@@ -59,6 +59,8 @@ This logger system is a component of a comprehensive threading and monitoring ec
 - **Thread-safe**: Designed for concurrent environments
 - **Modular Design**: Easy integration with any C++ project
 - **Low Latency**: Optimized for minimal overhead
+- **Performance Metrics**: Built-in metrics collection for monitoring logger performance
+- **Structured Logging**: Support for JSON, logfmt, and plain text output formats
 
 ## Integration with Thread System
 
@@ -104,17 +106,67 @@ int main() {
 }
 ```
 
+### Performance Metrics
+
+```cpp
+// Enable metrics collection
+logger->enable_metrics_collection(true);
+
+// Log some messages
+for (int i = 0; i < 1000; ++i) {
+    logger->log(log_level::info, "Test message");
+}
+
+// Get current metrics
+auto metrics = logger->get_current_metrics();
+std::cout << "Messages per second: " << metrics.get_messages_per_second() << "\n";
+std::cout << "Average enqueue time: " << metrics.get_avg_enqueue_time_ns() << " ns\n";
+std::cout << "Queue utilization: " << metrics.get_queue_utilization_percent() << "%\n";
+```
+
+### Structured Logging
+
+```cpp
+#include <logger_system/structured/structured_logger.h>
+
+// Create structured logger wrapper
+auto structured = std::make_shared<logger_module::structured_logger>(
+    logger, 
+    logger_module::structured_logger::output_format::json
+);
+
+// Log with structured fields
+structured->info("User logged in")
+    .field("user_id", 12345)
+    .field("ip_address", "192.168.1.1")
+    .field("session_duration", 3600)
+    .commit();
+
+// Output (JSON format):
+// {"@timestamp":"2025-01-27T08:30:00Z","level":"INFO","message":"User logged in","thread_id":"12345","user_id":12345,"ip_address":"192.168.1.1","session_duration":3600}
+```
+
 ### Custom Writers
 
 ```cpp
 class custom_writer : public logger_module::base_writer {
 public:
-    void write(const logger_module::log_entry& entry) override {
+    bool write(thread_module::log_level level,
+               const std::string& message,
+               const std::string& file,
+               int line,
+               const std::string& function,
+               const std::chrono::system_clock::time_point& timestamp) override {
         // Custom implementation
+        return true;
     }
     
     void flush() override {
         // Flush implementation
+    }
+    
+    std::string get_name() const override {
+        return "custom";
     }
 };
 ```

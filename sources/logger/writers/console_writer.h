@@ -62,7 +62,7 @@ public:
     /**
      * @brief Write log entry to console
      */
-    void write(thread_module::log_level level,
+    bool write(thread_module::log_level level,
                const std::string& message,
                const std::string& file,
                int line,
@@ -73,6 +73,11 @@ public:
      * @brief Flush console output
      */
     void flush() override;
+    
+    /**
+     * @brief Get writer name
+     */
+    std::string get_name() const override { return "console"; }
     
     /**
      * @brief Set whether to use stderr for all output

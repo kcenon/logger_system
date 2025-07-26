@@ -56,8 +56,9 @@ public:
      * @param line Source line (optional)
      * @param function Function name (optional)
      * @param timestamp Time of log entry
+     * @return true if write was successful
      */
-    virtual void write(thread_module::log_level level,
+    virtual bool write(thread_module::log_level level,
                       const std::string& message,
                       const std::string& file,
                       int line,
@@ -84,6 +85,12 @@ public:
     bool use_color() const {
         return use_color_;
     }
+    
+    /**
+     * @brief Get writer name
+     * @return Name of the writer
+     */
+    virtual std::string get_name() const = 0;
     
 protected:
     /**

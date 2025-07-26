@@ -238,7 +238,7 @@ TEST_F(ConsoleWriterTest, FlushFunctionality) {
 // Mock writer for testing base_writer functionality
 class MockWriter : public base_writer {
 public:
-    void write(thread_module::log_level level,
+    bool write(thread_module::log_level level,
               const std::string& message,
               const std::string& file,
               int line,
@@ -247,10 +247,15 @@ public:
         last_formatted_ = format_log_entry(level, message, file, line, function, timestamp);
         last_level_ = level;
         write_count_++;
+        return true;
     }
     
     void flush() override {
         flush_count_++;
+    }
+    
+    std::string get_name() const override {
+        return "mock";
     }
     
     std::string last_formatted_;

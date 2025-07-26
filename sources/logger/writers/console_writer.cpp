@@ -55,7 +55,7 @@ console_writer::~console_writer() {
     flush();
 }
 
-void console_writer::write(thread_module::log_level level,
+bool console_writer::write(thread_module::log_level level,
                           const std::string& message,
                           const std::string& file,
                           int line,
@@ -77,6 +77,9 @@ void console_writer::write(thread_module::log_level level,
     }
     
     stream << std::endl;
+    
+    // Console writes are generally always successful
+    return !stream.fail();
 }
 
 void console_writer::flush() {

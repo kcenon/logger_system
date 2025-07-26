@@ -39,6 +39,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // Import interface from thread_system
 #include "logger_interface.h"
+#include "metrics/logger_metrics.h"
 
 namespace logger_module {
 
@@ -48,6 +49,7 @@ using thread_module::log_level;
 // Forward declarations
 class log_collector;
 class base_writer;
+class logger_metrics_collector;
 
 /**
  * @brief Main logger implementation that implements thread_system's logger_interface
@@ -122,6 +124,42 @@ public:
      * @return true if running
      */
     bool is_running() const;
+    
+    /**
+     * @brief Enable or disable metrics collection
+     * @param enable true to enable metrics collection
+     */
+    void enable_metrics_collection(bool enable = true);
+    
+    /**
+     * @brief Check if metrics collection is enabled
+     * @return true if metrics collection is enabled
+     */
+    bool is_metrics_collection_enabled() const;
+    
+    /**
+     * @brief Get current performance metrics
+     * @return Snapshot of current metrics
+     */
+    performance_metrics get_current_metrics() const;
+    
+    /**
+     * @brief Get metrics history for a specific duration
+     * @param duration How far back to retrieve metrics
+     * @return Unique pointer to metrics snapshot (for Phase 1, only current snapshot)
+     */
+    std::unique_ptr<performance_metrics> get_metrics_history(std::chrono::seconds duration) const;
+    
+    /**
+     * @brief Reset performance metrics
+     */
+    void reset_metrics();
+    
+    /**
+     * @brief Get metrics collector for direct access
+     * @return Pointer to metrics collector (may be null if not enabled)
+     */
+    logger_metrics_collector* get_metrics_collector();
     
 private:
     class impl;

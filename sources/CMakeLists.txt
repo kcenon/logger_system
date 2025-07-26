@@ -8,9 +8,12 @@ target_sources(logger
         logger/writers/console_writer.cpp
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/logger.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/logger_interface.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/writers/base_writer.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/writers/console_writer.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/core/log_collector.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/metrics/logger_metrics.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/structured/structured_logger.h>
 )
 
 target_include_directories(logger

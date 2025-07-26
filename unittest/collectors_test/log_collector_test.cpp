@@ -44,7 +44,7 @@ using namespace logger_module;
 // Mock writer for testing log collector
 class MockCollectorWriter : public base_writer {
 public:
-    void write(thread_module::log_level level,
+    bool write(thread_module::log_level level,
               const std::string& message,
               const std::string& file,
               int line,
@@ -54,10 +54,15 @@ public:
         last_message_ = message;
         last_level_ = level;
         messages_.push_back(message);
+        return true;
     }
     
     void flush() override {
         flush_count_++;
+    }
+    
+    std::string get_name() const override {
+        return "mock_collector";
     }
     
     std::atomic<int> write_count_{0};

@@ -47,7 +47,8 @@ public:
         : async_(async)
         , buffer_size_(buffer_size)
         , min_level_(thread_module::log_level::trace)
-        , running_(false) {
+        , running_(false)
+        , metrics_enabled_(false) {
         if (async_) {
             collector_ = std::make_unique<log_collector>(buffer_size_);
         }
@@ -65,14 +66,53 @@ public:
         
         auto timestamp = std::chrono::system_clock::now();
         
-        if (async_ && collector_) {
-            // Async logging through collector
-            collector_->enqueue(level, message, file, line, function, timestamp);
+        // Record metrics if enabled
+        if (metrics_enabled_ && metrics_collector_) {
+            auto start = std::chrono::high_resolution_clock::now();
+            
+            if (async_ && collector_) {
+                // Async logging through collector
+                bool enqueued = collector_->enqueue(level, message, file, line, function, timestamp);
+                
+                auto end = std::chrono::high_resolution_clock::now();
+                auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+                
+                if (enqueued) {
+                    metrics_collector_->record_enqueue(message.size(), duration);
+                } else {
+                    metrics_collector_->record_drop();
+                }
+                
+                // Update queue metrics
+                auto [current, max] = collector_->get_queue_metrics();
+                metrics_collector_->update_queue_size(current, max);
+            } else {
+                // Sync logging directly to writers
+                std::lock_guard<std::mutex> lock(writers_mutex_);
+                for (auto& writer : writers_) {
+                    auto write_start = std::chrono::high_resolution_clock::now();
+                    bool success = writer->write(level, message, file, line, function, timestamp);
+                    auto write_end = std::chrono::high_resolution_clock::now();
+                    auto write_duration = std::chrono::duration_cast<std::chrono::microseconds>(write_end - write_start);
+                    
+                    metrics_collector_->record_write(writer->get_name(), message.size(), write_duration, success);
+                }
+                
+                auto end = std::chrono::high_resolution_clock::now();
+                auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+                metrics_collector_->record_enqueue(message.size(), duration);
+            }
+            
+            metrics_collector_->record_processed(message.size());
         } else {
-            // Sync logging directly to writers
-            std::lock_guard<std::mutex> lock(writers_mutex_);
-            for (auto& writer : writers_) {
-                writer->write(level, message, file, line, function, timestamp);
+            // Normal logging without metrics
+            if (async_ && collector_) {
+                collector_->enqueue(level, message, file, line, function, timestamp);
+            } else {
+                std::lock_guard<std::mutex> lock(writers_mutex_);
+                for (auto& writer : writers_) {
+                    writer->write(level, message, file, line, function, timestamp);
+                }
             }
         }
     }
@@ -131,6 +171,43 @@ public:
         return min_level_.load(std::memory_order_acquire);
     }
     
+    void enable_metrics_collection(bool enable) {
+        if (enable && !metrics_collector_) {
+            metrics_collector_ = std::make_unique<logger_metrics_collector>();
+        }
+        metrics_enabled_ = enable;
+    }
+    
+    bool is_metrics_collection_enabled() const {
+        return metrics_enabled_;
+    }
+    
+    performance_metrics get_current_metrics() const {
+        if (metrics_collector_) {
+            return metrics_collector_->get_snapshot();
+        }
+        return performance_metrics{};
+    }
+    
+    std::unique_ptr<performance_metrics> get_metrics_history(std::chrono::seconds duration) const {
+        // For Phase 1, we'll return just the current snapshot
+        // In a future phase, we could implement a time-series storage
+        if (metrics_collector_) {
+            return std::make_unique<performance_metrics>(metrics_collector_->get_snapshot());
+        }
+        return nullptr;
+    }
+    
+    void reset_metrics() {
+        if (metrics_collector_) {
+            metrics_collector_->reset();
+        }
+    }
+    
+    logger_metrics_collector* get_metrics_collector() {
+        return metrics_collector_.get();
+    }
+    
 private:
     bool async_;
     std::size_t buffer_size_;
@@ -139,6 +216,10 @@ private:
     std::unique_ptr<log_collector> collector_;
     std::vector<std::unique_ptr<base_writer>> writers_;
     mutable std::mutex writers_mutex_;
+    
+    // Metrics collection
+    bool metrics_enabled_;
+    std::unique_ptr<logger_metrics_collector> metrics_collector_;
 };
 
 // Logger implementation
@@ -191,6 +272,30 @@ void logger::stop() {
 
 bool logger::is_running() const {
     return pimpl_->is_running();
+}
+
+void logger::enable_metrics_collection(bool enable) {
+    pimpl_->enable_metrics_collection(enable);
+}
+
+bool logger::is_metrics_collection_enabled() const {
+    return pimpl_->is_metrics_collection_enabled();
+}
+
+performance_metrics logger::get_current_metrics() const {
+    return pimpl_->get_current_metrics();
+}
+
+std::unique_ptr<performance_metrics> logger::get_metrics_history(std::chrono::seconds duration) const {
+    return pimpl_->get_metrics_history(duration);
+}
+
+void logger::reset_metrics() {
+    pimpl_->reset_metrics();
+}
+
+logger_metrics_collector* logger::get_metrics_collector() {
+    return pimpl_->get_metrics_collector();
 }
 
 } // namespace logger_module

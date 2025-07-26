@@ -71,7 +71,7 @@ public:
      * @param function Function name
      * @param timestamp Log timestamp
      */
-    void enqueue(thread_module::log_level level,
+    bool enqueue(thread_module::log_level level,
                  const std::string& message,
                  const std::string& file,
                  int line,
@@ -103,6 +103,12 @@ public:
      * @brief Flush all pending log entries
      */
     void flush();
+    
+    /**
+     * @brief Get queue metrics
+     * @return Pair of (current_size, max_capacity)
+     */
+    std::pair<size_t, size_t> get_queue_metrics() const;
     
 private:
     class impl;

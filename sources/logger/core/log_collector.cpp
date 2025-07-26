@@ -58,7 +58,7 @@ public:
         stop();
     }
     
-    void enqueue(thread_module::log_level level,
+    bool enqueue(thread_module::log_level level,
                  const std::string& message,
                  const std::string& file,
                  int line,
@@ -67,15 +67,17 @@ public:
         {
             std::unique_lock<std::mutex> lock(queue_mutex_);
             
-            // Simple overflow handling - drop oldest entries
-            while (queue_.size() >= buffer_size_) {
-                queue_.pop();
+            // Check if queue is full
+            if (queue_.size() >= buffer_size_) {
+                // Drop the message
+                return false;
             }
             
             queue_.push({level, message, file, line, function, timestamp});
         }
         
         queue_cv_.notify_one();
+        return true;
     }
     
     void add_writer(base_writer* writer) {
@@ -123,6 +125,11 @@ public:
         }
     }
     
+    std::pair<size_t, size_t> get_queue_metrics() const {
+        std::lock_guard<std::mutex> lock(queue_mutex_);
+        return {queue_.size(), buffer_size_};
+    }
+    
 private:
     void process_loop() {
         while (running_.load()) {
@@ -154,6 +161,7 @@ private:
     void write_to_all(const log_entry& entry) {
         std::lock_guard<std::mutex> lock(writers_mutex_);
         for (auto* writer : writers_) {
+            // Ignore write failures for now
             writer->write(entry.level, entry.message, entry.file,
                          entry.line, entry.function, entry.timestamp);
         }
@@ -165,7 +173,7 @@ private:
     std::thread worker_thread_;
     
     std::queue<log_entry> queue_;
-    std::mutex queue_mutex_;
+    mutable std::mutex queue_mutex_;
     std::condition_variable queue_cv_;
     
     std::vector<base_writer*> writers_;
@@ -179,13 +187,13 @@ log_collector::log_collector(std::size_t buffer_size)
 
 log_collector::~log_collector() = default;
 
-void log_collector::enqueue(thread_module::log_level level,
+bool log_collector::enqueue(thread_module::log_level level,
                            const std::string& message,
                            const std::string& file,
                            int line,
                            const std::string& function,
                            const std::chrono::system_clock::time_point& timestamp) {
-    pimpl_->enqueue(level, message, file, line, function, timestamp);
+    return pimpl_->enqueue(level, message, file, line, function, timestamp);
 }
 
 void log_collector::add_writer(base_writer* writer) {
@@ -206,6 +214,10 @@ void log_collector::stop() {
 
 void log_collector::flush() {
     pimpl_->flush();
+}
+
+std::pair<size_t, size_t> log_collector::get_queue_metrics() const {
+    return pimpl_->get_queue_metrics();
 }
 
 } // namespace logger_module
