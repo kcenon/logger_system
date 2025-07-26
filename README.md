@@ -1,5 +1,8 @@
 # Logger System
 
+[![CI](https://github.com/kcenon/logger_system/actions/workflows/ci.yml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
 A high-performance, modular C++20 logging system with lock-free implementation designed for multithreaded applications.
 
 ## Features
