@@ -11,3 +11,10 @@ target_link_libraries(metrics_demo PRIVATE logger)
 set_target_properties(metrics_demo PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
+
+# Advanced features demo sample
+add_executable(advanced_features_demo advanced_features_demo.cpp)
+target_link_libraries(advanced_features_demo PRIVATE logger)
+set_target_properties(advanced_features_demo PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)

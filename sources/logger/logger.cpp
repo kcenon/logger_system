@@ -33,6 +33,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "logger.h"
 #include "core/log_collector.h"
 #include "writers/base_writer.h"
+#include "filters/log_filter.h"
+#include "routing/log_router.h"
 #include <chrono>
 #include <sstream>
 #include <iomanip>
@@ -48,6 +50,7 @@ public:
         , buffer_size_(buffer_size)
         , min_level_(thread_module::log_level::trace)
         , running_(false)
+        , router_(std::make_unique<log_router>())
         , metrics_enabled_(false) {
         if (async_) {
             collector_ = std::make_unique<log_collector>(buffer_size_);
@@ -61,6 +64,11 @@ public:
     void log(thread_module::log_level level, const std::string& message,
              const std::string& file, int line, const std::string& function) {
         if (level > min_level_.load(std::memory_order_acquire)) {
+            return;
+        }
+        
+        // Apply global filter
+        if (global_filter_ && !global_filter_->should_log(level, message, file, line, function)) {
             return;
         }
         
@@ -89,7 +97,11 @@ public:
             } else {
                 // Sync logging directly to writers
                 std::lock_guard<std::mutex> lock(writers_mutex_);
-                for (auto& writer : writers_) {
+                
+                // Get routed writers
+                auto routed_writers = router_->route(level, message, file, line, function, timestamp, named_writers_);
+                
+                for (auto* writer : routed_writers) {
                     auto write_start = std::chrono::high_resolution_clock::now();
                     bool success = writer->write(level, message, file, line, function, timestamp);
                     auto write_end = std::chrono::high_resolution_clock::now();
@@ -110,7 +122,11 @@ public:
                 collector_->enqueue(level, message, file, line, function, timestamp);
             } else {
                 std::lock_guard<std::mutex> lock(writers_mutex_);
-                for (auto& writer : writers_) {
+                
+                // Get routed writers
+                auto routed_writers = router_->route(level, message, file, line, function, timestamp, named_writers_);
+                
+                for (auto* writer : routed_writers) {
                     writer->write(level, message, file, line, function, timestamp);
                 }
             }
@@ -123,17 +139,33 @@ public:
         }
         
         std::lock_guard<std::mutex> lock(writers_mutex_);
-        for (auto& writer : writers_) {
+        for (auto& [name, writer] : named_writers_) {
             writer->flush();
         }
     }
     
     void add_writer(std::unique_ptr<base_writer> writer) {
         std::lock_guard<std::mutex> lock(writers_mutex_);
+        
+        // Generate a name if not using named_writers
+        std::string name = writer->get_name() + "_" + std::to_string(named_writers_.size());
+        
         if (async_ && collector_) {
             collector_->add_writer(writer.get());
         }
-        writers_.push_back(std::move(writer));
+        
+        // Keep in both collections for backward compatibility
+        writers_.push_back(writer.get());
+        named_writers_[name] = std::move(writer);
+    }
+    
+    void add_writer(const std::string& name, std::unique_ptr<base_writer> writer) {
+        std::lock_guard<std::mutex> lock(writers_mutex_);
+        if (async_ && collector_) {
+            collector_->add_writer(writer.get());
+        }
+        writers_.push_back(writer.get());
+        named_writers_[name] = std::move(writer);
     }
     
     void clear_writers() {
@@ -142,6 +174,7 @@ public:
             collector_->clear_writers();
         }
         writers_.clear();
+        named_writers_.clear();
     }
     
     void start() {
@@ -190,6 +223,7 @@ public:
     }
     
     std::unique_ptr<performance_metrics> get_metrics_history(std::chrono::seconds duration) const {
+        (void)duration;  // For Phase 1, we'll return just the current snapshot
         // For Phase 1, we'll return just the current snapshot
         // In a future phase, we could implement a time-series storage
         if (metrics_collector_) {
@@ -208,14 +242,47 @@ public:
         return metrics_collector_.get();
     }
     
+    bool remove_writer(const std::string& name) {
+        std::lock_guard<std::mutex> lock(writers_mutex_);
+        auto it = named_writers_.find(name);
+        if (it != named_writers_.end()) {
+            if (async_ && collector_) {
+                // Note: log_collector doesn't support individual writer removal
+                // This is a limitation of the current design
+            }
+            named_writers_.erase(it);
+            return true;
+        }
+        return false;
+    }
+    
+    base_writer* get_writer(const std::string& name) {
+        std::lock_guard<std::mutex> lock(writers_mutex_);
+        auto it = named_writers_.find(name);
+        return it != named_writers_.end() ? it->second.get() : nullptr;
+    }
+    
+    void set_filter(std::unique_ptr<log_filter> filter) {
+        global_filter_ = std::move(filter);
+    }
+    
+    log_router& get_router() {
+        return *router_;
+    }
+    
 private:
     bool async_;
     std::size_t buffer_size_;
     std::atomic<thread_module::log_level> min_level_;
     std::atomic<bool> running_;
     std::unique_ptr<log_collector> collector_;
-    std::vector<std::unique_ptr<base_writer>> writers_;
+    std::vector<base_writer*> writers_;  // For backward compatibility
+    std::unordered_map<std::string, std::unique_ptr<base_writer>> named_writers_;
     mutable std::mutex writers_mutex_;
+    
+    // Filtering and routing
+    std::unique_ptr<log_filter> global_filter_;
+    std::unique_ptr<log_router> router_;
     
     // Metrics collection
     bool metrics_enabled_;
@@ -296,6 +363,26 @@ void logger::reset_metrics() {
 
 logger_metrics_collector* logger::get_metrics_collector() {
     return pimpl_->get_metrics_collector();
+}
+
+void logger::add_writer(const std::string& name, std::unique_ptr<base_writer> writer) {
+    pimpl_->add_writer(name, std::move(writer));
+}
+
+bool logger::remove_writer(const std::string& name) {
+    return pimpl_->remove_writer(name);
+}
+
+base_writer* logger::get_writer(const std::string& name) {
+    return pimpl_->get_writer(name);
+}
+
+void logger::set_filter(std::unique_ptr<log_filter> filter) {
+    pimpl_->set_filter(std::move(filter));
+}
+
+log_router& logger::get_router() {
+    return pimpl_->get_router();
 }
 
 } // namespace logger_module

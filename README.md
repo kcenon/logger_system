@@ -61,6 +61,9 @@ This logger system is a component of a comprehensive threading and monitoring ec
 - **Low Latency**: Optimized for minimal overhead
 - **Performance Metrics**: Built-in metrics collection for monitoring logger performance
 - **Structured Logging**: Support for JSON, logfmt, and plain text output formats
+- **Advanced Filtering**: Level-based, regex, and custom function filters
+- **Flexible Routing**: Route logs to specific writers based on conditions
+- **File Writers**: Basic and rotating file writers with size/time-based rotation
 
 ## Integration with Thread System
 
@@ -144,6 +147,66 @@ structured->info("User logged in")
 
 // Output (JSON format):
 // {"@timestamp":"2025-01-27T08:30:00Z","level":"INFO","message":"User logged in","thread_id":"12345","user_id":12345,"ip_address":"192.168.1.1","session_duration":3600}
+```
+
+### Advanced Filtering and Routing
+
+```cpp
+#include <logger_system/filters/log_filter.h>
+#include <logger_system/routing/log_router.h>
+
+// Set up filtering - only log warnings and above
+logger->set_filter(std::make_unique<level_filter>(log_level::warning));
+
+// Filter out sensitive information
+logger->set_filter(std::make_unique<regex_filter>("password|secret", false));
+
+// Set up routing
+auto& router = logger->get_router();
+
+// Route errors to a dedicated error file
+router_builder(router)
+    .when_level(log_level::error)
+    .route_to("error_file", true);  // Stop propagation
+
+// Route debug messages to both debug file and console
+router_builder(router)
+    .when_level(log_level::debug)
+    .route_to(std::vector<std::string>{"debug_file", "console"});
+
+// Custom filter function
+auto custom_filter = std::make_unique<function_filter>(
+    [](log_level level, const std::string& msg, 
+       const std::string& file, int line, const std::string& func) {
+        // Only log messages from specific files
+        return file.find("critical_module") != std::string::npos;
+    }
+);
+logger->set_filter(std::move(custom_filter));
+```
+
+### File Writers
+
+```cpp
+#include <logger_system/writers/file_writer.h>
+#include <logger_system/writers/rotating_file_writer.h>
+
+// Basic file writer
+logger->add_writer("main_log", std::make_unique<file_writer>("logs/app.log"));
+
+// Rotating file writer - size based
+logger->add_writer("rotating", std::make_unique<rotating_file_writer>(
+    "logs/app.log",
+    1024 * 1024 * 10,  // 10MB per file
+    5                   // Keep 5 backup files
+));
+
+// Rotating file writer - time based (daily)
+logger->add_writer("daily", std::make_unique<rotating_file_writer>(
+    "logs/daily.log",
+    rotating_file_writer::rotation_type::daily,
+    30  // Keep 30 days of logs
+));
 ```
 
 ### Custom Writers

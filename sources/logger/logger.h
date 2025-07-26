@@ -50,6 +50,8 @@ using thread_module::log_level;
 class log_collector;
 class base_writer;
 class logger_metrics_collector;
+class log_filter;
+class log_router;
 
 /**
  * @brief Main logger implementation that implements thread_system's logger_interface
@@ -160,6 +162,39 @@ public:
      * @return Pointer to metrics collector (may be null if not enabled)
      */
     logger_metrics_collector* get_metrics_collector();
+    
+    /**
+     * @brief Add a writer with a specific name
+     * @param name Name for the writer
+     * @param writer Unique pointer to the writer
+     */
+    void add_writer(const std::string& name, std::unique_ptr<base_writer> writer);
+    
+    /**
+     * @brief Remove a writer by name
+     * @param name Name of the writer to remove
+     * @return true if writer was found and removed
+     */
+    bool remove_writer(const std::string& name);
+    
+    /**
+     * @brief Get a writer by name
+     * @param name Name of the writer
+     * @return Pointer to writer or nullptr if not found
+     */
+    base_writer* get_writer(const std::string& name);
+    
+    /**
+     * @brief Set global filter
+     * @param filter Filter to apply to all logs
+     */
+    void set_filter(std::unique_ptr<log_filter> filter);
+    
+    /**
+     * @brief Get the log router for configuration
+     * @return Reference to the log router
+     */
+    log_router& get_router();
     
 private:
     class impl;
