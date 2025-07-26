@@ -19,10 +19,9 @@ target_include_directories(logger
         $<INSTALL_INTERFACE:include/logger_system>
 )
 
-# Link with thread_system interfaces
+# Link with system libraries
 target_link_libraries(logger
     PUBLIC
-        ThreadSystemInterfaces
         Threads::Threads
 )
 

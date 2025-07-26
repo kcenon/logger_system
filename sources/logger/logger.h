@@ -38,7 +38,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <thread>
 
 // Import interface from thread_system
-#include <thread_system/interfaces/logger_interface.h>
+#include "logger_interface.h"
 
 namespace logger_module {
 

@@ -3,7 +3,53 @@
 [![CI](https://github.com/kcenon/logger_system/actions/workflows/ci.yml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-A high-performance, modular C++20 logging system with lock-free implementation designed for multithreaded applications.
+A high-performance, modular C++20 logging system with lock-free implementation designed for multithreaded applications. Part of the integrated threading ecosystem.
+
+## 🔗 Project Ecosystem Integration
+
+This logger system is a component of a comprehensive threading and monitoring ecosystem:
+
+### Project Dependencies
+- **[thread_system](https://github.com/kcenon/thread_system)**: Core dependency providing `logger_interface`
+  - Implements: `thread_module::logger_interface`
+  - Provides: Interface contracts for seamless integration
+  - Role: Foundation interfaces for logging subsystem
+
+### Related Projects
+- **[monitoring_system](https://github.com/kcenon/monitoring_system)**: Complementary metrics collection
+  - Relationship: Both integrate with thread_system
+  - Synergy: Combined logging and monitoring for complete observability
+  - Integration: Can log monitoring events and metrics
+
+- **[integrated_thread_system](https://github.com/kcenon/integrated_thread_system)**: Complete integration examples
+  - Usage: Demonstrates logger_system integration patterns
+  - Benefits: Production-ready examples with full ecosystem
+  - Reference: Complete application templates
+
+### Integration Architecture
+```
+┌─────────────────┐
+│  thread_system  │ ← Core interfaces (logger_interface)
+└─────────┬───────┘
+          │ implements
+┌─────────▼───────┐     ┌─────────────────┐
+│  logger_system  │ ◄──► │monitoring_system│
+└─────────────────┘     └─────────────────┘
+          │                       │
+          └───────┬───────────────┘
+                  ▼
+    ┌─────────────────────────┐
+    │integrated_thread_system │
+    └─────────────────────────┘
+```
+
+### Integration Benefits
+- **Thread-aware logging**: Automatic thread ID and context tracking
+- **Performance optimized**: Lock-free design for high-throughput applications
+- **Unified configuration**: Single point of configuration for entire ecosystem
+- **Seamless integration**: Plug-and-play with thread pools and monitoring
+
+> 📖 **[Complete Architecture Guide](../ARCHITECTURE.md)**: Comprehensive documentation of the entire ecosystem architecture, dependency relationships, and integration patterns.
 
 ## Features
 

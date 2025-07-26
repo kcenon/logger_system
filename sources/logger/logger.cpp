@@ -59,7 +59,7 @@ public:
     
     void log(thread_module::log_level level, const std::string& message,
              const std::string& file, int line, const std::string& function) {
-        if (level < min_level_.load(std::memory_order_acquire)) {
+        if (level > min_level_.load(std::memory_order_acquire)) {
             return;
         }
         
@@ -158,7 +158,7 @@ void logger::log(thread_module::log_level level, const std::string& message,
 }
 
 bool logger::is_enabled(thread_module::log_level level) const {
-    return level >= pimpl_->get_min_level();
+    return level <= pimpl_->get_min_level();
 }
 
 void logger::flush() {

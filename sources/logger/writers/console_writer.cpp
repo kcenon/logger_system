@@ -32,6 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "console_writer.h"
 #include <iostream>
+#include <iomanip>
 #include <cstdlib>
 
 #ifdef _WIN32

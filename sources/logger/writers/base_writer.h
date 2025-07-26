@@ -34,7 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <string>
 #include <chrono>
-#include <thread_system/interfaces/logger_interface.h>
+#include "../logger_interface.h"
 
 namespace logger_module {
 
