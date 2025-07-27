@@ -64,6 +64,10 @@ This logger system is a component of a comprehensive threading and monitoring ec
 - **Advanced Filtering**: Level-based, regex, and custom function filters
 - **Flexible Routing**: Route logs to specific writers based on conditions
 - **File Writers**: Basic and rotating file writers with size/time-based rotation
+- **Network Logging**: Send logs to remote servers via TCP/UDP
+- **Log Server**: Receive and process logs from multiple sources
+- **Real-time Analysis**: Analyze log patterns and generate statistics
+- **Alert System**: Define rules to trigger alerts based on log patterns
 
 ## Integration with Thread System
 
@@ -207,6 +211,63 @@ logger->add_writer("daily", std::make_unique<rotating_file_writer>(
     rotating_file_writer::rotation_type::daily,
     30  // Keep 30 days of logs
 ));
+```
+
+### Distributed Logging
+
+```cpp
+#include <logger_system/writers/network_writer.h>
+#include <logger_system/server/log_server.h>
+
+// Send logs to remote server
+logger->add_writer("remote", std::make_unique<network_writer>(
+    "log-server.example.com",
+    9999,
+    network_writer::protocol_type::tcp
+));
+
+// Create log server to receive logs
+auto server = std::make_unique<log_server>(9999, true);
+server->add_handler([](const log_server::network_log_entry& entry) {
+    std::cout << "Received log from " << entry.source_address 
+              << ": " << entry.raw_data << std::endl;
+});
+server->start();
+```
+
+### Real-time Analysis
+
+```cpp
+#include <logger_system/analysis/log_analyzer.h>
+
+// Create analyzer with 60-second windows
+auto analyzer = std::make_unique<log_analyzer>(
+    std::chrono::seconds(60),
+    60  // Keep 1 hour of history
+);
+
+// Track patterns
+analyzer->add_pattern("errors", "error|fail|exception");
+analyzer->add_pattern("slow_queries", "query took \\d{4,} ms");
+
+// Add alert rules
+analyzer->add_alert_rule({
+    "high_error_rate",
+    [](const auto& stats) {
+        auto errors = stats.level_counts.count(log_level::error) ? 
+                     stats.level_counts.at(log_level::error) : 0;
+        return errors > 100;  // Alert if >100 errors per minute
+    },
+    [](const std::string& rule, const auto& stats) {
+        std::cout << "ALERT: High error rate detected!" << std::endl;
+    }
+});
+
+// Analyze logs
+analyzer->analyze(level, message, file, line, function, timestamp);
+
+// Generate report
+std::string report = analyzer->generate_report(std::chrono::minutes(10));
 ```
 
 ### Custom Writers

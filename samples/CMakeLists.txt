@@ -18,3 +18,10 @@ target_link_libraries(advanced_features_demo PRIVATE logger)
 set_target_properties(advanced_features_demo PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
+
+# Distributed logging demo sample
+add_executable(distributed_logging_demo distributed_logging_demo.cpp)
+target_link_libraries(distributed_logging_demo PRIVATE logger)
+set_target_properties(distributed_logging_demo PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
