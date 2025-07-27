@@ -46,10 +46,10 @@ class MockCollectorWriter : public base_writer {
 public:
     bool write(thread_module::log_level level,
               const std::string& message,
-              const std::string& file,
-              int line,
-              const std::string& function,
-              const std::chrono::system_clock::time_point& timestamp) override {
+              const std::string& /* file */,
+              int /* line */,
+              const std::string& /* function */,
+              const std::chrono::system_clock::time_point& /* timestamp */) override {
         write_count_++;
         last_message_ = message;
         last_level_ = level;
@@ -179,7 +179,7 @@ TEST_F(LogCollectorTest, MultithreadedEnqueuing) {
     const int messages_per_thread = 25;
     
     for (int t = 0; t < num_threads; ++t) {
-        threads.emplace_back([this, t, messages_per_thread]() {
+        threads.emplace_back([this, t]() {
             for (int i = 0; i < messages_per_thread; ++i) {
                 collector_->enqueue(
                     thread_module::log_level::info,

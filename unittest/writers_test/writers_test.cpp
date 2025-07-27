@@ -192,7 +192,7 @@ TEST_F(ConsoleWriterTest, MultithreadedAccess) {
     const int messages_per_thread = 10;
     
     for (int t = 0; t < num_threads; ++t) {
-        threads.emplace_back([this, t, messages_per_thread]() {
+        threads.emplace_back([this, t]() {
             for (int i = 0; i < messages_per_thread; ++i) {
                 writer_->write(
                     thread_module::log_level::info,

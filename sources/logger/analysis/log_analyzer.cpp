@@ -27,7 +27,7 @@ void log_analyzer::analyze(thread_module::log_level level,
                           const std::string& message,
                           const std::string& file,
                           int line,
-                          const std::string& function,
+                          const std::string& /* function */,
                           const std::chrono::system_clock::time_point& timestamp) {
     
     std::lock_guard<std::mutex> lock(windows_mutex_);
@@ -261,7 +261,7 @@ bool log_analyzer::match_patterns(const std::string& message,
 
 void log_aggregator::add_log(const std::string& source_id,
                             thread_module::log_level level,
-                            const std::string& message,
+                            const std::string& /* message */,
                             size_t message_size) {
     std::lock_guard<std::mutex> lock(stats_mutex_);
     

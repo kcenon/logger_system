@@ -146,7 +146,7 @@ int main() {
     }
     
     // Monitor server statistics
-    std::thread monitor_thread([&server, &analyzer, &aggregator]() {
+    std::thread monitor_thread([&server, &analyzer]() {
         for (int i = 0; i < 30; ++i) {
             std::this_thread::sleep_for(std::chrono::seconds(2));
             
