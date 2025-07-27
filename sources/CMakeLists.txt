@@ -9,8 +9,10 @@ target_sources(logger
         logger/writers/file_writer.cpp
         logger/writers/rotating_file_writer.cpp
         logger/writers/network_writer.cpp
+        logger/writers/encrypted_writer.cpp
         logger/server/log_server.cpp
         logger/analysis/log_analyzer.cpp
+        logger/security/log_sanitizer.cpp
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/logger.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/logger_interface.h>
@@ -22,10 +24,12 @@ target_sources(logger
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/writers/file_writer.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/writers/rotating_file_writer.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/writers/network_writer.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/writers/encrypted_writer.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/filters/log_filter.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/routing/log_router.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/server/log_server.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/analysis/log_analyzer.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/security/log_sanitizer.h>
 )
 
 target_include_directories(logger

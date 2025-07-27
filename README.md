@@ -68,6 +68,8 @@ This logger system is a component of a comprehensive threading and monitoring ec
 - **Log Server**: Receive and process logs from multiple sources
 - **Real-time Analysis**: Analyze log patterns and generate statistics
 - **Alert System**: Define rules to trigger alerts based on log patterns
+- **Security Features**: Log encryption, sensitive data sanitization, and access control
+- **Integration Testing**: Comprehensive test suite for all components
 
 ## Integration with Thread System
 
@@ -268,6 +270,69 @@ analyzer->analyze(level, message, file, line, function, timestamp);
 
 // Generate report
 std::string report = analyzer->generate_report(std::chrono::minutes(10));
+```
+
+### Security Features
+
+#### Log Encryption
+
+```cpp
+#include <logger_system/writers/encrypted_writer.h>
+
+// Generate encryption key
+auto key = encrypted_writer::generate_key(32);  // 32 bytes for AES-256
+
+// Save key securely
+encrypted_writer::save_key(key, "logger.key");
+
+// Create encrypted writer
+auto file = std::make_unique<file_writer>("secure.log");
+auto encrypted = std::make_unique<encrypted_writer>(std::move(file), key);
+logger->add_writer("secure", std::move(encrypted));
+
+// Note: Demo uses XOR encryption - use proper crypto library in production
+```
+
+#### Sensitive Data Sanitization
+
+```cpp
+#include <logger_system/security/log_sanitizer.h>
+
+// Create sanitizer with default rules
+auto sanitizer = std::make_shared<log_sanitizer>();
+
+// Sanitize logs before writing
+std::string message = "User login: john.doe@example.com, Card: 4532-1234-5678-9012";
+std::string sanitized = sanitizer->sanitize(message);
+// Result: "User login: j******e@example.com, Card: 4532********9012"
+
+// Add custom sanitization rules
+sanitizer->add_rule({
+    "jwt_token",
+    std::regex("Bearer\\s+[A-Za-z0-9\\-_]+\\.[A-Za-z0-9\\-_]+\\.[A-Za-z0-9\\-_]+"),
+    [](const std::smatch& match) { return "Bearer [REDACTED]"; }
+});
+```
+
+#### Access Control
+
+```cpp
+#include <logger_system/security/log_sanitizer.h>
+
+// Create access control filter
+auto access_filter = std::make_unique<access_control_filter>(
+    access_control_filter::permission_level::write_info
+);
+
+// Set file-specific permissions
+access_filter->set_file_permission(".*secure.*", 
+    access_control_filter::permission_level::admin);
+
+// Set user context
+access_filter->set_user_context("current_user", 
+    access_control_filter::permission_level::write_info);
+
+logger->set_filter(std::move(access_filter));
 ```
 
 ### Custom Writers

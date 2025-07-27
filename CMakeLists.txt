@@ -91,6 +91,7 @@ endif()
 
 if (BUILD_TESTS)
     add_subdirectory(unittest)
+    add_subdirectory(tests)
 endif()
 
 if (BUILD_BENCHMARKS)
