@@ -57,7 +57,7 @@ class log_router;
  * @brief Main logger implementation that implements thread_system's logger_interface
  * 
  * This logger provides:
- * - Lock-free logging for high performance
+ * - High-performance asynchronous logging with batching
  * - Multiple writer support (console, file, custom)
  * - Asynchronous processing
  * - Thread-safe operations

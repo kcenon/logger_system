@@ -76,7 +76,7 @@ namespace thread_module {
 
 #### Responsibilities:
 - **Interface Implementation**: Implements `thread_module::logger_interface`
-- **Asynchronous Logging**: Lock-free, high-throughput logging
+- **Asynchronous Logging**: High-throughput batching pipeline (current: mutex-backed queue; lock-free planned)
 - **Multiple Writers**: Console, file, and custom output targets
 - **Thread Safety**: Safe concurrent access from multiple threads
 

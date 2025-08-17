@@ -226,7 +226,7 @@ When adding features:
 1. Update relevant documentation files
 2. Add examples to the docs
 3. Update the API reference if needed
-4. Add performance implications to performance.md
+4. Add performance implications to PERFORMANCE.md
 
 ## Submitting Changes
 

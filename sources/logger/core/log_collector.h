@@ -46,8 +46,8 @@ class base_writer;
 /**
  * @brief Asynchronous log collector for high-performance logging
  * 
- * Collects log entries in a lock-free queue and processes them
- * in a background thread to minimize logging overhead.
+ * Collects log entries in a queue (mutex/condition-variable backed)
+ * and processes them in a background thread to minimize logging overhead.
  */
 class log_collector {
 public:

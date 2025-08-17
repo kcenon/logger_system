@@ -115,6 +115,24 @@ logger->log(thread_module::log_level::debug,
 LOG_DEBUG(logger, "This includes source location");
 ```
 
+### Structured JSON Output
+
+The `structured_logger` provides JSON/logfmt/plain output. For strict JSON compliance at scale, consider integrating a JSON library (e.g., nlohmann/json):
+
+```cpp
+// Example using nlohmann::json (optional dependency)
+// #include <nlohmann/json.hpp>
+// nlohmann::json j = {
+//     {"@timestamp", std::time(nullptr)},
+//     {"level", "INFO"},
+//     {"message", "User logged in"},
+//     {"user_id", 12345}
+// };
+// logger->log(log_level::info, j.dump());
+```
+
+Alternatively, keep using `structured_logger` and route JSON output to file/network. When adding a JSON library, prefer compile-time options to keep it optional.
+
 ### Log Levels
 
 The logger supports six log levels:
@@ -187,6 +205,14 @@ class my_writer : public logger_module::base_writer {
 logger->add_writer(std::make_unique<my_writer>());
 ```
 
+### Windows Notes (Networking)
+
+The network writer/server use POSIX sockets. On Windows, add WinSock initialization and adapt socket calls:
+
+- Call `WSAStartup(MAKEWORD(2,2), &wsaData)` before creating sockets and `WSACleanup()` at shutdown.
+- Replace `close(fd)` with `closesocket(fd)` and use appropriate error codes (e.g., `WSAGetLastError()`).
+- Consider a small socket abstraction layer guarded by `#ifdef _WIN32` to keep code portable.
+
 ### Console Writer Options
 
 ```cpp
@@ -251,7 +277,7 @@ auto context = thread_module::thread_context(logger_interface);
 
 ## Next Steps
 
-- Read the [Architecture Overview](architecture.md) to understand the system design
-- Check the [API Reference](api-reference.md) for detailed documentation
-- See [Performance Guide](performance.md) for optimization tips
-- Learn about [Custom Writers](custom-writers.md) for specialized output
+- Read the [Architecture Overview](ARCHITECTURE.md) to understand the system design
+- Check the [API Reference](API-REFERENCE.md) for detailed documentation
+- See [Performance Guide](PERFORMANCE.md) for optimization tips
+- Learn about [Custom Writers](CUSTOM-WRITERS.md) for specialized output

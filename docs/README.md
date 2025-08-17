@@ -5,18 +5,18 @@ Welcome to the Logger System documentation. This guide provides comprehensive in
 ## Table of Contents
 
 ### Getting Started
-- [Quick Start Guide](getting-started.md) - Get up and running quickly
-- [Installation](getting-started.md#installation) - Detailed installation instructions
-- [Basic Usage](getting-started.md#basic-usage) - Simple examples to begin with
+- [Quick Start Guide](GETTING-STARTED.md) - Get up and running quickly
+- [Installation](GETTING-STARTED.md#installation) - Detailed installation instructions
+- [Basic Usage](GETTING-STARTED.md#basic-usage) - Simple examples to begin with
 
 ### Core Concepts
-- [Architecture Overview](architecture.md) - System design and components
-- [API Reference](api-reference.md) - Complete API documentation
-- [Performance Guide](performance.md) - Performance characteristics and benchmarks
+- [Architecture Overview](ARCHITECTURE.md) - System design and components
+- [API Reference](API-REFERENCE.md) - Complete API documentation
+- [Performance Guide](PERFORMANCE.md) - Performance characteristics and benchmarks
 
 ### Advanced Topics
-- [Custom Writers](custom-writers.md) - Creating custom output destinations
-- [Lock-free Implementation](lock-free.md) - Understanding the lock-free design
+- [Custom Writers](CUSTOM-WRITERS.md) - Creating custom output destinations
+- [Asynchronous Pipeline](ARCHITECTURE.md#asynchronous-mode) - Queueing and batching model
 - [Integration Guide](integration.md) - Integrating with other systems
 
 ### Development
@@ -33,3 +33,4 @@ Welcome to the Logger System documentation. This guide provides comprehensive in
 - [GitHub Repository](https://github.com/kcenon/logger_system)
 - [Issue Tracker](https://github.com/kcenon/logger_system/issues)
 - [Thread System](https://github.com/kcenon/thread_system) - Parent project
+- [Security Guide](../SECURITY.md) - Threat model and hardening

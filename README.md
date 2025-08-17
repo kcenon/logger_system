@@ -3,7 +3,9 @@
 [![CI](https://github.com/kcenon/logger_system/actions/workflows/ci.yml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-A high-performance, modular C++20 logging system with lock-free implementation designed for multithreaded applications. Part of the integrated threading ecosystem.
+A high-performance, modular C++20 logging system designed for multithreaded applications. Part of the integrated threading ecosystem.
+
+Implementation note: The current asynchronous pipeline uses a mutex/condition_variable backed queue for batching. A lock-free MPMC queue is planned, and the `USE_LOCKFREE` option is reserved for that future implementation.
 
 ## 🔗 Project Ecosystem Integration
 
@@ -45,7 +47,7 @@ This logger system is a component of a comprehensive threading and monitoring ec
 
 ### Integration Benefits
 - **Thread-aware logging**: Automatic thread ID and context tracking
-- **Performance optimized**: Lock-free design for high-throughput applications
+- **Performance optimized**: Asynchronous batching and minimal formatting overhead
 - **Unified configuration**: Single point of configuration for entire ecosystem
 - **Seamless integration**: Plug-and-play with thread pools and monitoring
 
@@ -53,7 +55,7 @@ This logger system is a component of a comprehensive threading and monitoring ec
 
 ## Features
 
-- **Lock-free Implementation**: High-performance logging without mutex contention
+- **Asynchronous Pipeline**: Background thread processes batched log entries
 - **Multiple Writers**: Console, file, and custom callback writers
 - **Asynchronous Logging**: Non-blocking log operations
 - **Thread-safe**: Designed for concurrent environments
@@ -70,6 +72,8 @@ This logger system is a component of a comprehensive threading and monitoring ec
 - **Alert System**: Define rules to trigger alerts based on log patterns
 - **Security Features**: Log encryption, sensitive data sanitization, and access control
 - **Integration Testing**: Comprehensive test suite for all components
+
+> Security note: `encrypted_writer` is a demonstration component using a simple XOR scheme and is not suitable for production use. See SECURITY.md for guidance and recommended alternatives.
 
 ## Integration with Thread System
 
@@ -374,6 +378,40 @@ cmake --build .
 - `BUILD_BENCHMARKS`: Build performance benchmarks (default: OFF)
 - `BUILD_SAMPLES`: Build example programs (default: ON)
 - `USE_LOCKFREE`: Use lock-free implementation (default: ON)
+
+## Testing
+
+After building with `BUILD_TESTS=ON` (default), run the integration tests:
+
+```bash
+ctest --test-dir build
+# or
+./build/bin/integration_test
+```
+
+## Platform Support
+
+- Linux and macOS fully supported for console/file writers and POSIX networking.
+- Windows support is partial; network/server components require WinSock initialization and minor adaptations. Contributions are welcome.
+
+## FAQ
+
+- Is the logger lock-free?
+  - The current async queue uses mutex/condition_variable for portability and simplicity. A lock-free MPMC queue is planned; see the `USE_LOCKFREE` placeholder.
+- Is `encrypted_writer` production-ready?
+  - No. It is a demonstration. Use a vetted crypto library and authenticated encryption (e.g., AES-GCM, ChaCha20-Poly1305) with proper key management.
+- How do I route only errors to a dedicated file?
+  - Use `router_builder(router).when_level(log_level::error).route_to("error_file", true);` and register a writer under that name.
+- How do I get JSON output?
+  - Use `structured_logger` with `output_format::json`. For strict JSON compliance at scale, consider integrating a JSON library (e.g., nlohmann/json).
+
+## Further Reading
+
+- docs/GETTING-STARTED.md
+- docs/PERFORMANCE.md
+- docs/CUSTOM-WRITERS.md
+- docs/API-REFERENCE.md
+- SECURITY.md
 
 ## Installation
 

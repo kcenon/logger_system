@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Logger System is designed as a high-performance, modular logging framework that implements the `thread_module::logger_interface` from the Thread System. It provides both synchronous and asynchronous logging capabilities with a lock-free implementation for minimal contention in multi-threaded environments.
+The Logger System is designed as a high-performance, modular logging framework that implements the `thread_module::logger_interface` from the Thread System. It provides both synchronous and asynchronous logging capabilities. The current asynchronous pipeline uses a mutex/condition-variable backed queue for batching; a true lock-free MPMC queue is planned.
 
 ## Architecture Diagram
 
@@ -66,7 +66,7 @@ The main `logger` class provides:
 ### 3. Log Collector (Async Mode)
 
 The `log_collector` manages asynchronous logging:
-- **Lock-free Queue**: Minimal contention for log producers
+- **Async Queue**: Mutex/condition-variable backed queue for batching (lock-free planned)
 - **Background Thread**: Dedicated thread for log processing
 - **Batch Processing**: Efficient handling of multiple log entries
 - **Overflow Handling**: Graceful handling when buffer is full
@@ -125,7 +125,7 @@ class base_writer {
 - All public methods are thread-safe
 - Writers are called sequentially (no concurrent writes)
 - Internal state protected by mutexes
-- Lock-free operations where possible
+- Contention minimized; lock-free queue planned where appropriate
 
 ## Memory Management
 
@@ -182,7 +182,12 @@ auto context = thread_context(iface);
 ## Future Enhancements
 
 ### Planned Features
-1. **Lock-free Queue**: True lock-free implementation
+1. **Lock-free Queue**: True lock-free MPMC queue implementation
+
+## Platform Notes
+
+- Linux/macOS: Fully supported (console/file writers, POSIX sockets for network components).
+- Windows: Network components require WinSock initialization (`WSAStartup`/`WSACleanup`) and minor socket option changes. Consider conditional compilation guards and a thin abstraction for sockets if extending the server or network writer.
 2. **File Writer**: Rotating file output with compression
 3. **Network Writer**: Remote logging capability
 4. **Structured Logging**: JSON/Binary format support

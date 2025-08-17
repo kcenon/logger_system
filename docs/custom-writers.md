@@ -468,11 +468,13 @@ logger->add_writer(std::move(async_file));
 
 ## Best Practices
 
-1. **Thread Safety**: Always protect shared state with mutexes
-2. **Error Handling**: Decide on failure behavior (throw, silent fail, or fallback)
-3. **Performance**: Consider batching for I/O operations
-4. **Resource Management**: Use RAII for file handles, sockets, etc.
-5. **Configuration**: Make writers configurable (paths, formats, etc.)
+1. **Thread Safety**: Always protect shared state with mutexes; writes are called sequentially by the logger, but custom async wrappers must be safe.
+2. **Error Handling**: Decide on failure behavior (throw, silent fail, retry/backoff) and expose counters for observability.
+3. **Batching**: Prefer batching for I/O heavy writers to reduce syscalls and context switches.
+4. **Resource Management**: Use RAII for file handles, sockets, and DB connections; ensure `flush()` is efficient and idempotent.
+5. **Configuration**: Make writers configurable (paths, formats, thresholds), and document defaults.
+6. **Security**: Avoid writing secrets/PII; consider integrating `log_sanitizer` upstream. If encrypting, use a vetted crypto library rather than demo components.
+7. **Windows Networking**: For socket-based writers, guard platform specifics (`#ifdef _WIN32`) and initialize WinSock.
 
 ## Testing Custom Writers
 

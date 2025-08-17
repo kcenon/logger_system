@@ -32,6 +32,7 @@ The Logger System is designed for high-performance logging in multi-threaded app
 - Decoupled from I/O latency
 - Configurable memory buffer
 - One background thread
+- Queue is currently mutex/condition-variable backed with batch size ≈100 (tunable in code)
 
 ## Benchmarks
 
@@ -121,6 +122,11 @@ auto logger = std::make_shared<logger_module::logger>(true, buffer_size);
 - Monitor dropped messages
 - Increase for burst handling
 - Consider memory constraints
+ - Observe `logger_metrics` (drop rate, queue utilization) and adjust
+
+### 2.1 Batch Size Considerations
+
+Batching reduces per-message overhead. If you maintain a custom build, consider exposing batch size and wake-up policies to tune latency vs. throughput for your workload.
 
 ### 3. Level Filtering
 
@@ -255,6 +261,12 @@ for (int i = 0; i < 1000000; ++i) {
     }
     // work
 }
+
+## Transport and Storage Considerations
+
+- For remote logging, network latency and packet loss dominate; batch and compress where appropriate.
+- Use transport security (TLS/mTLS) for in-transit logs; see SECURITY.md for guidance.
+- For storage, prefer rotating files with retention policies and, if needed, encryption-at-rest using authenticated encryption.
 ```
 
 ## Profiling and Monitoring
