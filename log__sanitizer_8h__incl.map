@@ -1,0 +1,23 @@
+<map id="log_sanitizer.h" name="log_sanitizer.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="323,5,439,31"/>
+<area shape="rect" id="Node000002" href="$log__filter_8h.html" title=" " alt="" coords="175,79,318,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="361,33,282,74,280,70,358,28"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="284,152,343,177"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="378,32,327,141,322,138,373,30"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="367,152,454,177"/>
+<area shape="poly" id="edge12_Node000001_Node000008" title=" " alt="" coords="386,31,408,138,403,139,381,32"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="445,79,569,104"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="403,28,476,69,473,74,400,33"/>
+<area shape="rect" id="Node000003" href="$logger__interface_8h.html" title=" " alt="" coords="57,152,209,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="230,106,165,147,162,142,227,102"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="199,225,276,251"/>
+<area shape="poly" id="edge8_Node000002_Node000004" title=" " alt="" coords="249,105,242,212,236,211,243,104"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="5,225,64,251"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="176,97,141,103,107,114,74,130,47,154,40,167,35,181,34,212,28,211,30,180,35,164,43,150,71,126,105,109,140,98,175,92"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="260,103,295,140,291,144,256,106"/>
+<area shape="poly" id="edge9_Node000002_Node000008" title=" " alt="" coords="274,102,373,144,370,149,272,106"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="152,175,210,215,207,219,149,180"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="101,225,165,251"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="136,178,136,212,131,212,131,178"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="119,180,63,219,60,215,116,175"/>
+</map>

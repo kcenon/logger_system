@@ -1,0 +1,14 @@
+<map id="base_writer.h" name="base_writer.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="19,5,128,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,152,64,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,33,45,53,31,79,27,109,30,138,25,138,21,109,25,78,40,50,59,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="40,79,107,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="76,31,76,65,71,65,71,31"/>
+<area shape="rect" id="Node000004" href="$logger__interface_8h.html" title=" " alt="" coords="131,79,283,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="96,28,174,70,172,74,94,33"/>
+<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="180,106,76,149,74,144,178,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="120,152,197,177"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="201,106,176,142,172,139,197,103"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="221,152,285,177"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="217,103,240,139,236,142,212,106"/>
+</map>

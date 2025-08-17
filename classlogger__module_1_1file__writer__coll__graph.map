@@ -1,0 +1,5 @@
+<map id="logger_module::file_writer" name="logger_module::file_writer">
+<area shape="rect" id="Node000001" title="Basic file writer for logging to files." alt="" coords="11,93,158,133"/>
+<area shape="rect" id="Node000002" href="$classlogger__module_1_1base__writer.html" title="Base class for all log writers." alt="" coords="5,5,164,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,59,87,93,82,93,82,59"/>
+</map>

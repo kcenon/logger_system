@@ -1,0 +1,37 @@
+var annotated_dup =
+[
+    [ "logger_module", "namespacelogger__module.html", [
+      [ "access_control_filter", "classlogger__module_1_1access__control__filter.html", "classlogger__module_1_1access__control__filter" ],
+      [ "base_writer", "classlogger__module_1_1base__writer.html", "classlogger__module_1_1base__writer" ],
+      [ "composite_filter", "classlogger__module_1_1composite__filter.html", "classlogger__module_1_1composite__filter" ],
+      [ "console_writer", "classlogger__module_1_1console__writer.html", "classlogger__module_1_1console__writer" ],
+      [ "encrypted_writer", "classlogger__module_1_1encrypted__writer.html", "classlogger__module_1_1encrypted__writer" ],
+      [ "file_writer", "classlogger__module_1_1file__writer.html", "classlogger__module_1_1file__writer" ],
+      [ "function_filter", "classlogger__module_1_1function__filter.html", "classlogger__module_1_1function__filter" ],
+      [ "level_filter", "classlogger__module_1_1level__filter.html", "classlogger__module_1_1level__filter" ],
+      [ "log_aggregator", "classlogger__module_1_1log__aggregator.html", "classlogger__module_1_1log__aggregator" ],
+      [ "log_analyzer", "classlogger__module_1_1log__analyzer.html", "classlogger__module_1_1log__analyzer" ],
+      [ "log_collector", "classlogger__module_1_1log__collector.html", "classlogger__module_1_1log__collector" ],
+      [ "log_entry", "structlogger__module_1_1log__entry.html", "structlogger__module_1_1log__entry" ],
+      [ "log_filter", "classlogger__module_1_1log__filter.html", "classlogger__module_1_1log__filter" ],
+      [ "log_route", "structlogger__module_1_1log__route.html", "structlogger__module_1_1log__route" ],
+      [ "log_router", "classlogger__module_1_1log__router.html", "classlogger__module_1_1log__router" ],
+      [ "log_sanitizer", "classlogger__module_1_1log__sanitizer.html", "classlogger__module_1_1log__sanitizer" ],
+      [ "log_server", "classlogger__module_1_1log__server.html", "classlogger__module_1_1log__server" ],
+      [ "logger", "classlogger__module_1_1logger.html", "classlogger__module_1_1logger" ],
+      [ "logger_metrics_collector", "classlogger__module_1_1logger__metrics__collector.html", "classlogger__module_1_1logger__metrics__collector" ],
+      [ "network_writer", "classlogger__module_1_1network__writer.html", "classlogger__module_1_1network__writer" ],
+      [ "performance_metrics", "structlogger__module_1_1performance__metrics.html", "structlogger__module_1_1performance__metrics" ],
+      [ "regex_filter", "classlogger__module_1_1regex__filter.html", "classlogger__module_1_1regex__filter" ],
+      [ "rotating_file_writer", "classlogger__module_1_1rotating__file__writer.html", "classlogger__module_1_1rotating__file__writer" ],
+      [ "router_builder", "classlogger__module_1_1router__builder.html", "classlogger__module_1_1router__builder" ],
+      [ "sanitizing_filter", "classlogger__module_1_1sanitizing__filter.html", "classlogger__module_1_1sanitizing__filter" ],
+      [ "standard_fields", "structlogger__module_1_1standard__fields.html", null ],
+      [ "structured_logger", "classlogger__module_1_1structured__logger.html", "classlogger__module_1_1structured__logger" ],
+      [ "writer_metrics", "structlogger__module_1_1writer__metrics.html", "structlogger__module_1_1writer__metrics" ]
+    ] ],
+    [ "thread_module", "namespacethread__module.html", [
+      [ "logger_interface", "classthread__module_1_1logger__interface.html", "classthread__module_1_1logger__interface" ],
+      [ "logger_registry", "classthread__module_1_1logger__registry.html", null ]
+    ] ]
+];

@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['record_5fdrop_0',['record_drop',['../classlogger__module_1_1logger__metrics__collector.html#a29f75dec81cdc1c5364d0e1694fc3150',1,'logger_module::logger_metrics_collector']]],
+  ['record_5fenqueue_1',['record_enqueue',['../classlogger__module_1_1logger__metrics__collector.html#a15bd2c5dcad915b5beda89e4161b52d3',1,'logger_module::logger_metrics_collector']]],
+  ['record_5fprocessed_2',['record_processed',['../classlogger__module_1_1logger__metrics__collector.html#a8ea8c557ab4ee94d886d10c841e46ae7',1,'logger_module::logger_metrics_collector']]],
+  ['record_5fwrite_3',['record_write',['../classlogger__module_1_1logger__metrics__collector.html#acdfa42395a0c7d6eb2c091f92bf67071',1,'logger_module::logger_metrics_collector']]],
+  ['regex_5ffilter_4',['regex_filter',['../classlogger__module_1_1regex__filter.html#a49414e0e55cdf144b34cd2d41b5905cb',1,'logger_module::regex_filter']]],
+  ['remove_5frule_5',['remove_rule',['../classlogger__module_1_1log__sanitizer.html#a29a558136c55295de12d6dd56884b9b9',1,'logger_module::log_sanitizer']]],
+  ['remove_5fwriter_6',['remove_writer',['../classlogger__module_1_1logger_1_1impl.html#a691c8ee7a796c97da695b3f164a89959',1,'logger_module::logger::impl::remove_writer()'],['../classlogger__module_1_1logger.html#adda78503ea4fd03e9f782cca539e6e2b',1,'logger_module::logger::remove_writer()']]],
+  ['reopen_7',['reopen',['../classlogger__module_1_1file__writer.html#a0dfe667ccbfc1dea9c1557658b51e748',1,'logger_module::file_writer']]],
+  ['reset_8',['reset',['../classlogger__module_1_1logger__metrics__collector.html#acdcb4a4535d9add01961d8b646309a49',1,'logger_module::logger_metrics_collector']]],
+  ['reset_5fall_9',['reset_all',['../classlogger__module_1_1log__aggregator.html#ac47371077a0aef28c52aba80efe582fd',1,'logger_module::log_aggregator']]],
+  ['reset_5fmetrics_10',['reset_metrics',['../classlogger__module_1_1logger_1_1impl.html#af0b1a204c171c0b2874c088f16782763',1,'logger_module::logger::impl::reset_metrics()'],['../classlogger__module_1_1logger.html#a9f8418175c8a0e4dcc7cd0d58c8fce80',1,'logger_module::logger::reset_metrics()']]],
+  ['reset_5fsource_11',['reset_source',['../classlogger__module_1_1log__aggregator.html#ae3d649dcebf6d9b036dbd338dadb271e',1,'logger_module::log_aggregator']]],
+  ['rotate_12',['rotate',['../classlogger__module_1_1rotating__file__writer.html#a22753c616ad612c3aa60a1eabf587a04',1,'logger_module::rotating_file_writer']]],
+  ['rotating_5ffile_5fwriter_13',['rotating_file_writer',['../classlogger__module_1_1rotating__file__writer.html#aebc9932a4f46556af1a8ef089e442d3e',1,'logger_module::rotating_file_writer::rotating_file_writer(const std::string &amp;filename, size_t max_size, size_t max_files=10)'],['../classlogger__module_1_1rotating__file__writer.html#aa5f1f372e43b05582cb59221c6c054b0',1,'logger_module::rotating_file_writer::rotating_file_writer(const std::string &amp;filename, rotation_type type, size_t max_files=10)'],['../classlogger__module_1_1rotating__file__writer.html#a82392c2617727b90104ea0dc88f3f8cc',1,'logger_module::rotating_file_writer::rotating_file_writer(const std::string &amp;filename, rotation_type type, size_t max_size, size_t max_files=10)']]],
+  ['route_14',['route',['../classlogger__module_1_1log__router.html#a2c136adb4487bb16f65fe6e4156907d1',1,'logger_module::log_router']]],
+  ['route_5fto_15',['route_to',['../classlogger__module_1_1router__builder.html#a3856cedc4ad1e0e515733d0b03446898',1,'logger_module::router_builder::route_to(const std::vector&lt; std::string &gt; &amp;writer_names, bool stop_propagation=false)'],['../classlogger__module_1_1router__builder.html#a9ff65eefaf88fb0eabb62f26d716ac5f',1,'logger_module::router_builder::route_to(const std::string &amp;writer_name, bool stop_propagation=false)']]],
+  ['router_5fbuilder_16',['router_builder',['../classlogger__module_1_1router__builder.html#abef9cacef8ab99bf76fd31d6ebd4c3f7',1,'logger_module::router_builder']]]
+];

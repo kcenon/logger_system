@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['daily_0',['daily',['../classlogger__module_1_1rotating__file__writer.html#a752f54d17b4949a3b0150f6e785e6c66abea79186fd7af2da67e59b4b15df5a26',1,'logger_module::rotating_file_writer']]],
+  ['data_20sanitization_1',['Sensitive Data Sanitization',['../index.html#autotoc_md19',1,'']]],
+  ['database_20writer_2',['4. Database Writer',['../md_docs_2custom-writers.html#autotoc_md163',1,'']]],
+  ['debug_3',['debug',['../classlogger__module_1_1structured__logger.html#ab8314ed344a87cc92e2601f0ce2cc1ce',1,'logger_module::structured_logger::debug()'],['../namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288aad42f6697b035b7580e4fef93be20b4d',1,'thread_module::debug']]],
+  ['decisions_3a_4',['Design Decisions:',['../md_docs_2architecture.html#autotoc_md129',1,'']]],
+  ['dependencies_5',['Project Dependencies',['../index.html#autotoc_md3',1,'']]],
+  ['dependencies_3a_6',['dependencies:',['../md_ARCHITECTURE.html#autotoc_md37',1,'Dependencies:'],['../md_ARCHITECTURE.html#autotoc_md42',1,'Dependencies:'],['../md_ARCHITECTURE.html#autotoc_md47',1,'Dependencies:'],['../md_ARCHITECTURE.html#autotoc_md52',1,'Dependencies:']]],
+  ['dependency_20flow_20interface_20contracts_7',['🔄 Dependency Flow &amp; Interface Contracts',['../md_ARCHITECTURE.html#autotoc_md53',1,'']]],
+  ['dependency_20graph_8',['Dependency Graph',['../md_ARCHITECTURE.html#autotoc_md55',1,'']]],
+  ['dependency_20injection_20pattern_9',['2. Dependency Injection Pattern',['../md_ARCHITECTURE.html#autotoc_md59',1,'']]],
+  ['design_20decisions_3a_10',['Design Decisions:',['../md_docs_2architecture.html#autotoc_md129',1,'']]],
+  ['design_20patterns_20used_11',['Design Patterns Used',['../md_docs_2architecture.html#autotoc_md152',1,'']]],
+  ['design_20principles_12',['Design Principles',['../md_ARCHITECTURE.html#autotoc_md62',1,'']]],
+  ['development_13',['development',['../md_ARCHITECTURE.html#autotoc_md70',1,'2. Build Order (Local Development)'],['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md228',1,'Development']]],
+  ['development_20environment_20setup_14',['1. Development Environment Setup',['../md_ARCHITECTURE.html#autotoc_md69',1,'']]],
+  ['diagram_15',['Architecture Diagram',['../md_docs_2architecture.html#autotoc_md123',1,'']]],
+  ['direct_20integration_16',['direct integration',['../md_docs_2architecture.html#autotoc_md144',1,'Direct Integration'],['../md_docs_2getting-started.html#autotoc_md189',1,'Direct Integration']]],
+  ['distributed_20logging_17',['Distributed Logging',['../index.html#autotoc_md15',1,'']]],
+  ['docs_2freadme_2emd_18',['README.md',['../docs_2README_8md.html',1,'']]],
+  ['documentation_20github_20pages_19',['Documentation (GitHub Pages)',['../index.html#autotoc_md1',1,'']]],
+  ['documentation_20pages_20checklist_20',['Documentation (Pages) Checklist',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md231',1,'']]],
+  ['documentation_20structure_21',['📚 Documentation Structure',['../md_ARCHITECTURE.html#autotoc_md72',1,'']]],
+  ['duration_22',['duration',['../structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506',1,'logger_module::log_entry']]]
+];
