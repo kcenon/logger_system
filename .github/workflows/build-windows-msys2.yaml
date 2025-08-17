@@ -1,0 +1,102 @@
+name: Build-Windows-MSYS2
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build_windows_msys2:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    timeout-minutes: 60
+    env:
+      BUILD_TYPE: Debug
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+          clean: true
+          fetch-depth: 1
+
+      - name: Setup MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            base-devel
+            mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
+            mingw-w64-x86_64-make
+            git
+
+      - name: Cache vcpkg
+        uses: actions/cache@v3
+        id: vcpkg-cache
+        with:
+          path: |
+            ${{ github.workspace }}/vcpkg
+            !${{ github.workspace }}/vcpkg/buildtrees
+            !${{ github.workspace }}/vcpkg/packages
+            !${{ github.workspace }}/vcpkg/downloads
+          key: ${{ runner.os }}-msys2-vcpkg-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-msys2-vcpkg-
+
+      - name: Cache vcpkg installed
+        uses: actions/cache@v3
+        id: vcpkg-installed
+        with:
+          path: ${{ github.workspace }}/vcpkg_installed
+          key: ${{ runner.os }}-msys2-vcpkg-installed-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-msys2-vcpkg-installed-
+
+      - name: Set up vcpkg
+        run: |
+          if [ ! -d "vcpkg" ]; then
+            git clone https://github.com/Microsoft/vcpkg.git
+          else
+            cd vcpkg && git pull && cd ..
+          fi
+          ./vcpkg/bootstrap-vcpkg.sh
+
+      - name: Install dependencies with vcpkg
+        if: steps.vcpkg-installed.outputs.cache-hit != 'true'
+        run: |
+          ./vcpkg/vcpkg install --x-manifest-root=. --x-install-root=${{ github.workspace }}/vcpkg_installed --triplet x86_64-w64-mingw32 || true
+
+      - name: Cache CMake build
+        uses: actions/cache@v3
+        id: cmake-cache
+        with:
+          path: ${{ github.workspace }}/build
+          key: ${{ runner.os }}-cmake-msys2-${{ hashFiles('CMakeLists.txt', 'vcpkg.json') }}-${{ env.BUILD_TYPE }}
+          restore-keys: |
+            ${{ runner.os }}-cmake-msys2-
+
+      - name: Prepare build directory
+        run: |
+          rm -rf build && mkdir -p build
+
+      - name: Configure (MSYS2)
+        run: |
+          cd build
+          cmake .. \
+            -G Ninja \
+            -DBUILD_TESTS=ON \
+            -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+            -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/vcpkg/scripts/buildsystems/vcpkg.cmake"
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Test
+        run: cd build && ctest --output-on-failure
+

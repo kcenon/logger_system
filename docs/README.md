@@ -34,3 +34,10 @@ Welcome to the Logger System documentation. This guide provides comprehensive in
 - [Issue Tracker](https://github.com/kcenon/logger_system/issues)
 - [Thread System](https://github.com/kcenon/thread_system) - Parent project
 - [Security Guide](../SECURITY.md) - Threat model and hardening
+
+## Documentation (Pages) Checklist
+
+- Enable GitHub Pages with source set to `gh-pages` branch (root).
+- Ensure `Doxyfile` exists at repository root (already added).
+- The workflow `Generate-Documentation` will build and publish to `documents/html` on `gh-pages`.
+- Visit Actions → Generate-Documentation to run manually if needed (workflow_dispatch supported).
