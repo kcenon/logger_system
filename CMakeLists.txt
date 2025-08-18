@@ -53,31 +53,52 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 # Dependencies
 ##################################################
 find_package(Threads REQUIRED)
-include(FetchContent)
 
-# Thread System Interface (local copy)
-# Using local logger_interface.h instead of external dependency
+# fmt library (optional but recommended)
+find_package(fmt CONFIG)
+if(fmt_FOUND)
+    message(STATUS "Found fmt library")
+    add_compile_definitions(USE_FMT)
+endif()
+
+# spdlog (optional for comparison)
+find_package(spdlog CONFIG)
+if(spdlog_FOUND)
+    message(STATUS "Found spdlog library")
+endif()
 
 # Google Test (for unit tests)
 if (BUILD_TESTS)
-    FetchContent_Declare(
-        googletest
-        GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG v1.14.0
-    )
-    FetchContent_MakeAvailable(googletest)
+    # Try to find GTest from vcpkg first
+    find_package(GTest CONFIG)
+    if(NOT GTest_FOUND)
+        # Fallback to FetchContent if not found
+        include(FetchContent)
+        FetchContent_Declare(
+            googletest
+            GIT_REPOSITORY https://github.com/google/googletest.git
+            GIT_TAG v1.14.0
+        )
+        FetchContent_MakeAvailable(googletest)
+    endif()
     enable_testing()
 endif()
 
 # Google Benchmark (for benchmarks)
 if (BUILD_BENCHMARKS)
-    FetchContent_Declare(
-        benchmark
-        GIT_REPOSITORY https://github.com/google/benchmark.git
-        GIT_TAG v1.8.3
-    )
-    set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
-    FetchContent_MakeAvailable(benchmark)
+    # Try to find benchmark from vcpkg first
+    find_package(benchmark CONFIG)
+    if(NOT benchmark_FOUND)
+        # Fallback to FetchContent if not found
+        include(FetchContent)
+        FetchContent_Declare(
+            benchmark
+            GIT_REPOSITORY https://github.com/google/benchmark.git
+            GIT_TAG v1.8.3
+        )
+        set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
+        FetchContent_MakeAvailable(benchmark)
+    endif()
 endif()
 
 ##################################################

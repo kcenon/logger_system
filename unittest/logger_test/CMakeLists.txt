@@ -16,10 +16,10 @@ if(DEFINED CMAKE_TOOLCHAIN_FILE AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../../bu
     endif()
 endif()
 
-# Try to find GTest (vcpkg first, then system)
-find_package(GTest CONFIG)
-if(NOT GTest_FOUND)
-    find_package(GTest REQUIRED)
+# GTest should already be found by parent CMakeLists.txt
+# Just verify it's available
+if(NOT TARGET GTest::gtest)
+    message(FATAL_ERROR "GTest not found. Please install via vcpkg or enable FetchContent in parent CMakeLists.txt")
 endif()
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
