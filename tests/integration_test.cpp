@@ -80,8 +80,8 @@ TEST_F(IntegrationTest, FullPipelineTest) {
     
     // Configure routing
     auto& router = logger->get_router();
-    router_builder(router)
-        .when_level(thread_module::log_level::error)
+    router_builder builder(router);
+    builder.when_level(thread_module::log_level::error)
         .route_to("file", true);
     
     // Log various messages

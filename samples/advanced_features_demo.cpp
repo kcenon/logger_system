@@ -69,18 +69,18 @@ int main() {
     auto& router = logger->get_router();
     
     // Route errors to error file only
-    router_builder(router)
-        .when_level(log_level::error)
+    router_builder builder1(router);
+    builder1.when_level(log_level::error)
         .route_to("error_file", true);  // Stop propagation
     
     // Route debug messages to debug file
-    router_builder(router)
-        .when_level(log_level::trace)
+    router_builder builder2(router);
+    builder2.when_level(log_level::trace)
         .route_to(std::vector<std::string>{"debug_file", "console"});
     
     // Route messages containing "performance" to rotating file
-    router_builder(router)
-        .when_matches("performance")
+    router_builder builder3(router);
+    builder3.when_matches("performance")
         .route_to("rotating");
     
     // Set exclusive routes (no default fallback)
