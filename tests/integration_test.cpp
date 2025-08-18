@@ -61,6 +61,9 @@ TEST_F(IntegrationTest, FullPipelineTest) {
     // Create logger with multiple writers
     auto logger = std::make_shared<logger_module::logger>();
     
+    // Start the logger before using it
+    logger->start();
+    
     // Add various writers
     logger->add_writer("console", std::make_unique<console_writer>());
     logger->add_writer("file", std::make_unique<file_writer>("test_integration.log"));
@@ -102,6 +105,9 @@ TEST_F(IntegrationTest, FullPipelineTest) {
     
     logger->flush();
     
+    // Stop the logger properly
+    logger->stop();
+    
     // Verify files exist
     EXPECT_TRUE(std::filesystem::exists("test_integration.log"));
     EXPECT_TRUE(std::filesystem::exists("test_rotating.log"));
@@ -109,6 +115,7 @@ TEST_F(IntegrationTest, FullPipelineTest) {
 
 TEST_F(IntegrationTest, StructuredLoggingTest) {
     auto logger = std::make_shared<logger_module::logger>();
+    logger->start();
     logger->add_writer(std::make_unique<file_writer>("test_integration.log"));
     
     // Test different formats
@@ -131,6 +138,7 @@ TEST_F(IntegrationTest, StructuredLoggingTest) {
     }
     
     logger->flush();
+    logger->stop();
     
     // Verify file has content
     std::ifstream file("test_integration.log");
@@ -191,12 +199,14 @@ TEST_F(IntegrationTest, SecurityFeaturesTest) {
     
     // Create logger with encrypted writer
     auto logger = std::make_shared<logger_module::logger>();
+    logger->start();
     auto file = std::make_unique<file_writer>("test_encrypted.log");
     auto encrypted = std::make_unique<encrypted_writer>(std::move(file), key);
     logger->add_writer(std::move(encrypted));
     
     logger->log(thread_module::log_level::info, "Encrypted message");
     logger->flush();
+    logger->stop();
     
     // Test sanitizer
     auto sanitizer = std::make_shared<log_sanitizer>();
@@ -282,6 +292,7 @@ TEST_F(IntegrationTest, AnalysisTest) {
 TEST_F(IntegrationTest, StressTest) {
     // Create logger with multiple writers
     auto logger = std::make_shared<logger_module::logger>();
+    logger->start();
     logger->add_writer(std::make_unique<file_writer>("test_integration.log"));
     logger->enable_metrics_collection(true);
     
@@ -348,6 +359,7 @@ TEST_F(IntegrationTest, StressTest) {
     std::cout << "Average enqueue time: " << metrics.get_avg_enqueue_time_ns() << " ns" << std::endl;
     
     logger->flush();
+    logger->stop();
 }
 
 int main(int argc, char** argv) {
