@@ -233,7 +233,7 @@ public:
         if (metrics_collector_) {
             return metrics_collector_->get_snapshot();
         }
-        return make_logger_error(logger_error_code::metrics_not_available, 
+        return make_logger_error<performance_metrics>(logger_error_code::metrics_not_available, 
                                 "Metrics collection is not enabled");
     }
     
@@ -244,7 +244,7 @@ public:
         if (metrics_collector_) {
             return std::make_unique<performance_metrics>(metrics_collector_->get_snapshot());
         }
-        return make_logger_error(logger_error_code::metrics_not_available,
+        return make_logger_error<std::unique_ptr<performance_metrics>>(logger_error_code::metrics_not_available,
                                 "Metrics collection is not enabled");
     }
     

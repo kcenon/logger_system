@@ -293,6 +293,12 @@ private:
 inline result_void make_logger_error(logger_error_code code, const std::string& message = "") {
     return result_void{code, message.empty() ? logger_error_to_string(code) : message};
 }
+
+// Template version for result<T>
+template<typename T>
+inline result<T> make_logger_error(logger_error_code code, const std::string& message = "") {
+    return result<T>{code, message.empty() ? logger_error_to_string(code) : message};
+}
 #endif
 
 } // namespace logger_module

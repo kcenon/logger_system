@@ -131,6 +131,11 @@ std::string encrypted_writer::encrypt_data(const std::string& plaintext) {
     // DEMO IMPLEMENTATION - NOT CRYPTOGRAPHICALLY SECURE!
     // In production, use OpenSSL, libsodium, or similar
     
+    // Different behavior based on encryption type
+    if (type_ == encryption_type::none) {
+        return plaintext;  // No encryption
+    }
+    
     // Convert string to bytes
     std::vector<uint8_t> data(plaintext.begin(), plaintext.end());
     
@@ -148,7 +153,7 @@ std::string encrypted_writer::encrypt_data(const std::string& plaintext) {
     std::vector<uint8_t> result = iv_;
     result.insert(result.end(), data.begin(), data.end());
     
-    // XOR encrypt (DEMO ONLY)
+    // XOR encrypt (DEMO ONLY) - for both aes_256_cbc and chacha20_poly1305 in demo
     xor_encrypt(result, key_);
     
     return std::string(result.begin(), result.end());
