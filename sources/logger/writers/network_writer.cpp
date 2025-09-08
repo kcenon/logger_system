@@ -6,11 +6,21 @@ All rights reserved.
 *****************************************************************************/
 
 #include "network_writer.h"
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <unistd.h>
+
+#ifdef _WIN32
+    #include <winsock2.h>
+    #include <ws2tcpip.h>
+    #pragma comment(lib, "ws2_32.lib")
+    typedef int socklen_t;
+    #define close closesocket
+#else
+    #include <sys/socket.h>
+    #include <netinet/in.h>
+    #include <arpa/inet.h>
+    #include <netdb.h>
+    #include <unistd.h>
+#endif
+
 #include <cstring>
 #include <sstream>
 #include <iomanip>
@@ -29,6 +39,14 @@ network_writer::network_writer(const std::string& host,
     , buffer_size_(buffer_size)
     , reconnect_interval_(reconnect_interval)
     , socket_fd_(-1) {
+    
+#ifdef _WIN32
+    // Initialize Winsock
+    WSADATA wsaData;
+    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+        throw std::runtime_error("Failed to initialize Winsock");
+    }
+#endif
     
     running_ = true;
     
@@ -57,6 +75,11 @@ network_writer::~network_writer() {
     }
     
     disconnect();
+    
+#ifdef _WIN32
+    // Cleanup Winsock
+    WSACleanup();
+#endif
 }
 
 result_void network_writer::write(thread_module::log_level level,

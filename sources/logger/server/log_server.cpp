@@ -6,10 +6,20 @@ All rights reserved.
 *****************************************************************************/
 
 #include "log_server.h"
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
+
+#ifdef _WIN32
+    #include <winsock2.h>
+    #include <ws2tcpip.h>
+    #pragma comment(lib, "ws2_32.lib")
+    typedef int socklen_t;
+    #define close closesocket
+#else
+    #include <sys/socket.h>
+    #include <netinet/in.h>
+    #include <arpa/inet.h>
+    #include <unistd.h>
+#endif
+
 #include <cstring>
 #include <iostream>
 #include <sstream>
@@ -41,6 +51,15 @@ bool log_server::start() {
         return true;
     }
     
+#ifdef _WIN32
+    // Initialize Winsock
+    WSADATA wsaData;
+    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+        std::cerr << "Failed to initialize Winsock" << std::endl;
+        return false;
+    }
+#endif
+    
     // Create socket
     server_socket_ = socket(AF_INET, use_tcp_ ? SOCK_STREAM : SOCK_DGRAM, 0);
     if (server_socket_ < 0) {
@@ -50,7 +69,11 @@ bool log_server::start() {
     
     // Allow socket reuse
     int reuse = 1;
+#ifdef _WIN32
+    if (setsockopt(server_socket_, SOL_SOCKET, SO_REUSEADDR, (const char*)&reuse, sizeof(reuse)) < 0) {
+#else
     if (setsockopt(server_socket_, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse)) < 0) {
+#endif
         std::cerr << "Failed to set socket options: " << strerror(errno) << std::endl;
         close(server_socket_);
         return false;
@@ -102,10 +125,19 @@ void log_server::stop() {
     
     // Close server socket to interrupt accept()
     if (server_socket_ >= 0) {
+#ifdef _WIN32
+        shutdown(server_socket_, SD_BOTH);
+#else
         shutdown(server_socket_, SHUT_RDWR);
+#endif
         close(server_socket_);
         server_socket_ = -1;
     }
+    
+#ifdef _WIN32
+    // Cleanup Winsock
+    WSACleanup();
+#endif
     
     // Wait for accept thread
     if (accept_thread_.joinable()) {

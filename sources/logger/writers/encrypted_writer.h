@@ -24,6 +24,7 @@ public:
      * @brief Encryption algorithm type
      */
     enum class encryption_type {
+        none,           // No encryption (passthrough)
         aes_256_cbc,    // AES-256 with CBC mode
         aes_256_gcm,    // AES-256 with GCM mode (authenticated)
         chacha20_poly1305  // ChaCha20-Poly1305 (authenticated)
