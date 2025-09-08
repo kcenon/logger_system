@@ -1,0 +1,7 @@
+<map id="logger_module::compact_formatter" name="logger_module::compact_formatter">
+<area shape="rect" id="Node000001" title="Compact formatter for minimal output." alt="" coords="5,181,188,221"/>
+<area shape="rect" id="Node000002" href="$classlogger__module_1_1base__formatter.html" title="Base implementation for log formatters." alt="" coords="17,93,176,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,147,99,181,94,181,94,147"/>
+<area shape="rect" id="Node000003" href="$classlogger__module_1_1log__formatter__interface.html" title="Interface for log formatters." alt="" coords="19,5,175,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,59,99,93,94,93,94,59"/>
+</map>

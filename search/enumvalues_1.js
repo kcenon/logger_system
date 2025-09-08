@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['chacha20_5fpoly1305_0',['chacha20_poly1305',['../classlogger__module_1_1encrypted__writer.html#af6311571e281e04fc22d088b07d45c81aacc377c92072070f0039775a9f72ac4d',1,'logger_module::encrypted_writer']]],
-  ['critical_1',['critical',['../namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288a7e85bcb66fb9a809d5ab4f62a8b8bea8',1,'thread_module']]]
+  ['block_0',['block',['../structlogger__module_1_1logger__config.html#a14957f830bfb3a4018ec62e4cea8da8da14511f2f5564650d129ca7cabc333278',1,'logger_module::logger_config']]],
+  ['buffer_5foverflow_1',['buffer_overflow',['../namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba0d998bc644f3d7bb85b68137d2bd62c2',1,'logger_module']]]
 ];

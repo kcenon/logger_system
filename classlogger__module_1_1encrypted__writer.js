@@ -7,7 +7,7 @@ var classlogger__module_1_1encrypted__writer =
     ] ],
     [ "encrypted_writer", "classlogger__module_1_1encrypted__writer.html#ab2dbd4ecb8762cc1a00302e1ec816248", null ],
     [ "~encrypted_writer", "classlogger__module_1_1encrypted__writer.html#aa519bf6afe3e5464c8e7dc7e82ef50cc", null ],
-    [ "flush", "classlogger__module_1_1encrypted__writer.html#a69a8161f7581b484c99e9dc27c286d3c", null ],
+    [ "flush", "classlogger__module_1_1encrypted__writer.html#ad3b9529e7afa5698f09103438b876781", null ],
     [ "get_name", "classlogger__module_1_1encrypted__writer.html#a997a92e2beed9924e63525d5f521e5a6", null ],
-    [ "write", "classlogger__module_1_1encrypted__writer.html#a5290d9cbee23d9a360ad9fce3d59e498", null ]
+    [ "write", "classlogger__module_1_1encrypted__writer.html#a7e538bc5e9dea04d61ff02ae4a03c6b7", null ]
 ];

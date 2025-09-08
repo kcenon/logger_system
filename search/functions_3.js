@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['enable_5fmetrics_5fcollection_0',['enable_metrics_collection',['../classlogger__module_1_1logger_1_1impl.html#a17afc09940116f404adfdf28021c2a3e',1,'logger_module::logger::impl::enable_metrics_collection()'],['../classlogger__module_1_1logger.html#a192581bcec31253229b7fcca13cf61c1',1,'logger_module::logger::enable_metrics_collection()']]],
-  ['encrypted_5fwriter_1',['encrypted_writer',['../classlogger__module_1_1encrypted__writer.html#ab2dbd4ecb8762cc1a00302e1ec816248',1,'logger_module::encrypted_writer']]],
-  ['enqueue_2',['enqueue',['../classlogger__module_1_1log__collector_1_1impl.html#aca7a1108d9307a91de5f5b3e97cc3782',1,'logger_module::log_collector::impl::enqueue()'],['../classlogger__module_1_1log__collector.html#a8185fbd818a9881aeef46350ea023ae0',1,'logger_module::log_collector::enqueue()']]],
-  ['error_3',['error',['../structlogger__module_1_1log__entry.html#a114be15ef16b3ed773ab0eb113dc6635',1,'logger_module::log_entry::error()'],['../classlogger__module_1_1structured__logger.html#a283c96016b59fec9cb9228f2202b84c8',1,'logger_module::structured_logger::error()']]]
+  ['debug_0',['debug',['../classlogger__module_1_1structured__logger.html#ad6d511f5b3134d88521f7314f0463d6f',1,'logger_module::structured_logger']]],
+  ['debug_5fconfig_1',['debug_config',['../structlogger__module_1_1logger__config.html#a0254530f253661be5b4311b0bef6befb',1,'logger_module::logger_config']]],
+  ['default_5fconfig_2',['default_config',['../structlogger__module_1_1logger__config.html#a9e5d4380ae8b300436d1d3a27168cc04',1,'logger_module::logger_config']]],
+  ['duration_3',['duration',['../classlogger__module_1_1structured__log__entry.html#a06bc06a995b3bf09378b9bd26f8d8ec3',1,'logger_module::structured_log_entry']]]
 ];

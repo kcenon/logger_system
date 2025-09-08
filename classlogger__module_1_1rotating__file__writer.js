@@ -18,5 +18,5 @@ var classlogger__module_1_1rotating__file__writer =
     [ "rotate", "classlogger__module_1_1rotating__file__writer.html#a22753c616ad612c3aa60a1eabf587a04", null ],
     [ "should_rotate", "classlogger__module_1_1rotating__file__writer.html#a8fc267e40cb74ee6886918a0da87abf1", null ],
     [ "should_rotate_by_time", "classlogger__module_1_1rotating__file__writer.html#af67bcae8a63168658537d7f0167dcecb", null ],
-    [ "write", "classlogger__module_1_1rotating__file__writer.html#a541384233263ff16bf02814437f929de", null ]
+    [ "write", "classlogger__module_1_1rotating__file__writer.html#afbe1b2bd5e9a697ca524d59ea56c1a3d", null ]
 ];

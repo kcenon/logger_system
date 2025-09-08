@@ -1,18 +1,6 @@
 var searchData=
 [
-  ['level_5ffilter_0',['level_filter',['../classlogger__module_1_1level__filter.html#aa6d7ad3ed9289bc969d4d1e73eac3c65',1,'logger_module::level_filter']]],
-  ['level_5fto_5fcolor_1',['level_to_color',['../classlogger__module_1_1base__writer.html#a89ee91a4879e75a7f46cdfd0312da348',1,'logger_module::base_writer']]],
-  ['level_5fto_5fstring_2',['level_to_string',['../classlogger__module_1_1base__writer.html#a61120b14d44d5194e2db5906477b9f86',1,'logger_module::base_writer']]],
-  ['load_5fkey_3',['load_key',['../classlogger__module_1_1encrypted__writer.html#a9b96eb859dab1ffef78910b7c80c276c',1,'logger_module::encrypted_writer']]],
-  ['log_4',['log',['../classlogger__module_1_1logger_1_1impl.html#a4b3b406032eb39b8ad10f246595d21ff',1,'logger_module::logger::impl::log()'],['../classlogger__module_1_1logger.html#acb40cd515416089f1ca6db2fbf1fd287',1,'logger_module::logger::log(thread_module::log_level level, const std::string &amp;message) override'],['../classlogger__module_1_1logger.html#a3c1b802cb45a2b298d40f104966c40f3',1,'logger_module::logger::log(thread_module::log_level level, const std::string &amp;message, const std::string &amp;file, int line, const std::string &amp;function) override'],['../classthread__module_1_1logger__interface.html#a5d3ee2951de8f69d38c8de7b82d54a7c',1,'thread_module::logger_interface::log(log_level level, const std::string &amp;message)=0'],['../classthread__module_1_1logger__interface.html#ab7259d5cefc6b03319317b4921db7d52',1,'thread_module::logger_interface::log(log_level level, const std::string &amp;message, const std::string &amp;file, int line, const std::string &amp;function)=0']]],
-  ['log_5faggregator_5',['log_aggregator',['../classlogger__module_1_1log__aggregator.html#a9d4263c4f3d89de4d811196a61952058',1,'logger_module::log_aggregator']]],
-  ['log_5fanalyzer_6',['log_analyzer',['../classlogger__module_1_1log__analyzer.html#ac177734038a77fea4f918935f8ec3e1e',1,'logger_module::log_analyzer']]],
-  ['log_5fcollector_7',['log_collector',['../classlogger__module_1_1log__collector.html#ae4487597310463c49507b2b3d557171f',1,'logger_module::log_collector']]],
-  ['log_5fentry_8',['log_entry',['../structlogger__module_1_1log__entry.html#a8af0e42acba14c378fd8645605357c1e',1,'logger_module::log_entry']]],
-  ['log_5froute_9',['log_route',['../structlogger__module_1_1log__route.html#a4a213de84669ba7712b9ddb202ae4800',1,'logger_module::log_route::log_route(std::unique_ptr&lt; log_filter &gt; f, std::vector&lt; std::string &gt; writers, bool stop=false)'],['../structlogger__module_1_1log__route.html#ab6ff98e48c680e084c7e114d62569f3c',1,'logger_module::log_route::log_route(log_route &amp;&amp;other) noexcept']]],
-  ['log_5frouter_10',['log_router',['../classlogger__module_1_1log__router.html#ac57b57e4e239ad1de536a3adb8f0919e',1,'logger_module::log_router']]],
-  ['log_5fsanitizer_11',['log_sanitizer',['../classlogger__module_1_1log__sanitizer.html#ad018d43a17121dcced8960179a3e6bf4',1,'logger_module::log_sanitizer']]],
-  ['log_5fserver_12',['log_server',['../classlogger__module_1_1log__server.html#a521055fd067caa13955739a3a4fe2376',1,'logger_module::log_server']]],
-  ['logger_13',['logger',['../classlogger__module_1_1logger.html#a50c224cd3164dddecf3cb98a376b7d6b',1,'logger_module::logger']]],
-  ['logger_5fmetrics_5fcollector_14',['logger_metrics_collector',['../classlogger__module_1_1logger__metrics__collector.html#ad4d0e87afc395079084ad032c5f6afc4',1,'logger_module::logger_metrics_collector']]]
+  ['has_5ferror_0',['has_error',['../classlogger__module_1_1result__void.html#a814c0a8e344f903cb53e089c5ded4d2e',1,'logger_module::result_void']]],
+  ['has_5fvalue_1',['has_value',['../classlogger__module_1_1result.html#adaa09fcb185c33e358526d0eaea02844',1,'logger_module::result']]],
+  ['high_5fperformance_2',['high_performance',['../structlogger__module_1_1logger__config.html#abe0539be0d556d6a8517bcf28588f628',1,'logger_module::logger_config']]]
 ];

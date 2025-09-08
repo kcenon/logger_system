@@ -1,0 +1,25 @@
+var classlogger__module_1_1logger__builder =
+[
+    [ "logger_builder", "classlogger__module_1_1logger__builder.html#afa60344d6d452265a8e3d2f72229c842", null ],
+    [ "add_filter", "classlogger__module_1_1logger__builder.html#ac78fe6e8b3d0fd0a21a08a709f5eaede", null ],
+    [ "add_writer", "classlogger__module_1_1logger__builder.html#af16ce8e9b3c4f8b8c3e5a34ba47e0cb0", null ],
+    [ "build", "classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266", null ],
+    [ "get_config", "classlogger__module_1_1logger__builder.html#a1a2d80b6deb97ca71ec8698bb1a4e5ff", null ],
+    [ "use_template", "classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431", null ],
+    [ "validate", "classlogger__module_1_1logger__builder.html#a962b213b1cc4a72c99238d6d6316b9d9", null ],
+    [ "with_async", "classlogger__module_1_1logger__builder.html#ad1a2d536ff57115f1d2e47888d72e22f", null ],
+    [ "with_batch_size", "classlogger__module_1_1logger__builder.html#a27966331ac6cdcc4cbee032c2d93774a", null ],
+    [ "with_buffer_size", "classlogger__module_1_1logger__builder.html#a063f7ab7a982b21a64174a2d806712d3", null ],
+    [ "with_config", "classlogger__module_1_1logger__builder.html#afe40a2edab1e7c1cc945c71c2cceb1e9", null ],
+    [ "with_crash_handler", "classlogger__module_1_1logger__builder.html#a22cbed5f0baaff8b8b470f9d9ddd7613", null ],
+    [ "with_file_output", "classlogger__module_1_1logger__builder.html#a1f80ad20dc0aa39c9f09821f334c40e2", null ],
+    [ "with_flush_interval", "classlogger__module_1_1logger__builder.html#a6e01bcd70c10c4ac8bcfdf20f06b9070", null ],
+    [ "with_formatter", "classlogger__module_1_1logger__builder.html#a5c2b1b5395dada17f224404bcd4d02a2", null ],
+    [ "with_lock_free", "classlogger__module_1_1logger__builder.html#ac8975076f3e78aa136827ac275fb27ff", null ],
+    [ "with_max_queue_size", "classlogger__module_1_1logger__builder.html#a9a58dc2bcd0587bf2cb0373f31440fe8", null ],
+    [ "with_metrics", "classlogger__module_1_1logger__builder.html#add8a383391a30e3759cb40150ab37825", null ],
+    [ "with_min_level", "classlogger__module_1_1logger__builder.html#a4ca65e7bb8757c08ece5d058cebc3baf", null ],
+    [ "with_network_output", "classlogger__module_1_1logger__builder.html#ac7886cfadcf1f1be02dfc41a5c250de0", null ],
+    [ "with_overflow_policy", "classlogger__module_1_1logger__builder.html#a5d6d7951b25d84dd311f357281a63d5f", null ],
+    [ "with_structured_logging", "classlogger__module_1_1logger__builder.html#a0bd08610e887583f110c244e360e5b4e", null ]
+];

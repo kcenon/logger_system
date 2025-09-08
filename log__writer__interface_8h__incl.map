@@ -1,0 +1,14 @@
+<map id="log_writer_interface.h" name="log_writer_interface.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,169,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="37,152,95,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,33,59,53,45,80,42,94,44,110,54,139,49,140,38,111,37,94,39,78,54,50,73,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="54,79,121,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="90,31,90,65,85,65,85,31"/>
+<area shape="rect" id="Node000004" href="$error__codes_8h.html" title=" " alt="" coords="145,79,267,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="108,28,176,69,173,74,105,33"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="185,106,102,148,100,143,182,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="121,152,195,177"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="200,106,176,142,171,139,196,103"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="220,152,288,177"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="216,103,241,139,236,142,212,106"/>
+</map>

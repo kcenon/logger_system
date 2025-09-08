@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::log_entry Class Reference</title>
+<title>logger_system: logger_module::log_entry Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,16 +93,15 @@ $(document).ready(function(){initNavTree('structlogger__module_1_1log__entry.htm
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="structlogger__module_1_1log__entry-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">logger_module::log_entry Class Reference</div></div>
+  <div class="headertitle"><div class="title">logger_module::log_entry Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Builder pattern for structured log entries.  
+<p>Represents a single log entry.  
  <a href="structlogger__module_1_1log__entry.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="structured__logger_8h_source.html">structured_logger.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="log__entry_8h_source.html">log_entry.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for logger_module::log_entry:</div>
 <div class="dyncontent">
@@ -111,22 +110,18 @@ Collaboration diagram for logger_module::log_entry:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8af0e42acba14c378fd8645605357c1e" id="r_a8af0e42acba14c378fd8645605357c1e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a8af0e42acba14c378fd8645605357c1e">log_entry</a> (<a class="el" href="classlogger__module_1_1structured__logger.html">structured_logger</a> *<a class="el" href="classlogger__module_1_1logger.html">logger</a>, log_level <a class="el" href="structlogger__module_1_1log__entry.html#a78065333972831f5e467ddd17d9c1ee9">level</a>, <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">const</a> std::string &amp;<a class="el" href="structlogger__module_1_1log__entry.html#ab012a26baeabb7da729862b1cf295fb3">message</a>)</td></tr>
-<tr class="separator:a8af0e42acba14c378fd8645605357c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3940e3be577ac70d6e9c59fafe9ab666" id="r_a3940e3be577ac70d6e9c59fafe9ab666"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">typename</a> <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">T</a> &gt; </td></tr>
-<tr class="memitem:a3940e3be577ac70d6e9c59fafe9ab666"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a3940e3be577ac70d6e9c59fafe9ab666">field</a> (<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">const</a> std::string &amp;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">key</a>, <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">const</a> <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">T</a> &amp;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">value</a>)</td></tr>
-<tr class="separator:a3940e3be577ac70d6e9c59fafe9ab666"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a368eab60bafb9a0ae829a3d4c63b4916" id="r_a368eab60bafb9a0ae829a3d4c63b4916"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">typename</a> <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">T</a> &gt; </td></tr>
-<tr class="memitem:a368eab60bafb9a0ae829a3d4c63b4916"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a368eab60bafb9a0ae829a3d4c63b4916">context</a> (<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">const</a> std::string &amp;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">key</a>, <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">const</a> <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">T</a> &amp;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">value</a>)</td></tr>
-<tr class="separator:a368eab60bafb9a0ae829a3d4c63b4916"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a157f7f1fdf015caa2402ed5ee19d6cd9" id="r_a157f7f1fdf015caa2402ed5ee19d6cd9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a157f7f1fdf015caa2402ed5ee19d6cd9">timestamp</a> (std::chrono::system_clock::time_point <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">tp</a>)</td></tr>
-<tr class="separator:a157f7f1fdf015caa2402ed5ee19d6cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a114be15ef16b3ed773ab0eb113dc6635" id="r_a114be15ef16b3ed773ab0eb113dc6635"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a114be15ef16b3ed773ab0eb113dc6635">error</a> (<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">const</a> std::exception &amp;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">e</a>)</td></tr>
-<tr class="separator:a114be15ef16b3ed773ab0eb113dc6635"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e31ff0819d7c66bdeedb05517a12506" id="r_a8e31ff0819d7c66bdeedb05517a12506"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">duration</a> (std::chrono::nanoseconds ns)</td></tr>
-<tr class="separator:a8e31ff0819d7c66bdeedb05517a12506"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3933d77f1b97fb56a93a8552542a45eb" id="r_a3933d77f1b97fb56a93a8552542a45eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a3933d77f1b97fb56a93a8552542a45eb">commit</a> ()</td></tr>
-<tr class="separator:a3933d77f1b97fb56a93a8552542a45eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77672a7e81232f7f1fee9dde8b08ceaa" id="r_a77672a7e81232f7f1fee9dde8b08ceaa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a77672a7e81232f7f1fee9dde8b08ceaa">log_entry</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> <a class="el" href="classlogger__module_1_1result.html">lvl</a>, <a class="el" href="classlogger__module_1_1result.html">const</a> std::string &amp;<a class="el" href="classlogger__module_1_1result.html">msg</a>, std::chrono::system_clock::time_point <a class="el" href="classlogger__module_1_1result.html">ts</a>=std::chrono::system_clock::now())</td></tr>
+<tr class="separator:a77672a7e81232f7f1fee9dde8b08ceaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae70580768033e29ed851b27d8de58710" id="r_ae70580768033e29ed851b27d8de58710"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#ae70580768033e29ed851b27d8de58710">log_entry</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> <a class="el" href="classlogger__module_1_1result.html">lvl</a>, <a class="el" href="classlogger__module_1_1result.html">const</a> std::string &amp;<a class="el" href="classlogger__module_1_1result.html">msg</a>, <a class="el" href="classlogger__module_1_1result.html">const</a> std::string &amp;file, <a class="el" href="classlogger__module_1_1result.html">int</a> line, <a class="el" href="classlogger__module_1_1result.html">const</a> std::string &amp;function, std::chrono::system_clock::time_point <a class="el" href="classlogger__module_1_1result.html">ts</a>=std::chrono::system_clock::now())</td></tr>
+<tr class="separator:ae70580768033e29ed851b27d8de58710"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c045b862bfc8fe9c8a17b9392c22a1f" id="r_a6c045b862bfc8fe9c8a17b9392c22a1f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a6c045b862bfc8fe9c8a17b9392c22a1f">log_entry</a> (<a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&amp;) <a class="el" href="classlogger__module_1_1result.html">noexcept</a>=<a class="el" href="classlogger__module_1_1result.html">default</a></td></tr>
+<tr class="separator:a6c045b862bfc8fe9c8a17b9392c22a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5397eb66972955c243476479780d0f28" id="r_a5397eb66972955c243476479780d0f28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a5397eb66972955c243476479780d0f28">operator=</a> (<a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&amp;) <a class="el" href="classlogger__module_1_1result.html">noexcept</a>=<a class="el" href="classlogger__module_1_1result.html">default</a></td></tr>
+<tr class="separator:a5397eb66972955c243476479780d0f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a971f7ea0c7782389a24b8cc28ed5b2ab" id="r_a971f7ea0c7782389a24b8cc28ed5b2ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a971f7ea0c7782389a24b8cc28ed5b2ab">log_entry</a> (<a class="el" href="classlogger__module_1_1result.html">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;)=<a class="el" href="classlogger__module_1_1result.html">delete</a></td></tr>
+<tr class="separator:a971f7ea0c7782389a24b8cc28ed5b2ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a452a33d70017109bb281ed76adc9798a" id="r_a452a33d70017109bb281ed76adc9798a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a452a33d70017109bb281ed76adc9798a">operator=</a> (<a class="el" href="classlogger__module_1_1result.html">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;)=<a class="el" href="classlogger__module_1_1result.html">delete</a></td></tr>
+<tr class="separator:a452a33d70017109bb281ed76adc9798a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -134,25 +129,21 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a78065333972831f5e467ddd17d9c1ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab012a26baeabb7da729862b1cf295fb3" id="r_ab012a26baeabb7da729862b1cf295fb3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#ab012a26baeabb7da729862b1cf295fb3">message</a></td></tr>
 <tr class="separator:ab012a26baeabb7da729862b1cf295fb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcc2cb68c92d80eff695d9b2fdd085de" id="r_afcc2cb68c92d80eff695d9b2fdd085de"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#afcc2cb68c92d80eff695d9b2fdd085de">file</a></td></tr>
-<tr class="separator:afcc2cb68c92d80eff695d9b2fdd085de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adba6f89f1170225d64f31edab70c3fae" id="r_adba6f89f1170225d64f31edab70c3fae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#adba6f89f1170225d64f31edab70c3fae">line</a></td></tr>
-<tr class="separator:adba6f89f1170225d64f31edab70c3fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5542002ecb503d2b15d76a503ad2b17a" id="r_a5542002ecb503d2b15d76a503ad2b17a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a5542002ecb503d2b15d76a503ad2b17a">function</a></td></tr>
-<tr class="separator:a5542002ecb503d2b15d76a503ad2b17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65dd0f774af2418faef79d219337e1bb" id="r_a65dd0f774af2418faef79d219337e1bb"><td class="memItemLeft" align="right" valign="top">std::chrono::system_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a65dd0f774af2418faef79d219337e1bb">timestamp</a></td></tr>
 <tr class="separator:a65dd0f774af2418faef79d219337e1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a77553b1f40b91a2b6612fd858f75463e" id="r_a77553b1f40b91a2b6612fd858f75463e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">class</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a77553b1f40b91a2b6612fd858f75463e">structured_logger</a></td></tr>
-<tr class="separator:a77553b1f40b91a2b6612fd858f75463e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34c83e02c8f50f2414422adb7aa556b9" id="r_a34c83e02c8f50f2414422adb7aa556b9"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structlogger__module_1_1source__location.html">source_location</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a34c83e02c8f50f2414422adb7aa556b9">location</a></td></tr>
+<tr class="separator:a34c83e02c8f50f2414422adb7aa556b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedfebfdc300a87686e09aa0c27afd3fb" id="r_aedfebfdc300a87686e09aa0c27afd3fb"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#aedfebfdc300a87686e09aa0c27afd3fb">thread_id</a></td></tr>
+<tr class="separator:aedfebfdc300a87686e09aa0c27afd3fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96d9a3e175ba6f4501ea952efabdc599" id="r_a96d9a3e175ba6f4501ea952efabdc599"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html#a96d9a3e175ba6f4501ea952efabdc599">category</a></td></tr>
+<tr class="separator:a96d9a3e175ba6f4501ea952efabdc599"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Builder pattern for structured log entries. </p>
+<div class="textblock"><p>Represents a single log entry. </p>
+<p>This structure contains all the information for a log message. Designed to be move-only for performance. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8af0e42acba14c378fd8645605357c1e" name="a8af0e42acba14c378fd8645605357c1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8af0e42acba14c378fd8645605357c1e">&#9670;&#160;</a></span>log_entry()</h2>
+<a id="a77672a7e81232f7f1fee9dde8b08ceaa" name="a77672a7e81232f7f1fee9dde8b08ceaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77672a7e81232f7f1fee9dde8b08ceaa">&#9670;&#160;</a></span>log_entry() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,20 +154,20 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">logger_module::log_entry::log_entry </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classlogger__module_1_1structured__logger.html">structured_logger</a> *&#160;</td>
-          <td class="paramname"><em>logger</em>, </td>
+          <td class="paramtype"><a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a>&#160;</td>
+          <td class="paramname"><em>lvl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">log_level&#160;</td>
-          <td class="paramname"><em>level</em>, </td>
+          <td class="paramtype"><a class="el" href="classlogger__module_1_1result.html">const</a> std::string &amp;&#160;</td>
+          <td class="paramname"><em>msg</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">const</a> std::string &amp;&#160;</td>
-          <td class="paramname"><em>message</em>&#160;</td>
+          <td class="paramtype">std::chrono::system_clock::time_point&#160;</td>
+          <td class="paramname"><em>ts</em> = <code>std::chrono::system_clock::now()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -187,6 +178,118 @@ Friends</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae70580768033e29ed851b27d8de58710" name="ae70580768033e29ed851b27d8de58710"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae70580768033e29ed851b27d8de58710">&#9670;&#160;</a></span>log_entry() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">logger_module::log_entry::log_entry </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a>&#160;</td>
+          <td class="paramname"><em>lvl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classlogger__module_1_1result.html">const</a> std::string &amp;&#160;</td>
+          <td class="paramname"><em>msg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classlogger__module_1_1result.html">const</a> std::string &amp;&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classlogger__module_1_1result.html">int</a>&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classlogger__module_1_1result.html">const</a> std::string &amp;&#160;</td>
+          <td class="paramname"><em>function</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::system_clock::time_point&#160;</td>
+          <td class="paramname"><em>ts</em> = <code>std::chrono::system_clock::now()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6c045b862bfc8fe9c8a17b9392c22a1f" name="a6c045b862bfc8fe9c8a17b9392c22a1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c045b862bfc8fe9c8a17b9392c22a1f">&#9670;&#160;</a></span>log_entry() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">logger_module::log_entry::log_entry </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a971f7ea0c7782389a24b8cc28ed5b2ab" name="a971f7ea0c7782389a24b8cc28ed5b2ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a971f7ea0c7782389a24b8cc28ed5b2ab">&#9670;&#160;</a></span>log_entry() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">logger_module::log_entry::log_entry </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classlogger__module_1_1result.html">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -194,8 +297,8 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3933d77f1b97fb56a93a8552542a45eb" name="a3933d77f1b97fb56a93a8552542a45eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3933d77f1b97fb56a93a8552542a45eb">&#9670;&#160;</a></span>commit()</h2>
+<a id="a452a33d70017109bb281ed76adc9798a" name="a452a33d70017109bb281ed76adc9798a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a452a33d70017109bb281ed76adc9798a">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -204,192 +307,42 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">void</a> logger_module::log_entry::commit </td>
+          <td class="memname"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp; logger_module::log_entry::operator= </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="classlogger__module_1_1result.html">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a368eab60bafb9a0ae829a3d4c63b4916" name="a368eab60bafb9a0ae829a3d4c63b4916"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a368eab60bafb9a0ae829a3d4c63b4916">&#9670;&#160;</a></span>context()</h2>
+<a id="a5397eb66972955c243476479780d0f28" name="a5397eb66972955c243476479780d0f28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5397eb66972955c243476479780d0f28">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">typename</a> <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp; logger_module::log_entry::context </td>
+          <td class="memname"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp; logger_module::log_entry::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">const</a> std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">const</a> <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">T</a> &amp;&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8e31ff0819d7c66bdeedb05517a12506" name="a8e31ff0819d7c66bdeedb05517a12506"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e31ff0819d7c66bdeedb05517a12506">&#9670;&#160;</a></span>duration()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp; logger_module::log_entry::duration </td>
-          <td>(</td>
-          <td class="paramtype">std::chrono::nanoseconds&#160;</td>
-          <td class="paramname"><em>ns</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a114be15ef16b3ed773ab0eb113dc6635" name="a114be15ef16b3ed773ab0eb113dc6635"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a114be15ef16b3ed773ab0eb113dc6635">&#9670;&#160;</a></span>error()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp; logger_module::log_entry::error </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">const</a> std::exception &amp;&#160;</td>
-          <td class="paramname"><em>e</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3940e3be577ac70d6e9c59fafe9ab666" name="a3940e3be577ac70d6e9c59fafe9ab666"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3940e3be577ac70d6e9c59fafe9ab666">&#9670;&#160;</a></span>field()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">typename</a> <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">T</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp; logger_module::log_entry::field </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">const</a> std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">const</a> <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">T</a> &amp;&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a157f7f1fdf015caa2402ed5ee19d6cd9" name="a157f7f1fdf015caa2402ed5ee19d6cd9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a157f7f1fdf015caa2402ed5ee19d6cd9">&#9670;&#160;</a></span>timestamp()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp; logger_module::log_entry::timestamp </td>
-          <td>(</td>
-          <td class="paramtype">std::chrono::system_clock::time_point&#160;</td>
-          <td class="paramname"><em>tp</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
-<a id="a77553b1f40b91a2b6612fd858f75463e" name="a77553b1f40b91a2b6612fd858f75463e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77553b1f40b91a2b6612fd858f75463e">&#9670;&#160;</a></span>structured_logger</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">friend</a> <a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">class</a> <a class="el" href="classlogger__module_1_1structured__logger.html">structured_logger</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -397,28 +350,14 @@ template&lt;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="afcc2cb68c92d80eff695d9b2fdd085de" name="afcc2cb68c92d80eff695d9b2fdd085de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afcc2cb68c92d80eff695d9b2fdd085de">&#9670;&#160;</a></span>file</h2>
+<a id="a96d9a3e175ba6f4501ea952efabdc599" name="a96d9a3e175ba6f4501ea952efabdc599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96d9a3e175ba6f4501ea952efabdc599">&#9670;&#160;</a></span>category</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string logger_module::log_entry::file</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5542002ecb503d2b15d76a503ad2b17a" name="a5542002ecb503d2b15d76a503ad2b17a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5542002ecb503d2b15d76a503ad2b17a">&#9670;&#160;</a></span>function</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string logger_module::log_entry::function</td>
+          <td class="memname">std::optional&lt;std::string&gt; logger_module::log_entry::category</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -439,14 +378,14 @@ template&lt;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0
 
 </div>
 </div>
-<a id="adba6f89f1170225d64f31edab70c3fae" name="adba6f89f1170225d64f31edab70c3fae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adba6f89f1170225d64f31edab70c3fae">&#9670;&#160;</a></span>line</h2>
+<a id="a34c83e02c8f50f2414422adb7aa556b9" name="a34c83e02c8f50f2414422adb7aa556b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34c83e02c8f50f2414422adb7aa556b9">&#9670;&#160;</a></span>location</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0819d7c66bdeedb05517a12506">int</a> logger_module::log_entry::line</td>
+          <td class="memname">std::optional&lt;<a class="el" href="structlogger__module_1_1source__location.html">source_location</a>&gt; logger_module::log_entry::location</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -467,6 +406,20 @@ template&lt;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0
 
 </div>
 </div>
+<a id="aedfebfdc300a87686e09aa0c27afd3fb" name="aedfebfdc300a87686e09aa0c27afd3fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedfebfdc300a87686e09aa0c27afd3fb">&#9670;&#160;</a></span>thread_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt;std::string&gt; logger_module::log_entry::thread_id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a65dd0f774af2418faef79d219337e1bb" name="a65dd0f774af2418faef79d219337e1bb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a65dd0f774af2418faef79d219337e1bb">&#9670;&#160;</a></span>timestamp</h2>
 
@@ -481,9 +434,8 @@ template&lt;<a class="el" href="structlogger__module_1_1log__entry.html#a8e31ff0
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="log__collector_8cpp.html">log_collector.cpp</a></li>
-<li><a class="el" href="structured__logger_8h_source.html">structured_logger.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li><a class="el" href="log__entry_8h_source.html">log_entry.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

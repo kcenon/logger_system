@@ -6,5 +6,6 @@ var classlogger__module_1_1composite__filter =
     ] ],
     [ "composite_filter", "classlogger__module_1_1composite__filter.html#aac78ae45fbd714f9eac5f9c316b23717", null ],
     [ "add_filter", "classlogger__module_1_1composite__filter.html#a72d432e2898f9be81375d37bc114817f", null ],
+    [ "get_name", "classlogger__module_1_1composite__filter.html#a16003afb010f44bbeb6dc53e41fdec27", null ],
     [ "should_log", "classlogger__module_1_1composite__filter.html#a999a268980f8567df93e4735cbc2d393", null ]
 ];

@@ -1,13 +1,15 @@
 <map id="logger_module::base_writer" name="logger_module::base_writer">
-<area shape="rect" id="Node000001" title="Base class for all log writers." alt="" coords="5,101,164,141"/>
-<area shape="rect" id="Node000002" href="$classlogger__module_1_1console__writer.html" title="Console writer that outputs logs to stdout/stderr." alt="" coords="219,5,397,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,92,211,55,242,43,244,48,213,60,136,97"/>
-<area shape="rect" id="Node000003" href="$classlogger__module_1_1encrypted__writer.html" title="Writer that encrypts log data before passing to another writer." alt="" coords="212,69,404,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,105,211,100,212,106,178,111"/>
-<area shape="rect" id="Node000004" href="$classlogger__module_1_1file__writer.html" title="Basic file writer for logging to files." alt="" coords="235,133,381,173"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="178,132,235,140,234,145,178,137"/>
-<area shape="rect" id="Node000006" href="$classlogger__module_1_1network__writer.html" title="Sends logs over network (TCP/UDP)" alt="" coords="218,197,398,237"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="136,146,213,183,244,195,242,200,211,188,133,150"/>
-<area shape="rect" id="Node000005" href="$classlogger__module_1_1rotating__file__writer.html" title="File writer with rotation support based on size or time." alt="" coords="452,133,631,173"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="395,151,452,151,452,156,395,156"/>
+<area shape="rect" id="Node000001" title="Base class for all log writers." alt="" coords="200,101,359,141"/>
+<area shape="rect" id="Node000003" href="$classlogger__module_1_1console__writer.html" title="Console writer that outputs logs to stdout/stderr." alt="" coords="414,5,591,45"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="328,92,406,55,437,43,439,48,408,60,330,97"/>
+<area shape="rect" id="Node000004" href="$classlogger__module_1_1encrypted__writer.html" title="Writer that encrypts log data before passing to another writer." alt="" coords="407,69,599,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="372,105,406,100,407,106,373,111"/>
+<area shape="rect" id="Node000005" href="$classlogger__module_1_1file__writer.html" title="Basic file writer for logging to files." alt="" coords="429,133,576,173"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="373,132,429,140,429,145,372,137"/>
+<area shape="rect" id="Node000007" href="$classlogger__module_1_1network__writer.html" title="Sends logs over network (TCP/UDP)" alt="" coords="413,197,593,237"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="330,146,408,183,439,195,437,200,406,188,328,150"/>
+<area shape="rect" id="Node000002" href="$classlogger__module_1_1log__writer__interface.html" title="Interface for log writers." alt="" coords="5,101,152,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,119,200,119,200,124,165,124"/>
+<area shape="rect" id="Node000006" href="$classlogger__module_1_1rotating__file__writer.html" title="File writer with rotation support based on size or time." alt="" coords="647,133,825,173"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="590,151,646,151,646,156,590,156"/>
 </map>

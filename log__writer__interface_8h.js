@@ -1,0 +1,4 @@
+var log__writer__interface_8h =
+[
+    [ "logger_module::log_writer_interface", "classlogger__module_1_1log__writer__interface.html", "classlogger__module_1_1log__writer__interface" ]
+];

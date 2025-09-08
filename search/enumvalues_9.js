@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['or_0',['OR',['../classlogger__module_1_1composite__filter.html#a2af669822f929ec6eb07d37236f813f6a1d00e7dce692e8dc3f6877f035e3a616',1,'logger_module::composite_filter']]]
+  ['json_0',['json',['../classlogger__module_1_1structured__logger.html#ad5caf63dd1c9c72e341abb4533c1aee6a466deec76ecdf5fca6d38571f6324d54',1,'logger_module::structured_logger']]]
 ];

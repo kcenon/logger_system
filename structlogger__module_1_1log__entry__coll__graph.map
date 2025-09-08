@@ -1,5 +1,5 @@
 <map id="logger_module::log_entry" name="logger_module::log_entry">
-<area shape="rect" id="Node000001" title="Builder pattern for structured log entries." alt="" coords="5,93,152,133"/>
+<area shape="rect" id="Node000001" title="Represents a single log entry." alt="" coords="5,93,152,133"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="38,5,119,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,44,81,93,76,93,76,44"/>
 </map>

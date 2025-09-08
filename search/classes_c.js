@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['writer_5fmetrics_0',['writer_metrics',['../structlogger__module_1_1writer__metrics.html',1,'logger_module']]]
+  ['time_5fwindow_5fstats_0',['time_window_stats',['../structlogger__module_1_1log__analyzer_1_1time__window__stats.html',1,'logger_module::log_analyzer']]]
 ];

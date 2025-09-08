@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['hourly_0',['hourly',['../classlogger__module_1_1rotating__file__writer.html#a752f54d17b4949a3b0150f6e785e6c66a745fd0ea7f576f350a0eed4b8c48a8e2',1,'logger_module::rotating_file_writer']]]
+  ['encryption_5ffailed_0',['encryption_failed',['../namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135ebab70718378f61f3b12c47eeef435ba117',1,'logger_module']]],
+  ['error_1',['error',['../namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288acb5e100e5a9a3e7f6d1fd97512215282',1,'thread_module']]]
 ];
