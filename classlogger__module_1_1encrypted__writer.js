@@ -1,6 +1,7 @@
 var classlogger__module_1_1encrypted__writer =
 [
     [ "encryption_type", "classlogger__module_1_1encrypted__writer.html#af6311571e281e04fc22d088b07d45c81", [
+      [ "none", "classlogger__module_1_1encrypted__writer.html#af6311571e281e04fc22d088b07d45c81a334c4a4c42fdb79d7ebc3e73b517e6f8", null ],
       [ "aes_256_cbc", "classlogger__module_1_1encrypted__writer.html#af6311571e281e04fc22d088b07d45c81a71ddbd7e66eabbbf2f75323b29b9c8c2", null ],
       [ "aes_256_gcm", "classlogger__module_1_1encrypted__writer.html#af6311571e281e04fc22d088b07d45c81a2216dca9a9855f9abda05c28312ed39a", null ],
       [ "chacha20_poly1305", "classlogger__module_1_1encrypted__writer.html#af6311571e281e04fc22d088b07d45c81aacc377c92072070f0039775a9f72ac4d", null ]

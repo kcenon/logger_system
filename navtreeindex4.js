@@ -1,5 +1,7 @@
 var NAVTREEINDEX4 =
 {
+"md_docs_2architecture.html#autotoc_md134":[4,2,1],
+"md_docs_2architecture.html#autotoc_md135":[4,2,1,0],
 "md_docs_2architecture.html#autotoc_md136":[4,2,2],
 "md_docs_2architecture.html#autotoc_md137":[4,2,2,0],
 "md_docs_2architecture.html#autotoc_md138":[4,2,3],
@@ -247,7 +249,5 @@ var NAVTREEINDEX4 =
 "structlogger__module_1_1log__server_1_1network__log__entry.html#a03a551a6d256f917608b166d06c49e1d":[9,0,0,21,0,2],
 "structlogger__module_1_1log__server_1_1network__log__entry.html#a03a551a6d256f917608b166d06c49e1d":[8,0,0,21,0,2],
 "structlogger__module_1_1log__server_1_1network__log__entry.html#a319c67a977b0e871503ba121ffa587ea":[9,0,0,21,0,4],
-"structlogger__module_1_1log__server_1_1network__log__entry.html#a319c67a977b0e871503ba121ffa587ea":[8,0,0,21,0,4],
-"structlogger__module_1_1log__server_1_1network__log__entry.html#a3cdef6badafee508b2a862a2669727ac":[8,0,0,21,0,0],
-"structlogger__module_1_1log__server_1_1network__log__entry.html#a3cdef6badafee508b2a862a2669727ac":[9,0,0,21,0,0]
+"structlogger__module_1_1log__server_1_1network__log__entry.html#a319c67a977b0e871503ba121ffa587ea":[8,0,0,21,0,4]
 };

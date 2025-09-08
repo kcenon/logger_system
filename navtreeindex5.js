@@ -1,5 +1,7 @@
 var NAVTREEINDEX5 =
 {
+"structlogger__module_1_1log__server_1_1network__log__entry.html#a3cdef6badafee508b2a862a2669727ac":[8,0,0,21,0,0],
+"structlogger__module_1_1log__server_1_1network__log__entry.html#a3cdef6badafee508b2a862a2669727ac":[9,0,0,21,0,0],
 "structlogger__module_1_1log__server_1_1network__log__entry.html#ae62a29d9bbb0b96337bad57fec189fd4":[9,0,0,21,0,3],
 "structlogger__module_1_1log__server_1_1network__log__entry.html#ae62a29d9bbb0b96337bad57fec189fd4":[8,0,0,21,0,3],
 "structlogger__module_1_1log__server_1_1network__log__entry.html#aebfa727d3aa8c58dad64f56583fb67cd":[8,0,0,21,0,1],
