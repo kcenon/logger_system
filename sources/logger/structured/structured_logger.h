@@ -7,7 +7,11 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-#include "../logger_interface.h"
+#ifdef USE_THREAD_SYSTEM
+    #include <interfaces/logger_interface.h>
+#else
+    #include "../logger_interface.h"
+#endif
 #include <any>
 #include <chrono>
 #include <memory>

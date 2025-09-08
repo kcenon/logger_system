@@ -38,17 +38,17 @@ public:
     /**
      * @brief Write log entry to file
      */
-    bool write(thread_module::log_level level,
-               const std::string& message,
-               const std::string& file,
-               int line,
-               const std::string& function,
-               const std::chrono::system_clock::time_point& timestamp) override;
+    result_void write(thread_module::log_level level,
+                      const std::string& message,
+                      const std::string& file,
+                      int line,
+                      const std::string& function,
+                      const std::chrono::system_clock::time_point& timestamp) override;
     
     /**
      * @brief Flush file buffer
      */
-    void flush() override;
+    result_void flush() override;
     
     /**
      * @brief Get writer name
@@ -68,7 +68,7 @@ public:
     /**
      * @brief Reopen the file
      */
-    bool reopen();
+    result_void reopen();
     
 protected:
     /**
@@ -79,7 +79,7 @@ protected:
     /**
      * @brief Open the file
      */
-    bool open();
+    result_void open();
     
 protected:
     std::string filename_;

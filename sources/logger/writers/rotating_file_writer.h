@@ -71,12 +71,12 @@ public:
     /**
      * @brief Write with rotation check
      */
-    bool write(thread_module::log_level level,
-               const std::string& message,
-               const std::string& file,
-               int line,
-               const std::string& function,
-               const std::chrono::system_clock::time_point& timestamp) override;
+    result_void write(thread_module::log_level level,
+                      const std::string& message,
+                      const std::string& file,
+                      int line,
+                      const std::string& function,
+                      const std::chrono::system_clock::time_point& timestamp) override;
     
     /**
      * @brief Get writer name

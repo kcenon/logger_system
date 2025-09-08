@@ -75,12 +75,12 @@ rotating_file_writer::rotating_file_writer(const std::string& filename,
     }
 }
 
-bool rotating_file_writer::write(thread_module::log_level level,
-                                const std::string& message,
-                                const std::string& file,
-                                int line,
-                                const std::string& function,
-                                const std::chrono::system_clock::time_point& timestamp) {
+result_void rotating_file_writer::write(thread_module::log_level level,
+                                        const std::string& message,
+                                        const std::string& file,
+                                        int line,
+                                        const std::string& function,
+                                        const std::chrono::system_clock::time_point& timestamp) {
     // Check if rotation is needed before writing
     if (should_rotate()) {
         rotate();

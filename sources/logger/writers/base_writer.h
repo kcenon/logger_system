@@ -42,6 +42,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #include "../logger_interface.h"
 #endif
 
+#include "../error_codes.h"
+
 namespace logger_module {
 
 /**
@@ -62,19 +64,20 @@ public:
      * @param line Source line (optional)
      * @param function Function name (optional)
      * @param timestamp Time of log entry
-     * @return true if write was successful
+     * @return result_void indicating success or error
      */
-    virtual bool write(thread_module::log_level level,
-                      const std::string& message,
-                      const std::string& file,
-                      int line,
-                      const std::string& function,
-                      const std::chrono::system_clock::time_point& timestamp) = 0;
+    virtual result_void write(thread_module::log_level level,
+                              const std::string& message,
+                              const std::string& file,
+                              int line,
+                              const std::string& function,
+                              const std::chrono::system_clock::time_point& timestamp) = 0;
     
     /**
      * @brief Flush any buffered data
+     * @return result_void indicating success or error
      */
-    virtual void flush() = 0;
+    virtual result_void flush() = 0;
     
     /**
      * @brief Set whether to use color output (if supported)
@@ -97,6 +100,12 @@ public:
      * @return Name of the writer
      */
     virtual std::string get_name() const = 0;
+    
+    /**
+     * @brief Check if writer is healthy
+     * @return true if writer is healthy and operational
+     */
+    virtual bool is_healthy() const { return true; }
     
 protected:
     /**

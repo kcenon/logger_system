@@ -75,6 +75,19 @@ if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE)
     if(THREAD_SYSTEM_FOUND)
         message(STATUS "Using thread_system for interfaces and utilities")
         add_compile_definitions(USE_THREAD_SYSTEM)
+        
+        # Create a unified thread_system target that includes all components
+        if(NOT TARGET thread_system)
+            add_library(thread_system INTERFACE)
+            target_link_libraries(thread_system INTERFACE 
+                utilities 
+                interfaces 
+                thread_base 
+                thread_pool 
+                typed_thread_pool 
+                lockfree
+            )
+        endif()
     else()
         message(STATUS "thread_system not found, using standalone mode")
         add_compile_definitions(LOGGER_STANDALONE)
@@ -155,7 +168,13 @@ endif()
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-install(TARGETS logger
+# Installation targets list
+set(INSTALL_TARGETS logger)
+if(TARGET thread_system)
+    list(APPEND INSTALL_TARGETS thread_system)
+endif()
+
+install(TARGETS ${INSTALL_TARGETS}
     EXPORT LoggerSystemTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

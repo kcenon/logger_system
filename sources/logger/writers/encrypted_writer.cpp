@@ -32,18 +32,23 @@ encrypted_writer::encrypted_writer(std::unique_ptr<base_writer> wrapped_writer,
 
 encrypted_writer::~encrypted_writer() = default;
 
-bool encrypted_writer::write(thread_module::log_level level,
-                            const std::string& message,
-                            const std::string& file,
-                            int line,
-                            const std::string& function,
-                            const std::chrono::system_clock::time_point& timestamp) {
+result_void encrypted_writer::write(thread_module::log_level level,
+                                    const std::string& message,
+                                    const std::string& file,
+                                    int line,
+                                    const std::string& function,
+                                    const std::chrono::system_clock::time_point& timestamp) {
     
     // Format the log entry
     std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
     
     // Encrypt the formatted log
-    std::string encrypted = encrypt_data(formatted);
+    std::string encrypted;
+    try {
+        encrypted = encrypt_data(formatted);
+    } catch (const std::exception& e) {
+        return make_logger_error(logger_error_code::encryption_failed, e.what());
+    }
     
     // Write encrypted data as hex string (for demo purposes)
     // In production, write binary data with proper framing
@@ -59,8 +64,8 @@ bool encrypted_writer::write(thread_module::log_level level,
                                  "", 0, "", timestamp);
 }
 
-void encrypted_writer::flush() {
-    wrapped_writer_->flush();
+result_void encrypted_writer::flush() {
+    return wrapped_writer_->flush();
 }
 
 std::vector<uint8_t> encrypted_writer::generate_key(size_t size) {

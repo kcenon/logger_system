@@ -23,16 +23,17 @@ file_writer::~file_writer() {
     close();
 }
 
-bool file_writer::write(thread_module::log_level level,
-                       const std::string& message,
-                       const std::string& file,
-                       int line,
-                       const std::string& function,
-                       const std::chrono::system_clock::time_point& timestamp) {
+result_void file_writer::write(thread_module::log_level level,
+                               const std::string& message,
+                               const std::string& file,
+                               int line,
+                               const std::string& function,
+                               const std::chrono::system_clock::time_point& timestamp) {
     std::lock_guard<std::mutex> lock(write_mutex_);
     
     if (!file_stream_.is_open()) {
-        return false;
+        return make_logger_error(logger_error_code::file_write_failed,
+                                "File stream is not open");
     }
     
     std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
@@ -40,21 +41,30 @@ bool file_writer::write(thread_module::log_level level,
     try {
         file_stream_ << formatted << std::endl;
         bytes_written_.fetch_add(formatted.size() + 1);  // +1 for newline
-        return file_stream_.good();
+        
+        if (!file_stream_.good()) {
+            return make_logger_error(logger_error_code::file_write_failed,
+                                    "Failed to write to file stream");
+        }
+        return {}; // Success
     } catch (const std::exception& e) {
-        std::cerr << "File write error: " << e.what() << std::endl;
-        return false;
+        return make_logger_error(logger_error_code::file_write_failed, e.what());
     }
 }
 
-void file_writer::flush() {
+result_void file_writer::flush() {
     std::lock_guard<std::mutex> lock(write_mutex_);
     if (file_stream_.is_open()) {
         file_stream_.flush();
+        if (file_stream_.fail()) {
+            return make_logger_error(logger_error_code::flush_timeout,
+                                    "Failed to flush file stream");
+        }
     }
+    return {}; // Success
 }
 
-bool file_writer::reopen() {
+result_void file_writer::reopen() {
     std::lock_guard<std::mutex> lock(write_mutex_);
     close();
     return open();
@@ -67,13 +77,16 @@ void file_writer::close() {
     }
 }
 
-bool file_writer::open() {
+result_void file_writer::open() {
     try {
         // Create directory if it doesn't exist
         std::filesystem::path file_path(filename_);
         std::filesystem::path dir = file_path.parent_path();
         if (!dir.empty() && !std::filesystem::exists(dir)) {
-            std::filesystem::create_directories(dir);
+            if (!std::filesystem::create_directories(dir)) {
+                return make_logger_error(logger_error_code::file_permission_denied,
+                                        "Failed to create directory: " + dir.string());
+            }
         }
         
         // Open file
@@ -92,13 +105,14 @@ bool file_writer::open() {
                 bytes_written_ = 0;
             }
             
-            return true;
+            return {}; // Success
+        } else {
+            return make_logger_error(logger_error_code::file_open_failed,
+                                    "Failed to open file: " + filename_);
         }
     } catch (const std::exception& e) {
-        std::cerr << "Failed to open log file: " << e.what() << std::endl;
+        return make_logger_error(logger_error_code::file_open_failed, e.what());
     }
-    
-    return false;
 }
 
 } // namespace logger_module
