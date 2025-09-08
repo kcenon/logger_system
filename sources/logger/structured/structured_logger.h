@@ -33,12 +33,12 @@ using thread_module::logger_interface;
 class structured_logger;
 
 /**
- * @class log_entry
+ * @class structured_log_entry
  * @brief Builder pattern for structured log entries
  */
-class log_entry {
+class structured_log_entry {
 public:
-    log_entry(structured_logger* logger, log_level level, const std::string& message)
+    structured_log_entry(structured_logger* logger, log_level level, const std::string& message)
         : logger_(logger), level_(level), message_(message) {
         // Automatically add timestamp
         timestamp_ = std::chrono::system_clock::now();
@@ -46,33 +46,33 @@ public:
     
     // Add field to the log entry
     template<typename T>
-    log_entry& field(const std::string& key, const T& value) {
+    structured_log_entry& field(const std::string& key, const T& value) {
         fields_[key] = value;
         return *this;
     }
     
     // Add context field
     template<typename T>
-    log_entry& context(const std::string& key, const T& value) {
+    structured_log_entry& context(const std::string& key, const T& value) {
         context_[key] = value;
         return *this;
     }
     
     // Set custom timestamp
-    log_entry& timestamp(std::chrono::system_clock::time_point tp) {
+    structured_log_entry& timestamp(std::chrono::system_clock::time_point tp) {
         timestamp_ = tp;
         return *this;
     }
     
     // Add error information
-    log_entry& error(const std::exception& e) {
+    structured_log_entry& error(const std::exception& e) {
         fields_["error_type"] = typeid(e).name();
         fields_["error_message"] = e.what();
         return *this;
     }
     
     // Add duration
-    log_entry& duration(std::chrono::nanoseconds ns) {
+    structured_log_entry& duration(std::chrono::nanoseconds ns) {
         fields_["duration_ns"] = ns.count();
         fields_["duration_ms"] = std::chrono::duration<double, std::milli>(ns).count();
         return *this;
@@ -128,28 +128,28 @@ public:
     }
     
     // Structured logging methods
-    log_entry trace(const std::string& message) {
-        return log_entry(this, log_level::trace, message);
+    structured_log_entry trace(const std::string& message) {
+        return structured_log_entry(this, log_level::trace, message);
     }
     
-    log_entry debug(const std::string& message) {
-        return log_entry(this, log_level::debug, message);
+    structured_log_entry debug(const std::string& message) {
+        return structured_log_entry(this, log_level::debug, message);
     }
     
-    log_entry info(const std::string& message) {
-        return log_entry(this, log_level::info, message);
+    structured_log_entry info(const std::string& message) {
+        return structured_log_entry(this, log_level::info, message);
     }
     
-    log_entry warning(const std::string& message) {
-        return log_entry(this, log_level::warning, message);
+    structured_log_entry warning(const std::string& message) {
+        return structured_log_entry(this, log_level::warning, message);
     }
     
-    log_entry error(const std::string& message) {
-        return log_entry(this, log_level::error, message);
+    structured_log_entry error(const std::string& message) {
+        return structured_log_entry(this, log_level::error, message);
     }
     
-    log_entry critical(const std::string& message) {
-        return log_entry(this, log_level::critical, message);
+    structured_log_entry critical(const std::string& message) {
+        return structured_log_entry(this, log_level::critical, message);
     }
     
     // Set global context
@@ -194,7 +194,7 @@ private:
     }
     
     // Format log entry based on output format
-    std::string format_entry(const log_entry& entry) const {
+    std::string format_entry(const structured_log_entry& entry) const {
         switch (format_) {
             case output_format::json:
                 return format_json(entry);
@@ -208,7 +208,7 @@ private:
     }
     
     // Format as JSON (simple implementation without nlohmann/json)
-    std::string format_json(const log_entry& entry) const {
+    std::string format_json(const structured_log_entry& entry) const {
         std::ostringstream oss;
         oss << "{";
         
@@ -250,7 +250,7 @@ private:
     }
     
     // Format as logfmt
-    std::string format_logfmt(const log_entry& entry) const {
+    std::string format_logfmt(const structured_log_entry& entry) const {
         std::ostringstream oss;
         
         // Add timestamp
@@ -277,7 +277,7 @@ private:
     }
     
     // Format as plain text
-    std::string format_plain(const log_entry& entry) const {
+    std::string format_plain(const structured_log_entry& entry) const {
         std::ostringstream oss;
         
         // Traditional format with structured data appended
@@ -399,11 +399,11 @@ private:
         }
     }
     
-    friend class log_entry;
+    friend class structured_log_entry;
 };
 
-// Implementation of log_entry::commit()
-inline void log_entry::commit() {
+// Implementation of structured_log_entry::commit()
+inline void structured_log_entry::commit() {
     std::string formatted = logger_->format_entry(*this);
     logger_->logger_->log(level_, formatted);
 }

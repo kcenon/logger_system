@@ -43,6 +43,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #include "../error_codes.h"
+#include "../interfaces/log_writer_interface.h"
+#include "../interfaces/log_entry.h"
 
 namespace logger_module {
 
@@ -51,13 +53,31 @@ namespace logger_module {
  * 
  * Writers are responsible for outputting log messages to various destinations
  * such as console, files, network, etc.
+ * 
+ * This class provides a compatibility layer between the old API and the new
+ * interface-based approach. It implements log_writer_interface and provides
+ * backward compatibility for existing code.
  */
-class base_writer {
+class base_writer : public log_writer_interface {
 public:
     virtual ~base_writer() = default;
     
     /**
-     * @brief Write a log entry
+     * @brief Write a log entry using the new interface
+     * @param entry The log entry to write
+     * @return result_void indicating success or error
+     */
+    virtual result_void write(const log_entry& entry) override {
+        // Convert to old API for backward compatibility
+        const std::string& file = entry.location ? entry.location->file : "";
+        int line = entry.location ? entry.location->line : 0;
+        const std::string& function = entry.location ? entry.location->function : "";
+        
+        return write(entry.level, entry.message, file, line, function, entry.timestamp);
+    }
+    
+    /**
+     * @brief Write a log entry (legacy API for backward compatibility)
      * @param level Log level
      * @param message Log message
      * @param file Source file (optional)
@@ -77,7 +97,7 @@ public:
      * @brief Flush any buffered data
      * @return result_void indicating success or error
      */
-    virtual result_void flush() = 0;
+    virtual result_void flush() override = 0;
     
     /**
      * @brief Set whether to use color output (if supported)
@@ -99,13 +119,13 @@ public:
      * @brief Get writer name
      * @return Name of the writer
      */
-    virtual std::string get_name() const = 0;
+    virtual std::string get_name() const override = 0;
     
     /**
      * @brief Check if writer is healthy
      * @return true if writer is healthy and operational
      */
-    virtual bool is_healthy() const { return true; }
+    virtual bool is_healthy() const override { return true; }
     
 protected:
     /**

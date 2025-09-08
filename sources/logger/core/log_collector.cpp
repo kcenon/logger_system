@@ -32,20 +32,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "log_collector.h"
 #include "../writers/base_writer.h"
+#include "../interfaces/log_entry.h"
 #include <queue>
 #include <mutex>
 #include <condition_variable>
 
 namespace logger_module {
-
-struct log_entry {
-    thread_module::log_level level;
-    std::string message;
-    std::string file;
-    int line;
-    std::string function;
-    std::chrono::system_clock::time_point timestamp;
-};
 
 class log_collector::impl {
 public:
@@ -73,7 +65,12 @@ public:
                 return false;
             }
             
-            queue_.push({level, message, file, line, function, timestamp});
+            // Create log_entry with optional source location
+            log_entry entry(level, message, timestamp);
+            if (!file.empty() || line != 0 || !function.empty()) {
+                entry.location = source_location{file, line, function};
+            }
+            queue_.push(std::move(entry));
         }
         
         queue_cv_.notify_one();
@@ -162,8 +159,12 @@ private:
         std::lock_guard<std::mutex> lock(writers_mutex_);
         for (auto* writer : writers_) {
             // Ignore write failures for now
-            writer->write(entry.level, entry.message, entry.file,
-                         entry.line, entry.function, entry.timestamp);
+            const std::string& file = entry.location ? entry.location->file : "";
+            int line = entry.location ? entry.location->line : 0;
+            const std::string& function = entry.location ? entry.location->function : "";
+            
+            writer->write(entry.level, entry.message, file,
+                         line, function, entry.timestamp);
         }
     }
     
