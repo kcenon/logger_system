@@ -36,6 +36,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <queue>
 #include <mutex>
 #include <condition_variable>
+#include <thread>
+#include <atomic>
+#include <vector>
 
 namespace logger_module {
 

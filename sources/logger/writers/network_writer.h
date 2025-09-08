@@ -13,6 +13,8 @@ All rights reserved.
 #include <condition_variable>
 #include <atomic>
 #include <memory>
+#include <mutex>
+#include <cstdint>
 
 namespace logger_module {
 

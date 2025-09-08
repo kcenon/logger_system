@@ -11,6 +11,7 @@ All rights reserved.
 #include <fstream>
 #include <mutex>
 #include <atomic>
+#include <memory>
 
 namespace logger_module {
 

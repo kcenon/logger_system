@@ -39,6 +39,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <sstream>
 #include <iomanip>
 #include <mutex>
+#include <unordered_map>
 
 namespace logger_module {
 

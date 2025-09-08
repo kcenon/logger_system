@@ -14,6 +14,14 @@ All rights reserved.
 #include <iostream>
 #include <sstream>
 #include <regex>
+#include <thread>
+#include <atomic>
+#include <vector>
+#include <mutex>
+#include <algorithm>
+#include <functional>
+#include <unordered_map>
+#include <cstdint>
 
 namespace logger_module {
 
