@@ -2,7 +2,7 @@
 
 This document describes the CI/CD improvements applied to logger_system workflows, adapted from thread_system's best practices.
 
-Updated: 2025-09-09 (Asia/Seoul)
+Updated: 2025-09-08 (Asia/Seoul)
 
 ## Summary of Improvements
 
@@ -89,6 +89,15 @@ permissions:
 
 **Benefit**: Enables proper caching and artifact uploads.
 
+### 6. Upgraded to upload-artifact@v4
+
+All workflows now use the latest version of upload-artifact:
+```yaml
+- uses: actions/upload-artifact@v4
+```
+
+**Benefit**: Avoids deprecation warnings and uses the latest performance improvements.
+
 ## Affected Workflows
 
 | Workflow | File | Triplet | Improvements |
@@ -96,8 +105,8 @@ permissions:
 | Ubuntu GCC | `build-ubuntu-gcc.yaml` | x64-linux |  All improvements |
 | Ubuntu Clang | `build-ubuntu-clang.yaml` | x64-linux |  All improvements |
 | Windows VS | `build-windows-vs.yaml` | x64-windows |  All improvements |
-| Windows MinGW | `build-windows-mingw.yaml` | x64-mingw-dynamic | =Ý Pending |
-| Windows MSYS2 | `build-windows-msys2.yaml` | x64-mingw-dynamic | =Ý Pending |
+| Windows MinGW | `build-windows-mingw.yaml` | x64-mingw-dynamic | âœ… All improvements |
+| Windows MSYS2 | `build-windows-msys2.yaml` | x64-mingw-dynamic | âœ… All improvements |
 
 ## Performance Impact
 
@@ -149,8 +158,9 @@ vcpkg build failed. Falling back to system libraries...
 
 ## Future Improvements
 
-- [ ] Add Windows MinGW workflow improvements
-- [ ] Add Windows MSYS2 workflow improvements
+- [x] Add Windows MinGW workflow improvements (completed)
+- [x] Add Windows MSYS2 workflow improvements (completed)
+- [x] Upgrade to upload-artifact@v4 (completed)
 - [ ] Consider matrix builds for multiple configurations
 - [ ] Add benchmark result tracking
 - [ ] Implement coverage reporting
