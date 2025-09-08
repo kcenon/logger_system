@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['make_5flogger_5ferror_0',['make_logger_error',['../namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b',1,'logger_module']]],
+  ['make_5flogger_5ferror_0',['make_logger_error',['../namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b',1,'logger_module::make_logger_error(logger_error_code code, const std::string &amp;message=&quot;&quot;)'],['../namespacelogger__module.html#a9bd070612d11c60b9828e64b2adf8566',1,'logger_module::make_logger_error(logger_error_code code, const std::string &amp;message=&quot;&quot;)']]],
   ['mask_5fapi_5fkey_1',['mask_api_key',['../classlogger__module_1_1log__sanitizer.html#a14e0f0bf34b790ea9473d85cbebf3975',1,'logger_module::log_sanitizer']]],
   ['mask_5fcredit_5fcard_2',['mask_credit_card',['../classlogger__module_1_1log__sanitizer.html#ae6d2d8b375f898325c48c8113f67ff3f',1,'logger_module::log_sanitizer']]],
   ['mask_5femail_3',['mask_email',['../classlogger__module_1_1log__sanitizer.html#a94a582eb9e325a84d7e25f67beb3a95d',1,'logger_module::log_sanitizer']]],

@@ -2,7 +2,7 @@ var searchData=
 [
   ['macos_0',['macOS',['../md_docs_2performance.html#autotoc_md230',1,'']]],
   ['macros_20and_20helpers_1',['Macros and Helpers',['../md_docs_2api-reference.html#autotoc_md125',1,'']]],
-  ['make_5flogger_5ferror_2',['make_logger_error',['../namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b',1,'logger_module']]],
+  ['make_5flogger_5ferror_2',['make_logger_error',['../namespacelogger__module.html#a9bd070612d11c60b9828e64b2adf8566',1,'logger_module::make_logger_error(logger_error_code code, const std::string &amp;message=&quot;&quot;)'],['../namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b',1,'logger_module::make_logger_error(logger_error_code code, const std::string &amp;message=&quot;&quot;)']]],
   ['management_3',['management',['../md_ARCHITECTURE.html#autotoc_md68',1,'3. Configuration Management'],['../md_docs_2architecture.html#autotoc_md147',1,'Buffer Management'],['../md_docs_2architecture.html#autotoc_md146',1,'Memory Management'],['../md_docs_2api-reference.html#autotoc_md112',1,'Writer Management']]],
   ['mask_5fapi_5fkey_4',['mask_api_key',['../classlogger__module_1_1log__sanitizer.html#a14e0f0bf34b790ea9473d85cbebf3975',1,'logger_module::log_sanitizer']]],
   ['mask_5fcredit_5fcard_5',['mask_credit_card',['../classlogger__module_1_1log__sanitizer.html#ae6d2d8b375f898325c48c8113f67ff3f',1,'logger_module::log_sanitizer']]],
@@ -34,7 +34,7 @@ var searchData=
   ['min_5fenqueue_5ftime_5fns_31',['min_enqueue_time_ns',['../structlogger__module_1_1performance__metrics.html#a52d80a8f39a367e91d2ddf466e3db6bd',1,'logger_module::performance_metrics']]],
   ['min_5flevel_32',['min_level',['../structlogger__module_1_1logger__config.html#a68874fcb43ead063db1934190de266d0',1,'logger_module::logger_config']]],
   ['min_5fwrite_5ftime_5fus_33',['min_write_time_us',['../structlogger__module_1_1writer__metrics.html#a2ea265fbebfa15a13fc247d97246dfc9',1,'logger_module::writer_metrics']]],
-  ['mode_34',['mode',['../md_docs_2performance.html#autotoc_md210',1,'1. Choose the Right Mode'],['../md_docs_2architecture.html#autotoc_md136',1,'3. Log Collector (Async Mode)'],['../md_docs_2performance.html#autotoc_md203',1,'Asynchronous Mode'],['../md_docs_2architecture.html#autotoc_md155',1,'Asynchronous Mode'],['../md_docs_2architecture.html#autotoc_md144',1,'Asynchronous Mode'],['../md_docs_2performance.html#autotoc_md202',1,'Synchronous Mode'],['../md_docs_2architecture.html#autotoc_md143',1,'Synchronous Mode'],['../md_docs_2architecture.html#autotoc_md154',1,'Synchronous Mode']]],
+  ['mode_34',['mode',['../md_docs_2performance.html#autotoc_md210',1,'1. Choose the Right Mode'],['../md_docs_2architecture.html#autotoc_md136',1,'3. Log Collector (Async Mode)'],['../md_docs_2performance.html#autotoc_md203',1,'Asynchronous Mode'],['../md_docs_2architecture.html#autotoc_md144',1,'Asynchronous Mode'],['../md_docs_2architecture.html#autotoc_md155',1,'Asynchronous Mode'],['../md_docs_2performance.html#autotoc_md202',1,'Synchronous Mode'],['../md_docs_2architecture.html#autotoc_md143',1,'Synchronous Mode'],['../md_docs_2architecture.html#autotoc_md154',1,'Synchronous Mode']]],
   ['model_35',['Threading Model',['../md_docs_2architecture.html#autotoc_md142',1,'']]],
   ['model_20scope_36',['Threat Model (Scope)',['../md_SECURITY.html#autotoc_md91',1,'']]],
   ['modular_37',['🔄 Evolution: Monolithic → Modular',['../md_ARCHITECTURE.html#autotoc_md72',1,'']]],

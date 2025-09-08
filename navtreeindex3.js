@@ -7,6 +7,7 @@ var NAVTREEINDEX3 =
 "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135ebae62337e0ccf2ce4250a906bef47b6598":[10,0,1,0,12,2,26],
 "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135ebafd03f4318f3d72e3d4d78c8a9867a092":[10,0,1,0,12,2,20],
 "error__codes_8h.html#a5a717e2eece74d014d20adab53d609f4":[10,0,1,0,12,3],
+"error__codes_8h.html#a9bd070612d11c60b9828e64b2adf8566":[10,0,1,0,12,5],
 "error__codes_8h.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b":[10,0,1,0,12,4],
 "error__codes_8h_source.html":[10,0,1,0,12],
 "file__writer_8cpp.html":[10,0,1,0,11,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "md_docs_2architecture.html#autotoc_md132":[4,2],
 "md_docs_2architecture.html#autotoc_md133":[4,2,0],
 "md_docs_2architecture.html#autotoc_md134":[4,2,1],
-"md_docs_2architecture.html#autotoc_md135":[4,2,1,0],
-"md_docs_2architecture.html#autotoc_md136":[4,2,2]
+"md_docs_2architecture.html#autotoc_md135":[4,2,1,0]
 };

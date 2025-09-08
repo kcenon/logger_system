@@ -36,5 +36,6 @@ var error__codes_8h =
       [ "sanitization_failed", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba134207cdbfedc64f077464d211aca382", null ]
     ] ],
     [ "logger_error_to_string", "error__codes_8h.html#a5a717e2eece74d014d20adab53d609f4", null ],
-    [ "make_logger_error", "error__codes_8h.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b", null ]
+    [ "make_logger_error", "error__codes_8h.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b", null ],
+    [ "make_logger_error", "error__codes_8h.html#a9bd070612d11c60b9828e64b2adf8566", null ]
 ];
