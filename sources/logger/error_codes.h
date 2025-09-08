@@ -219,6 +219,28 @@ inline error make_logger_error(logger_error_code code, const std::string& messag
     return error{thread_code, logger_error_to_string(code) + ": " + message};
 }
 
+/**
+ * @brief Helper function to create an error result
+ * @param code Logger error code
+ * @param message Error message
+ * @return result_void with error
+ */
+inline result_void make_error(logger_error_code code, const std::string& message = "") {
+    return make_logger_error(code, message);
+}
+
+/**
+ * @brief Helper function to create an error result with value
+ * @tparam T Result value type
+ * @param code Logger error code
+ * @param message Error message
+ * @return result<T> with error
+ */
+template<typename T>
+inline result<T> make_error(logger_error_code code, const std::string& message = "") {
+    return make_logger_error(code, message);
+}
+
 #else
 // Standalone mode - provide minimal result implementation
 template<typename T>
