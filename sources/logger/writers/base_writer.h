@@ -34,7 +34,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <string>
 #include <chrono>
-#include "../logger_interface.h"
+
+// Conditional include based on build configuration
+#ifdef USE_THREAD_SYSTEM
+    #include <interfaces/logger_interface.h>
+#else
+    #include "../logger_interface.h"
+#endif
 
 namespace logger_module {
 

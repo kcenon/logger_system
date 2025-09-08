@@ -32,7 +32,13 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
-#include "../logger_interface.h"
+// Conditional include based on build configuration
+#ifdef USE_THREAD_SYSTEM
+    #include <interfaces/logger_interface.h>
+#else
+    #include "../logger_interface.h"
+#endif
+
 #include <memory>
 #include <vector>
 #include <thread>

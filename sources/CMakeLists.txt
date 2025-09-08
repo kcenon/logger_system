@@ -44,6 +44,18 @@ target_link_libraries(logger
         Threads::Threads
 )
 
+# Link with thread_system if available
+if(THREAD_SYSTEM_FOUND)
+    target_link_libraries(logger
+        PUBLIC
+            thread_system
+    )
+    target_include_directories(logger
+        PUBLIC
+            $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/../thread_system/sources>
+    )
+endif()
+
 # Link filesystem library if needed
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS "9.0")
     target_link_libraries(logger PUBLIC stdc++fs)

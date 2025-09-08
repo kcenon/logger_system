@@ -26,6 +26,8 @@ option(BUILD_BENCHMARKS "Build benchmarks" OFF)
 option(BUILD_SAMPLES "Build sample programs" ON)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(USE_LOCKFREE "Use lock-free implementation" ON)
+option(USE_THREAD_SYSTEM "Use external thread_system if available" ON)
+option(LOGGER_STANDALONE "Build in standalone mode without thread_system" OFF)
 
 ##################################################
 # Compiler warnings and optimizations
@@ -53,6 +55,34 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 # Dependencies
 ##################################################
 find_package(Threads REQUIRED)
+
+# Try to find thread_system
+if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE)
+    # First try to find it as a sibling directory
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/CMakeLists.txt")
+        message(STATUS "Found thread_system as sibling directory")
+        add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" "${CMAKE_BINARY_DIR}/thread_system")
+        set(THREAD_SYSTEM_FOUND TRUE)
+    else()
+        # Try to find it as an installed package
+        find_package(thread_system CONFIG QUIET)
+        if(thread_system_FOUND)
+            message(STATUS "Found thread_system package")
+            set(THREAD_SYSTEM_FOUND TRUE)
+        endif()
+    endif()
+    
+    if(THREAD_SYSTEM_FOUND)
+        message(STATUS "Using thread_system for interfaces and utilities")
+        add_compile_definitions(USE_THREAD_SYSTEM)
+    else()
+        message(STATUS "thread_system not found, using standalone mode")
+        add_compile_definitions(LOGGER_STANDALONE)
+    endif()
+else()
+    message(STATUS "Building in standalone mode")
+    add_compile_definitions(LOGGER_STANDALONE)
+endif()
 
 # fmt library (optional but recommended)
 find_package(fmt CONFIG)
