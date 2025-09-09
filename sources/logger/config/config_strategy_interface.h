@@ -252,6 +252,7 @@ public:
                 config.max_queue_size = 1000;
                 config.flush_interval = std::chrono::milliseconds(500);
                 config.writer_thread_count = 1;
+                config.enable_batch_writing = false;  // Disable for conservative mode
                 break;
                 
             case tuning_level::balanced:
@@ -260,6 +261,7 @@ public:
                 config.max_queue_size = 10000;
                 config.flush_interval = std::chrono::milliseconds(1000);
                 config.writer_thread_count = 2;
+                config.enable_batch_writing = true;  // Enable for balanced mode
                 break;
                 
             case tuning_level::aggressive:
@@ -270,6 +272,7 @@ public:
                 config.writer_thread_count = 4;
                 config.use_lock_free = true;
                 config.enable_compression = true;
+                config.enable_batch_writing = true;  // Enable for aggressive mode
                 break;
         }
         return result_void{};

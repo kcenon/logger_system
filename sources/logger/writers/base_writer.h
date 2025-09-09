@@ -69,11 +69,11 @@ public:
      */
     virtual result_void write(const log_entry& entry) override {
         // Convert to old API for backward compatibility
-        const std::string& file = entry.location ? entry.location->file : "";
+        std::string file = entry.location ? entry.location->file.to_string() : "";
         int line = entry.location ? entry.location->line : 0;
-        const std::string& function = entry.location ? entry.location->function : "";
+        std::string function = entry.location ? entry.location->function.to_string() : "";
         
-        return write(entry.level, entry.message, file, line, function, entry.timestamp);
+        return write(entry.level, entry.message.to_string(), file, line, function, entry.timestamp);
     }
     
     /**

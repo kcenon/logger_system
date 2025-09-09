@@ -10,6 +10,7 @@ All rights reserved.
 #include <string>
 #include <chrono>
 #include <optional>
+#include "../core/small_string.h"
 
 #ifdef USE_THREAD_SYSTEM
     #include <interfaces/logger_interface.h>
@@ -24,11 +25,14 @@ namespace logger_module {
  * @brief Source code location information
  */
 struct source_location {
-    std::string file;
+    small_string_256 file;  // File paths can be long
     int line;
-    std::string function;
+    small_string_128 function;  // Function names are typically shorter
     
     source_location(const std::string& f = "", int l = 0, const std::string& func = "")
+        : file(f), line(l), function(func) {}
+    
+    source_location(const char* f = "", int l = 0, const char* func = "")
         : file(f), line(l), function(func) {}
 };
 
@@ -42,13 +46,13 @@ struct source_location {
 struct log_entry {
     // Required fields
     thread_module::log_level level;
-    std::string message;
+    small_string_256 message;  // Using SSO for messages
     std::chrono::system_clock::time_point timestamp;
     
     // Optional fields
     std::optional<source_location> location;
-    std::optional<std::string> thread_id;
-    std::optional<std::string> category;
+    std::optional<small_string_64> thread_id;  // Thread IDs are typically small
+    std::optional<small_string_128> category;  // Categories are usually short
     
     // Constructor for basic entry
     log_entry(thread_module::log_level lvl, 
