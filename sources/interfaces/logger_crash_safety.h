@@ -17,6 +17,32 @@ All rights reserved.
 #include <chrono>
 #include <queue>
 #include <thread>
+#include <csignal>
+#include <cstring>
+#include <unordered_map>
+#include <condition_variable>
+
+// Platform-specific includes
+#ifdef _WIN32
+    #include <windows.h>
+    #include <io.h>
+    #include <direct.h>
+    #include <fcntl.h>
+    #include <errno.h>
+    #include <basetsd.h>  // For SSIZE_T
+    #define write _write
+    #define close _close  
+    #define STDERR_FILENO 2
+    #define SIGBUS SIGABRT  // Windows doesn't have SIGBUS, map to SIGABRT
+    typedef SSIZE_T ssize_t;  // Windows doesn't have ssize_t
+    #ifndef EINTR
+        #define EINTR WSAEINTR
+    #endif
+#else
+    #include <unistd.h>
+    #include <fcntl.h>
+    #include <errno.h>
+#endif
 
 namespace logger_module {
 

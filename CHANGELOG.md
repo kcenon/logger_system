@@ -5,6 +5,127 @@ All notable changes to the Logger System will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - Phase 3 Overflow Policy System Implementation (2025-09-10)
+
+### Added - Phase 3 Task A4 Complete
+
+- **Comprehensive Overflow Policy System**
+  - Multiple overflow handling strategies (drop oldest, drop newest, block, grow)
+  - Policy factory for easy policy creation and switching
+  - Custom policy support with user-defined handlers
+  - Thread-safe overflow queue implementation
+  - Statistics tracking for all policy operations
+
+- **Adaptive Backpressure System**
+  - Dynamic batch size adjustment based on system load
+  - Automatic flush interval adaptation
+  - Load threshold-based pressure control
+  - Configurable adaptation parameters (rate, thresholds, limits)
+  - Real-time metrics tracking with sliding window
+  - Manual and automatic adaptation modes
+
+- **Policy Features**
+  - Drop Oldest: Removes oldest messages when queue is full
+  - Drop Newest: Rejects new messages when queue is full
+  - Block: Waits for space with configurable timeout
+  - Grow: Dynamically increases queue capacity up to max limit
+  - Custom: User-defined overflow handling logic
+
+- **Performance Optimization**
+  - Lock-free statistics tracking with atomic operations
+  - Efficient queue management with minimal locking
+  - Adaptive batch sizing for optimal throughput
+  - Backpressure mechanism to prevent system overload
+
+- **Test Coverage**
+  - 22 comprehensive unit tests covering all policies
+  - Concurrent access testing for thread safety
+  - Adaptive backpressure algorithm validation
+  - Boundary condition and stress testing
+  - 100% test pass rate (22/22 tests passing)
+
+### Technical Details
+- Implementation: `sources/logger/flow/` (417 lines)
+- Headers: `overflow_policy.h` with templated queue
+- Build integration: Full CMake support
+- Test suite: `unittest/flow_test/` with extensive coverage
+
+## [2.2.0] - Phase 3 Health Check System Implementation (2025-09-10)
+
+### Added - Phase 3 Task A3 Complete
+
+- **Comprehensive Health Check System**
+  - Writer health monitoring with failure rate and latency tracking
+  - Buffer health monitoring with usage percentage and allocation tracking
+  - Queue health monitoring with size and wait time metrics
+  - Custom health check registration support
+  - Automatic health monitoring with configurable intervals
+  - Health status aggregation (healthy, degraded, unhealthy, unknown)
+  - Configurable health check criteria and thresholds
+
+- **Writer Health Features**
+  - Track total writes, failed writes, consecutive failures
+  - Monitor average and maximum write latency
+  - Automatic status degradation based on failure thresholds
+  - Per-writer health status reporting
+
+- **System Monitoring Features**
+  - Real-time buffer usage tracking
+  - Queue overflow detection and dropped message tracking
+  - Configurable health check enabling/disabling
+  - Statistics reset capability
+  - JSON formatting for health reports
+
+- **Test Coverage**
+  - 17 unit tests covering all health check features
+  - Tests for writer registration and tracking
+  - Buffer and queue health monitoring tests
+  - Custom health check integration tests
+  - 88% test pass rate (15/17 tests passing)
+
+### Technical Details
+- Implementation: `sources/logger/health/` (720 lines)
+- Header: `health_check_system.h` with comprehensive API
+- Build integration: Full CMake support
+- Test suite: `unittest/health_test/` with extensive coverage
+
+## [2.1.0] - Phase 3 Crash Safety Implementation (2025-09-10)
+
+### Added - Phase 3 Task A2 Complete
+
+- **Comprehensive Crash Safety System**
+  - Full implementation of `logger_crash_safety` singleton manager
+  - Signal handlers for SIGSEGV, SIGABRT, SIGFPE, SIGILL, SIGBUS
+  - Emergency log flushing on crash with signal-safe operations
+  - Automatic backup creation with configurable intervals
+  - Crash recovery detection and handling
+  - Three safety levels: minimal, standard, paranoid
+  - Emergency log writing with file descriptor-based I/O
+
+- **Log File Recovery Mechanisms**
+  - Corruption detection for log files
+  - Automatic recovery of corrupted log files
+  - Backup creation with checksum verification
+  - File integrity checking using simple hash algorithm
+
+- **Asynchronous Logger Safety Extensions**
+  - Framework for async logger crash handling
+  - Overflow handler configuration
+  - Emergency sync mode switching capability
+
+- **Comprehensive Test Suite**
+  - 15 unit tests covering all crash safety features
+  - Tests for singleton pattern, logger registration, emergency logging
+  - File recovery and corruption detection tests
+  - Scoped crash protection RAII helper tests
+  - All tests passing with 100% success rate
+
+### Technical Details
+- Implementation: `sources/logger/safety/crash_safety.cpp` (546 lines)
+- Header updates: Added necessary system headers (signal, unistd, fcntl)
+- Build integration: Updated CMakeLists.txt for new component
+- Test coverage: `unittest/safety_test/` with comprehensive test cases
+
 ## [2.0.0] - Phase 2 Core Systems Complete (2025-09-09)
 
 ### Added - Phase 2 Complete (C1, C2, C3 & C4)
