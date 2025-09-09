@@ -159,6 +159,13 @@ if (BUILD_TESTS)
     if(NOT GTest_FOUND)
         # Fallback to FetchContent if not found
         include(FetchContent)
+        
+        # Disable pthread requirement on Windows
+        if(WIN32)
+            set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+            set(gtest_disable_pthreads ON CACHE BOOL "" FORCE)
+        endif()
+        
         FetchContent_Declare(
             googletest
             GIT_REPOSITORY https://github.com/google/googletest.git

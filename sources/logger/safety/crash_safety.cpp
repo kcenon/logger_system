@@ -77,8 +77,13 @@ void logger_crash_safety::initialize(logger_crash_safety_level level,
     emergency_log_path_ = emergency_log_path;
     backup_interval_ms_ = backup_interval_ms;
     
+    #ifdef _WIN32
+    emergency_log_fd_ = _open(emergency_log_path_.c_str(), 
+                              _O_WRONLY | _O_CREAT | _O_APPEND);
+    #else
     emergency_log_fd_ = open(emergency_log_path_.c_str(), 
                             O_WRONLY | O_CREAT | O_APPEND, 0644);
+    #endif
     
     if (emergency_log_fd_ == -1) {
         emergency_log_fd_ = STDERR_FILENO;
@@ -160,8 +165,13 @@ void logger_crash_safety::set_emergency_log_path(const std::string& path) {
     }
     
     emergency_log_path_ = path;
+    #ifdef _WIN32
+    emergency_log_fd_ = _open(emergency_log_path_.c_str(), 
+                              _O_WRONLY | _O_CREAT | _O_APPEND);
+    #else
     emergency_log_fd_ = open(emergency_log_path_.c_str(), 
                             O_WRONLY | O_CREAT | O_APPEND, 0644);
+    #endif
     
     if (emergency_log_fd_ == -1) {
         emergency_log_fd_ = STDERR_FILENO;

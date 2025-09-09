@@ -19,10 +19,23 @@ All rights reserved.
 #include <thread>
 #include <csignal>
 #include <cstring>
-#include <unistd.h>
-#include <fcntl.h>
 #include <unordered_map>
 #include <condition_variable>
+
+// Platform-specific includes
+#ifdef _WIN32
+    #include <windows.h>
+    #include <io.h>
+    #include <direct.h>
+    #include <fcntl.h>
+    #define write _write
+    #define close _close  
+    #define STDERR_FILENO 2
+    #define SIGBUS SIGABRT  // Windows doesn't have SIGBUS, map to SIGABRT
+#else
+    #include <unistd.h>
+    #include <fcntl.h>
+#endif
 
 namespace logger_module {
 
