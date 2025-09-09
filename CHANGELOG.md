@@ -5,6 +5,43 @@ All notable changes to the Logger System will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - Phase 3 Crash Safety Implementation (2025-09-10)
+
+### Added - Phase 3 Task A2 Complete
+
+- **Comprehensive Crash Safety System**
+  - Full implementation of `logger_crash_safety` singleton manager
+  - Signal handlers for SIGSEGV, SIGABRT, SIGFPE, SIGILL, SIGBUS
+  - Emergency log flushing on crash with signal-safe operations
+  - Automatic backup creation with configurable intervals
+  - Crash recovery detection and handling
+  - Three safety levels: minimal, standard, paranoid
+  - Emergency log writing with file descriptor-based I/O
+
+- **Log File Recovery Mechanisms**
+  - Corruption detection for log files
+  - Automatic recovery of corrupted log files
+  - Backup creation with checksum verification
+  - File integrity checking using simple hash algorithm
+
+- **Asynchronous Logger Safety Extensions**
+  - Framework for async logger crash handling
+  - Overflow handler configuration
+  - Emergency sync mode switching capability
+
+- **Comprehensive Test Suite**
+  - 15 unit tests covering all crash safety features
+  - Tests for singleton pattern, logger registration, emergency logging
+  - File recovery and corruption detection tests
+  - Scoped crash protection RAII helper tests
+  - All tests passing with 100% success rate
+
+### Technical Details
+- Implementation: `sources/logger/safety/crash_safety.cpp` (546 lines)
+- Header updates: Added necessary system headers (signal, unistd, fcntl)
+- Build integration: Updated CMakeLists.txt for new component
+- Test coverage: `unittest/safety_test/` with comprehensive test cases
+
 ## [2.0.0] - Phase 2 Core Systems Complete (2025-09-09)
 
 ### Added - Phase 2 Complete (C1, C2, C3 & C4)

@@ -34,6 +34,10 @@ if(UNIX AND NOT WIN32)
   # Validates monitoring interface and implementations
   add_subdirectory(monitoring_test)
   
+  # Crash safety tests
+  # Validates crash safety mechanisms and recovery
+  add_subdirectory(safety_test)
+  
 else()
   message(STATUS "Unit tests are disabled on ${CMAKE_SYSTEM_NAME}")
   message(STATUS "Unit tests are only supported on Linux and macOS platforms")

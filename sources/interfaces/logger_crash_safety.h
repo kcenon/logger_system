@@ -17,6 +17,12 @@ All rights reserved.
 #include <chrono>
 #include <queue>
 #include <thread>
+#include <csignal>
+#include <cstring>
+#include <unistd.h>
+#include <fcntl.h>
+#include <unordered_map>
+#include <condition_variable>
 
 namespace logger_module {
 
