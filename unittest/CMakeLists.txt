@@ -26,6 +26,10 @@ if(UNIX AND NOT WIN32)
   # Validates configuration validation and builder pattern
   add_subdirectory(config_test)
   
+  # DI Container tests
+  # Validates dependency injection container implementations
+  add_subdirectory(di_test)
+  
 else()
   message(STATUS "Unit tests are disabled on ${CMAKE_SYSTEM_NAME}")
   message(STATUS "Unit tests are only supported on Linux and macOS platforms")
