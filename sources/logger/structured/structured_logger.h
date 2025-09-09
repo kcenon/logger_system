@@ -19,9 +19,17 @@ All rights reserved.
 #include <unordered_map>
 #include <iomanip>
 // #include <nlohmann/json.hpp> // TODO: Add nlohmann/json dependency
-#include <unistd.h>
 #include <thread>
 #include <cstdlib>
+
+// Platform-specific includes
+#ifdef _WIN32
+    #include <winsock2.h>
+    #include <process.h>  // For _getpid
+    #pragma comment(lib, "ws2_32.lib")
+#else
+    #include <unistd.h>   // For getpid, gethostname on Unix/Linux
+#endif
 
 namespace logger_module {
 
@@ -124,6 +132,16 @@ public:
     structured_logger(std::shared_ptr<logger_interface> logger, 
                      output_format format = output_format::json)
         : logger_(logger), format_(format) {
+#ifdef _WIN32
+        // Initialize Winsock on Windows (required for gethostname)
+        static bool winsock_initialized = false;
+        if (!winsock_initialized) {
+            WSADATA wsaData;
+            if (WSAStartup(MAKEWORD(2, 2), &wsaData) == 0) {
+                winsock_initialized = true;
+            }
+        }
+#endif
         initialize_defaults();
     }
     
@@ -184,13 +202,27 @@ private:
     
     void initialize_defaults() {
         // Add default fields
+#ifdef _WIN32
+        global_context_[standard_fields::PROCESS_ID] = std::to_string(_getpid());
+#else
         global_context_[standard_fields::PROCESS_ID] = std::to_string(getpid());
+#endif
         
         // Get hostname
-        char hostname[256];
+        char hostname[256] = {0};
+#ifdef _WIN32
+        // On Windows, gethostname requires Winsock to be initialized
+        if (gethostname(hostname, sizeof(hostname) - 1) == 0) {
+            global_context_[standard_fields::HOST] = std::string(hostname);
+        } else {
+            // Fallback if gethostname fails
+            global_context_[standard_fields::HOST] = "unknown";
+        }
+#else
         if (gethostname(hostname, sizeof(hostname)) == 0) {
             global_context_[standard_fields::HOST] = std::string(hostname);
         }
+#endif
     }
     
     // Format log entry based on output format

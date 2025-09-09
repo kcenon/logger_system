@@ -12,6 +12,7 @@ All rights reserved.
     #include <ws2tcpip.h>
     #pragma comment(lib, "ws2_32.lib")
     typedef int socklen_t;
+    typedef SSIZE_T ssize_t;  // Define ssize_t for Windows
     #define close closesocket
 #else
     #include <sys/socket.h>
@@ -211,7 +212,11 @@ bool network_writer::send_data(const std::string& data) {
         return false;
     }
     
+#ifdef _WIN32
+    int sent = ::send(socket_fd_, data.c_str(), static_cast<int>(data.length()), 0);
+#else
     ssize_t sent = ::send(socket_fd_, data.c_str(), data.length(), 0);
+#endif
     if (sent < 0) {
         if (protocol_ == protocol_type::tcp) {
             // TCP connection lost
