@@ -40,11 +40,11 @@ public:
      * @return true if the log should be processed
      */
     virtual bool should_log(const log_entry& entry) const override {
-        const std::string& file = entry.location ? entry.location->file : "";
+        std::string file = entry.location ? entry.location->file.to_string() : "";
         int line = entry.location ? entry.location->line : 0;
-        const std::string& function = entry.location ? entry.location->function : "";
+        std::string function = entry.location ? entry.location->function.to_string() : "";
         
-        return should_log(entry.level, entry.message, file, line, function);
+        return should_log(entry.level, entry.message.to_string(), file, line, function);
     }
     
     /**

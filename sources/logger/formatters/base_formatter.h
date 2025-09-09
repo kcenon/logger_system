@@ -87,17 +87,17 @@ public:
         oss << "[" << level_to_string(entry.level) << "] ";
         
         if (entry.thread_id) {
-            oss << "[" << *entry.thread_id << "] ";
+            oss << "[" << std::string_view(*entry.thread_id) << "] ";
         } else {
             oss << "[" << get_thread_id() << "] ";
         }
         
-        oss << entry.message;
+        oss << std::string_view(entry.message);
         
         if (entry.location) {
-            oss << " [" << entry.location->file 
+            oss << " [" << std::string_view(entry.location->file)
                 << ":" << entry.location->line 
-                << ":" << entry.location->function << "]";
+                << ":" << std::string_view(entry.location->function) << "]";
         }
         
         return oss.str();
@@ -121,7 +121,7 @@ public:
         oss << "\"timestamp\":\"" << format_timestamp(entry.timestamp) << "\",";
         oss << "\"level\":\"" << level_to_string(entry.level) << "\",";
         oss << "\"message\":\"" << escape_json(entry.message) << "\",";
-        oss << "\"thread\":\"" << (entry.thread_id ? *entry.thread_id : get_thread_id()) << "\"";
+        oss << "\"thread\":\"" << (entry.thread_id ? std::string(*entry.thread_id) : get_thread_id()) << "\"";
         
         if (entry.location) {
             oss << ",\"location\":{";
@@ -145,7 +145,8 @@ public:
     }
     
 private:
-    std::string escape_json(const std::string& str) const {
+    template<typename StringType>
+    std::string escape_json(const StringType& str) const {
         std::string escaped;
         for (char c : str) {
             if (c == '"') escaped += "\\\"";

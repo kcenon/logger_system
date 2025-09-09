@@ -37,6 +37,16 @@ add_executable(logger_throughput_benchmark
     logger_throughput_benchmark.cpp
 )
 
+# Batch processing benchmark
+add_executable(batch_processing_benchmark
+    batch_processing_benchmark.cpp
+)
+
+# Comprehensive benchmark suite
+add_executable(comprehensive_benchmark
+    comprehensive_benchmark.cpp
+)
+
 # Set common properties for all benchmarks
 set(LOGGER_BENCHMARK_TARGETS
     logger_performance_benchmark
@@ -45,6 +55,8 @@ set(LOGGER_BENCHMARK_TARGETS
     multithreaded_logging_benchmark
     log_level_benchmark
     logger_throughput_benchmark
+    batch_processing_benchmark
+    comprehensive_benchmark
 )
 
 foreach(target ${LOGGER_BENCHMARK_TARGETS})
@@ -79,6 +91,8 @@ add_custom_target(run_logger_benchmarks
     COMMAND multithreaded_logging_benchmark
     COMMAND log_level_benchmark
     COMMAND logger_throughput_benchmark
+    COMMAND batch_processing_benchmark
+    COMMAND comprehensive_benchmark
     DEPENDS logger_benchmarks_target
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     COMMENT "Running logger benchmarks..."
