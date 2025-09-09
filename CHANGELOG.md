@@ -5,6 +5,51 @@ All notable changes to the Logger System will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - Phase 3 Overflow Policy System Implementation (2025-09-10)
+
+### Added - Phase 3 Task A4 Complete
+
+- **Comprehensive Overflow Policy System**
+  - Multiple overflow handling strategies (drop oldest, drop newest, block, grow)
+  - Policy factory for easy policy creation and switching
+  - Custom policy support with user-defined handlers
+  - Thread-safe overflow queue implementation
+  - Statistics tracking for all policy operations
+
+- **Adaptive Backpressure System**
+  - Dynamic batch size adjustment based on system load
+  - Automatic flush interval adaptation
+  - Load threshold-based pressure control
+  - Configurable adaptation parameters (rate, thresholds, limits)
+  - Real-time metrics tracking with sliding window
+  - Manual and automatic adaptation modes
+
+- **Policy Features**
+  - Drop Oldest: Removes oldest messages when queue is full
+  - Drop Newest: Rejects new messages when queue is full
+  - Block: Waits for space with configurable timeout
+  - Grow: Dynamically increases queue capacity up to max limit
+  - Custom: User-defined overflow handling logic
+
+- **Performance Optimization**
+  - Lock-free statistics tracking with atomic operations
+  - Efficient queue management with minimal locking
+  - Adaptive batch sizing for optimal throughput
+  - Backpressure mechanism to prevent system overload
+
+- **Test Coverage**
+  - 22 comprehensive unit tests covering all policies
+  - Concurrent access testing for thread safety
+  - Adaptive backpressure algorithm validation
+  - Boundary condition and stress testing
+  - 100% test pass rate (22/22 tests passing)
+
+### Technical Details
+- Implementation: `sources/logger/flow/` (417 lines)
+- Headers: `overflow_policy.h` with templated queue
+- Build integration: Full CMake support
+- Test suite: `unittest/flow_test/` with extensive coverage
+
 ## [2.2.0] - Phase 3 Health Check System Implementation (2025-09-10)
 
 ### Added - Phase 3 Task A3 Complete
