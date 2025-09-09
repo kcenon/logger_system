@@ -1,6 +1,10 @@
 var hierarchy =
 [
+    [ "logger_module::adaptive_backpressure::adaptation_stats", "structlogger__module_1_1adaptive__backpressure_1_1adaptation__stats.html", null ],
+    [ "logger_module::adaptive_backpressure", "classlogger__module_1_1adaptive__backpressure.html", null ],
     [ "logger_module::log_analyzer::alert_rule", "structlogger__module_1_1log__analyzer_1_1alert__rule.html", null ],
+    [ "logger_module::buffer_health_info", "structlogger__module_1_1buffer__health__info.html", null ],
+    [ "logger_module::adaptive_backpressure::config", "structlogger__module_1_1adaptive__backpressure_1_1config.html", null ],
     [ "logger_module::config_strategy_factory", "classlogger__module_1_1config__strategy__factory.html", null ],
     [ "logger_module::config_strategy_interface", "classlogger__module_1_1config__strategy__interface.html", [
       [ "logger_module::composite_strategy", "classlogger__module_1_1composite__strategy.html", null ],
@@ -14,7 +18,12 @@ var hierarchy =
       [ "logger_module::lightweight_di_container< T >", "classlogger__module_1_1lightweight__di__container.html", null ]
     ] ],
     [ "logger_module::di_container_interface< logger_module::base_writer >", "classlogger__module_1_1di__container__interface.html", null ],
+    [ "logger_module::health_check_criteria", "structlogger__module_1_1health__check__criteria.html", null ],
     [ "logger_module::health_check_result", "classlogger__module_1_1health__check__result.html", null ],
+    [ "logger_module::health_check_system", "classlogger__module_1_1health__check__system.html", null ],
+    [ "logger_module::health_check_utils", "classlogger__module_1_1health__check__utils.html", null ],
+    [ "logger_module::adaptive_backpressure::impl", "classlogger__module_1_1adaptive__backpressure_1_1impl.html", null ],
+    [ "logger_module::health_check_system::impl", "classlogger__module_1_1health__check__system_1_1impl.html", null ],
     [ "logger_module::log_collector::impl", "classlogger__module_1_1log__collector_1_1impl.html", null ],
     [ "logger_module::logger::impl", "classlogger__module_1_1logger_1_1impl.html", null ],
     [ "logger_module::log_aggregator", "classlogger__module_1_1log__aggregator.html", null ],
@@ -69,11 +78,23 @@ var hierarchy =
       ] ]
     ] ],
     [ "logger_module::log_server::network_log_entry", "structlogger__module_1_1log__server_1_1network__log__entry.html", null ],
+    [ "logger_module::overflow_policy_base", "classlogger__module_1_1overflow__policy__base.html", [
+      [ "logger_module::block_policy", "classlogger__module_1_1block__policy.html", null ],
+      [ "logger_module::custom_overflow_policy", "classlogger__module_1_1custom__overflow__policy.html", null ],
+      [ "logger_module::drop_newest_policy", "classlogger__module_1_1drop__newest__policy.html", null ],
+      [ "logger_module::drop_oldest_policy", "classlogger__module_1_1drop__oldest__policy.html", null ],
+      [ "logger_module::grow_policy", "classlogger__module_1_1grow__policy.html", null ]
+    ] ],
+    [ "logger_module::overflow_policy_factory", "classlogger__module_1_1overflow__policy__factory.html", null ],
+    [ "logger_module::overflow_queue< T >", "classlogger__module_1_1overflow__queue.html", null ],
+    [ "logger_module::overflow_stats", "structlogger__module_1_1overflow__stats.html", null ],
     [ "logger_module::performance_metrics", "structlogger__module_1_1performance__metrics.html", null ],
+    [ "logger_module::queue_health_info", "structlogger__module_1_1queue__health__info.html", null ],
     [ "logger_module::result< T >", "classlogger__module_1_1result.html", null ],
     [ "logger_module::result_void", "classlogger__module_1_1result__void.html", null ],
     [ "logger_module::router_builder", "classlogger__module_1_1router__builder.html", null ],
     [ "logger_module::log_sanitizer::sanitization_rule", "structlogger__module_1_1log__sanitizer_1_1sanitization__rule.html", null ],
+    [ "logger_module::scoped_health_registration", "classlogger__module_1_1scoped__health__registration.html", null ],
     [ "logger_module::log_server::server_stats", "structlogger__module_1_1log__server_1_1server__stats.html", null ],
     [ "logger_module::source_location", "structlogger__module_1_1source__location.html", null ],
     [ "logger_module::log_aggregator::source_stats", "structlogger__module_1_1log__aggregator_1_1source__stats.html", null ],
@@ -81,5 +102,6 @@ var hierarchy =
     [ "logger_module::structured_log_entry", "classlogger__module_1_1structured__log__entry.html", null ],
     [ "logger_module::structured_logger", "classlogger__module_1_1structured__logger.html", null ],
     [ "logger_module::log_analyzer::time_window_stats", "structlogger__module_1_1log__analyzer_1_1time__window__stats.html", null ],
+    [ "logger_module::writer_health_info", "structlogger__module_1_1writer__health__info.html", null ],
     [ "logger_module::writer_metrics", "structlogger__module_1_1writer__metrics.html", null ]
 ];

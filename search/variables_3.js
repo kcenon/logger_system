@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['enable_5fcolor_5foutput_0',['enable_color_output',['../structlogger__module_1_1logger__config.html#a381b73903b9499b53cc7b2ef67ad5900',1,'logger_module::logger_config']]],
-  ['enable_5fcompression_1',['enable_compression',['../structlogger__module_1_1logger__config.html#a6370b0f4e373435594d95c240b307066',1,'logger_module::logger_config']]],
-  ['enable_5fcrash_5fhandler_2',['enable_crash_handler',['../structlogger__module_1_1logger__config.html#afd00c4c34224069ee6c7e47be3e60d89',1,'logger_module::logger_config']]],
-  ['enable_5fmetrics_3',['enable_metrics',['../structlogger__module_1_1logger__config.html#a2e2c02c9a2b3a869337bea814a5ca490',1,'logger_module::logger_config']]],
-  ['enable_5fstructured_5flogging_4',['enable_structured_logging',['../structlogger__module_1_1logger__config.html#a57a9c2f9d937942d52e813dce866ae3e',1,'logger_module::logger_config']]],
-  ['environment_5',['ENVIRONMENT',['../structlogger__module_1_1standard__fields.html#aad3452243b8f213f8be05c452f68098e',1,'logger_module::standard_fields']]]
+  ['decrease_5fcount_0',['decrease_count',['../structlogger__module_1_1adaptive__backpressure_1_1adaptation__stats.html#af2328fc714c32dda54d5d9536cf6807a',1,'logger_module::adaptive_backpressure::adaptation_stats']]],
+  ['dropped_5fmessages_1',['dropped_messages',['../structlogger__module_1_1overflow__stats.html#a6b702a7d1097d3322241f79d636c3988',1,'logger_module::overflow_stats::dropped_messages'],['../structlogger__module_1_1queue__health__info.html#adbf94bd5a2c96d73f4c3a004b36eea17',1,'logger_module::queue_health_info::dropped_messages']]]
 ];

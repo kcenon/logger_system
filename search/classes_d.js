@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['regex_5ffilter_0',['regex_filter',['../classlogger__module_1_1regex__filter.html',1,'logger_module']]],
-  ['result_1',['result',['../classlogger__module_1_1result.html',1,'logger_module']]],
-  ['result_5fvoid_2',['result_void',['../classlogger__module_1_1result__void.html',1,'logger_module']]],
-  ['rotating_5ffile_5fwriter_3',['rotating_file_writer',['../classlogger__module_1_1rotating__file__writer.html',1,'logger_module']]],
-  ['router_5fbuilder_4',['router_builder',['../classlogger__module_1_1router__builder.html',1,'logger_module']]]
+  ['overflow_5fpolicy_5fbase_0',['overflow_policy_base',['../classlogger__module_1_1overflow__policy__base.html',1,'logger_module']]],
+  ['overflow_5fpolicy_5ffactory_1',['overflow_policy_factory',['../classlogger__module_1_1overflow__policy__factory.html',1,'logger_module']]],
+  ['overflow_5fqueue_2',['overflow_queue',['../classlogger__module_1_1overflow__queue.html',1,'logger_module']]],
+  ['overflow_5fstats_3',['overflow_stats',['../structlogger__module_1_1overflow__stats.html',1,'logger_module']]]
 ];

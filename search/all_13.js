@@ -16,5 +16,6 @@ var searchData=
   ['none_13',['none',['../classlogger__module_1_1encrypted__writer.html#af6311571e281e04fc22d088b07d45c81a334c4a4c42fdb79d7ebc3e73b517e6f8',1,'logger_module::encrypted_writer::none'],['../classlogger__module_1_1access__control__filter.html#a4fb9246236ad41fae5634fb3f61c6c50a334c4a4c42fdb79d7ebc3e73b517e6f8',1,'logger_module::access_control_filter::none']]],
   ['not_5fimplemented_14',['not_implemented',['../namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba63877363c706f5095d05a54f8b57b0ae',1,'logger_module']]],
   ['notes_15',['Platform Notes',['../md_docs_2architecture.html#autotoc_md163',1,'']]],
-  ['notes_20networking_16',['Windows Notes (Networking)',['../md_docs_2getting-started.html#autotoc_md198',1,'']]]
+  ['notes_20networking_16',['Windows Notes (Networking)',['../md_docs_2getting-started.html#autotoc_md198',1,'']]],
+  ['notify_5fspace_5favailable_17',['notify_space_available',['../classlogger__module_1_1block__policy.html#ab00c8cae772e78387cdb41a54c8cb4e5',1,'logger_module::block_policy']]]
 ];

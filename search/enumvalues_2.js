@@ -7,5 +7,6 @@ var searchData=
   ['conservative_4',['conservative',['../classlogger__module_1_1performance__tuning__strategy.html#a17fa2622fdd8e26b8ba7aa9b6edb04afa45f1cbae951b837ae1cbbddc2e97e23d',1,'logger_module::performance_tuning_strategy']]],
   ['counter_5',['counter',['../namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565da886bb73b3156b0aa24aac99d2de0b238',1,'logger_module']]],
   ['creation_5ffailed_6',['creation_failed',['../namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba2848577fa72398894b4cf63da22135f0',1,'logger_module']]],
-  ['critical_7',['critical',['../namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288a7e85bcb66fb9a809d5ab4f62a8b8bea8',1,'thread_module']]]
+  ['critical_7',['critical',['../namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288a7e85bcb66fb9a809d5ab4f62a8b8bea8',1,'thread_module']]],
+  ['custom_8',['custom',['../namespacelogger__module.html#a613f507608bacdad0a4ccde083bf1d2ea8b9035807842a4e4dbe009f3f1478127',1,'logger_module']]]
 ];

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['performance_5fmetrics_0',['performance_metrics',['../structlogger__module_1_1performance__metrics.html',1,'logger_module']]],
-  ['performance_5ftuning_5fstrategy_1',['performance_tuning_strategy',['../classlogger__module_1_1performance__tuning__strategy.html',1,'logger_module']]],
-  ['plain_5fformatter_2',['plain_formatter',['../classlogger__module_1_1plain__formatter.html',1,'logger_module']]]
+  ['network_5flog_5fentry_0',['network_log_entry',['../structlogger__module_1_1log__server_1_1network__log__entry.html',1,'logger_module::log_server']]],
+  ['network_5fwriter_1',['network_writer',['../classlogger__module_1_1network__writer.html',1,'logger_module']]]
 ];

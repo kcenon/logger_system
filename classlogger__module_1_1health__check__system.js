@@ -1,0 +1,25 @@
+var classlogger__module_1_1health__check__system =
+[
+    [ "impl", "classlogger__module_1_1health__check__system_1_1impl.html", "classlogger__module_1_1health__check__system_1_1impl" ],
+    [ "health_check_system", "classlogger__module_1_1health__check__system.html#aef914c131f4969ff790562d268d28ea9", null ],
+    [ "~health_check_system", "classlogger__module_1_1health__check__system.html#a501be502dc5bd3604484484b2fb90203", null ],
+    [ "check_buffer_health", "classlogger__module_1_1health__check__system.html#af2b39f41caca3f5ccf571b03c4d84778", null ],
+    [ "check_queue_health", "classlogger__module_1_1health__check__system.html#ae75b3f9e4490d633ce50d87880e3a232", null ],
+    [ "check_writer_health", "classlogger__module_1_1health__check__system.html#ac0a35e3f5883954d85763d2df6605dc8", null ],
+    [ "configure_checks", "classlogger__module_1_1health__check__system.html#ac0fd10d23c9afdbc76c88570d36d8e19", null ],
+    [ "get_all_writer_health", "classlogger__module_1_1health__check__system.html#a990293f404d3a16c067d325675ae8b45", null ],
+    [ "get_criteria", "classlogger__module_1_1health__check__system.html#a7a6d569e884a78adf30730faacd8093a", null ],
+    [ "is_monitoring", "classlogger__module_1_1health__check__system.html#a77e2af98d0a7b57aec87fe798e5560d5", null ],
+    [ "perform_health_check", "classlogger__module_1_1health__check__system.html#a506d80d20311182bc446127d7d4996ab", null ],
+    [ "register_collector", "classlogger__module_1_1health__check__system.html#a93722ef276df4ed7b767508dc5dbcca5", null ],
+    [ "register_custom_check", "classlogger__module_1_1health__check__system.html#ab5357b597a340e507d727128a0ba35b3", null ],
+    [ "register_writer", "classlogger__module_1_1health__check__system.html#a4cc7f76545a4e4a8674ae164ee1ebb1b", null ],
+    [ "reset_stats", "classlogger__module_1_1health__check__system.html#a28047d62c6931d2252f8cb5f2f8e7677", null ],
+    [ "set_criteria", "classlogger__module_1_1health__check__system.html#a5e6893d22278d6aba947f9503936b285", null ],
+    [ "start_monitoring", "classlogger__module_1_1health__check__system.html#a2cbe2532454a9605fe635b75e17a99f2", null ],
+    [ "stop_monitoring", "classlogger__module_1_1health__check__system.html#a4d1d4908ada2af5ca622c6ff72b0f499", null ],
+    [ "unregister_writer", "classlogger__module_1_1health__check__system.html#a666bd45296bcb180e25a878f8312719d", null ],
+    [ "update_buffer_stats", "classlogger__module_1_1health__check__system.html#a38556f8179d7a37ac9b8b026d9198f84", null ],
+    [ "update_queue_stats", "classlogger__module_1_1health__check__system.html#ade227fb091c1276092997d6b3677ea4d", null ],
+    [ "update_writer_stats", "classlogger__module_1_1health__check__system.html#a2fe7964eaa1e8245d271f730ddc68847", null ]
+];
