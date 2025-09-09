@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 # Create config test executable
 add_executable(config_unit
     config_test.cpp
+    strategy_test.cpp
 )
 
 # Link with logger library and test framework

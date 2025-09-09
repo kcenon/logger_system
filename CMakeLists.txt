@@ -43,11 +43,17 @@ option(LOGGER_STANDALONE "Build in standalone mode without thread_system" OFF)
 option(NO_VCPKG "Skip vcpkg and use system libraries only" OFF)
 
 ##################################################
-# Include Custom CMake Modules (following thread_system pattern)
+# Include Custom CMake Modules
 ##################################################
 
 # Add custom cmake modules path
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+# Include feature configuration module
+include(LoggerFeatures)
+
+# Include dependency detection module
+include(LoggerDependencies)
 
 # Include compiler checks module (following thread_system pattern)
 include(CompilerChecks)
@@ -75,9 +81,14 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 ##################################################
-# Dependencies (following thread_system pattern)
+# Dependencies (modular approach)
 ##################################################
-find_package(Threads REQUIRED)
+
+# Use our dependency detection module
+logger_find_all_dependencies()
+
+# Print feature configuration summary
+logger_print_features()
 
 # Skip vcpkg if NO_VCPKG option is set or if LOGGER_STANDALONE is ON
 if(NO_VCPKG OR LOGGER_STANDALONE)

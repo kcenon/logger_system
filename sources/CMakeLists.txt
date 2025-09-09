@@ -49,6 +49,9 @@ if(WIN32)
     target_link_libraries(logger PUBLIC ws2_32)
 endif()
 
+# Apply feature configuration to the target
+logger_configure_target(logger)
+
 # Link with thread_system if available
 if(THREAD_SYSTEM_FOUND)
     target_link_libraries(logger

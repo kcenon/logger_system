@@ -49,6 +49,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "error_codes.h"
 #include "metrics/logger_metrics.h"
+#include "di/di_container_interface.h"
+#include "di/di_container_factory.h"
+#include "monitoring/monitoring_interface.h"
+#include "monitoring/monitoring_factory.h"
 
 namespace logger_module {
 
@@ -211,9 +215,131 @@ public:
      */
     log_router& get_router();
     
+    // DI Support Methods
+    
+    /**
+     * @brief Set a DI container for writer resolution
+     * @param container Pointer to DI container (not owned)
+     */
+    void set_di_container(di_container_interface<base_writer>* container);
+    
+    /**
+     * @brief Check if DI container is available
+     * @return true if DI container is set
+     */
+    bool has_di_container() const;
+    
+    /**
+     * @brief Add a writer from DI container
+     * @param name Name of the writer registered in DI container
+     * @return result_void indicating success or error
+     */
+    result_void add_writer_from_di(const std::string& name);
+    
+    /**
+     * @brief Register a writer factory in the internal DI container
+     * @tparam WriterType The concrete writer type
+     * @param name Name to register the writer factory under
+     * @return result_void indicating success or error
+     */
+    template<typename WriterType>
+    result_void register_writer_factory(const std::string& name) {
+        if (!internal_di_container_) {
+            return error_code::di_not_available;
+        }
+        
+        auto factory = []() -> std::shared_ptr<base_writer> {
+            return std::make_shared<WriterType>();
+        };
+        
+        return internal_di_container_->register_factory(name, factory);
+    }
+    
+    /**
+     * @brief Get the DI strategy being used
+     * @return Current DI strategy
+     */
+    di_container_factory::container_type get_di_strategy() const;
+    
+    /**
+     * @brief Enable internal DI container
+     * @param type Type of DI container to use
+     * @return result_void indicating success or error
+     */
+    result_void enable_di(di_container_factory::container_type type = 
+                         di_container_factory::container_type::automatic);
+    
+    // Monitoring Support Methods
+    
+    /**
+     * @brief Set a custom monitoring implementation
+     * @param monitor Unique pointer to monitoring implementation
+     */
+    void set_monitor(std::unique_ptr<monitoring_interface> monitor);
+    
+    /**
+     * @brief Enable monitoring with specified backend
+     * @param type Type of monitoring backend to use
+     * @return result_void indicating success or error
+     */
+    result_void enable_monitoring(monitoring_factory::monitor_type type = 
+                                 monitoring_factory::monitor_type::automatic);
+    
+    /**
+     * @brief Disable monitoring
+     * @return result_void indicating success or error
+     */
+    result_void disable_monitoring();
+    
+    /**
+     * @brief Check if monitoring is enabled
+     * @return true if monitoring is enabled
+     */
+    bool is_monitoring_enabled() const;
+    
+    /**
+     * @brief Collect current metrics
+     * @return Result containing monitoring data or error
+     */
+    result<monitoring_data> collect_metrics() const;
+    
+    /**
+     * @brief Perform health check
+     * @return Result containing health check result or error
+     */
+    result<health_check_result> check_health() const;
+    
+    /**
+     * @brief Reset monitoring metrics
+     * @return result_void indicating success or error
+     */
+    result_void reset_monitoring_metrics();
+    
+    /**
+     * @brief Get the monitoring backend name
+     * @return Name of the current monitoring backend
+     */
+    std::string get_monitoring_backend() const;
+    
+    /**
+     * @brief Record a custom metric
+     * @param name Metric name
+     * @param value Metric value
+     * @param type Metric type
+     */
+    void record_metric(const std::string& name, double value, 
+                      metric_type type = metric_type::gauge);
+    
 private:
     class impl;
     std::unique_ptr<impl> pimpl_;
+    
+    // DI support members
+    di_container_interface<base_writer>* external_di_container_ = nullptr;
+    std::unique_ptr<di_container_interface<base_writer>> internal_di_container_;
+    
+    // Monitoring support member
+    std::unique_ptr<monitoring_interface> monitor_;
 };
 
 } // namespace logger_module

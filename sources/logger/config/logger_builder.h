@@ -8,12 +8,14 @@ All rights reserved.
 *****************************************************************************/
 
 #include "logger_config.h"
+#include "config_strategy_interface.h"
 #include "../logger.h"
 #include "../writers/base_writer.h"
 #include "../filters/log_filter.h"
 #include "../interfaces/log_formatter_interface.h"
 #include <memory>
 #include <vector>
+#include <algorithm>
 
 namespace logger_module {
 
@@ -45,6 +47,10 @@ public:
      */
     logger_builder& with_async(bool async = true) {
         config_.async = async;
+        // When disabling async, ensure batch_size is 1
+        if (!async && config_.batch_size > 1) {
+            config_.batch_size = 1;
+        }
         return *this;
     }
     
@@ -220,17 +226,82 @@ public:
      * @return Reference to builder for chaining
      */
     logger_builder& use_template(const std::string& name) {
-        if (name == "high_performance") {
-            config_ = logger_config::high_performance();
-        } else if (name == "low_latency") {
-            config_ = logger_config::low_latency();
-        } else if (name == "debug") {
-            config_ = logger_config::debug_config();
-        } else if (name == "production") {
-            config_ = logger_config::production();
+        auto strategy = config_strategy_factory::create_template(name);
+        if (strategy) {
+            apply_strategy(std::move(strategy));
         } else {
-            config_ = logger_config::default_config();
+            // Fallback to old behavior for backward compatibility
+            if (name == "high_performance") {
+                config_ = logger_config::high_performance();
+            } else if (name == "low_latency") {
+                config_ = logger_config::low_latency();
+            } else if (name == "debug") {
+                config_ = logger_config::debug_config();
+            } else if (name == "production") {
+                config_ = logger_config::production();
+            } else {
+                config_ = logger_config::default_config();
+            }
         }
+        return *this;
+    }
+    
+    /**
+     * @brief Apply a configuration strategy
+     * @param strategy Strategy to apply
+     * @return Reference to builder for chaining
+     */
+    logger_builder& apply_strategy(std::unique_ptr<config_strategy_interface> strategy) {
+        if (strategy) {
+            strategies_.push_back(std::move(strategy));
+        }
+        return *this;
+    }
+    
+    /**
+     * @brief Apply environment-based configuration
+     * @param env Environment name ("development", "testing", "staging", "production")
+     * @return Reference to builder for chaining
+     */
+    logger_builder& for_environment(const std::string& env) {
+        auto strategy = config_strategy_factory::create_environment(env);
+        if (strategy) {
+            apply_strategy(std::move(strategy));
+        }
+        return *this;
+    }
+    
+    /**
+     * @brief Apply performance tuning strategy
+     * @param level Tuning level ("conservative", "balanced", "aggressive")
+     * @return Reference to builder for chaining
+     */
+    logger_builder& with_performance_tuning(const std::string& level = "balanced") {
+        auto strategy = config_strategy_factory::create_tuning(level);
+        if (strategy) {
+            apply_strategy(std::move(strategy));
+        }
+        return *this;
+    }
+    
+    /**
+     * @brief Auto-detect and apply environment configuration
+     * @return Reference to builder for chaining
+     */
+    logger_builder& auto_configure() {
+        auto strategy = config_strategy_factory::from_environment();
+        if (strategy) {
+            apply_strategy(std::move(strategy));
+        }
+        return *this;
+    }
+    
+    /**
+     * @brief Clear all applied strategies
+     * @return Reference to builder for chaining
+     */
+    logger_builder& clear_strategies() {
+        strategies_.clear();
         return *this;
     }
     
@@ -239,6 +310,30 @@ public:
      * @return Result containing the logger or error
      */
     result<std::unique_ptr<logger>> build() {
+        // Apply all strategies first
+        for (const auto& strategy : strategies_) {
+            if (auto can_apply = strategy->can_apply(config_); !can_apply) {
+                // Log warning but continue with other strategies
+                continue;
+            }
+            
+            if (auto result = strategy->apply(config_); !result) {
+#ifdef USE_THREAD_SYSTEM
+                auto error_code = static_cast<int>(result.get_error().code());
+                auto logger_code = static_cast<logger_error_code>(error_code - 10000);
+                return make_error<std::unique_ptr<logger>>(
+                    logger_code,
+                    "Strategy application failed: " + result.get_error().message()
+                );
+#else
+                return make_logger_error<std::unique_ptr<logger>>(
+                    result.error_code(),
+                    "Strategy application failed: " + result.error_message()
+                );
+#endif
+            }
+        }
+        
         // Validate configuration
         if (auto validation = config_.validate(); !validation) {
 #ifdef USE_THREAD_SYSTEM
@@ -266,7 +361,7 @@ public:
         }
         
         // Create logger with validated configuration
-        auto logger_instance = std::make_unique<logger>(config_.buffer_size);
+        auto logger_instance = std::make_unique<logger>(config_.async, config_.buffer_size);
         
         // Apply configuration settings
         logger_instance->set_min_level(config_.min_level);
@@ -329,6 +424,7 @@ private:
     std::vector<std::pair<std::string, std::unique_ptr<base_writer>>> writers_;
     std::vector<std::unique_ptr<log_filter>> filters_;
     std::unique_ptr<log_formatter_interface> formatter_;
+    std::vector<std::unique_ptr<config_strategy_interface>> strategies_;
     mutable logger_config built_config_;  // Store last built configuration
 };
 
