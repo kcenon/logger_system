@@ -311,7 +311,11 @@ void logger_crash_safety::handle_logger_crash(int signal) {
     }
     
     std::string recovery_marker = emergency_log_path_ + ".recovery";
+    #ifdef _WIN32
+    int fd = _open(recovery_marker.c_str(), _O_CREAT | _O_WRONLY);
+    #else
     int fd = open(recovery_marker.c_str(), O_CREAT | O_WRONLY, 0644);
+    #endif
     if (fd != -1) {
         close(fd);
     }

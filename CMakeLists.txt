@@ -160,10 +160,12 @@ if (BUILD_TESTS)
         # Fallback to FetchContent if not found
         include(FetchContent)
         
-        # Disable pthread requirement on Windows
+        # Disable pthread requirement on Windows - Set before FetchContent_Declare
         if(WIN32)
-            set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-            set(gtest_disable_pthreads ON CACHE BOOL "" FORCE)
+            set(gtest_force_shared_crt ON CACHE BOOL "Use shared (DLL) run-time lib even when Google Test is built as static lib." FORCE)
+            set(gtest_disable_pthreads ON CACHE BOOL "Disable uses of pthreads in gtest." FORCE)
+            set(BUILD_GMOCK ON CACHE BOOL "Build gmock" FORCE)
+            add_definitions(-DGTEST_HAS_PTHREAD=0)
         endif()
         
         FetchContent_Declare(
@@ -171,6 +173,10 @@ if (BUILD_TESTS)
             GIT_REPOSITORY https://github.com/google/googletest.git
             GIT_TAG v1.14.0
         )
+        
+        # Set properties before making available
+        set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "" FORCE)
+        
         FetchContent_MakeAvailable(googletest)
     endif()
     enable_testing()
