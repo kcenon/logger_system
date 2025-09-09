@@ -267,26 +267,25 @@ Configuration Templates</h2>
 <div class="line"><span class="keyword">auto</span> prod_logger = <a class="code hl_class" href="classlogger__module_1_1logger__builder.html">logger_module::logger_builder</a>()</div>
 <div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431">use_template</a>(<span class="stringliteral">&quot;production&quot;</span>)</div>
 <div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build</a>()</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1result.html#afced53791aac6ac8b851381dd06a7007">value</a>();  <span class="comment">// Throws on error</span></div>
+<div class="line">    .value();  <span class="comment">// Throws on error</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Debug configuration - immediate output for development</span></div>
 <div class="line"><span class="keyword">auto</span> debug_logger = <a class="code hl_class" href="classlogger__module_1_1logger__builder.html">logger_module::logger_builder</a>()</div>
 <div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431">use_template</a>(<span class="stringliteral">&quot;debug&quot;</span>)</div>
 <div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build</a>()</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1result.html#afced53791aac6ac8b851381dd06a7007">value</a>();</div>
+<div class="line">    .value();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// High-performance - maximized throughput</span></div>
 <div class="line"><span class="keyword">auto</span> hp_logger = <a class="code hl_class" href="classlogger__module_1_1logger__builder.html">logger_module::logger_builder</a>()</div>
 <div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431">use_template</a>(<span class="stringliteral">&quot;high_performance&quot;</span>)</div>
 <div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build</a>()</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1result.html#afced53791aac6ac8b851381dd06a7007">value</a>();</div>
+<div class="line">    .value();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Low-latency - minimized latency for real-time systems</span></div>
 <div class="line"><span class="keyword">auto</span> rt_logger = <a class="code hl_class" href="classlogger__module_1_1logger__builder.html">logger_module::logger_builder</a>()</div>
 <div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431">use_template</a>(<span class="stringliteral">&quot;low_latency&quot;</span>)</div>
 <div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build</a>()</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1result.html#afced53791aac6ac8b851381dd06a7007">value</a>();</div>
-<div class="ttc" id="aclasslogger__module_1_1result_html_afced53791aac6ac8b851381dd06a7007"><div class="ttname"><a href="classlogger__module_1_1result.html#afced53791aac6ac8b851381dd06a7007">logger_module::result::value</a></div><div class="ttdeci">T &amp; value()</div><div class="ttdef"><b>Definition</b> error_codes.h:256</div></div>
+<div class="line">    .value();</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md16"></a>
 Traditional API (Legacy Support)</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logger_8h.html">logger/logger.h</a>&gt;</span></div>
