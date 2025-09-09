@@ -34,6 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <string>
 #include <stdexcept>
+#include <utility>
 
 // Conditional include based on build configuration
 #ifdef USE_THREAD_SYSTEM
