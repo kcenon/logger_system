@@ -77,7 +77,8 @@ public:
      */
     result<monitoring_data> collect_metrics() const override {
         if (!enabled_.load()) {
-            return error_code::metrics_not_available;
+            return make_logger_error<monitoring_data>(error_code::metrics_not_available,
+                            "Monitoring is disabled");
         }
         
         monitoring_data data;

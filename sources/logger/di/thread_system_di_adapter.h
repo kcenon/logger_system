@@ -19,7 +19,7 @@ All rights reserved.
 #include "di_container_interface.h"
 
 #ifdef USE_THREAD_SYSTEM
-#include <service_container/service_container.h>
+#include <interfaces/service_container.h>
 
 namespace logger_module {
 

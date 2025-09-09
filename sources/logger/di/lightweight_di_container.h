@@ -90,11 +90,13 @@ public:
         std::function<std::shared_ptr<T>()> factory) override {
         
         if (name.empty()) {
-            return error_code::invalid_argument;
+            return make_logger_error(error_code::invalid_argument, 
+                            "Factory name cannot be empty");
         }
         
         if (!factory) {
-            return error_code::invalid_argument;
+            return make_logger_error(error_code::invalid_argument,
+                            "Factory function cannot be null");
         }
         
         std::lock_guard<std::mutex> lock(mutex_);
@@ -114,7 +116,8 @@ public:
         std::shared_ptr<T> instance) override {
         
         if (name.empty()) {
-            return error_code::invalid_argument;
+            return make_logger_error(error_code::invalid_argument, 
+                            "Factory name cannot be empty");
         }
         
         if (!instance) {
