@@ -7,8 +7,13 @@ All rights reserved.
 
 #include "log_sanitizer.h"
 #include <algorithm>
-
-#include <iostream> // 명시적으로 포함
+#include <iostream>
+#include <regex>
+#include <mutex>
+#include <vector>
+#include <unordered_map>
+#include <memory>
+#include <cctype>
 
 namespace logger_module {
 

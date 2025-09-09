@@ -7,7 +7,15 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-#include "../logger_interface.h"
+// Conditional include based on build configuration
+#ifdef USE_THREAD_SYSTEM
+    #include <interfaces/logger_interface.h>
+#else
+    #include "../logger_interface.h"
+#endif
+
+#include "../interfaces/log_filter_interface.h"
+#include "../interfaces/log_entry.h"
 #include <string>
 #include <regex>
 #include <memory>
@@ -18,13 +26,29 @@ namespace logger_module {
 /**
  * @class log_filter
  * @brief Base class for log filtering
+ * 
+ * This class provides a compatibility layer between the old API and the new
+ * interface-based approach. It implements log_filter_interface.
  */
-class log_filter {
+class log_filter : public log_filter_interface {
 public:
     virtual ~log_filter() = default;
     
     /**
-     * @brief Check if a log entry should be processed
+     * @brief Check if a log entry should be processed (new interface)
+     * @param entry The log entry to check
+     * @return true if the log should be processed
+     */
+    virtual bool should_log(const log_entry& entry) const override {
+        const std::string& file = entry.location ? entry.location->file : "";
+        int line = entry.location ? entry.location->line : 0;
+        const std::string& function = entry.location ? entry.location->function : "";
+        
+        return should_log(entry.level, entry.message, file, line, function);
+    }
+    
+    /**
+     * @brief Check if a log entry should be processed (legacy API)
      * @param level Log level
      * @param message Log message
      * @param file Source file
@@ -37,6 +61,14 @@ public:
                            const std::string& file,
                            int line,
                            const std::string& function) const = 0;
+    
+    /**
+     * @brief Get the name of this filter
+     * @return Filter name for identification
+     */
+    virtual std::string get_name() const override {
+        return "base_filter";
+    }
 };
 
 /**
@@ -62,6 +94,10 @@ public:
     
     void set_min_level(thread_module::log_level level) {
         min_level_ = level;
+    }
+    
+    std::string get_name() const override {
+        return "level_filter";
     }
     
 private:
@@ -90,6 +126,10 @@ public:
         return include_ ? matches : !matches;
     }
     
+    std::string get_name() const override {
+        return "regex_filter";
+    }
+    
 private:
     std::regex pattern_;
     bool include_;  // true = include matching, false = exclude matching
@@ -116,6 +156,10 @@ public:
                    int line,
                    const std::string& function) const override {
         return filter_func_(level, message, file, line, function);
+    }
+    
+    std::string get_name() const override {
+        return "function_filter";
     }
     
 private:
@@ -164,6 +208,10 @@ public:
             }
             return false;
         }
+    }
+    
+    std::string get_name() const override {
+        return "composite_filter";
     }
     
 private:

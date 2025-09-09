@@ -10,6 +10,12 @@ All rights reserved.
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
+#include <mutex>
+#include <unordered_map>
+#include <deque>
+#include <vector>
+#include <functional>
+#include <cstdint>
 
 namespace logger_module {
 

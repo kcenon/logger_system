@@ -62,17 +62,17 @@ public:
     /**
      * @brief Write log entry to console
      */
-    bool write(thread_module::log_level level,
-               const std::string& message,
-               const std::string& file,
-               int line,
-               const std::string& function,
-               const std::chrono::system_clock::time_point& timestamp) override;
+    result_void write(thread_module::log_level level,
+                      const std::string& message,
+                      const std::string& file,
+                      int line,
+                      const std::string& function,
+                      const std::chrono::system_clock::time_point& timestamp) override;
     
     /**
      * @brief Flush console output
      */
-    void flush() override;
+    result_void flush() override;
     
     /**
      * @brief Get writer name

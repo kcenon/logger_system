@@ -7,7 +7,13 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-#include "../logger_interface.h"
+// Conditional include based on build configuration
+#ifdef USE_THREAD_SYSTEM
+    #include <interfaces/logger_interface.h>
+#else
+    #include "../logger_interface.h"
+#endif
+
 #include <unordered_map>
 #include <deque>
 #include <mutex>

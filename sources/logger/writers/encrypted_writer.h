@@ -24,6 +24,7 @@ public:
      * @brief Encryption algorithm type
      */
     enum class encryption_type {
+        none,           // No encryption (passthrough)
         aes_256_cbc,    // AES-256 with CBC mode
         aes_256_gcm,    // AES-256 with GCM mode (authenticated)
         chacha20_poly1305  // ChaCha20-Poly1305 (authenticated)
@@ -47,17 +48,17 @@ public:
     /**
      * @brief Write encrypted log entry
      */
-    bool write(thread_module::log_level level,
-               const std::string& message,
-               const std::string& file,
-               int line,
-               const std::string& function,
-               const std::chrono::system_clock::time_point& timestamp) override;
+    result_void write(thread_module::log_level level,
+                      const std::string& message,
+                      const std::string& file,
+                      int line,
+                      const std::string& function,
+                      const std::chrono::system_clock::time_point& timestamp) override;
     
     /**
      * @brief Flush wrapped writer
      */
-    void flush() override;
+    result_void flush() override;
     
     /**
      * @brief Get writer name
