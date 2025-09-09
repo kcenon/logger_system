@@ -78,112 +78,112 @@ struct logger_config {
     result_void validate() const {
         // Validate buffer size
         if (buffer_size == 0) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Buffer size must be greater than 0");
         }
         
         if (buffer_size > std::numeric_limits<std::size_t>::max() / 2) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Buffer size is too large");
         }
         
         // Validate batch size
         if (batch_size == 0) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Batch size must be greater than 0");
         }
         
         if (batch_size > buffer_size) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Batch size cannot exceed buffer size");
         }
         
         // Validate flush interval
         if (flush_interval.count() < 0) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Flush interval must be non-negative");
         }
         
         if (flush_interval.count() > 3600000) {  // 1 hour max
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Flush interval too large (max 1 hour)");
         }
         
         // Validate queue settings
         if (max_queue_size == 0) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Max queue size must be greater than 0");
         }
         
         if (max_queue_size < batch_size) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Max queue size must be at least as large as batch size");
         }
         
         // Validate file settings
         if (max_file_size < 1024) {  // Minimum 1KB
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Max file size too small (minimum 1KB)");
         }
         
         if (max_file_count == 0) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Max file count must be greater than 0");
         }
         
         if (max_file_count > 1000) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Max file count too large (max 1000)");
         }
         
         // Validate network settings if configured
         if (!remote_host.empty()) {
             if (remote_port == 0) {
-                return make_error(logger_error_code::invalid_configuration,
+                return make_logger_error(logger_error_code::invalid_configuration,
                                 "Remote port must be specified when remote host is set");
             }
             
             if (network_timeout.count() <= 0) {
-                return make_error(logger_error_code::invalid_configuration,
+                return make_logger_error(logger_error_code::invalid_configuration,
                                 "Network timeout must be positive");
             }
             
             if (network_retry_count > 100) {
-                return make_error(logger_error_code::invalid_configuration,
+                return make_logger_error(logger_error_code::invalid_configuration,
                                 "Network retry count too large (max 100)");
             }
         }
         
         // Validate writer settings
         if (max_writers == 0) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Must allow at least one writer");
         }
         
         if (max_writers > 100) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Max writers too large (max 100)");
         }
         
         // Validate thread count
         if (writer_thread_count == 0) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Writer thread count must be at least 1");
         }
         
         if (writer_thread_count > 32) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Writer thread count too large (max 32)");
         }
         
         // Validate feature combinations
         if (use_lock_free && queue_overflow_policy == overflow_policy::grow) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Lock-free queue cannot use grow overflow policy");
         }
         
         if (!async && batch_size > 1) {
-            return make_error(logger_error_code::invalid_configuration,
+            return make_logger_error(logger_error_code::invalid_configuration,
                             "Batch processing requires async mode");
         }
         

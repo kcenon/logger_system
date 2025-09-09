@@ -241,6 +241,7 @@ public:
     result<std::unique_ptr<logger>> build() {
         // Validate configuration
         if (auto validation = config_.validate(); !validation) {
+#ifdef USE_THREAD_SYSTEM
             // Extract error code - we need to reverse the offset we applied
             auto error_code = static_cast<int>(validation.get_error().code());
             auto logger_code = static_cast<logger_error_code>(error_code - 10000);
@@ -248,11 +249,17 @@ public:
                 logger_code,
                 "Configuration validation failed: " + validation.get_error().message()
             );
+#else
+            return make_logger_error<std::unique_ptr<logger>>(
+                validation.error_code(),
+                "Configuration validation failed: " + validation.error_message()
+            );
+#endif
         }
         
         // Validate writer count
         if (!writers_.empty() && writers_.size() > config_.max_writers) {
-            return make_error<std::unique_ptr<logger>>(
+            return make_logger_error<std::unique_ptr<logger>>(
                 logger_error_code::invalid_configuration,
                 "Number of writers exceeds max_writers configuration"
             );
