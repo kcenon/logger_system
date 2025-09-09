@@ -6,12 +6,24 @@ All rights reserved.
 *****************************************************************************/
 
 #include "network_writer.h"
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <unistd.h>
+
+#ifdef _WIN32
+    #include <winsock2.h>
+    #include <ws2tcpip.h>
+    #pragma comment(lib, "ws2_32.lib")
+    typedef int socklen_t;
+    typedef SSIZE_T ssize_t;  // Define ssize_t for Windows
+    #define close closesocket
+#else
+    #include <sys/socket.h>
+    #include <netinet/in.h>
+    #include <arpa/inet.h>
+    #include <netdb.h>
+    #include <unistd.h>
+#endif
+
 #include <cstring>
+#include <cerrno>
 #include <sstream>
 #include <iomanip>
 #include <iostream>
@@ -29,6 +41,14 @@ network_writer::network_writer(const std::string& host,
     , buffer_size_(buffer_size)
     , reconnect_interval_(reconnect_interval)
     , socket_fd_(-1) {
+    
+#ifdef _WIN32
+    // Initialize Winsock
+    WSADATA wsaData;
+    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+        throw std::runtime_error("Failed to initialize Winsock");
+    }
+#endif
     
     running_ = true;
     
@@ -57,14 +77,19 @@ network_writer::~network_writer() {
     }
     
     disconnect();
+    
+#ifdef _WIN32
+    // Cleanup Winsock
+    WSACleanup();
+#endif
 }
 
-bool network_writer::write(thread_module::log_level level,
-                          const std::string& message,
-                          const std::string& file,
-                          int line,
-                          const std::string& function,
-                          const std::chrono::system_clock::time_point& timestamp) {
+result_void network_writer::write(thread_module::log_level level,
+                                  const std::string& message,
+                                  const std::string& file,
+                                  int line,
+                                  const std::string& function,
+                                  const std::chrono::system_clock::time_point& timestamp) {
     
     std::lock_guard<std::mutex> lock(buffer_mutex_);
     
@@ -74,19 +99,37 @@ bool network_writer::write(thread_module::log_level level,
         buffer_.pop();
         std::lock_guard<std::mutex> stats_lock(stats_mutex_);
         stats_.send_failures++;
+        // Note: We still accept the new message after dropping the oldest
     }
     
     buffer_.push({level, message, file, line, function, timestamp});
     buffer_cv_.notify_one();
     
-    return true;
+    return {}; // Success
 }
 
-void network_writer::flush() {
+result_void network_writer::flush() {
     std::unique_lock<std::mutex> lock(buffer_mutex_);
+    auto start = std::chrono::steady_clock::now();
+    auto timeout = std::chrono::seconds(5); // 5 second timeout
+    
     while (!buffer_.empty()) {
-        buffer_cv_.wait(lock, [this] { return buffer_.empty() || !running_; });
+        if (buffer_cv_.wait_for(lock, timeout, [this] { return buffer_.empty() || !running_; })) {
+            if (!buffer_.empty() && !running_) {
+                return make_logger_error(logger_error_code::flush_timeout,
+                                        "Network writer stopped before flush completed");
+            }
+        } else {
+            return make_logger_error(logger_error_code::flush_timeout,
+                                    "Network flush timeout");
+        }
+        
+        if (std::chrono::steady_clock::now() - start > timeout) {
+            return make_logger_error(logger_error_code::flush_timeout,
+                                    "Network flush exceeded timeout");
+        }
     }
+    return {}; // Success
 }
 
 network_writer::connection_stats network_writer::get_stats() const {
@@ -169,7 +212,11 @@ bool network_writer::send_data(const std::string& data) {
         return false;
     }
     
+#ifdef _WIN32
+    int sent = ::send(socket_fd_, data.c_str(), static_cast<int>(data.length()), 0);
+#else
     ssize_t sent = ::send(socket_fd_, data.c_str(), data.length(), 0);
+#endif
     if (sent < 0) {
         if (protocol_ == protocol_type::tcp) {
             // TCP connection lost

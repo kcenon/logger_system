@@ -99,7 +99,9 @@ TEST_F(IntegrationTest, FullPipelineTest) {
     }
     
     // Check metrics
-    auto metrics = logger->get_current_metrics();
+    auto metrics_result = logger->get_current_metrics();
+    ASSERT_TRUE(metrics_result.has_value());
+    const auto& metrics = metrics_result.value();
     EXPECT_GT(metrics.messages_enqueued.load(), 0);
     EXPECT_GT(metrics.get_messages_per_second(), 0);
     
@@ -351,7 +353,9 @@ TEST_F(IntegrationTest, StressTest) {
         end_time - start_time);
     
     // Check performance
-    auto metrics = logger->get_current_metrics();
+    auto metrics_result = logger->get_current_metrics();
+    ASSERT_TRUE(metrics_result.has_value());
+    const auto& metrics = metrics_result.value();
     EXPECT_EQ(metrics.messages_enqueued.load(), thread_count * messages_per_thread);
     
     std::cout << "Stress test completed in " << duration.count() << " ms" << std::endl;

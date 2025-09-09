@@ -37,8 +37,17 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <atomic>
 #include <thread>
 
-// Import interface from thread_system
-#include "logger_interface.h"
+// Conditional include based on build configuration
+#ifdef USE_THREAD_SYSTEM
+    // Use thread_system's interface when available
+    #include <interfaces/logger_interface.h>
+    #include <thread_base/sync/error_handling.h>
+#else
+    // Use local interface in standalone mode
+    #include "logger_interface.h"
+#endif
+
+#include "error_codes.h"
 #include "metrics/logger_metrics.h"
 
 namespace logger_module {
@@ -91,13 +100,15 @@ public:
     /**
      * @brief Add a writer to output logs
      * @param writer Unique pointer to the writer
+     * @return result_void indicating success or error
      */
-    void add_writer(std::unique_ptr<base_writer> writer);
+    result_void add_writer(std::unique_ptr<base_writer> writer);
     
     /**
      * @brief Remove all writers
+     * @return result_void indicating success or error
      */
-    void clear_writers();
+    result_void clear_writers();
     
     /**
      * @brief Set the minimum log level
@@ -113,13 +124,15 @@ public:
     
     /**
      * @brief Start the logger (for async mode)
+     * @return result_void indicating success or error
      */
-    void start();
+    result_void start();
     
     /**
      * @brief Stop the logger
+     * @return result_void indicating success or error
      */
-    void stop();
+    result_void stop();
     
     /**
      * @brief Check if logger is running
@@ -130,8 +143,9 @@ public:
     /**
      * @brief Enable or disable metrics collection
      * @param enable true to enable metrics collection
+     * @return result_void indicating success or error
      */
-    void enable_metrics_collection(bool enable = true);
+    result_void enable_metrics_collection(bool enable = true);
     
     /**
      * @brief Check if metrics collection is enabled
@@ -141,21 +155,22 @@ public:
     
     /**
      * @brief Get current performance metrics
-     * @return Snapshot of current metrics
+     * @return Result containing metrics or error
      */
-    performance_metrics get_current_metrics() const;
+    result<performance_metrics> get_current_metrics() const;
     
     /**
      * @brief Get metrics history for a specific duration
      * @param duration How far back to retrieve metrics
-     * @return Unique pointer to metrics snapshot (for Phase 1, only current snapshot)
+     * @return Result containing metrics snapshot or error
      */
-    std::unique_ptr<performance_metrics> get_metrics_history(std::chrono::seconds duration) const;
+    result<std::unique_ptr<performance_metrics>> get_metrics_history(std::chrono::seconds duration) const;
     
     /**
      * @brief Reset performance metrics
+     * @return result_void indicating success or error
      */
-    void reset_metrics();
+    result_void reset_metrics();
     
     /**
      * @brief Get metrics collector for direct access

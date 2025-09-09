@@ -245,24 +245,29 @@ void demonstrate_security_metrics() {
     logger->enable_metrics_collection(true);
     
     // Get security-related metrics
-    auto metrics = logger->get_current_metrics();
+    auto metrics_result = logger->get_current_metrics();
     
     std::cout << "\nSecurity Logging Metrics:" << std::endl;
-    std::cout << "Total logs: " << metrics.messages_enqueued.load() << std::endl;
-    std::cout << "Messages per second: " << metrics.get_messages_per_second() << std::endl;
-    std::cout << "Average enqueue time: " << metrics.get_avg_enqueue_time_ns() << " ns" << std::endl;
-    
-    // Calculate security event rate (simplified for demo)
-    auto duration = 1;
-    
-    if (duration > 0) {
-        double message_rate = metrics.get_messages_per_second();
-        std::cout << "\nMessage rate: " << message_rate << " msgs/sec" << std::endl;
+    if (metrics_result) {
+        auto& metrics = metrics_result.value();
+        std::cout << "Total logs: " << metrics.messages_enqueued.load() << std::endl;
+        std::cout << "Messages per second: " << metrics.get_messages_per_second() << std::endl;
+        std::cout << "Average enqueue time: " << metrics.get_avg_enqueue_time_ns() << " ns" << std::endl;
         
-        if (message_rate > 1000.0) {
-            logger->log(thread_module::log_level::critical,
-                       "High message rate detected!");
+        // Calculate security event rate (simplified for demo)
+        auto duration = 1;
+        
+        if (duration > 0) {
+            double message_rate = metrics.get_messages_per_second();
+            std::cout << "\nMessage rate: " << message_rate << " msgs/sec" << std::endl;
+        
+            if (message_rate > 1000.0) {
+                logger->log(thread_module::log_level::critical,
+                           "High message rate detected!");
+            }
         }
+    } else {
+        std::cout << "Failed to get metrics" << std::endl;
     }
 }
 

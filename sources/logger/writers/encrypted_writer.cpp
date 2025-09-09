@@ -32,18 +32,23 @@ encrypted_writer::encrypted_writer(std::unique_ptr<base_writer> wrapped_writer,
 
 encrypted_writer::~encrypted_writer() = default;
 
-bool encrypted_writer::write(thread_module::log_level level,
-                            const std::string& message,
-                            const std::string& file,
-                            int line,
-                            const std::string& function,
-                            const std::chrono::system_clock::time_point& timestamp) {
+result_void encrypted_writer::write(thread_module::log_level level,
+                                    const std::string& message,
+                                    const std::string& file,
+                                    int line,
+                                    const std::string& function,
+                                    const std::chrono::system_clock::time_point& timestamp) {
     
     // Format the log entry
     std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
     
     // Encrypt the formatted log
-    std::string encrypted = encrypt_data(formatted);
+    std::string encrypted;
+    try {
+        encrypted = encrypt_data(formatted);
+    } catch (const std::exception& e) {
+        return make_logger_error(logger_error_code::encryption_failed, e.what());
+    }
     
     // Write encrypted data as hex string (for demo purposes)
     // In production, write binary data with proper framing
@@ -59,8 +64,8 @@ bool encrypted_writer::write(thread_module::log_level level,
                                  "", 0, "", timestamp);
 }
 
-void encrypted_writer::flush() {
-    wrapped_writer_->flush();
+result_void encrypted_writer::flush() {
+    return wrapped_writer_->flush();
 }
 
 std::vector<uint8_t> encrypted_writer::generate_key(size_t size) {
@@ -126,6 +131,11 @@ std::string encrypted_writer::encrypt_data(const std::string& plaintext) {
     // DEMO IMPLEMENTATION - NOT CRYPTOGRAPHICALLY SECURE!
     // In production, use OpenSSL, libsodium, or similar
     
+    // Different behavior based on encryption type
+    if (type_ == encryption_type::none) {
+        return plaintext;  // No encryption
+    }
+    
     // Convert string to bytes
     std::vector<uint8_t> data(plaintext.begin(), plaintext.end());
     
@@ -143,7 +153,7 @@ std::string encrypted_writer::encrypt_data(const std::string& plaintext) {
     std::vector<uint8_t> result = iv_;
     result.insert(result.end(), data.begin(), data.end());
     
-    // XOR encrypt (DEMO ONLY)
+    // XOR encrypt (DEMO ONLY) - for both aes_256_cbc and chacha20_poly1305 in demo
     xor_encrypt(result, key_);
     
     return std::string(result.begin(), result.end());

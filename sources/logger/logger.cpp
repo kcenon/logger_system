@@ -39,6 +39,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <sstream>
 #include <iomanip>
 #include <mutex>
+#include <unordered_map>
 
 namespace logger_module {
 
@@ -103,10 +104,11 @@ public:
                 
                 for (auto* writer : routed_writers) {
                     auto write_start = std::chrono::high_resolution_clock::now();
-                    bool success = writer->write(level, message, file, line, function, timestamp);
+                    auto result = writer->write(level, message, file, line, function, timestamp);
                     auto write_end = std::chrono::high_resolution_clock::now();
                     auto write_duration = std::chrono::duration_cast<std::chrono::microseconds>(write_end - write_start);
                     
+                    bool success = !result.has_error();
                     metrics_collector_->record_write(writer->get_name(), message.size(), write_duration, success);
                 }
                 
@@ -127,7 +129,8 @@ public:
                 auto routed_writers = router_->route(level, message, file, line, function, timestamp, named_writers_);
                 
                 for (auto* writer : routed_writers) {
-                    writer->write(level, message, file, line, function, timestamp);
+                    // Ignore result in sync mode for now
+                    (void)writer->write(level, message, file, line, function, timestamp);
                 }
             }
         }
@@ -140,11 +143,16 @@ public:
         
         std::lock_guard<std::mutex> lock(writers_mutex_);
         for (auto& [name, writer] : named_writers_) {
-            writer->flush();
+            // Ignore flush errors for now
+            (void)writer->flush();
         }
     }
     
-    void add_writer(std::unique_ptr<base_writer> writer) {
+    result_void add_writer(std::unique_ptr<base_writer> writer) {
+        if (!writer) {
+            return make_logger_error(logger_error_code::invalid_argument, "Writer is null");
+        }
+        
         std::lock_guard<std::mutex> lock(writers_mutex_);
         
         // Generate a name if not using named_writers
@@ -157,6 +165,8 @@ public:
         // Keep in both collections for backward compatibility
         writers_.push_back(writer.get());
         named_writers_[name] = std::move(writer);
+        
+        return {}; // Success
     }
     
     void add_writer(const std::string& name, std::unique_ptr<base_writer> writer) {
@@ -168,28 +178,31 @@ public:
         named_writers_[name] = std::move(writer);
     }
     
-    void clear_writers() {
+    result_void clear_writers() {
         std::lock_guard<std::mutex> lock(writers_mutex_);
         if (async_ && collector_) {
             collector_->clear_writers();
         }
         writers_.clear();
         named_writers_.clear();
+        return {}; // Success
     }
     
-    void start() {
+    result_void start() {
         if (async_ && collector_ && !running_.exchange(true)) {
             collector_->start();
         }
+        return {}; // Success
     }
     
-    void stop() {
+    result_void stop() {
         if (running_.exchange(false)) {
             if (async_ && collector_) {
                 collector_->stop();
             }
             flush();
         }
+        return {}; // Success
     }
     
     bool is_running() const {
@@ -204,38 +217,44 @@ public:
         return min_level_.load(std::memory_order_acquire);
     }
     
-    void enable_metrics_collection(bool enable) {
+    result_void enable_metrics_collection(bool enable) {
         if (enable && !metrics_collector_) {
             metrics_collector_ = std::make_unique<logger_metrics_collector>();
         }
         metrics_enabled_ = enable;
+        return {}; // Success
     }
     
     bool is_metrics_collection_enabled() const {
         return metrics_enabled_;
     }
     
-    performance_metrics get_current_metrics() const {
+    result<performance_metrics> get_current_metrics() const {
         if (metrics_collector_) {
             return metrics_collector_->get_snapshot();
         }
-        return performance_metrics{};
+        return make_logger_error<performance_metrics>(logger_error_code::metrics_not_available, 
+                                "Metrics collection is not enabled");
     }
     
-    std::unique_ptr<performance_metrics> get_metrics_history(std::chrono::seconds duration) const {
+    result<std::unique_ptr<performance_metrics>> get_metrics_history(std::chrono::seconds duration) const {
         (void)duration;  // For Phase 1, we'll return just the current snapshot
         // For Phase 1, we'll return just the current snapshot
         // In a future phase, we could implement a time-series storage
         if (metrics_collector_) {
             return std::make_unique<performance_metrics>(metrics_collector_->get_snapshot());
         }
-        return nullptr;
+        return make_logger_error<std::unique_ptr<performance_metrics>>(logger_error_code::metrics_not_available,
+                                "Metrics collection is not enabled");
     }
     
-    void reset_metrics() {
+    result_void reset_metrics() {
         if (metrics_collector_) {
             metrics_collector_->reset();
+            return {}; // Success
         }
+        return make_logger_error(logger_error_code::metrics_not_available,
+                                "Metrics collection is not enabled");
     }
     
     logger_metrics_collector* get_metrics_collector() {
@@ -313,12 +332,12 @@ void logger::flush() {
     pimpl_->flush();
 }
 
-void logger::add_writer(std::unique_ptr<base_writer> writer) {
-    pimpl_->add_writer(std::move(writer));
+result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
+    return pimpl_->add_writer(std::move(writer));
 }
 
-void logger::clear_writers() {
-    pimpl_->clear_writers();
+result_void logger::clear_writers() {
+    return pimpl_->clear_writers();
 }
 
 void logger::set_min_level(thread_module::log_level level) {
@@ -329,36 +348,36 @@ thread_module::log_level logger::get_min_level() const {
     return pimpl_->get_min_level();
 }
 
-void logger::start() {
-    pimpl_->start();
+result_void logger::start() {
+    return pimpl_->start();
 }
 
-void logger::stop() {
-    pimpl_->stop();
+result_void logger::stop() {
+    return pimpl_->stop();
 }
 
 bool logger::is_running() const {
     return pimpl_->is_running();
 }
 
-void logger::enable_metrics_collection(bool enable) {
-    pimpl_->enable_metrics_collection(enable);
+result_void logger::enable_metrics_collection(bool enable) {
+    return pimpl_->enable_metrics_collection(enable);
 }
 
 bool logger::is_metrics_collection_enabled() const {
     return pimpl_->is_metrics_collection_enabled();
 }
 
-performance_metrics logger::get_current_metrics() const {
+result<performance_metrics> logger::get_current_metrics() const {
     return pimpl_->get_current_metrics();
 }
 
-std::unique_ptr<performance_metrics> logger::get_metrics_history(std::chrono::seconds duration) const {
+result<std::unique_ptr<performance_metrics>> logger::get_metrics_history(std::chrono::seconds duration) const {
     return pimpl_->get_metrics_history(duration);
 }
 
-void logger::reset_metrics() {
-    pimpl_->reset_metrics();
+result_void logger::reset_metrics() {
+    return pimpl_->reset_metrics();
 }
 
 logger_metrics_collector* logger::get_metrics_collector() {

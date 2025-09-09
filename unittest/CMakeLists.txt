@@ -22,6 +22,10 @@ if(UNIX AND NOT WIN32)
   # Validates async log collection, buffering, and thread safety
   add_subdirectory(collectors_test)
   
+  # Configuration tests
+  # Validates configuration validation and builder pattern
+  add_subdirectory(config_test)
+  
 else()
   message(STATUS "Unit tests are disabled on ${CMAKE_SYSTEM_NAME}")
   message(STATUS "Unit tests are only supported on Linux and macOS platforms")

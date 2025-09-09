@@ -54,7 +54,6 @@ docs/latex/
 
 # Benchmark results
 benchmark_results/
-*.json
 
 # Coverage
 *.gcda

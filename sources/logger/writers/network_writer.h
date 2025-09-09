@@ -13,6 +13,8 @@ All rights reserved.
 #include <condition_variable>
 #include <atomic>
 #include <memory>
+#include <mutex>
+#include <cstdint>
 
 namespace logger_module {
 
@@ -49,17 +51,17 @@ public:
     /**
      * @brief Write log entry
      */
-    bool write(thread_module::log_level level,
-               const std::string& message,
-               const std::string& file,
-               int line,
-               const std::string& function,
-               const std::chrono::system_clock::time_point& timestamp) override;
+    result_void write(thread_module::log_level level,
+                      const std::string& message,
+                      const std::string& file,
+                      int line,
+                      const std::string& function,
+                      const std::chrono::system_clock::time_point& timestamp) override;
     
     /**
      * @brief Flush pending logs
      */
-    void flush() override;
+    result_void flush() override;
     
     /**
      * @brief Get writer name
