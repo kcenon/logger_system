@@ -12,6 +12,7 @@ All rights reserved.
     #include <ws2tcpip.h>
     #pragma comment(lib, "ws2_32.lib")
     typedef int socklen_t;
+    typedef SSIZE_T ssize_t;  // Define ssize_t for Windows
     #define close closesocket
 #else
     #include <sys/socket.h>
