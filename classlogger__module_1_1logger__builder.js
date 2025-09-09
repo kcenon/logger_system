@@ -13,6 +13,7 @@ var classlogger__module_1_1logger__builder =
     [ "validate", "classlogger__module_1_1logger__builder.html#a962b213b1cc4a72c99238d6d6316b9d9", null ],
     [ "with_async", "classlogger__module_1_1logger__builder.html#ad1a2d536ff57115f1d2e47888d72e22f", null ],
     [ "with_batch_size", "classlogger__module_1_1logger__builder.html#a27966331ac6cdcc4cbee032c2d93774a", null ],
+    [ "with_batch_writing", "classlogger__module_1_1logger__builder.html#ace497899700799575eb0f19bba51ee4f", null ],
     [ "with_buffer_size", "classlogger__module_1_1logger__builder.html#a063f7ab7a982b21a64174a2d806712d3", null ],
     [ "with_config", "classlogger__module_1_1logger__builder.html#afe40a2edab1e7c1cc945c71c2cceb1e9", null ],
     [ "with_crash_handler", "classlogger__module_1_1logger__builder.html#a22cbed5f0baaff8b8b470f9d9ddd7613", null ],

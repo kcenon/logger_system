@@ -14,13 +14,14 @@ var searchData=
   ['health_5fstatus_11',['health_status',['../namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47d',1,'logger_module']]],
   ['health_5fstatus_5fto_5fstring_12',['health_status_to_string',['../namespacelogger__module.html#a54fa52d17bdd34469aa237a40d97c642',1,'logger_module::health_status_to_string()'],['../classlogger__module_1_1health__check__utils.html#a6a14f9dd8b4d4cc8b8d32eb515ee5ee8',1,'logger_module::health_check_utils::health_status_to_string()']]],
   ['healthy_13',['healthy',['../namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47da741839f346d6e8126ae38ee76a96fd12',1,'logger_module']]],
-  ['helpers_14',['Macros and Helpers',['../md_docs_2api-reference.html#autotoc_md130',1,'']]],
-  ['hierarchy_15',['Interface Hierarchy',['../md_ARCHITECTURE.html#autotoc_md67',1,'']]],
-  ['high_20performance_20writer_16',['Custom High-Performance Writer',['../md_docs_2performance.html#autotoc_md222',1,'']]],
-  ['high_5fperformance_17',['high_performance',['../classlogger__module_1_1template__strategy.html#ac4382ac509db7650c8f94dafc438ed2ba7893ea136984a5b4ccdd1a9374b9b15f',1,'logger_module::template_strategy::high_performance'],['../structlogger__module_1_1logger__config.html#abe0539be0d556d6a8517bcf28588f628',1,'logger_module::logger_config::high_performance()']]],
-  ['histogram_18',['histogram',['../namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565dabdfb01f3ea1f6351d0d53d79625c347f',1,'logger_module']]],
-  ['host_19',['HOST',['../structlogger__module_1_1standard__fields.html#a5259be9e031ec5be25cd66a43f4b50b6',1,'logger_module::standard_fields']]],
-  ['hot_20paths_20',['1. Synchronous I/O in Hot Paths',['../md_docs_2performance.html#autotoc_md225',1,'']]],
-  ['hourly_21',['hourly',['../classlogger__module_1_1rotating__file__writer.html#a752f54d17b4949a3b0150f6e785e6c66a745fd0ea7f576f350a0eed4b8c48a8e2',1,'logger_module::rotating_file_writer']]],
-  ['hub_22',['4. integrated_thread_system (Integration Hub)',['../md_ARCHITECTURE.html#autotoc_md62',1,'']]]
+  ['heap_5fbytes_5fused_14',['heap_bytes_used',['../structlogger__module_1_1small__string_1_1memory__stats.html#a59ebadbc2bbb4979e17bc28bf9574700',1,'logger_module::small_string::memory_stats']]],
+  ['helpers_15',['Macros and Helpers',['../md_docs_2api-reference.html#autotoc_md130',1,'']]],
+  ['hierarchy_16',['Interface Hierarchy',['../md_ARCHITECTURE.html#autotoc_md67',1,'']]],
+  ['high_20performance_20writer_17',['Custom High-Performance Writer',['../md_docs_2performance.html#autotoc_md222',1,'']]],
+  ['high_5fperformance_18',['high_performance',['../structlogger__module_1_1logger__config.html#abe0539be0d556d6a8517bcf28588f628',1,'logger_module::logger_config::high_performance()'],['../classlogger__module_1_1template__strategy.html#ac4382ac509db7650c8f94dafc438ed2ba7893ea136984a5b4ccdd1a9374b9b15f',1,'logger_module::template_strategy::high_performance']]],
+  ['histogram_19',['histogram',['../namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565dabdfb01f3ea1f6351d0d53d79625c347f',1,'logger_module']]],
+  ['host_20',['HOST',['../structlogger__module_1_1standard__fields.html#a5259be9e031ec5be25cd66a43f4b50b6',1,'logger_module::standard_fields']]],
+  ['hot_20paths_21',['1. Synchronous I/O in Hot Paths',['../md_docs_2performance.html#autotoc_md225',1,'']]],
+  ['hourly_22',['hourly',['../classlogger__module_1_1rotating__file__writer.html#a752f54d17b4949a3b0150f6e785e6c66a745fd0ea7f576f350a0eed4b8c48a8e2',1,'logger_module::rotating_file_writer']]],
+  ['hub_23',['4. integrated_thread_system (Integration Hub)',['../md_ARCHITECTURE.html#autotoc_md62',1,'']]]
 ];

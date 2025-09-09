@@ -406,7 +406,7 @@ Simple Examples</h1>
 <div class="line">        </div>
 <div class="line">        <span class="comment">// Bind parameters</span></div>
 <div class="line">        <a class="code hl_function" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">sqlite3_bind_text</a>(insert_stmt_, 1, time_buf, -1, SQLITE_TRANSIENT);</div>
-<div class="line">        <a class="code hl_function" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">sqlite3_bind_text</a>(insert_stmt_, 2, <a class="code hl_function" href="classlogger__module_1_1base__writer.html#a61120b14d44d5194e2db5906477b9f86">level_to_string</a>(level).<a class="code hl_function" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">c_str</a>(), -1, SQLITE_TRANSIENT);</div>
+<div class="line">        <a class="code hl_function" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">sqlite3_bind_text</a>(insert_stmt_, 2, <a class="code hl_function" href="classlogger__module_1_1base__writer.html#a61120b14d44d5194e2db5906477b9f86">level_to_string</a>(level).c_str(), -1, SQLITE_TRANSIENT);</div>
 <div class="line">        <a class="code hl_function" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">sqlite3_bind_text</a>(insert_stmt_, 3, message.c_str(), -1, SQLITE_TRANSIENT);</div>
 <div class="line">        <a class="code hl_function" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">sqlite3_bind_text</a>(insert_stmt_, 4, file.c_str(), -1, SQLITE_TRANSIENT);</div>
 <div class="line">        <a class="code hl_function" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">sqlite3_bind_int</a>(insert_stmt_, 5, line);</div>

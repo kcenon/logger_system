@@ -3,8 +3,10 @@ var hierarchy =
     [ "logger_module::adaptive_backpressure::adaptation_stats", "structlogger__module_1_1adaptive__backpressure_1_1adaptation__stats.html", null ],
     [ "logger_module::adaptive_backpressure", "classlogger__module_1_1adaptive__backpressure.html", null ],
     [ "logger_module::log_analyzer::alert_rule", "structlogger__module_1_1log__analyzer_1_1alert__rule.html", null ],
+    [ "logger_module::batch_writer::batch_stats", "structlogger__module_1_1batch__writer_1_1batch__stats.html", null ],
     [ "logger_module::buffer_health_info", "structlogger__module_1_1buffer__health__info.html", null ],
     [ "logger_module::adaptive_backpressure::config", "structlogger__module_1_1adaptive__backpressure_1_1config.html", null ],
+    [ "logger_module::batch_writer::config", "structlogger__module_1_1batch__writer_1_1config.html", null ],
     [ "logger_module::config_strategy_factory", "classlogger__module_1_1config__strategy__factory.html", null ],
     [ "logger_module::config_strategy_interface", "classlogger__module_1_1config__strategy__interface.html", [
       [ "logger_module::composite_strategy", "classlogger__module_1_1composite__strategy.html", null ],
@@ -54,6 +56,7 @@ var hierarchy =
     [ "logger_module::log_sink_interface", "classlogger__module_1_1log__sink__interface.html", null ],
     [ "logger_module::log_writer_interface", "classlogger__module_1_1log__writer__interface.html", [
       [ "logger_module::base_writer", "classlogger__module_1_1base__writer.html", [
+        [ "logger_module::batch_writer", "classlogger__module_1_1batch__writer.html", null ],
         [ "logger_module::console_writer", "classlogger__module_1_1console__writer.html", null ],
         [ "logger_module::encrypted_writer", "classlogger__module_1_1encrypted__writer.html", null ],
         [ "logger_module::file_writer", "classlogger__module_1_1file__writer.html", [
@@ -69,6 +72,7 @@ var hierarchy =
     ] ],
     [ "logger_module::logger_metrics_collector", "classlogger__module_1_1logger__metrics__collector.html", null ],
     [ "thread_module::logger_registry", "classthread__module_1_1logger__registry.html", null ],
+    [ "logger_module::small_string< SSO_SIZE >::memory_stats", "structlogger__module_1_1small__string_1_1memory__stats.html", null ],
     [ "logger_module::metric_value", "structlogger__module_1_1metric__value.html", null ],
     [ "logger_module::monitoring_data", "classlogger__module_1_1monitoring__data.html", null ],
     [ "logger_module::monitoring_factory", "classlogger__module_1_1monitoring__factory.html", null ],
@@ -96,6 +100,9 @@ var hierarchy =
     [ "logger_module::log_sanitizer::sanitization_rule", "structlogger__module_1_1log__sanitizer_1_1sanitization__rule.html", null ],
     [ "logger_module::scoped_health_registration", "classlogger__module_1_1scoped__health__registration.html", null ],
     [ "logger_module::log_server::server_stats", "structlogger__module_1_1log__server_1_1server__stats.html", null ],
+    [ "logger_module::small_string< SSO_SIZE >", "classlogger__module_1_1small__string.html", null ],
+    [ "logger_module::small_string< 128 >", "classlogger__module_1_1small__string.html", null ],
+    [ "logger_module::small_string< 256 >", "classlogger__module_1_1small__string.html", null ],
     [ "logger_module::source_location", "structlogger__module_1_1source__location.html", null ],
     [ "logger_module::log_aggregator::source_stats", "structlogger__module_1_1log__aggregator_1_1source__stats.html", null ],
     [ "logger_module::standard_fields", "structlogger__module_1_1standard__fields.html", null ],

@@ -121,6 +121,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a27966331ac6cdcc4cbee032c2d93774a" id="r_a27966331ac6cdcc4cbee032c2d93774a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a27966331ac6cdcc4cbee032c2d93774a">with_batch_size</a> (std::size_t size)</td></tr>
 <tr class="memdesc:a27966331ac6cdcc4cbee032c2d93774a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set batch size for processing.  <br /></td></tr>
 <tr class="separator:a27966331ac6cdcc4cbee032c2d93774a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace497899700799575eb0f19bba51ee4f" id="r_ace497899700799575eb0f19bba51ee4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ace497899700799575eb0f19bba51ee4f">with_batch_writing</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enable</a>=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a>)</td></tr>
+<tr class="memdesc:ace497899700799575eb0f19bba51ee4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable batch writing for writers.  <br /></td></tr>
+<tr class="separator:ace497899700799575eb0f19bba51ee4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e01bcd70c10c4ac8bcfdf20f06b9070" id="r_a6e01bcd70c10c4ac8bcfdf20f06b9070"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a6e01bcd70c10c4ac8bcfdf20f06b9070">with_flush_interval</a> (std::chrono::milliseconds <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">interval</a>)</td></tr>
 <tr class="memdesc:a6e01bcd70c10c4ac8bcfdf20f06b9070"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set flush interval.  <br /></td></tr>
 <tr class="separator:a6e01bcd70c10c4ac8bcfdf20f06b9070"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -604,6 +607,41 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">size</td><td>Batch size </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+
+</div>
+</div>
+<a id="ace497899700799575eb0f19bba51ee4f" name="ace497899700799575eb0f19bba51ee4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace497899700799575eb0f19bba51ee4f">&#9670;&#160;</a></span>with_batch_writing()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_batch_writing </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
+          <td class="paramname"><em>enable</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a></code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable batch writing for writers. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enable</td><td>Enable/disable batch writing </td></tr>
   </table>
   </dd>
 </dl>

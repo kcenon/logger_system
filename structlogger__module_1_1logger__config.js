@@ -10,6 +10,7 @@ var structlogger__module_1_1logger__config =
     [ "async", "structlogger__module_1_1logger__config.html#aeecbcdf4eb187ee0a29ef09390620544", null ],
     [ "batch_size", "structlogger__module_1_1logger__config.html#ad295264a9933eb2bc998b4a589e6a144", null ],
     [ "buffer_size", "structlogger__module_1_1logger__config.html#a0050106ba7ccd18b60fbcd04acbf5b41", null ],
+    [ "enable_batch_writing", "structlogger__module_1_1logger__config.html#a4b7df7d5d68033eb553127c84743949d", null ],
     [ "enable_color_output", "structlogger__module_1_1logger__config.html#a381b73903b9499b53cc7b2ef67ad5900", null ],
     [ "enable_compression", "structlogger__module_1_1logger__config.html#a6370b0f4e373435594d95c240b307066", null ],
     [ "enable_crash_handler", "structlogger__module_1_1logger__config.html#afd00c4c34224069ee6c7e47be3e60d89", null ],

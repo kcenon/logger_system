@@ -11,10 +11,10 @@
 <!-- Node0 -->
 <g id="Node000000" class="node">
 <title>Node0</title>
-<g id="a_Node000000"><a xlink:href="classlogger__module_1_1log__server.html" target="_top" xlink:title="Server that receives logs from network writers.">
+<g id="a_Node000000"><a xlink:href="classlogger__module_1_1log__sanitizer.html" target="_top" xlink:title="Sanitizes sensitive information from log messages.">
 <polygon fill="white" stroke="#666666" points="110,-30 0,-30 0,0 110,0 110,-30"/>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">logger_module::log</text>
-<text text-anchor="middle" x="55" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_server</text>
+<text text-anchor="middle" x="55" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_sanitizer</text>
 </a>
 </g>
 </g>

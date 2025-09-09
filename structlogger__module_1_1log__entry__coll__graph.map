@@ -1,5 +1,7 @@
 <map id="logger_module::log_entry" name="logger_module::log_entry">
-<area shape="rect" id="Node000001" title="Represents a single log entry." alt="" coords="5,93,152,133"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="38,5,119,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,44,81,93,76,93,76,44"/>
+<area shape="rect" id="Node000001" title="Represents a single log entry." alt="" coords="46,108,193,148"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,13,87,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,48,108,106,103,109,60,51"/>
+<area shape="rect" id="Node000003" href="$classlogger__module_1_1small__string.html" title=" " alt="" coords="111,5,274,45"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="173,58,135,110,131,106,169,55"/>
 </map>

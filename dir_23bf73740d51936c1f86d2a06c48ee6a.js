@@ -1,6 +1,8 @@
 var dir_23bf73740d51936c1f86d2a06c48ee6a =
 [
     [ "base_writer.h", "base__writer_8h.html", "base__writer_8h" ],
+    [ "batch_writer.cpp", "batch__writer_8cpp.html", "batch__writer_8cpp" ],
+    [ "batch_writer.h", "batch__writer_8h.html", "batch__writer_8h" ],
     [ "console_writer.cpp", "console__writer_8cpp.html", null ],
     [ "console_writer.h", "console__writer_8h.html", "console__writer_8h" ],
     [ "encrypted_writer.cpp", "encrypted__writer_8cpp.html", null ],

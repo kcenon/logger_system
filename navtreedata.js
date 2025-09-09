@@ -302,14 +302,15 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classlogger__module_1_1di__container__interface.html#a43f9942813e7c0f1f07b6b56c5594d2c",
-"classlogger__module_1_1lightweight__di__container.html#a0c3226be63cf3fe64a5708b736cd3624",
-"classlogger__module_1_1logger.html#acb40cd515416089f1ca6db2fbf1fd287",
-"classlogger__module_1_1performance__tuning__strategy.html#a818f4de16d8a1b5e8d98b7e9cb09cbfb",
-"dir_45a02bcc868d58485d680c85bfaf465d.html",
-"md_ARCHITECTURE.html#autotoc_md82",
-"overflow__policy_8h.html#a613f507608bacdad0a4ccde083bf1d2ea4d200fce73a8e1cc965cfc2c43343824",
-"structlogger__module_1_1logger__config.html#ad295264a9933eb2bc998b4a589e6a144"
+"classlogger__module_1_1console__writer.html#ae9ff291bb306ff666955a81786df886b",
+"classlogger__module_1_1health__check__system_1_1impl.html#ae491d9c794362d576f4a9b7137f1ed3a",
+"classlogger__module_1_1logger.html#a8f32ddf025891101229e7a934060b0b5",
+"classlogger__module_1_1overflow__queue.html#a00bc23c9a62d2498e40a2be1887edc34",
+"classlogger__module_1_1structured__logger.html#a413f2aef8e5c09629b8134fa98a0ab0f",
+"lightweight__di__container_8h_source.html",
+"monitoring__interface_8h.html#afda0cc0728dba603411e5fa38cc2c47d",
+"structlogger__module_1_1log__analyzer_1_1time__window__stats.html#af841f4b800c3cd046afb1469d9a91c69",
+"structlogger__module_1_1queue__health__info.html#a3c8a5982e3323353055d8ebed886d801"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

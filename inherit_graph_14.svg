@@ -11,10 +11,10 @@
 <!-- Node0 -->
 <g id="Node000000" class="node">
 <title>Node0</title>
-<g id="a_Node000000"><a xlink:href="classlogger__module_1_1health__check__utils.html" target="_top" xlink:title="Health check utilities.">
+<g id="a_Node000000"><a xlink:href="classlogger__module_1_1health__check__system.html" target="_top" xlink:title="Comprehensive health check system for logger components.">
 <polygon fill="white" stroke="#666666" points="126,-30 0,-30 0,0 126,0 126,-30"/>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">logger_module::health</text>
-<text text-anchor="middle" x="63" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_check_utils</text>
+<text text-anchor="middle" x="63" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_check_system</text>
 </a>
 </g>
 </g>

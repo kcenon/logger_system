@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('classlogger__module_1_1base__writer.ht
 <div class="dynheader">
 Inheritance diagram for logger_module::base_writer:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classlogger__module_1_1base__writer__inherit__graph.svg" width="831" height="243"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classlogger__module_1_1base__writer__inherit__graph.svg" width="831" height="307"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for logger_module::base_writer:</div>
@@ -213,7 +213,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classlogger__module_1_1log__writer__interface.html#a1c55387feecd6c3736c801c5c241f5c1">logger_module::log_writer_interface</a>.</p>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1console__writer.html#ae9ff291bb306ff666955a81786df886b">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#ad3b9529e7afa5698f09103438b876781">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#a1a5839765576baf3ce9f64cb98b12472">logger_module::file_writer</a>, and <a class="el" href="classlogger__module_1_1network__writer.html#afdc8daeaa343b9606a735585e2386549">logger_module::network_writer</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1batch__writer.html#a36d0b1585f2ff8352b396f262ac9627d">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#ae9ff291bb306ff666955a81786df886b">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#ad3b9529e7afa5698f09103438b876781">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#a1a5839765576baf3ce9f64cb98b12472">logger_module::file_writer</a>, and <a class="el" href="classlogger__module_1_1network__writer.html#afdc8daeaa343b9606a735585e2386549">logger_module::network_writer</a>.</p>
 
 </div>
 </div>
@@ -319,7 +319,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classlogger__module_1_1log__writer__interface.html#a9a59e75435e22f6a1bc8a5b466b56f51">logger_module::log_writer_interface</a>.</p>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1console__writer.html#a93c2a67e504814a0d6bd68729afc4918">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#a997a92e2beed9924e63525d5f521e5a6">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#a9513976717dc1f6efe1eebb59e18b712">logger_module::file_writer</a>, <a class="el" href="classlogger__module_1_1network__writer.html#a2722f0df78d2fd3e08af1d8b69453707">logger_module::network_writer</a>, and <a class="el" href="classlogger__module_1_1rotating__file__writer.html#ac7a68dc3fc61c829ae11dc1eaa75e276">logger_module::rotating_file_writer</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1batch__writer.html#a1ed45e5aab439715f9812a2f20bada6c">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#a93c2a67e504814a0d6bd68729afc4918">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#a997a92e2beed9924e63525d5f521e5a6">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#a9513976717dc1f6efe1eebb59e18b712">logger_module::file_writer</a>, <a class="el" href="classlogger__module_1_1network__writer.html#a2722f0df78d2fd3e08af1d8b69453707">logger_module::network_writer</a>, and <a class="el" href="classlogger__module_1_1rotating__file__writer.html#ac7a68dc3fc61c829ae11dc1eaa75e276">logger_module::rotating_file_writer</a>.</p>
 
 </div>
 </div>
@@ -350,6 +350,8 @@ Protected Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true if writer is healthy and operational </dd></dl>
 
 <p>Implements <a class="el" href="classlogger__module_1_1log__writer__interface.html#a1d937bfc940a7d5d1dcd254d5c100e5d">logger_module::log_writer_interface</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classlogger__module_1_1batch__writer.html#a88275f51090a6711395ba34179fe166b">logger_module::batch_writer</a>.</p>
 
 </div>
 </div>
@@ -594,7 +596,7 @@ Protected Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classlogger__module_1_1result__void.html">result_void</a> indicating success or error </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1console__writer.html#a25767649fc15ef6abac19148014fb438">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#a7e538bc5e9dea04d61ff02ae4a03c6b7">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#af3a884277ddddf041b910f5f71a782c9">logger_module::file_writer</a>, <a class="el" href="classlogger__module_1_1network__writer.html#a3082e3824d208fa1e8ebcd3f2289774f">logger_module::network_writer</a>, and <a class="el" href="classlogger__module_1_1rotating__file__writer.html#afbe1b2bd5e9a697ca524d59ea56c1a3d">logger_module::rotating_file_writer</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1batch__writer.html#a8561880fb353e678cd5f9e4238a4cb39">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#a25767649fc15ef6abac19148014fb438">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#a7e538bc5e9dea04d61ff02ae4a03c6b7">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#af3a884277ddddf041b910f5f71a782c9">logger_module::file_writer</a>, <a class="el" href="classlogger__module_1_1network__writer.html#a3082e3824d208fa1e8ebcd3f2289774f">logger_module::network_writer</a>, and <a class="el" href="classlogger__module_1_1rotating__file__writer.html#afbe1b2bd5e9a697ca524d59ea56c1a3d">logger_module::rotating_file_writer</a>.</p>
 
 </div>
 </div>

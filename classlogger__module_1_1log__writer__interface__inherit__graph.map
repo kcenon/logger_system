@@ -1,15 +1,17 @@
 <map id="logger_module::log_writer_interface" name="logger_module::log_writer_interface">
-<area shape="rect" id="Node000001" title="Interface for log writers." alt="" coords="5,101,152,141"/>
-<area shape="rect" id="Node000002" href="$classlogger__module_1_1base__writer.html" title="Base class for all log writers." alt="" coords="200,101,359,141"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,119,200,119,200,124,165,124"/>
-<area shape="rect" id="Node000003" href="$classlogger__module_1_1console__writer.html" title="Console writer that outputs logs to stdout/stderr." alt="" coords="414,5,591,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="328,92,406,55,437,43,439,48,408,60,330,97"/>
-<area shape="rect" id="Node000004" href="$classlogger__module_1_1encrypted__writer.html" title="Writer that encrypts log data before passing to another writer." alt="" coords="407,69,599,109"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="372,105,406,100,407,106,373,111"/>
-<area shape="rect" id="Node000005" href="$classlogger__module_1_1file__writer.html" title="Basic file writer for logging to files." alt="" coords="429,133,576,173"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="373,132,429,140,429,145,372,137"/>
-<area shape="rect" id="Node000007" href="$classlogger__module_1_1network__writer.html" title="Sends logs over network (TCP/UDP)" alt="" coords="413,197,593,237"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="330,146,408,183,439,195,437,200,406,188,328,150"/>
-<area shape="rect" id="Node000006" href="$classlogger__module_1_1rotating__file__writer.html" title="File writer with rotation support based on size or time." alt="" coords="647,133,825,173"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="590,151,646,151,646,156,590,156"/>
+<area shape="rect" id="Node000001" title="Interface for log writers." alt="" coords="5,133,152,173"/>
+<area shape="rect" id="Node000002" href="$classlogger__module_1_1base__writer.html" title="Base class for all log writers." alt="" coords="200,133,359,173"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,151,200,151,200,156,165,156"/>
+<area shape="rect" id="Node000003" href="$classlogger__module_1_1batch__writer.html" title="Batch writer that accumulates log entries and writes them in batches." alt="" coords="421,5,584,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="311,122,354,88,405,55,432,43,434,48,408,60,357,92,314,126"/>
+<area shape="rect" id="Node000004" href="$classlogger__module_1_1console__writer.html" title="Console writer that outputs logs to stdout/stderr." alt="" coords="414,69,591,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="362,127,432,107,433,112,364,132"/>
+<area shape="rect" id="Node000005" href="$classlogger__module_1_1encrypted__writer.html" title="Writer that encrypts log data before passing to another writer." alt="" coords="407,133,599,173"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="373,151,407,151,407,156,373,156"/>
+<area shape="rect" id="Node000006" href="$classlogger__module_1_1file__writer.html" title="Basic file writer for logging to files." alt="" coords="429,197,576,237"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="364,175,433,195,432,200,362,180"/>
+<area shape="rect" id="Node000008" href="$classlogger__module_1_1network__writer.html" title="Sends logs over network (TCP/UDP)" alt="" coords="413,261,593,301"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="314,180,357,215,408,247,434,259,432,264,405,252,354,219,311,185"/>
+<area shape="rect" id="Node000007" href="$classlogger__module_1_1rotating__file__writer.html" title="File writer with rotation support based on size or time." alt="" coords="647,197,825,237"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="590,215,646,215,646,220,590,220"/>
 </map>

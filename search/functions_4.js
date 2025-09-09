@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['empty_0',['empty',['../classlogger__module_1_1overflow__queue.html#a39727f3f5dea0fab3db11ade1bc7901a',1,'logger_module::overflow_queue']]],
+  ['empty_0',['empty',['../classlogger__module_1_1small__string.html#a13809e7312c7325fbff7a30e6e2a6bf2',1,'logger_module::small_string::empty()'],['../classlogger__module_1_1overflow__queue.html#a39727f3f5dea0fab3db11ade1bc7901a',1,'logger_module::overflow_queue::empty()']]],
   ['enable_5fdi_1',['enable_di',['../classlogger__module_1_1logger.html#a478e6f576f2e3e4dc08b474d51f6b91c',1,'logger_module::logger']]],
   ['enable_5fmetrics_5fcollection_2',['enable_metrics_collection',['../classlogger__module_1_1logger_1_1impl.html#a11ead2e9c52b29c4c19c8cc0408a91e1',1,'logger_module::logger::impl::enable_metrics_collection()'],['../classlogger__module_1_1logger.html#a533972fa86c3b79f28b0bc3bec4e7cf8',1,'logger_module::logger::enable_metrics_collection(bool enable=true)']]],
   ['enable_5fmonitoring_3',['enable_monitoring',['../classlogger__module_1_1logger.html#a7ff15259dd4843742d0a3a33d14d5a6b',1,'logger_module::logger']]],
