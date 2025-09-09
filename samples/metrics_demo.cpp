@@ -125,8 +125,12 @@ int main() {
     std::this_thread::sleep_for(std::chrono::seconds(1));
     
     // Get and display metrics
-    auto metrics = logger->get_current_metrics();
-    print_metrics(metrics);
+    auto metrics_result = logger->get_current_metrics();
+    if (metrics_result) {
+        print_metrics(metrics_result.value());
+    } else {
+        std::cerr << "Failed to get metrics" << std::endl;
+    }
     
     // Test structured logging
     test_structured_logging();
