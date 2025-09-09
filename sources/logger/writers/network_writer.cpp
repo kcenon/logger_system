@@ -22,6 +22,7 @@ All rights reserved.
 #endif
 
 #include <cstring>
+#include <cerrno>
 #include <sstream>
 #include <iomanip>
 #include <iostream>

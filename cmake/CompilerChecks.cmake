@@ -1,5 +1,5 @@
 # CompilerChecks.cmake for logger_system
-# Based on thread_system's robust compiler checking system
+# Enhanced version with Windows CI compatibility
 
 ##################################################
 # Minimum Compiler Version Requirements
@@ -68,7 +68,9 @@ function(configure_platform_settings)
         add_definitions(-DWIN32_LEAN_AND_MEAN -DNOMINMAX)
         if(MSVC)
             # MSVC-specific warnings and optimizations
-            add_compile_options(/W4 /permissive-)
+            add_compile_options(/W4 /permissive- /Zc:__cplusplus)
+            # Enable proper C++20 standard reporting
+            add_compile_options(/std:c++20)
         endif()
     elseif(APPLE)
         # macOS-specific settings
@@ -150,55 +152,198 @@ function(check_required_headers)
 endfunction()
 
 ##################################################
-# C++20 Feature Checks
+# C++20 Feature Checks (Enhanced for Windows CI)
 ##################################################
 function(check_cpp_features)
     include(CheckCXXSourceCompiles)
     
+    # Save original settings
+    set(ORIGINAL_CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS})
+    set(ORIGINAL_CMAKE_REQUIRED_LIBRARIES ${CMAKE_REQUIRED_LIBRARIES})
+    set(ORIGINAL_CMAKE_TRY_COMPILE_TARGET_TYPE ${CMAKE_TRY_COMPILE_TARGET_TYPE})
+    
+    # Windows-specific configuration (for both CI and local builds)
+    if(WIN32)
+        message(STATUS "Configuring Windows-specific C++ feature detection")
+        
+        # Always use static library for try_compile on Windows to avoid linking issues
+        set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY" CACHE STRING "" FORCE)
+        
+        if(MSVC)
+            # MSVC needs these flags for proper C++20 feature detection
+            set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} /std:c++20 /permissive- /Zc:__cplusplus /EHsc")
+            
+            # Add Windows SDK libraries if needed
+            if(DEFINED ENV{WindowsSdkDir})
+                message(STATUS "Windows SDK found at: $ENV{WindowsSdkDir}")
+            endif()
+            
+            # For GitHub Actions Windows runners
+            if(DEFINED ENV{GITHUB_ACTIONS})
+                message(STATUS "GitHub Actions Windows runner detected")
+                # GitHub Actions specific workarounds
+                set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} /bigobj")
+            endif()
+            
+        elseif(MINGW)
+            # MinGW needs pthread and filesystem libraries
+            set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -std=c++20 -pthread")
+            set(CMAKE_REQUIRED_LIBRARIES "${CMAKE_REQUIRED_LIBRARIES} -lstdc++fs -lwinpthread")
+            message(STATUS "MinGW configuration applied for feature detection")
+        endif()
+    elseif(UNIX)
+        # Unix/Linux configuration
+        if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+            set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -std=c++20")
+        endif()
+    endif()
+    
+    # CI environment detection
+    if(DEFINED ENV{CI} OR DEFINED ENV{GITHUB_ACTIONS})
+        message(STATUS "CI environment detected - applying additional workarounds")
+    endif()
+    
     # Check for C++20 concepts
-    check_cxx_source_compiles("
-        #include <concepts>
-        template<typename T>
-        concept Incrementable = requires(T t) {
-            ++t;
-        };
-        int main() { return 0; }
-    " HAS_CONCEPTS)
+    message(STATUS "Checking for C++20 concepts...")
+    if(MSVC AND MSVC_VERSION LESS 1923)
+        message(STATUS "⚠️  MSVC version too old for concepts (need VS 2019 16.3+)")
+        set(HAS_CONCEPTS FALSE)
+    else()
+        check_cxx_source_compiles("
+            #include <concepts>
+            template<typename T>
+            concept Incrementable = requires(T t) {
+                ++t;
+            };
+            template<Incrementable T>
+            void increment(T& t) { ++t; }
+            int main() { 
+                int x = 0;
+                increment(x);
+                return 0; 
+            }
+        " HAS_CONCEPTS)
+    endif()
     
     if(HAS_CONCEPTS)
         message(STATUS "✅ C++20 concepts support detected")
+        add_compile_definitions(HAS_CONCEPTS=1)
     else()
-        message(STATUS "⚠️ C++20 concepts not fully supported")
+        message(STATUS "⚠️  C++20 concepts not fully supported")
     endif()
     
     # Check for std::format
-    check_cxx_source_compiles("
-        #include <format>
-        int main() {
-            auto s = std::format(\"Hello, {}!\", \"World\");
-            return 0;
-        }
-    " HAS_STD_FORMAT)
+    message(STATUS "Checking for std::format...")
+    if(MSVC AND MSVC_VERSION LESS 1929)
+        message(STATUS "⚠️  MSVC version too old for std::format (need VS 2019 16.10+)")
+        set(HAS_STD_FORMAT FALSE)
+    else()
+        check_cxx_source_compiles("
+            #include <format>
+            #include <string>
+            int main() {
+                std::string s = std::format(\"Hello, {}!\", \"World\");
+                return s.empty() ? 1 : 0;
+            }
+        " HAS_STD_FORMAT)
+    endif()
     
     if(HAS_STD_FORMAT)
         message(STATUS "✅ std::format support detected")
         add_compile_definitions(USE_STD_FORMAT=1)
     else()
-        message(STATUS "⚠️ std::format not available, using alternative formatting")
+        message(STATUS "⚠️  std::format not available, using fmt library as fallback")
     endif()
     
     # Check for std::jthread
-    check_cxx_source_compiles("
-        #include <thread>
-        int main() {
-            std::jthread t([](){});
-            return 0;
-        }
-    " HAS_STD_JTHREAD)
+    message(STATUS "Checking for std::jthread...")
+    if(MSVC AND MSVC_VERSION LESS 1928)
+        message(STATUS "⚠️  MSVC version too old for std::jthread (need VS 2019 16.8+)")
+        set(HAS_STD_JTHREAD FALSE)
+    else()
+        check_cxx_source_compiles("
+            #include <thread>
+            #include <stop_token>
+            int main() {
+                std::jthread t([](){});
+                return 0;
+            }
+        " HAS_STD_JTHREAD)
+    endif()
     
     if(HAS_STD_JTHREAD)
         message(STATUS "✅ std::jthread support detected")
+        add_compile_definitions(HAS_STD_JTHREAD=1)
     else()
-        message(STATUS "⚠️ std::jthread not available, using std::thread")
+        message(STATUS "⚠️  std::jthread not available, using std::thread")
     endif()
+    
+    # Additional C++17 features for compatibility (like thread_system)
+    message(STATUS "Checking for C++17 compatibility features...")
+    
+    # Check for std::optional
+    check_cxx_source_compiles("
+        #include <optional>
+        int main() {
+            std::optional<int> opt = 42;
+            return opt.value();
+        }
+    " HAS_STD_OPTIONAL)
+    
+    if(HAS_STD_OPTIONAL)
+        add_compile_definitions(HAS_STD_OPTIONAL=1)
+        message(STATUS "✅ std::optional is available")
+    endif()
+    
+    # Check for std::variant
+    check_cxx_source_compiles("
+        #include <variant>
+        int main() {
+            std::variant<int, double> v = 42;
+            return std::get<int>(v);
+        }
+    " HAS_STD_VARIANT)
+    
+    if(HAS_STD_VARIANT)
+        add_compile_definitions(HAS_STD_VARIANT=1)
+        message(STATUS "✅ std::variant is available")
+    endif()
+    
+    # Check for std::string_view
+    check_cxx_source_compiles("
+        #include <string_view>
+        int main() {
+            std::string_view sv = \"hello\";
+            return sv.length();
+        }
+    " HAS_STD_STRING_VIEW)
+    
+    if(HAS_STD_STRING_VIEW)
+        add_compile_definitions(HAS_STD_STRING_VIEW=1)
+        message(STATUS "✅ std::string_view is available")
+    endif()
+    
+    # Restore original settings
+    set(CMAKE_REQUIRED_FLAGS ${ORIGINAL_CMAKE_REQUIRED_FLAGS})
+    set(CMAKE_REQUIRED_LIBRARIES ${ORIGINAL_CMAKE_REQUIRED_LIBRARIES})
+    
+    # Reset Windows-specific settings
+    if(WIN32)
+        if(NOT "${ORIGINAL_CMAKE_TRY_COMPILE_TARGET_TYPE}" STREQUAL "")
+            set(CMAKE_TRY_COMPILE_TARGET_TYPE ${ORIGINAL_CMAKE_TRY_COMPILE_TARGET_TYPE} CACHE STRING "" FORCE)
+        else()
+            unset(CMAKE_TRY_COMPILE_TARGET_TYPE CACHE)
+        endif()
+    endif()
+    
+    message(STATUS "C++ feature detection completed")
+endfunction()
+
+##################################################
+# Optional: Add thread_system's check_cpp_stdlib_features for compatibility
+##################################################
+function(check_cpp_stdlib_features)
+    # This function can be called by code expecting thread_system compatibility
+    message(STATUS "check_cpp_stdlib_features called - redirecting to check_cpp_features")
+    check_cpp_features()
 endfunction()

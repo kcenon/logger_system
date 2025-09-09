@@ -9,6 +9,7 @@ All rights reserved.
 #include <filesystem>
 #include <algorithm>
 #include <regex>
+#include <ctime>
 #include <iostream>
 
 namespace logger_module {

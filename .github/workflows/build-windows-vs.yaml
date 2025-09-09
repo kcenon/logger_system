@@ -101,12 +101,18 @@ jobs:
         shell: pwsh
         run: |
           cd build
+          # Set environment variables for better C++ feature detection
+          $env:CMAKE_CXX_FLAGS = "/std:c++20 /permissive- /Zc:__cplusplus /EHsc"
+          $env:CMAKE_TRY_COMPILE_TARGET_TYPE = "STATIC_LIBRARY"
+          
           cmake .. `
             -G "Visual Studio 17 2022" `
             -A x64 `
             -DBUILD_TESTS=ON `
             -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE `
-            -DCMAKE_TOOLCHAIN_FILE="$env:GITHUB_WORKSPACE\vcpkg\scripts\buildsystems\vcpkg.cmake"
+            -DCMAKE_TOOLCHAIN_FILE="$env:GITHUB_WORKSPACE\vcpkg\scripts\buildsystems\vcpkg.cmake" `
+            -DCMAKE_CXX_FLAGS="/std:c++20 /permissive- /Zc:__cplusplus /EHsc" `
+            -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY"
           
           cmake --build . --config $env:BUILD_TYPE --parallel
           ctest -C $env:BUILD_TYPE --output-on-failure
@@ -120,11 +126,18 @@ jobs:
           New-Item -ItemType Directory -Force -Path "build"
           cd build
           
+          # Set environment variables for better C++ feature detection
+          $env:CMAKE_CXX_FLAGS = "/std:c++20 /permissive- /Zc:__cplusplus /EHsc"
+          $env:CMAKE_TRY_COMPILE_TARGET_TYPE = "STATIC_LIBRARY"
+          
           cmake .. `
             -G "Visual Studio 17 2022" `
             -A x64 `
             -DBUILD_TESTS=ON `
-            -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE
+            -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE `
+            -DCMAKE_CXX_FLAGS="/std:c++20 /permissive- /Zc:__cplusplus /EHsc" `
+            -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY" `
+            -DNO_VCPKG=ON
           
           cmake --build . --config $env:BUILD_TYPE --parallel
 

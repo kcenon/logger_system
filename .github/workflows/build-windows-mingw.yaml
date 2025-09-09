@@ -115,6 +115,11 @@ jobs:
         shell: pwsh
         run: |
           cd build
+          # Set environment variables for better C++ feature detection
+          $env:CMAKE_CXX_FLAGS = "-std=c++20 -pthread"
+          $env:CMAKE_EXE_LINKER_FLAGS = "-lstdc++fs -lwinpthread"
+          $env:CMAKE_TRY_COMPILE_TARGET_TYPE = "STATIC_LIBRARY"
+          
           cmake .. `
             -G "Ninja" `
             -DBUILD_TESTS=ON `
@@ -122,7 +127,10 @@ jobs:
             -DCMAKE_TOOLCHAIN_FILE="$env:GITHUB_WORKSPACE\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake" `
             -DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET `
             -DCMAKE_C_COMPILER=gcc `
-            -DCMAKE_CXX_COMPILER=g++
+            -DCMAKE_CXX_COMPILER=g++ `
+            -DCMAKE_CXX_FLAGS="-std=c++20 -pthread" `
+            -DCMAKE_EXE_LINKER_FLAGS="-lstdc++fs -lwinpthread" `
+            -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY"
           
           cmake --build . --parallel
           ctest -C $env:BUILD_TYPE --output-on-failure
@@ -136,12 +144,21 @@ jobs:
           New-Item -ItemType Directory -Force -Path "build"
           cd build
           
+          # Set environment variables for better C++ feature detection
+          $env:CMAKE_CXX_FLAGS = "-std=c++20 -pthread"
+          $env:CMAKE_EXE_LINKER_FLAGS = "-lstdc++fs -lwinpthread"
+          $env:CMAKE_TRY_COMPILE_TARGET_TYPE = "STATIC_LIBRARY"
+          
           cmake .. `
             -G "Ninja" `
             -DBUILD_TESTS=ON `
             -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE `
             -DCMAKE_C_COMPILER=gcc `
-            -DCMAKE_CXX_COMPILER=g++
+            -DCMAKE_CXX_COMPILER=g++ `
+            -DCMAKE_CXX_FLAGS="-std=c++20 -pthread" `
+            -DCMAKE_EXE_LINKER_FLAGS="-lstdc++fs -lwinpthread" `
+            -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY" `
+            -DNO_VCPKG=ON
           
           cmake --build . --parallel
 

@@ -7,6 +7,7 @@ All rights reserved.
 
 #include "file_writer.h"
 #include <filesystem>
+#include <ctime>
 #include <iostream>
 
 namespace logger_module {
