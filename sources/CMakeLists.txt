@@ -13,6 +13,9 @@ target_sources(logger
         logger/server/log_server.cpp
         logger/analysis/log_analyzer.cpp
         logger/security/log_sanitizer.cpp
+        logger/safety/crash_safety.cpp
+        logger/health/health_check_system.cpp
+        logger/flow/overflow_policy.cpp
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/logger.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/logger_interface.h>
@@ -30,6 +33,9 @@ target_sources(logger
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/server/log_server.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/analysis/log_analyzer.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/security/log_sanitizer.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/interfaces/logger_crash_safety.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/health/health_check_system.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/flow/overflow_policy.h>
 )
 
 target_include_directories(logger
