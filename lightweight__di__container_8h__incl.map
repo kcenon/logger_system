@@ -2,23 +2,25 @@
 <area shape="rect" id="Node000001" title="Lightweight dependency injection container implementation." alt="" coords="270,5,463,31"/>
 <area shape="rect" id="Node000002" href="$di__container__interface_8h.html" title="Abstract interface for dependency injection container." alt="" coords="101,79,280,104"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="339,33,233,76,231,71,337,28"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="305,79,429,104"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="369,31,369,65,364,65,364,31"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="453,79,517,104"/>
-<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="387,28,455,69,453,74,384,33"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="305,79,429,104"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="369,31,369,65,364,65,364,31"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="453,79,517,104"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="387,28,455,69,453,74,384,33"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="5,152,83,177"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="168,106,81,148,79,144,166,102"/>
 <area shape="rect" id="Node000004" title=" " alt="" coords="107,152,194,177"/>
 <area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="186,106,166,141,162,139,182,103"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="203,225,261,251"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="197,104,228,211,222,213,191,105"/>
-<area shape="rect" id="Node000006" href="$error__codes_8h.html" title=" " alt="" coords="269,152,392,177"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="214,102,297,143,295,148,212,106"/>
-<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="316,180,261,219,258,215,313,175"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="286,225,373,251"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="333,178,332,212,327,212,328,178"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="397,225,472,251"/>
-<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="349,175,408,215,405,219,346,180"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="497,225,565,251"/>
-<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="364,175,486,218,484,223,362,180"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="179,225,237,251"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="197,104,208,152,211,211,206,212,203,152,192,105"/>
+<area shape="rect" id="Node000006" href="$error__codes_8h.html" title=" " alt="" coords="317,152,440,177"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="222,102,336,144,334,149,220,107"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="352,180,249,222,247,218,350,175"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="262,225,349,251"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="368,180,329,218,325,214,365,176"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="373,225,433,251"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="385,177,397,211,392,213,380,179"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="457,225,532,251"/>
+<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="399,175,465,216,463,220,396,180"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="557,225,625,251"/>
+<area shape="poly" id="edge10_Node000006_Node000010" title=" " alt="" coords="414,175,544,218,543,223,412,180"/>
 </map>
