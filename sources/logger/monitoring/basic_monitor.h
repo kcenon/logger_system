@@ -18,6 +18,12 @@ All rights reserved.
 #include "monitoring_interface.h"
 #include <mutex>
 #include <memory>
+#include <atomic>
+#include <vector>
+#include <unordered_map>
+#include <chrono>
+#include <algorithm>
+#include <cstdint>
 
 namespace logger_module {
 

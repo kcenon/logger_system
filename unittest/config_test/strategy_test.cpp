@@ -10,6 +10,7 @@ All rights reserved.
 #include "../../sources/logger/config/logger_builder.h"
 #include "../../sources/logger/writers/console_writer.h"
 #include <chrono>
+#include <cstdlib>
 
 using namespace logger_module;
 

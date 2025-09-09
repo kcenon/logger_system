@@ -14,6 +14,8 @@ All rights reserved.
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
+#include <chrono>
+#include <unordered_map>
 
 namespace logger_module {
 
