@@ -1,7 +1,20 @@
 var hierarchy =
 [
     [ "logger_module::log_analyzer::alert_rule", "structlogger__module_1_1log__analyzer_1_1alert__rule.html", null ],
+    [ "logger_module::config_strategy_factory", "classlogger__module_1_1config__strategy__factory.html", null ],
+    [ "logger_module::config_strategy_interface", "classlogger__module_1_1config__strategy__interface.html", [
+      [ "logger_module::composite_strategy", "classlogger__module_1_1composite__strategy.html", null ],
+      [ "logger_module::environment_strategy", "classlogger__module_1_1environment__strategy.html", null ],
+      [ "logger_module::performance_tuning_strategy", "classlogger__module_1_1performance__tuning__strategy.html", null ],
+      [ "logger_module::template_strategy", "classlogger__module_1_1template__strategy.html", null ]
+    ] ],
     [ "logger_module::network_writer::connection_stats", "structlogger__module_1_1network__writer_1_1connection__stats.html", null ],
+    [ "logger_module::di_container_factory", "classlogger__module_1_1di__container__factory.html", null ],
+    [ "logger_module::di_container_interface< T >", "classlogger__module_1_1di__container__interface.html", [
+      [ "logger_module::lightweight_di_container< T >", "classlogger__module_1_1lightweight__di__container.html", null ]
+    ] ],
+    [ "logger_module::di_container_interface< logger_module::base_writer >", "classlogger__module_1_1di__container__interface.html", null ],
+    [ "logger_module::health_check_result", "classlogger__module_1_1health__check__result.html", null ],
     [ "logger_module::log_collector::impl", "classlogger__module_1_1log__collector_1_1impl.html", null ],
     [ "logger_module::logger::impl", "classlogger__module_1_1logger_1_1impl.html", null ],
     [ "logger_module::log_aggregator", "classlogger__module_1_1log__aggregator.html", null ],
@@ -47,6 +60,14 @@ var hierarchy =
     ] ],
     [ "logger_module::logger_metrics_collector", "classlogger__module_1_1logger__metrics__collector.html", null ],
     [ "thread_module::logger_registry", "classthread__module_1_1logger__registry.html", null ],
+    [ "logger_module::metric_value", "structlogger__module_1_1metric__value.html", null ],
+    [ "logger_module::monitoring_data", "classlogger__module_1_1monitoring__data.html", null ],
+    [ "logger_module::monitoring_factory", "classlogger__module_1_1monitoring__factory.html", null ],
+    [ "logger_module::monitoring_interface", "classlogger__module_1_1monitoring__interface.html", [
+      [ "logger_module::basic_monitor", "classlogger__module_1_1basic__monitor.html", [
+        [ "logger_module::thread_system_monitor_adapter", "classlogger__module_1_1thread__system__monitor__adapter.html", null ]
+      ] ]
+    ] ],
     [ "logger_module::log_server::network_log_entry", "structlogger__module_1_1log__server_1_1network__log__entry.html", null ],
     [ "logger_module::performance_metrics", "structlogger__module_1_1performance__metrics.html", null ],
     [ "logger_module::result< T >", "classlogger__module_1_1result.html", null ],

@@ -1,5 +1,8 @@
 <map id="logger_config.h" name="logger_config.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="8,5,129,31"/>
-<area shape="rect" id="Node000002" href="$logger__builder_8h.html" title=" " alt="" coords="5,79,132,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,44,71,79,66,79,66,44"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="112,5,233,31"/>
+<area shape="rect" id="Node000002" href="$config__strategy__interface_8h.html" title=" " alt="" coords="5,79,204,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,42,118,80,114,77,150,39"/>
+<area shape="rect" id="Node000003" href="$logger__builder_8h.html" title=" " alt="" coords="109,152,236,177"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="195,39,208,57,218,78,219,100,212,121,187,153,183,150,207,118,214,99,213,79,204,60,191,43"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="127,112,164,150,160,154,123,116"/>
 </map>

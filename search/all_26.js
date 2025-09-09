@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔮_20future_20roadmap_0',['🔮 Future Roadmap',['../md_ARCHITECTURE.html#autotoc_md85',1,'']]]
+  ['🔧_20integration_20patterns_0',['🔧 Integration Patterns',['../md_ARCHITECTURE.html#autotoc_md70',1,'']]]
 ];

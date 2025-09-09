@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📚_20documentation_20structure_0',['📚 Documentation Structure',['../md_ARCHITECTURE.html#autotoc_md80',1,'']]]
+  ['📋_20project_20roles_20responsibilities_0',['📋 Project Roles &amp; Responsibilities',['../md_ARCHITECTURE.html#autotoc_md46',1,'']]]
 ];

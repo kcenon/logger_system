@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['json_5fformatter_0',['json_formatter',['../classlogger__module_1_1json__formatter.html',1,'logger_module']]]
+  ['health_5fcheck_5fresult_0',['health_check_result',['../classlogger__module_1_1health__check__result.html',1,'logger_module']]]
 ];

@@ -2,6 +2,7 @@ var error__codes_8h =
 [
     [ "logger_module::result< T >", "classlogger__module_1_1result.html", "classlogger__module_1_1result" ],
     [ "logger_module::result_void", "classlogger__module_1_1result__void.html", "classlogger__module_1_1result__void" ],
+    [ "error_code", "error__codes_8h.html#ae1e454eb05e3ef274e857f0b0a43ad28", null ],
     [ "logger_error_code", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eb", [
       [ "success", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba260ca9dd8a4577fc00b7bd5810298076", null ],
       [ "unknown_error", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba4e44c97a51e5519cd277f335de285ead", null ],
@@ -33,7 +34,12 @@ var error__codes_8h =
       [ "encryption_failed", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135ebab70718378f61f3b12c47eeef435ba117", null ],
       [ "decryption_failed", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba44f554d8d54c1444423153f5647c7bd7", null ],
       [ "authentication_failed", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba047ef5b1ba6d5dcc4dbee37c075a2088", null ],
-      [ "sanitization_failed", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba134207cdbfedc64f077464d211aca382", null ]
+      [ "sanitization_failed", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba134207cdbfedc64f077464d211aca382", null ],
+      [ "di_not_available", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba9b4e984c36d45fe6341639436a0a980c", null ],
+      [ "component_not_found", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba9e1b67109ac6b2646d20525b32fc0629", null ],
+      [ "registration_failed", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba7d0c80be3476159849be95bfcbff5401", null ],
+      [ "creation_failed", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba2848577fa72398894b4cf63da22135f0", null ],
+      [ "operation_failed", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135ebae84e30f035632b055bfc113f1d7e0a67", null ]
     ] ],
     [ "logger_error_to_string", "error__codes_8h.html#a5a717e2eece74d014d20adab53d609f4", null ],
     [ "make_logger_error", "error__codes_8h.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b", null ],

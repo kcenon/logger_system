@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['time_5fwindow_5fstats_0',['time_window_stats',['../structlogger__module_1_1log__analyzer_1_1time__window__stats.html',1,'logger_module::log_analyzer']]]
+  ['performance_5fmetrics_0',['performance_metrics',['../structlogger__module_1_1performance__metrics.html',1,'logger_module']]],
+  ['performance_5ftuning_5fstrategy_1',['performance_tuning_strategy',['../classlogger__module_1_1performance__tuning__strategy.html',1,'logger_module']]],
+  ['plain_5fformatter_2',['plain_formatter',['../classlogger__module_1_1plain__formatter.html',1,'logger_module']]]
 ];

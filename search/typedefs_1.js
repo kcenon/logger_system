@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['log_5fhandler_0',['log_handler',['../classlogger__module_1_1log__server.html#a6860562df2bbe3eec7f6e5cebb508aa7',1,'logger_module::log_server']]]
+  ['filter_5ffunction_0',['filter_function',['../classlogger__module_1_1function__filter.html#abc28a51988d4bcd1ae0ef4be8d1d459e',1,'logger_module::function_filter']]]
 ];

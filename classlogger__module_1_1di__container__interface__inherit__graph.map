@@ -1,0 +1,5 @@
+<map id="logger_module::di_container_interface&lt; T &gt;" name="logger_module::di_container_interface&lt; T &gt;">
+<area shape="rect" id="Node000001" title="Abstract interface for dependency injection container." alt="" coords="5,5,212,45"/>
+<area shape="rect" id="Node000002" href="$classlogger__module_1_1lightweight__di__container.html" title="Lightweight implementation of DI container." alt="" coords="9,93,209,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,59,111,93,106,93,106,59"/>
+</map>

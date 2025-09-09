@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['file_5fwriter_0',['file_writer',['../classlogger__module_1_1file__writer.html',1,'logger_module']]],
-  ['function_5ffilter_1',['function_filter',['../classlogger__module_1_1function__filter.html',1,'logger_module']]]
+  ['encrypted_5fwriter_0',['encrypted_writer',['../classlogger__module_1_1encrypted__writer.html',1,'logger_module']]],
+  ['environment_5fstrategy_1',['environment_strategy',['../classlogger__module_1_1environment__strategy.html',1,'logger_module']]]
 ];

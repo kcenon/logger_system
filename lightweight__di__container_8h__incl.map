@@ -1,0 +1,22 @@
+<map id="lightweight_di_container.h" name="lightweight_di_container.h">
+<area shape="rect" id="Node000001" title="Lightweight dependency injection container implementation." alt="" coords="270,5,463,31"/>
+<area shape="rect" id="Node000002" href="$di__container__interface_8h.html" title="Abstract interface for dependency injection container." alt="" coords="101,79,280,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="339,33,233,76,231,71,337,28"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="305,79,429,104"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="369,31,369,65,364,65,364,31"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="453,79,517,104"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="387,28,455,69,453,74,384,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,83,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="168,106,81,148,79,144,166,102"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="107,152,194,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="186,106,166,141,162,139,182,103"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="207,225,265,251"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="197,104,231,211,226,213,192,105"/>
+<area shape="rect" id="Node000006" href="$error__codes_8h.html" title=" " alt="" coords="269,152,392,177"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="214,102,297,143,295,148,212,106"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="317,179,264,219,261,215,314,175"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="291,225,365,251"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="333,178,332,212,326,212,328,178"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="390,225,458,251"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="347,175,400,215,396,219,344,179"/>
+</map>

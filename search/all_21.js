@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📋_20project_20roles_20responsibilities_0',['📋 Project Roles &amp; Responsibilities',['../md_ARCHITECTURE.html#autotoc_md41',1,'']]]
+  ['📊_20performance_20characteristics_0',['📊 Performance Characteristics',['../md_ARCHITECTURE.html#autotoc_md74',1,'']]]
 ];

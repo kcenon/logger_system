@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['rotation_5ftype_0',['rotation_type',['../classlogger__module_1_1rotating__file__writer.html#a752f54d17b4949a3b0150f6e785e6c66',1,'logger_module::rotating_file_writer']]]
+  ['metric_5ftype_0',['metric_type',['../namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565d',1,'logger_module']]],
+  ['monitor_5ftype_1',['monitor_type',['../classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a',1,'logger_module::monitoring_factory']]]
 ];

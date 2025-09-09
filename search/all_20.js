@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📊_20performance_20characteristics_0',['📊 Performance Characteristics',['../md_ARCHITECTURE.html#autotoc_md69',1,'']]]
+  ['🏗️_20ecosystem_20overview_0',['🏗️ Ecosystem Overview',['../md_ARCHITECTURE.html#autotoc_md45',1,'']]]
 ];

@@ -3,7 +3,11 @@ var classlogger__module_1_1logger__builder =
     [ "logger_builder", "classlogger__module_1_1logger__builder.html#afa60344d6d452265a8e3d2f72229c842", null ],
     [ "add_filter", "classlogger__module_1_1logger__builder.html#ac78fe6e8b3d0fd0a21a08a709f5eaede", null ],
     [ "add_writer", "classlogger__module_1_1logger__builder.html#af16ce8e9b3c4f8b8c3e5a34ba47e0cb0", null ],
+    [ "apply_strategy", "classlogger__module_1_1logger__builder.html#a2da8a215da58a50629c5da9067226994", null ],
+    [ "auto_configure", "classlogger__module_1_1logger__builder.html#a54b0cf6f9545bbbfe9a02ef7d6acfeec", null ],
     [ "build", "classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266", null ],
+    [ "clear_strategies", "classlogger__module_1_1logger__builder.html#a0ee840daef8787d46a69b8af03bc68be", null ],
+    [ "for_environment", "classlogger__module_1_1logger__builder.html#a5828b00d7d65c4bf478f7c42c1c4c925", null ],
     [ "get_config", "classlogger__module_1_1logger__builder.html#a1a2d80b6deb97ca71ec8698bb1a4e5ff", null ],
     [ "use_template", "classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431", null ],
     [ "validate", "classlogger__module_1_1logger__builder.html#a962b213b1cc4a72c99238d6d6316b9d9", null ],
@@ -21,5 +25,6 @@ var classlogger__module_1_1logger__builder =
     [ "with_min_level", "classlogger__module_1_1logger__builder.html#a4ca65e7bb8757c08ece5d058cebc3baf", null ],
     [ "with_network_output", "classlogger__module_1_1logger__builder.html#ac7886cfadcf1f1be02dfc41a5c250de0", null ],
     [ "with_overflow_policy", "classlogger__module_1_1logger__builder.html#a5d6d7951b25d84dd311f357281a63d5f", null ],
+    [ "with_performance_tuning", "classlogger__module_1_1logger__builder.html#ae082e501035619ad92067f451b9a8dbc", null ],
     [ "with_structured_logging", "classlogger__module_1_1logger__builder.html#a0bd08610e887583f110c244e360e5b4e", null ]
 ];

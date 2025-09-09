@@ -1,0 +1,19 @@
+<map id="monitoring_interface.h" name="monitoring_interface.h">
+<area shape="rect" id="Node000001" title="Abstract interface for monitoring and metrics collection." alt="" coords="128,5,299,31"/>
+<area shape="rect" id="Node000002" href="$basic__monitor_8h.html" title="Basic monitoring implementation with no external dependencies." alt="" coords="25,79,151,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,40,110,81,107,76,180,35"/>
+<area shape="rect" id="Node000003" href="$monitoring__factory_8h.html" title="Factory for creating appropriate monitoring implementations." alt="" coords="65,240,221,265"/>
+<area shape="poly" id="edge9_Node000001_Node000003" title=" " alt="" coords="222,44,228,75,230,113,228,154,216,193,194,222,166,242,163,238,190,218,211,191,222,153,225,113,222,76,217,45"/>
+<area shape="rect" id="Node000004" href="$logger_8h.html" title=" " alt="" coords="163,313,237,339"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="231,41,247,78,247,104,248,186,246,222,236,266,224,293,211,315,206,312,220,290,231,265,241,221,243,186,241,104,241,79,226,44"/>
+<area shape="rect" id="Node000007" href="$thread__system__monitor__adapter_8h.html" title="Adapter for thread_system&#39;s monitoring capabilities." alt="" coords="23,152,201,192"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="203,44,165,105,129,153,125,150,161,103,198,41"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="53,113,31,131,14,153,8,172,14,191,28,207,46,220,85,238,83,242,43,224,25,211,10,193,3,172,10,151,27,127,50,109"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="98,116,109,151,104,153,93,118"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="163,274,193,312,189,315,159,278"/>
+<area shape="rect" id="Node000005" href="$logger_8cpp.html" title=" " alt="" coords="90,387,179,412"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="182,351,147,388,143,385,178,347"/>
+<area shape="rect" id="Node000006" href="$logger__builder_8h.html" title=" " alt="" coords="203,387,330,412"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="222,347,258,385,254,388,219,351"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="127,204,141,239,136,241,122,206"/>
+</map>

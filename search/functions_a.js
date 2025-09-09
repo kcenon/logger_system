@@ -6,5 +6,8 @@ var searchData=
   ['mask_5femail_3',['mask_email',['../classlogger__module_1_1log__sanitizer.html#a94a582eb9e325a84d7e25f67beb3a95d',1,'logger_module::log_sanitizer']]],
   ['mask_5fip_5faddress_4',['mask_ip_address',['../classlogger__module_1_1log__sanitizer.html#a494a990c7f97e5d613ff35c5d41ec4fe',1,'logger_module::log_sanitizer']]],
   ['mask_5fpassword_5',['mask_password',['../classlogger__module_1_1log__sanitizer.html#a2e16ed8608ce41e999c5b16256260cd6',1,'logger_module::log_sanitizer']]],
-  ['mask_5fssn_6',['mask_ssn',['../classlogger__module_1_1log__sanitizer.html#af8ce7353abe1280767d4980f90edb0c8',1,'logger_module::log_sanitizer']]]
+  ['mask_5fssn_6',['mask_ssn',['../classlogger__module_1_1log__sanitizer.html#af8ce7353abe1280767d4980f90edb0c8',1,'logger_module::log_sanitizer']]],
+  ['metric_5ftype_5fto_5fstring_7',['metric_type_to_string',['../namespacelogger__module.html#a79a01081308103ea1f9a2f19c52bed3d',1,'logger_module']]],
+  ['metric_5fvalue_8',['metric_value',['../structlogger__module_1_1metric__value.html#ab73afb606509f50c8419ea60cd78bd80',1,'logger_module::metric_value::metric_value()'],['../structlogger__module_1_1metric__value.html#ad6384b55c4c6ab057e21c0dc33524f99',1,'logger_module::metric_value::metric_value(const std::string &amp;n, double v, metric_type t=metric_type::gauge)']]],
+  ['monitoring_5fdata_9',['monitoring_data',['../classlogger__module_1_1monitoring__data.html#a005d9ec74104f75d3071b2570cda20a3',1,'logger_module::monitoring_data']]]
 ];

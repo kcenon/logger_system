@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🔗_20project_20ecosystem_20integration_0',['🔗 Project Ecosystem Integration',['../index.html#autotoc_md3',1,'']]]
+  ['🔄_20dependency_20flow_20interface_20contracts_0',['🔄 Dependency Flow &amp; Interface Contracts',['../md_ARCHITECTURE.html#autotoc_md66',1,'']]],
+  ['🔄_20evolution_3a_20monolithic_20→_20modular_1',['🔄 Evolution: Monolithic → Modular',['../md_ARCHITECTURE.html#autotoc_md77',1,'']]]
 ];
