@@ -38,6 +38,7 @@ struct logger_config {
     std::chrono::milliseconds flush_interval{1000};
     bool use_lock_free = false;
     std::size_t max_writers = 10;
+    bool enable_batch_writing = false;
     
     // Feature flags
     bool enable_metrics = false;
@@ -212,6 +213,7 @@ struct logger_config {
         config.max_queue_size = 100000;
         config.writer_thread_count = 2;
         config.enable_compression = true;
+        config.enable_batch_writing = true;
         return config;
     }
     
@@ -262,6 +264,8 @@ struct logger_config {
         config.max_file_size = 500 * 1024 * 1024;  // 500MB
         config.max_file_count = 10;
         config.enable_compression = true;
+        config.enable_batch_writing = true;
+        config.batch_size = 200;
         return config;
     }
 };

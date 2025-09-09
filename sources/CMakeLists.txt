@@ -10,6 +10,7 @@ target_sources(logger
         logger/writers/rotating_file_writer.cpp
         logger/writers/network_writer.cpp
         logger/writers/encrypted_writer.cpp
+        logger/writers/batch_writer.cpp
         logger/server/log_server.cpp
         logger/analysis/log_analyzer.cpp
         logger/security/log_sanitizer.cpp
@@ -20,6 +21,7 @@ target_sources(logger
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/logger.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/logger_interface.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/writers/base_writer.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/writers/batch_writer.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/writers/console_writer.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/core/log_collector.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/metrics/logger_metrics.h>

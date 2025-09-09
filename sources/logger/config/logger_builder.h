@@ -11,6 +11,7 @@ All rights reserved.
 #include "config_strategy_interface.h"
 #include "../logger.h"
 #include "../writers/base_writer.h"
+#include "../writers/batch_writer.h"
 #include "../filters/log_filter.h"
 #include "../interfaces/log_formatter_interface.h"
 #include <memory>
@@ -81,6 +82,16 @@ public:
      */
     logger_builder& with_batch_size(std::size_t size) {
         config_.batch_size = size;
+        return *this;
+    }
+    
+    /**
+     * @brief Enable batch writing for writers
+     * @param enable Enable/disable batch writing
+     * @return Reference to builder for chaining
+     */
+    logger_builder& with_batch_writing(bool enable = true) {
+        config_.enable_batch_writing = enable;
         return *this;
     }
     
@@ -370,11 +381,24 @@ public:
             logger_instance->enable_metrics_collection(true);
         }
         
-        // Add writers
+        // Add writers (apply batch writing if enabled)
         for (auto& [name, writer] : writers_) {
             if (writer) {
                 writer->set_use_color(config_.enable_color_output);
-                logger_instance->add_writer(name, std::move(writer));
+                
+                // Wrap with batch writer if enabled and async mode
+                if (config_.enable_batch_writing && config_.async) {
+                    batch_writer::config batch_cfg;
+                    batch_cfg.max_batch_size = config_.batch_size;
+                    batch_cfg.flush_interval = config_.flush_interval;
+                    
+                    auto batch_wrapped = std::make_unique<batch_writer>(
+                        std::move(writer), batch_cfg
+                    );
+                    logger_instance->add_writer(name, std::move(batch_wrapped));
+                } else {
+                    logger_instance->add_writer(name, std::move(writer));
+                }
             }
         }
         
