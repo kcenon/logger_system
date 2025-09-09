@@ -42,6 +42,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <mutex>
 #include <functional>
 #include <chrono>
+#include <optional>
+#include <string>
 
 namespace logger_module {
 

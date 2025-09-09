@@ -40,6 +40,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <chrono>
 #include <atomic>
 #include <functional>
+#include <utility>
+#include <string>
 
 // Conditional include based on build configuration
 #ifdef USE_THREAD_SYSTEM
