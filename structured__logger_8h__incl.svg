@@ -5,7 +5,7 @@
  -->
 <!-- Title: structured_logger.h Pages: 1 -->
 <svg width="762pt" height="137pt"
- viewBox="0.00 0.00 761.50 137.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ viewBox="0.00 0.00 762.00 137.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 133)">
 <title>structured_logger.h</title>
 <!-- Node1 -->
@@ -147,8 +147,8 @@
 <g id="Node000011" class="node">
 <title>Node11</title>
 <g id="a_Node000011"><a xlink:title=" ">
-<polygon fill="#e0e0e0" stroke="#999999" points="620,-74 564,-74 564,-55 620,-55 620,-74"/>
-<text text-anchor="middle" x="592" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">unistd.h</text>
+<polygon fill="#e0e0e0" stroke="#999999" points="612,-74 564,-74 564,-55 612,-55 612,-74"/>
+<text text-anchor="middle" x="588" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">thread</text>
 </a>
 </g>
 </g>
@@ -156,8 +156,8 @@
 <g id="edge11_Node000001_Node000011" class="edge">
 <title>Node1&#45;&gt;Node11</title>
 <g id="a_edge11_Node000001_Node000011"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M412.38,-109.98C451.08,-100.4 513.76,-84.88 553.91,-74.93"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="554.99,-78.27 563.85,-72.47 553.3,-71.48 554.99,-78.27"/>
+<path fill="none" stroke="#63b8ff" d="M412.28,-109.94C445.92,-101.53 498.97,-88.24 553.94,-74.26"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="555.03,-77.59 563.85,-71.74 553.3,-70.81 555.03,-77.59"/>
 </a>
 </g>
 </g>
@@ -165,8 +165,8 @@
 <g id="Node000012" class="node">
 <title>Node12</title>
 <g id="a_Node000012"><a xlink:title=" ">
-<polygon fill="#e0e0e0" stroke="#999999" points="686,-74 638,-74 638,-55 686,-55 686,-74"/>
-<text text-anchor="middle" x="662" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">thread</text>
+<polygon fill="#e0e0e0" stroke="#999999" points="679.5,-74 630.5,-74 630.5,-55 679.5,-55 679.5,-74"/>
+<text text-anchor="middle" x="655" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">cstdlib</text>
 </a>
 </g>
 </g>
@@ -174,8 +174,8 @@
 <g id="edge12_Node000001_Node000012" class="edge">
 <title>Node1&#45;&gt;Node12</title>
 <g id="a_edge12_Node000001_Node000012"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M433.08,-109.98C481.9,-102.15 555.32,-89.68 628.1,-74.06"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="628.87,-77.47 637.9,-71.93 627.39,-70.63 628.87,-77.47"/>
+<path fill="none" stroke="#63b8ff" d="M429.86,-109.99C476.97,-102.04 548.6,-89.39 620.08,-74.08"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="621.12,-77.44 630.16,-71.9 619.65,-70.59 621.12,-77.44"/>
 </a>
 </g>
 </g>
@@ -183,8 +183,8 @@
 <g id="Node000013" class="node">
 <title>Node13</title>
 <g id="a_Node000013"><a xlink:title=" ">
-<polygon fill="#e0e0e0" stroke="#999999" points="753.5,-74 704.5,-74 704.5,-55 753.5,-55 753.5,-74"/>
-<text text-anchor="middle" x="729" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">cstdlib</text>
+<polygon fill="#e0e0e0" stroke="#999999" points="754,-74 698,-74 698,-55 754,-55 754,-74"/>
+<text text-anchor="middle" x="726" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">unistd.h</text>
 </a>
 </g>
 </g>
@@ -192,8 +192,8 @@
 <g id="edge13_Node000001_Node000013" class="edge">
 <title>Node1&#45;&gt;Node13</title>
 <g id="a_edge13_Node000001_Node000013"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M433.27,-112.53C494.65,-105.51 596.83,-92.62 694.18,-73.97"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="695.04,-77.37 704.19,-72.02 693.7,-70.49 695.04,-77.37"/>
+<path fill="none" stroke="#63b8ff" d="M433,-112.04C493.2,-104.66 592.76,-91.52 687.71,-74.11"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="688.57,-77.51 697.77,-72.24 687.3,-70.62 688.57,-77.51"/>
 </a>
 </g>
 </g>
