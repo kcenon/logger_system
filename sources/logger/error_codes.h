@@ -100,7 +100,14 @@ enum class logger_error_code {
     encryption_failed = 1700,
     decryption_failed = 1701,
     authentication_failed = 1702,
-    sanitization_failed = 1703
+    sanitization_failed = 1703,
+    
+    // DI Container errors (1800-1899)
+    di_not_available = 1800,
+    component_not_found = 1801,
+    registration_failed = 1802,
+    creation_failed = 1803,
+    operation_failed = 1804
 };
 
 /**
@@ -189,6 +196,18 @@ inline std::string logger_error_to_string(logger_error_code code) {
         case logger_error_code::sanitization_failed:
             return "Sanitization failed";
             
+        // DI Container errors
+        case logger_error_code::di_not_available:
+            return "DI container not available";
+        case logger_error_code::component_not_found:
+            return "Component not found in DI container";
+        case logger_error_code::registration_failed:
+            return "Failed to register component in DI container";
+        case logger_error_code::creation_failed:
+            return "Failed to create component from factory";
+        case logger_error_code::operation_failed:
+            return "DI container operation failed";
+            
         default:
             return "Unknown logger error code";
     }
@@ -199,6 +218,9 @@ inline std::string logger_error_to_string(logger_error_code code) {
 using thread_module::result;
 using thread_module::result_void;
 using thread_module::error;
+
+// Type alias for convenience
+using error_code = logger_error_code;
 
 /**
  * @brief Create a logger error from error code
@@ -299,6 +321,9 @@ template<typename T>
 inline result<T> make_logger_error(logger_error_code code, const std::string& message = "") {
     return result<T>{code, message.empty() ? logger_error_to_string(code) : message};
 }
+
+// Type alias for convenience in standalone mode
+using error_code = logger_error_code;
 #endif
 
 } // namespace logger_module
