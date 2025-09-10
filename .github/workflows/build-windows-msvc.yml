@@ -1,0 +1,148 @@
+name: Windows MSVC Build
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.github/workflows/documentation.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  workflow_dispatch:
+
+env:
+  BUILD_TYPE: Debug
+  CMAKE_VERSION: 3.16
+
+jobs:
+  build-msvc:
+    name: MSVC ${{ matrix.vs_version }} - ${{ matrix.arch }} - ${{ matrix.build_type }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2019, windows-2022]
+        arch: [x64, Win32]
+        build_type: [Debug, Release]
+        include:
+          - os: windows-2019
+            vs_version: '2019'
+            generator: 'Visual Studio 16 2019'
+          - os: windows-2022
+            vs_version: '2022'
+            generator: 'Visual Studio 17 2022'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+    
+    - name: Setup MSVC environment
+      uses: microsoft/setup-msbuild@v1.3
+      with:
+        msbuild-architecture: ${{ matrix.arch }}
+    
+    - name: Install vcpkg packages
+      run: |
+        git clone https://github.com/Microsoft/vcpkg.git C:\vcpkg
+        C:\vcpkg\bootstrap-vcpkg.bat
+        C:\vcpkg\vcpkg integrate install
+        C:\vcpkg\vcpkg install gtest:${{ matrix.arch }}-windows
+        C:\vcpkg\vcpkg install benchmark:${{ matrix.arch }}-windows
+        C:\vcpkg\vcpkg install fmt:${{ matrix.arch }}-windows
+      shell: cmd
+    
+    - name: Setup Python for testing
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Configure CMake
+      run: |
+        cmake -B build `
+          -G "${{ matrix.generator }}" `
+          -A ${{ matrix.arch }} `
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} `
+          -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake `
+          -DBUILD_TESTS=ON `
+          -DBUILD_BENCHMARKS=${{ matrix.build_type == 'Release' && 'ON' || 'OFF' }} `
+          -DLOGGER_ENABLE_WARNINGS=ON `
+          -DLOGGER_WARNINGS_AS_ERRORS=${{ matrix.build_type == 'Release' && 'ON' || 'OFF' }} `
+          -DLOGGER_STANDALONE=OFF
+      shell: powershell
+    
+    - name: Build
+      run: |
+        cmake --build build `
+          --config ${{ matrix.build_type }} `
+          --parallel $env:NUMBER_OF_PROCESSORS
+      shell: powershell
+    
+    - name: Run tests
+      run: |
+        cd build
+        ctest -C ${{ matrix.build_type }} `
+          --timeout 300 `
+          --output-on-failure `
+          --parallel $env:NUMBER_OF_PROCESSORS `
+          -E "stress_test|benchmark"
+      shell: powershell
+    
+    - name: Run stress tests
+      if: ${{ matrix.build_type == 'Debug' }}
+      run: |
+        cd build
+        ctest -C ${{ matrix.build_type }} `
+          --timeout 600 `
+          --output-on-failure `
+          -R "stress_test"
+      shell: powershell
+    
+    - name: Run benchmarks
+      if: ${{ matrix.build_type == 'Release' }}
+      run: |
+        cd build
+        ctest -C Release `
+          --timeout 300 `
+          --output-on-failure `
+          -R "benchmark"
+      shell: powershell
+    
+    - name: Package binaries
+      if: ${{ matrix.build_type == 'Release' }}
+      run: |
+        mkdir package
+        mkdir package\lib
+        mkdir package\include
+        
+        # Copy libraries
+        Copy-Item -Path "build\${{ matrix.build_type }}\*.lib" -Destination "package\lib\" -Force
+        
+        # Copy headers
+        Copy-Item -Path "sources\logger\*.h" -Destination "package\include\" -Recurse -Force
+        
+        # Create archive
+        Compress-Archive -Path package\* -DestinationPath logger-${{ matrix.vs_version }}-${{ matrix.arch }}-${{ matrix.build_type }}.zip
+      shell: powershell
+    
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results-msvc${{ matrix.vs_version }}-${{ matrix.arch }}-${{ matrix.build_type }}
+        path: |
+          build/Testing/
+          build/*.xml
+    
+    - name: Upload release package
+      if: ${{ matrix.build_type == 'Release' }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-msvc${{ matrix.vs_version }}-${{ matrix.arch }}-release
+        path: logger-*.zip

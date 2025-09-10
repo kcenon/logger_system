@@ -147,6 +147,13 @@ cmake -DLOGGER_DEFAULT_QUEUE_SIZE=20000  # Maximum queue size
 
 # Build Options
 cmake -DLOGGER_FORCE_LIGHTWEIGHT=ON   # Force lightweight implementations (default: ON)
+
+# Quality Assurance Options (New in Phase 5 P5)
+cmake -DLOGGER_ENABLE_SANITIZERS=ON   # Enable sanitizers in debug builds
+cmake -DLOGGER_SANITIZER_TYPE=address # Sanitizer type (address/thread/undefined/memory)
+cmake -DLOGGER_ENABLE_WARNINGS=ON     # Enable comprehensive compiler warnings
+cmake -DLOGGER_WARNINGS_AS_ERRORS=ON  # Treat warnings as errors
+cmake -DLOGGER_ENABLE_COVERAGE=ON     # Enable code coverage reporting
 cmake -DLOGGER_USE_EXTERNAL_DI=OFF    # Use external DI container (default: OFF)
 cmake -DLOGGER_ENABLE_SANITIZERS=ON   # Enable sanitizers for debugging
 cmake -DLOGGER_ENABLE_COVERAGE=ON     # Enable code coverage

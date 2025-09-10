@@ -1,0 +1,145 @@
+name: Windows MinGW Build
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.github/workflows/documentation.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  workflow_dispatch:
+
+env:
+  BUILD_TYPE: Debug
+  CMAKE_VERSION: 3.16
+
+jobs:
+  build-mingw:
+    name: MinGW ${{ matrix.mingw_version }} - ${{ matrix.arch }} - ${{ matrix.build_type }}
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        mingw_version: [11, 12, 13]
+        arch: [x64, x86]
+        build_type: [Debug, Release]
+        include:
+          - arch: x64
+            mingw_arch: x86_64
+            msys_arch: mingw64
+          - arch: x86
+            mingw_arch: i686
+            msys_arch: mingw32
+    
+    defaults:
+      run:
+        shell: msys2 {0}
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+    
+    - name: Setup MSYS2
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: ${{ matrix.msys_arch }}
+        update: true
+        install: >-
+          base-devel
+          mingw-w64-${{ matrix.mingw_arch }}-gcc
+          mingw-w64-${{ matrix.mingw_arch }}-cmake
+          mingw-w64-${{ matrix.mingw_arch }}-ninja
+          mingw-w64-${{ matrix.mingw_arch }}-gtest
+          mingw-w64-${{ matrix.mingw_arch }}-benchmark
+          mingw-w64-${{ matrix.mingw_arch }}-fmt
+          mingw-w64-${{ matrix.mingw_arch }}-doxygen
+    
+    - name: Setup specific GCC version
+      run: |
+        # Install specific GCC version if needed
+        pacman -S --noconfirm mingw-w64-${{ matrix.mingw_arch }}-gcc-${{ matrix.mingw_version }} || true
+        gcc --version
+        g++ --version
+    
+    - name: Configure CMake
+      run: |
+        cmake -B build \
+          -G Ninja \
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          -DCMAKE_C_COMPILER=gcc \
+          -DCMAKE_CXX_COMPILER=g++ \
+          -DBUILD_TESTS=ON \
+          -DBUILD_BENCHMARKS=${{ matrix.build_type == 'Release' && 'ON' || 'OFF' }} \
+          -DLOGGER_ENABLE_WARNINGS=ON \
+          -DLOGGER_WARNINGS_AS_ERRORS=OFF \
+          -DLOGGER_STANDALONE=OFF
+    
+    - name: Build
+      run: cmake --build build --config ${{ matrix.build_type }} --parallel $(nproc)
+    
+    - name: Run tests
+      run: |
+        cd build
+        ctest -C ${{ matrix.build_type }} \
+          --timeout 300 \
+          --output-on-failure \
+          --parallel $(nproc) \
+          -E "stress_test|benchmark"
+    
+    - name: Run stress tests
+      if: ${{ matrix.build_type == 'Debug' }}
+      run: |
+        cd build
+        ctest -C ${{ matrix.build_type }} \
+          --timeout 600 \
+          --output-on-failure \
+          -R "stress_test"
+    
+    - name: Run benchmarks
+      if: ${{ matrix.build_type == 'Release' }}
+      run: |
+        cd build
+        ctest -C Release \
+          --timeout 300 \
+          --output-on-failure \
+          -R "benchmark"
+    
+    - name: Package binaries
+      if: ${{ matrix.build_type == 'Release' }}
+      run: |
+        mkdir -p package/lib
+        mkdir -p package/include
+        
+        # Copy libraries
+        cp build/*.a package/lib/ 2>/dev/null || true
+        cp build/lib/*.a package/lib/ 2>/dev/null || true
+        
+        # Copy headers
+        cp -r sources/logger/*.h package/include/
+        
+        # Create archive
+        tar czf logger-mingw${{ matrix.mingw_version }}-${{ matrix.arch }}-${{ matrix.build_type }}.tar.gz -C package .
+    
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results-mingw${{ matrix.mingw_version }}-${{ matrix.arch }}-${{ matrix.build_type }}
+        path: |
+          build/Testing/
+          build/*.xml
+    
+    - name: Upload release package
+      if: ${{ matrix.build_type == 'Release' }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-mingw${{ matrix.mingw_version }}-${{ matrix.arch }}-release
+        path: logger-*.tar.gz

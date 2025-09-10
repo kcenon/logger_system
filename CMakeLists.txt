@@ -55,6 +55,15 @@ include(LoggerFeatures)
 # Include dependency detection module
 include(LoggerDependencies)
 
+# Include sanitizer configuration module
+include(LoggerSanitizers)
+
+# Include warning configuration module
+include(LoggerWarnings)
+
+# Include coverage configuration module
+include(LoggerCoverage)
+
 # Include compiler checks module (following thread_system pattern)
 include(CompilerChecks)
 
@@ -214,6 +223,15 @@ endif()
 if (BUILD_TESTS)
     add_subdirectory(unittest)
     add_subdirectory(tests)
+    
+    # Enable sanitizers for test targets if requested
+    logger_enable_sanitizers_for_tests()
+    
+    # Enable warnings for all targets
+    logger_enable_warnings_for_all()
+    
+    # Enable coverage for all targets
+    logger_enable_coverage_for_all()
 endif()
 
 if (BUILD_BENCHMARKS)

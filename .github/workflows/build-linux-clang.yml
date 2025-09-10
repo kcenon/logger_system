@@ -1,0 +1,182 @@
+name: Linux Clang Build
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.github/workflows/documentation.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  workflow_dispatch:
+
+env:
+  BUILD_TYPE: Debug
+  CMAKE_VERSION: 3.16
+
+jobs:
+  build-clang:
+    name: Clang ${{ matrix.clang_version }} - ${{ matrix.build_type }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        clang_version: [12, 13, 14, 15, 16]
+        build_type: [Debug, Release]
+        include:
+          - clang_version: 14
+            sanitizer: memory
+            build_type: Debug
+          - clang_version: 15
+            sanitizer: undefined
+            build_type: Debug
+          - clang_version: 16
+            static_analysis: true
+            build_type: Debug
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+    
+    - name: Setup Clang ${{ matrix.clang_version }}
+      run: |
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        sudo add-apt-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ llvm-toolchain-$(lsb_release -cs)-${{ matrix.clang_version }} main"
+        sudo apt-get update
+        sudo apt-get install -y \
+          clang-${{ matrix.clang_version }} \
+          clang++-${{ matrix.clang_version }} \
+          clang-tools-${{ matrix.clang_version }} \
+          clang-tidy-${{ matrix.clang_version }} \
+          clang-format-${{ matrix.clang_version }} \
+          lld-${{ matrix.clang_version }} \
+          libc++-${{ matrix.clang_version }}-dev \
+          libc++abi-${{ matrix.clang_version }}-dev
+        
+        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-${{ matrix.clang_version }} 100
+        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-${{ matrix.clang_version }} 100
+        sudo update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-${{ matrix.clang_version }} 100
+        
+        clang --version
+        clang++ --version
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get install -y \
+          cmake ninja-build \
+          libgtest-dev \
+          libgmock-dev \
+          libbenchmark-dev \
+          libfmt-dev \
+          cppcheck
+    
+    - name: Configure CMake
+      run: |
+        cmake -B build \
+          -G Ninja \
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          -DCMAKE_C_COMPILER=clang-${{ matrix.clang_version }} \
+          -DCMAKE_CXX_COMPILER=clang++-${{ matrix.clang_version }} \
+          -DCMAKE_CXX_FLAGS="-stdlib=libc++" \
+          -DCMAKE_EXE_LINKER_FLAGS="-stdlib=libc++ -lc++abi" \
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+          -DBUILD_TESTS=ON \
+          -DBUILD_BENCHMARKS=${{ matrix.build_type == 'Release' && 'ON' || 'OFF' }} \
+          -DLOGGER_ENABLE_WARNINGS=ON \
+          -DLOGGER_WARNINGS_AS_ERRORS=ON \
+          -DLOGGER_ENABLE_SANITIZERS=${{ matrix.sanitizer && 'ON' || 'OFF' }} \
+          -DLOGGER_SANITIZER_TYPE=${{ matrix.sanitizer || 'none' }} \
+          -DLOGGER_STANDALONE=OFF
+    
+    - name: Build
+      run: cmake --build build --config ${{ matrix.build_type }} --parallel $(nproc)
+    
+    - name: Run clang-tidy
+      if: ${{ matrix.static_analysis }}
+      run: |
+        cd build
+        run-clang-tidy -p . \
+          -header-filter='.*' \
+          -checks='-*,bugprone-*,performance-*,readability-*,modernize-*,cppcoreguidelines-*,-modernize-use-trailing-return-type,-readability-magic-numbers,-cppcoreguidelines-avoid-magic-numbers' \
+          ../sources 2>&1 | tee clang-tidy-report.txt
+        
+        # Check if there are any warnings/errors
+        if grep -q "warning:" clang-tidy-report.txt; then
+          echo "::warning::Clang-tidy found issues"
+          cat clang-tidy-report.txt
+        fi
+    
+    - name: Run cppcheck
+      if: ${{ matrix.static_analysis }}
+      run: |
+        cppcheck --enable=all \
+                 --error-exitcode=0 \
+                 --inline-suppr \
+                 --suppress=missingInclude \
+                 --suppress=unusedFunction \
+                 --xml --xml-version=2 \
+                 -I sources/logger \
+                 sources/ 2> cppcheck.xml
+        
+        # Convert to human-readable format
+        cppcheck --enable=all \
+                 --inline-suppr \
+                 --suppress=missingInclude \
+                 --suppress=unusedFunction \
+                 -I sources/logger \
+                 sources/
+    
+    - name: Run tests
+      run: |
+        cd build
+        ctest -C ${{ matrix.build_type }} \
+          --timeout 300 \
+          --output-on-failure \
+          --parallel $(nproc) \
+          -E "stress_test|benchmark"
+      env:
+        MSAN_OPTIONS: halt_on_error=1:print_stats=1
+        UBSAN_OPTIONS: print_stacktrace=1:halt_on_error=1:print_module_map=1
+    
+    - name: Run stress tests
+      if: ${{ matrix.build_type == 'Debug' && !matrix.sanitizer }}
+      run: |
+        cd build
+        ctest -C ${{ matrix.build_type }} \
+          --timeout 600 \
+          --output-on-failure \
+          -R "stress_test"
+    
+    - name: Run benchmarks
+      if: ${{ matrix.build_type == 'Release' }}
+      run: |
+        cd build
+        ctest -C Release \
+          --timeout 300 \
+          --output-on-failure \
+          -R "benchmark"
+    
+    - name: Upload static analysis results
+      if: ${{ matrix.static_analysis }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: static-analysis-clang${{ matrix.clang_version }}
+        path: |
+          build/clang-tidy-report.txt
+          cppcheck.xml
+    
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results-clang${{ matrix.clang_version }}-${{ matrix.build_type }}
+        path: |
+          build/Testing/
+          build/*.xml

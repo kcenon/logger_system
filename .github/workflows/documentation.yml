@@ -1,0 +1,327 @@
+name: Documentation
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'sources/**'
+      - 'docs/**'
+      - 'Doxyfile'
+      - '**.md'
+      - '.github/workflows/documentation.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'sources/**'
+      - 'docs/**'
+      - 'Doxyfile'
+      - '**.md'
+  workflow_dispatch:
+  schedule:
+    # Run weekly on Sunday at 00:00 UTC
+    - cron: '0 0 * * 0'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  generate-docs:
+    name: Generate Documentation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+    
+    - name: Install documentation tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          doxygen \
+          graphviz \
+          plantuml \
+          python3-pip \
+          pandoc \
+          texlive-latex-base \
+          texlive-fonts-recommended \
+          texlive-fonts-extra \
+          texlive-latex-extra
+        
+        # Install Python documentation tools
+        pip3 install --user \
+          sphinx \
+          sphinx-rtd-theme \
+          breathe \
+          exhale \
+          recommonmark \
+          sphinx-markdown-tables \
+          m2r2
+    
+    - name: Setup Node.js for additional doc tools
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install Node.js documentation tools
+      run: |
+        npm install -g \
+          @mermaid-js/mermaid-cli \
+          markdownlint-cli \
+          markdown-pdf
+    
+    - name: Validate Markdown files
+      run: |
+        markdownlint '**/*.md' --ignore node_modules --ignore build || true
+    
+    - name: Generate Doxygen documentation
+      run: |
+        # Update Doxyfile for CI environment
+        echo "PROJECT_NUMBER = $(git describe --tags --always)" >> Doxyfile
+        echo "HTML_OUTPUT = doxygen-html" >> Doxyfile
+        echo "GENERATE_LATEX = YES" >> Doxyfile
+        echo "LATEX_OUTPUT = doxygen-latex" >> Doxyfile
+        echo "GENERATE_XML = YES" >> Doxyfile
+        echo "XML_OUTPUT = doxygen-xml" >> Doxyfile
+        
+        # Generate Doxygen docs
+        doxygen Doxyfile
+    
+    - name: Generate Sphinx documentation
+      run: |
+        # Create Sphinx configuration if it doesn't exist
+        if [ ! -f docs/conf.py ]; then
+          mkdir -p docs
+          cat > docs/conf.py << 'EOF'
+import os
+import sys
+sys.path.insert(0, os.path.abspath('..'))
+
+project = 'Logger System'
+copyright = '2025, kcenon'
+author = 'kcenon'
+
+extensions = [
+    'breathe',
+    'exhale',
+    'recommonmark',
+    'sphinx_markdown_tables',
+    'm2r2'
+]
+
+breathe_projects = {
+    "Logger System": "../doxygen-xml"
+}
+breathe_default_project = "Logger System"
+
+exhale_args = {
+    "containmentFolder": "./api",
+    "rootFileName": "library_root.rst",
+    "rootFileTitle": "Library API",
+    "doxygenStripFromPath": "../sources",
+    "createTreeView": True,
+}
+
+html_theme = 'sphinx_rtd_theme'
+html_static_path = ['_static']
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
+EOF
+        fi
+        
+        # Create index file if it doesn't exist
+        if [ ! -f docs/index.rst ]; then
+          cat > docs/index.rst << 'EOF'
+Logger System Documentation
+===========================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   readme
+   architecture
+   api/library_root
+   changelog
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+EOF
+        fi
+        
+        # Copy markdown files to docs
+        cp README.md docs/readme.md
+        cp CHANGELOG.md docs/changelog.md
+        cp ARCHITECTURE.md docs/architecture.md 2>/dev/null || true
+        
+        # Build Sphinx documentation
+        cd docs
+        sphinx-build -b html . ../sphinx-html
+        sphinx-build -b latex . ../sphinx-latex
+    
+    - name: Generate PDF documentation
+      run: |
+        # Generate PDF from LaTeX
+        cd sphinx-latex
+        make || true
+        cd ..
+        
+        # Generate PDF from Markdown
+        pandoc README.md \
+          -o readme.pdf \
+          --from markdown \
+          --pdf-engine=xelatex \
+          --toc \
+          --toc-depth=3 \
+          --highlight-style=tango
+        
+        pandoc CHANGELOG.md \
+          -o changelog.pdf \
+          --from markdown \
+          --pdf-engine=xelatex \
+          --toc
+    
+    - name: Generate API reference
+      run: |
+        # Create API reference from headers
+        mkdir -p api-reference
+        
+        # Generate markdown API reference
+        find sources -name "*.h" -o -name "*.hpp" | while read file; do
+          basename=$(basename "$file" .h)
+          basename=$(basename "$basename" .hpp)
+          echo "# API Reference: $basename" > "api-reference/${basename}.md"
+          echo "" >> "api-reference/${basename}.md"
+          echo '```cpp' >> "api-reference/${basename}.md"
+          cat "$file" >> "api-reference/${basename}.md"
+          echo '```' >> "api-reference/${basename}.md"
+        done
+    
+    - name: Create documentation archive
+      run: |
+        mkdir -p documentation
+        
+        # Copy all generated documentation
+        cp -r doxygen-html documentation/
+        cp -r sphinx-html documentation/
+        cp -r api-reference documentation/
+        cp *.pdf documentation/ 2>/dev/null || true
+        
+        # Create archive
+        tar czf documentation.tar.gz documentation/
+        zip -r documentation.zip documentation/
+    
+    - name: Upload documentation artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: documentation
+        path: |
+          documentation.tar.gz
+          documentation.zip
+          documentation/
+    
+    - name: Setup Pages
+      if: github.ref == 'refs/heads/main'
+      uses: actions/configure-pages@v3
+    
+    - name: Upload to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: documentation
+    
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      id: deployment
+      uses: actions/deploy-pages@v2
+    
+    - name: Comment PR with documentation link
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const artifactUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+          await github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `📚 Documentation has been generated for this PR!\n\n[View Documentation Artifacts](${artifactUrl})`
+          })
+    
+  check-documentation-quality:
+    name: Documentation Quality Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Check for broken links
+      uses: gaurav-nelson/github-action-markdown-link-check@v1
+      with:
+        use-quiet-mode: 'yes'
+        config-file: '.markdown-link-check.json'
+      continue-on-error: true
+    
+    - name: Check documentation completeness
+      run: |
+        # Check if all public headers have documentation
+        missing_docs=0
+        for header in $(find sources -name "*.h" -o -name "*.hpp"); do
+          if ! grep -q "[@\\]file" "$header"; then
+            echo "Missing @file documentation in: $header"
+            missing_docs=$((missing_docs + 1))
+          fi
+          if ! grep -q "[@\\]brief" "$header"; then
+            echo "Missing @brief documentation in: $header"
+            missing_docs=$((missing_docs + 1))
+          fi
+        done
+        
+        if [ $missing_docs -gt 0 ]; then
+          echo "::warning::Found $missing_docs missing documentation items"
+        fi
+    
+    - name: Generate documentation coverage report
+      run: |
+        # Count documented vs undocumented items
+        echo "# Documentation Coverage Report" > doc-coverage.md
+        echo "" >> doc-coverage.md
+        echo "## File Documentation" >> doc-coverage.md
+        
+        total_files=0
+        documented_files=0
+        
+        for header in $(find sources -name "*.h" -o -name "*.hpp"); do
+          total_files=$((total_files + 1))
+          if grep -q "[@\\]file" "$header"; then
+            documented_files=$((documented_files + 1))
+          fi
+        done
+        
+        coverage=$((documented_files * 100 / total_files))
+        echo "- Total files: $total_files" >> doc-coverage.md
+        echo "- Documented files: $documented_files" >> doc-coverage.md
+        echo "- Coverage: $coverage%" >> doc-coverage.md
+        
+        cat doc-coverage.md
+    
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: documentation-coverage
+        path: doc-coverage.md

@@ -5,6 +5,57 @@ All notable changes to the Logger System will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.0] - Phase 5 P5 CI/CD Pipeline with Sanitizers (2025-09-09)
+
+### Added - Phase 5 Task P5 Complete Implementation
+
+#### CI/CD Pipeline
+- **GitHub Actions Workflow**
+  - Multi-platform CI pipeline (Ubuntu, macOS, Windows)
+  - Sanitizer tests (AddressSanitizer, ThreadSanitizer, UndefinedBehaviorSanitizer)
+  - Compiler warning checks with multiple compilers (GCC, Clang)
+  - Code coverage analysis with gcovr/lcov
+  - Static analysis with cppcheck and clang-tidy
+  - Documentation generation with Doxygen
+  - Release build validation
+
+- **Sanitizer Configuration** (LoggerSanitizers.cmake)
+  - Support for Address, Thread, Undefined, and Memory sanitizers
+  - Platform-specific sanitizer settings
+  - Runtime options configuration
+  - Automatic sanitizer application to test targets
+
+- **Warning Configuration** (LoggerWarnings.cmake)
+  - Comprehensive warning flags for GCC, Clang, and MSVC
+  - Option to treat warnings as errors
+  - Compiler-specific warning optimizations
+  - Third-party code warning suppression
+
+- **Coverage Configuration** (LoggerCoverage.cmake)
+  - Code coverage support with gcov/lcov/gcovr
+  - HTML, XML, and JSON report generation
+  - Coverage target for easy report generation
+  - Coverage reset functionality
+
+### Improved
+- **Build System**
+  - Enhanced CMakeLists.txt with modular configuration
+  - Automatic sanitizer/warning/coverage application to targets
+  - Better feature detection and configuration
+
+- **Quality Assurance**
+  - Automated testing with multiple sanitizers
+  - Strict compiler warning enforcement
+  - Code coverage tracking
+  - Static analysis integration
+
+### Configuration Options
+- `LOGGER_ENABLE_SANITIZERS`: Enable sanitizers in debug builds
+- `LOGGER_SANITIZER_TYPE`: Select sanitizer type (address/thread/undefined/memory)
+- `LOGGER_ENABLE_WARNINGS`: Enable comprehensive compiler warnings
+- `LOGGER_WARNINGS_AS_ERRORS`: Treat warnings as errors
+- `LOGGER_ENABLE_COVERAGE`: Enable code coverage reporting
+
 ## [2.5.0] - Phase 5 P1 Comprehensive Test Suite (2025-09-09)
 
 ### Added - Phase 5 Task P1 Partial Implementation
