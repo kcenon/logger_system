@@ -21,10 +21,13 @@
 #include <chrono>
 #include <random>
 #include <sstream>
+#include <filesystem>
 
 using namespace logger_system;
 using namespace logger_system::testing;
+using namespace logger_module;
 using namespace std::chrono_literals;
+using log_level = thread_module::log_level;
 
 class stress_test : public ::testing::Test {
 protected:
@@ -53,11 +56,12 @@ TEST_F(stress_test, concurrent_logging_stress) {
     const size_t logs_per_thread = 1000;
     
     // Create logger with mock writer to track all writes
-    auto mock_writer = std::make_shared<mock_writer>();
+    auto mock_writer_inst = std::make_unique<mock_writer>();
+    auto* mock_writer_ptr = mock_writer_inst.get();
     
-    auto result = logger_builder()
+    auto result = logger_module::logger_builder()
         .with_default_pattern()
-        .add_writer("mock", mock_writer)
+        .add_writer("mock", std::move(mock_writer_inst))
         .build();
     
     ASSERT_TRUE(result.has_value());
@@ -88,7 +92,7 @@ TEST_F(stress_test, concurrent_logging_stress) {
 
     // Verify all messages were logged
     EXPECT_EQ(total_logged.load(), num_threads * logs_per_thread);
-    EXPECT_EQ(mock_writer->get_write_count(), num_threads * logs_per_thread);
+    EXPECT_EQ(mock_writer_ptr->get_write_count(), num_threads * logs_per_thread);
 
     // Calculate throughput
     double throughput = (total_logged.load() * 1000.0) / duration.count();
@@ -107,11 +111,12 @@ TEST_F(stress_test, memory_stability_stress) {
     const size_t num_iterations = 100;
     const size_t logs_per_iteration = 1000;
     
-    auto mock_writer = std::make_shared<mock_writer>();
+    auto mock_writer_inst = std::make_unique<mock_writer>();
+    auto* mock_writer_ptr = mock_writer_inst.get();
     
-    auto result = logger_builder()
+    auto result = logger_module::logger_builder()
         .with_buffer_size(10000)
-        .add_writer("mock", mock_writer)
+        .add_writer("mock", std::move(mock_writer_inst))
         .build();
     
     ASSERT_TRUE(result.has_value());
@@ -132,7 +137,7 @@ TEST_F(stress_test, memory_stability_stress) {
     }
 
     // Verify all messages were processed
-    EXPECT_EQ(mock_writer->get_write_count(), num_iterations * logs_per_iteration);
+    EXPECT_EQ(mock_writer_ptr->get_write_count(), num_iterations * logs_per_iteration);
 }
 
 /**
@@ -144,13 +149,14 @@ TEST_F(stress_test, buffer_overflow_stress) {
     const size_t buffer_size = 100;
     const size_t num_messages = 10000;
     
-    auto slow_writer = std::make_shared<mock_writer>();
-    slow_writer->set_write_delay(1ms);  // Simulate slow I/O
+    auto slow_writer_inst = std::make_unique<mock_writer>();
+    auto* slow_writer_ptr = slow_writer_inst.get();
+    slow_writer_ptr->set_write_delay(1ms);  // Simulate slow I/O
     
-    auto result = logger_builder()
+    auto result = logger_module::logger_builder()
         .with_buffer_size(buffer_size)
-        .with_overflow_policy(overflow_policy::drop_oldest)
-        .add_writer("slow", slow_writer)
+        .with_overflow_policy(logger_config::overflow_policy::drop_oldest)
+        .add_writer("slow", std::move(slow_writer_inst))
         .build();
     
     ASSERT_TRUE(result.has_value());
@@ -172,7 +178,7 @@ TEST_F(stress_test, buffer_overflow_stress) {
     auto end_time = std::chrono::steady_clock::now();
     
     // Some messages should have been dropped due to overflow
-    size_t written_count = slow_writer->get_write_count();
+    size_t written_count = slow_writer_ptr->get_write_count();
     EXPECT_LT(written_count, messages_sent.load());
     EXPECT_GT(written_count, 0);
     
@@ -187,7 +193,7 @@ TEST_F(stress_test, buffer_overflow_stress) {
  * Verifies that the logger can handle frequent writer additions and removals.
  */
 TEST_F(stress_test, writer_switching_stress) {
-    auto result = logger_builder()
+    auto result = logger_module::logger_builder()
         .with_default_pattern()
         .build();
     
@@ -195,15 +201,16 @@ TEST_F(stress_test, writer_switching_stress) {
     auto logger = std::move(result.value());
 
     const size_t num_switches = 100;
-    std::vector<std::shared_ptr<mock_writer>> writers;
+    std::vector<mock_writer*> writers;
     
     for (size_t i = 0; i < num_switches; ++i) {
         // Add a new writer
-        auto writer = std::make_shared<mock_writer>();
-        writers.push_back(writer);
+        auto writer = std::make_unique<mock_writer>();
+        auto* writer_ptr = writer.get();
+        writers.push_back(writer_ptr);
         
         std::string writer_name = "writer_" + std::to_string(i);
-        EXPECT_TRUE(logger->add_writer(writer_name, writer).has_value());
+        logger->add_writer(writer_name, std::move(writer));
         
         // Log some messages
         for (size_t j = 0; j < 10; ++j) {
@@ -230,11 +237,12 @@ TEST_F(stress_test, writer_switching_stress) {
  * Simulates realistic usage with varying message rates and sizes.
  */
 TEST_F(stress_test, random_load_pattern_stress) {
-    auto mock_writer = std::make_shared<mock_writer>();
+    auto mock_writer_inst = std::make_unique<mock_writer>();
+    auto* mock_writer_ptr = mock_writer_inst.get();
     
-    auto result = logger_builder()
+    auto result = logger_module::logger_builder()
         .with_buffer_size(1000)
-        .add_writer("mock", mock_writer)
+        .add_writer("mock", std::move(mock_writer_inst))
         .build();
     
     ASSERT_TRUE(result.has_value());
@@ -271,7 +279,7 @@ TEST_F(stress_test, random_load_pattern_stress) {
     std::this_thread::sleep_for(100ms);
     
     // Verify all messages were written
-    EXPECT_EQ(mock_writer->get_write_count(), message_count);
+    EXPECT_EQ(mock_writer_ptr->get_write_count(), message_count);
     
     std::cout << "Random load test: Processed " << message_count 
               << " messages in " << duration_seconds << " seconds" << std::endl;
@@ -283,12 +291,14 @@ TEST_F(stress_test, random_load_pattern_stress) {
  * Verifies that the logger continues operating when writers fail.
  */
 TEST_F(stress_test, writer_failure_recovery_stress) {
-    auto failing_writer = std::make_shared<mock_writer>();
-    auto backup_writer = std::make_shared<mock_writer>();
+    auto failing_writer_inst = std::make_unique<mock_writer>();
+    auto* failing_writer_ptr = failing_writer_inst.get();
+    auto backup_writer_inst = std::make_unique<mock_writer>();
+    auto* backup_writer_ptr = backup_writer_inst.get();
     
-    auto result = logger_builder()
-        .add_writer("primary", failing_writer)
-        .add_writer("backup", backup_writer)
+    auto result = logger_module::logger_builder()
+        .add_writer("primary", std::move(failing_writer_inst))
+        .add_writer("backup", std::move(backup_writer_inst))
         .build();
     
     ASSERT_TRUE(result.has_value());
@@ -299,22 +309,22 @@ TEST_F(stress_test, writer_failure_recovery_stress) {
     for (size_t i = 0; i < num_messages; ++i) {
         // Simulate intermittent failures
         if (i % 100 == 50) {
-            failing_writer->set_should_fail(true);
+            failing_writer_ptr->set_should_fail(true);
         } else if (i % 100 == 75) {
-            failing_writer->set_should_fail(false);
+            failing_writer_ptr->set_should_fail(false);
         }
         
-        logger->log(log_level::warn, "Failure test message " + std::to_string(i));
+        logger->log(log_level::warning, "Failure test message " + std::to_string(i));
     }
     
     // Backup writer should have all messages
-    EXPECT_EQ(backup_writer->get_write_count(), num_messages);
+    EXPECT_EQ(backup_writer_ptr->get_write_count(), num_messages);
     
     // Primary writer should have fewer due to failures
-    EXPECT_LT(failing_writer->get_write_count(), num_messages);
+    EXPECT_LT(failing_writer_ptr->get_write_count(), num_messages);
     
-    std::cout << "Failure recovery test: Primary wrote " << failing_writer->get_write_count()
-              << ", Backup wrote " << backup_writer->get_write_count() << std::endl;
+    std::cout << "Failure recovery test: Primary wrote " << failing_writer_ptr->get_write_count()
+              << ", Backup wrote " << backup_writer_ptr->get_write_count() << std::endl;
 }
 
 /**
@@ -324,11 +334,14 @@ TEST_F(stress_test, writer_failure_recovery_stress) {
  */
 TEST_F(stress_test, async_writer_performance_stress) {
     auto file_path = test_dir_ / "async_stress.log";
-    auto file_writer = std::make_shared<file_writer>(file_path.string());
-    auto async_writer_inst = std::make_shared<async_writer>(file_writer, 1000);
+    auto file_writer_inst = std::make_unique<logger_module::file_writer>(file_path.string());
+    auto async_writer_inst = std::make_unique<logger_module::async_writer>(std::move(file_writer_inst), 1000);
     
-    auto result = logger_builder()
-        .add_writer("async", async_writer_inst)
+    // Need to keep a raw pointer for later use
+    auto* async_writer_ptr = async_writer_inst.get();
+    
+    auto result = logger_module::logger_builder()
+        .add_writer("async", std::move(async_writer_inst))
         .build();
     
     ASSERT_TRUE(result.has_value());
@@ -342,8 +355,8 @@ TEST_F(stress_test, async_writer_performance_stress) {
         logger->log(log_level::info, "Async performance test " + std::to_string(i));
     }
     
-    // Force flush
-    async_writer_inst->flush();
+    // Force flush using logger
+    logger->flush();
     
     auto end_time = std::chrono::steady_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);

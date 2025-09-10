@@ -13,7 +13,7 @@ add_executable(integration_test
 # Link with logger library and dependencies
 target_link_libraries(integration_test
     PRIVATE
-        logger_system
+        logger
         GTest::gtest
         GTest::gtest_main
         Threads::Threads

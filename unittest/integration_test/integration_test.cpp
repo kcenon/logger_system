@@ -27,7 +27,9 @@
 
 using namespace logger_system;
 using namespace logger_system::testing;
+using namespace logger_module;
 using namespace std::chrono_literals;
+using log_level = thread_module::log_level;
 
 class integration_test : public ::testing::Test {
 protected:
@@ -55,12 +57,12 @@ TEST_F(integration_test, complete_pipeline_integration) {
     auto log_file = test_dir_ / "integration.log";
     
     // Create a complete logger with multiple writers and monitoring
-    auto monitor = std::make_shared<basic_monitor>();
-    auto file_writer_inst = std::make_shared<file_writer>(log_file.string());
-    auto console_writer_inst = std::make_shared<console_writer>();
-    auto async_file = std::make_shared<async_writer>(file_writer_inst, 100);
+    auto monitor = std::make_shared<logger_module::basic_monitor>();
+    auto file_writer_inst = std::make_shared<logger_module::file_writer>(log_file.string());
+    auto console_writer_inst = std::make_shared<logger_module::console_writer>();
+    auto async_file = std::make_shared<logger_module::async_writer>(file_writer_inst, 100);
     
-    auto result = logger_builder()
+    auto result = logger_module::logger_builder()
         .with_default_pattern()
         .with_buffer_size(1000)
         .with_monitoring(monitor)
@@ -74,7 +76,7 @@ TEST_F(integration_test, complete_pipeline_integration) {
     // Log messages at different levels
     logger->log(log_level::debug, "Debug message for integration test");
     logger->log(log_level::info, "Info message for integration test");
-    logger->log(log_level::warn, "Warning message for integration test");
+    logger->log(log_level::warning, "Warning message for integration test");
     logger->log(log_level::error, "Error message for integration test");
     
     // Wait for async operations
@@ -107,20 +109,20 @@ TEST_F(integration_test, complete_pipeline_integration) {
  */
 TEST_F(integration_test, di_container_integration) {
     // Create DI container with multiple writers
-    auto container = std::make_shared<lightweight_container>();
+    auto container = std::make_shared<logger_module::lightweight_container>();
     
     // Register writer factories
     container->register_factory("console", []() {
-        return std::make_shared<console_writer>();
+        return std::make_shared<logger_module::console_writer>();
     });
     
     container->register_factory("file", [this]() {
         auto path = test_dir_ / "di_test.log";
-        return std::make_shared<file_writer>(path.string());
+        return std::make_shared<logger_module::file_writer>(path.string());
     });
     
     // Build logger with DI support
-    auto result = logger_builder()
+    auto result = logger_module::logger_builder()
         .with_di_container(container)
         .with_writer_from_di("console")
         .with_writer_from_di("file")
@@ -145,9 +147,9 @@ TEST_F(integration_test, di_container_integration) {
 TEST_F(integration_test, configuration_templates_integration) {
     // Test production configuration
     {
-        auto prod_result = logger_builder()
-            .apply_template(configuration_template::production)
-            .add_writer("file", std::make_shared<file_writer>((test_dir_ / "prod.log").string()))
+        auto prod_result = logger_module::logger_builder()
+            .apply_template(logger_system::configuration_template::production)
+            .add_writer("file", std::make_shared<logger_module::file_writer>((test_dir_ / "prod.log").string()))
             .build();
         
         ASSERT_TRUE(prod_result.has_value());
@@ -164,9 +166,9 @@ TEST_F(integration_test, configuration_templates_integration) {
     
     // Test debug configuration
     {
-        auto debug_result = logger_builder()
-            .apply_template(configuration_template::debug)
-            .add_writer("file", std::make_shared<file_writer>((test_dir_ / "debug.log").string()))
+        auto debug_result = logger_module::logger_builder()
+            .apply_template(logger_system::configuration_template::debug)
+            .add_writer("file", std::make_shared<logger_module::file_writer>((test_dir_ / "debug.log").string()))
             .build();
         
         ASSERT_TRUE(debug_result.has_value());
@@ -188,10 +190,10 @@ TEST_F(integration_test, configuration_templates_integration) {
  */
 TEST_F(integration_test, batch_writer_integration) {
     auto log_file = test_dir_ / "batch.log";
-    auto file_writer_inst = std::make_shared<file_writer>(log_file.string());
-    auto batch_writer_inst = std::make_shared<batch_writer>(file_writer_inst, 10, 100ms);
+    auto file_writer_inst = std::make_shared<logger_module::file_writer>(log_file.string());
+    auto batch_writer_inst = std::make_shared<logger_module::batch_writer>(file_writer_inst, 10, 100ms);
     
-    auto result = logger_builder()
+    auto result = logger_module::logger_builder()
         .add_writer("batch", batch_writer_inst)
         .build();
     
@@ -224,10 +226,10 @@ TEST_F(integration_test, batch_writer_integration) {
  * Verifies that monitoring and health checks work correctly together.
  */
 TEST_F(integration_test, monitoring_health_integration) {
-    auto monitor = std::make_shared<basic_monitor>();
+    auto monitor = std::make_shared<logger_module::basic_monitor>();
     auto mock_writer = std::make_shared<mock_writer>();
     
-    auto result = logger_builder()
+    auto result = logger_module::logger_builder()
         .with_monitoring(monitor)
         .with_health_check_interval(50ms)
         .add_writer("mock", mock_writer)
@@ -247,7 +249,7 @@ TEST_F(integration_test, monitoring_health_integration) {
     // Check health status
     auto health_result = monitor->get_health_status();
     ASSERT_TRUE(health_result.has_value());
-    EXPECT_EQ(health_result.value(), health_status::healthy);
+    EXPECT_EQ(health_result.value(), logger_module::health_status::healthy);
     
     // Check metrics
     auto metrics_result = monitor->get_metrics();
@@ -280,7 +282,7 @@ TEST_F(integration_test, monitoring_health_integration) {
  */
 TEST_F(integration_test, multi_writer_synchronization) {
     std::vector<std::shared_ptr<mock_writer>> writers;
-    auto logger_builder_inst = logger_builder();
+    auto logger_builder_inst = logger_module::logger_builder();
     
     // Add multiple mock writers
     for (int i = 0; i < 5; ++i) {
@@ -325,7 +327,7 @@ TEST_F(integration_test, error_recovery_fallback) {
     auto primary_writer = std::make_shared<mock_writer>();
     auto fallback_writer = std::make_shared<mock_writer>();
     
-    auto result = logger_builder()
+    auto result = logger_module::logger_builder()
         .with_error_handler([](const error_code& error) {
             // Custom error handler
             std::cerr << "Logger error: " << error.message() << std::endl;
@@ -368,7 +370,7 @@ TEST_F(integration_test, performance_tuning_strategies) {
     // Test conservative strategy
     {
         auto mock_writer = std::make_shared<mock_writer>();
-        auto result = logger_builder()
+        auto result = logger_module::logger_builder()
             .apply_performance_strategy(performance_strategy::conservative)
             .add_writer("mock", mock_writer)
             .build();
@@ -383,7 +385,7 @@ TEST_F(integration_test, performance_tuning_strategies) {
     // Test aggressive strategy
     {
         auto mock_writer = std::make_shared<mock_writer>();
-        auto result = logger_builder()
+        auto result = logger_module::logger_builder()
             .apply_performance_strategy(performance_strategy::aggressive)
             .add_writer("mock", mock_writer)
             .build();
@@ -407,7 +409,7 @@ TEST_F(integration_test, environment_based_configuration) {
     setenv("LOG_LEVEL", "warn", 1);
     
     auto mock_writer = std::make_shared<mock_writer>();
-    auto result = logger_builder()
+    auto result = logger_module::logger_builder()
         .detect_environment()
         .add_writer("mock", mock_writer)
         .build();

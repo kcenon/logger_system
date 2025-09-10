@@ -11,11 +11,14 @@
 #pragma once
 
 #include "../../sources/logger/monitoring/monitoring_interface.h"
+#include "../../sources/logger/error_codes.h"
 #include <atomic>
 #include <map>
 #include <mutex>
 
 namespace logger_system::testing {
+
+using namespace logger_module;
 
 /**
  * @brief Mock monitor for unit testing
@@ -44,11 +47,11 @@ public:
     ~mock_monitor() override = default;
 
     // monitoring_interface implementation
-    result<monitoring_data> get_metrics() const override {
-        metric_query_count_.fetch_add(1);
+    result<monitoring_data> get_metrics() const {
+        metric_query_count_.fetch_add(1, std::memory_order_relaxed);
 
         if (should_fail_.load()) {
-            return error_code::monitoring_failed;
+            return make_logger_error<monitoring_data>(logger_error_code::operation_failed);
         }
 
         monitoring_data data;
@@ -62,20 +65,20 @@ public:
         return data;
     }
 
-    result<health_status> get_health_status() const override {
-        health_check_count_.fetch_add(1);
+    result<health_status> get_health_status() const {
+        health_check_count_.fetch_add(1, std::memory_order_relaxed);
 
         if (should_fail_.load()) {
-            return error_code::monitoring_failed;
+            return make_logger_error<health_status>(logger_error_code::operation_failed);
         }
 
         return health_.load();
     }
 
     result_void record_event(const std::string& event_name, 
-                            const std::string& details) override {
+                            const std::string& details) {
         if (should_fail_.load()) {
-            return error_code::monitoring_failed;
+            return make_logger_error(logger_error_code::operation_failed);
         }
 
         // Simply increment a counter for the event

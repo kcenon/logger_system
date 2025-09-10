@@ -11,12 +11,15 @@
 #pragma once
 
 #include "../../sources/logger/di/di_container_interface.h"
+#include "../../sources/logger/error_codes.h"
 #include "mock_writer.hpp"
 #include <unordered_map>
 #include <functional>
 #include <atomic>
 
 namespace logger_system::testing {
+
+using namespace logger_module;
 
 /**
  * @brief Mock DI container for unit testing
@@ -34,7 +37,7 @@ private:
     mutable std::unordered_map<std::string, size_t> resolution_counts_;
     std::atomic<bool> should_fail_{false};
     std::atomic<bool> use_singletons_{false};
-    error_code failure_error_{error_code::component_not_found};
+    logger_error_code failure_error_{logger_error_code::component_not_found};
 
 public:
     mock_di_container() = default;
@@ -47,7 +50,7 @@ public:
         resolution_counts_[name]++;
 
         if (should_fail_.load()) {
-            return failure_error_;
+            return make_logger_error<std::shared_ptr<base_writer>>(failure_error_);
         }
 
         // Check singletons first if enabled
@@ -61,7 +64,7 @@ public:
         // Try factory
         auto factory_it = factories_.find(name);
         if (factory_it == factories_.end()) {
-            return error_code::component_not_found;
+            return make_logger_error<std::shared_ptr<base_writer>>(logger_error_code::component_not_found);
         }
 
         auto instance = factory_it->second();
@@ -77,7 +80,7 @@ public:
     result_void register_factory(const std::string& name,
                                 std::function<std::shared_ptr<base_writer>()> factory) override {
         if (should_fail_.load()) {
-            return failure_error_;
+            return make_logger_error(failure_error_);
         }
 
         std::lock_guard<std::mutex> lock(mutex_);
@@ -89,7 +92,7 @@ public:
     result_void register_instance(const std::string& name,
                                  std::shared_ptr<base_writer> instance) {
         if (should_fail_.load()) {
-            return failure_error_;
+            return make_logger_error(failure_error_);
         }
 
         std::lock_guard<std::mutex> lock(mutex_);
@@ -97,24 +100,21 @@ public:
         return {};
     }
 
-    void set_should_fail(bool fail, error_code error = error_code::component_not_found) {
+    // Control methods
+    void set_should_fail(bool fail, logger_error_code error = logger_error_code::component_not_found) {
         should_fail_.store(fail);
         failure_error_ = error;
     }
 
-    void enable_singletons(bool enable = true) {
-        use_singletons_.store(enable);
+    void set_use_singletons(bool use) {
+        use_singletons_.store(use);
     }
 
-    void clear() {
+    void reset() {
         std::lock_guard<std::mutex> lock(mutex_);
         factories_.clear();
         singletons_.clear();
         resolution_counts_.clear();
-    }
-
-    void reset() {
-        clear();
         should_fail_.store(false);
         use_singletons_.store(false);
     }
@@ -126,91 +126,84 @@ public:
         return it != resolution_counts_.end() ? it->second : 0;
     }
 
-    size_t get_total_resolution_count() const {
+    std::vector<std::string> get_registered_names() const {
         std::lock_guard<std::mutex> lock(mutex_);
-        size_t total = 0;
-        for (const auto& [name, count] : resolution_counts_) {
-            total += count;
+        std::vector<std::string> names;
+        for (const auto& [name, _] : factories_) {
+            names.push_back(name);
         }
-        return total;
+        return names;
     }
 
-    bool has_factory(const std::string& name) const {
+    bool has_component(const std::string& name) const {
         std::lock_guard<std::mutex> lock(mutex_);
-        return factories_.find(name) != factories_.end();
-    }
-
-    bool has_singleton(const std::string& name) const {
-        std::lock_guard<std::mutex> lock(mutex_);
-        return singletons_.find(name) != singletons_.end();
-    }
-
-    size_t factory_count() const {
-        std::lock_guard<std::mutex> lock(mutex_);
-        return factories_.size();
-    }
-
-    size_t singleton_count() const {
-        std::lock_guard<std::mutex> lock(mutex_);
-        return singletons_.size();
+        return factories_.find(name) != factories_.end() ||
+               singletons_.find(name) != singletons_.end();
     }
 };
 
 /**
- * @brief Test helper for setting up mock DI scenarios
+ * @brief Test helper for DI container scenarios
  */
 class mock_di_scenario {
 private:
     std::shared_ptr<mock_di_container> container_;
-    std::shared_ptr<mock_writer_factory> writer_factory_;
+    std::vector<std::shared_ptr<mock_writer>> mock_writers_;
 
 public:
-    mock_di_scenario()
-        : container_(std::make_shared<mock_di_container>())
-        , writer_factory_(std::make_shared<mock_writer_factory>()) {}
+    mock_di_scenario() 
+        : container_(std::make_shared<mock_di_container>()) {}
 
-    std::shared_ptr<mock_di_container> get_container() const {
+    std::shared_ptr<mock_di_container> get_container() {
         return container_;
     }
 
-    std::shared_ptr<mock_writer_factory> get_writer_factory() const {
-        return writer_factory_;
-    }
-
     void setup_default_writers() {
-        // Register common writer types
         container_->register_factory("console", [this]() {
-            return writer_factory_->create_writer();
+            auto writer = std::make_shared<mock_writer>();
+            mock_writers_.push_back(writer);
+            return writer;
         });
 
         container_->register_factory("file", [this]() {
-            return writer_factory_->create_writer();
+            auto writer = std::make_shared<mock_writer>();
+            mock_writers_.push_back(writer);
+            return writer;
         });
 
         container_->register_factory("async", [this]() {
-            return writer_factory_->create_writer();
+            auto writer = std::make_shared<mock_writer>();
+            mock_writers_.push_back(writer);
+            return writer;
         });
     }
 
     void setup_failing_writer(const std::string& name) {
         container_->register_factory(name, [this]() {
-            auto writer = writer_factory_->create_writer();
+            auto writer = std::make_shared<mock_writer>();
             writer->set_should_fail(true);
+            mock_writers_.push_back(writer);
             return writer;
         });
     }
 
-    void setup_slow_writer(const std::string& name, std::chrono::milliseconds delay) {
+    void setup_slow_writer(const std::string& name, 
+                          std::chrono::milliseconds delay) {
         container_->register_factory(name, [this, delay]() {
-            auto writer = writer_factory_->create_writer();
+            auto writer = std::make_shared<mock_writer>();
             writer->set_write_delay(delay);
+            mock_writers_.push_back(writer);
             return writer;
         });
     }
 
     void reset() {
         container_->reset();
-        writer_factory_->reset_all();
+        mock_writers_.clear();
+    }
+
+    std::vector<std::shared_ptr<mock_writer>> get_created_writers() const {
+        return mock_writers_;
     }
 };
 
