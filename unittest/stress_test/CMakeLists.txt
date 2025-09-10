@@ -46,16 +46,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     target_compile_definitions(stress_test PRIVATE MACOS_PLATFORM)
 endif()
 
-# Enable sanitizers in debug mode
-if(CMAKE_BUILD_TYPE STREQUAL "Debug" AND LOGGER_ENABLE_SANITIZERS)
-    target_compile_options(stress_test PRIVATE
-        -fsanitize=address
-        -fsanitize=thread
-        -fsanitize=undefined
-    )
-    target_link_options(stress_test PRIVATE
-        -fsanitize=address
-        -fsanitize=thread
-        -fsanitize=undefined
-    )
+# Apply sanitizers using the logger module function
+if(LOGGER_ENABLE_SANITIZERS)
+    logger_add_sanitizers(stress_test)
 endif()

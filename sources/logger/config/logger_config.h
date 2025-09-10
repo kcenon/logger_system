@@ -45,6 +45,8 @@ struct logger_config {
     bool enable_crash_handler = false;
     bool enable_structured_logging = false;
     bool enable_color_output = true;
+    bool enable_timestamp = true;
+    bool enable_source_location = false;
     
     // Queue settings
     std::size_t max_queue_size = 10000;

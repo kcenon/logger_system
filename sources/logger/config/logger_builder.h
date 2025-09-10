@@ -324,7 +324,7 @@ public:
         config_.enable_batch_writing = template_config.enable_batch_writing;
         config_.batch_size = template_config.batch_size;
         config_.flush_interval = template_config.flush_interval;
-        config_.overflow_policy = template_config.overflow_policy_type;
+        config_.queue_overflow_policy = template_config.overflow_policy_type;
         return *this;
     }
     
@@ -341,7 +341,7 @@ public:
         config_.enable_batch_writing = perf_config.enable_batch_writing;
         config_.batch_size = perf_config.batch_size;
         config_.flush_interval = perf_config.flush_interval;
-        config_.overflow_policy = perf_config.overflow_policy_type;
+        config_.queue_overflow_policy = perf_config.overflow_policy_type;
         return *this;
     }
     
@@ -356,9 +356,9 @@ public:
         if (env) {
             std::string env_str(env);
             if (env_str == "production") {
-                apply_template(configuration_template::production);
+                apply_template(logger_system::configuration_template::production);
             } else if (env_str == "debug" || env_str == "development") {
-                apply_template(configuration_template::debug);
+                apply_template(logger_system::configuration_template::debug);
             }
         }
         
@@ -369,7 +369,7 @@ public:
             else if (level_str == "info") config_.min_level = thread_module::log_level::info;
             else if (level_str == "warn") config_.min_level = thread_module::log_level::warning;
             else if (level_str == "error") config_.min_level = thread_module::log_level::error;
-            else if (level_str == "fatal") config_.min_level = thread_module::log_level::fatal;
+            else if (level_str == "fatal") config_.min_level = thread_module::log_level::error; // Note: fatal mapped to error
         }
         
         return *this;
@@ -425,16 +425,6 @@ public:
      */
     logger_builder& with_error_handler(std::function<void(const logger_error_code&)> handler) {
         error_handler_ = handler;
-        return *this;
-    }
-    
-    /**
-     * @brief Set overflow policy
-     * @param policy Overflow policy to use
-     * @return Reference to builder for chaining
-     */
-    logger_builder& with_overflow_policy(overflow_policy policy) {
-        config_.overflow_policy = policy;
         return *this;
     }
     

@@ -125,14 +125,8 @@ function(logger_configure_target target)
     )
     
     # Add sanitizers if enabled
-    if(LOGGER_ENABLE_SANITIZERS)
-        if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
-            target_compile_options(${target} PUBLIC -fsanitize=address,thread -fno-omit-frame-pointer)
-            target_link_options(${target} PUBLIC -fsanitize=address,thread)
-        else()
-            message(WARNING "Sanitizers are only supported with Clang and GCC")
-        endif()
-    endif()
+    # Note: Don't add sanitizers here - they're handled by LoggerSanitizers.cmake
+    # This prevents conflicts between address and thread sanitizers
     
     # Add coverage flags if enabled
     if(LOGGER_ENABLE_COVERAGE)
