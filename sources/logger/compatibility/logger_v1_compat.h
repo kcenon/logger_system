@@ -23,6 +23,10 @@
 #include <cstdio>
 
 namespace logger_module {
+
+// Type alias for convenience
+using log_level = thread_module::log_level;
+
 namespace v1_compat {
 
 /**
@@ -57,42 +61,48 @@ inline std::string format_string(const char* fmt, ...) {
 #define LOG_TRACE(logger, ...) \
     do { \
         if (logger) { \
-            logger->trace(logger_module::v1_compat::format_string(__VA_ARGS__)); \
+            logger->log(thread_module::log_level::trace, \
+                       logger_module::v1_compat::format_string(__VA_ARGS__)); \
         } \
     } while(0)
 
 #define LOG_DEBUG(logger, ...) \
     do { \
         if (logger) { \
-            logger->debug(logger_module::v1_compat::format_string(__VA_ARGS__)); \
+            logger->log(thread_module::log_level::debug, \
+                       logger_module::v1_compat::format_string(__VA_ARGS__)); \
         } \
     } while(0)
 
 #define LOG_INFO(logger, ...) \
     do { \
         if (logger) { \
-            logger->info(logger_module::v1_compat::format_string(__VA_ARGS__)); \
+            logger->log(thread_module::log_level::info, \
+                       logger_module::v1_compat::format_string(__VA_ARGS__)); \
         } \
     } while(0)
 
 #define LOG_WARNING(logger, ...) \
     do { \
         if (logger) { \
-            logger->warning(logger_module::v1_compat::format_string(__VA_ARGS__)); \
+            logger->log(thread_module::log_level::warning, \
+                       logger_module::v1_compat::format_string(__VA_ARGS__)); \
         } \
     } while(0)
 
 #define LOG_ERROR(logger, ...) \
     do { \
         if (logger) { \
-            logger->error(logger_module::v1_compat::format_string(__VA_ARGS__)); \
+            logger->log(thread_module::log_level::error, \
+                       logger_module::v1_compat::format_string(__VA_ARGS__)); \
         } \
     } while(0)
 
 #define LOG_CRITICAL(logger, ...) \
     do { \
         if (logger) { \
-            logger->critical(logger_module::v1_compat::format_string(__VA_ARGS__)); \
+            logger->log(thread_module::log_level::error, \
+                       logger_module::v1_compat::format_string(__VA_ARGS__)); \
         } \
     } while(0)
 
@@ -102,9 +112,13 @@ inline std::string format_string(const char* fmt, ...) {
  */
 [[deprecated("Use logger_builder to create loggers")]]
 inline logger* create_logger() {
-    static auto modern_logger = logger_builder()
-        .with_console_writer()
+    static std::unique_ptr<logger> modern_logger;
+    auto result = logger_builder()
+        .add_writer("console", std::make_unique<console_writer>())
         .build();
+    if (result) {
+        modern_logger = std::move(result.value());
+    }
     return modern_logger.get();
 }
 
@@ -112,12 +126,15 @@ inline logger* create_logger() {
  * @brief Legacy logger creation with name
  * @deprecated Use logger_builder with with_name()
  */
-[[deprecated("Use logger_builder with with_name()")]]
+[[deprecated("Use logger_builder with add_writer()")]]
 inline logger* create_logger(const std::string& name) {
-    static auto modern_logger = logger_builder()
-        .with_name(name)
-        .with_console_writer()
+    static std::unique_ptr<logger> modern_logger;
+    auto result = logger_builder()
+        .add_writer("console", std::make_unique<console_writer>())
         .build();
+    if (result) {
+        modern_logger = std::move(result.value());
+    }
     return modern_logger.get();
 }
 
@@ -125,11 +142,15 @@ inline logger* create_logger(const std::string& name) {
  * @brief Legacy file logger creation
  * @deprecated Use logger_builder with with_file_writer()
  */
-[[deprecated("Use logger_builder with with_file_writer()")]]
+[[deprecated("Use logger_builder with add_writer()")]]
 inline logger* create_file_logger(const std::string& filename) {
-    static auto modern_logger = logger_builder()
-        .with_file_writer(filename)
+    static std::unique_ptr<logger> modern_logger;
+    auto result = logger_builder()
+        .add_writer("file", std::make_unique<file_writer>(filename))
         .build();
+    if (result) {
+        modern_logger = std::move(result.value());
+    }
     return modern_logger.get();
 }
 
@@ -143,10 +164,7 @@ inline void add_writer(logger* log, base_writer* writer) {
         throw std::invalid_argument("Null logger or writer");
     }
     
-    auto result = log->add_writer(std::unique_ptr<base_writer>(writer));
-    if (!result) {
-        throw std::runtime_error("Failed to add writer: " + result.error().message());
-    }
+    log->add_writer("writer", std::unique_ptr<base_writer>(writer));
 }
 
 /**
@@ -159,11 +177,7 @@ inline void add_console_writer(logger* log) {
         throw std::invalid_argument("Null logger");
     }
     
-    auto writer = std::make_unique<console_writer>();
-    auto result = log->add_writer(std::move(writer));
-    if (!result) {
-        throw std::runtime_error("Failed to add console writer: " + result.error().message());
-    }
+    log->add_writer("console", std::make_unique<console_writer>());
 }
 
 /**
@@ -176,11 +190,7 @@ inline void add_file_writer(logger* log, const std::string& filename) {
         throw std::invalid_argument("Null logger");
     }
     
-    auto writer = std::make_unique<file_writer>(filename);
-    auto result = log->add_writer(std::move(writer));
-    if (!result) {
-        throw std::runtime_error("Failed to add file writer: " + result.error().message());
-    }
+    log->add_writer("file", std::make_unique<file_writer>(filename));
 }
 
 /**
@@ -233,14 +243,16 @@ struct [[deprecated("Use logger_builder for configuration")]] logger_config_v1 {
      */
     [[deprecated("Use logger_builder directly")]]
     std::shared_ptr<logger> create() const {
-        return logger_builder()
+        auto result = logger_builder()
             .with_min_level(level)
-            .with_async_mode(async)
+            .with_async(async)
             .with_buffer_size(buffer_size)
-            .with_pattern(pattern)
-            .with_colored_output(colored)
-            .with_console_writer()
+            .add_writer("console", std::make_unique<console_writer>())
             .build();
+        if (result) {
+            return std::move(result.value());
+        }
+        return nullptr;
     }
 };
 
@@ -250,9 +262,15 @@ struct [[deprecated("Use logger_builder for configuration")]] logger_config_v1 {
  */
 [[deprecated("Use dependency injection instead of global logger")]]
 inline logger* get_global_logger() {
-    static auto global = logger_builder()
-        .with_console_writer()
-        .build();
+    static std::unique_ptr<logger> global;
+    if (!global) {
+        auto result = logger_builder()
+            .add_writer("console", std::make_unique<console_writer>())
+            .build();
+        if (result) {
+            global = std::move(result.value());
+        }
+    }
     return global.get();
 }
 

@@ -475,7 +475,21 @@ public:
         config_.enable_batch_writing = template_config.enable_batch_writing;
         config_.batch_size = template_config.batch_size;
         config_.flush_interval = template_config.flush_interval;
-        config_.queue_overflow_policy = template_config.overflow_policy_type;
+        // Convert logger_system::overflow_policy to logger_config::overflow_policy
+        switch (template_config.overflow_policy_type) {
+            case logger_system::overflow_policy::block:
+                config_.queue_overflow_policy = logger_config::overflow_policy::block;
+                break;
+            case logger_system::overflow_policy::drop_oldest:
+                config_.queue_overflow_policy = logger_config::overflow_policy::drop_oldest;
+                break;
+            case logger_system::overflow_policy::drop_newest:
+                config_.queue_overflow_policy = logger_config::overflow_policy::drop_newest;
+                break;
+            case logger_system::overflow_policy::grow:
+                config_.queue_overflow_policy = logger_config::overflow_policy::grow;
+                break;
+        }
         return *this;
     }
     
@@ -492,7 +506,21 @@ public:
         config_.enable_batch_writing = perf_config.enable_batch_writing;
         config_.batch_size = perf_config.batch_size;
         config_.flush_interval = perf_config.flush_interval;
-        config_.queue_overflow_policy = perf_config.overflow_policy_type;
+        // Convert logger_system::overflow_policy to logger_config::overflow_policy
+        switch (perf_config.overflow_policy_type) {
+            case logger_system::overflow_policy::block:
+                config_.queue_overflow_policy = logger_config::overflow_policy::block;
+                break;
+            case logger_system::overflow_policy::drop_oldest:
+                config_.queue_overflow_policy = logger_config::overflow_policy::drop_oldest;
+                break;
+            case logger_system::overflow_policy::drop_newest:
+                config_.queue_overflow_policy = logger_config::overflow_policy::drop_newest;
+                break;
+            case logger_system::overflow_policy::grow:
+                config_.queue_overflow_policy = logger_config::overflow_policy::grow;
+                break;
+        }
         return *this;
     }
     

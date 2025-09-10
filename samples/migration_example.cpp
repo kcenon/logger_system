@@ -56,38 +56,28 @@ void modern_v2_code_example() {
     std::cout << "\n=== Modern v2 Code ===\n";
     
     // Modern logger creation with builder pattern
-    auto logger = logger_builder()
-        .with_name("modern_app")
+    auto result = logger_builder()
         .with_min_level(log_level::debug)
-        .with_console_writer()
-        .with_file_writer("modern.log")
-        .with_rotation(10 * 1024 * 1024)  // 10MB rotation
-        .with_colored_output(true)
+        .add_writer("console", std::make_unique<console_writer>())
+        .add_writer("file", std::make_unique<file_writer>("modern.log"))
+        .with_file_output(".", "modern", 10 * 1024 * 1024, 5)  // 10MB rotation
         .build();
     
-    // Modern structured logging
-    logger->info("Application started", {
-        {"timestamp", "2025-09-10"},
-        {"version", "2.0.0"}
-    });
+    if (!result) {
+        std::cerr << "Failed to create logger\n";
+        return;
+    }
+    auto logger = std::move(result.value());
     
-    logger->debug("Debug information", {
-        {"value", 42},
-        {"type", "answer"}
-    });
+    // Modern logging
+    logger->log(thread_module::log_level::info, "Application started [timestamp: 2025-09-10, version: 2.0.0]");
     
-    logger->error("Request failed", {
-        {"error_code", 404},
-        {"message", "Not found"},
-        {"path", "/api/resource"}
-    });
+    logger->log(thread_module::log_level::debug, "Debug information [value: 42, type: answer]");
+    
+    logger->log(thread_module::log_level::error, "Request failed [error_code: 404, message: Not found, path: /api/resource]");
     
     // Using modern features
-    logger->info("Performance metrics", {
-        {"latency_ms", 45.2},
-        {"throughput", 1000},
-        {"cpu_usage", 0.65}
-    });
+    logger->log(thread_module::log_level::info, "Performance metrics [latency_ms: 45.2, throughput: 1000, cpu_usage: 0.65]");
 }
 
 /**
@@ -108,10 +98,13 @@ void api_comparison_example() {
     
     // v2 style
     {
-        auto v2_logger = logger_builder()
-            .with_file_writer("app_v2.log")
+        auto result = logger_builder()
+            .add_writer("file", std::make_unique<file_writer>("app_v2.log"))
             .build();
-        v2_logger->info("Created with v2 API");
+        if (result) {
+            auto v2_logger = std::move(result.value());
+            v2_logger->log(thread_module::log_level::info, "Created with v2 API");
+        }
     }
     
     // ========== Configuration ==========
@@ -130,18 +123,28 @@ void api_comparison_example() {
     
     // v2 style
     {
-        auto v2_logger = logger_builder()
+        auto result = logger_builder()
             .with_min_level(log_level::warning)
             .with_async(true)
             .with_buffer_size(10000)
+            .add_writer("console", std::make_unique<console_writer>())
             .build();
-        v2_logger->warning("Configured with v2 style", {});
+        if (result) {
+            auto v2_logger = std::move(result.value());
+            v2_logger->log(thread_module::log_level::warning, "Configured with v2 style");
+        }
     }
     
     // ========== Logging ==========
     std::cout << "\nLogging:\n";
     
-    auto logger = logger_builder().with_console_writer().build();
+    auto result = logger_builder()
+        .add_writer("console", std::make_unique<console_writer>())
+        .build();
+    if (!result) {
+        return;
+    }
+    auto logger = std::move(result.value());
     
     // v1 style with macros (deprecated)
     {
@@ -151,11 +154,8 @@ void api_comparison_example() {
     
     // v2 style with structured fields
     {
-        logger->info("User logged in", {
-            {"username", "john"},
-            {"ip_address", "192.168.1.1"},
-            {"session_id", "abc123"}
-        });
+        logger->log(thread_module::log_level::info, 
+                   "User logged in [username: john, ip_address: 192.168.1.1, session_id: abc123]");
     }
 }
 
@@ -169,11 +169,13 @@ private:
 public:
     GradualMigrationExample() {
         // Start with v2 logger creation
-        logger_ = logger_builder()
-            .with_name("migration_app")
-            .with_console_writer()
-            .with_file_writer("migration.log")
+        auto result = logger_builder()
+            .add_writer("console", std::make_unique<console_writer>())
+            .add_writer("file", std::make_unique<file_writer>("migration.log"))
             .build();
+        if (result) {
+            logger_ = std::move(result.value());
+        }
     }
     
     // Phase 1: Keep old interface, use new implementation
@@ -186,20 +188,18 @@ public:
     // Phase 2: New interface with compatibility
     void transitional_method() {
         // Mix old and new styles during transition
-        logger_->info("Transitional phase");
+        logger_->log(thread_module::log_level::info, "Transitional phase");
         
         // Can still handle old-style parameters
         auto message = v1_compat::format_string("Value: %d", 42);
-        logger_->info(message);
+        logger_->log(thread_module::log_level::info, message);
     }
     
     // Phase 3: Fully migrated to v2
     void new_interface_method() {
         // Pure v2 API usage
-        logger_->info("Fully migrated to v2", {
-            {"phase", "complete"},
-            {"api_version", "2.0"}
-        });
+        logger_->log(thread_module::log_level::info, 
+                    "Fully migrated to v2 [phase: complete, api_version: 2.0]");
     }
     
     void demonstrate_migration() {
@@ -241,18 +241,21 @@ void performance_comparison() {
     
     // v2 style performance
     {
-        auto v2_logger = logger_builder()
-            .with_file_writer("perf_v2.log")
+        auto result = logger_builder()
+            .add_writer("file", std::make_unique<file_writer>("perf_v2.log"))
             .with_async(true)
             .with_batch_writing(true)
             .build();
+        if (!result) {
+            std::cerr << "Failed to create v2 logger\n";
+            return;
+        }
+        auto v2_logger = std::move(result.value());
         
         auto start = std::chrono::high_resolution_clock::now();
         for (int i = 0; i < iterations; ++i) {
-            v2_logger->info("Message", {
-                {"index", i},
-                {"value", 3.14159}
-            });
+            v2_logger->log(thread_module::log_level::info, 
+                          "Message [index: " + std::to_string(i) + ", value: 3.14159]");
         }
         v2_logger->flush();
         auto end = std::chrono::high_resolution_clock::now();
@@ -263,20 +266,23 @@ void performance_comparison() {
     
     // v2 with optimization
     {
-        auto v2_optimized = logger_builder()
-            .with_file_writer("perf_v2_opt.log")
+        auto result_opt = logger_builder()
+            .add_writer("file", std::make_unique<file_writer>("perf_v2_opt.log"))
             .with_async(true)
             .with_batch_writing(true)
             .with_batch_size(1000)
-            .with_queue_size(100000)
+            .with_max_queue_size(100000)
             .build();
+        if (!result_opt) {
+            std::cerr << "Failed to create optimized logger\n";
+            return;
+        }
+        auto v2_optimized = std::move(result_opt.value());
         
         auto start = std::chrono::high_resolution_clock::now();
         for (int i = 0; i < iterations; ++i) {
-            v2_optimized->info("Message", {
-                {"index", i},
-                {"value", 3.14159}
-            });
+            v2_optimized->log(thread_module::log_level::info, 
+                             "Message [index: " + std::to_string(i) + ", value: 3.14159]");
         }
         v2_optimized->flush();
         auto end = std::chrono::high_resolution_clock::now();
@@ -299,57 +305,77 @@ void migration_pitfalls_example() {
         // auto* logger = new logger();  // Memory leak risk
         
         // Right: Smart pointer (v2 style)
-        auto logger = logger_builder().build();  // RAII
-        logger->info("Proper memory management with RAII");
+        auto result = logger_builder()
+            .add_writer("console", std::make_unique<console_writer>())
+            .build();  // RAII
+        if (result) {
+            auto logger = std::move(result.value());
+            logger->log(thread_module::log_level::info, "Proper memory management with RAII");
+        }
     }
     
     // Pitfall 2: Error handling
     std::cout << "\n2. Error Handling:\n";
     {
-        auto logger = logger_builder().build();
+        auto result = logger_builder()
+            .add_writer("console", std::make_unique<console_writer>())
+            .build();
+        if (!result) {
+            return;
+        }
+        auto logger = std::move(result.value());
         
         // Wrong: Ignoring errors
         // logger->add_writer(std::make_unique<file_writer>("/invalid/path"));
         
         // Right: Checking results
-        auto result = logger->add_writer(
-            std::make_unique<file_writer>("valid.log")
-        );
-        if (!result) {
-            std::cerr << "Failed to add writer: " 
-                     << result.error().message() << "\n";
-        }
+        // In v2, add_writer doesn't return a result
+        logger->add_writer("file", std::make_unique<file_writer>("valid.log"));
     }
     
     // Pitfall 3: Configuration immutability
     std::cout << "\n3. Configuration Immutability:\n";
     {
-        auto logger = logger_builder()
+        auto result = logger_builder()
             .with_min_level(log_level::info)
+            .add_writer("console", std::make_unique<console_writer>())
             .build();
+        if (!result) {
+            return;
+        }
+        auto logger = std::move(result.value());
         
         // Wrong: Trying to modify after creation
         // logger->set_min_level(log_level::debug);  // Not supported in v2
         
         // Right: Recreate with new configuration
-        logger = logger_builder()
+        auto new_result = logger_builder()
             .with_min_level(log_level::debug)
+            .add_writer("console", std::make_unique<console_writer>())
             .build();
-        logger->debug("Logger recreated with new configuration");
+        if (new_result) {
+            logger = std::move(new_result.value());
+            logger->log(thread_module::log_level::debug, "Logger recreated with new configuration");
+        }
     }
     
     // Pitfall 4: Thread safety
     std::cout << "\n4. Thread Safety:\n";
     {
-        auto logger = logger_builder()
-            .with_console_writer()
+        auto result = logger_builder()
+            .add_writer("console", std::make_unique<console_writer>())
             .build();
+        if (!result) {
+            return;
+        }
+        auto logger = std::move(result.value());
         
         // v2 loggers are thread-safe by default
         std::vector<std::thread> threads;
         for (int i = 0; i < 5; ++i) {
             threads.emplace_back([&logger, i]() {
-                logger->info("Thread message", {{"thread_id", i}});
+                logger->log(thread_module::log_level::info, 
+                           "Thread message [thread_id: " + std::to_string(i) + "]");
             });
         }
         
