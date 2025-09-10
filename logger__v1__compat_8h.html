@@ -94,6 +94,7 @@ $(document).ready(function(){initNavTree('logger__v1__compat_8h.html',''); initR
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">logger_v1_compat.h File Reference</div></div>
 </div><!--header-->
@@ -144,6 +145,11 @@ Macros</h2></td></tr>
 <tr class="separator:a2dc07ad0a23a92d9ee1707334874d75a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf9a8563e308383637c924bace82466b" id="r_abf9a8563e308383637c924bace82466b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger__v1__compat_8h.html#abf9a8563e308383637c924bace82466b">LOG_CRITICAL</a>(logger, ...)</td></tr>
 <tr class="separator:abf9a8563e308383637c924bace82466b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a32d708482da92fcff862224cdbf82ef0" id="r_a32d708482da92fcff862224cdbf82ef0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a32d708482da92fcff862224cdbf82ef0">logger_module::log_level</a> = <a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a></td></tr>
+<tr class="separator:a32d708482da92fcff862224cdbf82ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -222,12 +228,13 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> { \</div>
 <div class="line">        if (logger) { \</div>
-<div class="line">            logger-&gt;critical(<a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a>(__VA_ARGS__)); \</div>
+<div class="line">            logger-&gt;log(thread_module::log_level::error, \</div>
+<div class="line">                       <a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a>(__VA_ARGS__)); \</div>
 <div class="line">        } \</div>
 <div class="line">    } <span class="keywordflow">while</span>(0)</div>
-<div class="ttc" id="anamespacelogger__module_1_1v1__compat_html_a491b6339c8f421b382d48e160b18878c"><div class="ttname"><a href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a></div><div class="ttdeci">std::string format_string(const char *fmt,...)</div><div class="ttdoc">Format string with variable arguments (C-style)</div><div class="ttdef"><b>Definition</b> <a href="logger__v1__compat_8h_source.html#l00033">logger_v1_compat.h:33</a></div></div>
+<div class="ttc" id="anamespacelogger__module_1_1v1__compat_html_a491b6339c8f421b382d48e160b18878c"><div class="ttname"><a href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a></div><div class="ttdeci">std::string format_string(const char *fmt,...)</div><div class="ttdoc">Format string with variable arguments (C-style)</div><div class="ttdef"><b>Definition</b> <a href="logger__v1__compat_8h_source.html#l00037">logger_v1_compat.h:37</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="logger__v1__compat_8h_source.html#l00092">92</a> of file <a class="el" href="logger__v1__compat_8h_source.html">logger_v1_compat.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger__v1__compat_8h_source.html#l00101">101</a> of file <a class="el" href="logger__v1__compat_8h_source.html">logger_v1_compat.h</a>.</p>
 
 </div>
 </div>
@@ -258,11 +265,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> { \</div>
 <div class="line">        if (logger) { \</div>
-<div class="line">            logger-&gt;debug(<a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a>(__VA_ARGS__)); \</div>
+<div class="line">            logger-&gt;log(thread_module::log_level::debug, \</div>
+<div class="line">                       <a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a>(__VA_ARGS__)); \</div>
 <div class="line">        } \</div>
 <div class="line">    } <span class="keywordflow">while</span>(0)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="logger__v1__compat_8h_source.html#l00064">64</a> of file <a class="el" href="logger__v1__compat_8h_source.html">logger_v1_compat.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger__v1__compat_8h_source.html#l00069">69</a> of file <a class="el" href="logger__v1__compat_8h_source.html">logger_v1_compat.h</a>.</p>
 
 </div>
 </div>
@@ -293,11 +301,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> { \</div>
 <div class="line">        if (logger) { \</div>
-<div class="line">            logger-&gt;error(<a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a>(__VA_ARGS__)); \</div>
+<div class="line">            logger-&gt;log(thread_module::log_level::error, \</div>
+<div class="line">                       <a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a>(__VA_ARGS__)); \</div>
 <div class="line">        } \</div>
 <div class="line">    } <span class="keywordflow">while</span>(0)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="logger__v1__compat_8h_source.html#l00085">85</a> of file <a class="el" href="logger__v1__compat_8h_source.html">logger_v1_compat.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger__v1__compat_8h_source.html#l00093">93</a> of file <a class="el" href="logger__v1__compat_8h_source.html">logger_v1_compat.h</a>.</p>
 
 </div>
 </div>
@@ -328,11 +337,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> { \</div>
 <div class="line">        if (logger) { \</div>
-<div class="line">            logger-&gt;info(<a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a>(__VA_ARGS__)); \</div>
+<div class="line">            logger-&gt;log(thread_module::log_level::info, \</div>
+<div class="line">                       <a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a>(__VA_ARGS__)); \</div>
 <div class="line">        } \</div>
 <div class="line">    } <span class="keywordflow">while</span>(0)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="logger__v1__compat_8h_source.html#l00071">71</a> of file <a class="el" href="logger__v1__compat_8h_source.html">logger_v1_compat.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger__v1__compat_8h_source.html#l00077">77</a> of file <a class="el" href="logger__v1__compat_8h_source.html">logger_v1_compat.h</a>.</p>
 
 </div>
 </div>
@@ -363,11 +373,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> { \</div>
 <div class="line">        if (logger) { \</div>
-<div class="line">            logger-&gt;trace(<a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a>(__VA_ARGS__)); \</div>
+<div class="line">            logger-&gt;log(thread_module::log_level::trace, \</div>
+<div class="line">                       <a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a>(__VA_ARGS__)); \</div>
 <div class="line">        } \</div>
 <div class="line">    } <span class="keywordflow">while</span>(0)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="logger__v1__compat_8h_source.html#l00057">57</a> of file <a class="el" href="logger__v1__compat_8h_source.html">logger_v1_compat.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger__v1__compat_8h_source.html#l00061">61</a> of file <a class="el" href="logger__v1__compat_8h_source.html">logger_v1_compat.h</a>.</p>
 
 </div>
 </div>
@@ -398,11 +409,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> { \</div>
 <div class="line">        if (logger) { \</div>
-<div class="line">            logger-&gt;warning(<a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a>(__VA_ARGS__)); \</div>
+<div class="line">            logger-&gt;log(thread_module::log_level::warning, \</div>
+<div class="line">                       <a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#a491b6339c8f421b382d48e160b18878c">logger_module::v1_compat::format_string</a>(__VA_ARGS__)); \</div>
 <div class="line">        } \</div>
 <div class="line">    } <span class="keywordflow">while</span>(0)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="logger__v1__compat_8h_source.html#l00078">78</a> of file <a class="el" href="logger__v1__compat_8h_source.html">logger_v1_compat.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger__v1__compat_8h_source.html#l00085">85</a> of file <a class="el" href="logger__v1__compat_8h_source.html">logger_v1_compat.h</a>.</p>
 
 </div>
 </div>
@@ -412,7 +424,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_43e0a1f539e00dcfa1a6bc4d4fee4fc2.html">home</a></li><li class="navelem"><a class="el" href="dir_1036706e55c22cab35bc1c58ee689f1d.html">runner</a></li><li class="navelem"><a class="el" href="dir_629f8151d55d307162ff2d619fb1783d.html">work</a></li><li class="navelem"><a class="el" href="dir_2f31978482a61cf4431542dc092c37e7.html">logger_system</a></li><li class="navelem"><a class="el" href="dir_bfbc53a2a97de514a7a317425db7763c.html">logger_system</a></li><li class="navelem"><a class="el" href="dir_06c576356eee845d55468b6334f24205.html">sources</a></li><li class="navelem"><a class="el" href="dir_fdb45f3173b816aceb323ae6fdd0bb21.html">logger</a></li><li class="navelem"><a class="el" href="dir_2b2445f47c840e967b90fdb9374f455e.html">compatibility</a></li><li class="navelem"><a class="el" href="logger__v1__compat_8h.html">logger_v1_compat.h</a></li>
-    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:30:34 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

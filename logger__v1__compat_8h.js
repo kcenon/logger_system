@@ -7,6 +7,7 @@ var logger__v1__compat_8h =
     [ "LOG_INFO", "logger__v1__compat_8h.html#a3f8026b595d5c70766d6eb049f50f04e", null ],
     [ "LOG_TRACE", "logger__v1__compat_8h.html#aecf37424be52180a1516a07a9ec02e37", null ],
     [ "LOG_WARNING", "logger__v1__compat_8h.html#a9f66bb970b226a74ac0d3621b84ca4c3", null ],
+    [ "log_level", "logger__v1__compat_8h.html#a32d708482da92fcff862224cdbf82ef0", null ],
     [ "add_console_writer", "logger__v1__compat_8h.html#ac216f08b3ad77d7581dc4f4cfdc5add8", null ],
     [ "add_file_writer", "logger__v1__compat_8h.html#a02cf907ccf3a0edddfb62d6242318f28", null ],
     [ "add_writer", "logger__v1__compat_8h.html#a15d0b1cecf233ae5ec801c911451d89b", null ],

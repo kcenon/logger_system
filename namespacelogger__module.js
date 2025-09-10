@@ -80,6 +80,7 @@ var namespacelogger__module =
     [ "writer_health_info", "structlogger__module_1_1writer__health__info.html", "structlogger__module_1_1writer__health__info" ],
     [ "writer_metrics", "structlogger__module_1_1writer__metrics.html", "structlogger__module_1_1writer__metrics" ],
     [ "error_code", "namespacelogger__module.html#ae1e454eb05e3ef274e857f0b0a43ad28", null ],
+    [ "log_level", "namespacelogger__module.html#a32d708482da92fcff862224cdbf82ef0", null ],
     [ "small_string_128", "namespacelogger__module.html#aa046b298bf7ccbecf2e3518379afe114", null ],
     [ "small_string_256", "namespacelogger__module.html#a792c3db475172433c0f64b02c1533f76", null ],
     [ "small_string_512", "namespacelogger__module.html#aba151494a11139c74ff16b6e0c8c9b8b", null ],

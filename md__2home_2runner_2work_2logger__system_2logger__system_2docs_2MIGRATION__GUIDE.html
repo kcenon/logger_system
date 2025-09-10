@@ -172,7 +172,7 @@ From v1.x to v2.x</h2>
 4. Logging API Migration</h3>
 <p><b>Old (v1.x):</b> </p><div class="fragment"><div class="line"><a class="code hl_define" href="logger__v1__compat_8h.html#a3f8026b595d5c70766d6eb049f50f04e">LOG_INFO</a>(logger, <span class="stringliteral">&quot;Message with %s&quot;</span>, param);</div>
 <div class="line">LOG_DEBUG_F(logger, <span class="stringliteral">&quot;Formatted: {}&quot;</span>, value);</div>
-<div class="ttc" id="alogger__v1__compat_8h_html_a3f8026b595d5c70766d6eb049f50f04e"><div class="ttname"><a href="logger__v1__compat_8h.html#a3f8026b595d5c70766d6eb049f50f04e">LOG_INFO</a></div><div class="ttdeci">#define LOG_INFO(logger,...)</div><div class="ttdef"><b>Definition</b> <a href="logger__v1__compat_8h_source.html#l00071">logger_v1_compat.h:71</a></div></div>
+<div class="ttc" id="alogger__v1__compat_8h_html_a3f8026b595d5c70766d6eb049f50f04e"><div class="ttname"><a href="logger__v1__compat_8h.html#a3f8026b595d5c70766d6eb049f50f04e">LOG_INFO</a></div><div class="ttdeci">#define LOG_INFO(logger,...)</div><div class="ttdef"><b>Definition</b> <a href="logger__v1__compat_8h_source.html#l00077">logger_v1_compat.h:77</a></div></div>
 </div><!-- fragment --><p><b>New (v2.x):</b> </p><div class="fragment"><div class="line">logger-&gt;info(<span class="stringliteral">&quot;Message with param&quot;</span>, {{<span class="stringliteral">&quot;param&quot;</span>, param}});</div>
 <div class="line">logger-&gt;debug(<span class="stringliteral">&quot;Message&quot;</span>, {{<span class="stringliteral">&quot;value&quot;</span>, value}});</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md323"></a>
@@ -502,7 +502,7 @@ Wrapper for Other Libraries</h2>
 <div class="line">        <span class="keywordflow">return</span> std::make_shared&lt;logger_wrapper&gt;(std::move(impl));</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="anamespacelogger__module_1_1v1__compat_html_afa4c327310a16456b4e6ffb49d0cb731"><div class="ttname"><a href="namespacelogger__module_1_1v1__compat.html#afa4c327310a16456b4e6ffb49d0cb731">logger_module::v1_compat::set_level</a></div><div class="ttdeci">void set_level(logger *log, log_level level)</div><div class="ttdoc">Legacy level setting.</div><div class="ttdef"><b>Definition</b> <a href="logger__v1__compat_8h_source.html#l00191">logger_v1_compat.h:191</a></div></div>
+<div class="ttc" id="anamespacelogger__module_1_1v1__compat_html_afa4c327310a16456b4e6ffb49d0cb731"><div class="ttname"><a href="namespacelogger__module_1_1v1__compat.html#afa4c327310a16456b4e6ffb49d0cb731">logger_module::v1_compat::set_level</a></div><div class="ttdeci">void set_level(logger *log, log_level level)</div><div class="ttdoc">Legacy level setting.</div><div class="ttdef"><b>Definition</b> <a href="logger__v1__compat_8h_source.html#l00201">logger_v1_compat.h:201</a></div></div>
 <div class="ttc" id="anamespacelogger__system_html_ad8e3c64f7744daa2d80e68c884e342d1acb5e100e5a9a3e7f6d1fd97512215282"><div class="ttname"><a href="namespacelogger__system.html#ad8e3c64f7744daa2d80e68c884e342d1acb5e100e5a9a3e7f6d1fd97512215282">logger_system::log_level::error</a></div><div class="ttdeci">@ error</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md339"></a>
 Step-by-Step Migration</h1>
@@ -696,7 +696,7 @@ Support and Resources</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:30:34 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
