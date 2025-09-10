@@ -54,6 +54,58 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "monitoring/monitoring_interface.h"
 #include "monitoring/monitoring_factory.h"
 
+/**
+ * @file logger.h
+ * @brief High-performance, thread-safe logging system with asynchronous capabilities
+ * @author 🍀☀🌕🌥 🌊
+ * @since 1.0.0
+ * 
+ * @details This file defines the main logger class that provides a comprehensive
+ * logging solution with support for multiple output destinations, asynchronous
+ * processing, metrics collection, and dependency injection. The logger is designed
+ * to be thread-safe and supports both synchronous and asynchronous operation modes.
+ * 
+ * @note The logger integrates with the thread_system when USE_THREAD_SYSTEM is defined,
+ * providing seamless compatibility with the broader thread management infrastructure.
+ * 
+ * @example Basic usage:
+ * @code
+ * // Create a logger with default settings
+ * logger_module::logger logger;
+ * 
+ * // Add a console writer
+ * logger.add_writer(std::make_unique<console_writer>());
+ * 
+ * // Start the logger in async mode
+ * logger.start();
+ * 
+ * // Log messages
+ * logger.log(log_level::info, "Application started");
+ * logger.log(log_level::error, "An error occurred", __FILE__, __LINE__, __FUNCTION__);
+ * 
+ * // Flush and stop
+ * logger.flush();
+ * logger.stop();
+ * @endcode
+ * 
+ * @example Advanced configuration with builder:
+ * @code
+ * auto result = logger_builder()
+ *     .with_async(true)
+ *     .with_buffer_size(16384)
+ *     .with_min_level(log_level::debug)
+ *     .with_metrics(true)
+ *     .add_writer("console", std::make_unique<console_writer>())
+ *     .add_writer("file", std::make_unique<file_writer>("logs/app.log"))
+ *     .build();
+ * 
+ * if (result) {
+ *     auto logger = std::move(result.value());
+ *     // Use logger...
+ * }
+ * @endcode
+ */
+
 namespace logger_module {
 
 // Re-export log_level from thread_module for convenience
@@ -67,80 +119,245 @@ class log_filter;
 class log_router;
 
 /**
+ * @class logger
  * @brief Main logger implementation that implements thread_system's logger_interface
  * 
- * This logger provides:
- * - High-performance asynchronous logging with batching
- * - Multiple writer support (console, file, custom)
- * - Asynchronous processing
- * - Thread-safe operations
+ * @details The logger class provides a high-performance, thread-safe logging system with:
+ * - Asynchronous logging with configurable batching for optimal throughput
+ * - Multiple writer support for outputting to different destinations simultaneously
+ * - Real-time metrics collection and performance monitoring
+ * - Dependency injection support for flexible writer management
+ * - Configurable filtering and routing of log messages
+ * - Integration with monitoring backends for production observability
+ * 
+ * The logger uses the PIMPL idiom to hide implementation details and maintain ABI stability.
+ * 
+ * @warning When using asynchronous mode, ensure proper shutdown by calling stop() and flush()
+ * before destroying the logger to prevent loss of buffered messages.
+ * 
+ * @since 1.0.0
  */
 class logger : public thread_module::logger_interface {
 public:
     /**
      * @brief Constructor with optional configuration
      * @param async Enable asynchronous logging (default: true)
-     * @param buffer_size Size of the log buffer (default: 8192)
+     * @param buffer_size Size of the log buffer in bytes (default: 8192)
+     * 
+     * @details Creates a logger instance with the specified configuration.
+     * In async mode, a background thread is created to process log messages,
+     * providing better performance for high-throughput applications.
+     * 
+     * @note The buffer_size parameter affects memory usage and batching efficiency.
+     * Larger buffers can improve throughput but increase memory consumption.
+     * 
+     * @since 1.0.0
      */
     explicit logger(bool async = true, std::size_t buffer_size = 8192);
     
     /**
      * @brief Destructor - ensures all logs are flushed
+     * 
+     * @details Properly shuts down the logger, ensuring all buffered messages
+     * are written to their destinations before destruction. Automatically calls
+     * stop() and flush() if the logger is still running.
+     * 
+     * @warning Destruction may block until all pending messages are processed.
+     * 
+     * @since 1.0.0
      */
     ~logger() override;
     
-    // Implement logger_interface
+    /**
+     * @brief Log a simple message
+     * @param level Severity level of the message
+     * @param message The message to log
+     * 
+     * @details Logs a message without source location information.
+     * The message is queued for asynchronous processing if async mode is enabled.
+     * 
+     * @note Messages below the minimum log level are discarded for performance.
+     * 
+     * @since 1.0.0
+     */
     void log(thread_module::log_level level, const std::string& message) override;
     
+    /**
+     * @brief Log a message with source location
+     * @param level Severity level of the message
+     * @param message The message to log
+     * @param file Source file name (typically __FILE__)
+     * @param line Line number in source file (typically __LINE__)
+     * @param function Function name (typically __FUNCTION__)
+     * 
+     * @details Logs a message with complete source location information for debugging.
+     * This overload is useful for tracking the exact origin of log messages.
+     * 
+     * @example
+     * @code
+     * logger.log(log_level::error, "Database connection failed", 
+     *           __FILE__, __LINE__, __FUNCTION__);
+     * @endcode
+     * 
+     * @since 1.0.0
+     */
     void log(thread_module::log_level level, const std::string& message,
              const std::string& file, int line, const std::string& function) override;
     
+    /**
+     * @brief Check if a log level is enabled
+     * @param level The log level to check
+     * @return true if messages at this level will be logged, false otherwise
+     * 
+     * @details Use this method to avoid expensive message construction
+     * for log levels that won't be output.
+     * 
+     * @example
+     * @code
+     * if (logger.is_enabled(log_level::debug)) {
+     *     std::string expensive_debug_info = gather_debug_data();
+     *     logger.log(log_level::debug, expensive_debug_info);
+     * }
+     * @endcode
+     * 
+     * @since 1.0.0
+     */
     bool is_enabled(thread_module::log_level level) const override;
     
+    /**
+     * @brief Flush all pending log messages
+     * 
+     * @details Forces immediate writing of all buffered messages to their destinations.
+     * This is a blocking operation that waits until all messages are processed.
+     * 
+     * @note In synchronous mode, this is a no-op as messages are written immediately.
+     * 
+     * @warning May cause performance degradation if called frequently in async mode.
+     * 
+     * @since 1.0.0
+     */
     void flush() override;
     
     // Additional logger-specific methods
     
     /**
      * @brief Add a writer to output logs
-     * @param writer Unique pointer to the writer
-     * @return result_void indicating success or error
+     * @param writer Unique pointer to the writer to add
+     * @return result_void Success or error code
+     * 
+     * @details Adds a new output destination for log messages. Multiple writers
+     * can be added to send logs to different destinations simultaneously.
+     * Ownership of the writer is transferred to the logger.
+     * 
+     * @note Writers are processed in the order they were added.
+     * 
+     * @example
+     * @code
+     * auto result = logger.add_writer(std::make_unique<file_writer>("app.log"));
+     * if (!result) {
+     *     std::cerr << "Failed to add writer: " << result.error_message() << std::endl;
+     * }
+     * @endcode
+     * 
+     * @since 1.0.0
      */
     result_void add_writer(std::unique_ptr<base_writer> writer);
     
     /**
      * @brief Remove all writers
-     * @return result_void indicating success or error
+     * @return result_void Success or error code
+     * 
+     * @details Removes all currently registered writers from the logger.
+     * After this call, log messages will not be output anywhere until
+     * new writers are added.
+     * 
+     * @warning This operation cannot be undone. Removed writers are destroyed.
+     * 
+     * @since 1.0.0
      */
     result_void clear_writers();
     
     /**
      * @brief Set the minimum log level
      * @param level Minimum level to log
+     * 
+     * @details Sets the threshold for message logging. Messages with a level
+     * below this threshold are discarded for performance optimization.
+     * 
+     * @note This is a thread-safe operation that takes effect immediately.
+     * 
+     * @example
+     * @code
+     * // In production, only log warnings and errors
+     * logger.set_min_level(log_level::warning);
+     * 
+     * // In development, log everything
+     * logger.set_min_level(log_level::trace);
+     * @endcode
+     * 
+     * @since 1.0.0
      */
     void set_min_level(thread_module::log_level level);
     
     /**
      * @brief Get the minimum log level
      * @return Current minimum log level
+     * 
+     * @details Returns the current threshold level for message logging.
+     * 
+     * @since 1.0.0
      */
     thread_module::log_level get_min_level() const;
     
     /**
      * @brief Start the logger (for async mode)
-     * @return result_void indicating success or error
+     * @return result_void Success or error code
+     * 
+     * @details Starts the background processing thread for asynchronous logging.
+     * This method must be called before logging in async mode. Has no effect
+     * in synchronous mode.
+     * 
+     * @note Calling start() on an already running logger is a no-op.
+     * 
+     * @warning Not calling start() in async mode will cause log messages to queue
+     * indefinitely without being processed.
+     * 
+     * @example
+     * @code
+     * logger_module::logger logger(true, 16384); // async mode
+     * auto result = logger.start();
+     * if (!result) {
+     *     std::cerr << "Failed to start logger: " << result.error_message() << std::endl;
+     * }
+     * @endcode
+     * 
+     * @since 1.0.0
      */
     result_void start();
     
     /**
      * @brief Stop the logger
-     * @return result_void indicating success or error
+     * @return result_void Success or error code
+     * 
+     * @details Stops the background processing thread and flushes all pending messages.
+     * This is a blocking operation that waits for all queued messages to be processed.
+     * 
+     * @note After stopping, the logger can be restarted with start().
+     * 
+     * @warning Stopping the logger may take time if there are many pending messages.
+     * 
+     * @since 1.0.0
      */
     result_void stop();
     
     /**
      * @brief Check if logger is running
-     * @return true if running
+     * @return true if the logger is currently running, false otherwise
+     * 
+     * @details In async mode, returns true if the background processing thread
+     * is active. In sync mode, always returns true.
+     * 
+     * @since 1.0.0
      */
     bool is_running() const;
     

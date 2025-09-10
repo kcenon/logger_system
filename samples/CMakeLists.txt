@@ -32,3 +32,10 @@ target_link_libraries(security_demo PRIVATE logger)
 set_target_properties(security_demo PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
+
+# Migration example sample
+add_executable(migration_example migration_example.cpp)
+target_link_libraries(migration_example PRIVATE logger)
+set_target_properties(migration_example PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)

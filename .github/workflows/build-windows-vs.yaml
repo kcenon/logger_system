@@ -30,13 +30,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Visual Studio
-        uses: microsoft/setup-msbuild@v1.1
+        uses: microsoft/setup-msbuild@v2
         with:
           vs-version: '17.0'
           msbuild-architecture: x64
 
       - name: Cache vcpkg
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: vcpkg-cache
         with:
           path: |
@@ -67,7 +67,7 @@ jobs:
           "commit=$commit" >> $env:GITHUB_OUTPUT
 
       - name: Cache vcpkg installed
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: vcpkg-installed
         with:
           path: ${{ github.workspace }}\vcpkg_installed
@@ -82,7 +82,7 @@ jobs:
           .\vcpkg\vcpkg install --x-manifest-root=. --x-install-root=${{ github.workspace }}\vcpkg_installed --triplet $env:VCPKG_DEFAULT_TRIPLET
 
       - name: Cache CMake build
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}\build
           key: ${{ runner.os }}-vs-cmake-${{ hashFiles('CMakeLists.txt', 'vcpkg.json') }}-${{ env.BUILD_TYPE }}

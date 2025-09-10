@@ -55,6 +55,15 @@ include(LoggerFeatures)
 # Include dependency detection module
 include(LoggerDependencies)
 
+# Include sanitizer configuration module
+include(LoggerSanitizers)
+
+# Include warning configuration module
+include(LoggerWarnings)
+
+# Include coverage configuration module
+include(LoggerCoverage)
+
 # Include compiler checks module (following thread_system pattern)
 include(CompilerChecks)
 
@@ -98,19 +107,22 @@ endif()
 
 # Try to find thread_system (only if not in standalone mode)
 if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE)
-    # First try to find it as a sibling directory
-    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/CMakeLists.txt")
-        message(STATUS "Found thread_system as sibling directory")
-        # Build thread_system as submodule to avoid vcpkg issues
-        set(BUILD_THREADSYSTEM_AS_SUBMODULE ON CACHE BOOL "Build ThreadSystem as submodule" FORCE)
-        add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" "${CMAKE_BINARY_DIR}/thread_system")
-        set(THREAD_SYSTEM_FOUND TRUE)
-    else()
-        # Try to find it as an installed package
-        find_package(thread_system CONFIG QUIET)
-        if(thread_system_FOUND)
-            message(STATUS "Found thread_system package")
+    # Check if thread_system is already added
+    if(NOT TARGET thread_system)
+        # First try to find it as a sibling directory
+        if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/CMakeLists.txt")
+            message(STATUS "Found thread_system as sibling directory")
+            # Build thread_system as submodule to avoid vcpkg issues
+            set(BUILD_THREADSYSTEM_AS_SUBMODULE ON CACHE BOOL "Build ThreadSystem as submodule" FORCE)
+            add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" "${CMAKE_BINARY_DIR}/thread_system")
             set(THREAD_SYSTEM_FOUND TRUE)
+        else()
+            # Try to find it as an installed package
+            find_package(thread_system CONFIG QUIET)
+            if(thread_system_FOUND)
+                message(STATUS "Found thread_system package")
+                set(THREAD_SYSTEM_FOUND TRUE)
+            endif()
         endif()
     endif()
     
@@ -211,6 +223,15 @@ endif()
 if (BUILD_TESTS)
     add_subdirectory(unittest)
     add_subdirectory(tests)
+    
+    # Enable sanitizers for test targets if requested
+    logger_enable_sanitizers_for_tests()
+    
+    # Enable warnings for all targets
+    logger_enable_warnings_for_all()
+    
+    # Enable coverage for all targets
+    logger_enable_coverage_for_all()
 endif()
 
 if (BUILD_BENCHMARKS)

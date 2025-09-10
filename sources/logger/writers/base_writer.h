@@ -46,17 +46,79 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../interfaces/log_writer_interface.h"
 #include "../interfaces/log_entry.h"
 
+/**
+ * @file base_writer.h
+ * @brief Abstract base class for all log output writers
+ * @author 🍀☀🌕🌥 🌊
+ * @since 1.0.0
+ * 
+ * @details This file defines the abstract base class for all log writers in the system.
+ * Writers are responsible for outputting formatted log messages to various destinations
+ * such as console, files, network endpoints, databases, or custom targets.
+ * 
+ * The base_writer class provides:
+ * - A common interface for all writer implementations
+ * - Compatibility layer between legacy and modern APIs
+ * - Built-in formatting utilities for consistent output
+ * - Color support for terminals that support ANSI codes
+ * 
+ * @note Writers must be thread-safe if used in async logging mode.
+ * 
+ * @example Implementing a custom writer:
+ * @code
+ * class custom_writer : public base_writer {
+ * public:
+ *     result_void write(thread_module::log_level level,
+ *                      const std::string& message,
+ *                      const std::string& file,
+ *                      int line,
+ *                      const std::string& function,
+ *                      const std::chrono::system_clock::time_point& timestamp) override {
+ *         // Format the message
+ *         std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
+ *         
+ *         // Write to your custom destination
+ *         if (!write_to_destination(formatted)) {
+ *             return logger_error_code::write_failed;
+ *         }
+ *         
+ *         return {}; // Success
+ *     }
+ *     
+ *     result_void flush() override {
+ *         // Flush any buffered data
+ *         return flush_destination();
+ *     }
+ *     
+ *     std::string get_name() const override {
+ *         return "custom_writer";
+ *     }
+ * };
+ * @endcode
+ */
+
 namespace logger_module {
 
 /**
- * @brief Base class for all log writers
+ * @class base_writer
+ * @brief Abstract base class for all log output writers
  * 
- * Writers are responsible for outputting log messages to various destinations
- * such as console, files, network, etc.
- * 
+ * @details Writers are responsible for outputting log messages to various destinations.
  * This class provides a compatibility layer between the old API and the new
- * interface-based approach. It implements log_writer_interface and provides
+ * interface-based approach, implementing log_writer_interface while providing
  * backward compatibility for existing code.
+ * 
+ * Key responsibilities:
+ * - Format log messages for output
+ * - Handle destination-specific output logic
+ * - Manage buffering and flushing
+ * - Provide health status information
+ * 
+ * @note All derived classes must implement the pure virtual methods.
+ * 
+ * @warning Writers used in async mode must be thread-safe.
+ * 
+ * @since 1.0.0
  */
 class base_writer : public log_writer_interface {
 public:
@@ -65,7 +127,15 @@ public:
     /**
      * @brief Write a log entry using the new interface
      * @param entry The log entry to write
-     * @return result_void indicating success or error
+     * @return result_void Success or error code
+     * 
+     * @details This method provides compatibility with the modern log_entry structure.
+     * The default implementation converts the entry to the legacy API format for
+     * backward compatibility. Derived classes can override this for optimized handling.
+     * 
+     * @note This method extracts source location information if present in the entry.
+     * 
+     * @since 1.0.0
      */
     virtual result_void write(const log_entry& entry) override {
         // Convert to old API for backward compatibility
@@ -78,13 +148,24 @@ public:
     
     /**
      * @brief Write a log entry (legacy API for backward compatibility)
-     * @param level Log level
-     * @param message Log message
-     * @param file Source file (optional)
-     * @param line Source line (optional)
-     * @param function Function name (optional)
-     * @param timestamp Time of log entry
-     * @return result_void indicating success or error
+     * @param level Log severity level
+     * @param message Log message text
+     * @param file Source file path (empty if not available)
+     * @param line Source line number (0 if not available)
+     * @param function Function name (empty if not available)
+     * @param timestamp Time when the log entry was created
+     * @return result_void Success or error code
+     * 
+     * @details This is the main method that derived classes must implement.
+     * It receives all log information and is responsible for outputting it
+     * to the writer's specific destination.
+     * 
+     * @note Implementations should handle empty file/function strings gracefully.
+     * 
+     * @warning This method may be called from multiple threads in async mode.
+     * Implementations must be thread-safe.
+     * 
+     * @since 1.0.0
      */
     virtual result_void write(thread_module::log_level level,
                               const std::string& message,
@@ -94,49 +175,110 @@ public:
                               const std::chrono::system_clock::time_point& timestamp) = 0;
     
     /**
-     * @brief Flush any buffered data
-     * @return result_void indicating success or error
+     * @brief Flush any buffered data to the destination
+     * @return result_void Success or error code
+     * 
+     * @details Forces any buffered log messages to be written immediately.
+     * This is important for ensuring data persistence before shutdown or
+     * when immediate output is required.
+     * 
+     * @note For unbuffered writers, this can be a no-op returning success.
+     * 
+     * @example
+     * @code
+     * // Ensure all logs are written before critical operation
+     * writer->flush();
+     * perform_critical_operation();
+     * @endcode
+     * 
+     * @since 1.0.0
      */
     virtual result_void flush() override = 0;
     
     /**
      * @brief Set whether to use color output (if supported)
-     * @param use_color Enable/disable color
+     * @param use_color true to enable color output, false to disable
+     * 
+     * @details Enables or disables ANSI color codes in formatted output.
+     * Only affects writers that output to terminals supporting color.
+     * 
+     * @note Has no effect on writers that don't support color (e.g., file writers).
+     * 
+     * @since 1.0.0
      */
     virtual void set_use_color(bool use_color) {
         use_color_ = use_color;
     }
     
     /**
-     * @brief Get color setting
-     * @return true if color is enabled
+     * @brief Get current color output setting
+     * @return true if color output is enabled, false otherwise
+     * 
+     * @since 1.0.0
      */
     bool use_color() const {
         return use_color_;
     }
     
     /**
-     * @brief Get writer name
-     * @return Name of the writer
+     * @brief Get the unique name of this writer
+     * @return String identifier for this writer instance
+     * 
+     * @details Returns a unique name identifying this writer. Used for
+     * writer management, debugging, and configuration.
+     * 
+     * @example Common names: "console", "file", "syslog", "network"
+     * 
+     * @since 1.0.0
      */
     virtual std::string get_name() const override = 0;
     
     /**
-     * @brief Check if writer is healthy
-     * @return true if writer is healthy and operational
+     * @brief Check if the writer is healthy and operational
+     * @return true if the writer is functioning correctly, false otherwise
+     * 
+     * @details Used for health monitoring and automatic failover. A writer
+     * might be unhealthy if its destination is unavailable (e.g., disk full,
+     * network disconnected).
+     * 
+     * @note Default implementation always returns true. Override for writers
+     * that can detect failure conditions.
+     * 
+     * @since 1.0.0
      */
     virtual bool is_healthy() const override { return true; }
     
 protected:
     /**
-     * @brief Format a log entry to string
-     * @param level Log level
-     * @param message Log message
-     * @param file Source file
-     * @param line Source line
+     * @brief Format a log entry to a human-readable string
+     * @param level Log severity level
+     * @param message Log message text
+     * @param file Source file path
+     * @param line Source line number
      * @param function Function name
      * @param timestamp Time of log entry
-     * @return Formatted log string
+     * @return Formatted string ready for output
+     * 
+     * @details Provides a default formatting implementation that derived classes
+     * can use. The format includes timestamp, level, message, and optional source
+     * location. Color codes are included if color output is enabled.
+     * 
+     * @note Format: "[YYYY-MM-DD HH:MM:SS.mmm] [LEVEL] message [file:line in function()]"
+     * 
+     * @example
+     * @code
+     * std::string formatted = format_log_entry(
+     *     log_level::error,
+     *     "Connection failed",
+     *     "network.cpp",
+     *     42,
+     *     "connect",
+     *     std::chrono::system_clock::now()
+     * );
+     * // Result: "[2025-01-10 14:30:15.123] [ERROR] Connection failed [network.cpp:42 in connect()]"
+     * @endcode
+     * 
+     * @since 1.0.0
      */
     std::string format_log_entry(thread_module::log_level level,
                                 const std::string& message,
@@ -146,16 +288,38 @@ protected:
                                 const std::chrono::system_clock::time_point& timestamp);
     
     /**
-     * @brief Convert log level to string
-     * @param level Log level
-     * @return String representation
+     * @brief Convert log level to string representation
+     * @param level Log level to convert
+     * @return String representation of the level
+     * 
+     * @details Maps log levels to human-readable strings:
+     * - trace -> "TRACE"
+     * - debug -> "DEBUG"
+     * - info -> "INFO"
+     * - warning -> "WARNING"
+     * - error -> "ERROR"
+     * 
+     * @since 1.0.0
      */
     std::string level_to_string(thread_module::log_level level) const;
     
     /**
-     * @brief Get ANSI color code for log level
-     * @param level Log level
-     * @return ANSI color code or empty string if color disabled
+     * @brief Get ANSI color code for the specified log level
+     * @param level Log level to get color for
+     * @return ANSI escape sequence for color, or empty string if color is disabled
+     * 
+     * @details Returns appropriate ANSI color codes for terminal output:
+     * - trace -> Gray/Dim
+     * - debug -> Cyan
+     * - info -> Green
+     * - warning -> Yellow
+     * - error -> Red
+     * 
+     * @note Returns empty string if use_color() is false.
+     * 
+     * @warning Only use for terminals that support ANSI escape codes.
+     * 
+     * @since 1.0.0
      */
     std::string level_to_color(thread_module::log_level level) const;
     
