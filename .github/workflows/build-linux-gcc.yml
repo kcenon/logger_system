@@ -145,7 +145,7 @@ jobs:
     
     - name: Upload coverage to Codecov
       if: ${{ matrix.coverage }}
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         file: ./build/coverage.xml
         flags: unittests,gcc${{ matrix.gcc_version }}
@@ -154,7 +154,7 @@ jobs:
     
     - name: Upload test results
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: test-results-gcc${{ matrix.gcc_version }}-${{ matrix.build_type }}
         path: |
@@ -164,7 +164,7 @@ jobs:
     
     - name: Upload coverage report
       if: ${{ matrix.coverage }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: coverage-gcc${{ matrix.gcc_version }}
         path: |

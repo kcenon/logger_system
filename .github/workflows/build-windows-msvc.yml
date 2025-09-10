@@ -25,13 +25,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2019, windows-2022]
+        os: [windows-2022]
         arch: [x64, Win32]
         build_type: [Debug, Release]
         include:
-          - os: windows-2019
-            vs_version: '2019'
-            generator: 'Visual Studio 16 2019'
           - os: windows-2022
             vs_version: '2022'
             generator: 'Visual Studio 17 2022'
@@ -44,7 +41,7 @@ jobs:
         fetch-depth: 0
     
     - name: Setup MSVC environment
-      uses: microsoft/setup-msbuild@v1.3
+      uses: microsoft/setup-msbuild@v2
       with:
         msbuild-architecture: ${{ matrix.arch }}
     
@@ -59,7 +56,7 @@ jobs:
       shell: cmd
     
     - name: Setup Python for testing
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.x'
     
@@ -133,7 +130,7 @@ jobs:
     
     - name: Upload test results
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: test-results-msvc${{ matrix.vs_version }}-${{ matrix.arch }}-${{ matrix.build_type }}
         path: |
@@ -142,7 +139,7 @@ jobs:
     
     - name: Upload release package
       if: ${{ matrix.build_type == 'Release' }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: windows-msvc${{ matrix.vs_version }}-${{ matrix.arch }}-release
         path: logger-*.zip

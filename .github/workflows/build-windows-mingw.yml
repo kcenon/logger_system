@@ -130,7 +130,7 @@ jobs:
     
     - name: Upload test results
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: test-results-mingw${{ matrix.mingw_version }}-${{ matrix.arch }}-${{ matrix.build_type }}
         path: |
@@ -139,7 +139,7 @@ jobs:
     
     - name: Upload release package
       if: ${{ matrix.build_type == 'Release' }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: windows-mingw${{ matrix.mingw_version }}-${{ matrix.arch }}-release
         path: logger-*.tar.gz
