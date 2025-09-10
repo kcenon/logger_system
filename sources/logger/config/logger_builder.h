@@ -7,6 +7,63 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
+/**
+ * @file logger_builder.h
+ * @brief Builder pattern implementation for flexible logger configuration
+ * @author 🍀☀🌕🌥 🌊
+ * @since 1.0.0
+ * 
+ * @details This file provides a fluent interface for constructing logger instances
+ * with validated configurations. The builder pattern allows for step-by-step
+ * configuration with sensible defaults and automatic validation.
+ * 
+ * @note The builder ensures configuration consistency and applies optimizations
+ * based on the selected settings (e.g., disabling batching in sync mode).
+ * 
+ * @example Basic logger creation:
+ * @code
+ * auto result = logger_builder()
+ *     .with_async(true)
+ *     .with_min_level(log_level::info)
+ *     .add_writer("console", std::make_unique<console_writer>())
+ *     .build();
+ * 
+ * if (result) {
+ *     auto logger = std::move(result.value());
+ *     // Use logger...
+ * }
+ * @endcode
+ * 
+ * @example Using configuration templates:
+ * @code
+ * // High-performance configuration
+ * auto logger = logger_builder()
+ *     .use_template("high_performance")
+ *     .with_file_output("/var/log/app", "myapp")
+ *     .build();
+ * 
+ * // Debug configuration with environment detection
+ * auto logger = logger_builder()
+ *     .detect_environment()
+ *     .use_template("debug")
+ *     .with_metrics(true)
+ *     .build();
+ * @endcode
+ * 
+ * @example Advanced configuration with strategies:
+ * @code
+ * auto logger = logger_builder()
+ *     .for_environment("production")
+ *     .with_performance_tuning("aggressive")
+ *     .with_batch_writing(true)
+ *     .with_overflow_policy(logger_config::overflow_policy::drop_oldest)
+ *     .add_writer("file", std::make_unique<rotating_file_writer>())
+ *     .add_writer("network", std::make_unique<network_writer>())
+ *     .with_monitoring(std::make_shared<prometheus_monitor>())
+ *     .build();
+ * @endcode
+ */
+
 #include "logger_config.h"
 #include "config_strategy_interface.h"
 #include "configuration_templates.h"
@@ -28,8 +85,24 @@ namespace logger_module {
  * @class logger_builder
  * @brief Builder pattern for logger construction with validation
  * 
- * This class provides a fluent interface for constructing loggers
- * with validated configuration and proper initialization.
+ * @details The logger_builder class provides a fluent interface for constructing
+ * logger instances with complex configurations. It ensures configuration validity,
+ * applies optimization strategies, and handles the complexity of logger initialization.
+ * 
+ * Key features:
+ * - Fluent interface for intuitive configuration
+ * - Automatic validation of configuration parameters
+ * - Support for configuration templates and strategies
+ * - Environment-based auto-configuration
+ * - Integration with dependency injection containers
+ * - Performance tuning presets
+ * 
+ * @note All builder methods return a reference to the builder for method chaining.
+ * 
+ * @warning The build() method consumes writers and filters. After calling build(),
+ * the builder should not be reused without adding new writers.
+ * 
+ * @since 1.0.0
  */
 class logger_builder {
 public:
@@ -39,6 +112,20 @@ public:
      * @brief Start with a predefined configuration
      * @param config Base configuration to use
      * @return Reference to builder for chaining
+     * 
+     * @details Replaces the current configuration with the provided one.
+     * Useful for starting with a known good configuration and making adjustments.
+     * 
+     * @example
+     * @code
+     * logger_config custom_config = logger_config::high_performance();
+     * auto logger = logger_builder()
+     *     .with_config(custom_config)
+     *     .with_min_level(log_level::debug)  // Override specific setting
+     *     .build();
+     * @endcode
+     * 
+     * @since 1.0.0
      */
     logger_builder& with_config(const logger_config& config) {
         config_ = config;
@@ -47,8 +134,25 @@ public:
     
     /**
      * @brief Set async mode
-     * @param async Enable/disable async logging
+     * @param async Enable (true) or disable (false) async logging
      * @return Reference to builder for chaining
+     * 
+     * @details Configures whether logging operations are performed asynchronously.
+     * Async mode provides better performance but may lose messages on crash.
+     * Sync mode ensures all messages are written immediately but may impact performance.
+     * 
+     * @note When disabling async mode, batch_size is automatically set to 1.
+     * 
+     * @example
+     * @code
+     * // High-throughput application
+     * builder.with_async(true);
+     * 
+     * // Critical logging that must not lose messages
+     * builder.with_async(false);
+     * @endcode
+     * 
+     * @since 1.0.0
      */
     logger_builder& with_async(bool async = true) {
         config_.async = async;
@@ -63,6 +167,18 @@ public:
      * @brief Set buffer size
      * @param size Buffer size in bytes
      * @return Reference to builder for chaining
+     * 
+     * @details Configures the internal buffer size for log message queuing.
+     * Larger buffers can improve throughput but increase memory usage.
+     * 
+     * @note Recommended sizes:
+     * - Small applications: 4096-8192 bytes
+     * - Medium applications: 16384-32768 bytes
+     * - High-throughput applications: 65536+ bytes
+     * 
+     * @warning Very large buffers may cause memory pressure in constrained environments.
+     * 
+     * @since 1.0.0
      */
     logger_builder& with_buffer_size(std::size_t size) {
         config_.buffer_size = size;
@@ -73,6 +189,20 @@ public:
      * @brief Set minimum log level
      * @param level Minimum level to log
      * @return Reference to builder for chaining
+     * 
+     * @details Sets the threshold for message logging. Messages below this level
+     * are discarded at the earliest opportunity for maximum performance.
+     * 
+     * @example
+     * @code
+     * // Production: only important messages
+     * builder.with_min_level(log_level::warning);
+     * 
+     * // Development: all messages
+     * builder.with_min_level(log_level::trace);
+     * @endcode
+     * 
+     * @since 1.0.0
      */
     logger_builder& with_min_level(thread_module::log_level level) {
         config_.min_level = level;
@@ -239,6 +369,27 @@ public:
      * @brief Use a predefined configuration template
      * @param name Template name ("default", "high_performance", "low_latency", "debug", "production")
      * @return Reference to builder for chaining
+     * 
+     * @details Applies a pre-configured template optimized for specific use cases:
+     * - "default": Balanced configuration for general use
+     * - "high_performance": Optimized for maximum throughput
+     * - "low_latency": Minimized processing delay
+     * - "debug": Verbose logging for development
+     * - "production": Optimized for production environments
+     * 
+     * @note Templates can be further customized with additional builder methods.
+     * 
+     * @example
+     * @code
+     * // Start with high-performance template and customize
+     * auto logger = logger_builder()
+     *     .use_template("high_performance")
+     *     .with_min_level(log_level::info)  // Override template's level
+     *     .add_writer("custom", std::make_unique<custom_writer>())
+     *     .build();
+     * @endcode
+     * 
+     * @since 1.0.0
      */
     logger_builder& use_template(const std::string& name) {
         auto strategy = config_strategy_factory::create_template(name);
@@ -451,6 +602,34 @@ public:
     /**
      * @brief Build the logger with validation
      * @return Result containing the logger or error
+     * 
+     * @details Validates the configuration and constructs the logger instance.
+     * This method performs the following steps:
+     * 1. Applies all registered configuration strategies
+     * 2. Validates the final configuration
+     * 3. Creates the logger instance
+     * 4. Configures writers with appropriate wrappers (batching, etc.)
+     * 5. Applies filters and formatters
+     * 6. Starts the logger if in async mode
+     * 
+     * @note This method consumes writers and filters. The builder should not
+     * be reused after calling build() without adding new writers.
+     * 
+     * @warning If validation fails, an error result is returned with details
+     * about the configuration problem.
+     * 
+     * @example
+     * @code
+     * auto result = builder.build();
+     * if (!result) {
+     *     std::cerr << "Failed to build logger: " 
+     *               << result.error_message() << std::endl;
+     *     return;
+     * }
+     * auto logger = std::move(result.value());
+     * @endcode
+     * 
+     * @since 1.0.0
      */
     result<std::unique_ptr<logger>> build() {
         // Apply all strategies first
