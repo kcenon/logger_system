@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['getting_20started_20with_20logger_20system_0',['Getting Started with Logger System',['../md_docs_2getting-started.html',1,'']]],
-  ['guide_1',['guide',['../md_docs_2performance.html',1,'Logger System Performance Guide'],['../md_SECURITY.html',1,'Security Guide']]]
+  ['dashboard_0',['Logger System CI/CD Dashboard',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CI__CD__DASHBOARD.html',1,'']]],
+  ['deprecated_20list_1',['Deprecated List',['../deprecated.html',1,'']]],
+  ['documentation_2',['Logger System API Documentation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__DOCUMENTATION.html',1,'']]]
 ];

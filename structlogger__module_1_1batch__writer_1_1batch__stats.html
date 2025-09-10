@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::batch_writer::batch_stats Struct Reference</title>
+<title>Logger System: logger_module::batch_writer::batch_stats Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -102,29 +102,36 @@ $(document).ready(function(){initNavTree('structlogger__module_1_1batch__writer_
  <a href="structlogger__module_1_1batch__writer_1_1batch__stats.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="batch__writer_8h_source.html">batch_writer.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for logger_module::batch_writer::batch_stats:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="structlogger__module_1_1batch__writer_1_1batch__stats__coll__graph.svg" width="214" height="212"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab64b64ae2e022640d3f65d9b3c0adc6c" id="r_ab64b64ae2e022640d3f65d9b3c0adc6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#ab64b64ae2e022640d3f65d9b3c0adc6c">average_batch_size</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:ab64b64ae2e022640d3f65d9b3c0adc6c" id="r_ab64b64ae2e022640d3f65d9b3c0adc6c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#ab64b64ae2e022640d3f65d9b3c0adc6c">average_batch_size</a> () const</td></tr>
 <tr class="separator:ab64b64ae2e022640d3f65d9b3c0adc6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a4a0c4fb14607ba0fba364e5bc0519080" id="r_a4a0c4fb14607ba0fba364e5bc0519080"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#a4a0c4fb14607ba0fba364e5bc0519080">total_batches</a> {0}</td></tr>
+<tr class="memitem:a4a0c4fb14607ba0fba364e5bc0519080" id="r_a4a0c4fb14607ba0fba364e5bc0519080"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#a4a0c4fb14607ba0fba364e5bc0519080">total_batches</a> {0}</td></tr>
 <tr class="separator:a4a0c4fb14607ba0fba364e5bc0519080"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a955132c499f80bbe567bfac533ac3f" id="r_a5a955132c499f80bbe567bfac533ac3f"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#a5a955132c499f80bbe567bfac533ac3f">total_entries</a> {0}</td></tr>
+<tr class="memitem:a5a955132c499f80bbe567bfac533ac3f" id="r_a5a955132c499f80bbe567bfac533ac3f"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#a5a955132c499f80bbe567bfac533ac3f">total_entries</a> {0}</td></tr>
 <tr class="separator:a5a955132c499f80bbe567bfac533ac3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ec1e2fe2fd2beafc3d51cdfd1b855e0" id="r_a3ec1e2fe2fd2beafc3d51cdfd1b855e0"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#a3ec1e2fe2fd2beafc3d51cdfd1b855e0">dropped_entries</a> {0}</td></tr>
+<tr class="memitem:a3ec1e2fe2fd2beafc3d51cdfd1b855e0" id="r_a3ec1e2fe2fd2beafc3d51cdfd1b855e0"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#a3ec1e2fe2fd2beafc3d51cdfd1b855e0">dropped_entries</a> {0}</td></tr>
 <tr class="separator:a3ec1e2fe2fd2beafc3d51cdfd1b855e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6740d0712503106eee9ec7c099b13ba1" id="r_a6740d0712503106eee9ec7c099b13ba1"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#a6740d0712503106eee9ec7c099b13ba1">flush_on_size</a> {0}</td></tr>
+<tr class="memitem:a6740d0712503106eee9ec7c099b13ba1" id="r_a6740d0712503106eee9ec7c099b13ba1"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#a6740d0712503106eee9ec7c099b13ba1">flush_on_size</a> {0}</td></tr>
 <tr class="separator:a6740d0712503106eee9ec7c099b13ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad18ce9ba120892c26ac278c5409e98f3" id="r_ad18ce9ba120892c26ac278c5409e98f3"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#ad18ce9ba120892c26ac278c5409e98f3">flush_on_timeout</a> {0}</td></tr>
+<tr class="memitem:ad18ce9ba120892c26ac278c5409e98f3" id="r_ad18ce9ba120892c26ac278c5409e98f3"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#ad18ce9ba120892c26ac278c5409e98f3">flush_on_timeout</a> {0}</td></tr>
 <tr class="separator:ad18ce9ba120892c26ac278c5409e98f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5d19234e0e31a61ed29a27c06f8d4d9" id="r_ad5d19234e0e31a61ed29a27c06f8d4d9"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#ad5d19234e0e31a61ed29a27c06f8d4d9">manual_flushes</a> {0}</td></tr>
+<tr class="memitem:ad5d19234e0e31a61ed29a27c06f8d4d9" id="r_ad5d19234e0e31a61ed29a27c06f8d4d9"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#ad5d19234e0e31a61ed29a27c06f8d4d9">manual_flushes</a> {0}</td></tr>
 <tr class="separator:ad5d19234e0e31a61ed29a27c06f8d4d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Get batch statistics. </p>
+
+<p class="definition">Definition at line <a class="el" href="batch__writer_8h_source.html#l00131">131</a> of file <a class="el" href="batch__writer_8h_source.html">batch_writer.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab64b64ae2e022640d3f65d9b3c0adc6c" name="ab64b64ae2e022640d3f65d9b3c0adc6c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab64b64ae2e022640d3f65d9b3c0adc6c">&#9670;&#160;</a></span>average_batch_size()</h2>
@@ -136,7 +143,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">double</a> logger_module::batch_writer::batch_stats::average_batch_size </td>
+          <td class="memname">double logger_module::batch_writer::batch_stats::average_batch_size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -149,6 +156,10 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="batch__writer_8h_source.html#l00139">139</a> of file <a class="el" href="batch__writer_8h_source.html">batch_writer.h</a>.</p>
+
+<p class="reference">References <a class="el" href="batch__writer_8h_source.html#l00132">total_batches</a>, and <a class="el" href="batch__writer_8h_source.html#l00133">total_entries</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -159,10 +170,14 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::batch_writer::batch_stats::dropped_entries {0}</td>
+          <td class="memname">std::atomic&lt;uint64_t&gt; logger_module::batch_writer::batch_stats::dropped_entries {0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="batch__writer_8h_source.html#l00134">134</a> of file <a class="el" href="batch__writer_8h_source.html">batch_writer.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="batch__writer_8cpp_source.html#l00164">logger_module::batch_writer::reset_stats()</a>.</p>
 
 </div>
 </div>
@@ -173,10 +188,14 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::batch_writer::batch_stats::flush_on_size {0}</td>
+          <td class="memname">std::atomic&lt;uint64_t&gt; logger_module::batch_writer::batch_stats::flush_on_size {0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="batch__writer_8h_source.html#l00135">135</a> of file <a class="el" href="batch__writer_8h_source.html">batch_writer.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="batch__writer_8cpp_source.html#l00164">logger_module::batch_writer::reset_stats()</a>, and <a class="el" href="batch__writer_8cpp_source.html#l00061">logger_module::batch_writer::write()</a>.</p>
 
 </div>
 </div>
@@ -187,10 +206,14 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::batch_writer::batch_stats::flush_on_timeout {0}</td>
+          <td class="memname">std::atomic&lt;uint64_t&gt; logger_module::batch_writer::batch_stats::flush_on_timeout {0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="batch__writer_8h_source.html#l00136">136</a> of file <a class="el" href="batch__writer_8h_source.html">batch_writer.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="batch__writer_8cpp_source.html#l00164">logger_module::batch_writer::reset_stats()</a>.</p>
 
 </div>
 </div>
@@ -201,10 +224,14 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::batch_writer::batch_stats::manual_flushes {0}</td>
+          <td class="memname">std::atomic&lt;uint64_t&gt; logger_module::batch_writer::batch_stats::manual_flushes {0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="batch__writer_8h_source.html#l00137">137</a> of file <a class="el" href="batch__writer_8h_source.html">batch_writer.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="batch__writer_8cpp_source.html#l00096">logger_module::batch_writer::flush()</a>, and <a class="el" href="batch__writer_8cpp_source.html#l00164">logger_module::batch_writer::reset_stats()</a>.</p>
 
 </div>
 </div>
@@ -215,10 +242,14 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::batch_writer::batch_stats::total_batches {0}</td>
+          <td class="memname">std::atomic&lt;uint64_t&gt; logger_module::batch_writer::batch_stats::total_batches {0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="batch__writer_8h_source.html#l00132">132</a> of file <a class="el" href="batch__writer_8h_source.html">batch_writer.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="batch__writer_8h_source.html#l00139">average_batch_size()</a>, and <a class="el" href="batch__writer_8cpp_source.html#l00164">logger_module::batch_writer::reset_stats()</a>.</p>
 
 </div>
 </div>
@@ -229,15 +260,19 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::batch_writer::batch_stats::total_entries {0}</td>
+          <td class="memname">std::atomic&lt;uint64_t&gt; logger_module::batch_writer::batch_stats::total_entries {0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="batch__writer_8h_source.html#l00133">133</a> of file <a class="el" href="batch__writer_8h_source.html">batch_writer.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="batch__writer_8h_source.html#l00139">average_batch_size()</a>, <a class="el" href="batch__writer_8cpp_source.html#l00164">logger_module::batch_writer::reset_stats()</a>, and <a class="el" href="batch__writer_8cpp_source.html#l00061">logger_module::batch_writer::write()</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="batch__writer_8h_source.html">batch_writer.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/writers/<a class="el" href="batch__writer_8h_source.html">batch_writer.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -245,7 +280,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1batch__writer.html">batch_writer</a></li><li class="navelem"><a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html">batch_stats</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

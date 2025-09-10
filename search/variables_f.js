@@ -1,17 +1,9 @@
 var searchData=
 [
-  ['sample_5fcount_0',['sample_count',['../structlogger__module_1_1adaptive__backpressure_1_1config.html#a5d932cb8faee94851d2a55236f2a8a83',1,'logger_module::adaptive_backpressure::config']]],
-  ['send_5ffailures_1',['send_failures',['../structlogger__module_1_1network__writer_1_1connection__stats.html#a7d399e85afa12743c2d8cbec0eee4375',1,'logger_module::network_writer::connection_stats']]],
-  ['server_5fstart_5ftime_2',['server_start_time',['../structlogger__module_1_1log__server_1_1server__stats.html#abb1779cf8292a3a87c6e4cd4a30d4bf8',1,'logger_module::log_server::server_stats']]],
-  ['service_3',['SERVICE',['../structlogger__module_1_1standard__fields.html#aeecc5ff1bd9150f233748143465d295a',1,'logger_module::standard_fields']]],
-  ['source_5faddress_4',['source_address',['../structlogger__module_1_1log__server_1_1network__log__entry.html#ae62a29d9bbb0b96337bad57fec189fd4',1,'logger_module::log_server::network_log_entry']]],
-  ['source_5fcounts_5',['source_counts',['../structlogger__module_1_1log__analyzer_1_1time__window__stats.html#a0aaf2dadaa45a73596ebe6a4dec39fa8',1,'logger_module::log_analyzer::time_window_stats']]],
-  ['source_5fid_6',['source_id',['../structlogger__module_1_1log__aggregator_1_1source__stats.html#ad3d0c9d76965afbfd6c9729d6d2494b9',1,'logger_module::log_aggregator::source_stats']]],
-  ['source_5fport_7',['source_port',['../structlogger__module_1_1log__server_1_1network__log__entry.html#a319c67a977b0e871503ba121ffa587ea',1,'logger_module::log_server::network_log_entry']]],
-  ['sso_5fcapacity_8',['SSO_CAPACITY',['../classlogger__module_1_1small__string.html#abdf1bdfedfeab1681d3bbe1ebed04292',1,'logger_module::small_string']]],
-  ['start_5ftime_9',['start_time',['../structlogger__module_1_1performance__metrics.html#ab54104ab2d16583406abed59c0c46401',1,'logger_module::performance_metrics']]],
-  ['stats_5f_10',['stats_',['../classlogger__module_1_1overflow__policy__base.html#a42a099fcc00d89b663b34040810dc18b',1,'logger_module::overflow_policy_base']]],
-  ['status_11',['status',['../structlogger__module_1_1writer__health__info.html#ad35265830164396d9d1ba9a70ebb7ec4',1,'logger_module::writer_health_info::status'],['../structlogger__module_1_1buffer__health__info.html#ae0ea74bac54fd39e6dbf15271097b8af',1,'logger_module::buffer_health_info::status'],['../structlogger__module_1_1queue__health__info.html#aef2d8ba447691da66707645c3f33edd1',1,'logger_module::queue_health_info::status']]],
-  ['stop_5fpropagation_12',['stop_propagation',['../structlogger__module_1_1log__route.html#a36558c82db7d42cc503939ef7c3c9bc6',1,'logger_module::log_route']]],
-  ['string_5fsize_13',['string_size',['../structlogger__module_1_1small__string_1_1memory__stats.html#a88d2a76a42af2475fda14ea79aa825fd',1,'logger_module::small_string::memory_stats']]]
+  ['raw_5fdata_0',['raw_data',['../structlogger__module_1_1log__server_1_1network__log__entry.html#aebfa727d3aa8c58dad64f56583fb67cd',1,'logger_module::log_server::network_log_entry']]],
+  ['received_5ftime_1',['received_time',['../structlogger__module_1_1log__server_1_1network__log__entry.html#a03a551a6d256f917608b166d06c49e1d',1,'logger_module::log_server::network_log_entry']]],
+  ['recent_5ferrors_2',['recent_errors',['../structlogger__module_1_1writer__health__info.html#add25b0226450c6a517018a405acc26d8',1,'logger_module::writer_health_info']]],
+  ['remote_5fhost_3',['remote_host',['../structlogger__module_1_1logger__config.html#a62438f2cb94b6e888a1ddadbef119bf4',1,'logger_module::logger_config']]],
+  ['remote_5fport_4',['remote_port',['../structlogger__module_1_1logger__config.html#abbf1fe49378faaa8cefa6e373ff410b5',1,'logger_module::logger_config']]],
+  ['replacer_5',['replacer',['../structlogger__module_1_1log__sanitizer_1_1sanitization__rule.html#a7cf0ac7499018651d3f88d1769825918',1,'logger_module::log_sanitizer::sanitization_rule']]]
 ];

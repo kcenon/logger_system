@@ -32,6 +32,6 @@ var searchData=
   ['min_5fbatch_5fsize_29',['min_batch_size',['../structlogger__module_1_1adaptive__backpressure_1_1config.html#a4309c16d65216773bbadaf7e6271ef2e',1,'logger_module::adaptive_backpressure::config']]],
   ['min_5fenqueue_5ftime_5fns_30',['min_enqueue_time_ns',['../structlogger__module_1_1performance__metrics.html#a52d80a8f39a367e91d2ddf466e3db6bd',1,'logger_module::performance_metrics']]],
   ['min_5fflush_5finterval_31',['min_flush_interval',['../structlogger__module_1_1adaptive__backpressure_1_1config.html#a6f9c124104486a3a8a797b5076df8dd3',1,'logger_module::adaptive_backpressure::config']]],
-  ['min_5flevel_32',['min_level',['../structlogger__module_1_1logger__config.html#a68874fcb43ead063db1934190de266d0',1,'logger_module::logger_config']]],
+  ['min_5flevel_32',['min_level',['../structlogger__system_1_1template__config.html#a596bd24855b674047a482376f30e1bf3',1,'logger_system::template_config::min_level'],['../structlogger__module_1_1logger__config.html#a68874fcb43ead063db1934190de266d0',1,'logger_module::logger_config::min_level']]],
   ['min_5fwrite_5ftime_5fus_33',['min_write_time_us',['../structlogger__module_1_1writer__metrics.html#a2ea265fbebfa15a13fc247d97246dfc9',1,'logger_module::writer_metrics']]]
 ];

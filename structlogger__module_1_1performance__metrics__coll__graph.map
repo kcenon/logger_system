@@ -1,0 +1,18 @@
+<map id="logger_module::performance_metrics" name="logger_module::performance_metrics">
+<area shape="rect" id="Node000001" title="Comprehensive performance metrics for the logger." alt="" coords="1119,223,1329,263"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,151,184,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,144,208,125,272,121,337,125,631,138,759,149,923,168,1010,180,1095,199,1167,220,1165,225,1094,204,1009,185,922,173,758,154,631,143,337,131,272,127,208,131,140,149"/>
+<area shape="rect" id="Node000008" href="$structlogger__module_1_1writer__metrics.html" title="Performance metrics for a specific log writer." alt="" coords="361,191,527,231"/>
+<area shape="poly" id="edge8_Node000008_Node000002" title=" " alt="" coords="129,181,167,199,209,213,247,219,286,222,361,219,361,225,286,227,246,225,207,219,165,204,127,186"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="744,262,907,287"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="920,275,1005,274,1094,268,1142,260,1143,265,1095,273,1005,280,920,281"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="779,311,871,337"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="885,321,984,315,1039,307,1094,296,1141,280,1184,260,1186,265,1143,285,1095,301,1040,313,984,320,885,326"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="728,183,923,238"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="937,217,1119,232,1118,237,936,222"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="401,255,487,281"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="500,258,704,228,727,224,728,230,704,233,501,263"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="25,248,164,288"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="178,265,400,265,400,271,178,271"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="540,208,728,208,728,213,540,213"/>
+</map>

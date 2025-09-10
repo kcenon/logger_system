@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['creating_20custom_20writers_0',['Creating Custom Writers',['../md_docs_2custom-writers.html',1,'']]],
-  ['custom_20writers_1',['Creating Custom Writers',['../md_docs_2custom-writers.html',1,'']]]
+  ['best_20practices_20guide_0',['Logger System Best Practices Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BEST__PRACTICES.html',1,'']]]
 ];

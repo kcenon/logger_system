@@ -1,9 +1,11 @@
-<map id="file_writer.h" name="file_writer.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="91,5,190,31"/>
-<area shape="rect" id="Node000002" href="$file__writer_8cpp.html" title=" " alt="" coords="5,79,119,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,42,77,80,73,76,116,38"/>
-<area shape="rect" id="Node000003" href="$rotating__file__writer_8h.html" title=" " alt="" coords="143,79,299,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="165,38,209,76,206,80,162,42"/>
-<area shape="rect" id="Node000004" href="$rotating__file__writer_8cpp.html" title=" " alt="" coords="135,152,306,177"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="223,118,223,152,218,152,218,118"/>
+<map id="/home/runner/work/logger_system/logger_system/sources/logger/writers/file_writer.h" name="/home/runner/work/logger_system/logger_system/sources/logger/writers/file_writer.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="260,5,491,60"/>
+<area shape="rect" id="Node000002" href="$logger__v1__compat_8h.html" title="Compatibility wrapper for Logger System v1.x API." alt="" coords="5,108,236,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="301,68,201,110,199,105,299,63"/>
+<area shape="rect" id="Node000003" href="$file__writer_8cpp.html" title=" " alt="" coords="260,115,491,170"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="378,74,378,115,373,115,373,74"/>
+<area shape="rect" id="Node000004" href="$rotating__file__writer_8h.html" title=" " alt="" coords="515,108,745,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="451,63,552,105,549,110,449,68"/>
+<area shape="rect" id="Node000005" href="$rotating__file__writer_8cpp.html" title=" " alt="" coords="515,225,745,295"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="633,191,633,225,627,225,627,191"/>
 </map>

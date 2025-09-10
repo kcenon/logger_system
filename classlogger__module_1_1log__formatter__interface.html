@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::log_formatter_interface Interface Reference</title>
+<title>Logger System: logger_module::log_formatter_interface Interface Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -109,18 +109,20 @@ Inheritance diagram for logger_module::log_formatter_interface:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad0dd77ec891318d5b4adfaa565d0ee75" id="r_ad0dd77ec891318d5b4adfaa565d0ee75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__formatter__interface.html#ad0dd77ec891318d5b4adfaa565d0ee75">~log_formatter_interface</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
+<tr class="memitem:ad0dd77ec891318d5b4adfaa565d0ee75" id="r_ad0dd77ec891318d5b4adfaa565d0ee75"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__formatter__interface.html#ad0dd77ec891318d5b4adfaa565d0ee75">~log_formatter_interface</a> ()=default</td></tr>
 <tr class="separator:ad0dd77ec891318d5b4adfaa565d0ee75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33cfa9bfe9f66fade3f39613d058a0b3" id="r_a33cfa9bfe9f66fade3f39613d058a0b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__formatter__interface.html#a33cfa9bfe9f66fade3f39613d058a0b3">format</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">entry</a>) <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> =0</td></tr>
+<tr class="memitem:a33cfa9bfe9f66fade3f39613d058a0b3" id="r_a33cfa9bfe9f66fade3f39613d058a0b3"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__formatter__interface.html#a33cfa9bfe9f66fade3f39613d058a0b3">format</a> (const <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;entry) const =0</td></tr>
 <tr class="memdesc:a33cfa9bfe9f66fade3f39613d058a0b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format a log entry into a string.  <br /></td></tr>
 <tr class="separator:a33cfa9bfe9f66fade3f39613d058a0b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5e2f24b466fdae339b35ffaf8489a60" id="r_ae5e2f24b466fdae339b35ffaf8489a60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__formatter__interface.html#ae5e2f24b466fdae339b35ffaf8489a60">get_format_type</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> =0</td></tr>
+<tr class="memitem:ae5e2f24b466fdae339b35ffaf8489a60" id="r_ae5e2f24b466fdae339b35ffaf8489a60"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__formatter__interface.html#ae5e2f24b466fdae339b35ffaf8489a60">get_format_type</a> () const =0</td></tr>
 <tr class="memdesc:ae5e2f24b466fdae339b35ffaf8489a60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the format type name.  <br /></td></tr>
 <tr class="separator:ae5e2f24b466fdae339b35ffaf8489a60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for log formatters. </p>
 <p>This interface defines the contract for formatting log entries. Formatters convert log entries into string representations. </p>
+
+<p class="definition">Definition at line <a class="el" href="log__formatter__interface_8h_source.html#l00024">24</a> of file <a class="el" href="log__formatter__interface_8h_source.html">log_formatter_interface.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad0dd77ec891318d5b4adfaa565d0ee75" name="ad0dd77ec891318d5b4adfaa565d0ee75"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad0dd77ec891318d5b4adfaa565d0ee75">&#9670;&#160;</a></span>~log_formatter_interface()</h2>
@@ -132,7 +134,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> logger_module::log_formatter_interface::~log_formatter_interface </td>
+          <td class="memname">virtual logger_module::log_formatter_interface::~log_formatter_interface </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -158,9 +160,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> std::string logger_module::log_formatter_interface::format </td>
+          <td class="memname">virtual std::string logger_module::log_formatter_interface::format </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td>
           <td class="paramname"><em>entry</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -195,7 +197,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> std::string logger_module::log_formatter_interface::get_format_type </td>
+          <td class="memname">virtual std::string logger_module::log_formatter_interface::get_format_type </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -216,7 +218,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this interface was generated from the following file:<ul>
-<li><a class="el" href="log__formatter__interface_8h_source.html">log_formatter_interface.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/interfaces/<a class="el" href="log__formatter__interface_8h_source.html">log_formatter_interface.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -224,7 +226,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1log__formatter__interface.html">log_formatter_interface</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

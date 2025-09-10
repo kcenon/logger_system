@@ -1,11 +1,14 @@
-<map id="thread_system_monitor_adapter.h" name="thread_system_monitor_adapter.h">
-<area shape="rect" id="Node000001" title="Adapter for thread_system&#39;s monitoring capabilities." alt="" coords="27,5,204,45"/>
-<area shape="rect" id="Node000002" href="$monitoring__factory_8h.html" title="Factory for creating appropriate monitoring implementations." alt="" coords="37,93,193,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,59,118,93,113,93,113,59"/>
-<area shape="rect" id="Node000003" href="$logger_8h.html" title=" " alt="" coords="78,167,153,192"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="118,132,118,167,113,167,113,132"/>
-<area shape="rect" id="Node000004" href="$logger_8cpp.html" title=" " alt="" coords="5,240,95,265"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="97,204,63,242,59,238,93,201"/>
-<area shape="rect" id="Node000005" href="$logger__builder_8h.html" title=" " alt="" coords="119,240,245,265"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="138,201,173,238,169,242,134,204"/>
+<map id="/home/runner/work/logger_system/logger_system/sources/logger/monitoring/thread_system_monitor_adapter.h" name="/home/runner/work/logger_system/logger_system/sources/logger/monitoring/thread_system_monitor_adapter.h">
+<area shape="rect" id="Node000001" title="Adapter for thread_system&#39;s monitoring capabilities." alt="" coords="77,5,319,75"/>
+<area shape="rect" id="Node000002" href="$monitoring__factory_8h.html" title="Factory for creating appropriate monitoring implementations." alt="" coords="83,123,313,192"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,89,201,122,195,122,195,89"/>
+<area shape="rect" id="Node000003" href="$logger_8h.html" title="High&#45;performance, thread&#45;safe logging system with asynchronous capabilities." alt="" coords="83,240,313,295"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="201,206,201,240,195,240,195,206"/>
+<area shape="rect" id="Node000004" href="$logger__v1__compat_8h.html" title="Compatibility wrapper for Logger System v1.x API." alt="" coords="5,445,236,515"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="114,304,90,322,72,344,65,369,69,395,80,420,94,443,90,446,75,423,64,396,60,368,68,341,87,318,110,299"/>
+<area shape="rect" id="Node000005" href="$logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration." alt="" coords="83,343,313,397"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="201,308,201,343,195,343,195,308"/>
+<area shape="rect" id="Node000006" href="$logger_8cpp.html" title=" " alt="" coords="337,343,568,397"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="278,297,387,340,385,345,276,302"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="173,410,147,447,143,444,169,407"/>
 </map>

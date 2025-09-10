@@ -29,5 +29,6 @@ var classlogger__module_1_1small__string =
     [ "operator==", "classlogger__module_1_1small__string.html#a45b596a009dae8c0aaed06bce8016888", null ],
     [ "reserve", "classlogger__module_1_1small__string.html#a40a7326ea8b2bf37971b498472efc0bf", null ],
     [ "size", "classlogger__module_1_1small__string.html#a7bb0779656eba9cf8aeb9e03152f5745", null ],
-    [ "to_string", "classlogger__module_1_1small__string.html#a722837a4e1f4efc4e9df2af5fcad7520", null ]
+    [ "to_string", "classlogger__module_1_1small__string.html#a722837a4e1f4efc4e9df2af5fcad7520", null ],
+    [ "SSO_CAPACITY", "classlogger__module_1_1small__string.html#abdf1bdfedfeab1681d3bbe1ebed04292", null ]
 ];

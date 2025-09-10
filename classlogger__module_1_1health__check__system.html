@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::health_check_system Class Reference</title>
+<title>Logger System: logger_module::health_check_system Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -110,25 +110,25 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aef914c131f4969ff790562d268d28ea9" id="r_aef914c131f4969ff790562d268d28ea9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#aef914c131f4969ff790562d268d28ea9">health_check_system</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1health__check__criteria.html">health_check_criteria</a> &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">criteria</a>={})</td></tr>
+<tr class="memitem:aef914c131f4969ff790562d268d28ea9" id="r_aef914c131f4969ff790562d268d28ea9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#aef914c131f4969ff790562d268d28ea9">health_check_system</a> (const <a class="el" href="structlogger__module_1_1health__check__criteria.html">health_check_criteria</a> &amp;criteria={})</td></tr>
 <tr class="memdesc:aef914c131f4969ff790562d268d28ea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:aef914c131f4969ff790562d268d28ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a501be502dc5bd3604484484b2fb90203" id="r_a501be502dc5bd3604484484b2fb90203"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a501be502dc5bd3604484484b2fb90203">~health_check_system</a> ()</td></tr>
 <tr class="memdesc:a501be502dc5bd3604484484b2fb90203"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
 <tr class="separator:a501be502dc5bd3604484484b2fb90203"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cc7f76545a4e4a8674ae164ee1ebb1b" id="r_a4cc7f76545a4e4a8674ae164ee1ebb1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a4cc7f76545a4e4a8674ae164ee1ebb1b">register_writer</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name, <a class="el" href="classlogger__module_1_1base__writer.html">base_writer</a> *<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">writer</a>)</td></tr>
+<tr class="memitem:a4cc7f76545a4e4a8674ae164ee1ebb1b" id="r_a4cc7f76545a4e4a8674ae164ee1ebb1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a4cc7f76545a4e4a8674ae164ee1ebb1b">register_writer</a> (const std::string &amp;name, <a class="el" href="classlogger__module_1_1base__writer.html">base_writer</a> *writer)</td></tr>
 <tr class="memdesc:a4cc7f76545a4e4a8674ae164ee1ebb1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a writer for health monitoring.  <br /></td></tr>
 <tr class="separator:a4cc7f76545a4e4a8674ae164ee1ebb1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a666bd45296bcb180e25a878f8312719d" id="r_a666bd45296bcb180e25a878f8312719d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a666bd45296bcb180e25a878f8312719d">unregister_writer</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name)</td></tr>
+<tr class="memitem:a666bd45296bcb180e25a878f8312719d" id="r_a666bd45296bcb180e25a878f8312719d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a666bd45296bcb180e25a878f8312719d">unregister_writer</a> (const std::string &amp;name)</td></tr>
 <tr class="memdesc:a666bd45296bcb180e25a878f8312719d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unregister a writer from health monitoring.  <br /></td></tr>
 <tr class="separator:a666bd45296bcb180e25a878f8312719d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93722ef276df4ed7b767508dc5dbcca5" id="r_a93722ef276df4ed7b767508dc5dbcca5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a93722ef276df4ed7b767508dc5dbcca5">register_collector</a> (<a class="el" href="classlogger__module_1_1log__collector.html">log_collector</a> *<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">collector</a>)</td></tr>
+<tr class="memitem:a93722ef276df4ed7b767508dc5dbcca5" id="r_a93722ef276df4ed7b767508dc5dbcca5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a93722ef276df4ed7b767508dc5dbcca5">register_collector</a> (<a class="el" href="classlogger__module_1_1log__collector.html">log_collector</a> *collector)</td></tr>
 <tr class="memdesc:a93722ef276df4ed7b767508dc5dbcca5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a log collector for queue health monitoring.  <br /></td></tr>
 <tr class="separator:a93722ef276df4ed7b767508dc5dbcca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a506d80d20311182bc446127d7d4996ab" id="r_a506d80d20311182bc446127d7d4996ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a506d80d20311182bc446127d7d4996ab">perform_health_check</a> ()</td></tr>
 <tr class="memdesc:a506d80d20311182bc446127d7d4996ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform comprehensive health check.  <br /></td></tr>
 <tr class="separator:a506d80d20311182bc446127d7d4996ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0a35e3f5883954d85763d2df6605dc8" id="r_ac0a35e3f5883954d85763d2df6605dc8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1result.html">result</a>&lt; <a class="el" href="structlogger__module_1_1writer__health__info.html">writer_health_info</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#ac0a35e3f5883954d85763d2df6605dc8">check_writer_health</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name)</td></tr>
+<tr class="memitem:ac0a35e3f5883954d85763d2df6605dc8" id="r_ac0a35e3f5883954d85763d2df6605dc8"><td class="memItemLeft" align="right" valign="top">result&lt; <a class="el" href="structlogger__module_1_1writer__health__info.html">writer_health_info</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#ac0a35e3f5883954d85763d2df6605dc8">check_writer_health</a> (const std::string &amp;name)</td></tr>
 <tr class="memdesc:ac0a35e3f5883954d85763d2df6605dc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check health of a specific writer.  <br /></td></tr>
 <tr class="separator:ac0a35e3f5883954d85763d2df6605dc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2b39f41caca3f5ccf571b03c4d84778" id="r_af2b39f41caca3f5ccf571b03c4d84778"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1buffer__health__info.html">buffer_health_info</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#af2b39f41caca3f5ccf571b03c4d84778">check_buffer_health</a> ()</td></tr>
@@ -137,40 +137,40 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae75b3f9e4490d633ce50d87880e3a232" id="r_ae75b3f9e4490d633ce50d87880e3a232"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1queue__health__info.html">queue_health_info</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#ae75b3f9e4490d633ce50d87880e3a232">check_queue_health</a> ()</td></tr>
 <tr class="memdesc:ae75b3f9e4490d633ce50d87880e3a232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check queue system health.  <br /></td></tr>
 <tr class="separator:ae75b3f9e4490d633ce50d87880e3a232"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fe7964eaa1e8245d271f730ddc68847" id="r_a2fe7964eaa1e8245d271f730ddc68847"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a2fe7964eaa1e8245d271f730ddc68847">update_writer_stats</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba260ca9dd8a4577fc00b7bd5810298076">success</a>, std::chrono::milliseconds <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">latency</a>)</td></tr>
+<tr class="memitem:a2fe7964eaa1e8245d271f730ddc68847" id="r_a2fe7964eaa1e8245d271f730ddc68847"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a2fe7964eaa1e8245d271f730ddc68847">update_writer_stats</a> (const std::string &amp;name, bool <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba260ca9dd8a4577fc00b7bd5810298076">success</a>, std::chrono::milliseconds latency)</td></tr>
 <tr class="memdesc:a2fe7964eaa1e8245d271f730ddc68847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update writer statistics after a write operation.  <br /></td></tr>
 <tr class="separator:a2fe7964eaa1e8245d271f730ddc68847"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38556f8179d7a37ac9b8b026d9198f84" id="r_a38556f8179d7a37ac9b8b026d9198f84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a38556f8179d7a37ac9b8b026d9198f84">update_buffer_stats</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">used</a>, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">total</a>, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">allocation_failed</a>=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">false</a>)</td></tr>
+<tr class="memitem:a38556f8179d7a37ac9b8b026d9198f84" id="r_a38556f8179d7a37ac9b8b026d9198f84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a38556f8179d7a37ac9b8b026d9198f84">update_buffer_stats</a> (size_t used, size_t total, bool allocation_failed=false)</td></tr>
 <tr class="memdesc:a38556f8179d7a37ac9b8b026d9198f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update buffer statistics.  <br /></td></tr>
 <tr class="separator:a38556f8179d7a37ac9b8b026d9198f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade227fb091c1276092997d6b3677ea4d" id="r_ade227fb091c1276092997d6b3677ea4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#ade227fb091c1276092997d6b3677ea4d">update_queue_stats</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> current_size, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> max_size, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">dropped</a>=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">false</a>, std::chrono::milliseconds <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">wait_time</a>=std::chrono::milliseconds{0})</td></tr>
+<tr class="memitem:ade227fb091c1276092997d6b3677ea4d" id="r_ade227fb091c1276092997d6b3677ea4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#ade227fb091c1276092997d6b3677ea4d">update_queue_stats</a> (size_t current_size, size_t max_size, bool dropped=false, std::chrono::milliseconds wait_time=std::chrono::milliseconds{0})</td></tr>
 <tr class="memdesc:ade227fb091c1276092997d6b3677ea4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update queue statistics.  <br /></td></tr>
 <tr class="separator:ade227fb091c1276092997d6b3677ea4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cbe2532454a9605fe635b75e17a99f2" id="r_a2cbe2532454a9605fe635b75e17a99f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a2cbe2532454a9605fe635b75e17a99f2">start_monitoring</a> (std::chrono::seconds <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">interval</a>, std::function&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>(<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a> &amp;)&gt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">callback</a>)</td></tr>
+<tr class="memitem:a2cbe2532454a9605fe635b75e17a99f2" id="r_a2cbe2532454a9605fe635b75e17a99f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a2cbe2532454a9605fe635b75e17a99f2">start_monitoring</a> (std::chrono::seconds interval, std::function&lt; void(const <a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a> &amp;)&gt; callback)</td></tr>
 <tr class="memdesc:a2cbe2532454a9605fe635b75e17a99f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start automatic health monitoring.  <br /></td></tr>
 <tr class="separator:a2cbe2532454a9605fe635b75e17a99f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d1d4908ada2af5ca622c6ff72b0f499" id="r_a4d1d4908ada2af5ca622c6ff72b0f499"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a4d1d4908ada2af5ca622c6ff72b0f499">stop_monitoring</a> ()</td></tr>
+<tr class="memitem:a4d1d4908ada2af5ca622c6ff72b0f499" id="r_a4d1d4908ada2af5ca622c6ff72b0f499"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a4d1d4908ada2af5ca622c6ff72b0f499">stop_monitoring</a> ()</td></tr>
 <tr class="memdesc:a4d1d4908ada2af5ca622c6ff72b0f499"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop automatic health monitoring.  <br /></td></tr>
 <tr class="separator:a4d1d4908ada2af5ca622c6ff72b0f499"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77e2af98d0a7b57aec87fe798e5560d5" id="r_a77e2af98d0a7b57aec87fe798e5560d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a77e2af98d0a7b57aec87fe798e5560d5">is_monitoring</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:a77e2af98d0a7b57aec87fe798e5560d5" id="r_a77e2af98d0a7b57aec87fe798e5560d5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a77e2af98d0a7b57aec87fe798e5560d5">is_monitoring</a> () const</td></tr>
 <tr class="memdesc:a77e2af98d0a7b57aec87fe798e5560d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if monitoring is active.  <br /></td></tr>
 <tr class="separator:a77e2af98d0a7b57aec87fe798e5560d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a990293f404d3a16c067d325675ae8b45" id="r_a990293f404d3a16c067d325675ae8b45"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, <a class="el" href="structlogger__module_1_1writer__health__info.html">writer_health_info</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a990293f404d3a16c067d325675ae8b45">get_all_writer_health</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:a990293f404d3a16c067d325675ae8b45" id="r_a990293f404d3a16c067d325675ae8b45"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, <a class="el" href="structlogger__module_1_1writer__health__info.html">writer_health_info</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a990293f404d3a16c067d325675ae8b45">get_all_writer_health</a> () const</td></tr>
 <tr class="memdesc:a990293f404d3a16c067d325675ae8b45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all writer health information.  <br /></td></tr>
 <tr class="separator:a990293f404d3a16c067d325675ae8b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a6d569e884a78adf30730faacd8093a" id="r_a7a6d569e884a78adf30730faacd8093a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1health__check__criteria.html">health_check_criteria</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a7a6d569e884a78adf30730faacd8093a">get_criteria</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:a7a6d569e884a78adf30730faacd8093a" id="r_a7a6d569e884a78adf30730faacd8093a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1health__check__criteria.html">health_check_criteria</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a7a6d569e884a78adf30730faacd8093a">get_criteria</a> () const</td></tr>
 <tr class="memdesc:a7a6d569e884a78adf30730faacd8093a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get health check criteria.  <br /></td></tr>
 <tr class="separator:a7a6d569e884a78adf30730faacd8093a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e6893d22278d6aba947f9503936b285" id="r_a5e6893d22278d6aba947f9503936b285"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a5e6893d22278d6aba947f9503936b285">set_criteria</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1health__check__criteria.html">health_check_criteria</a> &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">criteria</a>)</td></tr>
+<tr class="memitem:a5e6893d22278d6aba947f9503936b285" id="r_a5e6893d22278d6aba947f9503936b285"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a5e6893d22278d6aba947f9503936b285">set_criteria</a> (const <a class="el" href="structlogger__module_1_1health__check__criteria.html">health_check_criteria</a> &amp;criteria)</td></tr>
 <tr class="memdesc:a5e6893d22278d6aba947f9503936b285"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update health check criteria.  <br /></td></tr>
 <tr class="separator:a5e6893d22278d6aba947f9503936b285"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28047d62c6931d2252f8cb5f2f8e7677" id="r_a28047d62c6931d2252f8cb5f2f8e7677"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a28047d62c6931d2252f8cb5f2f8e7677">reset_stats</a> ()</td></tr>
+<tr class="memitem:a28047d62c6931d2252f8cb5f2f8e7677" id="r_a28047d62c6931d2252f8cb5f2f8e7677"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#a28047d62c6931d2252f8cb5f2f8e7677">reset_stats</a> ()</td></tr>
 <tr class="memdesc:a28047d62c6931d2252f8cb5f2f8e7677"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all health statistics.  <br /></td></tr>
 <tr class="separator:a28047d62c6931d2252f8cb5f2f8e7677"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5357b597a340e507d727128a0ba35b3" id="r_ab5357b597a340e507d727128a0ba35b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#ab5357b597a340e507d727128a0ba35b3">register_custom_check</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name, std::function&lt; <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47d">health_status</a>()&gt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">check</a>)</td></tr>
+<tr class="memitem:ab5357b597a340e507d727128a0ba35b3" id="r_ab5357b597a340e507d727128a0ba35b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#ab5357b597a340e507d727128a0ba35b3">register_custom_check</a> (const std::string &amp;name, std::function&lt; <a class="el" href="namespacelogger__system.html#a7c770a6aeb351bbdeecfd4f6040ae4e7">health_status</a>()&gt; check)</td></tr>
 <tr class="memdesc:ab5357b597a340e507d727128a0ba35b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a custom health check.  <br /></td></tr>
 <tr class="separator:ab5357b597a340e507d727128a0ba35b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0fd10d23c9afdbc76c88570d36d8e19" id="r_ac0fd10d23c9afdbc76c88570d36d8e19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#ac0fd10d23c9afdbc76c88570d36d8e19">configure_checks</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">check_writers</a>=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a>, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">check_buffers</a>=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a>, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">check_queues</a>=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a>)</td></tr>
+<tr class="memitem:ac0fd10d23c9afdbc76c88570d36d8e19" id="r_ac0fd10d23c9afdbc76c88570d36d8e19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__system.html#ac0fd10d23c9afdbc76c88570d36d8e19">configure_checks</a> (bool check_writers=true, bool check_buffers=true, bool check_queues=true)</td></tr>
 <tr class="memdesc:ac0fd10d23c9afdbc76c88570d36d8e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable specific health checks.  <br /></td></tr>
 <tr class="separator:ac0fd10d23c9afdbc76c88570d36d8e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -182,6 +182,8 @@ Public Member Functions</h2></td></tr>
 <li>Queue systems</li>
 <li>Overall system resources </li>
 </ul>
+
+<p class="definition">Definition at line <a class="el" href="health__check__system_8h_source.html#l00134">134</a> of file <a class="el" href="health__check__system_8h_source.html">health_check_system.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aef914c131f4969ff790562d268d28ea9" name="aef914c131f4969ff790562d268d28ea9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aef914c131f4969ff790562d268d28ea9">&#9670;&#160;</a></span>health_check_system()</h2>
@@ -195,7 +197,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">logger_module::health_check_system::health_check_system </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1health__check__criteria.html">health_check_criteria</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structlogger__module_1_1health__check__criteria.html">health_check_criteria</a> &amp;&#160;</td>
           <td class="paramname"><em>criteria</em> = <code>{}</code></td><td>)</td>
           <td></td>
         </tr>
@@ -214,6 +216,8 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00489">489</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
 
 </div>
 </div>
@@ -263,6 +267,8 @@ Public Member Functions</h2></td></tr>
 <p>Check buffer system health. </p>
 <dl class="section return"><dt>Returns</dt><dd>Buffer health information </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00515">515</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
 </div>
 </div>
 <a id="ae75b3f9e4490d633ce50d87880e3a232" name="ae75b3f9e4490d633ce50d87880e3a232"></a>
@@ -283,6 +289,8 @@ Public Member Functions</h2></td></tr>
 <p>Check queue system health. </p>
 <dl class="section return"><dt>Returns</dt><dd>Queue health information </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00519">519</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
 </div>
 </div>
 <a id="ac0a35e3f5883954d85763d2df6605dc8" name="ac0a35e3f5883954d85763d2df6605dc8"></a>
@@ -292,9 +300,9 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classlogger__module_1_1result.html">result</a>&lt; <a class="el" href="structlogger__module_1_1writer__health__info.html">writer_health_info</a> &gt; logger_module::health_check_system::check_writer_health </td>
+          <td class="memname">result&lt; <a class="el" href="structlogger__module_1_1writer__health__info.html">writer_health_info</a> &gt; logger_module::health_check_system::check_writer_health </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
         </tr>
@@ -310,6 +318,8 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Result containing writer health information </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00511">511</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
 </div>
 </div>
 <a id="ac0fd10d23c9afdbc76c88570d36d8e19" name="ac0fd10d23c9afdbc76c88570d36d8e19"></a>
@@ -319,22 +329,22 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::health_check_system::configure_checks </td>
+          <td class="memname">void logger_module::health_check_system::configure_checks </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
-          <td class="paramname"><em>check_writers</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a></code>, </td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>check_writers</em> = <code>true</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
-          <td class="paramname"><em>check_buffers</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a></code>, </td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>check_buffers</em> = <code>true</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
-          <td class="paramname"><em>check_queues</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a></code>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>check_queues</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -353,6 +363,8 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00574">574</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
 
 </div>
 </div>
@@ -374,6 +386,8 @@ Public Member Functions</h2></td></tr>
 <p>Get all writer health information. </p>
 <dl class="section return"><dt>Returns</dt><dd>Map of writer names to health info </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00553">553</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a7a6d569e884a78adf30730faacd8093a" name="a7a6d569e884a78adf30730faacd8093a"></a>
@@ -394,6 +408,8 @@ Public Member Functions</h2></td></tr>
 <p>Get health check criteria. </p>
 <dl class="section return"><dt>Returns</dt><dd>Current health check criteria </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00557">557</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a77e2af98d0a7b57aec87fe798e5560d5" name="a77e2af98d0a7b57aec87fe798e5560d5"></a>
@@ -403,7 +419,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> logger_module::health_check_system::is_monitoring </td>
+          <td class="memname">bool logger_module::health_check_system::is_monitoring </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -413,6 +429,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Check if monitoring is active. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if monitoring is running </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00549">549</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
 
 </div>
 </div>
@@ -434,6 +452,8 @@ Public Member Functions</h2></td></tr>
 <p>Perform comprehensive health check. </p>
 <dl class="section return"><dt>Returns</dt><dd>Health check result with detailed information </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00507">507</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a93722ef276df4ed7b767508dc5dbcca5" name="a93722ef276df4ed7b767508dc5dbcca5"></a>
@@ -443,7 +463,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::health_check_system::register_collector </td>
+          <td class="memname">void logger_module::health_check_system::register_collector </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classlogger__module_1_1log__collector.html">log_collector</a> *&#160;</td>
           <td class="paramname"><em>collector</em></td><td>)</td>
@@ -460,6 +480,8 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00503">503</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
 </div>
 </div>
 <a id="ab5357b597a340e507d727128a0ba35b3" name="ab5357b597a340e507d727128a0ba35b3"></a>
@@ -469,15 +491,15 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::health_check_system::register_custom_check </td>
+          <td class="memname">void logger_module::health_check_system::register_custom_check </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47d">health_status</a>()&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; <a class="el" href="namespacelogger__system.html#a7c770a6aeb351bbdeecfd4f6040ae4e7">health_status</a>()&gt;&#160;</td>
           <td class="paramname"><em>check</em>&#160;</td>
         </tr>
         <tr>
@@ -497,6 +519,8 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00569">569</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a4cc7f76545a4e4a8674ae164ee1ebb1b" name="a4cc7f76545a4e4a8674ae164ee1ebb1b"></a>
@@ -506,9 +530,9 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::health_check_system::register_writer </td>
+          <td class="memname">void logger_module::health_check_system::register_writer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
@@ -534,6 +558,10 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00495">495</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="health__check__system_8h_source.html#l00291">logger_module::scoped_health_registration::scoped_health_registration()</a>.</p>
+
 </div>
 </div>
 <a id="a28047d62c6931d2252f8cb5f2f8e7677" name="a28047d62c6931d2252f8cb5f2f8e7677"></a>
@@ -543,7 +571,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::health_check_system::reset_stats </td>
+          <td class="memname">void logger_module::health_check_system::reset_stats </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -552,6 +580,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reset all health statistics. </p>
+
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00565">565</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
 
 </div>
 </div>
@@ -562,9 +592,9 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::health_check_system::set_criteria </td>
+          <td class="memname">void logger_module::health_check_system::set_criteria </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1health__check__criteria.html">health_check_criteria</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structlogger__module_1_1health__check__criteria.html">health_check_criteria</a> &amp;&#160;</td>
           <td class="paramname"><em>criteria</em></td><td>)</td>
           <td></td>
         </tr>
@@ -579,6 +609,8 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00561">561</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a2cbe2532454a9605fe635b75e17a99f2" name="a2cbe2532454a9605fe635b75e17a99f2"></a>
@@ -588,7 +620,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::health_check_system::start_monitoring </td>
+          <td class="memname">void logger_module::health_check_system::start_monitoring </td>
           <td>(</td>
           <td class="paramtype">std::chrono::seconds&#160;</td>
           <td class="paramname"><em>interval</em>, </td>
@@ -596,7 +628,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>(<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a> &amp;)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(const <a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a> &amp;)&gt;&#160;</td>
           <td class="paramname"><em>callback</em>&#160;</td>
         </tr>
         <tr>
@@ -616,6 +648,8 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00540">540</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a4d1d4908ada2af5ca622c6ff72b0f499" name="a4d1d4908ada2af5ca622c6ff72b0f499"></a>
@@ -625,7 +659,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::health_check_system::stop_monitoring </td>
+          <td class="memname">void logger_module::health_check_system::stop_monitoring </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -634,6 +668,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Stop automatic health monitoring. </p>
+
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00545">545</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
 
 </div>
 </div>
@@ -644,9 +680,9 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::health_check_system::unregister_writer </td>
+          <td class="memname">void logger_module::health_check_system::unregister_writer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
         </tr>
@@ -661,6 +697,10 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00499">499</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="health__check__system_8h_source.html#l00298">logger_module::scoped_health_registration::~scoped_health_registration()</a>.</p>
+
 </div>
 </div>
 <a id="a38556f8179d7a37ac9b8b026d9198f84" name="a38556f8179d7a37ac9b8b026d9198f84"></a>
@@ -670,22 +710,22 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::health_check_system::update_buffer_stats </td>
+          <td class="memname">void logger_module::health_check_system::update_buffer_stats </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>used</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>total</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
-          <td class="paramname"><em>allocation_failed</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">false</a></code>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>allocation_failed</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -705,6 +745,8 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00529">529</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
 </div>
 </div>
 <a id="ade227fb091c1276092997d6b3677ea4d" name="ade227fb091c1276092997d6b3677ea4d"></a>
@@ -714,22 +756,22 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::health_check_system::update_queue_stats </td>
+          <td class="memname">void logger_module::health_check_system::update_queue_stats </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>current_size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>max_size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
-          <td class="paramname"><em>dropped</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">false</a></code>, </td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>dropped</em> = <code>false</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -756,6 +798,8 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00533">533</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a2fe7964eaa1e8245d271f730ddc68847" name="a2fe7964eaa1e8245d271f730ddc68847"></a>
@@ -765,15 +809,15 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::health_check_system::update_writer_stats </td>
+          <td class="memname">void logger_module::health_check_system::update_writer_stats </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>success</em>, </td>
         </tr>
         <tr>
@@ -800,11 +844,15 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00523">523</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba260ca9dd8a4577fc00b7bd5810298076">logger_module::success</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="health__check__system_8h_source.html">health_check_system.h</a></li>
-<li><a class="el" href="health__check__system_8cpp.html">health_check_system.cpp</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/health/<a class="el" href="health__check__system_8h_source.html">health_check_system.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/health/<a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -812,7 +860,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1health__check__system.html">health_check_system</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -1,23 +1,27 @@
-<map id="monitoring_interface.h" name="monitoring_interface.h">
-<area shape="rect" id="Node000001" title="Abstract interface for monitoring and metrics collection." alt="" coords="155,5,325,31"/>
-<area shape="rect" id="Node000002" href="$basic__monitor_8h.html" title="Basic monitoring implementation with no external dependencies." alt="" coords="27,79,152,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="205,39,115,81,113,76,202,34"/>
-<area shape="rect" id="Node000003" href="$monitoring__factory_8h.html" title="Factory for creating appropriate monitoring implementations." alt="" coords="66,240,222,265"/>
-<area shape="poly" id="edge11_Node000001_Node000003" title=" " alt="" coords="244,44,241,114,233,155,217,193,194,222,167,242,163,237,190,218,213,191,228,153,236,113,239,44"/>
-<area shape="rect" id="Node000004" href="$logger_8h.html" title=" " alt="" coords="164,313,239,339"/>
-<area shape="poly" id="edge10_Node000001_Node000004" title=" " alt="" coords="252,43,261,78,261,104,256,186,250,222,237,266,225,293,212,314,207,312,221,290,232,264,245,221,251,186,256,104,256,79,247,44"/>
-<area shape="rect" id="Node000007" href="$thread__system__monitor__adapter_8h.html" title="Adapter for thread_system&#39;s monitoring capabilities." alt="" coords="25,152,202,192"/>
-<area shape="poly" id="edge12_Node000001_Node000007" title=" " alt="" coords="224,43,131,153,127,150,220,40"/>
-<area shape="rect" id="Node000008" href="$health__check__system_8h.html" title=" " alt="" coords="333,79,507,104"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="283,33,392,76,390,81,281,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="55,113,32,130,14,153,8,172,14,191,28,207,46,220,86,237,83,242,43,224,25,211,10,193,3,172,10,151,28,127,51,109"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="100,116,110,151,105,153,94,118"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="164,274,194,312,190,315,160,278"/>
-<area shape="rect" id="Node000005" href="$logger_8cpp.html" title=" " alt="" coords="91,387,181,412"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="183,351,149,388,145,385,179,347"/>
-<area shape="rect" id="Node000006" href="$logger__builder_8h.html" title=" " alt="" coords="205,387,331,412"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="224,347,259,385,255,388,220,351"/>
-<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="128,204,142,239,137,241,123,206"/>
-<area shape="rect" id="Node000009" href="$health__check__system_8cpp.html" title=" " alt="" coords="329,159,519,185"/>
-<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="424,118,426,159,421,159,419,118"/>
+<map id="/home/runner/work/logger_system/logger_system/sources/logger/monitoring/monitoring_interface.h" name="/home/runner/work/logger_system/logger_system/sources/logger/monitoring/monitoring_interface.h">
+<area shape="rect" id="Node000001" title="Abstract interface for monitoring and metrics collection." alt="" coords="315,5,545,75"/>
+<area shape="rect" id="Node000002" href="$logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration." alt="" coords="5,577,236,632"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="301,58,231,69,163,84,107,102,85,113,71,125,56,142,48,158,41,191,46,273,46,393,52,446,68,496,88,541,107,576,102,579,83,543,63,498,47,447,41,393,41,273,36,191,43,157,52,139,67,121,83,108,105,97,162,78,230,64,300,53"/>
+<area shape="rect" id="Node000004" href="$health__check__system_8h.html" title=" " alt="" coords="81,123,312,192"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="351,83,266,125,264,120,349,78"/>
+<area shape="rect" id="Node000006" href="$logger_8h.html" title="High&#45;performance, thread&#45;safe logging system with asynchronous capabilities." alt="" coords="235,475,465,529"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="396,87,376,124,363,172,353,222,345,322,345,411,350,474,344,475,340,411,339,322,348,222,357,171,372,122,391,84"/>
+<area shape="rect" id="Node000008" href="$basic__monitor_8h.html" title="Basic monitoring implementation with no external dependencies." alt="" coords="387,130,636,185"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="464,85,495,128,491,131,460,88"/>
+<area shape="rect" id="Node000009" href="$monitoring__factory_8h.html" title="Factory for creating appropriate monitoring implementations." alt="" coords="419,357,649,427"/>
+<area shape="poly" id="edge14_Node000001_Node000009" title=" " alt="" coords="560,57,621,81,649,99,673,121,708,167,719,189,725,212,726,235,723,259,714,284,700,311,676,339,645,359,642,355,672,335,696,308,709,282,718,258,721,235,720,213,714,191,703,169,669,124,646,103,618,86,558,62"/>
+<area shape="rect" id="Node000010" href="$thread__system__monitor__adapter_8h.html" title="Adapter for thread_system&#39;s monitoring capabilities." alt="" coords="443,240,686,309"/>
+<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="560,59,609,83,631,100,650,121,659,139,661,156,650,193,634,219,613,242,609,238,630,216,645,191,656,156,654,141,645,124,628,104,607,88,557,64"/>
+<area shape="rect" id="Node000003" href="$logger__v1__compat_8h.html" title="Compatibility wrapper for Logger System v1.x API." alt="" coords="81,680,312,749"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="149,642,175,678,171,681,145,645"/>
+<area shape="rect" id="Node000005" href="$health__check__system_8cpp.html" title=" " alt="" coords="81,240,312,309"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="199,206,199,240,194,240,194,206"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="279,537,181,580,179,575,277,532"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="325,542,223,681,219,678,321,539"/>
+<area shape="rect" id="Node000007" href="$logger_8cpp.html" title=" " alt="" coords="312,577,543,632"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="381,539,409,576,405,579,377,542"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="467,196,448,217,434,241,425,275,427,290,434,308,452,334,476,355,472,359,448,338,429,311,421,291,419,275,429,239,443,214,463,192"/>
+<area shape="poly" id="edge12_Node000008_Node000010" title=" " alt="" coords="531,196,551,238,547,241,527,198"/>
+<area shape="poly" id="edge11_Node000009_Node000006" title=" " alt="" coords="466,436,396,477,394,472,463,431"/>
+<area shape="poly" id="edge13_Node000010_Node000009" title=" " alt="" coords="555,324,546,358,540,356,550,322"/>
 </map>

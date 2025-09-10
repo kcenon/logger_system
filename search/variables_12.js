@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['value_0',['value',['../structlogger__module_1_1metric__value.html#ab0a1738244b3dcf687661b68189bce2f',1,'logger_module::metric_value']]],
-  ['version_1',['VERSION',['../structlogger__module_1_1standard__fields.html#a2bcd19005a38ca14eef3029562fadfa2',1,'logger_module::standard_fields']]]
+  ['usage_5fpercent_0',['usage_percent',['../structlogger__module_1_1buffer__health__info.html#a6cf9842fc945af28a743ed4db5adf313',1,'logger_module::buffer_health_info::usage_percent'],['../structlogger__module_1_1queue__health__info.html#afd4003c80c105dd669cd85109677a9aa',1,'logger_module::queue_health_info::usage_percent']]],
+  ['use_5flock_5ffree_1',['use_lock_free',['../structlogger__module_1_1logger__config.html#a287441655325a65693cfbe906fdebe66',1,'logger_module::logger_config']]],
+  ['used_5fcapacity_2',['used_capacity',['../structlogger__module_1_1buffer__health__info.html#ab15ac8f5bbc484cabd3a8b94964e21c2',1,'logger_module::buffer_health_info']]]
 ];

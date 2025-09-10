@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::writer_metrics Struct Reference</title>
+<title>Logger System: logger_module::writer_metrics Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -102,29 +102,36 @@ $(document).ready(function(){initNavTree('structlogger__module_1_1writer__metric
  <a href="structlogger__module_1_1writer__metrics.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for logger_module::writer_metrics:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="structlogger__module_1_1writer__metrics__coll__graph.svg" width="230" height="212"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adad3bd97c535d83bbf7afab528afd467" id="r_adad3bd97c535d83bbf7afab528afd467"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#adad3bd97c535d83bbf7afab528afd467">get_avg_write_time_us</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:adad3bd97c535d83bbf7afab528afd467" id="r_adad3bd97c535d83bbf7afab528afd467"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#adad3bd97c535d83bbf7afab528afd467">get_avg_write_time_us</a> () const</td></tr>
 <tr class="separator:adad3bd97c535d83bbf7afab528afd467"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a05b97e652b086a3b84d0ed44e6c93977" id="r_a05b97e652b086a3b84d0ed44e6c93977"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#a05b97e652b086a3b84d0ed44e6c93977">messages_written</a> {0}</td></tr>
+<tr class="memitem:a05b97e652b086a3b84d0ed44e6c93977" id="r_a05b97e652b086a3b84d0ed44e6c93977"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#a05b97e652b086a3b84d0ed44e6c93977">messages_written</a> {0}</td></tr>
 <tr class="separator:a05b97e652b086a3b84d0ed44e6c93977"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e5843b685d892041ded58acc4aafc4d" id="r_a0e5843b685d892041ded58acc4aafc4d"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#a0e5843b685d892041ded58acc4aafc4d">bytes_written</a> {0}</td></tr>
+<tr class="memitem:a0e5843b685d892041ded58acc4aafc4d" id="r_a0e5843b685d892041ded58acc4aafc4d"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#a0e5843b685d892041ded58acc4aafc4d">bytes_written</a> {0}</td></tr>
 <tr class="separator:a0e5843b685d892041ded58acc4aafc4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6451aaced4357b81bc2d519ac8082593" id="r_a6451aaced4357b81bc2d519ac8082593"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#a6451aaced4357b81bc2d519ac8082593">write_failures</a> {0}</td></tr>
+<tr class="memitem:a6451aaced4357b81bc2d519ac8082593" id="r_a6451aaced4357b81bc2d519ac8082593"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#a6451aaced4357b81bc2d519ac8082593">write_failures</a> {0}</td></tr>
 <tr class="separator:a6451aaced4357b81bc2d519ac8082593"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae83539e1f32d762d1e8bfd4ab4e4df7f" id="r_ae83539e1f32d762d1e8bfd4ab4e4df7f"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#ae83539e1f32d762d1e8bfd4ab4e4df7f">total_write_time_us</a> {0}</td></tr>
+<tr class="memitem:ae83539e1f32d762d1e8bfd4ab4e4df7f" id="r_ae83539e1f32d762d1e8bfd4ab4e4df7f"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#ae83539e1f32d762d1e8bfd4ab4e4df7f">total_write_time_us</a> {0}</td></tr>
 <tr class="separator:ae83539e1f32d762d1e8bfd4ab4e4df7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ea265fbebfa15a13fc247d97246dfc9" id="r_a2ea265fbebfa15a13fc247d97246dfc9"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#a2ea265fbebfa15a13fc247d97246dfc9">min_write_time_us</a> {<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">UINT64_MAX</a>}</td></tr>
+<tr class="memitem:a2ea265fbebfa15a13fc247d97246dfc9" id="r_a2ea265fbebfa15a13fc247d97246dfc9"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#a2ea265fbebfa15a13fc247d97246dfc9">min_write_time_us</a> {UINT64_MAX}</td></tr>
 <tr class="separator:a2ea265fbebfa15a13fc247d97246dfc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10e1674153b595a14b7febc15e8c0185" id="r_a10e1674153b595a14b7febc15e8c0185"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#a10e1674153b595a14b7febc15e8c0185">max_write_time_us</a> {0}</td></tr>
+<tr class="memitem:a10e1674153b595a14b7febc15e8c0185" id="r_a10e1674153b595a14b7febc15e8c0185"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__metrics.html#a10e1674153b595a14b7febc15e8c0185">max_write_time_us</a> {0}</td></tr>
 <tr class="separator:a10e1674153b595a14b7febc15e8c0185"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Performance metrics for a specific log writer. </p>
+
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00023">23</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="adad3bd97c535d83bbf7afab528afd467" name="adad3bd97c535d83bbf7afab528afd467"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adad3bd97c535d83bbf7afab528afd467">&#9670;&#160;</a></span>get_avg_write_time_us()</h2>
@@ -136,7 +143,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> logger_module::writer_metrics::get_avg_write_time_us </td>
+          <td class="memname">uint64_t logger_module::writer_metrics::get_avg_write_time_us </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -149,6 +156,10 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00031">31</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__metrics_8h_source.html#l00024">messages_written</a>, and <a class="el" href="logger__metrics_8h_source.html#l00027">total_write_time_us</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -159,10 +170,12 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::writer_metrics::bytes_written {0}</td>
+          <td class="memname">std::atomic&lt;uint64_t&gt; logger_module::writer_metrics::bytes_written {0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00025">25</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -173,10 +186,12 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::writer_metrics::max_write_time_us {0}</td>
+          <td class="memname">std::atomic&lt;uint64_t&gt; logger_module::writer_metrics::max_write_time_us {0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00029">29</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -187,10 +202,14 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::writer_metrics::messages_written {0}</td>
+          <td class="memname">std::atomic&lt;uint64_t&gt; logger_module::writer_metrics::messages_written {0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00024">24</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="logger__metrics_8h_source.html#l00031">get_avg_write_time_us()</a>.</p>
 
 </div>
 </div>
@@ -201,10 +220,12 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::writer_metrics::min_write_time_us {<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">UINT64_MAX</a>}</td>
+          <td class="memname">std::atomic&lt;uint64_t&gt; logger_module::writer_metrics::min_write_time_us {UINT64_MAX}</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00028">28</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -215,10 +236,14 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::writer_metrics::total_write_time_us {0}</td>
+          <td class="memname">std::atomic&lt;uint64_t&gt; logger_module::writer_metrics::total_write_time_us {0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00027">27</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="logger__metrics_8h_source.html#l00031">get_avg_write_time_us()</a>.</p>
 
 </div>
 </div>
@@ -229,15 +254,17 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::writer_metrics::write_failures {0}</td>
+          <td class="memname">std::atomic&lt;uint64_t&gt; logger_module::writer_metrics::write_failures {0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00026">26</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/metrics/<a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -245,7 +272,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="structlogger__module_1_1writer__metrics.html">writer_metrics</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

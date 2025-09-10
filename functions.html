@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: Class Members</title>
+<title>Logger System: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -113,16 +113,20 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>add_route()&#160;:&#160;<a class="el" href="classlogger__module_1_1log__router.html#a15d1db8a799afe5406925d94d23b28a6">logger_module::log_router</a></li>
 <li>add_rule()&#160;:&#160;<a class="el" href="classlogger__module_1_1log__sanitizer.html#ae1447eb2b1723824314517496a2c888d">logger_module::log_sanitizer</a></li>
 <li>add_strategy()&#160;:&#160;<a class="el" href="classlogger__module_1_1composite__strategy.html#ab50aab785bb59281a142527efb0bdf88">logger_module::composite_strategy</a></li>
-<li>add_writer()&#160;:&#160;<a class="el" href="classlogger__module_1_1log__collector.html#ace2f4604c712bc21413b8c5f73428802">logger_module::log_collector</a>, <a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#ad4985490f3e1b3747ae3c52bfe56b42c">logger_module::log_collector::impl</a>, <a class="el" href="classlogger__module_1_1logger.html#a09dcbc7d45891767b2f6ad527f52da8d">logger_module::logger</a>, <a class="el" href="classlogger__module_1_1logger_1_1impl.html#ac74f3058b788d1e74cc65db263f56580">logger_module::logger::impl</a>, <a class="el" href="classlogger__module_1_1logger__builder.html#af16ce8e9b3c4f8b8c3e5a34ba47e0cb0">logger_module::logger_builder</a></li>
+<li>add_writer()&#160;:&#160;<a class="el" href="classlogger__module_1_1log__collector.html#ace2f4604c712bc21413b8c5f73428802">logger_module::log_collector</a>, <a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#ad4985490f3e1b3747ae3c52bfe56b42c">logger_module::log_collector::impl</a>, <a class="el" href="classlogger__module_1_1logger.html#ad5eee7c8d53c6cea60bce6c672695e41">logger_module::logger</a>, <a class="el" href="classlogger__module_1_1logger_1_1impl.html#a59e07695aaa783384e0c38b07af64ba4">logger_module::logger::impl</a>, <a class="el" href="classlogger__module_1_1logger__builder.html#af16ce8e9b3c4f8b8c3e5a34ba47e0cb0">logger_module::logger_builder</a></li>
 <li>add_writer_from_di()&#160;:&#160;<a class="el" href="classlogger__module_1_1logger.html#a2683dc12c985c90453ac3f74e398baca">logger_module::logger</a></li>
 <li>aggregate_health_status()&#160;:&#160;<a class="el" href="classlogger__module_1_1health__check__utils.html#af596a25c51eb4ca561a48d2818363e98">logger_module::health_check_utils</a></li>
 <li>analyze()&#160;:&#160;<a class="el" href="classlogger__module_1_1log__analyzer.html#a2cfecb5dbb9a27dcdecd1ca5c6f643a5">logger_module::log_analyzer</a></li>
 <li>append()&#160;:&#160;<a class="el" href="classlogger__module_1_1small__string.html#a6332a26a9f294210e410adc15da38619">logger_module::small_string&lt; SSO_SIZE &gt;</a></li>
 <li>append_mode_&#160;:&#160;<a class="el" href="classlogger__module_1_1file__writer.html#ae1e59132409656a2afc14c164fb977e3">logger_module::file_writer</a></li>
 <li>apply()&#160;:&#160;<a class="el" href="classlogger__module_1_1composite__strategy.html#a46637956e5e5ebc815a4249745ab14e5">logger_module::composite_strategy</a>, <a class="el" href="classlogger__module_1_1config__strategy__interface.html#a9a0ba43578542edf9dd9f4df476e31fd">logger_module::config_strategy_interface</a>, <a class="el" href="classlogger__module_1_1environment__strategy.html#aae67bc750d44fb12c87a33e0fcfa5933">logger_module::environment_strategy</a>, <a class="el" href="classlogger__module_1_1performance__tuning__strategy.html#a1758b078d5f92400d5960314ef2a5295">logger_module::performance_tuning_strategy</a>, <a class="el" href="classlogger__module_1_1template__strategy.html#a7a4314af160434c05401a1674d05c971">logger_module::template_strategy</a></li>
+<li>apply_performance_strategy()&#160;:&#160;<a class="el" href="classlogger__module_1_1logger__builder.html#a2bdea1251ad1ae279ae5d27479b02329">logger_module::logger_builder</a></li>
 <li>apply_strategy()&#160;:&#160;<a class="el" href="classlogger__module_1_1logger__builder.html#a2da8a215da58a50629c5da9067226994">logger_module::logger_builder</a></li>
+<li>apply_template()&#160;:&#160;<a class="el" href="classlogger__module_1_1logger__builder.html#a43e5fe309c03a0370229deacd0c30490">logger_module::logger_builder</a></li>
 <li>assign()&#160;:&#160;<a class="el" href="classlogger__module_1_1small__string.html#af0a65072bbcbbbf65c8e5f912c041e86">logger_module::small_string&lt; SSO_SIZE &gt;</a></li>
-<li>async&#160;:&#160;<a class="el" href="structlogger__module_1_1logger__config.html#aeecbcdf4eb187ee0a29ef09390620544">logger_module::logger_config</a></li>
+<li>async&#160;:&#160;<a class="el" href="structlogger__module_1_1logger__config.html#aeecbcdf4eb187ee0a29ef09390620544">logger_module::logger_config</a>, <a class="el" href="structlogger__module_1_1v1__compat_1_1logger__config__v1.html#adf4e5d88319c3fb1953164b2e002120c">logger_module::v1_compat::logger_config_v1</a></li>
+<li>async_mode&#160;:&#160;<a class="el" href="structlogger__system_1_1template__config.html#a80a35f429e0dfd3599cd19b74f8bc55b">logger_system::template_config</a></li>
+<li>async_writer()&#160;:&#160;<a class="el" href="classlogger__module_1_1async__writer.html#af0e24cc11059967c5393b759f80615ec">logger_module::async_writer</a></li>
 <li>auto_configure()&#160;:&#160;<a class="el" href="classlogger__module_1_1logger__builder.html#a54b0cf6f9545bbbfe9a02ef7d6acfeec">logger_module::logger_builder</a></li>
 <li>available_capacity&#160;:&#160;<a class="el" href="structlogger__module_1_1buffer__health__info.html#afdba0cada539623c6e3c9f13f556774b">logger_module::buffer_health_info</a></li>
 <li>average_batch_size()&#160;:&#160;<a class="el" href="structlogger__module_1_1batch__writer_1_1batch__stats.html#ab64b64ae2e022640d3f65d9b3c0adc6c">logger_module::batch_writer::batch_stats</a></li>
@@ -135,7 +139,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

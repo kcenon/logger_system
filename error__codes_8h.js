@@ -1,7 +1,5 @@
 var error__codes_8h =
 [
-    [ "logger_module::result< T >", "classlogger__module_1_1result.html", "classlogger__module_1_1result" ],
-    [ "logger_module::result_void", "classlogger__module_1_1result__void.html", "classlogger__module_1_1result__void" ],
     [ "error_code", "error__codes_8h.html#ae1e454eb05e3ef274e857f0b0a43ad28", null ],
     [ "logger_error_code", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eb", [
       [ "success", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba260ca9dd8a4577fc00b7bd5810298076", null ],
@@ -42,6 +40,7 @@ var error__codes_8h =
       [ "operation_failed", "error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135ebae84e30f035632b055bfc113f1d7e0a67", null ]
     ] ],
     [ "logger_error_to_string", "error__codes_8h.html#a5a717e2eece74d014d20adab53d609f4", null ],
-    [ "make_logger_error", "error__codes_8h.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b", null ],
-    [ "make_logger_error", "error__codes_8h.html#a9bd070612d11c60b9828e64b2adf8566", null ]
+    [ "make_error", "error__codes_8h.html#aa9cfbabb229fd4ce9d0aa6ae39af931b", null ],
+    [ "make_error", "error__codes_8h.html#a7e0a58f6cad60a66804aeca5247d5e03", null ],
+    [ "make_logger_error", "error__codes_8h.html#a2b021431469263d6fae2ca1783661ddd", null ]
 ];

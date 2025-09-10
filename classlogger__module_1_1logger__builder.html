@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::logger_builder Class Reference</title>
+<title>Logger System: logger_module::logger_builder Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -106,91 +106,127 @@ $(document).ready(function(){initNavTree('classlogger__module_1_1logger__builder
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afa60344d6d452265a8e3d2f72229c842" id="r_afa60344d6d452265a8e3d2f72229c842"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#afa60344d6d452265a8e3d2f72229c842">logger_builder</a> ()</td></tr>
 <tr class="separator:afa60344d6d452265a8e3d2f72229c842"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe40a2edab1e7c1cc945c71c2cceb1e9" id="r_afe40a2edab1e7c1cc945c71c2cceb1e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#afe40a2edab1e7c1cc945c71c2cceb1e9">with_config</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;config)</td></tr>
-<tr class="memdesc:afe40a2edab1e7c1cc945c71c2cceb1e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start with a predefined configuration.  <br /></td></tr>
+<tr class="memitem:afe40a2edab1e7c1cc945c71c2cceb1e9" id="r_afe40a2edab1e7c1cc945c71c2cceb1e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#afe40a2edab1e7c1cc945c71c2cceb1e9">with_config</a> (const <a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;config)</td></tr>
 <tr class="separator:afe40a2edab1e7c1cc945c71c2cceb1e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1a2d536ff57115f1d2e47888d72e22f" id="r_ad1a2d536ff57115f1d2e47888d72e22f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ad1a2d536ff57115f1d2e47888d72e22f">with_async</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> async=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a>)</td></tr>
-<tr class="memdesc:ad1a2d536ff57115f1d2e47888d72e22f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set async mode.  <br /></td></tr>
+<tr class="memitem:ad1a2d536ff57115f1d2e47888d72e22f" id="r_ad1a2d536ff57115f1d2e47888d72e22f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ad1a2d536ff57115f1d2e47888d72e22f">with_async</a> (bool async=true)</td></tr>
 <tr class="separator:ad1a2d536ff57115f1d2e47888d72e22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a063f7ab7a982b21a64174a2d806712d3" id="r_a063f7ab7a982b21a64174a2d806712d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a063f7ab7a982b21a64174a2d806712d3">with_buffer_size</a> (std::size_t size)</td></tr>
 <tr class="memdesc:a063f7ab7a982b21a64174a2d806712d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set buffer size.  <br /></td></tr>
 <tr class="separator:a063f7ab7a982b21a64174a2d806712d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ca65e7bb8757c08ece5d058cebc3baf" id="r_a4ca65e7bb8757c08ece5d058cebc3baf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a4ca65e7bb8757c08ece5d058cebc3baf">with_min_level</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level)</td></tr>
-<tr class="memdesc:a4ca65e7bb8757c08ece5d058cebc3baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set minimum log level.  <br /></td></tr>
 <tr class="separator:a4ca65e7bb8757c08ece5d058cebc3baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27966331ac6cdcc4cbee032c2d93774a" id="r_a27966331ac6cdcc4cbee032c2d93774a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a27966331ac6cdcc4cbee032c2d93774a">with_batch_size</a> (std::size_t size)</td></tr>
 <tr class="memdesc:a27966331ac6cdcc4cbee032c2d93774a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set batch size for processing.  <br /></td></tr>
 <tr class="separator:a27966331ac6cdcc4cbee032c2d93774a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace497899700799575eb0f19bba51ee4f" id="r_ace497899700799575eb0f19bba51ee4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ace497899700799575eb0f19bba51ee4f">with_batch_writing</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enable</a>=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a>)</td></tr>
+<tr class="memitem:ace497899700799575eb0f19bba51ee4f" id="r_ace497899700799575eb0f19bba51ee4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ace497899700799575eb0f19bba51ee4f">with_batch_writing</a> (bool enable=true)</td></tr>
 <tr class="memdesc:ace497899700799575eb0f19bba51ee4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable batch writing for writers.  <br /></td></tr>
 <tr class="separator:ace497899700799575eb0f19bba51ee4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e01bcd70c10c4ac8bcfdf20f06b9070" id="r_a6e01bcd70c10c4ac8bcfdf20f06b9070"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a6e01bcd70c10c4ac8bcfdf20f06b9070">with_flush_interval</a> (std::chrono::milliseconds <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">interval</a>)</td></tr>
+<tr class="memitem:a6e01bcd70c10c4ac8bcfdf20f06b9070" id="r_a6e01bcd70c10c4ac8bcfdf20f06b9070"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a6e01bcd70c10c4ac8bcfdf20f06b9070">with_flush_interval</a> (std::chrono::milliseconds interval)</td></tr>
 <tr class="memdesc:a6e01bcd70c10c4ac8bcfdf20f06b9070"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set flush interval.  <br /></td></tr>
 <tr class="separator:a6e01bcd70c10c4ac8bcfdf20f06b9070"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8975076f3e78aa136827ac275fb27ff" id="r_ac8975076f3e78aa136827ac275fb27ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ac8975076f3e78aa136827ac275fb27ff">with_lock_free</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enable</a>=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a>)</td></tr>
+<tr class="memitem:ac8975076f3e78aa136827ac275fb27ff" id="r_ac8975076f3e78aa136827ac275fb27ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ac8975076f3e78aa136827ac275fb27ff">with_lock_free</a> (bool enable=true)</td></tr>
 <tr class="memdesc:ac8975076f3e78aa136827ac275fb27ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable lock-free queue.  <br /></td></tr>
 <tr class="separator:ac8975076f3e78aa136827ac275fb27ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add8a383391a30e3759cb40150ab37825" id="r_add8a383391a30e3759cb40150ab37825"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#add8a383391a30e3759cb40150ab37825">with_metrics</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enable</a>=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a>)</td></tr>
+<tr class="memitem:add8a383391a30e3759cb40150ab37825" id="r_add8a383391a30e3759cb40150ab37825"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#add8a383391a30e3759cb40150ab37825">with_metrics</a> (bool enable=true)</td></tr>
 <tr class="memdesc:add8a383391a30e3759cb40150ab37825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable metrics collection.  <br /></td></tr>
 <tr class="separator:add8a383391a30e3759cb40150ab37825"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22cbed5f0baaff8b8b470f9d9ddd7613" id="r_a22cbed5f0baaff8b8b470f9d9ddd7613"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a22cbed5f0baaff8b8b470f9d9ddd7613">with_crash_handler</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enable</a>=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a>)</td></tr>
+<tr class="memitem:a22cbed5f0baaff8b8b470f9d9ddd7613" id="r_a22cbed5f0baaff8b8b470f9d9ddd7613"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a22cbed5f0baaff8b8b470f9d9ddd7613">with_crash_handler</a> (bool enable=true)</td></tr>
 <tr class="memdesc:a22cbed5f0baaff8b8b470f9d9ddd7613"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable crash handler.  <br /></td></tr>
 <tr class="separator:a22cbed5f0baaff8b8b470f9d9ddd7613"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bd08610e887583f110c244e360e5b4e" id="r_a0bd08610e887583f110c244e360e5b4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a0bd08610e887583f110c244e360e5b4e">with_structured_logging</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enable</a>=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a>)</td></tr>
+<tr class="memitem:a0bd08610e887583f110c244e360e5b4e" id="r_a0bd08610e887583f110c244e360e5b4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a0bd08610e887583f110c244e360e5b4e">with_structured_logging</a> (bool enable=true)</td></tr>
 <tr class="memdesc:a0bd08610e887583f110c244e360e5b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable structured logging.  <br /></td></tr>
 <tr class="separator:a0bd08610e887583f110c244e360e5b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d6d7951b25d84dd311f357281a63d5f" id="r_a5d6d7951b25d84dd311f357281a63d5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a5d6d7951b25d84dd311f357281a63d5f">with_overflow_policy</a> (<a class="el" href="structlogger__module_1_1logger__config.html#a14957f830bfb3a4018ec62e4cea8da8d">logger_config::overflow_policy</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">policy</a>)</td></tr>
+<tr class="memitem:a5d6d7951b25d84dd311f357281a63d5f" id="r_a5d6d7951b25d84dd311f357281a63d5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a5d6d7951b25d84dd311f357281a63d5f">with_overflow_policy</a> (<a class="el" href="structlogger__module_1_1logger__config.html#a14957f830bfb3a4018ec62e4cea8da8d">logger_config::overflow_policy</a> policy)</td></tr>
 <tr class="memdesc:a5d6d7951b25d84dd311f357281a63d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set queue overflow policy.  <br /></td></tr>
 <tr class="separator:a5d6d7951b25d84dd311f357281a63d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a58dc2bcd0587bf2cb0373f31440fe8" id="r_a9a58dc2bcd0587bf2cb0373f31440fe8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a9a58dc2bcd0587bf2cb0373f31440fe8">with_max_queue_size</a> (std::size_t size)</td></tr>
 <tr class="memdesc:a9a58dc2bcd0587bf2cb0373f31440fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set max queue size.  <br /></td></tr>
 <tr class="separator:a9a58dc2bcd0587bf2cb0373f31440fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f80ad20dc0aa39c9f09821f334c40e2" id="r_a1f80ad20dc0aa39c9f09821f334c40e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a1f80ad20dc0aa39c9f09821f334c40e2">with_file_output</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">directory</a>, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">prefix</a>=&quot;app&quot;, std::size_t max_size=100 *1024 *1024, std::size_t <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">max_count</a>=5)</td></tr>
+<tr class="memitem:a1f80ad20dc0aa39c9f09821f334c40e2" id="r_a1f80ad20dc0aa39c9f09821f334c40e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a1f80ad20dc0aa39c9f09821f334c40e2">with_file_output</a> (const std::string &amp;directory, const std::string &amp;prefix=&quot;app&quot;, std::size_t max_size=100 *1024 *1024, std::size_t max_count=5)</td></tr>
 <tr class="memdesc:a1f80ad20dc0aa39c9f09821f334c40e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure file output.  <br /></td></tr>
 <tr class="separator:a1f80ad20dc0aa39c9f09821f334c40e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7886cfadcf1f1be02dfc41a5c250de0" id="r_ac7886cfadcf1f1be02dfc41a5c250de0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ac7886cfadcf1f1be02dfc41a5c250de0">with_network_output</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">host</a>, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint16_t</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">port</a>, std::chrono::milliseconds <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">timeout</a>=std::chrono::milliseconds(5000))</td></tr>
+<tr class="memitem:ac7886cfadcf1f1be02dfc41a5c250de0" id="r_ac7886cfadcf1f1be02dfc41a5c250de0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ac7886cfadcf1f1be02dfc41a5c250de0">with_network_output</a> (const std::string &amp;host, uint16_t port, std::chrono::milliseconds timeout=std::chrono::milliseconds(5000))</td></tr>
 <tr class="memdesc:ac7886cfadcf1f1be02dfc41a5c250de0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure network output.  <br /></td></tr>
 <tr class="separator:ac7886cfadcf1f1be02dfc41a5c250de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af16ce8e9b3c4f8b8c3e5a34ba47e0cb0" id="r_af16ce8e9b3c4f8b8c3e5a34ba47e0cb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#af16ce8e9b3c4f8b8c3e5a34ba47e0cb0">add_writer</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name, std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1base__writer.html">base_writer</a> &gt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">writer</a>)</td></tr>
+<tr class="memitem:af16ce8e9b3c4f8b8c3e5a34ba47e0cb0" id="r_af16ce8e9b3c4f8b8c3e5a34ba47e0cb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#af16ce8e9b3c4f8b8c3e5a34ba47e0cb0">add_writer</a> (const std::string &amp;name, std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1base__writer.html">base_writer</a> &gt; writer)</td></tr>
 <tr class="memdesc:af16ce8e9b3c4f8b8c3e5a34ba47e0cb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a writer to the logger.  <br /></td></tr>
 <tr class="separator:af16ce8e9b3c4f8b8c3e5a34ba47e0cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac78fe6e8b3d0fd0a21a08a709f5eaede" id="r_ac78fe6e8b3d0fd0a21a08a709f5eaede"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ac78fe6e8b3d0fd0a21a08a709f5eaede">add_filter</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1log__filter.html">log_filter</a> &gt; filter)</td></tr>
 <tr class="memdesc:ac78fe6e8b3d0fd0a21a08a709f5eaede"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a filter to the logger.  <br /></td></tr>
 <tr class="separator:ac78fe6e8b3d0fd0a21a08a709f5eaede"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c2b1b5395dada17f224404bcd4d02a2" id="r_a5c2b1b5395dada17f224404bcd4d02a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a5c2b1b5395dada17f224404bcd4d02a2">with_formatter</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1log__formatter__interface.html">log_formatter_interface</a> &gt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">formatter</a>)</td></tr>
+<tr class="memitem:a5c2b1b5395dada17f224404bcd4d02a2" id="r_a5c2b1b5395dada17f224404bcd4d02a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a5c2b1b5395dada17f224404bcd4d02a2">with_formatter</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1log__formatter__interface.html">log_formatter_interface</a> &gt; formatter)</td></tr>
 <tr class="memdesc:a5c2b1b5395dada17f224404bcd4d02a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set formatter for the logger.  <br /></td></tr>
 <tr class="separator:a5c2b1b5395dada17f224404bcd4d02a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad80405d53b4d66bc12cca8bf362d5431" id="r_ad80405d53b4d66bc12cca8bf362d5431"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431">use_template</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name)</td></tr>
-<tr class="memdesc:ad80405d53b4d66bc12cca8bf362d5431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use a predefined configuration template.  <br /></td></tr>
+<tr class="memitem:ad80405d53b4d66bc12cca8bf362d5431" id="r_ad80405d53b4d66bc12cca8bf362d5431"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431">use_template</a> (const std::string &amp;name)</td></tr>
 <tr class="separator:ad80405d53b4d66bc12cca8bf362d5431"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2da8a215da58a50629c5da9067226994" id="r_a2da8a215da58a50629c5da9067226994"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a2da8a215da58a50629c5da9067226994">apply_strategy</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1config__strategy__interface.html">config_strategy_interface</a> &gt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">strategy</a>)</td></tr>
+<tr class="memitem:a2da8a215da58a50629c5da9067226994" id="r_a2da8a215da58a50629c5da9067226994"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a2da8a215da58a50629c5da9067226994">apply_strategy</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1config__strategy__interface.html">config_strategy_interface</a> &gt; strategy)</td></tr>
 <tr class="memdesc:a2da8a215da58a50629c5da9067226994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a configuration strategy.  <br /></td></tr>
 <tr class="separator:a2da8a215da58a50629c5da9067226994"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5828b00d7d65c4bf478f7c42c1c4c925" id="r_a5828b00d7d65c4bf478f7c42c1c4c925"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a5828b00d7d65c4bf478f7c42c1c4c925">for_environment</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">env</a>)</td></tr>
+<tr class="memitem:a5828b00d7d65c4bf478f7c42c1c4c925" id="r_a5828b00d7d65c4bf478f7c42c1c4c925"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a5828b00d7d65c4bf478f7c42c1c4c925">for_environment</a> (const std::string &amp;env)</td></tr>
 <tr class="memdesc:a5828b00d7d65c4bf478f7c42c1c4c925"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply environment-based configuration.  <br /></td></tr>
 <tr class="separator:a5828b00d7d65c4bf478f7c42c1c4c925"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae082e501035619ad92067f451b9a8dbc" id="r_ae082e501035619ad92067f451b9a8dbc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ae082e501035619ad92067f451b9a8dbc">with_performance_tuning</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;level=&quot;balanced&quot;)</td></tr>
+<tr class="memitem:ae082e501035619ad92067f451b9a8dbc" id="r_ae082e501035619ad92067f451b9a8dbc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#ae082e501035619ad92067f451b9a8dbc">with_performance_tuning</a> (const std::string &amp;level=&quot;balanced&quot;)</td></tr>
 <tr class="memdesc:ae082e501035619ad92067f451b9a8dbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply performance tuning strategy.  <br /></td></tr>
 <tr class="separator:ae082e501035619ad92067f451b9a8dbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54b0cf6f9545bbbfe9a02ef7d6acfeec" id="r_a54b0cf6f9545bbbfe9a02ef7d6acfeec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a54b0cf6f9545bbbfe9a02ef7d6acfeec">auto_configure</a> ()</td></tr>
 <tr class="memdesc:a54b0cf6f9545bbbfe9a02ef7d6acfeec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auto-detect and apply environment configuration.  <br /></td></tr>
 <tr class="separator:a54b0cf6f9545bbbfe9a02ef7d6acfeec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43e5fe309c03a0370229deacd0c30490" id="r_a43e5fe309c03a0370229deacd0c30490"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a43e5fe309c03a0370229deacd0c30490">apply_template</a> (<a class="el" href="namespacelogger__system.html#a76a8b507a55790500c67ac49b4b041ae">logger_system::configuration_template</a> template_type)</td></tr>
+<tr class="memdesc:a43e5fe309c03a0370229deacd0c30490"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a configuration template.  <br /></td></tr>
+<tr class="separator:a43e5fe309c03a0370229deacd0c30490"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bdea1251ad1ae279ae5d27479b02329" id="r_a2bdea1251ad1ae279ae5d27479b02329"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a2bdea1251ad1ae279ae5d27479b02329">apply_performance_strategy</a> (<a class="el" href="namespacelogger__system.html#aaa281c547e6d00b64455819b72416ae4">logger_system::performance_strategy</a> strategy)</td></tr>
+<tr class="memdesc:a2bdea1251ad1ae279ae5d27479b02329"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a performance strategy.  <br /></td></tr>
+<tr class="separator:a2bdea1251ad1ae279ae5d27479b02329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40122f05d9cc4cf55e770b17ca1125a7" id="r_a40122f05d9cc4cf55e770b17ca1125a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a40122f05d9cc4cf55e770b17ca1125a7">detect_environment</a> ()</td></tr>
+<tr class="memdesc:a40122f05d9cc4cf55e770b17ca1125a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect environment from environment variables.  <br /></td></tr>
+<tr class="separator:a40122f05d9cc4cf55e770b17ca1125a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a393d3271450bfb1ecef3594e39784a44" id="r_a393d3271450bfb1ecef3594e39784a44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a393d3271450bfb1ecef3594e39784a44">with_monitoring</a> (std::shared_ptr&lt; <a class="el" href="classlogger__module_1_1monitoring__interface.html">monitoring_interface</a> &gt; monitor)</td></tr>
+<tr class="memdesc:a393d3271450bfb1ecef3594e39784a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set monitoring interface.  <br /></td></tr>
+<tr class="separator:a393d3271450bfb1ecef3594e39784a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a739ecfc73afd747cc2ba38ff7278a23c" id="r_a739ecfc73afd747cc2ba38ff7278a23c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a739ecfc73afd747cc2ba38ff7278a23c">with_health_check_interval</a> (std::chrono::milliseconds interval)</td></tr>
+<tr class="memdesc:a739ecfc73afd747cc2ba38ff7278a23c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set health check interval.  <br /></td></tr>
+<tr class="separator:a739ecfc73afd747cc2ba38ff7278a23c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacab4b1214b9d56a1e1f97925658a73f" id="r_aacab4b1214b9d56a1e1f97925658a73f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aacab4b1214b9d56a1e1f97925658a73f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#aacab4b1214b9d56a1e1f97925658a73f">with_di_container</a> (std::shared_ptr&lt; <a class="el" href="classlogger__module_1_1di__container__interface.html">di_container_interface</a>&lt; T &gt; &gt; container)</td></tr>
+<tr class="memdesc:aacab4b1214b9d56a1e1f97925658a73f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set DI container.  <br /></td></tr>
+<tr class="separator:aacab4b1214b9d56a1e1f97925658a73f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af674e59bae4618221c6631c093a09584" id="r_af674e59bae4618221c6631c093a09584"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#af674e59bae4618221c6631c093a09584">with_writer_from_di</a> (const std::string &amp;name)</td></tr>
+<tr class="memdesc:af674e59bae4618221c6631c093a09584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add writer from DI container.  <br /></td></tr>
+<tr class="separator:af674e59bae4618221c6631c093a09584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a255a20ba2eb2c784f95e573c153e25a4" id="r_a255a20ba2eb2c784f95e573c153e25a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a255a20ba2eb2c784f95e573c153e25a4">with_error_handler</a> (std::function&lt; void(const <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a> &amp;)&gt; handler)</td></tr>
+<tr class="memdesc:a255a20ba2eb2c784f95e573c153e25a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set error handler.  <br /></td></tr>
+<tr class="separator:a255a20ba2eb2c784f95e573c153e25a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e614590b4c0d06bfd1071d7fa6f5976" id="r_a3e614590b4c0d06bfd1071d7fa6f5976"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a3e614590b4c0d06bfd1071d7fa6f5976">with_default_pattern</a> ()</td></tr>
+<tr class="memdesc:a3e614590b4c0d06bfd1071d7fa6f5976"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use default pattern for logging.  <br /></td></tr>
+<tr class="separator:a3e614590b4c0d06bfd1071d7fa6f5976"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ee840daef8787d46a69b8af03bc68be" id="r_a0ee840daef8787d46a69b8af03bc68be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a0ee840daef8787d46a69b8af03bc68be">clear_strategies</a> ()</td></tr>
 <tr class="memdesc:a0ee840daef8787d46a69b8af03bc68be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all applied strategies.  <br /></td></tr>
 <tr class="separator:a0ee840daef8787d46a69b8af03bc68be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19ea0ad54462dc54678d174312565266" id="r_a19ea0ad54462dc54678d174312565266"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1result.html">result</a>&lt; std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1logger.html">logger</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build</a> ()</td></tr>
-<tr class="memdesc:a19ea0ad54462dc54678d174312565266"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the logger with validation.  <br /></td></tr>
+<tr class="memitem:a19ea0ad54462dc54678d174312565266" id="r_a19ea0ad54462dc54678d174312565266"><td class="memItemLeft" align="right" valign="top">result&lt; std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1logger.html">logger</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build</a> ()</td></tr>
 <tr class="separator:a19ea0ad54462dc54678d174312565266"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a2d80b6deb97ca71ec8698bb1a4e5ff" id="r_a1a2d80b6deb97ca71ec8698bb1a4e5ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a1a2d80b6deb97ca71ec8698bb1a4e5ff">get_config</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:a1a2d80b6deb97ca71ec8698bb1a4e5ff" id="r_a1a2d80b6deb97ca71ec8698bb1a4e5ff"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a1a2d80b6deb97ca71ec8698bb1a4e5ff">get_config</a> () const</td></tr>
 <tr class="memdesc:a1a2d80b6deb97ca71ec8698bb1a4e5ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current configuration (for inspection)  <br /></td></tr>
 <tr class="separator:a1a2d80b6deb97ca71ec8698bb1a4e5ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a962b213b1cc4a72c99238d6d6316b9d9" id="r_a962b213b1cc4a72c99238d6d6316b9d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a962b213b1cc4a72c99238d6d6316b9d9">validate</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:a962b213b1cc4a72c99238d6d6316b9d9" id="r_a962b213b1cc4a72c99238d6d6316b9d9"><td class="memItemLeft" align="right" valign="top">result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__builder.html#a962b213b1cc4a72c99238d6d6316b9d9">validate</a> () const</td></tr>
 <tr class="memdesc:a962b213b1cc4a72c99238d6d6316b9d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate current configuration without building.  <br /></td></tr>
 <tr class="separator:a962b213b1cc4a72c99238d6d6316b9d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Builder pattern for logger construction with validation. </p>
-<p>This class provides a fluent interface for constructing loggers with validated configuration and proper initialization. </p>
+<p>The <a class="el" href="classlogger__module_1_1logger__builder.html" title="Builder pattern for logger construction with validation.">logger_builder</a> class provides a fluent interface for constructing logger instances with complex configurations. It ensures configuration validity, applies optimization strategies, and handles the complexity of logger initialization.</p>
+<p>Key features:</p><ul>
+<li>Fluent interface for intuitive configuration</li>
+<li>Automatic validation of configuration parameters</li>
+<li>Support for configuration templates and strategies</li>
+<li>Environment-based auto-configuration</li>
+<li>Integration with dependency injection containers</li>
+<li>Performance tuning presets</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>All builder methods return a reference to the builder for method chaining.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>The <a class="el" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build()</a> method consumes writers and filters. After calling <a class="el" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build()</a>, the builder should not be reused without adding new writers.</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>1.0.0 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00107">107</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afa60344d6d452265a8e3d2f72229c842" name="afa60344d6d452265a8e3d2f72229c842"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afa60344d6d452265a8e3d2f72229c842">&#9670;&#160;</a></span>logger_builder()</h2>
@@ -214,6 +250,10 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a0">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00109">109</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
 
 </div>
 </div>
@@ -250,6 +290,10 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a38">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00353">353</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
 
 </div>
 </div>
@@ -265,7 +309,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::add_writer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
@@ -296,6 +340,51 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a37">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00343">343</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+</div>
+</div>
+<a id="a2bdea1251ad1ae279ae5d27479b02329" name="a2bdea1251ad1ae279ae5d27479b02329"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bdea1251ad1ae279ae5d27479b02329">&#9670;&#160;</a></span>apply_performance_strategy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::apply_performance_strategy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacelogger__system.html#aaa281c547e6d00b64455819b72416ae4">logger_system::performance_strategy</a>&#160;</td>
+          <td class="paramname"><em>strategy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Apply a performance strategy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">strategy</td><td>Performance strategy to apply </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a55">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00487">487</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00032">logger_module::logger_config::async</a>, <a class="el" href="logger__config_8h_source.html#l00037">logger_module::logger_config::batch_size</a>, <a class="el" href="logger__config_8h_source.html#l00033">logger_module::logger_config::buffer_size</a>, <a class="el" href="logger__config_8h_source.html#l00041">logger_module::logger_config::enable_batch_writing</a>, <a class="el" href="logger__config_8h_source.html#l00038">logger_module::logger_config::flush_interval</a>, <a class="el" href="configuration__templates_8h_source.html#l00140">logger_system::get_performance_config()</a>, <a class="el" href="logger__config_8h_source.html#l00034">logger_module::logger_config::min_level</a>, and <a class="el" href="logger__config_8h_source.html#l00059">logger_module::logger_config::queue_overflow_policy</a>.</p>
 
 </div>
 </div>
@@ -331,6 +420,55 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a42">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00420">420</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="logger__builder_8h_source.html#l00457">auto_configure()</a>, <a class="el" href="logger__builder_8h_source.html#l00432">for_environment()</a>, <a class="el" href="logger__builder_8h_source.html#l00394">use_template()</a>, and <a class="el" href="logger__builder_8h_source.html#l00445">with_performance_tuning()</a>.</p>
+
+</div>
+</div>
+<a id="a43e5fe309c03a0370229deacd0c30490" name="a43e5fe309c03a0370229deacd0c30490"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43e5fe309c03a0370229deacd0c30490">&#9670;&#160;</a></span>apply_template()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::apply_template </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacelogger__system.html#a76a8b507a55790500c67ac49b4b041ae">logger_system::configuration_template</a>&#160;</td>
+          <td class="paramname"><em>template_type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Apply a configuration template. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">template_type</td><td>Template to apply </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a53">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00470">470</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00032">logger_module::logger_config::async</a>, <a class="el" href="configuration__templates_8h_source.html#l00055">logger_system::template_config::async_mode</a>, <a class="el" href="configuration__templates_8h_source.html#l00057">logger_system::template_config::batch_size</a>, <a class="el" href="logger__config_8h_source.html#l00037">logger_module::logger_config::batch_size</a>, <a class="el" href="configuration__templates_8h_source.html#l00054">logger_system::template_config::buffer_size</a>, <a class="el" href="logger__config_8h_source.html#l00033">logger_module::logger_config::buffer_size</a>, <a class="el" href="configuration__templates_8h_source.html#l00056">logger_system::template_config::enable_batch_writing</a>, <a class="el" href="logger__config_8h_source.html#l00041">logger_module::logger_config::enable_batch_writing</a>, <a class="el" href="configuration__templates_8h_source.html#l00058">logger_system::template_config::flush_interval</a>, <a class="el" href="logger__config_8h_source.html#l00038">logger_module::logger_config::flush_interval</a>, <a class="el" href="configuration__templates_8h_source.html#l00067">logger_system::get_template_config()</a>, <a class="el" href="configuration__templates_8h_source.html#l00053">logger_system::template_config::min_level</a>, <a class="el" href="logger__config_8h_source.html#l00034">logger_module::logger_config::min_level</a>, <a class="el" href="configuration__templates_8h_source.html#l00059">logger_system::template_config::overflow_policy_type</a>, and <a class="el" href="logger__config_8h_source.html#l00059">logger_module::logger_config::queue_overflow_policy</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="logger__builder_8h_source.html#l00503">detect_environment()</a>.</p>
 
 </div>
 </div>
@@ -359,6 +497,12 @@ Public Member Functions</h2></td></tr>
 
 <p>Auto-detect and apply environment configuration. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a51">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00457">457</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__builder_8h_source.html#l00420">apply_strategy()</a>, and <a class="el" href="config__strategy__interface_8h_source.html#l00445">logger_module::config_strategy_factory::from_environment()</a>.</p>
 
 </div>
 </div>
@@ -372,7 +516,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classlogger__module_1_1result.html">result</a>&lt; std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1logger.html">logger</a> &gt; &gt; logger_module::logger_builder::build </td>
+          <td class="memname">result&lt; std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1logger.html">logger</a> &gt; &gt; logger_module::logger_builder::build </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -384,9 +528,14 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a70">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
 
-<p>Build the logger with validation. </p>
-<dl class="section return"><dt>Returns</dt><dd>Result containing the logger or error </dd></dl>
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00634">634</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="classlogger__module_1_1composite__filter.html#a2af669822f929ec6eb07d37236f813f6a558ffc8f5770d8e4f95f51d822685532">logger_module::composite_filter::AND</a>, <a class="el" href="logger__config_8h_source.html#l00032">logger_module::logger_config::async</a>, <a class="el" href="logger__config_8h_source.html#l00037">logger_module::logger_config::batch_size</a>, <a class="el" href="logger__config_8h_source.html#l00033">logger_module::logger_config::buffer_size</a>, <a class="el" href="logger__config_8h_source.html#l00041">logger_module::logger_config::enable_batch_writing</a>, <a class="el" href="logger__config_8h_source.html#l00047">logger_module::logger_config::enable_color_output</a>, <a class="el" href="logger__config_8h_source.html#l00044">logger_module::logger_config::enable_metrics</a>, <a class="el" href="logger__config_8h_source.html#l00038">logger_module::logger_config::flush_interval</a>, <a class="el" href="batch__writer_8h_source.html#l00065">logger_module::batch_writer::config::flush_interval</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba9cc57114b319994e90322314a00521d4">logger_module::invalid_configuration</a>, <a class="el" href="batch__writer_8h_source.html#l00064">logger_module::batch_writer::config::max_batch_size</a>, <a class="el" href="logger__config_8h_source.html#l00040">logger_module::logger_config::max_writers</a>, <a class="el" href="logger__config_8h_source.html#l00034">logger_module::logger_config::min_level</a>, and <a class="el" href="logger__config_8h_source.html#l00081">logger_module::logger_config::validate()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="logger__v1__compat_8h_source.html#l00235">logger_module::v1_compat::logger_config_v1::create()</a>, <a class="el" href="logger__v1__compat_8h_source.html#l00129">logger_module::v1_compat::create_file_logger()</a>, <a class="el" href="logger__v1__compat_8h_source.html#l00104">logger_module::v1_compat::create_logger()</a>, <a class="el" href="logger__v1__compat_8h_source.html#l00116">logger_module::v1_compat::create_logger()</a>, and <a class="el" href="logger__v1__compat_8h_source.html#l00252">logger_module::v1_compat::get_global_logger()</a>.</p>
 
 </div>
 </div>
@@ -415,6 +564,44 @@ Public Member Functions</h2></td></tr>
 
 <p>Clear all applied strategies. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a69">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00597">597</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+</div>
+</div>
+<a id="a40122f05d9cc4cf55e770b17ca1125a7" name="a40122f05d9cc4cf55e770b17ca1125a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40122f05d9cc4cf55e770b17ca1125a7">&#9670;&#160;</a></span>detect_environment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::detect_environment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Detect environment from environment variables. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a57">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00503">503</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__builder_8h_source.html#l00470">apply_template()</a>, <a class="el" href="namespacelogger__system.html#a76a8b507a55790500c67ac49b4b041aeaad42f6697b035b7580e4fef93be20b4d">logger_system::debug</a>, <a class="el" href="logger__config_8h_source.html#l00034">logger_module::logger_config::min_level</a>, and <a class="el" href="namespacelogger__system.html#a76a8b507a55790500c67ac49b4b041aeafd89784e59c72499525556f80289b2c7">logger_system::production</a>.</p>
 
 </div>
 </div>
@@ -430,7 +617,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::for_environment </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>env</em></td><td>)</td>
           <td></td>
         </tr>
@@ -450,6 +637,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a47">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00432">432</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__builder_8h_source.html#l00420">apply_strategy()</a>, and <a class="el" href="config__strategy__interface_8h_source.html#l00411">logger_module::config_strategy_factory::create_environment()</a>.</p>
 
 </div>
 </div>
@@ -463,7 +656,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp; logger_module::logger_builder::get_config </td>
+          <td class="memname">const <a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp; logger_module::logger_builder::get_config </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -478,6 +671,10 @@ Public Member Functions</h2></td></tr>
 
 <p>Get the current configuration (for inspection) </p>
 <dl class="section return"><dt>Returns</dt><dd>Current configuration </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a77">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00745">745</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
 
 </div>
 </div>
@@ -493,7 +690,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::use_template </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
         </tr>
@@ -504,15 +701,12 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Use a predefined configuration template. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">name</td><td>Template name ("default", "high_performance", "low_latency", "debug", "production") </td></tr>
-  </table>
-  </dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a40">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00394">394</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__builder_8h_source.html#l00420">apply_strategy()</a>, <a class="el" href="config__strategy__interface_8h_source.html#l00391">logger_module::config_strategy_factory::create_template()</a>, <a class="el" href="logger__config_8h_source.html#l00242">logger_module::logger_config::debug_config()</a>, <a class="el" href="logger__config_8h_source.html#l00200">logger_module::logger_config::default_config()</a>, <a class="el" href="logger__config_8h_source.html#l00208">logger_module::logger_config::high_performance()</a>, <a class="el" href="logger__config_8h_source.html#l00226">logger_module::logger_config::low_latency()</a>, and <a class="el" href="logger__config_8h_source.html#l00258">logger_module::logger_config::production()</a>.</p>
 
 </div>
 </div>
@@ -526,7 +720,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classlogger__module_1_1result__void.html">result_void</a> logger_module::logger_builder::validate </td>
+          <td class="memname">result_void logger_module::logger_builder::validate </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -541,6 +735,12 @@ Public Member Functions</h2></td></tr>
 
 <p>Validate current configuration without building. </p>
 <dl class="section return"><dt>Returns</dt><dd>Validation result </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a78">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00753">753</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00081">logger_module::logger_config::validate()</a>.</p>
 
 </div>
 </div>
@@ -556,8 +756,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_async </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
-          <td class="paramname"><em>async</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a></code></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>async</em> = <code>true</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -567,15 +767,12 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Set async mode. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">async</td><td>Enable/disable async logging </td></tr>
-  </table>
-  </dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a3">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00157">157</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00032">logger_module::logger_config::async</a>, and <a class="el" href="logger__config_8h_source.html#l00037">logger_module::logger_config::batch_size</a>.</p>
 
 </div>
 </div>
@@ -611,6 +808,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a10">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00217">217</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00037">logger_module::logger_config::batch_size</a>.</p>
 
 </div>
 </div>
@@ -626,8 +829,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_batch_writing </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
-          <td class="paramname"><em>enable</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a></code></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em> = <code>true</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -646,6 +849,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a11">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00227">227</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00041">logger_module::logger_config::enable_batch_writing</a>.</p>
 
 </div>
 </div>
@@ -680,7 +889,24 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining</dd></dl>
+<p>Configures the internal buffer size for log message queuing. Larger buffers can improve throughput but increase memory usage.</p>
+<dl class="section note"><dt>Note</dt><dd>Recommended sizes:<ul>
+<li>Small applications: 4096-8192 bytes</li>
+<li>Medium applications: 16384-32768 bytes</li>
+<li>High-throughput applications: 65536+ bytes</li>
+</ul>
+</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Very large buffers may cause memory pressure in constrained environments.</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>1.0.0 </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a6">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00183">183</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00033">logger_module::logger_config::buffer_size</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="logger__v1__compat_8h_source.html#l00235">logger_module::v1_compat::logger_config_v1::create()</a>.</p>
 
 </div>
 </div>
@@ -696,7 +922,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_config </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;&#160;</td>
           <td class="paramname"><em>config</em></td><td>)</td>
           <td></td>
         </tr>
@@ -707,15 +933,10 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Start with a predefined configuration. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">config</td><td>Base configuration to use </td></tr>
-  </table>
-  </dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a2">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00130">130</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
 
 </div>
 </div>
@@ -731,8 +952,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_crash_handler </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
-          <td class="paramname"><em>enable</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a></code></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em> = <code>true</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -751,6 +972,126 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a19">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00267">267</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00045">logger_module::logger_config::enable_crash_handler</a>.</p>
+
+</div>
+</div>
+<a id="a3e614590b4c0d06bfd1071d7fa6f5976" name="a3e614590b4c0d06bfd1071d7fa6f5976"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e614590b4c0d06bfd1071d7fa6f5976">&#9670;&#160;</a></span>with_default_pattern()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_default_pattern </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Use default pattern for logging. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a66">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00586">586</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00049">logger_module::logger_config::enable_source_location</a>, and <a class="el" href="logger__config_8h_source.html#l00048">logger_module::logger_config::enable_timestamp</a>.</p>
+
+</div>
+</div>
+<a id="aacab4b1214b9d56a1e1f97925658a73f" name="aacab4b1214b9d56a1e1f97925658a73f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacab4b1214b9d56a1e1f97925658a73f">&#9670;&#160;</a></span>with_di_container()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_di_container </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classlogger__module_1_1di__container__interface.html">di_container_interface</a>&lt; T &gt; &gt;&#160;</td>
+          <td class="paramname"><em>container</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set DI container. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">container</td><td>DI container implementation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a62">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00556">556</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+</div>
+</div>
+<a id="a255a20ba2eb2c784f95e573c153e25a4" name="a255a20ba2eb2c784f95e573c153e25a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a255a20ba2eb2c784f95e573c153e25a4">&#9670;&#160;</a></span>with_error_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_error_handler </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void(const <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a> &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set error handler. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>Error handler function </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a64">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00577">577</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
 
 </div>
 </div>
@@ -766,13 +1107,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_file_output </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>directory</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>prefix</em> = <code>&quot;app&quot;</code>, </td>
         </tr>
         <tr>
@@ -811,6 +1152,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a28">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00310">310</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00064">logger_module::logger_config::log_directory</a>, <a class="el" href="logger__config_8h_source.html#l00065">logger_module::logger_config::log_file_prefix</a>, <a class="el" href="logger__config_8h_source.html#l00063">logger_module::logger_config::max_file_count</a>, and <a class="el" href="logger__config_8h_source.html#l00062">logger_module::logger_config::max_file_size</a>.</p>
 
 </div>
 </div>
@@ -846,6 +1193,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a13">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00237">237</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00038">logger_module::logger_config::flush_interval</a>.</p>
 
 </div>
 </div>
@@ -881,6 +1234,49 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a39">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00363">363</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+</div>
+</div>
+<a id="a739ecfc73afd747cc2ba38ff7278a23c" name="a739ecfc73afd747cc2ba38ff7278a23c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a739ecfc73afd747cc2ba38ff7278a23c">&#9670;&#160;</a></span>with_health_check_interval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_health_check_interval </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::milliseconds&#160;</td>
+          <td class="paramname"><em>interval</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set health check interval. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">interval</td><td>Health check interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a61">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00545">545</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
 
 </div>
 </div>
@@ -896,8 +1292,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_lock_free </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
-          <td class="paramname"><em>enable</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a></code></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em> = <code>true</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -916,6 +1312,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a15">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00247">247</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00039">logger_module::logger_config::use_lock_free</a>.</p>
 
 </div>
 </div>
@@ -951,6 +1353,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a26">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00297">297</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00052">logger_module::logger_config::max_queue_size</a>.</p>
 
 </div>
 </div>
@@ -966,8 +1374,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_metrics </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
-          <td class="paramname"><em>enable</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a></code></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em> = <code>true</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -986,6 +1394,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a17">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00257">257</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00044">logger_module::logger_config::enable_metrics</a>.</p>
 
 </div>
 </div>
@@ -1012,15 +1426,55 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a8">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
 
-<p>Set minimum log level. </p>
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00207">207</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00034">logger_module::logger_config::min_level</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="logger__v1__compat_8h_source.html#l00235">logger_module::v1_compat::logger_config_v1::create()</a>.</p>
+
+</div>
+</div>
+<a id="a393d3271450bfb1ecef3594e39784a44" name="a393d3271450bfb1ecef3594e39784a44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a393d3271450bfb1ecef3594e39784a44">&#9670;&#160;</a></span>with_monitoring()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_monitoring </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classlogger__module_1_1monitoring__interface.html">monitoring_interface</a> &gt;&#160;</td>
+          <td class="paramname"><em>monitor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set monitoring interface. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">level</td><td>Minimum level to log </td></tr>
+    <tr><td class="paramname">monitor</td><td>Monitoring interface implementation </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a60">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00534">534</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00044">logger_module::logger_config::enable_metrics</a>.</p>
 
 </div>
 </div>
@@ -1036,13 +1490,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_network_output </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>host</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint16_t</a>&#160;</td>
+          <td class="paramtype">uint16_t&#160;</td>
           <td class="paramname"><em>port</em>, </td>
         </tr>
         <tr>
@@ -1074,6 +1528,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a33">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00328">328</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00070">logger_module::logger_config::network_timeout</a>, <a class="el" href="logger__config_8h_source.html#l00068">logger_module::logger_config::remote_host</a>, and <a class="el" href="logger__config_8h_source.html#l00069">logger_module::logger_config::remote_port</a>.</p>
 
 </div>
 </div>
@@ -1109,6 +1569,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a23">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00287">287</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00059">logger_module::logger_config::queue_overflow_policy</a>.</p>
 
 </div>
 </div>
@@ -1124,7 +1590,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_performance_tuning </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>level</em> = <code>&quot;balanced&quot;</code></td><td>)</td>
           <td></td>
         </tr>
@@ -1144,6 +1610,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a49">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00445">445</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__builder_8h_source.html#l00420">apply_strategy()</a>, and <a class="el" href="config__strategy__interface_8h_source.html#l00429">logger_module::config_strategy_factory::create_tuning()</a>.</p>
 
 </div>
 </div>
@@ -1159,8 +1631,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_structured_logging </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
-          <td class="paramname"><em>enable</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">true</a></code></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em> = <code>true</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1179,11 +1651,56 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a21">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00277">277</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__config_8h_source.html#l00046">logger_module::logger_config::enable_structured_logging</a>.</p>
+
+</div>
+</div>
+<a id="af674e59bae4618221c6631c093a09584" name="af674e59bae4618221c6631c093a09584"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af674e59bae4618221c6631c093a09584">&#9670;&#160;</a></span>with_writer_from_di()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a> &amp; logger_module::logger_builder::with_writer_from_di </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add writer from DI container. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Writer name to resolve from DI </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to builder for chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a63">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger__builder_8h_source.html#l00567">567</a> of file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="logger__builder_8h_source.html">logger_builder.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/config/<a class="el" href="logger__builder_8h_source.html">logger_builder.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -1191,7 +1708,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1logger__builder.html">logger_builder</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_builder.h File Reference</title>
+<title>Logger System: /home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -96,20 +96,32 @@ $(document).ready(function(){initNavTree('logger__builder_8h.html',''); initResi
   <div class="headertitle"><div class="title">logger_builder.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Builder pattern implementation for flexible logger configuration.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="logger__config_8h_source.html">logger_config.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="config__strategy__interface_8h_source.html">config_strategy_interface.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="configuration__templates_8h_source.html">configuration_templates.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="logger_8h_source.html">../logger.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="base__writer_8h_source.html">../writers/base_writer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="batch__writer_8h_source.html">../writers/batch_writer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="log__filter_8h_source.html">../filters/log_filter.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="log__formatter__interface_8h_source.html">../interfaces/log_formatter_interface.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="di__container__interface_8h_source.html">../di/di_container_interface.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="monitoring__interface_8h_source.html">../monitoring/monitoring_interface.h</a>&quot;</code><br />
 <code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for logger_builder.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="logger__builder_8h__incl.svg" width="3616" height="608"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="logger__builder_8h__incl.svg" width="3992" height="667"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="logger__builder_8h__dep__incl.svg" width="242" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="logger__builder_8h_source.html">Go to the source code of this file.</a></p>
@@ -125,13 +137,21 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespacelogger__module" id="r_namespacelogger__module"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html">logger_module</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Builder pattern implementation for flexible logger configuration. </p>
+<dl class="section author"><dt>Author</dt><dd>🍀☀🌕🌥 🌊 </dd></dl>
+<dl class="section since"><dt>Since</dt><dd>1.0.0</dd></dl>
+<p>This file provides a fluent interface for constructing logger instances with validated configurations. The builder pattern allows for step-by-step configuration with sensible defaults and automatic validation.</p>
+<dl class="section note"><dt>Note</dt><dd>The builder ensures configuration consistency and applies optimizations based on the selected settings (e.g., disabling batching in sync mode). </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="logger__builder_8h_source.html">logger_builder.h</a>.</p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_08d237fc27d4ecd563f71c5d52f2fecc.html">sources</a></li><li class="navelem"><a class="el" href="dir_8eafc3c8aa7c38e9ae7a32faf8deec41.html">logger</a></li><li class="navelem"><a class="el" href="dir_85634e65fefe8c8dcb3d84124f55c94a.html">config</a></li><li class="navelem"><a class="el" href="logger__builder_8h.html">logger_builder.h</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="navelem"><a class="el" href="dir_43e0a1f539e00dcfa1a6bc4d4fee4fc2.html">home</a></li><li class="navelem"><a class="el" href="dir_1036706e55c22cab35bc1c58ee689f1d.html">runner</a></li><li class="navelem"><a class="el" href="dir_629f8151d55d307162ff2d619fb1783d.html">work</a></li><li class="navelem"><a class="el" href="dir_2f31978482a61cf4431542dc092c37e7.html">logger_system</a></li><li class="navelem"><a class="el" href="dir_bfbc53a2a97de514a7a317425db7763c.html">logger_system</a></li><li class="navelem"><a class="el" href="dir_06c576356eee845d55468b6334f24205.html">sources</a></li><li class="navelem"><a class="el" href="dir_fdb45f3173b816aceb323ae6fdd0bb21.html">logger</a></li><li class="navelem"><a class="el" href="dir_0b6dd26edb24da019d7381ef1e2cc469.html">config</a></li><li class="navelem"><a class="el" href="logger__builder_8h.html">logger_builder.h</a></li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

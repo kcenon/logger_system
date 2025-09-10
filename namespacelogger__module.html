@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module Namespace Reference</title>
+<title>Logger System: logger_module Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -91,14 +91,21 @@ $(document).ready(function(){initNavTree('namespacelogger__module.html',''); ini
 
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">logger_module Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacelogger__module_1_1v1__compat" id="r_namespacelogger__module_1_1v1__compat"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module_1_1v1__compat.html">v1_compat</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1access__control__filter.html">access_control_filter</a></td></tr>
@@ -107,11 +114,14 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1adaptive__backpressure.html">adaptive_backpressure</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adaptive backpressure system.  <a href="classlogger__module_1_1adaptive__backpressure.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1async__writer.html">async_writer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronous wrapper for log writers.  <a href="classlogger__module_1_1async__writer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__formatter.html">base_formatter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base implementation for log formatters.  <a href="classlogger__module_1_1base__formatter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html">base_writer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for all log writers.  <a href="classlogger__module_1_1base__writer.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for all log output writers.  <a href="classlogger__module_1_1base__writer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1basic__monitor.html">basic_monitor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic monitoring implementation.  <a href="classlogger__module_1_1basic__monitor.html#details">More...</a><br /></td></tr>
@@ -190,6 +200,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1level__filter.html">level_filter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter logs by minimum level.  <a href="classlogger__module_1_1level__filter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1lightweight__container.html">lightweight_container</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple dependency injection container.  <a href="classlogger__module_1_1lightweight__container.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1lightweight__di__container.html">lightweight_di_container</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lightweight implementation of DI container.  <a href="classlogger__module_1_1lightweight__di__container.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -203,7 +216,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronous log collector for high-performance logging.  <a href="classlogger__module_1_1log__collector.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single log entry.  <a href="structlogger__module_1_1log__entry.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single log entry with all associated metadata.  <a href="structlogger__module_1_1log__entry.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__filter.html">log_filter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for log filtering.  <a href="classlogger__module_1_1log__filter.html#details">More...</a><br /></td></tr>
@@ -286,10 +299,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1regex__filter.html">regex_filter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter logs by regex pattern.  <a href="classlogger__module_1_1regex__filter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1result.html">result</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1result__void.html">result_void</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1rotating__file__writer.html">rotating_file_writer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">File writer with rotation support based on size or time.  <a href="classlogger__module_1_1rotating__file__writer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -306,7 +315,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Small String Optimization (SSO) implementation.  <a href="classlogger__module_1_1small__string.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1source__location.html">source_location</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source code location information.  <a href="structlogger__module_1_1source__location.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source code location information for debugging.  <a href="structlogger__module_1_1source__location.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1standard__fields.html">standard_fields</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard field names for structured logging.  <a href="structlogger__module_1_1standard__fields.html#details">More...</a><br /></td></tr>
@@ -320,8 +329,11 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1template__strategy.html">template_strategy</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strategy for applying predefined configuration templates.  <a href="classlogger__module_1_1template__strategy.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1thread__system__di__adapter.html">thread_system_di_adapter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapter to use thread_system's service container.  <a href="classlogger__module_1_1thread__system__di__adapter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1thread__system__monitor__adapter.html">thread_system_monitor_adapter</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fallback when thread_system is not available.  <a href="classlogger__module_1_1thread__system__monitor__adapter.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapter to use thread_system's monitoring capabilities.  <a href="classlogger__module_1_1thread__system__monitor__adapter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1writer__health__info.html">writer_health_info</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writer health information.  <a href="structlogger__module_1_1writer__health__info.html#details">More...</a><br /></td></tr>
@@ -332,15 +344,15 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a69d69fb16ceb59b2b268ba44511a09a3" id="r_a69d69fb16ceb59b2b268ba44511a09a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a69d69fb16ceb59b2b268ba44511a09a3">small_string_64</a> = <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt; 64 &gt;</td></tr>
+<tr class="memitem:a69d69fb16ceb59b2b268ba44511a09a3" id="r_a69d69fb16ceb59b2b268ba44511a09a3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a69d69fb16ceb59b2b268ba44511a09a3">small_string_64</a> = <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt; 64 &gt;</td></tr>
 <tr class="separator:a69d69fb16ceb59b2b268ba44511a09a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa046b298bf7ccbecf2e3518379afe114" id="r_aa046b298bf7ccbecf2e3518379afe114"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#aa046b298bf7ccbecf2e3518379afe114">small_string_128</a> = <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt; 128 &gt;</td></tr>
+<tr class="memitem:aa046b298bf7ccbecf2e3518379afe114" id="r_aa046b298bf7ccbecf2e3518379afe114"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#aa046b298bf7ccbecf2e3518379afe114">small_string_128</a> = <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt; 128 &gt;</td></tr>
 <tr class="separator:aa046b298bf7ccbecf2e3518379afe114"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a792c3db475172433c0f64b02c1533f76" id="r_a792c3db475172433c0f64b02c1533f76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a792c3db475172433c0f64b02c1533f76">small_string_256</a> = <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt; 256 &gt;</td></tr>
+<tr class="memitem:a792c3db475172433c0f64b02c1533f76" id="r_a792c3db475172433c0f64b02c1533f76"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a792c3db475172433c0f64b02c1533f76">small_string_256</a> = <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt; 256 &gt;</td></tr>
 <tr class="separator:a792c3db475172433c0f64b02c1533f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba151494a11139c74ff16b6e0c8c9b8b" id="r_aba151494a11139c74ff16b6e0c8c9b8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#aba151494a11139c74ff16b6e0c8c9b8b">small_string_512</a> = <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt; 512 &gt;</td></tr>
+<tr class="memitem:aba151494a11139c74ff16b6e0c8c9b8b" id="r_aba151494a11139c74ff16b6e0c8c9b8b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#aba151494a11139c74ff16b6e0c8c9b8b">small_string_512</a> = <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt; 512 &gt;</td></tr>
 <tr class="separator:aba151494a11139c74ff16b6e0c8c9b8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1e454eb05e3ef274e857f0b0a43ad28" id="r_ae1e454eb05e3ef274e857f0b0a43ad28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#ae1e454eb05e3ef274e857f0b0a43ad28">error_code</a> = <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a></td></tr>
+<tr class="memitem:ae1e454eb05e3ef274e857f0b0a43ad28" id="r_ae1e454eb05e3ef274e857f0b0a43ad28"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#ae1e454eb05e3ef274e857f0b0a43ad28">error_code</a> = <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a></td></tr>
 <tr class="separator:ae1e454eb05e3ef274e857f0b0a43ad28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
@@ -422,23 +434,38 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a5a717e2eece74d014d20adab53d609f4" id="r_a5a717e2eece74d014d20adab53d609f4"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a5a717e2eece74d014d20adab53d609f4">logger_error_to_string</a> (<a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">code</a>)</td></tr>
+<tr class="memitem:a66165cb4618073112903c6fce98b2010" id="r_a66165cb4618073112903c6fce98b2010"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1lightweight__container.html">lightweight_container</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a66165cb4618073112903c6fce98b2010">get_container</a> ()</td></tr>
+<tr class="memdesc:a66165cb4618073112903c6fce98b2010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the global lightweight container instance.  <br /></td></tr>
+<tr class="separator:a66165cb4618073112903c6fce98b2010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a717e2eece74d014d20adab53d609f4" id="r_a5a717e2eece74d014d20adab53d609f4"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a5a717e2eece74d014d20adab53d609f4">logger_error_to_string</a> (<a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a> code)</td></tr>
 <tr class="memdesc:a5a717e2eece74d014d20adab53d609f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert logger_error_code to string representation.  <br /></td></tr>
 <tr class="separator:a5a717e2eece74d014d20adab53d609f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3dc3716c8d0fd1b84d009a9d4a0a73b" id="r_ac3dc3716c8d0fd1b84d009a9d4a0a73b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">make_logger_error</a> (<a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a> code, const std::string &amp;message=&quot;&quot;)</td></tr>
-<tr class="separator:ac3dc3716c8d0fd1b84d009a9d4a0a73b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bd070612d11c60b9828e64b2adf8566" id="r_a9bd070612d11c60b9828e64b2adf8566"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a9bd070612d11c60b9828e64b2adf8566"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1result.html">result</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a9bd070612d11c60b9828e64b2adf8566">make_logger_error</a> (<a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a> code, const std::string &amp;message=&quot;&quot;)</td></tr>
-<tr class="separator:a9bd070612d11c60b9828e64b2adf8566"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54fa52d17bdd34469aa237a40d97c642" id="r_a54fa52d17bdd34469aa237a40d97c642"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a54fa52d17bdd34469aa237a40d97c642">health_status_to_string</a> (<a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47d">health_status</a> status)</td></tr>
+<tr class="memitem:a2b021431469263d6fae2ca1783661ddd" id="r_a2b021431469263d6fae2ca1783661ddd"><td class="memItemLeft" align="right" valign="top">error&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a2b021431469263d6fae2ca1783661ddd">make_logger_error</a> (<a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a> code, const std::string &amp;message=&quot;&quot;)</td></tr>
+<tr class="memdesc:a2b021431469263d6fae2ca1783661ddd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a logger error from error code.  <br /></td></tr>
+<tr class="separator:a2b021431469263d6fae2ca1783661ddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9cfbabb229fd4ce9d0aa6ae39af931b" id="r_aa9cfbabb229fd4ce9d0aa6ae39af931b"><td class="memItemLeft" align="right" valign="top">result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#aa9cfbabb229fd4ce9d0aa6ae39af931b">make_error</a> (<a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a> code, const std::string &amp;message=&quot;&quot;)</td></tr>
+<tr class="memdesc:aa9cfbabb229fd4ce9d0aa6ae39af931b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create an error result.  <br /></td></tr>
+<tr class="separator:aa9cfbabb229fd4ce9d0aa6ae39af931b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0a58f6cad60a66804aeca5247d5e03" id="r_a7e0a58f6cad60a66804aeca5247d5e03"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a7e0a58f6cad60a66804aeca5247d5e03"><td class="memTemplItemLeft" align="right" valign="top">result&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a7e0a58f6cad60a66804aeca5247d5e03">make_error</a> (<a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a> code, const std::string &amp;message=&quot;&quot;)</td></tr>
+<tr class="memdesc:a7e0a58f6cad60a66804aeca5247d5e03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create an error result with value.  <br /></td></tr>
+<tr class="separator:a7e0a58f6cad60a66804aeca5247d5e03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54fa52d17bdd34469aa237a40d97c642" id="r_a54fa52d17bdd34469aa237a40d97c642"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a54fa52d17bdd34469aa237a40d97c642">health_status_to_string</a> (<a class="el" href="namespacelogger__system.html#a7c770a6aeb351bbdeecfd4f6040ae4e7">health_status</a> status)</td></tr>
 <tr class="memdesc:a54fa52d17bdd34469aa237a40d97c642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert health status to string.  <br /></td></tr>
 <tr class="separator:a54fa52d17bdd34469aa237a40d97c642"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79a01081308103ea1f9a2f19c52bed3d" id="r_a79a01081308103ea1f9a2f19c52bed3d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a79a01081308103ea1f9a2f19c52bed3d">metric_type_to_string</a> (<a class="el" href="namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565d">metric_type</a> type)</td></tr>
 <tr class="memdesc:a79a01081308103ea1f9a2f19c52bed3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert metric type to string.  <br /></td></tr>
 <tr class="separator:a79a01081308103ea1f9a2f19c52bed3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f0c99d9a903299597b8061943d96aca" id="r_a1f0c99d9a903299597b8061943d96aca"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1batch__writer.html">batch_writer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a1f0c99d9a903299597b8061943d96aca">make_batch_writer</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1base__writer.html">base_writer</a> &gt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">writer</a>, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> batch_size=100, std::chrono::milliseconds flush_interval=std::chrono::milliseconds{1000})</td></tr>
+<tr class="memitem:a1f0c99d9a903299597b8061943d96aca" id="r_a1f0c99d9a903299597b8061943d96aca"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1batch__writer.html">batch_writer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a1f0c99d9a903299597b8061943d96aca">make_batch_writer</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1base__writer.html">base_writer</a> &gt; writer, size_t batch_size=100, std::chrono::milliseconds flush_interval=std::chrono::milliseconds{1000})</td></tr>
 <tr class="memdesc:a1f0c99d9a903299597b8061943d96aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory function to create a batch writer.  <br /></td></tr>
 <tr class="separator:a1f0c99d9a903299597b8061943d96aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a46ea1a7b82e7a3c9e36e8ae0b3df68bb" id="r_a46ea1a7b82e7a3c9e36e8ae0b3df68bb"><td class="memItemLeft" align="right" valign="top">static logger_crash_safety *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#a46ea1a7b82e7a3c9e36e8ae0b3df68bb">g_instance</a> = nullptr</td></tr>
+<tr class="separator:a46ea1a7b82e7a3c9e36e8ae0b3df68bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeb96b15cfecfbee40dba05d0ad8c652" id="r_afeb96b15cfecfbee40dba05d0ad8c652"><td class="memItemLeft" align="right" valign="top">static std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelogger__module.html#afeb96b15cfecfbee40dba05d0ad8c652">g_instance_mutex</a></td></tr>
+<tr class="separator:afeb96b15cfecfbee40dba05d0ad8c652"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ae1e454eb05e3ef274e857f0b0a43ad28" name="ae1e454eb05e3ef274e857f0b0a43ad28"></a>
@@ -448,10 +475,14 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">using</a> <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_module::error_code</a> = <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typedef</a> <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a></td>
+          <td class="memname">using <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_module::error_code</a> = typedef <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a71">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="error__codes_8h_source.html#l00225">225</a> of file <a class="el" href="error__codes_8h_source.html">error_codes.h</a>.</p>
 
 </div>
 </div>
@@ -462,10 +493,14 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">using</a> <a class="el" href="namespacelogger__module.html#aa046b298bf7ccbecf2e3518379afe114">logger_module::small_string_128</a> = <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typedef</a> <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt;128&gt;</td>
+          <td class="memname">using <a class="el" href="namespacelogger__module.html#aa046b298bf7ccbecf2e3518379afe114">logger_module::small_string_128</a> = typedef <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt;128&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2interfaces_2log_entry_8h-example.html#a3">/home/runner/work/logger_system/logger_system/sources/logger/interfaces/log_entry.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="small__string_8h_source.html#l00441">441</a> of file <a class="el" href="small__string_8h_source.html">small_string.h</a>.</p>
 
 </div>
 </div>
@@ -476,10 +511,14 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">using</a> <a class="el" href="namespacelogger__module.html#a792c3db475172433c0f64b02c1533f76">logger_module::small_string_256</a> = <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typedef</a> <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt;256&gt;</td>
+          <td class="memname">using <a class="el" href="namespacelogger__module.html#a792c3db475172433c0f64b02c1533f76">logger_module::small_string_256</a> = typedef <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt;256&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2interfaces_2log_entry_8h-example.html#a0">/home/runner/work/logger_system/logger_system/sources/logger/interfaces/log_entry.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="small__string_8h_source.html#l00442">442</a> of file <a class="el" href="small__string_8h_source.html">small_string.h</a>.</p>
 
 </div>
 </div>
@@ -490,10 +529,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">using</a> <a class="el" href="namespacelogger__module.html#aba151494a11139c74ff16b6e0c8c9b8b">logger_module::small_string_512</a> = <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typedef</a> <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt;512&gt;</td>
+          <td class="memname">using <a class="el" href="namespacelogger__module.html#aba151494a11139c74ff16b6e0c8c9b8b">logger_module::small_string_512</a> = typedef <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt;512&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="small__string_8h_source.html#l00443">443</a> of file <a class="el" href="small__string_8h_source.html">small_string.h</a>.</p>
 
 </div>
 </div>
@@ -504,10 +545,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">using</a> <a class="el" href="namespacelogger__module.html#a69d69fb16ceb59b2b268ba44511a09a3">logger_module::small_string_64</a> = <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typedef</a> <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt;64&gt;</td>
+          <td class="memname">using <a class="el" href="namespacelogger__module.html#a69d69fb16ceb59b2b268ba44511a09a3">logger_module::small_string_64</a> = typedef <a class="el" href="classlogger__module_1_1small__string.html">small_string</a>&lt;64&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="small__string_8h_source.html#l00440">440</a> of file <a class="el" href="small__string_8h_source.html">small_string.h</a>.</p>
 
 </div>
 </div>
@@ -522,7 +565,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enum</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">class</a> <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47d">logger_module::health_status</a></td>
+          <td class="memname">enum class <a class="el" href="namespacelogger__system.html#a7c770a6aeb351bbdeecfd4f6040ae4e7">logger_module::health_status</a></td>
         </tr>
       </table>
   </td>
@@ -544,6 +587,8 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00030">30</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
+
 </div>
 </div>
 <a id="a23f0da6f87d99d4e4c13ef24c21135eb" name="a23f0da6f87d99d4e4c13ef24c21135eb"></a>
@@ -556,7 +601,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enum</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">class</a> <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_module::logger_error_code</a></td>
+          <td class="memname">enum class <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_module::logger_error_code</a></td>
         </tr>
       </table>
   </td>
@@ -606,6 +651,10 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a23f0da6f87d99d4e4c13ef24c21135eba2848577fa72398894b4cf63da22135f0" name="a23f0da6f87d99d4e4c13ef24c21135eba2848577fa72398894b4cf63da22135f0"></a>creation_failed&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a23f0da6f87d99d4e4c13ef24c21135ebae84e30f035632b055bfc113f1d7e0a67" name="a23f0da6f87d99d4e4c13ef24c21135ebae84e30f035632b055bfc113f1d7e0a67"></a>operation_failed&#160;</td><td class="fielddoc"></td></tr>
 </table>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2config_2logger_builder_8h-example.html#a65">/home/runner/work/logger_system/logger_system/sources/logger/config/logger_builder.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="error__codes_8h_source.html#l00057">57</a> of file <a class="el" href="error__codes_8h_source.html">error_codes.h</a>.</p>
 
 </div>
 </div>
@@ -619,7 +668,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enum</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">class</a> <a class="el" href="namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565d">logger_module::metric_type</a></td>
+          <td class="memname">enum class <a class="el" href="namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565d">logger_module::metric_type</a></td>
         </tr>
       </table>
   </td>
@@ -640,6 +689,10 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a2bc7249b271a8f65e2cb169bf76a565daa80da1282f2c775bbc5f2c92c836968b" name="a2bc7249b271a8f65e2cb169bf76a565daa80da1282f2c775bbc5f2c92c836968b"></a>summary&#160;</td><td class="fielddoc"><p>Statistical summary. </p>
 </td></tr>
 </table>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2logger_8h-example.html#a42">/home/runner/work/logger_system/logger_system/sources/logger/logger.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00040">40</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
 
 </div>
 </div>
@@ -653,7 +706,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enum</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">class</a> <a class="el" href="namespacelogger__module.html#a613f507608bacdad0a4ccde083bf1d2e">logger_module::overflow_policy_type</a></td>
+          <td class="memname">enum class <a class="el" href="namespacelogger__module.html#a613f507608bacdad0a4ccde083bf1d2e">logger_module::overflow_policy_type</a></td>
         </tr>
       </table>
   </td>
@@ -677,9 +730,41 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8h_source.html#l00061">61</a> of file <a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a66165cb4618073112903c6fce98b2010" name="a66165cb4618073112903c6fce98b2010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66165cb4618073112903c6fce98b2010">&#9670;&#160;</a></span>get_container()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlogger__module_1_1lightweight__container.html">lightweight_container</a> &amp; logger_module::get_container </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the global lightweight container instance. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the global container </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="lightweight__container_8h_source.html#l00111">111</a> of file <a class="el" href="lightweight__container_8h_source.html">lightweight_container.h</a>.</p>
+
+</div>
+</div>
 <a id="a54fa52d17bdd34469aa237a40d97c642" name="a54fa52d17bdd34469aa237a40d97c642"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a54fa52d17bdd34469aa237a40d97c642">&#9670;&#160;</a></span>health_status_to_string()</h2>
 
@@ -692,7 +777,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">std::string logger_module::health_status_to_string </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47d">health_status</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacelogger__system.html#a7c770a6aeb351bbdeecfd4f6040ae4e7">health_status</a>&#160;</td>
           <td class="paramname"><em>status</em></td><td>)</td>
           <td></td>
         </tr>
@@ -712,6 +797,10 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String representation </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00287">287</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47da8377f5fd94f84ea08829f36e1ded3b74">degraded</a>, <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47da741839f346d6e8126ae38ee76a96fd12">healthy</a>, <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47dab7a582af4c2e181215b55161560713e5">unhealthy</a>, and <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47daad921d60486366258809553a3db49a4a">unknown</a>.</p>
 
 </div>
 </div>
@@ -748,6 +837,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Human-readable error description </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="error__codes_8h_source.html#l00120">120</a> of file <a class="el" href="error__codes_8h_source.html">error_codes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba047ef5b1ba6d5dcc4dbee37c075a2088">authentication_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba0d998bc644f3d7bb85b68137d2bd62c2">buffer_overflow</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba9e1b67109ac6b2646d20525b32fc0629">component_not_found</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135ebafd03f4318f3d72e3d4d78c8a9867a092">configuration_conflict</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba33929b864ee16d56d58e00e3fed26937">configuration_missing</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba2848577fa72398894b4cf63da22135f0">creation_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba44f554d8d54c1444423153f5647c7bd7">decryption_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba9b4e984c36d45fe6341639436a0a980c">di_not_available</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135ebab70718378f61f3b12c47eeef435ba117">encryption_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135ebaa9f1f138101d794f3ef1a039f0bfcb24">file_open_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba1fa75e552d389db25ae861cb89706236">file_permission_denied</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba6d17791fb40b54524ecbb27c86168d5c">file_rotation_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba5736902e344f7611741115fef9cff30c">file_write_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba5c1479a0fb821237d662b94a18ba3233">filter_error</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba5a584d5bbce7d7340839a8c530e47351">flush_timeout</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135ebae62337e0ccf2ce4250a906bef47b6598">formatter_error</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135ebae55d43eabeefe5a8271b4a3c898bd18f">invalid_argument</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba9cc57114b319994e90322314a00521d4">invalid_configuration</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba4a407fc772145ce4dea7c33387500b36">metrics_collection_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba1e8d5360967d83b545e1939a576ac68c">metrics_not_available</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135ebacee4188f58817832f1b5057a7e887cd4">network_connection_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135ebae4531e1f495c00a6324dec07292cf095">network_send_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba8fc246cdbf19b3a35d47497d145fc003">network_timeout</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba63877363c706f5095d05a54f8b57b0ae">not_implemented</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135ebae84e30f035632b055bfc113f1d7e0a67">operation_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135ebad1d24eb94ee39e41e17b65cc63118672">processing_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba7a254d61c3058375b49dbabd86631b37">queue_full</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba7cf957d8abdc60ec16fc5bd302c55987">queue_stopped</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba7d0c80be3476159849be95bfcbff5401">registration_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba134207cdbfedc64f077464d211aca382">sanitization_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba260ca9dd8a4577fc00b7bd5810298076">success</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba4e44c97a51e5519cd277f335de285ead">unknown_error</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba023221fa3638e00cce0b1890c7b9cb2f">writer_already_exists</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135ebac14179971dc97c4e038f41a02da217c5">writer_initialization_failed</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba8662c19274faf4442d2d0faee6de105c">writer_not_found</a>, and <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba03d94d6afc4d7725c6887f45c924d448">writer_not_healthy</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__codes_8h_source.html#l00233">make_logger_error()</a>.</p>
+
 </div>
 </div>
 <a id="a1f0c99d9a903299597b8061943d96aca" name="a1f0c99d9a903299597b8061943d96aca"></a>
@@ -765,7 +860,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>batch_size</em> = <code>100</code>, </td>
         </tr>
         <tr>
@@ -793,10 +888,14 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unique pointer to the batch writer </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="batch__writer_8cpp_source.html#l00186">186</a> of file <a class="el" href="batch__writer_8cpp_source.html">batch_writer.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="batch__writer_8h_source.html#l00065">logger_module::batch_writer::config::flush_interval</a>, and <a class="el" href="batch__writer_8h_source.html#l00064">logger_module::batch_writer::config::max_batch_size</a>.</p>
+
 </div>
 </div>
-<a id="ac3dc3716c8d0fd1b84d009a9d4a0a73b" name="ac3dc3716c8d0fd1b84d009a9d4a0a73b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3dc3716c8d0fd1b84d009a9d4a0a73b">&#9670;&#160;</a></span>make_logger_error() <span class="overload">[1/2]</span></h2>
+<a id="aa9cfbabb229fd4ce9d0aa6ae39af931b" name="aa9cfbabb229fd4ce9d0aa6ae39af931b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9cfbabb229fd4ce9d0aa6ae39af931b">&#9670;&#160;</a></span>make_error() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -805,7 +904,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classlogger__module_1_1result__void.html">result_void</a> logger_module::make_logger_error </td>
+          <td class="memname">result_void logger_module::make_error </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a>&#160;</td>
           <td class="paramname"><em>code</em>, </td>
@@ -829,10 +928,24 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Helper function to create an error result. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code</td><td>Logger error code </td></tr>
+    <tr><td class="paramname">message</td><td>Error message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>result_void with error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="error__codes_8h_source.html#l00252">252</a> of file <a class="el" href="error__codes_8h_source.html">error_codes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="error__codes_8h_source.html#l00233">make_logger_error()</a>.</p>
+
 </div>
 </div>
-<a id="a9bd070612d11c60b9828e64b2adf8566" name="a9bd070612d11c60b9828e64b2adf8566"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bd070612d11c60b9828e64b2adf8566">&#9670;&#160;</a></span>make_logger_error() <span class="overload">[2/2]</span></h2>
+<a id="a7e0a58f6cad60a66804aeca5247d5e03" name="a7e0a58f6cad60a66804aeca5247d5e03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e0a58f6cad60a66804aeca5247d5e03">&#9670;&#160;</a></span>make_error() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -843,7 +956,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classlogger__module_1_1result.html">result</a>&lt; T &gt; logger_module::make_logger_error </td>
+          <td class="memname">result&lt; T &gt; logger_module::make_error </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a>&#160;</td>
           <td class="paramname"><em>code</em>, </td>
@@ -866,6 +979,78 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Helper function to create an error result with value. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Result value type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code</td><td>Logger error code </td></tr>
+    <tr><td class="paramname">message</td><td>Error message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>result&lt;T&gt; with error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="error__codes_8h_source.html#l00264">264</a> of file <a class="el" href="error__codes_8h_source.html">error_codes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="error__codes_8h_source.html#l00233">make_logger_error()</a>.</p>
+
+</div>
+</div>
+<a id="a2b021431469263d6fae2ca1783661ddd" name="a2b021431469263d6fae2ca1783661ddd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b021431469263d6fae2ca1783661ddd">&#9670;&#160;</a></span>make_logger_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">error logger_module::make_logger_error </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eb">logger_error_code</a>&#160;</td>
+          <td class="paramname"><em>code</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>message</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a logger error from error code. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code</td><td>Logger error code </td></tr>
+    <tr><td class="paramname">message</td><td>Optional detailed message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288acb5e100e5a9a3e7f6d1fd97512215282">thread_module::error</a> object </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="error__codes_8h_source.html#l00233">233</a> of file <a class="el" href="error__codes_8h_source.html">error_codes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespacelogger__system.html#ad8e3c64f7744daa2d80e68c884e342d1acb5e100e5a9a3e7f6d1fd97512215282">logger_system::error</a>, and <a class="el" href="error__codes_8h_source.html#l00120">logger_error_to_string()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="logger_8cpp_source.html#l00151">logger_module::logger::impl::add_writer()</a>, <a class="el" href="config__strategy__interface_8h_source.html#l00303">logger_module::performance_tuning_strategy::can_apply()</a>, <a class="el" href="config__strategy__interface_8h_source.html#l00365">logger_module::composite_strategy::can_apply()</a>, <a class="el" href="console__writer_8cpp_source.html#l00091">logger_module::console_writer::flush()</a>, <a class="el" href="file__writer_8cpp_source.html#l00056">logger_module::file_writer::flush()</a>, <a class="el" href="network__writer_8cpp_source.html#l00111">logger_module::network_writer::flush()</a>, <a class="el" href="error__codes_8h_source.html#l00252">make_error()</a>, <a class="el" href="file__writer_8cpp_source.html#l00081">logger_module::file_writer::open()</a>, <a class="el" href="lightweight__di__container_8h_source.html#l00088">logger_module::lightweight_di_container&lt; T &gt;::register_factory()</a>, <a class="el" href="lightweight__di__container_8h_source.html#l00114">logger_module::lightweight_di_container&lt; T &gt;::register_singleton()</a>, <a class="el" href="logger_8cpp_source.html#l00251">logger_module::logger::impl::reset_metrics()</a>, <a class="el" href="logger__config_8h_source.html#l00081">logger_module::logger_config::validate()</a>, <a class="el" href="async__writer_8h_source.html#l00105">logger_module::async_writer::write()</a>, <a class="el" href="batch__writer_8cpp_source.html#l00061">logger_module::batch_writer::write()</a>, <a class="el" href="console__writer_8cpp_source.html#l00059">logger_module::console_writer::write()</a>, <a class="el" href="encrypted__writer_8cpp_source.html#l00035">logger_module::encrypted_writer::write()</a>, and <a class="el" href="file__writer_8cpp_source.html#l00027">logger_module::file_writer::write()</a>.</p>
 
 </div>
 </div>
@@ -902,6 +1087,59 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String representation </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00307">307</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565da886bb73b3156b0aa24aac99d2de0b238">counter</a>, <a class="el" href="namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565da37e1a9c3ba6042b79266687d13f3c5ff">gauge</a>, <a class="el" href="namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565dabdfb01f3ea1f6351d0d53d79625c347f">histogram</a>, and <a class="el" href="namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565daa80da1282f2c775bbc5f2c92c836968b">summary</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a46ea1a7b82e7a3c9e36e8ae0b3df68bb" name="a46ea1a7b82e7a3c9e36e8ae0b3df68bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46ea1a7b82e7a3c9e36e8ae0b3df68bb">&#9670;&#160;</a></span>g_instance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">logger_crash_safety* logger_module::g_instance = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="crash__safety_8cpp_source.html#l00041">41</a> of file <a class="el" href="crash__safety_8cpp_source.html">crash_safety.cpp</a>.</p>
+
+</div>
+</div>
+<a id="afeb96b15cfecfbee40dba05d0ad8c652" name="afeb96b15cfecfbee40dba05d0ad8c652"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeb96b15cfecfbee40dba05d0ad8c652">&#9670;&#160;</a></span>g_instance_mutex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex logger_module::g_instance_mutex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="crash__safety_8cpp_source.html#l00042">42</a> of file <a class="el" href="crash__safety_8cpp_source.html">crash_safety.cpp</a>.</p>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -910,7 +1148,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

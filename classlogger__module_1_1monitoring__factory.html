@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::monitoring_factory Class Reference</title>
+<title>Logger System: logger_module::monitoring_factory Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -114,24 +114,26 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ad6a21dea1377a50b2f6697f659f95972" id="r_ad6a21dea1377a50b2f6697f659f95972"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1monitoring__interface.html">monitoring_interface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__factory.html#ad6a21dea1377a50b2f6697f659f95972">create_monitor</a> (<a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a">monitor_type</a> type=<a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21aa2bd9c0ed00116be1258e0cc66617d7c8">monitor_type::automatic</a>)</td></tr>
+<tr class="memitem:ad6a21dea1377a50b2f6697f659f95972" id="r_ad6a21dea1377a50b2f6697f659f95972"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1monitoring__interface.html">monitoring_interface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__factory.html#ad6a21dea1377a50b2f6697f659f95972">create_monitor</a> (<a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a">monitor_type</a> type=<a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21aa2bd9c0ed00116be1258e0cc66617d7c8">monitor_type::automatic</a>)</td></tr>
 <tr class="memdesc:ad6a21dea1377a50b2f6697f659f95972"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a monitoring implementation.  <br /></td></tr>
 <tr class="separator:ad6a21dea1377a50b2f6697f659f95972"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8540d18e25270373e3005aad541c5be0" id="r_a8540d18e25270373e3005aad541c5be0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1monitoring__interface.html">monitoring_interface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__factory.html#a8540d18e25270373e3005aad541c5be0">create_best_available</a> ()</td></tr>
+<tr class="memitem:a8540d18e25270373e3005aad541c5be0" id="r_a8540d18e25270373e3005aad541c5be0"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1monitoring__interface.html">monitoring_interface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__factory.html#a8540d18e25270373e3005aad541c5be0">create_best_available</a> ()</td></tr>
 <tr class="memdesc:a8540d18e25270373e3005aad541c5be0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the best available monitor.  <br /></td></tr>
 <tr class="separator:a8540d18e25270373e3005aad541c5be0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbe4919e28b7de8378b30a02abd8f223" id="r_abbe4919e28b7de8378b30a02abd8f223"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__factory.html#abbe4919e28b7de8378b30a02abd8f223">get_monitor_type_name</a> (<a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a">monitor_type</a> type)</td></tr>
+<tr class="memitem:abbe4919e28b7de8378b30a02abd8f223" id="r_abbe4919e28b7de8378b30a02abd8f223"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__factory.html#abbe4919e28b7de8378b30a02abd8f223">get_monitor_type_name</a> (<a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a">monitor_type</a> type)</td></tr>
 <tr class="memdesc:abbe4919e28b7de8378b30a02abd8f223"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of the monitor type.  <br /></td></tr>
 <tr class="separator:abbe4919e28b7de8378b30a02abd8f223"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae26d61ca702bc5bbaec14ee5e1a302eb" id="r_ae26d61ca702bc5bbaec14ee5e1a302eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a">monitor_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__factory.html#ae26d61ca702bc5bbaec14ee5e1a302eb">get_available_type</a> ()</td></tr>
+<tr class="memitem:ae26d61ca702bc5bbaec14ee5e1a302eb" id="r_ae26d61ca702bc5bbaec14ee5e1a302eb"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a">monitor_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__factory.html#ae26d61ca702bc5bbaec14ee5e1a302eb">get_available_type</a> ()</td></tr>
 <tr class="memdesc:ae26d61ca702bc5bbaec14ee5e1a302eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the currently available monitor type.  <br /></td></tr>
 <tr class="separator:ae26d61ca702bc5bbaec14ee5e1a302eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3975c143575d4fd9bba42385d0d38035" id="r_a3975c143575d4fd9bba42385d0d38035"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__factory.html#a3975c143575d4fd9bba42385d0d38035">is_thread_system_available</a> ()</td></tr>
+<tr class="memitem:a3975c143575d4fd9bba42385d0d38035" id="r_a3975c143575d4fd9bba42385d0d38035"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__factory.html#a3975c143575d4fd9bba42385d0d38035">is_thread_system_available</a> ()</td></tr>
 <tr class="memdesc:a3975c143575d4fd9bba42385d0d38035"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if thread_system monitoring is available.  <br /></td></tr>
 <tr class="separator:a3975c143575d4fd9bba42385d0d38035"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Factory for creating monitoring implementations. </p>
+
+<p class="definition">Definition at line <a class="el" href="monitoring__factory_8h_source.html#l00028">28</a> of file <a class="el" href="monitoring__factory_8h_source.html">monitoring_factory.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a74aeb1e92eb0978e67ec48fa60afc21a" name="a74aeb1e92eb0978e67ec48fa60afc21a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a74aeb1e92eb0978e67ec48fa60afc21a">&#9670;&#160;</a></span>monitor_type</h2>
@@ -143,7 +145,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enum</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">class</a> <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a">logger_module::monitoring_factory::monitor_type</a></td>
+          <td class="memname">enum class <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a">logger_module::monitoring_factory::monitor_type</a></td>
         </tr>
       </table>
   </td>
@@ -162,6 +164,10 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a74aeb1e92eb0978e67ec48fa60afc21aa2bd9c0ed00116be1258e0cc66617d7c8" name="a74aeb1e92eb0978e67ec48fa60afc21aa2bd9c0ed00116be1258e0cc66617d7c8"></a>automatic&#160;</td><td class="fielddoc"><p>Automatically choose best available. </p>
 </td></tr>
 </table>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2logger_8h-example.html#a33">/home/runner/work/logger_system/logger_system/sources/logger/logger.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="monitoring__factory_8h_source.html#l00033">33</a> of file <a class="el" href="monitoring__factory_8h_source.html">monitoring_factory.h</a>.</p>
 
 </div>
 </div>
@@ -176,7 +182,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1monitoring__interface.html">monitoring_interface</a> &gt; logger_module::monitoring_factory::create_best_available </td>
+          <td class="memname">static std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1monitoring__interface.html">monitoring_interface</a> &gt; logger_module::monitoring_factory::create_best_available </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -193,6 +199,10 @@ Static Public Member Functions</h2></td></tr>
 <p>Attempts to create a thread_system monitor if available, otherwise falls back to basic implementation.</p>
 <dl class="section return"><dt>Returns</dt><dd>Unique pointer to the created monitor </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="monitoring__factory_8h_source.html#l00072">72</a> of file <a class="el" href="monitoring__factory_8h_source.html">monitoring_factory.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="monitoring__factory_8h_source.html#l00044">create_monitor()</a>.</p>
+
 </div>
 </div>
 <a id="ad6a21dea1377a50b2f6697f659f95972" name="ad6a21dea1377a50b2f6697f659f95972"></a>
@@ -205,7 +215,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1monitoring__interface.html">monitoring_interface</a> &gt; logger_module::monitoring_factory::create_monitor </td>
+          <td class="memname">static std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1monitoring__interface.html">monitoring_interface</a> &gt; logger_module::monitoring_factory::create_monitor </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a">monitor_type</a>&#160;</td>
           <td class="paramname"><em>type</em> = <code><a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21aa2bd9c0ed00116be1258e0cc66617d7c8">monitor_type::automatic</a></code></td><td>)</td>
@@ -228,6 +238,10 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unique pointer to the created monitor </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="monitoring__factory_8h_source.html#l00044">44</a> of file <a class="el" href="monitoring__factory_8h_source.html">monitoring_factory.h</a>.</p>
+
+<p class="reference">References <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21aa2bd9c0ed00116be1258e0cc66617d7c8">automatic</a>, <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21aaf17aaabc20bfe045075927934fed52d2">basic</a>, <a class="el" href="monitoring__factory_8h_source.html#l00072">create_best_available()</a>, and <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21aa6301f2092b5a3793284861412241e87f">thread_system</a>.</p>
+
 </div>
 </div>
 <a id="ae26d61ca702bc5bbaec14ee5e1a302eb" name="ae26d61ca702bc5bbaec14ee5e1a302eb"></a>
@@ -240,7 +254,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a">monitor_type</a> logger_module::monitoring_factory::get_available_type </td>
+          <td class="memname">static <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a">monitor_type</a> logger_module::monitoring_factory::get_available_type </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -256,6 +270,10 @@ Static Public Member Functions</h2></td></tr>
 <p>Get the currently available monitor type. </p>
 <dl class="section return"><dt>Returns</dt><dd>The best available monitor type </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="monitoring__factory_8h_source.html#l00105">105</a> of file <a class="el" href="monitoring__factory_8h_source.html">monitoring_factory.h</a>.</p>
+
+<p class="reference">References <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21aaf17aaabc20bfe045075927934fed52d2">basic</a>, and <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21aa6301f2092b5a3793284861412241e87f">thread_system</a>.</p>
+
 </div>
 </div>
 <a id="abbe4919e28b7de8378b30a02abd8f223" name="abbe4919e28b7de8378b30a02abd8f223"></a>
@@ -268,7 +286,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">char</a> * logger_module::monitoring_factory::get_monitor_type_name </td>
+          <td class="memname">static const char * logger_module::monitoring_factory::get_monitor_type_name </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21a">monitor_type</a>&#160;</td>
           <td class="paramname"><em>type</em></td><td>)</td>
@@ -291,6 +309,10 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String representation of the type </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="monitoring__factory_8h_source.html#l00088">88</a> of file <a class="el" href="monitoring__factory_8h_source.html">monitoring_factory.h</a>.</p>
+
+<p class="reference">References <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21aa2bd9c0ed00116be1258e0cc66617d7c8">automatic</a>, <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21aaf17aaabc20bfe045075927934fed52d2">basic</a>, and <a class="el" href="classlogger__module_1_1monitoring__factory.html#a74aeb1e92eb0978e67ec48fa60afc21aa6301f2092b5a3793284861412241e87f">thread_system</a>.</p>
+
 </div>
 </div>
 <a id="a3975c143575d4fd9bba42385d0d38035" name="a3975c143575d4fd9bba42385d0d38035"></a>
@@ -303,7 +325,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> logger_module::monitoring_factory::is_thread_system_available </td>
+          <td class="memname">static bool logger_module::monitoring_factory::is_thread_system_available </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -319,10 +341,12 @@ Static Public Member Functions</h2></td></tr>
 <p>Check if thread_system monitoring is available. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if thread_system monitoring can be used </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="monitoring__factory_8h_source.html#l00117">117</a> of file <a class="el" href="monitoring__factory_8h_source.html">monitoring_factory.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="monitoring__factory_8h_source.html">monitoring_factory.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/monitoring/<a class="el" href="monitoring__factory_8h_source.html">monitoring_factory.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -330,7 +354,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1monitoring__factory.html">monitoring_factory</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

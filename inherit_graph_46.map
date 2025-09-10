@@ -1,3 +1,13 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classlogger__module_1_1overflow__policy__factory.html" title="Factory for creating overflow policies." alt="" coords="5,5,188,45"/>
+<area shape="rect" id="Node000000" href="$classlogger__module_1_1overflow__policy__base.html" title="Base class for overflow policies." alt="" coords="5,133,188,173"/>
+<area shape="rect" id="Node000001" href="$classlogger__module_1_1block__policy.html" title="Block until space is available." alt="" coords="242,5,405,45"/>
+<area shape="poly" id="edge28_Node000000_Node000001" title=" " alt="" coords="132,123,180,88,235,55,261,43,263,48,237,60,183,93,135,127"/>
+<area shape="rect" id="Node000002" href="$classlogger__module_1_1custom__overflow__policy.html" title=" " alt="" coords="236,69,411,109"/>
+<area shape="poly" id="edge29_Node000000_Node000002" title=" " alt="" coords="181,127,251,107,253,112,182,132"/>
+<area shape="rect" id="Node000003" href="$classlogger__module_1_1drop__newest__policy.html" title="Drop newest messages when queue is full." alt="" coords="245,133,401,173"/>
+<area shape="poly" id="edge30_Node000000_Node000003" title=" " alt="" coords="202,151,245,151,245,156,202,156"/>
+<area shape="rect" id="Node000004" href="$classlogger__module_1_1drop__oldest__policy.html" title="Drop oldest messages when queue is full." alt="" coords="245,197,401,237"/>
+<area shape="poly" id="edge31_Node000000_Node000004" title=" " alt="" coords="182,175,253,195,251,200,181,180"/>
+<area shape="rect" id="Node000005" href="$classlogger__module_1_1grow__policy.html" title="Dynamically grow the queue." alt="" coords="244,261,403,301"/>
+<area shape="poly" id="edge32_Node000000_Node000005" title=" " alt="" coords="135,180,183,214,237,247,263,259,261,264,235,252,180,218,132,184"/>
 </map>

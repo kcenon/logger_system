@@ -1,7 +1,7 @@
 <map id="logger_module::monitoring_interface" name="logger_module::monitoring_interface">
-<area shape="rect" id="Node000001" title="Abstract monitoring interface." alt="" coords="5,5,204,45"/>
-<area shape="rect" id="Node000002" href="$classlogger__module_1_1basic__monitor.html" title="Basic monitoring implementation." alt="" coords="24,93,185,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,59,107,93,102,93,102,59"/>
-<area shape="rect" id="Node000003" href="$classlogger__module_1_1thread__system__monitor__adapter.html" title="Fallback when thread_system is not available." alt="" coords="9,181,201,221"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="107,147,107,181,102,181,102,147"/>
+<area shape="rect" id="Node000001" title="Abstract monitoring interface." alt="" coords="87,5,285,45"/>
+<area shape="rect" id="Node000002" href="$classlogger__module_1_1basic__monitor.html" title="Basic monitoring implementation." alt="" coords="5,93,167,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,56,110,95,106,91,152,52"/>
+<area shape="rect" id="Node000003" href="$classlogger__module_1_1thread__system__monitor__adapter.html" title="Adapter to use thread_system&#39;s monitoring capabilities." alt="" coords="191,93,383,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,52,267,91,263,95,217,56"/>
 </map>

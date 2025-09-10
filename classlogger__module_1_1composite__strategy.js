@@ -5,5 +5,7 @@ var classlogger__module_1_1composite__strategy =
     [ "apply", "classlogger__module_1_1composite__strategy.html#a46637956e5e5ebc815a4249745ab14e5", null ],
     [ "can_apply", "classlogger__module_1_1composite__strategy.html#ac06f3420c6f7c67331a50eae00451146", null ],
     [ "get_description", "classlogger__module_1_1composite__strategy.html#a46de0c8753f6d5fcb485434a72ff920b", null ],
-    [ "get_name", "classlogger__module_1_1composite__strategy.html#abe84d06300e767e2725e8163cd2ec4c8", null ]
+    [ "get_name", "classlogger__module_1_1composite__strategy.html#abe84d06300e767e2725e8163cd2ec4c8", null ],
+    [ "get_priority", "classlogger__module_1_1composite__strategy.html#ad5b4a14651f39ee0879819d443e07a2c", null ],
+    [ "should_override", "classlogger__module_1_1composite__strategy.html#ab0f6f134b308b7db329b27ef2f76790c", null ]
 ];

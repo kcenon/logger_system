@@ -11,5 +11,6 @@ var classlogger__module_1_1environment__strategy =
     [ "can_apply", "classlogger__module_1_1environment__strategy.html#a0773d61d7e3bfe9abda333fe9d8a9e4d", null ],
     [ "get_description", "classlogger__module_1_1environment__strategy.html#adc75468a58fbdde532fc41da767768c5", null ],
     [ "get_name", "classlogger__module_1_1environment__strategy.html#acdaa9e7212c9e50f6f46d883274d361a", null ],
-    [ "get_priority", "classlogger__module_1_1environment__strategy.html#acac89cb6d99d920c11f875527b0c63a4", null ]
+    [ "get_priority", "classlogger__module_1_1environment__strategy.html#acac89cb6d99d920c11f875527b0c63a4", null ],
+    [ "should_override", "classlogger__module_1_1environment__strategy.html#ab0f6f134b308b7db329b27ef2f76790c", null ]
 ];

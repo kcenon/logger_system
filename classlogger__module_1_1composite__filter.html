@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::composite_filter Class Reference</title>
+<title>Logger System: logger_module::composite_filter Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -122,28 +122,24 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aac78ae45fbd714f9eac5f9c316b23717" id="r_aac78ae45fbd714f9eac5f9c316b23717"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__filter.html#aac78ae45fbd714f9eac5f9c316b23717">composite_filter</a> (<a class="el" href="classlogger__module_1_1composite__filter.html#a2af669822f929ec6eb07d37236f813f6">logic_type</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">logic</a>=<a class="el" href="classlogger__module_1_1composite__filter.html#a2af669822f929ec6eb07d37236f813f6a558ffc8f5770d8e4f95f51d822685532">logic_type::AND</a>)</td></tr>
+<tr class="memitem:aac78ae45fbd714f9eac5f9c316b23717" id="r_aac78ae45fbd714f9eac5f9c316b23717"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__filter.html#aac78ae45fbd714f9eac5f9c316b23717">composite_filter</a> (<a class="el" href="classlogger__module_1_1composite__filter.html#a2af669822f929ec6eb07d37236f813f6">logic_type</a> logic=<a class="el" href="classlogger__module_1_1composite__filter.html#a2af669822f929ec6eb07d37236f813f6a558ffc8f5770d8e4f95f51d822685532">logic_type::AND</a>)</td></tr>
 <tr class="separator:aac78ae45fbd714f9eac5f9c316b23717"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72d432e2898f9be81375d37bc114817f" id="r_a72d432e2898f9be81375d37bc114817f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__filter.html#a72d432e2898f9be81375d37bc114817f">add_filter</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1log__filter.html">log_filter</a> &gt; filter)</td></tr>
+<tr class="memitem:a72d432e2898f9be81375d37bc114817f" id="r_a72d432e2898f9be81375d37bc114817f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__filter.html#a72d432e2898f9be81375d37bc114817f">add_filter</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1log__filter.html">log_filter</a> &gt; filter)</td></tr>
 <tr class="separator:a72d432e2898f9be81375d37bc114817f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a999a268980f8567df93e4735cbc2d393" id="r_a999a268980f8567df93e4735cbc2d393"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__filter.html#a999a268980f8567df93e4735cbc2d393">should_log</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;message, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;file, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">int</a> line, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;function) <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a></td></tr>
+<tr class="memitem:a999a268980f8567df93e4735cbc2d393" id="r_a999a268980f8567df93e4735cbc2d393"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__filter.html#a999a268980f8567df93e4735cbc2d393">should_log</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level, const std::string &amp;message, const std::string &amp;file, int line, const std::string &amp;function) const override</td></tr>
 <tr class="memdesc:a999a268980f8567df93e4735cbc2d393"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a log entry should be processed (legacy API)  <br /></td></tr>
 <tr class="separator:a999a268980f8567df93e4735cbc2d393"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16003afb010f44bbeb6dc53e41fdec27" id="r_a16003afb010f44bbeb6dc53e41fdec27"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__filter.html#a16003afb010f44bbeb6dc53e41fdec27">get_name</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a></td></tr>
+<tr class="memitem:a16003afb010f44bbeb6dc53e41fdec27" id="r_a16003afb010f44bbeb6dc53e41fdec27"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__filter.html#a16003afb010f44bbeb6dc53e41fdec27">get_name</a> () const override</td></tr>
 <tr class="memdesc:a16003afb010f44bbeb6dc53e41fdec27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this filter.  <br /></td></tr>
 <tr class="separator:a16003afb010f44bbeb6dc53e41fdec27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classlogger__module_1_1log__filter"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classlogger__module_1_1log__filter')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classlogger__module_1_1log__filter.html">logger_module::log_filter</a></td></tr>
-<tr class="memitem:a74a9851d98ab369aa68c08e17ef77f30 inherit pub_methods_classlogger__module_1_1log__filter" id="r_a74a9851d98ab369aa68c08e17ef77f30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__filter.html#a74a9851d98ab369aa68c08e17ef77f30">~log_filter</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
-<tr class="separator:a74a9851d98ab369aa68c08e17ef77f30 inherit pub_methods_classlogger__module_1_1log__filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43b8b5a89ef95cb75e9a2ddfdb9ca65e inherit pub_methods_classlogger__module_1_1log__filter" id="r_a43b8b5a89ef95cb75e9a2ddfdb9ca65e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__filter.html#a43b8b5a89ef95cb75e9a2ddfdb9ca65e">should_log</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">entry</a>) <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a></td></tr>
-<tr class="memdesc:a43b8b5a89ef95cb75e9a2ddfdb9ca65e inherit pub_methods_classlogger__module_1_1log__filter"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a log entry should be processed (new interface)  <br /></td></tr>
-<tr class="separator:a43b8b5a89ef95cb75e9a2ddfdb9ca65e inherit pub_methods_classlogger__module_1_1log__filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classlogger__module_1_1log__filter__interface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classlogger__module_1_1log__filter__interface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classlogger__module_1_1log__filter__interface.html">logger_module::log_filter_interface</a></td></tr>
-<tr class="memitem:aaffcba30fe0e741ce58443e3e9e3785d inherit pub_methods_classlogger__module_1_1log__filter__interface" id="r_aaffcba30fe0e741ce58443e3e9e3785d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__filter__interface.html#aaffcba30fe0e741ce58443e3e9e3785d">~log_filter_interface</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
-<tr class="separator:aaffcba30fe0e741ce58443e3e9e3785d inherit pub_methods_classlogger__module_1_1log__filter__interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43b8b5a89ef95cb75e9a2ddfdb9ca65e" id="r_a43b8b5a89ef95cb75e9a2ddfdb9ca65e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__filter.html#a43b8b5a89ef95cb75e9a2ddfdb9ca65e">should_log</a> (const <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;entry) const override</td></tr>
+<tr class="memdesc:a43b8b5a89ef95cb75e9a2ddfdb9ca65e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a log entry should be processed (new interface)  <br /></td></tr>
+<tr class="separator:a43b8b5a89ef95cb75e9a2ddfdb9ca65e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Combine multiple filters with AND/OR logic. </p>
+
+<p class="definition">Definition at line <a class="el" href="log__filter_8h_source.html#l00173">173</a> of file <a class="el" href="log__filter_8h_source.html">log_filter.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a2af669822f929ec6eb07d37236f813f6" name="a2af669822f929ec6eb07d37236f813f6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2af669822f929ec6eb07d37236f813f6">&#9670;&#160;</a></span>logic_type</h2>
@@ -155,7 +151,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enum</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">class</a> <a class="el" href="classlogger__module_1_1composite__filter.html#a2af669822f929ec6eb07d37236f813f6">logger_module::composite_filter::logic_type</a></td>
+          <td class="memname">enum class <a class="el" href="classlogger__module_1_1composite__filter.html#a2af669822f929ec6eb07d37236f813f6">logger_module::composite_filter::logic_type</a></td>
         </tr>
       </table>
   </td>
@@ -168,6 +164,8 @@ Public Member Functions</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2af669822f929ec6eb07d37236f813f6a558ffc8f5770d8e4f95f51d822685532" name="a2af669822f929ec6eb07d37236f813f6a558ffc8f5770d8e4f95f51d822685532"></a>AND&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a2af669822f929ec6eb07d37236f813f6a1d00e7dce692e8dc3f6877f035e3a616" name="a2af669822f929ec6eb07d37236f813f6a1d00e7dce692e8dc3f6877f035e3a616"></a>OR&#160;</td><td class="fielddoc"></td></tr>
 </table>
+
+<p class="definition">Definition at line <a class="el" href="log__filter_8h_source.html#l00175">175</a> of file <a class="el" href="log__filter_8h_source.html">log_filter.h</a>.</p>
 
 </div>
 </div>
@@ -196,6 +194,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="log__filter_8h_source.html#l00180">180</a> of file <a class="el" href="log__filter_8h_source.html">log_filter.h</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -209,7 +209,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::composite_filter::add_filter </td>
+          <td class="memname">void logger_module::composite_filter::add_filter </td>
           <td>(</td>
           <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1log__filter.html">log_filter</a> &gt;&#160;</td>
           <td class="paramname"><em>filter</em></td><td>)</td>
@@ -222,6 +222,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log__filter_8h_source.html#l00183">183</a> of file <a class="el" href="log__filter_8h_source.html">log_filter.h</a>.</p>
 
 </div>
 </div>
@@ -253,10 +255,12 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classlogger__module_1_1log__filter.html#a153ea10432c1605e366d26b2444b4b70">logger_module::log_filter</a>.</p>
 
+<p class="definition">Definition at line <a class="el" href="log__filter_8h_source.html#l00213">213</a> of file <a class="el" href="log__filter_8h_source.html">log_filter.h</a>.</p>
+
 </div>
 </div>
-<a id="a999a268980f8567df93e4735cbc2d393" name="a999a268980f8567df93e4735cbc2d393"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a999a268980f8567df93e4735cbc2d393">&#9670;&#160;</a></span>should_log()</h2>
+<a id="a43b8b5a89ef95cb75e9a2ddfdb9ca65e" name="a43b8b5a89ef95cb75e9a2ddfdb9ca65e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43b8b5a89ef95cb75e9a2ddfdb9ca65e">&#9670;&#160;</a></span>should_log() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -265,7 +269,50 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> logger_module::composite_filter::should_log </td>
+          <td class="memname">virtual bool logger_module::log_filter::should_log </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td>
+          <td class="paramname"><em>entry</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if a log entry should be processed (new interface) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entry</td><td>The log entry to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the log should be processed </dd></dl>
+
+<p>Implements <a class="el" href="classlogger__module_1_1log__filter__interface.html#a6cce88e052b94018824504b7a1ab8b78">logger_module::log_filter_interface</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="log__filter_8h_source.html#l00042">42</a> of file <a class="el" href="log__filter_8h_source.html">log_filter.h</a>.</p>
+
+<p class="reference">References <a class="el" href="overflow__policy_8cpp_source.html#l00042">logger_module::log_entry::level</a>, <a class="el" href="log__entry_8h_source.html#l00163">logger_module::log_entry::location</a>, <a class="el" href="overflow__policy_8cpp_source.html#l00043">logger_module::log_entry::message</a>, and <a class="el" href="log__filter_8h_source.html#l00042">logger_module::log_filter::should_log()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="log__filter_8h_source.html#l00042">logger_module::log_filter::should_log()</a>.</p>
+
+</div>
+</div>
+<a id="a999a268980f8567df93e4735cbc2d393" name="a999a268980f8567df93e4735cbc2d393"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a999a268980f8567df93e4735cbc2d393">&#9670;&#160;</a></span>should_log() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool logger_module::composite_filter::should_log </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a>&#160;</td>
           <td class="paramname"><em>level</em>, </td>
@@ -273,25 +320,25 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>message</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>file</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>line</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>function</em>&#160;</td>
         </tr>
         <tr>
@@ -322,10 +369,14 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classlogger__module_1_1log__filter.html#abf52929b77ae7cdf3980ad0a392c8b10">logger_module::log_filter</a>.</p>
 
+<p class="definition">Definition at line <a class="el" href="log__filter_8h_source.html#l00187">187</a> of file <a class="el" href="log__filter_8h_source.html">log_filter.h</a>.</p>
+
+<p class="reference">References <a class="el" href="classlogger__module_1_1composite__filter.html#a2af669822f929ec6eb07d37236f813f6a558ffc8f5770d8e4f95f51d822685532">AND</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="log__filter_8h_source.html">log_filter.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/filters/<a class="el" href="log__filter_8h_source.html">log_filter.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -333,7 +384,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1composite__filter.html">composite_filter</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

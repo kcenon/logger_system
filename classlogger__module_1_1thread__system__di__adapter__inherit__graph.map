@@ -1,0 +1,5 @@
+<map id="logger_module::thread_system_di_adapter&lt; T &gt;" name="logger_module::thread_system_di_adapter&lt; T &gt;">
+<area shape="rect" id="Node000001" title="Adapter to use thread_system&#39;s service container." alt="" coords="13,93,204,133"/>
+<area shape="rect" id="Node000002" href="$classlogger__module_1_1di__container__interface.html" title="Abstract interface for dependency injection container." alt="" coords="5,5,212,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,59,111,93,106,93,106,59"/>
+</map>

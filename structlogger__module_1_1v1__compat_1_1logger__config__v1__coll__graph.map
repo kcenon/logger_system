@@ -1,0 +1,9 @@
+<map id="logger_module::v1_compat::logger_config_v1" name="logger_module::v1_compat::logger_config_v1">
+<area shape="rect" id="Node000001" title="Legacy logger configuration structure." alt="" coords="5,183,204,223"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="20,95,101,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,132,84,158,97,181,92,184,80,160,68,134"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="125,95,212,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="155,133,120,184,115,181,151,130"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="99,5,238,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="171,59,171,94,166,94,166,59"/>
+</map>

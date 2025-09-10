@@ -1,9 +1,9 @@
-<map id="logger_interface.h" name="logger_interface.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="69,5,209,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,83,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,33,72,72,69,68,122,29"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="107,79,171,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,31,141,65,136,65,136,31"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="195,79,253,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="154,29,201,68,198,72,151,33"/>
+<map id="/home/runner/work/logger_system/logger_system/sources/logger/logger_interface.h" name="/home/runner/work/logger_system/logger_system/sources/logger/logger_interface.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="23,5,254,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,83,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,62,69,101,65,97,108,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="107,108,171,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,60,141,94,136,94,136,60"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="195,108,253,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="167,58,205,96,201,100,163,62"/>
 </map>

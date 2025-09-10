@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::health_check_utils Class Reference</title>
+<title>Logger System: logger_module::health_check_utils Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -104,21 +104,23 @@ $(document).ready(function(){initNavTree('classlogger__module_1_1health__check__
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a6a14f9dd8b4d4cc8b8d32eb515ee5ee8" id="r_a6a14f9dd8b4d4cc8b8d32eb515ee5ee8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__utils.html#a6a14f9dd8b4d4cc8b8d32eb515ee5ee8">health_status_to_string</a> (<a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47d">health_status</a> status)</td></tr>
+<tr class="memitem:a6a14f9dd8b4d4cc8b8d32eb515ee5ee8" id="r_a6a14f9dd8b4d4cc8b8d32eb515ee5ee8"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__utils.html#a6a14f9dd8b4d4cc8b8d32eb515ee5ee8">health_status_to_string</a> (<a class="el" href="namespacelogger__system.html#a7c770a6aeb351bbdeecfd4f6040ae4e7">health_status</a> status)</td></tr>
 <tr class="memdesc:a6a14f9dd8b4d4cc8b8d32eb515ee5ee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert health status to string.  <br /></td></tr>
 <tr class="separator:a6a14f9dd8b4d4cc8b8d32eb515ee5ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af596a25c51eb4ca561a48d2818363e98" id="r_af596a25c51eb4ca561a48d2818363e98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47d">health_status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__utils.html#af596a25c51eb4ca561a48d2818363e98">aggregate_health_status</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::vector&lt; <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47d">health_status</a> &gt; &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">statuses</a>)</td></tr>
+<tr class="memitem:af596a25c51eb4ca561a48d2818363e98" id="r_af596a25c51eb4ca561a48d2818363e98"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespacelogger__system.html#a7c770a6aeb351bbdeecfd4f6040ae4e7">health_status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__utils.html#af596a25c51eb4ca561a48d2818363e98">aggregate_health_status</a> (const std::vector&lt; <a class="el" href="namespacelogger__system.html#a7c770a6aeb351bbdeecfd4f6040ae4e7">health_status</a> &gt; &amp;statuses)</td></tr>
 <tr class="memdesc:af596a25c51eb4ca561a48d2818363e98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine overall health from multiple statuses.  <br /></td></tr>
 <tr class="separator:af596a25c51eb4ca561a48d2818363e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5deb0f4afbb9e11bce901172c33cfe9d" id="r_a5deb0f4afbb9e11bce901172c33cfe9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__utils.html#a5deb0f4afbb9e11bce901172c33cfe9d">format_as_json</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a> &amp;<a class="el" href="classlogger__module_1_1result.html">result</a>)</td></tr>
+<tr class="memitem:a5deb0f4afbb9e11bce901172c33cfe9d" id="r_a5deb0f4afbb9e11bce901172c33cfe9d"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__utils.html#a5deb0f4afbb9e11bce901172c33cfe9d">format_as_json</a> (const <a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a> &amp;result)</td></tr>
 <tr class="memdesc:a5deb0f4afbb9e11bce901172c33cfe9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format health check result as JSON.  <br /></td></tr>
 <tr class="separator:a5deb0f4afbb9e11bce901172c33cfe9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40a38bf22d387e83bfcf7f7a90752ed3" id="r_a40a38bf22d387e83bfcf7f7a90752ed3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__utils.html#a40a38bf22d387e83bfcf7f7a90752ed3">format_writer_health</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1writer__health__info.html">writer_health_info</a> &amp;info)</td></tr>
+<tr class="memitem:a40a38bf22d387e83bfcf7f7a90752ed3" id="r_a40a38bf22d387e83bfcf7f7a90752ed3"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1health__check__utils.html#a40a38bf22d387e83bfcf7f7a90752ed3">format_writer_health</a> (const <a class="el" href="structlogger__module_1_1writer__health__info.html">writer_health_info</a> &amp;<a class="el" href="namespacelogger__system.html#ad8e3c64f7744daa2d80e68c884e342d1acaf9b6b99962bf5c2264824231d7a40c">info</a>)</td></tr>
 <tr class="memdesc:a40a38bf22d387e83bfcf7f7a90752ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format writer health info as string.  <br /></td></tr>
 <tr class="separator:a40a38bf22d387e83bfcf7f7a90752ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Health check utilities. </p>
+
+<p class="definition">Definition at line <a class="el" href="health__check__system_8h_source.html#l00316">316</a> of file <a class="el" href="health__check__system_8h_source.html">health_check_system.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af596a25c51eb4ca561a48d2818363e98" name="af596a25c51eb4ca561a48d2818363e98"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af596a25c51eb4ca561a48d2818363e98">&#9670;&#160;</a></span>aggregate_health_status()</h2>
@@ -130,9 +132,9 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47d">health_status</a> logger_module::health_check_utils::aggregate_health_status </td>
+          <td class="memname"><a class="el" href="namespacelogger__system.html#a7c770a6aeb351bbdeecfd4f6040ae4e7">health_status</a> logger_module::health_check_utils::aggregate_health_status </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::vector&lt; <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47d">health_status</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="namespacelogger__system.html#a7c770a6aeb351bbdeecfd4f6040ae4e7">health_status</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>statuses</em></td><td>)</td>
           <td></td>
         </tr>
@@ -153,6 +155,12 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Worst health status </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00597">597</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47da8377f5fd94f84ea08829f36e1ded3b74">logger_module::degraded</a>, <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47da741839f346d6e8126ae38ee76a96fd12">logger_module::healthy</a>, <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47dab7a582af4c2e181215b55161560713e5">logger_module::unhealthy</a>, and <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47daad921d60486366258809553a3db49a4a">logger_module::unknown</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="health__check__system_8cpp_source.html#l00080">logger_module::health_check_system::impl::perform_health_check()</a>.</p>
+
 </div>
 </div>
 <a id="a5deb0f4afbb9e11bce901172c33cfe9d" name="a5deb0f4afbb9e11bce901172c33cfe9d"></a>
@@ -167,7 +175,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">std::string logger_module::health_check_utils::format_as_json </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a> &amp;&#160;</td>
           <td class="paramname"><em>result</em></td><td>)</td>
           <td></td>
         </tr>
@@ -188,6 +196,10 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>JSON string representation </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00628">628</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="monitoring__interface_8h_source.html#l00205">logger_module::health_check_result::get_check_time()</a>, <a class="el" href="monitoring__interface_8h_source.html#l00173">logger_module::health_check_result::get_issues()</a>, <a class="el" href="monitoring__interface_8h_source.html#l00189">logger_module::health_check_result::get_message()</a>, <a class="el" href="monitoring__interface_8h_source.html#l00153">logger_module::health_check_result::get_status()</a>, and <a class="el" href="health__check__system_8cpp_source.html#l00582">health_status_to_string()</a>.</p>
+
 </div>
 </div>
 <a id="a40a38bf22d387e83bfcf7f7a90752ed3" name="a40a38bf22d387e83bfcf7f7a90752ed3"></a>
@@ -202,7 +214,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">std::string logger_module::health_check_utils::format_writer_health </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1writer__health__info.html">writer_health_info</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structlogger__module_1_1writer__health__info.html">writer_health_info</a> &amp;&#160;</td>
           <td class="paramname"><em>info</em></td><td>)</td>
           <td></td>
         </tr>
@@ -223,6 +235,10 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Formatted string </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00653">653</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="namespacelogger__system.html#ad8e3c64f7744daa2d80e68c884e342d1acb5e100e5a9a3e7f6d1fd97512215282">logger_system::error</a>, <a class="el" href="health__check__system_8cpp_source.html#l00582">health_status_to_string()</a>, and <a class="el" href="namespacelogger__system.html#ad8e3c64f7744daa2d80e68c884e342d1acaf9b6b99962bf5c2264824231d7a40c">logger_system::info</a>.</p>
+
 </div>
 </div>
 <a id="a6a14f9dd8b4d4cc8b8d32eb515ee5ee8" name="a6a14f9dd8b4d4cc8b8d32eb515ee5ee8"></a>
@@ -237,7 +253,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">std::string logger_module::health_check_utils::health_status_to_string </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47d">health_status</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacelogger__system.html#a7c770a6aeb351bbdeecfd4f6040ae4e7">health_status</a>&#160;</td>
           <td class="paramname"><em>status</em></td><td>)</td>
           <td></td>
         </tr>
@@ -258,11 +274,17 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String representation </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="health__check__system_8cpp_source.html#l00582">582</a> of file <a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47da8377f5fd94f84ea08829f36e1ded3b74">logger_module::degraded</a>, <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47da741839f346d6e8126ae38ee76a96fd12">logger_module::healthy</a>, <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47dab7a582af4c2e181215b55161560713e5">logger_module::unhealthy</a>, and <a class="el" href="namespacelogger__module.html#afda0cc0728dba603411e5fa38cc2c47daad921d60486366258809553a3db49a4a">logger_module::unknown</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="health__check__system_8cpp_source.html#l00628">format_as_json()</a>, and <a class="el" href="health__check__system_8cpp_source.html#l00653">format_writer_health()</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="health__check__system_8h_source.html">health_check_system.h</a></li>
-<li><a class="el" href="health__check__system_8cpp.html">health_check_system.cpp</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/health/<a class="el" href="health__check__system_8h_source.html">health_check_system.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/health/<a class="el" href="health__check__system_8cpp_source.html">health_check_system.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -270,7 +292,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1health__check__utils.html">health_check_utils</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

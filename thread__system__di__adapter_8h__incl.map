@@ -1,22 +1,22 @@
-<map id="thread_system_di_adapter.h" name="thread_system_di_adapter.h">
-<area shape="rect" id="Node000001" title="Adapter for thread_system&#39;s service container." alt="" coords="87,5,294,31"/>
-<area shape="rect" id="Node000002" href="$di__container__interface_8h.html" title="Abstract interface for dependency injection container." alt="" coords="101,79,280,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,31,193,65,188,65,188,31"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,83,177"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="168,106,81,148,79,144,166,102"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="107,152,194,177"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="186,106,166,141,162,139,182,103"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="179,225,237,251"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="197,104,208,152,211,211,206,212,203,152,192,105"/>
-<area shape="rect" id="Node000006" href="$error__codes_8h.html" title=" " alt="" coords="317,152,440,177"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="222,102,336,144,334,149,220,107"/>
-<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="352,180,249,222,247,218,350,175"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="262,225,349,251"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="368,180,329,218,325,214,365,176"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="373,225,433,251"/>
-<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="385,177,397,211,392,213,380,179"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="457,225,532,251"/>
-<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="399,175,465,216,463,220,396,180"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="557,225,625,251"/>
-<area shape="poly" id="edge10_Node000006_Node000010" title=" " alt="" coords="414,175,544,218,543,223,412,180"/>
+<map id="/home/runner/work/logger_system/logger_system/sources/logger/di/thread_system_di_adapter.h" name="/home/runner/work/logger_system/logger_system/sources/logger/di/thread_system_di_adapter.h">
+<area shape="rect" id="Node000001" title="Adapter for thread_system&#39;s service container." alt="" coords="166,5,397,75"/>
+<area shape="rect" id="Node000002" href="$di__container__interface_8h.html" title="Abstract interface for dependency injection container." alt="" coords="101,130,280,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="253,77,212,121,208,118,249,73"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="304,123,443,163"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="314,73,348,110,344,114,311,77"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,211,83,236"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="170,158,79,206,77,202,168,153"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="107,211,194,236"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="187,157,165,200,160,197,182,154"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="203,291,261,317"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="196,155,228,277,223,279,191,156"/>
+<area shape="rect" id="Node000006" href="$error__codes_8h.html" title=" " alt="" coords="269,211,392,236"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="213,153,299,202,297,206,210,158"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="318,238,259,285,256,281,314,234"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="286,291,373,317"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="333,236,332,278,327,277,328,236"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="397,291,457,317"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="347,234,404,281,400,285,343,238"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="481,284,652,324"/>
+<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="366,233,498,277,496,282,364,239"/>
 </map>

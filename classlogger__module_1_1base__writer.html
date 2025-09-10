@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::base_writer Class Reference</title>
+<title>Logger System: logger_module::base_writer Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -98,14 +98,14 @@ $(document).ready(function(){initNavTree('classlogger__module_1_1base__writer.ht
 </div><!--header-->
 <div class="contents">
 
-<p>Base class for all log writers.  
+<p>Abstract base class for all log output writers.  
  <a href="classlogger__module_1_1base__writer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="base__writer_8h_source.html">base_writer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for logger_module::base_writer:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classlogger__module_1_1base__writer__inherit__graph.svg" width="831" height="307"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classlogger__module_1_1base__writer__inherit__graph.svg" width="831" height="371"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for logger_module::base_writer:</div>
@@ -115,49 +115,55 @@ Collaboration diagram for logger_module::base_writer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a77970af949d971a31b552fd8f7ee2022" id="r_a77970af949d971a31b552fd8f7ee2022"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a77970af949d971a31b552fd8f7ee2022">~base_writer</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
+<tr class="memitem:a77970af949d971a31b552fd8f7ee2022" id="r_a77970af949d971a31b552fd8f7ee2022"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a77970af949d971a31b552fd8f7ee2022">~base_writer</a> ()=default</td></tr>
 <tr class="separator:a77970af949d971a31b552fd8f7ee2022"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23076abfb99a7c2f26a6f0736bbf33c5" id="r_a23076abfb99a7c2f26a6f0736bbf33c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a23076abfb99a7c2f26a6f0736bbf33c5">write</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">entry</a>) <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a></td></tr>
+<tr class="memitem:a23076abfb99a7c2f26a6f0736bbf33c5" id="r_a23076abfb99a7c2f26a6f0736bbf33c5"><td class="memItemLeft" align="right" valign="top">virtual result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a23076abfb99a7c2f26a6f0736bbf33c5">write</a> (const <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;entry) override</td></tr>
 <tr class="memdesc:a23076abfb99a7c2f26a6f0736bbf33c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a log entry using the new interface.  <br /></td></tr>
 <tr class="separator:a23076abfb99a7c2f26a6f0736bbf33c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c2f2ce6c82443eeac01a8555a9c2981" id="r_a6c2f2ce6c82443eeac01a8555a9c2981"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a6c2f2ce6c82443eeac01a8555a9c2981">write</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;message, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;file, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">int</a> line, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;function, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::chrono::system_clock::time_point &amp;timestamp)=0</td></tr>
+<tr class="memitem:a6c2f2ce6c82443eeac01a8555a9c2981" id="r_a6c2f2ce6c82443eeac01a8555a9c2981"><td class="memItemLeft" align="right" valign="top">virtual result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a6c2f2ce6c82443eeac01a8555a9c2981">write</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level, const std::string &amp;message, const std::string &amp;file, int line, const std::string &amp;function, const std::chrono::system_clock::time_point &amp;timestamp)=0</td></tr>
 <tr class="memdesc:a6c2f2ce6c82443eeac01a8555a9c2981"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a log entry (legacy API for backward compatibility)  <br /></td></tr>
 <tr class="separator:a6c2f2ce6c82443eeac01a8555a9c2981"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8bf045875ea4ab77588d937cd0c133a" id="r_aa8bf045875ea4ab77588d937cd0c133a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#aa8bf045875ea4ab77588d937cd0c133a">flush</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a>=0</td></tr>
+<tr class="memitem:aa8bf045875ea4ab77588d937cd0c133a" id="r_aa8bf045875ea4ab77588d937cd0c133a"><td class="memItemLeft" align="right" valign="top">virtual result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#aa8bf045875ea4ab77588d937cd0c133a">flush</a> () override=0</td></tr>
 <tr class="memdesc:aa8bf045875ea4ab77588d937cd0c133a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush any buffered data.  <br /></td></tr>
 <tr class="separator:aa8bf045875ea4ab77588d937cd0c133a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad587c7b23d21c9f9a80f79093a7b2be2" id="r_ad587c7b23d21c9f9a80f79093a7b2be2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#ad587c7b23d21c9f9a80f79093a7b2be2">set_use_color</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="classlogger__module_1_1base__writer.html#ade279a977a86c6691e5427d38f7c84b9">use_color</a>)</td></tr>
+<tr class="memitem:ad587c7b23d21c9f9a80f79093a7b2be2" id="r_ad587c7b23d21c9f9a80f79093a7b2be2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#ad587c7b23d21c9f9a80f79093a7b2be2">set_use_color</a> (bool <a class="el" href="classlogger__module_1_1base__writer.html#ade279a977a86c6691e5427d38f7c84b9">use_color</a>)</td></tr>
 <tr class="memdesc:ad587c7b23d21c9f9a80f79093a7b2be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set whether to use color output (if supported)  <br /></td></tr>
 <tr class="separator:ad587c7b23d21c9f9a80f79093a7b2be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade279a977a86c6691e5427d38f7c84b9" id="r_ade279a977a86c6691e5427d38f7c84b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#ade279a977a86c6691e5427d38f7c84b9">use_color</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
-<tr class="memdesc:ade279a977a86c6691e5427d38f7c84b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get color setting.  <br /></td></tr>
+<tr class="memitem:ade279a977a86c6691e5427d38f7c84b9" id="r_ade279a977a86c6691e5427d38f7c84b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#ade279a977a86c6691e5427d38f7c84b9">use_color</a> () const</td></tr>
+<tr class="memdesc:ade279a977a86c6691e5427d38f7c84b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current color output setting.  <br /></td></tr>
 <tr class="separator:ade279a977a86c6691e5427d38f7c84b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3db3e79bcecd99ca156720758049f69f" id="r_a3db3e79bcecd99ca156720758049f69f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a3db3e79bcecd99ca156720758049f69f">get_name</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a>=0</td></tr>
-<tr class="memdesc:a3db3e79bcecd99ca156720758049f69f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get writer name.  <br /></td></tr>
+<tr class="memitem:a3db3e79bcecd99ca156720758049f69f" id="r_a3db3e79bcecd99ca156720758049f69f"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a3db3e79bcecd99ca156720758049f69f">get_name</a> () const override=0</td></tr>
+<tr class="memdesc:a3db3e79bcecd99ca156720758049f69f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this writer.  <br /></td></tr>
 <tr class="separator:a3db3e79bcecd99ca156720758049f69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53205ddc8b9c43c6c092e737e8ccdd9c" id="r_a53205ddc8b9c43c6c092e737e8ccdd9c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a53205ddc8b9c43c6c092e737e8ccdd9c">is_healthy</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a></td></tr>
-<tr class="memdesc:a53205ddc8b9c43c6c092e737e8ccdd9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if writer is healthy.  <br /></td></tr>
+<tr class="memitem:a53205ddc8b9c43c6c092e737e8ccdd9c" id="r_a53205ddc8b9c43c6c092e737e8ccdd9c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a53205ddc8b9c43c6c092e737e8ccdd9c">is_healthy</a> () const override</td></tr>
+<tr class="memdesc:a53205ddc8b9c43c6c092e737e8ccdd9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the writer is healthy and operational.  <br /></td></tr>
 <tr class="separator:a53205ddc8b9c43c6c092e737e8ccdd9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classlogger__module_1_1log__writer__interface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classlogger__module_1_1log__writer__interface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classlogger__module_1_1log__writer__interface.html">logger_module::log_writer_interface</a></td></tr>
-<tr class="memitem:a19c46930bbeb35f63c76c565703ab35b inherit pub_methods_classlogger__module_1_1log__writer__interface" id="r_a19c46930bbeb35f63c76c565703ab35b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__writer__interface.html#a19c46930bbeb35f63c76c565703ab35b">~log_writer_interface</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
-<tr class="separator:a19c46930bbeb35f63c76c565703ab35b inherit pub_methods_classlogger__module_1_1log__writer__interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aca4eb0938ac8ff87d5c66e2391e59bc7" id="r_aca4eb0938ac8ff87d5c66e2391e59bc7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#aca4eb0938ac8ff87d5c66e2391e59bc7">format_log_entry</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;message, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;file, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">int</a> line, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;function, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::chrono::system_clock::time_point &amp;timestamp)</td></tr>
-<tr class="memdesc:aca4eb0938ac8ff87d5c66e2391e59bc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format a log entry to string.  <br /></td></tr>
+<tr class="memitem:aca4eb0938ac8ff87d5c66e2391e59bc7" id="r_aca4eb0938ac8ff87d5c66e2391e59bc7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#aca4eb0938ac8ff87d5c66e2391e59bc7">format_log_entry</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level, const std::string &amp;message, const std::string &amp;file, int line, const std::string &amp;function, const std::chrono::system_clock::time_point &amp;timestamp)</td></tr>
 <tr class="separator:aca4eb0938ac8ff87d5c66e2391e59bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61120b14d44d5194e2db5906477b9f86" id="r_a61120b14d44d5194e2db5906477b9f86"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a61120b14d44d5194e2db5906477b9f86">level_to_string</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level) <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
-<tr class="memdesc:a61120b14d44d5194e2db5906477b9f86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert log level to string.  <br /></td></tr>
+<tr class="memitem:a61120b14d44d5194e2db5906477b9f86" id="r_a61120b14d44d5194e2db5906477b9f86"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a61120b14d44d5194e2db5906477b9f86">level_to_string</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level) const</td></tr>
+<tr class="memdesc:a61120b14d44d5194e2db5906477b9f86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert log level to string representation.  <br /></td></tr>
 <tr class="separator:a61120b14d44d5194e2db5906477b9f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89ee91a4879e75a7f46cdfd0312da348" id="r_a89ee91a4879e75a7f46cdfd0312da348"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a89ee91a4879e75a7f46cdfd0312da348">level_to_color</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level) <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
-<tr class="memdesc:a89ee91a4879e75a7f46cdfd0312da348"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get ANSI color code for log level.  <br /></td></tr>
+<tr class="memitem:a89ee91a4879e75a7f46cdfd0312da348" id="r_a89ee91a4879e75a7f46cdfd0312da348"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__writer.html#a89ee91a4879e75a7f46cdfd0312da348">level_to_color</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level) const</td></tr>
+<tr class="memdesc:a89ee91a4879e75a7f46cdfd0312da348"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get ANSI color code for the specified log level.  <br /></td></tr>
 <tr class="separator:a89ee91a4879e75a7f46cdfd0312da348"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Base class for all log writers. </p>
-<p>Writers are responsible for outputting log messages to various destinations such as console, files, network, etc.</p>
-<p>This class provides a compatibility layer between the old API and the new interface-based approach. It implements <a class="el" href="classlogger__module_1_1log__writer__interface.html" title="Interface for log writers.">log_writer_interface</a> and provides backward compatibility for existing code. </p>
+<div class="textblock"><p>Abstract base class for all log output writers. </p>
+<p>Writers are responsible for outputting log messages to various destinations. This class provides a compatibility layer between the old API and the new interface-based approach, implementing <a class="el" href="classlogger__module_1_1log__writer__interface.html" title="Interface for log writers.">log_writer_interface</a> while providing backward compatibility for existing code.</p>
+<p>Key responsibilities:</p><ul>
+<li>Format log messages for output</li>
+<li>Handle destination-specific output logic</li>
+<li>Manage buffering and flushing</li>
+<li>Provide health status information</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>All derived classes must implement the pure virtual methods.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Writers used in async mode must be thread-safe.</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>1.0.0 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="base__writer_8h_source.html#l00123">123</a> of file <a class="el" href="base__writer_8h_source.html">base_writer.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a77970af949d971a31b552fd8f7ee2022" name="a77970af949d971a31b552fd8f7ee2022"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a77970af949d971a31b552fd8f7ee2022">&#9670;&#160;</a></span>~base_writer()</h2>
@@ -169,7 +175,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> logger_module::base_writer::~base_writer </td>
+          <td class="memname">virtual logger_module::base_writer::~base_writer </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -181,6 +187,8 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2writers_2base_writer_8h-example.html#a0">/home/runner/work/logger_system/logger_system/sources/logger/writers/base_writer.h</a>.</dd>
+</dl>
 
 </div>
 </div>
@@ -195,7 +203,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a> logger_module::base_writer::flush </td>
+          <td class="memname">virtual result_void logger_module::base_writer::flush </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -209,11 +217,13 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Flush any buffered data. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classlogger__module_1_1result__void.html">result_void</a> indicating success or error </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>result_void indicating success or failure </dd></dl>
 
 <p>Implements <a class="el" href="classlogger__module_1_1log__writer__interface.html#a1c55387feecd6c3736c801c5c241f5c1">logger_module::log_writer_interface</a>.</p>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1batch__writer.html#a36d0b1585f2ff8352b396f262ac9627d">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#ae9ff291bb306ff666955a81786df886b">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#ad3b9529e7afa5698f09103438b876781">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#a1a5839765576baf3ce9f64cb98b12472">logger_module::file_writer</a>, and <a class="el" href="classlogger__module_1_1network__writer.html#afdc8daeaa343b9606a735585e2386549">logger_module::network_writer</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1async__writer.html#a3cda76e268bd484280e1335ed1c0da8e">logger_module::async_writer</a>, <a class="el" href="classlogger__module_1_1batch__writer.html#a36d0b1585f2ff8352b396f262ac9627d">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#ae9ff291bb306ff666955a81786df886b">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#ad3b9529e7afa5698f09103438b876781">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#a1a5839765576baf3ce9f64cb98b12472">logger_module::file_writer</a>, and <a class="el" href="classlogger__module_1_1network__writer.html#afdc8daeaa343b9606a735585e2386549">logger_module::network_writer</a>.</p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2writers_2base_writer_8h-example.html#a2">/home/runner/work/logger_system/logger_system/sources/logger/writers/base_writer.h</a>.</dd>
+</dl>
 
 </div>
 </div>
@@ -235,31 +245,31 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>message</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>file</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>line</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>function</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::chrono::system_clock::time_point &amp;&#160;</td>
+          <td class="paramtype">const std::chrono::system_clock::time_point &amp;&#160;</td>
           <td class="paramname"><em>timestamp</em>&#160;</td>
         </tr>
         <tr>
@@ -274,20 +284,14 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Format a log entry to string. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">level</td><td>Log level </td></tr>
-    <tr><td class="paramname">message</td><td>Log message </td></tr>
-    <tr><td class="paramname">file</td><td>Source file </td></tr>
-    <tr><td class="paramname">line</td><td>Source line </td></tr>
-    <tr><td class="paramname">function</td><td>Function name </td></tr>
-    <tr><td class="paramname">timestamp</td><td>Time of log entry </td></tr>
-  </table>
-  </dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2writers_2base_writer_8h-example.html#a7">/home/runner/work/logger_system/logger_system/sources/logger/writers/base_writer.h</a>.</dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Formatted log string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="console__writer_8cpp_source.html#l00131">131</a> of file <a class="el" href="console__writer_8cpp_source.html">console_writer.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="console__writer_8cpp_source.html#l00158">level_to_string()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="console__writer_8cpp_source.html#l00059">logger_module::console_writer::write()</a>, <a class="el" href="encrypted__writer_8cpp_source.html#l00035">logger_module::encrypted_writer::write()</a>, and <a class="el" href="file__writer_8cpp_source.html#l00027">logger_module::file_writer::write()</a>.</p>
 
 </div>
 </div>
@@ -301,7 +305,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> std::string logger_module::base_writer::get_name </td>
+          <td class="memname">virtual std::string logger_module::base_writer::get_name </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -314,12 +318,14 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get writer name. </p>
-<dl class="section return"><dt>Returns</dt><dd>Name of the writer </dd></dl>
+<p>Get the name of this writer. </p>
+<dl class="section return"><dt>Returns</dt><dd>Writer name for identification </dd></dl>
 
 <p>Implements <a class="el" href="classlogger__module_1_1log__writer__interface.html#a9a59e75435e22f6a1bc8a5b466b56f51">logger_module::log_writer_interface</a>.</p>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1batch__writer.html#a1ed45e5aab439715f9812a2f20bada6c">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#a93c2a67e504814a0d6bd68729afc4918">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#a997a92e2beed9924e63525d5f521e5a6">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#a9513976717dc1f6efe1eebb59e18b712">logger_module::file_writer</a>, <a class="el" href="classlogger__module_1_1network__writer.html#a2722f0df78d2fd3e08af1d8b69453707">logger_module::network_writer</a>, and <a class="el" href="classlogger__module_1_1rotating__file__writer.html#ac7a68dc3fc61c829ae11dc1eaa75e276">logger_module::rotating_file_writer</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1async__writer.html#a50b3e5511d802eed1694fe7350ee5150">logger_module::async_writer</a>, <a class="el" href="classlogger__module_1_1batch__writer.html#a1ed45e5aab439715f9812a2f20bada6c">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#a93c2a67e504814a0d6bd68729afc4918">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#a997a92e2beed9924e63525d5f521e5a6">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#a9513976717dc1f6efe1eebb59e18b712">logger_module::file_writer</a>, <a class="el" href="classlogger__module_1_1network__writer.html#a2722f0df78d2fd3e08af1d8b69453707">logger_module::network_writer</a>, and <a class="el" href="classlogger__module_1_1rotating__file__writer.html#ac7a68dc3fc61c829ae11dc1eaa75e276">logger_module::rotating_file_writer</a>.</p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2writers_2base_writer_8h-example.html#a5">/home/runner/work/logger_system/logger_system/sources/logger/writers/base_writer.h</a>.</dd>
+</dl>
 
 </div>
 </div>
@@ -333,7 +339,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> logger_module::base_writer::is_healthy </td>
+          <td class="memname">virtual bool logger_module::base_writer::is_healthy </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -346,12 +352,19 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Check if writer is healthy. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if writer is healthy and operational </dd></dl>
+<p>Check if the writer is healthy and operational. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if the writer is functioning correctly, false otherwise</dd></dl>
+<p>Used for health monitoring and automatic failover. A writer might be unhealthy if its destination is unavailable (e.g., disk full, network disconnected).</p>
+<dl class="section note"><dt>Note</dt><dd>Default implementation always returns true. Override for writers that can detect failure conditions.</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>1.0.0 </dd></dl>
 
 <p>Implements <a class="el" href="classlogger__module_1_1log__writer__interface.html#a1d937bfc940a7d5d1dcd254d5c100e5d">logger_module::log_writer_interface</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classlogger__module_1_1batch__writer.html#a88275f51090a6711395ba34179fe166b">logger_module::batch_writer</a>.</p>
+<p>Reimplemented in <a class="el" href="classlogger__module_1_1async__writer.html#a5b9953551998f219962ae4f140ab1672">logger_module::async_writer</a>, and <a class="el" href="classlogger__module_1_1batch__writer.html#a88275f51090a6711395ba34179fe166b">logger_module::batch_writer</a>.</p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2writers_2base_writer_8h-example.html#a6">/home/runner/work/logger_system/logger_system/sources/logger/writers/base_writer.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="base__writer_8h_source.html#l00249">249</a> of file <a class="el" href="base__writer_8h_source.html">base_writer.h</a>.</p>
 
 </div>
 </div>
@@ -379,14 +392,32 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get ANSI color code for log level. </p>
+<p>Get ANSI color code for the specified log level. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">level</td><td>Log level </td></tr>
+    <tr><td class="paramname">level</td><td>Log level to get color for </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>ANSI color code or empty string if color disabled </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>ANSI escape sequence for color, or empty string if color is disabled</dd></dl>
+<p>Returns appropriate ANSI color codes for terminal output:</p><ul>
+<li>trace -&gt; Gray/Dim</li>
+<li>debug -&gt; Cyan</li>
+<li>info -&gt; Green</li>
+<li>warning -&gt; Yellow</li>
+<li>error -&gt; Red</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>Returns empty string if <a class="el" href="classlogger__module_1_1base__writer.html#ade279a977a86c6691e5427d38f7c84b9" title="Get current color output setting.">use_color()</a> is false.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Only use for terminals that support ANSI escape codes.</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>1.0.0 </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2writers_2base_writer_8h-example.html#a9">/home/runner/work/logger_system/logger_system/sources/logger/writers/base_writer.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="console__writer_8cpp_source.html#l00170">170</a> of file <a class="el" href="console__writer_8cpp_source.html">console_writer.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="base__writer_8h_source.html#l00219">use_color()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="console__writer_8cpp_source.html#l00059">logger_module::console_writer::write()</a>.</p>
 
 </div>
 </div>
@@ -414,14 +445,28 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Convert log level to string. </p>
+<p>Convert log level to string representation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">level</td><td>Log level </td></tr>
+    <tr><td class="paramname">level</td><td>Log level to convert </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>String representation </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>String representation of the level</dd></dl>
+<p>Maps log levels to human-readable strings:</p><ul>
+<li>trace -&gt; "TRACE"</li>
+<li>debug -&gt; "DEBUG"</li>
+<li>info -&gt; "INFO"</li>
+<li>warning -&gt; "WARNING"</li>
+<li>error -&gt; "ERROR"</li>
+</ul>
+<dl class="section since"><dt>Since</dt><dd>1.0.0 </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2writers_2base_writer_8h-example.html#a8">/home/runner/work/logger_system/logger_system/sources/logger/writers/base_writer.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="console__writer_8cpp_source.html#l00158">158</a> of file <a class="el" href="console__writer_8cpp_source.html">console_writer.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="console__writer_8cpp_source.html#l00131">format_log_entry()</a>.</p>
 
 </div>
 </div>
@@ -435,9 +480,9 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::base_writer::set_use_color </td>
+          <td class="memname">virtual void logger_module::base_writer::set_use_color </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>use_color</em></td><td>)</td>
           <td></td>
         </tr>
@@ -452,10 +497,23 @@ Protected Member Functions</h2></td></tr>
 <p>Set whether to use color output (if supported) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">use_color</td><td>Enable/disable color </td></tr>
+    <tr><td class="paramname">use_color</td><td>true to enable color output, false to disable</td></tr>
   </table>
   </dd>
 </dl>
+<p>Enables or disables ANSI color codes in formatted output. Only affects writers that output to terminals supporting color.</p>
+<dl class="section note"><dt>Note</dt><dd>Has no effect on writers that don't support color (e.g., file writers).</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>1.0.0 </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classlogger__module_1_1async__writer.html#a488cfffc5a25dd94775d9191e2b7af00">logger_module::async_writer</a>.</p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2writers_2base_writer_8h-example.html#a3">/home/runner/work/logger_system/logger_system/sources/logger/writers/base_writer.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="base__writer_8h_source.html#l00209">209</a> of file <a class="el" href="base__writer_8h_source.html">base_writer.h</a>.</p>
+
+<p class="reference">References <a class="el" href="base__writer_8h_source.html#l00219">use_color()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="console__writer_8cpp_source.html#l00048">logger_module::console_writer::console_writer()</a>.</p>
 
 </div>
 </div>
@@ -469,7 +527,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> logger_module::base_writer::use_color </td>
+          <td class="memname">bool logger_module::base_writer::use_color </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -482,8 +540,15 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get color setting. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if color is enabled </dd></dl>
+<p>Get current color output setting. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if color output is enabled, false otherwise</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>1.0.0 </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2writers_2base_writer_8h-example.html#a4">/home/runner/work/logger_system/logger_system/sources/logger/writers/base_writer.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="base__writer_8h_source.html#l00219">219</a> of file <a class="el" href="base__writer_8h_source.html">base_writer.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="console__writer_8cpp_source.html#l00170">level_to_color()</a>, <a class="el" href="base__writer_8h_source.html#l00209">set_use_color()</a>, <a class="el" href="async__writer_8h_source.html#l00172">logger_module::async_writer::set_use_color()</a>, and <a class="el" href="console__writer_8cpp_source.html#l00059">logger_module::console_writer::write()</a>.</p>
 
 </div>
 </div>
@@ -497,9 +562,9 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a> logger_module::base_writer::write </td>
+          <td class="memname">virtual result_void logger_module::base_writer::write </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td>
           <td class="paramname"><em>entry</em></td><td>)</td>
           <td></td>
         </tr>
@@ -518,9 +583,20 @@ Protected Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classlogger__module_1_1result__void.html">result_void</a> indicating success or error </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>result_void Success or error code</dd></dl>
+<p>This method provides compatibility with the modern <a class="el" href="structlogger__module_1_1log__entry.html" title="Represents a single log entry with all associated metadata.">log_entry</a> structure. The default implementation converts the entry to the legacy API format for backward compatibility. Derived classes can override this for optimized handling.</p>
+<dl class="section note"><dt>Note</dt><dd>This method extracts source location information if present in the entry.</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>1.0.0 </dd></dl>
 
 <p>Implements <a class="el" href="classlogger__module_1_1log__writer__interface.html#a9ab1ce565b731e06d1fec66588d420bf">logger_module::log_writer_interface</a>.</p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2logger_system_2logger_system_2sources_2logger_2writers_2base_writer_8h-example.html#a1">/home/runner/work/logger_system/logger_system/sources/logger/writers/base_writer.h</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="base__writer_8h_source.html#l00140">140</a> of file <a class="el" href="base__writer_8h_source.html">base_writer.h</a>.</p>
+
+<p class="reference">References <a class="el" href="overflow__policy_8cpp_source.html#l00042">logger_module::log_entry::level</a>, <a class="el" href="log__entry_8h_source.html#l00163">logger_module::log_entry::location</a>, <a class="el" href="overflow__policy_8cpp_source.html#l00043">logger_module::log_entry::message</a>, <a class="el" href="overflow__policy_8cpp_source.html#l00044">logger_module::log_entry::timestamp</a>, and <a class="el" href="base__writer_8h_source.html#l00140">write()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="base__writer_8h_source.html#l00140">write()</a>.</p>
 
 </div>
 </div>
@@ -534,7 +610,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a> logger_module::base_writer::write </td>
+          <td class="memname">virtual result_void logger_module::base_writer::write </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a>&#160;</td>
           <td class="paramname"><em>level</em>, </td>
@@ -542,31 +618,31 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>message</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>file</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>line</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>function</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::chrono::system_clock::time_point &amp;&#160;</td>
+          <td class="paramtype">const std::chrono::system_clock::time_point &amp;&#160;</td>
           <td class="paramname"><em>timestamp</em>&#160;</td>
         </tr>
         <tr>
@@ -585,24 +661,28 @@ Protected Member Functions</h2></td></tr>
 <p>Write a log entry (legacy API for backward compatibility) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">level</td><td>Log level </td></tr>
-    <tr><td class="paramname">message</td><td>Log message </td></tr>
-    <tr><td class="paramname">file</td><td>Source file (optional) </td></tr>
-    <tr><td class="paramname">line</td><td>Source line (optional) </td></tr>
-    <tr><td class="paramname">function</td><td>Function name (optional) </td></tr>
-    <tr><td class="paramname">timestamp</td><td>Time of log entry </td></tr>
+    <tr><td class="paramname">level</td><td>Log severity level </td></tr>
+    <tr><td class="paramname">message</td><td>Log message text </td></tr>
+    <tr><td class="paramname">file</td><td>Source file path (empty if not available) </td></tr>
+    <tr><td class="paramname">line</td><td>Source line number (0 if not available) </td></tr>
+    <tr><td class="paramname">function</td><td>Function name (empty if not available) </td></tr>
+    <tr><td class="paramname">timestamp</td><td>Time when the log entry was created </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classlogger__module_1_1result__void.html">result_void</a> indicating success or error </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>result_void Success or error code</dd></dl>
+<p>This is the main method that derived classes must implement. It receives all log information and is responsible for outputting it to the writer's specific destination.</p>
+<dl class="section note"><dt>Note</dt><dd>Implementations should handle empty file/function strings gracefully.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>This method may be called from multiple threads in async mode. Implementations must be thread-safe.</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>1.0.0 </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1batch__writer.html#a8561880fb353e678cd5f9e4238a4cb39">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#a25767649fc15ef6abac19148014fb438">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#a7e538bc5e9dea04d61ff02ae4a03c6b7">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#af3a884277ddddf041b910f5f71a782c9">logger_module::file_writer</a>, <a class="el" href="classlogger__module_1_1network__writer.html#a3082e3824d208fa1e8ebcd3f2289774f">logger_module::network_writer</a>, and <a class="el" href="classlogger__module_1_1rotating__file__writer.html#afbe1b2bd5e9a697ca524d59ea56c1a3d">logger_module::rotating_file_writer</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1async__writer.html#a8a94999e7bd9f6ebd9890fcc5983ad68">logger_module::async_writer</a>, <a class="el" href="classlogger__module_1_1batch__writer.html#a8561880fb353e678cd5f9e4238a4cb39">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#a25767649fc15ef6abac19148014fb438">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#a7e538bc5e9dea04d61ff02ae4a03c6b7">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#af3a884277ddddf041b910f5f71a782c9">logger_module::file_writer</a>, <a class="el" href="classlogger__module_1_1network__writer.html#a3082e3824d208fa1e8ebcd3f2289774f">logger_module::network_writer</a>, and <a class="el" href="classlogger__module_1_1rotating__file__writer.html#afbe1b2bd5e9a697ca524d59ea56c1a3d">logger_module::rotating_file_writer</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="base__writer_8h_source.html">base_writer.h</a></li>
-<li><a class="el" href="console__writer_8cpp.html">console_writer.cpp</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/writers/<a class="el" href="base__writer_8h_source.html">base_writer.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/writers/<a class="el" href="console__writer_8cpp_source.html">console_writer.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -610,7 +690,7 @@ Protected Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1base__writer.html">base_writer</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -1,26 +1,24 @@
-<map id="lightweight_di_container.h" name="lightweight_di_container.h">
-<area shape="rect" id="Node000001" title="Lightweight dependency injection container implementation." alt="" coords="270,5,463,31"/>
-<area shape="rect" id="Node000002" href="$di__container__interface_8h.html" title="Abstract interface for dependency injection container." alt="" coords="101,79,280,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="339,33,233,76,231,71,337,28"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="305,79,429,104"/>
-<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="369,31,369,65,364,65,364,31"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="453,79,517,104"/>
-<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="387,28,455,69,453,74,384,33"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,83,177"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="168,106,81,148,79,144,166,102"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="107,152,194,177"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="186,106,166,141,162,139,182,103"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="179,225,237,251"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="197,104,208,152,211,211,206,212,203,152,192,105"/>
-<area shape="rect" id="Node000006" href="$error__codes_8h.html" title=" " alt="" coords="317,152,440,177"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="222,102,336,144,334,149,220,107"/>
-<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="352,180,249,222,247,218,350,175"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="262,225,349,251"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="368,180,329,218,325,214,365,176"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="373,225,433,251"/>
-<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="385,177,397,211,392,213,380,179"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="457,225,532,251"/>
-<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="399,175,465,216,463,220,396,180"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="557,225,625,251"/>
-<area shape="poly" id="edge10_Node000006_Node000010" title=" " alt="" coords="414,175,544,218,543,223,412,180"/>
+<map id="/home/runner/work/logger_system/logger_system/sources/logger/di/lightweight_di_container.h" name="/home/runner/work/logger_system/logger_system/sources/logger/di/lightweight_di_container.h">
+<area shape="rect" id="Node000001" title="Lightweight dependency injection container implementation." alt="" coords="237,5,496,60"/>
+<area shape="rect" id="Node000002" href="$di__container__interface_8h.html" title="Abstract interface for dependency injection container." alt="" coords="101,108,280,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="314,62,228,104,225,100,312,58"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="305,108,429,133"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="369,60,369,94,364,94,364,60"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="453,108,517,133"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="404,58,460,98,457,102,401,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,181,83,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="168,136,81,178,79,173,166,131"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="107,181,194,207"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="186,135,166,171,162,168,182,132"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="203,262,261,287"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="196,133,228,248,223,250,191,134"/>
+<area shape="rect" id="Node000006" href="$error__codes_8h.html" title=" " alt="" coords="269,181,392,207"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="214,131,297,173,295,177,212,136"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="318,209,259,255,256,251,314,205"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="286,262,373,287"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="333,207,332,248,327,248,328,207"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="397,262,457,287"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="347,205,404,251,400,255,343,209"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="481,255,652,295"/>
+<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="366,204,498,248,496,253,364,209"/>
 </map>

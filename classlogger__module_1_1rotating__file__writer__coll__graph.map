@@ -1,9 +1,29 @@
 <map id="logger_module::rotating_file_writer" name="logger_module::rotating_file_writer">
-<area shape="rect" id="Node000001" title="File writer with rotation support based on size or time." alt="" coords="5,269,184,309"/>
-<area shape="rect" id="Node000002" href="$classlogger__module_1_1file__writer.html" title="Basic file writer for logging to files." alt="" coords="21,181,168,221"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,235,97,269,92,269,92,235"/>
-<area shape="rect" id="Node000003" href="$classlogger__module_1_1base__writer.html" title="Base class for all log writers." alt="" coords="15,93,174,133"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="97,147,97,181,92,181,92,147"/>
-<area shape="rect" id="Node000004" href="$classlogger__module_1_1log__writer__interface.html" title="Interface for log writers." alt="" coords="21,5,168,45"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="97,59,97,93,92,93,92,59"/>
+<area shape="rect" id="Node000001" title="File writer with rotation support based on size or time." alt="" coords="1304,145,1483,185"/>
+<area shape="rect" id="Node000002" href="$classlogger__module_1_1file__writer.html" title="Basic file writer for logging to files." alt="" coords="1108,145,1255,185"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1268,163,1304,163,1304,168,1268,168"/>
+<area shape="rect" id="Node000003" href="$classlogger__module_1_1base__writer.html" title="Abstract base class for all log output writers." alt="" coords="788,8,947,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="961,42,1023,60,1085,86,1128,114,1162,143,1158,147,1124,118,1083,90,1021,65,959,47"/>
+<area shape="rect" id="Node000004" href="$classlogger__module_1_1log__writer__interface.html" title="Interface for log writers." alt="" coords="578,5,725,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="738,24,788,24,788,30,738,29"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="824,77,911,102"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="925,94,1001,107,1085,127,1132,143,1130,148,1083,132,1000,113,924,100"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="582,69,721,109"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="734,87,824,87,824,92,734,92"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="813,126,922,151"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="936,142,1108,157,1108,162,936,147"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="576,133,727,173"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="740,145,812,140,812,145,740,150"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="381,133,527,173"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="540,151,575,151,575,156,540,156"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="161,141,332,166"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="346,151,381,151,381,156,346,156"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="5,141,112,166"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="126,151,161,151,161,156,126,156"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="776,175,959,201"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="972,188,1084,183,1108,179,1108,185,1084,188,973,193"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="821,225,913,250"/>
+<area shape="poly" id="edge12_Node000002_Node000013" title=" " alt="" coords="927,232,1002,225,1083,208,1144,183,1146,188,1085,213,1003,230,928,238"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="786,274,949,299"/>
+<area shape="poly" id="edge13_Node000002_Node000014" title=" " alt="" coords="962,279,1023,268,1083,247,1127,217,1161,184,1165,187,1131,221,1085,252,1025,273,963,284"/>
 </map>

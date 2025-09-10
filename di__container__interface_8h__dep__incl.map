@@ -1,18 +1,22 @@
-<map id="di_container_interface.h" name="di_container_interface.h">
-<area shape="rect" id="Node000001" title="Abstract interface for dependency injection container." alt="" coords="147,5,326,31"/>
-<area shape="rect" id="Node000002" href="$di__container__factory_8h.html" title="Factory for creating appropriate DI containers." alt="" coords="154,152,319,177"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,28,79,37,34,52,19,62,10,73,9,86,17,102,38,117,71,130,155,149,154,155,70,135,35,122,13,106,4,88,5,72,15,58,31,48,78,32,133,23"/>
-<area shape="rect" id="Node000003" href="$logger_8h.html" title=" " alt="" coords="270,225,345,251"/>
-<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="336,30,415,49,446,62,467,77,477,101,475,124,461,147,441,167,388,203,337,228,334,223,385,198,437,163,457,143,470,123,472,102,462,80,444,66,413,54,335,36"/>
-<area shape="rect" id="Node000006" href="$lightweight__di__container_8h.html" title="Lightweight dependency injection container implementation." alt="" coords="28,79,221,104"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="208,40,144,81,141,76,205,36"/>
-<area shape="rect" id="Node000007" href="$thread__system__di__adapter_8h.html" title="Adapter for thread_system&#39;s service container." alt="" coords="245,79,452,104"/>
-<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="268,36,332,76,329,81,265,40"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="260,185,298,223,294,227,256,189"/>
-<area shape="rect" id="Node000004" href="$logger_8cpp.html" title=" " alt="" coords="197,299,287,324"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="289,263,254,300,251,297,285,259"/>
-<area shape="rect" id="Node000005" href="$logger__builder_8h.html" title=" " alt="" coords="311,299,437,324"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="330,259,365,297,361,300,326,263"/>
-<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="156,109,220,150,217,154,153,114"/>
-<area shape="poly" id="edge9_Node000007_Node000002" title=" " alt="" coords="320,114,256,154,253,150,317,109"/>
+<map id="/home/runner/work/logger_system/logger_system/sources/logger/di/di_container_interface.h" name="/home/runner/work/logger_system/logger_system/sources/logger/di/di_container_interface.h">
+<area shape="rect" id="Node000001" title="Abstract interface for dependency injection container." alt="" coords="184,5,428,60"/>
+<area shape="rect" id="Node000002" href="$logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration." alt="" coords="5,431,236,485"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,68,172,86,151,110,129,149,115,193,106,238,103,284,107,368,117,430,112,431,102,368,98,284,101,238,109,192,124,147,147,106,169,82,196,64"/>
+<area shape="rect" id="Node000004" href="$di__container__factory_8h.html" title="Factory for creating appropriate DI containers." alt="" coords="191,225,421,280"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="211,69,186,87,167,109,158,127,155,143,158,158,167,176,191,203,222,223,220,227,188,207,162,179,153,160,150,143,153,125,162,107,182,83,208,64"/>
+<area shape="rect" id="Node000005" href="$logger_8h.html" title="High&#45;performance, thread&#45;safe logging system with asynchronous capabilities." alt="" coords="191,328,421,383"/>
+<area shape="poly" id="edge12_Node000001_Node000005" title=" " alt="" coords="442,38,521,47,599,60,664,79,688,92,705,106,719,127,726,147,727,167,721,185,711,203,695,219,654,249,601,276,542,298,422,332,421,327,540,293,599,271,651,245,692,215,706,200,716,183,721,166,721,148,715,130,701,110,685,96,662,84,598,65,520,52,441,44"/>
+<area shape="rect" id="Node000007" href="$lightweight__di__container_8h.html" title="Lightweight dependency injection container implementation." alt="" coords="177,115,435,170"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="309,74,309,115,303,115,303,74"/>
+<area shape="rect" id="Node000008" href="$thread__system__di__adapter_8h.html" title="Adapter for thread_system&#39;s service container." alt="" coords="460,108,691,177"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="385,63,493,105,491,110,383,68"/>
+<area shape="rect" id="Node000003" href="$logger__v1__compat_8h.html" title="Compatibility wrapper for Logger System v1.x API." alt="" coords="81,533,312,603"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="149,495,175,532,171,535,145,498"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="309,294,309,328,303,328,303,294"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="247,391,171,433,168,428,245,387"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="292,396,250,487,221,535,217,532,245,484,288,394"/>
+<area shape="rect" id="Node000006" href="$logger_8cpp.html" title=" " alt="" coords="312,431,543,485"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="350,389,397,429,394,433,347,394"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="309,184,309,225,303,225,303,184"/>
+<area shape="poly" id="edge11_Node000008_Node000004" title=" " alt="" coords="480,185,372,228,370,223,478,180"/>
 </map>

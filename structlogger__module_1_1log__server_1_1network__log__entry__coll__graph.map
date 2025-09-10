@@ -1,0 +1,10 @@
+<map id="logger_module::log_server::network_log_entry" name="logger_module::log_server::network_log_entry">
+<area shape="rect" id="Node000001" title="Log entry received from network." alt="" coords="5,315,204,355"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="61,95,148,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,134,98,197,98,252,105,314,99,315,93,252,93,197,99,134"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="209,197,361,252"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="135,125,245,195,242,199,132,130"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="35,5,174,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="107,59,107,94,102,94,102,59"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="230,262,138,317,135,312,228,257"/>
+</map>

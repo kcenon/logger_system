@@ -1,7 +1,7 @@
 var logger__interface_8h =
 [
     [ "thread_module::logger_interface", "classthread__module_1_1logger__interface.html", "classthread__module_1_1logger__interface" ],
-    [ "thread_module::logger_registry", "classthread__module_1_1logger__registry.html", null ],
+    [ "thread_module::logger_registry", "classthread__module_1_1logger__registry.html", "classthread__module_1_1logger__registry" ],
     [ "THREAD_LOG_CRITICAL", "logger__interface_8h.html#a1a9c70b761333fe474beed3f10632f83", null ],
     [ "THREAD_LOG_DEBUG", "logger__interface_8h.html#a635e9f7858b6cef780315a94e1404eb6", null ],
     [ "THREAD_LOG_ERROR", "logger__interface_8h.html#ac9c43387c0dce4ad8428b89de78792ce", null ],

@@ -1,7 +1,9 @@
 <map id="logger_module::log_entry" name="logger_module::log_entry">
-<area shape="rect" id="Node000001" title="Represents a single log entry." alt="" coords="46,108,193,148"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,13,87,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,48,108,106,103,109,60,51"/>
-<area shape="rect" id="Node000003" href="$classlogger__module_1_1small__string.html" title=" " alt="" coords="111,5,274,45"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="173,58,135,110,131,106,169,55"/>
+<area shape="rect" id="Node000001" title="Represents a single log entry with all associated metadata." alt="" coords="76,197,223,237"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="31,102,118,127"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,137,137,196,133,199,89,140"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,144,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="77,59,77,102,72,102,72,59"/>
+<area shape="rect" id="Node000004" href="$classlogger__module_1_1small__string.html" title=" " alt="" coords="143,95,305,135"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="207,148,189,175,169,199,165,195,185,172,203,145"/>
 </map>

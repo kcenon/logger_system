@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::composite_strategy Class Reference</title>
+<title>Logger System: logger_module::composite_strategy Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -114,35 +114,34 @@ Collaboration diagram for logger_module::composite_strategy:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a70a0b3ee2ccb8a24adc3c5c2e9841469" id="r_a70a0b3ee2ccb8a24adc3c5c2e9841469"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__strategy.html#a70a0b3ee2ccb8a24adc3c5c2e9841469">composite_strategy</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
+<tr class="memitem:a70a0b3ee2ccb8a24adc3c5c2e9841469" id="r_a70a0b3ee2ccb8a24adc3c5c2e9841469"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__strategy.html#a70a0b3ee2ccb8a24adc3c5c2e9841469">composite_strategy</a> ()=default</td></tr>
 <tr class="separator:a70a0b3ee2ccb8a24adc3c5c2e9841469"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab50aab785bb59281a142527efb0bdf88" id="r_ab50aab785bb59281a142527efb0bdf88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__strategy.html#ab50aab785bb59281a142527efb0bdf88">add_strategy</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1config__strategy__interface.html">config_strategy_interface</a> &gt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">strategy</a>)</td></tr>
+<tr class="memitem:ab50aab785bb59281a142527efb0bdf88" id="r_ab50aab785bb59281a142527efb0bdf88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__strategy.html#ab50aab785bb59281a142527efb0bdf88">add_strategy</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1config__strategy__interface.html">config_strategy_interface</a> &gt; strategy)</td></tr>
 <tr class="memdesc:ab50aab785bb59281a142527efb0bdf88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a strategy to the composite.  <br /></td></tr>
 <tr class="separator:ab50aab785bb59281a142527efb0bdf88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46637956e5e5ebc815a4249745ab14e5" id="r_a46637956e5e5ebc815a4249745ab14e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__strategy.html#a46637956e5e5ebc815a4249745ab14e5">apply</a> (<a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;config) <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a></td></tr>
+<tr class="memitem:a46637956e5e5ebc815a4249745ab14e5" id="r_a46637956e5e5ebc815a4249745ab14e5"><td class="memItemLeft" align="right" valign="top">result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__strategy.html#a46637956e5e5ebc815a4249745ab14e5">apply</a> (<a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;config) override</td></tr>
 <tr class="memdesc:a46637956e5e5ebc815a4249745ab14e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the strategy to a configuration.  <br /></td></tr>
 <tr class="separator:a46637956e5e5ebc815a4249745ab14e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe84d06300e767e2725e8163cd2ec4c8" id="r_abe84d06300e767e2725e8163cd2ec4c8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__strategy.html#abe84d06300e767e2725e8163cd2ec4c8">get_name</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a></td></tr>
+<tr class="memitem:abe84d06300e767e2725e8163cd2ec4c8" id="r_abe84d06300e767e2725e8163cd2ec4c8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__strategy.html#abe84d06300e767e2725e8163cd2ec4c8">get_name</a> () const override</td></tr>
 <tr class="memdesc:abe84d06300e767e2725e8163cd2ec4c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get strategy name for identification.  <br /></td></tr>
 <tr class="separator:abe84d06300e767e2725e8163cd2ec4c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46de0c8753f6d5fcb485434a72ff920b" id="r_a46de0c8753f6d5fcb485434a72ff920b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__strategy.html#a46de0c8753f6d5fcb485434a72ff920b">get_description</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a></td></tr>
+<tr class="memitem:a46de0c8753f6d5fcb485434a72ff920b" id="r_a46de0c8753f6d5fcb485434a72ff920b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__strategy.html#a46de0c8753f6d5fcb485434a72ff920b">get_description</a> () const override</td></tr>
 <tr class="memdesc:a46de0c8753f6d5fcb485434a72ff920b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get strategy description.  <br /></td></tr>
 <tr class="separator:a46de0c8753f6d5fcb485434a72ff920b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac06f3420c6f7c67331a50eae00451146" id="r_ac06f3420c6f7c67331a50eae00451146"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__strategy.html#ac06f3420c6f7c67331a50eae00451146">can_apply</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;config) <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a></td></tr>
+<tr class="memitem:ac06f3420c6f7c67331a50eae00451146" id="r_ac06f3420c6f7c67331a50eae00451146"><td class="memItemLeft" align="right" valign="top">result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1composite__strategy.html#ac06f3420c6f7c67331a50eae00451146">can_apply</a> (const <a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;config) const override</td></tr>
 <tr class="memdesc:ac06f3420c6f7c67331a50eae00451146"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate if this strategy can be applied.  <br /></td></tr>
 <tr class="separator:ac06f3420c6f7c67331a50eae00451146"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classlogger__module_1_1config__strategy__interface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classlogger__module_1_1config__strategy__interface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classlogger__module_1_1config__strategy__interface.html">logger_module::config_strategy_interface</a></td></tr>
-<tr class="memitem:a9dd1ff419fd8701dc81d14129cdfab18 inherit pub_methods_classlogger__module_1_1config__strategy__interface" id="r_a9dd1ff419fd8701dc81d14129cdfab18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1config__strategy__interface.html#a9dd1ff419fd8701dc81d14129cdfab18">~config_strategy_interface</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
-<tr class="separator:a9dd1ff419fd8701dc81d14129cdfab18 inherit pub_methods_classlogger__module_1_1config__strategy__interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5b4a14651f39ee0879819d443e07a2c inherit pub_methods_classlogger__module_1_1config__strategy__interface" id="r_ad5b4a14651f39ee0879819d443e07a2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1config__strategy__interface.html#ad5b4a14651f39ee0879819d443e07a2c">get_priority</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
-<tr class="memdesc:ad5b4a14651f39ee0879819d443e07a2c inherit pub_methods_classlogger__module_1_1config__strategy__interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the priority of this strategy (higher = applied first)  <br /></td></tr>
-<tr class="separator:ad5b4a14651f39ee0879819d443e07a2c inherit pub_methods_classlogger__module_1_1config__strategy__interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0f6f134b308b7db329b27ef2f76790c inherit pub_methods_classlogger__module_1_1config__strategy__interface" id="r_ab0f6f134b308b7db329b27ef2f76790c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1config__strategy__interface.html#ab0f6f134b308b7db329b27ef2f76790c">should_override</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
-<tr class="memdesc:ab0f6f134b308b7db329b27ef2f76790c inherit pub_methods_classlogger__module_1_1config__strategy__interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this strategy should override existing settings.  <br /></td></tr>
-<tr class="separator:ab0f6f134b308b7db329b27ef2f76790c inherit pub_methods_classlogger__module_1_1config__strategy__interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5b4a14651f39ee0879819d443e07a2c" id="r_ad5b4a14651f39ee0879819d443e07a2c"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1config__strategy__interface.html#ad5b4a14651f39ee0879819d443e07a2c">get_priority</a> () const</td></tr>
+<tr class="memdesc:ad5b4a14651f39ee0879819d443e07a2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the priority of this strategy (higher = applied first)  <br /></td></tr>
+<tr class="separator:ad5b4a14651f39ee0879819d443e07a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0f6f134b308b7db329b27ef2f76790c" id="r_ab0f6f134b308b7db329b27ef2f76790c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1config__strategy__interface.html#ab0f6f134b308b7db329b27ef2f76790c">should_override</a> () const</td></tr>
+<tr class="memdesc:ab0f6f134b308b7db329b27ef2f76790c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this strategy should override existing settings.  <br /></td></tr>
+<tr class="separator:ab0f6f134b308b7db329b27ef2f76790c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Combines multiple strategies in sequence. </p>
+
+<p class="definition">Definition at line <a class="el" href="config__strategy__interface_8h_source.html#l00322">322</a> of file <a class="el" href="config__strategy__interface_8h_source.html">config_strategy_interface.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a70a0b3ee2ccb8a24adc3c5c2e9841469" name="a70a0b3ee2ccb8a24adc3c5c2e9841469"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a70a0b3ee2ccb8a24adc3c5c2e9841469">&#9670;&#160;</a></span>composite_strategy()</h2>
@@ -180,7 +179,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::composite_strategy::add_strategy </td>
+          <td class="memname">void logger_module::composite_strategy::add_strategy </td>
           <td>(</td>
           <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1config__strategy__interface.html">config_strategy_interface</a> &gt;&#160;</td>
           <td class="paramname"><em>strategy</em></td><td>)</td>
@@ -202,6 +201,8 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="config__strategy__interface_8h_source.html#l00330">330</a> of file <a class="el" href="config__strategy__interface_8h_source.html">config_strategy_interface.h</a>.</p>
+
 </div>
 </div>
 <a id="a46637956e5e5ebc815a4249745ab14e5" name="a46637956e5e5ebc815a4249745ab14e5"></a>
@@ -214,7 +215,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classlogger__module_1_1result__void.html">result_void</a> logger_module::composite_strategy::apply </td>
+          <td class="memname">result_void logger_module::composite_strategy::apply </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;&#160;</td>
           <td class="paramname"><em>config</em></td><td>)</td>
@@ -235,9 +236,13 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classlogger__module_1_1result__void.html">result_void</a> indicating success or error </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>result_void indicating success or error </dd></dl>
 
 <p>Implements <a class="el" href="classlogger__module_1_1config__strategy__interface.html#a9a0ba43578542edf9dd9f4df476e31fd">logger_module::config_strategy_interface</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="config__strategy__interface_8h_source.html#l00339">339</a> of file <a class="el" href="config__strategy__interface_8h_source.html">config_strategy_interface.h</a>.</p>
+
+<p class="reference">References <a class="el" href="config__strategy__interface_8h_source.html#l00365">can_apply()</a>.</p>
 
 </div>
 </div>
@@ -251,9 +256,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classlogger__module_1_1result__void.html">result_void</a> logger_module::composite_strategy::can_apply </td>
+          <td class="memname">result_void logger_module::composite_strategy::can_apply </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structlogger__module_1_1logger__config.html">logger_config</a> &amp;&#160;</td>
           <td class="paramname"><em>config</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -272,9 +277,15 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classlogger__module_1_1result__void.html">result_void</a> indicating if strategy is applicable </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>result_void indicating if strategy is applicable </dd></dl>
 
 <p>Implements <a class="el" href="classlogger__module_1_1config__strategy__interface.html#a164e8de7e094e542889e8743183c262e">logger_module::config_strategy_interface</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="config__strategy__interface_8h_source.html#l00365">365</a> of file <a class="el" href="config__strategy__interface_8h_source.html">config_strategy_interface.h</a>.</p>
+
+<p class="reference">References <a class="el" href="config__strategy__interface_8h_source.html#l00365">can_apply()</a>, <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba9cc57114b319994e90322314a00521d4">logger_module::invalid_configuration</a>, and <a class="el" href="error__codes_8h_source.html#l00233">logger_module::make_logger_error()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="config__strategy__interface_8h_source.html#l00339">apply()</a>, and <a class="el" href="config__strategy__interface_8h_source.html#l00365">can_apply()</a>.</p>
 
 </div>
 </div>
@@ -306,6 +317,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classlogger__module_1_1config__strategy__interface.html#a8b86176f7c6fe428af54838f8ff9b317">logger_module::config_strategy_interface</a>.</p>
 
+<p class="definition">Definition at line <a class="el" href="config__strategy__interface_8h_source.html#l00356">356</a> of file <a class="el" href="config__strategy__interface_8h_source.html">config_strategy_interface.h</a>.</p>
+
 </div>
 </div>
 <a id="abe84d06300e767e2725e8163cd2ec4c8" name="abe84d06300e767e2725e8163cd2ec4c8"></a>
@@ -336,10 +349,76 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classlogger__module_1_1config__strategy__interface.html#a7c73d0944f93f5abf16321ae2ce6e9f6">logger_module::config_strategy_interface</a>.</p>
 
+<p class="definition">Definition at line <a class="el" href="config__strategy__interface_8h_source.html#l00352">352</a> of file <a class="el" href="config__strategy__interface_8h_source.html">config_strategy_interface.h</a>.</p>
+
+</div>
+</div>
+<a id="ad5b4a14651f39ee0879819d443e07a2c" name="ad5b4a14651f39ee0879819d443e07a2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5b4a14651f39ee0879819d443e07a2c">&#9670;&#160;</a></span>get_priority()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int logger_module::config_strategy_interface::get_priority </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the priority of this strategy (higher = applied first) </p>
+<dl class="section return"><dt>Returns</dt><dd>Priority value (0-100) </dd></dl>
+
+<p>Implemented in <a class="el" href="classlogger__module_1_1environment__strategy.html#acac89cb6d99d920c11f875527b0c63a4">logger_module::environment_strategy</a>, and <a class="el" href="classlogger__module_1_1performance__tuning__strategy.html#aebcf426a52f83faa90d87bb0f3f15793">logger_module::performance_tuning_strategy</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="config__strategy__interface_8h_source.html#l00064">64</a> of file <a class="el" href="config__strategy__interface_8h_source.html">config_strategy_interface.h</a>.</p>
+
+</div>
+</div>
+<a id="ab0f6f134b308b7db329b27ef2f76790c" name="ab0f6f134b308b7db329b27ef2f76790c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0f6f134b308b7db329b27ef2f76790c">&#9670;&#160;</a></span>should_override()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool logger_module::config_strategy_interface::should_override </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if this strategy should override existing settings. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if strategy should override, false to merge </dd></dl>
+
+<p>Implemented in <a class="el" href="classlogger__module_1_1template__strategy.html#ab6422f7cdd388b4a980b8461512501a2">logger_module::template_strategy</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="config__strategy__interface_8h_source.html#l00070">70</a> of file <a class="el" href="config__strategy__interface_8h_source.html">config_strategy_interface.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="config__strategy__interface_8h_source.html">config_strategy_interface.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/config/<a class="el" href="config__strategy__interface_8h_source.html">config_strategy_interface.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -347,7 +426,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1composite__strategy.html">composite_strategy</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

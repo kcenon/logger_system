@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::json_formatter Class Reference</title>
+<title>Logger System: logger_module::json_formatter Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -92,6 +92,7 @@ $(document).ready(function(){initNavTree('classlogger__module_1_1json__formatter
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classlogger__module_1_1json__formatter-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">logger_module::json_formatter Class Reference</div></div>
 </div><!--header-->
@@ -114,34 +115,29 @@ Collaboration diagram for logger_module::json_formatter:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7e9bb4f49c50b91f0f44b12e5adc5d25" id="r_a7e9bb4f49c50b91f0f44b12e5adc5d25"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1json__formatter.html#a7e9bb4f49c50b91f0f44b12e5adc5d25">format</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">entry</a>) <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a></td></tr>
+<tr class="memitem:a7e9bb4f49c50b91f0f44b12e5adc5d25" id="r_a7e9bb4f49c50b91f0f44b12e5adc5d25"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1json__formatter.html#a7e9bb4f49c50b91f0f44b12e5adc5d25">format</a> (const <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;entry) const override</td></tr>
 <tr class="memdesc:a7e9bb4f49c50b91f0f44b12e5adc5d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format a log entry into a string.  <br /></td></tr>
 <tr class="separator:a7e9bb4f49c50b91f0f44b12e5adc5d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1a7c051f223129db2dba194a446b077" id="r_aa1a7c051f223129db2dba194a446b077"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1json__formatter.html#aa1a7c051f223129db2dba194a446b077">get_format_type</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">override</a></td></tr>
+<tr class="memitem:aa1a7c051f223129db2dba194a446b077" id="r_aa1a7c051f223129db2dba194a446b077"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1json__formatter.html#aa1a7c051f223129db2dba194a446b077">get_format_type</a> () const override</td></tr>
 <tr class="memdesc:aa1a7c051f223129db2dba194a446b077"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the format type name.  <br /></td></tr>
 <tr class="separator:aa1a7c051f223129db2dba194a446b077"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classlogger__module_1_1base__formatter"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classlogger__module_1_1base__formatter')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classlogger__module_1_1base__formatter.html">logger_module::base_formatter</a></td></tr>
-<tr class="memitem:a4e88d55e3da9819131cba8c9a358b579 inherit pub_methods_classlogger__module_1_1base__formatter" id="r_a4e88d55e3da9819131cba8c9a358b579"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__formatter.html#a4e88d55e3da9819131cba8c9a358b579">~base_formatter</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
-<tr class="separator:a4e88d55e3da9819131cba8c9a358b579 inherit pub_methods_classlogger__module_1_1base__formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classlogger__module_1_1log__formatter__interface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classlogger__module_1_1log__formatter__interface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classlogger__module_1_1log__formatter__interface.html">logger_module::log_formatter_interface</a></td></tr>
-<tr class="memitem:ad0dd77ec891318d5b4adfaa565d0ee75 inherit pub_methods_classlogger__module_1_1log__formatter__interface" id="r_ad0dd77ec891318d5b4adfaa565d0ee75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__formatter__interface.html#ad0dd77ec891318d5b4adfaa565d0ee75">~log_formatter_interface</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
-<tr class="separator:ad0dd77ec891318d5b4adfaa565d0ee75 inherit pub_methods_classlogger__module_1_1log__formatter__interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_methods_classlogger__module_1_1base__formatter"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classlogger__module_1_1base__formatter')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classlogger__module_1_1base__formatter.html">logger_module::base_formatter</a></td></tr>
-<tr class="memitem:a18f057a589007e9c54872a7827ec1181 inherit pro_methods_classlogger__module_1_1base__formatter" id="r_a18f057a589007e9c54872a7827ec1181"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__formatter.html#a18f057a589007e9c54872a7827ec1181">level_to_string</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level) <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
-<tr class="memdesc:a18f057a589007e9c54872a7827ec1181 inherit pro_methods_classlogger__module_1_1base__formatter"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert log level to string.  <br /></td></tr>
-<tr class="separator:a18f057a589007e9c54872a7827ec1181 inherit pro_methods_classlogger__module_1_1base__formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec75242e63de58358ae287236dfb4ecf inherit pro_methods_classlogger__module_1_1base__formatter" id="r_aec75242e63de58358ae287236dfb4ecf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__formatter.html#aec75242e63de58358ae287236dfb4ecf">format_timestamp</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::chrono::system_clock::time_point &amp;timestamp) <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
-<tr class="memdesc:aec75242e63de58358ae287236dfb4ecf inherit pro_methods_classlogger__module_1_1base__formatter"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format timestamp to ISO8601 string.  <br /></td></tr>
-<tr class="separator:aec75242e63de58358ae287236dfb4ecf inherit pro_methods_classlogger__module_1_1base__formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ad05d0ec1b5e5d9454b0e2632f5e2f8 inherit pro_methods_classlogger__module_1_1base__formatter" id="r_a5ad05d0ec1b5e5d9454b0e2632f5e2f8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__formatter.html#a5ad05d0ec1b5e5d9454b0e2632f5e2f8">get_thread_id</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
-<tr class="memdesc:a5ad05d0ec1b5e5d9454b0e2632f5e2f8 inherit pro_methods_classlogger__module_1_1base__formatter"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current thread ID as string.  <br /></td></tr>
-<tr class="separator:a5ad05d0ec1b5e5d9454b0e2632f5e2f8 inherit pro_methods_classlogger__module_1_1base__formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a18f057a589007e9c54872a7827ec1181" id="r_a18f057a589007e9c54872a7827ec1181"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__formatter.html#a18f057a589007e9c54872a7827ec1181">level_to_string</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level) const</td></tr>
+<tr class="memdesc:a18f057a589007e9c54872a7827ec1181"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert log level to string.  <br /></td></tr>
+<tr class="separator:a18f057a589007e9c54872a7827ec1181"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec75242e63de58358ae287236dfb4ecf" id="r_aec75242e63de58358ae287236dfb4ecf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__formatter.html#aec75242e63de58358ae287236dfb4ecf">format_timestamp</a> (const std::chrono::system_clock::time_point &amp;timestamp) const</td></tr>
+<tr class="memdesc:aec75242e63de58358ae287236dfb4ecf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format timestamp to ISO8601 string.  <br /></td></tr>
+<tr class="separator:aec75242e63de58358ae287236dfb4ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ad05d0ec1b5e5d9454b0e2632f5e2f8" id="r_a5ad05d0ec1b5e5d9454b0e2632f5e2f8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1base__formatter.html#a5ad05d0ec1b5e5d9454b0e2632f5e2f8">get_thread_id</a> () const</td></tr>
+<tr class="memdesc:a5ad05d0ec1b5e5d9454b0e2632f5e2f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current thread ID as string.  <br /></td></tr>
+<tr class="separator:a5ad05d0ec1b5e5d9454b0e2632f5e2f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>JSON formatter for structured logging. </p>
+
+<p class="definition">Definition at line <a class="el" href="base__formatter_8h_source.html#l00115">115</a> of file <a class="el" href="base__formatter_8h_source.html">base_formatter.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7e9bb4f49c50b91f0f44b12e5adc5d25" name="a7e9bb4f49c50b91f0f44b12e5adc5d25"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7e9bb4f49c50b91f0f44b12e5adc5d25">&#9670;&#160;</a></span>format()</h2>
@@ -155,7 +151,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">std::string logger_module::json_formatter::format </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td>
           <td class="paramname"><em>entry</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -177,6 +173,49 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>Formatted string representation </dd></dl>
 
 <p>Implements <a class="el" href="classlogger__module_1_1base__formatter.html#a2129c4c789a43526b8e41cc9643f1293">logger_module::base_formatter</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="base__formatter_8h_source.html#l00117">117</a> of file <a class="el" href="base__formatter_8h_source.html">base_formatter.h</a>.</p>
+
+<p class="reference">References <a class="el" href="log__entry_8h_source.html#l00177">logger_module::log_entry::category</a>, <a class="el" href="base__formatter_8h_source.html#l00058">logger_module::base_formatter::format_timestamp()</a>, <a class="el" href="base__formatter_8h_source.html#l00069">logger_module::base_formatter::get_thread_id()</a>, <a class="el" href="overflow__policy_8cpp_source.html#l00042">logger_module::log_entry::level</a>, <a class="el" href="base__formatter_8h_source.html#l00041">logger_module::base_formatter::level_to_string()</a>, <a class="el" href="log__entry_8h_source.html#l00163">logger_module::log_entry::location</a>, <a class="el" href="overflow__policy_8cpp_source.html#l00043">logger_module::log_entry::message</a>, <a class="el" href="log__entry_8h_source.html#l00170">logger_module::log_entry::thread_id</a>, and <a class="el" href="overflow__policy_8cpp_source.html#l00044">logger_module::log_entry::timestamp</a>.</p>
+
+</div>
+</div>
+<a id="aec75242e63de58358ae287236dfb4ecf" name="aec75242e63de58358ae287236dfb4ecf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec75242e63de58358ae287236dfb4ecf">&#9670;&#160;</a></span>format_timestamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string logger_module::base_formatter::format_timestamp </td>
+          <td>(</td>
+          <td class="paramtype">const std::chrono::system_clock::time_point &amp;&#160;</td>
+          <td class="paramname"><em>timestamp</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Format timestamp to ISO8601 string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timestamp</td><td>Time point to format </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ISO8601 formatted string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="base__formatter_8h_source.html#l00058">58</a> of file <a class="el" href="base__formatter_8h_source.html">base_formatter.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="base__formatter_8h_source.html#l00082">logger_module::plain_formatter::format()</a>, and <a class="el" href="base__formatter_8h_source.html#l00117">format()</a>.</p>
 
 </div>
 </div>
@@ -208,10 +247,83 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classlogger__module_1_1log__formatter__interface.html#ae5e2f24b466fdae339b35ffaf8489a60">logger_module::log_formatter_interface</a>.</p>
 
+<p class="definition">Definition at line <a class="el" href="base__formatter_8h_source.html#l00143">143</a> of file <a class="el" href="base__formatter_8h_source.html">base_formatter.h</a>.</p>
+
+</div>
+</div>
+<a id="a5ad05d0ec1b5e5d9454b0e2632f5e2f8" name="a5ad05d0ec1b5e5d9454b0e2632f5e2f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ad05d0ec1b5e5d9454b0e2632f5e2f8">&#9670;&#160;</a></span>get_thread_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string logger_module::base_formatter::get_thread_id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get current thread ID as string. </p>
+<dl class="section return"><dt>Returns</dt><dd>Thread ID string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="base__formatter_8h_source.html#l00069">69</a> of file <a class="el" href="base__formatter_8h_source.html">base_formatter.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="base__formatter_8h_source.html#l00082">logger_module::plain_formatter::format()</a>, and <a class="el" href="base__formatter_8h_source.html#l00117">format()</a>.</p>
+
+</div>
+</div>
+<a id="a18f057a589007e9c54872a7827ec1181" name="a18f057a589007e9c54872a7827ec1181"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18f057a589007e9c54872a7827ec1181">&#9670;&#160;</a></span>level_to_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string logger_module::base_formatter::level_to_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a>&#160;</td>
+          <td class="paramname"><em>level</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert log level to string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>Log level </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>String representation </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="base__formatter_8h_source.html#l00041">41</a> of file <a class="el" href="base__formatter_8h_source.html">base_formatter.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="base__formatter_8h_source.html#l00082">logger_module::plain_formatter::format()</a>, <a class="el" href="base__formatter_8h_source.html#l00117">format()</a>, and <a class="el" href="base__formatter_8h_source.html#l00171">logger_module::compact_formatter::format()</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="base__formatter_8h_source.html">base_formatter.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/formatters/<a class="el" href="base__formatter_8h_source.html">base_formatter.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -219,7 +331,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1json__formatter.html">json_formatter</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::log_collector::impl Class Reference</title>
+<title>Logger System: logger_module::log_collector::impl Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -103,22 +103,25 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5508494223b937510dbc9716489b321d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a34645d4ffda57cf06349d940f58719" id="r_a5a34645d4ffda57cf06349d940f58719"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#a5a34645d4ffda57cf06349d940f58719">~impl</a> ()</td></tr>
 <tr class="separator:a5a34645d4ffda57cf06349d940f58719"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca7a1108d9307a91de5f5b3e97cc3782" id="r_aca7a1108d9307a91de5f5b3e97cc3782"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#aca7a1108d9307a91de5f5b3e97cc3782">enqueue</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;message, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;file, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">int</a> line, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;function, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::chrono::system_clock::time_point &amp;timestamp)</td></tr>
+<tr class="memitem:aca7a1108d9307a91de5f5b3e97cc3782" id="r_aca7a1108d9307a91de5f5b3e97cc3782"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#aca7a1108d9307a91de5f5b3e97cc3782">enqueue</a> (<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level, const std::string &amp;message, const std::string &amp;file, int line, const std::string &amp;function, const std::chrono::system_clock::time_point &amp;timestamp)</td></tr>
 <tr class="separator:aca7a1108d9307a91de5f5b3e97cc3782"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4985490f3e1b3747ae3c52bfe56b42c" id="r_ad4985490f3e1b3747ae3c52bfe56b42c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#ad4985490f3e1b3747ae3c52bfe56b42c">add_writer</a> (<a class="el" href="classlogger__module_1_1base__writer.html">base_writer</a> *<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">writer</a>)</td></tr>
+<tr class="memitem:ad4985490f3e1b3747ae3c52bfe56b42c" id="r_ad4985490f3e1b3747ae3c52bfe56b42c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#ad4985490f3e1b3747ae3c52bfe56b42c">add_writer</a> (<a class="el" href="classlogger__module_1_1base__writer.html">base_writer</a> *writer)</td></tr>
 <tr class="separator:ad4985490f3e1b3747ae3c52bfe56b42c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71911e4c16cb51090d70c35591209681" id="r_a71911e4c16cb51090d70c35591209681"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#a71911e4c16cb51090d70c35591209681">clear_writers</a> ()</td></tr>
+<tr class="memitem:a71911e4c16cb51090d70c35591209681" id="r_a71911e4c16cb51090d70c35591209681"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#a71911e4c16cb51090d70c35591209681">clear_writers</a> ()</td></tr>
 <tr class="separator:a71911e4c16cb51090d70c35591209681"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a294020ef18f2291f7af35a97b6edac5b" id="r_a294020ef18f2291f7af35a97b6edac5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#a294020ef18f2291f7af35a97b6edac5b">start</a> ()</td></tr>
+<tr class="memitem:a294020ef18f2291f7af35a97b6edac5b" id="r_a294020ef18f2291f7af35a97b6edac5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#a294020ef18f2291f7af35a97b6edac5b">start</a> ()</td></tr>
 <tr class="separator:a294020ef18f2291f7af35a97b6edac5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a675d424d4ccdbd19e1630848abe89650" id="r_a675d424d4ccdbd19e1630848abe89650"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#a675d424d4ccdbd19e1630848abe89650">stop</a> ()</td></tr>
+<tr class="memitem:a675d424d4ccdbd19e1630848abe89650" id="r_a675d424d4ccdbd19e1630848abe89650"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#a675d424d4ccdbd19e1630848abe89650">stop</a> ()</td></tr>
 <tr class="separator:a675d424d4ccdbd19e1630848abe89650"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe65aaef8447f380ba641e80836d15b5" id="r_abe65aaef8447f380ba641e80836d15b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#abe65aaef8447f380ba641e80836d15b5">flush</a> ()</td></tr>
+<tr class="memitem:abe65aaef8447f380ba641e80836d15b5" id="r_abe65aaef8447f380ba641e80836d15b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#abe65aaef8447f380ba641e80836d15b5">flush</a> ()</td></tr>
 <tr class="separator:abe65aaef8447f380ba641e80836d15b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ea7093ea77a11f7e67fe47d1bdcebe0" id="r_a4ea7093ea77a11f7e67fe47d1bdcebe0"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#a4ea7093ea77a11f7e67fe47d1bdcebe0">get_queue_metrics</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:a4ea7093ea77a11f7e67fe47d1bdcebe0" id="r_a4ea7093ea77a11f7e67fe47d1bdcebe0"><td class="memItemLeft" align="right" valign="top">std::pair&lt; size_t, size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html#a4ea7093ea77a11f7e67fe47d1bdcebe0">get_queue_metrics</a> () const</td></tr>
 <tr class="separator:a4ea7093ea77a11f7e67fe47d1bdcebe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="log__collector_8cpp_source.html#l00045">45</a> of file <a class="el" href="log__collector_8cpp_source.html">log_collector.cpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a5508494223b937510dbc9716489b321d" name="a5508494223b937510dbc9716489b321d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5508494223b937510dbc9716489b321d">&#9670;&#160;</a></span>impl()</h2>
 
@@ -142,6 +145,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log__collector_8cpp_source.html#l00047">47</a> of file <a class="el" href="log__collector_8cpp_source.html">log_collector.cpp</a>.</p>
 
 </div>
 </div>
@@ -168,6 +173,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="log__collector_8cpp_source.html#l00052">52</a> of file <a class="el" href="log__collector_8cpp_source.html">log_collector.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="log__collector_8cpp_source.html#l00099">stop()</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -181,7 +190,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::log_collector::impl::add_writer </td>
+          <td class="memname">void logger_module::log_collector::impl::add_writer </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classlogger__module_1_1base__writer.html">base_writer</a> *&#160;</td>
           <td class="paramname"><em>writer</em></td><td>)</td>
@@ -195,6 +204,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="log__collector_8cpp_source.html#l00083">83</a> of file <a class="el" href="log__collector_8cpp_source.html">log_collector.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a71911e4c16cb51090d70c35591209681" name="a71911e4c16cb51090d70c35591209681"></a>
@@ -207,7 +218,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::log_collector::impl::clear_writers </td>
+          <td class="memname">void logger_module::log_collector::impl::clear_writers </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -219,6 +230,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log__collector_8cpp_source.html#l00088">88</a> of file <a class="el" href="log__collector_8cpp_source.html">log_collector.cpp</a>.</p>
 
 </div>
 </div>
@@ -232,7 +245,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> logger_module::log_collector::impl::enqueue </td>
+          <td class="memname">bool logger_module::log_collector::impl::enqueue </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a>&#160;</td>
           <td class="paramname"><em>level</em>, </td>
@@ -240,31 +253,31 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>message</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>file</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>line</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>function</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::chrono::system_clock::time_point &amp;&#160;</td>
+          <td class="paramtype">const std::chrono::system_clock::time_point &amp;&#160;</td>
           <td class="paramname"><em>timestamp</em>&#160;</td>
         </tr>
         <tr>
@@ -280,6 +293,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="log__collector_8cpp_source.html#l00056">56</a> of file <a class="el" href="log__collector_8cpp_source.html">log_collector.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="log__entry_8h_source.html#l00163">logger_module::log_entry::location</a>.</p>
+
 </div>
 </div>
 <a id="abe65aaef8447f380ba641e80836d15b5" name="abe65aaef8447f380ba641e80836d15b5"></a>
@@ -292,7 +309,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::log_collector::impl::flush </td>
+          <td class="memname">void logger_module::log_collector::impl::flush </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -304,6 +321,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log__collector_8cpp_source.html#l00108">108</a> of file <a class="el" href="log__collector_8cpp_source.html">log_collector.cpp</a>.</p>
 
 </div>
 </div>
@@ -317,7 +336,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> &gt; logger_module::log_collector::impl::get_queue_metrics </td>
+          <td class="memname">std::pair&lt; size_t, size_t &gt; logger_module::log_collector::impl::get_queue_metrics </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -329,6 +348,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log__collector_8cpp_source.html#l00128">128</a> of file <a class="el" href="log__collector_8cpp_source.html">log_collector.cpp</a>.</p>
 
 </div>
 </div>
@@ -342,7 +363,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::log_collector::impl::start </td>
+          <td class="memname">void logger_module::log_collector::impl::start </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -354,6 +375,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log__collector_8cpp_source.html#l00093">93</a> of file <a class="el" href="log__collector_8cpp_source.html">log_collector.cpp</a>.</p>
 
 </div>
 </div>
@@ -367,7 +390,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::log_collector::impl::stop </td>
+          <td class="memname">void logger_module::log_collector::impl::stop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -380,10 +403,14 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="log__collector_8cpp_source.html#l00099">99</a> of file <a class="el" href="log__collector_8cpp_source.html">log_collector.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="log__collector_8cpp_source.html#l00052">~impl()</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="log__collector_8cpp.html">log_collector.cpp</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/core/<a class="el" href="log__collector_8cpp_source.html">log_collector.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -391,7 +418,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1log__collector.html">log_collector</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1log__collector_1_1impl.html">impl</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

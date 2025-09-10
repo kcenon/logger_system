@@ -1,0 +1,7 @@
+<map id="/home/runner/work/logger_system/logger_system/sources/logger/config/configuration_templates.h" name="/home/runner/work/logger_system/logger_system/sources/logger/config/configuration_templates.h">
+<area shape="rect" id="Node000001" title="Pre&#45;defined configuration templates for common scenarios." alt="" coords="5,5,236,75"/>
+<area shape="rect" id="Node000002" href="$logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration." alt="" coords="5,123,236,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,88,123,122,118,122,118,88"/>
+<area shape="rect" id="Node000003" href="$logger__v1__compat_8h.html" title="Compatibility wrapper for Logger System v1.x API." alt="" coords="5,225,236,295"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="123,191,123,225,118,225,118,191"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="logger_module::log_aggregator::source_stats" name="logger_module::log_aggregator::source_stats">
+<area shape="rect" id="Node000001" title="Statistics per log source." alt="" coords="53,225,243,265"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="31,123,118,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,159,117,200,135,224,130,227,112,203,86,161"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,144,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="77,59,77,122,72,122,72,59"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="143,108,305,163"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="202,176,183,203,165,227,161,224,179,200,198,173"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="183,13,265,38"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="227,52,227,108,221,108,221,52"/>
+</map>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::monitoring_interface Class Reference</title>
+<title>Logger System: logger_module::monitoring_interface Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -104,45 +104,47 @@ $(document).ready(function(){initNavTree('classlogger__module_1_1monitoring__int
 <div class="dynheader">
 Inheritance diagram for logger_module::monitoring_interface:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classlogger__module_1_1monitoring__interface__inherit__graph.svg" width="210" height="227"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classlogger__module_1_1monitoring__interface__inherit__graph.svg" width="390" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2460fc64b2df90783c0a116daf0931c5" id="r_a2460fc64b2df90783c0a116daf0931c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#a2460fc64b2df90783c0a116daf0931c5">~monitoring_interface</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
+<tr class="memitem:a2460fc64b2df90783c0a116daf0931c5" id="r_a2460fc64b2df90783c0a116daf0931c5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#a2460fc64b2df90783c0a116daf0931c5">~monitoring_interface</a> ()=default</td></tr>
 <tr class="memdesc:a2460fc64b2df90783c0a116daf0931c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:a2460fc64b2df90783c0a116daf0931c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfd3bcf341e241a94e2f65e4f9fbcd87" id="r_abfd3bcf341e241a94e2f65e4f9fbcd87"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result.html">result</a>&lt; <a class="el" href="classlogger__module_1_1monitoring__data.html">monitoring_data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#abfd3bcf341e241a94e2f65e4f9fbcd87">collect_metrics</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> =0</td></tr>
+<tr class="memitem:abfd3bcf341e241a94e2f65e4f9fbcd87" id="r_abfd3bcf341e241a94e2f65e4f9fbcd87"><td class="memItemLeft" align="right" valign="top">virtual result&lt; <a class="el" href="classlogger__module_1_1monitoring__data.html">monitoring_data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#abfd3bcf341e241a94e2f65e4f9fbcd87">collect_metrics</a> () const =0</td></tr>
 <tr class="memdesc:abfd3bcf341e241a94e2f65e4f9fbcd87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collect current metrics.  <br /></td></tr>
 <tr class="separator:abfd3bcf341e241a94e2f65e4f9fbcd87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adeab3ed7db6f2d64ba831a1b0e06b559" id="r_adeab3ed7db6f2d64ba831a1b0e06b559"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result.html">result</a>&lt; <a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#adeab3ed7db6f2d64ba831a1b0e06b559">check_health</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> =0</td></tr>
+<tr class="memitem:adeab3ed7db6f2d64ba831a1b0e06b559" id="r_adeab3ed7db6f2d64ba831a1b0e06b559"><td class="memItemLeft" align="right" valign="top">virtual result&lt; <a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#adeab3ed7db6f2d64ba831a1b0e06b559">check_health</a> () const =0</td></tr>
 <tr class="memdesc:adeab3ed7db6f2d64ba831a1b0e06b559"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform health check.  <br /></td></tr>
 <tr class="separator:adeab3ed7db6f2d64ba831a1b0e06b559"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8a6144e4cc63bfc5b2413c361c61c39" id="r_ab8a6144e4cc63bfc5b2413c361c61c39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#ab8a6144e4cc63bfc5b2413c361c61c39">reset_metrics</a> ()=0</td></tr>
+<tr class="memitem:ab8a6144e4cc63bfc5b2413c361c61c39" id="r_ab8a6144e4cc63bfc5b2413c361c61c39"><td class="memItemLeft" align="right" valign="top">virtual result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#ab8a6144e4cc63bfc5b2413c361c61c39">reset_metrics</a> ()=0</td></tr>
 <tr class="memdesc:ab8a6144e4cc63bfc5b2413c361c61c39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all metrics.  <br /></td></tr>
 <tr class="separator:ab8a6144e4cc63bfc5b2413c361c61c39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37cef9ef9b2d9e431287078c3e76984d" id="r_a37cef9ef9b2d9e431287078c3e76984d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#a37cef9ef9b2d9e431287078c3e76984d">set_enabled</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enable</a>)=0</td></tr>
+<tr class="memitem:a37cef9ef9b2d9e431287078c3e76984d" id="r_a37cef9ef9b2d9e431287078c3e76984d"><td class="memItemLeft" align="right" valign="top">virtual result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#a37cef9ef9b2d9e431287078c3e76984d">set_enabled</a> (bool enable)=0</td></tr>
 <tr class="memdesc:a37cef9ef9b2d9e431287078c3e76984d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable metric collection.  <br /></td></tr>
 <tr class="separator:a37cef9ef9b2d9e431287078c3e76984d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef9016470a213e28f0cde90a4172961e" id="r_aef9016470a213e28f0cde90a4172961e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#aef9016470a213e28f0cde90a4172961e">is_enabled</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> =0</td></tr>
+<tr class="memitem:aef9016470a213e28f0cde90a4172961e" id="r_aef9016470a213e28f0cde90a4172961e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#aef9016470a213e28f0cde90a4172961e">is_enabled</a> () const =0</td></tr>
 <tr class="memdesc:aef9016470a213e28f0cde90a4172961e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if monitoring is enabled.  <br /></td></tr>
 <tr class="separator:aef9016470a213e28f0cde90a4172961e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a595c890f4a63122392f452afb92cc75d" id="r_a595c890f4a63122392f452afb92cc75d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#a595c890f4a63122392f452afb92cc75d">get_backend_name</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> =0</td></tr>
+<tr class="memitem:a595c890f4a63122392f452afb92cc75d" id="r_a595c890f4a63122392f452afb92cc75d"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#a595c890f4a63122392f452afb92cc75d">get_backend_name</a> () const =0</td></tr>
 <tr class="memdesc:a595c890f4a63122392f452afb92cc75d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get monitoring backend name.  <br /></td></tr>
 <tr class="separator:a595c890f4a63122392f452afb92cc75d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93536091b772310bb5c7e9bb62fd068a" id="r_a93536091b772310bb5c7e9bb62fd068a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#a93536091b772310bb5c7e9bb62fd068a">increment_counter</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">double</a> value=1.0)=0</td></tr>
+<tr class="memitem:a93536091b772310bb5c7e9bb62fd068a" id="r_a93536091b772310bb5c7e9bb62fd068a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#a93536091b772310bb5c7e9bb62fd068a">increment_counter</a> (const std::string &amp;name, double value=1.0)=0</td></tr>
 <tr class="memdesc:a93536091b772310bb5c7e9bb62fd068a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Record a counter increment.  <br /></td></tr>
 <tr class="separator:a93536091b772310bb5c7e9bb62fd068a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67997f22d73e0fe5358eb9a91a987cd5" id="r_a67997f22d73e0fe5358eb9a91a987cd5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#a67997f22d73e0fe5358eb9a91a987cd5">update_gauge</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">double</a> value)=0</td></tr>
+<tr class="memitem:a67997f22d73e0fe5358eb9a91a987cd5" id="r_a67997f22d73e0fe5358eb9a91a987cd5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#a67997f22d73e0fe5358eb9a91a987cd5">update_gauge</a> (const std::string &amp;name, double value)=0</td></tr>
 <tr class="memdesc:a67997f22d73e0fe5358eb9a91a987cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update a gauge value.  <br /></td></tr>
 <tr class="separator:a67997f22d73e0fe5358eb9a91a987cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa9fd5e6fcabb58eec785ae414de8e09" id="r_aaa9fd5e6fcabb58eec785ae414de8e09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#aaa9fd5e6fcabb58eec785ae414de8e09">record_histogram</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">double</a> value)=0</td></tr>
+<tr class="memitem:aaa9fd5e6fcabb58eec785ae414de8e09" id="r_aaa9fd5e6fcabb58eec785ae414de8e09"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__interface.html#aaa9fd5e6fcabb58eec785ae414de8e09">record_histogram</a> (const std::string &amp;name, double value)=0</td></tr>
 <tr class="memdesc:aaa9fd5e6fcabb58eec785ae414de8e09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Record a value in a histogram.  <br /></td></tr>
 <tr class="separator:aaa9fd5e6fcabb58eec785ae414de8e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract monitoring interface. </p>
 <p>This interface defines the contract for monitoring implementations, allowing different backends to be plugged in. </p>
+
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00216">216</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2460fc64b2df90783c0a116daf0931c5" name="a2460fc64b2df90783c0a116daf0931c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2460fc64b2df90783c0a116daf0931c5">&#9670;&#160;</a></span>~monitoring_interface()</h2>
@@ -154,7 +156,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> logger_module::monitoring_interface::~monitoring_interface </td>
+          <td class="memname">virtual logger_module::monitoring_interface::~monitoring_interface </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -182,7 +184,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result.html">result</a>&lt; <a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a> &gt; logger_module::monitoring_interface::check_health </td>
+          <td class="memname">virtual result&lt; <a class="el" href="classlogger__module_1_1health__check__result.html">health_check_result</a> &gt; logger_module::monitoring_interface::check_health </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -198,7 +200,7 @@ Public Member Functions</h2></td></tr>
 <p>Perform health check. </p>
 <dl class="section return"><dt>Returns</dt><dd>Result containing health check result or error </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#a45ce71a22aadfea4eeb1430b84bdc3dc">logger_module::basic_monitor</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#a45ce71a22aadfea4eeb1430b84bdc3dc">logger_module::basic_monitor</a>, and <a class="el" href="classlogger__module_1_1thread__system__monitor__adapter.html#a02526eaa846b085ce96405e12afd6db7">logger_module::thread_system_monitor_adapter</a>.</p>
 
 </div>
 </div>
@@ -212,7 +214,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result.html">result</a>&lt; <a class="el" href="classlogger__module_1_1monitoring__data.html">monitoring_data</a> &gt; logger_module::monitoring_interface::collect_metrics </td>
+          <td class="memname">virtual result&lt; <a class="el" href="classlogger__module_1_1monitoring__data.html">monitoring_data</a> &gt; logger_module::monitoring_interface::collect_metrics </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -228,7 +230,7 @@ Public Member Functions</h2></td></tr>
 <p>Collect current metrics. </p>
 <dl class="section return"><dt>Returns</dt><dd>Result containing monitoring data or error </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#adee22a79972d39ab84dcea99bf4810d6">logger_module::basic_monitor</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#adee22a79972d39ab84dcea99bf4810d6">logger_module::basic_monitor</a>, and <a class="el" href="classlogger__module_1_1thread__system__monitor__adapter.html#ab2c081fe7384fb7a50b50fa31f1e978a">logger_module::thread_system_monitor_adapter</a>.</p>
 
 </div>
 </div>
@@ -242,7 +244,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> std::string logger_module::monitoring_interface::get_backend_name </td>
+          <td class="memname">virtual std::string logger_module::monitoring_interface::get_backend_name </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -272,15 +274,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::monitoring_interface::increment_counter </td>
+          <td class="memname">virtual void logger_module::monitoring_interface::increment_counter </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">double</a>&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>value</em> = <code>1.0</code>&#160;</td>
         </tr>
         <tr>
@@ -305,7 +307,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#a75d2ccb688b4158b7fb688e2b62338de">logger_module::basic_monitor</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#a75d2ccb688b4158b7fb688e2b62338de">logger_module::basic_monitor</a>, and <a class="el" href="classlogger__module_1_1thread__system__monitor__adapter.html#a1d4c127e8f65bc755cdcac11f1be02e2">logger_module::thread_system_monitor_adapter</a>.</p>
 
 </div>
 </div>
@@ -319,7 +321,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> logger_module::monitoring_interface::is_enabled </td>
+          <td class="memname">virtual bool logger_module::monitoring_interface::is_enabled </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -335,7 +337,7 @@ Public Member Functions</h2></td></tr>
 <p>Check if monitoring is enabled. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if monitoring is enabled </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#a817ddb34a2172fb6381224bf916a0ee1">logger_module::basic_monitor</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#a817ddb34a2172fb6381224bf916a0ee1">logger_module::basic_monitor</a>, and <a class="el" href="classlogger__module_1_1thread__system__monitor__adapter.html#ab989459af538d35b7b33f1cd0807a31b">logger_module::thread_system_monitor_adapter</a>.</p>
 
 </div>
 </div>
@@ -349,15 +351,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::monitoring_interface::record_histogram </td>
+          <td class="memname">virtual void logger_module::monitoring_interface::record_histogram </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">double</a>&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
@@ -382,7 +384,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#a0e69f0037b791c6be26106e747d07563">logger_module::basic_monitor</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#a0e69f0037b791c6be26106e747d07563">logger_module::basic_monitor</a>, and <a class="el" href="classlogger__module_1_1thread__system__monitor__adapter.html#a350e033015276fcf3a001d495c992f7b">logger_module::thread_system_monitor_adapter</a>.</p>
 
 </div>
 </div>
@@ -396,7 +398,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a> logger_module::monitoring_interface::reset_metrics </td>
+          <td class="memname">virtual result_void logger_module::monitoring_interface::reset_metrics </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -412,7 +414,7 @@ Public Member Functions</h2></td></tr>
 <p>Reset all metrics. </p>
 <dl class="section return"><dt>Returns</dt><dd>Result indicating success or error </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#a9e18adf3848cfe40fb44d1ac9d195b1b">logger_module::basic_monitor</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#a9e18adf3848cfe40fb44d1ac9d195b1b">logger_module::basic_monitor</a>, and <a class="el" href="classlogger__module_1_1thread__system__monitor__adapter.html#aec88d77de73515cdb84d4df8764d8c7d">logger_module::thread_system_monitor_adapter</a>.</p>
 
 </div>
 </div>
@@ -426,9 +428,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a> logger_module::monitoring_interface::set_enabled </td>
+          <td class="memname">virtual result_void logger_module::monitoring_interface::set_enabled </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>enable</em></td><td>)</td>
           <td></td>
         </tr>
@@ -449,7 +451,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Result indicating success or error </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#a7b0af1ec93b3bef3d66918fb69a42c1d">logger_module::basic_monitor</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#a7b0af1ec93b3bef3d66918fb69a42c1d">logger_module::basic_monitor</a>, and <a class="el" href="classlogger__module_1_1thread__system__monitor__adapter.html#a86305535b4ec3f23b6e7b5d7ac51df27">logger_module::thread_system_monitor_adapter</a>.</p>
 
 </div>
 </div>
@@ -463,15 +465,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::monitoring_interface::update_gauge </td>
+          <td class="memname">virtual void logger_module::monitoring_interface::update_gauge </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">double</a>&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
@@ -496,12 +498,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#aefc3d12218761a490d69eaac1989c029">logger_module::basic_monitor</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1basic__monitor.html#aefc3d12218761a490d69eaac1989c029">logger_module::basic_monitor</a>, and <a class="el" href="classlogger__module_1_1thread__system__monitor__adapter.html#a044a42fdd135880a9612c010e70d1e28">logger_module::thread_system_monitor_adapter</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/monitoring/<a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -509,7 +511,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1monitoring__interface.html">monitoring_interface</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

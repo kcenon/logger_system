@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::logger_metrics_collector Class Reference</title>
+<title>Logger System: logger_module::logger_metrics_collector Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -104,25 +104,27 @@ $(document).ready(function(){initNavTree('classlogger__module_1_1logger__metrics
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad4d0e87afc395079084ad032c5f6afc4" id="r_ad4d0e87afc395079084ad032c5f6afc4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#ad4d0e87afc395079084ad032c5f6afc4">logger_metrics_collector</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
+<tr class="memitem:ad4d0e87afc395079084ad032c5f6afc4" id="r_ad4d0e87afc395079084ad032c5f6afc4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#ad4d0e87afc395079084ad032c5f6afc4">logger_metrics_collector</a> ()=default</td></tr>
 <tr class="separator:ad4d0e87afc395079084ad032c5f6afc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15bd2c5dcad915b5beda89e4161b52d3" id="r_a15bd2c5dcad915b5beda89e4161b52d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#a15bd2c5dcad915b5beda89e4161b52d3">record_enqueue</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">message_size</a>, std::chrono::nanoseconds <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">enqueue_time</a>)</td></tr>
+<tr class="memitem:a15bd2c5dcad915b5beda89e4161b52d3" id="r_a15bd2c5dcad915b5beda89e4161b52d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#a15bd2c5dcad915b5beda89e4161b52d3">record_enqueue</a> (size_t message_size, std::chrono::nanoseconds enqueue_time)</td></tr>
 <tr class="separator:a15bd2c5dcad915b5beda89e4161b52d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29f75dec81cdc1c5364d0e1694fc3150" id="r_a29f75dec81cdc1c5364d0e1694fc3150"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#a29f75dec81cdc1c5364d0e1694fc3150">record_drop</a> ()</td></tr>
+<tr class="memitem:a29f75dec81cdc1c5364d0e1694fc3150" id="r_a29f75dec81cdc1c5364d0e1694fc3150"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#a29f75dec81cdc1c5364d0e1694fc3150">record_drop</a> ()</td></tr>
 <tr class="separator:a29f75dec81cdc1c5364d0e1694fc3150"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ea8c557ab4ee94d886d10c841e46ae7" id="r_a8ea8c557ab4ee94d886d10c841e46ae7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#a8ea8c557ab4ee94d886d10c841e46ae7">record_processed</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">message_size</a>)</td></tr>
+<tr class="memitem:a8ea8c557ab4ee94d886d10c841e46ae7" id="r_a8ea8c557ab4ee94d886d10c841e46ae7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#a8ea8c557ab4ee94d886d10c841e46ae7">record_processed</a> (size_t message_size)</td></tr>
 <tr class="separator:a8ea8c557ab4ee94d886d10c841e46ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdfa42395a0c7d6eb2c091f92bf67071" id="r_acdfa42395a0c7d6eb2c091f92bf67071"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#acdfa42395a0c7d6eb2c091f92bf67071">record_write</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;writer_name, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">message_size</a>, std::chrono::microseconds <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">write_time</a>, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba260ca9dd8a4577fc00b7bd5810298076">success</a>)</td></tr>
+<tr class="memitem:acdfa42395a0c7d6eb2c091f92bf67071" id="r_acdfa42395a0c7d6eb2c091f92bf67071"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#acdfa42395a0c7d6eb2c091f92bf67071">record_write</a> (const std::string &amp;writer_name, size_t message_size, std::chrono::microseconds write_time, bool <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba260ca9dd8a4577fc00b7bd5810298076">success</a>)</td></tr>
 <tr class="separator:acdfa42395a0c7d6eb2c091f92bf67071"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89e5cb974f1632be2be4ff92ce8050df" id="r_a89e5cb974f1632be2be4ff92ce8050df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#a89e5cb974f1632be2be4ff92ce8050df">update_queue_size</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> current_size, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> max_size)</td></tr>
+<tr class="memitem:a89e5cb974f1632be2be4ff92ce8050df" id="r_a89e5cb974f1632be2be4ff92ce8050df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#a89e5cb974f1632be2be4ff92ce8050df">update_queue_size</a> (size_t current_size, size_t max_size)</td></tr>
 <tr class="separator:a89e5cb974f1632be2be4ff92ce8050df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac358a4e451d371bf089d12b5dca7d2b3" id="r_ac358a4e451d371bf089d12b5dca7d2b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1performance__metrics.html">performance_metrics</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#ac358a4e451d371bf089d12b5dca7d2b3">get_snapshot</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:ac358a4e451d371bf089d12b5dca7d2b3" id="r_ac358a4e451d371bf089d12b5dca7d2b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1performance__metrics.html">performance_metrics</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#ac358a4e451d371bf089d12b5dca7d2b3">get_snapshot</a> () const</td></tr>
 <tr class="separator:ac358a4e451d371bf089d12b5dca7d2b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdcb4a4535d9add01961d8b646309a49" id="r_acdcb4a4535d9add01961d8b646309a49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#acdcb4a4535d9add01961d8b646309a49">reset</a> ()</td></tr>
+<tr class="memitem:acdcb4a4535d9add01961d8b646309a49" id="r_acdcb4a4535d9add01961d8b646309a49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html#acdcb4a4535d9add01961d8b646309a49">reset</a> ()</td></tr>
 <tr class="separator:acdcb4a4535d9add01961d8b646309a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Collects and manages logger performance metrics. </p>
+
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00145">145</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad4d0e87afc395079084ad032c5f6afc4" name="ad4d0e87afc395079084ad032c5f6afc4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad4d0e87afc395079084ad032c5f6afc4">&#9670;&#160;</a></span>logger_metrics_collector()</h2>
@@ -173,6 +175,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00200">200</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__metrics_8h_source.html#l00087">logger_module::performance_metrics::bytes_enqueued</a>, <a class="el" href="logger__metrics_8h_source.html#l00089">logger_module::performance_metrics::bytes_processed</a>, <a class="el" href="logger__metrics_8h_source.html#l00092">logger_module::performance_metrics::current_queue_size</a>, <a class="el" href="logger__metrics_8h_source.html#l00107">logger_module::performance_metrics::last_reset</a>, <a class="el" href="logger__metrics_8h_source.html#l00099">logger_module::performance_metrics::max_enqueue_time_ns</a>, <a class="el" href="logger__metrics_8h_source.html#l00093">logger_module::performance_metrics::max_queue_size</a>, <a class="el" href="logger__metrics_8h_source.html#l00094">logger_module::performance_metrics::messages_dropped</a>, <a class="el" href="logger__metrics_8h_source.html#l00086">logger_module::performance_metrics::messages_enqueued</a>, <a class="el" href="logger__metrics_8h_source.html#l00088">logger_module::performance_metrics::messages_processed</a>, <a class="el" href="logger__metrics_8h_source.html#l00098">logger_module::performance_metrics::min_enqueue_time_ns</a>, <a class="el" href="logger__metrics_8h_source.html#l00106">logger_module::performance_metrics::start_time</a>, <a class="el" href="logger__metrics_8h_source.html#l00097">logger_module::performance_metrics::total_enqueue_time_ns</a>, <a class="el" href="logger__metrics_8h_source.html#l00102">logger_module::performance_metrics::writer_metrics_mutex</a>, and <a class="el" href="logger__metrics_8h_source.html#l00103">logger_module::performance_metrics::writer_stats</a>.</p>
+
 </div>
 </div>
 <a id="a29f75dec81cdc1c5364d0e1694fc3150" name="a29f75dec81cdc1c5364d0e1694fc3150"></a>
@@ -185,7 +191,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::logger_metrics_collector::record_drop </td>
+          <td class="memname">void logger_module::logger_metrics_collector::record_drop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -197,6 +203,10 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00162">162</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__metrics_8h_source.html#l00094">logger_module::performance_metrics::messages_dropped</a>.</p>
 
 </div>
 </div>
@@ -210,9 +220,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::logger_metrics_collector::record_enqueue </td>
+          <td class="memname">void logger_module::logger_metrics_collector::record_enqueue </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>message_size</em>, </td>
         </tr>
         <tr>
@@ -234,6 +244,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00150">150</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__metrics_8h_source.html#l00087">logger_module::performance_metrics::bytes_enqueued</a>, <a class="el" href="logger__metrics_8h_source.html#l00099">logger_module::performance_metrics::max_enqueue_time_ns</a>, <a class="el" href="logger__metrics_8h_source.html#l00086">logger_module::performance_metrics::messages_enqueued</a>, <a class="el" href="logger__metrics_8h_source.html#l00098">logger_module::performance_metrics::min_enqueue_time_ns</a>, and <a class="el" href="logger__metrics_8h_source.html#l00097">logger_module::performance_metrics::total_enqueue_time_ns</a>.</p>
+
 </div>
 </div>
 <a id="a8ea8c557ab4ee94d886d10c841e46ae7" name="a8ea8c557ab4ee94d886d10c841e46ae7"></a>
@@ -246,9 +260,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::logger_metrics_collector::record_processed </td>
+          <td class="memname">void logger_module::logger_metrics_collector::record_processed </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>message_size</em></td><td>)</td>
           <td></td>
         </tr>
@@ -259,6 +273,10 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00167">167</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__metrics_8h_source.html#l00089">logger_module::performance_metrics::bytes_processed</a>, and <a class="el" href="logger__metrics_8h_source.html#l00088">logger_module::performance_metrics::messages_processed</a>.</p>
 
 </div>
 </div>
@@ -272,15 +290,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::logger_metrics_collector::record_write </td>
+          <td class="memname">void logger_module::logger_metrics_collector::record_write </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>writer_name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>message_size</em>, </td>
         </tr>
         <tr>
@@ -292,7 +310,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>success</em>&#160;</td>
         </tr>
         <tr>
@@ -308,6 +326,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00173">173</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba260ca9dd8a4577fc00b7bd5810298076">logger_module::success</a>, <a class="el" href="logger__metrics_8h_source.html#l00102">logger_module::performance_metrics::writer_metrics_mutex</a>, and <a class="el" href="logger__metrics_8h_source.html#l00103">logger_module::performance_metrics::writer_stats</a>.</p>
+
 </div>
 </div>
 <a id="acdcb4a4535d9add01961d8b646309a49" name="acdcb4a4535d9add01961d8b646309a49"></a>
@@ -320,7 +342,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::logger_metrics_collector::reset </td>
+          <td class="memname">void logger_module::logger_metrics_collector::reset </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -332,6 +354,10 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00235">235</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__metrics_8h_source.html#l00087">logger_module::performance_metrics::bytes_enqueued</a>, <a class="el" href="logger__metrics_8h_source.html#l00089">logger_module::performance_metrics::bytes_processed</a>, <a class="el" href="logger__metrics_8h_source.html#l00092">logger_module::performance_metrics::current_queue_size</a>, <a class="el" href="logger__metrics_8h_source.html#l00107">logger_module::performance_metrics::last_reset</a>, <a class="el" href="logger__metrics_8h_source.html#l00099">logger_module::performance_metrics::max_enqueue_time_ns</a>, <a class="el" href="logger__metrics_8h_source.html#l00093">logger_module::performance_metrics::max_queue_size</a>, <a class="el" href="logger__metrics_8h_source.html#l00094">logger_module::performance_metrics::messages_dropped</a>, <a class="el" href="logger__metrics_8h_source.html#l00086">logger_module::performance_metrics::messages_enqueued</a>, <a class="el" href="logger__metrics_8h_source.html#l00088">logger_module::performance_metrics::messages_processed</a>, <a class="el" href="logger__metrics_8h_source.html#l00098">logger_module::performance_metrics::min_enqueue_time_ns</a>, <a class="el" href="logger__metrics_8h_source.html#l00106">logger_module::performance_metrics::start_time</a>, <a class="el" href="logger__metrics_8h_source.html#l00097">logger_module::performance_metrics::total_enqueue_time_ns</a>, <a class="el" href="logger__metrics_8h_source.html#l00102">logger_module::performance_metrics::writer_metrics_mutex</a>, and <a class="el" href="logger__metrics_8h_source.html#l00103">logger_module::performance_metrics::writer_stats</a>.</p>
 
 </div>
 </div>
@@ -345,15 +371,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::logger_metrics_collector::update_queue_size </td>
+          <td class="memname">void logger_module::logger_metrics_collector::update_queue_size </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>current_size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>max_size</em>&#160;</td>
         </tr>
         <tr>
@@ -369,10 +395,14 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="logger__metrics_8h_source.html#l00194">194</a> of file <a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a>.</p>
+
+<p class="reference">References <a class="el" href="logger__metrics_8h_source.html#l00092">logger_module::performance_metrics::current_queue_size</a>, and <a class="el" href="logger__metrics_8h_source.html#l00093">logger_module::performance_metrics::max_queue_size</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/metrics/<a class="el" href="logger__metrics_8h_source.html">logger_metrics.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -380,7 +410,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1logger__metrics__collector.html">logger_metrics_collector</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

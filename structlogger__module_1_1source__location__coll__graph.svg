@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title="Source code location information.">
+<g id="a_Node000001"><a xlink:title="Source code location information for debugging.">
 <polygon fill="#999999" stroke="#666666" points="195,-30 67,-30 67,0 195,0 195,-30"/>
 <text text-anchor="start" x="75" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">logger_module::source</text>
 <text text-anchor="middle" x="131" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_location</text>

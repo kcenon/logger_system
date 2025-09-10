@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::log_aggregator::source_stats Struct Reference</title>
+<title>Logger System: logger_module::log_aggregator::source_stats Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -101,26 +101,33 @@ $(document).ready(function(){initNavTree('structlogger__module_1_1log__aggregato
  <a href="structlogger__module_1_1log__aggregator_1_1source__stats.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="log__analyzer_8h_source.html">log_analyzer.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for logger_module::log_aggregator::source_stats:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="structlogger__module_1_1log__aggregator_1_1source__stats__coll__graph.svg" width="311" height="271"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ad3d0c9d76965afbfd6c9729d6d2494b9" id="r_ad3d0c9d76965afbfd6c9729d6d2494b9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__aggregator_1_1source__stats.html#ad3d0c9d76965afbfd6c9729d6d2494b9">source_id</a></td></tr>
 <tr class="separator:ad3d0c9d76965afbfd6c9729d6d2494b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82d3d8600039c2b9251da6abb8986e43" id="r_a82d3d8600039c2b9251da6abb8986e43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__aggregator_1_1source__stats.html#a82d3d8600039c2b9251da6abb8986e43">total_messages</a> = 0</td></tr>
+<tr class="memitem:a82d3d8600039c2b9251da6abb8986e43" id="r_a82d3d8600039c2b9251da6abb8986e43"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__aggregator_1_1source__stats.html#a82d3d8600039c2b9251da6abb8986e43">total_messages</a> = 0</td></tr>
 <tr class="separator:a82d3d8600039c2b9251da6abb8986e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00ec8e595e0f41d8d28c2cf6802c5656" id="r_a00ec8e595e0f41d8d28c2cf6802c5656"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__aggregator_1_1source__stats.html#a00ec8e595e0f41d8d28c2cf6802c5656">total_bytes</a> = 0</td></tr>
+<tr class="memitem:a00ec8e595e0f41d8d28c2cf6802c5656" id="r_a00ec8e595e0f41d8d28c2cf6802c5656"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__aggregator_1_1source__stats.html#a00ec8e595e0f41d8d28c2cf6802c5656">total_bytes</a> = 0</td></tr>
 <tr class="separator:a00ec8e595e0f41d8d28c2cf6802c5656"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac9d39a18a4b8d18c0ffed26acbf2479" id="r_aac9d39a18a4b8d18c0ffed26acbf2479"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a>, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__aggregator_1_1source__stats.html#aac9d39a18a4b8d18c0ffed26acbf2479">level_counts</a></td></tr>
+<tr class="memitem:aac9d39a18a4b8d18c0ffed26acbf2479" id="r_aac9d39a18a4b8d18c0ffed26acbf2479"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a>, uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__aggregator_1_1source__stats.html#aac9d39a18a4b8d18c0ffed26acbf2479">level_counts</a></td></tr>
 <tr class="separator:aac9d39a18a4b8d18c0ffed26acbf2479"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75c1d3efcbc1509ede1e17ec416c78e6" id="r_a75c1d3efcbc1509ede1e17ec416c78e6"><td class="memItemLeft" align="right" valign="top">std::chrono::system_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__aggregator_1_1source__stats.html#a75c1d3efcbc1509ede1e17ec416c78e6">first_seen</a></td></tr>
 <tr class="separator:a75c1d3efcbc1509ede1e17ec416c78e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a271b358022c40d9deb11cef914c98fd1" id="r_a271b358022c40d9deb11cef914c98fd1"><td class="memItemLeft" align="right" valign="top">std::chrono::system_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__aggregator_1_1source__stats.html#a271b358022c40d9deb11cef914c98fd1">last_seen</a></td></tr>
 <tr class="separator:a271b358022c40d9deb11cef914c98fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b72efc0be20409bb7cf794df3dd52e9" id="r_a9b72efc0be20409bb7cf794df3dd52e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__aggregator_1_1source__stats.html#a9b72efc0be20409bb7cf794df3dd52e9">average_message_rate</a> = 0.0</td></tr>
+<tr class="memitem:a9b72efc0be20409bb7cf794df3dd52e9" id="r_a9b72efc0be20409bb7cf794df3dd52e9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__aggregator_1_1source__stats.html#a9b72efc0be20409bb7cf794df3dd52e9">average_message_rate</a> = 0.0</td></tr>
 <tr class="separator:a9b72efc0be20409bb7cf794df3dd52e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Statistics per log source. </p>
+
+<p class="definition">Definition at line <a class="el" href="log__analyzer_8h_source.html#l00172">172</a> of file <a class="el" href="log__analyzer_8h_source.html">log_analyzer.h</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a9b72efc0be20409bb7cf794df3dd52e9" name="a9b72efc0be20409bb7cf794df3dd52e9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9b72efc0be20409bb7cf794df3dd52e9">&#9670;&#160;</a></span>average_message_rate</h2>
@@ -129,10 +136,12 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">double</a> logger_module::log_aggregator::source_stats::average_message_rate = 0.0</td>
+          <td class="memname">double logger_module::log_aggregator::source_stats::average_message_rate = 0.0</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log__analyzer_8h_source.html#l00179">179</a> of file <a class="el" href="log__analyzer_8h_source.html">log_analyzer.h</a>.</p>
 
 </div>
 </div>
@@ -148,6 +157,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="log__analyzer_8h_source.html#l00177">177</a> of file <a class="el" href="log__analyzer_8h_source.html">log_analyzer.h</a>.</p>
+
 </div>
 </div>
 <a id="a271b358022c40d9deb11cef914c98fd1" name="a271b358022c40d9deb11cef914c98fd1"></a>
@@ -162,6 +173,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="log__analyzer_8h_source.html#l00178">178</a> of file <a class="el" href="log__analyzer_8h_source.html">log_analyzer.h</a>.</p>
+
 </div>
 </div>
 <a id="aac9d39a18a4b8d18c0ffed26acbf2479" name="aac9d39a18a4b8d18c0ffed26acbf2479"></a>
@@ -171,10 +184,12 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a>, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a>&gt; logger_module::log_aggregator::source_stats::level_counts</td>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a>, uint64_t&gt; logger_module::log_aggregator::source_stats::level_counts</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log__analyzer_8h_source.html#l00176">176</a> of file <a class="el" href="log__analyzer_8h_source.html">log_analyzer.h</a>.</p>
 
 </div>
 </div>
@@ -190,6 +205,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="log__analyzer_8h_source.html#l00173">173</a> of file <a class="el" href="log__analyzer_8h_source.html">log_analyzer.h</a>.</p>
+
 </div>
 </div>
 <a id="a00ec8e595e0f41d8d28c2cf6802c5656" name="a00ec8e595e0f41d8d28c2cf6802c5656"></a>
@@ -199,10 +216,12 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> logger_module::log_aggregator::source_stats::total_bytes = 0</td>
+          <td class="memname">uint64_t logger_module::log_aggregator::source_stats::total_bytes = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log__analyzer_8h_source.html#l00175">175</a> of file <a class="el" href="log__analyzer_8h_source.html">log_analyzer.h</a>.</p>
 
 </div>
 </div>
@@ -213,15 +232,17 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">uint64_t</a> logger_module::log_aggregator::source_stats::total_messages = 0</td>
+          <td class="memname">uint64_t logger_module::log_aggregator::source_stats::total_messages = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="log__analyzer_8h_source.html#l00174">174</a> of file <a class="el" href="log__analyzer_8h_source.html">log_analyzer.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="log__analyzer_8h_source.html">log_analyzer.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/analysis/<a class="el" href="log__analyzer_8h_source.html">log_analyzer.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -229,7 +250,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1log__aggregator.html">log_aggregator</a></li><li class="navelem"><a class="el" href="structlogger__module_1_1log__aggregator_1_1source__stats.html">source_stats</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

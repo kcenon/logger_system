@@ -40,7 +40,7 @@
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="classlogger__module_1_1base__writer.html" target="_top" xlink:title="Base class for all log writers.">
+<g id="a_Node000003"><a xlink:href="classlogger__module_1_1base__writer.html" target="_top" xlink:title="Abstract base class for all log output writers.">
 <polygon fill="white" stroke="#666666" points="126.5,-162 7.5,-162 7.5,-132 126.5,-132 126.5,-162"/>
 <text text-anchor="start" x="15.5" y="-150" font-family="Helvetica,sans-Serif" font-size="10.00">logger_module::base</text>
 <text text-anchor="middle" x="67" y="-139" font-family="Helvetica,sans-Serif" font-size="10.00">_writer</text>

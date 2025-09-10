@@ -1,7 +1,8 @@
 var namespacethread__module =
 [
     [ "logger_interface", "classthread__module_1_1logger__interface.html", "classthread__module_1_1logger__interface" ],
-    [ "logger_registry", "classthread__module_1_1logger__registry.html", null ],
+    [ "logger_registry", "classthread__module_1_1logger__registry.html", "classthread__module_1_1logger__registry" ],
+    [ "log_level", "namespacethread__module.html#a16934debdcde043cf85f553b57183807", null ],
     [ "log_level", "namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288", [
       [ "critical", "namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288a7e85bcb66fb9a809d5ab4f62a8b8bea8", null ],
       [ "error", "namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288acb5e100e5a9a3e7f6d1fd97512215282", null ],

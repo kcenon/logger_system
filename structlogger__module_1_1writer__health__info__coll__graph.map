@@ -1,0 +1,10 @@
+<map id="logger_module::writer_health_info" name="logger_module::writer_health_info">
+<area shape="rect" id="Node000001" title="Writer health information." alt="" coords="5,271,171,311"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="45,95,131,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,134,81,183,82,230,87,270,82,271,77,230,76,183,81,133"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="177,183,364,208"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="126,124,247,180,245,185,124,128"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="19,5,157,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,59,91,94,85,94,85,59"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="237,217,126,273,124,268,235,212"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="logger_module::log_analyzer::time_window_stats" name="logger_module::log_analyzer::time_window_stats">
+<area shape="rect" id="Node000001" title="Statistics for a time window." alt="" coords="704,50,923,90"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="371,5,533,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="547,40,704,56,704,61,546,45"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="196,20,277,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="291,30,370,30,370,35,291,35"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="363,85,541,125"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="555,101,680,93,716,87,717,93,680,98,556,106"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="193,92,280,117"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="294,102,363,102,363,107,294,107"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="5,85,144,125"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="157,102,193,102,193,107,157,107"/>
+</map>

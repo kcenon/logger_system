@@ -11,10 +11,10 @@
 <!-- Node0 -->
 <g id="Node000000" class="node">
 <title>Node0</title>
-<g id="a_Node000000"><a xlink:href="structlogger__module_1_1log__entry.html" target="_top" xlink:title="Represents a single log entry.">
+<g id="a_Node000000"><a xlink:href="classlogger__module_1_1log__collector_1_1impl.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="110,-30 0,-30 0,0 110,0 110,-30"/>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">logger_module::log</text>
-<text text-anchor="middle" x="55" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_entry</text>
+<text text-anchor="middle" x="55" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_collector::impl</text>
 </a>
 </g>
 </g>

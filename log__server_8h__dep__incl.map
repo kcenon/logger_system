@@ -1,5 +1,5 @@
-<map id="log_server.h" name="log_server.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="13,5,114,31"/>
-<area shape="rect" id="Node000002" href="$log__server_8cpp.html" title=" " alt="" coords="5,79,121,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,44,66,79,61,79,61,44"/>
+<map id="/home/runner/work/logger_system/logger_system/sources/logger/server/log_server.h" name="/home/runner/work/logger_system/logger_system/sources/logger/server/log_server.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,236,60"/>
+<area shape="rect" id="Node000002" href="$log__server_8cpp.html" title=" " alt="" coords="5,108,236,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,74,123,108,118,108,118,74"/>
 </map>

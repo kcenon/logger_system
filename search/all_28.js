@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['🚀_20getting_20started_0',['🚀 Getting Started',['../md_ARCHITECTURE.html#autotoc_md81',1,'']]],
-  ['🚀_20recent_20improvements_1',['🚀 Recent Improvements',['../index.html#autotoc_md2',1,'']]]
+  ['📚_20documentation_20structure_0',['📚 Documentation Structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html#autotoc_md85',1,'']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::log_writer_interface Interface Reference</title>
+<title>Logger System: logger_module::log_writer_interface Interface Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -104,29 +104,31 @@ $(document).ready(function(){initNavTree('classlogger__module_1_1log__writer__in
 <div class="dynheader">
 Inheritance diagram for logger_module::log_writer_interface:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classlogger__module_1_1log__writer__interface__inherit__graph.svg" width="831" height="307"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classlogger__module_1_1log__writer__interface__inherit__graph.svg" width="831" height="371"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a19c46930bbeb35f63c76c565703ab35b" id="r_a19c46930bbeb35f63c76c565703ab35b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__writer__interface.html#a19c46930bbeb35f63c76c565703ab35b">~log_writer_interface</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
+<tr class="memitem:a19c46930bbeb35f63c76c565703ab35b" id="r_a19c46930bbeb35f63c76c565703ab35b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__writer__interface.html#a19c46930bbeb35f63c76c565703ab35b">~log_writer_interface</a> ()=default</td></tr>
 <tr class="separator:a19c46930bbeb35f63c76c565703ab35b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ab1ce565b731e06d1fec66588d420bf" id="r_a9ab1ce565b731e06d1fec66588d420bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__writer__interface.html#a9ab1ce565b731e06d1fec66588d420bf">write</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">entry</a>)=0</td></tr>
+<tr class="memitem:a9ab1ce565b731e06d1fec66588d420bf" id="r_a9ab1ce565b731e06d1fec66588d420bf"><td class="memItemLeft" align="right" valign="top">virtual result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__writer__interface.html#a9ab1ce565b731e06d1fec66588d420bf">write</a> (const <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;entry)=0</td></tr>
 <tr class="memdesc:a9ab1ce565b731e06d1fec66588d420bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a log entry.  <br /></td></tr>
 <tr class="separator:a9ab1ce565b731e06d1fec66588d420bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c55387feecd6c3736c801c5c241f5c1" id="r_a1c55387feecd6c3736c801c5c241f5c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__writer__interface.html#a1c55387feecd6c3736c801c5c241f5c1">flush</a> ()=0</td></tr>
+<tr class="memitem:a1c55387feecd6c3736c801c5c241f5c1" id="r_a1c55387feecd6c3736c801c5c241f5c1"><td class="memItemLeft" align="right" valign="top">virtual result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__writer__interface.html#a1c55387feecd6c3736c801c5c241f5c1">flush</a> ()=0</td></tr>
 <tr class="memdesc:a1c55387feecd6c3736c801c5c241f5c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush any buffered data.  <br /></td></tr>
 <tr class="separator:a1c55387feecd6c3736c801c5c241f5c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a59e75435e22f6a1bc8a5b466b56f51" id="r_a9a59e75435e22f6a1bc8a5b466b56f51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__writer__interface.html#a9a59e75435e22f6a1bc8a5b466b56f51">get_name</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> =0</td></tr>
+<tr class="memitem:a9a59e75435e22f6a1bc8a5b466b56f51" id="r_a9a59e75435e22f6a1bc8a5b466b56f51"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__writer__interface.html#a9a59e75435e22f6a1bc8a5b466b56f51">get_name</a> () const =0</td></tr>
 <tr class="memdesc:a9a59e75435e22f6a1bc8a5b466b56f51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of this writer.  <br /></td></tr>
 <tr class="separator:a9a59e75435e22f6a1bc8a5b466b56f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d937bfc940a7d5d1dcd254d5c100e5d" id="r_a1d937bfc940a7d5d1dcd254d5c100e5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__writer__interface.html#a1d937bfc940a7d5d1dcd254d5c100e5d">is_healthy</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> =0</td></tr>
+<tr class="memitem:a1d937bfc940a7d5d1dcd254d5c100e5d" id="r_a1d937bfc940a7d5d1dcd254d5c100e5d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1log__writer__interface.html#a1d937bfc940a7d5d1dcd254d5c100e5d">is_healthy</a> () const =0</td></tr>
 <tr class="memdesc:a1d937bfc940a7d5d1dcd254d5c100e5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the writer is healthy.  <br /></td></tr>
 <tr class="separator:a1d937bfc940a7d5d1dcd254d5c100e5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for log writers. </p>
 <p>This interface defines the contract for all log writers. Follows the Single Responsibility Principle - only responsible for writing logs. </p>
+
+<p class="definition">Definition at line <a class="el" href="log__writer__interface_8h_source.html#l00026">26</a> of file <a class="el" href="log__writer__interface_8h_source.html">log_writer_interface.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a19c46930bbeb35f63c76c565703ab35b" name="a19c46930bbeb35f63c76c565703ab35b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a19c46930bbeb35f63c76c565703ab35b">&#9670;&#160;</a></span>~log_writer_interface()</h2>
@@ -138,7 +140,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> logger_module::log_writer_interface::~log_writer_interface </td>
+          <td class="memname">virtual logger_module::log_writer_interface::~log_writer_interface </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -164,7 +166,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a> logger_module::log_writer_interface::flush </td>
+          <td class="memname">virtual result_void logger_module::log_writer_interface::flush </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -178,9 +180,9 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Flush any buffered data. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classlogger__module_1_1result__void.html">result_void</a> indicating success or failure </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>result_void indicating success or failure </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1batch__writer.html#a36d0b1585f2ff8352b396f262ac9627d">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#ae9ff291bb306ff666955a81786df886b">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#ad3b9529e7afa5698f09103438b876781">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#a1a5839765576baf3ce9f64cb98b12472">logger_module::file_writer</a>, <a class="el" href="classlogger__module_1_1network__writer.html#afdc8daeaa343b9606a735585e2386549">logger_module::network_writer</a>, and <a class="el" href="classlogger__module_1_1base__writer.html#aa8bf045875ea4ab77588d937cd0c133a">logger_module::base_writer</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1async__writer.html#a3cda76e268bd484280e1335ed1c0da8e">logger_module::async_writer</a>, <a class="el" href="classlogger__module_1_1batch__writer.html#a36d0b1585f2ff8352b396f262ac9627d">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#ae9ff291bb306ff666955a81786df886b">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#ad3b9529e7afa5698f09103438b876781">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#a1a5839765576baf3ce9f64cb98b12472">logger_module::file_writer</a>, <a class="el" href="classlogger__module_1_1network__writer.html#afdc8daeaa343b9606a735585e2386549">logger_module::network_writer</a>, and <a class="el" href="classlogger__module_1_1base__writer.html#aa8bf045875ea4ab77588d937cd0c133a">logger_module::base_writer</a>.</p>
 
 </div>
 </div>
@@ -194,7 +196,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> std::string logger_module::log_writer_interface::get_name </td>
+          <td class="memname">virtual std::string logger_module::log_writer_interface::get_name </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -210,7 +212,7 @@ Public Member Functions</h2></td></tr>
 <p>Get the name of this writer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Writer name for identification </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1batch__writer.html#a1ed45e5aab439715f9812a2f20bada6c">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#a93c2a67e504814a0d6bd68729afc4918">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#a997a92e2beed9924e63525d5f521e5a6">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#a9513976717dc1f6efe1eebb59e18b712">logger_module::file_writer</a>, <a class="el" href="classlogger__module_1_1network__writer.html#a2722f0df78d2fd3e08af1d8b69453707">logger_module::network_writer</a>, <a class="el" href="classlogger__module_1_1rotating__file__writer.html#ac7a68dc3fc61c829ae11dc1eaa75e276">logger_module::rotating_file_writer</a>, and <a class="el" href="classlogger__module_1_1base__writer.html#a3db3e79bcecd99ca156720758049f69f">logger_module::base_writer</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1async__writer.html#a50b3e5511d802eed1694fe7350ee5150">logger_module::async_writer</a>, <a class="el" href="classlogger__module_1_1batch__writer.html#a1ed45e5aab439715f9812a2f20bada6c">logger_module::batch_writer</a>, <a class="el" href="classlogger__module_1_1console__writer.html#a93c2a67e504814a0d6bd68729afc4918">logger_module::console_writer</a>, <a class="el" href="classlogger__module_1_1encrypted__writer.html#a997a92e2beed9924e63525d5f521e5a6">logger_module::encrypted_writer</a>, <a class="el" href="classlogger__module_1_1file__writer.html#a9513976717dc1f6efe1eebb59e18b712">logger_module::file_writer</a>, <a class="el" href="classlogger__module_1_1network__writer.html#a2722f0df78d2fd3e08af1d8b69453707">logger_module::network_writer</a>, <a class="el" href="classlogger__module_1_1rotating__file__writer.html#ac7a68dc3fc61c829ae11dc1eaa75e276">logger_module::rotating_file_writer</a>, and <a class="el" href="classlogger__module_1_1base__writer.html#a3db3e79bcecd99ca156720758049f69f">logger_module::base_writer</a>.</p>
 
 </div>
 </div>
@@ -224,7 +226,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> logger_module::log_writer_interface::is_healthy </td>
+          <td class="memname">virtual bool logger_module::log_writer_interface::is_healthy </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -240,7 +242,7 @@ Public Member Functions</h2></td></tr>
 <p>Check if the writer is healthy. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the writer is operational </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1base__writer.html#a53205ddc8b9c43c6c092e737e8ccdd9c">logger_module::base_writer</a>, and <a class="el" href="classlogger__module_1_1batch__writer.html#a88275f51090a6711395ba34179fe166b">logger_module::batch_writer</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1async__writer.html#a5b9953551998f219962ae4f140ab1672">logger_module::async_writer</a>, <a class="el" href="classlogger__module_1_1base__writer.html#a53205ddc8b9c43c6c092e737e8ccdd9c">logger_module::base_writer</a>, and <a class="el" href="classlogger__module_1_1batch__writer.html#a88275f51090a6711395ba34179fe166b">logger_module::batch_writer</a>.</p>
 
 </div>
 </div>
@@ -254,9 +256,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a> logger_module::log_writer_interface::write </td>
+          <td class="memname">virtual result_void logger_module::log_writer_interface::write </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;&#160;</td>
           <td class="paramname"><em>entry</em></td><td>)</td>
           <td></td>
         </tr>
@@ -275,14 +277,14 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classlogger__module_1_1result__void.html">result_void</a> indicating success or failure </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>result_void indicating success or failure </dd></dl>
 
 <p>Implemented in <a class="el" href="classlogger__module_1_1base__writer.html#a23076abfb99a7c2f26a6f0736bbf33c5">logger_module::base_writer</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this interface was generated from the following file:<ul>
-<li><a class="el" href="log__writer__interface_8h_source.html">log_writer_interface.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/interfaces/<a class="el" href="log__writer__interface_8h_source.html">log_writer_interface.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -290,7 +292,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1log__writer__interface.html">log_writer_interface</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

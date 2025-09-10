@@ -10,5 +10,6 @@ var classlogger__module_1_1performance__tuning__strategy =
     [ "can_apply", "classlogger__module_1_1performance__tuning__strategy.html#aaa3e63ac27c8ea6e5261d79e8f78f8dd", null ],
     [ "get_description", "classlogger__module_1_1performance__tuning__strategy.html#a818f4de16d8a1b5e8d98b7e9cb09cbfb", null ],
     [ "get_name", "classlogger__module_1_1performance__tuning__strategy.html#aa8baa971f5e5659a01c98da92dda3541", null ],
-    [ "get_priority", "classlogger__module_1_1performance__tuning__strategy.html#aebcf426a52f83faa90d87bb0f3f15793", null ]
+    [ "get_priority", "classlogger__module_1_1performance__tuning__strategy.html#aebcf426a52f83faa90d87bb0f3f15793", null ],
+    [ "should_override", "classlogger__module_1_1performance__tuning__strategy.html#ab0f6f134b308b7db329b27ef2f76790c", null ]
 ];

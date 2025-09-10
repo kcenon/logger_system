@@ -1,5 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classthread__module_1_1logger__interface.html" title="Logger interface for thread system." alt="" coords="5,5,175,45"/>
-<area shape="rect" id="Node000001" href="$classlogger__module_1_1logger.html" title="Main logger implementation that implements thread_system&#39;s logger_interface." alt="" coords="223,13,391,38"/>
-<area shape="poly" id="edge31_Node000000_Node000001" title=" " alt="" coords="188,23,223,23,223,28,188,28"/>
+<area shape="rect" id="Node000000" href="$structlogger__system_1_1template__config.html" title="Template configuration settings." alt="" coords="5,5,191,45"/>
 </map>

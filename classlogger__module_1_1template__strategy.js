@@ -12,5 +12,6 @@ var classlogger__module_1_1template__strategy =
     [ "can_apply", "classlogger__module_1_1template__strategy.html#a6c230525e2f3c57fbfe1984145224272", null ],
     [ "get_description", "classlogger__module_1_1template__strategy.html#a0c70ecc45dbd8cc4d1b12581069d836e", null ],
     [ "get_name", "classlogger__module_1_1template__strategy.html#a10fce2748d83525c5a32b6d823fa8e7b", null ],
+    [ "get_priority", "classlogger__module_1_1template__strategy.html#ad5b4a14651f39ee0879819d443e07a2c", null ],
     [ "should_override", "classlogger__module_1_1template__strategy.html#ab6422f7cdd388b4a980b8461512501a2", null ]
 ];

@@ -1,8 +1,10 @@
-<map id="logger_config.h" name="logger_config.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="112,5,233,31"/>
-<area shape="rect" id="Node000002" href="$config__strategy__interface_8h.html" title=" " alt="" coords="5,79,204,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,42,118,80,114,77,150,39"/>
-<area shape="rect" id="Node000003" href="$logger__builder_8h.html" title=" " alt="" coords="109,152,236,177"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="195,39,208,57,218,78,219,100,212,121,187,153,183,150,207,118,214,99,213,79,204,60,191,43"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="127,112,164,150,160,154,123,116"/>
+<map id="/home/runner/work/logger_system/logger_system/sources/logger/config/logger_config.h" name="/home/runner/work/logger_system/logger_system/sources/logger/config/logger_config.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="81,5,312,60"/>
+<area shape="rect" id="Node000002" href="$config__strategy__interface_8h.html" title=" " alt="" coords="5,108,236,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,73,147,109,142,106,168,70"/>
+<area shape="rect" id="Node000003" href="$logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration." alt="" coords="81,225,312,280"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="232,70,251,107,258,143,251,178,239,204,223,227,219,224,235,201,246,177,253,143,246,109,227,72"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="154,187,180,224,176,227,150,190"/>
+<area shape="rect" id="Node000004" href="$logger__v1__compat_8h.html" title="Compatibility wrapper for Logger System v1.x API." alt="" coords="81,328,312,397"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="199,294,199,328,194,328,194,294"/>
 </map>

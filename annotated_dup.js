@@ -1,8 +1,12 @@
 var annotated_dup =
 [
     [ "logger_module", "namespacelogger__module.html", [
+      [ "v1_compat", "namespacelogger__module_1_1v1__compat.html", [
+        [ "logger_config_v1", "structlogger__module_1_1v1__compat_1_1logger__config__v1.html", "structlogger__module_1_1v1__compat_1_1logger__config__v1" ]
+      ] ],
       [ "access_control_filter", "classlogger__module_1_1access__control__filter.html", "classlogger__module_1_1access__control__filter" ],
       [ "adaptive_backpressure", "classlogger__module_1_1adaptive__backpressure.html", "classlogger__module_1_1adaptive__backpressure" ],
+      [ "async_writer", "classlogger__module_1_1async__writer.html", "classlogger__module_1_1async__writer" ],
       [ "base_formatter", "classlogger__module_1_1base__formatter.html", "classlogger__module_1_1base__formatter" ],
       [ "base_writer", "classlogger__module_1_1base__writer.html", "classlogger__module_1_1base__writer" ],
       [ "basic_monitor", "classlogger__module_1_1basic__monitor.html", "classlogger__module_1_1basic__monitor" ],
@@ -12,7 +16,7 @@ var annotated_dup =
       [ "compact_formatter", "classlogger__module_1_1compact__formatter.html", "classlogger__module_1_1compact__formatter" ],
       [ "composite_filter", "classlogger__module_1_1composite__filter.html", "classlogger__module_1_1composite__filter" ],
       [ "composite_strategy", "classlogger__module_1_1composite__strategy.html", "classlogger__module_1_1composite__strategy" ],
-      [ "config_strategy_factory", "classlogger__module_1_1config__strategy__factory.html", null ],
+      [ "config_strategy_factory", "classlogger__module_1_1config__strategy__factory.html", "classlogger__module_1_1config__strategy__factory" ],
       [ "config_strategy_interface", "classlogger__module_1_1config__strategy__interface.html", "classlogger__module_1_1config__strategy__interface" ],
       [ "console_writer", "classlogger__module_1_1console__writer.html", "classlogger__module_1_1console__writer" ],
       [ "custom_overflow_policy", "classlogger__module_1_1custom__overflow__policy.html", "classlogger__module_1_1custom__overflow__policy" ],
@@ -28,9 +32,10 @@ var annotated_dup =
       [ "health_check_criteria", "structlogger__module_1_1health__check__criteria.html", "structlogger__module_1_1health__check__criteria" ],
       [ "health_check_result", "classlogger__module_1_1health__check__result.html", "classlogger__module_1_1health__check__result" ],
       [ "health_check_system", "classlogger__module_1_1health__check__system.html", "classlogger__module_1_1health__check__system" ],
-      [ "health_check_utils", "classlogger__module_1_1health__check__utils.html", null ],
+      [ "health_check_utils", "classlogger__module_1_1health__check__utils.html", "classlogger__module_1_1health__check__utils" ],
       [ "json_formatter", "classlogger__module_1_1json__formatter.html", "classlogger__module_1_1json__formatter" ],
       [ "level_filter", "classlogger__module_1_1level__filter.html", "classlogger__module_1_1level__filter" ],
+      [ "lightweight_container", "classlogger__module_1_1lightweight__container.html", "classlogger__module_1_1lightweight__container" ],
       [ "lightweight_di_container", "classlogger__module_1_1lightweight__di__container.html", "classlogger__module_1_1lightweight__di__container" ],
       [ "log_aggregator", "classlogger__module_1_1log__aggregator.html", "classlogger__module_1_1log__aggregator" ],
       [ "log_analyzer", "classlogger__module_1_1log__analyzer.html", "classlogger__module_1_1log__analyzer" ],
@@ -55,7 +60,7 @@ var annotated_dup =
       [ "monitoring_interface", "classlogger__module_1_1monitoring__interface.html", "classlogger__module_1_1monitoring__interface" ],
       [ "network_writer", "classlogger__module_1_1network__writer.html", "classlogger__module_1_1network__writer" ],
       [ "overflow_policy_base", "classlogger__module_1_1overflow__policy__base.html", "classlogger__module_1_1overflow__policy__base" ],
-      [ "overflow_policy_factory", "classlogger__module_1_1overflow__policy__factory.html", null ],
+      [ "overflow_policy_factory", "classlogger__module_1_1overflow__policy__factory.html", "classlogger__module_1_1overflow__policy__factory" ],
       [ "overflow_queue", "classlogger__module_1_1overflow__queue.html", "classlogger__module_1_1overflow__queue" ],
       [ "overflow_stats", "structlogger__module_1_1overflow__stats.html", "structlogger__module_1_1overflow__stats" ],
       [ "performance_metrics", "structlogger__module_1_1performance__metrics.html", "structlogger__module_1_1performance__metrics" ],
@@ -63,24 +68,26 @@ var annotated_dup =
       [ "plain_formatter", "classlogger__module_1_1plain__formatter.html", "classlogger__module_1_1plain__formatter" ],
       [ "queue_health_info", "structlogger__module_1_1queue__health__info.html", "structlogger__module_1_1queue__health__info" ],
       [ "regex_filter", "classlogger__module_1_1regex__filter.html", "classlogger__module_1_1regex__filter" ],
-      [ "result", "classlogger__module_1_1result.html", "classlogger__module_1_1result" ],
-      [ "result_void", "classlogger__module_1_1result__void.html", "classlogger__module_1_1result__void" ],
       [ "rotating_file_writer", "classlogger__module_1_1rotating__file__writer.html", "classlogger__module_1_1rotating__file__writer" ],
       [ "router_builder", "classlogger__module_1_1router__builder.html", "classlogger__module_1_1router__builder" ],
       [ "sanitizing_filter", "classlogger__module_1_1sanitizing__filter.html", "classlogger__module_1_1sanitizing__filter" ],
       [ "scoped_health_registration", "classlogger__module_1_1scoped__health__registration.html", "classlogger__module_1_1scoped__health__registration" ],
       [ "small_string", "classlogger__module_1_1small__string.html", "classlogger__module_1_1small__string" ],
       [ "source_location", "structlogger__module_1_1source__location.html", "structlogger__module_1_1source__location" ],
-      [ "standard_fields", "structlogger__module_1_1standard__fields.html", null ],
+      [ "standard_fields", "structlogger__module_1_1standard__fields.html", "structlogger__module_1_1standard__fields" ],
       [ "structured_log_entry", "classlogger__module_1_1structured__log__entry.html", "classlogger__module_1_1structured__log__entry" ],
       [ "structured_logger", "classlogger__module_1_1structured__logger.html", "classlogger__module_1_1structured__logger" ],
       [ "template_strategy", "classlogger__module_1_1template__strategy.html", "classlogger__module_1_1template__strategy" ],
+      [ "thread_system_di_adapter", "classlogger__module_1_1thread__system__di__adapter.html", "classlogger__module_1_1thread__system__di__adapter" ],
       [ "thread_system_monitor_adapter", "classlogger__module_1_1thread__system__monitor__adapter.html", "classlogger__module_1_1thread__system__monitor__adapter" ],
       [ "writer_health_info", "structlogger__module_1_1writer__health__info.html", "structlogger__module_1_1writer__health__info" ],
       [ "writer_metrics", "structlogger__module_1_1writer__metrics.html", "structlogger__module_1_1writer__metrics" ]
     ] ],
+    [ "logger_system", "namespacelogger__system.html", [
+      [ "template_config", "structlogger__system_1_1template__config.html", "structlogger__system_1_1template__config" ]
+    ] ],
     [ "thread_module", "namespacethread__module.html", [
       [ "logger_interface", "classthread__module_1_1logger__interface.html", "classthread__module_1_1logger__interface" ],
-      [ "logger_registry", "classthread__module_1_1logger__registry.html", null ]
+      [ "logger_registry", "classthread__module_1_1logger__registry.html", "classthread__module_1_1logger__registry" ]
     ] ]
 ];

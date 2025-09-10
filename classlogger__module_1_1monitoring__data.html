@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::monitoring_data Class Reference</title>
+<title>Logger System: logger_module::monitoring_data Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -106,27 +106,29 @@ $(document).ready(function(){initNavTree('classlogger__module_1_1monitoring__dat
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a005d9ec74104f75d3071b2570cda20a3" id="r_a005d9ec74104f75d3071b2570cda20a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#a005d9ec74104f75d3071b2570cda20a3">monitoring_data</a> ()</td></tr>
 <tr class="separator:a005d9ec74104f75d3071b2570cda20a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a290380a420e9828a6f02a78127e00e46" id="r_a290380a420e9828a6f02a78127e00e46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#a290380a420e9828a6f02a78127e00e46">add_metric</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">double</a> value, <a class="el" href="namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565d">metric_type</a> type=<a class="el" href="namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565da37e1a9c3ba6042b79266687d13f3c5ff">metric_type::gauge</a>)</td></tr>
+<tr class="memitem:a290380a420e9828a6f02a78127e00e46" id="r_a290380a420e9828a6f02a78127e00e46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#a290380a420e9828a6f02a78127e00e46">add_metric</a> (const std::string &amp;name, double value, <a class="el" href="namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565d">metric_type</a> type=<a class="el" href="namespacelogger__module.html#a2bc7249b271a8f65e2cb169bf76a565da37e1a9c3ba6042b79266687d13f3c5ff">metric_type::gauge</a>)</td></tr>
 <tr class="memdesc:a290380a420e9828a6f02a78127e00e46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a metric to the collection.  <br /></td></tr>
 <tr class="separator:a290380a420e9828a6f02a78127e00e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a636de7d147be487a60d42c79e0a64676" id="r_a636de7d147be487a60d42c79e0a64676"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#a636de7d147be487a60d42c79e0a64676">add_metric</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1metric__value.html">metric_value</a> &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">metric</a>)</td></tr>
+<tr class="memitem:a636de7d147be487a60d42c79e0a64676" id="r_a636de7d147be487a60d42c79e0a64676"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#a636de7d147be487a60d42c79e0a64676">add_metric</a> (const <a class="el" href="structlogger__module_1_1metric__value.html">metric_value</a> &amp;metric)</td></tr>
 <tr class="memdesc:a636de7d147be487a60d42c79e0a64676"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a pre-built metric.  <br /></td></tr>
 <tr class="separator:a636de7d147be487a60d42c79e0a64676"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44dc6bd5763932ce4d729b31c1dc3000" id="r_a44dc6bd5763932ce4d729b31c1dc3000"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::vector&lt; <a class="el" href="structlogger__module_1_1metric__value.html">metric_value</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#a44dc6bd5763932ce4d729b31c1dc3000">get_metrics</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:a44dc6bd5763932ce4d729b31c1dc3000" id="r_a44dc6bd5763932ce4d729b31c1dc3000"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="structlogger__module_1_1metric__value.html">metric_value</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#a44dc6bd5763932ce4d729b31c1dc3000">get_metrics</a> () const</td></tr>
 <tr class="memdesc:a44dc6bd5763932ce4d729b31c1dc3000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all metrics.  <br /></td></tr>
 <tr class="separator:a44dc6bd5763932ce4d729b31c1dc3000"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfa0a02e99ebb8c7ad1fb98cc8291d08" id="r_acfa0a02e99ebb8c7ad1fb98cc8291d08"><td class="memItemLeft" align="right" valign="top">std::chrono::system_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#acfa0a02e99ebb8c7ad1fb98cc8291d08">get_collection_time</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:acfa0a02e99ebb8c7ad1fb98cc8291d08" id="r_acfa0a02e99ebb8c7ad1fb98cc8291d08"><td class="memItemLeft" align="right" valign="top">std::chrono::system_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#acfa0a02e99ebb8c7ad1fb98cc8291d08">get_collection_time</a> () const</td></tr>
 <tr class="memdesc:acfa0a02e99ebb8c7ad1fb98cc8291d08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get collection timestamp.  <br /></td></tr>
 <tr class="separator:acfa0a02e99ebb8c7ad1fb98cc8291d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc8829bcfd70a51c3d1c6b244ac64272" id="r_afc8829bcfd70a51c3d1c6b244ac64272"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#afc8829bcfd70a51c3d1c6b244ac64272">clear</a> ()</td></tr>
+<tr class="memitem:afc8829bcfd70a51c3d1c6b244ac64272" id="r_afc8829bcfd70a51c3d1c6b244ac64272"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#afc8829bcfd70a51c3d1c6b244ac64272">clear</a> ()</td></tr>
 <tr class="memdesc:afc8829bcfd70a51c3d1c6b244ac64272"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all metrics.  <br /></td></tr>
 <tr class="separator:afc8829bcfd70a51c3d1c6b244ac64272"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebaf0d4af1c0b6843f0a7709b272bb38" id="r_aebaf0d4af1c0b6843f0a7709b272bb38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#aebaf0d4af1c0b6843f0a7709b272bb38">size</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:aebaf0d4af1c0b6843f0a7709b272bb38" id="r_aebaf0d4af1c0b6843f0a7709b272bb38"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1monitoring__data.html#aebaf0d4af1c0b6843f0a7709b272bb38">size</a> () const</td></tr>
 <tr class="memdesc:aebaf0d4af1c0b6843f0a7709b272bb38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of metrics.  <br /></td></tr>
 <tr class="separator:aebaf0d4af1c0b6843f0a7709b272bb38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Collection of metrics. </p>
+
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00068">68</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a005d9ec74104f75d3071b2570cda20a3" name="a005d9ec74104f75d3071b2570cda20a3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a005d9ec74104f75d3071b2570cda20a3">&#9670;&#160;</a></span>monitoring_data()</h2>
@@ -151,6 +153,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00074">74</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -164,9 +168,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::monitoring_data::add_metric </td>
+          <td class="memname">void logger_module::monitoring_data::add_metric </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1metric__value.html">metric_value</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structlogger__module_1_1metric__value.html">metric_value</a> &amp;&#160;</td>
           <td class="paramname"><em>metric</em></td><td>)</td>
           <td></td>
         </tr>
@@ -186,6 +190,8 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00091">91</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
+
 </div>
 </div>
 <a id="a290380a420e9828a6f02a78127e00e46" name="a290380a420e9828a6f02a78127e00e46"></a>
@@ -198,15 +204,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::monitoring_data::add_metric </td>
+          <td class="memname">void logger_module::monitoring_data::add_metric </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">double</a>&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>value</em>, </td>
         </tr>
         <tr>
@@ -238,6 +244,10 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00082">82</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="basic__monitor_8h_source.html#l00084">logger_module::basic_monitor::collect_metrics()</a>, and <a class="el" href="thread__system__monitor__adapter_8h_source.html#l00076">logger_module::thread_system_monitor_adapter::collect_metrics()</a>.</p>
+
 </div>
 </div>
 <a id="afc8829bcfd70a51c3d1c6b244ac64272" name="afc8829bcfd70a51c3d1c6b244ac64272"></a>
@@ -250,7 +260,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> logger_module::monitoring_data::clear </td>
+          <td class="memname">void logger_module::monitoring_data::clear </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -264,6 +274,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Clear all metrics. </p>
+
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00114">114</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
 
 </div>
 </div>
@@ -293,6 +305,8 @@ Public Member Functions</h2></td></tr>
 <p>Get collection timestamp. </p>
 <dl class="section return"><dt>Returns</dt><dd>Time when metrics were collected </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00107">107</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
+
 </div>
 </div>
 <a id="a44dc6bd5763932ce4d729b31c1dc3000" name="a44dc6bd5763932ce4d729b31c1dc3000"></a>
@@ -305,7 +319,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::vector&lt; <a class="el" href="structlogger__module_1_1metric__value.html">metric_value</a> &gt; &amp; logger_module::monitoring_data::get_metrics </td>
+          <td class="memname">const std::vector&lt; <a class="el" href="structlogger__module_1_1metric__value.html">metric_value</a> &gt; &amp; logger_module::monitoring_data::get_metrics </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -321,6 +335,8 @@ Public Member Functions</h2></td></tr>
 <p>Get all metrics. </p>
 <dl class="section return"><dt>Returns</dt><dd>Vector of metrics </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00099">99</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
+
 </div>
 </div>
 <a id="aebaf0d4af1c0b6843f0a7709b272bb38" name="aebaf0d4af1c0b6843f0a7709b272bb38"></a>
@@ -333,7 +349,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> logger_module::monitoring_data::size </td>
+          <td class="memname">size_t logger_module::monitoring_data::size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -349,10 +365,12 @@ Public Member Functions</h2></td></tr>
 <p>Get number of metrics. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of metrics in collection </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="monitoring__interface_8h_source.html#l00122">122</a> of file <a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/monitoring/<a class="el" href="monitoring__interface_8h_source.html">monitoring_interface.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -360,7 +378,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1monitoring__data.html">monitoring_data</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

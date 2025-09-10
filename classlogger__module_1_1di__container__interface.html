@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::di_container_interface&lt; T &gt; Class Template Reference</title>
+<title>Logger System: logger_module::di_container_interface&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -104,35 +104,35 @@ $(document).ready(function(){initNavTree('classlogger__module_1_1di__container__
 <div class="dynheader">
 Inheritance diagram for logger_module::di_container_interface&lt; T &gt;:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classlogger__module_1_1di__container__interface__inherit__graph.svg" width="218" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classlogger__module_1_1di__container__interface__inherit__graph.svg" width="466" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a43f9942813e7c0f1f07b6b56c5594d2c" id="r_a43f9942813e7c0f1f07b6b56c5594d2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#a43f9942813e7c0f1f07b6b56c5594d2c">~di_container_interface</a> ()=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">default</a></td></tr>
+<tr class="memitem:a43f9942813e7c0f1f07b6b56c5594d2c" id="r_a43f9942813e7c0f1f07b6b56c5594d2c"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#a43f9942813e7c0f1f07b6b56c5594d2c">~di_container_interface</a> ()=default</td></tr>
 <tr class="memdesc:a43f9942813e7c0f1f07b6b56c5594d2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:a43f9942813e7c0f1f07b6b56c5594d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27d2bc344e3610abf70a81b32070f49f" id="r_a27d2bc344e3610abf70a81b32070f49f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result.html">result</a>&lt; std::shared_ptr&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#a27d2bc344e3610abf70a81b32070f49f">resolve</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name)=0</td></tr>
+<tr class="memitem:a27d2bc344e3610abf70a81b32070f49f" id="r_a27d2bc344e3610abf70a81b32070f49f"><td class="memItemLeft" align="right" valign="top">virtual result&lt; std::shared_ptr&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#a27d2bc344e3610abf70a81b32070f49f">resolve</a> (const std::string &amp;name)=0</td></tr>
 <tr class="memdesc:a27d2bc344e3610abf70a81b32070f49f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve a component by name.  <br /></td></tr>
 <tr class="separator:a27d2bc344e3610abf70a81b32070f49f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bfc958f7e5d8558b683b39fd7075966" id="r_a2bfc958f7e5d8558b683b39fd7075966"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#a2bfc958f7e5d8558b683b39fd7075966">register_factory</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name, std::function&lt; std::shared_ptr&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;()&gt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">factory</a>)=0</td></tr>
+<tr class="memitem:a2bfc958f7e5d8558b683b39fd7075966" id="r_a2bfc958f7e5d8558b683b39fd7075966"><td class="memItemLeft" align="right" valign="top">virtual result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#a2bfc958f7e5d8558b683b39fd7075966">register_factory</a> (const std::string &amp;name, std::function&lt; std::shared_ptr&lt; T &gt;()&gt; factory)=0</td></tr>
 <tr class="memdesc:a2bfc958f7e5d8558b683b39fd7075966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a factory function for creating components.  <br /></td></tr>
 <tr class="separator:a2bfc958f7e5d8558b683b39fd7075966"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5555319565dfc78ae357bfd87871d0a" id="r_ac5555319565dfc78ae357bfd87871d0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#ac5555319565dfc78ae357bfd87871d0a">register_singleton</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name, std::shared_ptr&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">instance</a>)=0</td></tr>
+<tr class="memitem:ac5555319565dfc78ae357bfd87871d0a" id="r_ac5555319565dfc78ae357bfd87871d0a"><td class="memItemLeft" align="right" valign="top">virtual result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#ac5555319565dfc78ae357bfd87871d0a">register_singleton</a> (const std::string &amp;name, std::shared_ptr&lt; T &gt; instance)=0</td></tr>
 <tr class="memdesc:ac5555319565dfc78ae357bfd87871d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a singleton instance.  <br /></td></tr>
 <tr class="separator:ac5555319565dfc78ae357bfd87871d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea2760be5446a0734fc1e88ce105f4dd" id="r_aea2760be5446a0734fc1e88ce105f4dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#aea2760be5446a0734fc1e88ce105f4dd">is_registered</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;name) <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> =0</td></tr>
+<tr class="memitem:aea2760be5446a0734fc1e88ce105f4dd" id="r_aea2760be5446a0734fc1e88ce105f4dd"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#aea2760be5446a0734fc1e88ce105f4dd">is_registered</a> (const std::string &amp;name) const =0</td></tr>
 <tr class="memdesc:aea2760be5446a0734fc1e88ce105f4dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a component is registered.  <br /></td></tr>
 <tr class="separator:aea2760be5446a0734fc1e88ce105f4dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d6dd8d57e5cf3a40f10610c2cdcfa2b" id="r_a5d6dd8d57e5cf3a40f10610c2cdcfa2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#a5d6dd8d57e5cf3a40f10610c2cdcfa2b">clear</a> ()=0</td></tr>
+<tr class="memitem:a5d6dd8d57e5cf3a40f10610c2cdcfa2b" id="r_a5d6dd8d57e5cf3a40f10610c2cdcfa2b"><td class="memItemLeft" align="right" valign="top">virtual result_void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#a5d6dd8d57e5cf3a40f10610c2cdcfa2b">clear</a> ()=0</td></tr>
 <tr class="memdesc:a5d6dd8d57e5cf3a40f10610c2cdcfa2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all registrations.  <br /></td></tr>
 <tr class="separator:a5d6dd8d57e5cf3a40f10610c2cdcfa2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b1d37b518826eac2b29bc865bb2dafb" id="r_a8b1d37b518826eac2b29bc865bb2dafb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#a8b1d37b518826eac2b29bc865bb2dafb">size</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> =0</td></tr>
+<tr class="memitem:a8b1d37b518826eac2b29bc865bb2dafb" id="r_a8b1d37b518826eac2b29bc865bb2dafb"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1di__container__interface.html#a8b1d37b518826eac2b29bc865bb2dafb">size</a> () const =0</td></tr>
 <tr class="memdesc:a8b1d37b518826eac2b29bc865bb2dafb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of registered components.  <br /></td></tr>
 <tr class="separator:a8b1d37b518826eac2b29bc865bb2dafb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class logger_module::di_container_interface&lt; T &gt;</div><p>Abstract interface for dependency injection container. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -141,6 +141,8 @@ class logger_module::di_container_interface&lt; T &gt;</div><p>Abstract interfac
   </dd>
 </dl>
 <p>This interface defines the contract for DI containers, allowing different implementations without coupling to specific DI frameworks. </p>
+
+<p class="definition">Definition at line <a class="el" href="di__container__interface_8h_source.html#l00034">34</a> of file <a class="el" href="di__container__interface_8h_source.html">di_container_interface.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a43f9942813e7c0f1f07b6b56c5594d2c" name="a43f9942813e7c0f1f07b6b56c5594d2c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a43f9942813e7c0f1f07b6b56c5594d2c">&#9670;&#160;</a></span>~di_container_interface()</h2>
@@ -148,13 +150,13 @@ class logger_module::di_container_interface&lt; T &gt;</div><p>Abstract interfac
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::~<a class="el" href="classlogger__module_1_1di__container__interface.html">di_container_interface</a> </td>
+          <td class="memname">virtual <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; T &gt;::~<a class="el" href="classlogger__module_1_1di__container__interface.html">di_container_interface</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -178,13 +180,13 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a> <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::clear </td>
+          <td class="memname">virtual result_void <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; T &gt;::clear </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -200,7 +202,7 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <p>Clear all registrations. </p>
 <dl class="section return"><dt>Returns</dt><dd>Result indicating success or error </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1lightweight__di__container.html#a9daa086081c2968e0aa4f6e5398c37ff">logger_module::lightweight_di_container&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1lightweight__di__container.html#a9daa086081c2968e0aa4f6e5398c37ff">logger_module::lightweight_di_container&lt; T &gt;</a>, and <a class="el" href="classlogger__module_1_1thread__system__di__adapter.html#a073bfe029dc7626ee1eb2c594a750fed">logger_module::thread_system_di_adapter&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -210,15 +212,15 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::is_registered </td>
+          <td class="memname">virtual bool <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; T &gt;::is_registered </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -239,7 +241,7 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if registered, false otherwise </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1lightweight__di__container.html#a21abf37307add72680d68d9fd9760feb">logger_module::lightweight_di_container&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1lightweight__di__container.html#a21abf37307add72680d68d9fd9760feb">logger_module::lightweight_di_container&lt; T &gt;</a>, and <a class="el" href="classlogger__module_1_1thread__system__di__adapter.html#aa918759a862050a7b33dde9a638e66be">logger_module::thread_system_di_adapter&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -249,21 +251,21 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a> <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::register_factory </td>
+          <td class="memname">virtual result_void <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; T &gt;::register_factory </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; std::shared_ptr&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;()&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; std::shared_ptr&lt; T &gt;()&gt;&#160;</td>
           <td class="paramname"><em>factory</em>&#160;</td>
         </tr>
         <tr>
@@ -289,7 +291,7 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Result indicating success or error </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1lightweight__di__container.html#a12905b72b012ded443841a3ab34e75b8">logger_module::lightweight_di_container&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1lightweight__di__container.html#a12905b72b012ded443841a3ab34e75b8">logger_module::lightweight_di_container&lt; T &gt;</a>, and <a class="el" href="classlogger__module_1_1thread__system__di__adapter.html#a166b18bafc165347ce5f7259b96545ec">logger_module::thread_system_di_adapter&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -299,21 +301,21 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result__void.html">result_void</a> <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::register_singleton </td>
+          <td class="memname">virtual result_void <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; T &gt;::register_singleton </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; T &gt;&#160;</td>
           <td class="paramname"><em>instance</em>&#160;</td>
         </tr>
         <tr>
@@ -339,7 +341,7 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Result indicating success or error </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1lightweight__di__container.html#aac0301ed9b085dce42583e71b5e495bf">logger_module::lightweight_di_container&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1lightweight__di__container.html#aac0301ed9b085dce42583e71b5e495bf">logger_module::lightweight_di_container&lt; T &gt;</a>, and <a class="el" href="classlogger__module_1_1thread__system__di__adapter.html#a25707302ee4c6bdc6b41c67588bb807f">logger_module::thread_system_di_adapter&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -349,15 +351,15 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="classlogger__module_1_1result.html">result</a>&lt; std::shared_ptr&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; &gt; <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::resolve </td>
+          <td class="memname">virtual result&lt; std::shared_ptr&lt; T &gt; &gt; <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; T &gt;::resolve </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
         </tr>
@@ -378,7 +380,7 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Result containing the resolved component or error </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1lightweight__di__container.html#a0c3226be63cf3fe64a5708b736cd3624">logger_module::lightweight_di_container&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1lightweight__di__container.html#a0c3226be63cf3fe64a5708b736cd3624">logger_module::lightweight_di_container&lt; T &gt;</a>, and <a class="el" href="classlogger__module_1_1thread__system__di__adapter.html#ab5101eba53d7e251eb2f33a5b57d2ce0">logger_module::thread_system_di_adapter&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -388,13 +390,13 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">virtual</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::size </td>
+          <td class="memname">virtual size_t <a class="el" href="classlogger__module_1_1di__container__interface.html">logger_module::di_container_interface</a>&lt; T &gt;::size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -410,12 +412,12 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <p>Get the number of registered components. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of registered components </dd></dl>
 
-<p>Implemented in <a class="el" href="classlogger__module_1_1lightweight__di__container.html#a415aae28ca7c1952b679573e134dad41">logger_module::lightweight_di_container&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classlogger__module_1_1lightweight__di__container.html#a415aae28ca7c1952b679573e134dad41">logger_module::lightweight_di_container&lt; T &gt;</a>, and <a class="el" href="classlogger__module_1_1thread__system__di__adapter.html#a8882835a5a929d459b6973f6a9c438fe">logger_module::thread_system_di_adapter&lt; T &gt;</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="di__container__interface_8h_source.html">di_container_interface.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/di/<a class="el" href="di__container__interface_8h_source.html">di_container_interface.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -423,7 +425,7 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1di__container__interface.html">di_container_interface</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

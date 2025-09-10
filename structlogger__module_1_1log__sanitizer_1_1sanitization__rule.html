@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::log_sanitizer::sanitization_rule Struct Reference</title>
+<title>Logger System: logger_module::log_sanitizer::sanitization_rule Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -101,6 +101,11 @@ $(document).ready(function(){initNavTree('structlogger__module_1_1log__sanitizer
  <a href="structlogger__module_1_1log__sanitizer_1_1sanitization__rule.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="log__sanitizer_8h_source.html">log_sanitizer.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for logger_module::log_sanitizer::sanitization_rule:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="structlogger__module_1_1log__sanitizer_1_1sanitization__rule__coll__graph.svg" width="212" height="228"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -108,11 +113,13 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a69cd30392b72bf292d5aebd2fad306df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae091a114d743cff0da1109ed72e97e6d" id="r_ae091a114d743cff0da1109ed72e97e6d"><td class="memItemLeft" align="right" valign="top">std::regex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__sanitizer_1_1sanitization__rule.html#ae091a114d743cff0da1109ed72e97e6d">pattern</a></td></tr>
 <tr class="separator:ae091a114d743cff0da1109ed72e97e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cf0ac7499018651d3f88d1769825918" id="r_a7cf0ac7499018651d3f88d1769825918"><td class="memItemLeft" align="right" valign="top">std::function&lt; std::string(<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::smatch &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__sanitizer_1_1sanitization__rule.html#a7cf0ac7499018651d3f88d1769825918">replacer</a></td></tr>
+<tr class="memitem:a7cf0ac7499018651d3f88d1769825918" id="r_a7cf0ac7499018651d3f88d1769825918"><td class="memItemLeft" align="right" valign="top">std::function&lt; std::string(const std::smatch &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlogger__module_1_1log__sanitizer_1_1sanitization__rule.html#a7cf0ac7499018651d3f88d1769825918">replacer</a></td></tr>
 <tr class="separator:a7cf0ac7499018651d3f88d1769825918"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Rule for sanitizing specific patterns. </p>
+
+<p class="definition">Definition at line <a class="el" href="log__sanitizer_8h_source.html#l00027">27</a> of file <a class="el" href="log__sanitizer_8h_source.html">log_sanitizer.h</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a69cd30392b72bf292d5aebd2fad306df" name="a69cd30392b72bf292d5aebd2fad306df"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a69cd30392b72bf292d5aebd2fad306df">&#9670;&#160;</a></span>name</h2>
@@ -125,6 +132,10 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log__sanitizer_8h_source.html#l00028">28</a> of file <a class="el" href="log__sanitizer_8h_source.html">log_sanitizer.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="log__sanitizer_8cpp_source.html#l00070">logger_module::log_sanitizer::add_rule()</a>.</p>
 
 </div>
 </div>
@@ -140,6 +151,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="log__sanitizer_8h_source.html#l00029">29</a> of file <a class="el" href="log__sanitizer_8h_source.html">log_sanitizer.h</a>.</p>
+
 </div>
 </div>
 <a id="a7cf0ac7499018651d3f88d1769825918" name="a7cf0ac7499018651d3f88d1769825918"></a>
@@ -149,15 +162,17 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;std::string(<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> std::smatch&amp;)&gt; logger_module::log_sanitizer::sanitization_rule::replacer</td>
+          <td class="memname">std::function&lt;std::string(const std::smatch&amp;)&gt; logger_module::log_sanitizer::sanitization_rule::replacer</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="log__sanitizer_8h_source.html#l00030">30</a> of file <a class="el" href="log__sanitizer_8h_source.html">log_sanitizer.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="log__sanitizer_8h_source.html">log_sanitizer.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/security/<a class="el" href="log__sanitizer_8h_source.html">log_sanitizer.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -165,7 +180,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1log__sanitizer.html">log_sanitizer</a></li><li class="navelem"><a class="el" href="structlogger__module_1_1log__sanitizer_1_1sanitization__rule.html">sanitization_rule</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

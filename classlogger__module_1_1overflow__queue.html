@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::overflow_queue&lt; T &gt; Class Template Reference</title>
+<title>Logger System: logger_module::overflow_queue&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -104,33 +104,35 @@ $(document).ready(function(){initNavTree('classlogger__module_1_1overflow__queue
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a87ef7ce67e3de1e54b086b254ae38862" id="r_a87ef7ce67e3de1e54b086b254ae38862"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#a87ef7ce67e3de1e54b086b254ae38862">overflow_queue</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> max_size, std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1overflow__policy__base.html">overflow_policy_base</a> &gt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">policy</a>=<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">nullptr</a>)</td></tr>
+<tr class="memitem:a87ef7ce67e3de1e54b086b254ae38862" id="r_a87ef7ce67e3de1e54b086b254ae38862"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#a87ef7ce67e3de1e54b086b254ae38862">overflow_queue</a> (size_t max_size, std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1overflow__policy__base.html">overflow_policy_base</a> &gt; policy=nullptr)</td></tr>
 <tr class="separator:a87ef7ce67e3de1e54b086b254ae38862"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab75b4f454aa3c1197448e8db81bd7614" id="r_ab75b4f454aa3c1197448e8db81bd7614"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#ab75b4f454aa3c1197448e8db81bd7614">push</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &amp;&amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">item</a>)</td></tr>
+<tr class="memitem:ab75b4f454aa3c1197448e8db81bd7614" id="r_ab75b4f454aa3c1197448e8db81bd7614"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#ab75b4f454aa3c1197448e8db81bd7614">push</a> (T &amp;&amp;item)</td></tr>
 <tr class="memdesc:ab75b4f454aa3c1197448e8db81bd7614"><td class="mdescLeft">&#160;</td><td class="mdescRight">Push an item to the queue.  <br /></td></tr>
 <tr class="separator:ab75b4f454aa3c1197448e8db81bd7614"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7ced9776735c4c043a2076389d93a3e" id="r_ab7ced9776735c4c043a2076389d93a3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#ab7ced9776735c4c043a2076389d93a3e">pop</a> (<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &amp;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">item</a>, std::chrono::milliseconds <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">timeout</a>=std::chrono::milliseconds{100})</td></tr>
+<tr class="memitem:ab7ced9776735c4c043a2076389d93a3e" id="r_ab7ced9776735c4c043a2076389d93a3e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#ab7ced9776735c4c043a2076389d93a3e">pop</a> (T &amp;item, std::chrono::milliseconds timeout=std::chrono::milliseconds{100})</td></tr>
 <tr class="memdesc:ab7ced9776735c4c043a2076389d93a3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pop an item from the queue.  <br /></td></tr>
 <tr class="separator:ab7ced9776735c4c043a2076389d93a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a569d019abb0333e805993e01875480d3" id="r_a569d019abb0333e805993e01875480d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#a569d019abb0333e805993e01875480d3">size</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:a569d019abb0333e805993e01875480d3" id="r_a569d019abb0333e805993e01875480d3"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#a569d019abb0333e805993e01875480d3">size</a> () const</td></tr>
 <tr class="memdesc:a569d019abb0333e805993e01875480d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current queue size.  <br /></td></tr>
 <tr class="separator:a569d019abb0333e805993e01875480d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39727f3f5dea0fab3db11ade1bc7901a" id="r_a39727f3f5dea0fab3db11ade1bc7901a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#a39727f3f5dea0fab3db11ade1bc7901a">empty</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:a39727f3f5dea0fab3db11ade1bc7901a" id="r_a39727f3f5dea0fab3db11ade1bc7901a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#a39727f3f5dea0fab3db11ade1bc7901a">empty</a> () const</td></tr>
 <tr class="memdesc:a39727f3f5dea0fab3db11ade1bc7901a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if queue is empty.  <br /></td></tr>
 <tr class="separator:a39727f3f5dea0fab3db11ade1bc7901a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00bc23c9a62d2498e40a2be1887edc34" id="r_a00bc23c9a62d2498e40a2be1887edc34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#a00bc23c9a62d2498e40a2be1887edc34">stop</a> ()</td></tr>
+<tr class="memitem:a00bc23c9a62d2498e40a2be1887edc34" id="r_a00bc23c9a62d2498e40a2be1887edc34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#a00bc23c9a62d2498e40a2be1887edc34">stop</a> ()</td></tr>
 <tr class="memdesc:a00bc23c9a62d2498e40a2be1887edc34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the queue.  <br /></td></tr>
 <tr class="separator:a00bc23c9a62d2498e40a2be1887edc34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b05dedb174b2f3c039a8f5d73c3d3cd" id="r_a6b05dedb174b2f3c039a8f5d73c3d3cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#a6b05dedb174b2f3c039a8f5d73c3d3cd">set_policy</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1overflow__policy__base.html">overflow_policy_base</a> &gt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">policy</a>)</td></tr>
+<tr class="memitem:a6b05dedb174b2f3c039a8f5d73c3d3cd" id="r_a6b05dedb174b2f3c039a8f5d73c3d3cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#a6b05dedb174b2f3c039a8f5d73c3d3cd">set_policy</a> (std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1overflow__policy__base.html">overflow_policy_base</a> &gt; policy)</td></tr>
 <tr class="memdesc:a6b05dedb174b2f3c039a8f5d73c3d3cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change overflow policy.  <br /></td></tr>
 <tr class="separator:a6b05dedb174b2f3c039a8f5d73c3d3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa8203f1dc59e87e1a38e2598f37a2e6" id="r_aaa8203f1dc59e87e1a38e2598f37a2e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1overflow__stats.html">overflow_stats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#aaa8203f1dc59e87e1a38e2598f37a2e6">get_stats</a> () <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a></td></tr>
+<tr class="memitem:aaa8203f1dc59e87e1a38e2598f37a2e6" id="r_aaa8203f1dc59e87e1a38e2598f37a2e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlogger__module_1_1overflow__stats.html">overflow_stats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__queue.html#aaa8203f1dc59e87e1a38e2598f37a2e6">get_stats</a> () const</td></tr>
 <tr class="memdesc:aaa8203f1dc59e87e1a38e2598f37a2e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get overflow statistics.  <br /></td></tr>
 <tr class="separator:aaa8203f1dc59e87e1a38e2598f37a2e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class logger_module::overflow_queue&lt; T &gt;</div><p>Queue with overflow policy support. </p>
+
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8h_source.html#l00404">404</a> of file <a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a87ef7ce67e3de1e54b086b254ae38862" name="a87ef7ce67e3de1e54b086b254ae38862"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a87ef7ce67e3de1e54b086b254ae38862">&#9670;&#160;</a></span>overflow_queue()</h2>
@@ -138,22 +140,22 @@ class logger_module::overflow_queue&lt; T &gt;</div><p>Queue with overflow polic
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::overflow_queue </td>
+          <td class="memname"><a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; T &gt;::overflow_queue </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>max_size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1overflow__policy__base.html">overflow_policy_base</a> &gt;&#160;</td>
-          <td class="paramname"><em>policy</em> = <code><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">nullptr</a></code>&#160;</td>
+          <td class="paramname"><em>policy</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -168,6 +170,10 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8h_source.html#l00406">406</a> of file <a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a>.</p>
+
+<p class="reference">References <a class="el" href="overflow__policy_8cpp_source.html#l00398">logger_module::overflow_policy_factory::create()</a>, and <a class="el" href="namespacelogger__module.html#a613f507608bacdad0a4ccde083bf1d2ea9c45223965cfda2da60a15bf36168a34">logger_module::drop_oldest</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -177,13 +183,13 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::empty </td>
+          <td class="memname">bool <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; T &gt;::empty </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -199,6 +205,8 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <p>Check if queue is empty. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if empty </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8h_source.html#l00479">479</a> of file <a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a>.</p>
+
 </div>
 </div>
 <a id="aaa8203f1dc59e87e1a38e2598f37a2e6" name="aaa8203f1dc59e87e1a38e2598f37a2e6"></a>
@@ -207,13 +215,13 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structlogger__module_1_1overflow__stats.html">overflow_stats</a> <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::get_stats </td>
+          <td class="memname"><a class="el" href="structlogger__module_1_1overflow__stats.html">overflow_stats</a> <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; T &gt;::get_stats </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -229,6 +237,8 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <p>Get overflow statistics. </p>
 <dl class="section return"><dt>Returns</dt><dd>Current statistics </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8h_source.html#l00506">506</a> of file <a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a>.</p>
+
 </div>
 </div>
 <a id="ab7ced9776735c4c043a2076389d93a3e" name="ab7ced9776735c4c043a2076389d93a3e"></a>
@@ -237,15 +247,15 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::pop </td>
+          <td class="memname">bool <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; T &gt;::pop </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &amp;&#160;</td>
+          <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>item</em>, </td>
         </tr>
         <tr>
@@ -277,6 +287,8 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if item was popped, false on timeout </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8h_source.html#l00440">440</a> of file <a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a>.</p>
+
 </div>
 </div>
 <a id="ab75b4f454aa3c1197448e8db81bd7614" name="ab75b4f454aa3c1197448e8db81bd7614"></a>
@@ -285,15 +297,15 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a> <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::push </td>
+          <td class="memname">bool <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; T &gt;::push </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>item</em></td><td>)</td>
           <td></td>
         </tr>
@@ -314,6 +326,8 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if item was added, false if dropped </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8h_source.html#l00420">420</a> of file <a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a>.</p>
+
 </div>
 </div>
 <a id="a6b05dedb174b2f3c039a8f5d73c3d3cd" name="a6b05dedb174b2f3c039a8f5d73c3d3cd"></a>
@@ -322,13 +336,13 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::set_policy </td>
+          <td class="memname">void <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; T &gt;::set_policy </td>
           <td>(</td>
           <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1overflow__policy__base.html">overflow_policy_base</a> &gt;&#160;</td>
           <td class="paramname"><em>policy</em></td><td>)</td>
@@ -350,6 +364,8 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8h_source.html#l00497">497</a> of file <a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a>.</p>
+
 </div>
 </div>
 <a id="a569d019abb0333e805993e01875480d3" name="a569d019abb0333e805993e01875480d3"></a>
@@ -358,13 +374,13 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a> <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::size </td>
+          <td class="memname">size_t <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; T &gt;::size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -380,6 +396,8 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <p>Get current queue size. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of items in queue </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8h_source.html#l00470">470</a> of file <a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a>.</p>
+
 </div>
 </div>
 <a id="a00bc23c9a62d2498e40a2be1887edc34" name="a00bc23c9a62d2498e40a2be1887edc34"></a>
@@ -388,13 +406,13 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">typename</a> <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">void</a> <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">T</a> &gt;::stop </td>
+          <td class="memname">void <a class="el" href="classlogger__module_1_1overflow__queue.html">logger_module::overflow_queue</a>&lt; T &gt;::stop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -409,10 +427,12 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 
 <p>Stop the queue. </p>
 
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8h_source.html#l00487">487</a> of file <a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/flow/<a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -420,7 +440,7 @@ template&lt;<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1overflow__queue.html">overflow_queue</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>logger_system: logger_module::overflow_policy_factory Class Reference</title>
+<title>Logger System: logger_module::overflow_policy_factory Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">logger_system
+   <div id="projectname">Logger System<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">High-performance C++20 logging system</div>
+   <div id="projectbrief">High-performance C++20 thread-safe logging system with asynchronous capabilities</div>
   </td>
  </tr>
  </tbody>
@@ -104,15 +104,17 @@ $(document).ready(function(){initNavTree('classlogger__module_1_1overflow__polic
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:af5b9fc823a730711222c368b212f49c5" id="r_af5b9fc823a730711222c368b212f49c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1overflow__policy__base.html">overflow_policy_base</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__policy__factory.html#af5b9fc823a730711222c368b212f49c5">create</a> (<a class="el" href="namespacelogger__module.html#a613f507608bacdad0a4ccde083bf1d2e">overflow_policy_type</a> type)</td></tr>
+<tr class="memitem:af5b9fc823a730711222c368b212f49c5" id="r_af5b9fc823a730711222c368b212f49c5"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1overflow__policy__base.html">overflow_policy_base</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__policy__factory.html#af5b9fc823a730711222c368b212f49c5">create</a> (<a class="el" href="namespacelogger__module.html#a613f507608bacdad0a4ccde083bf1d2e">overflow_policy_type</a> type)</td></tr>
 <tr class="memdesc:af5b9fc823a730711222c368b212f49c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an overflow policy.  <br /></td></tr>
 <tr class="separator:af5b9fc823a730711222c368b212f49c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7aa3eeecfcdf17d161742c0ee39bd07" id="r_aa7aa3eeecfcdf17d161742c0ee39bd07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">static</a> std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1overflow__policy__base.html">overflow_policy_base</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__policy__factory.html#aa7aa3eeecfcdf17d161742c0ee39bd07">create_custom</a> (std::function&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>(<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;, std::queue&lt; <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &gt; &amp;, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>)&gt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">handler</a>)</td></tr>
+<tr class="memitem:aa7aa3eeecfcdf17d161742c0ee39bd07" id="r_aa7aa3eeecfcdf17d161742c0ee39bd07"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1overflow__policy__base.html">overflow_policy_base</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogger__module_1_1overflow__policy__factory.html#aa7aa3eeecfcdf17d161742c0ee39bd07">create_custom</a> (std::function&lt; bool(const <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;, std::queue&lt; <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &gt; &amp;, size_t)&gt; handler)</td></tr>
 <tr class="memdesc:aa7aa3eeecfcdf17d161742c0ee39bd07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a custom overflow policy.  <br /></td></tr>
 <tr class="separator:aa7aa3eeecfcdf17d161742c0ee39bd07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Factory for creating overflow policies. </p>
+
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8h_source.html#l00382">382</a> of file <a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af5b9fc823a730711222c368b212f49c5" name="af5b9fc823a730711222c368b212f49c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af5b9fc823a730711222c368b212f49c5">&#9670;&#160;</a></span>create()</h2>
@@ -147,6 +149,12 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unique pointer to the policy </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8cpp_source.html#l00398">398</a> of file <a class="el" href="overflow__policy_8cpp_source.html">overflow_policy.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="namespacelogger__module.html#a613f507608bacdad0a4ccde083bf1d2ea14511f2f5564650d129ca7cabc333278">logger_module::block</a>, <a class="el" href="namespacelogger__module.html#a613f507608bacdad0a4ccde083bf1d2ea08777f30b7b02f6d4f0c61db90d04dce">logger_module::drop_newest</a>, <a class="el" href="namespacelogger__module.html#a613f507608bacdad0a4ccde083bf1d2ea9c45223965cfda2da60a15bf36168a34">logger_module::drop_oldest</a>, and <a class="el" href="namespacelogger__module.html#a613f507608bacdad0a4ccde083bf1d2ea4d200fce73a8e1cc965cfc2c43343824">logger_module::grow</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="overflow__policy_8h_source.html#l00406">logger_module::overflow_queue&lt; T &gt;::overflow_queue()</a>.</p>
+
 </div>
 </div>
 <a id="aa7aa3eeecfcdf17d161742c0ee39bd07" name="aa7aa3eeecfcdf17d161742c0ee39bd07"></a>
@@ -161,7 +169,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">std::unique_ptr&lt; <a class="el" href="classlogger__module_1_1overflow__policy__base.html">overflow_policy_base</a> &gt; logger_module::overflow_policy_factory::create_custom </td>
           <td>(</td>
-          <td class="paramtype">std::function&lt; <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">bool</a>(<a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">const</a> <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;, std::queue&lt; <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &gt; &amp;, <a class="el" href="namespacelogger__module.html#ac3dc3716c8d0fd1b84d009a9d4a0a73b">size_t</a>)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; bool(const <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &amp;, std::queue&lt; <a class="el" href="structlogger__module_1_1log__entry.html">log_entry</a> &gt; &amp;, size_t)&gt;&#160;</td>
           <td class="paramname"><em>handler</em></td><td>)</td>
           <td></td>
         </tr>
@@ -182,11 +190,13 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unique pointer to the custom policy </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="overflow__policy_8cpp_source.html#l00417">417</a> of file <a class="el" href="overflow__policy_8cpp_source.html">overflow_policy.cpp</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a></li>
-<li><a class="el" href="overflow__policy_8cpp.html">overflow_policy.cpp</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/flow/<a class="el" href="overflow__policy_8h_source.html">overflow_policy.h</a></li>
+<li>/home/runner/work/logger_system/logger_system/sources/logger/flow/<a class="el" href="overflow__policy_8cpp_source.html">overflow_policy.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -194,7 +204,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelogger__module.html">logger_module</a></li><li class="navelem"><a class="el" href="classlogger__module_1_1overflow__policy__factory.html">overflow_policy_factory</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Sep 10 2025 02:15:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

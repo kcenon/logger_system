@@ -1,20 +1,18 @@
-<map id="di_container_interface.h" name="di_container_interface.h">
-<area shape="rect" id="Node000001" title="Abstract interface for dependency injection container." alt="" coords="101,5,280,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,83,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,33,81,75,79,70,166,28"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="107,79,194,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="186,32,166,68,162,65,182,30"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="179,152,237,177"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="197,30,208,78,211,138,206,138,203,79,192,32"/>
-<area shape="rect" id="Node000005" href="$error__codes_8h.html" title=" " alt="" coords="317,79,440,104"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="222,28,336,71,334,76,220,33"/>
-<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="352,106,249,149,247,144,350,102"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="262,152,349,177"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="368,106,329,144,325,140,365,102"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="373,152,433,177"/>
-<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="385,103,397,138,392,140,380,105"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="457,152,532,177"/>
-<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="399,102,465,142,463,147,396,106"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="557,152,625,177"/>
-<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="414,101,544,145,543,150,412,107"/>
+<map id="/home/runner/work/logger_system/logger_system/sources/logger/di/di_container_interface.h" name="/home/runner/work/logger_system/logger_system/sources/logger/di/di_container_interface.h">
+<area shape="rect" id="Node000001" title="Abstract interface for dependency injection container." alt="" coords="69,5,313,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,83,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,62,77,103,74,99,145,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="107,108,194,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,61,164,97,159,94,176,59"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="203,189,261,214"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="200,60,228,175,223,176,195,61"/>
+<area shape="rect" id="Node000005" href="$error__codes_8h.html" title=" " alt="" coords="269,108,392,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="235,58,301,98,299,103,232,62"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="318,136,259,182,256,178,314,131"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="286,189,373,214"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="333,134,332,175,327,175,328,133"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="397,189,457,214"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="347,131,404,178,400,182,343,136"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="481,181,652,221"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="366,131,498,174,496,179,364,136"/>
 </map>

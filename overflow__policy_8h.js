@@ -9,7 +9,7 @@ var overflow__policy_8h =
     [ "logger_module::adaptive_backpressure", "classlogger__module_1_1adaptive__backpressure.html", "classlogger__module_1_1adaptive__backpressure" ],
     [ "logger_module::adaptive_backpressure::config", "structlogger__module_1_1adaptive__backpressure_1_1config.html", "structlogger__module_1_1adaptive__backpressure_1_1config" ],
     [ "logger_module::adaptive_backpressure::adaptation_stats", "structlogger__module_1_1adaptive__backpressure_1_1adaptation__stats.html", "structlogger__module_1_1adaptive__backpressure_1_1adaptation__stats" ],
-    [ "logger_module::overflow_policy_factory", "classlogger__module_1_1overflow__policy__factory.html", null ],
+    [ "logger_module::overflow_policy_factory", "classlogger__module_1_1overflow__policy__factory.html", "classlogger__module_1_1overflow__policy__factory" ],
     [ "logger_module::overflow_queue< T >", "classlogger__module_1_1overflow__queue.html", "classlogger__module_1_1overflow__queue" ],
     [ "overflow_policy_type", "overflow__policy_8h.html#a613f507608bacdad0a4ccde083bf1d2e", [
       [ "drop_oldest", "overflow__policy_8h.html#a613f507608bacdad0a4ccde083bf1d2ea9c45223965cfda2da60a15bf36168a34", null ],
