@@ -98,19 +98,22 @@ endif()
 
 # Try to find thread_system (only if not in standalone mode)
 if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE)
-    # First try to find it as a sibling directory
-    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/CMakeLists.txt")
-        message(STATUS "Found thread_system as sibling directory")
-        # Build thread_system as submodule to avoid vcpkg issues
-        set(BUILD_THREADSYSTEM_AS_SUBMODULE ON CACHE BOOL "Build ThreadSystem as submodule" FORCE)
-        add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" "${CMAKE_BINARY_DIR}/thread_system")
-        set(THREAD_SYSTEM_FOUND TRUE)
-    else()
-        # Try to find it as an installed package
-        find_package(thread_system CONFIG QUIET)
-        if(thread_system_FOUND)
-            message(STATUS "Found thread_system package")
+    # Check if thread_system is already added
+    if(NOT TARGET thread_system)
+        # First try to find it as a sibling directory
+        if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/CMakeLists.txt")
+            message(STATUS "Found thread_system as sibling directory")
+            # Build thread_system as submodule to avoid vcpkg issues
+            set(BUILD_THREADSYSTEM_AS_SUBMODULE ON CACHE BOOL "Build ThreadSystem as submodule" FORCE)
+            add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" "${CMAKE_BINARY_DIR}/thread_system")
             set(THREAD_SYSTEM_FOUND TRUE)
+        else()
+            # Try to find it as an installed package
+            find_package(thread_system CONFIG QUIET)
+            if(thread_system_FOUND)
+                message(STATUS "Found thread_system package")
+                set(THREAD_SYSTEM_FOUND TRUE)
+            endif()
         endif()
     endif()
     

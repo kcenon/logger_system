@@ -9,14 +9,18 @@ All rights reserved.
 
 #include "logger_config.h"
 #include "config_strategy_interface.h"
+#include "configuration_templates.h"
 #include "../logger.h"
 #include "../writers/base_writer.h"
 #include "../writers/batch_writer.h"
 #include "../filters/log_filter.h"
 #include "../interfaces/log_formatter_interface.h"
+#include "../di/di_container_interface.h"
+#include "../monitoring/monitoring_interface.h"
 #include <memory>
 #include <vector>
 #include <algorithm>
+#include <cstdlib>
 
 namespace logger_module {
 
@@ -308,6 +312,144 @@ public:
     }
     
     /**
+     * @brief Apply a configuration template
+     * @param template_type Template to apply
+     * @return Reference to builder for chaining
+     */
+    logger_builder& apply_template(logger_system::configuration_template template_type) {
+        auto template_config = logger_system::get_template_config(template_type);
+        config_.min_level = template_config.min_level;
+        config_.buffer_size = template_config.buffer_size;
+        config_.async = template_config.async_mode;
+        config_.enable_batch_writing = template_config.enable_batch_writing;
+        config_.batch_size = template_config.batch_size;
+        config_.flush_interval = template_config.flush_interval;
+        config_.overflow_policy = template_config.overflow_policy_type;
+        return *this;
+    }
+    
+    /**
+     * @brief Apply a performance strategy
+     * @param strategy Performance strategy to apply
+     * @return Reference to builder for chaining
+     */
+    logger_builder& apply_performance_strategy(logger_system::performance_strategy strategy) {
+        auto perf_config = logger_system::get_performance_config(strategy);
+        config_.min_level = perf_config.min_level;
+        config_.buffer_size = perf_config.buffer_size;
+        config_.async = perf_config.async_mode;
+        config_.enable_batch_writing = perf_config.enable_batch_writing;
+        config_.batch_size = perf_config.batch_size;
+        config_.flush_interval = perf_config.flush_interval;
+        config_.overflow_policy = perf_config.overflow_policy_type;
+        return *this;
+    }
+    
+    /**
+     * @brief Detect environment from environment variables
+     * @return Reference to builder for chaining
+     */
+    logger_builder& detect_environment() {
+        const char* env = std::getenv("LOG_ENV");
+        const char* level = std::getenv("LOG_LEVEL");
+        
+        if (env) {
+            std::string env_str(env);
+            if (env_str == "production") {
+                apply_template(configuration_template::production);
+            } else if (env_str == "debug" || env_str == "development") {
+                apply_template(configuration_template::debug);
+            }
+        }
+        
+        if (level) {
+            std::string level_str(level);
+            if (level_str == "trace") config_.min_level = thread_module::log_level::trace;
+            else if (level_str == "debug") config_.min_level = thread_module::log_level::debug;
+            else if (level_str == "info") config_.min_level = thread_module::log_level::info;
+            else if (level_str == "warn") config_.min_level = thread_module::log_level::warning;
+            else if (level_str == "error") config_.min_level = thread_module::log_level::error;
+            else if (level_str == "fatal") config_.min_level = thread_module::log_level::fatal;
+        }
+        
+        return *this;
+    }
+    
+    /**
+     * @brief Set monitoring interface
+     * @param monitor Monitoring interface implementation
+     * @return Reference to builder for chaining
+     */
+    logger_builder& with_monitoring(std::shared_ptr<monitoring_interface> monitor) {
+        monitor_ = monitor;
+        config_.enable_metrics = true;
+        return *this;
+    }
+    
+    /**
+     * @brief Set health check interval
+     * @param interval Health check interval
+     * @return Reference to builder for chaining
+     */
+    logger_builder& with_health_check_interval(std::chrono::milliseconds interval) {
+        health_check_interval_ = interval;
+        return *this;
+    }
+    
+    /**
+     * @brief Set DI container
+     * @param container DI container implementation
+     * @return Reference to builder for chaining
+     */
+    template<typename T>
+    logger_builder& with_di_container(std::shared_ptr<di_container_interface<T>> container) {
+        // Store for later use
+        // Note: Implementation would need to handle type erasure or specific container type
+        return *this;
+    }
+    
+    /**
+     * @brief Add writer from DI container
+     * @param name Writer name to resolve from DI
+     * @return Reference to builder for chaining
+     */
+    logger_builder& with_writer_from_di(const std::string& name) {
+        // Implementation would resolve from DI container
+        return *this;
+    }
+    
+    /**
+     * @brief Set error handler
+     * @param handler Error handler function
+     * @return Reference to builder for chaining
+     */
+    logger_builder& with_error_handler(std::function<void(const logger_error_code&)> handler) {
+        error_handler_ = handler;
+        return *this;
+    }
+    
+    /**
+     * @brief Set overflow policy
+     * @param policy Overflow policy to use
+     * @return Reference to builder for chaining
+     */
+    logger_builder& with_overflow_policy(overflow_policy policy) {
+        config_.overflow_policy = policy;
+        return *this;
+    }
+    
+    /**
+     * @brief Use default pattern for logging
+     * @return Reference to builder for chaining
+     */
+    logger_builder& with_default_pattern() {
+        // Set a default format pattern
+        config_.enable_timestamp = true;
+        config_.enable_source_location = true;
+        return *this;
+    }
+    
+    /**
      * @brief Clear all applied strategies
      * @return Reference to builder for chaining
      */
@@ -450,6 +592,9 @@ private:
     std::unique_ptr<log_formatter_interface> formatter_;
     std::vector<std::unique_ptr<config_strategy_interface>> strategies_;
     mutable logger_config built_config_;  // Store last built configuration
+    std::shared_ptr<monitoring_interface> monitor_;
+    std::chrono::milliseconds health_check_interval_{1000};
+    std::function<void(const logger_error_code&)> error_handler_;
 };
 
 } // namespace logger_module
