@@ -95,7 +95,7 @@ TEST_F(integration_test, complete_pipeline_integration) {
     EXPECT_TRUE(content.find("Error message") != std::string::npos);
     
     // Check monitoring metrics
-    auto metrics_result = monitor->get_metrics();
+    auto metrics_result = monitor->collect_metrics();
     ASSERT_TRUE(metrics_result.has_value());
     auto metrics = metrics_result.value();
     
@@ -247,12 +247,12 @@ TEST_F(integration_test, monitoring_health_integration) {
     std::this_thread::sleep_for(200ms);
     
     // Check health status
-    auto health_result = monitor->get_health_status();
+    auto health_result = monitor->check_health();
     ASSERT_TRUE(health_result.has_value());
-    EXPECT_EQ(health_result.value(), logger_module::health_status::healthy);
+    EXPECT_EQ(health_result.value().status, logger_module::health_status::healthy);
     
     // Check metrics
-    auto metrics_result = monitor->get_metrics();
+    auto metrics_result = monitor->collect_metrics();
     ASSERT_TRUE(metrics_result.has_value());
     auto metrics = metrics_result.value();
     
@@ -270,7 +270,7 @@ TEST_F(integration_test, monitoring_health_integration) {
     std::this_thread::sleep_for(100ms);
     
     // Health should degrade after failures
-    health_result = monitor->get_health_status();
+    health_result = monitor->check_health();
     ASSERT_TRUE(health_result.has_value());
     // Note: Actual implementation may vary in how it detects degradation
 }
@@ -330,7 +330,7 @@ TEST_F(integration_test, error_recovery_fallback) {
     auto result = logger_module::logger_builder()
         .with_error_handler([](const error_code& error) {
             // Custom error handler
-            std::cerr << "Logger error: " << error.message() << std::endl;
+            std::cerr << "Logger error occurred" << std::endl;
         })
         .add_writer("primary", primary_writer)
         .add_writer("fallback", fallback_writer)
@@ -419,11 +419,11 @@ TEST_F(integration_test, environment_based_configuration) {
     
     // Should use production settings
     auto config = logger->get_configuration();
-    EXPECT_GE(config.min_level, log_level::warn);
+    EXPECT_GE(config.min_level, log_level::warning);
     
     // Debug messages should be filtered
     logger->log(log_level::debug, "This should not be logged");
-    logger->log(log_level::warn, "This should be logged");
+    logger->log(log_level::warning, "This should be logged");
     logger->log(log_level::error, "This should also be logged");
     
     EXPECT_EQ(mock_writer->get_write_count(), 2);

@@ -31,8 +31,8 @@ private:
     mutable std::mutex mutex_;
     std::map<std::string, double> metrics_;
     std::atomic<health_status> health_{health_status::healthy};
-    std::atomic<size_t> metric_query_count_{0};
-    std::atomic<size_t> health_check_count_{0};
+    mutable std::atomic<size_t> metric_query_count_{0};
+    mutable std::atomic<size_t> health_check_count_{0};
     std::atomic<bool> should_fail_{false};
 
 public:

@@ -78,7 +78,7 @@ public:
     }
 
     result_void register_factory(const std::string& name,
-                                std::function<std::shared_ptr<base_writer>()> factory) override {
+                                std::function<std::shared_ptr<base_writer>()> factory) {
         if (should_fail_.load()) {
             return make_logger_error(failure_error_);
         }
@@ -88,6 +88,36 @@ public:
         return {};
     }
 
+    // Missing pure virtual methods from di_container_interface
+    result_void register_singleton(const std::string& name,
+                                  std::shared_ptr<base_writer> instance) override {
+        if (should_fail_.load()) {
+            return make_logger_error(failure_error_);
+        }
+        
+        std::lock_guard<std::mutex> lock(mutex_);
+        singletons_[name] = instance;
+        return {};
+    }
+    
+    bool is_registered(const std::string& name) const override {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return factories_.find(name) != factories_.end() ||
+               singletons_.find(name) != singletons_.end();
+    }
+    
+    result_void clear() override {
+        std::lock_guard<std::mutex> lock(mutex_);
+        factories_.clear();
+        singletons_.clear();
+        return {};
+    }
+    
+    size_t size() const override {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return factories_.size() + singletons_.size();
+    }
+    
     // Mock-specific methods
     result_void register_instance(const std::string& name,
                                  std::shared_ptr<base_writer> instance) {
