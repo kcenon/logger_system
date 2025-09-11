@@ -8,11 +8,30 @@
 #include <memory>
 
 ##################################################
-// C++20 Feature Detection and Fallbacks
+// Runtime C++20 Feature Detection and Fallbacks
 ##################################################
 
-// std::format compatibility
-#ifdef LOGGER_HAS_STD_FORMAT
+// Feature detection macros - check availability at compile time
+#if defined(__cpp_lib_format) && __cpp_lib_format >= 201907L
+    #define LOGGER_HAS_STD_FORMAT_BUILTIN 1
+#else
+    #define LOGGER_HAS_STD_FORMAT_BUILTIN 0
+#endif
+
+#if defined(__cpp_concepts) && __cpp_concepts >= 201907L
+    #define LOGGER_HAS_CONCEPTS_BUILTIN 1
+#else
+    #define LOGGER_HAS_CONCEPTS_BUILTIN 0
+#endif
+
+#if defined(__cpp_lib_span) && __cpp_lib_span >= 202002L
+    #define LOGGER_HAS_SPAN_BUILTIN 1
+#else
+    #define LOGGER_HAS_SPAN_BUILTIN 0
+#endif
+
+// std::format compatibility - use C++20 if available, fallback to fmt or basic
+#if LOGGER_HAS_STD_FORMAT_BUILTIN && !defined(LOGGER_FORCE_CPP17_FORMAT)
     #include <format>
     namespace logger_compat {
         using std::format;
@@ -21,7 +40,8 @@
         using std::vformat;
     }
     #define LOGGER_FORMAT_AVAILABLE 1
-#elif defined(LOGGER_USE_FMT)
+    #define LOGGER_USING_STD_FORMAT 1
+#elif defined(USE_FMT) || defined(LOGGER_USE_FMT)
     #include <fmt/format.h>
     #include <fmt/args.h>
     namespace logger_compat {
@@ -32,6 +52,7 @@
         using fmt::vformat;
     }
     #define LOGGER_FORMAT_AVAILABLE 1
+    #define LOGGER_USING_FMT 1
 #else
     #include <sstream>
     #include <string>
@@ -39,7 +60,6 @@
         // Basic string formatting fallback
         template<typename... Args>
         std::string format(const std::string& fmt, Args&&... args) {
-            // Simple fallback - just concatenate with spaces
             std::ostringstream oss;
             oss << fmt;
             ((oss << " " << args), ...);  // C++17 fold expression
@@ -48,22 +68,34 @@
         
         template<typename T>
         using format_string = const T&;
+        
+        template<typename... Args>
+        auto make_format_args(Args&&... args) {
+            return std::make_tuple(std::forward<Args>(args)...);
+        }
+        
+        template<typename... Args>
+        std::string vformat(const std::string& fmt, const std::tuple<Args...>& args) {
+            return std::apply([&fmt](auto&&... a) { return format(fmt, a...); }, args);
+        }
     }
     #define LOGGER_FORMAT_AVAILABLE 0
+    #define LOGGER_USING_BASIC_FORMAT 1
 #endif
 
-// std::span compatibility
-#ifdef LOGGER_HAS_STD_SPAN
+// std::span compatibility - use C++20 if available, fallback to custom implementation
+#if LOGGER_HAS_SPAN_BUILTIN && !defined(LOGGER_FORCE_CPP17_SPAN)
     #include <span>
     namespace logger_compat {
         template<typename T, std::size_t Extent = std::dynamic_extent>
         using span = std::span<T, Extent>;
     }
     #define LOGGER_SPAN_AVAILABLE 1
+    #define LOGGER_USING_STD_SPAN 1
 #else
     #include <iterator>
     namespace logger_compat {
-        // Simple span-like class for C++17
+        // Simple span-like class for C++17 fallback
         template<typename T, std::size_t Extent = SIZE_MAX>
         class span {
         public:
@@ -106,10 +138,11 @@
         };
     }
     #define LOGGER_SPAN_AVAILABLE 0
+    #define LOGGER_USING_CUSTOM_SPAN 1
 #endif
 
-// Concepts compatibility
-#ifdef LOGGER_HAS_CONCEPTS
+// Concepts compatibility - use C++20 if available, fallback to SFINAE
+#if LOGGER_HAS_CONCEPTS_BUILTIN && !defined(LOGGER_FORCE_CPP17_CONCEPTS)
     #include <concepts>
     namespace logger_compat {
         template<typename T>
@@ -121,8 +154,14 @@
         concept Loggable = requires(T t) {
             { t.to_string() } -> std::convertible_to<std::string>;
         } || Stringable<T>;
+        
+        template<typename T>
+        concept Formattable = requires(T t) {
+            std::formatter<T>{};
+        };
     }
     #define LOGGER_CONCEPTS_AVAILABLE 1
+    #define LOGGER_USING_STD_CONCEPTS 1
 #else
     #include <string>
     namespace logger_compat {
@@ -152,19 +191,44 @@
                                                !std::is_same_v<decltype(std::declval<T>().to_string()), void>>>
             : std::true_type {};
         
+        template<typename T, typename = void>
+        struct is_formattable : std::false_type {};
+        
+        template<typename T>
+        struct is_formattable<T, std::void_t<decltype(std::formatter<T>{})>>
+            : std::true_type {};
+        
         template<typename T>
         inline constexpr bool Stringable = is_stringable<T>::value;
         
         template<typename T>
         inline constexpr bool Loggable = is_loggable<T>::value || is_stringable<T>::value;
+        
+        template<typename T>
+        inline constexpr bool Formattable = is_formattable<T>::value;
     }
     #define LOGGER_CONCEPTS_AVAILABLE 0
+    #define LOGGER_USING_SFINAE_CONCEPTS 1
 #endif
 
 ##################################################
-// Utility Macros for Feature-Conditional Code
+// Feature-Specific Utility Macros
 ##################################################
 
+// Feature availability checks
+#define LOGGER_HAS_FEATURE(feature_name) LOGGER_HAS_##feature_name##_BUILTIN
+
+// Conditional compilation based on individual features
+#define LOGGER_IF_FORMAT(code) \
+    do { if constexpr(LOGGER_HAS_STD_FORMAT_BUILTIN) { code } } while(0)
+
+#define LOGGER_IF_SPAN(code) \
+    do { if constexpr(LOGGER_HAS_SPAN_BUILTIN) { code } } while(0)
+
+#define LOGGER_IF_CONCEPTS(code) \
+    do { if constexpr(LOGGER_HAS_CONCEPTS_BUILTIN) { code } } while(0)
+
+// Legacy mode macros (backward compatibility)
 #ifdef LOGGER_CPP17_MODE
     #define LOGGER_IF_CPP20(code) 
     #define LOGGER_IF_CPP17(code) code
@@ -177,13 +241,24 @@
     #define LOGGER_CONSTEVAL_CPP20 consteval
 #endif
 
-// Template parameter constraint macros
-#ifdef LOGGER_HAS_CONCEPTS
+// Template parameter constraint macros - use C++20 concepts if available
+#if LOGGER_HAS_CONCEPTS_BUILTIN && !defined(LOGGER_FORCE_CPP17_CONCEPTS)
     #define LOGGER_REQUIRES(condition) requires condition
     #define LOGGER_CONCEPT_CHECK(concept_name, type) concept_name<type>
+    #define LOGGER_ENABLE_IF_CONCEPT(concept_name, type)
 #else
     #define LOGGER_REQUIRES(condition)
-    #define LOGGER_CONCEPT_CHECK(concept_name, type) std::enable_if_t<logger_compat::concept_name<type>>* = nullptr
+    #define LOGGER_CONCEPT_CHECK(concept_name, type)
+    #define LOGGER_ENABLE_IF_CONCEPT(concept_name, type) std::enable_if_t<logger_compat::concept_name<type>>* = nullptr
+#endif
+
+// Format string macros - adapt based on available implementation
+#if LOGGER_HAS_STD_FORMAT_BUILTIN && !defined(LOGGER_FORCE_CPP17_FORMAT)
+    #define LOGGER_FORMAT(fmt, ...) logger_compat::format(fmt, __VA_ARGS__)
+    #define LOGGER_FORMAT_STRING(str) logger_compat::format_string<decltype(__VA_ARGS__)...>{str}
+#else
+    #define LOGGER_FORMAT(fmt, ...) logger_compat::format(fmt, __VA_ARGS__)
+    #define LOGGER_FORMAT_STRING(str) str
 #endif
 
 ##################################################

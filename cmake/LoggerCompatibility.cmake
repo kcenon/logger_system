@@ -5,10 +5,11 @@
 # Feature Detection Functions
 ##################################################
 
-# Test for std::format availability
+# Test for std::format availability with vcpkg fmt fallback
 function(check_std_format)
     include(CheckCXXSourceCompiles)
     
+    # First try std::format
     set(CMAKE_REQUIRED_FLAGS "-std=c++20")
     check_cxx_source_compiles("
         #include <format>
@@ -19,10 +20,41 @@ function(check_std_format)
     " HAS_STD_FORMAT)
     
     if(HAS_STD_FORMAT)
-        message(STATUS "std::format is available")
+        message(STATUS "✅ std::format is available")
         add_definitions(-DLOGGER_HAS_STD_FORMAT)
+        add_definitions(-DLOGGER_USE_STD_FORMAT)
+        set(LOGGER_FORMAT_BACKEND "std::format" PARENT_SCOPE)
     else()
-        message(STATUS "std::format not available - using fallback formatting")
+        message(STATUS "⚠️ std::format not available - checking for fmt library")
+        
+        # Try to find fmt through vcpkg or system
+        find_package(fmt CONFIG QUIET)
+        if(fmt_FOUND)
+            message(STATUS "✅ fmt library found - using fmt::format")
+            add_definitions(-DLOGGER_USE_FMT)
+            set(LOGGER_FORMAT_BACKEND "fmt::format" PARENT_SCOPE)
+            set(LOGGER_FMT_TARGET fmt::fmt PARENT_SCOPE)
+        else()
+            # Try to find fmt through vcpkg explicitly
+            if(DEFINED ENV{VCPKG_ROOT})
+                message(STATUS "🔍 Trying to find fmt through vcpkg...")
+                find_package(fmt CONFIG QUIET PATHS $ENV{VCPKG_ROOT}/installed/${VCPKG_TARGET_TRIPLET})
+                if(fmt_FOUND)
+                    message(STATUS "✅ fmt library found via vcpkg - using fmt::format")
+                    add_definitions(-DLOGGER_USE_FMT)
+                    set(LOGGER_FORMAT_BACKEND "fmt::format" PARENT_SCOPE)
+                    set(LOGGER_FMT_TARGET fmt::fmt PARENT_SCOPE)
+                else()
+                    message(STATUS "⚠️ fmt library not found via vcpkg")
+                endif()
+            endif()
+            
+            if(NOT fmt_FOUND)
+                message(STATUS "⚠️ Neither std::format nor fmt available - using basic formatting")
+                add_definitions(-DLOGGER_USE_BASIC_FORMAT)
+                set(LOGGER_FORMAT_BACKEND "basic" PARENT_SCOPE)
+            endif()
+        endif()
     endif()
 endfunction()
 
@@ -132,19 +164,60 @@ endfunction()
 # External Dependency Management
 ##################################################
 
-function(setup_formatting_library)
-    if(CMAKE_CXX_STANDARD EQUAL 17 OR NOT HAS_STD_FORMAT)
-        # Use fmt library as fallback
-        find_package(fmt QUIET)
-        if(fmt_FOUND)
-            message(STATUS "Using external fmt library for formatting")
-            add_definitions(-DLOGGER_USE_FMT)
-        else()
-            message(STATUS "fmt library not found - using basic string formatting")
-            add_definitions(-DLOGGER_USE_BASIC_FORMAT)
+# Enhanced formatting library setup with vcpkg support
+function(setup_formatting_library TARGET_NAME)
+    message(STATUS "========================================")
+    message(STATUS "Setting up formatting library for ${TARGET_NAME}")
+    
+    if(DEFINED LOGGER_FORMAT_BACKEND)
+        message(STATUS "  Backend: ${LOGGER_FORMAT_BACKEND}")
+        
+        if(LOGGER_FORMAT_BACKEND STREQUAL "std::format")
+            message(STATUS "  ✅ Using std::format (C++20 native)")
+            target_compile_definitions(${TARGET_NAME} PRIVATE LOGGER_USE_STD_FORMAT)
+            
+        elseif(LOGGER_FORMAT_BACKEND STREQUAL "fmt::format")
+            message(STATUS "  ✅ Using fmt::format library")
+            target_compile_definitions(${TARGET_NAME} PRIVATE LOGGER_USE_FMT)
+            if(DEFINED LOGGER_FMT_TARGET)
+                target_link_libraries(${TARGET_NAME} PRIVATE ${LOGGER_FMT_TARGET})
+                message(STATUS "  📦 Linked fmt target: ${LOGGER_FMT_TARGET}")
+            endif()
+            
+        elseif(LOGGER_FORMAT_BACKEND STREQUAL "basic")
+            message(STATUS "  ⚠️  Using basic formatting fallback")
+            target_compile_definitions(${TARGET_NAME} PRIVATE LOGGER_USE_BASIC_FORMAT)
         endif()
     else()
-        message(STATUS "Using std::format for formatting")
-        add_definitions(-DLOGGER_USE_STD_FORMAT)
+        message(WARNING "LOGGER_FORMAT_BACKEND not set - using basic formatting")
+        target_compile_definitions(${TARGET_NAME} PRIVATE LOGGER_USE_BASIC_FORMAT)
+    endif()
+    
+    message(STATUS "========================================")
+endfunction()
+
+# Convenience function for setting up vcpkg fmt if std::format not available
+function(setup_vcpkg_fmt_fallback)
+    if(NOT DEFINED LOGGER_FORMAT_BACKEND OR LOGGER_FORMAT_BACKEND STREQUAL "basic")
+        message(STATUS "🔍 Attempting to install fmt via vcpkg...")
+        
+        # Check if vcpkg is available
+        find_program(VCPKG_EXECUTABLE vcpkg 
+            PATHS 
+                $ENV{VCPKG_ROOT} 
+                $ENV{VCPKG_ROOT}/vcpkg
+                ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg
+                ${CMAKE_CURRENT_SOURCE_DIR}/../vcpkg
+        )
+        
+        if(VCPKG_EXECUTABLE)
+            message(STATUS "📦 Found vcpkg at: ${VCPKG_EXECUTABLE}")
+            message(STATUS "💡 Consider running: ${VCPKG_EXECUTABLE} install fmt")
+        else()
+            message(STATUS "⚠️  vcpkg not found. To install fmt:")
+            message(STATUS "    1. Install vcpkg: git clone https://github.com/Microsoft/vcpkg.git")
+            message(STATUS "    2. Set VCPKG_ROOT environment variable")  
+            message(STATUS "    3. Run: vcpkg install fmt")
+        endif()
     endif()
 endfunction()
