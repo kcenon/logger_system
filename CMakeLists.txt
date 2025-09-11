@@ -12,9 +12,20 @@ project(
 )
 
 ##################################################
-# C++ standard requirements
+# C++ standard requirements with graceful degradation
 ##################################################
-set(CMAKE_CXX_STANDARD 20)
+
+# Default to C++20 but support graceful degradation to C++17
+option(FORCE_CPP17 "Force C++17 standard (disable C++20 features)" OFF)
+
+if(FORCE_CPP17)
+    set(CMAKE_CXX_STANDARD 17)
+    message(STATUS "Logger System: Forcing C++17 mode - C++20 features will be disabled")
+else()
+    set(CMAKE_CXX_STANDARD 20)
+    message(STATUS "Logger System: Using C++20 mode - Enhanced features enabled")
+endif()
+
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # Generate compile_commands.json for tooling

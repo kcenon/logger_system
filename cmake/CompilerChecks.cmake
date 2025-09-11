@@ -5,11 +5,22 @@
 # Minimum Compiler Version Requirements
 ##################################################
 
-# Define minimum compiler versions for C++20 support
-set(MIN_GCC_VERSION "10.0")
-set(MIN_CLANG_VERSION "11.0")
-set(MIN_APPLECLANG_VERSION "12.0")
-set(MIN_MSVC_VERSION "19.26")  # Visual Studio 2019 16.6
+# Define minimum compiler versions based on C++ standard
+if(CMAKE_CXX_STANDARD EQUAL 17)
+    # C++17 minimum requirements (more lenient)
+    set(MIN_GCC_VERSION "7.0")
+    set(MIN_CLANG_VERSION "5.0")
+    set(MIN_APPLECLANG_VERSION "9.0")
+    set(MIN_MSVC_VERSION "19.14")  # Visual Studio 2017 15.7
+    message(STATUS "Using C++17 compatibility mode - relaxed compiler requirements")
+else()
+    # C++20 minimum requirements 
+    set(MIN_GCC_VERSION "10.0")
+    set(MIN_CLANG_VERSION "11.0")
+    set(MIN_APPLECLANG_VERSION "12.0")
+    set(MIN_MSVC_VERSION "19.26")  # Visual Studio 2019 16.6
+    message(STATUS "Using C++20 mode - stricter compiler requirements")
+endif()
 
 # Check compiler version
 function(check_compiler_version)
