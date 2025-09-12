@@ -38,8 +38,15 @@ show_help() {
     echo "  --docs            Generate Doxygen documentation"
     echo "  --clean-docs      Clean and regenerate Doxygen documentation"
     echo ""
-    echo -e "${BOLD}Feature Options:${NC}"
-    echo "  --no-format       Disable std::format even if supported"
+    echo -e "${BOLD}Logger-Specific Options:${NC}"
+    echo "  --standalone      Build in standalone mode without thread_system"
+    echo "  --with-thread     Build with thread_system integration"
+    echo ""
+    echo -e "${BOLD}C++ Compatibility Options:${NC}"
+    echo "  --cpp17           Force C++17 mode (disable C++20 features)"
+    echo "  --force-fmt       Force fmt library usage even if std::format available"
+    echo "  --no-vcpkg        Skip vcpkg and use system libraries only"
+    echo "  --no-format       Disable std::format even if supported (legacy)"
     echo ""
     echo -e "${BOLD}Compiler Options:${NC}"
     echo "  --compiler PATH   Use specific compiler (skips interactive selection)"
@@ -422,6 +429,12 @@ BUILD_CORES=0
 VERBOSE=0
 SPECIFIC_COMPILER=""
 AUTO_SELECT=0
+# New C++17/C++20 compatibility options
+FORCE_CPP17=0
+FORCE_FMT=0
+NO_VCPKG=0
+STANDALONE_MODE=0
+WITH_THREAD=0
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -464,6 +477,26 @@ while [[ $# -gt 0 ]]; do
             ;;
         --no-format)
             DISABLE_STD_FORMAT=1
+            shift
+            ;;
+        --standalone)
+            STANDALONE_MODE=1
+            shift
+            ;;
+        --with-thread)
+            WITH_THREAD=1
+            shift
+            ;;
+        --cpp17)
+            FORCE_CPP17=1
+            shift
+            ;;
+        --force-fmt)
+            FORCE_FMT=1
+            shift
+            ;;
+        --no-vcpkg)
+            NO_VCPKG=1
             shift
             ;;
         --compiler)
@@ -600,6 +633,32 @@ fi
 
 if [ $BUILD_BENCHMARKS -eq 1 ]; then
     CMAKE_ARGS+=" -DBUILD_BENCHMARKS=ON"
+fi
+
+# New C++17/C++20 compatibility options
+if [ $FORCE_CPP17 -eq 1 ]; then
+    CMAKE_ARGS+=" -DFORCE_CPP17=ON"
+    print_info "Forcing C++17 mode - C++20 features will be disabled"
+fi
+
+if [ $FORCE_FMT -eq 1 ]; then
+    CMAKE_ARGS+=" -DLOGGER_FORCE_CPP17_FORMAT=ON"
+    print_info "Forcing fmt library usage over std::format"
+fi
+
+if [ $NO_VCPKG -eq 1 ]; then
+    CMAKE_ARGS+=" -DNO_VCPKG=ON"
+    # Remove vcpkg toolchain if disabling vcpkg
+    CMAKE_ARGS=$(echo "$CMAKE_ARGS" | sed 's/-DCMAKE_TOOLCHAIN_FILE=[^ ]*//')
+    print_info "Skipping vcpkg - using system libraries only"
+fi
+
+if [ $STANDALONE_MODE -eq 1 ]; then
+    CMAKE_ARGS+=" -DLOGGER_STANDALONE=ON"
+    print_info "Building in standalone mode without thread_system"
+elif [ $WITH_THREAD -eq 1 ]; then
+    CMAKE_ARGS+=" -DUSE_THREAD_SYSTEM=ON"
+    print_info "Building with thread_system integration"
 fi
 
 # Set build targets based on option
