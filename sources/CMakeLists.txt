@@ -90,6 +90,16 @@ set_target_properties(logger PROPERTIES
     POSITION_INDEPENDENT_CODE ON
 )
 
+# Setup formatting library (std::format, fmt, or basic fallback)
+if(COMMAND setup_formatting_library)
+    setup_formatting_library(logger)
+endif()
+
+# Setup vcpkg fmt fallback guidance if needed
+if(COMMAND setup_vcpkg_fmt_fallback)
+    setup_vcpkg_fmt_fallback()
+endif()
+
 # Compiler-specific options
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(logger PRIVATE -Wall -Wextra -Wpedantic)
