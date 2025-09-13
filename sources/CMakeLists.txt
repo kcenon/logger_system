@@ -17,6 +17,9 @@ target_sources(logger
         logger/safety/crash_safety.cpp
         logger/health/health_check_system.cpp
         logger/flow/overflow_policy.cpp
+        core/plugin_manager.cpp
+        core/plugin_registry.cpp
+        threading_plugins/thread_system_plugin.cpp
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/logger.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/logger_interface.h>
@@ -36,6 +39,14 @@ target_sources(logger
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/analysis/log_analyzer.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/security/log_sanitizer.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/interfaces/logger_crash_safety.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logging_interfaces/logging_interfaces.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logging_interfaces/logger_interface.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logging_interfaces/writer_interface.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logging_interfaces/threading_plugin_interface.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logging_interfaces/plugin_loader_interface.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/core/plugin_manager.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/core/plugin_registry.h>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/threading_plugins/thread_system_plugin.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/health/health_check_system.h>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/logger/flow/overflow_policy.h>
 )
