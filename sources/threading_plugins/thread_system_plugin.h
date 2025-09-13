@@ -90,9 +90,10 @@ private:
 
 // Plugin factory functions for dynamic loading
 extern "C" {
-    std::shared_ptr<void> create_plugin();
+    void* create_plugin();
     void destroy_plugin(void* plugin);
-    interfaces::plugin_info get_plugin_info();
+    void get_plugin_info(char* name, size_t name_size, char* version, size_t version_size,
+                        char* description, size_t desc_size, int* plugin_type);
 }
 
 } // namespace threading_plugins

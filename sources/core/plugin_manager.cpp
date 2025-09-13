@@ -47,22 +47,45 @@ bool plugin_manager::load_plugin(const std::string& plugin_path) {
     entry.healthy = true;
 
     // Try to get plugin info function
-    auto get_info_func = get_symbol<interfaces::plugin_info(*)()>(handle, "get_plugin_info");
+    auto get_info_func = get_symbol<void(*)(char*, size_t, char*, size_t, char*, size_t, int*)>(handle, "get_plugin_info");
     if (get_info_func) {
-        entry.info = get_info_func();
+        char name_buf[256] = {0};
+        char version_buf[64] = {0};
+        char desc_buf[512] = {0};
+        int plugin_type = 0;
+
+        get_info_func(name_buf, sizeof(name_buf), version_buf, sizeof(version_buf),
+                     desc_buf, sizeof(desc_buf), &plugin_type);
+
+        entry.info = interfaces::plugin_info(
+            std::string(name_buf),
+            std::string(version_buf),
+            std::string(desc_buf),
+            static_cast<interfaces::plugin_type>(plugin_type),
+            plugin_path,
+            true
+        );
     } else {
         entry.info = interfaces::plugin_info(plugin_name, "1.0.0", "Unknown plugin",
                                            interfaces::plugin_type::unknown, plugin_path, true);
     }
 
     // Try to get factory function
-    auto factory_func = get_symbol<std::shared_ptr<void>(*)()>(handle, "create_plugin");
+    auto factory_func = get_symbol<void*(*)()>(handle, "create_plugin");
+    auto destroyer_func = get_symbol<void(*)(void*)>(handle, "destroy_plugin");
+
     if (factory_func) {
-        entry.factory = [factory_func]() { return factory_func(); };
+        entry.factory = [factory_func, destroyer_func]() {
+            void* raw_ptr = factory_func();
+            return std::shared_ptr<void>(raw_ptr, [destroyer_func](void* ptr) {
+                if (destroyer_func && ptr) {
+                    destroyer_func(ptr);
+                }
+            });
+        };
     }
 
-    // Try to get destroyer function
-    auto destroyer_func = get_symbol<void(*)(void*)>(handle, "destroy_plugin");
+    // Store destroyer function for entry
     if (destroyer_func) {
         entry.destroyer = [destroyer_func](void* ptr) { destroyer_func(ptr); };
     }
@@ -188,7 +211,7 @@ bool plugin_manager::validate_plugin(const std::string& plugin_path) const {
 
     // Check for required symbols
     bool valid = true;
-    auto get_info_func = get_symbol<interfaces::plugin_info(*)()>(handle, "get_plugin_info");
+    auto get_info_func = get_symbol<void(*)(char*, size_t, char*, size_t, char*, size_t, int*)>(handle, "get_plugin_info");
     if (!get_info_func) {
         valid = false;
     }

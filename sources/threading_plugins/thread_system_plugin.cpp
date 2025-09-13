@@ -1,6 +1,7 @@
 #include "thread_system_plugin.h"
 #include <algorithm>
 #include <stdexcept>
+#include <cstring>
 
 #ifdef USE_THREAD_SYSTEM
     // Include thread_system headers if available
@@ -260,8 +261,8 @@ void thread_system_plugin::ensure_default_pool() {
 // Plugin factory functions
 extern "C" {
 
-std::shared_ptr<void> create_plugin() {
-    return std::static_pointer_cast<void>(std::make_shared<thread_system_plugin>());
+void* create_plugin() {
+    return new thread_system_plugin();
 }
 
 void destroy_plugin(void* plugin) {
@@ -270,15 +271,23 @@ void destroy_plugin(void* plugin) {
     }
 }
 
-interfaces::plugin_info get_plugin_info() {
-    return interfaces::plugin_info(
-        "thread_system_plugin",
-        "1.0.0",
-        "Threading plugin with thread_system integration support",
-        interfaces::plugin_type::threading,
-        "",  // Path will be set by plugin manager
-        true
-    );
+void get_plugin_info(char* name, size_t name_size, char* version, size_t version_size,
+                    char* description, size_t desc_size, int* plugin_type) {
+    if (name && name_size > 0) {
+        strncpy(name, "thread_system_plugin", name_size - 1);
+        name[name_size - 1] = '\0';
+    }
+    if (version && version_size > 0) {
+        strncpy(version, "1.0.0", version_size - 1);
+        version[version_size - 1] = '\0';
+    }
+    if (description && desc_size > 0) {
+        strncpy(description, "Threading plugin with thread_system integration support", desc_size - 1);
+        description[desc_size - 1] = '\0';
+    }
+    if (plugin_type) {
+        *plugin_type = static_cast<int>(interfaces::plugin_type::threading);
+    }
 }
 
 } // extern "C"
