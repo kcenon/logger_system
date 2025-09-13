@@ -125,7 +125,7 @@ if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE)
             message(STATUS "Found thread_system as sibling directory")
             # Build thread_system as submodule to avoid vcpkg issues
             set(BUILD_THREADSYSTEM_AS_SUBMODULE ON CACHE BOOL "Build ThreadSystem as submodule" FORCE)
-            add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" "${CMAKE_BINARY_DIR}/thread_system")
+            add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" "${CMAKE_BINARY_DIR}/thread_system_build")
             set(THREAD_SYSTEM_FOUND TRUE)
         else()
             # Try to find it as an installed package
