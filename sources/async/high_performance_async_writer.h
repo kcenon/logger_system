@@ -24,6 +24,7 @@ All rights reserved.
 #include <thread>
 #include <atomic>
 #include <chrono>
+#include <functional>  // Added for std::function usage
 
 namespace logger_module::async {
 
