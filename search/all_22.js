@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['✅_0',['Phase 2 - Core Systems (Complete - 100% ✅)',['../index.html#autotoc_md3',1,'']]]
+  ['you_20start_0',['1. Before You Start',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CONTRIBUTING.html#autotoc_md250',1,'']]]
 ];

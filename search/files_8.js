@@ -23,6 +23,7 @@ var searchData=
   ['logger_5fconfig_2eh_20',['logger_config.h',['../logger__config_8h.html',1,'']]],
   ['logger_5finterface_2eh_21',['logger_interface.h',['../logger__interface_8h.html',1,'']]],
   ['logger_5fmetrics_2eh_22',['logger_metrics.h',['../logger__metrics_8h.html',1,'']]],
-  ['logger_5ftypes_2eh_23',['logger_types.h',['../logger__types_8h.html',1,'']]],
-  ['logger_5fv1_5fcompat_2eh_24',['logger_v1_compat.h',['../logger__v1__compat_8h.html',1,'']]]
+  ['logger_5fsystem_5farchitecture_2emd_23',['LOGGER_SYSTEM_ARCHITECTURE.md',['../LOGGER__SYSTEM__ARCHITECTURE_8md.html',1,'']]],
+  ['logger_5ftypes_2eh_24',['logger_types.h',['../logger__types_8h.html',1,'']]],
+  ['logger_5fv1_5fcompat_2eh_25',['logger_v1_compat.h',['../logger__v1__compat_8h.html',1,'']]]
 ];

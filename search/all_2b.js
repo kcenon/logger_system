@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔍_20code_20quality_0',['🔍 Code Quality',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CI__CD__DASHBOARD.html#autotoc_md256',1,'']]]
+  ['📖_20external_20resources_0',['📖 External Resources',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md454',1,'']]]
 ];
