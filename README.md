@@ -88,7 +88,7 @@ This logger system is a component of a comprehensive threading and monitoring ec
 - **Unified configuration**: Single point of configuration for entire ecosystem
 - **Seamless integration**: Plug-and-play with thread pools and monitoring
 
-> 📖 **[Complete Architecture Guide](../ARCHITECTURE.md)**: Comprehensive documentation of the entire ecosystem architecture, dependency relationships, and integration patterns.
+> 📖 **[Complete Architecture Guide](docs/ARCHITECTURE.md)**: Comprehensive documentation of the entire ecosystem architecture, dependency relationships, and integration patterns.
 
 ## Features
 
@@ -645,11 +645,14 @@ ctest --test-dir build
 
 ## Further Reading
 
-- docs/GETTING-STARTED.md
-- docs/PERFORMANCE.md
-- docs/CUSTOM-WRITERS.md
-- docs/API-REFERENCE.md
-- SECURITY.md
+- [Getting Started Guide](docs/guides/GETTING_STARTED.md) - Step-by-step setup and basic usage
+- [Best Practices](docs/guides/BEST_PRACTICES.md) - Production-ready patterns and recommendations  
+- [Performance Guide](docs/guides/PERFORMANCE.md) - Performance analysis and optimization
+- [Custom Writers](docs/advanced/CUSTOM_WRITERS.md) - Creating custom log writers
+- [API Reference](docs/API_REFERENCE.md) - Complete API documentation
+- [System Architecture](docs/LOGGER_SYSTEM_ARCHITECTURE.md) - Detailed technical architecture
+- [Security Guide](docs/SECURITY.md) - Security considerations and reporting
+- [Complete Documentation](docs/README.md) - Full documentation index
 
 ## Installation
 
