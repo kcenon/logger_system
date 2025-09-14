@@ -8,6 +8,7 @@
 #include <mutex>
 #include <chrono>
 #include <functional>
+#include <stdexcept>  // Added for exception handling
 #include "../logging_interfaces/plugin_loader_interface.h"
 
 #ifdef _WIN32

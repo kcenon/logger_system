@@ -25,6 +25,8 @@ All rights reserved.
 #include <memory>
 #include <thread>
 #include <functional>
+#include <mutex>              // Added for synchronization primitives
+#include <condition_variable> // Added for threading coordination
 
 namespace logger_module::async {
 

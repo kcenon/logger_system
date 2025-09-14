@@ -25,6 +25,8 @@ All rights reserved.
 #include <memory>
 #include <optional>
 #include <sstream>
+#include <algorithm>  // Added for graph algorithms
+#include <stack>      // Added for graph traversal algorithms
 
 namespace logger_module {
 
