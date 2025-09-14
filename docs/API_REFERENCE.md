@@ -521,6 +521,75 @@ All public methods of the logger class are thread-safe. Writers should implement
 - Lock-free queue provides better scalability (when enabled)
 - Larger buffer sizes reduce contention but increase memory usage
 
+## Advanced Features
+
+### Structured Logging
+
+```cpp
+// Using structured fields with built-in logger methods
+logger->info("User login", {
+    {"user_id", 12345},
+    {"ip_address", "192.168.1.1"},
+    {"timestamp", std::chrono::system_clock::now()},
+    {"success", true}
+});
+
+// Using log_entry directly for complex scenarios
+log_entry entry;
+entry.level = log_level::info;
+entry.message = "Database query";
+entry.context["query"] = "SELECT * FROM users";
+entry.context["duration_ms"] = "45";
+entry.context["rows_returned"] = "100";
+// Entry would be processed by structured-aware writers
+```
+
+### Contextual Logging
+
+```cpp
+// Set thread-local context (implementation dependent)
+// Context is included automatically in log entries
+logger->log(log_level::info, "Processing request");
+
+// Context is accessible through the log_entry structure
+// in custom writers and formatters
+```
+
+### Performance Monitoring
+
+```cpp
+// Enable performance metrics collection
+logger->enable_metrics_collection(true);
+
+// Log some messages
+for (int i = 0; i < 1000; ++i) {
+    auto result = logger->log(log_level::info, "Test message");
+    if (!result) {
+        // Handle logging errors
+        break;
+    }
+}
+
+// Get current metrics
+auto metrics = logger->get_current_metrics();
+std::cout << "Messages per second: " << metrics.get_messages_per_second() << "\n";
+std::cout << "Average enqueue time: " << metrics.get_avg_enqueue_time_ns() << " ns\n";
+std::cout << "Queue utilization: " << metrics.get_queue_utilization_percent() << "%\n";
+```
+
+### Environment-based Configuration
+
+```cpp
+// Configuration can adapt based on environment variables
+auto logger = logger_module::logger_builder()
+    .use_template("production")  // Base template
+    .with_config_validation(true) // Enable validation
+    .build();
+
+// Templates support environment variable overrides:
+// LOG_LEVEL, LOG_ASYNC, LOG_BUFFER_SIZE, etc.
+```
+
 ## Migration from v1.0
 
 The v1.0 API is still supported for backward compatibility. New code should use the builder pattern and result types for better error handling.
