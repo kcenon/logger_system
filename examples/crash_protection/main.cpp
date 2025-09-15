@@ -22,7 +22,8 @@
 #include "logger/writers/console_writer.h"
 #include "logger/writers/file_writer.h"
 
-using namespace logger_module;
+using namespace kcenon::logger;
+namespace logger_module = kcenon::logger;
 
 // Global state for demonstration
 std::atomic<bool> logging_active{true};

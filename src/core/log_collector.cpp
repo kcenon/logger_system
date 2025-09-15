@@ -33,6 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/log_collector.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/logger/interfaces/logger_interface.h>
 #include <queue>
 #include <mutex>
 #include <condition_variable>
@@ -69,7 +70,18 @@ public:
             }
             
             // Create log_entry with optional source location
-            log_entry entry(level, message, timestamp);
+            // Convert thread_module::log_level to logger_system::log_level
+            logger_system::log_level logger_level;
+            switch (level) {
+                case thread_module::log_level::trace: logger_level = logger_system::log_level::trace; break;
+                case thread_module::log_level::debug: logger_level = logger_system::log_level::debug; break;
+                case thread_module::log_level::info: logger_level = logger_system::log_level::info; break;
+                case thread_module::log_level::warning: logger_level = logger_system::log_level::warn; break;
+                case thread_module::log_level::error: logger_level = logger_system::log_level::error; break;
+                case thread_module::log_level::critical: logger_level = logger_system::log_level::fatal; break;
+                default: logger_level = logger_system::log_level::info; break;
+            }
+            log_entry entry(logger_level, message, timestamp);
             if (!file.empty() || line != 0 || !function.empty()) {
                 entry.location = source_location{file, line, function};
             }

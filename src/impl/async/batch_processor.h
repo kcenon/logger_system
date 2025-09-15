@@ -18,6 +18,7 @@ All rights reserved.
 #include "lockfree_queue.h"
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/writers/base_writer.h>
+#include <kcenon/logger/interfaces/logger_types.h>
 #include <kcenon/logger/core/error_codes.h>
 #include <vector>
 #include <chrono>
@@ -62,7 +63,7 @@ public:
      * @brief Batch entry structure
      */
     struct batch_entry {
-        thread_module::log_level level;
+        logger_system::log_level level;
         std::string message;
         std::string file;
         int line;
@@ -71,7 +72,7 @@ public:
 
         batch_entry() = default;
 
-        batch_entry(thread_module::log_level lvl,
+        batch_entry(logger_system::log_level lvl,
                    std::string msg,
                    std::string f,
                    int l,

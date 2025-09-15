@@ -222,9 +222,11 @@ inline std::string logger_error_to_string(logger_error_code code) {
 
 #ifdef USE_THREAD_SYSTEM
 // Use thread_system's result types
-using thread_module::result;
-using thread_module::result_void;
-using thread_module::error;
+using kcenon::thread::result;
+using kcenon::thread::result_void;
+using kcenon::thread::error;
+// Alias for convenience
+namespace thread_module = kcenon::thread;
 
 // Type alias for convenience
 using error_code = logger_error_code;
@@ -238,7 +240,7 @@ using error_code = logger_error_code;
 inline error make_logger_error(logger_error_code code, const std::string& message = "") {
     // Convert logger_error_code to thread_module::error_code
     // For logger-specific errors, we'll use a high offset to avoid conflicts
-    auto thread_code = static_cast<thread_module::error_code>(
+    auto thread_code = static_cast<kcenon::thread::error_code>(
         static_cast<int>(code) + 10000
     );
     

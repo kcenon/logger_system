@@ -15,14 +15,15 @@ All rights reserved.
 #include <thread>
 #include <chrono>
 
-using namespace logger_module;
+using namespace kcenon::logger;
 using namespace thread_module;
+namespace logger_module = kcenon::logger;
 
 int main() {
     std::cout << "=== Logger Advanced Features Demo ===" << std::endl;
     
     // Create logger instance
-    auto logger = std::make_unique<logger_module::logger>(true, 1024);
+    auto logger = std::make_unique<kcenon::logger::logger>(true, 1024);
     
     // Add named writers
     logger->add_writer("console", std::make_unique<console_writer>());

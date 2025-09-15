@@ -84,7 +84,7 @@ network_writer::~network_writer() {
 #endif
 }
 
-result_void network_writer::write(thread_module::log_level level,
+result_void network_writer::write(logger_system::log_level level,
                                   const std::string& message,
                                   const std::string& file,
                                   int line,

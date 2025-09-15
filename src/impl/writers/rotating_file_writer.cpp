@@ -76,7 +76,7 @@ rotating_file_writer::rotating_file_writer(const std::string& filename,
     }
 }
 
-result_void rotating_file_writer::write(thread_module::log_level level,
+result_void rotating_file_writer::write(logger_system::log_level level,
                                         const std::string& message,
                                         const std::string& file,
                                         int line,

@@ -71,7 +71,7 @@ public:
     /**
      * @brief Write with rotation check
      */
-    result_void write(thread_module::log_level level,
+    result_void write(logger_system::log_level level,
                       const std::string& message,
                       const std::string& file,
                       int line,

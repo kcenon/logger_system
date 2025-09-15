@@ -94,7 +94,7 @@ public:
      * @param timestamp Time of log entry
      * @return result_void indicating success or error
      */
-    result_void write(thread_module::log_level level,
+    result_void write(logger_system::log_level level,
                      const std::string& message,
                      const std::string& file,
                      int line,
@@ -158,14 +158,14 @@ private:
      * @brief Internal structure to store batch entry
      */
     struct batch_entry {
-        thread_module::log_level level;
+        logger_system::log_level level;
         std::string message;
         std::string file;
         int line;
         std::string function;
         std::chrono::system_clock::time_point timestamp;
         
-        batch_entry(thread_module::log_level lvl,
+        batch_entry(logger_system::log_level lvl,
                    const std::string& msg,
                    const std::string& f,
                    int l,

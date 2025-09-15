@@ -20,7 +20,8 @@
 // Compatibility header for v1 API
 #include <kcenon/logger/compatibility.h>
 
-using namespace logger_module;
+using namespace kcenon::logger;
+namespace logger_module = kcenon::logger;
 using namespace std::chrono_literals;
 
 /**

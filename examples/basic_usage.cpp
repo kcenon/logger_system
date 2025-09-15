@@ -37,7 +37,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <iostream>
 #include <chrono>
 
-using namespace logger_module;
+using namespace kcenon::logger;
+namespace logger_module = kcenon::logger;
 
 void basic_logging_example() {
     std::cout << "\n=== Basic Logging Example ===\n" << std::endl;

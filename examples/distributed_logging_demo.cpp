@@ -16,15 +16,16 @@ All rights reserved.
 #include <random>
 #include <atomic>
 
-using namespace logger_module;
+using namespace kcenon::logger;
 using namespace thread_module;
+namespace logger_module = kcenon::logger;
 
 // Simulate a client application
 void simulate_client(int client_id, const std::string& server_host, uint16_t server_port) {
     std::cout << "Client " << client_id << " starting..." << std::endl;
     
     // Create logger with network writer
-    auto logger = std::make_unique<logger_module::logger>(true, 1024);
+    auto logger = std::make_unique<kcenon::logger::logger>(true, 1024);
     logger->add_writer("console", std::make_unique<console_writer>());
     logger->add_writer("network", std::make_unique<network_writer>(
         server_host, server_port, network_writer::protocol_type::tcp

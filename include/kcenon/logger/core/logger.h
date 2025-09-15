@@ -53,6 +53,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "di/di_container_factory.h"
 #include "monitoring/monitoring_interface.h"
 #include "monitoring/monitoring_factory.h"
+#include <kcenon/logger/interfaces/logger_types.h>
 
 /**
  * @file logger.h
@@ -378,14 +379,14 @@ public:
      * @brief Get current performance metrics
      * @return Result containing metrics or error
      */
-    result<performance_metrics> get_current_metrics() const;
+    result<logger_metrics> get_current_metrics() const;
     
     /**
      * @brief Get metrics history for a specific duration
      * @param duration How far back to retrieve metrics
      * @return Result containing metrics snapshot or error
      */
-    result<std::unique_ptr<performance_metrics>> get_metrics_history(std::chrono::seconds duration) const;
+    result<std::unique_ptr<logger_metrics>> get_metrics_history(std::chrono::seconds duration) const;
     
     /**
      * @brief Reset performance metrics
@@ -438,7 +439,7 @@ public:
      * @brief Set a DI container for writer resolution
      * @param container Pointer to DI container (not owned)
      */
-    void set_di_container(di_container_interface<base_writer>* container);
+    void set_di_container(di_container_interface* container);
     
     /**
      * @brief Check if DI container is available
@@ -518,13 +519,13 @@ public:
      * @brief Collect current metrics
      * @return Result containing monitoring data or error
      */
-    result<monitoring_data> collect_metrics() const;
+    result<monitoring_metrics> collect_metrics() const;
     
     /**
      * @brief Perform health check
      * @return Result containing health check result or error
      */
-    result<health_check_result> check_health() const;
+    result<health_status> check_health() const;
     
     /**
      * @brief Reset monitoring metrics
@@ -552,8 +553,8 @@ private:
     std::unique_ptr<impl> pimpl_;
     
     // DI support members
-    di_container_interface<base_writer>* external_di_container_ = nullptr;
-    std::unique_ptr<di_container_interface<base_writer>> internal_di_container_;
+    di_container_interface* external_di_container_ = nullptr;
+    std::unique_ptr<di_container_interface> internal_di_container_;
     
     // Monitoring support member
     std::unique_ptr<monitoring_interface> monitor_;

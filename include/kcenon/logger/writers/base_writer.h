@@ -68,7 +68,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @code
  * class custom_writer : public base_writer {
  * public:
- *     result_void write(thread_module::log_level level,
+ *     result_void write(logger_system::log_level level,
  *                      const std::string& message,
  *                      const std::string& file,
  *                      int line,
@@ -167,7 +167,7 @@ public:
      * 
      * @since 1.0.0
      */
-    virtual result_void write(thread_module::log_level level,
+    virtual result_void write(logger_system::log_level level,
                               const std::string& message,
                               const std::string& file,
                               int line,
@@ -280,7 +280,7 @@ protected:
      * 
      * @since 1.0.0
      */
-    std::string format_log_entry(thread_module::log_level level,
+    std::string format_log_entry(logger_system::log_level level,
                                 const std::string& message,
                                 const std::string& file,
                                 int line,
@@ -301,7 +301,7 @@ protected:
      * 
      * @since 1.0.0
      */
-    std::string level_to_string(thread_module::log_level level) const;
+    std::string level_to_string(logger_system::log_level level) const;
     
     /**
      * @brief Get ANSI color code for the specified log level
@@ -321,7 +321,7 @@ protected:
      * 
      * @since 1.0.0
      */
-    std::string level_to_color(thread_module::log_level level) const;
+    std::string level_to_color(logger_system::log_level level) const;
     
 private:
     bool use_color_ = true;

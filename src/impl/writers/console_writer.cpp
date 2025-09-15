@@ -56,7 +56,7 @@ console_writer::~console_writer() {
     flush();
 }
 
-result_void console_writer::write(thread_module::log_level level,
+result_void console_writer::write(logger_system::log_level level,
                                   const std::string& message,
                                   const std::string& file,
                                   int line,
@@ -64,7 +64,7 @@ result_void console_writer::write(thread_module::log_level level,
                                   const std::chrono::system_clock::time_point& timestamp) {
     std::lock_guard<std::mutex> lock(write_mutex_);
     
-    auto& stream = (use_stderr_ || level <= thread_module::log_level::error) 
+    auto& stream = (use_stderr_ || level <= logger_system::log_level::error) 
                    ? std::cerr : std::cout;
     
     if (use_color()) {
@@ -128,7 +128,7 @@ bool console_writer::is_color_supported() const {
 }
 
 // base_writer implementation
-std::string base_writer::format_log_entry(thread_module::log_level level,
+std::string base_writer::format_log_entry(logger_system::log_level level,
                                          const std::string& message,
                                          const std::string& file,
                                          int line,
@@ -155,28 +155,28 @@ std::string base_writer::format_log_entry(thread_module::log_level level,
     return oss.str();
 }
 
-std::string base_writer::level_to_string(thread_module::log_level level) const {
+std::string base_writer::level_to_string(logger_system::log_level level) const {
     switch (level) {
-        case thread_module::log_level::critical: return "CRITICAL";
-        case thread_module::log_level::error:    return "ERROR";
-        case thread_module::log_level::warning:  return "WARNING";
-        case thread_module::log_level::info:     return "INFO";
-        case thread_module::log_level::debug:    return "DEBUG";
-        case thread_module::log_level::trace:    return "TRACE";
+        case logger_system::log_level::fatal: return "CRITICAL";
+        case logger_system::log_level::error:    return "ERROR";
+        case logger_system::log_level::warn:  return "WARNING";
+        case logger_system::log_level::info:     return "INFO";
+        case logger_system::log_level::debug:    return "DEBUG";
+        case logger_system::log_level::trace:    return "TRACE";
     }
     return "UNKNOWN";
 }
 
-std::string base_writer::level_to_color(thread_module::log_level level) const {
+std::string base_writer::level_to_color(logger_system::log_level level) const {
     if (!use_color()) return "";
     
     switch (level) {
-        case thread_module::log_level::critical: return "\033[1;35m"; // Bright Magenta
-        case thread_module::log_level::error:    return "\033[1;31m"; // Bright Red
-        case thread_module::log_level::warning:  return "\033[1;33m"; // Bright Yellow
-        case thread_module::log_level::info:     return "\033[1;32m"; // Bright Green
-        case thread_module::log_level::debug:    return "\033[1;36m"; // Bright Cyan
-        case thread_module::log_level::trace:    return "\033[1;37m"; // Bright White
+        case logger_system::log_level::fatal: return "\033[1;35m"; // Bright Magenta
+        case logger_system::log_level::error:    return "\033[1;31m"; // Bright Red
+        case logger_system::log_level::warn:  return "\033[1;33m"; // Bright Yellow
+        case logger_system::log_level::info:     return "\033[1;32m"; // Bright Green
+        case logger_system::log_level::debug:    return "\033[1;36m"; // Bright Cyan
+        case logger_system::log_level::trace:    return "\033[1;37m"; // Bright White
     }
     return "";
 }

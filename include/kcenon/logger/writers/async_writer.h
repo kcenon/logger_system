@@ -102,7 +102,7 @@ public:
      * @param timestamp Timestamp
      * @return result_void indicating success or error
      */
-    result_void write(thread_module::log_level level,
+    result_void write(logger_system::log_level level,
                      const std::string& message,
                      const std::string& file,
                      int line,
@@ -178,7 +178,7 @@ private:
      * @brief Message structure for queuing
      */
     struct queued_message {
-        thread_module::log_level level;
+        logger_system::log_level level;
         std::string message;
         std::string file;
         int line;

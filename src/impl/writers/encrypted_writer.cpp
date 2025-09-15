@@ -32,7 +32,7 @@ encrypted_writer::encrypted_writer(std::unique_ptr<base_writer> wrapped_writer,
 
 encrypted_writer::~encrypted_writer() = default;
 
-result_void encrypted_writer::write(thread_module::log_level level,
+result_void encrypted_writer::write(logger_system::log_level level,
                                     const std::string& message,
                                     const std::string& file,
                                     int line,

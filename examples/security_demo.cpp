@@ -43,29 +43,26 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <chrono>
 #include <regex>
 
-using namespace logger_module;
+using namespace kcenon::logger;
+namespace logger_module = kcenon::logger;
 using namespace std::chrono_literals;
 
 // Custom security filter that blocks sensitive logs
-class security_filter : public log_filter {
+class security_filter : public log_filter_interface {
 public:
-    bool should_log(thread_module::log_level level,
-                   const std::string& message,
-                   const std::string& file,
-                   int line,
-                   const std::string& function) const override {
-        // Suppress unused parameter warnings
-        (void)level;
-        (void)file;
-        (void)line;
-        (void)function;
-        
+    bool should_log(const log_entry& entry) const override {
+        const std::string message = entry.message.to_string();
+
         // Block logs containing passwords
         if (message.find("password") != std::string::npos) {
             std::cout << "[SECURITY] Blocked log containing password" << std::endl;
             return false;
         }
         return true;
+    }
+
+    std::string get_name() const override {
+        return "security_filter";
     }
 };
 
@@ -111,20 +108,20 @@ void demonstrate_security_logging() {
     std::cout << "\nLogging security events (sensitive data will be sanitized):" << std::endl;
     
     // This will be blocked by the security filter
-    logger->log(thread_module::log_level::warning,
+    logger->log(logger_system::log_level::warning,
                 "User login attempt with password=admin123");
     
     // These will be logged but sanitized
-    logger->log(thread_module::log_level::warning,
+    logger->log(logger_system::log_level::warning,
                 sanitizer->sanitize("Suspicious activity from IP 192.168.1.100"));
     
-    logger->log(thread_module::log_level::warning,
+    logger->log(logger_system::log_level::warning,
                 sanitizer->sanitize("Failed login for email user@example.com"));
     
-    logger->log(thread_module::log_level::error,
+    logger->log(logger_system::log_level::error,
                 sanitizer->sanitize("Data breach detected: SSN 123-45-6789 exposed"));
     
-    logger->log(thread_module::log_level::critical,
+    logger->log(logger_system::log_level::critical,
                 sanitizer->sanitize("API key compromised: key=EXAMPLE_KEY_12345"));
 }
 
@@ -136,10 +133,10 @@ void demonstrate_encryption() {
     // Add encrypted file writer
     logger->add_writer(std::make_unique<file_writer>("security_encrypted.log"));
     
-    logger->log(thread_module::log_level::info,
+    logger->log(logger_system::log_level::info,
                 "This message will be written to an encrypted log file");
     
-    logger->log(thread_module::log_level::warning,
+    logger->log(logger_system::log_level::warning,
                 "Sensitive operations are logged securely");
     
     std::cout << "Messages written to encrypted log file: security_encrypted.log" << std::endl;
@@ -159,11 +156,11 @@ void demonstrate_audit_trail() {
     // Note: Router configuration would be done here if needed
     
     // Simulate various events
-    logger->log(thread_module::log_level::info, "Normal operation");
-    logger->log(thread_module::log_level::warning, "High CPU usage");
-    logger->log(thread_module::log_level::critical, "Security breach detected");
-    logger->log(thread_module::log_level::critical, "Unauthorized access attempt");
-    logger->log(thread_module::log_level::error, "Database connection failed");
+    logger->log(logger_system::log_level::info, "Normal operation");
+    logger->log(logger_system::log_level::warning, "High CPU usage");
+    logger->log(logger_system::log_level::critical, "Security breach detected");
+    logger->log(logger_system::log_level::critical, "Unauthorized access attempt");
+    logger->log(logger_system::log_level::error, "Database connection failed");
     
     std::cout << "Audit events written to: audit_trail.log" << std::endl;
 }
@@ -262,7 +259,7 @@ void demonstrate_security_metrics() {
             std::cout << "\nMessage rate: " << message_rate << " msgs/sec" << std::endl;
         
             if (message_rate > 1000.0) {
-                logger->log(thread_module::log_level::critical,
+                logger->log(logger_system::log_level::critical,
                            "High message rate detected!");
             }
         }
@@ -278,7 +275,7 @@ int main() {
         
         // Create and configure logger
         auto logger = std::make_shared<logger_module::logger>();
-        logger->set_min_level(thread_module::log_level::debug);
+        logger->set_min_level(logger_system::log_level::debug);
         logger->start();
         
         // Add console output for demo

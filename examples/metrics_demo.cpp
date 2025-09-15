@@ -12,7 +12,8 @@ All rights reserved.
 #include <iostream>
 #include <random>
 
-using namespace logger_module;
+using namespace kcenon::logger;
+namespace logger_module = kcenon::logger;
 
 void generate_logs(logger* log, int thread_id, int count) {
     std::random_device rd;

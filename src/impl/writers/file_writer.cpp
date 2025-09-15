@@ -24,7 +24,7 @@ file_writer::~file_writer() {
     close();
 }
 
-result_void file_writer::write(thread_module::log_level level,
+result_void file_writer::write(logger_system::log_level level,
                                const std::string& message,
                                const std::string& file,
                                int line,

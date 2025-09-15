@@ -51,7 +51,7 @@ public:
     /**
      * @brief Write log entry
      */
-    result_void write(thread_module::log_level level,
+    result_void write(logger_system::log_level level,
                       const std::string& message,
                       const std::string& file,
                       int line,
@@ -90,7 +90,7 @@ public:
 private:
     // Log entry for buffering
     struct buffered_log {
-        thread_module::log_level level;
+        logger_system::log_level level;
         std::string message;
         std::string file;
         int line;

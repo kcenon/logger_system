@@ -52,6 +52,8 @@ All rights reserved.
     #include <kcenon/logger/interfaces/logger_interface.h>
 #endif
 
+#include <kcenon/logger/interfaces/logger_types.h>
+
 namespace kcenon::logger {
 
 /**
@@ -139,7 +141,7 @@ struct log_entry {
      * @brief Severity level of the log message
      * @details Determines the importance and routing of the message
      */
-    thread_module::log_level level;
+    logger_system::log_level level;
     
     /**
      * @brief The actual log message
@@ -192,7 +194,7 @@ struct log_entry {
      * 
      * @since 1.0.0
      */
-    log_entry(thread_module::log_level lvl, 
+    log_entry(logger_system::log_level lvl, 
               const std::string& msg,
               std::chrono::system_clock::time_point ts = std::chrono::system_clock::now())
         : level(lvl), message(msg), timestamp(ts) {}
@@ -222,7 +224,7 @@ struct log_entry {
      * 
      * @since 1.0.0
      */
-    log_entry(thread_module::log_level lvl,
+    log_entry(logger_system::log_level lvl,
               const std::string& msg,
               const std::string& file,
               int line,
