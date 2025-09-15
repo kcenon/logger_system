@@ -191,13 +191,29 @@ log_collector::log_collector(std::size_t buffer_size)
 
 log_collector::~log_collector() = default;
 
+namespace {
+// Convert logger_system::log_level to thread_module::log_level
+thread_module::log_level convert_log_level(logger_system::log_level level) {
+    switch (level) {
+        case logger_system::log_level::trace: return thread_module::log_level::trace;
+        case logger_system::log_level::debug: return thread_module::log_level::debug;
+        case logger_system::log_level::info: return thread_module::log_level::info;
+        case logger_system::log_level::warn: return thread_module::log_level::warning;
+        case logger_system::log_level::error: return thread_module::log_level::error;
+        case logger_system::log_level::fatal: return thread_module::log_level::critical;
+        case logger_system::log_level::off: return thread_module::log_level::critical; // fallback
+        default: return thread_module::log_level::info;
+    }
+}
+}
+
 bool log_collector::enqueue(logger_system::log_level level,
                            const std::string& message,
                            const std::string& file,
                            int line,
                            const std::string& function,
                            const std::chrono::system_clock::time_point& timestamp) {
-    return pimpl_->enqueue(level, message, file, line, function, timestamp);
+    return pimpl_->enqueue(convert_log_level(level), message, file, line, function, timestamp);
 }
 
 void log_collector::add_writer(base_writer* writer) {
