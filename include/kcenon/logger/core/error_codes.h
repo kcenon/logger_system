@@ -109,7 +109,12 @@ enum class logger_error_code {
     component_not_found = 1801,
     registration_failed = 1802,
     creation_failed = 1803,
-    operation_failed = 1804
+    operation_failed = 1804,
+
+    // Writer errors (1900-1999)
+    writer_not_available = 1900,
+    writer_configuration_error = 1901,
+    writer_operation_failed = 1902
 };
 
 /**

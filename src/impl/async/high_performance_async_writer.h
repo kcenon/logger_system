@@ -18,6 +18,7 @@ All rights reserved.
 #include "lockfree_queue.h"
 #include "batch_processor.h"
 #include "../memory/object_pool.h"
+#include "../memory/log_entry_pool.h"
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/core/error_codes.h>
 #include <memory>

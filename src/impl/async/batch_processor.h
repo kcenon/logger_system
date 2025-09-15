@@ -55,7 +55,7 @@ public:
         size_t back_pressure_threshold{5000}; ///< Queue size threshold for back-pressure
         std::chrono::microseconds back_pressure_delay{100}; ///< Delay when under back-pressure
 
-        config() = default;
+        config() noexcept {}
     };
 
     /**
