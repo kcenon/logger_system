@@ -30,13 +30,13 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
-#include "../sources/logger/logger.h"
-#include "../sources/logger/security/log_sanitizer.h"
-#include "../sources/logger/structured/structured_logger.h"
-#include "../sources/logger/filters/log_filter.h"
-#include "../sources/logger/routing/log_router.h"
-#include "../sources/logger/writers/console_writer.h"
-#include "../sources/logger/writers/file_writer.h"
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/security/log_sanitizer.h>
+#include <kcenon/logger/structured/structured_logger.h>
+#include <kcenon/logger/filters/log_filter.h>
+#include <kcenon/logger/routing/log_router.h>
+#include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/logger/writers/file_writer.h>
 
 #include <iostream>
 #include <thread>

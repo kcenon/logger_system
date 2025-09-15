@@ -12,13 +12,13 @@
 #include <thread>
 
 // New v2 API headers
-#include "../sources/logger/logger.h"
-#include "../sources/logger/config/logger_builder.h"
-#include "../sources/logger/writers/console_writer.h"
-#include "../sources/logger/writers/file_writer.h"
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/logger/writers/file_writer.h>
 
 // Compatibility header for v1 API
-#include "../sources/logger/compatibility/logger_v1_compat.h"
+#include <kcenon/logger/compatibility.h>
 
 using namespace logger_module;
 using namespace std::chrono_literals;
