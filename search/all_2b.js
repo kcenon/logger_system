@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📖_20external_20resources_0',['📖 External Resources',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md454',1,'']]]
+  ['📚_20documentation_20structure_0',['📚 documentation structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md194',1,'📚 Documentation Structure'],['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md443',1,'📚 Documentation Structure']]]
 ];

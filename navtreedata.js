@@ -588,57 +588,14 @@ var NAVTREE =
       [ "Recommendations (Production)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md461", null ],
       [ "Secure Configuration Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md462", null ],
       [ "Roadmap", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md463", null ]
-    ] ],
-    [ "Deprecated List", "deprecated.html", null ],
-    [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
-      [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ],
-        [ "Variables", "namespacemembers_vars.html", null ],
-        [ "Typedefs", "namespacemembers_type.html", null ],
-        [ "Enumerations", "namespacemembers_enum.html", null ]
-      ] ]
-    ] ],
-    [ "Classes", "annotated.html", [
-      [ "Class List", "annotated.html", "annotated_dup" ],
-      [ "Class Index", "classes.html", null ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
-      [ "Class Members", "functions.html", [
-        [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", "functions_func" ],
-        [ "Variables", "functions_vars.html", "functions_vars" ],
-        [ "Typedefs", "functions_type.html", null ],
-        [ "Enumerations", "functions_enum.html", null ],
-        [ "Related Symbols", "functions_rela.html", null ]
-      ] ]
-    ] ],
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ],
-      [ "File Members", "globals.html", [
-        [ "All", "globals.html", null ],
-        [ "Macros", "globals_defs.html", null ]
-      ] ]
-    ] ],
-    [ "Examples", "examples.html", "examples" ]
+    ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"Advanced-example.html",
-"classlogger__module_1_1compact__formatter.html",
-"classlogger__module_1_1file__writer.html#a23076abfb99a7c2f26a6f0736bbf33c5",
-"classlogger__module_1_1log__aggregator.html#a9d4263c4f3d89de4d811196a61952058",
-"classlogger__module_1_1logger.html#af0f6ca9bc91d3ebebb46de27822f52bb",
-"classlogger__module_1_1overflow__policy__base.html#afdfa24948eb8a8044b6b5692144090e3",
-"classlogger__module_1_1small__string.html#af0a65072bbcbbbf65c8e5f912c041e86",
-"error__codes_8h.html#a23f0da6f87d99d4e4c13ef24c21135eba8fc246cdbf19b3a35d47497d145fc003",
-"logger__types_8h.html#ae3766003c8285b1cba6e1d4ee4475a19aa835e87f7ee7533d915bb9ba60582043",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html",
-"namespacelogger__module.html#a792c3db475172433c0f64b02c1533f76",
-"structlogger__module_1_1log__aggregator_1_1source__stats.html#ad3d0c9d76965afbfd6c9729d6d2494b9",
-"structlogger__module_1_1performance__metrics.html#a4d2f02240ef72307dbb9285b6d0408f3"
+"index.html",
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md67"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

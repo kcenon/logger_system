@@ -170,9 +170,8 @@ From v1.x to v2.x</h2>
 <div class="line">    .build();</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md335"></a>
 4. Logging API Migration</h3>
-<p><b>Old (v1.x):</b> </p><div class="fragment"><div class="line"><a class="code hl_define" href="logger__v1__compat_8h.html#a3f8026b595d5c70766d6eb049f50f04e">LOG_INFO</a>(logger, <span class="stringliteral">&quot;Message with %s&quot;</span>, param);</div>
+<p><b>Old (v1.x):</b> </p><div class="fragment"><div class="line">LOG_INFO(logger, <span class="stringliteral">&quot;Message with %s&quot;</span>, param);</div>
 <div class="line">LOG_DEBUG_F(logger, <span class="stringliteral">&quot;Formatted: {}&quot;</span>, value);</div>
-<div class="ttc" id="alogger__v1__compat_8h_html_a3f8026b595d5c70766d6eb049f50f04e"><div class="ttname"><a href="logger__v1__compat_8h.html#a3f8026b595d5c70766d6eb049f50f04e">LOG_INFO</a></div><div class="ttdeci">#define LOG_INFO(logger,...)</div><div class="ttdef"><b>Definition</b> <a href="logger__v1__compat_8h_source.html#l00077">logger_v1_compat.h:77</a></div></div>
 </div><!-- fragment --><p><b>New (v2.x):</b> </p><div class="fragment"><div class="line">logger-&gt;info(<span class="stringliteral">&quot;Message with param&quot;</span>, {{<span class="stringliteral">&quot;param&quot;</span>, param}});</div>
 <div class="line">logger-&gt;debug(<span class="stringliteral">&quot;Message&quot;</span>, {{<span class="stringliteral">&quot;value&quot;</span>, value}});</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md336"></a>
@@ -365,12 +364,11 @@ From Google glog</h2>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> logger = create_logger();</div>
 <div class="line">logger-&gt;info(<span class="stringliteral">&quot;Found cookies&quot;</span>, {{<span class="stringliteral">&quot;count&quot;</span>, num_cookies}});</div>
-<div class="line">logger-&gt;error(<span class="stringliteral">&quot;Error occurred&quot;</span>, {{<span class="stringliteral">&quot;code&quot;</span>, <a class="code hl_typedef" href="namespacelogger__module.html#ae1e454eb05e3ef274e857f0b0a43ad28">error_code</a>}});</div>
+<div class="line">logger-&gt;error(<span class="stringliteral">&quot;Error occurred&quot;</span>, {{<span class="stringliteral">&quot;code&quot;</span>, error_code}});</div>
 <div class="line"><span class="keywordflow">if</span> (!condition) {</div>
 <div class="line">    logger-&gt;critical(<span class="stringliteral">&quot;Condition failed&quot;</span>);</div>
 <div class="line">    std::abort();</div>
 <div class="line">}</div>
-<div class="ttc" id="anamespacelogger__module_html_ae1e454eb05e3ef274e857f0b0a43ad28"><div class="ttname"><a href="namespacelogger__module.html#ae1e454eb05e3ef274e857f0b0a43ad28">logger_module::error_code</a></div><div class="ttdeci">logger_error_code error_code</div><div class="ttdef"><b>Definition</b> <a href="error__codes_8h_source.html#l00225">error_codes.h:225</a></div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md348"></a>
 From log4cpp</h2>
 <div class="fragment"><div class="line"><span class="comment">// log4cpp</span></div>
@@ -469,11 +467,11 @@ Wrapper for Other Libraries</h2>
 <div class="line">        }</div>
 <div class="line">        </div>
 <div class="line">        <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... T&gt;</div>
-<div class="line">        <span class="keywordtype">void</span> <a class="code hl_enumvalue" href="namespacelogger__system.html#ad8e3c64f7744daa2d80e68c884e342d1acb5e100e5a9a3e7f6d1fd97512215282">error</a>(<span class="keyword">const</span> std::string&amp; fmt, T&amp;&amp;... args) {</div>
+<div class="line">        <span class="keywordtype">void</span> error(<span class="keyword">const</span> std::string&amp; fmt, T&amp;&amp;... args) {</div>
 <div class="line">            impl_-&gt;error(format(fmt, std::forward&lt;T&gt;(args)...));</div>
 <div class="line">        }</div>
 <div class="line">        </div>
-<div class="line">        <span class="keywordtype">void</span> <a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#afa4c327310a16456b4e6ffb49d0cb731">set_level</a>(<span class="keywordtype">int</span> level) {</div>
+<div class="line">        <span class="keywordtype">void</span> set_level(<span class="keywordtype">int</span> level) {</div>
 <div class="line">            <span class="comment">// Map spdlog levels to logger_system levels</span></div>
 <div class="line">            <span class="keyword">static</span> <span class="keyword">const</span> std::map&lt;int, log_level&gt; level_map = {</div>
 <div class="line">                {0, log_level::trace},</div>
@@ -502,8 +500,6 @@ Wrapper for Other Libraries</h2>
 <div class="line">        <span class="keywordflow">return</span> std::make_shared&lt;logger_wrapper&gt;(std::move(impl));</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="anamespacelogger__module_1_1v1__compat_html_afa4c327310a16456b4e6ffb49d0cb731"><div class="ttname"><a href="namespacelogger__module_1_1v1__compat.html#afa4c327310a16456b4e6ffb49d0cb731">logger_module::v1_compat::set_level</a></div><div class="ttdeci">void set_level(logger *log, log_level level)</div><div class="ttdoc">Legacy level setting.</div><div class="ttdef"><b>Definition</b> <a href="logger__v1__compat_8h_source.html#l00201">logger_v1_compat.h:201</a></div></div>
-<div class="ttc" id="anamespacelogger__system_html_ad8e3c64f7744daa2d80e68c884e342d1acb5e100e5a9a3e7f6d1fd97512215282"><div class="ttname"><a href="namespacelogger__system.html#ad8e3c64f7744daa2d80e68c884e342d1acb5e100e5a9a3e7f6d1fd97512215282">logger_system::log_level::error</a></div><div class="ttdeci">@ error</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md352"></a>
 Step-by-Step Migration</h1>
 <h2><a class="anchor" id="autotoc_md353"></a>
@@ -518,9 +514,8 @@ Phase 1: Preparation (1-2 days)</h2>
 <li><b>Create Migration Branch</b> <div class="fragment"><div class="line">git checkout -b migration/logger-v2</div>
 </div><!-- fragment --></li>
 <li><b>Add Compatibility Headers</b> <div class="fragment"><div class="line"><span class="comment">// Add to your project</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="logger__v1__compat_8h.html">compatibility/logger_v1_compat.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;compatibility/logger_v1_compat.h&quot;</span></div>
 <div class="line"><span class="keyword">using namespace </span>logger_v1_compat;  <span class="comment">// Temporary during migration</span></div>
-<div class="ttc" id="alogger__v1__compat_8h_html"><div class="ttname"><a href="logger__v1__compat_8h.html">logger_v1_compat.h</a></div><div class="ttdoc">Compatibility wrapper for Logger System v1.x API.</div></div>
 </div><!-- fragment --></li>
 </ol>
 <h2><a class="anchor" id="autotoc_md354"></a>
@@ -696,7 +691,7 @@ Support and Resources</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Sep 14 2025 07:25:04 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Sep 15 2025 13:31:51 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

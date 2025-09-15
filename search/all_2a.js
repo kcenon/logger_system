@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📋_20project_20roles_20responsibilities_0',['📋 Project Roles &amp; Responsibilities',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md155',1,'']]]
+  ['📖_20external_20resources_0',['📖 External Resources',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md454',1,'']]]
 ];

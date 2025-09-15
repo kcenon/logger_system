@@ -148,7 +148,7 @@ Phase 1 - Foundation (Complete)</h2>
 Project Dependencies</h2>
 <ul>
 <li><b><a href="https://github.com/kcenon/thread_system">thread_system</a></b>: Core dependency providing <code>logger_interface</code><ul>
-<li>Implements: <code><a class="el" href="classthread__module_1_1logger__interface.html" title="Logger interface for thread system.">thread_module::logger_interface</a></code></li>
+<li>Implements: <code>thread_module::logger_interface</code></li>
 <li>Provides: Interface contracts for seamless integration</li>
 <li>Role: Foundation interfaces for logging subsystem</li>
 </ul>
@@ -164,7 +164,7 @@ Related Projects</h2>
 </ul>
 </li>
 <li><b><a href="https://github.com/kcenon/integrated_thread_system">integrated_thread_system</a></b>: Complete integration examples<ul>
-<li>Usage: Demonstrates <a class="el" href="namespacelogger__system.html">logger_system</a> integration patterns</li>
+<li>Usage: Demonstrates logger_system integration patterns</li>
 <li>Benefits: Production-ready examples with full ecosystem</li>
 <li>Reference: Complete application templates</li>
 </ul>
@@ -283,87 +283,78 @@ Using as a Package</h2>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md17"></a>
 Integration with Thread System</h1>
 <p>This logger is designed to work seamlessly with the <a href="https://github.com/kcenon/thread_system">Thread System</a> through dependency injection:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;logger_system/logger.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;thread_system/interfaces/service_container.h&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/thread/interfaces/service_container.h&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Register logger in the service container</span></div>
-<div class="line"><span class="keyword">auto</span> logger = std::make_shared&lt;logger_module::logger&gt;();</div>
-<div class="line">logger-&gt;add_writer(std::make_unique&lt;logger_module::console_writer&gt;());</div>
+<div class="line"><span class="keyword">auto</span> logger = std::make_shared&lt;kcenon::logger::logger&gt;();</div>
+<div class="line">logger-&gt;add_writer(std::make_unique&lt;kcenon::logger::console_writer&gt;());</div>
 <div class="line"> </div>
-<div class="line">thread_module::service_container::global()</div>
-<div class="line">    .register_singleton&lt;<a class="code hl_class" href="classthread__module_1_1logger__interface.html">thread_module::logger_interface</a>&gt;(logger);</div>
+<div class="line">kcenon::thread::service_container::global()</div>
+<div class="line">    .register_singleton&lt;kcenon::thread::interfaces::logger_interface&gt;(logger);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Now thread system components will automatically use this logger</span></div>
-<div class="line"><span class="keyword">auto</span> context = thread_module::thread_context(); <span class="comment">// Will resolve logger from container</span></div>
-<div class="ttc" id="aclassthread__module_1_1logger__interface_html"><div class="ttname"><a href="classthread__module_1_1logger__interface.html">thread_module::logger_interface</a></div><div class="ttdoc">Logger interface for thread system.</div><div class="ttdef"><b>Definition</b> <a href="logger__interface_8h_source.html#l00057">logger_interface.h:57</a></div></div>
+<div class="line"><span class="keyword">auto</span> context = kcenon::thread::thread_context(); <span class="comment">// Will resolve logger from container</span></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md18"></a>
 Quick Start</h1>
 <h2><a class="anchor" id="autotoc_md19"></a>
 Quick Start with Builder Pattern (Recommended)</h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logger__builder_8h.html">logger/config/logger_builder.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="console__writer_8h.html">logger/writers/console_writer.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="file__writer_8h.html">logger/writers/file_writer.h</a>&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/console_writer.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/file_writer.h&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main() {</div>
 <div class="line">    <span class="comment">// Create logger using builder with automatic validation</span></div>
-<div class="line">    <span class="keyword">auto</span> result = <a class="code hl_class" href="classlogger__module_1_1logger__builder.html">logger_module::logger_builder</a>()</div>
-<div class="line">        .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431">use_template</a>(<span class="stringliteral">&quot;production&quot;</span>)  <span class="comment">// Use predefined configuration</span></div>
-<div class="line">        .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#a4ca65e7bb8757c08ece5d058cebc3baf">with_min_level</a>(thread_module::log_level::info)</div>
-<div class="line">        .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#af16ce8e9b3c4f8b8c3e5a34ba47e0cb0">add_writer</a>(<span class="stringliteral">&quot;console&quot;</span>, std::make_unique&lt;logger_module::console_writer&gt;())</div>
-<div class="line">        .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#af16ce8e9b3c4f8b8c3e5a34ba47e0cb0">add_writer</a>(<span class="stringliteral">&quot;file&quot;</span>, std::make_unique&lt;logger_module::file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>))</div>
-<div class="line">        .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build</a>();</div>
-<div class="line">    </div>
+<div class="line">    <span class="keyword">auto</span> result = kcenon::logger::logger_builder()</div>
+<div class="line">        .use_template(<span class="stringliteral">&quot;production&quot;</span>)  <span class="comment">// Use predefined configuration</span></div>
+<div class="line">        .with_min_level(kcenon::logger::log_level::info)</div>
+<div class="line">        .add_writer(<span class="stringliteral">&quot;console&quot;</span>, std::make_unique&lt;kcenon::logger::console_writer&gt;())</div>
+<div class="line">        .add_writer(<span class="stringliteral">&quot;file&quot;</span>, std::make_unique&lt;kcenon::logger::file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>))</div>
+<div class="line">        .build();</div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (!result) {</div>
 <div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed to create logger: &quot;</span> &lt;&lt; result.get_error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">        <span class="keywordflow">return</span> -1;</div>
 <div class="line">    }</div>
-<div class="line">    </div>
+<div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> logger = std::move(result.value());</div>
-<div class="line">    </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment">// Log messages with error handling</span></div>
-<div class="line">    <span class="keyword">auto</span> log_result = logger-&gt;log(thread_module::log_level::info, <span class="stringliteral">&quot;Application started&quot;</span>);</div>
+<div class="line">    <span class="keyword">auto</span> log_result = logger-&gt;log(kcenon::logger::log_level::info, <span class="stringliteral">&quot;Application started&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">if</span> (!log_result) {</div>
 <div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;Log failed: &quot;</span> &lt;&lt; log_result.get_error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">    }</div>
-<div class="line">    </div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasslogger__module_1_1logger__builder_html"><div class="ttname"><a href="classlogger__module_1_1logger__builder.html">logger_module::logger_builder</a></div><div class="ttdoc">Builder pattern for logger construction with validation.</div><div class="ttdef"><b>Definition</b> <a href="logger__builder_8h_source.html#l00107">logger_builder.h:107</a></div></div>
-<div class="ttc" id="aclasslogger__module_1_1logger__builder_html_a19ea0ad54462dc54678d174312565266"><div class="ttname"><a href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">logger_module::logger_builder::build</a></div><div class="ttdeci">result&lt; std::unique_ptr&lt; logger &gt; &gt; build()</div><div class="ttdef"><b>Definition</b> <a href="logger__builder_8h_source.html#l00662">logger_builder.h:662</a></div></div>
-<div class="ttc" id="aclasslogger__module_1_1logger__builder_html_a4ca65e7bb8757c08ece5d058cebc3baf"><div class="ttname"><a href="classlogger__module_1_1logger__builder.html#a4ca65e7bb8757c08ece5d058cebc3baf">logger_module::logger_builder::with_min_level</a></div><div class="ttdeci">logger_builder &amp; with_min_level(thread_module::log_level level)</div><div class="ttdef"><b>Definition</b> <a href="logger__builder_8h_source.html#l00207">logger_builder.h:207</a></div></div>
-<div class="ttc" id="aclasslogger__module_1_1logger__builder_html_ad80405d53b4d66bc12cca8bf362d5431"><div class="ttname"><a href="classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431">logger_module::logger_builder::use_template</a></div><div class="ttdeci">logger_builder &amp; use_template(const std::string &amp;name)</div><div class="ttdef"><b>Definition</b> <a href="logger__builder_8h_source.html#l00394">logger_builder.h:394</a></div></div>
-<div class="ttc" id="aclasslogger__module_1_1logger__builder_html_af16ce8e9b3c4f8b8c3e5a34ba47e0cb0"><div class="ttname"><a href="classlogger__module_1_1logger__builder.html#af16ce8e9b3c4f8b8c3e5a34ba47e0cb0">logger_module::logger_builder::add_writer</a></div><div class="ttdeci">logger_builder &amp; add_writer(const std::string &amp;name, std::unique_ptr&lt; base_writer &gt; writer)</div><div class="ttdoc">Add a writer to the logger.</div><div class="ttdef"><b>Definition</b> <a href="logger__builder_8h_source.html#l00343">logger_builder.h:343</a></div></div>
-<div class="ttc" id="aconsole__writer_8h_html"><div class="ttname"><a href="console__writer_8h.html">console_writer.h</a></div></div>
-<div class="ttc" id="afile__writer_8h_html"><div class="ttname"><a href="file__writer_8h.html">file_writer.h</a></div></div>
-<div class="ttc" id="alogger__builder_8h_html"><div class="ttname"><a href="logger__builder_8h.html">logger_builder.h</a></div><div class="ttdoc">Builder pattern implementation for flexible logger configuration.</div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md20"></a>
 Configuration Templates</h2>
 <div class="fragment"><div class="line"><span class="comment">// Production configuration - optimized for production environments</span></div>
-<div class="line"><span class="keyword">auto</span> prod_logger = <a class="code hl_class" href="classlogger__module_1_1logger__builder.html">logger_module::logger_builder</a>()</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431">use_template</a>(<span class="stringliteral">&quot;production&quot;</span>)</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build</a>()</div>
+<div class="line"><span class="keyword">auto</span> prod_logger = kcenon::logger::logger_builder()</div>
+<div class="line">    .use_template(<span class="stringliteral">&quot;production&quot;</span>)</div>
+<div class="line">    .build()</div>
 <div class="line">    .value();  <span class="comment">// Throws on error</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Debug configuration - immediate output for development</span></div>
-<div class="line"><span class="keyword">auto</span> debug_logger = <a class="code hl_class" href="classlogger__module_1_1logger__builder.html">logger_module::logger_builder</a>()</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431">use_template</a>(<span class="stringliteral">&quot;debug&quot;</span>)</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build</a>()</div>
+<div class="line"><span class="keyword">auto</span> debug_logger = kcenon::logger::logger_builder()</div>
+<div class="line">    .use_template(<span class="stringliteral">&quot;debug&quot;</span>)</div>
+<div class="line">    .build()</div>
 <div class="line">    .value();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// High-performance - maximized throughput</span></div>
-<div class="line"><span class="keyword">auto</span> hp_logger = <a class="code hl_class" href="classlogger__module_1_1logger__builder.html">logger_module::logger_builder</a>()</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431">use_template</a>(<span class="stringliteral">&quot;high_performance&quot;</span>)</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build</a>()</div>
+<div class="line"><span class="keyword">auto</span> hp_logger = kcenon::logger::logger_builder()</div>
+<div class="line">    .use_template(<span class="stringliteral">&quot;high_performance&quot;</span>)</div>
+<div class="line">    .build()</div>
 <div class="line">    .value();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Low-latency - minimized latency for real-time systems</span></div>
-<div class="line"><span class="keyword">auto</span> rt_logger = <a class="code hl_class" href="classlogger__module_1_1logger__builder.html">logger_module::logger_builder</a>()</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#ad80405d53b4d66bc12cca8bf362d5431">use_template</a>(<span class="stringliteral">&quot;low_latency&quot;</span>)</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build</a>()</div>
+<div class="line"><span class="keyword">auto</span> rt_logger = logger_module::logger_builder()</div>
+<div class="line">    .use_template(<span class="stringliteral">&quot;low_latency&quot;</span>)</div>
+<div class="line">    .build()</div>
 <div class="line">    .value();</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md21"></a>
 Traditional API (Legacy Support)</h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logger_8h.html">logger/logger.h</a>&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;logger/logger.h&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main() {</div>
 <div class="line">    <span class="comment">// Create logger instance</span></div>
@@ -381,7 +372,6 @@ Traditional API (Legacy Support)</h2>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="alogger_8h_html"><div class="ttname"><a href="logger_8h.html">logger.h</a></div><div class="ttdoc">High-performance, thread-safe logging system with asynchronous capabilities.</div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md22"></a>
 Error Handling with Result Pattern</h2>
 <div class="fragment"><div class="line"><span class="comment">// All operations return result types for comprehensive error handling</span></div>
@@ -407,66 +397,52 @@ Error Handling with Result Pattern</h2>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Builder pattern with validation</span></div>
-<div class="line"><span class="keyword">auto</span> builder_result = <a class="code hl_class" href="classlogger__module_1_1logger__builder.html">logger_module::logger_builder</a>()</div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#a063f7ab7a982b21a64174a2d806712d3">with_buffer_size</a>(0)  <span class="comment">// Invalid!</span></div>
-<div class="line">    .<a class="code hl_function" href="classlogger__module_1_1logger__builder.html#a19ea0ad54462dc54678d174312565266">build</a>();</div>
+<div class="line"><span class="keyword">auto</span> builder_result = logger_module::logger_builder()</div>
+<div class="line">    .with_buffer_size(0)  <span class="comment">// Invalid!</span></div>
+<div class="line">    .build();</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">if</span> (!builder_result) {</div>
 <div class="line">    <span class="comment">// Configuration validation failed</span></div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Invalid configuration: &quot;</span> </div>
 <div class="line">              &lt;&lt; builder_result.get_error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasslogger__module_1_1logger__builder_html_a063f7ab7a982b21a64174a2d806712d3"><div class="ttname"><a href="classlogger__module_1_1logger__builder.html#a063f7ab7a982b21a64174a2d806712d3">logger_module::logger_builder::with_buffer_size</a></div><div class="ttdeci">logger_builder &amp; with_buffer_size(std::size_t size)</div><div class="ttdoc">Set buffer size.</div><div class="ttdef"><b>Definition</b> <a href="logger__builder_8h_source.html#l00183">logger_builder.h:183</a></div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md23"></a>
 Interface Architecture</h2>
 <div class="fragment"><div class="line"><span class="comment">// New clean interface separation</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="log__writer__interface_8h.html">logger/interfaces/log_writer_interface.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="log__filter__interface_8h.html">logger/interfaces/log_filter_interface.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="log__formatter__interface_8h.html">logger/interfaces/log_formatter_interface.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;logger/interfaces/log_writer_interface.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;logger/interfaces/log_filter_interface.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;logger/interfaces/log_formatter_interface.h&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Implement custom writer</span></div>
-<div class="line"><span class="keyword">class </span>custom_writer : <span class="keyword">public</span> <a class="code hl_interface" href="classlogger__module_1_1log__writer__interface.html">logger_module::log_writer_interface</a> {</div>
+<div class="line"><span class="keyword">class </span>custom_writer : <span class="keyword">public</span> logger_module::log_writer_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    result_void <a class="code hl_function" href="classlogger__module_1_1log__writer__interface.html#a9ab1ce565b731e06d1fec66588d420bf">write</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structlogger__module_1_1log__entry.html">logger_module::log_entry</a>&amp; entry)<span class="keyword"> override </span>{</div>
+<div class="line">    result_void write(<span class="keyword">const</span> logger_module::log_entry&amp; entry)<span class="keyword"> override </span>{</div>
 <div class="line">        <span class="comment">// Your custom implementation</span></div>
 <div class="line">        <span class="keywordflow">return</span> result_void{};  <span class="comment">// Success</span></div>
 <div class="line">    }</div>
 <div class="line">    </div>
-<div class="line">    result_void <a class="code hl_function" href="classlogger__module_1_1log__writer__interface.html#a1c55387feecd6c3736c801c5c241f5c1">flush</a>()<span class="keyword"> override </span>{</div>
+<div class="line">    result_void flush()<span class="keyword"> override </span>{</div>
 <div class="line">        <span class="keywordflow">return</span> result_void{};</div>
 <div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Implement custom filter</span></div>
-<div class="line"><span class="keyword">class </span>custom_filter : <span class="keyword">public</span> <a class="code hl_interface" href="classlogger__module_1_1log__filter__interface.html">logger_module::log_filter_interface</a> {</div>
+<div class="line"><span class="keyword">class </span>custom_filter : <span class="keyword">public</span> logger_module::log_filter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keywordtype">bool</span> <a class="code hl_function" href="classlogger__module_1_1log__filter__interface.html#a6cce88e052b94018824504b7a1ab8b78">should_log</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structlogger__module_1_1log__entry.html">logger_module::log_entry</a>&amp; entry)<span class="keyword"> const override </span>{</div>
+<div class="line">    <span class="keywordtype">bool</span> should_log(<span class="keyword">const</span> logger_module::log_entry&amp; entry)<span class="keyword"> const override </span>{</div>
 <div class="line">        <span class="comment">// Filter logic</span></div>
-<div class="line">        <span class="keywordflow">return</span> entry.<a class="code hl_variable" href="structlogger__module_1_1log__entry.html#a78065333972831f5e467ddd17d9c1ee9">level</a> &gt;= thread_module::log_level::warning;</div>
+<div class="line">        <span class="keywordflow">return</span> entry.level &gt;= thread_module::log_level::warning;</div>
 <div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Implement custom formatter</span></div>
-<div class="line"><span class="keyword">class </span>custom_formatter : <span class="keyword">public</span> <a class="code hl_interface" href="classlogger__module_1_1log__formatter__interface.html">logger_module::log_formatter_interface</a> {</div>
+<div class="line"><span class="keyword">class </span>custom_formatter : <span class="keyword">public</span> logger_module::log_formatter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    std::string <a class="code hl_function" href="classlogger__module_1_1log__formatter__interface.html#a33cfa9bfe9f66fade3f39613d058a0b3">format</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structlogger__module_1_1log__entry.html">logger_module::log_entry</a>&amp; entry)<span class="keyword"> const override </span>{</div>
+<div class="line">    std::string format(<span class="keyword">const</span> logger_module::log_entry&amp; entry)<span class="keyword"> const override </span>{</div>
 <div class="line">        <span class="comment">// Format log entry</span></div>
-<div class="line">        <span class="keywordflow">return</span> fmt::format(<span class="stringliteral">&quot;[{}] {}&quot;</span>, entry.<a class="code hl_variable" href="structlogger__module_1_1log__entry.html#a78065333972831f5e467ddd17d9c1ee9">level</a>, entry.<a class="code hl_variable" href="structlogger__module_1_1log__entry.html#ab012a26baeabb7da729862b1cf295fb3">message</a>);</div>
+<div class="line">        <span class="keywordflow">return</span> fmt::format(<span class="stringliteral">&quot;[{}] {}&quot;</span>, entry.level, entry.message);</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-<div class="ttc" id="aclasslogger__module_1_1log__filter__interface_html"><div class="ttname"><a href="classlogger__module_1_1log__filter__interface.html">logger_module::log_filter_interface</a></div><div class="ttdoc">Interface for log filters.</div><div class="ttdef"><b>Definition</b> <a href="log__filter__interface_8h_source.html#l00024">log_filter_interface.h:24</a></div></div>
-<div class="ttc" id="aclasslogger__module_1_1log__filter__interface_html_a6cce88e052b94018824504b7a1ab8b78"><div class="ttname"><a href="classlogger__module_1_1log__filter__interface.html#a6cce88e052b94018824504b7a1ab8b78">logger_module::log_filter_interface::should_log</a></div><div class="ttdeci">virtual bool should_log(const log_entry &amp;entry) const =0</div><div class="ttdoc">Check if a log entry should be processed.</div></div>
-<div class="ttc" id="aclasslogger__module_1_1log__formatter__interface_html"><div class="ttname"><a href="classlogger__module_1_1log__formatter__interface.html">logger_module::log_formatter_interface</a></div><div class="ttdoc">Interface for log formatters.</div><div class="ttdef"><b>Definition</b> <a href="log__formatter__interface_8h_source.html#l00024">log_formatter_interface.h:24</a></div></div>
-<div class="ttc" id="aclasslogger__module_1_1log__formatter__interface_html_a33cfa9bfe9f66fade3f39613d058a0b3"><div class="ttname"><a href="classlogger__module_1_1log__formatter__interface.html#a33cfa9bfe9f66fade3f39613d058a0b3">logger_module::log_formatter_interface::format</a></div><div class="ttdeci">virtual std::string format(const log_entry &amp;entry) const =0</div><div class="ttdoc">Format a log entry into a string.</div></div>
-<div class="ttc" id="aclasslogger__module_1_1log__writer__interface_html"><div class="ttname"><a href="classlogger__module_1_1log__writer__interface.html">logger_module::log_writer_interface</a></div><div class="ttdoc">Interface for log writers.</div><div class="ttdef"><b>Definition</b> <a href="log__writer__interface_8h_source.html#l00026">log_writer_interface.h:26</a></div></div>
-<div class="ttc" id="aclasslogger__module_1_1log__writer__interface_html_a1c55387feecd6c3736c801c5c241f5c1"><div class="ttname"><a href="classlogger__module_1_1log__writer__interface.html#a1c55387feecd6c3736c801c5c241f5c1">logger_module::log_writer_interface::flush</a></div><div class="ttdeci">virtual result_void flush()=0</div><div class="ttdoc">Flush any buffered data.</div></div>
-<div class="ttc" id="aclasslogger__module_1_1log__writer__interface_html_a9ab1ce565b731e06d1fec66588d420bf"><div class="ttname"><a href="classlogger__module_1_1log__writer__interface.html#a9ab1ce565b731e06d1fec66588d420bf">logger_module::log_writer_interface::write</a></div><div class="ttdeci">virtual result_void write(const log_entry &amp;entry)=0</div><div class="ttdoc">Write a log entry.</div></div>
-<div class="ttc" id="alog__filter__interface_8h_html"><div class="ttname"><a href="log__filter__interface_8h.html">log_filter_interface.h</a></div></div>
-<div class="ttc" id="alog__formatter__interface_8h_html"><div class="ttname"><a href="log__formatter__interface_8h.html">log_formatter_interface.h</a></div></div>
-<div class="ttc" id="alog__writer__interface_8h_html"><div class="ttname"><a href="log__writer__interface_8h.html">log_writer_interface.h</a></div></div>
-<div class="ttc" id="astructlogger__module_1_1log__entry_html"><div class="ttname"><a href="structlogger__module_1_1log__entry.html">logger_module::log_entry</a></div><div class="ttdoc">Represents a single log entry with all associated metadata.</div><div class="ttdef"><b>Definition</b> <a href="overflow__policy_8cpp_source.html#l00041">overflow_policy.cpp:41</a></div></div>
-<div class="ttc" id="astructlogger__module_1_1log__entry_html_a78065333972831f5e467ddd17d9c1ee9"><div class="ttname"><a href="structlogger__module_1_1log__entry.html#a78065333972831f5e467ddd17d9c1ee9">logger_module::log_entry::level</a></div><div class="ttdeci">thread_module::log_level level</div><div class="ttdoc">Severity level of the log message.</div><div class="ttdef"><b>Definition</b> <a href="overflow__policy_8cpp_source.html#l00042">overflow_policy.cpp:42</a></div></div>
-<div class="ttc" id="astructlogger__module_1_1log__entry_html_ab012a26baeabb7da729862b1cf295fb3"><div class="ttname"><a href="structlogger__module_1_1log__entry.html#ab012a26baeabb7da729862b1cf295fb3">logger_module::log_entry::message</a></div><div class="ttdeci">std::string message</div><div class="ttdef"><b>Definition</b> <a href="overflow__policy_8cpp_source.html#l00043">overflow_policy.cpp:43</a></div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md24"></a>
 Performance Metrics</h2>
 <div class="fragment"><div class="line"><span class="comment">// Enable metrics collection</span></div>
@@ -489,7 +465,7 @@ Structured Logging</h2>
 <div class="line"><span class="comment">// Create structured logger wrapper</span></div>
 <div class="line"><span class="keyword">auto</span> structured = std::make_shared&lt;logger_module::structured_logger&gt;(</div>
 <div class="line">    logger, </div>
-<div class="line">    <a class="code hl_enumvalue" href="classlogger__module_1_1structured__logger.html#ad5caf63dd1c9c72e341abb4533c1aee6a466deec76ecdf5fca6d38571f6324d54">logger_module::structured_logger::output_format::json</a></div>
+<div class="line">    logger_module::structured_logger::output_format::json</div>
 <div class="line">);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Log with structured fields</span></div>
@@ -501,7 +477,6 @@ Structured Logging</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Output (JSON format):</span></div>
 <div class="line"><span class="comment">// {&quot;@timestamp&quot;:&quot;2025-01-27T08:30:00Z&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;User logged in&quot;,&quot;thread_id&quot;:&quot;12345&quot;,&quot;user_id&quot;:12345,&quot;ip_address&quot;:&quot;192.168.1.1&quot;,&quot;session_duration&quot;:3600}</span></div>
-<div class="ttc" id="aclasslogger__module_1_1structured__logger_html_ad5caf63dd1c9c72e341abb4533c1aee6a466deec76ecdf5fca6d38571f6324d54"><div class="ttname"><a href="classlogger__module_1_1structured__logger.html#ad5caf63dd1c9c72e341abb4533c1aee6a466deec76ecdf5fca6d38571f6324d54">logger_module::structured_logger::output_format::json</a></div><div class="ttdeci">@ json</div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md26"></a>
 Advanced Filtering and Routing</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;logger_system/filters/log_filter.h&gt;</span></div>
@@ -663,9 +638,9 @@ Access Control</h3>
 <div class="line">logger-&gt;set_filter(std::move(access_filter));</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md34"></a>
 Custom Writers</h2>
-<div class="fragment"><div class="line"><span class="keyword">class </span>custom_writer : <span class="keyword">public</span> <a class="code hl_class" href="classlogger__module_1_1base__writer.html">logger_module::base_writer</a> {</div>
+<div class="fragment"><div class="line"><span class="keyword">class </span>custom_writer : <span class="keyword">public</span> logger_module::base_writer {</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keywordtype">bool</span> <a class="code hl_function" href="classlogger__module_1_1log__writer__interface.html#a9ab1ce565b731e06d1fec66588d420bf">write</a>(<a class="code hl_enumeration" href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a> level,</div>
+<div class="line">    <span class="keywordtype">bool</span> write(thread_module::log_level level,</div>
 <div class="line">               <span class="keyword">const</span> std::string&amp; message,</div>
 <div class="line">               <span class="keyword">const</span> std::string&amp; file,</div>
 <div class="line">               <span class="keywordtype">int</span> line,</div>
@@ -675,17 +650,14 @@ Custom Writers</h2>
 <div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">    }</div>
 <div class="line">    </div>
-<div class="line">    <span class="keywordtype">void</span> <a class="code hl_function" href="classlogger__module_1_1log__writer__interface.html#a1c55387feecd6c3736c801c5c241f5c1">flush</a>()<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="keywordtype">void</span> flush()<span class="keyword"> override </span>{</div>
 <div class="line">        <span class="comment">// Flush implementation</span></div>
 <div class="line">    }</div>
 <div class="line">    </div>
-<div class="line">    std::string <a class="code hl_function" href="classlogger__module_1_1log__writer__interface.html#a9a59e75435e22f6a1bc8a5b466b56f51">get_name</a>()<span class="keyword"> const override </span>{</div>
+<div class="line">    std::string get_name()<span class="keyword"> const override </span>{</div>
 <div class="line">        <span class="keywordflow">return</span> <span class="stringliteral">&quot;custom&quot;</span>;</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-<div class="ttc" id="aclasslogger__module_1_1base__writer_html"><div class="ttname"><a href="classlogger__module_1_1base__writer.html">logger_module::base_writer</a></div><div class="ttdoc">Abstract base class for all log output writers.</div><div class="ttdef"><b>Definition</b> <a href="base__writer_8h_source.html#l00123">base_writer.h:123</a></div></div>
-<div class="ttc" id="aclasslogger__module_1_1log__writer__interface_html_a9a59e75435e22f6a1bc8a5b466b56f51"><div class="ttname"><a href="classlogger__module_1_1log__writer__interface.html#a9a59e75435e22f6a1bc8a5b466b56f51">logger_module::log_writer_interface::get_name</a></div><div class="ttdeci">virtual std::string get_name() const =0</div><div class="ttdoc">Get the name of this writer.</div></div>
-<div class="ttc" id="anamespacethread__module_html_a5a2719d6d43f27e1e8e913fbfa5c9288"><div class="ttname"><a href="namespacethread__module.html#a5a2719d6d43f27e1e8e913fbfa5c9288">thread_module::log_level</a></div><div class="ttdeci">log_level</div><div class="ttdoc">Log level enumeration.</div><div class="ttdef"><b>Definition</b> <a href="logger__interface_8h_source.html#l00042">logger_interface.h:42</a></div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md35"></a>
 Building</h1>
 <div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div>
@@ -760,7 +732,7 @@ License</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Sep 14 2025 07:25:05 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Sep 15 2025 13:31:51 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

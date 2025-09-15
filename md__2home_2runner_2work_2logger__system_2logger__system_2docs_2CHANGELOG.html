@@ -112,7 +112,7 @@ Migration Support</h3>
 <li>Common pitfalls and solutions</li>
 </ul>
 </li>
-<li><b>Compatibility Wrapper</b> (<a class="el" href="logger__v1__compat_8h.html" title="Compatibility wrapper for Logger System v1.x API.">sources/logger/compatibility/logger_v1_compat.h</a>)<ul>
+<li><b>Compatibility Wrapper</b> (sources/logger/compatibility/logger_v1_compat.h)<ul>
 <li>Legacy API support for gradual migration</li>
 <li>Deprecated macros (LOG_INFO, LOG_ERROR, etc.)</li>
 <li>Legacy function signatures</li>
@@ -165,10 +165,10 @@ API Documentation</h3>
 </li>
 <li><b>Doxygen Documentation</b><ul>
 <li>Added comprehensive Doxygen comments to all major headers</li>
-<li>Documented <a class="el" href="logger_8h.html" title="High-performance, thread-safe logging system with asynchronous capabilities.">logger.h</a> with full method descriptions</li>
-<li>Documented <a class="el" href="logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration.">logger_builder.h</a> with builder pattern explanations</li>
-<li>Documented <a class="el" href="log__entry_8h.html" title="Data structures for representing log entries and source locations.">log_entry.h</a> with structure field descriptions</li>
-<li>Documented <a class="el" href="base__writer_8h.html" title="Abstract base class for all log output writers.">base_writer.h</a> with interface requirements</li>
+<li>Documented logger.h with full method descriptions</li>
+<li>Documented logger_builder.h with builder pattern explanations</li>
+<li>Documented log_entry.h with structure field descriptions</li>
+<li>Documented base_writer.h with interface requirements</li>
 <li>Updated Doxyfile for optimal documentation generation</li>
 </ul>
 </li>
@@ -215,8 +215,8 @@ CI/CD Monitoring Dashboard</h3>
 </ul>
 </li>
 <li><b>Missing Components Added</b><ul>
-<li><a class="el" href="async__writer_8h.html" title="Asynchronous wrapper for log writers.">async_writer.h</a>: Asynchronous writer implementation</li>
-<li><a class="el" href="lightweight__container_8h.html" title="Lightweight dependency injection container for logger system.">lightweight_container.h</a>: Standalone DI container</li>
+<li>async_writer.h: Asynchronous writer implementation</li>
+<li>lightweight_container.h: Standalone DI container</li>
 <li>Configuration enhancements: timestamp and source location options</li>
 </ul>
 </li>
@@ -462,9 +462,9 @@ Benchmark Suite (O4)</h3>
 <h2><a class="anchor" id="autotoc_md233"></a>
 Technical Details</h2>
 <ul>
-<li>Batch Writer: <code><a class="el" href="batch__writer_8cpp.html">sources/logger/writers/batch_writer.cpp</a></code> (186 lines), <code><a class="el" href="batch__writer_8h.html">batch_writer.h</a></code> (218 lines)</li>
-<li>Small String Optimization: <code><a class="el" href="small__string_8h.html">sources/logger/core/small_string.h</a></code> (445 lines)</li>
-<li>Modified files for SSO: <code><a class="el" href="log__entry_8h.html" title="Data structures for representing log entries and source locations.">log_entry.h</a></code>, <code><a class="el" href="base__writer_8h.html" title="Abstract base class for all log output writers.">base_writer.h</a></code>, <code><a class="el" href="base__formatter_8h.html">base_formatter.h</a></code>, <code><a class="el" href="log__filter_8h.html">log_filter.h</a></code>, <code><a class="el" href="log__collector_8cpp.html">log_collector.cpp</a></code></li>
+<li>Batch Writer: <code>sources/logger/writers/batch_writer.cpp</code> (186 lines), <code>batch_writer.h</code> (218 lines)</li>
+<li>Small String Optimization: <code>sources/logger/core/small_string.h</code> (445 lines)</li>
+<li>Modified files for SSO: <code>log_entry.h</code>, <code>base_writer.h</code>, <code>base_formatter.h</code>, <code>log_filter.h</code>, <code>log_collector.cpp</code></li>
 <li>Benchmarks: <code>comprehensive_benchmark.cpp</code>, <code>batch_processing_benchmark.cpp</code> (700+ lines total)</li>
 <li>Configuration: Added <code>enable_batch_writing</code> to <code>logger_config</code></li>
 <li>CMake: Enhanced benchmark build configuration with Google Benchmark v1.8.3</li>
@@ -519,7 +519,7 @@ Added - Phase 3 Task A4 Complete</h2>
 Technical Details</h2>
 <ul>
 <li>Implementation: <code>sources/logger/flow/</code> (417 lines)</li>
-<li>Headers: <code><a class="el" href="overflow__policy_8h.html">overflow_policy.h</a></code> with templated queue</li>
+<li>Headers: <code>overflow_policy.h</code> with templated queue</li>
 <li>Build integration: Full CMake support</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md237"></a>
@@ -591,7 +591,7 @@ Added</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Sep 14 2025 07:25:04 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Sep 15 2025 13:31:51 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

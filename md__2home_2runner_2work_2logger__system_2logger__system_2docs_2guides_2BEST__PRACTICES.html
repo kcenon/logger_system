@@ -169,14 +169,13 @@ Environment-Specific Configuration</h2>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Automatic environment detection</span></div>
-<div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="namespacelogger__module_1_1v1__compat.html#ab82930129c9636b7424376af590b2a41">create_logger</a>() {</div>
+<div class="line"><span class="keyword">auto</span> create_logger() {</div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> env = std::getenv(<span class="stringliteral">&quot;APP_ENV&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">if</span> (env &amp;&amp; std::string(env) == <span class="stringliteral">&quot;production&quot;</span>) {</div>
 <div class="line">        <span class="keywordflow">return</span> create_prod_logger();</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> create_dev_logger();</div>
 <div class="line">}</div>
-<div class="ttc" id="anamespacelogger__module_1_1v1__compat_html_ab82930129c9636b7424376af590b2a41"><div class="ttname"><a href="namespacelogger__module_1_1v1__compat.html#ab82930129c9636b7424376af590b2a41">logger_module::v1_compat::create_logger</a></div><div class="ttdeci">logger * create_logger()</div><div class="ttdoc">Legacy logger creation function.</div><div class="ttdef"><b>Definition</b> <a href="logger__v1__compat_8h_source.html#l00114">logger_v1_compat.h:114</a></div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md276"></a>
 Configuration Validation</h2>
 <div class="fragment"><div class="line"><span class="comment">// Always validate configuration</span></div>
@@ -188,12 +187,10 @@ Configuration Validation</h2>
 <div class="line">        <span class="keywordflow">return</span> error(<span class="stringliteral">&quot;Queue size insufficient for production&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">if</span> (config.rotation_size &gt; 1024 * 1024 * 1024) {</div>
-<div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacelogger__system.html#ad8e3c64f7744daa2d80e68c884e342d1acb5e100e5a9a3e7f6d1fd97512215282">error</a>(<span class="stringliteral">&quot;Rotation size too large (&gt;1GB)&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> error(<span class="stringliteral">&quot;Rotation size too large (&gt;1GB)&quot;</span>);</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba260ca9dd8a4577fc00b7bd5810298076">success</a>();</div>
+<div class="line">    <span class="keywordflow">return</span> success();</div>
 <div class="line">}</div>
-<div class="ttc" id="anamespacelogger__module_html_a23f0da6f87d99d4e4c13ef24c21135eba260ca9dd8a4577fc00b7bd5810298076"><div class="ttname"><a href="namespacelogger__module.html#a23f0da6f87d99d4e4c13ef24c21135eba260ca9dd8a4577fc00b7bd5810298076">logger_module::logger_error_code::success</a></div><div class="ttdeci">@ success</div></div>
-<div class="ttc" id="anamespacelogger__system_html_ad8e3c64f7744daa2d80e68c884e342d1acb5e100e5a9a3e7f6d1fd97512215282"><div class="ttname"><a href="namespacelogger__system.html#ad8e3c64f7744daa2d80e68c884e342d1acb5e100e5a9a3e7f6d1fd97512215282">logger_system::log_level::error</a></div><div class="ttdeci">@ error</div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md277"></a>
 Dynamic Reconfiguration</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>reconfigurable_logger {</div>
@@ -628,7 +625,7 @@ Summary</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Sep 14 2025 07:25:04 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Sep 15 2025 13:31:51 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
