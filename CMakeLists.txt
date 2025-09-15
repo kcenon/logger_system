@@ -225,15 +225,72 @@ endif()
 ##################################################
 # Source files
 ##################################################
-add_subdirectory(sources)
+
+# Check for new structure
+set(LOGGER_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(LOGGER_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
+    message(STATUS "Logger System: Using new directory structure")
+
+    # Add include directories
+    include_directories(${LOGGER_INCLUDE_DIR})
+
+    # Collect source files from new structure
+    file(GLOB_RECURSE LOGGER_HEADERS
+        ${LOGGER_INCLUDE_DIR}/kcenon/logger/*.h
+    )
+
+    file(GLOB_RECURSE LOGGER_SOURCES
+        ${LOGGER_SOURCE_DIR}/*.cpp
+    )
+
+    # Check if we have enough sources in new structure
+    list(LENGTH LOGGER_SOURCES SOURCE_COUNT)
+    if(SOURCE_COUNT GREATER 5)
+        # Create library with new structure
+        add_library(LoggerSystem ${LOGGER_SOURCES} ${LOGGER_HEADERS})
+        target_include_directories(LoggerSystem
+            PUBLIC
+                $<BUILD_INTERFACE:${LOGGER_INCLUDE_DIR}>
+                $<INSTALL_INTERFACE:include>
+        )
+        set(USE_LEGACY_SOURCES FALSE)
+    else()
+        message(STATUS "Logger System: New structure incomplete, using legacy sources")
+        set(USE_LEGACY_SOURCES TRUE)
+    endif()
+else()
+    message(STATUS "Logger System: Using legacy directory structure")
+    set(USE_LEGACY_SOURCES TRUE)
+endif()
+
+# Use legacy sources if needed
+if(USE_LEGACY_SOURCES)
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/sources)
+        add_subdirectory(sources)
+    endif()
+endif()
 
 if (BUILD_SAMPLES)
-    add_subdirectory(samples)
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/examples)
+        add_subdirectory(examples)
+    elseif(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/samples)
+        add_subdirectory(samples)
+    endif()
 endif()
 
 if (BUILD_TESTS)
-    add_subdirectory(unittest)
-    add_subdirectory(tests)
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt)
+        add_subdirectory(tests)
+    else()
+        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/unittest)
+            add_subdirectory(unittest)
+        endif()
+        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+            add_subdirectory(tests)
+        endif()
+    endif()
     
     # Enable sanitizers for test targets if requested
     logger_enable_sanitizers_for_tests()
