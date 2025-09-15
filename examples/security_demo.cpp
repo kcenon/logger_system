@@ -31,10 +31,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include <kcenon/logger/core/logger.h>
-#include <kcenon/logger/security/log_sanitizer.h>
-#include <kcenon/logger/structured/structured_logger.h>
-#include <kcenon/logger/filters/log_filter.h>
-#include <kcenon/logger/routing/log_router.h>
+// #include <kcenon/logger/security/log_sanitizer.h>  // TODO: Not implemented yet
+// #include <kcenon/logger/structured/structured_logger.h>  // TODO: Not implemented yet
+#include <kcenon/logger/interfaces/log_filter_interface.h>
+// #include <kcenon/logger/routing/log_router.h>  // TODO: Not implemented yet
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/logger/writers/file_writer.h>
 
