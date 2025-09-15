@@ -56,9 +56,9 @@ struct pooled_log_entry {
      */
     log_entry to_log_entry() const {
         log_entry entry(level, message, timestamp);
-        entry.file_path = file_path;
-        entry.line_number = line_number;
-        entry.function_name = function_name;
+        if (!file_path.empty() || line_number != 0 || !function_name.empty()) {
+            entry.location = source_location(file_path, line_number, function_name);
+        }
         return entry;
     }
 };

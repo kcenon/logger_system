@@ -68,8 +68,7 @@ public:
             // Optimize pool config
             pool_config.initial_size = 200;
             pool_config.max_size = 2000;
-            pool_config.thread_local_cache = true;
-            pool_config.thread_cache_size = 100;
+            pool_config.allow_growth = true;
         }
     };
 

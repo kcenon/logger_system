@@ -164,7 +164,7 @@ result_void high_performance_async_writer::write_direct(
     const auto end_time = std::chrono::steady_clock::now();
 
     const auto latency = end_time - start_time;
-    update_stats(result.has_value(), latency);
+    update_stats(static_cast<bool>(result), latency);
 
     return result;
 }
