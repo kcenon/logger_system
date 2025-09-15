@@ -38,7 +38,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // Conditional include based on build configuration
 #ifdef USE_THREAD_SYSTEM
-    #include <thread_base/sync/error_handling.h>
+    #include <kcenon/thread/core/error_handling.h>
 #else
     // Minimal error handling for standalone mode
     #include <optional>

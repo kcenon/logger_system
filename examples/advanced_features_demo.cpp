@@ -5,12 +5,12 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-#include <logger/logger.h>
-#include <logger/writers/console_writer.h>
-#include <logger/writers/file_writer.h>
-#include <logger/writers/rotating_file_writer.h>
-#include <logger/filters/log_filter.h>
-#include <logger/routing/log_router.h>
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/logger/writers/file_writer.h>
+#include <kcenon/logger/writers/rotating_file_writer.h>
+#include <kcenon/logger/filters/log_filter.h>
+#include <kcenon/logger/routing/log_router.h>
 #include <iostream>
 #include <thread>
 #include <chrono>

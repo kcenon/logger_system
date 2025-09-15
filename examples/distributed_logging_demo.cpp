@@ -5,11 +5,11 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-#include <logger/logger.h>
-#include <logger/writers/console_writer.h>
-#include <logger/writers/network_writer.h>
-#include <logger/server/log_server.h>
-#include <logger/analysis/log_analyzer.h>
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/logger/writers/network_writer.h>
+#include <kcenon/logger/server/log_server.h>
+#include <kcenon/logger/analysis/log_analyzer.h>
 #include <iostream>
 #include <thread>
 #include <chrono>

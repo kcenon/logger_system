@@ -191,7 +191,7 @@ log_collector::log_collector(std::size_t buffer_size)
 
 log_collector::~log_collector() = default;
 
-bool log_collector::enqueue(thread_module::log_level level,
+bool log_collector::enqueue(logger_system::log_level level,
                            const std::string& message,
                            const std::string& file,
                            int line,

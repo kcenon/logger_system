@@ -5,9 +5,9 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-#include <logger/logger.h>
-#include <logger/writers/console_writer.h>
-#include <logger/structured/structured_logger.h>
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/logger/structured/structured_logger.h>
 #include <thread>
 #include <iostream>
 #include <random>
