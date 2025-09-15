@@ -56,7 +56,8 @@ public:
      * @brief Destructor
      */
     ~lockfree_spsc_queue() {
-        while (T item; dequeue(item)) {
+        T item;
+        while (dequeue(item)) {
             // Clean up remaining items
         }
     }

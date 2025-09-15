@@ -9,7 +9,7 @@ All rights reserved.
 
 // Conditional include based on build configuration
 #ifdef USE_THREAD_SYSTEM
-    #include <interfaces/logger_interface.h>
+    #include <kcenon/thread/interfaces/logger_interface.h>
 #else
     #include <kcenon/logger/interfaces/logger_interface.h>
 #endif

@@ -47,9 +47,9 @@ All rights reserved.
 #include "../core/small_string.h"
 
 #ifdef USE_THREAD_SYSTEM
-    #include <interfaces/logger_interface.h>
+    #include <kcenon/thread/interfaces/logger_interface.h>
 #else
-    #include "../logger_interface.h"
+    #include <kcenon/logger/interfaces/logger_interface.h>
 #endif
 
 namespace kcenon::logger {

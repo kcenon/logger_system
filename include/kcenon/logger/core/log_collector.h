@@ -34,9 +34,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // Conditional include based on build configuration
 #ifdef USE_THREAD_SYSTEM
-    #include <interfaces/logger_interface.h>
+    #include <kcenon/thread/interfaces/logger_interface.h>
 #else
-    #include "../logger_interface.h"
+    #include <kcenon/logger/interfaces/logger_interface.h>
 #endif
 
 #include <memory>

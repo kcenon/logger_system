@@ -5,7 +5,7 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-#include <kcenon/logger/core/batch_processor.h>
+#include "batch_processor.h"
 #include "../memory/object_pool.h"
 #include <algorithm>
 #include <chrono>

@@ -40,11 +40,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // Conditional include based on build configuration
 #ifdef USE_THREAD_SYSTEM
     // Use thread_system's interface when available
-    #include <interfaces/logger_interface.h>
+    #include <kcenon/thread/interfaces/logger_interface.h>
     #include <thread_base/sync/error_handling.h>
 #else
     // Use local interface in standalone mode
-    #include "logger_interface.h"
+    #include <kcenon/logger/interfaces/logger_interface.h>
 #endif
 
 #include "error_codes.h"

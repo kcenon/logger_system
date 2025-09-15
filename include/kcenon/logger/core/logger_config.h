@@ -10,12 +10,12 @@ All rights reserved.
 #include <chrono>
 #include <string>
 #include <limits>
-#include "../error_codes.h"
+#include <kcenon/logger/core/error_codes.h>
 
 #ifdef USE_THREAD_SYSTEM
-    #include <interfaces/logger_interface.h>
+    #include <kcenon/thread/interfaces/logger_interface.h>
 #else
-    #include "../logger_interface.h"
+    #include <kcenon/logger/interfaces/logger_interface.h>
 #endif
 
 namespace kcenon::logger {
