@@ -264,13 +264,20 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 $<INSTALL_INTERFACE:include>
         )
 
-        # Add thread_system include directories if available
-        if(THREAD_SYSTEM_FOUND)
+        # Add thread_system integration if available and not explicitly disabled
+        option(LOGGER_STANDALONE_MODE "Build logger_system in standalone mode without thread_system integration" OFF)
+
+        if(THREAD_SYSTEM_FOUND AND NOT LOGGER_STANDALONE_MODE)
+            message(STATUS "Logger System: Using thread_system integration mode")
             target_include_directories(LoggerSystem
                 PUBLIC
                     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
             )
             target_link_libraries(LoggerSystem PRIVATE thread_system)
+            target_compile_definitions(LoggerSystem PUBLIC USE_THREAD_SYSTEM_INTEGRATION)
+        else()
+            message(STATUS "Logger System: Using standalone mode")
+            target_compile_definitions(LoggerSystem PUBLIC LOGGER_STANDALONE_MODE)
         endif()
 
         set(USE_LEGACY_SOURCES FALSE)

@@ -36,14 +36,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdexcept>
 #include <utility>
 
-// Conditional include based on build configuration
-#ifdef USE_THREAD_SYSTEM
-    #include <kcenon/thread/core/error_handling.h>
-#else
-    // Minimal error handling for standalone mode
-    #include <optional>
-    #include <variant>
-#endif
+// Use standalone error handling for better compatibility
+#include <optional>
+#include <variant>
 
 namespace kcenon::logger {
 
@@ -220,59 +215,7 @@ inline std::string logger_error_to_string(logger_error_code code) {
     }
 }
 
-#ifdef USE_THREAD_SYSTEM
-// Use thread_system's result types
-using kcenon::thread::result;
-using kcenon::thread::result_void;
-using kcenon::thread::error;
-// Alias for convenience
-namespace thread_module = kcenon::thread;
-
-// Type alias for convenience
-using error_code = logger_error_code;
-
-/**
- * @brief Create a logger error from error code
- * @param code Logger error code
- * @param message Optional detailed message
- * @return thread_module::error object
- */
-inline error make_logger_error(logger_error_code code, const std::string& message = "") {
-    // Convert logger_error_code to thread_module::error_code
-    // For logger-specific errors, we'll use a high offset to avoid conflicts
-    auto thread_code = static_cast<kcenon::thread::error_code>(
-        static_cast<int>(code) + 10000
-    );
-    
-    if (message.empty()) {
-        return error{thread_code, logger_error_to_string(code)};
-    }
-    return error{thread_code, logger_error_to_string(code) + ": " + message};
-}
-
-/**
- * @brief Helper function to create an error result
- * @param code Logger error code
- * @param message Error message
- * @return result_void with error
- */
-inline result_void make_error(logger_error_code code, const std::string& message = "") {
-    return make_logger_error(code, message);
-}
-
-/**
- * @brief Helper function to create an error result with value
- * @tparam T Result value type
- * @param code Logger error code
- * @param message Error message
- * @return result<T> with error
- */
-template<typename T>
-inline result<T> make_error(logger_error_code code, const std::string& message = "") {
-    return make_logger_error(code, message);
-}
-
-#else
+// Use standalone mode for better compatibility and fewer dependencies
 // Standalone mode - provide minimal result implementation
 template<typename T>
 class result {
@@ -333,6 +276,5 @@ inline result<T> make_logger_error(logger_error_code code, const std::string& me
 
 // Type alias for convenience in standalone mode
 using error_code = logger_error_code;
-#endif
 
 } // namespace kcenon::logger

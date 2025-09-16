@@ -16,6 +16,14 @@ namespace kcenon::logger::di {
 class di_container_factory {
 public:
     /**
+     * @brief Container type enumeration
+     */
+    enum class container_type {
+        automatic,
+        basic,
+        advanced
+    };
+    /**
      * @brief Create a default DI container instance
      * @return Shared pointer to DI container interface
      */

@@ -37,13 +37,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <atomic>
 #include <thread>
 
-// Conditional include based on build configuration
-#ifdef USE_THREAD_SYSTEM
-    // Use thread_system's interface when available
+// Conditional include based on build mode
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+    // Integration mode: Use thread_system's interface for ecosystem compatibility
     #include <kcenon/thread/interfaces/logger_interface.h>
-    #include <thread_base/sync/error_handling.h>
 #else
-    // Use local interface in standalone mode
+    // Standalone mode: Use local interface for independence
     #include <kcenon/logger/interfaces/logger_interface.h>
 #endif
 
@@ -111,6 +110,21 @@ namespace kcenon::logger {
 
 // Re-export log_level from thread_module for convenience
 using thread_module::log_level;
+
+// Type aliases for convenience and compatibility
+using logger_metrics = metrics::logger_performance_stats;
+using monitoring_metrics = monitoring::monitoring_data;
+using monitoring_interface = monitoring::monitoring_interface;
+using di_container_interface = di::di_container_interface;
+using di_container_factory = di::di_container_factory;
+using monitoring_factory = monitoring::monitoring_factory;
+
+// Metric type enum
+enum class metric_type {
+    gauge,
+    counter,
+    histogram
+};
 
 // Forward declarations
 class log_collector;
@@ -379,14 +393,14 @@ public:
      * @brief Get current performance metrics
      * @return Result containing metrics or error
      */
-    result<logger_metrics> get_current_metrics() const;
+    result<metrics::logger_performance_stats> get_current_metrics() const;
     
     /**
      * @brief Get metrics history for a specific duration
      * @param duration How far back to retrieve metrics
      * @return Result containing metrics snapshot or error
      */
-    result<std::unique_ptr<logger_metrics>> get_metrics_history(std::chrono::seconds duration) const;
+    result<std::unique_ptr<metrics::logger_performance_stats>> get_metrics_history(std::chrono::seconds duration) const;
     
     /**
      * @brief Reset performance metrics
@@ -439,7 +453,7 @@ public:
      * @brief Set a DI container for writer resolution
      * @param container Pointer to DI container (not owned)
      */
-    void set_di_container(di_container_interface* container);
+    void set_di_container(di::di_container_interface* container);
     
     /**
      * @brief Check if DI container is available
@@ -456,36 +470,25 @@ public:
     
     /**
      * @brief Register a writer factory in the internal DI container
-     * @tparam WriterType The concrete writer type
      * @param name Name to register the writer factory under
+     * @param factory Factory function to create the writer
      * @return result_void indicating success or error
      */
-    template<typename WriterType>
-    result_void register_writer_factory(const std::string& name) {
-        if (!internal_di_container_) {
-            return error_code::di_not_available;
-        }
-        
-        auto factory = []() -> std::shared_ptr<base_writer> {
-            return std::make_shared<WriterType>();
-        };
-        
-        return internal_di_container_->register_factory(name, factory);
-    }
+    result_void register_writer_factory(const std::string& name, std::function<std::shared_ptr<base_writer>()> factory);
     
     /**
      * @brief Get the DI strategy being used
      * @return Current DI strategy
      */
-    di_container_factory::container_type get_di_strategy() const;
+    di::di_container_factory::container_type get_di_strategy() const;
     
     /**
      * @brief Enable internal DI container
      * @param type Type of DI container to use
      * @return result_void indicating success or error
      */
-    result_void enable_di(di_container_factory::container_type type = 
-                         di_container_factory::container_type::automatic);
+    result_void enable_di(di::di_container_factory::container_type type =
+                         di::di_container_factory::container_type::automatic);
     
     // Monitoring Support Methods
     
@@ -493,15 +496,15 @@ public:
      * @brief Set a custom monitoring implementation
      * @param monitor Unique pointer to monitoring implementation
      */
-    void set_monitor(std::unique_ptr<monitoring_interface> monitor);
+    void set_monitor(std::unique_ptr<monitoring::monitoring_interface> monitor);
     
     /**
      * @brief Enable monitoring with specified backend
      * @param type Type of monitoring backend to use
      * @return result_void indicating success or error
      */
-    result_void enable_monitoring(monitoring_factory::monitor_type type = 
-                                 monitoring_factory::monitor_type::automatic);
+    result_void enable_monitoring(monitoring::monitoring_factory::monitor_type type =
+                                 monitoring::monitoring_factory::monitor_type::automatic);
     
     /**
      * @brief Disable monitoring
@@ -519,7 +522,7 @@ public:
      * @brief Collect current metrics
      * @return Result containing monitoring data or error
      */
-    result<monitoring_metrics> collect_metrics() const;
+    result<monitoring::monitoring_data> collect_metrics() const;
     
     /**
      * @brief Perform health check
@@ -553,11 +556,11 @@ private:
     std::unique_ptr<impl> pimpl_;
     
     // DI support members
-    di_container_interface* external_di_container_ = nullptr;
-    std::unique_ptr<di_container_interface> internal_di_container_;
+    di::di_container_interface* external_di_container_ = nullptr;
+    std::unique_ptr<di::di_container_interface> internal_di_container_;
     
     // Monitoring support member
-    std::unique_ptr<monitoring_interface> monitor_;
+    std::unique_ptr<monitoring::monitoring_interface> monitor_;
 };
 
 } // namespace kcenon::logger

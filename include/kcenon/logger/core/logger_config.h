@@ -12,10 +12,12 @@ All rights reserved.
 #include <limits>
 #include <kcenon/logger/core/error_codes.h>
 
-#ifdef USE_THREAD_SYSTEM
+// Conditional include based on build mode
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     #include <kcenon/thread/interfaces/logger_interface.h>
 #else
     #include <kcenon/logger/interfaces/logger_interface.h>
+    #include <kcenon/logger/interfaces/logger_types.h>
 #endif
 
 namespace kcenon::logger {
@@ -31,7 +33,11 @@ struct logger_config {
     // Basic settings
     bool async = true;
     std::size_t buffer_size = 8192;
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     thread_module::log_level min_level = thread_module::log_level::info;
+#else
+    logger_system::log_level min_level = logger_system::log_level::info;
+#endif
     
     // Performance settings
     std::size_t batch_size = 100;

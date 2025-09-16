@@ -32,8 +32,8 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
-// Conditional include based on build configuration
-#ifdef USE_THREAD_SYSTEM
+// Conditional include based on build mode
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     #include <kcenon/thread/interfaces/logger_interface.h>
 #else
     #include <kcenon/logger/interfaces/logger_interface.h>

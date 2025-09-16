@@ -16,6 +16,14 @@ namespace kcenon::logger::monitoring {
 class monitoring_factory {
 public:
     /**
+     * @brief Monitor type enumeration
+     */
+    enum class monitor_type {
+        automatic,
+        basic,
+        advanced
+    };
+    /**
      * @brief Create a default monitoring instance
      * @return Shared pointer to monitoring interface
      */

@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include <functional>
 #include <memory>
 #include <string>
 #include <typeindex>
@@ -40,6 +41,16 @@ public:
     virtual void clear() = 0;
 
     /**
+     * @brief Register a factory function for creating services
+     */
+    virtual void register_factory(const std::string& name, std::function<std::shared_ptr<void>()> factory) = 0;
+
+    /**
+     * @brief Get a service by name using factory
+     */
+    virtual std::shared_ptr<void> get_service(const std::string& name) = 0;
+
+    /**
      * @brief Template wrappers for type-safe access
      */
     template<typename T>
@@ -65,6 +76,7 @@ public:
 class basic_di_container : public di_container_interface {
 private:
     std::unordered_map<std::type_index, std::shared_ptr<void>> services_;
+    std::unordered_map<std::string, std::function<std::shared_ptr<void>()>> factories_;
 
 public:
     void register_service(std::type_index type, std::shared_ptr<void> service) override {
@@ -85,6 +97,19 @@ public:
 
     void clear() override {
         services_.clear();
+        factories_.clear();
+    }
+
+    void register_factory(const std::string& name, std::function<std::shared_ptr<void>()> factory) override {
+        factories_[name] = factory;
+    }
+
+    std::shared_ptr<void> get_service(const std::string& name) override {
+        auto it = factories_.find(name);
+        if (it != factories_.end()) {
+            return it->second();
+        }
+        return nullptr;
     }
 };
 

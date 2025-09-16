@@ -46,7 +46,8 @@ All rights reserved.
 #include <optional>
 #include "../core/small_string.h"
 
-#ifdef USE_THREAD_SYSTEM
+// Conditional include based on build mode
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     #include <kcenon/thread/interfaces/logger_interface.h>
 #else
     #include <kcenon/logger/interfaces/logger_interface.h>

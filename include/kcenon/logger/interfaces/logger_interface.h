@@ -25,9 +25,11 @@
 
 #pragma once
 
-// This file is only used in standalone mode when thread_system is not available
-#ifndef LOGGER_STANDALONE
-#warning "This file should only be included in standalone mode. Use thread_system's logger_interface.h instead."
+// Logger interface for standalone mode
+// Note: This interface is used when LOGGER_STANDALONE_MODE is defined
+// For thread_system integration, use thread_module::logger_interface instead
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+#warning "This local logger_interface.h should not be used in integration mode. Use thread_system's logger_interface.h instead."
 #endif
 
 #include <memory>
