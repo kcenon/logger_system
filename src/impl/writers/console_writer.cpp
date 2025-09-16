@@ -178,6 +178,7 @@ std::string base_writer::level_to_color(logger_system::log_level level) const {
         case logger_system::log_level::info:     return "\033[1;32m"; // Bright Green
         case logger_system::log_level::debug:    return "\033[1;36m"; // Bright Cyan
         case logger_system::log_level::trace:    return "\033[1;37m"; // Bright White
+        case logger_system::log_level::off:      return ""; // No color for off
     }
     return "";
 }

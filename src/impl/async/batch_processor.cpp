@@ -266,6 +266,8 @@ bool batch_processor::should_flush_by_time(std::chrono::steady_clock::time_point
 void batch_processor::update_stats(size_t batch_size,
                                   std::chrono::nanoseconds processing_time,
                                   const std::string& flush_reason) {
+    (void)batch_size;  // Suppress unused parameter warning
+    (void)flush_reason;  // Suppress unused parameter warning
     const double processing_time_ms =
         std::chrono::duration_cast<std::chrono::microseconds>(processing_time).count() / 1000.0;
 

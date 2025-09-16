@@ -113,6 +113,7 @@ jobs:
             -G Ninja \
             -DBUILD_TESTS=ON \
             -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+            -DLOGGER_STANDALONE_MODE=ON \
             -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/vcpkg/scripts/buildsystems/vcpkg.cmake" \
             -DVCPKG_TARGET_TRIPLET=$VCPKG_DEFAULT_TRIPLET \
             -DCMAKE_CXX_FLAGS="-std=c++20 -pthread" \
@@ -139,6 +140,7 @@ jobs:
             -G Ninja \
             -DBUILD_TESTS=ON \
             -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+            -DLOGGER_STANDALONE_MODE=ON \
             -DCMAKE_CXX_FLAGS="-std=c++20 -pthread" \
             -DCMAKE_EXE_LINKER_FLAGS="-lstdc++fs -lpthread" \
             -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY" \
