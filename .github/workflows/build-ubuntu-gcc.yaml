@@ -102,6 +102,8 @@ jobs:
             -G Ninja \
             -DBUILD_TESTS=ON \
             -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+            -DLOGGER_STANDALONE_MODE=ON \
+            -DUSE_THREAD_SYSTEM=OFF \
             -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/vcpkg/scripts/buildsystems/vcpkg.cmake" \
             -DCMAKE_C_COMPILER=gcc \
             -DCMAKE_CXX_COMPILER=g++
@@ -121,6 +123,8 @@ jobs:
             -G Ninja \
             -DBUILD_TESTS=ON \
             -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+            -DLOGGER_STANDALONE_MODE=ON \
+            -DUSE_THREAD_SYSTEM=OFF \
             -DCMAKE_C_COMPILER=gcc \
             -DCMAKE_CXX_COMPILER=g++
           

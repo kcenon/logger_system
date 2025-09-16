@@ -110,21 +110,24 @@ logger_find_all_dependencies()
 # Print feature configuration summary
 logger_print_features()
 
-# Skip vcpkg if NO_VCPKG option is set or if LOGGER_STANDALONE is ON
-if(NO_VCPKG OR LOGGER_STANDALONE)
+# Skip vcpkg if NO_VCPKG option is set or if LOGGER_STANDALONE_MODE is ON
+if(NO_VCPKG OR LOGGER_STANDALONE_MODE)
     message(STATUS "Skipping vcpkg - using system libraries only")
     set(SKIP_VCPKG ON)
 endif()
 
 # Try to find thread_system (only if not in standalone mode)
-if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE)
-    # Check if thread_system is already added
-    if(NOT TARGET thread_system)
+if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
+    # Check if thread_system components are already added
+    if(NOT TARGET interfaces)
         # First try to find it as a sibling directory
         if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/CMakeLists.txt")
             message(STATUS "Found thread_system as sibling directory")
             # Build thread_system as submodule to avoid vcpkg issues
             set(BUILD_THREADSYSTEM_AS_SUBMODULE ON CACHE BOOL "Build ThreadSystem as submodule" FORCE)
+            # Prevent duplicate target issues
+            set(BUILD_TESTS OFF CACHE BOOL "Disable tests for thread_system" FORCE)
+            set(BUILD_SAMPLES OFF CACHE BOOL "Disable samples for thread_system" FORCE)
             add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" "${CMAKE_BINARY_DIR}/thread_system_build")
             set(THREAD_SYSTEM_FOUND TRUE)
         else()
@@ -135,23 +138,28 @@ if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE)
                 set(THREAD_SYSTEM_FOUND TRUE)
             endif()
         endif()
+    else()
+        message(STATUS "thread_system components already included")
+        set(THREAD_SYSTEM_FOUND TRUE)
     endif()
-    
+
     if(THREAD_SYSTEM_FOUND)
         message(STATUS "Using thread_system for interfaces and utilities")
         add_compile_definitions(USE_THREAD_SYSTEM)
-        
+
         # Create a unified thread_system target that includes all components
         if(NOT TARGET thread_system)
             add_library(thread_system INTERFACE)
-            target_link_libraries(thread_system INTERFACE 
-                utilities 
-                interfaces 
-                thread_base 
-                thread_pool 
-                typed_thread_pool 
-                lockfree
-            )
+            if(TARGET utilities AND TARGET interfaces AND TARGET thread_base)
+                target_link_libraries(thread_system INTERFACE
+                    utilities
+                    interfaces
+                    thread_base
+                    thread_pool
+                    typed_thread_pool
+                    lockfree
+                )
+            endif()
         endif()
     else()
         message(STATUS "thread_system not found, using standalone mode")
@@ -225,15 +233,89 @@ endif()
 ##################################################
 # Source files
 ##################################################
-add_subdirectory(sources)
+
+# Check for new structure
+set(LOGGER_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(LOGGER_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
+    message(STATUS "Logger System: Using new directory structure")
+
+    # Add include directories
+    include_directories(${LOGGER_INCLUDE_DIR})
+
+    # Collect source files from new structure
+    file(GLOB_RECURSE LOGGER_HEADERS
+        ${LOGGER_INCLUDE_DIR}/kcenon/logger/*.h
+    )
+
+    file(GLOB_RECURSE LOGGER_SOURCES
+        ${LOGGER_SOURCE_DIR}/*.cpp
+    )
+
+    # Check if we have enough sources in new structure
+    list(LENGTH LOGGER_SOURCES SOURCE_COUNT)
+    if(SOURCE_COUNT GREATER 5)
+        # Create library with new structure
+        add_library(LoggerSystem ${LOGGER_SOURCES} ${LOGGER_HEADERS})
+        target_include_directories(LoggerSystem
+            PUBLIC
+                $<BUILD_INTERFACE:${LOGGER_INCLUDE_DIR}>
+                $<INSTALL_INTERFACE:include>
+        )
+
+        # Add thread_system integration if available and not explicitly disabled
+        option(LOGGER_STANDALONE_MODE "Build logger_system in standalone mode without thread_system integration" OFF)
+
+        if(THREAD_SYSTEM_FOUND AND NOT LOGGER_STANDALONE_MODE)
+            message(STATUS "Logger System: Using thread_system integration mode")
+            target_include_directories(LoggerSystem
+                PUBLIC
+                    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
+            )
+            target_link_libraries(LoggerSystem PRIVATE thread_system)
+            target_compile_definitions(LoggerSystem PUBLIC USE_THREAD_SYSTEM_INTEGRATION)
+        else()
+            message(STATUS "Logger System: Using standalone mode")
+            target_compile_definitions(LoggerSystem PUBLIC LOGGER_STANDALONE_MODE)
+        endif()
+
+        set(USE_LEGACY_SOURCES FALSE)
+    else()
+        message(STATUS "Logger System: New structure incomplete, using legacy sources")
+        set(USE_LEGACY_SOURCES TRUE)
+    endif()
+else()
+    message(STATUS "Logger System: Using legacy directory structure")
+    set(USE_LEGACY_SOURCES TRUE)
+endif()
+
+# Use legacy sources if needed
+if(USE_LEGACY_SOURCES)
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/sources)
+        add_subdirectory(sources)
+    endif()
+endif()
 
 if (BUILD_SAMPLES)
-    add_subdirectory(samples)
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/examples)
+        add_subdirectory(examples)
+    elseif(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/samples)
+        add_subdirectory(samples)
+    endif()
 endif()
 
 if (BUILD_TESTS)
-    add_subdirectory(unittest)
-    add_subdirectory(tests)
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt)
+        add_subdirectory(tests)
+    else()
+        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/unittest)
+            add_subdirectory(unittest)
+        endif()
+        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+            add_subdirectory(tests)
+        endif()
+    endif()
     
     # Enable sanitizers for test targets if requested
     logger_enable_sanitizers_for_tests()
@@ -256,29 +338,35 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
 # Installation targets list
-set(INSTALL_TARGETS logger)
-if(TARGET thread_system)
-    list(APPEND INSTALL_TARGETS thread_system)
+set(INSTALL_TARGETS)
+if(TARGET LoggerSystem)
+    list(APPEND INSTALL_TARGETS LoggerSystem)
 endif()
+# Note: thread_system is an external dependency and should not be installed as part of LoggerSystem
 
-install(TARGETS ${INSTALL_TARGETS}
-    EXPORT LoggerSystemTargets
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
+if(INSTALL_TARGETS)
+    install(TARGETS ${INSTALL_TARGETS}
+        EXPORT LoggerSystemTargets
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    )
+endif()
 
 install(DIRECTORY sources/
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/logger_system
     FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
 )
 
-install(EXPORT LoggerSystemTargets
-    FILE LoggerSystemTargets.cmake
-    NAMESPACE LoggerSystem::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/LoggerSystem
-)
+# Temporarily disabled to avoid export dependency issues
+# if(INSTALL_TARGETS)
+#     install(EXPORT LoggerSystemTargets
+#         FILE LoggerSystemTargets.cmake
+#         NAMESPACE LoggerSystem::
+#         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/LoggerSystem
+#     )
+# endif()
 
 configure_package_config_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/LoggerSystemConfig.cmake.in
