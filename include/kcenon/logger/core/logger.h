@@ -108,11 +108,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace kcenon::logger {
 
-// Re-export log_level from thread_module for convenience
-using thread_module::log_level;
+// Type aliases for consistency across modes
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+    // In integration mode, use thread_module types
+    using log_level = thread_module::log_level;
+#else
+    // In standalone mode, use logger_system types
+    using log_level = logger_system::log_level;
+#endif
 
 // Type aliases for convenience and compatibility
 using logger_metrics = metrics::logger_performance_stats;
+using performance_metrics = metrics::logger_performance_stats; // Alias for examples
 using monitoring_metrics = monitoring::monitoring_data;
 using monitoring_interface = monitoring::monitoring_interface;
 using di_container_interface = di::di_container_interface;
@@ -152,7 +159,11 @@ class log_router;
  * 
  * @since 1.0.0
  */
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
 class logger : public thread_module::logger_interface {
+#else
+class logger : public logger_system::logger_interface {
+#endif
 public:
     /**
      * @brief Constructor with optional configuration
@@ -195,7 +206,11 @@ public:
      * 
      * @since 1.0.0
      */
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     void log(thread_module::log_level level, const std::string& message) override;
+#else
+    void log(logger_system::log_level level, const std::string& message) override;
+#endif
     
     /**
      * @brief Log a message with source location
@@ -216,8 +231,13 @@ public:
      * 
      * @since 1.0.0
      */
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     void log(thread_module::log_level level, const std::string& message,
              const std::string& file, int line, const std::string& function) override;
+#else
+    void log(logger_system::log_level level, const std::string& message,
+             const std::string& file, int line, const std::string& function) override;
+#endif
     
     /**
      * @brief Check if a log level is enabled
@@ -237,7 +257,11 @@ public:
      * 
      * @since 1.0.0
      */
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     bool is_enabled(thread_module::log_level level) const override;
+#else
+    bool is_enabled(logger_system::log_level level) const override;
+#endif
     
     /**
      * @brief Flush all pending log messages
@@ -312,7 +336,11 @@ public:
      * 
      * @since 1.0.0
      */
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     void set_min_level(thread_module::log_level level);
+#else
+    void set_min_level(logger_system::log_level level);
+#endif
     
     /**
      * @brief Get the minimum log level
@@ -322,7 +350,11 @@ public:
      * 
      * @since 1.0.0
      */
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     thread_module::log_level get_min_level() const;
+#else
+    logger_system::log_level get_min_level() const;
+#endif
     
     /**
      * @brief Start the logger (for async mode)

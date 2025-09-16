@@ -39,6 +39,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace kcenon::logger {
 
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
 // Helper function to convert thread_module::log_level to logger_system::log_level
 logger_system::log_level convert_log_level(thread_module::log_level level) {
     switch (level) {
@@ -51,6 +52,12 @@ logger_system::log_level convert_log_level(thread_module::log_level level) {
         default: return logger_system::log_level::info;
     }
 }
+#else
+// In standalone mode, no conversion needed - both types are the same
+logger_system::log_level convert_log_level(logger_system::log_level level) {
+    return level;
+}
+#endif
 
 // Simple implementation class for logger PIMPL
 class logger::impl {
@@ -58,11 +65,19 @@ public:
     bool async_mode_;
     std::size_t buffer_size_;
     bool running_;
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     thread_module::log_level min_level_;
+#else
+    logger_system::log_level min_level_;
+#endif
     std::vector<std::unique_ptr<base_writer>> writers_;
 
     impl(bool async, std::size_t buffer_size)
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
         : async_mode_(async), buffer_size_(buffer_size), running_(false), min_level_(thread_module::log_level::info) {
+#else
+        : async_mode_(async), buffer_size_(buffer_size), running_(false), min_level_(logger_system::log_level::info) {
+#endif
     }
 };
 
@@ -104,17 +119,30 @@ result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
     return result_void{};
 }
 
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
 void logger::set_min_level(thread_module::log_level level) {
+#else
+void logger::set_min_level(logger_system::log_level level) {
+#endif
     if (pimpl_) {
         pimpl_->min_level_ = level;
     }
 }
 
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
 thread_module::log_level logger::get_min_level() const {
     return pimpl_ ? pimpl_->min_level_ : thread_module::log_level::info;
+#else
+logger_system::log_level logger::get_min_level() const {
+    return pimpl_ ? pimpl_->min_level_ : logger_system::log_level::info;
+#endif
 }
 
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
 void logger::log(thread_module::log_level level, const std::string& message) {
+#else
+void logger::log(logger_system::log_level level, const std::string& message) {
+#endif
     if (pimpl_ && level <= pimpl_->min_level_) {
         for (auto& writer : pimpl_->writers_) {
             if (writer) {
@@ -126,8 +154,13 @@ void logger::log(thread_module::log_level level, const std::string& message) {
     }
 }
 
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
 void logger::log(thread_module::log_level level, const std::string& message,
                 const std::string& file, int line, const std::string& function) {
+#else
+void logger::log(logger_system::log_level level, const std::string& message,
+                const std::string& file, int line, const std::string& function) {
+#endif
     if (pimpl_ && level <= pimpl_->min_level_) {
         for (auto& writer : pimpl_->writers_) {
             if (writer) {
@@ -139,7 +172,11 @@ void logger::log(thread_module::log_level level, const std::string& message,
     }
 }
 
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
 bool logger::is_enabled(thread_module::log_level level) const {
+#else
+bool logger::is_enabled(logger_system::log_level level) const {
+#endif
     return pimpl_ && level <= pimpl_->min_level_;
 }
 

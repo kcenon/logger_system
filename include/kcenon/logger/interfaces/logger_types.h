@@ -23,8 +23,10 @@ enum class log_level {
     debug = 1,
     info = 2,
     warn = 3,
+    warning = 3,  // Alias for warn for compatibility
     error = 4,
     fatal = 5,
+    critical = 5, // Alias for fatal for compatibility
     off = 6
 };
 

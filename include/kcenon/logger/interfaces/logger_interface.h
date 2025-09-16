@@ -35,26 +35,16 @@
 #include <memory>
 #include <mutex>
 #include <string>
+#include "logger_types.h"
 
-namespace thread_module {
+namespace logger_system {
 
-/**
- * @brief Log level enumeration
- */
-enum class log_level {
-  critical = 0,
-  error = 1,
-  warning = 2,
-  info = 3,
-  debug = 4,
-  trace = 5
-};
+// Log level is defined in logger_types.h
 
 /**
- * @brief Logger interface for thread system
+ * @brief Logger interface for standalone mode
  *
- * This interface allows the thread system to log messages without
- * depending on a specific logger implementation.
+ * This interface provides a logging contract for standalone logger implementations.
  */
 class logger_interface {
 public:
@@ -144,4 +134,4 @@ private:
 #define THREAD_LOG_TRACE(message)                                             \
   THREAD_LOG_IF_ENABLED(thread_module::log_level::trace, message)
 
-} // namespace thread_module
+} // namespace logger_system

@@ -54,7 +54,11 @@ public:
         stop();
     }
     
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     bool enqueue(thread_module::log_level level,
+#else
+    bool enqueue(logger_system::log_level level,
+#endif
                  const std::string& message,
                  const std::string& file,
                  int line,
@@ -70,6 +74,7 @@ public:
             }
             
             // Create log_entry with optional source location
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
             // Convert thread_module::log_level to logger_system::log_level
             logger_system::log_level logger_level;
             switch (level) {
@@ -81,6 +86,10 @@ public:
                 case thread_module::log_level::critical: logger_level = logger_system::log_level::fatal; break;
                 default: logger_level = logger_system::log_level::info; break;
             }
+#else
+            // In standalone mode, no conversion needed
+            logger_system::log_level logger_level = level;
+#endif
             log_entry entry(logger_level, message, timestamp);
             if (!file.empty() || line != 0 || !function.empty()) {
                 entry.location = source_location{file, line, function};
@@ -204,6 +213,7 @@ log_collector::log_collector(std::size_t buffer_size)
 log_collector::~log_collector() = default;
 
 namespace {
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
 // Convert logger_system::log_level to thread_module::log_level
 thread_module::log_level convert_log_level(logger_system::log_level level) {
     switch (level) {
@@ -217,6 +227,7 @@ thread_module::log_level convert_log_level(logger_system::log_level level) {
         default: return thread_module::log_level::info;
     }
 }
+#endif
 }
 
 bool log_collector::enqueue(logger_system::log_level level,
@@ -225,7 +236,11 @@ bool log_collector::enqueue(logger_system::log_level level,
                            int line,
                            const std::string& function,
                            const std::chrono::system_clock::time_point& timestamp) {
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     return pimpl_->enqueue(convert_log_level(level), message, file, line, function, timestamp);
+#else
+    return pimpl_->enqueue(level, message, file, line, function, timestamp);
+#endif
 }
 
 void log_collector::add_writer(base_writer* writer) {

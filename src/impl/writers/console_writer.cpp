@@ -163,6 +163,7 @@ std::string base_writer::level_to_string(logger_system::log_level level) const {
         case logger_system::log_level::info:     return "INFO";
         case logger_system::log_level::debug:    return "DEBUG";
         case logger_system::log_level::trace:    return "TRACE";
+        case logger_system::log_level::off:      return "OFF";
     }
     return "UNKNOWN";
 }

@@ -53,15 +53,15 @@ void basic_logging_example() {
     logger_instance->start();
     
     // Log messages at different levels
-    logger_instance->log(thread_module::log_level::trace, "This is a trace message");
-    logger_instance->log(thread_module::log_level::debug, "Debug information here");
-    logger_instance->log(thread_module::log_level::info, "Application started successfully");
-    logger_instance->log(thread_module::log_level::warning, "This is a warning");
-    logger_instance->log(thread_module::log_level::error, "An error occurred!");
-    logger_instance->log(thread_module::log_level::critical, "Critical system failure!");
-    
+    logger_instance->log(logger_system::log_level::trace, "This is a trace message");
+    logger_instance->log(logger_system::log_level::debug, "Debug information here");
+    logger_instance->log(logger_system::log_level::info, "Application started successfully");
+    logger_instance->log(logger_system::log_level::warn, "This is a warning");
+    logger_instance->log(logger_system::log_level::error, "An error occurred!");
+    logger_instance->log(logger_system::log_level::fatal, "Critical system failure!");
+
     // Log with source location
-    logger_instance->log(thread_module::log_level::info, "Message with location", 
+    logger_instance->log(logger_system::log_level::info, "Message with location",
                 __FILE__, __LINE__, __func__);
     
     // Stop and flush
@@ -82,7 +82,7 @@ void multithreaded_logging_example() {
     for (int i = 0; i < 4; ++i) {
         threads.emplace_back([logger_instance, i]() {
             for (int j = 0; j < 10; ++j) {
-                logger_instance->log(thread_module::log_level::info,
+                logger_instance->log(logger_system::log_level::info,
                            "Thread " + std::to_string(i) + " - Message " + std::to_string(j));
                 std::this_thread::sleep_for(std::chrono::milliseconds(10));
             }
@@ -105,16 +105,16 @@ void log_level_filtering_example() {
     logger_instance->start();
     
     // Set minimum level to INFO
-    logger_instance->set_min_level(thread_module::log_level::info);
+    logger_instance->set_min_level(logger_system::log_level::info);
     std::cout << "Minimum level set to INFO\n" << std::endl;
-    
+
     // These won't be logged
-    logger_instance->log(thread_module::log_level::trace, "This trace won't show");
-    logger_instance->log(thread_module::log_level::debug, "This debug won't show");
-    
+    logger_instance->log(logger_system::log_level::trace, "This trace won't show");
+    logger_instance->log(logger_system::log_level::debug, "This debug won't show");
+
     // These will be logged
-    logger_instance->log(thread_module::log_level::info, "This info will show");
-    logger_instance->log(thread_module::log_level::warning, "This warning will show");
+    logger_instance->log(logger_system::log_level::info, "This info will show");
+    logger_instance->log(logger_system::log_level::warn, "This warning will show");
     
     logger_instance->stop();
 }
@@ -129,7 +129,7 @@ void sync_vs_async_example() {
     
     auto start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < 100; ++i) {
-        sync_logger->log(thread_module::log_level::info, "Sync log " + std::to_string(i));
+        sync_logger->log(logger_system::log_level::info, "Sync log " + std::to_string(i));
     }
     auto sync_time = std::chrono::high_resolution_clock::now() - start;
     
@@ -141,7 +141,7 @@ void sync_vs_async_example() {
     
     start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < 100; ++i) {
-        async_logger->log(thread_module::log_level::info, "Async log " + std::to_string(i));
+        async_logger->log(logger_system::log_level::info, "Async log " + std::to_string(i));
     }
     auto async_time = std::chrono::high_resolution_clock::now() - start;
     
