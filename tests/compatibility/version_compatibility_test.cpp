@@ -296,6 +296,7 @@ TEST_F(VersionCompatibilityTest, APIVersionDetection) {
 
     // Check API compatibility simulation
     auto is_api_compatible = [](int major, int minor) {
+        (void)minor;  // Suppress unused parameter warning
         return major <= 3; // Current version is 3.x
     };
 

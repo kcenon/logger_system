@@ -111,6 +111,7 @@ jobs:
             -DBUILD_TESTS=ON `
             -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE `
             -DLOGGER_STANDALONE_MODE=ON `
+            -DUSE_THREAD_SYSTEM=OFF `
             -DCMAKE_TOOLCHAIN_FILE="$env:GITHUB_WORKSPACE\vcpkg\scripts\buildsystems\vcpkg.cmake" `
             -DCMAKE_CXX_FLAGS="/std:c++20 /permissive- /Zc:__cplusplus /EHsc" `
             -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY"
@@ -137,6 +138,7 @@ jobs:
             -DBUILD_TESTS=ON `
             -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE `
             -DLOGGER_STANDALONE_MODE=ON `
+            -DUSE_THREAD_SYSTEM=OFF `
             -DCMAKE_CXX_FLAGS="/std:c++20 /permissive- /Zc:__cplusplus /EHsc" `
             -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY" `
             -DNO_VCPKG=ON

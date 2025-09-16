@@ -110,14 +110,14 @@ logger_find_all_dependencies()
 # Print feature configuration summary
 logger_print_features()
 
-# Skip vcpkg if NO_VCPKG option is set or if LOGGER_STANDALONE is ON
-if(NO_VCPKG OR LOGGER_STANDALONE)
+# Skip vcpkg if NO_VCPKG option is set or if LOGGER_STANDALONE_MODE is ON
+if(NO_VCPKG OR LOGGER_STANDALONE_MODE)
     message(STATUS "Skipping vcpkg - using system libraries only")
     set(SKIP_VCPKG ON)
 endif()
 
 # Try to find thread_system (only if not in standalone mode)
-if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE)
+if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
     # Check if thread_system components are already added
     if(NOT TARGET interfaces)
         # First try to find it as a sibling directory
