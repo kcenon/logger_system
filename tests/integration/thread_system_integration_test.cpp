@@ -75,6 +75,7 @@ TEST_F(ThreadSystemIntegrationTest, ThreadPoolUtilization) {
 
     // Create simulated thread pool
     const int num_threads = 4;
+    (void)num_threads;  // Suppress unused variable warning
     const int num_tasks = 100;
 
     for (int i = 0; i < num_tasks; ++i) {

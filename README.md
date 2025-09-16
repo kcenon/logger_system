@@ -180,18 +180,18 @@ LoggerSystem_print_configuration()
 This logger is designed to work seamlessly with the [Thread System](https://github.com/kcenon/thread_system) through dependency injection:
 
 ```cpp
-#include <logger_system/logger.h>
-#include <thread_system/interfaces/service_container.h>
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/thread/interfaces/service_container.h>
 
 // Register logger in the service container
-auto logger = std::make_shared<logger_module::logger>();
-logger->add_writer(std::make_unique<logger_module::console_writer>());
+auto logger = std::make_shared<kcenon::logger::logger>();
+logger->add_writer(std::make_unique<kcenon::logger::console_writer>());
 
-thread_module::service_container::global()
-    .register_singleton<thread_module::logger_interface>(logger);
+kcenon::thread::service_container::global()
+    .register_singleton<kcenon::thread::interfaces::logger_interface>(logger);
 
 // Now thread system components will automatically use this logger
-auto context = thread_module::thread_context(); // Will resolve logger from container
+auto context = kcenon::thread::thread_context(); // Will resolve logger from container
 ```
 
 ## Quick Start
@@ -199,32 +199,32 @@ auto context = thread_module::thread_context(); // Will resolve logger from cont
 ### Quick Start with Builder Pattern (Recommended)
 
 ```cpp
-#include <logger/config/logger_builder.h>
-#include <logger/writers/console_writer.h>
-#include <logger/writers/file_writer.h>
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/logger/writers/file_writer.h>
 
 int main() {
     // Create logger using builder with automatic validation
-    auto result = logger_module::logger_builder()
+    auto result = kcenon::logger::logger_builder()
         .use_template("production")  // Use predefined configuration
-        .with_min_level(thread_module::log_level::info)
-        .add_writer("console", std::make_unique<logger_module::console_writer>())
-        .add_writer("file", std::make_unique<logger_module::file_writer>("app.log"))
+        .with_min_level(kcenon::logger::log_level::info)
+        .add_writer("console", std::make_unique<kcenon::logger::console_writer>())
+        .add_writer("file", std::make_unique<kcenon::logger::file_writer>("app.log"))
         .build();
-    
+
     if (!result) {
         std::cerr << "Failed to create logger: " << result.get_error().message() << "\n";
         return -1;
     }
-    
+
     auto logger = std::move(result.value());
-    
+
     // Log messages with error handling
-    auto log_result = logger->log(thread_module::log_level::info, "Application started");
+    auto log_result = logger->log(kcenon::logger::log_level::info, "Application started");
     if (!log_result) {
         std::cerr << "Log failed: " << log_result.get_error().message() << "\n";
     }
-    
+
     return 0;
 }
 ```
@@ -233,19 +233,19 @@ int main() {
 
 ```cpp
 // Production configuration - optimized for production environments
-auto prod_logger = logger_module::logger_builder()
+auto prod_logger = kcenon::logger::logger_builder()
     .use_template("production")
     .build()
     .value();  // Throws on error
 
 // Debug configuration - immediate output for development
-auto debug_logger = logger_module::logger_builder()
+auto debug_logger = kcenon::logger::logger_builder()
     .use_template("debug")
     .build()
     .value();
 
 // High-performance - maximized throughput
-auto hp_logger = logger_module::logger_builder()
+auto hp_logger = kcenon::logger::logger_builder()
     .use_template("high_performance")
     .build()
     .value();
