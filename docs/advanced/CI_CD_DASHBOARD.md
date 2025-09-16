@@ -8,7 +8,6 @@
 | Ubuntu | GCC | ![Build-Ubuntu-GCC](https://github.com/kcenon/logger_system/workflows/Build-Ubuntu-GCC/badge.svg) | ![Coverage](https://img.shields.io/badge/coverage-pending-yellow) | ![Tests](https://img.shields.io/badge/tests-pending-yellow) |
 | Ubuntu | Clang | ![Build-Ubuntu-Clang](https://github.com/kcenon/logger_system/workflows/Build-Ubuntu-Clang/badge.svg) | - | ![Tests](https://img.shields.io/badge/tests-pending-yellow) |
 | Windows | MSVC | ![Build-Windows-VS](https://github.com/kcenon/logger_system/workflows/Build-Windows-VS/badge.svg) | - | ![Tests](https://img.shields.io/badge/tests-pending-yellow) |
-| Windows | MinGW | ![Build-Windows-MinGW](https://github.com/kcenon/logger_system/workflows/Build-Windows-MinGW/badge.svg) | - | ![Tests](https://img.shields.io/badge/tests-pending-yellow) |
 | Windows | MSYS2 | ![Build-Windows-MSYS2](https://github.com/kcenon/logger_system/workflows/Build-Windows-MSYS2/badge.svg) | - | ![Tests](https://img.shields.io/badge/tests-pending-yellow) |
 | Documentation | Doxygen | ![Build-Doxygen](https://github.com/kcenon/logger_system/workflows/Build-Doxygen/badge.svg) | - | - |
 
@@ -115,7 +114,6 @@ No recent test failures
 | Build-Ubuntu-GCC | - | - | - |
 | Build-Ubuntu-Clang | - | - | - |
 | Build-Windows-VS | - | - | - |
-| Build-Windows-MinGW | - | - | - |
 | Build-Windows-MSYS2 | - | - | - |
 | Build-Doxygen | - | - | - |
 
