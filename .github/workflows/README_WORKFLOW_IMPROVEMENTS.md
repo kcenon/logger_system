@@ -22,7 +22,7 @@ Added environment variables to all jobs:
 env:
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
   VCPKG_FEATURE_FLAGS: "manifests,registries,versions,binarycaching"
-  VCPKG_DEFAULT_TRIPLET: x64-linux  # or x64-windows / x64-mingw-dynamic
+  VCPKG_DEFAULT_TRIPLET: x64-linux  # or x64-windows
 ```
 
 **Effect**: vcpkg reuses prebuilt artifacts via GitHub Actions cache, dramatically reducing build times.
@@ -30,7 +30,7 @@ env:
 ### 2. Improved Cache Key Structure
 
 Cache keys now include:
-- Platform and compiler flavor (gcc/clang/vs/mingw/msys2)
+- Platform and compiler flavor (gcc/clang/vs/msys2)
 - Triplet (x64-linux, x64-windows, x64-mingw-dynamic)
 - Manifest hash (`hashFiles('vcpkg.json', 'vcpkg-configuration.json')`)
 - vcpkg commit hash (determined dynamically)
@@ -105,7 +105,6 @@ All workflows now use the latest version of upload-artifact:
 | Ubuntu GCC | `build-ubuntu-gcc.yaml` | x64-linux |  All improvements |
 | Ubuntu Clang | `build-ubuntu-clang.yaml` | x64-linux |  All improvements |
 | Windows VS | `build-windows-vs.yaml` | x64-windows |  All improvements |
-| Windows MinGW | `build-windows-mingw.yaml` | x64-mingw-dynamic | ✅ All improvements |
 | Windows MSYS2 | `build-windows-msys2.yaml` | x64-mingw-dynamic | ✅ All improvements |
 
 ## Performance Impact
@@ -158,7 +157,6 @@ vcpkg build failed. Falling back to system libraries...
 
 ## Future Improvements
 
-- [x] Add Windows MinGW workflow improvements (completed)
 - [x] Add Windows MSYS2 workflow improvements (completed)
 - [x] Upgrade to upload-artifact@v4 (completed)
 - [ ] Consider matrix builds for multiple configurations

@@ -30,13 +30,6 @@ function(check_compiler_version)
         endif()
         message(STATUS "GCC ${CMAKE_CXX_COMPILER_VERSION} - C++20 support verified")
         
-        # Special handling for MinGW
-        if(MINGW)
-            message(STATUS "MinGW detected - applying compatibility settings")
-            add_definitions(-D__MINGW32__)
-            # MinGW often needs explicit std library linking
-            set(CMAKE_CXX_STANDARD_LIBRARIES "${CMAKE_CXX_STANDARD_LIBRARIES} -lstdc++fs")
-        endif()
         
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS ${MIN_CLANG_VERSION})
@@ -196,11 +189,6 @@ function(check_cpp_features)
                 set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} /bigobj")
             endif()
             
-        elseif(MINGW)
-            # MinGW needs pthread and filesystem libraries
-            set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -std=c++20 -pthread")
-            set(CMAKE_REQUIRED_LIBRARIES "${CMAKE_REQUIRED_LIBRARIES} -lstdc++fs -lwinpthread")
-            message(STATUS "MinGW configuration applied for feature detection")
         endif()
     elseif(UNIX)
         # Unix/Linux configuration
