@@ -27,7 +27,7 @@
 
 // Logger interface for standalone mode
 // Note: This interface is used when LOGGER_STANDALONE_MODE is defined
-// For thread_system integration, use thread_module::logger_interface instead
+// For thread_system integration, use kcenon::thread::logger_interface instead
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
 #warning "This local logger_interface.h should not be used in integration mode. Use thread_system's logger_interface.h instead."
 #endif
@@ -114,7 +114,7 @@ private:
 // Convenience macros for logging
 #define THREAD_LOG_IF_ENABLED(level, message)                                  \
   do {                                                                         \
-    if (auto logger = thread_module::logger_registry::get_logger()) {         \
+    if (auto logger = kcenon::thread::logger_registry::get_logger()) {         \
       if (logger->is_enabled(level)) {                                        \
         logger->log(level, message, __FILE__, __LINE__, __FUNCTION__);        \
       }                                                                        \
@@ -122,16 +122,16 @@ private:
   } while (0)
 
 #define THREAD_LOG_CRITICAL(message)                                          \
-  THREAD_LOG_IF_ENABLED(thread_module::log_level::critical, message)
+  THREAD_LOG_IF_ENABLED(kcenon::thread::log_level::critical, message)
 #define THREAD_LOG_ERROR(message)                                             \
-  THREAD_LOG_IF_ENABLED(thread_module::log_level::error, message)
+  THREAD_LOG_IF_ENABLED(kcenon::thread::log_level::error, message)
 #define THREAD_LOG_WARNING(message)                                           \
-  THREAD_LOG_IF_ENABLED(thread_module::log_level::warning, message)
+  THREAD_LOG_IF_ENABLED(kcenon::thread::log_level::warning, message)
 #define THREAD_LOG_INFO(message)                                              \
-  THREAD_LOG_IF_ENABLED(thread_module::log_level::info, message)
+  THREAD_LOG_IF_ENABLED(kcenon::thread::log_level::info, message)
 #define THREAD_LOG_DEBUG(message)                                             \
-  THREAD_LOG_IF_ENABLED(thread_module::log_level::debug, message)
+  THREAD_LOG_IF_ENABLED(kcenon::thread::log_level::debug, message)
 #define THREAD_LOG_TRACE(message)                                             \
-  THREAD_LOG_IF_ENABLED(thread_module::log_level::trace, message)
+  THREAD_LOG_IF_ENABLED(kcenon::thread::log_level::trace, message)
 
 } // namespace logger_system

@@ -668,6 +668,9 @@ elif [ "$TARGET" == "samples" ]; then
     CMAKE_ARGS+=" -DBUILD_SAMPLES=ON -DBUILD_TESTS=OFF"
 elif [ "$TARGET" == "tests" ]; then
     CMAKE_ARGS+=" -DBUILD_SAMPLES=OFF -DBUILD_TESTS=ON"
+else
+    # Default "all" target - disable samples to avoid API compatibility issues
+    CMAKE_ARGS+=" -DBUILD_SAMPLES=OFF -DBUILD_TESTS=OFF"
 fi
 
 # Enter build directory

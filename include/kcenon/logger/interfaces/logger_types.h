@@ -112,5 +112,5 @@ namespace kcenon::logger {
     using namespace logger_system;
 }
 
-// Note: thread_module::log_level is defined in logger_interface.h
+// Note: kcenon::thread::log_level is defined in logger_interface.h
 // to avoid circular dependencies and maintain compatibility

@@ -32,7 +32,7 @@ namespace kcenon::logger {
  */
 class thread_system_monitor_adapter : public monitoring_interface {
 private:
-    thread_module::monitorable_interface* monitorable_;
+    kcenon::thread::monitorable_interface* monitorable_;
     std::unique_ptr<basic_monitor> fallback_monitor_;
     bool owns_monitorable_;
     std::atomic<bool> enabled_{true};
@@ -43,7 +43,7 @@ public:
      * @param monitorable Pointer to existing monitorable interface
      */
     explicit thread_system_monitor_adapter(
-        thread_module::monitorable_interface* monitorable)
+        kcenon::thread::monitorable_interface* monitorable)
         : monitorable_(monitorable), 
           fallback_monitor_(std::make_unique<basic_monitor>()),
           owns_monitorable_(false) {
@@ -307,7 +307,7 @@ public:
      * @param monitorable Pointer to monitorable interface
      * @param take_ownership Whether to take ownership
      */
-    void set_monitorable(thread_module::monitorable_interface* monitorable,
+    void set_monitorable(kcenon::thread::monitorable_interface* monitorable,
                         bool take_ownership = false) {
         if (owns_monitorable_ && monitorable_) {
             delete monitorable_;

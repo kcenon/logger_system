@@ -111,7 +111,7 @@ namespace kcenon::logger {
 // Type aliases for consistency across modes
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
     // In integration mode, use thread_module types
-    using log_level = thread_module::log_level;
+    using log_level = kcenon::thread::log_level;
 #else
     // In standalone mode, use logger_system types
     using log_level = logger_system::log_level;
@@ -160,7 +160,7 @@ class log_router;
  * @since 1.0.0
  */
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-class logger : public thread_module::logger_interface {
+class logger : public kcenon::thread::logger_interface {
 #else
 class logger : public logger_system::logger_interface {
 #endif
@@ -207,7 +207,7 @@ public:
      * @since 1.0.0
      */
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    void log(thread_module::log_level level, const std::string& message) override;
+    void log(kcenon::thread::log_level level, const std::string& message) override;
 #else
     void log(logger_system::log_level level, const std::string& message) override;
 #endif
@@ -232,7 +232,7 @@ public:
      * @since 1.0.0
      */
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    void log(thread_module::log_level level, const std::string& message,
+    void log(kcenon::thread::log_level level, const std::string& message,
              const std::string& file, int line, const std::string& function) override;
 #else
     void log(logger_system::log_level level, const std::string& message,
@@ -258,7 +258,7 @@ public:
      * @since 1.0.0
      */
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    bool is_enabled(thread_module::log_level level) const override;
+    bool is_enabled(kcenon::thread::log_level level) const override;
 #else
     bool is_enabled(logger_system::log_level level) const override;
 #endif
@@ -337,7 +337,7 @@ public:
      * @since 1.0.0
      */
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    void set_min_level(thread_module::log_level level);
+    void set_min_level(kcenon::thread::log_level level);
 #else
     void set_min_level(logger_system::log_level level);
 #endif
@@ -351,7 +351,7 @@ public:
      * @since 1.0.0
      */
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    thread_module::log_level get_min_level() const;
+    kcenon::thread::log_level get_min_level() const;
 #else
     logger_system::log_level get_min_level() const;
 #endif
