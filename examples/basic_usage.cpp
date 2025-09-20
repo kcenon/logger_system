@@ -32,6 +32,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/writers/console_writer.h>
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+#include <kcenon/thread/interfaces/logger_interface.h>
+using log_level_type = kcenon::thread::log_level;
+namespace log_levels = kcenon::thread;
+#else
+using log_level_type = logger_system::log_level;
+namespace log_levels = logger_system;
+#endif
 #include <thread>
 #include <vector>
 #include <iostream>
@@ -53,15 +61,15 @@ void basic_logging_example() {
     logger_instance->start();
     
     // Log messages at different levels
-    logger_instance->log(logger_system::log_level::trace, "This is a trace message");
-    logger_instance->log(logger_system::log_level::debug, "Debug information here");
-    logger_instance->log(logger_system::log_level::info, "Application started successfully");
-    logger_instance->log(logger_system::log_level::warn, "This is a warning");
-    logger_instance->log(logger_system::log_level::error, "An error occurred!");
-    logger_instance->log(logger_system::log_level::fatal, "Critical system failure!");
+    logger_instance->log(log_level_type::trace, "This is a trace message");
+    logger_instance->log(log_level_type::debug, "Debug information here");
+    logger_instance->log(log_level_type::info, "Application started successfully");
+    logger_instance->log(log_level_type::warning, "This is a warning");
+    logger_instance->log(log_level_type::error, "An error occurred!");
+    logger_instance->log(log_level_type::critical, "Critical system failure!");
 
     // Log with source location
-    logger_instance->log(logger_system::log_level::info, "Message with location",
+    logger_instance->log(log_level_type::info, "Message with location",
                 __FILE__, __LINE__, __func__);
     
     // Stop and flush
@@ -82,7 +90,7 @@ void multithreaded_logging_example() {
     for (int i = 0; i < 4; ++i) {
         threads.emplace_back([logger_instance, i]() {
             for (int j = 0; j < 10; ++j) {
-                logger_instance->log(logger_system::log_level::info,
+                logger_instance->log(log_level_type::info,
                            "Thread " + std::to_string(i) + " - Message " + std::to_string(j));
                 std::this_thread::sleep_for(std::chrono::milliseconds(10));
             }
@@ -105,16 +113,16 @@ void log_level_filtering_example() {
     logger_instance->start();
     
     // Set minimum level to INFO
-    logger_instance->set_min_level(logger_system::log_level::info);
+    logger_instance->set_min_level(log_level_type::info);
     std::cout << "Minimum level set to INFO\n" << std::endl;
 
     // These won't be logged
-    logger_instance->log(logger_system::log_level::trace, "This trace won't show");
-    logger_instance->log(logger_system::log_level::debug, "This debug won't show");
+    logger_instance->log(log_level_type::trace, "This trace won't show");
+    logger_instance->log(log_level_type::debug, "This debug won't show");
 
     // These will be logged
-    logger_instance->log(logger_system::log_level::info, "This info will show");
-    logger_instance->log(logger_system::log_level::warn, "This warning will show");
+    logger_instance->log(log_level_type::info, "This info will show");
+    logger_instance->log(log_level_type::warning, "This warning will show");
     
     logger_instance->stop();
 }
@@ -129,7 +137,7 @@ void sync_vs_async_example() {
     
     auto start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < 100; ++i) {
-        sync_logger->log(logger_system::log_level::info, "Sync log " + std::to_string(i));
+        sync_logger->log(log_level_type::info, "Sync log " + std::to_string(i));
     }
     auto sync_time = std::chrono::high_resolution_clock::now() - start;
     
@@ -141,7 +149,7 @@ void sync_vs_async_example() {
     
     start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < 100; ++i) {
-        async_logger->log(logger_system::log_level::info, "Async log " + std::to_string(i));
+        async_logger->log(log_level_type::info, "Async log " + std::to_string(i));
     }
     auto async_time = std::chrono::high_resolution_clock::now() - start;
     
