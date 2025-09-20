@@ -34,7 +34,7 @@ struct logger_config {
     bool async = true;
     std::size_t buffer_size = 8192;
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    thread_module::log_level min_level = thread_module::log_level::info;
+    kcenon::thread::log_level min_level = kcenon::thread::log_level::info;
 #else
     logger_system::log_level min_level = logger_system::log_level::info;
 #endif
@@ -248,7 +248,7 @@ struct logger_config {
     static logger_config debug_config() {
         logger_config config;
         config.async = false;  // Synchronous for immediate output
-        config.min_level = thread_module::log_level::trace;
+        config.min_level = kcenon::thread::log_level::trace;
         config.enable_metrics = true;
         config.enable_crash_handler = true;
         config.enable_color_output = true;
@@ -265,7 +265,7 @@ struct logger_config {
         logger_config config;
         config.async = true;
         config.buffer_size = 16384;
-        config.min_level = thread_module::log_level::warning;
+        config.min_level = kcenon::thread::log_level::warning;
         config.enable_metrics = true;
         config.enable_crash_handler = true;
         config.enable_color_output = false;

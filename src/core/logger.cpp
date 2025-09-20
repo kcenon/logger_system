@@ -40,15 +40,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace kcenon::logger {
 
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-// Helper function to convert thread_module::log_level to logger_system::log_level
-logger_system::log_level convert_log_level(thread_module::log_level level) {
+// Helper function to convert kcenon::thread::log_level to logger_system::log_level
+logger_system::log_level convert_log_level(kcenon::thread::log_level level) {
     switch (level) {
-        case thread_module::log_level::critical: return logger_system::log_level::fatal;
-        case thread_module::log_level::error: return logger_system::log_level::error;
-        case thread_module::log_level::warning: return logger_system::log_level::warn;
-        case thread_module::log_level::info: return logger_system::log_level::info;
-        case thread_module::log_level::debug: return logger_system::log_level::debug;
-        case thread_module::log_level::trace: return logger_system::log_level::trace;
+        case kcenon::thread::log_level::critical: return logger_system::log_level::fatal;
+        case kcenon::thread::log_level::error: return logger_system::log_level::error;
+        case kcenon::thread::log_level::warning: return logger_system::log_level::warn;
+        case kcenon::thread::log_level::info: return logger_system::log_level::info;
+        case kcenon::thread::log_level::debug: return logger_system::log_level::debug;
+        case kcenon::thread::log_level::trace: return logger_system::log_level::trace;
         default: return logger_system::log_level::info;
     }
 }
@@ -66,7 +66,7 @@ public:
     std::size_t buffer_size_;
     bool running_;
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    thread_module::log_level min_level_;
+    kcenon::thread::log_level min_level_;
 #else
     logger_system::log_level min_level_;
 #endif
@@ -74,7 +74,7 @@ public:
 
     impl(bool async, std::size_t buffer_size)
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-        : async_mode_(async), buffer_size_(buffer_size), running_(false), min_level_(thread_module::log_level::info) {
+        : async_mode_(async), buffer_size_(buffer_size), running_(false), min_level_(kcenon::thread::log_level::info) {
 #else
         : async_mode_(async), buffer_size_(buffer_size), running_(false), min_level_(logger_system::log_level::info) {
 #endif
@@ -120,7 +120,7 @@ result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
 }
 
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-void logger::set_min_level(thread_module::log_level level) {
+void logger::set_min_level(kcenon::thread::log_level level) {
 #else
 void logger::set_min_level(logger_system::log_level level) {
 #endif
@@ -130,8 +130,8 @@ void logger::set_min_level(logger_system::log_level level) {
 }
 
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-thread_module::log_level logger::get_min_level() const {
-    return pimpl_ ? pimpl_->min_level_ : thread_module::log_level::info;
+kcenon::thread::log_level logger::get_min_level() const {
+    return pimpl_ ? pimpl_->min_level_ : kcenon::thread::log_level::info;
 #else
 logger_system::log_level logger::get_min_level() const {
     return pimpl_ ? pimpl_->min_level_ : logger_system::log_level::info;
@@ -139,7 +139,7 @@ logger_system::log_level logger::get_min_level() const {
 }
 
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-void logger::log(thread_module::log_level level, const std::string& message) {
+void logger::log(kcenon::thread::log_level level, const std::string& message) {
 #else
 void logger::log(logger_system::log_level level, const std::string& message) {
 #endif
@@ -155,7 +155,7 @@ void logger::log(logger_system::log_level level, const std::string& message) {
 }
 
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-void logger::log(thread_module::log_level level, const std::string& message,
+void logger::log(kcenon::thread::log_level level, const std::string& message,
                 const std::string& file, int line, const std::string& function) {
 #else
 void logger::log(logger_system::log_level level, const std::string& message,
@@ -173,7 +173,7 @@ void logger::log(logger_system::log_level level, const std::string& message,
 }
 
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-bool logger::is_enabled(thread_module::log_level level) const {
+bool logger::is_enabled(kcenon::thread::log_level level) const {
 #else
 bool logger::is_enabled(logger_system::log_level level) const {
 #endif

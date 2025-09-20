@@ -55,7 +55,7 @@ public:
     }
     
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    bool enqueue(thread_module::log_level level,
+    bool enqueue(kcenon::thread::log_level level,
 #else
     bool enqueue(logger_system::log_level level,
 #endif
@@ -75,15 +75,15 @@ public:
             
             // Create log_entry with optional source location
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-            // Convert thread_module::log_level to logger_system::log_level
+            // Convert kcenon::thread::log_level to logger_system::log_level
             logger_system::log_level logger_level;
             switch (level) {
-                case thread_module::log_level::trace: logger_level = logger_system::log_level::trace; break;
-                case thread_module::log_level::debug: logger_level = logger_system::log_level::debug; break;
-                case thread_module::log_level::info: logger_level = logger_system::log_level::info; break;
-                case thread_module::log_level::warning: logger_level = logger_system::log_level::warn; break;
-                case thread_module::log_level::error: logger_level = logger_system::log_level::error; break;
-                case thread_module::log_level::critical: logger_level = logger_system::log_level::fatal; break;
+                case kcenon::thread::log_level::trace: logger_level = logger_system::log_level::trace; break;
+                case kcenon::thread::log_level::debug: logger_level = logger_system::log_level::debug; break;
+                case kcenon::thread::log_level::info: logger_level = logger_system::log_level::info; break;
+                case kcenon::thread::log_level::warning: logger_level = logger_system::log_level::warn; break;
+                case kcenon::thread::log_level::error: logger_level = logger_system::log_level::error; break;
+                case kcenon::thread::log_level::critical: logger_level = logger_system::log_level::fatal; break;
                 default: logger_level = logger_system::log_level::info; break;
             }
 #else
@@ -214,17 +214,17 @@ log_collector::~log_collector() = default;
 
 namespace {
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-// Convert logger_system::log_level to thread_module::log_level
-thread_module::log_level convert_log_level(logger_system::log_level level) {
+// Convert logger_system::log_level to kcenon::thread::log_level
+kcenon::thread::log_level convert_log_level(logger_system::log_level level) {
     switch (level) {
-        case logger_system::log_level::trace: return thread_module::log_level::trace;
-        case logger_system::log_level::debug: return thread_module::log_level::debug;
-        case logger_system::log_level::info: return thread_module::log_level::info;
-        case logger_system::log_level::warn: return thread_module::log_level::warning;
-        case logger_system::log_level::error: return thread_module::log_level::error;
-        case logger_system::log_level::fatal: return thread_module::log_level::critical;
-        case logger_system::log_level::off: return thread_module::log_level::critical; // fallback
-        default: return thread_module::log_level::info;
+        case logger_system::log_level::trace: return kcenon::thread::log_level::trace;
+        case logger_system::log_level::debug: return kcenon::thread::log_level::debug;
+        case logger_system::log_level::info: return kcenon::thread::log_level::info;
+        case logger_system::log_level::warn: return kcenon::thread::log_level::warning;
+        case logger_system::log_level::error: return kcenon::thread::log_level::error;
+        case logger_system::log_level::fatal: return kcenon::thread::log_level::critical;
+        case logger_system::log_level::off: return kcenon::thread::log_level::critical; // fallback
+        default: return kcenon::thread::log_level::info;
     }
 }
 #endif

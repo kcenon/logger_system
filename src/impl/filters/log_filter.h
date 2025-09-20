@@ -56,7 +56,7 @@ public:
      * @param function Function name
      * @return true if the log should be processed
      */
-    virtual bool should_log(thread_module::log_level level,
+    virtual bool should_log(kcenon::thread::log_level level,
                            const std::string& message,
                            const std::string& file,
                            int line,
@@ -77,10 +77,10 @@ public:
  */
 class level_filter : public log_filter {
 public:
-    explicit level_filter(thread_module::log_level min_level)
+    explicit level_filter(kcenon::thread::log_level min_level)
         : min_level_(min_level) {}
     
-    bool should_log(thread_module::log_level level,
+    bool should_log(kcenon::thread::log_level level,
                    const std::string& message,
                    const std::string& file,
                    int line,
@@ -92,7 +92,7 @@ public:
         return level <= min_level_;
     }
     
-    void set_min_level(thread_module::log_level level) {
+    void set_min_level(kcenon::thread::log_level level) {
         min_level_ = level;
     }
     
@@ -101,7 +101,7 @@ public:
     }
     
 private:
-    thread_module::log_level min_level_;
+    kcenon::thread::log_level min_level_;
 };
 
 /**
@@ -113,7 +113,7 @@ public:
     explicit regex_filter(const std::string& pattern, bool include = true)
         : pattern_(pattern), include_(include) {}
     
-    bool should_log(thread_module::log_level level,
+    bool should_log(kcenon::thread::log_level level,
                    const std::string& message,
                    const std::string& file,
                    int line,
@@ -141,7 +141,7 @@ private:
  */
 class function_filter : public log_filter {
 public:
-    using filter_function = std::function<bool(thread_module::log_level,
+    using filter_function = std::function<bool(kcenon::thread::log_level,
                                                const std::string&,
                                                const std::string&,
                                                int,
@@ -150,7 +150,7 @@ public:
     explicit function_filter(filter_function func)
         : filter_func_(std::move(func)) {}
     
-    bool should_log(thread_module::log_level level,
+    bool should_log(kcenon::thread::log_level level,
                    const std::string& message,
                    const std::string& file,
                    int line,
@@ -184,7 +184,7 @@ public:
         filters_.push_back(std::move(filter));
     }
     
-    bool should_log(thread_module::log_level level,
+    bool should_log(kcenon::thread::log_level level,
                    const std::string& message,
                    const std::string& file,
                    int line,

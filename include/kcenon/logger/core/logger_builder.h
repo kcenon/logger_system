@@ -204,7 +204,7 @@ public:
      * 
      * @since 1.0.0
      */
-    logger_builder& with_min_level(thread_module::log_level level) {
+    logger_builder& with_min_level(kcenon::thread::log_level level) {
         config_.min_level = level;
         return *this;
     }
@@ -543,12 +543,12 @@ public:
         
         if (level) {
             std::string level_str(level);
-            if (level_str == "trace") config_.min_level = thread_module::log_level::trace;
-            else if (level_str == "debug") config_.min_level = thread_module::log_level::debug;
-            else if (level_str == "info") config_.min_level = thread_module::log_level::info;
-            else if (level_str == "warn") config_.min_level = thread_module::log_level::warning;
-            else if (level_str == "error") config_.min_level = thread_module::log_level::error;
-            else if (level_str == "fatal") config_.min_level = thread_module::log_level::error; // Note: fatal mapped to error
+            if (level_str == "trace") config_.min_level = kcenon::thread::log_level::trace;
+            else if (level_str == "debug") config_.min_level = kcenon::thread::log_level::debug;
+            else if (level_str == "info") config_.min_level = kcenon::thread::log_level::info;
+            else if (level_str == "warn") config_.min_level = kcenon::thread::log_level::warning;
+            else if (level_str == "error") config_.min_level = kcenon::thread::log_level::error;
+            else if (level_str == "fatal") config_.min_level = kcenon::thread::log_level::error; // Note: fatal mapped to error
         }
         
         return *this;

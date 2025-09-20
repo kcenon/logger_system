@@ -102,7 +102,7 @@ public:
 #ifdef USE_THREAD_SYSTEM
         // Try to create a test container to verify availability
         try {
-            thread_module::service_container test_container;
+            kcenon::thread::service_container test_container;
             return true;
         } catch (...) {
             return false;

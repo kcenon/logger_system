@@ -34,7 +34,7 @@ namespace kcenon::logger {
 template<typename T>
 class thread_system_di_adapter : public di_container_interface<T> {
 private:
-    thread_module::service_container* container_;
+    kcenon::thread::service_container* container_;
     bool owns_container_;
     
 public:
@@ -42,7 +42,7 @@ public:
      * @brief Constructor with external container
      * @param container Pointer to existing service container
      */
-    explicit thread_system_di_adapter(thread_module::service_container* container)
+    explicit thread_system_di_adapter(kcenon::thread::service_container* container)
         : container_(container), owns_container_(false) {
         if (!container_) {
             throw std::invalid_argument("Container cannot be null");
@@ -53,7 +53,7 @@ public:
      * @brief Constructor that creates its own container
      */
     thread_system_di_adapter()
-        : container_(new thread_module::service_container()),
+        : container_(new kcenon::thread::service_container()),
           owns_container_(true) {}
     
     /**
@@ -167,7 +167,7 @@ public:
      * @brief Get the underlying thread_system container
      * @return Pointer to the wrapped container
      */
-    thread_module::service_container* get_native_container() {
+    kcenon::thread::service_container* get_native_container() {
         return container_;
     }
 };

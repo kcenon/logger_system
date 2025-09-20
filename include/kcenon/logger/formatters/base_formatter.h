@@ -38,14 +38,14 @@ protected:
      * @param level Log level
      * @return String representation
      */
-    std::string level_to_string(thread_module::log_level level) const {
+    std::string level_to_string(kcenon::thread::log_level level) const {
         switch (level) {
-            case thread_module::log_level::critical: return "CRITICAL";
-            case thread_module::log_level::error:    return "ERROR";
-            case thread_module::log_level::warning:  return "WARNING";
-            case thread_module::log_level::info:     return "INFO";
-            case thread_module::log_level::debug:    return "DEBUG";
-            case thread_module::log_level::trace:    return "TRACE";
+            case kcenon::thread::log_level::critical: return "CRITICAL";
+            case kcenon::thread::log_level::error:    return "ERROR";
+            case kcenon::thread::log_level::warning:  return "WARNING";
+            case kcenon::thread::log_level::info:     return "INFO";
+            case kcenon::thread::log_level::debug:    return "DEBUG";
+            case kcenon::thread::log_level::trace:    return "TRACE";
             default: return "UNKNOWN";
         }
     }
