@@ -124,8 +124,8 @@ if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
         if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/CMakeLists.txt")
             message(STATUS "Found thread_system as sibling directory")
             # Build thread_system as submodule to avoid vcpkg issues
+            # Force the cache variable to be set before processing subdirectory
             set(BUILD_THREADSYSTEM_AS_SUBMODULE ON CACHE BOOL "Build ThreadSystem as submodule" FORCE)
-            # Prevent duplicate target issues
             set(BUILD_TESTS OFF CACHE BOOL "Disable tests for thread_system" FORCE)
             set(BUILD_SAMPLES OFF CACHE BOOL "Disable samples for thread_system" FORCE)
             add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" "${CMAKE_BINARY_DIR}/thread_system_build")
@@ -273,7 +273,7 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 PUBLIC
                     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
             )
-            target_link_libraries(LoggerSystem PRIVATE thread_system)
+            target_link_libraries(LoggerSystem PRIVATE thread_base interfaces utilities)
             target_compile_definitions(LoggerSystem PUBLIC USE_THREAD_SYSTEM_INTEGRATION)
         else()
             message(STATUS "Logger System: Using standalone mode")

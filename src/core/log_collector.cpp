@@ -33,7 +33,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/log_collector.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/log_entry.h>
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+#include <kcenon/thread/interfaces/logger_interface.h>
+#else
 #include <kcenon/logger/interfaces/logger_interface.h>
+#endif
 #include <queue>
 #include <mutex>
 #include <condition_variable>

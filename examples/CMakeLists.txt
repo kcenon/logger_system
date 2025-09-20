@@ -1,12 +1,14 @@
-# Basic usage sample - always available
-add_executable(basic_usage basic_usage.cpp)
-target_link_libraries(basic_usage PRIVATE LoggerSystem)
-set_target_properties(basic_usage PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+# Basic usage sample - available when samples are enabled
+if(BUILD_SAMPLES)
+    add_executable(basic_usage basic_usage.cpp)
+    target_link_libraries(basic_usage PRIVATE LoggerSystem)
+    set_target_properties(basic_usage PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
 
-# Advanced examples - only available in integration mode
-if(NOT LOGGER_STANDALONE_MODE)
+# Advanced examples - only available in integration mode and when samples are enabled
+if(NOT LOGGER_STANDALONE_MODE AND BUILD_SAMPLES)
     # Metrics demo sample
     add_executable(metrics_demo metrics_demo.cpp)
     target_link_libraries(metrics_demo PRIVATE LoggerSystem)
