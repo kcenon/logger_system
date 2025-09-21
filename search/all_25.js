@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🏗️_20ecosystem_20overview_0',['🏗️ Ecosystem Overview',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md154',1,'']]]
+  ['🌐_20strong_20cross_20platform_20compatibility_20strong_0',['🌐 &lt;strong&gt;Cross-Platform Compatibility&lt;/strong&gt;',['../index.html#autotoc_md15',1,'']]]
 ];
