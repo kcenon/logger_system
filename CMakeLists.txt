@@ -51,6 +51,7 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(USE_LOCKFREE "Use lock-free implementation" ON)
 option(USE_THREAD_SYSTEM "Use external thread_system if available" ON)
 option(LOGGER_STANDALONE "Build in standalone mode without thread_system" OFF)
+option(USE_COMMON_SYSTEM "Enable common_system integration" ON)
 option(NO_VCPKG "Skip vcpkg and use system libraries only" OFF)
 
 ##################################################
@@ -263,6 +264,15 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 $<BUILD_INTERFACE:${LOGGER_INCLUDE_DIR}>
                 $<INSTALL_INTERFACE:include>
         )
+
+        if(USE_COMMON_SYSTEM)
+            message(STATUS "Logger System: Enabling common_system integration")
+            target_include_directories(LoggerSystem
+                PUBLIC
+                    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include>
+            )
+            target_compile_definitions(LoggerSystem PUBLIC LOGGER_USE_COMMON_SYSTEM)
+        endif()
 
         # Add thread_system integration if available and not explicitly disabled
         option(LOGGER_STANDALONE_MODE "Build logger_system in standalone mode without thread_system integration" OFF)

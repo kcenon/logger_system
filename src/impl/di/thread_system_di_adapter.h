@@ -18,6 +18,8 @@ All rights reserved.
 
 #include "di_container_interface.h"
 
+#include <kcenon/logger/core/thread_integration_detector.h>
+
 #ifdef USE_THREAD_SYSTEM
 #include <kcenon/thread/interfaces/service_container.h>
 

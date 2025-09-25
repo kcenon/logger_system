@@ -28,6 +28,8 @@
 // Logger interface for standalone mode
 // Note: This interface is used when LOGGER_STANDALONE_MODE is defined
 // For thread_system integration, use kcenon::thread::logger_interface instead
+#include <kcenon/logger/core/thread_integration_detector.h>
+
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
 #warning "This local logger_interface.h should not be used in integration mode. Use thread_system's logger_interface.h instead."
 #endif

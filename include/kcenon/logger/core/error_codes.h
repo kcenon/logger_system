@@ -36,9 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdexcept>
 #include <utility>
 
-// Use standalone error handling for better compatibility
-#include <optional>
-#include <variant>
+#include <kcenon/common/patterns/result.h>
 
 namespace kcenon::logger {
 
@@ -215,66 +213,84 @@ inline std::string logger_error_to_string(logger_error_code code) {
     }
 }
 
-// Use standalone mode for better compatibility and fewer dependencies
-// Standalone mode - provide minimal result implementation
+// Result wrapper built on top of common_system Result pattern
 template<typename T>
 class result {
 public:
-    result(T value) : value_(std::move(value)), has_value_(true) {}
-    result(logger_error_code code, const std::string& msg = "") 
-        : error_code_(code), error_msg_(msg), has_value_(false) {}
-    
-    bool has_value() const { return has_value_; }
-    explicit operator bool() const { return has_value_; }
-    
-    T& value() { 
-        if (!has_value_) throw std::runtime_error("No value");
-        return value_;
+    result(T value)
+        : value_(common::ok<T>(std::move(value))) {}
+
+    result(const T& value)
+        : value_(common::ok<T>(value)) {}
+
+    result(logger_error_code code, const std::string& msg = "")
+        : value_(common::error_info(
+              static_cast<int>(code),
+              msg.empty() ? logger_error_to_string(code) : msg,
+              "logger_system")) {}
+
+    bool has_value() const { return common::is_ok(value_); }
+    explicit operator bool() const { return has_value(); }
+
+    T& value() { return common::get_value(value_); }
+    const T& value() const { return common::get_value(value_); }
+
+    logger_error_code error_code() const {
+        return static_cast<logger_error_code>(common::get_error(value_).code);
     }
-    const T& value() const {
-        if (!has_value_) throw std::runtime_error("No value");
-        return value_;
+
+    const std::string& error_message() const {
+        return common::get_error(value_).message;
     }
-    
-    logger_error_code error_code() const { return error_code_; }
-    const std::string& error_message() const { return error_msg_; }
-    
+
+    const common::Result<T>& raw() const { return value_; }
+
 private:
-    T value_{};
-    logger_error_code error_code_{logger_error_code::success};
-    std::string error_msg_;
-    bool has_value_;
+    common::Result<T> value_;
 };
 
 class result_void {
 public:
     result_void() = default;
-    result_void(logger_error_code code, const std::string& msg = "")
-        : error_code_(code), error_msg_(msg), has_error_(true) {}
-    
-    bool has_error() const { return has_error_; }
-    explicit operator bool() const { return !has_error_; }
-    
-    logger_error_code error_code() const { return error_code_; }
-    const std::string& error_message() const { return error_msg_; }
-    
+
+    explicit result_void(logger_error_code code, const std::string& msg = "")
+        : value_(common::error_info(
+              static_cast<int>(code),
+              msg.empty() ? logger_error_to_string(code) : msg,
+              "logger_system")) {}
+
+    static result_void success() { return result_void(); }
+
+    static result_void error(logger_error_code code, const std::string& msg = "") {
+        return result_void(code, msg);
+    }
+
+    bool has_error() const { return common::is_error(value_); }
+    explicit operator bool() const { return !has_error(); }
+
+    logger_error_code error_code() const {
+        return static_cast<logger_error_code>(common::get_error(value_).code);
+    }
+
+    const std::string& error_message() const {
+        return common::get_error(value_).message;
+    }
+
+    const common::VoidResult& raw() const { return value_; }
+
 private:
-    logger_error_code error_code_{logger_error_code::success};
-    std::string error_msg_;
-    bool has_error_{false};
+    common::VoidResult value_{};
 };
 
 inline result_void make_logger_error(logger_error_code code, const std::string& message = "") {
-    return result_void{code, message.empty() ? logger_error_to_string(code) : message};
+    return result_void{code, message};
 }
 
-// Template version for result<T>
 template<typename T>
 inline result<T> make_logger_error(logger_error_code code, const std::string& message = "") {
-    return result<T>{code, message.empty() ? logger_error_to_string(code) : message};
+    return result<T>{code, message};
 }
 
-// Type alias for convenience in standalone mode
 using error_code = logger_error_code;
 
 } // namespace kcenon::logger

@@ -37,6 +37,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <atomic>
 #include <thread>
 
+#include "thread_integration_detector.h"
+
 // Conditional include based on build mode
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
     // Integration mode: Use thread_system's interface for ecosystem compatibility

@@ -18,6 +18,8 @@ All rights reserved.
 #include "monitoring_interface.h"
 #include "basic_monitor.h"
 
+#include <kcenon/logger/core/thread_integration_detector.h>
+
 #ifdef USE_THREAD_SYSTEM
 #include <kcenon/thread/interfaces/monitorable_interface.h>
 

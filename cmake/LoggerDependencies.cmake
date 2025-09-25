@@ -17,6 +17,12 @@ function(logger_find_thread_system)
         
         # Add thread_system subdirectory
         add_subdirectory(${CMAKE_SOURCE_DIR}/../thread_system ${CMAKE_BINARY_DIR}/thread_system)
+
+        if(TARGET utilities)
+            target_include_directories(utilities PUBLIC
+                $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/../thread_system/include>
+            )
+        endif()
         
         # Set flags to indicate thread_system is available
         set(THREAD_SYSTEM_FOUND TRUE PARENT_SCOPE)
