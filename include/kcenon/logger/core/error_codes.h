@@ -218,35 +218,35 @@ template<typename T>
 class result {
 public:
     result(T value)
-        : value_(common::ok<T>(std::move(value))) {}
+        : value_(kcenon::common::ok<T>(std::move(value))) {}
 
     result(const T& value)
-        : value_(common::ok<T>(value)) {}
+        : value_(kcenon::common::ok<T>(value)) {}
 
     result(logger_error_code code, const std::string& msg = "")
-        : value_(common::error_info(
+        : value_(kcenon::common::error_info(
               static_cast<int>(code),
               msg.empty() ? logger_error_to_string(code) : msg,
               "logger_system")) {}
 
-    bool has_value() const { return common::is_ok(value_); }
+    bool has_value() const { return kcenon::common::is_ok(value_); }
     explicit operator bool() const { return has_value(); }
 
-    T& value() { return common::get_value(value_); }
-    const T& value() const { return common::get_value(value_); }
+    T& value() { return kcenon::common::get_value(value_); }
+    const T& value() const { return kcenon::common::get_value(value_); }
 
     logger_error_code error_code() const {
-        return static_cast<logger_error_code>(common::get_error(value_).code);
+        return static_cast<logger_error_code>(kcenon::common::get_error(value_).code);
     }
 
     const std::string& error_message() const {
-        return common::get_error(value_).message;
+        return kcenon::common::get_error(value_).message;
     }
 
-    const common::Result<T>& raw() const { return value_; }
+    const kcenon::common::Result<T>& raw() const { return value_; }
 
 private:
-    common::Result<T> value_;
+    kcenon::common::Result<T> value_;
 };
 
 class result_void {
@@ -254,7 +254,7 @@ public:
     result_void() = default;
 
     explicit result_void(logger_error_code code, const std::string& msg = "")
-        : value_(common::error_info(
+        : value_(kcenon::common::error_info(
               static_cast<int>(code),
               msg.empty() ? logger_error_to_string(code) : msg,
               "logger_system")) {}
@@ -265,21 +265,21 @@ public:
         return result_void(code, msg);
     }
 
-    bool has_error() const { return common::is_error(value_); }
+    bool has_error() const { return kcenon::common::is_error(value_); }
     explicit operator bool() const { return !has_error(); }
 
     logger_error_code error_code() const {
-        return static_cast<logger_error_code>(common::get_error(value_).code);
+        return static_cast<logger_error_code>(kcenon::common::get_error(value_).code);
     }
 
     const std::string& error_message() const {
-        return common::get_error(value_).message;
+        return kcenon::common::get_error(value_).message;
     }
 
-    const common::VoidResult& raw() const { return value_; }
+    const kcenon::common::VoidResult& raw() const { return value_; }
 
 private:
-    common::VoidResult value_{};
+    kcenon::common::VoidResult value_{};
 };
 
 inline result_void make_logger_error(logger_error_code code, const std::string& message = "") {
