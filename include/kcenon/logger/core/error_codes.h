@@ -36,7 +36,42 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdexcept>
 #include <utility>
 
+#if __has_include(<kcenon/common/patterns/result.h>)
 #include <kcenon/common/patterns/result.h>
+#define KCENON_COMMON_RESULT_AVAILABLE 1
+#elif __has_include(<common/patterns/result.h>)
+#include <common/patterns/result.h>
+#define KCENON_COMMON_RESULT_AVAILABLE 1
+#ifndef KCENON_COMMON_RESULT_FALLBACK_DEFINED
+#define KCENON_COMMON_RESULT_FALLBACK_DEFINED
+namespace kcenon {
+namespace common {
+using ::common::error_info;
+template<typename T>
+using Result = ::common::Result<T>;
+using VoidResult = ::common::VoidResult;
+using ::common::ok;
+using ::common::error;
+using ::common::is_ok;
+using ::common::is_error;
+using ::common::get_value;
+using ::common::get_error;
+using ::common::get_if_ok;
+using ::common::get_if_error;
+using ::common::value_or;
+using ::common::map;
+using ::common::and_then;
+using ::common::or_else;
+using ::common::try_catch;
+namespace error_codes {
+using namespace ::common::error_codes;
+} // namespace error_codes
+} // namespace common
+} // namespace kcenon
+#endif // KCENON_COMMON_RESULT_FALLBACK_DEFINED
+#else
+#error "Unable to locate common system result header."
+#endif
 
 namespace kcenon::logger {
 
