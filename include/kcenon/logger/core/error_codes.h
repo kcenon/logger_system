@@ -35,6 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string>
 #include <stdexcept>
 #include <utility>
+#include <optional>
 
 #if __has_include(<kcenon/common/patterns/result.h>)
 #include <kcenon/common/patterns/result.h>
@@ -56,13 +57,6 @@ using ::common::is_ok;
 using ::common::is_error;
 using ::common::get_value;
 using ::common::get_error;
-using ::common::get_if_ok;
-using ::common::get_if_error;
-using ::common::value_or;
-using ::common::map;
-using ::common::and_then;
-using ::common::or_else;
-using ::common::try_catch;
 namespace error_codes {
 using namespace ::common::error_codes;
 } // namespace error_codes
@@ -70,7 +64,157 @@ using namespace ::common::error_codes;
 } // namespace kcenon
 #endif // KCENON_COMMON_RESULT_FALLBACK_DEFINED
 #else
-#error "Unable to locate common system result header."
+#ifndef KCENON_COMMON_RESULT_FALLBACK_DEFINED
+#define KCENON_COMMON_RESULT_FALLBACK_DEFINED
+namespace kcenon {
+namespace common {
+
+struct error_info {
+    int code;
+    std::string message;
+    std::string category;
+};
+
+inline error_info error_info(int code_value, std::string message_value, std::string category_value) {
+    return error_info{code_value, std::move(message_value), std::move(category_value)};
+}
+
+template<typename T>
+class Result {
+public:
+    Result() = default;
+
+    explicit Result(T value)
+        : value_(std::move(value)) {}
+
+    explicit Result(error_info info)
+        : error_(std::move(info)) {}
+
+    bool has_value() const { return value_.has_value(); }
+    bool has_error() const { return error_.has_value(); }
+
+    T& value() {
+        if (!value_) {
+            throw std::logic_error("Result does not contain a value");
+        }
+        return *value_;
+    }
+
+    const T& value() const {
+        if (!value_) {
+            throw std::logic_error("Result does not contain a value");
+        }
+        return *value_;
+    }
+
+    error_info& error() {
+        if (!error_) {
+            throw std::logic_error("Result does not contain an error");
+        }
+        return *error_;
+    }
+
+    const error_info& error() const {
+        if (!error_) {
+            throw std::logic_error("Result does not contain an error");
+        }
+        return *error_;
+    }
+
+private:
+    std::optional<T> value_;
+    std::optional<error_info> error_;
+};
+
+class VoidResult {
+public:
+    VoidResult() = default;
+
+    explicit VoidResult(error_info info)
+        : error_(std::move(info)) {}
+
+    bool has_value() const { return !error_.has_value(); }
+    bool has_error() const { return error_.has_value(); }
+
+    error_info& error() {
+        if (!error_) {
+            throw std::logic_error("VoidResult does not contain an error");
+        }
+        return *error_;
+    }
+
+    const error_info& error() const {
+        if (!error_) {
+            throw std::logic_error("VoidResult does not contain an error");
+        }
+        return *error_;
+    }
+
+private:
+    std::optional<error_info> error_;
+};
+
+template<typename T>
+Result<T> ok(T value) {
+    return Result<T>(std::move(value));
+}
+
+inline VoidResult ok() {
+    return VoidResult{};
+}
+
+template<typename T>
+Result<T> error(error_info info) {
+    return Result<T>(std::move(info));
+}
+
+inline VoidResult error(error_info info) {
+    return VoidResult(std::move(info));
+}
+
+template<typename T>
+bool is_ok(const Result<T>& result) {
+    return result.has_value();
+}
+
+template<typename T>
+bool is_error(const Result<T>& result) {
+    return result.has_error();
+}
+
+template<typename T>
+T& get_value(Result<T>& result) {
+    return result.value();
+}
+
+template<typename T>
+const T& get_value(const Result<T>& result) {
+    return result.value();
+}
+
+template<typename T>
+error_info& get_error(Result<T>& result) {
+    return result.error();
+}
+
+template<typename T>
+const error_info& get_error(const Result<T>& result) {
+    return result.error();
+}
+
+inline const error_info& get_error(const VoidResult& result) {
+    return result.error();
+}
+
+namespace error_codes {
+enum class generic_error {
+    none = 0
+};
+} // namespace error_codes
+
+} // namespace common
+} // namespace kcenon
+#endif // KCENON_COMMON_RESULT_FALLBACK_DEFINED
 #endif
 
 namespace kcenon::logger {
