@@ -182,6 +182,14 @@ bool is_error(const Result<T>& result) {
     return result.has_error();
 }
 
+inline bool is_ok(const VoidResult& result) {
+    return !result.has_error();
+}
+
+inline bool is_error(const VoidResult& result) {
+    return result.has_error();
+}
+
 template<typename T>
 T& get_value(Result<T>& result) {
     return result.value();
