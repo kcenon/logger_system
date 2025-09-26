@@ -35,10 +35,195 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string>
 #include <stdexcept>
 #include <utility>
-
-// Use standalone error handling for better compatibility
 #include <optional>
-#include <variant>
+
+#if __has_include(<kcenon/common/patterns/result.h>)
+#include <kcenon/common/patterns/result.h>
+#define KCENON_COMMON_RESULT_AVAILABLE 1
+#elif __has_include(<common/patterns/result.h>)
+#include <common/patterns/result.h>
+#define KCENON_COMMON_RESULT_AVAILABLE 1
+#ifndef KCENON_COMMON_RESULT_FALLBACK_DEFINED
+#define KCENON_COMMON_RESULT_FALLBACK_DEFINED
+namespace kcenon {
+namespace common {
+using ::common::error_info;
+template<typename T>
+using Result = ::common::Result<T>;
+using VoidResult = ::common::VoidResult;
+using ::common::ok;
+using ::common::error;
+using ::common::is_ok;
+using ::common::is_error;
+using ::common::get_value;
+using ::common::get_error;
+namespace error_codes {
+using namespace ::common::error_codes;
+} // namespace error_codes
+} // namespace common
+} // namespace kcenon
+#endif // KCENON_COMMON_RESULT_FALLBACK_DEFINED
+#else
+#ifndef KCENON_COMMON_RESULT_FALLBACK_DEFINED
+#define KCENON_COMMON_RESULT_FALLBACK_DEFINED
+namespace kcenon {
+namespace common {
+
+struct error_info {
+    int code;
+    std::string message;
+    std::string category;
+};
+
+inline error_info make_error_info(int code_value, std::string message_value, std::string category_value) {
+    return error_info{code_value, std::move(message_value), std::move(category_value)};
+}
+
+template<typename T>
+class Result {
+public:
+    Result() = default;
+
+    explicit Result(T value)
+        : value_(std::move(value)) {}
+
+    explicit Result(error_info info)
+        : error_(std::move(info)) {}
+
+    bool has_value() const { return value_.has_value(); }
+    bool has_error() const { return error_.has_value(); }
+
+    T& value() {
+        if (!value_) {
+            throw std::logic_error("Result does not contain a value");
+        }
+        return *value_;
+    }
+
+    const T& value() const {
+        if (!value_) {
+            throw std::logic_error("Result does not contain a value");
+        }
+        return *value_;
+    }
+
+    error_info& error() {
+        if (!error_) {
+            throw std::logic_error("Result does not contain an error");
+        }
+        return *error_;
+    }
+
+    const error_info& error() const {
+        if (!error_) {
+            throw std::logic_error("Result does not contain an error");
+        }
+        return *error_;
+    }
+
+private:
+    std::optional<T> value_;
+    std::optional<error_info> error_;
+};
+
+class VoidResult {
+public:
+    VoidResult() = default;
+
+    explicit VoidResult(error_info info)
+        : error_(std::move(info)) {}
+
+    bool has_value() const { return !error_.has_value(); }
+    bool has_error() const { return error_.has_value(); }
+
+    error_info& error() {
+        if (!error_) {
+            throw std::logic_error("VoidResult does not contain an error");
+        }
+        return *error_;
+    }
+
+    const error_info& error() const {
+        if (!error_) {
+            throw std::logic_error("VoidResult does not contain an error");
+        }
+        return *error_;
+    }
+
+private:
+    std::optional<error_info> error_;
+};
+
+template<typename T>
+Result<T> ok(T value) {
+    return Result<T>(std::move(value));
+}
+
+inline VoidResult ok() {
+    return VoidResult{};
+}
+
+template<typename T>
+Result<T> error(error_info info) {
+    return Result<T>(std::move(info));
+}
+
+inline VoidResult error(error_info info) {
+    return VoidResult(std::move(info));
+}
+
+template<typename T>
+bool is_ok(const Result<T>& result) {
+    return result.has_value();
+}
+
+template<typename T>
+bool is_error(const Result<T>& result) {
+    return result.has_error();
+}
+
+inline bool is_ok(const VoidResult& result) {
+    return !result.has_error();
+}
+
+inline bool is_error(const VoidResult& result) {
+    return result.has_error();
+}
+
+template<typename T>
+T& get_value(Result<T>& result) {
+    return result.value();
+}
+
+template<typename T>
+const T& get_value(const Result<T>& result) {
+    return result.value();
+}
+
+template<typename T>
+error_info& get_error(Result<T>& result) {
+    return result.error();
+}
+
+template<typename T>
+const error_info& get_error(const Result<T>& result) {
+    return result.error();
+}
+
+inline const error_info& get_error(const VoidResult& result) {
+    return result.error();
+}
+
+namespace error_codes {
+enum class generic_error {
+    none = 0
+};
+} // namespace error_codes
+
+} // namespace common
+} // namespace kcenon
+#endif // KCENON_COMMON_RESULT_FALLBACK_DEFINED
+#endif
 
 namespace kcenon::logger {
 
@@ -215,66 +400,84 @@ inline std::string logger_error_to_string(logger_error_code code) {
     }
 }
 
-// Use standalone mode for better compatibility and fewer dependencies
-// Standalone mode - provide minimal result implementation
+// Result wrapper built on top of common_system Result pattern
 template<typename T>
 class result {
 public:
-    result(T value) : value_(std::move(value)), has_value_(true) {}
-    result(logger_error_code code, const std::string& msg = "") 
-        : error_code_(code), error_msg_(msg), has_value_(false) {}
-    
-    bool has_value() const { return has_value_; }
-    explicit operator bool() const { return has_value_; }
-    
-    T& value() { 
-        if (!has_value_) throw std::runtime_error("No value");
-        return value_;
+    result(T value)
+        : value_(kcenon::common::ok<T>(std::move(value))) {}
+
+    result(const T& value)
+        : value_(kcenon::common::ok<T>(value)) {}
+
+    result(logger_error_code code, const std::string& msg = "")
+        : value_(kcenon::common::error_info(
+              static_cast<int>(code),
+              msg.empty() ? logger_error_to_string(code) : msg,
+              "logger_system")) {}
+
+    bool has_value() const { return kcenon::common::is_ok(value_); }
+    explicit operator bool() const { return has_value(); }
+
+    T& value() { return kcenon::common::get_value(value_); }
+    const T& value() const { return kcenon::common::get_value(value_); }
+
+    logger_error_code error_code() const {
+        return static_cast<logger_error_code>(kcenon::common::get_error(value_).code);
     }
-    const T& value() const {
-        if (!has_value_) throw std::runtime_error("No value");
-        return value_;
+
+    const std::string& error_message() const {
+        return kcenon::common::get_error(value_).message;
     }
-    
-    logger_error_code error_code() const { return error_code_; }
-    const std::string& error_message() const { return error_msg_; }
-    
+
+    const kcenon::common::Result<T>& raw() const { return value_; }
+
 private:
-    T value_{};
-    logger_error_code error_code_{logger_error_code::success};
-    std::string error_msg_;
-    bool has_value_;
+    kcenon::common::Result<T> value_;
 };
 
 class result_void {
 public:
     result_void() = default;
-    result_void(logger_error_code code, const std::string& msg = "")
-        : error_code_(code), error_msg_(msg), has_error_(true) {}
-    
-    bool has_error() const { return has_error_; }
-    explicit operator bool() const { return !has_error_; }
-    
-    logger_error_code error_code() const { return error_code_; }
-    const std::string& error_message() const { return error_msg_; }
-    
+
+    explicit result_void(logger_error_code code, const std::string& msg = "")
+        : value_(kcenon::common::error_info(
+              static_cast<int>(code),
+              msg.empty() ? logger_error_to_string(code) : msg,
+              "logger_system")) {}
+
+    static result_void success() { return result_void(); }
+
+    static result_void error(logger_error_code code, const std::string& msg = "") {
+        return result_void(code, msg);
+    }
+
+    bool has_error() const { return kcenon::common::is_error(value_); }
+    explicit operator bool() const { return !has_error(); }
+
+    logger_error_code error_code() const {
+        return static_cast<logger_error_code>(kcenon::common::get_error(value_).code);
+    }
+
+    const std::string& error_message() const {
+        return kcenon::common::get_error(value_).message;
+    }
+
+    const kcenon::common::VoidResult& raw() const { return value_; }
+
 private:
-    logger_error_code error_code_{logger_error_code::success};
-    std::string error_msg_;
-    bool has_error_{false};
+    kcenon::common::VoidResult value_{};
 };
 
 inline result_void make_logger_error(logger_error_code code, const std::string& message = "") {
-    return result_void{code, message.empty() ? logger_error_to_string(code) : message};
+    return result_void{code, message};
 }
 
-// Template version for result<T>
 template<typename T>
 inline result<T> make_logger_error(logger_error_code code, const std::string& message = "") {
-    return result<T>{code, message.empty() ? logger_error_to_string(code) : message};
+    return result<T>{code, message};
 }
 
-// Type alias for convenience in standalone mode
 using error_code = logger_error_code;
 
 } // namespace kcenon::logger

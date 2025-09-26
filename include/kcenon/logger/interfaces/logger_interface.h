@@ -28,6 +28,8 @@
 // Logger interface for standalone mode
 // Note: This interface is used when LOGGER_STANDALONE_MODE is defined
 // For thread_system integration, use kcenon::thread::logger_interface instead
+#include <kcenon/logger/core/thread_integration_detector.h>
+
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
 #warning "This local logger_interface.h should not be used in integration mode. Use thread_system's logger_interface.h instead."
 #endif
@@ -83,55 +85,55 @@ public:
 };
 
 /**
- * @brief Global logger registry
+ * @brief Global logger registry (standalone mode)
  *
- * Manages the global logger instance used by the thread system.
+ * Thread-safe global registry to access a process-wide logger instance
+ * without depending on thread_system. Inline definitions avoid the need
+ * for a separate .cpp translation unit in standalone builds.
  */
 class logger_registry {
 public:
-  /**
-   * @brief Set the global logger instance
-   * @param logger Logger implementation
-   */
-  static void set_logger(std::shared_ptr<logger_interface> logger);
+  static void set_logger(std::shared_ptr<logger_interface> logger) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    logger_ = std::move(logger);
+  }
 
-  /**
-   * @brief Get the global logger instance
-   * @return Current logger instance, may be nullptr
-   */
-  static std::shared_ptr<logger_interface> get_logger();
+  static std::shared_ptr<logger_interface> get_logger() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    return logger_;
+  }
 
-  /**
-   * @brief Clear the global logger instance
-   */
-  static void clear_logger();
+  static void clear_logger() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    logger_.reset();
+  }
 
 private:
-  static std::shared_ptr<logger_interface> logger_;
-  static std::mutex mutex_;
+  inline static std::shared_ptr<logger_interface> logger_{};
+  inline static std::mutex mutex_{};
 };
 
-// Convenience macros for logging
+// Convenience macros for logging (standalone mode)
 #define THREAD_LOG_IF_ENABLED(level, message)                                  \
   do {                                                                         \
-    if (auto logger = kcenon::thread::logger_registry::get_logger()) {         \
-      if (logger->is_enabled(level)) {                                        \
-        logger->log(level, message, __FILE__, __LINE__, __FUNCTION__);        \
-      }                                                                        \
-    }                                                                          \
+    if (auto logger = ::logger_system::logger_registry::get_logger()) {        \
+      if (logger->is_enabled(level)) {                                         \
+        logger->log(level, message, __FILE__, __LINE__, __FUNCTION__);         \
+      }                                                                         \
+    }                                                                           \
   } while (0)
 
-#define THREAD_LOG_CRITICAL(message)                                          \
-  THREAD_LOG_IF_ENABLED(kcenon::thread::log_level::critical, message)
-#define THREAD_LOG_ERROR(message)                                             \
-  THREAD_LOG_IF_ENABLED(kcenon::thread::log_level::error, message)
-#define THREAD_LOG_WARNING(message)                                           \
-  THREAD_LOG_IF_ENABLED(kcenon::thread::log_level::warning, message)
-#define THREAD_LOG_INFO(message)                                              \
-  THREAD_LOG_IF_ENABLED(kcenon::thread::log_level::info, message)
-#define THREAD_LOG_DEBUG(message)                                             \
-  THREAD_LOG_IF_ENABLED(kcenon::thread::log_level::debug, message)
-#define THREAD_LOG_TRACE(message)                                             \
-  THREAD_LOG_IF_ENABLED(kcenon::thread::log_level::trace, message)
+#define THREAD_LOG_CRITICAL(message)                                           \
+  THREAD_LOG_IF_ENABLED(::logger_system::log_level::critical, message)
+#define THREAD_LOG_ERROR(message)                                              \
+  THREAD_LOG_IF_ENABLED(::logger_system::log_level::error, message)
+#define THREAD_LOG_WARNING(message)                                            \
+  THREAD_LOG_IF_ENABLED(::logger_system::log_level::warning, message)
+#define THREAD_LOG_INFO(message)                                               \
+  THREAD_LOG_IF_ENABLED(::logger_system::log_level::info, message)
+#define THREAD_LOG_DEBUG(message)                                              \
+  THREAD_LOG_IF_ENABLED(::logger_system::log_level::debug, message)
+#define THREAD_LOG_TRACE(message)                                              \
+  THREAD_LOG_IF_ENABLED(::logger_system::log_level::trace, message)
 
 } // namespace logger_system

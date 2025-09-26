@@ -8,6 +8,8 @@ All rights reserved.
 *****************************************************************************/
 
 // Conditional include based on build mode
+#include <kcenon/logger/core/thread_integration_detector.h>
+
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
     #include <kcenon/thread/interfaces/logger_interface.h>
 #else
@@ -89,7 +91,7 @@ public:
         (void)file;
         (void)line;
         (void)function;
-        return level <= min_level_;
+        return static_cast<int>(level) >= static_cast<int>(min_level_);
     }
     
     void set_min_level(kcenon::thread::log_level level) {

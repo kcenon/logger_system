@@ -20,6 +20,8 @@ All rights reserved.
 #include "thread_system_monitor_adapter.h"
 #include <memory>
 
+#include <kcenon/logger/core/thread_integration_detector.h>
+
 namespace kcenon::logger {
 
 /**
@@ -48,6 +50,7 @@ public:
             case monitor_type::basic:
                 return std::make_unique<basic_monitor>();
                 
+
 #ifdef USE_THREAD_SYSTEM
             case monitor_type::thread_system:
                 return std::make_unique<thread_system_monitor_adapter>();
