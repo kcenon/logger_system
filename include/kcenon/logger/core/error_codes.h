@@ -75,7 +75,7 @@ struct error_info {
     std::string category;
 };
 
-inline error_info error_info(int code_value, std::string message_value, std::string category_value) {
+inline error_info make_error_info(int code_value, std::string message_value, std::string category_value) {
     return error_info{code_value, std::move(message_value), std::move(category_value)};
 }
 
