@@ -20,6 +20,8 @@ All rights reserved.
 #include "lightweight_di_container.h"
 #include "thread_system_di_adapter.h"
 
+#include <kcenon/logger/core/thread_integration_detector.h>
+
 namespace kcenon::logger {
 
 /**

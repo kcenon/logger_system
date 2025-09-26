@@ -64,6 +64,7 @@ All rights reserved.
  * @endcode
  */
 
+#include "thread_integration_detector.h"
 #include "logger_config.h"
 #include "config_strategy_interface.h"
 #include "configuration_templates.h"

@@ -10,6 +10,7 @@ All rights reserved.
 #include <chrono>
 #include <string>
 #include <limits>
+#include <kcenon/logger/core/thread_integration_detector.h>
 #include <kcenon/logger/core/error_codes.h>
 
 // Conditional include based on build mode

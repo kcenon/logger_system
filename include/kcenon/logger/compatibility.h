@@ -1,23 +1,16 @@
 #ifndef KCENON_LOGGER_COMPATIBILITY_H
 #define KCENON_LOGGER_COMPATIBILITY_H
 
-// Backward compatibility namespace aliases
-// These will be removed in future versions
+// Forward declare legacy namespace so that aliasing works without including
+// heavier logger headers.
+namespace logger_system {}
 
-namespace kcenon::logger {
-    namespace core {}
-    namespace interfaces {}
-    namespace impl {}
-    namespace utils {}
-    namespace writers {}
-    namespace formatters {}
-}
+// Primary alias: expose legacy logger_system as kcenon::logger.
+namespace kcenon {
+namespace logger = ::logger_system;
+} // namespace kcenon
 
-// Old namespace aliases (deprecated)
-namespace kcenon::logger = kcenon::logger;
-namespace kcenon::logger {
-    namespace interfaces = kcenon::logger::interfaces;
-    namespace core = kcenon::logger::core;
-}
+// Additional legacy aliases kept for downstream projects.
+namespace logger_module = ::logger_system;
 
 #endif // KCENON_LOGGER_COMPATIBILITY_H

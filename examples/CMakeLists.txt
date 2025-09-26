@@ -8,7 +8,7 @@ if(BUILD_SAMPLES)
 endif()
 
 # Advanced examples - only available in integration mode and when samples are enabled
-if(NOT LOGGER_STANDALONE_MODE AND BUILD_SAMPLES)
+if(NOT LOGGER_STANDALONE_MODE AND BUILD_SAMPLES AND NOT USE_COMMON_SYSTEM)
     # Metrics demo sample
     add_executable(metrics_demo metrics_demo.cpp)
     target_link_libraries(metrics_demo PRIVATE LoggerSystem)
@@ -44,5 +44,9 @@ if(NOT LOGGER_STANDALONE_MODE AND BUILD_SAMPLES)
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
 else()
-    message(STATUS "Advanced examples skipped in standalone mode")
+    if(USE_COMMON_SYSTEM)
+        message(STATUS "Advanced examples skipped when common_system integration is enabled")
+    else()
+        message(STATUS "Advanced examples skipped in standalone mode")
+    endif()
 endif()

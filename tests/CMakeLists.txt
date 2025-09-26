@@ -70,3 +70,17 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/compatibility/version_compatibility_test.
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
 endif()
+
+# Regression test ensuring minimum level filtering behaviour
+add_executable(logger_min_level_threshold_test min_level_filter_test.cpp)
+
+if(TARGET GTest::gtest_main)
+    target_link_libraries(logger_min_level_threshold_test PRIVATE LoggerSystem GTest::gtest_main)
+else()
+    target_link_libraries(logger_min_level_threshold_test PRIVATE LoggerSystem gtest_main)
+endif()
+
+add_test(NAME logger_min_level_threshold_test COMMAND logger_min_level_threshold_test)
+set_target_properties(logger_min_level_threshold_test PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
