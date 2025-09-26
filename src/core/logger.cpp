@@ -65,6 +65,7 @@ public:
     bool async_mode_;
     std::size_t buffer_size_;
     bool running_;
+    bool metrics_enabled_;
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
     kcenon::thread::log_level min_level_;
 #else
@@ -74,9 +75,11 @@ public:
 
     impl(bool async, std::size_t buffer_size)
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-        : async_mode_(async), buffer_size_(buffer_size), running_(false), min_level_(kcenon::thread::log_level::info) {
+        : async_mode_(async), buffer_size_(buffer_size), running_(false), metrics_enabled_(false),
+          min_level_(kcenon::thread::log_level::info) {
 #else
-        : async_mode_(async), buffer_size_(buffer_size), running_(false), min_level_(logger_system::log_level::info) {
+        : async_mode_(async), buffer_size_(buffer_size), running_(false), metrics_enabled_(false),
+          min_level_(logger_system::log_level::info) {
 #endif
     }
 };
@@ -188,6 +191,29 @@ void logger::flush() {
             }
         }
     }
+}
+
+result_void logger::enable_metrics_collection(bool enable) {
+    if (!pimpl_) {
+        return result_void{};
+    }
+
+    pimpl_->metrics_enabled_ = enable;
+    if (!enable) {
+        metrics::g_logger_stats.reset();
+    }
+
+    return result_void{};
+}
+
+bool logger::is_metrics_collection_enabled() const {
+    return pimpl_ && pimpl_->metrics_enabled_;
+}
+
+result<logger_metrics> logger::get_current_metrics() const {
+    return make_logger_error<logger_metrics>(
+        logger_error_code::not_implemented,
+        "Metrics collection is not available in this build");
 }
 
 } // namespace kcenon::logger

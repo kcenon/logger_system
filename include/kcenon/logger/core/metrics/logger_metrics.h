@@ -8,6 +8,8 @@
 #include <atomic>
 #include <chrono>
 #include <cstdint>
+#include <map>
+#include <string>
 
 namespace kcenon::logger::metrics {
 
@@ -22,6 +24,20 @@ struct logger_performance_stats {
     std::atomic<uint64_t> max_queue_size{0};           ///< Maximum queue size reached
     std::atomic<uint64_t> writer_errors{0};            ///< Number of writer errors
     std::atomic<uint64_t> flush_operations{0};         ///< Number of flush operations
+
+    // Compatibility counters for legacy integrations
+    std::atomic<uint64_t> messages_enqueued{0};        ///< Legacy alias for enqueued messages
+    std::atomic<uint64_t> messages_processed{0};       ///< Legacy alias for processed messages
+
+    struct writer_stats_compat {
+        uint64_t messages_written{0};
+        uint64_t bytes_written{0};
+        uint64_t write_failures{0};
+
+        double get_avg_write_time_us() const { return 0.0; }
+    };
+
+    std::map<std::string, writer_stats_compat> writer_stats; ///< Legacy per-writer statistics
 
     /**
      * @brief Get messages per second
@@ -53,6 +69,19 @@ struct logger_performance_stats {
         return static_cast<double>(current) * 100.0 / static_cast<double>(max_size);
     }
 
+    double get_drop_rate_percent() const {
+        auto enqueued = messages_enqueued.load();
+        if (enqueued == 0) {
+            return 0.0;
+        }
+        auto dropped = messages_dropped.load();
+        return static_cast<double>(dropped) * 100.0 / static_cast<double>(enqueued);
+    }
+
+    double get_bytes_per_second() const {
+        return 0.0;
+    }
+
     /**
      * @brief Reset all statistics
      */
@@ -64,6 +93,9 @@ struct logger_performance_stats {
         max_queue_size.store(0);
         writer_errors.store(0);
         flush_operations.store(0);
+        messages_enqueued.store(0);
+        messages_processed.store(0);
+        writer_stats.clear();
     }
 };
 
@@ -77,6 +109,8 @@ extern logger_performance_stats g_logger_stats;
  */
 inline void record_message_logged(uint64_t time_ns) {
     g_logger_stats.messages_logged.fetch_add(1);
+    g_logger_stats.messages_enqueued.fetch_add(1);
+    g_logger_stats.messages_processed.fetch_add(1);
     g_logger_stats.total_log_time_ns.fetch_add(time_ns);
 }
 
@@ -85,6 +119,7 @@ inline void record_message_logged(uint64_t time_ns) {
  */
 inline void record_message_dropped() {
     g_logger_stats.messages_dropped.fetch_add(1);
+    g_logger_stats.messages_enqueued.fetch_add(1);
 }
 
 /**

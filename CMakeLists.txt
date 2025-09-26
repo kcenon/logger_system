@@ -315,7 +315,7 @@ if (BUILD_SAMPLES)
     endif()
 endif()
 
-if (BUILD_TESTS)
+if (BUILD_TESTS AND NOT USE_COMMON_SYSTEM)
     if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt)
         add_subdirectory(tests)
     else()
@@ -335,6 +335,8 @@ if (BUILD_TESTS)
     
     # Enable coverage for all targets
     logger_enable_coverage_for_all()
+elseif(BUILD_TESTS AND USE_COMMON_SYSTEM)
+    message(STATUS "Logger tests skipped when common_system integration is enabled")
 endif()
 
 if (BUILD_BENCHMARKS)
