@@ -1040,16 +1040,25 @@ Code Style</h3>
 <li>Write comprehensive unit tests for new features</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md72"></a>
+Network System Integration</h2>
+<ul>
+<li>network_system can consume logger_system via a lightweight adapter when built with:<ul>
+<li><code>-DBUILD_WITH_LOGGER_SYSTEM=ON</code></li>
+</ul>
+</li>
+<li>At call sites inside network_system, the <code>NETWORK_LOG_*</code> macros route through <code>logger_integration_manager</code>, which uses <code>logger_system_adapter</code> when available and <code>basic_logger</code> otherwise.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md73"></a>
 Support</h2>
 <ul>
 <li><b>Issues</b>: <a href="https://github.com/kcenon/logger_system/issues">GitHub Issues</a></li>
 <li><b>Discussions</b>: <a href="https://github.com/kcenon/logger_system/discussions">GitHub Discussions</a></li>
 <li><b>Email</b>: <a href="#" onclick="location.href='mai'+'lto:'+'kce'+'no'+'n@n'+'av'+'er.'+'co'+'m'; return false;">kceno<span class="obfuscator">.nosp@m.</span>n@na<span class="obfuscator">.nosp@m.</span>ver.c<span class="obfuscator">.nosp@m.</span>om</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md73"></a>
+<h2><a class="anchor" id="autotoc_md74"></a>
 License</h2>
 <p>This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICENSE) file for details.</p>
-<h2><a class="anchor" id="autotoc_md74"></a>
+<h2><a class="anchor" id="autotoc_md75"></a>
 Acknowledgments</h2>
 <ul>
 <li>Thanks to all contributors who have helped improve this project</li>
@@ -1064,7 +1073,7 @@ Acknowledgments</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Sep 26 2025 16:04:08 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Sep 28 2025 10:25:44 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

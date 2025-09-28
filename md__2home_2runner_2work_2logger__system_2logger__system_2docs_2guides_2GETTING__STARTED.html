@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Getting Started with Logger System</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md336"></a> This guide will help you get started with the Logger System quickly.</p>
-<h1><a class="anchor" id="autotoc_md337"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md337"></a> This guide will help you get started with the Logger System quickly.</p>
+<h1><a class="anchor" id="autotoc_md338"></a>
 Table of Contents</h1>
 <ul>
 <li>Requirements</li>
@@ -103,7 +103,7 @@ Table of Contents</h1>
 <li>Configuration</li>
 <li>Integration with Thread System</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md338"></a>
+<h1><a class="anchor" id="autotoc_md339"></a>
 Requirements</h1>
 <ul>
 <li>C++20 compatible compiler:<ul>
@@ -120,9 +120,9 @@ Requirements</h1>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md339"></a>
+<h1><a class="anchor" id="autotoc_md340"></a>
 Installation</h1>
-<h2><a class="anchor" id="autotoc_md340"></a>
+<h2><a class="anchor" id="autotoc_md341"></a>
 Using CMake FetchContent (Recommended)</h2>
 <p>Add the following to your <code>CMakeLists.txt</code>:</p>
 <div class="fragment"><div class="line">include(FetchContent)</div>
@@ -136,7 +136,7 @@ Using CMake FetchContent (Recommended)</h2>
 <div class="line"> </div>
 <div class="line"># Link to your target</div>
 <div class="line">target_link_libraries(your_target PRIVATE LoggerSystem::logger)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md341"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md342"></a>
 Building from Source</h2>
 <div class="fragment"><div class="line"># Clone the repository</div>
 <div class="line">git clone https://github.com/kcenon/logger_system.git</div>
@@ -153,14 +153,14 @@ Building from Source</h2>
 <div class="line"> </div>
 <div class="line"># Install (optional)</div>
 <div class="line">sudo cmake --install .</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md342"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md343"></a>
 Using as Installed Package</h2>
 <p>If you've installed the logger system:</p>
 <div class="fragment"><div class="line">find_package(LoggerSystem REQUIRED)</div>
 <div class="line">target_link_libraries(your_target PRIVATE LoggerSystem::logger)</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md343"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md344"></a>
 Basic Usage</h1>
-<h2><a class="anchor" id="autotoc_md344"></a>
+<h2><a class="anchor" id="autotoc_md345"></a>
 Simple Console Logging</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;logger_system/logger.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;logger_system/writers/console_writer.h&gt;</span></div>
@@ -185,7 +185,7 @@ Simple Console Logging</h2>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md345"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md346"></a>
 Logging with Source Location</h2>
 <div class="fragment"><div class="line"><span class="comment">// Log with file, line, and function information</span></div>
 <div class="line">logger-&gt;log(thread_module::log_level::debug, </div>
@@ -197,7 +197,7 @@ Logging with Source Location</h2>
 <div class="line"><span class="preprocessor">    logger-&gt;log(thread_module::log_level::debug, msg, __FILE__, __LINE__, __func__)</span></div>
 <div class="line"> </div>
 <div class="line">LOG_DEBUG(logger, <span class="stringliteral">&quot;This includes source location&quot;</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md346"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md347"></a>
 Structured JSON Output</h2>
 <p>The <code>structured_logger</code> provides JSON/logfmt/plain output. For strict JSON compliance at scale, consider integrating a JSON library (e.g., nlohmann/json):</p>
 <div class="fragment"><div class="line"><span class="comment">// Example using nlohmann::json (optional dependency)</span></div>
@@ -210,7 +210,7 @@ Structured JSON Output</h2>
 <div class="line"><span class="comment">// };</span></div>
 <div class="line"><span class="comment">// logger-&gt;log(log_level::info, j.dump());</span></div>
 </div><!-- fragment --><p>Alternatively, keep using <code>structured_logger</code> and route JSON output to file/network. When adding a JSON library, prefer compile-time options to keep it optional.</p>
-<h2><a class="anchor" id="autotoc_md347"></a>
+<h2><a class="anchor" id="autotoc_md348"></a>
 Log Levels</h2>
 <p>The logger supports six log levels:</p>
 <div class="fragment"><div class="line"><span class="keyword">enum class</span> log_level {</div>
@@ -221,7 +221,7 @@ Log Levels</h2>
 <div class="line">    error,    <span class="comment">// Error messages</span></div>
 <div class="line">    critical  <span class="comment">// Critical errors</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md348"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md349"></a>
 Filtering by Level</h2>
 <div class="fragment"><div class="line"><span class="comment">// Set minimum log level</span></div>
 <div class="line">logger-&gt;set_min_level(thread_module::log_level::info);</div>
@@ -233,16 +233,16 @@ Filtering by Level</h2>
 <div class="line"><span class="comment">// These will be logged</span></div>
 <div class="line">logger-&gt;log(thread_module::log_level::info, <span class="stringliteral">&quot;Important info&quot;</span>);</div>
 <div class="line">logger-&gt;log(thread_module::log_level::error, <span class="stringliteral">&quot;Error!&quot;</span>);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md349"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md350"></a>
 Configuration</h1>
-<h2><a class="anchor" id="autotoc_md350"></a>
+<h2><a class="anchor" id="autotoc_md351"></a>
 Synchronous vs Asynchronous Logging</h2>
 <div class="fragment"><div class="line"><span class="comment">// Asynchronous logger (default)</span></div>
 <div class="line"><span class="keyword">auto</span> async_logger = std::make_shared&lt;logger_module::logger&gt;(<span class="keyword">true</span>, 8192);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Synchronous logger</span></div>
 <div class="line"><span class="keyword">auto</span> sync_logger = std::make_shared&lt;logger_module::logger&gt;(<span class="keyword">false</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md351"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md352"></a>
 Multiple Writers</h2>
 <div class="fragment"><div class="line"><span class="comment">// Console output with color</span></div>
 <div class="line"><span class="keyword">auto</span> console = std::make_unique&lt;logger_module::console_writer&gt;();</div>
@@ -269,7 +269,7 @@ Multiple Writers</h2>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">logger-&gt;add_writer(std::make_unique&lt;my_writer&gt;());</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md352"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md353"></a>
 Windows Notes (Networking)</h2>
 <p>The network writer/server use POSIX sockets. On Windows, add WinSock initialization and adapt socket calls:</p>
 <ul>
@@ -277,7 +277,7 @@ Windows Notes (Networking)</h2>
 <li>Replace <code>close(fd)</code> with <code>closesocket(fd)</code> and use appropriate error codes (e.g., <code>WSAGetLastError()</code>).</li>
 <li>Consider a small socket abstraction layer guarded by <code>#ifdef _WIN32</code> to keep code portable.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md353"></a>
+<h2><a class="anchor" id="autotoc_md354"></a>
 Console Writer Options</h2>
 <div class="fragment"><div class="line"><span class="comment">// Output to stderr instead of stdout</span></div>
 <div class="line"><span class="keyword">auto</span> console = std::make_unique&lt;logger_module::console_writer&gt;(<span class="keyword">true</span>);</div>
@@ -285,9 +285,9 @@ Console Writer Options</h2>
 <div class="line"><span class="comment">// Disable color output</span></div>
 <div class="line"><span class="keyword">auto</span> console = std::make_unique&lt;logger_module::console_writer&gt;(<span class="keyword">false</span>, <span class="keyword">false</span>);</div>
 <div class="line">console-&gt;set_use_color(<span class="keyword">false</span>);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md354"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md355"></a>
 Integration with Thread System</h1>
-<h2><a class="anchor" id="autotoc_md355"></a>
+<h2><a class="anchor" id="autotoc_md356"></a>
 Using Service Container</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;logger_system/logger.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;logger_system/writers/console_writer.h&gt;</span></div>
@@ -318,7 +318,7 @@ Using Service Container</h2>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md356"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md357"></a>
 Direct Integration</h2>
 <div class="fragment"><div class="line"><span class="comment">// Create logger</span></div>
 <div class="line"><span class="keyword">auto</span> logger = std::make_shared&lt;logger_module::logger&gt;();</div>
@@ -330,7 +330,7 @@ Direct Integration</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Pass to components that need logging</span></div>
 <div class="line"><span class="keyword">auto</span> context = thread_module::thread_context(logger_interface);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md357"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md358"></a>
 Next Steps</h1>
 <ul>
 <li>Read the Architecture Overview to understand the system design</li>
@@ -344,7 +344,7 @@ Next Steps</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Sep 26 2025 16:04:08 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Sep 28 2025 10:25:44 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
