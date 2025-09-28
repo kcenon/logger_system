@@ -193,6 +193,12 @@ if(spdlog_FOUND)
 endif()
 
 # Google Test (for unit tests)
+# Disable tests for MinGW builds due to compatibility issues
+if (MINGW)
+    set(BUILD_TESTS OFF CACHE BOOL "Tests disabled for MinGW" FORCE)
+    message(STATUS "Tests disabled for MinGW builds")
+endif()
+
 if (BUILD_TESTS)
     # Try to find GTest from vcpkg first
     find_package(GTest CONFIG)
