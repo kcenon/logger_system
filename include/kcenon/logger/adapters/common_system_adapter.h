@@ -17,22 +17,21 @@
 #include "../core/logger.h"
 #include "../interfaces/logger_interface.h"
 
-namespace logger_system {
-namespace adapters {
+namespace kcenon::logger::adapters {
 
 #ifdef USE_COMMON_SYSTEM
 
 /**
- * @brief Adapter to expose logger_system as common::interfaces::ILogger
+ * @brief Adapter to expose kcenon::logger as common::interfaces::ILogger
  *
- * This adapter allows logger_system's logger to be used through
+ * This adapter allows kcenon::logger's logger to be used through
  * the standard common_system logger interface.
  */
 class common_system_logger_adapter : public ::common::interfaces::ILogger {
 public:
     /**
-     * @brief Construct adapter with logger_system logger
-     * @param logger Shared pointer to logger_system logger
+     * @brief Construct adapter with kcenon::logger logger
+     * @param logger Shared pointer to kcenon::logger logger
      */
     explicit common_system_logger_adapter(std::shared_ptr<logger> lg)
         : logger_(lg) {}
@@ -47,7 +46,7 @@ public:
         const std::string& message) override {
         if (!logger_) {
             return ::common::VoidResult(
-                ::common::error_info(1, "Logger not initialized", "logger_system"));
+                ::common::error_info(1, "Logger not initialized", "kcenon::logger"));
         }
 
         try {
@@ -56,7 +55,7 @@ public:
             return ::common::VoidResult(std::monostate{});
         } catch (const std::exception& e) {
             return ::common::VoidResult(
-                ::common::error_info(2, e.what(), "logger_system"));
+                ::common::error_info(2, e.what(), "kcenon::logger"));
         }
     }
 
@@ -71,7 +70,7 @@ public:
         const std::string& function) override {
         if (!logger_) {
             return ::common::VoidResult(
-                ::common::error_info(1, "Logger not initialized", "logger_system"));
+                ::common::error_info(1, "Logger not initialized", "kcenon::logger"));
         }
 
         try {
@@ -83,7 +82,7 @@ public:
             return ::common::VoidResult(std::monostate{});
         } catch (const std::exception& e) {
             return ::common::VoidResult(
-                ::common::error_info(2, e.what(), "logger_system"));
+                ::common::error_info(2, e.what(), "kcenon::logger"));
         }
     }
 
@@ -113,7 +112,7 @@ public:
         ::common::interfaces::log_level level) override {
         if (!logger_) {
             return ::common::VoidResult(
-                ::common::error_info(1, "Logger not initialized", "logger_system"));
+                ::common::error_info(1, "Logger not initialized", "kcenon::logger"));
         }
 
         try {
@@ -122,7 +121,7 @@ public:
             return ::common::VoidResult(std::monostate{});
         } catch (const std::exception& e) {
             return ::common::VoidResult(
-                ::common::error_info(2, e.what(), "logger_system"));
+                ::common::error_info(2, e.what(), "kcenon::logger"));
         }
     }
 
@@ -143,7 +142,7 @@ public:
     ::common::VoidResult flush() override {
         if (!logger_) {
             return ::common::VoidResult(
-                ::common::error_info(1, "Logger not initialized", "logger_system"));
+                ::common::error_info(1, "Logger not initialized", "kcenon::logger"));
         }
 
         try {
@@ -151,7 +150,7 @@ public:
             return ::common::VoidResult(std::monostate{});
         } catch (const std::exception& e) {
             return ::common::VoidResult(
-                ::common::error_info(2, e.what(), "logger_system"));
+                ::common::error_info(2, e.what(), "kcenon::logger"));
         }
     }
 
@@ -159,7 +158,7 @@ private:
     std::shared_ptr<logger> logger_;
 
     /**
-     * @brief Convert common log level to logger_system log level
+     * @brief Convert common log level to kcenon::logger log level
      */
     static log_level convert_level_from_common(::common::interfaces::log_level level) {
         switch(level) {
@@ -182,7 +181,7 @@ private:
     }
 
     /**
-     * @brief Convert logger_system log level to common log level
+     * @brief Convert kcenon::logger log level to common log level
      */
     static ::common::interfaces::log_level convert_level_to_common(log_level level) {
         switch(level) {
@@ -206,10 +205,10 @@ private:
 };
 
 /**
- * @brief Adapter to use common::interfaces::ILogger in logger_system
+ * @brief Adapter to use common::interfaces::ILogger in kcenon::logger
  *
  * This adapter allows a common_system logger to be used as
- * a logger_system writer.
+ * a kcenon::logger writer.
  */
 class logger_from_common_adapter : public logger_interface {
 public:
@@ -275,7 +274,7 @@ private:
     std::shared_ptr<::common::interfaces::ILogger> common_logger_;
 
     /**
-     * @brief Convert logger_system log level to common log level
+     * @brief Convert kcenon::logger log level to common log level
      */
     static ::common::interfaces::log_level convert_level_to_common(log_level level) {
         switch(level) {
@@ -304,7 +303,7 @@ private:
 class common_logger_factory {
 public:
     /**
-     * @brief Create a common_system ILogger from logger_system logger
+     * @brief Create a common_system ILogger from kcenon::logger logger
      */
     static std::shared_ptr<::common::interfaces::ILogger> create_common_logger(
         std::shared_ptr<logger> lg) {
@@ -312,7 +311,7 @@ public:
     }
 
     /**
-     * @brief Create a logger_system logger that wraps common ILogger
+     * @brief Create a kcenon::logger logger that wraps common ILogger
      */
     static std::shared_ptr<logger_interface> create_from_common(
         std::shared_ptr<::common::interfaces::ILogger> common_logger) {
@@ -322,5 +321,4 @@ public:
 
 #endif // USE_COMMON_SYSTEM
 
-} // namespace adapters
-} // namespace logger_system
+} // namespace kcenon::logger::adapters
