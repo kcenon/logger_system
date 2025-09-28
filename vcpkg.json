@@ -3,15 +3,7 @@
   "version": "1.0.0",
   "dependencies": [
     "fmt",
-    "spdlog",
-    {
-      "name": "gtest",
-      "platform": "!mingw"
-    },
-    {
-      "name": "benchmark",
-      "platform": "!mingw"
-    }
+    "spdlog"
   ],
   "overrides": [
     {
