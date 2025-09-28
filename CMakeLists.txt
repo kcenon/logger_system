@@ -51,14 +51,14 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(USE_LOCKFREE "Use lock-free implementation" ON)
 option(USE_THREAD_SYSTEM "Use external thread_system if available" ON)
 option(LOGGER_STANDALONE "Build in standalone mode without thread_system" OFF)
-option(USE_COMMON_SYSTEM "Enable common_system integration" ON)
+option(BUILD_WITH_COMMON_SYSTEM "Enable common_system integration" ON)
 option(NO_VCPKG "Skip vcpkg and use system libraries only" OFF)
 
-if(USE_COMMON_SYSTEM)
+if(BUILD_WITH_COMMON_SYSTEM)
     set(_LOGGER_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include/kcenon/common/patterns/result.h")
     if(NOT EXISTS "${_LOGGER_COMMON_HEADER}")
-        message(WARNING "common_system integration requested but required headers were not found - disabling USE_COMMON_SYSTEM")
-        set(USE_COMMON_SYSTEM OFF CACHE BOOL "Enable common_system integration" FORCE)
+        message(WARNING "common_system integration requested but required headers were not found - disabling BUILD_WITH_COMMON_SYSTEM")
+        set(BUILD_WITH_COMMON_SYSTEM OFF CACHE BOOL "Enable common_system integration" FORCE)
     endif()
 endif()
 
@@ -273,13 +273,13 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 $<INSTALL_INTERFACE:include>
         )
 
-        if(USE_COMMON_SYSTEM)
+        if(BUILD_WITH_COMMON_SYSTEM)
             message(STATUS "Logger System: Enabling common_system integration")
             target_include_directories(LoggerSystem
                 PUBLIC
                     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include>
             )
-            target_compile_definitions(LoggerSystem PUBLIC LOGGER_USE_COMMON_SYSTEM USE_COMMON_SYSTEM)
+            target_compile_definitions(LoggerSystem PUBLIC LOGGER_BUILD_WITH_COMMON_SYSTEM BUILD_WITH_COMMON_SYSTEM)
         endif()
 
         # Add thread_system integration if available and not explicitly disabled
