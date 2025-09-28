@@ -9,7 +9,7 @@
 #include <unordered_map>
 
 // Check if common_system is available
-#ifdef USE_COMMON_SYSTEM
+#ifdef BUILD_WITH_COMMON_SYSTEM
 #include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/common/patterns/result.h>
 #endif
@@ -19,7 +19,7 @@
 
 namespace kcenon::logger::adapters {
 
-#ifdef USE_COMMON_SYSTEM
+#ifdef BUILD_WITH_COMMON_SYSTEM
 
 /**
  * @brief Adapter to expose kcenon::logger as common::interfaces::ILogger
@@ -319,6 +319,6 @@ public:
     }
 };
 
-#endif // USE_COMMON_SYSTEM
+#endif // BUILD_WITH_COMMON_SYSTEM
 
 } // namespace kcenon::logger::adapters

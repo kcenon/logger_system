@@ -814,6 +814,8 @@ cmake --build .
 - `BUILD_BENCHMARKS`: Build performance benchmarks (default: OFF)
 - `BUILD_SAMPLES`: Build example programs (default: ON)
 - `USE_LOCKFREE`: Use lock-free implementation (default: ON)
+- `BUILD_WITH_COMMON_SYSTEM`: Enable common_system integration for standardized interfaces (default: ON)
+- `USE_THREAD_SYSTEM`: Use external thread_system if available (default: ON)
 
 ## Testing
 
