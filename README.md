@@ -950,6 +950,12 @@ We welcome contributions! Please see our [Contributing Guide](./docs/CONTRIBUTIN
 - Maintain consistent formatting (clang-format configuration provided)
 - Write comprehensive unit tests for new features
 
+## Network System Integration
+
+- network_system can consume logger_system via a lightweight adapter when built with:
+  - `-DBUILD_WITH_LOGGER_SYSTEM=ON`
+- At call sites inside network_system, the `NETWORK_LOG_*` macros route through `logger_integration_manager`, which uses `logger_system_adapter` when available and `basic_logger` otherwise.
+
 ## Support
 
 - **Issues**: [GitHub Issues](https://github.com/kcenon/logger_system/issues)
