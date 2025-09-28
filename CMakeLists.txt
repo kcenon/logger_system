@@ -223,6 +223,12 @@ if (BUILD_TESTS)
 endif()
 
 # Google Benchmark (for benchmarks)
+# Disable benchmarks for MinGW builds due to compatibility issues
+if (MINGW)
+    set(BUILD_BENCHMARKS OFF CACHE BOOL "Benchmarks disabled for MinGW" FORCE)
+    message(STATUS "Benchmarks disabled for MinGW builds")
+endif()
+
 if (BUILD_BENCHMARKS)
     # Try to find benchmark from vcpkg first
     find_package(benchmark CONFIG)
