@@ -279,7 +279,7 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 PUBLIC
                     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include>
             )
-            target_compile_definitions(LoggerSystem PUBLIC LOGGER_USE_COMMON_SYSTEM)
+            target_compile_definitions(LoggerSystem PUBLIC LOGGER_USE_COMMON_SYSTEM USE_COMMON_SYSTEM)
         endif()
 
         # Add thread_system integration if available and not explicitly disabled
