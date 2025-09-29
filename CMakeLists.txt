@@ -54,6 +54,12 @@ option(LOGGER_STANDALONE "Build in standalone mode without thread_system" OFF)
 option(BUILD_WITH_COMMON_SYSTEM "Enable common_system integration" ON)
 option(NO_VCPKG "Skip vcpkg and use system libraries only" OFF)
 
+# Disable benchmarks for MinGW builds due to compatibility issues
+if(MINGW AND BUILD_BENCHMARKS)
+    message(STATUS "Disabling benchmarks for MinGW build due to compatibility issues")
+    set(BUILD_BENCHMARKS OFF CACHE BOOL "Benchmarks disabled for MinGW" FORCE)
+endif()
+
 if(BUILD_WITH_COMMON_SYSTEM)
     set(_LOGGER_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include/kcenon/common/patterns/result.h")
     if(NOT EXISTS "${_LOGGER_COMMON_HEADER}")
