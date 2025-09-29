@@ -99,10 +99,16 @@ function(logger_find_test_dependencies)
         message(STATUS "GTest not found, attempting to fetch...")
         include(FetchContent)
 
+        # Set options before FetchContent_Declare for all platforms
+        set(gtest_force_shared_crt ON CACHE BOOL "Use shared CRT when building GoogleTest" FORCE)
+        set(BUILD_GMOCK ON CACHE BOOL "Build gmock" FORCE)
+
+        # Windows-specific pthread disable
         if(WIN32 OR MSVC OR MINGW)
-            set(gtest_force_shared_crt ON CACHE BOOL "Use shared CRT when building GoogleTest" FORCE)
             set(gtest_disable_pthreads ON CACHE BOOL "Disable pthread usage in GoogleTest" FORCE)
             set(GTEST_HAS_PTHREAD 0 CACHE INTERNAL "Explicitly disable pthread support in GoogleTest")
+            # Add compile definitions to ensure pthread is disabled
+            add_compile_definitions(GTEST_HAS_PTHREAD=0)
         endif()
 
         FetchContent_Declare(
@@ -110,7 +116,35 @@ function(logger_find_test_dependencies)
             GIT_REPOSITORY https://github.com/google/googletest.git
             GIT_TAG v1.14.0
         )
-        FetchContent_MakeAvailable(googletest)
+
+        # Populate first to get the targets
+        FetchContent_GetProperties(googletest)
+        if(NOT googletest_POPULATED)
+            FetchContent_Populate(googletest)
+
+            # Force disable pthread before adding subdirectory on Windows
+            if(WIN32 OR MSVC OR MINGW)
+                set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGTEST_HAS_PTHREAD=0" CACHE STRING "" FORCE)
+            endif()
+
+            add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR} EXCLUDE_FROM_ALL)
+
+            # Apply compile definitions to all Google Test targets after they're created
+            if(WIN32 OR MSVC OR MINGW)
+                if(TARGET gtest)
+                    target_compile_definitions(gtest PUBLIC GTEST_HAS_PTHREAD=0)
+                endif()
+                if(TARGET gtest_main)
+                    target_compile_definitions(gtest_main PUBLIC GTEST_HAS_PTHREAD=0)
+                endif()
+                if(TARGET gmock)
+                    target_compile_definitions(gmock PUBLIC GTEST_HAS_PTHREAD=0)
+                endif()
+                if(TARGET gmock_main)
+                    target_compile_definitions(gmock_main PUBLIC GTEST_HAS_PTHREAD=0)
+                endif()
+            endif()
+        endif()
     else()
         message(STATUS "Found GTest: ${GTest_DIR}")
     endif()
@@ -128,11 +162,15 @@ function(logger_find_benchmark_dependencies)
         message(STATUS "Google Benchmark not found, attempting to fetch...")
         include(FetchContent)
 
+        # Disable benchmark tests for all platforms
+        set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Disable benchmark tests" FORCE)
+
         # Disable features that might require pthread on Windows
         if(WIN32 OR MSVC OR MINGW)
             set(BENCHMARK_ENABLE_LTO OFF CACHE BOOL "Disable LTO" FORCE)
             set(BENCHMARK_USE_LIBCXX OFF CACHE BOOL "Disable libcxx" FORCE)
-            set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Disable benchmark tests" FORCE)
+            set(BENCHMARK_ENABLE_EXCEPTIONS OFF CACHE BOOL "Disable exceptions" FORCE)
+            set(BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "Disable install" FORCE)
         endif()
 
         FetchContent_Declare(
@@ -140,7 +178,13 @@ function(logger_find_benchmark_dependencies)
             GIT_REPOSITORY https://github.com/google/benchmark.git
             GIT_TAG v1.8.3
         )
-        FetchContent_MakeAvailable(googlebenchmark)
+
+        # Use the same pattern as GoogleTest for consistency
+        FetchContent_GetProperties(googlebenchmark)
+        if(NOT googlebenchmark_POPULATED)
+            FetchContent_Populate(googlebenchmark)
+            add_subdirectory(${googlebenchmark_SOURCE_DIR} ${googlebenchmark_BINARY_DIR} EXCLUDE_FROM_ALL)
+        endif()
     else()
         message(STATUS "Found Google Benchmark: ${benchmark_DIR}")
     endif()
