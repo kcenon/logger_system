@@ -194,61 +194,12 @@ endif()
 
 # Google Test (for unit tests)
 if (BUILD_TESTS)
-    # Try to find GTest from vcpkg first
-    find_package(GTest CONFIG)
-    if(NOT GTest_FOUND)
-        # Fallback to FetchContent if not found
-        include(FetchContent)
-        
-        # Disable pthread requirement on Windows - Set before FetchContent_Declare
-        if(WIN32 OR MSVC OR MINGW)
-            set(gtest_force_shared_crt ON CACHE BOOL "Use shared (DLL) run-time lib even when Google Test is built as static lib." FORCE)
-            set(gtest_disable_pthreads ON CACHE BOOL "Disable uses of pthreads in gtest." FORCE)
-            set(BUILD_GMOCK ON CACHE BOOL "Build gmock" FORCE)
-            # Set compile definitions for Google Test to disable pthread
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGTEST_HAS_PTHREAD=0")
-            # Also set as cache variable for Google Test's internal use
-            set(GTEST_HAS_PTHREAD 0 CACHE INTERNAL "Disable pthread in Google Test")
-            set(GTEST_HAS_TR1_TUPLE 0 CACHE INTERNAL "Disable TR1 tuple in Google Test")
-        endif()
-        
-        FetchContent_Declare(
-            googletest
-            GIT_REPOSITORY https://github.com/google/googletest.git
-            GIT_TAG v1.14.0
-        )
-        
-        # Set properties before making available
-        set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "" FORCE)
-        
-        FetchContent_MakeAvailable(googletest)
-    endif()
+    # Test dependencies are handled by LoggerDependencies module
     enable_testing()
 endif()
 
 # Google Benchmark (for benchmarks)
-if (BUILD_BENCHMARKS)
-    # Try to find benchmark from vcpkg first
-    find_package(benchmark CONFIG)
-    if(NOT benchmark_FOUND)
-        # Fallback to FetchContent if not found
-        include(FetchContent)
-
-        # Disable features that might require pthread on Windows
-        if(WIN32 OR MSVC OR MINGW)
-            set(BENCHMARK_ENABLE_LTO OFF CACHE BOOL "Disable LTO" FORCE)
-            set(BENCHMARK_USE_LIBCXX OFF CACHE BOOL "Disable libcxx" FORCE)
-        endif()
-
-        FetchContent_Declare(
-            benchmark
-            GIT_REPOSITORY https://github.com/google/benchmark.git
-            GIT_TAG v1.8.3
-        )
-        set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
-        FetchContent_MakeAvailable(benchmark)
-    endif()
-endif()
+# Benchmark dependencies are handled by LoggerDependencies module
 
 ##################################################
 # Source files

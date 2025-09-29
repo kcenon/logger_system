@@ -98,6 +98,13 @@ function(logger_find_test_dependencies)
     if(NOT GTest_FOUND)
         message(STATUS "GTest not found, attempting to fetch...")
         include(FetchContent)
+
+        if(WIN32 OR MSVC OR MINGW)
+            set(gtest_force_shared_crt ON CACHE BOOL "Use shared CRT when building GoogleTest" FORCE)
+            set(gtest_disable_pthreads ON CACHE BOOL "Disable pthread usage in GoogleTest" FORCE)
+            set(GTEST_HAS_PTHREAD 0 CACHE INTERNAL "Explicitly disable pthread support in GoogleTest")
+        endif()
+
         FetchContent_Declare(
             googletest
             GIT_REPOSITORY https://github.com/google/googletest.git
@@ -114,12 +121,20 @@ function(logger_find_benchmark_dependencies)
     if(NOT BUILD_BENCHMARKS)
         return()
     endif()
-    
+
     # Try to find Google Benchmark
     find_package(benchmark QUIET)
     if(NOT benchmark_FOUND)
         message(STATUS "Google Benchmark not found, attempting to fetch...")
         include(FetchContent)
+
+        # Disable features that might require pthread on Windows
+        if(WIN32 OR MSVC OR MINGW)
+            set(BENCHMARK_ENABLE_LTO OFF CACHE BOOL "Disable LTO" FORCE)
+            set(BENCHMARK_USE_LIBCXX OFF CACHE BOOL "Disable libcxx" FORCE)
+            set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Disable benchmark tests" FORCE)
+        endif()
+
         FetchContent_Declare(
             googlebenchmark
             GIT_REPOSITORY https://github.com/google/benchmark.git
