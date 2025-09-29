@@ -54,6 +54,18 @@ option(LOGGER_STANDALONE "Build in standalone mode without thread_system" OFF)
 option(BUILD_WITH_COMMON_SYSTEM "Enable common_system integration" ON)
 option(NO_VCPKG "Skip vcpkg and use system libraries only" OFF)
 
+# Disable tests and benchmarks for MinGW builds due to compatibility issues
+if(MINGW)
+    if(BUILD_TESTS)
+        message(STATUS "Disabling tests for MinGW build due to compatibility issues")
+        set(BUILD_TESTS OFF CACHE BOOL "Tests disabled for MinGW" FORCE)
+    endif()
+    if(BUILD_BENCHMARKS)
+        message(STATUS "Disabling benchmarks for MinGW build due to compatibility issues")
+        set(BUILD_BENCHMARKS OFF CACHE BOOL "Benchmarks disabled for MinGW" FORCE)
+    endif()
+endif()
+
 if(BUILD_WITH_COMMON_SYSTEM)
     set(_LOGGER_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include/kcenon/common/patterns/result.h")
     if(NOT EXISTS "${_LOGGER_COMMON_HEADER}")
@@ -193,63 +205,14 @@ if(spdlog_FOUND)
 endif()
 
 # Google Test (for unit tests)
-# Disable tests for MinGW builds due to compatibility issues
-if (MINGW)
-    set(BUILD_TESTS OFF CACHE BOOL "Tests disabled for MinGW" FORCE)
-    message(STATUS "Tests disabled for MinGW builds")
-endif()
-
 if (BUILD_TESTS)
-    # Try to find GTest from vcpkg first
-    find_package(GTest CONFIG)
-    if(NOT GTest_FOUND)
-        # Fallback to FetchContent if not found
-        include(FetchContent)
-        
-        # Disable pthread requirement on Windows - Set before FetchContent_Declare
-        if(WIN32)
-            set(gtest_force_shared_crt ON CACHE BOOL "Use shared (DLL) run-time lib even when Google Test is built as static lib." FORCE)
-            set(gtest_disable_pthreads ON CACHE BOOL "Disable uses of pthreads in gtest." FORCE)
-            set(BUILD_GMOCK ON CACHE BOOL "Build gmock" FORCE)
-            add_definitions(-DGTEST_HAS_PTHREAD=0)
-        endif()
-        
-        FetchContent_Declare(
-            googletest
-            GIT_REPOSITORY https://github.com/google/googletest.git
-            GIT_TAG v1.14.0
-        )
-        
-        # Set properties before making available
-        set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "" FORCE)
-        
-        FetchContent_MakeAvailable(googletest)
-    endif()
+    # Test dependencies are handled by LoggerDependencies module
     enable_testing()
 endif()
 
 # Google Benchmark (for benchmarks)
-# Disable benchmarks for MinGW builds due to compatibility issues
-if (MINGW)
-    set(BUILD_BENCHMARKS OFF CACHE BOOL "Benchmarks disabled for MinGW" FORCE)
-    message(STATUS "Benchmarks disabled for MinGW builds")
-endif()
-
-if (BUILD_BENCHMARKS)
-    # Try to find benchmark from vcpkg first
-    find_package(benchmark CONFIG)
-    if(NOT benchmark_FOUND)
-        # Fallback to FetchContent if not found
-        include(FetchContent)
-        FetchContent_Declare(
-            benchmark
-            GIT_REPOSITORY https://github.com/google/benchmark.git
-            GIT_TAG v1.8.3
-        )
-        set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
-        FetchContent_MakeAvailable(benchmark)
-    endif()
-endif()
+# Benchmark dependencies are handled by LoggerDependencies module
+# Note: MinGW benchmark disable is handled in the options section (line 58-61)
 
 ##################################################
 # Source files

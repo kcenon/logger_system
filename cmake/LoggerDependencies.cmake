@@ -98,12 +98,30 @@ function(logger_find_test_dependencies)
     if(NOT GTest_FOUND)
         message(STATUS "GTest not found, attempting to fetch...")
         include(FetchContent)
+
+        # Set options before FetchContent_Declare so they apply during configuration
+        set(gtest_force_shared_crt ON CACHE BOOL "Use shared CRT when building GoogleTest" FORCE)
+        set(BUILD_GMOCK ON CACHE BOOL "Build gmock" FORCE)
+
+        if(WIN32 OR MSVC OR MINGW)
+            set(gtest_disable_pthreads ON CACHE BOOL "Disable pthread usage in GoogleTest" FORCE)
+        endif()
+
         FetchContent_Declare(
             googletest
             GIT_REPOSITORY https://github.com/google/googletest.git
             GIT_TAG v1.14.0
         )
+
         FetchContent_MakeAvailable(googletest)
+
+        if(WIN32 OR MSVC OR MINGW)
+            foreach(logger_gtest_target IN ITEMS gtest gtest_main gmock gmock_main)
+                if(TARGET ${logger_gtest_target})
+                    target_compile_definitions(${logger_gtest_target} PUBLIC GTEST_HAS_PTHREAD=0)
+                endif()
+            endforeach()
+        endif()
     else()
         message(STATUS "Found GTest: ${GTest_DIR}")
     endif()
@@ -114,18 +132,36 @@ function(logger_find_benchmark_dependencies)
     if(NOT BUILD_BENCHMARKS)
         return()
     endif()
-    
+
     # Try to find Google Benchmark
     find_package(benchmark QUIET)
     if(NOT benchmark_FOUND)
         message(STATUS "Google Benchmark not found, attempting to fetch...")
         include(FetchContent)
+
+        # Disable benchmark tests for all platforms
+        set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Disable benchmark tests" FORCE)
+
+        # Disable features that might require pthread on Windows
+        if(WIN32 OR MSVC OR MINGW)
+            set(BENCHMARK_ENABLE_LTO OFF CACHE BOOL "Disable LTO" FORCE)
+            set(BENCHMARK_USE_LIBCXX OFF CACHE BOOL "Disable libcxx" FORCE)
+            set(BENCHMARK_ENABLE_EXCEPTIONS OFF CACHE BOOL "Disable exceptions" FORCE)
+            set(BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "Disable install" FORCE)
+        endif()
+
         FetchContent_Declare(
             googlebenchmark
             GIT_REPOSITORY https://github.com/google/benchmark.git
             GIT_TAG v1.8.3
         )
-        FetchContent_MakeAvailable(googlebenchmark)
+
+        # Use the same pattern as GoogleTest for consistency
+        FetchContent_GetProperties(googlebenchmark)
+        if(NOT googlebenchmark_POPULATED)
+            FetchContent_Populate(googlebenchmark)
+            add_subdirectory(${googlebenchmark_SOURCE_DIR} ${googlebenchmark_BINARY_DIR} EXCLUDE_FROM_ALL)
+        endif()
     else()
         message(STATUS "Found Google Benchmark: ${benchmark_DIR}")
     endif()
