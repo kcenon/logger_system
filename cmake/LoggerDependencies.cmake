@@ -99,16 +99,12 @@ function(logger_find_test_dependencies)
         message(STATUS "GTest not found, attempting to fetch...")
         include(FetchContent)
 
-        # Set options before FetchContent_Declare for all platforms
+        # Set options before FetchContent_Declare so they apply during configuration
         set(gtest_force_shared_crt ON CACHE BOOL "Use shared CRT when building GoogleTest" FORCE)
         set(BUILD_GMOCK ON CACHE BOOL "Build gmock" FORCE)
 
-        # Windows-specific pthread disable
         if(WIN32 OR MSVC OR MINGW)
             set(gtest_disable_pthreads ON CACHE BOOL "Disable pthread usage in GoogleTest" FORCE)
-            set(GTEST_HAS_PTHREAD 0 CACHE INTERNAL "Explicitly disable pthread support in GoogleTest")
-            # Add compile definitions to ensure pthread is disabled
-            add_compile_definitions(GTEST_HAS_PTHREAD=0)
         endif()
 
         FetchContent_Declare(
@@ -117,33 +113,14 @@ function(logger_find_test_dependencies)
             GIT_TAG v1.14.0
         )
 
-        # Populate first to get the targets
-        FetchContent_GetProperties(googletest)
-        if(NOT googletest_POPULATED)
-            FetchContent_Populate(googletest)
+        FetchContent_MakeAvailable(googletest)
 
-            # Force disable pthread before adding subdirectory on Windows
-            if(WIN32 OR MSVC OR MINGW)
-                set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGTEST_HAS_PTHREAD=0" CACHE STRING "" FORCE)
-            endif()
-
-            add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR} EXCLUDE_FROM_ALL)
-
-            # Apply compile definitions to all Google Test targets after they're created
-            if(WIN32 OR MSVC OR MINGW)
-                if(TARGET gtest)
-                    target_compile_definitions(gtest PUBLIC GTEST_HAS_PTHREAD=0)
+        if(WIN32 OR MSVC OR MINGW)
+            foreach(logger_gtest_target IN ITEMS gtest gtest_main gmock gmock_main)
+                if(TARGET ${logger_gtest_target})
+                    target_compile_definitions(${logger_gtest_target} PUBLIC GTEST_HAS_PTHREAD=0)
                 endif()
-                if(TARGET gtest_main)
-                    target_compile_definitions(gtest_main PUBLIC GTEST_HAS_PTHREAD=0)
-                endif()
-                if(TARGET gmock)
-                    target_compile_definitions(gmock PUBLIC GTEST_HAS_PTHREAD=0)
-                endif()
-                if(TARGET gmock_main)
-                    target_compile_definitions(gmock_main PUBLIC GTEST_HAS_PTHREAD=0)
-                endif()
-            endif()
+            endforeach()
         endif()
     else()
         message(STATUS "Found GTest: ${GTest_DIR}")
