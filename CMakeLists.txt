@@ -54,10 +54,16 @@ option(LOGGER_STANDALONE "Build in standalone mode without thread_system" OFF)
 option(BUILD_WITH_COMMON_SYSTEM "Enable common_system integration" ON)
 option(NO_VCPKG "Skip vcpkg and use system libraries only" OFF)
 
-# Disable benchmarks for MinGW builds due to compatibility issues
-if(MINGW AND BUILD_BENCHMARKS)
-    message(STATUS "Disabling benchmarks for MinGW build due to compatibility issues")
-    set(BUILD_BENCHMARKS OFF CACHE BOOL "Benchmarks disabled for MinGW" FORCE)
+# Disable tests and benchmarks for MinGW builds due to compatibility issues
+if(MINGW)
+    if(BUILD_TESTS)
+        message(STATUS "Disabling tests for MinGW build due to compatibility issues")
+        set(BUILD_TESTS OFF CACHE BOOL "Tests disabled for MinGW" FORCE)
+    endif()
+    if(BUILD_BENCHMARKS)
+        message(STATUS "Disabling benchmarks for MinGW build due to compatibility issues")
+        set(BUILD_BENCHMARKS OFF CACHE BOOL "Benchmarks disabled for MinGW" FORCE)
+    endif()
 endif()
 
 if(BUILD_WITH_COMMON_SYSTEM)
@@ -206,6 +212,7 @@ endif()
 
 # Google Benchmark (for benchmarks)
 # Benchmark dependencies are handled by LoggerDependencies module
+# Note: MinGW benchmark disable is handled in the options section (line 58-61)
 
 ##################################################
 # Source files
