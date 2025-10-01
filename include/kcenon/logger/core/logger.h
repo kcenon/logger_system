@@ -179,10 +179,20 @@ class log_router;
  * 
  * @since 1.0.0
  */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-class logger : public kcenon::thread::logger_interface {
+#ifdef LOGGER_USING_COMMON_INTERFACES
+    #ifdef USE_THREAD_SYSTEM_INTEGRATION
+    class logger : public kcenon::thread::logger_interface,
+                   public common::interfaces::IMonitorable {
+    #else
+    class logger : public logger_system::logger_interface,
+                   public common::interfaces::IMonitorable {
+    #endif
 #else
-class logger : public logger_system::logger_interface {
+    #ifdef USE_THREAD_SYSTEM_INTEGRATION
+    class logger : public kcenon::thread::logger_interface {
+    #else
+    class logger : public logger_system::logger_interface {
+    #endif
 #endif
 public:
     /**
@@ -600,9 +610,40 @@ public:
      * @param value Metric value
      * @param type Metric type
      */
-    void record_metric(const std::string& name, double value, 
+    void record_metric(const std::string& name, double value,
                       metric_type type = metric_type::gauge);
-    
+
+#ifdef LOGGER_USING_COMMON_INTERFACES
+    // IMonitorable interface implementation
+
+    /**
+     * @brief Get monitoring data (IMonitorable interface)
+     * @return Result containing metrics snapshot or error
+     *
+     * @details Collects comprehensive metrics about the logger's current state,
+     * including message counts, queue utilization, writer statistics, and error rates.
+     */
+    common::Result<common::interfaces::metrics_snapshot> get_monitoring_data() override;
+
+    /**
+     * @brief Perform health check (IMonitorable interface)
+     * @return Result containing health check result or error
+     *
+     * @details Evaluates the logger's health based on various factors such as
+     * queue capacity, writer availability, error rates, and operational status.
+     */
+    common::Result<common::interfaces::health_check_result> health_check() override;
+
+    /**
+     * @brief Get component name for monitoring (IMonitorable interface)
+     * @return Component identifier string
+     *
+     * @details Returns a unique identifier for this logger instance in the
+     * monitoring system, typically "logger_system::logger".
+     */
+    std::string get_component_name() const override;
+#endif
+
 private:
     class impl;
     std::unique_ptr<impl> pimpl_;
