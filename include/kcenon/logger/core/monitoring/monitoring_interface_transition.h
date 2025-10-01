@@ -9,8 +9,16 @@
 
 #pragma once
 
-#include <kcenon/common/interfaces/monitoring_interface.h>
 #include <memory>
+#include <string>
+#include <unordered_map>
+#include <chrono>
+#include <vector>
+
+// Only include common interfaces when explicitly using them
+#ifdef LOGGER_USING_COMMON_INTERFACES
+#include <kcenon/common/interfaces/monitoring_interface.h>
+#endif
 
 // Deprecation warning macros
 #if defined(__GNUC__) || defined(__clang__)
@@ -22,6 +30,9 @@
 #endif
 
 namespace kcenon::logger::monitoring {
+
+#ifdef LOGGER_USING_COMMON_INTERFACES
+// When using common interfaces, provide type aliases
 
 // DEPRECATED: Use common::interfaces::health_status instead
 using health_status LOGGER_DEPRECATED = common::interfaces::health_status;
@@ -38,6 +49,80 @@ using health_check_result LOGGER_DEPRECATED = common::interfaces::health_check_r
 // DEPRECATED: Use common::interfaces::IMonitor instead
 using monitoring_interface LOGGER_DEPRECATED = common::interfaces::IMonitor;
 
+#else
+// Standalone mode: provide minimal legacy definitions
+
+/**
+ * @brief Health status enumeration (standalone mode)
+ */
+enum class health_status {
+    healthy,
+    degraded,
+    unhealthy,
+    unknown
+};
+
+/**
+ * @brief Metric value structure (standalone mode)
+ */
+struct metric_value {
+    std::string name;
+    double value;
+    std::chrono::system_clock::time_point timestamp;
+    std::unordered_map<std::string, std::string> tags;
+
+    metric_value(const std::string& n = "", double v = 0.0)
+        : name(n), value(v), timestamp(std::chrono::system_clock::now()) {}
+};
+
+/**
+ * @brief Monitoring data structure (standalone mode)
+ */
+struct monitoring_data {
+    std::vector<metric_value> metrics;
+    std::chrono::system_clock::time_point capture_time;
+    std::string source_id;
+    health_status status{health_status::unknown};
+    std::string status_message;
+
+    monitoring_data() : capture_time(std::chrono::system_clock::now()) {}
+
+    void add_metric(const std::string& name, double value) {
+        metrics.emplace_back(name, value);
+    }
+};
+
+/**
+ * @brief Health check result (standalone mode)
+ */
+struct health_check_result {
+    health_status status = health_status::unknown;
+    std::string message;
+    std::chrono::system_clock::time_point timestamp;
+    std::chrono::milliseconds check_duration{0};
+
+    health_check_result() : timestamp(std::chrono::system_clock::now()) {}
+
+    bool is_healthy() const {
+        return status == health_status::healthy;
+    }
+};
+
+/**
+ * @brief Basic monitoring interface (standalone mode)
+ */
+class monitoring_interface {
+public:
+    virtual ~monitoring_interface() = default;
+    virtual monitoring_data get_monitoring_data() const = 0;
+    virtual bool is_healthy() const = 0;
+    virtual health_status get_health_status() const = 0;
+    virtual void set_metric(const std::string& name, double value) = 0;
+    virtual double get_metric(const std::string& name) const = 0;
+    virtual void reset() = 0;
+};
+#endif // LOGGER_USING_COMMON_INTERFACES
+
 /**
  * @class basic_monitoring
  * @brief Legacy basic monitoring implementation for backward compatibility
@@ -46,15 +131,25 @@ using monitoring_interface LOGGER_DEPRECATED = common::interfaces::IMonitor;
  * New code should use common::interfaces::IMonitor implementations directly.
  * This class will be removed in version 3.0.0.
  */
+#ifdef LOGGER_USING_COMMON_INTERFACES
 class LOGGER_DEPRECATED basic_monitoring : public common::interfaces::IMonitor {
+#else
+class basic_monitoring : public monitoring_interface {
+#endif
 private:
+#ifdef LOGGER_USING_COMMON_INTERFACES
     mutable common::interfaces::metrics_snapshot data_;
+#else
+    mutable monitoring_data data_;
+#endif
 
 public:
     basic_monitoring() {
         data_.source_id = "logger_system::basic_monitoring";
     }
 
+#ifdef LOGGER_USING_COMMON_INTERFACES
+    // IMonitor interface implementation
     common::VoidResult record_metric(const std::string& name, double value) override {
         data_.add_metric(name, value);
 
@@ -154,6 +249,58 @@ public:
         }
         return 0.0;
     }
+#else
+    // Standalone mode: implement legacy monitoring_interface
+    monitoring_data get_monitoring_data() const override {
+        auto copy = data_;
+        copy.capture_time = std::chrono::system_clock::now();
+        return copy;
+    }
+
+    bool is_healthy() const override {
+        // Simple health check based on metrics
+        for (const auto& metric : data_.metrics) {
+            if (metric.name == "error_rate" && metric.value > 0.1) {
+                return false;
+            }
+            if (metric.name == "queue_utilization" && metric.value > 0.9) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    health_status get_health_status() const override {
+        for (const auto& metric : data_.metrics) {
+            if (metric.name == "error_rate" && metric.value > 0.1) {
+                return health_status::degraded;
+            }
+            if (metric.name == "queue_utilization" && metric.value > 0.9) {
+                return health_status::unhealthy;
+            }
+        }
+        return health_status::healthy;
+    }
+
+    void set_metric(const std::string& name, double value) override {
+        data_.add_metric(name, value);
+        data_.capture_time = std::chrono::system_clock::now();
+    }
+
+    double get_metric(const std::string& name) const override {
+        for (const auto& metric : data_.metrics) {
+            if (metric.name == name) {
+                return metric.value;
+            }
+        }
+        return 0.0;
+    }
+
+    void reset() override {
+        data_ = monitoring_data();
+        data_.source_id = "logger_system::basic_monitoring";
+    }
+#endif // LOGGER_USING_COMMON_INTERFACES
 };
 
 } // namespace kcenon::logger::monitoring
