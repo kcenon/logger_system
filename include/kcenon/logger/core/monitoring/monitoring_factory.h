@@ -62,8 +62,8 @@ public:
         double queue_utilization_threshold = 0.9) {
 
         auto monitor = create_default();
-        monitor->set_metric("error_rate_threshold", error_rate_threshold);
-        monitor->set_metric("queue_utilization_threshold", queue_utilization_threshold);
+        monitor->record_metric("error_rate_threshold", error_rate_threshold);
+        monitor->record_metric("queue_utilization_threshold", queue_utilization_threshold);
         return monitor;
     }
 };

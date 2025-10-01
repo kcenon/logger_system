@@ -26,5 +26,3 @@
 
 // NOTE: All definitions have been moved to monitoring_interface_transition.h
 // This file is kept for backward compatibility and will be removed in v3.0.0
-
-} // namespace kcenon::logger::monitoring

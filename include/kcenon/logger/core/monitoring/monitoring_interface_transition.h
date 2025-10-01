@@ -67,7 +67,7 @@ public:
             data_.capture_time = std::chrono::system_clock::now();
         }
 
-        return common::VoidResult::success();
+        return std::monostate{};
     }
 
     common::VoidResult record_metric(
@@ -80,12 +80,12 @@ public:
         data_.metrics.push_back(metric);
         data_.capture_time = std::chrono::system_clock::now();
 
-        return common::VoidResult::success();
+        return std::monostate{};
     }
 
     common::Result<common::interfaces::metrics_snapshot> get_metrics() override {
         data_.capture_time = std::chrono::system_clock::now();
-        return common::Result<common::interfaces::metrics_snapshot>::success(data_);
+        return data_;
     }
 
     common::Result<common::interfaces::health_check_result> check_health() override {
@@ -105,13 +105,13 @@ public:
             }
         }
 
-        return common::Result<common::interfaces::health_check_result>::success(result);
+        return result;
     }
 
     common::VoidResult reset() override {
         data_ = common::interfaces::metrics_snapshot();
         data_.source_id = "logger_system::basic_monitoring";
-        return common::VoidResult::success();
+        return std::monostate{};
     }
 
     // Legacy methods for backward compatibility
@@ -125,14 +125,17 @@ public:
     LOGGER_DEPRECATED
     bool is_healthy() const {
         auto result = const_cast<basic_monitoring*>(this)->check_health();
-        return result && result.value().is_healthy();
+        if (std::holds_alternative<common::interfaces::health_check_result>(result)) {
+            return std::get<common::interfaces::health_check_result>(result).is_healthy();
+        }
+        return false;
     }
 
     LOGGER_DEPRECATED
     health_status get_health_status() const {
         auto result = const_cast<basic_monitoring*>(this)->check_health();
-        if (result) {
-            return result.value().status;
+        if (std::holds_alternative<common::interfaces::health_check_result>(result)) {
+            return std::get<common::interfaces::health_check_result>(result).status;
         }
         return health_status::unknown;
     }
