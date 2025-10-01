@@ -229,4 +229,117 @@ result<logger_metrics> logger::get_current_metrics() const {
         "Metrics collection is not available in this build");
 }
 
+#ifdef LOGGER_USING_COMMON_INTERFACES
+// IMonitorable interface implementation
+
+common::Result<common::interfaces::metrics_snapshot> logger::get_monitoring_data() {
+    common::interfaces::metrics_snapshot snapshot;
+    snapshot.source_id = "logger_system::logger";
+    snapshot.capture_time = std::chrono::system_clock::now();
+
+    if (!pimpl_) {
+        return common::error_info(
+            static_cast<int>(logger_error_code::invalid_argument),
+            "Logger not initialized");
+    }
+
+    // Add basic statistics
+    snapshot.add_metric("writers_count", static_cast<double>(pimpl_->writers_.size()));
+    snapshot.add_metric("async_mode", pimpl_->async_mode_ ? 1.0 : 0.0);
+
+    // Add metrics from internal monitor if available
+    if (monitor_) {
+        auto monitor_result = monitor_->get_metrics();
+        if (std::holds_alternative<common::interfaces::metrics_snapshot>(monitor_result)) {
+            auto& monitor_metrics = std::get<common::interfaces::metrics_snapshot>(monitor_result);
+            // Merge monitor metrics into snapshot
+            for (const auto& metric : monitor_metrics.metrics) {
+                snapshot.metrics.push_back(metric);
+            }
+        }
+    }
+
+    // Add performance metrics if enabled
+    if (pimpl_->metrics_enabled_) {
+        auto& stats = metrics::g_logger_stats;
+        snapshot.add_metric("messages_logged", static_cast<double>(stats.messages_logged.load()));
+        snapshot.add_metric("messages_dropped", static_cast<double>(stats.messages_dropped.load()));
+        snapshot.add_metric("queue_size", static_cast<double>(stats.queue_size.load()));
+        snapshot.add_metric("max_queue_size", static_cast<double>(stats.max_queue_size.load()));
+    }
+
+    return snapshot;
+}
+
+common::Result<common::interfaces::health_check_result> logger::health_check() {
+    common::interfaces::health_check_result result;
+    result.timestamp = std::chrono::system_clock::now();
+    auto start_time = std::chrono::high_resolution_clock::now();
+
+    if (!pimpl_) {
+        result.status = common::interfaces::health_status::unhealthy;
+        result.message = "Logger not initialized";
+        auto end_time = std::chrono::high_resolution_clock::now();
+        result.check_duration = std::chrono::duration_cast<std::chrono::milliseconds>(
+            end_time - start_time);
+        return result;
+    }
+
+    // Check if logger is running
+    if (!pimpl_->running_) {
+        result.status = common::interfaces::health_status::degraded;
+        result.message = "Logger is not running";
+        result.metadata["running"] = "false";
+    } else {
+        result.status = common::interfaces::health_status::healthy;
+        result.message = "Logger operational";
+        result.metadata["running"] = "true";
+    }
+
+    // Check writers
+    if (pimpl_->writers_.empty()) {
+        result.status = common::interfaces::health_status::degraded;
+        result.message = "No writers configured";
+        result.metadata["writers_count"] = "0";
+    } else {
+        result.metadata["writers_count"] = std::to_string(pimpl_->writers_.size());
+    }
+
+    // Check metrics if enabled
+    if (pimpl_->metrics_enabled_) {
+        auto& stats = metrics::g_logger_stats;
+        auto dropped = stats.messages_dropped.load();
+        auto logged = stats.messages_logged.load();
+
+        if (logged > 0) {
+            double drop_rate = static_cast<double>(dropped) / static_cast<double>(logged + dropped);
+            result.metadata["drop_rate"] = std::to_string(drop_rate);
+
+            if (drop_rate > 0.1) {
+                result.status = common::interfaces::health_status::degraded;
+                result.message = "High message drop rate detected";
+            } else if (drop_rate > 0.5) {
+                result.status = common::interfaces::health_status::unhealthy;
+                result.message = "Critical message drop rate";
+            }
+        }
+
+        result.metadata["queue_size"] = std::to_string(stats.queue_size.load());
+    }
+
+    // Add async mode info
+    result.metadata["async_mode"] = pimpl_->async_mode_ ? "true" : "false";
+
+    auto end_time = std::chrono::high_resolution_clock::now();
+    result.check_duration = std::chrono::duration_cast<std::chrono::milliseconds>(
+        end_time - start_time);
+
+    return result;
+}
+
+std::string logger::get_component_name() const {
+    return "logger_system::logger";
+}
+#endif // LOGGER_USING_COMMON_INTERFACES
+
 } // namespace kcenon::logger
