@@ -67,10 +67,20 @@ if(MINGW)
 endif()
 
 if(BUILD_WITH_COMMON_SYSTEM)
-    set(_LOGGER_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include/kcenon/common/patterns/result.h")
-    if(NOT EXISTS "${_LOGGER_COMMON_HEADER}")
-        message(WARNING "common_system integration requested but required headers were not found - disabling BUILD_WITH_COMMON_SYSTEM")
-        set(BUILD_WITH_COMMON_SYSTEM OFF CACHE BOOL "Enable common_system integration" FORCE)
+    # Try to find common_system package first
+    find_package(common_system CONFIG QUIET)
+
+    if(NOT common_system_FOUND)
+        # Fallback to checking sibling directory
+        set(_LOGGER_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include/kcenon/common/patterns/result.h")
+        if(NOT EXISTS "${_LOGGER_COMMON_HEADER}")
+            message(WARNING "common_system integration requested but required headers were not found - disabling BUILD_WITH_COMMON_SYSTEM")
+            set(BUILD_WITH_COMMON_SYSTEM OFF CACHE BOOL "Enable common_system integration" FORCE)
+        else()
+            message(STATUS "Found common_system as sibling directory")
+        endif()
+    else()
+        message(STATUS "Found common_system package")
     endif()
 endif()
 
@@ -254,7 +264,18 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 PUBLIC
                     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include>
             )
-            target_compile_definitions(LoggerSystem PUBLIC LOGGER_BUILD_WITH_COMMON_SYSTEM BUILD_WITH_COMMON_SYSTEM)
+            target_compile_definitions(LoggerSystem
+                PUBLIC
+                    LOGGER_BUILD_WITH_COMMON_SYSTEM
+                    BUILD_WITH_COMMON_SYSTEM
+                PRIVATE
+                    LOGGER_USING_COMMON_INTERFACES
+            )
+
+            # Link common_system if found as package
+            if(common_system_FOUND)
+                target_link_libraries(LoggerSystem PUBLIC kcenon::common_system)
+            endif()
         endif()
 
         # Add thread_system integration if available and not explicitly disabled
