@@ -74,7 +74,14 @@ All rights reserved.
 #include "../filters/log_filter.h"
 #include "../interfaces/log_formatter_interface.h"
 #include "../di/di_container_interface.h"
-#include "../monitoring/monitoring_interface.h"
+
+// Use common_system interfaces when available
+#ifdef LOGGER_USING_COMMON_INTERFACES
+    #include <kcenon/common/interfaces/monitoring_interface.h>
+#else
+    #include "../monitoring/monitoring_interface.h"
+#endif
+
 #include <memory>
 #include <vector>
 #include <algorithm>
