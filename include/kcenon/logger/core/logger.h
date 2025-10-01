@@ -52,7 +52,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "metrics/logger_metrics.h"
 #include "di/di_container_interface.h"
 #include "di/di_container_factory.h"
-#include "monitoring/monitoring_interface.h"
+
+// Use common_system interfaces when available
+#ifdef LOGGER_USING_COMMON_INTERFACES
+    #include <kcenon/common/interfaces/monitoring_interface.h>
+    #include <kcenon/common/interfaces/logger_interface.h>
+#else
+    // Fallback to legacy interfaces
+    #include "monitoring/monitoring_interface.h"
+#endif
+
 #include "monitoring/monitoring_factory.h"
 #include <kcenon/logger/interfaces/logger_types.h>
 
@@ -122,8 +131,17 @@ namespace kcenon::logger {
 // Type aliases for convenience and compatibility
 using logger_metrics = metrics::logger_performance_stats;
 using performance_metrics = metrics::logger_performance_stats; // Alias for examples
-using monitoring_metrics = monitoring::monitoring_data;
-using monitoring_interface = monitoring::monitoring_interface;
+
+#ifdef LOGGER_USING_COMMON_INTERFACES
+    // Use common_system monitoring interfaces
+    using monitoring_interface = common::interfaces::IMonitor;
+    using monitoring_metrics = common::interfaces::metrics_snapshot;
+#else
+    // Legacy monitoring interfaces
+    using monitoring_metrics = monitoring::monitoring_data;
+    using monitoring_interface = monitoring::monitoring_interface;
+#endif
+
 using di_container_interface = di::di_container_interface;
 using di_container_factory = di::di_container_factory;
 using monitoring_factory = monitoring::monitoring_factory;
