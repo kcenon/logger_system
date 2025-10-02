@@ -132,15 +132,9 @@ namespace kcenon::logger {
 using logger_metrics = metrics::logger_performance_stats;
 using performance_metrics = metrics::logger_performance_stats; // Alias for examples
 
-#ifdef LOGGER_USING_COMMON_INTERFACES
-    // Use common_system monitoring interfaces
-    using monitoring_interface = common::interfaces::IMonitor;
-    using monitoring_metrics = common::interfaces::metrics_snapshot;
-#else
-    // Legacy monitoring interfaces
-    using monitoring_metrics = monitoring::monitoring_data;
-    using monitoring_interface = monitoring::monitoring_interface;
-#endif
+// Use common_system monitoring interfaces (Phase 2.2)
+using monitoring_interface = common::interfaces::IMonitor;
+using monitoring_metrics = common::interfaces::metrics_snapshot;
 
 using di_container_interface = di::di_container_interface;
 using di_container_factory = di::di_container_factory;
@@ -163,7 +157,7 @@ class log_router;
 /**
  * @class logger
  * @brief Main logger implementation that implements thread_system's logger_interface
- * 
+ *
  * @details The logger class provides a high-performance, thread-safe logging system with:
  * - Asynchronous logging with configurable batching for optimal throughput
  * - Multiple writer support for outputting to different destinations simultaneously
@@ -171,28 +165,21 @@ class log_router;
  * - Dependency injection support for flexible writer management
  * - Configurable filtering and routing of log messages
  * - Integration with monitoring backends for production observability
- * 
+ *
  * The logger uses the PIMPL idiom to hide implementation details and maintain ABI stability.
- * 
+ * Implements common::interfaces::IMonitorable for observability (Phase 2.2).
+ *
  * @warning When using asynchronous mode, ensure proper shutdown by calling stop() and flush()
  * before destroying the logger to prevent loss of buffered messages.
- * 
+ *
  * @since 1.0.0
  */
-#ifdef LOGGER_USING_COMMON_INTERFACES
-    #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    class logger : public kcenon::thread::logger_interface,
-                   public common::interfaces::IMonitorable {
-    #else
-    class logger : public logger_system::logger_interface,
-                   public common::interfaces::IMonitorable {
-    #endif
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+class logger : public kcenon::thread::logger_interface,
+               public common::interfaces::IMonitorable {
 #else
-    #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    class logger : public kcenon::thread::logger_interface {
-    #else
-    class logger : public logger_system::logger_interface {
-    #endif
+class logger : public logger_system::logger_interface,
+               public common::interfaces::IMonitorable {
 #endif
 public:
     /**
@@ -555,11 +542,11 @@ public:
     // Monitoring Support Methods
     
     /**
-     * @brief Set a custom monitoring implementation
-     * @param monitor Unique pointer to monitoring implementation
+     * @brief Set a custom monitoring implementation (Phase 2.2)
+     * @param monitor Unique pointer to IMonitor implementation
      */
-    void set_monitor(std::unique_ptr<monitoring::monitoring_interface> monitor);
-    
+    void set_monitor(std::unique_ptr<common::interfaces::IMonitor> monitor);
+
     /**
      * @brief Enable monitoring with specified backend
      * @param type Type of monitoring backend to use
@@ -567,24 +554,24 @@ public:
      */
     result_void enable_monitoring(monitoring::monitoring_factory::monitor_type type =
                                  monitoring::monitoring_factory::monitor_type::automatic);
-    
+
     /**
      * @brief Disable monitoring
      * @return result_void indicating success or error
      */
     result_void disable_monitoring();
-    
+
     /**
      * @brief Check if monitoring is enabled
      * @return true if monitoring is enabled
      */
     bool is_monitoring_enabled() const;
-    
+
     /**
-     * @brief Collect current metrics
-     * @return Result containing monitoring data or error
+     * @brief Collect current metrics (Phase 2.2)
+     * @return Result containing metrics snapshot or error
      */
-    result<monitoring::monitoring_data> collect_metrics() const;
+    result<common::interfaces::metrics_snapshot> collect_metrics() const;
     
     /**
      * @brief Perform health check
@@ -613,8 +600,7 @@ public:
     void record_metric(const std::string& name, double value,
                       metric_type type = metric_type::gauge);
 
-#ifdef LOGGER_USING_COMMON_INTERFACES
-    // IMonitorable interface implementation
+    // IMonitorable interface implementation (Phase 2.2)
 
     /**
      * @brief Get monitoring data (IMonitorable interface)
@@ -642,18 +628,17 @@ public:
      * monitoring system, typically "logger_system::logger".
      */
     std::string get_component_name() const override;
-#endif
 
 private:
     class impl;
     std::unique_ptr<impl> pimpl_;
-    
+
     // DI support members
     di::di_container_interface* external_di_container_ = nullptr;
     std::unique_ptr<di::di_container_interface> internal_di_container_;
-    
-    // Monitoring support member
-    std::unique_ptr<monitoring::monitoring_interface> monitor_;
+
+    // Monitoring support member (Phase 2.2)
+    std::unique_ptr<common::interfaces::IMonitor> monitor_;
 };
 
 } // namespace kcenon::logger

@@ -51,7 +51,6 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(USE_LOCKFREE "Use lock-free implementation" ON)
 option(USE_THREAD_SYSTEM "Use external thread_system if available" ON)
 option(LOGGER_STANDALONE "Build in standalone mode without thread_system" OFF)
-option(BUILD_WITH_COMMON_SYSTEM "Enable common_system integration" ON)
 option(NO_VCPKG "Skip vcpkg and use system libraries only" OFF)
 
 # Disable tests and benchmarks for MinGW builds due to compatibility issues
@@ -66,22 +65,30 @@ if(MINGW)
     endif()
 endif()
 
-if(BUILD_WITH_COMMON_SYSTEM)
-    # Try to find common_system package first
-    find_package(common_system CONFIG QUIET)
+# common_system integration is now mandatory (Phase 2.2)
+# Try to find common_system package first
+find_package(common_system CONFIG QUIET)
 
-    if(NOT common_system_FOUND)
-        # Fallback to checking sibling directory
-        set(_LOGGER_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include/kcenon/common/patterns/result.h")
-        if(NOT EXISTS "${_LOGGER_COMMON_HEADER}")
-            message(WARNING "common_system integration requested but required headers were not found - disabling BUILD_WITH_COMMON_SYSTEM")
-            set(BUILD_WITH_COMMON_SYSTEM OFF CACHE BOOL "Enable common_system integration" FORCE)
-        else()
-            message(STATUS "Found common_system as sibling directory")
+if(NOT common_system_FOUND)
+    # Check for common_system in multiple locations
+    set(_LOGGER_COMMON_PATHS
+        "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"
+        "${CMAKE_CURRENT_SOURCE_DIR}/common_system/include"
+    )
+
+    foreach(_path ${_LOGGER_COMMON_PATHS})
+        if(EXISTS "${_path}/kcenon/common/patterns/result.h")
+            message(STATUS "Found common_system at: ${_path}")
+            set(COMMON_SYSTEM_INCLUDE_DIR "${_path}")
+            break()
         endif()
-    else()
-        message(STATUS "Found common_system package")
+    endforeach()
+
+    if(NOT DEFINED COMMON_SYSTEM_INCLUDE_DIR)
+        message(FATAL_ERROR "common_system is required but was not found. Please ensure common_system is available.")
     endif()
+else()
+    message(STATUS "Found common_system package")
 endif()
 
 ##################################################
@@ -258,25 +265,26 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 $<INSTALL_INTERFACE:include>
         )
 
-        if(BUILD_WITH_COMMON_SYSTEM)
-            message(STATUS "Logger System: Enabling common_system integration")
+        # common_system integration is mandatory (Phase 2.2)
+        message(STATUS "Logger System: Using common_system interfaces")
+
+        # Add common_system include path
+        if(common_system_FOUND)
+            target_link_libraries(LoggerSystem PUBLIC kcenon::common_system)
+        else()
+            # Use the found include directory
             target_include_directories(LoggerSystem
                 PUBLIC
-                    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include>
+                    $<BUILD_INTERFACE:${COMMON_SYSTEM_INCLUDE_DIR}>
             )
-            target_compile_definitions(LoggerSystem
-                PUBLIC
-                    LOGGER_BUILD_WITH_COMMON_SYSTEM
-                    BUILD_WITH_COMMON_SYSTEM
-                PRIVATE
-                    LOGGER_USING_COMMON_INTERFACES
-            )
-
-            # Link common_system if found as package
-            if(common_system_FOUND)
-                target_link_libraries(LoggerSystem PUBLIC kcenon::common_system)
-            endif()
         endif()
+
+        target_compile_definitions(LoggerSystem
+            PUBLIC
+                LOGGER_BUILD_WITH_COMMON_SYSTEM
+                BUILD_WITH_COMMON_SYSTEM
+                LOGGER_USING_COMMON_INTERFACES  # Now always enabled
+        )
 
         # Add thread_system integration if available and not explicitly disabled
         option(LOGGER_STANDALONE_MODE "Build logger_system in standalone mode without thread_system integration" OFF)
