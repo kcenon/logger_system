@@ -206,11 +206,19 @@ private:
 
 /**
  * @brief Adapter to use common::interfaces::ILogger in kcenon::logger
+ * @deprecated This reverse adapter will be removed in Phase 3
  *
+ * Phase 2 Note: Bidirectional adapters create circular conversion risk.
  * This adapter allows a common_system logger to be used as
  * a kcenon::logger writer.
+ *
+ * MIGRATION: Use common::interfaces::ILogger directly instead of wrapping it.
+ * Reverse adapters (Common→System) are being phased out in favor of
+ * native common interface adoption.
+ *
+ * Will be removed in Phase 3 (Adapter Optimization)
  */
-class logger_from_common_adapter : public logger_interface {
+class [[deprecated("Will be removed in Phase 3. Use common::interfaces::ILogger directly")]] logger_from_common_adapter : public logger_interface {
 public:
     /**
      * @brief Construct adapter with common logger
