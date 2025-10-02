@@ -205,107 +205,6 @@ private:
 };
 
 /**
- * @brief Adapter to use common::interfaces::ILogger in kcenon::logger
- * @deprecated This reverse adapter will be removed in Phase 3
- *
- * Phase 2 Note: Bidirectional adapters create circular conversion risk.
- * This adapter allows a common_system logger to be used as
- * a kcenon::logger writer.
- *
- * MIGRATION: Use common::interfaces::ILogger directly instead of wrapping it.
- * Reverse adapters (Common→System) are being phased out in favor of
- * native common interface adoption.
- *
- * Will be removed in Phase 3 (Adapter Optimization)
- */
-class [[deprecated("Will be removed in Phase 3. Use common::interfaces::ILogger directly")]] logger_from_common_adapter : public logger_interface {
-public:
-    /**
-     * @brief Construct adapter with common logger
-     * @param logger Shared pointer to common logger
-     */
-    explicit logger_from_common_adapter(
-        std::shared_ptr<::common::interfaces::ILogger> common_logger)
-        : common_logger_(common_logger) {}
-
-    ~logger_from_common_adapter() override = default;
-
-    /**
-     * @brief Log a message with specified level
-     */
-    void log(log_level level, const std::string& message) override {
-        if (!common_logger_) {
-            return;
-        }
-
-        auto common_level = convert_level_to_common(level);
-        common_logger_->log(common_level, message);
-    }
-
-    /**
-     * @brief Log a message with source location information
-     */
-    void log(log_level level,
-             const std::string& message,
-             const std::string& file,
-             int line,
-             const std::string& function) override {
-        if (!common_logger_) {
-            return;
-        }
-
-        auto common_level = convert_level_to_common(level);
-        common_logger_->log(common_level, message, file, line, function);
-    }
-
-    /**
-     * @brief Check if logging is enabled for the specified level
-     */
-    bool is_enabled(log_level level) const override {
-        if (!common_logger_) {
-            return false;
-        }
-        auto common_level = convert_level_to_common(level);
-        return common_logger_->is_enabled(common_level);
-    }
-
-    /**
-     * @brief Flush any buffered log messages
-     */
-    void flush() override {
-        if (common_logger_) {
-            common_logger_->flush();
-        }
-    }
-
-private:
-    std::shared_ptr<::common::interfaces::ILogger> common_logger_;
-
-    /**
-     * @brief Convert kcenon::logger log level to common log level
-     */
-    static ::common::interfaces::log_level convert_level_to_common(log_level level) {
-        switch(level) {
-            case log_level::trace:
-                return ::common::interfaces::log_level::trace;
-            case log_level::debug:
-                return ::common::interfaces::log_level::debug;
-            case log_level::info:
-                return ::common::interfaces::log_level::info;
-            case log_level::warning:
-                return ::common::interfaces::log_level::warning;
-            case log_level::error:
-                return ::common::interfaces::log_level::error;
-            case log_level::critical:
-                return ::common::interfaces::log_level::critical;
-            case log_level::off:
-            default:
-                return ::common::interfaces::log_level::off;
-        }
-    }
-};
-
-/**
  * @brief Factory for creating common_system compatible loggers
  */
 class common_logger_factory {
@@ -316,14 +215,6 @@ public:
     static std::shared_ptr<::common::interfaces::ILogger> create_common_logger(
         std::shared_ptr<logger> lg) {
         return std::make_shared<common_system_logger_adapter>(lg);
-    }
-
-    /**
-     * @brief Create a kcenon::logger logger that wraps common ILogger
-     */
-    static std::shared_ptr<logger_interface> create_from_common(
-        std::shared_ptr<::common::interfaces::ILogger> common_logger) {
-        return std::make_shared<logger_from_common_adapter>(common_logger);
     }
 };
 
