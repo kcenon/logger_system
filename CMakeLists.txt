@@ -70,12 +70,22 @@ endif()
 find_package(common_system CONFIG QUIET)
 
 if(NOT common_system_FOUND)
-    # Fallback to checking sibling directory
-    set(_LOGGER_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include/kcenon/common/patterns/result.h")
-    if(NOT EXISTS "${_LOGGER_COMMON_HEADER}")
+    # Check for common_system in multiple locations
+    set(_LOGGER_COMMON_PATHS
+        "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"
+        "${CMAKE_CURRENT_SOURCE_DIR}/common_system/include"
+    )
+
+    foreach(_path ${_LOGGER_COMMON_PATHS})
+        if(EXISTS "${_path}/kcenon/common/patterns/result.h")
+            message(STATUS "Found common_system at: ${_path}")
+            set(COMMON_SYSTEM_INCLUDE_DIR "${_path}")
+            break()
+        endif()
+    endforeach()
+
+    if(NOT DEFINED COMMON_SYSTEM_INCLUDE_DIR)
         message(FATAL_ERROR "common_system is required but was not found. Please ensure common_system is available.")
-    else()
-        message(STATUS "Found common_system as sibling directory")
     endif()
 else()
     message(STATUS "Found common_system package")
@@ -257,21 +267,24 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
 
         # common_system integration is mandatory (Phase 2.2)
         message(STATUS "Logger System: Using common_system interfaces")
-        target_include_directories(LoggerSystem
-            PUBLIC
-                $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include>
-        )
+
+        # Add common_system include path
+        if(common_system_FOUND)
+            target_link_libraries(LoggerSystem PUBLIC kcenon::common_system)
+        else()
+            # Use the found include directory
+            target_include_directories(LoggerSystem
+                PUBLIC
+                    $<BUILD_INTERFACE:${COMMON_SYSTEM_INCLUDE_DIR}>
+            )
+        endif()
+
         target_compile_definitions(LoggerSystem
             PUBLIC
                 LOGGER_BUILD_WITH_COMMON_SYSTEM
                 BUILD_WITH_COMMON_SYSTEM
                 LOGGER_USING_COMMON_INTERFACES  # Now always enabled
         )
-
-        # Link common_system if found as package
-        if(common_system_FOUND)
-            target_link_libraries(LoggerSystem PUBLIC kcenon::common_system)
-        endif()
 
         # Add thread_system integration if available and not explicitly disabled
         option(LOGGER_STANDALONE_MODE "Build logger_system in standalone mode without thread_system integration" OFF)
