@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System Architecture</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md431"></a> </p>
-<h1><a class="anchor" id="autotoc_md432"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md429"></a> </p>
+<h1><a class="anchor" id="autotoc_md430"></a>
 Overview</h1>
 <p>The Logger System is designed as a high-performance, modular logging framework that implements the <code>thread_module::logger_interface</code> from the Thread System. It provides both synchronous and asynchronous logging capabilities with comprehensive error handling through the result pattern.</p>
-<h1><a class="anchor" id="autotoc_md433"></a>
+<h1><a class="anchor" id="autotoc_md431"></a>
 Architecture Diagram</h1>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                      Client Application                      │</div>
@@ -138,9 +138,9 @@ Architecture Diagram</h1>
 <div class="line">│  │ConsoleWriter │  │ FileWriter   │  │ CustomWriter  │     │</div>
 <div class="line">│  └──────────────┘  └──────────────┘  └───────────────┘     │</div>
 <div class="line">└─────────────────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md434"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md432"></a>
 Core Components</h1>
-<h2><a class="anchor" id="autotoc_md435"></a>
+<h2><a class="anchor" id="autotoc_md433"></a>
 1. Logger Interface Implementation</h2>
 <p>The system implements <code>thread_module::logger_interface</code> with enhanced error handling:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>logger : <span class="keyword">public</span> thread_module::logger_interface {</div>
@@ -153,9 +153,9 @@ Core Components</h1>
 <div class="line">    <span class="keywordtype">bool</span> is_enabled(log_level level) <span class="keyword">const override</span>;</div>
 <div class="line">    result_void flush() <span class="keyword">override</span>;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md436"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md434"></a>
 2. Configuration Management</h2>
-<h3><a class="anchor" id="autotoc_md437"></a>
+<h3><a class="anchor" id="autotoc_md435"></a>
 Logger Configuration with Validation</h3>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>logger_config {</div>
 <div class="line">    <span class="comment">// Core settings</span></div>
@@ -176,7 +176,7 @@ Logger Configuration with Validation</h3>
 <div class="line">    <span class="comment">// Comprehensive validation</span></div>
 <div class="line">    result_void validate() <span class="keyword">const</span>;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md438"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md436"></a>
 Configuration Templates</h3>
 <p>Predefined configurations for common scenarios:</p>
 <ul>
@@ -186,7 +186,7 @@ Configuration Templates</h3>
 <li><b>High Performance</b>: Maximum throughput configuration</li>
 <li><b>Low Latency</b>: Minimal latency for real-time systems</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md439"></a>
+<h2><a class="anchor" id="autotoc_md437"></a>
 3. Builder Pattern with Validation</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>logger_builder {</div>
 <div class="line">    <span class="comment">// Fluent interface with validation at each step</span></div>
@@ -200,10 +200,10 @@ Configuration Templates</h3>
 <div class="line">    result_void validate() <span class="keyword">const</span>;</div>
 <div class="line">    result&lt;std::unique_ptr&lt;logger&gt;&gt; build();</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md440"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md438"></a>
 4. Interface Segregation</h2>
 <p>Clean separation of concerns through dedicated interfaces:</p>
-<h3><a class="anchor" id="autotoc_md441"></a>
+<h3><a class="anchor" id="autotoc_md439"></a>
 Writer Interface</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>log_writer_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -211,19 +211,19 @@ Writer Interface</h3>
 <div class="line">    <span class="keyword">virtual</span> result_void flush() = 0;</div>
 <div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> is_healthy()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md442"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md440"></a>
 Filter Interface</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>log_filter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> should_log(<span class="keyword">const</span> log_entry&amp; entry) <span class="keyword">const</span> = 0;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md443"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md441"></a>
 Formatter Interface</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>log_formatter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    <span class="keyword">virtual</span> std::string format(<span class="keyword">const</span> log_entry&amp; entry) <span class="keyword">const</span> = 0;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md444"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md442"></a>
 5. Log Entry Structure</h2>
 <p>Unified data structure for all logging operations:</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>log_entry {</div>
@@ -236,9 +236,9 @@ Formatter Interface</h3>
 <div class="line">    std::thread::id thread_id;</div>
 <div class="line">    std::unordered_map&lt;std::string, std::string&gt; context;  <span class="comment">// For structured logging</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md445"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md443"></a>
 Advanced Features</h1>
-<h2><a class="anchor" id="autotoc_md446"></a>
+<h2><a class="anchor" id="autotoc_md444"></a>
 1. Asynchronous Pipeline</h2>
 <p>The async mode uses a sophisticated pipeline:</p>
 <ul>
@@ -247,7 +247,7 @@ Advanced Features</h1>
 <li><b>Queue Management</b>: Currently mutex-backed (lock-free planned)</li>
 <li><b>Overflow Handling</b>: Configurable policies (drop oldest/newest, block, expand)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md447"></a>
+<h2><a class="anchor" id="autotoc_md445"></a>
 2. Error Handling with Result Pattern</h2>
 <p>Comprehensive error handling throughout the system:</p>
 <div class="fragment"><div class="line"><span class="keyword">enum class</span> logger_error_code {</div>
@@ -268,7 +268,7 @@ Advanced Features</h1>
 <div class="line">    <span class="comment">// Configuration errors (1400-1499)</span></div>
 <div class="line">    invalid_configuration = 1400</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md448"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md446"></a>
 3. Performance Monitoring</h2>
 <p>Built-in metrics collection:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>logger_metrics {</div>
@@ -278,7 +278,7 @@ Advanced Features</h1>
 <div class="line">    <span class="keywordtype">double</span> get_queue_utilization_percent() <span class="keyword">const</span>;</div>
 <div class="line">    uint64_t get_dropped_messages() <span class="keyword">const</span>;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md449"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md447"></a>
 4. Configuration Strategies</h2>
 <p>Flexible configuration management:</p>
 <ul>
@@ -288,23 +288,23 @@ Advanced Features</h1>
 <li><b>Performance Strategy</b>: Auto-tuning based on load</li>
 <li><b>Composite Strategy</b>: Combination of multiple strategies</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md450"></a>
+<h1><a class="anchor" id="autotoc_md448"></a>
 Threading Model</h1>
-<h2><a class="anchor" id="autotoc_md451"></a>
+<h2><a class="anchor" id="autotoc_md449"></a>
 Synchronous Mode</h2>
 <ul>
 <li><b>Execution</b>: Direct write to all registered writers</li>
 <li><b>Blocking</b>: Waits for I/O completion</li>
 <li><b>Use Cases</b>: Low-frequency logging, critical errors, simple applications</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md452"></a>
+<h2><a class="anchor" id="autotoc_md450"></a>
 Asynchronous Mode</h2>
 <ul>
 <li><b>Execution</b>: Non-blocking enqueue, background processing</li>
 <li><b>Throughput</b>: High-volume logging capability</li>
 <li><b>Use Cases</b>: High-frequency logging, performance-critical applications</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md453"></a>
+<h2><a class="anchor" id="autotoc_md451"></a>
 Thread Safety Guarantees</h2>
 <ul>
 <li>All public methods are thread-safe</li>
@@ -312,9 +312,9 @@ Thread Safety Guarantees</h2>
 <li>Internal state protected by appropriate synchronization</li>
 <li>Lock-free queue planned for better scalability</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md454"></a>
+<h1><a class="anchor" id="autotoc_md452"></a>
 Memory Management</h1>
-<h2><a class="anchor" id="autotoc_md455"></a>
+<h2><a class="anchor" id="autotoc_md453"></a>
 Buffer Management</h2>
 <ul>
 <li>Configurable buffer sizes with validation</li>
@@ -322,16 +322,16 @@ Buffer Management</h2>
 <li>Pre-allocated buffers in async mode</li>
 <li>Smart overflow handling</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md456"></a>
+<h2><a class="anchor" id="autotoc_md454"></a>
 Object Lifetime</h2>
 <ul>
 <li>RAII principles throughout</li>
 <li>Shared ownership via smart pointers where appropriate</li>
 <li>Clear ownership semantics for writers and filters</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md457"></a>
+<h1><a class="anchor" id="autotoc_md455"></a>
 Performance Characteristics</h1>
-<h2><a class="anchor" id="autotoc_md458"></a>
+<h2><a class="anchor" id="autotoc_md456"></a>
 Benchmarks</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -341,7 +341,7 @@ Benchmarks</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Async   </td><td class="markdownTableBodyNone">Enqueue   </td><td class="markdownTableBodyNone">~50ns   </td><td class="markdownTableBodyNone">&gt;1M msg/sec   </td><td class="markdownTableBodyNone">Buffer size   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md459"></a>
+<h2><a class="anchor" id="autotoc_md457"></a>
 Optimization Strategies</h2>
 <ol type="1">
 <li><b>String Operations</b>: Minimized allocations, move semantics</li>
@@ -349,9 +349,9 @@ Optimization Strategies</h2>
 <li><b>Lock Contention</b>: Minimized through careful design</li>
 <li><b>Cache Performance</b>: Data structure layout optimization</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md460"></a>
+<h1><a class="anchor" id="autotoc_md458"></a>
 Integration Patterns</h1>
-<h2><a class="anchor" id="autotoc_md461"></a>
+<h2><a class="anchor" id="autotoc_md459"></a>
 Service Container Integration</h2>
 <div class="fragment"><div class="line"><span class="comment">// Register as singleton</span></div>
 <div class="line">service_container::global()</div>
@@ -361,7 +361,7 @@ Service Container Integration</h2>
 <div class="line">            .build()</div>
 <div class="line">            .value()</div>
 <div class="line">    );</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md462"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md460"></a>
 Direct Integration</h2>
 <div class="fragment"><div class="line"><span class="comment">// Inject into components</span></div>
 <div class="line"><span class="keyword">class </span>MyComponent {</div>
@@ -370,9 +370,9 @@ Direct Integration</h2>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">    std::shared_ptr&lt;logger_interface&gt; logger_;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md463"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md461"></a>
 Extension Points</h1>
-<h2><a class="anchor" id="autotoc_md464"></a>
+<h2><a class="anchor" id="autotoc_md462"></a>
 Custom Writers</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>custom_writer : <span class="keyword">public</span> log_writer_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -381,7 +381,7 @@ Custom Writers</h2>
 <div class="line">        <span class="keywordflow">return</span> result_void{};</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md465"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md463"></a>
 Custom Filters</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>severity_filter : <span class="keyword">public</span> log_filter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -389,7 +389,7 @@ Custom Filters</h2>
 <div class="line">        <span class="keywordflow">return</span> entry.level &gt;= min_level_;</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md466"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md464"></a>
 Custom Formatters</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>json_formatter : <span class="keyword">public</span> log_formatter_interface {  </div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -398,16 +398,16 @@ Custom Formatters</h2>
 <div class="line">        <span class="keywordflow">return</span> json_string;</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md467"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md465"></a>
 Future Enhancements</h1>
-<h2><a class="anchor" id="autotoc_md468"></a>
+<h2><a class="anchor" id="autotoc_md466"></a>
 Performance Improvements</h2>
 <ol type="1">
 <li><b>Lock-free Queue</b>: True lock-free MPMC queue implementation</li>
 <li><b>SIMD Optimizations</b>: Vectorized string operations</li>
 <li><b>Memory Pool</b>: Custom allocators for frequent allocations</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md469"></a>
+<h2><a class="anchor" id="autotoc_md467"></a>
 Feature Additions</h2>
 <ol type="1">
 <li><b>Structured Logging</b>: Native JSON/binary format support</li>
@@ -415,16 +415,16 @@ Feature Additions</h2>
 <li><b>Network Writers</b>: Remote logging with compression</li>
 <li><b>Database Integration</b>: Direct database logging support</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md470"></a>
+<h2><a class="anchor" id="autotoc_md468"></a>
 Platform Extensions</h2>
 <ol type="1">
 <li><b>Windows Support</b>: Full Windows compatibility for network features</li>
 <li><b>Mobile Platforms</b>: iOS/Android optimizations</li>
 <li><b>Embedded Systems</b>: Resource-constrained environment support</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md471"></a>
+<h1><a class="anchor" id="autotoc_md469"></a>
 Best Practices</h1>
-<h2><a class="anchor" id="autotoc_md472"></a>
+<h2><a class="anchor" id="autotoc_md470"></a>
 For Library Users</h2>
 <ul>
 <li>Use async mode for production systems</li>
@@ -433,7 +433,7 @@ For Library Users</h2>
 <li>Monitor metrics for performance tuning</li>
 <li>Use result pattern for error handling</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md473"></a>
+<h2><a class="anchor" id="autotoc_md471"></a>
 For Contributors</h2>
 <ul>
 <li>Maintain thread safety guarantees</li>
@@ -442,7 +442,7 @@ For Contributors</h2>
 <li>Document performance implications of changes</li>
 <li>Write comprehensive tests for new features</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md474"></a>
+<h1><a class="anchor" id="autotoc_md472"></a>
 Platform Notes</h1>
 <ul>
 <li><b>Linux/macOS</b>: Full support for all features</li>
@@ -457,7 +457,7 @@ Platform Notes</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Oct 2 2025 06:38:56 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Oct 2 2025 09:23:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
