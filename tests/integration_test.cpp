@@ -20,7 +20,8 @@ All rights reserved.
 #include <kcenon/logger/routing/log_router.h>
 #include <kcenon/logger/server/log_server.h>
 #include <kcenon/logger/analysis/log_analyzer.h>
-#include <kcenon/logger/security/log_sanitizer.h>
+// Note: log_sanitizer.h is part of future security features (Phase 4)
+// #include <kcenon/logger/security/log_sanitizer.h>
 #endif
 #include <thread>
 #include <chrono>

@@ -61,17 +61,11 @@ public:
     /**
      * @brief Get writer names for a log entry
      */
-    std::vector<std::string> get_writers_for_log(
-        logger_system::log_level level,
-        const std::string& message,
-        const std::string& file,
-        int line,
-        const std::string& function) const {
-
+    std::vector<std::string> get_writers_for_log(const log_entry& entry) const {
         std::vector<std::string> writers;
 
         for (const auto& route : routes_) {
-            if (route.filter && route.filter->should_log(level, message, file, line, function)) {
+            if (route.filter && route.filter->should_log(entry)) {
                 writers.insert(writers.end(), route.writer_names.begin(), route.writer_names.end());
                 if (route.stop_propagation) {
                     break;
@@ -101,7 +95,7 @@ private:
 public:
     explicit router_builder(log_router& router) : router_(router) {}
 
-    router_builder& when_level(logger_system::log_level level) {
+    router_builder& when_level(kcenon::thread::log_level level) {
         config_.filter = std::make_unique<class level_condition>(level);
         return *this;
     }
@@ -128,11 +122,16 @@ public:
 private:
     class level_condition : public log_filter_interface {
     private:
-        logger_system::log_level target_level_;
+        kcenon::thread::log_level target_level_;
     public:
-        explicit level_condition(logger_system::log_level level) : target_level_(level) {}
-        bool should_log(logger_system::log_level level, const std::string&, const std::string&, int, const std::string&) const override {
-            return level == target_level_;
+        explicit level_condition(kcenon::thread::log_level level) : target_level_(level) {}
+
+        bool should_log(const log_entry& entry) const override {
+            return entry.level == target_level_;
+        }
+
+        std::string get_name() const override {
+            return "level_condition";
         }
     };
 
@@ -141,8 +140,13 @@ private:
         std::regex pattern_;
     public:
         explicit regex_condition(const std::string& pattern) : pattern_(pattern) {}
-        bool should_log(logger_system::log_level, const std::string& message, const std::string&, int, const std::string&) const override {
-            return std::regex_search(message, pattern_);
+
+        bool should_log(const log_entry& entry) const override {
+            return std::regex_search(entry.message, pattern_);
+        }
+
+        std::string get_name() const override {
+            return "regex_condition";
         }
     };
 };
