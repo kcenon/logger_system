@@ -75,12 +75,8 @@ All rights reserved.
 #include "../interfaces/log_formatter_interface.h"
 #include "../di/di_container_interface.h"
 
-// Use common_system interfaces when available
-#ifdef LOGGER_USING_COMMON_INTERFACES
-    #include <kcenon/common/interfaces/monitoring_interface.h>
-#else
-    #include "../monitoring/monitoring_interface.h"
-#endif
+// Use common_system interfaces (Phase 2.2.4)
+#include <kcenon/common/interfaces/monitoring_interface.h>
 
 #include <memory>
 #include <vector>
@@ -563,11 +559,11 @@ public:
     }
     
     /**
-     * @brief Set monitoring interface
-     * @param monitor Monitoring interface implementation
+     * @brief Set monitoring interface (Phase 2.2.4)
+     * @param monitor IMonitor implementation from common_system
      * @return Reference to builder for chaining
      */
-    logger_builder& with_monitoring(std::shared_ptr<monitoring_interface> monitor) {
+    logger_builder& with_monitoring(std::shared_ptr<common::interfaces::IMonitor> monitor) {
         monitor_ = monitor;
         config_.enable_metrics = true;
         return *this;
@@ -797,7 +793,7 @@ private:
     std::unique_ptr<log_formatter_interface> formatter_;
     std::vector<std::unique_ptr<config_strategy_interface>> strategies_;
     mutable logger_config built_config_;  // Store last built configuration
-    std::shared_ptr<monitoring_interface> monitor_;
+    std::shared_ptr<common::interfaces::IMonitor> monitor_;  // Phase 2.2.4
     std::chrono::milliseconds health_check_interval_{1000};
     std::function<void(const logger_error_code&)> error_handler_;
 };

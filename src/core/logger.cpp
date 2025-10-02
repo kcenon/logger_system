@@ -229,8 +229,7 @@ result<logger_metrics> logger::get_current_metrics() const {
         "Metrics collection is not available in this build");
 }
 
-#ifdef LOGGER_USING_COMMON_INTERFACES
-// IMonitorable interface implementation
+// IMonitorable interface implementation (Phase 2.2)
 
 common::Result<common::interfaces::metrics_snapshot> logger::get_monitoring_data() {
     common::interfaces::metrics_snapshot snapshot;
@@ -340,6 +339,5 @@ common::Result<common::interfaces::health_check_result> logger::health_check() {
 std::string logger::get_component_name() const {
     return "logger_system::logger";
 }
-#endif // LOGGER_USING_COMMON_INTERFACES
 
 } // namespace kcenon::logger

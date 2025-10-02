@@ -47,23 +47,25 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/error_codes.h>
 #include "../interfaces/log_writer_interface.h"
 #include "../interfaces/log_entry.h"
+#include <kcenon/common/interfaces/monitoring_interface.h>
 
 /**
  * @file base_writer.h
  * @brief Abstract base class for all log output writers
  * @author 🍀☀🌕🌥 🌊
  * @since 1.0.0
- * 
+ *
  * @details This file defines the abstract base class for all log writers in the system.
  * Writers are responsible for outputting formatted log messages to various destinations
  * such as console, files, network endpoints, databases, or custom targets.
- * 
+ *
  * The base_writer class provides:
  * - A common interface for all writer implementations
  * - Compatibility layer between legacy and modern APIs
  * - Built-in formatting utilities for consistent output
  * - Color support for terminals that support ANSI codes
- * 
+ * - IMonitorable implementation for observability (Phase 2.2.5)
+ *
  * @note Writers must be thread-safe if used in async logging mode.
  * 
  * @example Implementing a custom writer:
@@ -104,25 +106,27 @@ namespace kcenon::logger {
 /**
  * @class base_writer
  * @brief Abstract base class for all log output writers
- * 
+ *
  * @details Writers are responsible for outputting log messages to various destinations.
  * This class provides a compatibility layer between the old API and the new
- * interface-based approach, implementing log_writer_interface while providing
- * backward compatibility for existing code.
- * 
+ * interface-based approach, implementing log_writer_interface and IMonitorable
+ * for observability (Phase 2.2.5).
+ *
  * Key responsibilities:
  * - Format log messages for output
  * - Handle destination-specific output logic
  * - Manage buffering and flushing
  * - Provide health status information
- * 
+ * - Expose monitoring metrics and health checks
+ *
  * @note All derived classes must implement the pure virtual methods.
- * 
+ *
  * @warning Writers used in async mode must be thread-safe.
- * 
+ *
  * @since 1.0.0
  */
-class base_writer : public log_writer_interface {
+class base_writer : public log_writer_interface,
+                    public common::interfaces::IMonitorable {
 public:
     virtual ~base_writer() = default;
     
@@ -238,18 +242,60 @@ public:
     /**
      * @brief Check if the writer is healthy and operational
      * @return true if the writer is functioning correctly, false otherwise
-     * 
+     *
      * @details Used for health monitoring and automatic failover. A writer
      * might be unhealthy if its destination is unavailable (e.g., disk full,
      * network disconnected).
-     * 
+     *
      * @note Default implementation always returns true. Override for writers
      * that can detect failure conditions.
-     * 
+     *
      * @since 1.0.0
      */
     virtual bool is_healthy() const override { return true; }
-    
+
+    // IMonitorable interface implementation (Phase 2.2.5)
+
+    /**
+     * @brief Get monitoring data for this writer
+     * @return Result containing metrics snapshot
+     *
+     * @details Provides basic writer metrics. Derived classes can override
+     * to add writer-specific metrics.
+     */
+    virtual common::Result<common::interfaces::metrics_snapshot> get_monitoring_data() override {
+        common::interfaces::metrics_snapshot snapshot;
+        snapshot.source_id = "logger_writer::" + get_name();
+        snapshot.capture_time = std::chrono::system_clock::now();
+        snapshot.add_metric("is_healthy", is_healthy() ? 1.0 : 0.0);
+        return snapshot;
+    }
+
+    /**
+     * @brief Perform health check on this writer
+     * @return Result containing health check result
+     */
+    virtual common::Result<common::interfaces::health_check_result> health_check() override {
+        common::interfaces::health_check_result result;
+        result.timestamp = std::chrono::system_clock::now();
+        result.status = is_healthy() ?
+            common::interfaces::health_status::healthy :
+            common::interfaces::health_status::unhealthy;
+        result.message = is_healthy() ?
+            "Writer operational" :
+            "Writer unhealthy";
+        result.metadata["writer_name"] = get_name();
+        return result;
+    }
+
+    /**
+     * @brief Get component name for monitoring
+     * @return Component identifier
+     */
+    virtual std::string get_component_name() const override {
+        return "logger_writer::" + get_name();
+    }
+
 protected:
     /**
      * @brief Format a log entry to a human-readable string
