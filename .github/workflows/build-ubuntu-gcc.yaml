@@ -29,6 +29,13 @@ jobs:
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Checkout common_system dependency
+        uses: actions/checkout@v4
+        with:
+          repository: kcenon/common_system
+          path: ../common_system
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Install dependencies
         run: |
           sudo apt update
