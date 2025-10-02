@@ -7,6 +7,25 @@ if(BUILD_SAMPLES)
     )
 endif()
 
+# Phase 4 DI Pattern examples - available when common_system integration is enabled
+if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM)
+    # DI Pattern example
+    add_executable(di_pattern_example di_pattern_example.cpp)
+    target_link_libraries(di_pattern_example PRIVATE LoggerSystem)
+    set_target_properties(di_pattern_example PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    # Monitoring Integration example
+    add_executable(monitoring_integration_example monitoring_integration_example.cpp)
+    target_link_libraries(monitoring_integration_example PRIVATE LoggerSystem)
+    set_target_properties(monitoring_integration_example PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Phase 4 DI pattern examples enabled")
+endif()
+
 # Advanced examples - only available in integration mode and when samples are enabled
 if(NOT LOGGER_STANDALONE_MODE AND BUILD_SAMPLES AND NOT BUILD_WITH_COMMON_SYSTEM)
     # Metrics demo sample
