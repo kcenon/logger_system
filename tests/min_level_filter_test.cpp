@@ -23,28 +23,21 @@ namespace {
 class memory_writer final : public kcenon::logger::base_writer {
 public:
     struct entry_record {
-        log_level level;
+        logger_system::log_level level;
         std::string message;
     };
 
-    // Override the new log_entry-based interface
-    kcenon::logger::result_void write(const kcenon::logger::log_entry& entry) override {
-        records_.push_back({entry.level, entry.message.to_string()});
-        return {};
-    }
-
-    // Still implement legacy API for compatibility
-    kcenon::logger::result_void write(log_level level,
+    // Implement the legacy write interface required by base_writer
+    kcenon::logger::result_void write(logger_system::log_level level,
                                       const std::string& message,
                                       const std::string& file,
                                       int line,
                                       const std::string& function,
                                       const std::chrono::system_clock::time_point& timestamp) override {
-        (void)file;
-        (void)line;
-        (void)function;
-        (void)timestamp;
-        records_.push_back({level, message});
+        entry_record rec;
+        rec.level = level;
+        rec.message = message;
+        records_.push_back(std::move(rec));
         return {};
     }
 
@@ -57,21 +50,21 @@ public:
     }
 
     // IMonitorable interface implementation
-    kcenon::common::Result<kcenon::common::interfaces::metrics_snapshot>
+    common::Result<common::interfaces::metrics_snapshot>
     get_monitoring_data() override {
-        kcenon::common::interfaces::metrics_snapshot snapshot;
+        common::interfaces::metrics_snapshot snapshot;
         snapshot.source_id = "memory_writer";
         snapshot.capture_time = std::chrono::system_clock::now();
-        return kcenon::common::Result<kcenon::common::interfaces::metrics_snapshot>::success(std::move(snapshot));
+        return snapshot;
     }
 
-    kcenon::common::Result<kcenon::common::interfaces::health_check_result>
+    common::Result<common::interfaces::health_check_result>
     health_check() override {
-        kcenon::common::interfaces::health_check_result result;
+        common::interfaces::health_check_result result;
         result.timestamp = std::chrono::system_clock::now();
-        result.status = kcenon::common::interfaces::health_status::healthy;
+        result.status = common::interfaces::health_status::healthy;
         result.message = "Memory writer operational";
-        return kcenon::common::Result<kcenon::common::interfaces::health_check_result>::success(std::move(result));
+        return result;
     }
 
     std::string get_component_name() const override {
@@ -105,11 +98,11 @@ TEST(LoggerMinLevelTest, DropsMessagesBelowConfiguredThreshold) {
 
     logger.log(log_level::warning, "warning message");
     ASSERT_EQ(writer_ptr->records().size(), 1U);
-    EXPECT_EQ(writer_ptr->records().back().level, log_level::warning);
+    EXPECT_EQ(writer_ptr->records().back().level, logger_system::log_level::warning);
     EXPECT_EQ(writer_ptr->records().back().message, "warning message");
 
     logger.log(log_level::error, "error message");
     ASSERT_EQ(writer_ptr->records().size(), 2U);
-    EXPECT_EQ(writer_ptr->records().back().level, log_level::error);
+    EXPECT_EQ(writer_ptr->records().back().level, logger_system::log_level::error);
     EXPECT_EQ(writer_ptr->records().back().message, "error message");
 }
