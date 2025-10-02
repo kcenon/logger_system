@@ -44,7 +44,15 @@ namespace {
 template <typename Level>
 bool meets_threshold(Level level, Level minimum) {
     using underlying_type = std::underlying_type_t<Level>;
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+    // thread::log_level uses descending severity: critical(0) > error(1) > warning(2) > info(3)
+    // So we need level <= minimum to allow more severe messages
+    return static_cast<underlying_type>(level) <= static_cast<underlying_type>(minimum);
+#else
+    // logger_system::log_level uses ascending severity: trace(0) < debug(1) < info(2) < warn(3)
+    // So we need level >= minimum to allow more severe messages
     return static_cast<underlying_type>(level) >= static_cast<underlying_type>(minimum);
+#endif
 }
 } // namespace
 
