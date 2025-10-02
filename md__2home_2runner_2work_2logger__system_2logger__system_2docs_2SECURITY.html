@@ -93,29 +93,29 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Security Guide</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md490"></a> This document outlines the current security posture of the logger_system and provides guidance for secure deployments.</p>
-<h1><a class="anchor" id="autotoc_md491"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md534"></a> This document outlines the current security posture of the logger_system and provides guidance for secure deployments.</p>
+<h1><a class="anchor" id="autotoc_md535"></a>
 Threat Model (Scope)</h1>
 <ul>
 <li>Sensitive data can accidentally enter logs (PII, credentials, API keys).</li>
 <li>Logs may be stored on shared disks or shipped over networks to central collectors.</li>
 <li>Attackers may read, tamper with, or replay logs if not adequately protected.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md492"></a>
+<h1><a class="anchor" id="autotoc_md536"></a>
 Current Capabilities</h1>
 <ul>
 <li>Sanitization: <code>log_sanitizer</code> and <code>sanitizing_filter</code> can redact common sensitive patterns (credit cards, SSN, email, IP, API keys, passwords) and support custom rules.</li>
 <li>Access control filter: Restrict logging based on file patterns, user context, and log levels.</li>
 <li>Encryption writer (demo): <code>encrypted_writer</code> wraps any writer and applies a simple XOR-based transformation.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md493"></a>
+<h1><a class="anchor" id="autotoc_md537"></a>
 Important Limitations</h1>
 <ul>
 <li>The included <code>encrypted_writer</code> is for demonstration only and is NOT cryptographically secure. Do not use in production.</li>
 <li>No built-in TLS for the <code>network_writer</code>/<code>log_server</code>. Traffic is plaintext by default.</li>
 <li>Authentication/authorization for the <code>log_server</code> is not implemented.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md494"></a>
+<h1><a class="anchor" id="autotoc_md538"></a>
 Recommendations (Production)</h1>
 <ol type="1">
 <li>Sanitization First<ul>
@@ -152,7 +152,7 @@ Recommendations (Production)</h1>
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md495"></a>
+<h1><a class="anchor" id="autotoc_md539"></a>
 Secure Configuration Checklist</h1>
 <ul>
 <li>[ ] Sanitization rules enabled and customized.</li>
@@ -164,7 +164,7 @@ Secure Configuration Checklist</h1>
 <li>[ ] Retention and rotation configured; old logs purged securely.</li>
 <li>[ ] Server behind TLS/auth and with rate limits.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md496"></a>
+<h1><a class="anchor" id="autotoc_md540"></a>
 Roadmap</h1>
 <ul>
 <li>Optional TLS support for <code>network_writer</code>/<code>log_server</code>.</li>
@@ -177,7 +177,7 @@ Roadmap</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Oct 2 2025 01:32:48 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Oct 2 2025 06:38:56 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

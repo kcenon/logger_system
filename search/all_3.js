@@ -18,9 +18,12 @@ var searchData=
   ['3_20performance_20monitoring_15',['3. Performance Monitoring',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md448',1,'']]],
   ['3_20stress_20testing_16',['3. Stress Testing',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html#autotoc_md327',1,'']]],
   ['3_20task_20a4_20complete_17',['Added - Phase 3 Task A4 Complete',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md268',1,'']]],
-  ['3_20verification_18',['3. Verification',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md226',1,'']]],
-  ['30_20days_19',['Workflow Execution Stats (Last 30 Days)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md98',1,'']]],
-  ['3_3a_20ecosystem_20expansion_20',['Phase 3: Ecosystem Expansion',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md235',1,'']]],
-  ['3_3a_20feature_20migration_202_203_20days_21',['Phase 3: Feature Migration (2-3 days)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md388',1,'']]],
-  ['3_3a_20thread_20safety_22',['Issue 3: Thread Safety',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md394',1,'']]]
+  ['3_20use_20monitor_20providers_18',['3. Use Monitor Providers',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md495',1,'']]],
+  ['3_20verification_19',['3. Verification',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md226',1,'']]],
+  ['30_20days_20',['Workflow Execution Stats (Last 30 Days)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md98',1,'']]],
+  ['3_3a_20ecosystem_20expansion_21',['Phase 3: Ecosystem Expansion',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md235',1,'']]],
+  ['3_3a_20feature_20migration_202_203_20days_22',['Phase 3: Feature Migration (2-3 days)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md388',1,'']]],
+  ['3_3a_20health_20check_20aggregation_23',['Pattern 3: Health Check Aggregation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md490',1,'']]],
+  ['3_3a_20optional_20monitoring_24',['Example 3: Optional Monitoring',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md484',1,'']]],
+  ['3_3a_20thread_20safety_25',['Issue 3: Thread Safety',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md394',1,'']]]
 ];

@@ -16,7 +16,7 @@ var searchData=
   ['library_20users_13',['For Library Users',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md472',1,'']]],
   ['license_14',['License',['../index.html#autotoc_md74',1,'']]],
   ['lifetime_15',['Object Lifetime',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md456',1,'']]],
-  ['limitations_16',['Important Limitations',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md493',1,'']]],
+  ['limitations_16',['Important Limitations',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md537',1,'']]],
   ['links_17',['🔗 Quick Links',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md102',1,'']]],
   ['linux_18',['Linux',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html#autotoc_md428',1,'']]],
   ['local_20development_19',['2. Build Order (Local Development)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md225',1,'']]],
@@ -59,11 +59,12 @@ var searchData=
   ['logger_5fsystem_56',['logger_system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md229',1,'']]],
   ['logger_5fsystem_20logging_57',['2. logger_system (Logging)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md194',1,'']]],
   ['logger_5fsystem_5farchitecture_2emd_58',['LOGGER_SYSTEM_ARCHITECTURE.md',['../LOGGER__SYSTEM__ARCHITECTURE_8md.html',1,'']]],
-  ['logging_59',['logging',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md194',1,'2. logger_system (Logging)'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md182',1,'Contextual Logging'],['../index.html#autotoc_md51',1,'Distributed Logging'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html#autotoc_md345',1,'Simple Console Logging'],['../index.html#autotoc_md48',1,'Structured Logging'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md181',1,'Structured Logging'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html#autotoc_md351',1,'Synchronous vs Asynchronous Logging']]],
-  ['logging_20api_20migration_60',['4. Logging API Migration',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md368',1,'']]],
-  ['logging_20in_20tight_20loops_61',['3. Logging in Tight Loops',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html#autotoc_md422',1,'']]],
-  ['logging_20pattern_62',['4. Async Logging Pattern',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html#autotoc_md315',1,'']]],
-  ['logging_20with_20source_20location_63',['Logging with Source Location',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html#autotoc_md346',1,'']]],
-  ['loops_64',['3. Logging in Tight Loops',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html#autotoc_md422',1,'']]],
-  ['low_5flatency_20tt_65',['&lt;tt&gt;low_latency&lt;/tt&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md139',1,'']]]
+  ['loggers_59',['Pattern 2: Aggregating Multiple Loggers',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md489',1,'']]],
+  ['logging_60',['logging',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md194',1,'2. logger_system (Logging)'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md182',1,'Contextual Logging'],['../index.html#autotoc_md51',1,'Distributed Logging'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html#autotoc_md345',1,'Simple Console Logging'],['../index.html#autotoc_md48',1,'Structured Logging'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md181',1,'Structured Logging'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html#autotoc_md351',1,'Synchronous vs Asynchronous Logging']]],
+  ['logging_20api_20migration_61',['4. Logging API Migration',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md368',1,'']]],
+  ['logging_20in_20tight_20loops_62',['3. Logging in Tight Loops',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html#autotoc_md422',1,'']]],
+  ['logging_20pattern_63',['4. Async Logging Pattern',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html#autotoc_md315',1,'']]],
+  ['logging_20with_20source_20location_64',['Logging with Source Location',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html#autotoc_md346',1,'']]],
+  ['loops_65',['3. Logging in Tight Loops',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html#autotoc_md422',1,'']]],
+  ['low_5flatency_20tt_66',['&lt;tt&gt;low_latency&lt;/tt&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md139',1,'']]]
 ];

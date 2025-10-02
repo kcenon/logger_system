@@ -623,13 +623,55 @@ var NAVTREE =
       ] ],
       [ "Platform Notes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md474", null ]
     ] ],
+    [ "Phase 4: Dependency Injection Pattern Migration Guide", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html", [
+      [ "Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md476", null ],
+      [ "What Changed in Phase 4", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md478", [
+        [ "Key Improvements", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md479", null ]
+      ] ],
+      [ "Migration Examples", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md481", [
+        [ "Example 1: Basic Monitor Injection", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md482", null ],
+        [ "Example 2: Runtime Monitor Injection", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md483", null ],
+        [ "Example 3: Optional Monitoring", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md484", null ],
+        [ "Example 4: Using IMonitorable Interface", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md485", null ]
+      ] ],
+      [ "Integration with monitoring_system", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md487", [
+        [ "Pattern 1: Monitor Provided by monitoring_system", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md488", null ],
+        [ "Pattern 2: Aggregating Multiple Loggers", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md489", null ],
+        [ "Pattern 3: Health Check Aggregation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md490", null ]
+      ] ],
+      [ "Best Practices", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md492", [
+        [ "1. Use Interface Types in APIs", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md493", null ],
+        [ "2. Make Monitoring Optional", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md494", null ],
+        [ "3. Use Monitor Providers", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md495", null ],
+        [ "4. Check Capabilities at Runtime", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md496", null ]
+      ] ],
+      [ "Testing DI Integration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md498", [
+        [ "Unit Test Example", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md499", null ]
+      ] ],
+      [ "Performance Considerations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md501", [
+        [ "Monitor Injection Overhead", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md502", null ],
+        [ "Recommendations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md503", null ]
+      ] ],
+      [ "Troubleshooting", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md505", [
+        [ "Issue: Monitor Not Receiving Metrics", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md506", null ],
+        [ "Issue: Circular Dependency Errors", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md507", null ],
+        [ "Issue: Health Check Not Working", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md508", null ]
+      ] ],
+      [ "API Reference", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md510", [
+        [ "Builder API", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md511", null ],
+        [ "Runtime API", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md512", null ],
+        [ "IMonitorable API", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md513", null ]
+      ] ],
+      [ "Examples", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md515", null ],
+      [ "Summary", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md517", null ]
+    ] ],
     [ "Security Guide", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html", [
-      [ "Threat Model (Scope)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md491", null ],
-      [ "Current Capabilities", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md492", null ],
-      [ "Important Limitations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md493", null ],
-      [ "Recommendations (Production)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md494", null ],
-      [ "Secure Configuration Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md495", null ],
-      [ "Roadmap", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md496", null ]
+      [ "Threat Model (Scope)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md535", null ],
+      [ "Current Capabilities", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md536", null ],
+      [ "Important Limitations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md537", null ],
+      [ "Recommendations (Production)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md538", null ],
+      [ "Secure Configuration Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md539", null ],
+      [ "Roadmap", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md540", null ]
     ] ]
   ] ]
 ];
@@ -637,7 +679,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "index.html",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md472"
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md472",
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html#autotoc_md421"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
