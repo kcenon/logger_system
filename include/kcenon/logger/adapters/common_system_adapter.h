@@ -12,6 +12,7 @@
 #ifdef BUILD_WITH_COMMON_SYSTEM
 #include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/common/patterns/result.h>
+#include <kcenon/common/adapters/typed_adapter.h>
 #endif
 
 #include "../core/logger.h"
@@ -26,15 +27,22 @@ namespace kcenon::logger::adapters {
  *
  * This adapter allows kcenon::logger's logger to be used through
  * the standard common_system logger interface.
+ *
+ * Now inherits from typed_adapter for:
+ * - Type safety and wrapper depth tracking
+ * - Automatic prevention of infinite adapter chains (max depth: 2)
+ * - Unwrap support to access underlying logger
  */
-class common_system_logger_adapter : public ::common::interfaces::ILogger {
+class common_system_logger_adapter
+    : public ::common::adapters::typed_adapter<::common::interfaces::ILogger, logger> {
+    using base_type = ::common::adapters::typed_adapter<::common::interfaces::ILogger, logger>;
 public:
     /**
      * @brief Construct adapter with kcenon::logger logger
-     * @param logger Shared pointer to kcenon::logger logger
+     * @param lg Shared pointer to kcenon::logger logger
      */
     explicit common_system_logger_adapter(std::shared_ptr<logger> lg)
-        : logger_(lg) {}
+        : base_type(lg) {}
 
     ~common_system_logger_adapter() override = default;
 
@@ -44,14 +52,14 @@ public:
     ::common::VoidResult log(
         ::common::interfaces::log_level level,
         const std::string& message) override {
-        if (!logger_) {
+        if (!this->impl_) {
             return ::common::VoidResult(
                 ::common::error_info(1, "Logger not initialized", "kcenon::logger"));
         }
 
         try {
             auto logger_level = convert_level_from_common(level);
-            logger_->log(logger_level, message);
+            this->impl_->log(logger_level, message);
             return ::common::VoidResult(std::monostate{});
         } catch (const std::exception& e) {
             return ::common::VoidResult(
@@ -68,7 +76,7 @@ public:
         const std::string& file,
         int line,
         const std::string& function) override {
-        if (!logger_) {
+        if (!this->impl_) {
             return ::common::VoidResult(
                 ::common::error_info(1, "Logger not initialized", "kcenon::logger"));
         }
@@ -78,7 +86,7 @@ public:
             // Create formatted message with location info
             std::string formatted = "[" + file + ":" + std::to_string(line) +
                                    " in " + function + "] " + message;
-            logger_->log(logger_level, formatted);
+            this->impl_->log(logger_level, formatted);
             return ::common::VoidResult(std::monostate{});
         } catch (const std::exception& e) {
             return ::common::VoidResult(
@@ -98,11 +106,11 @@ public:
      * @brief Check if logging is enabled for the specified level
      */
     bool is_enabled(::common::interfaces::log_level level) const override {
-        if (!logger_) {
+        if (!this->impl_) {
             return false;
         }
         auto logger_level = convert_level_from_common(level);
-        return logger_->should_log(logger_level);
+        return this->impl_->should_log(logger_level);
     }
 
     /**
@@ -110,14 +118,14 @@ public:
      */
     ::common::VoidResult set_level(
         ::common::interfaces::log_level level) override {
-        if (!logger_) {
+        if (!this->impl_) {
             return ::common::VoidResult(
                 ::common::error_info(1, "Logger not initialized", "kcenon::logger"));
         }
 
         try {
             auto logger_level = convert_level_from_common(level);
-            logger_->set_level(logger_level);
+            this->impl_->set_level(logger_level);
             return ::common::VoidResult(std::monostate{});
         } catch (const std::exception& e) {
             return ::common::VoidResult(
@@ -129,10 +137,10 @@ public:
      * @brief Get the current minimum log level
      */
     ::common::interfaces::log_level get_level() const override {
-        if (!logger_) {
+        if (!this->impl_) {
             return ::common::interfaces::log_level::info;
         }
-        auto logger_level = logger_->get_level();
+        auto logger_level = this->impl_->get_level();
         return convert_level_to_common(logger_level);
     }
 
@@ -140,13 +148,13 @@ public:
      * @brief Flush any buffered log messages
      */
     ::common::VoidResult flush() override {
-        if (!logger_) {
+        if (!this->impl_) {
             return ::common::VoidResult(
                 ::common::error_info(1, "Logger not initialized", "kcenon::logger"));
         }
 
         try {
-            logger_->flush();
+            this->impl_->flush();
             return ::common::VoidResult(std::monostate{});
         } catch (const std::exception& e) {
             return ::common::VoidResult(
@@ -155,7 +163,6 @@ public:
     }
 
 private:
-    std::shared_ptr<logger> logger_;
 
     /**
      * @brief Convert common log level to kcenon::logger log level
