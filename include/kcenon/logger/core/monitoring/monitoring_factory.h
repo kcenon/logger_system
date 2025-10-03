@@ -13,8 +13,7 @@
 
 namespace kcenon::logger::monitoring {
 
-// Forward compatibility aliases
-using monitoring_interface = common::interfaces::IMonitor;
+// Forward compatibility aliases (monitoring_interface removed due to conflict with transition header)
 using monitoring_metrics = common::interfaces::metrics_snapshot;
 
 /**
