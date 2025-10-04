@@ -60,7 +60,7 @@ jobs:
     - name: Install dependencies (macOS)
       if: runner.os == 'macOS'
       run: |
-        brew install ninja pkg-config curl zip unzip tar autoconf automake autoconf-archive
+        brew install ninja pkg-config curl zip unzip autoconf automake autoconf-archive
 
     - name: Setup Visual Studio (Windows)
       if: runner.os == 'Windows'
@@ -182,15 +182,22 @@ jobs:
       shell: pwsh
       run: |
         cd build
+        $env:CMAKE_CXX_FLAGS = "/std:c++20 /permissive- /Zc:__cplusplus /EHsc"
+        $env:CMAKE_TRY_COMPILE_TARGET_TYPE = "STATIC_LIBRARY"
+
         cmake .. `
-          -G Ninja `
+          -G "Visual Studio 17 2022" `
+          -A x64 `
           -DBUILD_TESTS=ON `
           -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE `
           -DLOGGER_STANDALONE_MODE=ON `
           -DUSE_THREAD_SYSTEM=OFF `
-          -DCMAKE_TOOLCHAIN_FILE="$env:GITHUB_WORKSPACE\vcpkg\scripts\buildsystems\vcpkg.cmake"
+          -DCMAKE_TOOLCHAIN_FILE="$env:GITHUB_WORKSPACE\vcpkg\scripts\buildsystems\vcpkg.cmake" `
+          -DCMAKE_CXX_FLAGS="/std:c++20 /permissive- /Zc:__cplusplus /EHsc" `
+          -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY"
 
-        cmake --build . --parallel
+        cmake --build . --config $env:BUILD_TYPE --parallel
+        ctest -C $env:BUILD_TYPE --output-on-failure
 
     - name: Build application (fallback - Unix)
       if: runner.os != 'Windows' && steps.build_vcpkg_unix.outcome != 'success'
@@ -215,19 +222,26 @@ jobs:
       if: runner.os == 'Windows' && steps.build_vcpkg_windows.outcome != 'success'
       shell: pwsh
       run: |
-        echo "vcpkg build failed. Falling back to system libraries..."
+        Write-Host "vcpkg build failed. Falling back to system libraries..."
         if (Test-Path build) { Remove-Item -Recurse -Force build }
         New-Item -ItemType Directory -Path build
         cd build
 
+        $env:CMAKE_CXX_FLAGS = "/std:c++20 /permissive- /Zc:__cplusplus /EHsc"
+        $env:CMAKE_TRY_COMPILE_TARGET_TYPE = "STATIC_LIBRARY"
+
         cmake .. `
-          -G Ninja `
+          -G "Visual Studio 17 2022" `
+          -A x64 `
           -DBUILD_TESTS=ON `
           -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE `
           -DLOGGER_STANDALONE_MODE=ON `
-          -DUSE_THREAD_SYSTEM=OFF
+          -DUSE_THREAD_SYSTEM=OFF `
+          -DCMAKE_CXX_FLAGS="/std:c++20 /permissive- /Zc:__cplusplus /EHsc" `
+          -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY" `
+          -DNO_VCPKG=ON
 
-        cmake --build . --parallel
+        cmake --build . --config $env:BUILD_TYPE --parallel
 
     - name: Run minimal test (fallback - Unix)
       if: runner.os != 'Windows' && steps.build_vcpkg_unix.outcome != 'success'
@@ -237,6 +251,16 @@ jobs:
           ./bin/logger_unit --gtest_filter="*BasicTest*" || true
         fi
         echo "Build completed with system libraries"
+
+    - name: Run minimal test (fallback - Windows)
+      if: runner.os == 'Windows' && steps.build_vcpkg_windows.outcome != 'success'
+      shell: pwsh
+      run: |
+        cd build
+        if (Test-Path "bin\$env:BUILD_TYPE\logger_unit.exe") {
+          .\bin\$env:BUILD_TYPE\logger_unit.exe --gtest_filter="*BasicTest*"
+        }
+        Write-Host "Build completed with system libraries"
 
     - name: Upload test results
       if: always()
