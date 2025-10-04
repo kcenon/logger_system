@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['best_20practices_20guide_0',['Logger System Best Practices Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html',1,'']]]
+  ['analysis_20baseline_20logger_5fsystem_0',['Static Analysis Baseline - logger_system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html',1,'']]],
+  ['api_20reference_1',['API Reference',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html',1,'']]],
+  ['architecture_2',['architecture',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html',1,'Logger System Architecture'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html',1,'Threading Ecosystem Architecture']]]
 ];

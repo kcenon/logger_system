@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['api_20reference_0',['API Reference',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html',1,'']]],
-  ['architecture_1',['architecture',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html',1,'Logger System Architecture'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html',1,'Threading Ecosystem Architecture']]]
+  ['4_3a_20dependency_20injection_20pattern_20migration_20guide_0',['Phase 4: Dependency Injection Pattern Migration Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html',1,'']]]
 ];

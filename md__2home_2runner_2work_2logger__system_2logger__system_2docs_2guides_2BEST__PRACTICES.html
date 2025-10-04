@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System Best Practices Guide</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md299"></a> </p>
-<h1><a class="anchor" id="autotoc_md300"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md322"></a> </p>
+<h1><a class="anchor" id="autotoc_md323"></a>
 Table of Contents</h1>
 <ol type="1">
 <li>Design Principles</li>
@@ -106,9 +106,9 @@ Table of Contents</h1>
 <li>Production Deployment</li>
 <li>Common Pitfalls</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md301"></a>
+<h1><a class="anchor" id="autotoc_md324"></a>
 Design Principles</h1>
-<h2><a class="anchor" id="autotoc_md302"></a>
+<h2><a class="anchor" id="autotoc_md325"></a>
 1. Single Responsibility</h2>
 <p>Each logger instance should have a clear, single purpose:</p>
 <div class="fragment"><div class="line"><span class="comment">// Good: Separate loggers for different concerns</span></div>
@@ -118,7 +118,7 @@ Design Principles</h1>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Avoid: One logger for everything</span></div>
 <div class="line"><span class="keyword">auto</span> logger = create_logger(<span class="stringliteral">&quot;everything&quot;</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md303"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md326"></a>
 2. Dependency Injection</h2>
 <p>Pass loggers as dependencies rather than using global instances:</p>
 <div class="fragment"><div class="line"><span class="comment">// Good: Dependency injection</span></div>
@@ -135,7 +135,7 @@ Design Principles</h1>
 <div class="line">        global_logger-&gt;info(<span class="stringliteral">&quot;Query executed&quot;</span>);  <span class="comment">// Avoid</span></div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md304"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md327"></a>
 3. Interface Segregation</h2>
 <p>Use minimal interfaces when possible:</p>
 <div class="fragment"><div class="line"><span class="comment">// Good: Accept minimal interface</span></div>
@@ -143,9 +143,9 @@ Design Principles</h1>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Avoid: Requiring full logger when only writing is needed</span></div>
 <div class="line"><span class="keywordtype">void</span> process_data(logger&amp; full_logger);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md305"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md328"></a>
 Configuration Best Practices</h1>
-<h2><a class="anchor" id="autotoc_md306"></a>
+<h2><a class="anchor" id="autotoc_md329"></a>
 Environment-Specific Configuration</h2>
 <div class="fragment"><div class="line"><span class="comment">// Development environment</span></div>
 <div class="line"><span class="keyword">auto</span> create_dev_logger() {</div>
@@ -176,7 +176,7 @@ Environment-Specific Configuration</h2>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> create_dev_logger();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md307"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md330"></a>
 Configuration Validation</h2>
 <div class="fragment"><div class="line"><span class="comment">// Always validate configuration</span></div>
 <div class="line"><span class="keyword">auto</span> validate_logger_config(<span class="keyword">const</span> logger_config&amp; config) -&gt; result&lt;void&gt; {</div>
@@ -191,7 +191,7 @@ Configuration Validation</h2>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> success();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md308"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md331"></a>
 Dynamic Reconfiguration</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>reconfigurable_logger {</div>
 <div class="line">    std::atomic&lt;log_level&gt; min_level_;</div>
@@ -207,9 +207,9 @@ Dynamic Reconfiguration</h2>
 <div class="line">        apply_config(config);</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md309"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md332"></a>
 Performance Guidelines</h1>
-<h2><a class="anchor" id="autotoc_md310"></a>
+<h2><a class="anchor" id="autotoc_md333"></a>
 1. Minimize Allocations</h2>
 <div class="fragment"><div class="line"><span class="comment">// Good: Pre-sized string reservation</span></div>
 <div class="line"><span class="keywordtype">void</span> log_with_reservation(logger&amp; log) {</div>
@@ -226,7 +226,7 @@ Performance Guidelines</h1>
 <div class="line">std::string msg = <span class="stringliteral">&quot;Message&quot;</span>;</div>
 <div class="line">log.info(msg);  <span class="comment">// Avoid copy</span></div>
 <div class="line">log.info(std::move(msg));  <span class="comment">// Better</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md311"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md334"></a>
 2. Lazy Evaluation</h2>
 <div class="fragment"><div class="line"><span class="comment">// Good: Check level before expensive operations</span></div>
 <div class="line"><span class="keywordflow">if</span> (logger-&gt;should_log(log_level::debug)) {</div>
@@ -237,7 +237,7 @@ Performance Guidelines</h1>
 <div class="line"><span class="comment">// Avoid: Always computing expensive data</span></div>
 <div class="line"><span class="keyword">auto</span> debug_info = collect_expensive_debug_info();</div>
 <div class="line">logger-&gt;debug(<span class="stringliteral">&quot;Debug info&quot;</span>, {{<span class="stringliteral">&quot;data&quot;</span>, debug_info}});</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md312"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md335"></a>
 3. Batch Operations</h2>
 <div class="fragment"><div class="line"><span class="comment">// Good: Batch multiple log entries</span></div>
 <div class="line"><span class="keyword">class </span>log_batcher {</div>
@@ -256,7 +256,7 @@ Performance Guidelines</h1>
 <div class="line">        batch_.clear();</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md313"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md336"></a>
 4. Async Logging Pattern</h2>
 <div class="fragment"><div class="line"><span class="comment">// High-throughput async configuration</span></div>
 <div class="line"><span class="keyword">auto</span> create_high_throughput_logger() {</div>
@@ -269,9 +269,9 @@ Performance Guidelines</h1>
 <div class="line">        .with_flush_interval(std::chrono::milliseconds(100))</div>
 <div class="line">        .build();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md314"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md337"></a>
 Error Handling</h1>
-<h2><a class="anchor" id="autotoc_md315"></a>
+<h2><a class="anchor" id="autotoc_md338"></a>
 Graceful Degradation</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>resilient_logger {</div>
 <div class="line">    std::shared_ptr&lt;logger&gt; primary_;</div>
@@ -292,7 +292,7 @@ Graceful Degradation</h2>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md316"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md339"></a>
 Error Recovery</h2>
 <div class="fragment"><div class="line"><span class="comment">// Automatic reconnection for file writers</span></div>
 <div class="line"><span class="keyword">class </span>reconnecting_file_writer : <span class="keyword">public</span> base_writer {</div>
@@ -311,7 +311,7 @@ Error Recovery</h2>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md317"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md340"></a>
 Circuit Breaker Pattern</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>circuit_breaker_logger {</div>
 <div class="line">    <span class="keyword">enum class</span> State { CLOSED, OPEN, HALF_OPEN };</div>
@@ -342,9 +342,9 @@ Circuit Breaker Pattern</h2>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md318"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md341"></a>
 Security Considerations</h1>
-<h2><a class="anchor" id="autotoc_md319"></a>
+<h2><a class="anchor" id="autotoc_md342"></a>
 1. Sanitize Sensitive Data</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>sanitizing_logger {</div>
 <div class="line">    std::regex credit_card_pattern{<span class="stringliteral">&quot;\\b\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}\\b&quot;</span>};</div>
@@ -362,7 +362,7 @@ Security Considerations</h1>
 <div class="line">        logger_-&gt;info(sanitize(message));</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md320"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md343"></a>
 2. Access Control</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>access_controlled_logger {</div>
 <div class="line">    <span class="keyword">enum class</span> LogAccess { READ, WRITE, ADMIN };</div>
@@ -380,7 +380,7 @@ Security Considerations</h1>
 <div class="line">        <span class="keywordflow">return</span> it-&gt;second &gt;= LogAccess::WRITE;</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md321"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md344"></a>
 3. Log Injection Prevention</h2>
 <div class="fragment"><div class="line">std::string escape_log_injection(<span class="keyword">const</span> std::string&amp; input) {</div>
 <div class="line">    std::string output;</div>
@@ -403,9 +403,9 @@ Security Considerations</h1>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> output;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md322"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md345"></a>
 Testing Strategies</h1>
-<h2><a class="anchor" id="autotoc_md323"></a>
+<h2><a class="anchor" id="autotoc_md346"></a>
 1. Mock Logger for Testing</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>mock_logger : <span class="keyword">public</span> logger_interface {</div>
 <div class="line">    std::vector&lt;std::string&gt; captured_logs_;</div>
@@ -435,7 +435,7 @@ Testing Strategies</h1>
 <div class="line">    EXPECT_TRUE(mock_log-&gt;contains(<span class="stringliteral">&quot;Invalid data&quot;</span>));</div>
 <div class="line">    EXPECT_EQ(mock_log-&gt;log_count(), 1);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md324"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md347"></a>
 2. Performance Testing</h2>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> benchmark_logger_throughput() {</div>
 <div class="line">    <span class="keyword">auto</span> logger = create_test_logger();</div>
@@ -456,7 +456,7 @@ Testing Strategies</h1>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Throughput: &quot;</span> &lt;&lt; throughput &lt;&lt; <span class="stringliteral">&quot; msg/sec\n&quot;</span>;</div>
 <div class="line">    EXPECT_GT(throughput, 100&#39;000);  <span class="comment">// Minimum expected throughput</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md325"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md348"></a>
 3. Stress Testing</h2>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> stress_test_concurrent_logging() {</div>
 <div class="line">    <span class="keyword">auto</span> logger = create_thread_safe_logger();</div>
@@ -484,9 +484,9 @@ Testing Strategies</h1>
 <div class="line">    </div>
 <div class="line">    EXPECT_EQ(total_logged, num_threads * logs_per_thread);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md326"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md349"></a>
 Production Deployment</h1>
-<h2><a class="anchor" id="autotoc_md327"></a>
+<h2><a class="anchor" id="autotoc_md350"></a>
 1. Monitoring Integration</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>monitored_logger {</div>
 <div class="line">    std::shared_ptr&lt;metrics_collector&gt; metrics_;</div>
@@ -508,7 +508,7 @@ Production Deployment</h1>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md328"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md351"></a>
 2. Log Rotation Strategy</h2>
 <div class="fragment"><div class="line"><span class="comment">// Time and size based rotation</span></div>
 <div class="line"><span class="keyword">auto</span> setup_production_rotation() {</div>
@@ -520,7 +520,7 @@ Production Deployment</h1>
 <div class="line">        .with_compression(<span class="keyword">true</span>)                     <span class="comment">// Compress rotated files</span></div>
 <div class="line">        .build();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md329"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md352"></a>
 3. Graceful Shutdown</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>application {</div>
 <div class="line">    std::shared_ptr&lt;logger&gt; logger_;</div>
@@ -538,9 +538,9 @@ Production Deployment</h1>
 <div class="line">        logger_-&gt;info(<span class="stringliteral">&quot;Shutdown complete&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md330"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md353"></a>
 Common Pitfalls</h1>
-<h2><a class="anchor" id="autotoc_md331"></a>
+<h2><a class="anchor" id="autotoc_md354"></a>
 1. Memory Leaks</h2>
 <div class="fragment"><div class="line"><span class="comment">// Avoid: Circular references</span></div>
 <div class="line"><span class="keyword">class </span>bad_service {</div>
@@ -567,7 +567,7 @@ Common Pitfalls</h1>
 <div class="line">        });</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md332"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md355"></a>
 2. Deadlocks</h2>
 <div class="fragment"><div class="line"><span class="comment">// Avoid: Logging while holding locks</span></div>
 <div class="line"><span class="keyword">class </span>bad_example {</div>
@@ -593,7 +593,7 @@ Common Pitfalls</h1>
 <div class="line">        logger_-&gt;info(<span class="stringliteral">&quot;Process complete&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md333"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md356"></a>
 3. Performance Bottlenecks</h2>
 <div class="fragment"><div class="line"><span class="comment">// Avoid: Synchronous I/O in hot paths</span></div>
 <div class="line"><span class="keywordtype">void</span> hot_path_bad() {</div>
@@ -609,7 +609,7 @@ Common Pitfalls</h1>
 <div class="line">        async_logger-&gt;info(<span class="stringliteral">&quot;Processing item&quot;</span>, {{<span class="stringliteral">&quot;id&quot;</span>, i}});  <span class="comment">// Non-blocking</span></div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md334"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md357"></a>
 Summary</h1>
 <p>Following these best practices will help you:</p><ul>
 <li>Build more reliable and maintainable logging solutions</li>
@@ -625,7 +625,7 @@ Summary</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Oct 3 2025 07:03:23 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Oct 4 2025 08:13:18 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

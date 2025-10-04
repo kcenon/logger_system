@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Phase 4: Dependency Injection Pattern Migration Guide</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md473"></a> <b>Document Version</b>: 1.0 <b>Date</b>: 2025-10-02 <b>Status</b>: Active</p>
-<h1><a class="anchor" id="autotoc_md474"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md496"></a> <b>Document Version</b>: 1.0 <b>Date</b>: 2025-10-02 <b>Status</b>: Active</p>
+<h1><a class="anchor" id="autotoc_md497"></a>
 Overview</h1>
 <p>Phase 4 introduces Dependency Injection (DI) patterns to logger_system, enabling loose coupling with monitoring systems through common_system interfaces. This guide helps developers migrate to the new DI-based architecture.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md476"></a>
+<h1><a class="anchor" id="autotoc_md499"></a>
 What Changed in Phase 4</h1>
-<h2><a class="anchor" id="autotoc_md477"></a>
+<h2><a class="anchor" id="autotoc_md500"></a>
 Key Improvements</h2>
 <ol type="1">
 <li><b>Dependency Injection for Monitors</b><ul>
@@ -123,9 +123,9 @@ Key Improvements</h2>
 </li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md479"></a>
+<h1><a class="anchor" id="autotoc_md502"></a>
 Migration Examples</h1>
-<h2><a class="anchor" id="autotoc_md480"></a>
+<h2><a class="anchor" id="autotoc_md503"></a>
 Example 1: Basic Monitor Injection</h2>
 <p><b>Before (Phase 3):</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
 <div class="line"> </div>
@@ -146,7 +146,7 @@ Example 1: Basic Monitor Injection</h2>
 <div class="line">    .with_monitoring(monitor)  <span class="comment">// DI: inject monitor</span></div>
 <div class="line">    .build()</div>
 <div class="line">    .value();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md481"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md504"></a>
 Example 2: Runtime Monitor Injection</h2>
 <p><b>New in Phase 4:</b> </p><div class="fragment"><div class="line"><span class="comment">// Create logger without monitor initially</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
@@ -160,7 +160,7 @@ Example 2: Runtime Monitor Injection</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Can also swap monitors at runtime</span></div>
 <div class="line">logger-&gt;set_monitor(different_monitor);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md482"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md505"></a>
 Example 3: Optional Monitoring</h2>
 <p><b>New in Phase 4:</b> </p><div class="fragment"><div class="line"><span class="comment">// Logger works perfectly without a monitor</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
@@ -175,7 +175,7 @@ Example 3: Optional Monitoring</h2>
 <div class="line"><span class="keywordflow">if</span> (monitoring_enabled) {</div>
 <div class="line">    logger-&gt;set_monitor(create_monitor());</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md483"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md506"></a>
 Example 4: Using IMonitorable Interface</h2>
 <p><b>New in Phase 4:</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/common/interfaces/monitoring_interface.h&gt;</span></div>
 <div class="line"> </div>
@@ -198,9 +198,9 @@ Example 4: Using IMonitorable Interface</h2>
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md485"></a>
+<h1><a class="anchor" id="autotoc_md508"></a>
 Integration with monitoring_system</h1>
-<h2><a class="anchor" id="autotoc_md486"></a>
+<h2><a class="anchor" id="autotoc_md509"></a>
 Pattern 1: Monitor Provided by monitoring_system</h2>
 <div class="fragment"><div class="line"><span class="comment">// In your application initialization</span></div>
 <div class="line"> </div>
@@ -215,7 +215,7 @@ Pattern 1: Monitor Provided by monitoring_system</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Step 3: Logger automatically reports metrics to monitor</span></div>
 <div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;Message&quot;</span>);  <span class="comment">// Metrics sent to monitor</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md487"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md510"></a>
 Pattern 2: Aggregating Multiple Loggers</h2>
 <div class="fragment"><div class="line"><span class="comment">// monitoring_system creates an aggregating monitor</span></div>
 <div class="line"><span class="keyword">auto</span> agg_monitor = std::make_shared&lt;aggregating_monitor&gt;();</div>
@@ -235,7 +235,7 @@ Pattern 2: Aggregating Multiple Loggers</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Monitor collects metrics from all loggers</span></div>
 <div class="line"><span class="keyword">auto</span> all_metrics = agg_monitor-&gt;get_metrics();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md488"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md511"></a>
 Pattern 3: Health Check Aggregation</h2>
 <div class="fragment"><div class="line"><span class="comment">// monitoring_system can check health of all components</span></div>
 <div class="line"><span class="keyword">auto</span> monitor = <span class="comment">/* ... */</span>;</div>
@@ -249,9 +249,9 @@ Pattern 3: Health Check Aggregation</h2>
 <div class="line">              &lt;&lt; to_string(dep.status) &lt;&lt; std::endl;</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md490"></a>
+<h1><a class="anchor" id="autotoc_md513"></a>
 Best Practices</h1>
-<h2><a class="anchor" id="autotoc_md491"></a>
+<h2><a class="anchor" id="autotoc_md514"></a>
 1. Use Interface Types in APIs</h2>
 <p><b>Good:</b> </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> setup_logging(std::shared_ptr&lt;IMonitor&gt; monitor) {</div>
 <div class="line">    <span class="keyword">auto</span> logger = logger_builder()</div>
@@ -264,7 +264,7 @@ Best Practices</h1>
 <div class="line"><span class="keywordtype">void</span> setup_logging(std::shared_ptr&lt;concrete_monitor&gt; monitor) {</div>
 <div class="line">    <span class="comment">// This creates tight coupling</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md492"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md515"></a>
 2. Make Monitoring Optional</h2>
 <p><b>Good:</b> </p><div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .with_async(<span class="keyword">true</span>)</div>
@@ -275,14 +275,14 @@ Best Practices</h1>
 <div class="line"><span class="keywordflow">if</span> (<span class="keyword">auto</span> monitor = get_optional_monitor()) {</div>
 <div class="line">    logger-&gt;set_monitor(monitor);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md493"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md516"></a>
 3. Use Monitor Providers</h2>
 <p><b>Good:</b> </p><div class="fragment"><div class="line"><span class="comment">// Get monitor from provider interface</span></div>
 <div class="line"><span class="keywordflow">if</span> (<span class="keyword">auto</span> provider = get_monitor_provider()) {</div>
 <div class="line">    <span class="keyword">auto</span> monitor = provider-&gt;get_monitor();</div>
 <div class="line">    logger-&gt;set_monitor(monitor);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md494"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md517"></a>
 4. Check Capabilities at Runtime</h2>
 <p><b>Good:</b> </p><div class="fragment"><div class="line">std::shared_ptr&lt;ILogger&gt; logger = get_logger();</div>
 <div class="line"> </div>
@@ -292,9 +292,9 @@ Best Practices</h1>
 <div class="line">    <span class="comment">// Use monitoring features</span></div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md496"></a>
+<h1><a class="anchor" id="autotoc_md519"></a>
 Testing DI Integration</h1>
-<h2><a class="anchor" id="autotoc_md497"></a>
+<h2><a class="anchor" id="autotoc_md520"></a>
 Unit Test Example</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;gtest/gtest.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
@@ -346,16 +346,16 @@ Unit Test Example</h2>
 <div class="line">    EXPECT_EQ(logger-&gt;get_monitor(), monitor2);</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md499"></a>
+<h1><a class="anchor" id="autotoc_md522"></a>
 Performance Considerations</h1>
-<h2><a class="anchor" id="autotoc_md500"></a>
+<h2><a class="anchor" id="autotoc_md523"></a>
 Monitor Injection Overhead</h2>
 <ul>
 <li><b>Monitor check</b>: ~1-2 ns (pointer null check)</li>
 <li><b>Metric recording</b>: Depends on monitor implementation</li>
 <li><b>No monitor</b>: Zero overhead when monitor is nullptr</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md501"></a>
+<h2><a class="anchor" id="autotoc_md524"></a>
 Recommendations</h2>
 <ol type="1">
 <li><b>For High-Performance Scenarios</b>: <div class="fragment"><div class="line"><span class="comment">// Create logger without monitor for maximum performance</span></div>
@@ -375,9 +375,9 @@ Recommendations</h2>
 </div><!-- fragment --></li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md503"></a>
+<h1><a class="anchor" id="autotoc_md526"></a>
 Troubleshooting</h1>
-<h2><a class="anchor" id="autotoc_md504"></a>
+<h2><a class="anchor" id="autotoc_md527"></a>
 Issue: Monitor Not Receiving Metrics</h2>
 <p><b>Solution:</b> </p><div class="fragment"><div class="line"><span class="comment">// Verify monitor is set</span></div>
 <div class="line"><span class="keywordflow">if</span> (logger-&gt;get_monitor() == <span class="keyword">nullptr</span>) {</div>
@@ -389,7 +389,7 @@ Issue: Monitor Not Receiving Metrics</h2>
 <div class="line"><span class="keywordflow">if</span> (!result) {</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Monitor error: &quot;</span> &lt;&lt; result.error().message &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md505"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md528"></a>
 Issue: Circular Dependency Errors</h2>
 <p><b>Solution:</b> </p><div class="fragment"><div class="line"><span class="comment">// Use forward declarations and interfaces</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/common/interfaces/monitoring_interface.h&gt;</span>  <span class="comment">// Interface only</span></div>
@@ -397,7 +397,7 @@ Issue: Circular Dependency Errors</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// DO NOT include concrete implementations in headers</span></div>
 <div class="line"><span class="comment">// #include &lt;kcenon/monitoring/core/performance_monitor.h&gt;  // Avoid this</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md506"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md529"></a>
 Issue: Health Check Not Working</h2>
 <p><b>Solution:</b> </p><div class="fragment"><div class="line"><span class="comment">// Ensure logger implements IMonitorable</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder().build().value();</div>
@@ -409,16 +409,16 @@ Issue: Health Check Not Working</h2>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Logger does not implement IMonitorable&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md508"></a>
+<h1><a class="anchor" id="autotoc_md531"></a>
 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md509"></a>
+<h2><a class="anchor" id="autotoc_md532"></a>
 Builder API</h2>
 <div class="fragment"><div class="line">logger_builder&amp; with_monitoring(std::shared_ptr&lt;IMonitor&gt; monitor);</div>
 </div><!-- fragment --><ul>
 <li>Injects monitor during logger construction</li>
 <li>Monitor can be nullptr for monitor-less operation</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md510"></a>
+<h2><a class="anchor" id="autotoc_md533"></a>
 Runtime API</h2>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> logger::set_monitor(std::shared_ptr&lt;IMonitor&gt; monitor);</div>
 <div class="line">std::shared_ptr&lt;IMonitor&gt; logger::get_monitor() <span class="keyword">const</span>;</div>
@@ -426,7 +426,7 @@ Runtime API</h2>
 <li>Set or replace monitor at runtime</li>
 <li>Returns current monitor (may be nullptr)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md511"></a>
+<h2><a class="anchor" id="autotoc_md534"></a>
 IMonitorable API</h2>
 <div class="fragment"><div class="line">Result&lt;metrics_snapshot&gt; get_monitoring_data() <span class="keyword">override</span>;</div>
 <div class="line">Result&lt;health_check_result&gt; health_check() <span class="keyword">override</span>;</div>
@@ -436,7 +436,7 @@ IMonitorable API</h2>
 <li>Provides monitoring and health data</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md513"></a>
+<h1><a class="anchor" id="autotoc_md536"></a>
 Examples</h1>
 <p>See the following example programs:</p><ul>
 <li><code>examples/di_pattern_example.cpp</code> - DI pattern demonstrations</li>
@@ -449,7 +449,7 @@ Examples</h1>
 <div class="line">./bin/di_pattern_example</div>
 <div class="line">./bin/monitoring_integration_example</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md515"></a>
+<h1><a class="anchor" id="autotoc_md538"></a>
 Summary</h1>
 <p>Phase 4 introduces:</p><ul>
 <li>✅ Dependency Injection for monitors</li>
@@ -473,7 +473,7 @@ Summary</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Oct 3 2025 07:03:23 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Oct 4 2025 08:13:18 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
