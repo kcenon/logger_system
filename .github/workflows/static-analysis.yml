@@ -113,7 +113,7 @@ jobs:
           --xml \
           --xml-version=2 \
           -I include \
-          include 2> cppcheck-results.xml || true
+          include/kcenon src 2> cppcheck-results.xml || true
 
     - name: Generate cppcheck report
       if: always()
