@@ -6,5 +6,5 @@ var searchData=
   ['logger_20system_20ci_20cd_20dashboard_3',['Logger System CI/CD Dashboard',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html',1,'']]],
   ['logger_20system_20migration_20guide_4',['Logger System Migration Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html',1,'']]],
   ['logger_20system_20performance_20guide_5',['Logger System Performance Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html',1,'']]],
-  ['logger_5fsystem_6',['logger_system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html',1,'Current State - logger_system'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__0__BASELINE.html',1,'Phase 0 Baseline - logger_system'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html',1,'Static Analysis Baseline - logger_system']]]
+  ['logger_5fsystem_6',['logger_system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__0__BASELINE.html',1,'Phase 0 Baseline - logger_system'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html',1,'Static Analysis Baseline - logger_system']]]
 ];

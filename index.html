@@ -94,6 +94,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__2home_2runner_2work_2logger__system_2logger__system_2README"></a> <a href="https://www.codefactor.io/repository/github/kcenon/logger_system"><img src="https://www.codefactor.io/repository/github/kcenon/logger_system/badge" alt="CodeFactor" class="inline"/></a></p>
+<p><a href="https://github.com/kcenon/logger_system/actions/workflows/ci.yml"><img src="https://github.com/kcenon/logger_system/actions/workflows/ci.yml/badge.svg" alt="CI" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/kcenon/logger_system/actions/workflows/coverage.yml"><img src="https://github.com/kcenon/logger_system/actions/workflows/coverage.yml/badge.svg" alt="Code Coverage" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/kcenon/logger_system/actions/workflows/static-analysis.yml"><img src="https://github.com/kcenon/logger_system/actions/workflows/static-analysis.yml/badge.svg" alt="Static Analysis" style="pointer-events: none;" class="inline"/></a></p>
 <p><a href="https://github.com/kcenon/logger_system/actions/workflows/build-ubuntu-gcc.yaml"><img src="https://github.com/kcenon/logger_system/actions/workflows/build-ubuntu-gcc.yaml/badge.svg" alt="Ubuntu-GCC" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/kcenon/logger_system/actions/workflows/build-ubuntu-clang.yaml"><img src="https://github.com/kcenon/logger_system/actions/workflows/build-ubuntu-clang.yaml/badge.svg" alt="Ubuntu-Clang" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/kcenon/logger_system/actions/workflows/build-windows-msys2.yaml"><img src="https://github.com/kcenon/logger_system/actions/workflows/build-windows-msys2.yaml/badge.svg" alt="Windows-MSYS2" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/kcenon/logger_system/actions/workflows/build-windows-vs.yaml"><img src="https://github.com/kcenon/logger_system/actions/workflows/build-windows-vs.yaml/badge.svg" alt="Windows-VisualStudio" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/kcenon/logger_system/actions/workflows/build-Doxygen.yaml"><img src="https://github.com/kcenon/logger_system/actions/workflows/build-Doxygen.yaml/badge.svg" alt="Docs" style="pointer-events: none;" class="inline"/></a></p>
 <h1><a class="anchor" id="autotoc_md0"></a>
 Logger System Project</h1>
@@ -1032,9 +1033,63 @@ Support</h2>
 <li><b>Email</b>: <a href="#" onclick="location.href='mai'+'lto:'+'kce'+'no'+'n@n'+'av'+'er.'+'co'+'m'; return false;">kceno<span class="obfuscator">.nosp@m.</span>n@na<span class="obfuscator">.nosp@m.</span>ver.c<span class="obfuscator">.nosp@m.</span>om</a></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md72"></a>
+Phase 0: Foundation Status</h2>
+<p>This project is undergoing systematic architecture improvements following a phased approach.</p>
+<h3><a class="anchor" id="autotoc_md73"></a>
+Current Phase: Phase 0 - Foundation and Tooling Setup</h3>
+<h4><a class="anchor" id="autotoc_md74"></a>
+Completed Tasks</h4>
+<ul>
+<li>✅ <b>CI/CD Pipeline Enhancement</b><ul>
+<li>Sanitizer builds (ThreadSanitizer, AddressSanitizer, UBSanitizer)</li>
+<li>Multi-platform testing (Ubuntu GCC, Ubuntu Clang, Windows MSYS2, Windows VS)</li>
+<li>Automated test execution</li>
+</ul>
+</li>
+<li>✅ <b>Documentation Build</b><ul>
+<li>Doxygen API documentation generation</li>
+<li>Automated documentation deployment</li>
+</ul>
+</li>
+<li>✅ <b>Static Analysis Baseline</b><ul>
+<li>Clang-tidy configuration</li>
+<li>Cppcheck integration</li>
+<li>Baseline warning collection</li>
+</ul>
+</li>
+<li>✅ <b>Documentation of Current State</b><ul>
+<li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html">Current State Documentation</a></li>
+<li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES.html">Architecture Issues Catalog</a></li>
+</ul>
+</li>
+</ul>
+<h4><a class="anchor" id="autotoc_md75"></a>
+Metrics Baseline</h4>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Metric   </th><th class="markdownTableHeadNone">Current Status   </th><th class="markdownTableHeadNone">Phase 5 Target    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Test Coverage   </td><td class="markdownTableBodyNone">~75%   </td><td class="markdownTableBodyNone">80%+    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Static Analysis   </td><td class="markdownTableBodyNone">Baseline warnings collected   </td><td class="markdownTableBodyNone">&lt;10 warnings    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Sanitizer Issues   </td><td class="markdownTableBodyNone">Baseline established   </td><td class="markdownTableBodyNone">0 warnings    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Documentation   </td><td class="markdownTableBodyNone">70%   </td><td class="markdownTableBodyNone">100%   </td></tr>
+</table>
+<h4><a class="anchor" id="autotoc_md76"></a>
+Next Phase: Phase 1 - Test Migration &amp; Thread Safety</h4>
+<ul>
+<li>Test suite migration to new interface patterns</li>
+<li>Writer thread safety verification</li>
+<li>Dependency injection edge case testing</li>
+<li>ThreadSanitizer compliance</li>
+</ul>
+<p>For detailed improvement plans, see the project's NEED_TO_FIX.md.</p>
+<h2><a class="anchor" id="autotoc_md77"></a>
 License</h2>
 <p>This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICENSE) file for details.</p>
-<h2><a class="anchor" id="autotoc_md73"></a>
+<h2><a class="anchor" id="autotoc_md78"></a>
 Acknowledgments</h2>
 <ul>
 <li>Thanks to all contributors who have helped improve this project</li>
@@ -1049,7 +1104,7 @@ Acknowledgments</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Oct 4 2025 08:13:18 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Oct 5 2025 23:58:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

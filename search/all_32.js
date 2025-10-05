@@ -1,6 +1,6 @@
 var searchData=
 [
   ['🔗_20ecosystem_20integration_0',['🔗 Ecosystem Integration',['../index.html#autotoc_md7',1,'']]],
-  ['🔗_20quick_20links_1',['🔗 Quick Links',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md100',1,'']]],
+  ['🔗_20quick_20links_1',['🔗 Quick Links',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md105',1,'']]],
   ['🔗_20strong_20module_20dependencies_20strong_2',['🔗 &lt;strong&gt;Module Dependencies&lt;/strong&gt;',['../index.html#autotoc_md34',1,'']]]
 ];
