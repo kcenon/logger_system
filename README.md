@@ -1,13 +1,6 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/kcenon/logger_system/badge)](https://www.codefactor.io/repository/github/kcenon/logger_system)
-
 [![CI](https://github.com/kcenon/logger_system/actions/workflows/ci.yml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/ci.yml)
 [![Code Coverage](https://github.com/kcenon/logger_system/actions/workflows/coverage.yml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/coverage.yml)
 [![Static Analysis](https://github.com/kcenon/logger_system/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/static-analysis.yml)
-
-[![Ubuntu-GCC](https://github.com/kcenon/logger_system/actions/workflows/build-ubuntu-gcc.yaml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/build-ubuntu-gcc.yaml)
-[![Ubuntu-Clang](https://github.com/kcenon/logger_system/actions/workflows/build-ubuntu-clang.yaml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/build-ubuntu-clang.yaml)
-[![Windows-MSYS2](https://github.com/kcenon/logger_system/actions/workflows/build-windows-msys2.yaml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/build-windows-msys2.yaml)
-[![Windows-VisualStudio](https://github.com/kcenon/logger_system/actions/workflows/build-windows-vs.yaml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/build-windows-vs.yaml)
 [![Docs](https://github.com/kcenon/logger_system/actions/workflows/build-Doxygen.yaml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/build-Doxygen.yaml)
 
 # Logger System Project
