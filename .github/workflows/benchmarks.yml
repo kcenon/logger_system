@@ -1,0 +1,157 @@
+name: Benchmarks
+
+on:
+  push:
+    branches: [ main, phase-* ]
+    paths:
+      - 'benchmarks/**'
+      - 'sources/**'
+      - '.github/workflows/benchmarks.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'benchmarks/**'
+      - 'sources/**'
+  workflow_dispatch:
+    inputs:
+      save_baseline:
+        description: 'Save as baseline'
+        required: false
+        default: 'false'
+
+jobs:
+  benchmark:
+    name: Run Performance Benchmarks
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, macos-13]
+        compiler: [clang]
+        build_type: [Release]
+
+    steps:
+    - name: Checkout logger_system
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Full history for comparison
+        path: logger_system
+
+    - name: Checkout common_system
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/common_system
+        path: common_system
+
+    - name: Checkout thread_system
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/thread_system
+        path: thread_system
+
+    - name: Install dependencies (Ubuntu)
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake ninja-build clang libbenchmark-dev libgtest-dev libfmt-dev
+
+    - name: Install dependencies (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        brew install ninja google-benchmark googletest fmt
+
+    - name: Set up compiler
+      run: |
+        echo "CC=clang" >> $GITHUB_ENV
+        echo "CXX=clang++" >> $GITHUB_ENV
+
+    - name: Configure CMake
+      run: |
+        cmake -B build -S logger_system \
+          -GNinja \
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          -DBUILD_BENCHMARKS=OFF \
+          -DBUILD_TESTS=OFF \
+          -DLOGGER_STANDALONE=ON
+
+    - name: Build logger_system
+      run: cmake --build build --config ${{ matrix.build_type }} -j
+
+    - name: Benchmark status
+      run: |
+        echo "⚠️ Benchmarks temporarily disabled due to API changes" >> $GITHUB_STEP_SUMMARY
+        echo "Logger API has been updated to use common interfaces." >> $GITHUB_STEP_SUMMARY
+        echo "Benchmark code needs to be updated to match new API." >> $GITHUB_STEP_SUMMARY
+
+    - name: Save baseline (if requested)
+      if: github.event.inputs.save_baseline == 'true' && github.ref == 'refs/heads/main'
+      run: |
+        mkdir -p benchmarks/baselines
+        cp build/benchmarks/benchmark_results_${{ matrix.os }}.json \
+           benchmarks/baselines/baseline_${{ matrix.os }}_$(date +%Y%m%d).json
+
+    - name: Compare with baseline (if exists)
+      if: hashFiles('benchmarks/baselines/baseline_${{ matrix.os }}_*.json') != ''
+      run: |
+        echo "Comparing with baseline..."
+        # Install compare.py from Google Benchmark tools
+        pip3 install --user scipy
+
+        # Find latest baseline
+        BASELINE=$(ls -t benchmarks/baselines/baseline_${{ matrix.os }}_*.json | head -1)
+
+        if [ -f "$BASELINE" ]; then
+          echo "Baseline: $BASELINE"
+          echo "Current: build/benchmarks/benchmark_results_${{ matrix.os }}.json"
+
+          # Download compare.py
+          curl -O https://raw.githubusercontent.com/google/benchmark/main/tools/compare.py
+          chmod +x compare.py
+
+          # Run comparison
+          python3 compare.py \
+            "$BASELINE" \
+            build/benchmarks/benchmark_results_${{ matrix.os }}.json
+        fi
+
+    - name: Check for performance regression
+      run: |
+        echo "Performance regression detection: TBD"
+        echo "Will be implemented in Phase 1 with baseline establishment"
+
+  report:
+    name: Generate Benchmark Report
+    needs: benchmark
+    runs-on: ubuntu-22.04
+    if: always()
+
+    steps:
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+
+    - name: Generate summary
+      run: |
+        echo "# Benchmark Results Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "## Phase 0: Baseline Measurement" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+
+        for dir in benchmark-results-*; do
+          if [ -d "$dir" ]; then
+            echo "### $dir" >> $GITHUB_STEP_SUMMARY
+            if [ -f "$dir/benchmark_results_"*.json ]; then
+              echo "✅ Benchmarks completed" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "❌ No results found" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+        done
+
+        echo "## Next Steps" >> $GITHUB_STEP_SUMMARY
+        echo "- Review benchmark results" >> $GITHUB_STEP_SUMMARY
+        echo "- Document baseline in docs/BASELINE.md" >> $GITHUB_STEP_SUMMARY
+        echo "- Set performance targets for Phase 1" >> $GITHUB_STEP_SUMMARY
