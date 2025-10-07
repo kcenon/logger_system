@@ -66,8 +66,9 @@ All rights reserved.
 
 #include "thread_integration_detector.h"
 #include "logger_config.h"
-#include "config_strategy_interface.h"
-#include "configuration_templates.h"
+// TODO: Re-enable when strategy pattern is implemented
+// #include "config_strategy_interface.h"
+// #include "configuration_templates.h"
 #include "../logger.h"
 #include "../writers/base_writer.h"
 #include "../writers/batch_writer.h"
@@ -416,23 +417,15 @@ public:
         return *this;
     }
     
-    /**
-     * @brief Apply a configuration strategy
-     * @param strategy Strategy to apply
-     * @return Reference to builder for chaining
-     */
+    // TODO: Re-enable when strategy pattern is implemented
+    /*
     logger_builder& apply_strategy(std::unique_ptr<config_strategy_interface> strategy) {
         if (strategy) {
             strategies_.push_back(std::move(strategy));
         }
         return *this;
     }
-    
-    /**
-     * @brief Apply environment-based configuration
-     * @param env Environment name ("development", "testing", "staging", "production")
-     * @return Reference to builder for chaining
-     */
+
     logger_builder& for_environment(const std::string& env) {
         auto strategy = config_strategy_factory::create_environment(env);
         if (strategy) {
@@ -440,12 +433,7 @@ public:
         }
         return *this;
     }
-    
-    /**
-     * @brief Apply performance tuning strategy
-     * @param level Tuning level ("conservative", "balanced", "aggressive")
-     * @return Reference to builder for chaining
-     */
+
     logger_builder& with_performance_tuning(const std::string& level = "balanced") {
         auto strategy = config_strategy_factory::create_tuning(level);
         if (strategy) {
@@ -453,11 +441,7 @@ public:
         }
         return *this;
     }
-    
-    /**
-     * @brief Auto-detect and apply environment configuration
-     * @return Reference to builder for chaining
-     */
+
     logger_builder& auto_configure() {
         auto strategy = config_strategy_factory::from_environment();
         if (strategy) {
@@ -465,6 +449,7 @@ public:
         }
         return *this;
     }
+    */
     
     /**
      * @brief Apply a configuration template
@@ -791,7 +776,8 @@ private:
     std::vector<std::pair<std::string, std::unique_ptr<base_writer>>> writers_;
     std::vector<std::unique_ptr<log_filter>> filters_;
     std::unique_ptr<log_formatter_interface> formatter_;
-    std::vector<std::unique_ptr<config_strategy_interface>> strategies_;
+    // TODO: Re-enable when strategy pattern is implemented
+    // std::vector<std::unique_ptr<config_strategy_interface>> strategies_;
     mutable logger_config built_config_;  // Store last built configuration
     std::shared_ptr<common::interfaces::IMonitor> monitor_;  // Phase 2.2.4
     std::chrono::milliseconds health_check_interval_{1000};
