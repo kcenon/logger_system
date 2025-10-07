@@ -31,7 +31,8 @@ static void BM_RotationOverhead(benchmark::State& state) {
 
     auto rotating_writer = std::make_unique<kcenon::logger::rotating_file_writer>(
         base_filename, max_file_size, max_files);
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(rotating_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(rotating_writer));
 
     // Write enough to trigger rotation
     std::string large_message(1024, 'x'); // 1 KB message
@@ -81,7 +82,8 @@ static void BM_WritePerformanceDuringRotation(benchmark::State& state) {
 
     auto rotating_writer = std::make_unique<kcenon::logger::rotating_file_writer>(
         base_filename, max_file_size, max_files);
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(rotating_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(rotating_writer));
 
     std::string message(100, 'x');
     size_t messages_written = 0;
@@ -118,7 +120,8 @@ static void BM_FileSizeThresholdAccuracy(benchmark::State& state) {
         state.PauseTiming();
         auto rotating_writer = std::make_unique<kcenon::logger::rotating_file_writer>(
             base_filename, max_file_size, max_files);
-        auto logger = std::make_unique<kcenon::logger::logger>(std::move(rotating_writer));
+        auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(rotating_writer));
 
         state.ResumeTiming();
 
@@ -173,7 +176,8 @@ static void BM_MaxFilesRotation(benchmark::State& state) {
 
     auto rotating_writer = std::make_unique<kcenon::logger::rotating_file_writer>(
         base_filename, max_file_size, max_files);
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(rotating_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(rotating_writer));
 
     std::string large_message(1024, 'x'); // 1 KB message
     size_t messages_written = 0;
@@ -226,7 +230,8 @@ static void BM_ConcurrentRotation(benchmark::State& state) {
 
         auto rotating_writer = std::make_unique<kcenon::logger::rotating_file_writer>(
             base_filename, max_file_size, max_files);
-        shared_logger = std::make_shared<kcenon::logger::logger>(std::move(rotating_writer));
+        shared_logger = std::make_shared<kcenon::logger::logger>();
+        shared_logger->add_writer(std::move(rotating_writer));
     }
 
     std::string message(100, 'x');

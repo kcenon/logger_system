@@ -34,11 +34,13 @@ protected:
 
         // Create logger with null writer (measures logger overhead only)
         auto null_writer = std::make_unique<kcenon::logger::null_writer>();
-        null_logger_ = std::make_unique<kcenon::logger::logger>(std::move(null_writer));
+        null_logger_ = std::make_unique<kcenon::logger::logger>();
+        null_logger_->add_writer(std::move(null_writer));
 
         // Create logger with file writer (measures full file I/O)
         auto file_writer = std::make_unique<kcenon::logger::file_writer>(test_log_file_);
-        file_logger_ = std::make_unique<kcenon::logger::logger>(std::move(file_writer));
+        file_logger_ = std::make_unique<kcenon::logger::logger>();
+        file_logger_->add_writer(std::move(file_writer));
     }
 
     void TearDown(const ::benchmark::State& state) override {

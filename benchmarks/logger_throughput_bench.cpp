@@ -29,7 +29,8 @@ namespace fs = std::filesystem;
 
 static void BM_Throughput_NullWriter(benchmark::State& state) {
     auto null_writer = std::make_unique<kcenon::logger::null_writer>();
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(null_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(null_writer));
 
     size_t messages_logged = 0;
 
@@ -46,7 +47,8 @@ BENCHMARK(BM_Throughput_NullWriter);
 static void BM_Throughput_FileWriter(benchmark::State& state) {
     std::string test_file = "throughput_bench.log";
     auto file_writer = std::make_unique<kcenon::logger::file_writer>(test_file);
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(file_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(file_writer));
 
     size_t messages_logged = 0;
 
@@ -72,7 +74,8 @@ BENCHMARK(BM_Throughput_FileWriter);
 
 static void BM_BurstThroughput(benchmark::State& state) {
     auto null_writer = std::make_unique<kcenon::logger::null_writer>();
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(null_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(null_writer));
 
     const size_t burst_size = state.range(0);
     size_t total_messages = 0;
@@ -106,7 +109,8 @@ static void BM_MultithreadedThroughput(benchmark::State& state) {
     // Initialize logger once for all threads
     if (state.thread_index() == 0) {
         auto null_writer = std::make_unique<kcenon::logger::null_writer>();
-        shared_logger = std::make_shared<kcenon::logger::logger>(std::move(null_writer));
+        shared_logger = std::make_shared<kcenon::logger::logger>();
+        shared_logger->add_writer(std::move(null_writer));
     }
 
     std::atomic<size_t> messages_logged{0};
@@ -140,7 +144,8 @@ BENCHMARK(BM_MultithreadedThroughput)
 
 static void BM_SustainedThroughput(benchmark::State& state) {
     auto null_writer = std::make_unique<kcenon::logger::null_writer>();
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(null_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(null_writer));
 
     size_t messages_logged = 0;
     auto start_time = std::chrono::high_resolution_clock::now();
@@ -169,7 +174,8 @@ BENCHMARK(BM_SustainedThroughput)
 
 static void BM_ThroughputWithVariableMessageSize(benchmark::State& state) {
     auto null_writer = std::make_unique<kcenon::logger::null_writer>();
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(null_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(null_writer));
 
     size_t messages_logged = 0;
     std::vector<std::string> messages = {
@@ -198,7 +204,8 @@ BENCHMARK(BM_ThroughputWithVariableMessageSize);
 
 static void BM_ThroughputWithFiltering(benchmark::State& state) {
     auto null_writer = std::make_unique<kcenon::logger::null_writer>();
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(null_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(null_writer));
 
     // Set minimum log level to WARNING (filters out DEBUG and INFO)
     logger->set_min_level(kcenon::logger::log_level::warning);
@@ -234,7 +241,8 @@ static void BM_ContentionThroughput(benchmark::State& state) {
 
     if (state.thread_index() == 0) {
         auto null_writer = std::make_unique<kcenon::logger::null_writer>();
-        shared_logger = std::make_shared<kcenon::logger::logger>(std::move(null_writer));
+        shared_logger = std::make_shared<kcenon::logger::logger>();
+        shared_logger->add_writer(std::move(null_writer));
         ready = true;
     }
 

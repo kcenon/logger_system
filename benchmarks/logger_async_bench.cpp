@@ -31,7 +31,8 @@ static void BM_AsyncWriter_Throughput(benchmark::State& state) {
     auto file_writer = std::make_unique<kcenon::logger::file_writer>(test_file);
     auto async_writer = std::make_unique<kcenon::logger::async_writer>(
         std::move(file_writer), 10000); // 10k queue size
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(async_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(async_writer));
 
     size_t messages_logged = 0;
 
@@ -57,7 +58,8 @@ BENCHMARK(BM_AsyncWriter_Throughput);
 static void BM_SyncWriter_Throughput(benchmark::State& state) {
     std::string test_file = "sync_bench.log";
     auto file_writer = std::make_unique<kcenon::logger::file_writer>(test_file);
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(file_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(file_writer));
 
     size_t messages_logged = 0;
 
@@ -86,7 +88,8 @@ static void BM_AsyncWriter_QueueLatency(benchmark::State& state) {
     auto null_writer = std::make_unique<kcenon::logger::null_writer>();
     auto async_writer = std::make_unique<kcenon::logger::async_writer>(
         std::move(null_writer), 10000);
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(async_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(async_writer));
 
     for (auto _ : state) {
         auto start = std::chrono::high_resolution_clock::now();
@@ -112,7 +115,8 @@ static void BM_AsyncWriter_QueueSizeImpact(benchmark::State& state) {
     auto null_writer = std::make_unique<kcenon::logger::null_writer>();
     auto async_writer = std::make_unique<kcenon::logger::async_writer>(
         std::move(null_writer), queue_size);
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(async_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(async_writer));
 
     size_t messages_logged = 0;
 
@@ -143,7 +147,8 @@ static void BM_AsyncWriter_QueueSaturation(benchmark::State& state) {
     auto null_writer = std::make_unique<kcenon::logger::null_writer>();
     auto async_writer = std::make_unique<kcenon::logger::async_writer>(
         std::move(null_writer), small_queue_size);
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(async_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(async_writer));
 
     size_t messages_logged = 0;
     size_t blocked_writes = 0;
@@ -181,7 +186,8 @@ static void BM_AsyncWriter_Multithreaded(benchmark::State& state) {
         auto null_writer = std::make_unique<kcenon::logger::null_writer>();
         auto async_writer = std::make_unique<kcenon::logger::async_writer>(
             std::move(null_writer), 100000); // Large queue
-        shared_logger = std::make_shared<kcenon::logger::logger>(std::move(async_writer));
+        shared_logger = std::make_shared<kcenon::logger::logger>();
+        shared_logger->add_writer(std::move(async_writer));
     }
 
     std::atomic<size_t> messages_logged{0};
@@ -220,7 +226,8 @@ static void BM_AsyncWriter_FlushOverhead(benchmark::State& state) {
         auto file_writer = std::make_unique<kcenon::logger::file_writer>(test_file);
         auto async_writer = std::make_unique<kcenon::logger::async_writer>(
             std::move(file_writer), 1000);
-        auto logger = std::make_unique<kcenon::logger::logger>(std::move(async_writer));
+        auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(async_writer));
 
         // Write some messages
         for (int i = 0; i < 100; ++i) {
@@ -255,7 +262,8 @@ static void BM_AsyncWriter_VariableMessageSize(benchmark::State& state) {
     auto null_writer = std::make_unique<kcenon::logger::null_writer>();
     auto async_writer = std::make_unique<kcenon::logger::async_writer>(
         std::move(null_writer), 10000);
-    auto logger = std::make_unique<kcenon::logger::logger>(std::move(async_writer));
+    auto logger = std::make_unique<kcenon::logger::logger>();
+    logger->add_writer(std::move(async_writer));
 
     std::vector<std::string> messages = {
         "Short",
