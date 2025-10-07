@@ -72,6 +72,10 @@ result_void file_writer::reopen() {
 }
 
 void file_writer::close() {
+    // IMPORTANT: Caller must hold write_mutex_ before calling this method
+    // This ensures thread safety with concurrent write() operations
+    // In debug builds, consider adding: assert(write_mutex_.try_lock() == false)
+
     if (file_stream_.is_open()) {
         file_stream_.flush();
         file_stream_.close();
@@ -79,6 +83,10 @@ void file_writer::close() {
 }
 
 result_void file_writer::open() {
+    // IMPORTANT: Caller must hold write_mutex_ before calling this method
+    // This ensures thread safety with concurrent operations
+    // In debug builds, consider adding: assert(write_mutex_.try_lock() == false)
+
     try {
         // Create directory if it doesn't exist
         std::filesystem::path file_path(filename_);
@@ -89,15 +97,15 @@ result_void file_writer::open() {
                                         "Failed to create directory: " + dir.string());
             }
         }
-        
+
         // Open file
         auto mode = append_mode_ ? std::ios::app : std::ios::trunc;
         file_stream_.open(filename_, std::ios::out | mode);
-        
+
         if (file_stream_.is_open()) {
             // Set buffer
             file_stream_.rdbuf()->pubsetbuf(buffer_.get(), buffer_size_);
-            
+
             // Get current file size if appending
             if (append_mode_) {
                 file_stream_.seekp(0, std::ios::end);
@@ -105,7 +113,7 @@ result_void file_writer::open() {
             } else {
                 bytes_written_ = 0;
             }
-            
+
             return {}; // Success
         } else {
             return make_logger_error(logger_error_code::file_open_failed,

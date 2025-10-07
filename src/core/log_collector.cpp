@@ -123,26 +123,42 @@ public:
     
     void stop() {
         if (running_.exchange(false)) {
+            // Notify worker thread to wake up and process remaining messages
             queue_cv_.notify_all();
+
+            // Wait for worker thread to finish processing all remaining messages
             if (worker_thread_.joinable()) {
                 worker_thread_.join();
             }
+
+            // The worker thread's process_loop() will call flush() to drain the queue
+            // before exiting, ensuring no messages are lost
         }
     }
     
     void flush() {
-        // Process all remaining entries
+        if (!running_.load()) {
+            // If not running, don't process queue (already drained by process_loop)
+            // Just flush the writers
+            std::lock_guard<std::mutex> writer_lock(writers_mutex_);
+            for (auto* writer : writers_) {
+                writer->flush();
+            }
+            return;
+        }
+
+        // Process all remaining entries if still running
         std::unique_lock<std::mutex> lock(queue_mutex_);
         while (!queue_.empty()) {
             auto entry = std::move(queue_.front());
             queue_.pop();
             lock.unlock();
-            
+
             write_to_all(entry);
-            
+
             lock.lock();
         }
-        
+
         // Flush all writers
         std::lock_guard<std::mutex> writer_lock(writers_mutex_);
         for (auto* writer : writers_) {
@@ -159,12 +175,12 @@ private:
     void process_loop() {
         while (running_.load()) {
             std::unique_lock<std::mutex> lock(queue_mutex_);
-            
+
             // Wait for entries or shutdown
             queue_cv_.wait(lock, [this] {
                 return !queue_.empty() || !running_.load();
             });
-            
+
             // Process batch of entries
             std::vector<log_entry> batch;
             while (!queue_.empty() && batch.size() < 100) {
@@ -172,25 +188,49 @@ private:
                 queue_.pop();
             }
             lock.unlock();
-            
+
             // Write batch to all writers
             for (const auto& entry : batch) {
                 write_to_all(entry);
             }
         }
-        
-        // Process any remaining entries
-        flush();
+
+        // Process any remaining entries in the queue after shutdown signal
+        // This ensures no messages are lost during shutdown
+        std::unique_lock<std::mutex> lock(queue_mutex_);
+        while (!queue_.empty()) {
+            auto entry = std::move(queue_.front());
+            queue_.pop();
+            lock.unlock();
+
+            write_to_all(entry);
+
+            lock.lock();
+        }
+
+        // Flush all writers after processing remaining messages
+        std::lock_guard<std::mutex> writer_lock(writers_mutex_);
+        for (auto* writer : writers_) {
+            writer->flush();
+        }
     }
     
     void write_to_all(const log_entry& entry) {
-        std::lock_guard<std::mutex> lock(writers_mutex_);
-        for (auto* writer : writers_) {
-            // Ignore write failures for now
-            std::string file = entry.location ? entry.location->file.to_string() : "";
-            int line = entry.location ? entry.location->line : 0;
-            std::string function = entry.location ? entry.location->function.to_string() : "";
-            
+        // Copy the writers list under lock, then release the lock before calling write()
+        // This prevents deadlock if a writer logs internally and avoids blocking add_writer()
+        std::vector<base_writer*> writers_snapshot;
+        {
+            std::lock_guard<std::mutex> lock(writers_mutex_);
+            writers_snapshot = writers_;
+        }
+
+        // Write to all writers without holding the mutex
+        // This allows concurrent add_writer() calls and prevents deadlock
+        std::string file = entry.location ? entry.location->file.to_string() : "";
+        int line = entry.location ? entry.location->line : 0;
+        std::string function = entry.location ? entry.location->function.to_string() : "";
+
+        for (auto* writer : writers_snapshot) {
             writer->write(entry.level, entry.message.to_string(), file,
                          line, function, entry.timestamp);
         }

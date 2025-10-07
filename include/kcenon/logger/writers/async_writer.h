@@ -60,13 +60,22 @@ public:
      * @brief Start the async writer thread
      */
     void start() {
-        if (running_.exchange(true)) {
+        // Use compare_exchange to safely check and set running_ flag
+        bool expected = false;
+        if (!running_.compare_exchange_strong(expected, true)) {
             return; // Already running
         }
-        
-        worker_thread_ = std::thread([this]() {
-            process_messages();
-        });
+
+        // Try to create the worker thread with proper error handling
+        try {
+            worker_thread_ = std::thread([this]() {
+                process_messages();
+            });
+        } catch (const std::exception&) {
+            // Thread creation failed, rollback the running_ flag
+            running_.store(false);
+            throw; // Re-throw to notify caller
+        }
     }
     
     /**
@@ -138,13 +147,19 @@ public:
         if (!running_) {
             return wrapped_writer_->flush();
         }
-        
-        // Wait for the queue to be empty
+
+        // Wait for the queue to be empty with a timeout to prevent indefinite blocking
         std::unique_lock<std::mutex> lock(queue_mutex_);
-        flush_cv_.wait(lock, [this]() {
+        bool flushed = flush_cv_.wait_for(lock, std::chrono::seconds(5), [this]() {
             return message_queue_.empty();
         });
-        
+
+        if (!flushed) {
+            // Timeout occurred - worker thread may have exited or is blocked
+            return make_logger_error(logger_error_code::flush_timeout,
+                                    "Flush operation timed out after 5 seconds");
+        }
+
         // Flush the wrapped writer
         return wrapped_writer_->flush();
     }
