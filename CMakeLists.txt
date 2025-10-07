@@ -66,7 +66,9 @@ if(NOT common_system_FOUND)
     # Check for common_system in multiple locations
     set(_LOGGER_COMMON_PATHS
         "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../../common_system/include"
         "${CMAKE_CURRENT_SOURCE_DIR}/common_system/include"
+        "$ENV{GITHUB_WORKSPACE}/common_system/include"
     )
 
     foreach(_path ${_LOGGER_COMMON_PATHS})
