@@ -28,7 +28,7 @@ if(benchmark_FOUND OR BENCHMARK_FOUND)
 
     target_link_libraries(logger_benchmarks
         PRIVATE
-            kcenon::logger_system
+            LoggerSystem
             benchmark::benchmark
             benchmark::benchmark_main
     )
