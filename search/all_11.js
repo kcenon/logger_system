@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['handling_0',['handling',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md161',1,'Error Handling'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html#autotoc_md438',1,'Error Handling'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md178',1,'Error Handling']]],
+  ['handling_0',['handling',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md161',1,'Error Handling'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md178',1,'Error Handling'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html#autotoc_md438',1,'Error Handling']]],
   ['handling_20migration_1',['1. Error Handling Migration',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md487',1,'']]],
   ['handling_20with_20result_20pattern_2',['handling with result pattern',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md569',1,'2. Error Handling with Result Pattern'],['../index.html#autotoc_md43',1,'Error Handling with Result Pattern']]],
   ['hardware_20specifications_3',['Hardware Specifications',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE.html#autotoc_md284',1,'']]],
@@ -17,8 +17,9 @@ var searchData=
   ['highlights_14',['🏗️ Architecture Highlights',['../index.html#autotoc_md5',1,'']]],
   ['history_15',['history',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md103',1,'📅 Release History'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE.html#autotoc_md329',1,'Revision History']]],
   ['hot_20paths_16',['1. Synchronous I/O in Hot Paths',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html#autotoc_md542',1,'']]],
-  ['how_20to_20run_20analysis_17',['How to Run Analysis',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md704',1,'']]],
+  ['how_20to_20run_20analysis_17',['How to Run Analysis',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md727',1,'']]],
   ['how_20to_20run_20benchmarks_18',['How to Run Benchmarks',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE.html#autotoc_md314',1,'']]],
-  ['how_20to_20verify_20baseline_19',['How to Verify Baseline',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__0__BASELINE.html#autotoc_md665',1,'']]],
-  ['hub_20',['4. integrated_thread_system (Integration Hub)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md207',1,'']]]
+  ['how_20to_20run_20sanitizers_20locally_19',['How to Run Sanitizers Locally',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md698',1,'']]],
+  ['how_20to_20verify_20baseline_20',['How to Verify Baseline',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__0__BASELINE.html#autotoc_md665',1,'']]],
+  ['hub_21',['4. integrated_thread_system (Integration Hub)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md207',1,'']]]
 ];

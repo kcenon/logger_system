@@ -7,5 +7,6 @@ var searchData=
   ['logger_20system_20migration_20guide_4',['Logger System Migration Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html',1,'']]],
   ['logger_20system_20performance_20guide_5',['Logger System Performance Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html',1,'']]],
   ['logger_5fsystem_6',['logger_system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__0__BASELINE.html',1,'Phase 0 Baseline - logger_system'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html',1,'Static Analysis Baseline - logger_system']]],
-  ['logger_5fsystem_20performance_20baseline_7',['logger_system Performance Baseline',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE.html',1,'']]]
+  ['logger_5fsystem_20performance_20baseline_7',['logger_system Performance Baseline',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE.html',1,'']]],
+  ['logger_5fsystem_20sanitizer_20baseline_8',['logger_system Sanitizer Baseline',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html',1,'']]]
 ];

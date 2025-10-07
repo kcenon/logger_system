@@ -6,7 +6,7 @@ var searchData=
   ['getting_5fstarted_2emd_3',['GETTING_STARTED.md',['../GETTING__STARTED_8md.html',1,'']]],
   ['github_20actions_20workflows_4',['GitHub Actions Workflows',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html#autotoc_md406',1,'']]],
   ['glog_5',['From Google glog',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md502',1,'']]],
-  ['goals_6',['goals',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__0__BASELINE.html#autotoc_md662',1,'Phase 1 Goals'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__0__BASELINE.html#autotoc_md663',1,'Phase 2 Goals'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md703',1,'Target Goals']]],
+  ['goals_6',['goals',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__0__BASELINE.html#autotoc_md662',1,'Phase 1 Goals'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__0__BASELINE.html#autotoc_md663',1,'Phase 2 Goals'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md726',1,'Target Goals']]],
   ['google_20glog_7',['From Google glog',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md502',1,'']]],
   ['graceful_20degradation_8',['Graceful Degradation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html#autotoc_md439',1,'']]],
   ['graceful_20shutdown_9',['3. Graceful Shutdown',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html#autotoc_md453',1,'']]],
