@@ -161,7 +161,17 @@ if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
             set(BUILD_THREADSYSTEM_AS_SUBMODULE ON CACHE BOOL "Build ThreadSystem as submodule" FORCE)
             set(BUILD_TESTS OFF CACHE BOOL "Disable tests for thread_system" FORCE)
             set(BUILD_SAMPLES OFF CACHE BOOL "Disable samples for thread_system" FORCE)
+            # Set THREAD_SYSTEM_ROOT before adding subdirectory for utilities to find main include
+            set(THREAD_SYSTEM_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" CACHE PATH "Thread system root directory" FORCE)
             add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" "${CMAKE_BINARY_DIR}/thread_system_build")
+
+            # Fix utilities include path for CI environment
+            if(TARGET utilities)
+                target_include_directories(utilities PUBLIC
+                    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
+                )
+            endif()
+
             set(THREAD_SYSTEM_FOUND TRUE)
         else()
             # Try to find it as an installed package
