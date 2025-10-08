@@ -189,45 +189,47 @@ void rotating_file_writer::perform_rotation() {
 std::string rotating_file_writer::generate_rotated_filename(int index) const {
     std::ostringstream oss;
     std::filesystem::path dir = std::filesystem::path(filename_).parent_path();
-    
+
     if (!dir.empty()) {
         oss << dir.string() << "/";
     }
-    
-    oss << base_filename_;
-    
+
+    // Build: base + extension + separator + timestamp/index
+    // Example: "test.log.1" instead of "test.1.log"
+    oss << base_filename_ << file_extension_;
+
     // Add timestamp or index
     auto now = std::chrono::system_clock::now();
     auto time_t = std::chrono::system_clock::to_time_t(now);
-    
+
     switch (rotation_type_) {
         case rotation_type::size:
             if (index >= 0) {
                 oss << "." << index;
             } else {
                 // Find next available index
+                std::string base_with_ext = oss.str();
                 int next_index = 1;
-                while (std::filesystem::exists(oss.str() + "." + std::to_string(next_index) + file_extension_)) {
+                while (std::filesystem::exists(base_with_ext + "." + std::to_string(next_index))) {
                     next_index++;
                 }
                 oss << "." << next_index;
             }
             break;
-            
+
         case rotation_type::daily:
             oss << "." << std::put_time(std::localtime(&time_t), "%Y%m%d");
             break;
-            
+
         case rotation_type::hourly:
             oss << "." << std::put_time(std::localtime(&time_t), "%Y%m%d_%H");
             break;
-            
+
         case rotation_type::size_and_time:
             oss << "." << std::put_time(std::localtime(&time_t), "%Y%m%d_%H%M%S");
             break;
     }
-    
-    oss << file_extension_;
+
     return oss.str();
 }
 
@@ -262,8 +264,10 @@ std::vector<std::string> rotating_file_writer::get_backup_files() const {
     }
     
     // Create regex pattern for backup files
-    std::string pattern = base_filename_ + R"(\.(\d+|\\d{8}|\\d{8}_\\d{2}|\\d{8}_\\d{6}))" +
-                         std::regex_replace(file_extension_, std::regex(R"(\.)"), R"(\\.)");
+    // Pattern: base_filename + file_extension + "." + (number or timestamp)
+    // Example: "test_rotating.log.1" or "test.log.20250108"
+    std::string escaped_ext = std::regex_replace(file_extension_, std::regex(R"(\.)"), R"(\\.)");
+    std::string pattern = base_filename_ + escaped_ext + R"(\.(\d+|\d{8}|\d{8}_\d{2}|\d{8}_\d{6}))";
     std::regex backup_regex(pattern);
     
     try {
