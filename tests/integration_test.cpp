@@ -30,12 +30,9 @@ All rights reserved.
 using namespace kcenon::logger;
 using namespace std::chrono_literals;
 
-// Use the correct log_level type based on build configuration
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-using log_level = kcenon::thread::log_level;
-#else
+// Always use logger_system::log_level in tests
+// The logger class internally handles conversion if needed
 using log_level = logger_system::log_level;
-#endif
 
 class IntegrationTest : public ::testing::Test {
 protected:
@@ -93,7 +90,7 @@ TEST_F(IntegrationTest, FullPipelineTest) {
 
     // Configure routing
     auto& router = logger->get_router();
-    kcenon::logger::routing::router_builder builder(router);
+    routing::router_builder builder(router);
     builder.when_level(log_level::error)
         .route_to("file", true);
 #endif

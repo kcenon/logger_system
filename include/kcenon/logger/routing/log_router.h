@@ -142,7 +142,8 @@ private:
         explicit regex_condition(const std::string& pattern) : pattern_(pattern) {}
 
         bool should_log(const log_entry& entry) const override {
-            std::string_view msg_view = entry.message.to_string_view();
+            // Use implicit conversion to string_view
+            std::string_view msg_view = entry.message;
             return std::regex_search(msg_view.begin(), msg_view.end(), pattern_);
         }
 
