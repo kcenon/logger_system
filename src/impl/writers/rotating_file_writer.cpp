@@ -202,6 +202,14 @@ std::string rotating_file_writer::generate_rotated_filename(int index) const {
     auto now = std::chrono::system_clock::now();
     auto time_t = std::chrono::system_clock::to_time_t(now);
 
+    // Use thread-safe time conversion
+    std::tm tm_buf{};
+#ifdef _WIN32
+    localtime_s(&tm_buf, &time_t);  // Windows thread-safe version
+#else
+    localtime_r(&time_t, &tm_buf);  // POSIX thread-safe version
+#endif
+
     switch (rotation_type_) {
         case rotation_type::size:
             if (index >= 0) {
@@ -218,15 +226,15 @@ std::string rotating_file_writer::generate_rotated_filename(int index) const {
             break;
 
         case rotation_type::daily:
-            oss << "." << std::put_time(std::localtime(&time_t), "%Y%m%d");
+            oss << "." << std::put_time(&tm_buf, "%Y%m%d");
             break;
 
         case rotation_type::hourly:
-            oss << "." << std::put_time(std::localtime(&time_t), "%Y%m%d_%H");
+            oss << "." << std::put_time(&tm_buf, "%Y%m%d_%H");
             break;
 
         case rotation_type::size_and_time:
-            oss << "." << std::put_time(std::localtime(&time_t), "%Y%m%d_%H%M%S");
+            oss << "." << std::put_time(&tm_buf, "%Y%m%d_%H%M%S");
             break;
     }
 

@@ -236,6 +236,7 @@ TEST_F(ThreadSafetyTest, MultipleWritersConcurrent) {
     auto test_logger = std::make_shared<logger>();
     test_logger->start();
 
+    // Add all writers in single-threaded setup phase
     test_logger->add_writer(std::make_unique<file_writer>("test_multiple.log"));
     test_logger->add_writer(std::make_unique<file_writer>("test_multiple2.log"));
     test_logger->add_writer(std::make_unique<console_writer>());
@@ -246,6 +247,7 @@ TEST_F(ThreadSafetyTest, MultipleWritersConcurrent) {
     std::vector<std::thread> threads;
     std::atomic<int> errors{0};
 
+    // Now perform concurrent logging with pre-configured writers
     for (int i = 0; i < num_threads; ++i) {
         threads.emplace_back([&, thread_id = i]() {
             for (int j = 0; j < messages_per_thread; ++j) {
