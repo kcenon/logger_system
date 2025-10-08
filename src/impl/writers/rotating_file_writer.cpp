@@ -82,15 +82,39 @@ result_void rotating_file_writer::write(logger_system::log_level level,
                                         int line,
                                         const std::string& function,
                                         const std::chrono::system_clock::time_point& timestamp) {
+    // Lock the mutex first to ensure atomic check-and-rotate operation
+    std::lock_guard<std::mutex> lock(write_mutex_);
+
     // Check if rotation is needed before writing
+    // This check is now protected by mutex to prevent race conditions
     if (should_rotate()) {
-        rotate();
+        perform_rotation();
     }
-    
-    return file_writer::write(level, message, file, line, function, timestamp);
+
+    // Write to file with mutex already held
+    if (!file_stream_.is_open()) {
+        return make_logger_error(logger_error_code::file_write_failed,
+                                "File stream is not open");
+    }
+
+    std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
+
+    try {
+        file_stream_ << formatted << std::endl;
+        bytes_written_.fetch_add(formatted.size() + 1);
+
+        if (!file_stream_.good()) {
+            return make_logger_error(logger_error_code::file_write_failed,
+                                    "Failed to write to file stream");
+        }
+        return {};
+    } catch (const std::exception& e) {
+        return make_logger_error(logger_error_code::file_write_failed, e.what());
+    }
 }
 
 void rotating_file_writer::rotate() {
+    // Public API for manual rotation
     std::lock_guard<std::mutex> lock(write_mutex_);
     perform_rotation();
 }
@@ -113,12 +137,18 @@ bool rotating_file_writer::should_rotate() const {
 }
 
 void rotating_file_writer::perform_rotation() {
+    // IMPORTANT: Caller must hold write_mutex_ before calling this method
+    // This ensures thread safety for all file operations and mutable state modifications
+
     // Close current file
-    close();
-    
+    if (file_stream_.is_open()) {
+        file_stream_.flush();
+        file_stream_.close();
+    }
+
     // Generate new filename for the current log
     std::string rotated_name = generate_rotated_filename();
-    
+
     // Rename current file
     try {
         if (std::filesystem::exists(filename_)) {
@@ -127,14 +157,30 @@ void rotating_file_writer::perform_rotation() {
     } catch (const std::exception& e) {
         std::cerr << "Failed to rotate log file: " << e.what() << std::endl;
     }
-    
+
     // Clean up old files
     cleanup_old_files();
-    
+
     // Open new file
-    open();
-    
-    // Update rotation time
+    try {
+        std::filesystem::path file_path(filename_);
+        std::filesystem::path dir = file_path.parent_path();
+        if (!dir.empty() && !std::filesystem::exists(dir)) {
+            std::filesystem::create_directories(dir);
+        }
+
+        auto mode = append_mode_ ? std::ios::app : std::ios::trunc;
+        file_stream_.open(filename_, std::ios::out | mode);
+
+        if (file_stream_.is_open()) {
+            file_stream_.rdbuf()->pubsetbuf(buffer_.get(), buffer_size_);
+            bytes_written_ = 0;
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Failed to open new log file: " << e.what() << std::endl;
+    }
+
+    // Update rotation time - protected by mutex
     last_rotation_time_ = std::chrono::system_clock::now();
     current_period_start_ = last_rotation_time_;
 }
