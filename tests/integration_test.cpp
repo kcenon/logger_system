@@ -63,11 +63,11 @@ TEST_F(IntegrationTest, MultiWriterLogging) {
     // Log messages at various levels
     for (int i = 0; i < 50; ++i) {
         if (i % 10 == 0) {
-            test_logger->log(kcenon::thread::log_level::error, "Error message " + std::to_string(i));
+            test_logger->log(log_level::error, "Error message " + std::to_string(i));
         } else if (i % 5 == 0) {
-            test_logger->log(kcenon::thread::log_level::warning, "Warning message " + std::to_string(i));
+            test_logger->log(log_level::warning, "Warning message " + std::to_string(i));
         } else {
-            test_logger->log(kcenon::thread::log_level::info, "Info message " + std::to_string(i));
+            test_logger->log(log_level::info, "Info message " + std::to_string(i));
         }
     }
 
@@ -97,7 +97,7 @@ TEST_F(IntegrationTest, MetricsCollection) {
 
     const int message_count = 100;
     for (int i = 0; i < message_count; ++i) {
-        test_logger->log(kcenon::thread::log_level::info, "Test message " + std::to_string(i));
+        test_logger->log(log_level::info, "Test message " + std::to_string(i));
     }
 
     test_logger->flush();
@@ -132,8 +132,8 @@ TEST_F(IntegrationTest, EncryptedWriting) {
     auto encrypted = std::make_unique<encrypted_writer>(std::move(file), key);
     test_logger->add_writer(std::move(encrypted));
 
-    test_logger->log(kcenon::thread::log_level::info, "Encrypted test message");
-    test_logger->log(kcenon::thread::log_level::warning, "Another encrypted message");
+    test_logger->log(log_level::info, "Encrypted test message");
+    test_logger->log(log_level::warning, "Another encrypted message");
 
     test_logger->flush();
     test_logger->stop();
@@ -161,7 +161,7 @@ TEST_F(IntegrationTest, FileRotation) {
 
     // Write enough messages to trigger rotation
     for (int i = 0; i < 100; ++i) {
-        test_logger->log(kcenon::thread::log_level::info,
+        test_logger->log(log_level::info,
             "Long message to trigger file rotation - message number " + std::to_string(i) +
             " with additional padding to increase file size quickly");
     }
@@ -201,7 +201,7 @@ TEST_F(IntegrationTest, ConcurrentLogging) {
             for (int i = 0; i < messages_per_thread; ++i) {
                 std::string msg = "Thread " + std::to_string(t) +
                                  " message " + std::to_string(i);
-                test_logger->log(kcenon::thread::log_level::info, msg);
+                test_logger->log(log_level::info, msg);
             }
         });
     }
@@ -247,7 +247,7 @@ TEST_F(IntegrationTest, StartStopLifecycle) {
     for (int cycle = 0; cycle < 5; ++cycle) {
         test_logger->start();
 
-        test_logger->log(kcenon::thread::log_level::info, "Cycle " + std::to_string(cycle) + " message");
+        test_logger->log(log_level::info, "Cycle " + std::to_string(cycle) + " message");
 
         test_logger->flush();
         test_logger->stop();

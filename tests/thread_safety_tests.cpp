@@ -78,7 +78,7 @@ TEST_F(ThreadSafetyTest, ConcurrentLogging) {
                 try {
                     std::string msg = "Thread " + std::to_string(thread_id) +
                                     " message " + std::to_string(j);
-                    test_logger->log(kcenon::thread::log_level::info, msg);
+                    test_logger->log(log_level::info, msg);
                 } catch (...) {
                     ++errors;
                 }
@@ -122,7 +122,7 @@ TEST_F(ThreadSafetyTest, HighThroughputStress) {
 
             for (int j = 0; j < messages_per_thread; ++j) {
                 try {
-                    test_logger->log(kcenon::thread::log_level::info,
+                    test_logger->log(log_level::info,
                                    "High throughput test: thread " + std::to_string(thread_id) +
                                    " msg " + std::to_string(j));
                 } catch (...) {
@@ -172,7 +172,7 @@ TEST_F(ThreadSafetyTest, RotatingFileWriterConcurrency) {
                     std::string msg = "Rotation test thread " + std::to_string(thread_id) +
                                     " message " + std::to_string(j) +
                                     " - padding data to increase file size quickly";
-                    test_logger->log(kcenon::thread::log_level::info, msg);
+                    test_logger->log(log_level::info, msg);
                 } catch (...) {
                     ++errors;
                 }
@@ -209,7 +209,7 @@ TEST_F(ThreadSafetyTest, StartStopStress) {
             threads.emplace_back([&, thread_id = i]() {
                 for (int j = 0; j < messages_per_cycle; ++j) {
                     try {
-                        test_logger->log(kcenon::thread::log_level::info,
+                        test_logger->log(log_level::info,
                                        "Cycle " + std::to_string(cycle) +
                                        " thread " + std::to_string(thread_id) +
                                        " msg " + std::to_string(j));
@@ -251,13 +251,13 @@ TEST_F(ThreadSafetyTest, MultipleWritersConcurrent) {
             for (int j = 0; j < messages_per_thread; ++j) {
                 try {
                     // Cycle through different log levels
-                    kcenon::thread::log_level level;
+                    log_level level;
                     switch (j % 4) {
-                        case 0: level = kcenon::thread::log_level::debug; break;
-                        case 1: level = kcenon::thread::log_level::info; break;
-                        case 2: level = kcenon::thread::log_level::warning; break;
-                        case 3: level = kcenon::thread::log_level::error; break;
-                        default: level = kcenon::thread::log_level::info;
+                        case 0: level = log_level::debug; break;
+                        case 1: level = log_level::info; break;
+                        case 2: level = log_level::warning; break;
+                        case 3: level = log_level::error; break;
+                        default: level = log_level::info;
                     }
 
                     test_logger->log(level,
@@ -305,7 +305,7 @@ TEST_F(ThreadSafetyTest, FlushDuringLogging) {
         threads.emplace_back([&, thread_id = i]() {
             for (int j = 0; j < messages_per_thread && running.load(); ++j) {
                 try {
-                    test_logger->log(kcenon::thread::log_level::info,
+                    test_logger->log(log_level::info,
                                    "Concurrent flush test " + std::to_string(thread_id) +
                                    ":" + std::to_string(j));
                 } catch (...) {
@@ -357,7 +357,7 @@ TEST_F(ThreadSafetyTest, SourceLocationConcurrency) {
         threads.emplace_back([&]() {
             for (int j = 0; j < messages_per_thread; ++j) {
                 try {
-                    test_logger->log(kcenon::thread::log_level::info,
+                    test_logger->log(log_level::info,
                                    "Source location test " + std::to_string(j),
                                    __FILE__, __LINE__, __FUNCTION__);
                 } catch (...) {
@@ -400,14 +400,14 @@ TEST_F(ThreadSafetyTest, MixedLogLevelsStress) {
 
             for (int j = 0; j < operations_per_thread; ++j) {
                 try {
-                    kcenon::thread::log_level level;
+                    log_level level;
                     switch (level_dist(rng)) {
-                        case 0: level = kcenon::thread::log_level::trace; break;
-                        case 1: level = kcenon::thread::log_level::debug; break;
-                        case 2: level = kcenon::thread::log_level::info; break;
-                        case 3: level = kcenon::thread::log_level::warning; break;
-                        case 4: level = kcenon::thread::log_level::error; break;
-                        default: level = kcenon::thread::log_level::fatal; break;
+                        case 0: level = log_level::trace; break;
+                        case 1: level = log_level::debug; break;
+                        case 2: level = log_level::info; break;
+                        case 3: level = log_level::warning; break;
+                        case 4: level = log_level::error; break;
+                        default: level = log_level::fatal; break;
                     }
 
                     test_logger->log(level,
@@ -452,7 +452,7 @@ TEST_F(ThreadSafetyTest, DynamicWriterAddition) {
         threads.emplace_back([&, thread_id = i]() {
             for (int j = 0; j < messages_per_thread && running.load(); ++j) {
                 try {
-                    test_logger->log(kcenon::thread::log_level::info,
+                    test_logger->log(log_level::info,
                                    "Dynamic writer test " + std::to_string(thread_id) +
                                    ":" + std::to_string(j));
                 } catch (...) {
@@ -504,7 +504,7 @@ TEST_F(ThreadSafetyTest, MemorySafetyTest) {
             threads.emplace_back([&, thread_id = i]() {
                 for (int j = 0; j < messages_per_thread; ++j) {
                     try {
-                        test_logger->log(kcenon::thread::log_level::info,
+                        test_logger->log(log_level::info,
                                        "Memory safety iter " + std::to_string(iteration) +
                                        " thread " + std::to_string(thread_id) +
                                        " msg " + std::to_string(j));
