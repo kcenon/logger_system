@@ -24,6 +24,8 @@ class IntegrationTest : public ::testing::Test {
 protected:
     void SetUp() override {
         cleanup_test_files();
+        // Reset global metrics before each test
+        metrics::g_logger_stats.reset();
     }
 
     void TearDown() override {

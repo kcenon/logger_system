@@ -85,12 +85,6 @@ result_void rotating_file_writer::write(logger_system::log_level level,
     // Lock the mutex first to ensure atomic check-and-rotate operation
     std::lock_guard<std::mutex> lock(write_mutex_);
 
-    // Check if rotation is needed before writing
-    // This check is now protected by mutex to prevent race conditions
-    if (should_rotate()) {
-        perform_rotation();
-    }
-
     // Write to file with mutex already held
     if (!file_stream_.is_open()) {
         return make_logger_error(logger_error_code::file_write_failed,
@@ -107,6 +101,13 @@ result_void rotating_file_writer::write(logger_system::log_level level,
             return make_logger_error(logger_error_code::file_write_failed,
                                     "Failed to write to file stream");
         }
+
+        // Check if rotation is needed after writing
+        // This ensures we can accurately determine if the size threshold is exceeded
+        if (should_rotate()) {
+            perform_rotation();
+        }
+
         return {};
     } catch (const std::exception& e) {
         return make_logger_error(logger_error_code::file_write_failed, e.what());
