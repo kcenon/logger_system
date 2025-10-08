@@ -55,9 +55,9 @@ TEST_F(IntegrationTest, MultiWriterLogging) {
     test_logger->start();
 
     // Add multiple writers
-    test_logger->add_writer("console", std::make_unique<console_writer>());
-    test_logger->add_writer("file", std::make_unique<file_writer>("test_integration.log"));
-    test_logger->add_writer("rotating", std::make_unique<rotating_file_writer>(
+    test_logger->add_writer(std::make_unique<console_writer>());
+    test_logger->add_writer(std::make_unique<file_writer>("test_integration.log"));
+    test_logger->add_writer(std::make_unique<rotating_file_writer>(
         "test_rotating.log", 1024, 3));
 
     // Log messages at various levels

@@ -407,7 +407,7 @@ TEST_F(ThreadSafetyTest, MixedLogLevelsStress) {
                         case 2: level = log_level::info; break;
                         case 3: level = log_level::warning; break;
                         case 4: level = log_level::error; break;
-                        default: level = log_level::fatal; break;
+                        default: level = log_level::critical; break;
                     }
 
                     test_logger->log(level,
