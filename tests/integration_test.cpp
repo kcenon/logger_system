@@ -30,10 +30,6 @@ All rights reserved.
 using namespace kcenon::logger;
 using namespace std::chrono_literals;
 
-// Always use logger_system::log_level in tests
-// The logger class internally handles conversion if needed
-using log_level = logger_system::log_level;
-
 class IntegrationTest : public ::testing::Test {
 protected:
     void SetUp() override {
@@ -87,26 +83,26 @@ TEST_F(IntegrationTest, DISABLED_FullPipelineTest) {
     // Add filters
 #ifndef LOGGER_STANDALONE_MODE
     auto level_filt = std::make_unique<kcenon::logger::filters::level_filter>(
-        log_level::debug);
+        logger_system::log_level::debug);
     logger->set_filter(std::move(level_filt));
 
     // Configure routing
     auto& router = logger->get_router();
     routing::router_builder builder(router);
-    builder.when_level(log_level::error)
+    builder.when_level(logger_system::log_level::error)
         .route_to("file", true);
 #endif
 
     // Log various messages
     for (int i = 0; i < 100; ++i) {
         if (i % 10 == 0) {
-            logger->log(log_level::error,
+            logger->log(logger_system::log_level::error,
                        "Error message " + std::to_string(i));
         } else if (i % 5 == 0) {
-            logger->log(log_level::warn,
+            logger->log(logger_system::log_level::warn,
                        "Warning message " + std::to_string(i));
         } else {
-            logger->log(log_level::info,
+            logger->log(logger_system::log_level::info,
                        "Info message " + std::to_string(i));
         }
     }
@@ -193,7 +189,7 @@ TEST_F(IntegrationTest, DISABLED_NetworkLoggingTest) {
 
     // Send some logs
     for (int i = 0; i < 10; ++i) {
-        logger->log(log_level::info,
+        logger->log(logger_system::log_level::info,
                    "Network message " + std::to_string(i));
     }
 
@@ -225,7 +221,7 @@ TEST_F(IntegrationTest, DISABLED_SecurityFeaturesTest) {
     auto encrypted = std::make_unique<encrypted_writer>(std::move(file), key);
     logger->add_writer(std::move(encrypted));
 
-    logger->log(log_level::info, "Encrypted message");
+    logger->log(logger_system::log_level::info, "Encrypted message");
     logger->flush();
     logger->stop();
 
@@ -252,11 +248,11 @@ TEST_F(IntegrationTest, DISABLED_SecurityFeaturesTest) {
 
     // Info level should be allowed
     EXPECT_TRUE(access_filter->should_log(
-        log_level::info, "test", "file.cpp", 1, "func"));
+        logger_system::log_level::info, "test", "file.cpp", 1, "func"));
 
     // Debug level should be blocked
     EXPECT_FALSE(access_filter->should_log(
-        log_level::debug, "test", "file.cpp", 1, "func"));
+        logger_system::log_level::debug, "test", "file.cpp", 1, "func"));
 #endif
 }
 
@@ -276,8 +272,8 @@ TEST_F(IntegrationTest, DISABLED_AnalysisTest) {
     analyzer->add_alert_rule({
         "high_error_rate",
         [](const auto& stats) {
-            auto error_count = stats.level_counts.count(log_level::error) ?
-                              stats.level_counts.at(log_level::error) : 0;
+            auto error_count = stats.level_counts.count(logger_system::log_level::error) ?
+                              stats.level_counts.at(logger_system::log_level::error) : 0;
             return error_count > 5;
         },
         [&alert_triggered](const std::string& rule, const auto& stats) {
@@ -291,7 +287,7 @@ TEST_F(IntegrationTest, DISABLED_AnalysisTest) {
     auto now = std::chrono::system_clock::now();
     for (int i = 0; i < 10; ++i) {
         analyzer->analyze(
-            log_level::error,
+            logger_system::log_level::error,
             "Error occurred",
             "test.cpp",
             100,
@@ -305,7 +301,7 @@ TEST_F(IntegrationTest, DISABLED_AnalysisTest) {
 
     // Get current stats
     auto current_stats = analyzer->get_current_stats();
-    EXPECT_GT(current_stats.level_counts[log_level::error], 5);
+    EXPECT_GT(current_stats.level_counts[logger_system::log_level::error], 5);
     EXPECT_GT(current_stats.pattern_matches["errors"], 0);
 
     // Generate report
@@ -356,11 +352,11 @@ TEST_F(IntegrationTest, DISABLED_StressTest) {
 
                 // Sanitize and log
                 std::string sanitized = sanitizer->sanitize(msg);
-                logger->log(log_level::info, sanitized);
+                logger->log(logger_system::log_level::info, sanitized);
 
                 // Analyze
                 analyzer->analyze(
-                    log_level::info,
+                    logger_system::log_level::info,
                     sanitized,
                     __FILE__,
                     __LINE__,
@@ -369,7 +365,7 @@ TEST_F(IntegrationTest, DISABLED_StressTest) {
                 );
 #else
                 // Simple logging in standalone mode
-                logger->log(log_level::info, msg);
+                logger->log(logger_system::log_level::info, msg);
 #endif
             }
         });
