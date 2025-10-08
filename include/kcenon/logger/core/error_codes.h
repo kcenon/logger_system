@@ -416,6 +416,14 @@ public:
               msg.empty() ? logger_error_to_string(code) : msg,
               "logger_system")) {}
 
+    // Static factory method to avoid constructor ambiguity
+    static result ok_value(const T& value) {
+        result res(logger_error_code::success);
+        // Directly assign common::Result value
+        res.value_ = common::ok<T>(value);
+        return res;
+    }
+
     bool has_value() const { return common::is_ok(value_); }
     explicit operator bool() const { return has_value(); }
 

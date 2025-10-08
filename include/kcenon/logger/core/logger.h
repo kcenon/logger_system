@@ -128,6 +128,10 @@ namespace kcenon::logger {
     using log_level = logger_system::log_level;
 #endif
 
+// Type aliases from logger_system namespace for convenience
+using health_status = logger_system::health_status;
+using overflow_policy = logger_system::overflow_policy;
+
 // Type aliases for convenience and compatibility
 using logger_metrics = metrics::logger_performance_stats;
 using performance_metrics = metrics::logger_performance_stats; // Alias for examples
