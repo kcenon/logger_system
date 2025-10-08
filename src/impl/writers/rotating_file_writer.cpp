@@ -310,4 +310,20 @@ bool rotating_file_writer::should_rotate_by_time() const {
     }
 }
 
+std::size_t rotating_file_writer::get_file_size() const {
+    if (!file_stream_.is_open()) {
+        return 0;
+    }
+
+    // Use filesystem to get actual file size
+    std::error_code ec;
+    auto size = std::filesystem::file_size(filename_, ec);
+    if (ec) {
+        // If filesystem::file_size fails, fall back to bytes_written atomic counter
+        return bytes_written_.load();
+    }
+
+    return static_cast<std::size_t>(size);
+}
+
 } // namespace kcenon::logger
