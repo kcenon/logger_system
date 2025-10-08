@@ -87,13 +87,13 @@ TEST_F(IntegrationTest, FullPipelineTest) {
     
     // Add filters
 #ifndef LOGGER_STANDALONE_MODE
-    auto level_filter = std::make_unique<kcenon::logger::level_filter>(
+    auto level_filt = std::make_unique<kcenon::logger::filters::level_filter>(
         log_level::debug);
-    logger->set_filter(std::move(level_filter));
+    logger->set_filter(std::move(level_filt));
 
     // Configure routing
     auto& router = logger->get_router();
-    router_builder builder(router);
+    kcenon::logger::routing::router_builder builder(router);
     builder.when_level(log_level::error)
         .route_to("file", true);
 #endif

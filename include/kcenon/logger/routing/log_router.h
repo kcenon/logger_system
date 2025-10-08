@@ -95,7 +95,7 @@ private:
 public:
     explicit router_builder(log_router& router) : router_(router) {}
 
-    router_builder& when_level(kcenon::thread::log_level level) {
+    router_builder& when_level(logger_system::log_level level) {
         config_.filter = std::make_unique<class level_condition>(level);
         return *this;
     }
@@ -122,9 +122,9 @@ public:
 private:
     class level_condition : public log_filter_interface {
     private:
-        kcenon::thread::log_level target_level_;
+        logger_system::log_level target_level_;
     public:
-        explicit level_condition(kcenon::thread::log_level level) : target_level_(level) {}
+        explicit level_condition(logger_system::log_level level) : target_level_(level) {}
 
         bool should_log(const log_entry& entry) const override {
             return entry.level == target_level_;
@@ -142,7 +142,8 @@ private:
         explicit regex_condition(const std::string& pattern) : pattern_(pattern) {}
 
         bool should_log(const log_entry& entry) const override {
-            return std::regex_search(entry.message, pattern_);
+            std::string_view msg_view = entry.message.to_string_view();
+            return std::regex_search(msg_view.begin(), msg_view.end(), pattern_);
         }
 
         std::string get_name() const override {
