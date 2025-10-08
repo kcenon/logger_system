@@ -89,6 +89,7 @@ public:
     logger_system::log_level min_level_;
 #endif
     std::vector<std::unique_ptr<base_writer>> writers_;
+    std::mutex writers_mutex_;  // Protects writers_ vector from concurrent modification
 
     impl(bool async, std::size_t buffer_size)
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
@@ -98,6 +99,8 @@ public:
         : async_mode_(async), buffer_size_(buffer_size), running_(false), metrics_enabled_(false),
           min_level_(logger_system::log_level::info) {
 #endif
+        // Reserve space to avoid reallocation during typical usage
+        writers_.reserve(10);
     }
 };
 
@@ -134,6 +137,7 @@ bool logger::is_running() const {
 
 result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
     if (pimpl_ && writer) {
+        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
         pimpl_->writers_.push_back(std::move(writer));
     }
     return result_void{};
@@ -167,12 +171,26 @@ void logger::log(logger_system::log_level level, const std::string& message) {
         return;
     }
 
-    for (auto& writer : pimpl_->writers_) {
-        if (writer) {
-            // Create a simple log entry and write it
-            auto now = std::chrono::system_clock::now();
-            writer->write(convert_log_level(level), message, "", 0, "", now);
+    // Record metrics if enabled
+    auto start_time = std::chrono::high_resolution_clock::now();
+
+    {
+        // Lock writers_ vector to prevent concurrent modification during iteration
+        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
+        for (auto& writer : pimpl_->writers_) {
+            if (writer) {
+                // Create a simple log entry and write it
+                auto now = std::chrono::system_clock::now();
+                writer->write(convert_log_level(level), message, "", 0, "", now);
+            }
         }
+    }
+
+    // Update metrics after logging
+    if (pimpl_->metrics_enabled_) {
+        auto end_time = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
+        metrics::record_message_logged(duration.count());
     }
 }
 
@@ -187,12 +205,26 @@ void logger::log(logger_system::log_level level, const std::string& message,
         return;
     }
 
-    for (auto& writer : pimpl_->writers_) {
-        if (writer) {
-            // Create a log entry with source location
-            auto now = std::chrono::system_clock::now();
-            writer->write(convert_log_level(level), message, file, line, function, now);
+    // Record metrics if enabled
+    auto start_time = std::chrono::high_resolution_clock::now();
+
+    {
+        // Lock writers_ vector to prevent concurrent modification during iteration
+        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
+        for (auto& writer : pimpl_->writers_) {
+            if (writer) {
+                // Create a log entry with source location
+                auto now = std::chrono::system_clock::now();
+                writer->write(convert_log_level(level), message, file, line, function, now);
+            }
         }
+    }
+
+    // Update metrics after logging
+    if (pimpl_->metrics_enabled_) {
+        auto end_time = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
+        metrics::record_message_logged(duration.count());
     }
 }
 
@@ -206,6 +238,7 @@ bool logger::is_enabled(logger_system::log_level level) const {
 
 void logger::flush() {
     if (pimpl_) {
+        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
         for (auto& writer : pimpl_->writers_) {
             if (writer) {
                 writer->flush();
@@ -232,9 +265,21 @@ bool logger::is_metrics_collection_enabled() const {
 }
 
 result<logger_metrics> logger::get_current_metrics() const {
-    return make_logger_error<logger_metrics>(
-        logger_error_code::not_implemented,
-        "Metrics collection is not available in this build");
+    if (!pimpl_) {
+        return make_logger_error<logger_metrics>(
+            logger_error_code::invalid_argument,
+            "Logger not initialized");
+    }
+
+    if (!pimpl_->metrics_enabled_) {
+        return make_logger_error<logger_metrics>(
+            logger_error_code::invalid_argument,
+            "Metrics collection is not enabled");
+    }
+
+    // Return a copy of the current global metrics (thread-safe because of copy constructor)
+    // Use static factory method to avoid constructor ambiguity
+    return result<logger_metrics>::ok_value(metrics::g_logger_stats);
 }
 
 // IMonitorable interface implementation (Phase 2.2)

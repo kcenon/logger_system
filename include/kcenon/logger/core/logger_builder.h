@@ -532,12 +532,12 @@ public:
         
         if (level) {
             std::string level_str(level);
-            if (level_str == "trace") config_.min_level = kcenon::thread::log_level::trace;
-            else if (level_str == "debug") config_.min_level = kcenon::thread::log_level::debug;
-            else if (level_str == "info") config_.min_level = kcenon::thread::log_level::info;
-            else if (level_str == "warn") config_.min_level = kcenon::thread::log_level::warning;
-            else if (level_str == "error") config_.min_level = kcenon::thread::log_level::error;
-            else if (level_str == "fatal") config_.min_level = kcenon::thread::log_level::error; // Note: fatal mapped to error
+            if (level_str == "trace") config_.min_level = kcenon::logger::log_level::trace;
+            else if (level_str == "debug") config_.min_level = kcenon::logger::log_level::debug;
+            else if (level_str == "info") config_.min_level = kcenon::logger::log_level::info;
+            else if (level_str == "warn") config_.min_level = kcenon::logger::log_level::warning;
+            else if (level_str == "error") config_.min_level = kcenon::logger::log_level::error;
+            else if (level_str == "fatal") config_.min_level = kcenon::logger::log_level::error; // Note: fatal mapped to error
         }
         
         return *this;

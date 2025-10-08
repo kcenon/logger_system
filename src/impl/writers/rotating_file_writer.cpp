@@ -85,12 +85,6 @@ result_void rotating_file_writer::write(logger_system::log_level level,
     // Lock the mutex first to ensure atomic check-and-rotate operation
     std::lock_guard<std::mutex> lock(write_mutex_);
 
-    // Check if rotation is needed before writing
-    // This check is now protected by mutex to prevent race conditions
-    if (should_rotate()) {
-        perform_rotation();
-    }
-
     // Write to file with mutex already held
     if (!file_stream_.is_open()) {
         return make_logger_error(logger_error_code::file_write_failed,
@@ -107,6 +101,13 @@ result_void rotating_file_writer::write(logger_system::log_level level,
             return make_logger_error(logger_error_code::file_write_failed,
                                     "Failed to write to file stream");
         }
+
+        // Check if rotation is needed after writing
+        // This ensures we can accurately determine if the size threshold is exceeded
+        if (should_rotate()) {
+            perform_rotation();
+        }
+
         return {};
     } catch (const std::exception& e) {
         return make_logger_error(logger_error_code::file_write_failed, e.what());
@@ -188,45 +189,55 @@ void rotating_file_writer::perform_rotation() {
 std::string rotating_file_writer::generate_rotated_filename(int index) const {
     std::ostringstream oss;
     std::filesystem::path dir = std::filesystem::path(filename_).parent_path();
-    
+
     if (!dir.empty()) {
         oss << dir.string() << "/";
     }
-    
-    oss << base_filename_;
-    
+
+    // Build: base + extension + separator + timestamp/index
+    // Example: "test.log.1" instead of "test.1.log"
+    oss << base_filename_ << file_extension_;
+
     // Add timestamp or index
     auto now = std::chrono::system_clock::now();
     auto time_t = std::chrono::system_clock::to_time_t(now);
-    
+
+    // Use thread-safe time conversion
+    std::tm tm_buf{};
+#ifdef _WIN32
+    localtime_s(&tm_buf, &time_t);  // Windows thread-safe version
+#else
+    localtime_r(&time_t, &tm_buf);  // POSIX thread-safe version
+#endif
+
     switch (rotation_type_) {
         case rotation_type::size:
             if (index >= 0) {
                 oss << "." << index;
             } else {
                 // Find next available index
+                std::string base_with_ext = oss.str();
                 int next_index = 1;
-                while (std::filesystem::exists(oss.str() + "." + std::to_string(next_index) + file_extension_)) {
+                while (std::filesystem::exists(base_with_ext + "." + std::to_string(next_index))) {
                     next_index++;
                 }
                 oss << "." << next_index;
             }
             break;
-            
+
         case rotation_type::daily:
-            oss << "." << std::put_time(std::localtime(&time_t), "%Y%m%d");
+            oss << "." << std::put_time(&tm_buf, "%Y%m%d");
             break;
-            
+
         case rotation_type::hourly:
-            oss << "." << std::put_time(std::localtime(&time_t), "%Y%m%d_%H");
+            oss << "." << std::put_time(&tm_buf, "%Y%m%d_%H");
             break;
-            
+
         case rotation_type::size_and_time:
-            oss << "." << std::put_time(std::localtime(&time_t), "%Y%m%d_%H%M%S");
+            oss << "." << std::put_time(&tm_buf, "%Y%m%d_%H%M%S");
             break;
     }
-    
-    oss << file_extension_;
+
     return oss.str();
 }
 
@@ -261,8 +272,10 @@ std::vector<std::string> rotating_file_writer::get_backup_files() const {
     }
     
     // Create regex pattern for backup files
-    std::string pattern = base_filename_ + R"(\.(\d+|\\d{8}|\\d{8}_\\d{2}|\\d{8}_\\d{6}))" +
-                         std::regex_replace(file_extension_, std::regex(R"(\.)"), R"(\\.)");
+    // Pattern: base_filename + file_extension + "." + (number or timestamp)
+    // Example: "test_rotating.log.1" or "test.log.20250108"
+    std::string escaped_ext = std::regex_replace(file_extension_, std::regex(R"(\.)"), R"(\\.)");
+    std::string pattern = base_filename_ + escaped_ext + R"(\.(\d+|\d{8}|\d{8}_\d{2}|\d{8}_\d{6}))";
     std::regex backup_regex(pattern);
     
     try {
@@ -308,6 +321,22 @@ bool rotating_file_writer::should_rotate_by_time() const {
         default:
             return false;
     }
+}
+
+std::size_t rotating_file_writer::get_file_size() const {
+    if (!file_stream_.is_open()) {
+        return 0;
+    }
+
+    // Use filesystem to get actual file size
+    std::error_code ec;
+    auto size = std::filesystem::file_size(filename_, ec);
+    if (ec) {
+        // If filesystem::file_size fails, fall back to bytes_written atomic counter
+        return bytes_written_.load();
+    }
+
+    return static_cast<std::size_t>(size);
 }
 
 } // namespace kcenon::logger

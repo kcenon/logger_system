@@ -118,7 +118,12 @@ protected:
      * @brief Check if time-based rotation is needed
      */
     bool should_rotate_by_time() const;
-    
+
+    /**
+     * @brief Get current file size in bytes
+     */
+    std::size_t get_file_size() const;
+
 private:
     rotation_type rotation_type_;
     size_t max_size_;

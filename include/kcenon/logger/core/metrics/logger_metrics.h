@@ -39,6 +39,49 @@ struct logger_performance_stats {
 
     std::map<std::string, writer_stats_compat> writer_stats; ///< Legacy per-writer statistics
 
+    // Copy constructor to allow copying atomic values
+    logger_performance_stats() = default;
+    logger_performance_stats(const logger_performance_stats& other)
+        : messages_logged(other.messages_logged.load()),
+          messages_dropped(other.messages_dropped.load()),
+          total_log_time_ns(other.total_log_time_ns.load()),
+          queue_size(other.queue_size.load()),
+          max_queue_size(other.max_queue_size.load()),
+          writer_errors(other.writer_errors.load()),
+          flush_operations(other.flush_operations.load()),
+          messages_enqueued(other.messages_enqueued.load()),
+          messages_processed(other.messages_processed.load()),
+          writer_stats(other.writer_stats) {}
+
+    logger_performance_stats& operator=(const logger_performance_stats& other) {
+        if (this != &other) {
+            messages_logged.store(other.messages_logged.load());
+            messages_dropped.store(other.messages_dropped.load());
+            total_log_time_ns.store(other.total_log_time_ns.load());
+            queue_size.store(other.queue_size.load());
+            max_queue_size.store(other.max_queue_size.load());
+            writer_errors.store(other.writer_errors.load());
+            flush_operations.store(other.flush_operations.load());
+            messages_enqueued.store(other.messages_enqueued.load());
+            messages_processed.store(other.messages_processed.load());
+            writer_stats = other.writer_stats;
+        }
+        return *this;
+    }
+
+    // Move constructor
+    logger_performance_stats(logger_performance_stats&& other) noexcept
+        : messages_logged(other.messages_logged.load()),
+          messages_dropped(other.messages_dropped.load()),
+          total_log_time_ns(other.total_log_time_ns.load()),
+          queue_size(other.queue_size.load()),
+          max_queue_size(other.max_queue_size.load()),
+          writer_errors(other.writer_errors.load()),
+          flush_operations(other.flush_operations.load()),
+          messages_enqueued(other.messages_enqueued.load()),
+          messages_processed(other.messages_processed.load()),
+          writer_stats(std::move(other.writer_stats)) {}
+
     /**
      * @brief Get messages per second
      */

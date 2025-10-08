@@ -7,8 +7,8 @@ if(BUILD_SAMPLES)
     )
 endif()
 
-# Phase 4 DI Pattern examples - available when common_system integration is enabled
-if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM)
+# Phase 4 DI Pattern examples - available when common_system integration is enabled and not in standalone mode
+if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
     # DI Pattern example
     add_executable(di_pattern_example di_pattern_example.cpp)
     target_link_libraries(di_pattern_example PRIVATE LoggerSystem)

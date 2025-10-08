@@ -114,7 +114,7 @@ TEST_F(ThreadSystemIntegrationTest, PerformanceImprovement) {
         log_file.close();
     }
     auto end = std::chrono::high_resolution_clock::now();
-    auto duration_without = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    auto duration_without = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
 #ifdef USE_THREAD_SYSTEM
     // Benchmark with plugin (simulated with parallel writes)
@@ -125,7 +125,7 @@ TEST_F(ThreadSystemIntegrationTest, PerformanceImprovement) {
         std::vector<std::thread> threads;
 
         for (int t = 0; t < num_threads; ++t) {
-            threads.emplace_back([t, num_messages, num_threads]() {
+            threads.emplace_back([t, &num_messages, &num_threads]() {
                 std::ofstream log_file("test_logs/perf_with_" + std::to_string(t) + ".log");
                 for (int i = t; i < num_messages; i += num_threads) {
                     log_file << "[INFO] Performance test message with thread_system: " << i << std::endl;
@@ -139,18 +139,19 @@ TEST_F(ThreadSystemIntegrationTest, PerformanceImprovement) {
         }
     }
     end = std::chrono::high_resolution_clock::now();
-    auto duration_with = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    auto duration_with = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
     // Verify performance characteristics
     std::cout << "Performance comparison:" << std::endl;
-    std::cout << "Without threading: " << duration_without << "ms" << std::endl;
-    std::cout << "With threading: " << duration_with << "ms" << std::endl;
+    std::cout << "Without threading: " << duration_without << "us" << std::endl;
+    std::cout << "With threading: " << duration_with << "us" << std::endl;
 
     // We don't expect exact improvement in this simulation, just verify it runs
+    // Using microseconds instead of milliseconds to avoid 0ms measurements in fast CI environments
     EXPECT_GT(duration_without, 0);
     EXPECT_GT(duration_with, 0);
 #else
-    std::cout << "Baseline performance: " << duration_without << "ms for " << num_messages << " messages" << std::endl;
+    std::cout << "Baseline performance: " << duration_without << "us for " << num_messages << " messages" << std::endl;
     EXPECT_GT(duration_without, 0);
 #endif
 }

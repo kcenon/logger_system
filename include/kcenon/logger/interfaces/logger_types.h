@@ -107,10 +107,7 @@ inline log_level string_to_log_level(const std::string& str) {
 
 } // namespace logger_system
 
-// Compatibility with kcenon::logger namespace
-namespace kcenon::logger {
-    using namespace logger_system;
-}
-
-// Note: kcenon::thread::log_level is defined in logger_interface.h
-// to avoid circular dependencies and maintain compatibility
+// Note: Type aliases for kcenon::logger namespace are defined in logger.h
+// to support conditional compilation based on integration mode.
+// DO NOT add 'using namespace logger_system' here as it causes ambiguous
+// reference errors when combined with logger.h's conditional type aliases.
