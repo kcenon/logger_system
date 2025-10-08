@@ -255,7 +255,7 @@ TEST_F(ThreadSafetyTest, MultipleWritersConcurrent) {
                     switch (j % 4) {
                         case 0: level = kcenon::thread::log_level::debug; break;
                         case 1: level = kcenon::thread::log_level::info; break;
-                        case 2: level = kcenon::thread::log_level::warn; break;
+                        case 2: level = kcenon::thread::log_level::warning; break;
                         case 3: level = kcenon::thread::log_level::error; break;
                         default: level = kcenon::thread::log_level::info;
                     }
@@ -405,7 +405,7 @@ TEST_F(ThreadSafetyTest, MixedLogLevelsStress) {
                         case 0: level = kcenon::thread::log_level::trace; break;
                         case 1: level = kcenon::thread::log_level::debug; break;
                         case 2: level = kcenon::thread::log_level::info; break;
-                        case 3: level = kcenon::thread::log_level::warn; break;
+                        case 3: level = kcenon::thread::log_level::warning; break;
                         case 4: level = kcenon::thread::log_level::error; break;
                         default: level = kcenon::thread::log_level::fatal; break;
                     }
