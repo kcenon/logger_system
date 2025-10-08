@@ -23,6 +23,7 @@ All rights reserved.
 #include <fstream>
 #include <sstream>
 #include <barrier>
+#include <random>
 
 using namespace kcenon::logger;
 using namespace std::chrono_literals;
