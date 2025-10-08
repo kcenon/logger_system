@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['📁_20strong_20directory_20organization_20strong_0',['📁 &lt;strong&gt;Directory Organization&lt;/strong&gt;',['../index.html#autotoc_md29',1,'']]]
+  ['🎯_20high_20performance_20logging_0',['🎯 High-Performance Logging',['../index.html#autotoc_md3',1,'']]],
+  ['🎯_20strong_20ideal_20applications_20strong_1',['🎯 &lt;strong&gt;Ideal Applications&lt;/strong&gt;',['../index.html#autotoc_md16',1,'']]]
 ];

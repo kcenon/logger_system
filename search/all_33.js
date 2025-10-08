@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔥_20sanitizer_20results_0',['🔥 Sanitizer Results',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md92',1,'']]]
+  ['🔍_20code_20quality_0',['🔍 Code Quality',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md86',1,'']]]
 ];

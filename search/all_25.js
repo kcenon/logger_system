@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🌐_20strong_20cross_20platform_20compatibility_20strong_0',['🌐 &lt;strong&gt;Cross-Platform Compatibility&lt;/strong&gt;',['../index.html#autotoc_md13',1,'']]]
+  ['★_20insight_20─────────────────────────────────────_0',['★ Insight ─────────────────────────────────────',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md725',1,'']]]
 ];

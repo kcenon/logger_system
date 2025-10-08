@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['🚀_20build_20status_0',['🚀 Build Status',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md81',1,'']]],
-  ['🚀_20getting_20started_1',['🚀 Getting Started',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md226',1,'']]],
-  ['🚀_20quick_20navigation_2',['🚀 Quick Navigation',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md676',1,'']]],
-  ['🚀_20strong_20performance_20excellence_20strong_3',['🚀 &lt;strong&gt;Performance Excellence&lt;/strong&gt;',['../index.html#autotoc_md10',1,'']]]
+  ['🔧_20advanced_20capabilities_0',['🔧 Advanced Capabilities',['../index.html#autotoc_md4',1,'']]],
+  ['🔧_20documentation_20maintenance_1',['🔧 Documentation Maintenance',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md741',1,'']]],
+  ['🔧_20integration_20patterns_2',['🔧 Integration Patterns',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md215',1,'']]],
+  ['🔧_20strong_20developer_20productivity_20strong_3',['🔧 &lt;strong&gt;Developer Productivity&lt;/strong&gt;',['../index.html#autotoc_md12',1,'']]]
 ];

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['🔧_20advanced_20capabilities_0',['🔧 Advanced Capabilities',['../index.html#autotoc_md4',1,'']]],
-  ['🔧_20documentation_20maintenance_1',['🔧 Documentation Maintenance',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md681',1,'']]],
-  ['🔧_20integration_20patterns_2',['🔧 Integration Patterns',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md215',1,'']]],
-  ['🔧_20strong_20developer_20productivity_20strong_3',['🔧 &lt;strong&gt;Developer Productivity&lt;/strong&gt;',['../index.html#autotoc_md12',1,'']]]
+  ['🔗_20ecosystem_20integration_0',['🔗 Ecosystem Integration',['../index.html#autotoc_md7',1,'']]],
+  ['🔗_20quick_20links_1',['🔗 Quick Links',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md105',1,'']]],
+  ['🔗_20strong_20module_20dependencies_20strong_2',['🔗 &lt;strong&gt;Module Dependencies&lt;/strong&gt;',['../index.html#autotoc_md34',1,'']]]
 ];

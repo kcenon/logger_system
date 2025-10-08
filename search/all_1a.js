@@ -9,7 +9,7 @@ var searchData=
   ['queue_20tuning_6',['Issue ARC-009: Async Queue Tuning',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES.html#autotoc_md262',1,'']]],
   ['quick_20api_20overview_7',['Quick API Overview',['../index.html#autotoc_md66',1,'']]],
   ['quick_20links_8',['🔗 Quick Links',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md105',1,'']]],
-  ['quick_20navigation_9',['🚀 Quick Navigation',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md676',1,'']]],
+  ['quick_20navigation_9',['🚀 Quick Navigation',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md736',1,'']]],
   ['quick_20start_10',['Quick Start',['../index.html#autotoc_md39',1,'']]],
   ['quick_20start_20with_20builder_20pattern_20recommended_11',['Quick Start with Builder Pattern (Recommended)',['../index.html#autotoc_md40',1,'']]]
 ];

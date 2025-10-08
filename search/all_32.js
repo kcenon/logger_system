@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['🔗_20ecosystem_20integration_0',['🔗 Ecosystem Integration',['../index.html#autotoc_md7',1,'']]],
-  ['🔗_20quick_20links_1',['🔗 Quick Links',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md105',1,'']]],
-  ['🔗_20strong_20module_20dependencies_20strong_2',['🔗 &lt;strong&gt;Module Dependencies&lt;/strong&gt;',['../index.html#autotoc_md34',1,'']]]
+  ['🔄_20ci_20cd_20pipeline_20health_0',['🔄 CI/CD Pipeline Health',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md100',1,'']]],
+  ['🔄_20dependency_20flow_20interface_20contracts_1',['🔄 Dependency Flow &amp; Interface Contracts',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md211',1,'']]],
+  ['🔄_20evolution_3a_20monolithic_20→_20modular_2',['🔄 Evolution: Monolithic → Modular',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md222',1,'']]],
+  ['🔄_20strong_20design_20patterns_20implementation_20strong_3',['🔄 &lt;strong&gt;Design Patterns Implementation&lt;/strong&gt;',['../index.html#autotoc_md27',1,'']]]
 ];
