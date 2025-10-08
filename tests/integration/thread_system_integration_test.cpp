@@ -125,7 +125,7 @@ TEST_F(ThreadSystemIntegrationTest, PerformanceImprovement) {
         std::vector<std::thread> threads;
 
         for (int t = 0; t < num_threads; ++t) {
-            threads.emplace_back([t, num_messages, num_threads]() {
+            threads.emplace_back([t, &num_messages, &num_threads]() {
                 std::ofstream log_file("test_logs/perf_with_" + std::to_string(t) + ".log");
                 for (int i = t; i < num_messages; i += num_threads) {
                     log_file << "[INFO] Performance test message with thread_system: " << i << std::endl;
