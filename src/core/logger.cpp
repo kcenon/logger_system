@@ -167,12 +167,22 @@ void logger::log(logger_system::log_level level, const std::string& message) {
         return;
     }
 
+    // Record metrics if enabled
+    auto start_time = std::chrono::high_resolution_clock::now();
+
     for (auto& writer : pimpl_->writers_) {
         if (writer) {
             // Create a simple log entry and write it
             auto now = std::chrono::system_clock::now();
             writer->write(convert_log_level(level), message, "", 0, "", now);
         }
+    }
+
+    // Update metrics after logging
+    if (pimpl_->metrics_enabled_) {
+        auto end_time = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
+        metrics::record_message_logged(duration.count());
     }
 }
 
@@ -187,12 +197,22 @@ void logger::log(logger_system::log_level level, const std::string& message,
         return;
     }
 
+    // Record metrics if enabled
+    auto start_time = std::chrono::high_resolution_clock::now();
+
     for (auto& writer : pimpl_->writers_) {
         if (writer) {
             // Create a log entry with source location
             auto now = std::chrono::system_clock::now();
             writer->write(convert_log_level(level), message, file, line, function, now);
         }
+    }
+
+    // Update metrics after logging
+    if (pimpl_->metrics_enabled_) {
+        auto end_time = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
+        metrics::record_message_logged(duration.count());
     }
 }
 
@@ -232,9 +252,21 @@ bool logger::is_metrics_collection_enabled() const {
 }
 
 result<logger_metrics> logger::get_current_metrics() const {
-    return make_logger_error<logger_metrics>(
-        logger_error_code::not_implemented,
-        "Metrics collection is not available in this build");
+    if (!pimpl_) {
+        return make_logger_error<logger_metrics>(
+            logger_error_code::invalid_argument,
+            "Logger not initialized");
+    }
+
+    if (!pimpl_->metrics_enabled_) {
+        return make_logger_error<logger_metrics>(
+            logger_error_code::invalid_argument,
+            "Metrics collection is not enabled");
+    }
+
+    // Return a copy of the current global metrics (thread-safe because of copy constructor)
+    // Use static factory method to avoid constructor ambiguity
+    return result<logger_metrics>::ok_value(metrics::g_logger_stats);
 }
 
 // IMonitorable interface implementation (Phase 2.2)
