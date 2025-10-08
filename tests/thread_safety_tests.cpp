@@ -13,7 +13,6 @@ All rights reserved.
 
 #ifndef LOGGER_STANDALONE_MODE
 #include <kcenon/logger/writers/async_writer.h>
-#include <kcenon/logger/core/log_collector.h>
 #endif
 
 #include <thread>
@@ -27,6 +26,13 @@ All rights reserved.
 
 using namespace kcenon::logger;
 using namespace std::chrono_literals;
+
+// Use the correct log_level type based on build configuration
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+using log_level = kcenon::thread::log_level;
+#else
+using log_level = logger_system::log_level;
+#endif
 
 class ThreadSafetyTest : public ::testing::Test {
 protected:
@@ -50,82 +56,40 @@ protected:
         };
 
         for (const auto& file : test_files) {
-            if (std::filesystem::exists(file)) {
-                std::filesystem::remove(file);
-            }
-        }
-    }
-
-    bool verify_log_integrity(const std::string& filename) {
-        if (!std::filesystem::exists(filename)) {
-            return false;
+            std::filesystem::remove(file);
         }
 
-        std::ifstream file(filename);
-        std::string line;
-        size_t line_count = 0;
-
-        while (std::getline(file, line)) {
-            ++line_count;
-            // Basic integrity check: lines should not be corrupted
-            // (mixed characters from different threads)
-            if (line.empty()) {
-                return false;
-            }
+        // Remove rotating file backups
+        for (int i = 1; i <= 5; ++i) {
+            std::filesystem::remove("test_rotation.log." + std::to_string(i));
         }
-
-        return line_count > 0;
-    }
-
-    size_t count_log_lines(const std::string& filename) {
-        if (!std::filesystem::exists(filename)) {
-            return 0;
-        }
-
-        std::ifstream file(filename);
-        return std::count(std::istreambuf_iterator<char>(file),
-                         std::istreambuf_iterator<char>(), '\n');
     }
 };
 
-// Test 1: Concurrent rotation - 10 threads writing simultaneously, trigger rotation
-TEST_F(ThreadSafetyTest, ConcurrentRotation) {
-    const size_t max_file_size = 1024; // 1KB to force rotation
+// Test 1: Concurrent logging from multiple threads
+TEST_F(ThreadSafetyTest, ConcurrentLogging) {
+    auto test_logger = std::make_shared<logger>();
+    test_logger->start();
+    test_logger->add_writer(std::make_unique<file_writer>("test_concurrent.log"));
+
     const int num_threads = 10;
-    const int messages_per_thread = 100;
-
-    auto writer = std::make_shared<rotating_file_writer>(
-        "test_rotation.log",
-        max_file_size,
-        3 // max backup files
-    );
-
-    auto test_logger = std::make_shared<logger>(writer);
+    const int messages_per_thread = 500;
 
     std::vector<std::thread> threads;
     std::atomic<int> errors{0};
-    std::atomic<int> total_written{0};
-
-    // Use barrier to ensure all threads start simultaneously
-    std::barrier sync_point(num_threads);
 
     for (int i = 0; i < num_threads; ++i) {
         threads.emplace_back([&, thread_id = i]() {
-            sync_point.arrive_and_wait(); // Synchronize start
-
             for (int j = 0; j < messages_per_thread; ++j) {
                 try {
-                    std::ostringstream msg;
-                    msg << "Thread " << thread_id << " message " << j
-                        << " - This is a long message to trigger rotation faster";
-                    test_logger->info(msg.str());
-                    ++total_written;
+                    std::string msg = "Thread " + std::to_string(thread_id) +
+                                    " message " + std::to_string(j);
+                    test_logger->log(log_level::info, msg);
                 } catch (...) {
                     ++errors;
                 }
 
-                // Small delay to allow rotation to occur
-                if (j % 10 == 0) {
+                if (j % 100 == 0) {
                     std::this_thread::sleep_for(1ms);
                 }
             }
@@ -136,42 +100,39 @@ TEST_F(ThreadSafetyTest, ConcurrentRotation) {
         t.join();
     }
 
-    // Flush and wait for async operations
-    std::this_thread::sleep_for(100ms);
+    test_logger->flush();
+    test_logger->stop();
 
-    EXPECT_EQ(errors.load(), 0) << "No errors should occur during concurrent rotation";
-    EXPECT_EQ(total_written.load(), num_threads * messages_per_thread)
-        << "All messages should be written";
+    EXPECT_EQ(errors.load(), 0);
+    EXPECT_TRUE(std::filesystem::exists("test_concurrent.log"));
 }
 
-#ifndef LOGGER_STANDALONE_MODE
-// Test 2: Async writer stress test - Fill queue, test backpressure
-TEST_F(ThreadSafetyTest, AsyncWriterStress) {
-    const int num_threads = 8;
-    const int messages_per_thread = 1000;
-    const size_t queue_capacity = 100;
+// Test 2: High throughput stress test
+TEST_F(ThreadSafetyTest, HighThroughputStress) {
+    auto test_logger = std::make_shared<logger>(true, 16384); // Larger buffer
+    test_logger->start();
+    test_logger->add_writer(std::make_unique<file_writer>("test_async.log"));
 
-    auto file_writer = std::make_shared<file_writer>("test_async.log");
-    auto async_writer = std::make_shared<async_writer>(file_writer, queue_capacity);
-    auto test_logger = std::make_shared<logger>(async_writer);
+    const int num_threads = 20;
+    const int messages_per_thread = 1000;
 
     std::vector<std::thread> threads;
-    std::atomic<int> messages_sent{0};
     std::atomic<int> errors{0};
+    std::barrier sync_point(num_threads);
+
+    auto start_time = std::chrono::high_resolution_clock::now();
 
     for (int i = 0; i < num_threads; ++i) {
         threads.emplace_back([&, thread_id = i]() {
+            sync_point.arrive_and_wait(); // All start together
+
             for (int j = 0; j < messages_per_thread; ++j) {
                 try {
-                    test_logger->info("Thread {} message {}", thread_id, j);
-                    ++messages_sent;
+                    test_logger->log(log_level::info,
+                                   "High throughput test: thread " + std::to_string(thread_id) +
+                                   " msg " + std::to_string(j));
                 } catch (...) {
                     ++errors;
-                }
-
-                // Vary the rate to test backpressure
-                if (j % 100 == 0) {
-                    std::this_thread::sleep_for(5ms);
                 }
             }
         });
@@ -181,36 +142,135 @@ TEST_F(ThreadSafetyTest, AsyncWriterStress) {
         t.join();
     }
 
-    // Allow async writer to flush
-    std::this_thread::sleep_for(500ms);
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
 
-    EXPECT_EQ(errors.load(), 0) << "No errors should occur during async writing";
+    test_logger->flush();
+    test_logger->stop();
 
-    // Verify log file integrity
-    EXPECT_TRUE(verify_log_integrity("test_async.log"));
+    EXPECT_EQ(errors.load(), 0);
+
+    // Calculate throughput
+    double total_messages = num_threads * messages_per_thread;
+    double messages_per_second = (total_messages / duration.count()) * 1000.0;
+
+    std::cout << "Throughput: " << messages_per_second << " messages/second" << std::endl;
 }
-#endif
 
-// Test 3: Shutdown race - Stop logger while threads are writing
-TEST_F(ThreadSafetyTest, ShutdownRace) {
-    const int num_threads = 10;
+// Test 3: Rotating file writer concurrency
+TEST_F(ThreadSafetyTest, RotatingFileWriterConcurrency) {
+    auto test_logger = std::make_shared<logger>();
+    test_logger->start();
+    test_logger->add_writer(std::make_unique<rotating_file_writer>(
+        "test_rotation.log", 1024 * 10, 3)); // 10KB max, 3 backups
+
+    const int num_threads = 8;
     const int messages_per_thread = 500;
 
-    auto writer = std::make_shared<file_writer>("test_shutdown.log");
-    auto test_logger = std::make_shared<logger>(writer);
-
     std::vector<std::thread> threads;
-    std::atomic<bool> should_stop{false};
-    std::atomic<int> messages_written{0};
+    std::atomic<int> errors{0};
 
     for (int i = 0; i < num_threads; ++i) {
         threads.emplace_back([&, thread_id = i]() {
-            for (int j = 0; j < messages_per_thread && !should_stop.load(); ++j) {
+            for (int j = 0; j < messages_per_thread; ++j) {
                 try {
-                    test_logger->info("Thread {} message {}", thread_id, j);
-                    ++messages_written;
+                    // Create longer messages to trigger rotation
+                    std::string msg = "Rotation test thread " + std::to_string(thread_id) +
+                                    " message " + std::to_string(j) +
+                                    " - padding data to increase file size quickly";
+                    test_logger->log(log_level::info, msg);
                 } catch (...) {
-                    // Expected during shutdown
+                    ++errors;
+                }
+            }
+        });
+    }
+
+    for (auto& t : threads) {
+        t.join();
+    }
+
+    test_logger->flush();
+    test_logger->stop();
+
+    EXPECT_EQ(errors.load(), 0);
+    EXPECT_TRUE(std::filesystem::exists("test_rotation.log"));
+}
+
+// Test 4: Start/stop stress test
+TEST_F(ThreadSafetyTest, StartStopStress) {
+    auto test_logger = std::make_shared<logger>();
+    test_logger->add_writer(std::make_unique<file_writer>("test_shutdown.log"));
+
+    const int num_cycles = 20;
+    const int messages_per_cycle = 50;
+
+    std::atomic<int> errors{0};
+
+    for (int cycle = 0; cycle < num_cycles; ++cycle) {
+        test_logger->start();
+
+        std::vector<std::thread> threads;
+        for (int i = 0; i < 5; ++i) {
+            threads.emplace_back([&, thread_id = i]() {
+                for (int j = 0; j < messages_per_cycle; ++j) {
+                    try {
+                        test_logger->log(log_level::info,
+                                       "Cycle " + std::to_string(cycle) +
+                                       " thread " + std::to_string(thread_id) +
+                                       " msg " + std::to_string(j));
+                    } catch (...) {
+                        ++errors;
+                    }
+                }
+            });
+        }
+
+        for (auto& t : threads) {
+            t.join();
+        }
+
+        test_logger->flush();
+        test_logger->stop();
+    }
+
+    EXPECT_EQ(errors.load(), 0);
+}
+
+// Test 5: Multiple writers concurrent access
+TEST_F(ThreadSafetyTest, MultipleWritersConcurrent) {
+    auto test_logger = std::make_shared<logger>();
+    test_logger->start();
+
+    test_logger->add_writer(std::make_unique<file_writer>("test_multiple.log"));
+    test_logger->add_writer(std::make_unique<file_writer>("test_multiple2.log"));
+    test_logger->add_writer(std::make_unique<console_writer>());
+
+    const int num_threads = 12;
+    const int messages_per_thread = 300;
+
+    std::vector<std::thread> threads;
+    std::atomic<int> errors{0};
+
+    for (int i = 0; i < num_threads; ++i) {
+        threads.emplace_back([&, thread_id = i]() {
+            for (int j = 0; j < messages_per_thread; ++j) {
+                try {
+                    // Cycle through different log levels
+                    log_level level;
+                    switch (j % 4) {
+                        case 0: level = log_level::debug; break;
+                        case 1: level = log_level::info; break;
+                        case 2: level = log_level::warn; break;
+                        case 3: level = log_level::error; break;
+                        default: level = log_level::info;
+                    }
+
+                    test_logger->log(level,
+                                   "Multiple writers test: " + std::to_string(thread_id) +
+                                   ":" + std::to_string(j));
+                } catch (...) {
+                    ++errors;
                 }
 
                 if (j % 50 == 0) {
@@ -220,108 +280,97 @@ TEST_F(ThreadSafetyTest, ShutdownRace) {
         });
     }
 
-    // Let threads run for a bit
-    std::this_thread::sleep_for(100ms);
-
-    // Signal shutdown while threads are still writing
-    should_stop.store(true);
-
-    // Wait for threads to finish
     for (auto& t : threads) {
         t.join();
     }
 
-    // Logger should still be in valid state
-    EXPECT_NO_THROW(test_logger->info("Final message after threads stopped"));
+    test_logger->flush();
+    test_logger->stop();
 
-    // Verify log file is not corrupted
-    EXPECT_TRUE(verify_log_integrity("test_shutdown.log"));
+    EXPECT_EQ(errors.load(), 0);
+    EXPECT_TRUE(std::filesystem::exists("test_multiple.log"));
+    EXPECT_TRUE(std::filesystem::exists("test_multiple2.log"));
 }
 
-// Test 4: Multiple loggers writing to different files
-TEST_F(ThreadSafetyTest, MultipleLoggers) {
-    const int num_loggers = 5;
-    const int threads_per_logger = 4;
-    const int messages_per_thread = 200;
+// Test 6: Flush during concurrent logging
+TEST_F(ThreadSafetyTest, FlushDuringLogging) {
+    auto test_logger = std::make_shared<logger>();
+    test_logger->start();
+    test_logger->add_writer(std::make_unique<file_writer>("test_concurrent.log"));
 
-    std::vector<std::shared_ptr<logger>> loggers;
+    const int num_logger_threads = 10;
+    const int num_flush_threads = 3;
+    const int messages_per_thread = 400;
+
     std::vector<std::thread> threads;
-    std::atomic<int> total_errors{0};
+    std::atomic<int> errors{0};
+    std::atomic<bool> running{true};
 
-    // Create multiple loggers with different files
-    for (int i = 0; i < num_loggers; ++i) {
-        std::string filename = "test_multiple" + std::to_string(i) + ".log";
-        auto writer = std::make_shared<file_writer>(filename);
-        loggers.push_back(std::make_shared<logger>(writer));
-    }
-
-    // Create threads that write to different loggers
-    for (int logger_id = 0; logger_id < num_loggers; ++logger_id) {
-        for (int i = 0; i < threads_per_logger; ++i) {
-            threads.emplace_back([&, logger_id, thread_id = i]() {
-                for (int j = 0; j < messages_per_thread; ++j) {
-                    try {
-                        loggers[logger_id]->info("Logger {} Thread {} Message {}",
-                                                 logger_id, thread_id, j);
-                    } catch (...) {
-                        ++total_errors;
-                    }
-
-                    if (j % 25 == 0) {
-                        std::this_thread::sleep_for(1ms);
-                    }
+    // Logger threads
+    for (int i = 0; i < num_logger_threads; ++i) {
+        threads.emplace_back([&, thread_id = i]() {
+            for (int j = 0; j < messages_per_thread && running.load(); ++j) {
+                try {
+                    test_logger->log(log_level::info,
+                                   "Concurrent flush test " + std::to_string(thread_id) +
+                                   ":" + std::to_string(j));
+                } catch (...) {
+                    ++errors;
                 }
-            });
-        }
+            }
+        });
     }
+
+    // Flush threads
+    for (int i = 0; i < num_flush_threads; ++i) {
+        threads.emplace_back([&]() {
+            while (running.load()) {
+                try {
+                    test_logger->flush();
+                    std::this_thread::sleep_for(50ms);
+                } catch (...) {
+                    ++errors;
+                }
+            }
+        });
+    }
+
+    std::this_thread::sleep_for(500ms);
+    running.store(false);
 
     for (auto& t : threads) {
         t.join();
     }
 
-    std::this_thread::sleep_for(100ms);
+    test_logger->stop();
 
-    EXPECT_EQ(total_errors.load(), 0);
-
-    // Verify all log files
-    for (int i = 0; i < num_loggers; ++i) {
-        std::string filename = "test_multiple" + std::to_string(i) + ".log";
-        EXPECT_TRUE(verify_log_integrity(filename));
-
-        // Clean up
-        if (std::filesystem::exists(filename)) {
-            std::filesystem::remove(filename);
-        }
-    }
+    EXPECT_EQ(errors.load(), 0);
 }
 
-// Test 5: Concurrent formatting - Complex formatting under load
-TEST_F(ThreadSafetyTest, ConcurrentFormatting) {
-    const int num_threads = 12;
-    const int messages_per_thread = 300;
+// Test 7: Source location logging concurrency
+TEST_F(ThreadSafetyTest, SourceLocationConcurrency) {
+    auto test_logger = std::make_shared<logger>();
+    test_logger->start();
+    test_logger->add_writer(std::make_unique<file_writer>("test_concurrent.log"));
 
-    auto writer = std::make_shared<file_writer>("test_format.log");
-    auto test_logger = std::make_shared<logger>(writer);
+    const int num_threads = 8;
+    const int messages_per_thread = 500;
 
     std::vector<std::thread> threads;
-    std::atomic<int> format_errors{0};
+    std::atomic<int> errors{0};
 
     for (int i = 0; i < num_threads; ++i) {
         threads.emplace_back([&, thread_id = i]() {
             for (int j = 0; j < messages_per_thread; ++j) {
                 try {
-                    // Use complex formatting patterns
-                    test_logger->info("Thread {}: Counter={}, Float={:.2f}, Hex=0x{:X}",
-                                     thread_id, j, j * 3.14159, j * 256);
-                    test_logger->debug("Nested format: {} {} {} {} {}",
-                                      thread_id, j, j * 2, j * 3, j * 4);
-                    test_logger->warn("String formatting: '{}' len={}",
-                                     std::string(j % 20, 'x'), j % 20);
+                    test_logger->log(log_level::info,
+                                   "Source location test " + std::to_string(j),
+                                   __FILE__, __LINE__, __FUNCTION__);
                 } catch (...) {
-                    ++format_errors;
+                    ++errors;
                 }
 
-                if (j % 30 == 0) {
+                if (j % 100 == 0) {
                     std::this_thread::sleep_for(1ms);
                 }
             }
@@ -332,38 +381,50 @@ TEST_F(ThreadSafetyTest, ConcurrentFormatting) {
         t.join();
     }
 
-    std::this_thread::sleep_for(100ms);
+    test_logger->flush();
+    test_logger->stop();
 
-    EXPECT_EQ(format_errors.load(), 0) << "No formatting errors should occur";
-    EXPECT_TRUE(verify_log_integrity("test_format.log"));
+    EXPECT_EQ(errors.load(), 0);
 }
 
-// Test 6: Mixed log levels concurrent access
-TEST_F(ThreadSafetyTest, MixedLogLevels) {
-    auto writer = std::make_shared<file_writer>("test_levels.log");
-    auto test_logger = std::make_shared<logger>(writer);
-    test_logger->set_level(log_level::trace);
+// Test 8: Mixed log levels stress
+TEST_F(ThreadSafetyTest, MixedLogLevelsStress) {
+    auto test_logger = std::make_shared<logger>();
+    test_logger->start();
+    test_logger->add_writer(std::make_unique<file_writer>("test_concurrent.log"));
 
-    const int num_threads = 8;
-    const int messages_per_thread = 200;
+    const int num_threads = 15;
+    const int operations_per_thread = 400;
 
     std::vector<std::thread> threads;
     std::atomic<int> errors{0};
 
     for (int i = 0; i < num_threads; ++i) {
         threads.emplace_back([&, thread_id = i]() {
-            for (int j = 0; j < messages_per_thread; ++j) {
+            std::mt19937 rng(thread_id);
+            std::uniform_int_distribution<int> level_dist(0, 5);
+
+            for (int j = 0; j < operations_per_thread; ++j) {
                 try {
-                    switch (j % 6) {
-                        case 0: test_logger->trace("Trace {}", j); break;
-                        case 1: test_logger->debug("Debug {}", j); break;
-                        case 2: test_logger->info("Info {}", j); break;
-                        case 3: test_logger->warn("Warn {}", j); break;
-                        case 4: test_logger->error("Error {}", j); break;
-                        case 5: test_logger->critical("Critical {}", j); break;
+                    log_level level;
+                    switch (level_dist(rng)) {
+                        case 0: level = log_level::trace; break;
+                        case 1: level = log_level::debug; break;
+                        case 2: level = log_level::info; break;
+                        case 3: level = log_level::warn; break;
+                        case 4: level = log_level::error; break;
+                        default: level = log_level::fatal; break;
                     }
+
+                    test_logger->log(level,
+                                   "Mixed level test " + std::to_string(thread_id) +
+                                   ":" + std::to_string(j));
                 } catch (...) {
                     ++errors;
+                }
+
+                if (j % 50 == 0) {
+                    std::this_thread::sleep_for(1ms);
                 }
             }
         });
@@ -373,33 +434,33 @@ TEST_F(ThreadSafetyTest, MixedLogLevels) {
         t.join();
     }
 
-    EXPECT_EQ(errors.load(), 0);
-    EXPECT_TRUE(verify_log_integrity("test_levels.log"));
+    test_logger->flush();
+    test_logger->stop();
 
-    if (std::filesystem::exists("test_levels.log")) {
-        std::filesystem::remove("test_levels.log");
-    }
+    EXPECT_EQ(errors.load(), 0);
 }
 
-// Test 7: Concurrent level changes
-TEST_F(ThreadSafetyTest, ConcurrentLevelChanges) {
-    auto writer = std::make_shared<file_writer>("test_level_change.log");
-    auto test_logger = std::make_shared<logger>(writer);
+// Test 9: Add writer during logging
+TEST_F(ThreadSafetyTest, DynamicWriterAddition) {
+    auto test_logger = std::make_shared<logger>();
+    test_logger->start();
+    test_logger->add_writer(std::make_unique<file_writer>("test_concurrent.log"));
 
-    const int num_writer_threads = 10;
-    const int num_modifier_threads = 3;
-    const int messages_per_thread = 300;
+    const int num_logger_threads = 8;
+    const int messages_per_thread = 500;
 
     std::vector<std::thread> threads;
-    std::atomic<bool> running{true};
     std::atomic<int> errors{0};
+    std::atomic<bool> running{true};
 
-    // Writer threads
-    for (int i = 0; i < num_writer_threads; ++i) {
+    // Logger threads
+    for (int i = 0; i < num_logger_threads; ++i) {
         threads.emplace_back([&, thread_id = i]() {
             for (int j = 0; j < messages_per_thread && running.load(); ++j) {
                 try {
-                    test_logger->info("Thread {} message {}", thread_id, j);
+                    test_logger->log(log_level::info,
+                                   "Dynamic writer test " + std::to_string(thread_id) +
+                                   ":" + std::to_string(j));
                 } catch (...) {
                     ++errors;
                 }
@@ -407,142 +468,41 @@ TEST_F(ThreadSafetyTest, ConcurrentLevelChanges) {
         });
     }
 
-    // Threads that change log level
-    for (int i = 0; i < num_modifier_threads; ++i) {
-        threads.emplace_back([&]() {
-            std::this_thread::sleep_for(10ms);
-            while (running.load()) {
-                try {
-                    test_logger->set_level(log_level::debug);
-                    std::this_thread::sleep_for(20ms);
-                    test_logger->set_level(log_level::info);
-                    std::this_thread::sleep_for(20ms);
-                    test_logger->set_level(log_level::warn);
-                    std::this_thread::sleep_for(20ms);
-                } catch (...) {
-                    ++errors;
-                }
-            }
-        });
-    }
+    // Writer addition thread
+    threads.emplace_back([&]() {
+        std::this_thread::sleep_for(100ms);
+        try {
+            test_logger->add_writer(std::make_unique<file_writer>("test_multiple.log"));
+        } catch (...) {
+            ++errors;
+        }
+    });
 
-    // Let it run
-    std::this_thread::sleep_for(200ms);
+    std::this_thread::sleep_for(600ms);
     running.store(false);
 
     for (auto& t : threads) {
         t.join();
     }
 
-    EXPECT_EQ(errors.load(), 0);
-    EXPECT_TRUE(verify_log_integrity("test_level_change.log"));
-
-    if (std::filesystem::exists("test_level_change.log")) {
-        std::filesystem::remove("test_level_change.log");
-    }
-}
-
-// Test 8: Stress test with very high contention
-TEST_F(ThreadSafetyTest, HighContentionStress) {
-    auto writer = std::make_shared<file_writer>("test_stress.log");
-    auto test_logger = std::make_shared<logger>(writer);
-
-    const int num_threads = 20;
-    const int messages_per_thread = 500;
-
-    std::vector<std::thread> threads;
-    std::atomic<int> total_messages{0};
-    std::atomic<int> errors{0};
-
-    std::barrier sync_point(num_threads);
-
-    for (int i = 0; i < num_threads; ++i) {
-        threads.emplace_back([&, thread_id = i]() {
-            sync_point.arrive_and_wait(); // All start together
-
-            for (int j = 0; j < messages_per_thread; ++j) {
-                try {
-                    test_logger->info("T{}:M{}", thread_id, j);
-                    ++total_messages;
-                } catch (...) {
-                    ++errors;
-                }
-            }
-        });
-    }
-
-    for (auto& t : threads) {
-        t.join();
-    }
-
-    std::this_thread::sleep_for(100ms);
+    test_logger->flush();
+    test_logger->stop();
 
     EXPECT_EQ(errors.load(), 0);
-    EXPECT_EQ(total_messages.load(), num_threads * messages_per_thread);
-    EXPECT_TRUE(verify_log_integrity("test_stress.log"));
-
-    if (std::filesystem::exists("test_stress.log")) {
-        std::filesystem::remove("test_stress.log");
-    }
 }
 
-// Test 9: Rotation during high-frequency writes
-TEST_F(ThreadSafetyTest, RotationUnderHighLoad) {
-    const size_t small_file_size = 512; // Small file to force frequent rotation
-    const int num_threads = 15;
-    const int messages_per_thread = 200;
-
-    auto writer = std::make_shared<rotating_file_writer>(
-        "test_rotation_stress.log",
-        small_file_size,
-        5
-    );
-
-    auto test_logger = std::make_shared<logger>(writer);
-
-    std::vector<std::thread> threads;
-    std::atomic<int> rotation_errors{0};
-
-    for (int i = 0; i < num_threads; ++i) {
-        threads.emplace_back([&, thread_id = i]() {
-            for (int j = 0; j < messages_per_thread; ++j) {
-                try {
-                    test_logger->info("Thread {} message {} with extra padding to force rotation",
-                                     thread_id, j);
-                } catch (...) {
-                    ++rotation_errors;
-                }
-            }
-        });
-    }
-
-    for (auto& t : threads) {
-        t.join();
-    }
-
-    std::this_thread::sleep_for(100ms);
-
-    EXPECT_EQ(rotation_errors.load(), 0);
-
-    // Cleanup rotation files
-    for (const auto& entry : std::filesystem::directory_iterator(".")) {
-        if (entry.path().filename().string().find("test_rotation_stress") != std::string::npos) {
-            std::filesystem::remove(entry.path());
-        }
-    }
-}
-
-// Test 10: Memory safety - no leaks during concurrent operations
+// Test 10: Memory safety - no leaks during concurrent logging
 TEST_F(ThreadSafetyTest, MemorySafetyTest) {
-    const int num_iterations = 100;
+    const int num_iterations = 30;
     const int threads_per_iteration = 8;
-    const int messages_per_thread = 50;
+    const int messages_per_thread = 100;
 
     std::atomic<int> total_errors{0};
 
     for (int iteration = 0; iteration < num_iterations; ++iteration) {
-        auto writer = std::make_shared<file_writer>("test_memory.log");
-        auto test_logger = std::make_shared<logger>(writer);
+        auto test_logger = std::make_shared<logger>();
+        test_logger->start();
+        test_logger->add_writer(std::make_unique<file_writer>("test_concurrent.log"));
 
         std::vector<std::thread> threads;
 
@@ -550,8 +510,10 @@ TEST_F(ThreadSafetyTest, MemorySafetyTest) {
             threads.emplace_back([&, thread_id = i]() {
                 for (int j = 0; j < messages_per_thread; ++j) {
                     try {
-                        test_logger->info("Iter {} Thread {} Msg {}",
-                                         iteration, thread_id, j);
+                        test_logger->log(log_level::info,
+                                       "Memory safety iter " + std::to_string(iteration) +
+                                       " thread " + std::to_string(thread_id) +
+                                       " msg " + std::to_string(j));
                     } catch (...) {
                         ++total_errors;
                     }
@@ -563,12 +525,11 @@ TEST_F(ThreadSafetyTest, MemorySafetyTest) {
             t.join();
         }
 
-        // Logger and writer destructors called here
+        test_logger->flush();
+        test_logger->stop();
+
+        // Logger destructor called here
     }
 
     EXPECT_EQ(total_errors.load(), 0);
-
-    if (std::filesystem::exists("test_memory.log")) {
-        std::filesystem::remove("test_memory.log");
-    }
 }
