@@ -84,3 +84,17 @@ add_test(NAME logger_min_level_threshold_test COMMAND logger_min_level_threshold
 set_target_properties(logger_min_level_threshold_test PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
+
+# Thread safety tests (Phase 1 - Task 1.1)
+add_executable(logger_thread_safety_test thread_safety_tests.cpp)
+
+if(TARGET GTest::gtest_main)
+    target_link_libraries(logger_thread_safety_test PRIVATE LoggerSystem GTest::gtest_main)
+else()
+    target_link_libraries(logger_thread_safety_test PRIVATE LoggerSystem gtest_main)
+endif()
+
+add_test(NAME logger_thread_safety_test COMMAND logger_thread_safety_test)
+set_target_properties(logger_thread_safety_test PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
