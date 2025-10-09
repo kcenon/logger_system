@@ -883,52 +883,99 @@ var NAVTREE =
       [ "Conclusion", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md730", null ],
       [ "References", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md732", null ]
     ] ],
+    [ "Phase 3: Error Handling Preparation - logger_system", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html", [
+      [ "Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md736", null ],
+      [ "Current State", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md738", [
+        [ "Error Handling Status", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md739", null ]
+      ] ],
+      [ "Migration Plan", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md741", [
+        [ "Phase 3.1: Import Error Codes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md742", null ],
+        [ "Phase 3.2: Key API Migrations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md743", [
+          [ "Priority 1: Logger Lifecycle (High Impact)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md744", null ],
+          [ "Priority 2: File Operations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md745", null ],
+          [ "Priority 3: Async Writer Operations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md746", null ]
+        ] ]
+      ] ],
+      [ "Migration Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md748", [
+        [ "Code Changes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md749", null ],
+        [ "Test Updates", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md750", null ],
+        [ "Documentation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md751", null ]
+      ] ],
+      [ "Example Migrations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md753", [
+        [ "Example 1: Basic Logger Setup", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md754", null ],
+        [ "Example 2: Monadic Chaining", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md755", null ],
+        [ "Example 3: Error Recovery with Rotation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md756", null ],
+        [ "Example 4: Async Writer with Error Handling", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md757", null ]
+      ] ],
+      [ "Error Code Mapping", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md759", [
+        [ "Logger System Error Codes (-200 to -299)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md760", null ],
+        [ "Error Messages", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md761", null ]
+      ] ],
+      [ "Testing Strategy", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md763", [
+        [ "Unit Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md764", null ],
+        [ "Integration Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md765", null ]
+      ] ],
+      [ "Performance Impact", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md767", [
+        [ "Expected Overhead", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md768", null ],
+        [ "Current Performance (Baseline)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md769", null ],
+        [ "Expected After Migration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md770", null ]
+      ] ],
+      [ "Implementation Timeline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md772", [
+        [ "Week 1: Core APIs", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md773", null ],
+        [ "Week 2: Advanced Features", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md774", null ],
+        [ "Week 3: Finalization", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md775", null ]
+      ] ],
+      [ "Backwards Compatibility", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md777", [
+        [ "Strategy: Dual API (Transitional)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md778", null ]
+      ] ],
+      [ "References", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md780", null ]
+    ] ],
     [ "logger_system Sanitizer Baseline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html", [
-      [ "Executive Summary", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md751", null ],
-      [ "Sanitizer Configuration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md753", [
-        [ "Enabled Sanitizers", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md754", null ]
+      [ "Executive Summary", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md799", null ],
+      [ "Sanitizer Configuration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md801", [
+        [ "Enabled Sanitizers", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md802", null ]
       ] ],
-      [ "Baseline Warnings", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md756", [
-        [ "ThreadSanitizer Warnings", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md757", null ],
-        [ "AddressSanitizer Warnings", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md758", null ],
-        [ "UndefinedBehaviorSanitizer Warnings", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md759", null ]
+      [ "Baseline Warnings", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md804", [
+        [ "ThreadSanitizer Warnings", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md805", null ],
+        [ "AddressSanitizer Warnings", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md806", null ],
+        [ "UndefinedBehaviorSanitizer Warnings", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md807", null ]
       ] ],
-      [ "How to Run Sanitizers Locally", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md761", [
-        [ "ThreadSanitizer", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md762", null ],
-        [ "AddressSanitizer", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md763", null ],
-        [ "UndefinedBehaviorSanitizer", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md764", null ]
+      [ "How to Run Sanitizers Locally", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md809", [
+        [ "ThreadSanitizer", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md810", null ],
+        [ "AddressSanitizer", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md811", null ],
+        [ "UndefinedBehaviorSanitizer", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md812", null ]
       ] ],
-      [ "CI/CD Integration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md766", null ],
-      [ "Phase 1 Action Items", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md768", null ],
-      [ "Exemptions", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md770", null ]
+      [ "CI/CD Integration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md814", null ],
+      [ "Phase 1 Action Items", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md816", null ],
+      [ "Exemptions", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md818", null ]
     ] ],
     [ "Security Guide", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html", [
-      [ "Threat Model (Scope)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md773", null ],
-      [ "Current Capabilities", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md774", null ],
-      [ "Important Limitations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md775", null ],
-      [ "Recommendations (Production)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md776", null ],
-      [ "Secure Configuration Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md777", null ],
-      [ "Roadmap", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md778", null ]
+      [ "Threat Model (Scope)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md821", null ],
+      [ "Current Capabilities", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md822", null ],
+      [ "Important Limitations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md823", null ],
+      [ "Recommendations (Production)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md824", null ],
+      [ "Secure Configuration Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md825", null ],
+      [ "Roadmap", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md826", null ]
     ] ],
     [ "Static Analysis Baseline - logger_system", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html", [
-      [ "Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md780", null ],
-      [ "Clang-Tidy Baseline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md781", [
-        [ "Configuration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md782", null ],
-        [ "Initial Baseline (Phase 0)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md783", null ],
-        [ "Notable Suppressions", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md784", null ]
+      [ "Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md828", null ],
+      [ "Clang-Tidy Baseline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md829", [
+        [ "Configuration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md830", null ],
+        [ "Initial Baseline (Phase 0)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md831", null ],
+        [ "Notable Suppressions", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md832", null ]
       ] ],
-      [ "Cppcheck Baseline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md785", [
-        [ "Configuration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md786", null ],
-        [ "Initial Baseline (Phase 0)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md787", null ],
-        [ "Notable Suppressions", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md788", null ]
+      [ "Cppcheck Baseline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md833", [
+        [ "Configuration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md834", null ],
+        [ "Initial Baseline (Phase 0)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md835", null ],
+        [ "Notable Suppressions", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md836", null ]
       ] ],
-      [ "Target Goals", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md789", null ],
-      [ "How to Run Analysis", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md790", [
-        [ "Clang-Tidy", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md791", null ],
-        [ "Cppcheck", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md792", null ]
+      [ "Target Goals", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md837", null ],
+      [ "How to Run Analysis", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md838", [
+        [ "Clang-Tidy", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md839", null ],
+        [ "Cppcheck", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md840", null ]
       ] ],
-      [ "Tracking Changes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md793", null ],
-      [ "Notes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md794", null ]
+      [ "Tracking Changes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md841", null ],
+      [ "Notes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md842", null ]
     ] ]
   ] ]
 ];
@@ -937,7 +984,7 @@ var NAVTREEINDEX =
 [
 "index.html",
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md366",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md106"
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md810"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

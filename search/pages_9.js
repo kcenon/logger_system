@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['getting_20started_20with_20logger_20system_0',['Getting Started with Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html',1,'']]],
-  ['guide_1',['guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html',1,'Logger System Best Practices Guide'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html',1,'Logger System Migration Guide'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html',1,'Logger System Performance Guide'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html',1,'Phase 4: Dependency Injection Pattern Migration Guide'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html',1,'Security Guide']]]
+  ['ecosystem_20architecture_0',['Threading Ecosystem Architecture',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html',1,'']]],
+  ['error_20handling_20preparation_20logger_5fsystem_1',['Phase 3: Error Handling Preparation - logger_system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html',1,'']]]
 ];

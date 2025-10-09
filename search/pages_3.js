@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['4_3a_20dependency_20injection_20pattern_20migration_20guide_0',['Phase 4: Dependency Injection Pattern Migration Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html',1,'']]]
+  ['3_3a_20error_20handling_20preparation_20logger_5fsystem_0',['Phase 3: Error Handling Preparation - logger_system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html',1,'']]]
 ];

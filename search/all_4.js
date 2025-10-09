@@ -17,8 +17,9 @@ var searchData=
   ['4_20tasks_20o1_20o3_20o4_20complete_14',['Added - Phase 4 Tasks O1, O3 &amp; O4 Complete',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md356',1,'']]],
   ['4_20windows_20visual_20studio_20build_15',['4. Windows Visual Studio Build',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html#autotoc_md410',1,'']]],
   ['4_20writer_20lifecycle_20management_16',['4. Writer Lifecycle Management',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md683',1,'']]],
-  ['4_3a_20configuration_20changes_17',['Issue 4: Configuration Changes',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md517',1,'']]],
-  ['4_3a_20dependency_20injection_20pattern_20migration_20guide_18',['Phase 4: Dependency Injection Pattern Migration Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html',1,'']]],
-  ['4_3a_20optimization_201_202_20days_19',['Phase 4: Optimization (1-2 days)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md511',1,'']]],
-  ['4_3a_20using_20imonitorable_20interface_20',['Example 4: Using IMonitorable Interface',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md607',1,'']]]
+  ['4_3a_20async_20writer_20with_20error_20handling_17',['Example 4: Async Writer with Error Handling',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html#autotoc_md757',1,'']]],
+  ['4_3a_20configuration_20changes_18',['Issue 4: Configuration Changes',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md517',1,'']]],
+  ['4_3a_20dependency_20injection_20pattern_20migration_20guide_19',['Phase 4: Dependency Injection Pattern Migration Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html',1,'']]],
+  ['4_3a_20optimization_201_202_20days_20',['Phase 4: Optimization (1-2 days)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md511',1,'']]],
+  ['4_3a_20using_20imonitorable_20interface_21',['Example 4: Using IMonitorable Interface',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md607',1,'']]]
 ];
