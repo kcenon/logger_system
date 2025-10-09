@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['🏗️_20architecture_20highlights_0',['🏗️ Architecture Highlights',['../index.html#autotoc_md5',1,'']]],
-  ['🏗️_20ecosystem_20overview_1',['🏗️ Ecosystem Overview',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md190',1,'']]],
-  ['🏗️_20strong_20modern_20c_20foundation_20strong_2',['🏗️ &lt;strong&gt;Modern C++ Foundation&lt;/strong&gt;',['../index.html#autotoc_md26',1,'']]]
+  ['🎯_20high_20performance_20logging_0',['🎯 High-Performance Logging',['../index.html#autotoc_md3',1,'']]],
+  ['🎯_20strong_20ideal_20applications_20strong_1',['🎯 &lt;strong&gt;Ideal Applications&lt;/strong&gt;',['../index.html#autotoc_md16',1,'']]]
 ];

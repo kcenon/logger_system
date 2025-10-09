@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['📖_20external_20resources_0',['📖 External Resources',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md794',1,'']]],
-  ['📖_20strong_20key_20files_20and_20their_20purpose_20strong_1',['📖 &lt;strong&gt;Key Files and Their Purpose&lt;/strong&gt;',['../index.html#autotoc_md30',1,'']]]
+  ['📋_0',['Phase 3: Error Handling 📋',['../index.html#autotoc_md78',1,'']]],
+  ['📋_20project_20roles_20responsibilities_1',['📋 Project Roles &amp; Responsibilities',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md193',1,'']]]
 ];

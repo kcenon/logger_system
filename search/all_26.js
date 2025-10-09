@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['✨_20core_20features_0',['✨ Core Features',['../index.html#autotoc_md2',1,'']]]
+  ['✅_0',['✅',['../index.html#autotoc_md74',1,'Phase 0: Foundation and Tooling Setup ✅'],['../index.html#autotoc_md76',1,'Phase 1: Thread Safety ✅'],['../index.html#autotoc_md77',1,'Phase 2: Resource Management with RAII ✅']]]
 ];
