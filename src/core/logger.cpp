@@ -120,7 +120,7 @@ result_void logger::start() {
         pimpl_->running_ = true;
         // Initialize async processing if needed
     }
-    return result_void{};
+    return result_void::success();
 }
 
 result_void logger::stop() {
@@ -128,7 +128,7 @@ result_void logger::stop() {
         flush();
         pimpl_->running_ = false;
     }
-    return result_void{};
+    return result_void::success();
 }
 
 bool logger::is_running() const {
@@ -140,7 +140,7 @@ result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
         std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
         pimpl_->writers_.push_back(std::move(writer));
     }
-    return result_void{};
+    return result_void::success();
 }
 
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
@@ -249,7 +249,7 @@ void logger::flush() {
 
 result_void logger::enable_metrics_collection(bool enable) {
     if (!pimpl_) {
-        return result_void{};
+        return make_logger_error(logger_error_code::invalid_argument, "Logger not initialized");
     }
 
     pimpl_->metrics_enabled_ = enable;
@@ -257,7 +257,7 @@ result_void logger::enable_metrics_collection(bool enable) {
         metrics::g_logger_stats.reset();
     }
 
-    return result_void{};
+    return result_void::success();
 }
 
 bool logger::is_metrics_collection_enabled() const {
@@ -302,8 +302,8 @@ common::Result<common::interfaces::metrics_snapshot> logger::get_monitoring_data
     // Add metrics from internal monitor if available
     if (monitor_) {
         auto monitor_result = monitor_->get_metrics();
-        if (std::holds_alternative<common::interfaces::metrics_snapshot>(monitor_result)) {
-            auto& monitor_metrics = std::get<common::interfaces::metrics_snapshot>(monitor_result);
+        if (monitor_result.is_ok()) {
+            const auto& monitor_metrics = monitor_result.value();
             // Merge monitor metrics into snapshot
             for (const auto& metric : monitor_metrics.metrics) {
                 snapshot.metrics.push_back(metric);
