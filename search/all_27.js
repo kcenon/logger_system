@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['✨_20core_20features_0',['✨ Core Features',['../index.html#autotoc_md2',1,'']]]
+  ['🌐_20strong_20cross_20platform_20compatibility_20strong_0',['🌐 &lt;strong&gt;Cross-Platform Compatibility&lt;/strong&gt;',['../index.html#autotoc_md13',1,'']]]
 ];
