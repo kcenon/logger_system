@@ -93,15 +93,15 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Phase 3: Error Handling Preparation - logger_system</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md736"></a> <b>Version</b>: 1.0 <b>Date</b>: 2025-10-09 <b>Status</b>: Ready for Implementation</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md741"></a> <b>Version</b>: 1.0 <b>Date</b>: 2025-10-09 <b>Status</b>: Ready for Implementation</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md738"></a>
+<h1><a class="anchor" id="autotoc_md743"></a>
 Overview</h1>
 <p>This document outlines the migration path for logger_system to adopt the centralized error handling from common_system Phase 3.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md740"></a>
+<h1><a class="anchor" id="autotoc_md745"></a>
 Current State</h1>
-<h2><a class="anchor" id="autotoc_md741"></a>
+<h2><a class="anchor" id="autotoc_md746"></a>
 Error Handling Status</h2>
 <p><b>Current Approach</b>:</p><ul>
 <li>Mixed void returns and boolean success indicators</li>
@@ -120,9 +120,9 @@ Error Handling Status</h2>
 <div class="line">    <span class="keywordflow">return</span> setup_writers(cfg);</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md743"></a>
+<h1><a class="anchor" id="autotoc_md748"></a>
 Migration Plan</h1>
-<h2><a class="anchor" id="autotoc_md744"></a>
+<h2><a class="anchor" id="autotoc_md749"></a>
 Phase 3.1: Import Error Codes</h2>
 <p><b>Action</b>: Add common_system error code dependency</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/common/error/error_codes.h&gt;</span></div>
@@ -130,9 +130,9 @@ Phase 3.1: Import Error Codes</h2>
 <div class="line"> </div>
 <div class="line"><span class="keyword">using namespace </span>common;</div>
 <div class="line"><span class="keyword">using namespace </span>common::error;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md745"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md750"></a>
 Phase 3.2: Key API Migrations</h2>
-<h3><a class="anchor" id="autotoc_md746"></a>
+<h3><a class="anchor" id="autotoc_md751"></a>
 Priority 1: Logger Lifecycle (High Impact)</h3>
 <div class="fragment"><div class="line"><span class="comment">// Before</span></div>
 <div class="line"><span class="keywordtype">bool</span> initialize(<span class="keyword">const</span> logger_config&amp; config);</div>
@@ -190,7 +190,7 @@ Priority 1: Logger Lifecycle (High Impact)</h3>
 <div class="line">        );</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md747"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md752"></a>
 Priority 2: File Operations</h3>
 <div class="fragment"><div class="line"><span class="comment">// Before</span></div>
 <div class="line"><span class="keywordtype">void</span> write(<span class="keyword">const</span> log_entry&amp; entry);</div>
@@ -265,7 +265,7 @@ Priority 2: File Operations</h3>
 <div class="line">        );</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md748"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md753"></a>
 Priority 3: Async Writer Operations</h3>
 <div class="fragment"><div class="line"><span class="comment">// Before</span></div>
 <div class="line"><span class="keywordtype">void</span> async_writer::start();</div>
@@ -301,9 +301,9 @@ Priority 3: Async Writer Operations</h3>
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md750"></a>
+<h1><a class="anchor" id="autotoc_md755"></a>
 Migration Checklist</h1>
-<h2><a class="anchor" id="autotoc_md751"></a>
+<h2><a class="anchor" id="autotoc_md756"></a>
 Code Changes</h2>
 <ul>
 <li>[ ] Add common_system error code includes</li>
@@ -315,7 +315,7 @@ Code Changes</h2>
 <li>[ ] Update formatter error handling</li>
 <li>[ ] Add error context (file path, errno, etc.)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md752"></a>
+<h2><a class="anchor" id="autotoc_md757"></a>
 Test Updates</h2>
 <ul>
 <li>[ ] Update unit tests for Result&lt;T&gt; APIs</li>
@@ -325,7 +325,7 @@ Test Updates</h2>
 <li>[ ] Test rotation failure recovery</li>
 <li>[ ] Verify error message quality</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md753"></a>
+<h2><a class="anchor" id="autotoc_md758"></a>
 Documentation</h2>
 <ul>
 <li>[ ] Update API reference with Result&lt;T&gt; signatures</li>
@@ -335,9 +335,9 @@ Documentation</h2>
 <li>[ ] Create troubleshooting guide</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md755"></a>
+<h1><a class="anchor" id="autotoc_md760"></a>
 Example Migrations</h1>
-<h2><a class="anchor" id="autotoc_md756"></a>
+<h2><a class="anchor" id="autotoc_md761"></a>
 Example 1: Basic Logger Setup</h2>
 <div class="fragment"><div class="line"><span class="comment">// Usage before</span></div>
 <div class="line">logger log;</div>
@@ -357,7 +357,7 @@ Example 1: Basic Logger Setup</h2>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> -1;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md757"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md762"></a>
 Example 2: Monadic Chaining</h2>
 <div class="fragment"><div class="line"><span class="comment">// Chain logger operations</span></div>
 <div class="line"><span class="keyword">auto</span> result = logger::create(config)</div>
@@ -375,7 +375,7 @@ Example 2: Monadic Chaining</h2>
 <div class="line">        log_warn(<span class="stringliteral">&quot;File logging unavailable: {}&quot;</span>, err.message);</div>
 <div class="line">        <span class="keywordflow">return</span> logger::create_console_only();</div>
 <div class="line">    });</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md758"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md763"></a>
 Example 3: Error Recovery with Rotation</h2>
 <div class="fragment"><div class="line"><span class="comment">// Attempt rotation with fallback</span></div>
 <div class="line"><span class="keyword">auto</span> rotate_result = writer-&gt;rotate()</div>
@@ -391,7 +391,7 @@ Example 3: Error Recovery with Rotation</h2>
 <div class="line">        alert_ops(<span class="stringliteral">&quot;Log system failure&quot;</span>);</div>
 <div class="line">        <span class="keywordflow">return</span> ok();  <span class="comment">// Continue without logging</span></div>
 <div class="line">    });</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md759"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md764"></a>
 Example 4: Async Writer with Error Handling</h2>
 <div class="fragment"><div class="line"><span class="comment">// Create async writer with proper error handling</span></div>
 <div class="line"><span class="keyword">auto</span> create_async_logger() -&gt; Result&lt;std::shared_ptr&lt;logger&gt;&gt; {</div>
@@ -409,9 +409,9 @@ Example 4: Async Writer with Error Handling</h2>
 <div class="line">    <span class="keywordflow">return</span> ok(logger);</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md761"></a>
+<h1><a class="anchor" id="autotoc_md766"></a>
 Error Code Mapping</h1>
-<h2><a class="anchor" id="autotoc_md762"></a>
+<h2><a class="anchor" id="autotoc_md767"></a>
 Logger System Error Codes (-200 to -299)</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>common::error::codes::logger_system {</div>
 <div class="line">    <span class="comment">// File errors (-200 to -219)</span></div>
@@ -435,7 +435,7 @@ Logger System Error Codes (-200 to -299)</h2>
 <div class="line">    <span class="keyword">constexpr</span> <span class="keywordtype">int</span> invalid_filter = -260;</div>
 <div class="line">    <span class="keyword">constexpr</span> <span class="keywordtype">int</span> filter_rejected = -261;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md763"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md768"></a>
 Error Messages</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -458,9 +458,9 @@ Error Messages</h2>
 <td class="markdownTableBodyNone">writer_full   </td><td class="markdownTableBodyNone">"Writer queue full"   </td><td class="markdownTableBodyNone">Queue capacity reached   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md765"></a>
+<h1><a class="anchor" id="autotoc_md770"></a>
 Testing Strategy</h1>
-<h2><a class="anchor" id="autotoc_md766"></a>
+<h2><a class="anchor" id="autotoc_md771"></a>
 Unit Tests</h2>
 <div class="fragment"><div class="line">TEST(LoggerPhase3, InitializeWithInvalidPath) {</div>
 <div class="line">    logger log;</div>
@@ -507,7 +507,7 @@ Unit Tests</h2>
 <div class="line"> </div>
 <div class="line">    EXPECT_TRUE(result.is_ok());</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md767"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md772"></a>
 Integration Tests</h2>
 <div class="fragment"><div class="line">TEST(LoggerPhase3, HighVolumeWithErrors) {</div>
 <div class="line">    <span class="keyword">auto</span> logger_result = create_logger_with_async_writer();</div>
@@ -528,23 +528,23 @@ Integration Tests</h2>
 <div class="line">    verify_log_integrity();</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md769"></a>
+<h1><a class="anchor" id="autotoc_md774"></a>
 Performance Impact</h1>
-<h2><a class="anchor" id="autotoc_md770"></a>
+<h2><a class="anchor" id="autotoc_md775"></a>
 Expected Overhead</h2>
 <ul>
 <li><b>Result&lt;T&gt; size</b>: +24 bytes per return (variant overhead)</li>
 <li><b>Success path</b>: ~0-1ns (inline optimization)</li>
 <li><b>Error path</b>: ~2-3ns (error_info construction)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md771"></a>
+<h2><a class="anchor" id="autotoc_md776"></a>
 Current Performance (Baseline)</h2>
 <ul>
 <li><b>Synchronous write</b>: 4.34M msgs/sec</li>
 <li><b>Async write</b>: 8.2M msgs/sec</li>
 <li><b>File rotation</b>: &lt;1ms</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md772"></a>
+<h2><a class="anchor" id="autotoc_md777"></a>
 Expected After Migration</h2>
 <ul>
 <li><b>Synchronous write</b>: 4.3M msgs/sec (-1%)</li>
@@ -553,23 +553,23 @@ Expected After Migration</h2>
 </ul>
 <p>**Conclusion**: Negligible performance impact (&lt;2%)</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md774"></a>
+<h1><a class="anchor" id="autotoc_md779"></a>
 Implementation Timeline</h1>
-<h2><a class="anchor" id="autotoc_md775"></a>
+<h2><a class="anchor" id="autotoc_md780"></a>
 Week 1: Core APIs</h2>
 <ul>
 <li>Day 1-2: Migrate logger lifecycle (initialize, shutdown)</li>
 <li>Day 3-4: Migrate file_writer operations</li>
 <li>Day 5: Update tests</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md776"></a>
+<h2><a class="anchor" id="autotoc_md781"></a>
 Week 2: Advanced Features</h2>
 <ul>
 <li>Day 1-2: Migrate rotating_file_writer</li>
 <li>Day 3-4: Migrate async_writer</li>
 <li>Day 5: Integration tests</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md777"></a>
+<h2><a class="anchor" id="autotoc_md782"></a>
 Week 3: Finalization</h2>
 <ul>
 <li>Day 1-2: Migrate remaining writers (console, network)</li>
@@ -577,9 +577,9 @@ Week 3: Finalization</h2>
 <li>Day 4-5: Documentation and code review</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md779"></a>
+<h1><a class="anchor" id="autotoc_md784"></a>
 Backwards Compatibility</h1>
-<h2><a class="anchor" id="autotoc_md780"></a>
+<h2><a class="anchor" id="autotoc_md785"></a>
 Strategy: Dual API (Transitional)</h2>
 <p>Provide both old and new APIs during transition:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>logger {</div>
@@ -600,7 +600,7 @@ Strategy: Dual API (Transitional)</h2>
 <li>Phase 4: Remove deprecated APIs (after 6 months)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md782"></a>
+<h1><a class="anchor" id="autotoc_md787"></a>
 References</h1>
 <ul>
 <li><a href="../../common_system/include/kcenon/common/error/error_codes.h">common_system Error Codes</a></li>
@@ -616,7 +616,7 @@ References</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Oct 9 2025 10:34:12 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Oct 9 2025 11:11:42 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
