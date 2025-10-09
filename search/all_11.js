@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['handle_20management_0',['1. File Handle Management',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md677',1,'']]],
-  ['handles_1',['Category 1: File Handles',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md697',1,'']]],
+  ['handle_20management_0',['1. File Handle Management',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md680',1,'']]],
+  ['handles_1',['Category 1: File Handles',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md700',1,'']]],
   ['handling_2',['handling',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md161',1,'Error Handling'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md178',1,'Error Handling'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html#autotoc_md438',1,'Error Handling']]],
   ['handling_20migration_3',['1. Error Handling Migration',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md487',1,'']]],
   ['handling_20with_20result_20pattern_4',['handling with result pattern',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md569',1,'2. Error Handling with Result Pattern'],['../index.html#autotoc_md43',1,'Error Handling with Result Pattern']]],
@@ -9,9 +9,9 @@ var searchData=
   ['health_6',['🔄 CI/CD Pipeline Health',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md100',1,'']]],
   ['health_20check_20aggregation_7',['Pattern 3: Health Check Aggregation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md612',1,'']]],
   ['health_20check_20not_20working_8',['Issue: Health Check Not Working',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html#autotoc_md630',1,'']]],
-  ['help_20support_9',['🤝 Help &amp; Support',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md744',1,'']]],
+  ['help_20support_9',['🤝 Help &amp; Support',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md747',1,'']]],
   ['helper_20functions_10',['Helper Functions',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md163',1,'']]],
-  ['hierarchy_11',['hierarchy',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md212',1,'Interface Hierarchy'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md705',1,'Writer Hierarchy']]],
+  ['hierarchy_11',['hierarchy',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md212',1,'Interface Hierarchy'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md708',1,'Writer Hierarchy']]],
   ['high_20performance_20logging_12',['🎯 High-Performance Logging',['../index.html#autotoc_md3',1,'']]],
   ['high_20performance_20writer_13',['Custom High-Performance Writer',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html#autotoc_md539',1,'']]],
   ['high_20priority_20p0_14',['High Priority (P0)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html#autotoc_md417',1,'']]],
@@ -19,9 +19,9 @@ var searchData=
   ['highlights_16',['🏗️ Architecture Highlights',['../index.html#autotoc_md5',1,'']]],
   ['history_17',['history',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md103',1,'📅 Release History'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE.html#autotoc_md329',1,'Revision History']]],
   ['hot_20paths_18',['1. Synchronous I/O in Hot Paths',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html#autotoc_md542',1,'']]],
-  ['how_20to_20run_20analysis_19',['How to Run Analysis',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md787',1,'']]],
+  ['how_20to_20run_20analysis_19',['How to Run Analysis',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html#autotoc_md790',1,'']]],
   ['how_20to_20run_20benchmarks_20',['How to Run Benchmarks',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE.html#autotoc_md314',1,'']]],
-  ['how_20to_20run_20sanitizers_20locally_21',['How to Run Sanitizers Locally',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md758',1,'']]],
+  ['how_20to_20run_20sanitizers_20locally_21',['How to Run Sanitizers Locally',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md761',1,'']]],
   ['how_20to_20verify_20baseline_22',['How to Verify Baseline',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__0__BASELINE.html#autotoc_md665',1,'']]],
   ['hub_23',['4. integrated_thread_system (Integration Hub)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md207',1,'']]]
 ];

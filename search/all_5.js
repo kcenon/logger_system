@@ -2,7 +2,7 @@ var searchData=
 [
   ['5_200_20phase_205_20p1_20comprehensive_20test_20suite_202025_2009_2009_0',['[2.5.0] - Phase 5 P1 Comprehensive Test Suite (2025-09-09)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md349',1,'']]],
   ['5_20documentation_20build_1',['5. Documentation Build',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html#autotoc_md411',1,'']]],
-  ['5_20exception_20safety_2',['5. Exception Safety',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md683',1,'']]],
+  ['5_20exception_20safety_2',['5. Exception Safety',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md686',1,'']]],
   ['5_20log_20entry_20structure_3',['5. Log Entry Structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md566',1,'']]],
   ['5_20p2_20migration_20guide_20for_20existing_20users_202025_2009_2010_4',['[2.9.0] - Phase 5 P2 Migration Guide for Existing Users (2025-09-10)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md332',1,'']]],
   ['5_20p3_20complete_20api_20documentation_202025_2009_2010_5',['[2.8.0] - Phase 5 P3 Complete API Documentation (2025-09-10)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md336',1,'']]],
