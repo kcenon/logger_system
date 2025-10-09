@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Architecture Issues - Phase 0 Identification</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md240"></a> <b>Document Version</b>: 1.0 <b>Date</b>: 2025-10-05 <b>System</b>: logger_system <b>Status</b>: Issue Tracking Document</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md241"></a> <b>Document Version</b>: 1.0 <b>Date</b>: 2025-10-05 <b>System</b>: logger_system <b>Status</b>: Issue Tracking Document</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md242"></a>
+<h1><a class="anchor" id="autotoc_md243"></a>
 Overview</h1>
 <p>This document catalogs known architectural issues in logger_system identified during Phase 0 analysis. Issues are prioritized and mapped to specific phases for resolution.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md244"></a>
+<h1><a class="anchor" id="autotoc_md245"></a>
 Issue Categories</h1>
-<h2><a class="anchor" id="autotoc_md245"></a>
+<h2><a class="anchor" id="autotoc_md246"></a>
 1. Testing &amp; Quality</h2>
-<h3><a class="anchor" id="autotoc_md246"></a>
+<h3><a class="anchor" id="autotoc_md247"></a>
 Issue ARC-001: Test Suite API Migration</h3>
 <ul>
 <li><b>Priority</b>: P0 (High)</li>
@@ -118,7 +118,7 @@ Issue ARC-001: Test Suite API Migration</h3>
 </li>
 <li><b>Acceptance Criteria</b>: All tests passing with new APIs, &gt;80% coverage</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md247"></a>
+<h3><a class="anchor" id="autotoc_md248"></a>
 Issue ARC-002: Performance Baseline Incomplete</h3>
 <ul>
 <li><b>Priority</b>: P0 (High)</li>
@@ -134,9 +134,9 @@ Issue ARC-002: Performance Baseline Incomplete</h3>
 <li><b>Acceptance Criteria</b>: Complete benchmark suite with baseline metrics</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md249"></a>
+<h2><a class="anchor" id="autotoc_md250"></a>
 2. Concurrency &amp; Thread Safety</h2>
-<h3><a class="anchor" id="autotoc_md250"></a>
+<h3><a class="anchor" id="autotoc_md251"></a>
 Issue ARC-003: Writer Thread Safety Verification</h3>
 <ul>
 <li><b>Priority</b>: P0 (High)</li>
@@ -151,7 +151,7 @@ Issue ARC-003: Writer Thread Safety Verification</h3>
 </li>
 <li><b>Acceptance Criteria</b>: ThreadSanitizer clean, documented contracts</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md251"></a>
+<h3><a class="anchor" id="autotoc_md252"></a>
 Issue ARC-004: Lock-Free Queue Implementation</h3>
 <ul>
 <li><b>Priority</b>: P1 (Medium)</li>
@@ -167,9 +167,9 @@ Issue ARC-004: Lock-Free Queue Implementation</h3>
 <li><b>Acceptance Criteria</b>: Lock-free option available, performance validated</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md253"></a>
+<h2><a class="anchor" id="autotoc_md254"></a>
 3. Dependency Injection &amp; Configuration</h2>
-<h3><a class="anchor" id="autotoc_md254"></a>
+<h3><a class="anchor" id="autotoc_md255"></a>
 Issue ARC-005: DI Edge Case Testing</h3>
 <ul>
 <li><b>Priority</b>: P1 (Medium)</li>
@@ -184,7 +184,7 @@ Issue ARC-005: DI Edge Case Testing</h3>
 </li>
 <li><b>Acceptance Criteria</b>: All DI edge cases covered by tests</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md255"></a>
+<h3><a class="anchor" id="autotoc_md256"></a>
 Issue ARC-006: Builder Pattern Validation</h3>
 <ul>
 <li><b>Priority</b>: P1 (Medium)</li>
@@ -200,9 +200,9 @@ Issue ARC-006: Builder Pattern Validation</h3>
 <li><b>Acceptance Criteria</b>: All invalid configs rejected with clear errors</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md257"></a>
+<h2><a class="anchor" id="autotoc_md258"></a>
 4. Documentation</h2>
-<h3><a class="anchor" id="autotoc_md258"></a>
+<h3><a class="anchor" id="autotoc_md259"></a>
 Issue ARC-007: Incomplete API Documentation</h3>
 <ul>
 <li><b>Priority</b>: P1 (Medium)</li>
@@ -218,7 +218,7 @@ Issue ARC-007: Incomplete API Documentation</h3>
 </li>
 <li><b>Acceptance Criteria</b>: 100% public API documented</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md259"></a>
+<h3><a class="anchor" id="autotoc_md260"></a>
 Issue ARC-008: Missing Integration Examples</h3>
 <ul>
 <li><b>Priority</b>: P2 (Low)</li>
@@ -235,9 +235,9 @@ Issue ARC-008: Missing Integration Examples</h3>
 <li><b>Acceptance Criteria</b>: Complete example suite in examples/</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md261"></a>
+<h2><a class="anchor" id="autotoc_md262"></a>
 5. Performance &amp; Optimization</h2>
-<h3><a class="anchor" id="autotoc_md262"></a>
+<h3><a class="anchor" id="autotoc_md263"></a>
 Issue ARC-009: Async Queue Tuning</h3>
 <ul>
 <li><b>Priority</b>: P2 (Low)</li>
@@ -252,7 +252,7 @@ Issue ARC-009: Async Queue Tuning</h3>
 </li>
 <li><b>Acceptance Criteria</b>: Configurable parameters with tuning guidance</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md263"></a>
+<h3><a class="anchor" id="autotoc_md264"></a>
 Issue ARC-010: Memory Overhead Analysis</h3>
 <ul>
 <li><b>Priority</b>: P2 (Low)</li>
@@ -268,9 +268,9 @@ Issue ARC-010: Memory Overhead Analysis</h3>
 <li><b>Acceptance Criteria</b>: Memory usage documented, no leaks</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md265"></a>
+<h2><a class="anchor" id="autotoc_md266"></a>
 6. Integration</h2>
-<h3><a class="anchor" id="autotoc_md266"></a>
+<h3><a class="anchor" id="autotoc_md267"></a>
 Issue ARC-011: Common System Integration</h3>
 <ul>
 <li><b>Priority</b>: P1 (Medium)</li>
@@ -286,9 +286,9 @@ Issue ARC-011: Common System Integration</h3>
 <li><b>Acceptance Criteria</b>: Clean integration with all common_system features</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md268"></a>
+<h1><a class="anchor" id="autotoc_md269"></a>
 Issue Tracking</h1>
-<h2><a class="anchor" id="autotoc_md269"></a>
+<h2><a class="anchor" id="autotoc_md270"></a>
 Phase 0 Actions</h2>
 <ul>
 <li>[x] Identify all architectural issues</li>
@@ -296,14 +296,14 @@ Phase 0 Actions</h2>
 <li>[x] Map issues to phases</li>
 <li>[ ] Document baseline metrics</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md270"></a>
+<h2><a class="anchor" id="autotoc_md271"></a>
 Phase 1 Actions</h2>
 <ul>
 <li>[ ] Resolve ARC-001 (Test suite migration)</li>
 <li>[ ] Resolve ARC-003 (Writer thread safety)</li>
 <li>[ ] Resolve ARC-005 (DI edge cases)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md271"></a>
+<h2><a class="anchor" id="autotoc_md272"></a>
 Phase 2 Actions</h2>
 <ul>
 <li>[ ] Resolve ARC-002 (Performance baseline)</li>
@@ -311,20 +311,20 @@ Phase 2 Actions</h2>
 <li>[ ] Resolve ARC-009 (Queue tuning)</li>
 <li>[ ] Resolve ARC-010 (Memory analysis)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md272"></a>
+<h2><a class="anchor" id="autotoc_md273"></a>
 Phase 3 Actions</h2>
 <ul>
 <li>[ ] Resolve ARC-006 (Builder validation)</li>
 <li>[ ] Resolve ARC-011 (Common system integration)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md273"></a>
+<h2><a class="anchor" id="autotoc_md274"></a>
 Phase 6 Actions</h2>
 <ul>
 <li>[ ] Resolve ARC-007 (API documentation)</li>
 <li>[ ] Resolve ARC-008 (Integration examples)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md275"></a>
+<h1><a class="anchor" id="autotoc_md276"></a>
 Risk Assessment</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -353,7 +353,7 @@ Risk Assessment</h1>
 <td class="markdownTableBodyNone">ARC-011   </td><td class="markdownTableBodyNone">Medium   </td><td class="markdownTableBodyNone">Medium   </td><td class="markdownTableBodyNone">Medium   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md277"></a>
+<h1><a class="anchor" id="autotoc_md278"></a>
 References</h1>
 <ul>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html">CURRENT_STATE.md</a></li>
@@ -368,7 +368,7 @@ References</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Oct 9 2025 13:56:09 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Oct 9 2025 14:34:31 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Creating Custom Writers</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md108"></a> This guide explains how to create custom writers for the Logger System to send logs to various destinations.</p>
-<h1><a class="anchor" id="autotoc_md109"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md109"></a> This guide explains how to create custom writers for the Logger System to send logs to various destinations.</p>
+<h1><a class="anchor" id="autotoc_md110"></a>
 Overview</h1>
 <p>Writers are responsible for the actual output of log messages. The Logger System provides a flexible <code>base_writer</code> class that you can extend to create custom output destinations.</p>
-<h1><a class="anchor" id="autotoc_md110"></a>
+<h1><a class="anchor" id="autotoc_md111"></a>
 Base Writer Interface</h1>
 <p>All custom writers must inherit from <code>base_writer</code>:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>base_writer {</div>
@@ -125,9 +125,9 @@ Base Writer Interface</h1>
 <div class="line">    std::string level_to_string(thread_module::log_level level) <span class="keyword">const</span>;</div>
 <div class="line">    std::string level_to_color(thread_module::log_level level) <span class="keyword">const</span>;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md111"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md112"></a>
 Simple Examples</h1>
-<h2><a class="anchor" id="autotoc_md112"></a>
+<h2><a class="anchor" id="autotoc_md113"></a>
 1. File Writer</h2>
 <p>A basic file writer that appends logs to a file:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;logger_system/writers/base_writer.h&gt;</span></div>
@@ -178,7 +178,7 @@ Simple Examples</h1>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Usage</span></div>
 <div class="line">logger-&gt;add_writer(std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;application.log&quot;</span>));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md113"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md114"></a>
 2. Rotating File Writer</h2>
 <p>A more advanced file writer with size-based rotation:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>rotating_file_writer : <span class="keyword">public</span> logger_module::base_writer {</div>
@@ -244,7 +244,7 @@ Simple Examples</h1>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Usage: 10MB max file size</span></div>
 <div class="line">logger-&gt;add_writer(std::make_unique&lt;rotating_file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>, 10 * 1024 * 1024));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md114"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md115"></a>
 3. Network Writer</h2>
 <p>Send logs to a remote server:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/socket.h&gt;</span></div>
@@ -322,7 +322,7 @@ Simple Examples</h1>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Usage</span></div>
 <div class="line">logger-&gt;add_writer(std::make_unique&lt;network_writer&gt;(<span class="stringliteral">&quot;192.168.1.100&quot;</span>, 5514));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md115"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md116"></a>
 4. Database Writer</h2>
 <p>Log to a database (using SQLite as example):</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sqlite3.h&gt;</span></div>
@@ -419,9 +419,9 @@ Simple Examples</h1>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Usage</span></div>
 <div class="line">logger-&gt;add_writer(std::make_unique&lt;database_writer&gt;(<span class="stringliteral">&quot;logs.db&quot;</span>));</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md116"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md117"></a>
 Advanced Patterns</h1>
-<h2><a class="anchor" id="autotoc_md117"></a>
+<h2><a class="anchor" id="autotoc_md118"></a>
 1. Filtering Writer</h2>
 <p>A writer that filters logs before outputting:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>filtering_writer : <span class="keyword">public</span> logger_module::base_writer {</div>
@@ -460,7 +460,7 @@ Advanced Patterns</h1>
 <div class="line">    }</div>
 <div class="line">);</div>
 <div class="line">logger-&gt;add_writer(std::move(filtered));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md118"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md119"></a>
 2. Async Writer Wrapper</h2>
 <p>Make any writer asynchronous:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>async_writer : <span class="keyword">public</span> logger_module::base_writer {</div>
@@ -529,7 +529,7 @@ Advanced Patterns</h1>
 <div class="line">    std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
 <div class="line">);</div>
 <div class="line">logger-&gt;add_writer(std::move(async_file));</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md119"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md120"></a>
 Best Practices</h1>
 <ol type="1">
 <li><b>Thread Safety</b>: Always protect shared state with mutexes; writes are called sequentially by the logger, but custom async wrappers must be safe.</li>
@@ -540,7 +540,7 @@ Best Practices</h1>
 <li><b>Security</b>: Avoid writing secrets/PII; consider integrating <code>log_sanitizer</code> upstream. If encrypting, use a vetted crypto library rather than demo components.</li>
 <li><b>Windows Networking</b>: For socket-based writers, guard platform specifics (<code>#ifdef _WIN32</code>) and initialize WinSock.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md120"></a>
+<h1><a class="anchor" id="autotoc_md121"></a>
 Testing Custom Writers</h1>
 <div class="fragment"><div class="line"><span class="comment">// Test harness for custom writers</span></div>
 <div class="line"><span class="keyword">class </span>writer_test {</div>
@@ -589,7 +589,7 @@ Testing Custom Writers</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Oct 9 2025 13:56:09 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Oct 9 2025 14:34:31 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
