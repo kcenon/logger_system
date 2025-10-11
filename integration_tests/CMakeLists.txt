@@ -27,12 +27,24 @@ target_include_directories(integration_tests PRIVATE
     ${CMAKE_SOURCE_DIR}/include
 )
 
+# Add common_system include path if available
+if(COMMON_SYSTEM_INCLUDE_DIR)
+    target_include_directories(integration_tests PRIVATE
+        ${COMMON_SYSTEM_INCLUDE_DIR}
+    )
+endif()
+
 # Link libraries
 target_link_libraries(integration_tests PRIVATE
     GTest::gtest
     GTest::gtest_main
-    logger_system
+    LoggerSystem  # Correct target name
 )
+
+# Link common_system if found
+if(common_system_FOUND)
+    target_link_libraries(integration_tests PRIVATE kcenon::common_system)
+endif()
 
 # Compiler settings
 target_compile_features(integration_tests PRIVATE cxx_std_20)
