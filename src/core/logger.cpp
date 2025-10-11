@@ -143,6 +143,14 @@ result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
     return result_void::success();
 }
 
+result_void logger::clear_writers() {
+    if (pimpl_) {
+        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
+        pimpl_->writers_.clear();
+    }
+    return result_void::success();
+}
+
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
 void logger::set_min_level(kcenon::thread::log_level level) {
 #else
