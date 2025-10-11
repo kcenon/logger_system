@@ -69,12 +69,12 @@ All rights reserved.
 // TODO: Re-enable when strategy pattern is implemented
 // #include "config_strategy_interface.h"
 // #include "configuration_templates.h"
-#include "../logger.h"
+#include "logger.h"
 #include "../writers/base_writer.h"
 #include "../writers/batch_writer.h"
 #include "../filters/log_filter.h"
 #include "../interfaces/log_formatter_interface.h"
-#include "../di/di_container_interface.h"
+#include "di/di_container_interface.h"
 
 // Use common_system interfaces (Phase 2.2.4)
 #include <kcenon/common/interfaces/monitoring_interface.h>
@@ -397,11 +397,12 @@ public:
      * @since 1.0.0
      */
     logger_builder& use_template(const std::string& name) {
-        auto strategy = config_strategy_factory::create_template(name);
-        if (strategy) {
-            apply_strategy(std::move(strategy));
-        } else {
-            // Fallback to old behavior for backward compatibility
+        // TODO: Re-enable when strategy pattern is implemented
+        // auto strategy = config_strategy_factory::create_template(name);
+        // if (strategy) {
+        //     apply_strategy(std::move(strategy));
+        // } else {
+            // Use built-in templates
             if (name == "high_performance") {
                 config_ = logger_config::high_performance();
             } else if (name == "low_latency") {
@@ -413,7 +414,7 @@ public:
             } else {
                 config_ = logger_config::default_config();
             }
-        }
+        // }
         return *this;
     }
     
@@ -451,11 +452,8 @@ public:
     }
     */
     
-    /**
-     * @brief Apply a configuration template
-     * @param template_type Template to apply
-     * @return Reference to builder for chaining
-     */
+    // TODO: Re-enable when configuration templates are implemented
+    /*
     logger_builder& apply_template(kcenon::logger::configuration_template template_type) {
         auto template_config = kcenon::logger::get_template_config(template_type);
         config_.min_level = template_config.min_level;
@@ -481,12 +479,7 @@ public:
         }
         return *this;
     }
-    
-    /**
-     * @brief Apply a performance strategy
-     * @param strategy Performance strategy to apply
-     * @return Reference to builder for chaining
-     */
+
     logger_builder& apply_performance_strategy(kcenon::logger::performance_strategy strategy) {
         auto perf_config = kcenon::logger::get_performance_config(strategy);
         config_.min_level = perf_config.min_level;
@@ -512,6 +505,7 @@ public:
         }
         return *this;
     }
+    */
     
     /**
      * @brief Detect environment from environment variables
@@ -520,26 +514,26 @@ public:
     logger_builder& detect_environment() {
         const char* env = std::getenv("LOG_ENV");
         const char* level = std::getenv("LOG_LEVEL");
-        
+
         if (env) {
             std::string env_str(env);
             if (env_str == "production") {
-                apply_template(kcenon::logger::configuration_template::production);
+                use_template("production");
             } else if (env_str == "debug" || env_str == "development") {
-                apply_template(kcenon::logger::configuration_template::debug);
+                use_template("debug");
             }
         }
-        
+
         if (level) {
             std::string level_str(level);
-            if (level_str == "trace") config_.min_level = kcenon::logger::log_level::trace;
-            else if (level_str == "debug") config_.min_level = kcenon::logger::log_level::debug;
-            else if (level_str == "info") config_.min_level = kcenon::logger::log_level::info;
-            else if (level_str == "warn") config_.min_level = kcenon::logger::log_level::warning;
-            else if (level_str == "error") config_.min_level = kcenon::logger::log_level::error;
-            else if (level_str == "fatal") config_.min_level = kcenon::logger::log_level::error; // Note: fatal mapped to error
+            if (level_str == "trace") config_.min_level = kcenon::thread::log_level::trace;
+            else if (level_str == "debug") config_.min_level = kcenon::thread::log_level::debug;
+            else if (level_str == "info") config_.min_level = kcenon::thread::log_level::info;
+            else if (level_str == "warn") config_.min_level = kcenon::thread::log_level::warning;
+            else if (level_str == "error") config_.min_level = kcenon::thread::log_level::error;
+            else if (level_str == "fatal") config_.min_level = kcenon::thread::log_level::error; // Note: fatal mapped to error
         }
-        
+
         return *this;
     }
     
@@ -607,14 +601,13 @@ public:
         return *this;
     }
     
-    /**
-     * @brief Clear all applied strategies
-     * @return Reference to builder for chaining
-     */
+    // TODO: Re-enable when strategy pattern is implemented
+    /*
     logger_builder& clear_strategies() {
         strategies_.clear();
         return *this;
     }
+    */
     
     /**
      * @brief Build the logger with validation
@@ -649,46 +642,30 @@ public:
      * @since 1.0.0
      */
     result<std::unique_ptr<logger>> build() {
+        // TODO: Re-enable when strategy pattern is implemented
+        /*
         // Apply all strategies first
         for (const auto& strategy : strategies_) {
             if (auto can_apply = strategy->can_apply(config_); !can_apply) {
                 // Log warning but continue with other strategies
                 continue;
             }
-            
+
             if (auto result = strategy->apply(config_); !result) {
-#ifdef USE_THREAD_SYSTEM
-                auto error_code = static_cast<int>(result.get_error().code());
-                auto logger_code = static_cast<logger_error_code>(error_code - 10000);
-                return make_error<std::unique_ptr<logger>>(
-                    logger_code,
-                    "Strategy application failed: " + result.get_error().message()
-                );
-#else
                 return make_logger_error<std::unique_ptr<logger>>(
-                    result.error_code(),
-                    "Strategy application failed: " + result.error_message()
+                    logger_error_code::invalid_configuration,
+                    "Strategy application failed"
                 );
-#endif
             }
         }
-        
+        */
+
         // Validate configuration
         if (auto validation = config_.validate(); !validation) {
-#ifdef USE_THREAD_SYSTEM
-            // Extract error code - we need to reverse the offset we applied
-            auto error_code = static_cast<int>(validation.get_error().code());
-            auto logger_code = static_cast<logger_error_code>(error_code - 10000);
-            return make_error<std::unique_ptr<logger>>(
-                logger_code,
-                "Configuration validation failed: " + validation.get_error().message()
-            );
-#else
             return make_logger_error<std::unique_ptr<logger>>(
-                validation.error_code(),
-                "Configuration validation failed: " + validation.error_message()
+                logger_error_code::invalid_configuration,
+                "Configuration validation failed"
             );
-#endif
         }
         
         // Validate writer count
@@ -736,7 +713,7 @@ public:
             if (filters_.size() == 1) {
                 logger_instance->set_filter(std::move(filters_[0]));
             } else {
-                auto composite = std::make_unique<composite_filter>(composite_filter::logic_type::AND);
+                auto composite = std::make_unique<filters::composite_filter>(filters::composite_filter::logic_type::AND);
                 for (auto& filter : filters_) {
                     composite->add_filter(std::move(filter));
                 }
