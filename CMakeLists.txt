@@ -41,6 +41,7 @@ option(BUILD_TESTS "Build unit tests" ON)
 option(BUILD_BENCHMARKS "Build benchmarks" OFF)
 option(BUILD_SAMPLES "Build sample programs" ON)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
+option(LOGGER_BUILD_INTEGRATION_TESTS "Build integration tests" ON)
 
 # Map LOGGER_BUILD_* to BUILD_* for compatibility with CI/CD
 if(DEFINED LOGGER_BUILD_SAMPLES)
@@ -364,6 +365,14 @@ endif()
 
 if (BUILD_BENCHMARKS)
     add_subdirectory(benchmarks)
+endif()
+
+# Integration tests
+if (LOGGER_BUILD_INTEGRATION_TESTS AND BUILD_TESTS)
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/integration_tests AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/integration_tests/CMakeLists.txt)
+        message(STATUS "Adding integration_tests subdirectory")
+        add_subdirectory(integration_tests)
+    endif()
 endif()
 
 ##################################################
