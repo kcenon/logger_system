@@ -54,7 +54,7 @@ TEST_F(LogFormattingIntegrationTest, BasicMessageFormat) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
     const std::string test_message = "Basic format test message";
-    logger_->log(logger_system::log_level::info, test_message);
+    logger_->log(kcenon::logger::log_level::info, test_message);
 
     WaitForFlush();
 
@@ -66,12 +66,12 @@ TEST_F(LogFormattingIntegrationTest, BasicMessageFormat) {
 TEST_F(LogFormattingIntegrationTest, MultipleLogLevelsFormatting) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
-    logger_->log(logger_system::log_level::trace, "Trace message");
-    logger_->log(logger_system::log_level::debug, "Debug message");
-    logger_->log(logger_system::log_level::info, "Info message");
-    logger_->log(logger_system::log_level::warn, "Warning message");
-    logger_->log(logger_system::log_level::error, "Error message");
-    logger_->log(logger_system::log_level::fatal, "Fatal message");
+    logger_->log(kcenon::logger::log_level::trace, "Trace message");
+    logger_->log(kcenon::logger::log_level::debug, "Debug message");
+    logger_->log(kcenon::logger::log_level::info, "Info message");
+    logger_->log(kcenon::logger::log_level::warning, "Warning message");
+    logger_->log(kcenon::logger::log_level::error, "Error message");
+    logger_->log(kcenon::logger::log_level::error, "Fatal message");
 
     WaitForFlush();
 
@@ -87,7 +87,7 @@ TEST_F(LogFormattingIntegrationTest, MultipleLogLevelsFormatting) {
 TEST_F(LogFormattingIntegrationTest, TimestampPresence) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
-    logger_->log(logger_system::log_level::info, "Timestamp test");
+    logger_->log(kcenon::logger::log_level::info, "Timestamp test");
 
     WaitForFlush();
 
@@ -104,10 +104,10 @@ TEST_F(LogFormattingIntegrationTest, ThreadIdInclusion) {
 
     std::thread::id main_thread_id = std::this_thread::get_id();
 
-    logger_->log(logger_system::log_level::info, "Main thread log");
+    logger_->log(kcenon::logger::log_level::info, "Main thread log");
 
     std::thread worker([this]() {
-        logger_->log(logger_system::log_level::info, "Worker thread log");
+        logger_->log(kcenon::logger::log_level::info, "Worker thread log");
     });
     worker.join();
 
@@ -124,7 +124,7 @@ TEST_F(LogFormattingIntegrationTest, SourceLocationFormatting) {
     const std::string function_name = "TestFunction";
     const int line_num = 123;
 
-    logger_->log(logger_system::log_level::error,
+    logger_->log(kcenon::logger::log_level::error,
                 "Error with location",
                 "test_file.cpp",
                 line_num,
@@ -143,7 +143,7 @@ TEST_F(LogFormattingIntegrationTest, LongMessageHandling) {
     std::string long_message(5000, 'X');
     long_message += " END_MARKER";
 
-    logger_->log(logger_system::log_level::info, long_message);
+    logger_->log(kcenon::logger::log_level::info, long_message);
 
     WaitForFlush();
 
@@ -155,7 +155,7 @@ TEST_F(LogFormattingIntegrationTest, MultiLineMessageHandling) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
     std::string multi_line_message = "Line 1\nLine 2\nLine 3";
-    logger_->log(logger_system::log_level::info, multi_line_message);
+    logger_->log(kcenon::logger::log_level::info, multi_line_message);
 
     WaitForFlush();
 
@@ -169,7 +169,7 @@ TEST_F(LogFormattingIntegrationTest, SpecialCharactersInMessages) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
     std::string special_chars = "Special chars: \t\n\r\"'\\!@#$%^&*()";
-    logger_->log(logger_system::log_level::info, special_chars);
+    logger_->log(kcenon::logger::log_level::info, special_chars);
 
     WaitForFlush();
 
@@ -180,7 +180,7 @@ TEST_F(LogFormattingIntegrationTest, SpecialCharactersInMessages) {
 TEST_F(LogFormattingIntegrationTest, EmptyMessage) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
-    logger_->log(logger_system::log_level::info, "");
+    logger_->log(kcenon::logger::log_level::info, "");
 
     WaitForFlush();
 
@@ -192,7 +192,7 @@ TEST_F(LogFormattingIntegrationTest, ConsecutiveMessages) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
     for (int i = 0; i < 10; ++i) {
-        logger_->log(logger_system::log_level::info, "Message " + std::to_string(i));
+        logger_->log(kcenon::logger::log_level::info, "Message " + std::to_string(i));
     }
 
     WaitForFlush();
@@ -210,7 +210,7 @@ TEST_F(LogFormattingIntegrationTest, UnicodeMessageHandling) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
     std::string unicode_message = "Unicode test: 한글 日本語 中文 Русский";
-    logger_->log(logger_system::log_level::info, unicode_message);
+    logger_->log(kcenon::logger::log_level::info, unicode_message);
 
     WaitForFlush();
 
@@ -224,7 +224,7 @@ TEST_F(LogFormattingIntegrationTest, MessageOrderingUnderLoad) {
 
     const size_t message_count = 1000;
     for (size_t i = 0; i < message_count; ++i) {
-        logger_->log(logger_system::log_level::info, "Ordered message " + std::to_string(i));
+        logger_->log(kcenon::logger::log_level::info, "Ordered message " + std::to_string(i));
     }
 
     WaitForFlush();

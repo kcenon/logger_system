@@ -72,7 +72,7 @@ TEST_F(LoggerLifecycleTest, LogMessagesAfterStart) {
 
     const size_t message_count = 100;
     for (size_t i = 0; i < message_count; ++i) {
-        logger_->log(logger_system::log_level::info, "Test message " + std::to_string(i));
+        logger_->log(kcenon::logger::log_level::info, "Test message " + std::to_string(i));
     }
 
     WaitForFlush();
@@ -91,7 +91,7 @@ TEST_F(LoggerLifecycleTest, LogMessagesBeforeStart) {
     // Log before starting
     const size_t message_count = 50;
     for (size_t i = 0; i < message_count; ++i) {
-        logger_->log(logger_system::log_level::info, "Test message " + std::to_string(i));
+        logger_->log(kcenon::logger::log_level::info, "Test message " + std::to_string(i));
     }
 
     // Now start the logger
@@ -112,7 +112,7 @@ TEST_F(LoggerLifecycleTest, MultipleStartStopCycles) {
         ASSERT_TRUE(result) << "Failed to start in cycle " << cycle;
 
         for (size_t i = 0; i < 20; ++i) {
-            logger_->log(logger_system::log_level::info, "Cycle " + std::to_string(cycle) + " message " + std::to_string(i));
+            logger_->log(kcenon::logger::log_level::info, "Cycle " + std::to_string(cycle) + " message " + std::to_string(i));
         }
 
         WaitForFlush();
@@ -128,16 +128,16 @@ TEST_F(LoggerLifecycleTest, ChangeLogLevelAtRuntime) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
     // Set minimum level to warning
-    logger_->set_min_level(logger_system::log_level::warn);
-    EXPECT_EQ(logger_->get_min_level(), logger_system::log_level::warn);
+    logger_->set_min_level(kcenon::logger::log_level::warning);
+    EXPECT_EQ(logger_->get_min_level(), kcenon::logger::log_level::warning);
 
     // These should not be logged
-    logger_->log(logger_system::log_level::debug, "Debug message");
-    logger_->log(logger_system::log_level::info, "Info message");
+    logger_->log(kcenon::logger::log_level::debug, "Debug message");
+    logger_->log(kcenon::logger::log_level::info, "Info message");
 
     // These should be logged
-    logger_->log(logger_system::log_level::warn, "Warning message");
-    logger_->log(logger_system::log_level::error, "Error message");
+    logger_->log(kcenon::logger::log_level::warning, "Warning message");
+    logger_->log(kcenon::logger::log_level::error, "Error message");
 
     WaitForFlush();
 
@@ -162,7 +162,7 @@ TEST_F(LoggerLifecycleTest, AddMultipleWriters) {
     logger_->add_writer(std::move(writer2));
 
     const std::string test_message = "Test message to multiple files";
-    logger_->log(logger_system::log_level::info, test_message);
+    logger_->log(kcenon::logger::log_level::info, test_message);
 
     WaitForFlush();
 
@@ -174,14 +174,14 @@ TEST_F(LoggerLifecycleTest, AddMultipleWriters) {
 TEST_F(LoggerLifecycleTest, RemoveAllWriters) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
-    logger_->log(logger_system::log_level::info, "Before clear");
+    logger_->log(kcenon::logger::log_level::info, "Before clear");
     WaitForFlush();
 
     auto result = logger_->clear_writers();
     ASSERT_TRUE(result);
 
     // This message should not be written anywhere
-    logger_->log(logger_system::log_level::info, "After clear");
+    logger_->log(kcenon::logger::log_level::info, "After clear");
     WaitForFlush();
 
     EXPECT_EQ(CountLogLines(log_file), 1);
@@ -197,7 +197,7 @@ TEST_F(LoggerLifecycleTest, ConcurrentLoggingFromMultipleThreads) {
     for (size_t t = 0; t < thread_count; ++t) {
         threads.emplace_back([this, t, messages_per_thread]() {
             for (size_t i = 0; i < messages_per_thread; ++i) {
-                logger_->log(logger_system::log_level::info,
+                logger_->log(kcenon::logger::log_level::info,
                            "Thread " + std::to_string(t) + " message " + std::to_string(i));
             }
         });
@@ -222,7 +222,7 @@ TEST_F(LoggerLifecycleTest, SyncVsAsyncMode) {
     logger_->add_writer(std::move(writer));
     logger_->start();
 
-    logger_->log(logger_system::log_level::info, "Sync message");
+    logger_->log(kcenon::logger::log_level::info, "Sync message");
     logger_->flush();
 
     EXPECT_TRUE(WaitForFile(log_file));
@@ -239,7 +239,7 @@ TEST_F(LoggerLifecycleTest, SyncVsAsyncMode) {
     logger_->add_writer(std::move(async_writer));
     logger_->start();
 
-    logger_->log(logger_system::log_level::info, "Async message");
+    logger_->log(kcenon::logger::log_level::info, "Async message");
     WaitForFlush();
 
     EXPECT_TRUE(WaitForFile(async_file));
@@ -251,7 +251,7 @@ TEST_F(LoggerLifecycleTest, LoggerFlushBehavior) {
 
     const size_t batch_size = 100;
     for (size_t i = 0; i < batch_size; ++i) {
-        logger_->log(logger_system::log_level::info, "Message " + std::to_string(i));
+        logger_->log(kcenon::logger::log_level::info, "Message " + std::to_string(i));
     }
 
     // Before flush, file might not have all messages
@@ -272,7 +272,7 @@ TEST_F(LoggerLifecycleTest, LoggerResourceCleanup) {
         logger->start();
 
         for (size_t i = 0; i < 100; ++i) {
-            logger->log(logger_system::log_level::info, "Cleanup test " + std::to_string(i));
+            logger->log(kcenon::logger::log_level::info, "Cleanup test " + std::to_string(i));
         }
 
         // Logger destroyed when scope exits
@@ -286,20 +286,20 @@ TEST_F(LoggerLifecycleTest, IsEnabledCheck) {
     CreateLogger(true);
     logger_->start();
 
-    logger_->set_min_level(logger_system::log_level::warn);
+    logger_->set_min_level(kcenon::logger::log_level::warning);
 
-    EXPECT_FALSE(logger_->is_enabled(logger_system::log_level::trace));
-    EXPECT_FALSE(logger_->is_enabled(logger_system::log_level::debug));
-    EXPECT_FALSE(logger_->is_enabled(logger_system::log_level::info));
-    EXPECT_TRUE(logger_->is_enabled(logger_system::log_level::warn));
-    EXPECT_TRUE(logger_->is_enabled(logger_system::log_level::error));
-    EXPECT_TRUE(logger_->is_enabled(logger_system::log_level::fatal));
+    EXPECT_FALSE(logger_->is_enabled(kcenon::logger::log_level::trace));
+    EXPECT_FALSE(logger_->is_enabled(kcenon::logger::log_level::debug));
+    EXPECT_FALSE(logger_->is_enabled(kcenon::logger::log_level::info));
+    EXPECT_TRUE(logger_->is_enabled(kcenon::logger::log_level::warning));
+    EXPECT_TRUE(logger_->is_enabled(kcenon::logger::log_level::error));
+    EXPECT_TRUE(logger_->is_enabled(kcenon::logger::log_level::error));
 }
 
 TEST_F(LoggerLifecycleTest, LogWithSourceLocation) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
-    logger_->log(logger_system::log_level::error,
+    logger_->log(kcenon::logger::log_level::error,
                 "Error with location",
                 __FILE__,
                 __LINE__,

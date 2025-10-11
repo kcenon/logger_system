@@ -60,7 +60,7 @@ TEST_F(LoggerPerformanceTest, ThroughputAsyncMode) {
     });
 
     for (size_t i = 0; i < message_count; ++i) {
-        logger_->log(logger_system::log_level::info, "Performance test message " + std::to_string(i));
+        logger_->log(kcenon::logger::log_level::info, "Performance test message " + std::to_string(i));
     }
 
     auto elapsed = timer.elapsed();
@@ -91,7 +91,7 @@ TEST_F(LoggerPerformanceTest, ThroughputSyncMode) {
     });
 
     for (size_t i = 0; i < message_count; ++i) {
-        logger_->log(logger_system::log_level::info, "Sync test message " + std::to_string(i));
+        logger_->log(kcenon::logger::log_level::info, "Sync test message " + std::to_string(i));
     }
 
     auto elapsed = timer.elapsed();
@@ -115,7 +115,7 @@ TEST_F(LoggerPerformanceTest, LatencyMeasurements) {
     for (size_t i = 0; i < sample_count; ++i) {
         auto start = std::chrono::high_resolution_clock::now();
 
-        logger_->log(logger_system::log_level::info, "Latency test " + std::to_string(i));
+        logger_->log(kcenon::logger::log_level::info, "Latency test " + std::to_string(i));
 
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
@@ -147,7 +147,7 @@ TEST_F(LoggerPerformanceTest, AsyncVsSyncComparison) {
 
     auto async_start = std::chrono::high_resolution_clock::now();
     for (size_t i = 0; i < message_count; ++i) {
-        logger_->log(logger_system::log_level::info, "Message " + std::to_string(i));
+        logger_->log(kcenon::logger::log_level::info, "Message " + std::to_string(i));
     }
     logger_->flush();
     auto async_elapsed = std::chrono::high_resolution_clock::now() - async_start;
@@ -164,7 +164,7 @@ TEST_F(LoggerPerformanceTest, AsyncVsSyncComparison) {
 
     auto sync_start = std::chrono::high_resolution_clock::now();
     for (size_t i = 0; i < message_count; ++i) {
-        logger_->log(logger_system::log_level::info, "Message " + std::to_string(i));
+        logger_->log(kcenon::logger::log_level::info, "Message " + std::to_string(i));
     }
     logger_->flush();
     auto sync_elapsed = std::chrono::high_resolution_clock::now() - sync_start;
@@ -192,7 +192,7 @@ TEST_F(LoggerPerformanceTest, MultiThreadedThroughput) {
     for (size_t t = 0; t < thread_count; ++t) {
         threads.emplace_back([this, t, messages_per_thread]() {
             for (size_t i = 0; i < messages_per_thread; ++i) {
-                logger_->log(logger_system::log_level::info,
+                logger_->log(kcenon::logger::log_level::info,
                            "Thread " + std::to_string(t) + " msg " + std::to_string(i));
             }
         });
@@ -231,7 +231,7 @@ TEST_F(LoggerPerformanceTest, ScalabilityWithThreadCount) {
         for (size_t t = 0; t < thread_count; ++t) {
             threads.emplace_back([this, messages_per_thread]() {
                 for (size_t i = 0; i < messages_per_thread; ++i) {
-                    logger_->log(logger_system::log_level::info, "Scale test message");
+                    logger_->log(kcenon::logger::log_level::info, "Scale test message");
                 }
             });
         }
@@ -267,7 +267,7 @@ TEST_F(LoggerPerformanceTest, LargeMessagePerformance) {
     for (size_t i = 0; i < message_count; ++i) {
         std::string large_message(message_size, 'X');
         large_message += " Message " + std::to_string(i);
-        logger_->log(logger_system::log_level::info, large_message);
+        logger_->log(kcenon::logger::log_level::info, large_message);
     }
 
     logger_->flush();
@@ -294,7 +294,7 @@ TEST_F(LoggerPerformanceTest, BurstLogging) {
         auto start = std::chrono::high_resolution_clock::now();
 
         for (size_t i = 0; i < messages_per_burst; ++i) {
-            logger_->log(logger_system::log_level::info,
+            logger_->log(kcenon::logger::log_level::info,
                        "Burst " + std::to_string(burst) + " msg " + std::to_string(i));
         }
 
@@ -320,7 +320,7 @@ TEST_F(LoggerPerformanceTest, MemoryUsageUnderLoad) {
 
     // Log many messages without flushing
     for (size_t i = 0; i < message_count; ++i) {
-        logger_->log(logger_system::log_level::info, "Memory test message " + std::to_string(i));
+        logger_->log(kcenon::logger::log_level::info, "Memory test message " + std::to_string(i));
     }
 
     // Flush and verify all messages were handled

@@ -404,10 +404,13 @@ inline std::string logger_error_to_string(logger_error_code code) {
 template<typename T>
 class result {
 public:
+    // Move constructor (works for all types)
     result(T value)
         : value_(common::ok<T>(std::move(value))) {}
 
-    result(const T& value)
+    // Copy constructor (only enabled for copyable types)
+    template<typename U = T>
+    result(const T& value, typename std::enable_if<std::is_copy_constructible<U>::value, int>::type = 0)
         : value_(common::ok<T>(value)) {}
 
     result(logger_error_code code, const std::string& msg = "")

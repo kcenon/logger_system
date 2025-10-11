@@ -72,7 +72,8 @@ All rights reserved.
 #include "logger.h"
 #include "../writers/base_writer.h"
 #include "../writers/batch_writer.h"
-#include "../filters/log_filter.h"
+// TODO: Implement filtering system
+// #include "../filters/log_filter.h"
 #include "../interfaces/log_formatter_interface.h"
 #include "di/di_container_interface.h"
 
@@ -350,15 +351,18 @@ public:
         return *this;
     }
     
+    // TODO: Implement filtering system
     /**
      * @brief Add a filter to the logger
      * @param filter Filter instance
      * @return Reference to builder for chaining
      */
+    /*
     logger_builder& add_filter(std::unique_ptr<log_filter> filter) {
         filters_.push_back(std::move(filter));
         return *this;
     }
+    */
     
     /**
      * @brief Set formatter for the logger
@@ -692,17 +696,15 @@ public:
                 }
             }
         }
-        
-        // TODO: Fix filter type hierarchy - log_filter vs log_filter_interface mismatch
-        // Add filters
+
+        // TODO: Implement filtering system
+        // Filter application disabled until log_filter is implemented
+        /*
         if (!filters_.empty()) {
             // Create composite filter if multiple filters
             if (filters_.size() == 1) {
                 logger_instance->set_filter(std::move(filters_[0]));
             }
-            // TODO: Re-enable when type hierarchy is fixed
-            // composite_filter expects log_filter_interface but filters_ contains log_filter
-            /*
             else {
                 auto composite = std::make_unique<filters::composite_filter>(filters::composite_filter::logic_type::AND);
                 for (auto& filter : filters_) {
@@ -710,9 +712,9 @@ public:
                 }
                 logger_instance->set_filter(std::move(composite));
             }
-            */
         }
-        
+        */
+
         // Start logger if async
         if (config_.async) {
             logger_instance->start();
@@ -721,8 +723,8 @@ public:
         // Store configuration in logger (if we add a config getter)
         built_config_ = config_;
 
-        // Return logger instance - implicit conversion to result
-        return logger_instance;
+        // Return logger instance - move into result
+        return std::move(logger_instance);
     }
     
     /**
@@ -744,7 +746,8 @@ public:
 private:
     logger_config config_;
     std::vector<std::pair<std::string, std::unique_ptr<base_writer>>> writers_;
-    std::vector<std::unique_ptr<log_filter>> filters_;
+    // TODO: Implement filtering system
+    // std::vector<std::unique_ptr<log_filter>> filters_;
     std::unique_ptr<log_formatter_interface> formatter_;
     // TODO: Re-enable when strategy pattern is implemented
     // std::vector<std::unique_ptr<config_strategy_interface>> strategies_;

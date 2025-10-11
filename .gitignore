@@ -72,6 +72,7 @@ __pycache__/
 vcpkg_installed/
 conan/
 .conan/
+common_system/
 NEED_TO_IMPROVEMENT.md
 
 # Documentation

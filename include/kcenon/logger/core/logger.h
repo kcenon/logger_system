@@ -155,8 +155,8 @@ enum class metric_type {
 class log_collector;
 class base_writer;
 class logger_metrics_collector;
-class log_filter;
-class log_router;
+// class log_filter;  // TODO: Implement filtering system
+// class log_router;  // TODO: Implement routing system
 
 /**
  * @class logger
@@ -488,17 +488,18 @@ public:
      */
     base_writer* get_writer(const std::string& name);
     
-    /**
-     * @brief Set global filter
-     * @param filter Filter to apply to all logs
-     */
-    void set_filter(std::unique_ptr<log_filter> filter);
-    
-    /**
-     * @brief Get the log router for configuration
-     * @return Reference to the log router
-     */
-    log_router& get_router();
+    // TODO: Implement filtering and routing system
+    // /**
+    //  * @brief Set global filter
+    //  * @param filter Filter to apply to all logs
+    //  */
+    // void set_filter(std::unique_ptr<log_filter> filter);
+    //
+    // /**
+    //  * @brief Get the log router for configuration
+    //  * @return Reference to the log router
+    //  */
+    // log_router& get_router();
     
     // DI Support Methods
     
