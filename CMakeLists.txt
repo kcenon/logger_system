@@ -75,11 +75,12 @@ if(BUILD_WITH_COMMON_SYSTEM)
 
     if(NOT common_system_FOUND)
         # Check for common_system in multiple locations
+        # Priority order: CI/CD workspace -> sibling directory -> parent directory
         set(_LOGGER_COMMON_PATHS
-            "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"
-            "${CMAKE_CURRENT_SOURCE_DIR}/../../common_system/include"
-            "${CMAKE_CURRENT_SOURCE_DIR}/common_system/include"
-            "$ENV{GITHUB_WORKSPACE}/common_system/include"
+            "${CMAKE_CURRENT_SOURCE_DIR}/common_system/include"          # CI/CD: workspace/common_system
+            "$ENV{GITHUB_WORKSPACE}/common_system/include"               # CI/CD: explicit GITHUB_WORKSPACE
+            "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"       # Local: sibling directory
+            "${CMAKE_CURRENT_SOURCE_DIR}/../../common_system/include"    # Local: parent directory
         )
 
         foreach(_path ${_LOGGER_COMMON_PATHS})
