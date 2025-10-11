@@ -447,7 +447,7 @@ private:
 class result_void {
 public:
     // Default constructor creates a success state (not error!)
-    result_void() : value_(std::monostate{}) {}
+    result_void() : value_() {}
 
     explicit result_void(logger_error_code code, const std::string& msg = "")
         : value_(common::error_info(

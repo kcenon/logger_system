@@ -23,35 +23,25 @@ jobs:
         sudo apt-get install -y cmake ninja-build g++ lcov libfmt-dev libspdlog-dev
         # GTest is now fetched via CMake FetchContent
 
-    - name: Checkout common_system (optional dependency)
-      continue-on-error: true
-      run: |
-        cd ..
-        if [ ! -d "common_system" ]; then
-          git clone https://github.com/kcenon/common_system.git || echo "common_system not available, will build without it"
-        fi
+    - name: Checkout common_system (required dependency)
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/common_system
+        path: ../common_system
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Configure CMake with coverage
       run: |
-        # Check if common_system is available
-        if [ -d "../common_system" ]; then
-          echo "Building with common_system support"
-          BUILD_WITH_COMMON="ON"
-        else
-          echo "Building without common_system support"
-          BUILD_WITH_COMMON="OFF"
-        fi
-
         echo "=== Build Configuration ==="
         echo "Build Mode: Debug with Coverage"
-        echo "Common System: $BUILD_WITH_COMMON"
+        echo "Common System: Required (Phase 2.2+)"
         echo "==========================="
 
         cmake -B build -G Ninja \
           -DCMAKE_BUILD_TYPE=Debug \
           -DCMAKE_CXX_FLAGS="--coverage -fprofile-arcs -ftest-coverage" \
           -DCMAKE_C_FLAGS="--coverage -fprofile-arcs -ftest-coverage" \
-          -DBUILD_WITH_COMMON_SYSTEM=$BUILD_WITH_COMMON \
+          -DBUILD_WITH_COMMON_SYSTEM=ON \
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON \
           -DCMAKE_PREFIX_PATH="/usr" || {

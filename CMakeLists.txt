@@ -54,6 +54,7 @@ option(USE_LOCKFREE "Use lock-free implementation" ON)
 option(USE_THREAD_SYSTEM "Use external thread_system if available" ON)
 option(LOGGER_STANDALONE "Build in standalone mode without thread_system" OFF)
 option(NO_VCPKG "Skip vcpkg and use system libraries only" OFF)
+option(BUILD_WITH_COMMON_SYSTEM "Build with common_system integration (optional)" ON)
 
 # Disable tests and benchmarks for MinGW builds due to compatibility issues
 if(MINGW)
@@ -67,32 +68,44 @@ if(MINGW)
     endif()
 endif()
 
-# common_system integration is now mandatory (Phase 2.2)
-# Try to find common_system package first
-find_package(common_system CONFIG QUIET)
+# common_system integration (required for Phase 2.2+)
+if(BUILD_WITH_COMMON_SYSTEM)
+    # Try to find common_system package first
+    find_package(common_system CONFIG QUIET)
 
-if(NOT common_system_FOUND)
-    # Check for common_system in multiple locations
-    set(_LOGGER_COMMON_PATHS
-        "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../../common_system/include"
-        "${CMAKE_CURRENT_SOURCE_DIR}/common_system/include"
-        "$ENV{GITHUB_WORKSPACE}/common_system/include"
-    )
+    if(NOT common_system_FOUND)
+        # Check for common_system in multiple locations
+        set(_LOGGER_COMMON_PATHS
+            "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"
+            "${CMAKE_CURRENT_SOURCE_DIR}/../../common_system/include"
+            "${CMAKE_CURRENT_SOURCE_DIR}/common_system/include"
+            "$ENV{GITHUB_WORKSPACE}/common_system/include"
+        )
 
-    foreach(_path ${_LOGGER_COMMON_PATHS})
-        if(EXISTS "${_path}/kcenon/common/patterns/result.h")
-            message(STATUS "Found common_system at: ${_path}")
-            set(COMMON_SYSTEM_INCLUDE_DIR "${_path}")
-            break()
+        foreach(_path ${_LOGGER_COMMON_PATHS})
+            if(EXISTS "${_path}/kcenon/common/patterns/result.h")
+                message(STATUS "Found common_system at: ${_path}")
+                set(COMMON_SYSTEM_INCLUDE_DIR "${_path}")
+                set(common_system_FOUND TRUE)
+                break()
+            endif()
+        endforeach()
+
+        if(NOT common_system_FOUND)
+            message(FATAL_ERROR "common_system is required but was not found.\n"
+                "Please ensure common_system is available in one of the following locations:\n"
+                "  - ${CMAKE_CURRENT_SOURCE_DIR}/../common_system\n"
+                "  - ${CMAKE_CURRENT_SOURCE_DIR}/../../common_system\n"
+                "  - ${CMAKE_CURRENT_SOURCE_DIR}/common_system\n"
+                "  - $ENV{GITHUB_WORKSPACE}/common_system\n"
+                "Or set BUILD_WITH_COMMON_SYSTEM=OFF to build in standalone mode (not recommended for Phase 2.2+).")
         endif()
-    endforeach()
-
-    if(NOT DEFINED COMMON_SYSTEM_INCLUDE_DIR)
-        message(FATAL_ERROR "common_system is required but was not found. Please ensure common_system is available.")
+    else()
+        message(STATUS "Found common_system package")
     endif()
 else()
-    message(STATUS "Found common_system package")
+    message(STATUS "Building without common_system integration (BUILD_WITH_COMMON_SYSTEM=OFF)")
+    message(WARNING "Standalone mode is not fully supported in Phase 2.2+")
 endif()
 
 ##################################################
@@ -279,26 +292,31 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 $<INSTALL_INTERFACE:include>
         )
 
-        # common_system integration is mandatory (Phase 2.2)
-        message(STATUS "Logger System: Using common_system interfaces")
+        # common_system integration (conditional)
+        if(BUILD_WITH_COMMON_SYSTEM AND common_system_FOUND)
+            message(STATUS "Logger System: Using common_system interfaces")
 
-        # Add common_system include path
-        if(common_system_FOUND)
-            target_link_libraries(LoggerSystem PUBLIC kcenon::common_system)
-        else()
-            # Use the found include directory
-            target_include_directories(LoggerSystem
+            # Add common_system include path
+            if(TARGET kcenon::common_system)
+                target_link_libraries(LoggerSystem PUBLIC kcenon::common_system)
+            else()
+                # Use the found include directory
+                target_include_directories(LoggerSystem
+                    PUBLIC
+                        $<BUILD_INTERFACE:${COMMON_SYSTEM_INCLUDE_DIR}>
+                )
+            endif()
+
+            target_compile_definitions(LoggerSystem
                 PUBLIC
-                    $<BUILD_INTERFACE:${COMMON_SYSTEM_INCLUDE_DIR}>
+                    LOGGER_BUILD_WITH_COMMON_SYSTEM
+                    BUILD_WITH_COMMON_SYSTEM
+                    LOGGER_USING_COMMON_INTERFACES
             )
+        else()
+            message(STATUS "Logger System: Building without common_system")
+            # No common_system compile definitions
         endif()
-
-        target_compile_definitions(LoggerSystem
-            PUBLIC
-                LOGGER_BUILD_WITH_COMMON_SYSTEM
-                BUILD_WITH_COMMON_SYSTEM
-                LOGGER_USING_COMMON_INTERFACES  # Now always enabled
-        )
 
         # Add thread_system integration if available and not explicitly disabled
         option(LOGGER_STANDALONE_MODE "Build logger_system in standalone mode without thread_system integration" OFF)

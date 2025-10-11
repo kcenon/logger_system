@@ -57,13 +57,12 @@ jobs:
         ninja --version
         # GTest is now fetched via CMake FetchContent - no system package needed
 
-    - name: Checkout common_system (optional dependency)
-      continue-on-error: true
-      run: |
-        cd ..
-        if [ ! -d "common_system" ]; then
-          git clone https://github.com/kcenon/common_system.git || echo "common_system not available"
-        fi
+    - name: Checkout common_system (required dependency)
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/common_system
+        path: ../common_system
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Cache FetchContent dependencies
       uses: actions/cache@v4
@@ -80,15 +79,10 @@ jobs:
         CC: ${{ matrix.compiler.cc }}
         CXX: ${{ matrix.compiler.cxx }}
       run: |
-        BUILD_WITH_COMMON="OFF"
-        if [ -d "../common_system" ]; then
-          BUILD_WITH_COMMON="ON"
-        fi
-
         echo "=== Build Configuration ==="
         echo "Compiler: ${{ matrix.compiler.name }}"
         echo "Build Type: ${{ matrix.build-type }}"
-        echo "Common System: $BUILD_WITH_COMMON"
+        echo "Common System: Required (Phase 2.2+)"
         echo "GTest: Will be fetched via FetchContent if needed"
         echo "==========================="
 
@@ -97,7 +91,7 @@ jobs:
           -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON \
-          -DBUILD_WITH_COMMON_SYSTEM=$BUILD_WITH_COMMON \
+          -DBUILD_WITH_COMMON_SYSTEM=ON \
           -DCMAKE_PREFIX_PATH="/usr" \
           --debug-find || {
             echo "::error::CMake configuration failed"
@@ -145,13 +139,12 @@ jobs:
         brew install cmake ninja fmt spdlog
         # GTest is now fetched via CMake FetchContent - no system package needed
 
-    - name: Checkout common_system (optional dependency)
-      continue-on-error: true
-      run: |
-        cd ..
-        if [ ! -d "common_system" ]; then
-          git clone https://github.com/kcenon/common_system.git || echo "common_system not available"
-        fi
+    - name: Checkout common_system (required dependency)
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/common_system
+        path: ../common_system
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Cache FetchContent dependencies
       uses: actions/cache@v4
@@ -165,14 +158,9 @@ jobs:
 
     - name: Configure CMake
       run: |
-        BUILD_WITH_COMMON="OFF"
-        if [ -d "../common_system" ]; then
-          BUILD_WITH_COMMON="ON"
-        fi
-
         echo "=== Build Configuration ==="
         echo "Build Type: ${{ matrix.build-type }}"
-        echo "Common System: $BUILD_WITH_COMMON"
+        echo "Common System: Required (Phase 2.2+)"
         echo "GTest: Will be fetched via FetchContent if needed"
         echo "==========================="
 
@@ -181,7 +169,7 @@ jobs:
           -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON \
-          -DBUILD_WITH_COMMON_SYSTEM=$BUILD_WITH_COMMON \
+          -DBUILD_WITH_COMMON_SYSTEM=ON \
           --debug-find || {
             echo "::error::CMake configuration failed"
             echo "CMake logs:"
@@ -218,14 +206,12 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Checkout common_system (optional dependency)
-      continue-on-error: true
-      run: |
-        cd ..
-        if (-not (Test-Path "common_system")) {
-          git clone https://github.com/kcenon/common_system.git
-          if (-not $?) { Write-Host "common_system not available" }
-        }
+    - name: Checkout common_system (required dependency)
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/common_system
+        path: ../common_system
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
@@ -236,15 +222,11 @@ jobs:
       env:
         VCPKG_FEATURE_FLAGS: manifests
       run: |
-        $buildWithCommon = "OFF"
-        if (Test-Path "../common_system") {
-          $buildWithCommon = "ON"
-        }
         cmake -B build `
           -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} `
           -DLOGGER_BUILD_TESTS=ON `
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON `
-          -DBUILD_WITH_COMMON_SYSTEM=$buildWithCommon `
+          -DBUILD_WITH_COMMON_SYSTEM=ON `
           -DVCPKG_MANIFEST_FEATURES="testing" `
           -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake"
 
@@ -310,13 +292,12 @@ jobs:
         lcov --version
         # GTest is now fetched via CMake FetchContent - no system package needed
 
-    - name: Checkout common_system (optional dependency)
-      continue-on-error: true
-      run: |
-        cd ..
-        if [ ! -d "common_system" ]; then
-          git clone https://github.com/kcenon/common_system.git || echo "common_system not available"
-        fi
+    - name: Checkout common_system (required dependency)
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/common_system
+        path: ../common_system
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Cache FetchContent dependencies
       uses: actions/cache@v4
@@ -337,16 +318,12 @@ jobs:
         # CMake cache can prevent new compiler flags from being picked up
         rm -rf build
 
-        BUILD_WITH_COMMON="OFF"
-        if [ -d "../common_system" ]; then
-          BUILD_WITH_COMMON="ON"
-        fi
         cmake -B build \
           -G Ninja \
           -DCMAKE_BUILD_TYPE=Debug \
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON \
-          -DBUILD_WITH_COMMON_SYSTEM=$BUILD_WITH_COMMON \
+          -DBUILD_WITH_COMMON_SYSTEM=ON \
           -DLOGGER_ENABLE_COVERAGE=ON \
           -DCMAKE_PREFIX_PATH="/usr"
 
@@ -485,13 +462,12 @@ jobs:
         ninja --version
         # GTest is now fetched via CMake FetchContent - no system package needed
 
-    - name: Checkout common_system (optional dependency)
-      continue-on-error: true
-      run: |
-        cd ..
-        if [ ! -d "common_system" ]; then
-          git clone https://github.com/kcenon/common_system.git || echo "common_system not available"
-        fi
+    - name: Checkout common_system (required dependency)
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/common_system
+        path: ../common_system
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Cache FetchContent dependencies
       uses: actions/cache@v4
@@ -509,17 +485,13 @@ jobs:
         CXX: g++
         CI: true
       run: |
-        BUILD_WITH_COMMON="OFF"
-        if [ -d "../common_system" ]; then
-          BUILD_WITH_COMMON="ON"
-        fi
         cmake -B build \
           -G Ninja \
           -DCMAKE_BUILD_TYPE=Release \
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON \
           -DLOGGER_BUILD_PERFORMANCE_TESTS=ON \
-          -DBUILD_WITH_COMMON_SYSTEM=$BUILD_WITH_COMMON \
+          -DBUILD_WITH_COMMON_SYSTEM=ON \
           -DCMAKE_PREFIX_PATH="/usr"
 
     - name: Build

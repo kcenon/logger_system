@@ -17,13 +17,12 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Checkout common_system (optional dependency)
-      continue-on-error: true
-      run: |
-        cd ..
-        if [ ! -d "common_system" ]; then
-          git clone https://github.com/kcenon/common_system.git || echo "common_system not available"
-        fi
+    - name: Checkout common_system (required dependency)
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/common_system
+        path: ../common_system
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Install dependencies
       run: |
@@ -32,17 +31,12 @@ jobs:
 
     - name: Configure CMake
       run: |
-        BUILD_WITH_COMMON="OFF"
-        if [ -d "../common_system" ]; then
-          BUILD_WITH_COMMON="ON"
-        fi
-
         cmake -B build -G Ninja \
           -DCMAKE_BUILD_TYPE=Debug \
           -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
           -DCMAKE_CXX_COMPILER=clang++ \
           -DCMAKE_C_COMPILER=clang \
-          -DBUILD_WITH_COMMON_SYSTEM=$BUILD_WITH_COMMON \
+          -DBUILD_WITH_COMMON_SYSTEM=ON \
           -DLOGGER_BUILD_TESTS=OFF \
           -DLOGGER_BUILD_BENCHMARKS=OFF \
           -DLOGGER_BUILD_SAMPLES=OFF
@@ -108,13 +102,12 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Checkout common_system (optional dependency)
-      continue-on-error: true
-      run: |
-        cd ..
-        if [ ! -d "common_system" ]; then
-          git clone https://github.com/kcenon/common_system.git || echo "common_system not available"
-        fi
+    - name: Checkout common_system (required dependency)
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/common_system
+        path: ../common_system
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Install cppcheck
       run: |

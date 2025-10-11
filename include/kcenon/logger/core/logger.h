@@ -136,7 +136,7 @@ using overflow_policy = logger_system::overflow_policy;
 using logger_metrics = metrics::logger_performance_stats;
 using performance_metrics = metrics::logger_performance_stats; // Alias for examples
 
-// Use common_system monitoring interfaces (Phase 2.2)
+// common_system monitoring interfaces (required for Phase 2.2+)
 using monitoring_interface = common::interfaces::IMonitor;
 using monitoring_metrics = common::interfaces::metrics_snapshot;
 
@@ -543,10 +543,10 @@ public:
     result_void enable_di(di::di_container_factory::container_type type =
                          di::di_container_factory::container_type::automatic);
     
-    // Monitoring Support Methods
-    
+    // Monitoring Support Methods (Phase 2.2+)
+
     /**
-     * @brief Set a custom monitoring implementation (Phase 2.2)
+     * @brief Set a custom monitoring implementation
      * @param monitor Unique pointer to IMonitor implementation
      */
     void set_monitor(std::unique_ptr<common::interfaces::IMonitor> monitor);
@@ -572,11 +572,11 @@ public:
     bool is_monitoring_enabled() const;
 
     /**
-     * @brief Collect current metrics (Phase 2.2)
+     * @brief Collect current metrics
      * @return Result containing metrics snapshot or error
      */
     result<common::interfaces::metrics_snapshot> collect_metrics() const;
-    
+
     /**
      * @brief Perform health check
      * @return Result containing health check result or error
@@ -604,7 +604,7 @@ public:
     void record_metric(const std::string& name, double value,
                       metric_type type = metric_type::gauge);
 
-    // IMonitorable interface implementation (Phase 2.2)
+    // IMonitorable interface implementation (Phase 2.2+)
 
     /**
      * @brief Get monitoring data (IMonitorable interface)
@@ -641,7 +641,7 @@ private:
     di::di_container_interface* external_di_container_ = nullptr;
     std::unique_ptr<di::di_container_interface> internal_di_container_;
 
-    // Monitoring support member (Phase 2.2)
+    // Monitoring support member (Phase 2.2+)
     std::unique_ptr<common::interfaces::IMonitor> monitor_;
 };
 
