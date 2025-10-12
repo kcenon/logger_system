@@ -439,11 +439,13 @@ if (BUILD_BENCHMARKS)
 endif()
 
 # Integration tests
-if (LOGGER_BUILD_INTEGRATION_TESTS AND BUILD_TESTS)
+if (LOGGER_BUILD_INTEGRATION_TESTS AND BUILD_TESTS AND BUILD_WITH_COMMON_SYSTEM)
     if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/integration_tests AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/integration_tests/CMakeLists.txt)
         message(STATUS "Adding integration_tests subdirectory")
         add_subdirectory(integration_tests)
     endif()
+elseif (LOGGER_BUILD_INTEGRATION_TESTS AND BUILD_TESTS AND NOT BUILD_WITH_COMMON_SYSTEM)
+    message(STATUS "Skipping integration_tests because BUILD_WITH_COMMON_SYSTEM=OFF")
 endif()
 
 ##################################################
