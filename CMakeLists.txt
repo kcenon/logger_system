@@ -42,6 +42,7 @@ option(BUILD_BENCHMARKS "Build benchmarks" OFF)
 option(BUILD_SAMPLES "Build sample programs" ON)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(LOGGER_BUILD_INTEGRATION_TESTS "Build integration tests" ON)
+option(LOGGER_ENABLE_COVERAGE "Enable code coverage reporting" OFF)
 
 # Map LOGGER_BUILD_* to BUILD_* for compatibility with CI/CD
 if(DEFINED LOGGER_BUILD_SAMPLES)
