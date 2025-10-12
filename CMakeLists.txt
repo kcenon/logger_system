@@ -75,9 +75,18 @@ if(MINGW)
     endif()
 endif()
 
+##################################################
+# Dependency Management (Phase 5: Modern CMake FetchContent)
+##################################################
+
+# Use FetchContent for dependency management (CMake 3.14+)
+include(FetchContent)
+
 # common_system integration (required for Phase 2.2+)
 if(BUILD_WITH_COMMON_SYSTEM)
-    # Try to find common_system package first
+    message(STATUS "=== Dependency Management (FetchContent) ===")
+
+    # Try to find common_system package first (for local development)
     find_package(common_system CONFIG QUIET)
 
     if(NOT common_system_FOUND)
@@ -110,27 +119,34 @@ if(BUILD_WITH_COMMON_SYSTEM)
         endforeach()
 
         if(NOT common_system_FOUND)
-            message(STATUS "Debug information:")
-            message(STATUS "  CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
-            message(STATUS "  CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
-            message(STATUS "  GITHUB_WORKSPACE: $ENV{GITHUB_WORKSPACE}")
-            message(STATUS "  Current directory contents:")
-            execute_process(COMMAND ${CMAKE_COMMAND} -E echo "Listing parent directory:"
-                WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/..")
-            execute_process(COMMAND ls -la "${CMAKE_CURRENT_SOURCE_DIR}/.."
-                OUTPUT_VARIABLE _LS_OUTPUT ERROR_QUIET)
-            message(STATUS "${_LS_OUTPUT}")
+            # Fallback to FetchContent (Phase 5: Modern dependency management)
+            message(STATUS "  ⚠ Local common_system not found, using FetchContent")
+            message(STATUS "  Fetching common_system from GitHub...")
 
-            message(FATAL_ERROR "common_system is required but was not found.\n"
-                "Searched locations:\n"
-                "  - $ENV{GITHUB_WORKSPACE}/common_system\n"
-                "  - ${CMAKE_CURRENT_SOURCE_DIR}/common_system\n"
-                "  - ${CMAKE_CURRENT_SOURCE_DIR}/../common_system\n"
-                "  - ${CMAKE_CURRENT_SOURCE_DIR}/../../common_system\n"
-                "  - ${CMAKE_SOURCE_DIR}/common_system\n"
-                "  - ${CMAKE_SOURCE_DIR}/../common_system\n"
-                "\nPlease ensure common_system is checked out before building.\n"
-                "Or set BUILD_WITH_COMMON_SYSTEM=OFF to build in standalone mode (not recommended for Phase 2.2+).")
+            FetchContent_Declare(
+                common_system
+                GIT_REPOSITORY https://github.com/kcenon/common_system.git
+                GIT_TAG        main  # TODO: Pin to specific tag/commit for reproducibility
+                GIT_SHALLOW    TRUE  # Faster checkout
+                GIT_PROGRESS   TRUE  # Show download progress
+            )
+
+            # Make common_system available
+            FetchContent_MakeAvailable(common_system)
+
+            # After FetchContent, set the include directory
+            if(TARGET common_system OR EXISTS "${common_system_SOURCE_DIR}/include/kcenon/common/patterns/result.h")
+                message(STATUS "  ✓ FetchContent: common_system available at ${common_system_SOURCE_DIR}")
+                set(COMMON_SYSTEM_INCLUDE_DIR "${common_system_SOURCE_DIR}/include")
+                set(common_system_FOUND TRUE)
+            else()
+                message(FATAL_ERROR "FetchContent failed to provide common_system.\n"
+                    "This should not happen. Please check:\n"
+                    "  1. Internet connectivity\n"
+                    "  2. GitHub repository access\n"
+                    "  3. CMake version >= 3.14\n"
+                    "\nAs last resort, set BUILD_WITH_COMMON_SYSTEM=OFF (not recommended for Phase 2.2+).")
+            endif()
         endif()
     else()
         message(STATUS "Found common_system package")
