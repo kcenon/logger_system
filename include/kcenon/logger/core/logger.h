@@ -117,11 +117,11 @@ namespace kcenon::logger {
 
 // Type aliases for consistency across modes
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    // In integration mode, use thread_module types
-    using log_level = kcenon::thread::log_level;
+// In integration mode, use thread_module types
+using log_level = kcenon::thread::log_level;
 #else
-    // In standalone mode, use logger_system types
-    using log_level = logger_system::log_level;
+// In standalone mode, use logger_system types
+using log_level = logger_system::log_level;
 #endif
 
 // Type aliases from logger_system namespace for convenience
@@ -158,7 +158,7 @@ class logger_metrics_collector;
 
 /**
  * @class logger
- * @brief Main logger implementation that implements thread_system's logger_interface
+ * @brief Main logger implementation providing high-performance logging facilities
  *
  * @details The logger class provides a high-performance, thread-safe logging system with:
  * - Asynchronous logging with configurable batching for optimal throughput
@@ -169,20 +169,17 @@ class logger_metrics_collector;
  * - Integration with monitoring backends for production observability
  *
  * The logger uses the PIMPL idiom to hide implementation details and maintain ABI stability.
- * Implements common::interfaces::IMonitorable for observability (Phase 2.2).
+ * Implements common::interfaces::IMonitorable for observability (Phase 2.2) and can be
+ * adapted to legacy thread_system interfaces through dedicated adapter classes.
  *
  * @warning When using asynchronous mode, ensure proper shutdown by calling stop() and flush()
  * before destroying the logger to prevent loss of buffered messages.
  *
  * @since 1.0.0
  */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-class logger : public kcenon::thread::logger_interface
-#else
-class logger : public logger_system::logger_interface
-#endif
+class logger
 #ifdef BUILD_WITH_COMMON_SYSTEM
-             , public common::interfaces::IMonitorable
+    : public common::interfaces::IMonitorable
 #endif
 {
 public:
@@ -213,7 +210,7 @@ public:
      * 
      * @since 1.0.0
      */
-    ~logger() override;
+    ~logger();
     
     /**
      * @brief Log a simple message
@@ -227,11 +224,7 @@ public:
      * 
      * @since 1.0.0
      */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    void log(kcenon::thread::log_level level, const std::string& message) override;
-#else
-    void log(logger_system::log_level level, const std::string& message) override;
-#endif
+    void log(log_level level, const std::string& message);
     
     /**
      * @brief Log a message with source location
@@ -252,13 +245,11 @@ public:
      * 
      * @since 1.0.0
      */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    void log(kcenon::thread::log_level level, const std::string& message,
-             const std::string& file, int line, const std::string& function) override;
-#else
-    void log(logger_system::log_level level, const std::string& message,
-             const std::string& file, int line, const std::string& function) override;
-#endif
+    void log(log_level level,
+             const std::string& message,
+             const std::string& file,
+             int line,
+             const std::string& function);
     
     /**
      * @brief Check if a log level is enabled
@@ -278,11 +269,7 @@ public:
      * 
      * @since 1.0.0
      */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    bool is_enabled(kcenon::thread::log_level level) const override;
-#else
-    bool is_enabled(logger_system::log_level level) const override;
-#endif
+    bool is_enabled(log_level level) const;
     
     /**
      * @brief Flush all pending log messages
@@ -296,7 +283,7 @@ public:
      * 
      * @since 1.0.0
      */
-    void flush() override;
+    void flush();
     
     // Additional logger-specific methods
     
@@ -357,11 +344,8 @@ public:
      * 
      * @since 1.0.0
      */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    void set_min_level(kcenon::thread::log_level level);
-#else
-    void set_min_level(logger_system::log_level level);
-#endif
+    void set_min_level(log_level level);
+    void set_level(log_level level) { set_min_level(level); }
     
     /**
      * @brief Get the minimum log level
@@ -371,11 +355,8 @@ public:
      * 
      * @since 1.0.0
      */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    kcenon::thread::log_level get_min_level() const;
-#else
-    logger_system::log_level get_min_level() const;
-#endif
+    log_level get_min_level() const;
+    log_level get_level() const { return get_min_level(); }
     
     /**
      * @brief Start the logger (for async mode)

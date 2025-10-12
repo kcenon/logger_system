@@ -167,30 +167,24 @@ void logger::set_monitor(std::unique_ptr<common::interfaces::IMonitor> monitor) 
 }
 #endif
 
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-void logger::set_min_level(kcenon::thread::log_level level) {
-#else
-void logger::set_min_level(logger_system::log_level level) {
-#endif
+void logger::set_min_level(log_level level) {
     if (pimpl_) {
         pimpl_->min_level_ = level;
     }
 }
 
+log_level logger::get_min_level() const {
+    if (pimpl_) {
+        return pimpl_->min_level_;
+    }
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-kcenon::thread::log_level logger::get_min_level() const {
-    return pimpl_ ? pimpl_->min_level_ : kcenon::thread::log_level::info;
+    return kcenon::thread::log_level::info;
 #else
-logger_system::log_level logger::get_min_level() const {
-    return pimpl_ ? pimpl_->min_level_ : logger_system::log_level::info;
+    return logger_system::log_level::info;
 #endif
 }
 
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-void logger::log(kcenon::thread::log_level level, const std::string& message) {
-#else
-void logger::log(logger_system::log_level level, const std::string& message) {
-#endif
+void logger::log(log_level level, const std::string& message) {
     if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_)) {
         return;
     }
@@ -218,13 +212,11 @@ void logger::log(logger_system::log_level level, const std::string& message) {
     }
 }
 
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-void logger::log(kcenon::thread::log_level level, const std::string& message,
-                const std::string& file, int line, const std::string& function) {
-#else
-void logger::log(logger_system::log_level level, const std::string& message,
-                const std::string& file, int line, const std::string& function) {
-#endif
+void logger::log(log_level level,
+                const std::string& message,
+                const std::string& file,
+                int line,
+                const std::string& function) {
     if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_)) {
         return;
     }
@@ -252,11 +244,7 @@ void logger::log(logger_system::log_level level, const std::string& message,
     }
 }
 
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-bool logger::is_enabled(kcenon::thread::log_level level) const {
-#else
-bool logger::is_enabled(logger_system::log_level level) const {
-#endif
+bool logger::is_enabled(log_level level) const {
     return pimpl_ && meets_threshold(level, pimpl_->min_level_);
 }
 
