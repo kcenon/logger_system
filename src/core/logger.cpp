@@ -143,6 +143,13 @@ result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
     return result_void::success();
 }
 
+void logger::add_writer(const std::string& /*name*/, std::unique_ptr<base_writer> writer) {
+    if (pimpl_ && writer) {
+        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
+        pimpl_->writers_.push_back(std::move(writer));
+    }
+}
+
 result_void logger::clear_writers() {
     if (pimpl_) {
         std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
@@ -150,6 +157,15 @@ result_void logger::clear_writers() {
     }
     return result_void::success();
 }
+
+#ifdef BUILD_WITH_COMMON_SYSTEM
+void logger::set_monitor(std::unique_ptr<common::interfaces::IMonitor> monitor) {
+    monitor_ = std::move(monitor);
+    if (monitor_) {
+        enable_metrics_collection(true);
+    }
+}
+#endif
 
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
 void logger::set_min_level(kcenon::thread::log_level level) {
