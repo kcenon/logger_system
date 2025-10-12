@@ -67,8 +67,24 @@ if(NOT _LOGGER_GTEST_MAIN_TARGET)
     endif()
 endif()
 
+# Final fallback: use the same pattern as tests/CMakeLists.txt
+# This ensures compatibility when GTest targets have non-standard names
+if(NOT _LOGGER_GTEST_TARGET AND TARGET gtest)
+    set(_LOGGER_GTEST_TARGET gtest)
+    message(STATUS "Integration tests: Using fallback GTest target 'gtest'")
+endif()
+
+if(NOT _LOGGER_GTEST_MAIN_TARGET AND TARGET gtest_main)
+    set(_LOGGER_GTEST_MAIN_TARGET gtest_main)
+    message(STATUS "Integration tests: Using fallback GTest main target 'gtest_main'")
+endif()
+
 if(NOT _LOGGER_GTEST_TARGET OR NOT _LOGGER_GTEST_MAIN_TARGET)
-    message(FATAL_ERROR "GoogleTest targets not available. Verify logger_find_test_dependencies() ran before configuring integration tests.")
+    message(WARNING "GoogleTest targets not available. Integration tests will be skipped.")
+    message(WARNING "  - GTest target found: ${_LOGGER_GTEST_TARGET}")
+    message(WARNING "  - GTest main target found: ${_LOGGER_GTEST_MAIN_TARGET}")
+    message(WARNING "Please ensure logger_find_test_dependencies() ran before configuring integration tests.")
+    return()
 endif()
 
 # Collect all integration test source files
@@ -104,11 +120,17 @@ if(common_system_FOUND)
 endif()
 
 # Link libraries
+# Note: GTest targets may already include gtest, so we link gtest_main which depends on gtest
 target_link_libraries(integration_tests PRIVATE
-    ${_LOGGER_GTEST_TARGET}
     ${_LOGGER_GTEST_MAIN_TARGET}
     LoggerSystem  # Correct target name
 )
+
+# Only link gtest separately if gtest_main doesn't already provide it
+# This avoids duplicate library warnings
+if(NOT ${_LOGGER_GTEST_MAIN_TARGET} MATCHES "gtest_main")
+    target_link_libraries(integration_tests PRIVATE ${_LOGGER_GTEST_TARGET})
+endif()
 
 # Compiler settings
 target_compile_features(integration_tests PRIVATE cxx_std_20)
