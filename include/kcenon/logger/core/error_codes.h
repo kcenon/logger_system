@@ -469,8 +469,8 @@ private:
 
 class result_void {
 public:
-    // Default constructor creates a success state (not error!)
-    result_void() : value_() {}
+    result_void()
+        : value_(common::ok()) {}
 
     explicit result_void(logger_error_code code, const std::string& msg = "")
         : value_(common::error_info{
@@ -478,7 +478,9 @@ public:
               msg.empty() ? logger_error_to_string(code) : msg,
               "logger_system"}) {}
 
-    static result_void success() { return result_void(); }
+    static result_void success() {
+        return result_void(common::ok());
+    }
 
     static result_void error(logger_error_code code, const std::string& msg = "") {
         return result_void(code, msg);
@@ -498,7 +500,10 @@ public:
     const common::VoidResult& raw() const { return value_; }
 
 private:
-    common::VoidResult value_{};
+    explicit result_void(common::VoidResult value)
+        : value_(std::move(value)) {}
+
+    common::VoidResult value_;
 };
 
 inline result_void make_logger_error(logger_error_code code, const std::string& message = "") {

@@ -66,6 +66,8 @@ TEST_F(LogFormattingIntegrationTest, BasicMessageFormat) {
 TEST_F(LogFormattingIntegrationTest, MultipleLogLevelsFormatting) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
+    logger_->set_min_level(kcenon::logger::log_level::trace);
+
     logger_->log(kcenon::logger::log_level::trace, "Trace message");
     logger_->log(kcenon::logger::log_level::debug, "Debug message");
     logger_->log(kcenon::logger::log_level::info, "Info message");
