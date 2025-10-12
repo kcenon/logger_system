@@ -6,8 +6,43 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-# Find dependencies
-find_package(GTest REQUIRED)
+# Ensure GoogleTest targets are available. The top-level CMake script populates
+# GTest via logger_find_test_dependencies(); fall back to find_package only when
+# the targets are still missing (e.g. system installations).
+set(_LOGGER_GTEST_TARGET "")
+set(_LOGGER_GTEST_MAIN_TARGET "")
+
+if(TARGET GTest::gtest)
+    set(_LOGGER_GTEST_TARGET GTest::gtest)
+elseif(TARGET gtest)
+    set(_LOGGER_GTEST_TARGET gtest)
+endif()
+
+if(TARGET GTest::gtest_main)
+    set(_LOGGER_GTEST_MAIN_TARGET GTest::gtest_main)
+elseif(TARGET gtest_main)
+    set(_LOGGER_GTEST_MAIN_TARGET gtest_main)
+endif()
+
+if(NOT _LOGGER_GTEST_TARGET OR NOT _LOGGER_GTEST_MAIN_TARGET)
+    find_package(GTest QUIET)
+    if(GTest_FOUND)
+        if(NOT _LOGGER_GTEST_TARGET AND TARGET GTest::gtest)
+            set(_LOGGER_GTEST_TARGET GTest::gtest)
+        elseif(NOT _LOGGER_GTEST_TARGET AND TARGET gtest)
+            set(_LOGGER_GTEST_TARGET gtest)
+        endif()
+        if(NOT _LOGGER_GTEST_MAIN_TARGET AND TARGET GTest::gtest_main)
+            set(_LOGGER_GTEST_MAIN_TARGET GTest::gtest_main)
+        elseif(NOT _LOGGER_GTEST_MAIN_TARGET AND TARGET gtest_main)
+            set(_LOGGER_GTEST_MAIN_TARGET gtest_main)
+        endif()
+    endif()
+endif()
+
+if(NOT _LOGGER_GTEST_TARGET OR NOT _LOGGER_GTEST_MAIN_TARGET)
+    message(FATAL_ERROR "GoogleTest targets not available. Verify logger_find_test_dependencies() ran before configuring integration tests.")
+endif()
 
 # Collect all integration test source files
 file(GLOB SCENARIO_TESTS scenarios/*.cpp)
@@ -43,8 +78,8 @@ endif()
 
 # Link libraries
 target_link_libraries(integration_tests PRIVATE
-    GTest::gtest
-    GTest::gtest_main
+    ${_LOGGER_GTEST_TARGET}
+    ${_LOGGER_GTEST_MAIN_TARGET}
     LoggerSystem  # Correct target name
 )
 
