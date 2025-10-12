@@ -135,6 +135,27 @@ endif()
 # Compiler settings
 target_compile_features(integration_tests PRIVATE cxx_std_20)
 
+# Apply coverage flags if enabled
+# Note: This must be done here because integration_tests is added after
+# logger_enable_coverage_for_all() is called in the parent CMakeLists.txt
+if(LOGGER_ENABLE_COVERAGE AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
+        target_compile_options(integration_tests PRIVATE
+            --coverage
+            -fprofile-arcs
+            -ftest-coverage
+            -O0  # No optimization for accurate coverage
+            -g   # Debug symbols
+        )
+
+        target_link_options(integration_tests PRIVATE
+            --coverage
+        )
+
+        message(STATUS "Enabled code coverage for integration_tests")
+    endif()
+endif()
+
 # Add test to CTest
 add_test(NAME IntegrationTests COMMAND integration_tests)
 
