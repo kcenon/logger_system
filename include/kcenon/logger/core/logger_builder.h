@@ -534,7 +534,6 @@ public:
 
         return *this;
     }
-    */
 
     /**
      * @brief Set monitoring interface (Phase 2.2.4)
