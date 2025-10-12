@@ -290,6 +290,7 @@ result<logger_metrics> logger::get_current_metrics() const {
     return result<logger_metrics>::ok_value(metrics::g_logger_stats);
 }
 
+#ifdef BUILD_WITH_COMMON_SYSTEM
 // IMonitorable interface implementation (Phase 2.2)
 
 common::Result<common::interfaces::metrics_snapshot> logger::get_monitoring_data() {
@@ -400,5 +401,6 @@ common::Result<common::interfaces::health_check_result> logger::health_check() {
 std::string logger::get_component_name() const {
     return "logger_system::logger";
 }
+#endif // BUILD_WITH_COMMON_SYSTEM
 
 } // namespace kcenon::logger

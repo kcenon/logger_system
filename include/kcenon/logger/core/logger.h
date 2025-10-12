@@ -54,15 +54,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "di/di_container_factory.h"
 
 // Use common_system interfaces when available
-#ifdef LOGGER_USING_COMMON_INTERFACES
+#ifdef BUILD_WITH_COMMON_SYSTEM
     #include <kcenon/common/interfaces/monitoring_interface.h>
-    #include <kcenon/common/interfaces/logger_interface.h>
-#else
-    // Fallback to legacy interfaces
-    #include "monitoring/monitoring_interface.h"
+    #include "monitoring/monitoring_factory.h"
 #endif
 
-#include "monitoring/monitoring_factory.h"
 #include <kcenon/logger/interfaces/logger_types.h>
 
 /**
@@ -136,13 +132,15 @@ using overflow_policy = logger_system::overflow_policy;
 using logger_metrics = metrics::logger_performance_stats;
 using performance_metrics = metrics::logger_performance_stats; // Alias for examples
 
+using di_container_interface = di::di_container_interface;
+using di_container_factory = di::di_container_factory;
+
+#ifdef BUILD_WITH_COMMON_SYSTEM
 // common_system monitoring interfaces (required for Phase 2.2+)
 using monitoring_interface = common::interfaces::IMonitor;
 using monitoring_metrics = common::interfaces::metrics_snapshot;
-
-using di_container_interface = di::di_container_interface;
-using di_container_factory = di::di_container_factory;
 using monitoring_factory = monitoring::monitoring_factory;
+#endif
 
 // Metric type enum
 enum class metric_type {
@@ -179,12 +177,14 @@ class logger_metrics_collector;
  * @since 1.0.0
  */
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-class logger : public kcenon::thread::logger_interface,
-               public common::interfaces::IMonitorable {
+class logger : public kcenon::thread::logger_interface
 #else
-class logger : public logger_system::logger_interface,
-               public common::interfaces::IMonitorable {
+class logger : public logger_system::logger_interface
 #endif
+#ifdef BUILD_WITH_COMMON_SYSTEM
+             , public common::interfaces::IMonitorable
+#endif
+{
 public:
     /**
      * @brief Constructor with optional configuration
@@ -544,6 +544,7 @@ public:
     result_void enable_di(di::di_container_factory::container_type type =
                          di::di_container_factory::container_type::automatic);
     
+#ifdef BUILD_WITH_COMMON_SYSTEM
     // Monitoring Support Methods (Phase 2.2+)
 
     /**
@@ -583,19 +584,19 @@ public:
      * @return Result containing health check result or error
      */
     result<health_status> check_health() const;
-    
+
     /**
      * @brief Reset monitoring metrics
      * @return result_void indicating success or error
      */
     result_void reset_monitoring_metrics();
-    
+
     /**
      * @brief Get the monitoring backend name
      * @return Name of the current monitoring backend
      */
     std::string get_monitoring_backend() const;
-    
+
     /**
      * @brief Record a custom metric
      * @param name Metric name
@@ -604,7 +605,9 @@ public:
      */
     void record_metric(const std::string& name, double value,
                       metric_type type = metric_type::gauge);
+#endif // BUILD_WITH_COMMON_SYSTEM
 
+#ifdef BUILD_WITH_COMMON_SYSTEM
     // IMonitorable interface implementation (Phase 2.2+)
 
     /**
@@ -633,6 +636,7 @@ public:
      * monitoring system, typically "logger_system::logger".
      */
     std::string get_component_name() const override;
+#endif // BUILD_WITH_COMMON_SYSTEM
 
 private:
     class impl;
@@ -642,8 +646,10 @@ private:
     di::di_container_interface* external_di_container_ = nullptr;
     std::unique_ptr<di::di_container_interface> internal_di_container_;
 
+#ifdef BUILD_WITH_COMMON_SYSTEM
     // Monitoring support member (Phase 2.2+)
     std::unique_ptr<common::interfaces::IMonitor> monitor_;
+#endif
 };
 
 } // namespace kcenon::logger
