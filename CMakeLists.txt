@@ -81,31 +81,55 @@ if(BUILD_WITH_COMMON_SYSTEM)
     find_package(common_system CONFIG QUIET)
 
     if(NOT common_system_FOUND)
-        # Check for common_system in multiple locations
-        # Priority order: CI/CD workspace -> sibling directory -> parent directory
+        # Check for common_system in multiple locations with comprehensive search
+        # Priority order: CI/CD workspace variations -> sibling -> parent -> source tree locations
         set(_LOGGER_COMMON_PATHS
-            "${CMAKE_CURRENT_SOURCE_DIR}/common_system/include"          # CI/CD: workspace/common_system
-            "$ENV{GITHUB_WORKSPACE}/common_system/include"               # CI/CD: explicit GITHUB_WORKSPACE
-            "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"       # Local: sibling directory
-            "${CMAKE_CURRENT_SOURCE_DIR}/../../common_system/include"    # Local: parent directory
+            # GitHub Actions: various checkout patterns
+            "$ENV{GITHUB_WORKSPACE}/common_system/include"                      # Standard GITHUB_WORKSPACE
+            "${CMAKE_CURRENT_SOURCE_DIR}/common_system/include"                 # Same directory as logger_system
+            "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"              # Sibling (sanitizers.yml pattern)
+            "${CMAKE_CURRENT_SOURCE_DIR}/../../common_system/include"           # Parent directory
+            "${CMAKE_SOURCE_DIR}/common_system/include"                         # Relative to source root
+            "${CMAKE_SOURCE_DIR}/../common_system/include"                      # Sibling to source root
+            # Local development paths
+            "/Users/dongcheolshin/Sources/common_system/include"                # macOS development
+            "/home/${USER}/Sources/common_system/include"                       # Linux development
         )
 
+        message(STATUS "Searching for common_system in the following locations:")
         foreach(_path ${_LOGGER_COMMON_PATHS})
+            message(STATUS "  Checking: ${_path}")
             if(EXISTS "${_path}/kcenon/common/patterns/result.h")
-                message(STATUS "Found common_system at: ${_path}")
+                message(STATUS "  ✓ Found common_system at: ${_path}")
                 set(COMMON_SYSTEM_INCLUDE_DIR "${_path}")
                 set(common_system_FOUND TRUE)
                 break()
+            else()
+                message(STATUS "  ✗ Not found")
             endif()
         endforeach()
 
         if(NOT common_system_FOUND)
+            message(STATUS "Debug information:")
+            message(STATUS "  CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
+            message(STATUS "  CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
+            message(STATUS "  GITHUB_WORKSPACE: $ENV{GITHUB_WORKSPACE}")
+            message(STATUS "  Current directory contents:")
+            execute_process(COMMAND ${CMAKE_COMMAND} -E echo "Listing parent directory:"
+                WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/..")
+            execute_process(COMMAND ls -la "${CMAKE_CURRENT_SOURCE_DIR}/.."
+                OUTPUT_VARIABLE _LS_OUTPUT ERROR_QUIET)
+            message(STATUS "${_LS_OUTPUT}")
+
             message(FATAL_ERROR "common_system is required but was not found.\n"
-                "Please ensure common_system is available in one of the following locations:\n"
+                "Searched locations:\n"
+                "  - $ENV{GITHUB_WORKSPACE}/common_system\n"
+                "  - ${CMAKE_CURRENT_SOURCE_DIR}/common_system\n"
                 "  - ${CMAKE_CURRENT_SOURCE_DIR}/../common_system\n"
                 "  - ${CMAKE_CURRENT_SOURCE_DIR}/../../common_system\n"
-                "  - ${CMAKE_CURRENT_SOURCE_DIR}/common_system\n"
-                "  - $ENV{GITHUB_WORKSPACE}/common_system\n"
+                "  - ${CMAKE_SOURCE_DIR}/common_system\n"
+                "  - ${CMAKE_SOURCE_DIR}/../common_system\n"
+                "\nPlease ensure common_system is checked out before building.\n"
                 "Or set BUILD_WITH_COMMON_SYSTEM=OFF to build in standalone mode (not recommended for Phase 2.2+).")
         endif()
     else()

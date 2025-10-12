@@ -34,6 +34,8 @@ jobs:
         echo "=== Build Configuration ==="
         echo "Build Mode: Debug with Coverage"
         echo "Common System: Required (Phase 2.2+)"
+        echo "Directory structure:"
+        ls -la . | head -20
         echo "==========================="
 
         cmake -B build -G Ninja \
@@ -43,8 +45,10 @@ jobs:
           -DBUILD_WITH_COMMON_SYSTEM=ON \
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON \
-          -DCMAKE_PREFIX_PATH="/usr" || {
+          -DCMAKE_PREFIX_PATH="/usr" \
+          --debug-find || {
             echo "::error::CMake configuration failed for coverage build"
+            cat build/CMakeFiles/CMakeOutput.log 2>/dev/null || echo "No output log"
             cat build/CMakeFiles/CMakeError.log 2>/dev/null || echo "No error log found"
             exit 1
           }

@@ -54,6 +54,13 @@ jobs:
     - name: Configure CMake with ${{ matrix.sanitizer }} sanitizer
       run: |
         cd logger_system
+        echo "=== Sanitizer Build Configuration ==="
+        echo "Sanitizer: ${{ matrix.sanitizer }}"
+        echo "Build Type: ${{ matrix.build_type }}"
+        echo "Directory structure:"
+        ls -la ../ | head -20
+        echo "======================================"
+
         SANITIZER_FLAGS="-fsanitize=${{ matrix.sanitizer }} -fno-omit-frame-pointer -g"
         cmake -B build -S . \
           -GNinja \
@@ -63,7 +70,14 @@ jobs:
           -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }}" \
           -DCMAKE_SHARED_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }}" \
           -DLOGGER_BUILD_TESTS=ON \
-          -DLOGGER_BUILD_SAMPLES=OFF
+          -DLOGGER_BUILD_SAMPLES=OFF \
+          -DBUILD_WITH_COMMON_SYSTEM=ON \
+          -DUSE_THREAD_SYSTEM=ON || {
+            echo "::error::CMake configuration failed"
+            echo "CMake error log:"
+            cat build/CMakeFiles/CMakeError.log 2>/dev/null || echo "No error log found"
+            exit 1
+          }
 
     - name: Build with ${{ matrix.sanitizer }} sanitizer
       run: |
