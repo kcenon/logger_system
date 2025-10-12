@@ -2,7 +2,10 @@
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/log_entry.h>
-#include <kcenon/common/interfaces/monitoring_interface.h>
+
+#ifdef BUILD_WITH_COMMON_SYSTEM
+    #include <kcenon/common/interfaces/monitoring_interface.h>
+#endif
 
 #include <chrono>
 #include <memory>
@@ -49,6 +52,7 @@ public:
         return "memory_writer";
     }
 
+#ifdef BUILD_WITH_COMMON_SYSTEM
     // IMonitorable interface implementation
     common::Result<common::interfaces::metrics_snapshot>
     get_monitoring_data() override {
@@ -70,6 +74,7 @@ public:
     std::string get_component_name() const override {
         return "memory_writer";
     }
+#endif
 
     const std::vector<entry_record>& records() const {
         return records_;

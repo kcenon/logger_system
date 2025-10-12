@@ -78,7 +78,9 @@ All rights reserved.
 #include "di/di_container_interface.h"
 
 // Use common_system interfaces (Phase 2.2.4)
-#include <kcenon/common/interfaces/monitoring_interface.h>
+#ifdef BUILD_WITH_COMMON_SYSTEM
+    #include <kcenon/common/interfaces/monitoring_interface.h>
+#endif
 
 #include <memory>
 #include <vector>
@@ -553,11 +555,13 @@ public:
      * @param monitor IMonitor implementation from common_system
      * @return Reference to builder for chaining
      */
+#ifdef BUILD_WITH_COMMON_SYSTEM
     logger_builder& with_monitoring(std::shared_ptr<common::interfaces::IMonitor> monitor) {
         monitor_ = monitor;
         config_.enable_metrics = true;
         return *this;
     }
+#endif
     
     /**
      * @brief Set health check interval
@@ -765,7 +769,9 @@ private:
     // TODO: Re-enable when strategy pattern is implemented
     // std::vector<std::unique_ptr<config_strategy_interface>> strategies_;
     mutable logger_config built_config_;  // Store last built configuration
+#ifdef BUILD_WITH_COMMON_SYSTEM
     std::shared_ptr<common::interfaces::IMonitor> monitor_;  // Phase 2.2.4
+#endif
     std::chrono::milliseconds health_check_interval_{1000};
     std::function<void(const logger_error_code&)> error_handler_;
 };

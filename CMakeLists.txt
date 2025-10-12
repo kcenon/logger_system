@@ -56,6 +56,13 @@ option(LOGGER_STANDALONE "Build in standalone mode without thread_system" OFF)
 option(NO_VCPKG "Skip vcpkg and use system libraries only" OFF)
 option(BUILD_WITH_COMMON_SYSTEM "Build with common_system integration (optional)" ON)
 
+# LOGGER_STANDALONE_MODE takes precedence - force disable common_system and thread_system
+if(LOGGER_STANDALONE_MODE)
+    message(STATUS "LOGGER_STANDALONE_MODE is ON - forcing BUILD_WITH_COMMON_SYSTEM=OFF and USE_THREAD_SYSTEM=OFF")
+    set(BUILD_WITH_COMMON_SYSTEM OFF CACHE BOOL "Disabled by LOGGER_STANDALONE_MODE" FORCE)
+    set(USE_THREAD_SYSTEM OFF CACHE BOOL "Disabled by LOGGER_STANDALONE_MODE" FORCE)
+endif()
+
 # Disable tests and benchmarks for MinGW builds due to compatibility issues
 if(MINGW)
     if(BUILD_TESTS)
