@@ -504,9 +504,11 @@ public:
         return *this;
     }
     */
-
-    // TODO: Re-enable detect_environment() when apply_template() is implemented
-    /*
+    
+    /**
+     * @brief Detect environment from environment variables
+     * @return Reference to builder for chaining
+     */
     logger_builder& detect_environment() {
         const char* env = std::getenv("LOG_ENV");
         const char* level = std::getenv("LOG_LEVEL");
@@ -704,8 +706,7 @@ public:
             // Create composite filter if multiple filters
             if (filters_.size() == 1) {
                 logger_instance->set_filter(std::move(filters_[0]));
-            }
-            else {
+            } else {
                 auto composite = std::make_unique<filters::composite_filter>(filters::composite_filter::logic_type::AND);
                 for (auto& filter : filters_) {
                     composite->add_filter(std::move(filter));
