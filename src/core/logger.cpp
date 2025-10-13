@@ -37,6 +37,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <vector>
 #include <chrono>
 #include <type_traits>
+#include <atomic>
 
 namespace kcenon::logger {
 
@@ -84,9 +85,9 @@ public:
     bool running_;
     bool metrics_enabled_;
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    kcenon::thread::log_level min_level_;
+    std::atomic<kcenon::thread::log_level> min_level_;
 #else
-    logger_system::log_level min_level_;
+    std::atomic<logger_system::log_level> min_level_;
 #endif
     std::vector<std::unique_ptr<base_writer>> writers_;
     std::mutex writers_mutex_;  // Protects writers_ vector from concurrent modification
@@ -169,13 +170,13 @@ void logger::set_monitor(std::unique_ptr<common::interfaces::IMonitor> monitor) 
 
 void logger::set_min_level(log_level level) {
     if (pimpl_) {
-        pimpl_->min_level_ = level;
+        pimpl_->min_level_.store(level);
     }
 }
 
 log_level logger::get_min_level() const {
     if (pimpl_) {
-        return pimpl_->min_level_;
+        return pimpl_->min_level_.load();
     }
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
     return kcenon::thread::log_level::info;
@@ -185,7 +186,7 @@ log_level logger::get_min_level() const {
 }
 
 void logger::log(log_level level, const std::string& message) {
-    if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_)) {
+    if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
         return;
     }
 
@@ -217,7 +218,7 @@ void logger::log(log_level level,
                 const std::string& file,
                 int line,
                 const std::string& function) {
-    if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_)) {
+    if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
         return;
     }
 
@@ -245,7 +246,7 @@ void logger::log(log_level level,
 }
 
 bool logger::is_enabled(log_level level) const {
-    return pimpl_ && meets_threshold(level, pimpl_->min_level_);
+    return pimpl_ && meets_threshold(level, pimpl_->min_level_.load());
 }
 
 void logger::flush() {

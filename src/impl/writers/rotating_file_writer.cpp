@@ -303,10 +303,18 @@ bool rotating_file_writer::should_rotate_by_time() const {
             // Check if we're in a new day
             auto now_time_t = std::chrono::system_clock::to_time_t(now);
             auto start_time_t = std::chrono::system_clock::to_time_t(current_period_start_);
-            
-            std::tm now_tm = *std::localtime(&now_time_t);
-            std::tm start_tm = *std::localtime(&start_time_t);
-            
+
+            // Use thread-safe time conversion
+            std::tm now_tm{};
+            std::tm start_tm{};
+#ifdef _WIN32
+            localtime_s(&now_tm, &now_time_t);
+            localtime_s(&start_tm, &start_time_t);
+#else
+            localtime_r(&now_time_t, &now_tm);
+            localtime_r(&start_time_t, &start_tm);
+#endif
+
             return now_tm.tm_year != start_tm.tm_year ||
                    now_tm.tm_mon != start_tm.tm_mon ||
                    now_tm.tm_mday != start_tm.tm_mday;
