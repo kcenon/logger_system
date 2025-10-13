@@ -119,6 +119,10 @@ if(common_system_FOUND)
     endif()
 endif()
 
+# Ensure GTest targets are built before integration_tests
+# This prevents "file truncated" errors during parallel builds
+add_dependencies(integration_tests ${_LOGGER_GTEST_TARGET} ${_LOGGER_GTEST_MAIN_TARGET})
+
 # Link libraries
 # Note: GTest targets may already include gtest, so we link gtest_main which depends on gtest
 target_link_libraries(integration_tests PRIVATE
