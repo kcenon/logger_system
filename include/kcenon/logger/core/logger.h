@@ -54,15 +54,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "di/di_container_factory.h"
 
 // Use common_system interfaces when available
-#ifdef LOGGER_USING_COMMON_INTERFACES
+#ifdef BUILD_WITH_COMMON_SYSTEM
     #include <kcenon/common/interfaces/monitoring_interface.h>
-    #include <kcenon/common/interfaces/logger_interface.h>
-#else
-    // Fallback to legacy interfaces
-    #include "monitoring/monitoring_interface.h"
+    #include "monitoring/monitoring_factory.h"
 #endif
 
-#include "monitoring/monitoring_factory.h"
 #include <kcenon/logger/interfaces/logger_types.h>
 
 /**
@@ -121,11 +117,11 @@ namespace kcenon::logger {
 
 // Type aliases for consistency across modes
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    // In integration mode, use thread_module types
-    using log_level = kcenon::thread::log_level;
+// In integration mode, use thread_module types
+using log_level = kcenon::thread::log_level;
 #else
-    // In standalone mode, use logger_system types
-    using log_level = logger_system::log_level;
+// In standalone mode, use logger_system types
+using log_level = logger_system::log_level;
 #endif
 
 // Type aliases from logger_system namespace for convenience
@@ -136,13 +132,15 @@ using overflow_policy = logger_system::overflow_policy;
 using logger_metrics = metrics::logger_performance_stats;
 using performance_metrics = metrics::logger_performance_stats; // Alias for examples
 
-// Use common_system monitoring interfaces (Phase 2.2)
-using monitoring_interface = common::interfaces::IMonitor;
-using monitoring_metrics = common::interfaces::metrics_snapshot;
-
 using di_container_interface = di::di_container_interface;
 using di_container_factory = di::di_container_factory;
+
+#ifdef BUILD_WITH_COMMON_SYSTEM
+// common_system monitoring interfaces (required for Phase 2.2+)
+using monitoring_interface = common::interfaces::IMonitor;
+using monitoring_metrics = common::interfaces::metrics_snapshot;
 using monitoring_factory = monitoring::monitoring_factory;
+#endif
 
 // Metric type enum
 enum class metric_type {
@@ -155,12 +153,12 @@ enum class metric_type {
 class log_collector;
 class base_writer;
 class logger_metrics_collector;
-class log_filter;
-class log_router;
+// class log_filter;  // TODO: Implement filtering system
+// class log_router;  // TODO: Implement routing system
 
 /**
  * @class logger
- * @brief Main logger implementation that implements thread_system's logger_interface
+ * @brief Main logger implementation providing high-performance logging facilities
  *
  * @details The logger class provides a high-performance, thread-safe logging system with:
  * - Asynchronous logging with configurable batching for optimal throughput
@@ -171,20 +169,19 @@ class log_router;
  * - Integration with monitoring backends for production observability
  *
  * The logger uses the PIMPL idiom to hide implementation details and maintain ABI stability.
- * Implements common::interfaces::IMonitorable for observability (Phase 2.2).
+ * Implements common::interfaces::IMonitorable for observability (Phase 2.2) and can be
+ * adapted to legacy thread_system interfaces through dedicated adapter classes.
  *
  * @warning When using asynchronous mode, ensure proper shutdown by calling stop() and flush()
  * before destroying the logger to prevent loss of buffered messages.
  *
  * @since 1.0.0
  */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-class logger : public kcenon::thread::logger_interface,
-               public common::interfaces::IMonitorable {
-#else
-class logger : public logger_system::logger_interface,
-               public common::interfaces::IMonitorable {
+class logger
+#ifdef BUILD_WITH_COMMON_SYSTEM
+    : public common::interfaces::IMonitorable
 #endif
+{
 public:
     /**
      * @brief Constructor with optional configuration
@@ -213,7 +210,7 @@ public:
      * 
      * @since 1.0.0
      */
-    ~logger() override;
+    ~logger();
     
     /**
      * @brief Log a simple message
@@ -227,11 +224,7 @@ public:
      * 
      * @since 1.0.0
      */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    void log(kcenon::thread::log_level level, const std::string& message) override;
-#else
-    void log(logger_system::log_level level, const std::string& message) override;
-#endif
+    void log(log_level level, const std::string& message);
     
     /**
      * @brief Log a message with source location
@@ -252,13 +245,11 @@ public:
      * 
      * @since 1.0.0
      */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    void log(kcenon::thread::log_level level, const std::string& message,
-             const std::string& file, int line, const std::string& function) override;
-#else
-    void log(logger_system::log_level level, const std::string& message,
-             const std::string& file, int line, const std::string& function) override;
-#endif
+    void log(log_level level,
+             const std::string& message,
+             const std::string& file,
+             int line,
+             const std::string& function);
     
     /**
      * @brief Check if a log level is enabled
@@ -278,11 +269,7 @@ public:
      * 
      * @since 1.0.0
      */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    bool is_enabled(kcenon::thread::log_level level) const override;
-#else
-    bool is_enabled(logger_system::log_level level) const override;
-#endif
+    bool is_enabled(log_level level) const;
     
     /**
      * @brief Flush all pending log messages
@@ -296,7 +283,7 @@ public:
      * 
      * @since 1.0.0
      */
-    void flush() override;
+    void flush();
     
     // Additional logger-specific methods
     
@@ -357,11 +344,8 @@ public:
      * 
      * @since 1.0.0
      */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    void set_min_level(kcenon::thread::log_level level);
-#else
-    void set_min_level(logger_system::log_level level);
-#endif
+    void set_min_level(log_level level);
+    void set_level(log_level level) { set_min_level(level); }
     
     /**
      * @brief Get the minimum log level
@@ -371,11 +355,8 @@ public:
      * 
      * @since 1.0.0
      */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    kcenon::thread::log_level get_min_level() const;
-#else
-    logger_system::log_level get_min_level() const;
-#endif
+    log_level get_min_level() const;
+    log_level get_level() const { return get_min_level(); }
     
     /**
      * @brief Start the logger (for async mode)
@@ -488,17 +469,18 @@ public:
      */
     base_writer* get_writer(const std::string& name);
     
-    /**
-     * @brief Set global filter
-     * @param filter Filter to apply to all logs
-     */
-    void set_filter(std::unique_ptr<log_filter> filter);
-    
-    /**
-     * @brief Get the log router for configuration
-     * @return Reference to the log router
-     */
-    log_router& get_router();
+    // TODO: Implement filtering and routing system
+    // /**
+    //  * @brief Set global filter
+    //  * @param filter Filter to apply to all logs
+    //  */
+    // void set_filter(std::unique_ptr<log_filter> filter);
+    //
+    // /**
+    //  * @brief Get the log router for configuration
+    //  * @return Reference to the log router
+    //  */
+    // log_router& get_router();
     
     // DI Support Methods
     
@@ -543,10 +525,11 @@ public:
     result_void enable_di(di::di_container_factory::container_type type =
                          di::di_container_factory::container_type::automatic);
     
-    // Monitoring Support Methods
-    
+#ifdef BUILD_WITH_COMMON_SYSTEM
+    // Monitoring Support Methods (Phase 2.2+)
+
     /**
-     * @brief Set a custom monitoring implementation (Phase 2.2)
+     * @brief Set a custom monitoring implementation
      * @param monitor Unique pointer to IMonitor implementation
      */
     void set_monitor(std::unique_ptr<common::interfaces::IMonitor> monitor);
@@ -572,29 +555,29 @@ public:
     bool is_monitoring_enabled() const;
 
     /**
-     * @brief Collect current metrics (Phase 2.2)
+     * @brief Collect current metrics
      * @return Result containing metrics snapshot or error
      */
     result<common::interfaces::metrics_snapshot> collect_metrics() const;
-    
+
     /**
      * @brief Perform health check
      * @return Result containing health check result or error
      */
     result<health_status> check_health() const;
-    
+
     /**
      * @brief Reset monitoring metrics
      * @return result_void indicating success or error
      */
     result_void reset_monitoring_metrics();
-    
+
     /**
      * @brief Get the monitoring backend name
      * @return Name of the current monitoring backend
      */
     std::string get_monitoring_backend() const;
-    
+
     /**
      * @brief Record a custom metric
      * @param name Metric name
@@ -603,8 +586,10 @@ public:
      */
     void record_metric(const std::string& name, double value,
                       metric_type type = metric_type::gauge);
+#endif // BUILD_WITH_COMMON_SYSTEM
 
-    // IMonitorable interface implementation (Phase 2.2)
+#ifdef BUILD_WITH_COMMON_SYSTEM
+    // IMonitorable interface implementation (Phase 2.2+)
 
     /**
      * @brief Get monitoring data (IMonitorable interface)
@@ -632,6 +617,7 @@ public:
      * monitoring system, typically "logger_system::logger".
      */
     std::string get_component_name() const override;
+#endif // BUILD_WITH_COMMON_SYSTEM
 
 private:
     class impl;
@@ -641,8 +627,10 @@ private:
     di::di_container_interface* external_di_container_ = nullptr;
     std::unique_ptr<di::di_container_interface> internal_di_container_;
 
-    // Monitoring support member (Phase 2.2)
+#ifdef BUILD_WITH_COMMON_SYSTEM
+    // Monitoring support member (Phase 2.2+)
     std::unique_ptr<common::interfaces::IMonitor> monitor_;
+#endif
 };
 
 } // namespace kcenon::logger

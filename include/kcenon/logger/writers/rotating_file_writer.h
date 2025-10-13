@@ -11,6 +11,7 @@ All rights reserved.
 #include <chrono>
 #include <iomanip>
 #include <sstream>
+#include <vector>
 
 namespace kcenon::logger {
 

@@ -249,7 +249,11 @@ struct logger_config {
     static logger_config debug_config() {
         logger_config config;
         config.async = false;  // Synchronous for immediate output
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
         config.min_level = kcenon::thread::log_level::trace;
+#else
+        config.min_level = logger_system::log_level::trace;
+#endif
         config.enable_metrics = true;
         config.enable_crash_handler = true;
         config.enable_color_output = true;
@@ -266,7 +270,11 @@ struct logger_config {
         logger_config config;
         config.async = true;
         config.buffer_size = 16384;
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
         config.min_level = kcenon::thread::log_level::warning;
+#else
+        config.min_level = logger_system::log_level::warn;
+#endif
         config.enable_metrics = true;
         config.enable_crash_handler = true;
         config.enable_color_output = false;
