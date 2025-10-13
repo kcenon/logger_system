@@ -72,12 +72,15 @@ All rights reserved.
 #include "logger.h"
 #include "../writers/base_writer.h"
 #include "../writers/batch_writer.h"
-#include "../filters/log_filter.h"
+// TODO: Implement filtering system
+// #include "../filters/log_filter.h"
 #include "../interfaces/log_formatter_interface.h"
 #include "di/di_container_interface.h"
 
 // Use common_system interfaces (Phase 2.2.4)
-#include <kcenon/common/interfaces/monitoring_interface.h>
+#ifdef BUILD_WITH_COMMON_SYSTEM
+    #include <kcenon/common/interfaces/monitoring_interface.h>
+#endif
 
 #include <memory>
 #include <vector>
@@ -194,22 +197,26 @@ public:
      * @brief Set minimum log level
      * @param level Minimum level to log
      * @return Reference to builder for chaining
-     * 
+     *
      * @details Sets the threshold for message logging. Messages below this level
      * are discarded at the earliest opportunity for maximum performance.
-     * 
+     *
      * @example
      * @code
      * // Production: only important messages
      * builder.with_min_level(log_level::warning);
-     * 
+     *
      * // Development: all messages
      * builder.with_min_level(log_level::trace);
      * @endcode
-     * 
+     *
      * @since 1.0.0
      */
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
     logger_builder& with_min_level(kcenon::thread::log_level level) {
+#else
+    logger_builder& with_min_level(logger_system::log_level level) {
+#endif
         config_.min_level = level;
         return *this;
     }
@@ -350,15 +357,18 @@ public:
         return *this;
     }
     
+    // TODO: Implement filtering system
     /**
      * @brief Add a filter to the logger
      * @param filter Filter instance
      * @return Reference to builder for chaining
      */
+    /*
     logger_builder& add_filter(std::unique_ptr<log_filter> filter) {
         filters_.push_back(std::move(filter));
         return *this;
     }
+    */
     
     /**
      * @brief Set formatter for the logger
@@ -397,24 +407,18 @@ public:
      * @since 1.0.0
      */
     logger_builder& use_template(const std::string& name) {
-        // TODO: Re-enable when strategy pattern is implemented
-        // auto strategy = config_strategy_factory::create_template(name);
-        // if (strategy) {
-        //     apply_strategy(std::move(strategy));
-        // } else {
-            // Use built-in templates
-            if (name == "high_performance") {
-                config_ = logger_config::high_performance();
-            } else if (name == "low_latency") {
-                config_ = logger_config::low_latency();
-            } else if (name == "debug") {
-                config_ = logger_config::debug_config();
-            } else if (name == "production") {
-                config_ = logger_config::production();
-            } else {
-                config_ = logger_config::default_config();
-            }
-        // }
+        // Use built-in logger_config templates
+        if (name == "high_performance") {
+            config_ = logger_config::high_performance();
+        } else if (name == "low_latency") {
+            config_ = logger_config::low_latency();
+        } else if (name == "debug") {
+            config_ = logger_config::debug_config();
+        } else if (name == "production") {
+            config_ = logger_config::production();
+        } else {
+            config_ = logger_config::default_config();
+        }
         return *this;
     }
     
@@ -452,7 +456,7 @@ public:
     }
     */
     
-    // TODO: Re-enable when configuration templates are implemented
+    // TODO: Re-enable when configuration_template enum is implemented
     /*
     logger_builder& apply_template(kcenon::logger::configuration_template template_type) {
         auto template_config = kcenon::logger::get_template_config(template_type);
@@ -526,27 +530,38 @@ public:
 
         if (level) {
             std::string level_str(level);
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
             if (level_str == "trace") config_.min_level = kcenon::thread::log_level::trace;
             else if (level_str == "debug") config_.min_level = kcenon::thread::log_level::debug;
             else if (level_str == "info") config_.min_level = kcenon::thread::log_level::info;
             else if (level_str == "warn") config_.min_level = kcenon::thread::log_level::warning;
             else if (level_str == "error") config_.min_level = kcenon::thread::log_level::error;
             else if (level_str == "fatal") config_.min_level = kcenon::thread::log_level::error; // Note: fatal mapped to error
+#else
+            if (level_str == "trace") config_.min_level = logger_system::log_level::trace;
+            else if (level_str == "debug") config_.min_level = logger_system::log_level::debug;
+            else if (level_str == "info") config_.min_level = logger_system::log_level::info;
+            else if (level_str == "warn") config_.min_level = logger_system::log_level::warn;
+            else if (level_str == "error") config_.min_level = logger_system::log_level::error;
+            else if (level_str == "fatal") config_.min_level = logger_system::log_level::fatal;
+#endif
         }
 
         return *this;
     }
-    
+
     /**
      * @brief Set monitoring interface (Phase 2.2.4)
      * @param monitor IMonitor implementation from common_system
      * @return Reference to builder for chaining
      */
+#ifdef BUILD_WITH_COMMON_SYSTEM
     logger_builder& with_monitoring(std::shared_ptr<common::interfaces::IMonitor> monitor) {
         monitor_ = monitor;
         config_.enable_metrics = true;
         return *this;
     }
+#endif
     
     /**
      * @brief Set health check interval
@@ -558,27 +573,20 @@ public:
         return *this;
     }
     
-    /**
-     * @brief Set DI container
-     * @param container DI container implementation
-     * @return Reference to builder for chaining
-     */
+    // TODO: Re-enable when DI pattern is fully implemented
+    /*
     template<typename T>
     logger_builder& with_di_container(std::shared_ptr<di_container_interface<T>> container) {
         // Store for later use
         // Note: Implementation would need to handle type erasure or specific container type
         return *this;
     }
-    
-    /**
-     * @brief Add writer from DI container
-     * @param name Writer name to resolve from DI
-     * @return Reference to builder for chaining
-     */
+
     logger_builder& with_writer_from_di(const std::string& name) {
         // Implementation would resolve from DI container
         return *this;
     }
+    */
     
     /**
      * @brief Set error handler
@@ -600,7 +608,7 @@ public:
         config_.enable_source_location = true;
         return *this;
     }
-    
+
     // TODO: Re-enable when strategy pattern is implemented
     /*
     logger_builder& clear_strategies() {
@@ -608,7 +616,7 @@ public:
         return *this;
     }
     */
-    
+
     /**
      * @brief Build the logger with validation
      * @return Result containing the logger or error
@@ -706,8 +714,10 @@ public:
                 }
             }
         }
-        
-        // Add filters
+
+        // TODO: Implement filtering system
+        // Filter application disabled until log_filter is implemented
+        /*
         if (!filters_.empty()) {
             // Create composite filter if multiple filters
             if (filters_.size() == 1) {
@@ -720,15 +730,17 @@ public:
                 logger_instance->set_filter(std::move(composite));
             }
         }
-        
+        */
+
         // Start logger if async
         if (config_.async) {
             logger_instance->start();
         }
-        
+
         // Store configuration in logger (if we add a config getter)
         built_config_ = config_;
-        
+
+        // Return logger instance - move into result
         return std::move(logger_instance);
     }
     
@@ -751,12 +763,15 @@ public:
 private:
     logger_config config_;
     std::vector<std::pair<std::string, std::unique_ptr<base_writer>>> writers_;
-    std::vector<std::unique_ptr<log_filter>> filters_;
+    // TODO: Implement filtering system
+    // std::vector<std::unique_ptr<log_filter>> filters_;
     std::unique_ptr<log_formatter_interface> formatter_;
     // TODO: Re-enable when strategy pattern is implemented
     // std::vector<std::unique_ptr<config_strategy_interface>> strategies_;
     mutable logger_config built_config_;  // Store last built configuration
+#ifdef BUILD_WITH_COMMON_SYSTEM
     std::shared_ptr<common::interfaces::IMonitor> monitor_;  // Phase 2.2.4
+#endif
     std::chrono::milliseconds health_check_interval_{1000};
     std::function<void(const logger_error_code&)> error_handler_;
 };

@@ -15,21 +15,25 @@
 #include <thread>
 #include <chrono>
 #include <iomanip>
+#include <mutex>
+#include <unordered_map>
 
 using namespace kcenon::logger;
-using namespace kcenon::common::interfaces;
+namespace ci = common::interfaces;
 
 /**
  * @brief Aggregating monitor that collects metrics from multiple sources
  */
-class aggregating_monitor : public IMonitor, public IMonitorProvider {
+class aggregating_monitor : public ci::IMonitor,
+                            public ci::IMonitorProvider,
+                            public std::enable_shared_from_this<aggregating_monitor> {
 private:
-    std::vector<std::shared_ptr<IMonitorable>> monitored_components_;
+    std::vector<std::shared_ptr<ci::IMonitorable>> monitored_components_;
     std::unordered_map<std::string, double> aggregated_metrics_;
     mutable std::mutex mutex_;
 
 public:
-    void register_component(std::shared_ptr<IMonitorable> component) {
+    void register_component(std::shared_ptr<ci::IMonitorable> component) {
         std::lock_guard<std::mutex> lock(mutex_);
         monitored_components_.push_back(component);
         std::cout << "[AggregatingMonitor] Registered component: "
@@ -42,7 +46,7 @@ public:
     {
         std::lock_guard<std::mutex> lock(mutex_);
         aggregated_metrics_[name] = value;
-        return common::VoidResult::success();
+        return common::ok();
     }
 
     common::VoidResult record_metric(
@@ -57,10 +61,10 @@ public:
         return record_metric(tagged_name, value);
     }
 
-    common::Result<metrics_snapshot> get_metrics() override {
+    common::Result<ci::metrics_snapshot> get_metrics() override {
         std::lock_guard<std::mutex> lock(mutex_);
 
-        metrics_snapshot snapshot;
+        ci::metrics_snapshot snapshot;
         snapshot.source_id = "aggregating_monitor";
         snapshot.capture_time = std::chrono::system_clock::now();
 
@@ -72,56 +76,69 @@ public:
         // Collect metrics from all registered components
         for (const auto& component : monitored_components_) {
             auto comp_data = component->get_monitoring_data();
-            if (comp_data) {
-                for (const auto& metric : comp_data.value().metrics) {
+            if (common::is_ok(comp_data)) {
+                const auto& component_metrics = common::get_value(comp_data);
+                for (const auto& metric : component_metrics.metrics) {
                     snapshot.metrics.push_back(metric);
                 }
+            } else {
+                snapshot.add_metric("component_error_" + component->get_component_name(), 1.0);
             }
         }
 
-        return common::Result<metrics_snapshot>::success(std::move(snapshot));
+        return common::Result<ci::metrics_snapshot>::ok(std::move(snapshot));
     }
 
-    common::Result<health_check_result> check_health() override {
+    common::Result<ci::health_check_result> check_health() override {
         std::lock_guard<std::mutex> lock(mutex_);
 
-        health_check_result result;
+        ci::health_check_result result;
         result.timestamp = std::chrono::system_clock::now();
-        result.status = health_status::healthy;
+        result.status = ci::health_status::healthy;
         result.message = "Aggregating monitor operational";
 
         // Check health of all components
         for (const auto& component : monitored_components_) {
             auto comp_health = component->health_check();
-            if (comp_health) {
-                dependency_health dep;
-                dep.name = component->get_component_name();
-                dep.status = comp_health.value().status;
-                result.dependencies.push_back(dep);
+            const auto component_name = component->get_component_name();
 
-                // Degrade overall status if any component is unhealthy
-                if (comp_health.value().status != health_status::healthy) {
-                    result.status = health_status::degraded;
+            if (common::is_ok(comp_health)) {
+                const auto& component_result = common::get_value(comp_health);
+                result.metadata["component_status:" + component_name] = ci::to_string(component_result.status);
+
+                if (component_result.status == ci::health_status::unhealthy) {
+                    result.status = ci::health_status::unhealthy;
+                    result.message = "One or more components unhealthy";
+                } else if (component_result.status == ci::health_status::degraded &&
+                           result.status == ci::health_status::healthy) {
+                    result.status = ci::health_status::degraded;
                     result.message = "One or more components degraded";
+                }
+            } else {
+                const auto& error = common::get_error(comp_health);
+                result.metadata["component_status:" + component_name] = "error:" + error.message;
+                if (result.status == ci::health_status::healthy) {
+                    result.status = ci::health_status::degraded;
+                    result.message = "Component health check failed";
                 }
             }
         }
 
-        return common::Result<health_check_result>::success(std::move(result));
+        return common::Result<ci::health_check_result>::ok(std::move(result));
     }
 
     common::VoidResult reset() override {
         std::lock_guard<std::mutex> lock(mutex_);
         aggregated_metrics_.clear();
-        return common::VoidResult::success();
+        return common::ok();
     }
 
     // IMonitorProvider implementation
-    std::shared_ptr<IMonitor> get_monitor() override {
+    std::shared_ptr<ci::IMonitor> get_monitor() override {
         return shared_from_this();
     }
 
-    std::shared_ptr<IMonitor> create_monitor(const std::string& name) override {
+    std::shared_ptr<ci::IMonitor> create_monitor(const std::string& name) override {
         // For this example, return self
         return shared_from_this();
     }
@@ -135,7 +152,7 @@ public:
 /**
  * @brief Print metrics snapshot in formatted way
  */
-void print_metrics_snapshot(const metrics_snapshot& snapshot) {
+void print_metrics_snapshot(const ci::metrics_snapshot& snapshot) {
     std::cout << "\n--- Metrics Snapshot ---" << std::endl;
     std::cout << "Source: " << snapshot.source_id << std::endl;
     std::cout << "Captured at: "
@@ -152,16 +169,18 @@ void print_metrics_snapshot(const metrics_snapshot& snapshot) {
 /**
  * @brief Print health check result
  */
-void print_health_result(const health_check_result& health) {
+void print_health_result(const ci::health_check_result& health) {
     std::cout << "\n--- Health Check ---" << std::endl;
-    std::cout << "Status: " << to_string(health.status) << std::endl;
+    std::cout << "Status: " << ci::to_string(health.status) << std::endl;
     std::cout << "Message: " << health.message << std::endl;
 
-    if (!health.dependencies.empty()) {
-        std::cout << "Dependencies:" << std::endl;
-        for (const auto& dep : health.dependencies) {
-            std::cout << "  - " << dep.name << ": "
-                      << to_string(dep.status) << std::endl;
+    if (!health.metadata.empty()) {
+        std::cout << "Component Status:" << std::endl;
+        for (const auto& [key, value] : health.metadata) {
+            if (key.rfind("component_status:", 0) == 0) {
+                std::cout << "  - " << key.substr(std::string("component_status:").size())
+                          << ": " << value << std::endl;
+            }
         }
     }
 
@@ -187,10 +206,10 @@ void example_1_basic_integration() {
         return;
     }
 
-    auto logger_instance = std::move(logger_result.value());
+    auto logger_instance = std::shared_ptr<logger>(std::move(logger_result.value()));
 
     // Register logger as monitored component
-    monitor->register_component(logger_instance);
+    monitor->register_component(std::static_pointer_cast<ci::IMonitorable>(logger_instance));
 
     // Perform logging operations
     for (int i = 0; i < 5; ++i) {
@@ -200,14 +219,14 @@ void example_1_basic_integration() {
 
     // Get aggregated metrics
     auto metrics = monitor->get_metrics();
-    if (metrics) {
-        print_metrics_snapshot(metrics.value());
+    if (common::is_ok(metrics)) {
+        print_metrics_snapshot(common::get_value(metrics));
     }
 
     // Check aggregated health
     auto health = monitor->check_health();
-    if (health) {
-        print_health_result(health.value());
+    if (common::is_ok(health)) {
+        print_health_result(common::get_value(health));
     }
 }
 
@@ -235,12 +254,12 @@ void example_2_multiple_loggers() {
         return;
     }
 
-    auto logger1 = std::move(logger1_result.value());
-    auto logger2 = std::move(logger2_result.value());
+    auto logger1 = std::shared_ptr<logger>(std::move(logger1_result.value()));
+    auto logger2 = std::shared_ptr<logger>(std::move(logger2_result.value()));
 
     // Register both loggers
-    monitor->register_component(logger1);
-    monitor->register_component(logger2);
+    monitor->register_component(std::static_pointer_cast<ci::IMonitorable>(logger1));
+    monitor->register_component(std::static_pointer_cast<ci::IMonitorable>(logger2));
 
     // Both loggers use the same monitor
     logger1->log(log_level::info, "Message from logger 1");
@@ -252,9 +271,9 @@ void example_2_multiple_loggers() {
 
     // Get combined metrics
     auto metrics = monitor->get_metrics();
-    if (metrics) {
+    if (common::is_ok(metrics)) {
         std::cout << "Combined metrics from all loggers:" << std::endl;
-        print_metrics_snapshot(metrics.value());
+        print_metrics_snapshot(common::get_value(metrics));
     }
 }
 
@@ -273,10 +292,10 @@ void example_3_imonitorable_interface() {
 
     if (!logger_result) return;
 
-    auto logger_instance = std::move(logger_result.value());
+    auto logger_instance = std::shared_ptr<logger>(std::move(logger_result.value()));
 
     // Cast to IMonitorable to demonstrate interface usage
-    if (auto monitorable = std::dynamic_pointer_cast<IMonitorable>(logger_instance)) {
+    if (auto monitorable = std::dynamic_pointer_cast<ci::IMonitorable>(logger_instance)) {
         std::cout << "Logger component name: "
                   << monitorable->get_component_name() << std::endl;
 
@@ -286,16 +305,16 @@ void example_3_imonitorable_interface() {
 
         // Get monitoring data directly from logger
         auto data = monitorable->get_monitoring_data();
-        if (data) {
+        if (common::is_ok(data)) {
             std::cout << "\nDirect monitoring data from logger:" << std::endl;
-            print_metrics_snapshot(data.value());
+            print_metrics_snapshot(common::get_value(data));
         }
 
         // Health check directly from logger
         auto health = monitorable->health_check();
-        if (health) {
+        if (common::is_ok(health)) {
             std::cout << "\nDirect health check from logger:" << std::endl;
-            print_health_result(health.value());
+            print_health_result(common::get_value(health));
         }
     }
 }
@@ -309,7 +328,7 @@ void example_4_monitoring_system_simulation() {
     std::cout << "      interact via interfaces without circular dependencies" << std::endl;
 
     // Simulate monitoring_system providing a monitor
-    std::shared_ptr<IMonitor> monitor = std::make_shared<aggregating_monitor>();
+    std::shared_ptr<ci::IMonitor> monitor = std::make_shared<aggregating_monitor>();
 
     // Logger receives monitor through DI
     auto logger_result = logger_builder()
@@ -319,7 +338,7 @@ void example_4_monitoring_system_simulation() {
 
     if (!logger_result) return;
 
-    auto logger_instance = std::move(logger_result.value());
+    auto logger_instance = std::shared_ptr<logger>(std::move(logger_result.value()));
 
     std::cout << "\nPhase 1: Logger operates and reports to monitor" << std::endl;
 
@@ -337,17 +356,17 @@ void example_4_monitoring_system_simulation() {
 
     // Monitoring system can query the monitor
     auto metrics = monitor->get_metrics();
-    if (metrics) {
+    if (common::is_ok(metrics)) {
         std::cout << "Monitoring system received metrics:" << std::endl;
-        print_metrics_snapshot(metrics.value());
+        print_metrics_snapshot(common::get_value(metrics));
     }
 
     // Monitoring system can check logger health through IMonitorable
-    if (auto monitorable = std::dynamic_pointer_cast<IMonitorable>(logger_instance)) {
+    if (auto monitorable = std::dynamic_pointer_cast<ci::IMonitorable>(logger_instance)) {
         auto health = monitorable->health_check();
-        if (health) {
+        if (common::is_ok(health)) {
             std::cout << "\nLogger health status:" << std::endl;
-            print_health_result(health.value());
+            print_health_result(common::get_value(health));
         }
     }
 

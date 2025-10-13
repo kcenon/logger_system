@@ -17,27 +17,40 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Checkout common_system dependency
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake ninja-build g++ lcov libfmt-dev libspdlog-dev
+        # GTest is now fetched via CMake FetchContent
+
+    - name: Checkout common_system (required dependency)
       uses: actions/checkout@v4
       with:
         repository: kcenon/common_system
         path: common_system
-        token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y cmake ninja-build g++ libgtest-dev libgmock-dev lcov
 
     - name: Configure CMake with coverage
       run: |
+        echo "=== Build Configuration ==="
+        echo "Build Mode: Debug with Coverage"
+        echo "Common System: Required (Phase 2.2+)"
+        echo "Directory structure:"
+        ls -la . | head -20
+        echo "==========================="
+
         cmake -B build -G Ninja \
           -DCMAKE_BUILD_TYPE=Debug \
-          -DCMAKE_CXX_FLAGS="--coverage -fprofile-arcs -ftest-coverage" \
-          -DCMAKE_C_FLAGS="--coverage -fprofile-arcs -ftest-coverage" \
-          -DBUILD_TESTS=ON \
-          -DLOGGER_STANDALONE_MODE=ON \
-          -DUSE_THREAD_SYSTEM=OFF
+          -DLOGGER_ENABLE_COVERAGE=ON \
+          -DBUILD_WITH_COMMON_SYSTEM=ON \
+          -DLOGGER_BUILD_TESTS=ON \
+          -DLOGGER_BUILD_INTEGRATION_TESTS=ON \
+          -DCMAKE_PREFIX_PATH="/usr" \
+          --debug-find || {
+            echo "::error::CMake configuration failed for coverage build"
+            cat build/CMakeFiles/CMakeOutput.log 2>/dev/null || echo "No output log"
+            cat build/CMakeFiles/CMakeError.log 2>/dev/null || echo "No error log found"
+            exit 1
+          }
 
     - name: Build with coverage
       run: cmake --build build --config Debug
@@ -45,9 +58,6 @@ jobs:
     - name: Run tests
       run: |
         cd build
-        if [ -f "bin/logger_unit" ]; then
-          ./bin/logger_unit --gtest_filter="*BasicTest*" || true
-        fi
         ctest -C Debug --output-on-failure --verbose || true
 
     - name: Generate coverage report

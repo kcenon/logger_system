@@ -47,7 +47,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/error_codes.h>
 #include "../interfaces/log_writer_interface.h"
 #include "../interfaces/log_entry.h"
-#include <kcenon/common/interfaces/monitoring_interface.h>
+
+// Conditional monitoring interface (Phase 2.2.5)
+#ifdef BUILD_WITH_COMMON_SYSTEM
+    #include <kcenon/common/interfaces/monitoring_interface.h>
+#endif
 
 /**
  * @file base_writer.h
@@ -125,8 +129,11 @@ namespace kcenon::logger {
  *
  * @since 1.0.0
  */
-class base_writer : public log_writer_interface,
-                    public common::interfaces::IMonitorable {
+class base_writer : public log_writer_interface
+#ifdef BUILD_WITH_COMMON_SYSTEM
+                  , public common::interfaces::IMonitorable
+#endif
+{
 public:
     virtual ~base_writer() = default;
     
@@ -254,6 +261,7 @@ public:
      */
     virtual bool is_healthy() const override { return true; }
 
+#ifdef BUILD_WITH_COMMON_SYSTEM
     // IMonitorable interface implementation (Phase 2.2.5)
 
     /**
@@ -295,6 +303,7 @@ public:
     virtual std::string get_component_name() const override {
         return "logger_writer::" + get_name();
     }
+#endif // BUILD_WITH_COMMON_SYSTEM
 
 protected:
     /**

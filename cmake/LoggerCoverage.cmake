@@ -3,6 +3,24 @@
 
 # Coverage options
 option(LOGGER_ENABLE_COVERAGE "Enable code coverage reporting" OFF)
+set(LOGGER_COVERAGE_TARGETS
+    basic_integration_test
+    thread_system_integration_test
+    monitoring_integration_test
+    version_compatibility_test
+    logger_min_level_threshold_test
+    logger_thread_safety_test
+    integration_tests
+    integration_test
+    stress_test
+    config_unit
+    di_container_test
+    crash_safety_test
+    monitoring_test
+    logger_test
+    overflow_policy_test
+    health_check_test
+)
 
 # Function to add coverage flags to a target
 function(logger_add_coverage target)
@@ -116,25 +134,19 @@ endfunction()
 macro(logger_enable_coverage_for_all)
     if(LOGGER_ENABLE_COVERAGE)
         # Add coverage to main library
-        if(TARGET logger_system)
-            logger_add_coverage(logger_system)
+        if(TARGET LoggerSystem)
+            logger_add_coverage(LoggerSystem)
         endif()
-        
-        if(TARGET logger)
-            logger_add_coverage(logger)
-        endif()
-        
-        # Add coverage to all test targets
+
+        # Add coverage to test executables
         if(BUILD_TESTS)
-            if(TARGET stress_test)
-                logger_add_coverage(stress_test)
-            endif()
-            if(TARGET integration_test)
-                logger_add_coverage(integration_test)
-            endif()
-            # Add more test targets as needed
+            foreach(_cov_target IN LISTS LOGGER_COVERAGE_TARGETS)
+                if(TARGET ${_cov_target})
+                    logger_add_coverage(${_cov_target})
+                endif()
+            endforeach()
         endif()
-        
+
         # Setup coverage target
         logger_setup_coverage_target()
     endif()

@@ -43,26 +43,34 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif __has_include(<common/patterns/result.h>)
 #include <common/patterns/result.h>
 #define KCENON_COMMON_RESULT_AVAILABLE 1
-#ifndef KCENON_COMMON_RESULT_FALLBACK_DEFINED
-#define KCENON_COMMON_RESULT_FALLBACK_DEFINED
+#endif
+
+#if defined(KCENON_COMMON_RESULT_AVAILABLE)
+#ifndef KCENON_COMMON_RESULT_SHIM_DEFINED
+#define KCENON_COMMON_RESULT_SHIM_DEFINED
+namespace common {
+namespace interfaces {
+} // namespace interfaces
+} // namespace common
 namespace kcenon {
 namespace common {
-using common::error_info;
+using ::common::error_info;
 template<typename T>
-using Result = common::Result<T>;
-using VoidResult = common::VoidResult;
-using common::ok;
-using common::error;
-using common::is_ok;
-using common::is_error;
-using common::get_value;
-using common::get_error;
+using Result = ::common::Result<T>;
+using VoidResult = ::common::VoidResult;
+namespace interfaces = ::common::interfaces;
+using ::common::ok;
+using ::common::error;
+using ::common::is_ok;
+using ::common::is_error;
+using ::common::get_value;
+using ::common::get_error;
 namespace error_codes {
-using namespace common::error_codes;
+using namespace ::common::error_codes;
 } // namespace error_codes
 } // namespace common
 } // namespace kcenon
-#endif // KCENON_COMMON_RESULT_FALLBACK_DEFINED
+#endif // KCENON_COMMON_RESULT_SHIM_DEFINED
 #else
 #ifndef KCENON_COMMON_RESULT_FALLBACK_DEFINED
 #define KCENON_COMMON_RESULT_FALLBACK_DEFINED
@@ -70,9 +78,21 @@ namespace kcenon {
 namespace common {
 
 struct error_info {
-    int code;
+    int code{};
     std::string message;
     std::string category;
+
+    error_info() = default;
+
+    error_info(int code_value, std::string message_value)
+        : code(code_value),
+          message(std::move(message_value)),
+          category() {}
+
+    error_info(int code_value, std::string message_value, std::string category_value)
+        : code(code_value),
+          message(std::move(message_value)),
+          category(std::move(category_value)) {}
 };
 
 inline error_info make_error_info(int code_value, std::string message_value, std::string category_value) {
@@ -404,17 +424,20 @@ inline std::string logger_error_to_string(logger_error_code code) {
 template<typename T>
 class result {
 public:
+    // Move constructor (works for all types)
     result(T value)
         : value_(common::ok<T>(std::move(value))) {}
 
-    result(const T& value)
+    // Copy constructor (only enabled for copyable types)
+    template<typename U = T>
+    result(const T& value, typename std::enable_if<std::is_copy_constructible<U>::value, int>::type = 0)
         : value_(common::ok<T>(value)) {}
 
     result(logger_error_code code, const std::string& msg = "")
-        : value_(common::error_info(
+        : value_(common::error_info{
               static_cast<int>(code),
               msg.empty() ? logger_error_to_string(code) : msg,
-              "logger_system")) {}
+              "logger_system"}) {}
 
     // Static factory method to avoid constructor ambiguity
     static result ok_value(const T& value) {
@@ -446,16 +469,18 @@ private:
 
 class result_void {
 public:
-    // Default constructor creates a success state (not error!)
-    result_void() : value_(std::monostate{}) {}
+    result_void()
+        : value_(common::ok()) {}
 
     explicit result_void(logger_error_code code, const std::string& msg = "")
-        : value_(common::error_info(
+        : value_(common::error_info{
               static_cast<int>(code),
               msg.empty() ? logger_error_to_string(code) : msg,
-              "logger_system")) {}
+              "logger_system"}) {}
 
-    static result_void success() { return result_void(); }
+    static result_void success() {
+        return result_void(common::ok());
+    }
 
     static result_void error(logger_error_code code, const std::string& msg = "") {
         return result_void(code, msg);
@@ -475,7 +500,10 @@ public:
     const common::VoidResult& raw() const { return value_; }
 
 private:
-    common::VoidResult value_{};
+    explicit result_void(common::VoidResult value)
+        : value_(std::move(value)) {}
+
+    common::VoidResult value_;
 };
 
 inline result_void make_logger_error(logger_error_code code, const std::string& message = "") {

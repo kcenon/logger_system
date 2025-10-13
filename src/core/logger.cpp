@@ -37,6 +37,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <vector>
 #include <chrono>
 #include <type_traits>
+#include <atomic>
 
 namespace kcenon::logger {
 
@@ -84,9 +85,9 @@ public:
     bool running_;
     bool metrics_enabled_;
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    kcenon::thread::log_level min_level_;
+    std::atomic<kcenon::thread::log_level> min_level_;
 #else
-    logger_system::log_level min_level_;
+    std::atomic<logger_system::log_level> min_level_;
 #endif
     std::vector<std::unique_ptr<base_writer>> writers_;
     std::mutex writers_mutex_;  // Protects writers_ vector from concurrent modification
@@ -143,31 +144,49 @@ result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
     return result_void::success();
 }
 
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-void logger::set_min_level(kcenon::thread::log_level level) {
-#else
-void logger::set_min_level(logger_system::log_level level) {
-#endif
-    if (pimpl_) {
-        pimpl_->min_level_ = level;
+void logger::add_writer(const std::string& /*name*/, std::unique_ptr<base_writer> writer) {
+    if (pimpl_ && writer) {
+        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
+        pimpl_->writers_.push_back(std::move(writer));
     }
 }
 
+result_void logger::clear_writers() {
+    if (pimpl_) {
+        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
+        pimpl_->writers_.clear();
+    }
+    return result_void::success();
+}
+
+#ifdef BUILD_WITH_COMMON_SYSTEM
+void logger::set_monitor(std::unique_ptr<common::interfaces::IMonitor> monitor) {
+    monitor_ = std::move(monitor);
+    if (monitor_) {
+        enable_metrics_collection(true);
+    }
+}
+#endif
+
+void logger::set_min_level(log_level level) {
+    if (pimpl_) {
+        pimpl_->min_level_.store(level);
+    }
+}
+
+log_level logger::get_min_level() const {
+    if (pimpl_) {
+        return pimpl_->min_level_.load();
+    }
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-kcenon::thread::log_level logger::get_min_level() const {
-    return pimpl_ ? pimpl_->min_level_ : kcenon::thread::log_level::info;
+    return kcenon::thread::log_level::info;
 #else
-logger_system::log_level logger::get_min_level() const {
-    return pimpl_ ? pimpl_->min_level_ : logger_system::log_level::info;
+    return logger_system::log_level::info;
 #endif
 }
 
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-void logger::log(kcenon::thread::log_level level, const std::string& message) {
-#else
-void logger::log(logger_system::log_level level, const std::string& message) {
-#endif
-    if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_)) {
+void logger::log(log_level level, const std::string& message) {
+    if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
         return;
     }
 
@@ -194,14 +213,12 @@ void logger::log(logger_system::log_level level, const std::string& message) {
     }
 }
 
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-void logger::log(kcenon::thread::log_level level, const std::string& message,
-                const std::string& file, int line, const std::string& function) {
-#else
-void logger::log(logger_system::log_level level, const std::string& message,
-                const std::string& file, int line, const std::string& function) {
-#endif
-    if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_)) {
+void logger::log(log_level level,
+                const std::string& message,
+                const std::string& file,
+                int line,
+                const std::string& function) {
+    if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
         return;
     }
 
@@ -228,12 +245,8 @@ void logger::log(logger_system::log_level level, const std::string& message,
     }
 }
 
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-bool logger::is_enabled(kcenon::thread::log_level level) const {
-#else
-bool logger::is_enabled(logger_system::log_level level) const {
-#endif
-    return pimpl_ && meets_threshold(level, pimpl_->min_level_);
+bool logger::is_enabled(log_level level) const {
+    return pimpl_ && meets_threshold(level, pimpl_->min_level_.load());
 }
 
 void logger::flush() {
@@ -282,6 +295,7 @@ result<logger_metrics> logger::get_current_metrics() const {
     return result<logger_metrics>::ok_value(metrics::g_logger_stats);
 }
 
+#ifdef BUILD_WITH_COMMON_SYSTEM
 // IMonitorable interface implementation (Phase 2.2)
 
 common::Result<common::interfaces::metrics_snapshot> logger::get_monitoring_data() {
@@ -392,5 +406,6 @@ common::Result<common::interfaces::health_check_result> logger::health_check() {
 std::string logger::get_component_name() const {
     return "logger_system::logger";
 }
+#endif // BUILD_WITH_COMMON_SYSTEM
 
 } // namespace kcenon::logger
