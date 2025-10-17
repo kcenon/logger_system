@@ -199,7 +199,7 @@ void example_production_setup() {
         .build();
 
     if (!result) {
-        std::cerr << "Failed to build logger: " << result.error().message << "\n";
+        std::cerr << "Failed to build logger: " << result.error_message() << "\n";
         return;
     }
 
@@ -208,7 +208,7 @@ void example_production_setup() {
 
     // Production logging examples
     log->log(log_level::info, "Service started");
-    log->log(log_level::warn, "Cache miss rate high");
+    log->log(log_level::warning, "Cache miss rate high");
     log->log(log_level::error, "Database connection timeout");
     log->log(log_level::critical, "Out of memory - terminating");
 
@@ -250,11 +250,11 @@ void example_error_handling() {
 
     // Generate logs
     log.log(log_level::info, "Info message");
-    log.log(log_level::warn, "Warning message");
+    log.log(log_level::warning, "Warning message");
     log.log(log_level::error, "Error message");
     log.log(log_level::critical, "Critical message 1");
     log.log(log_level::critical, "Critical message 2");
-    log.log(log_level::fatal, "Fatal message");
+    log.log(log_level::critical, "Fatal message");
 
     // Check statistics
     std::cout << "\nConfiguration:\n";
