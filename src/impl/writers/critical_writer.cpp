@@ -12,7 +12,10 @@ All rights reserved.
 #include <iomanip>
 #include <ctime>
 
-#ifdef __unix__
+#ifdef _WIN32
+#include <io.h>       // For _flushall()
+#include <stdio.h>    // For _flushall()
+#elif defined(__unix__) || defined(__APPLE__)
 #include <unistd.h>
 #include <fcntl.h>
 #endif
@@ -235,7 +238,17 @@ void critical_writer::write_to_wal(
 }
 
 void critical_writer::sync_file_descriptor() {
-#ifdef __unix__
+#ifdef _WIN32
+    // Windows: Use _commit() to flush file buffers to disk
+    // Note: std::ofstream doesn't expose HANDLE, so we flush the stream
+    // For a complete implementation, would need native Windows file handling
+    if (wal_stream_) {
+        wal_stream_->flush();
+    }
+    // Could use _flushall() to flush all open streams, but it's global
+    ::_flushall();
+#elif defined(__unix__) || defined(__APPLE__)
+    // POSIX: Use fsync() to synchronize file to disk
     // Get file descriptor from wrapped writer if it's a file writer
     // This is a simplified implementation - actual implementation would need
     // to query the wrapped writer for its file descriptor
@@ -250,13 +263,20 @@ void critical_writer::sync_file_descriptor() {
         // Note: std::ofstream doesn't expose fd, would need native file handling
     }
 #endif
-    // Windows would use _commit() or FlushFileBuffers()
 }
 
 void critical_writer::install_signal_handlers() {
     // Set global instance
     instance_.store(this);
 
+#ifdef _WIN32
+    // Windows: Use signal() API (less robust than POSIX sigaction)
+    original_sigterm_ = ::signal(SIGTERM, &critical_writer::signal_handler);
+    original_sigint_ = ::signal(SIGINT, &critical_writer::signal_handler);
+    original_sigabrt_ = ::signal(SIGABRT, &critical_writer::signal_handler);
+    // Note: SIGSEGV is not recommended to handle on Windows
+#elif defined(__unix__) || defined(__APPLE__)
+    // POSIX: Use sigaction for more reliable signal handling
     struct sigaction sa;
     sa.sa_handler = &critical_writer::signal_handler;
     sigemptyset(&sa.sa_mask);
@@ -267,14 +287,22 @@ void critical_writer::install_signal_handlers() {
     sigaction(SIGINT, &sa, &original_sigint_);
     sigaction(SIGSEGV, &sa, &original_sigsegv_);
     sigaction(SIGABRT, &sa, &original_sigabrt_);
+#endif
 }
 
 void critical_writer::restore_signal_handlers() {
-    // Restore original handlers
+#ifdef _WIN32
+    // Windows: Restore original handlers
+    if (original_sigterm_) ::signal(SIGTERM, original_sigterm_);
+    if (original_sigint_) ::signal(SIGINT, original_sigint_);
+    if (original_sigabrt_) ::signal(SIGABRT, original_sigabrt_);
+#elif defined(__unix__) || defined(__APPLE__)
+    // POSIX: Restore original handlers
     sigaction(SIGTERM, &original_sigterm_, nullptr);
     sigaction(SIGINT, &original_sigint_, nullptr);
     sigaction(SIGSEGV, &original_sigsegv_, nullptr);
     sigaction(SIGABRT, &original_sigabrt_, nullptr);
+#endif
 
     instance_.store(nullptr);
 }
@@ -296,7 +324,9 @@ void critical_writer::signal_handler(int signal) {
         switch (signal) {
             case SIGTERM: signal_name = "SIGTERM"; break;
             case SIGINT:  signal_name = "SIGINT"; break;
+#if defined(__unix__) || defined(__APPLE__)
             case SIGSEGV: signal_name = "SIGSEGV"; break;
+#endif
             case SIGABRT: signal_name = "SIGABRT"; break;
         }
 
@@ -320,11 +350,19 @@ void critical_writer::signal_handler(int signal) {
         std::cerr << "[critical_writer] Emergency flush failed\n" << std::flush;
     }
 
-    // For SIGSEGV and SIGABRT, restore original handler and re-raise
+#if defined(__unix__) || defined(__APPLE__)
+    // For SIGSEGV and SIGABRT, restore original handler and re-raise (POSIX only)
     if (signal == SIGSEGV || signal == SIGABRT) {
         writer->restore_signal_handlers();
         std::raise(signal);
     }
+#else
+    // Windows: For SIGABRT, restore and re-raise
+    if (signal == SIGABRT) {
+        writer->restore_signal_handlers();
+        std::raise(signal);
+    }
+#endif
 }
 
 // ============================================================================

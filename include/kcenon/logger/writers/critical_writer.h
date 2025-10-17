@@ -259,11 +259,18 @@ private:
     /// Global instance for signal handler (unfortunately needed for C signal API)
     static std::atomic<critical_writer*> instance_;
 
-    /// Original signal handlers
+#ifdef _WIN32
+    /// Original signal handlers (Windows)
+    void (*original_sigterm_)(int) = nullptr;
+    void (*original_sigint_)(int) = nullptr;
+    void (*original_sigabrt_)(int) = nullptr;
+#elif defined(__unix__) || defined(__APPLE__)
+    /// Original signal handlers (POSIX)
     struct sigaction original_sigterm_;
     struct sigaction original_sigint_;
     struct sigaction original_sigsegv_;
     struct sigaction original_sigabrt_;
+#endif
 };
 
 /**
