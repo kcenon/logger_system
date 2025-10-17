@@ -7,6 +7,15 @@ if(BUILD_SAMPLES)
     )
 endif()
 
+# Critical logging example - demonstrates critical log loss prevention mechanisms
+if(BUILD_SAMPLES)
+    add_executable(critical_logging_example critical_logging_example.cpp)
+    target_link_libraries(critical_logging_example PRIVATE LoggerSystem)
+    set_target_properties(critical_logging_example PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
+
 # Phase 4 DI Pattern examples - available when common_system integration is enabled and not in standalone mode
 if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
     # DI Pattern example
