@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['📖_20external_20resources_0',['📖 External Resources',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md795',1,'']]],
-  ['📖_20strong_20key_20files_20and_20their_20purpose_20strong_1',['📖 &lt;strong&gt;Key Files and Their Purpose&lt;/strong&gt;',['../index.html#autotoc_md30',1,'']]]
+  ['📈_20build_20time_20analysis_0',['📈 Build Time Analysis',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md94',1,'']]],
+  ['📈_20strong_20enterprise_20ready_20features_20strong_1',['📈 &lt;strong&gt;Enterprise-Ready Features&lt;/strong&gt;',['../index.html#autotoc_md14',1,'']]]
 ];

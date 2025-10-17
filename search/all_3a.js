@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🛡️_20strong_20production_20grade_20reliability_20strong_0',['🛡️ &lt;strong&gt;Production-Grade Reliability&lt;/strong&gt;',['../index.html#autotoc_md11',1,'']]]
+  ['🔮_20future_20roadmap_0',['🔮 Future Roadmap',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md236',1,'']]]
 ];

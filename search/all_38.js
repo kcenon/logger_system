@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['🚀_20build_20status_0',['🚀 Build Status',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md82',1,'']]],
-  ['🚀_20getting_20started_1',['🚀 Getting Started',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md227',1,'']]],
-  ['🚀_20quick_20navigation_2',['🚀 Quick Navigation',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md788',1,'']]],
-  ['🚀_20strong_20performance_20excellence_20strong_3',['🚀 &lt;strong&gt;Performance Excellence&lt;/strong&gt;',['../index.html#autotoc_md10',1,'']]]
+  ['🔥_20sanitizer_20results_0',['🔥 Sanitizer Results',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md93',1,'']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['📈_20build_20time_20analysis_0',['📈 Build Time Analysis',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md94',1,'']]],
-  ['📈_20strong_20enterprise_20ready_20features_20strong_1',['📈 &lt;strong&gt;Enterprise-Ready Features&lt;/strong&gt;',['../index.html#autotoc_md14',1,'']]]
+  ['💡_20key_20points_0',['💡 Key Points',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md491',1,'']]]
 ];

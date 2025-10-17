@@ -11,5 +11,6 @@ var searchData=
   ['phase_203_3a_20error_20handling_20preparation_20logger_5fsystem_8',['Phase 3: Error Handling Preparation - logger_system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html',1,'']]],
   ['phase_204_3a_20dependency_20injection_20pattern_20migration_20guide_9',['Phase 4: Dependency Injection Pattern Migration Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE4__DI__MIGRATION__GUIDE.html',1,'']]],
   ['practices_20guide_10',['Logger System Best Practices Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html',1,'']]],
-  ['preparation_20logger_5fsystem_11',['Phase 3: Error Handling Preparation - logger_system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html',1,'']]]
+  ['preparation_20logger_5fsystem_11',['Phase 3: Error Handling Preparation - logger_system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html',1,'']]],
+  ['prevention_20guide_12',['Critical Log Loss Prevention Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION.html',1,'']]]
 ];

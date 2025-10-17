@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📝_20dependency_20status_0',['📝 Dependency Status',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md99',1,'']]]
+  ['📋_20project_20roles_20responsibilities_0',['📋 Project Roles &amp; Responsibilities',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md192',1,'']]]
 ];

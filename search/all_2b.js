@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📅_20release_20history_0',['📅 Release History',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md104',1,'']]]
+  ['🐛_20troubleshooting_0',['🐛 Troubleshooting',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md486',1,'']]]
 ];

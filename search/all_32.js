@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['🔄_20ci_20cd_20pipeline_20health_0',['🔄 CI/CD Pipeline Health',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md101',1,'']]],
-  ['🔄_20dependency_20flow_20interface_20contracts_1',['🔄 Dependency Flow &amp; Interface Contracts',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md212',1,'']]],
-  ['🔄_20evolution_3a_20monolithic_20→_20modular_2',['🔄 Evolution: Monolithic → Modular',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md223',1,'']]],
-  ['🔄_20strong_20design_20patterns_20implementation_20strong_3',['🔄 &lt;strong&gt;Design Patterns Implementation&lt;/strong&gt;',['../index.html#autotoc_md27',1,'']]]
+  ['📖_20external_20resources_0',['📖 External Resources',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md892',1,'']]],
+  ['📖_20strong_20key_20files_20and_20their_20purpose_20strong_1',['📖 &lt;strong&gt;Key Files and Their Purpose&lt;/strong&gt;',['../index.html#autotoc_md30',1,'']]]
 ];
