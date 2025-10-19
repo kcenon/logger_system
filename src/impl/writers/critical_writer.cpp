@@ -99,6 +99,20 @@ result_void critical_writer::write(
     const std::chrono::system_clock::time_point& timestamp
 )
 {
+    // Check if we're in emergency shutdown (signal received)
+    if (shutting_down_.load(std::memory_order_acquire)) {
+        // In shutdown mode, all writes become critical to ensure they're flushed
+        // before process termination
+        std::lock_guard<std::mutex> lock(critical_mutex_);
+
+        auto result = wrapped_writer_->write(level, message, file, line, function, timestamp);
+        if (result) {
+            wrapped_writer_->flush();
+            stats_.total_flushes.fetch_add(1, std::memory_order_relaxed);
+        }
+        return result;
+    }
+
     // Check if this is a critical level
     const bool is_critical = is_critical_level(level);
 
@@ -308,52 +322,75 @@ void critical_writer::restore_signal_handlers() {
 }
 
 void critical_writer::signal_handler(int signal) {
-    // Get global instance
-    critical_writer* writer = instance_.load();
+    // IMPORTANT: This is a signal handler - only async-signal-safe operations allowed!
+    // See POSIX.1-2008 or https://man7.org/linux/man-pages/man7/signal-safety.7.html
+
+    // Get global instance (atomic operation - safe)
+    critical_writer* writer = instance_.load(std::memory_order_acquire);
     if (!writer) {
         return;
     }
 
-    // Update statistics
+    // Update statistics (atomic operation - safe)
     writer->stats_.signal_handler_invocations.fetch_add(1, std::memory_order_relaxed);
 
-    // Emergency flush - do not allocate memory or throw exceptions
-    try {
-        // Write emergency message to stderr
-        const char* signal_name = "UNKNOWN";
-        switch (signal) {
-            case SIGTERM: signal_name = "SIGTERM"; break;
-            case SIGINT:  signal_name = "SIGINT"; break;
+    // Set shutdown flag (atomic operation - safe)
+    // This allows other threads to detect signal and perform graceful shutdown
+    writer->shutting_down_.store(true, std::memory_order_release);
+
+    // Write emergency message using async-signal-safe write() syscall
+    const char* msg = nullptr;
+    size_t msg_len = 0;
+
+    switch (signal) {
+        case SIGTERM:
+            msg = "\n[critical_writer] SIGTERM received, shutting down...\n";
+            msg_len = 55;
+            break;
+        case SIGINT:
+            msg = "\n[critical_writer] SIGINT received, shutting down...\n";
+            msg_len = 54;
+            break;
 #if defined(__unix__) || defined(__APPLE__)
-            case SIGSEGV: signal_name = "SIGSEGV"; break;
+        case SIGSEGV:
+            msg = "\n[critical_writer] SIGSEGV received, emergency shutdown...\n";
+            msg_len = 61;
+            break;
 #endif
-            case SIGABRT: signal_name = "SIGABRT"; break;
-        }
-
-        std::cerr << "\n[critical_writer] Signal " << signal_name
-                  << " received, performing emergency flush...\n" << std::flush;
-
-        // Flush wrapped writer
-        if (writer->wrapped_writer_) {
-            writer->wrapped_writer_->flush();
-        }
-
-        // Flush WAL
-        if (writer->wal_stream_ && writer->wal_stream_->is_open()) {
-            writer->wal_stream_->flush();
-        }
-
-        std::cerr << "[critical_writer] Emergency flush completed\n" << std::flush;
-
-    } catch (...) {
-        // Cannot do anything in signal handler
-        std::cerr << "[critical_writer] Emergency flush failed\n" << std::flush;
+        case SIGABRT:
+            msg = "\n[critical_writer] SIGABRT received, emergency shutdown...\n";
+            msg_len = 61;
+            break;
+        default:
+            msg = "\n[critical_writer] Signal received, shutting down...\n";
+            msg_len = 55;
+            break;
     }
 
+    // Use async-signal-safe write() directly to stderr (POSIX-safe)
 #if defined(__unix__) || defined(__APPLE__)
-    // For SIGSEGV and SIGABRT, restore original handler and re-raise (POSIX only)
+    if (msg && msg_len > 0) {
+        ::write(STDERR_FILENO, msg, msg_len);
+    }
+#elif defined(_WIN32)
+    // Windows doesn't have strict async-signal-safe requirements
+    // But we still avoid complex operations
+    if (msg && msg_len > 0) {
+        ::write(_fileno(stderr), msg, static_cast<unsigned int>(msg_len));
+    }
+#endif
+
+    // NOTE: We do NOT call flush() here as it acquires mutex (signal-unsafe!)
+    // The shutting_down_ flag will be checked by other threads to perform
+    // graceful shutdown and flush operations in a safe context.
+
+#if defined(__unix__) || defined(__APPLE__)
+    // For fatal signals (SIGSEGV, SIGABRT), restore original handler and re-raise
+    // This allows the default action (core dump) to proceed
     if (signal == SIGSEGV || signal == SIGABRT) {
+        // Restore original handlers (sigaction is async-signal-safe on most systems)
         writer->restore_signal_handlers();
+        // Re-raise the signal to trigger default action
         std::raise(signal);
     }
 #else

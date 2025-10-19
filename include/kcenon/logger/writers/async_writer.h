@@ -22,6 +22,8 @@ All rights reserved.
 #include <condition_variable>
 #include <atomic>
 #include <memory>
+#include <future>
+#include <iostream>
 
 namespace kcenon::logger {
 
@@ -85,20 +87,47 @@ public:
         if (!running_.exchange(false)) {
             return; // Already stopped
         }
-        
+
         // Signal the worker thread to stop
         {
             std::lock_guard<std::mutex> lock(queue_mutex_);
-            queue_cv_.notify_one();
+            queue_cv_.notify_all();  // Use notify_all() to ensure signal is received
         }
-        
-        // Wait for the worker thread to finish
+
+        // Wait for the worker thread to finish with timeout to prevent deadlock
         if (worker_thread_.joinable()) {
-            worker_thread_.join();
+            // Use a future to implement timeout for join()
+            auto join_future = std::async(std::launch::async, [this]() {
+                if (worker_thread_.joinable()) {
+                    worker_thread_.join();
+                }
+            });
+
+            // Wait for up to 5 seconds for the thread to finish
+            auto status = join_future.wait_for(std::chrono::seconds(5));
+
+            if (status == std::future_status::timeout) {
+                // Thread didn't finish in time - this is a serious issue
+                // Log warning and detach to prevent undefined behavior
+                std::cerr << "[async_writer] Warning: Worker thread did not stop within 5 seconds. "
+                          << "Detaching thread to prevent deadlock. Some messages may be lost.\n";
+
+                // Detach the thread to avoid std::terminate() in thread destructor
+                // Note: This means the thread will continue running in background
+                if (worker_thread_.joinable()) {
+                    worker_thread_.detach();
+                }
+            }
         }
-        
-        // Process any remaining messages
-        flush_remaining();
+
+        // Process any remaining messages (only if thread was joined successfully)
+        // If thread was detached, this might race with the background thread
+        try {
+            flush_remaining();
+        } catch (const std::exception& e) {
+            std::cerr << "[async_writer] Error flushing remaining messages: "
+                      << e.what() << "\n";
+        }
     }
     
     /**
