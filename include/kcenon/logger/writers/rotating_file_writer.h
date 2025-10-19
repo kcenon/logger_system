@@ -1,142 +1,88 @@
 #pragma once
 
-/*****************************************************************************
-BSD 3-Clause License
-
-Copyright (c) 2025, 🍀☀🌕🌥 🌊
-All rights reserved.
-*****************************************************************************/
-
-#include "file_writer.h"
+#include "base_writer.h"
+#include <filesystem>
+#include <fstream>
 #include <chrono>
-#include <iomanip>
-#include <sstream>
-#include <vector>
+#include <mutex>
 
 namespace kcenon::logger {
 
-/**
- * @class rotating_file_writer
- * @brief File writer with rotation support based on size or time
- */
-class rotating_file_writer : public file_writer {
-public:
-    /**
-     * @enum rotation_type
-     * @brief Type of rotation strategy
-     */
-    enum class rotation_type {
-        size,       // Rotate based on file size
-        daily,      // Rotate daily
-        hourly,     // Rotate hourly
-        size_and_time  // Rotate on size or time, whichever comes first
-    };
-    
-    /**
-     * @brief Constructor for size-based rotation
-     * @param filename Base filename (will be appended with number/date)
-     * @param max_size Maximum file size in bytes before rotation
-     * @param max_files Maximum number of backup files to keep
-     */
-    rotating_file_writer(const std::string& filename,
-                        size_t max_size,
-                        size_t max_files = 10);
-    
-    /**
-     * @brief Constructor for time-based rotation
-     * @param filename Base filename (will be appended with date/time)
-     * @param type Rotation type (daily or hourly)
-     * @param max_files Maximum number of backup files to keep
-     */
-    rotating_file_writer(const std::string& filename,
-                        rotation_type type,
-                        size_t max_files = 10);
-    
-    /**
-     * @brief Constructor for combined rotation
-     * @param filename Base filename
-     * @param type Must be size_and_time
-     * @param max_size Maximum file size
-     * @param max_files Maximum number of backup files
-     */
-    rotating_file_writer(const std::string& filename,
-                        rotation_type type,
-                        size_t max_size,
-                        size_t max_files = 10);
-    
-    /**
-     * @brief Destructor
-     */
-    ~rotating_file_writer() override = default;
-    
-    /**
-     * @brief Write with rotation check
-     */
-    result_void write(logger_system::log_level level,
-                      const std::string& message,
-                      const std::string& file,
-                      int line,
-                      const std::string& function,
-                      const std::chrono::system_clock::time_point& timestamp) override;
-    
-    /**
-     * @brief Get writer name
-     */
-    std::string get_name() const override { return "rotating_file"; }
-    
-    /**
-     * @brief Force rotation
-     */
-    void rotate();
-    
-protected:
-    /**
-     * @brief Check if rotation is needed
-     */
-    bool should_rotate() const;
-    
-    /**
-     * @brief Perform rotation
-     */
-    void perform_rotation();
-    
-    /**
-     * @brief Generate rotated filename
-     */
-    std::string generate_rotated_filename(int index = -1) const;
-    
-    /**
-     * @brief Clean up old files
-     */
-    void cleanup_old_files();
-    
-    /**
-     * @brief Get list of existing backup files
-     */
-    std::vector<std::string> get_backup_files() const;
-    
-    /**
-     * @brief Check if time-based rotation is needed
-     */
-    bool should_rotate_by_time() const;
+struct rotation_config {
+    size_t max_file_size{10 * 1024 * 1024};
+    size_t max_files{5};
+    bool rotate_on_startup{true};
+};
 
-    /**
-     * @brief Get current file size in bytes
-     */
-    std::size_t get_file_size() const;
+class rotating_file_writer : public base_writer {
+public:
+    rotating_file_writer(const std::filesystem::path& base_path,
+                        const rotation_config& config = {})
+        : base_path_(base_path), config_(config), current_size_(0) {
+        if (config_.rotate_on_startup && std::filesystem::exists(base_path_)) {
+            rotate_files();
+        }
+        open_file();
+    }
+
+    ~rotating_file_writer() override { close_file(); }
+
+    void write(const std::string& message) override {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (!file_.is_open()) open_file();
+        if (current_size_ + message.size() > config_.max_file_size) {
+            rotate_files();
+            open_file();
+        }
+        file_ << message << std::flush;
+        current_size_ += message.size();
+    }
+
+    void flush() override {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (file_.is_open()) file_.flush();
+    }
 
 private:
-    rotation_type rotation_type_;
-    size_t max_size_;
-    size_t max_files_;
-    
-    // For time-based rotation
-    mutable std::chrono::system_clock::time_point last_rotation_time_;
-    mutable std::chrono::system_clock::time_point current_period_start_;
-    
-    // Base filename without extension
-    std::string base_filename_;
-    std::string file_extension_;
+    void open_file() {
+        file_.open(base_path_, std::ios::app);
+        if (file_.is_open()) {
+            current_size_ = std::filesystem::file_size(base_path_);
+        }
+    }
+
+    void close_file() {
+        if (file_.is_open()) file_.close();
+    }
+
+    void rotate_files() {
+        close_file();
+        auto oldest = get_rotated_path(config_.max_files);
+        if (std::filesystem::exists(oldest)) {
+            std::filesystem::remove(oldest);
+        }
+        for (size_t i = config_.max_files - 1; i > 0; --i) {
+            auto from = get_rotated_path(i);
+            auto to = get_rotated_path(i + 1);
+            if (std::filesystem::exists(from)) {
+                std::filesystem::rename(from, to);
+            }
+        }
+        if (std::filesystem::exists(base_path_)) {
+            std::filesystem::rename(base_path_, get_rotated_path(1));
+        }
+        current_size_ = 0;
+    }
+
+    std::filesystem::path get_rotated_path(size_t index) const {
+        return base_path_.string() + "." + std::to_string(index);
+    }
+
+    std::filesystem::path base_path_;
+    rotation_config config_;
+    std::ofstream file_;
+    size_t current_size_;
+    std::mutex mutex_;
 };
 
 } // namespace kcenon::logger
