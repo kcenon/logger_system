@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['3_3a_20error_20handling_20preparation_20logger_5fsystem_0',['Phase 3: Error Handling Preparation - logger_system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__3__PREPARATION.html',1,'']]]
+  ['getting_5fstarted_0',['GETTING_STARTED',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html',1,'']]],
+  ['getting_5fstarted_5fko_1',['GETTING_STARTED_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED__KO.html',1,'']]]
 ];

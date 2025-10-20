@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔥_20sanitizer_20results_0',['🔥 Sanitizer Results',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md93',1,'']]]
+  ['분석_20기준선_20logger_5fsystem_0',['정적 분석 기준선 - logger_system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE__KO.html#autotoc_md855',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🔍_20code_20quality_0',['🔍 Code Quality',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md87',1,'']]]
+  ['변경사항_0',['최근 변경사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md791',1,'']]],
+  ['변경_20이력_1',['변경 이력',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md401',1,'']]]
 ];

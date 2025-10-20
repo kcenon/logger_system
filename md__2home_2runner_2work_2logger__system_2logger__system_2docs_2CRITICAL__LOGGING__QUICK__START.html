@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Logger System: Critical Logging Quick Start</title>
+<title>Logger System: CRITICAL_LOGGING_QUICK_START</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,23 +90,60 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Critical Logging Quick Start</div></div>
+  <div class="headertitle"><div class="title">CRITICAL_LOGGING_QUICK_START</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md463"></a> <b>⚠️ Apply Critical Log Loss Prevention in 5 Minutes</b></p>
+<div class="textblock"><blockquote class="doxtable">
+<p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START__KO.html">한국어</a> </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md503"></a>
+Table of Contents</h2>
+<ul>
+<li>🎯 Goal</li>
+<li>🚀 Quick Start<ul>
+<li>Step 1: Include Headers</li>
+<li>Step 2: Create Hybrid Writer</li>
+<li>Step 3: Verify</li>
+</ul>
+</li>
+<li>📊 3 Usage Scenarios<ul>
+<li>Scenario 1: General Web Services (Recommended)</li>
+<li>Scenario 2: Finance/Medical Systems (Maximum Reliability)</li>
+<li>Scenario 3: Games/Real-time Systems (High Performance)</li>
+</ul>
+</li>
+<li>🔧 Configuration Options</li>
+<li>✅ Verification Methods<ul>
+<li>Test 1: Check Critical Logs</li>
+<li>Test 2: Crash Simulation</li>
+<li>Test 3: Ctrl+C Test</li>
+</ul>
+</li>
+<li>📚 Learn More</li>
+<li>🐛 Troubleshooting<ul>
+<li>&quot;WAL file not created&quot;</li>
+<li>&quot;Performance too slow&quot;</li>
+<li>&quot;Signal handler not working&quot;</li>
+</ul>
+</li>
+<li>💡 Key Points</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md504"></a>
+Critical Logging Quick Start</h1>
+<p><b>⚠️ Apply Critical Log Loss Prevention in 5 Minutes</b></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md465"></a>
-🎯 Goal</h1>
+<h2><a class="anchor" id="autotoc_md506"></a>
+🎯 Goal</h2>
 <p><b>Guarantee that critical logs are never lost</b> in production environments.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md467"></a>
-🚀 Quick Start</h1>
-<h2><a class="anchor" id="autotoc_md468"></a>
-Step 1: Include Headers</h2>
+<h2><a class="anchor" id="autotoc_md508"></a>
+🚀 Quick Start</h2>
+<h3><a class="anchor" id="autotoc_md509"></a>
+Step 1: Include Headers</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/critical_writer.h&gt;</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md469"></a>
-Step 2: Create Hybrid Writer</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md510"></a>
+Step 2: Create Hybrid Writer</h3>
 <div class="fragment"><div class="line"><span class="keyword">using namespace </span>kcenon::logger;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Existing code (Risky!)</span></div>
@@ -125,18 +162,18 @@ Step 2: Create Hybrid Writer</h2>
 <div class="line">    )</div>
 <div class="line">    .build();</div>
 </div><!-- fragment --><p><b>Changes</b>: Just wrap <code>file_writer</code> with <code>hybrid_writer</code>!</p>
-<h2><a class="anchor" id="autotoc_md470"></a>
-Step 3: Verify</h2>
+<h3><a class="anchor" id="autotoc_md511"></a>
+Step 3: Verify</h3>
 <div class="fragment"><div class="line"><span class="comment">// Normal logs → async (fast)</span></div>
 <div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;Normal message&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Critical logs → immediate flush (safe!)</span></div>
 <div class="line">logger-&gt;log(log_level::critical, <span class="stringliteral">&quot;Critical error&quot;</span>);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md472"></a>
-📊 3 Usage Scenarios</h1>
-<h2><a class="anchor" id="autotoc_md473"></a>
-Scenario 1: General Web Services (Recommended)</h2>
+<h2><a class="anchor" id="autotoc_md513"></a>
+📊 3 Usage Scenarios</h2>
+<h3><a class="anchor" id="autotoc_md514"></a>
+Scenario 1: General Web Services (Recommended)</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hybrid = std::make_unique&lt;hybrid_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;rotating_file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>, 100_MB, 10)</div>
 <div class="line">);</div>
@@ -146,8 +183,8 @@ Scenario 1: General Web Services (Recommended)</h2>
 <li>✅ Errors async (maintain performance)</li>
 <li>⚡ Performance impact: &lt; 1%</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md474"></a>
-Scenario 2: Finance/Medical Systems (Maximum Reliability)</h2>
+<h3><a class="anchor" id="autotoc_md515"></a>
+Scenario 2: Finance/Medical Systems (Maximum Reliability)</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hybrid = std::make_unique&lt;hybrid_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;rotating_file_writer&gt;(<span class="stringliteral">&quot;audit.log&quot;</span>, 50_MB, 20),</div>
 <div class="line">    critical_writer_config{</div>
@@ -165,8 +202,8 @@ Scenario 2: Finance/Medical Systems (Maximum Reliability)</h2>
 <li>✅ Signal handler protection</li>
 <li>⚡ Performance impact: 5-10% (acceptable)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md475"></a>
-Scenario 3: Games/Real-time Systems (High Performance)</h2>
+<h3><a class="anchor" id="autotoc_md516"></a>
+Scenario 3: Games/Real-time Systems (High Performance)</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hybrid = std::make_unique&lt;hybrid_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;game.log&quot;</span>),</div>
 <div class="line">    critical_writer_config{</div>
@@ -183,8 +220,8 @@ Scenario 3: Games/Real-time Systems (High Performance)</h2>
 <li>⚡ Performance impact: &lt; 0.1%</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md477"></a>
-🔧 Configuration Options</h1>
+<h2><a class="anchor" id="autotoc_md518"></a>
+🔧 Configuration Options</h2>
 <div class="fragment"><div class="line">critical_writer_config{</div>
 <div class="line">    .force_flush_on_critical = <span class="keyword">true</span>,   <span class="comment">// Flush critical immediately</span></div>
 <div class="line">    .force_flush_on_error = <span class="keyword">false</span>,     <span class="comment">// Errors async</span></div>
@@ -206,23 +243,23 @@ Scenario 3: Games/Real-time Systems (High Performance)</h2>
 <td class="markdownTableBodyNone"><code>sync_on_critical</code>   </td><td class="markdownTableBodyNone">true   </td><td class="markdownTableBodyNone">true   </td><td class="markdownTableBodyNone">true   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md479"></a>
-✅ Verification Methods</h1>
-<h2><a class="anchor" id="autotoc_md480"></a>
-Test 1: Check Critical Logs</h2>
+<h2><a class="anchor" id="autotoc_md520"></a>
+✅ Verification Methods</h2>
+<h3><a class="anchor" id="autotoc_md521"></a>
+Test 1: Check Critical Logs</h3>
 <div class="fragment"><div class="line">logger.log(log_level::critical, <span class="stringliteral">&quot;Test critical log&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Check file immediately</span></div>
 <div class="line">system(<span class="stringliteral">&quot;tail -1 app.log&quot;</span>);  <span class="comment">// Should appear right away!</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md481"></a>
-Test 2: Crash Simulation</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md522"></a>
+Test 2: Crash Simulation</h3>
 <div class="fragment"><div class="line">logger.log(log_level::critical, <span class="stringliteral">&quot;Before crash&quot;</span>);</div>
 <div class="line">std::abort();  <span class="comment">// Force terminate</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Check after restart</span></div>
 <div class="line">system(<span class="stringliteral">&quot;cat app.log | grep &#39;Before crash&#39;&quot;</span>);  <span class="comment">// Should exist!</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md482"></a>
-Test 3: Ctrl+C Test</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md523"></a>
+Test 3: Ctrl+C Test</h3>
 <div class="fragment"><div class="line">$ ./your_app</div>
 <div class="line">[INFO] App started</div>
 <div class="line">^C  # Press Ctrl+C</div>
@@ -232,32 +269,32 @@ Test 3: Ctrl+C Test</h2>
 <div class="line">$ cat app.log</div>
 <div class="line"># All logs properly recorded!</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md484"></a>
-📚 Learn More</h1>
+<h2><a class="anchor" id="autotoc_md525"></a>
+📚 Learn More</h2>
 <ul>
 <li><b>Detailed Guide</b>: <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION.html">CRITICAL_LOG_PREVENTION.md</a></li>
 <li><b>Example Code</b>: <a href="../examples/critical_logging_example.cpp">critical_logging_example.cpp</a></li>
 <li><b>API Documentation</b>: <a href="../include/kcenon/logger/writers/critical_writer.h">critical_writer.h</a></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md486"></a>
-🐛 Troubleshooting</h1>
-<h2><a class="anchor" id="autotoc_md487"></a>
-"WAL file not created"</h2>
+<h2><a class="anchor" id="autotoc_md527"></a>
+🐛 Troubleshooting</h2>
+<h3><a class="anchor" id="autotoc_md528"></a>
+"WAL file not created"</h3>
 <div class="fragment"><div class="line"><span class="comment">// Create directory first</span></div>
 <div class="line"><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
 <div class="line">std::filesystem::create_directories(<span class="stringliteral">&quot;logs&quot;</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md488"></a>
-"Performance too slow"</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md529"></a>
+"Performance too slow"</h3>
 <div class="fragment"><div class="line"><span class="comment">// Disable fsync</span></div>
 <div class="line">config.sync_on_critical = <span class="keyword">false</span>;  <span class="comment">// 10x faster</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md489"></a>
-"Signal handler not working"</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md530"></a>
+"Signal handler not working"</h3>
 <div class="fragment"><div class="line"><span class="comment">// Check for conflicts with other libraries</span></div>
 <div class="line"><span class="comment">// Google Test etc. install their own handlers</span></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md491"></a>
-💡 Key Points</h1>
+<h2><a class="anchor" id="autotoc_md532"></a>
+💡 Key Points</h2>
 <ol type="1">
 <li><b>Use hybrid_writer</b> → Performance + Safety</li>
 <li><b>Only critical/fatal immediately flushed</b> → Minimal overhead</li>
@@ -273,14 +310,16 @@ Test 3: Ctrl+C Test</h2>
 <div class="line">    std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
 <div class="line">))</div>
 </div><!-- fragment --><hr  />
-<p><b>Have questions or issues? Open an issue!</b> </p>
+<p><b>Have questions or issues? Open an issue!</b></p>
+<hr  />
+<p><em>Last Updated: 2025-10-20</em> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Oct 20 2025 03:52:12 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Oct 20 2025 13:58:15 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📁_20strong_20directory_20organization_20strong_0',['📁 &lt;strong&gt;Directory Organization&lt;/strong&gt;',['../index.html#autotoc_md29',1,'']]]
+  ['레퍼런스_0',['API 레퍼런스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html#autotoc_md199',1,'']]]
 ];

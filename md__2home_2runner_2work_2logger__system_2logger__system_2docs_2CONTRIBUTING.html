@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Logger System: Contributing to Logger System</title>
+<title>Logger System: CONTRIBUTING</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,12 +90,17 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Contributing to Logger System</div></div>
+  <div class="headertitle"><div class="title">CONTRIBUTING</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md373"></a> Thank you for your interest in contributing to the Logger System! This document provides guidelines and information for contributors.</p>
-<h1><a class="anchor" id="autotoc_md374"></a>
-Table of Contents</h1>
+<div class="textblock"><blockquote class="doxtable">
+<p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CONTRIBUTING__KO.html">한국어</a> </p>
+</blockquote>
+<h1><a class="anchor" id="autotoc_md404"></a>
+Contributing to Logger System</h1>
+<p>Thank you for your interest in contributing to the Logger System! This document provides guidelines and information for contributors.</p>
+<h2><a class="anchor" id="autotoc_md405"></a>
+Table of Contents</h2>
 <ul>
 <li>Code of Conduct</li>
 <li>Getting Started</li>
@@ -105,8 +110,8 @@ Table of Contents</h1>
 <li>Documentation</li>
 <li>Submitting Changes</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md375"></a>
-Code of Conduct</h1>
+<h2><a class="anchor" id="autotoc_md406"></a>
+Code of Conduct</h2>
 <p>This project adheres to a code of conduct. By participating, you are expected to:</p><ul>
 <li>Use welcoming and inclusive language</li>
 <li>Be respectful of differing viewpoints and experiences</li>
@@ -114,8 +119,8 @@ Code of Conduct</h1>
 <li>Focus on what is best for the community</li>
 <li>Show empathy towards other community members</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md376"></a>
-Getting Started</h1>
+<h2><a class="anchor" id="autotoc_md407"></a>
+Getting Started</h2>
 <ol type="1">
 <li><b>Fork the Repository</b> <div class="fragment"><div class="line">git clone https://github.com/kcenon/logger_system.git</div>
 <div class="line">cd logger_system</div>
@@ -129,17 +134,17 @@ Getting Started</h1>
 <li><b>Run Tests</b> <div class="fragment"><div class="line">ctest --output-on-failure</div>
 </div><!-- fragment --></li>
 </ol>
-<h1><a class="anchor" id="autotoc_md377"></a>
-Development Process</h1>
-<h2><a class="anchor" id="autotoc_md378"></a>
-1. Before You Start</h2>
+<h2><a class="anchor" id="autotoc_md408"></a>
+Development Process</h2>
+<h3><a class="anchor" id="autotoc_md409"></a>
+1. Before You Start</h3>
 <ul>
 <li>Check existing issues and pull requests</li>
 <li>For major changes, open an issue first to discuss</li>
 <li>Ensure your idea aligns with the project's direction</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md379"></a>
-2. Making Changes</h2>
+<h3><a class="anchor" id="autotoc_md410"></a>
+2. Making Changes</h3>
 <ul>
 <li>Follow the existing code style</li>
 <li>Write meaningful commit messages</li>
@@ -147,8 +152,8 @@ Development Process</h1>
 <li>Update documentation as needed</li>
 <li>Ensure all tests pass</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md380"></a>
-3. Commit Message Format</h2>
+<h3><a class="anchor" id="autotoc_md411"></a>
+3. Commit Message Format</h3>
 <p>Follow the conventional commits format:</p>
 <div class="fragment"><div class="line">type(scope): description</div>
 <div class="line"> </div>
@@ -173,26 +178,26 @@ Development Process</h1>
 <div class="line">Includes configuration for max file size and number of backups.</div>
 <div class="line"> </div>
 <div class="line">Closes #123</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md381"></a>
-Code Style</h1>
-<h2><a class="anchor" id="autotoc_md382"></a>
-C++ Guidelines</h2>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md412"></a>
+Code Style</h2>
+<h3><a class="anchor" id="autotoc_md413"></a>
+C++ Guidelines</h3>
 <p>We follow the Google C++ Style Guide with modifications:</p><ul>
 <li>Use 4 spaces for indentation (not 2)</li>
 <li>Use snake_case for all names (not CamelCase)</li>
 <li>Place opening braces on the same line</li>
 <li>Always use braces for control structures</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md383"></a>
-Code Formatting</h2>
+<h3><a class="anchor" id="autotoc_md414"></a>
+Code Formatting</h3>
 <p>Use clang-format with the provided <code>.clang-format</code> file:</p>
 <div class="fragment"><div class="line"># Format a file</div>
 <div class="line">clang-format -i sources/logger/logger.cpp</div>
 <div class="line"> </div>
 <div class="line"># Format all files</div>
 <div class="line">find . -name &quot;*.cpp&quot; -o -name &quot;*.h&quot; | xargs clang-format -i</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md384"></a>
-Naming Conventions</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md415"></a>
+Naming Conventions</h3>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>logger_module {</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">class </span>my_writer : <span class="keyword">public</span> base_writer {</div>
@@ -211,10 +216,10 @@ Naming Conventions</h2>
 <div class="line"><span class="keywordtype">int</span> global_variable;</div>
 <div class="line"> </div>
 <div class="line">} <span class="comment">// namespace logger_module</span></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md385"></a>
-Testing</h1>
-<h2><a class="anchor" id="autotoc_md386"></a>
-Unit Tests</h2>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md416"></a>
+Testing</h2>
+<h3><a class="anchor" id="autotoc_md417"></a>
+Unit Tests</h3>
 <p>All new code should include unit tests:</p>
 <div class="fragment"><div class="line">TEST(LoggerTest, AsyncLogging) {</div>
 <div class="line">    <span class="keyword">auto</span> logger = std::make_shared&lt;logger&gt;(<span class="keyword">true</span>);</div>
@@ -227,8 +232,8 @@ Unit Tests</h2>
 <div class="line">    </div>
 <div class="line">    EXPECT_EQ(mock_writer-&gt;message_count(), 1);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md387"></a>
-Running Tests</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md418"></a>
+Running Tests</h3>
 <div class="fragment"><div class="line"># Run all tests</div>
 <div class="line">cd build</div>
 <div class="line">ctest</div>
@@ -238,8 +243,8 @@ Running Tests</h2>
 <div class="line"> </div>
 <div class="line"># Run with verbose output</div>
 <div class="line">ctest -V</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md388"></a>
-Benchmarks</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md419"></a>
+Benchmarks</h3>
 <p>Performance-critical code should include benchmarks:</p>
 <div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> BM_AsyncLogging(benchmark::State&amp; state) {</div>
 <div class="line">    <span class="keyword">auto</span> logger = std::make_shared&lt;logger&gt;(<span class="keyword">true</span>, state.range(0));</div>
@@ -253,27 +258,27 @@ Benchmarks</h2>
 <div class="line">    logger-&gt;stop();</div>
 <div class="line">}</div>
 <div class="line">BENCHMARK(BM_AsyncLogging)-&gt;Range(1024, 65536);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md389"></a>
-Documentation</h1>
-<h2><a class="anchor" id="autotoc_md390"></a>
-Code Documentation</h2>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md420"></a>
+Documentation</h2>
+<h3><a class="anchor" id="autotoc_md421"></a>
+Code Documentation</h3>
 <p>Use Doxygen-style comments:</p>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="keyword">class </span>logger : <span class="keyword">public</span> logger_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    <span class="keyword">explicit</span> logger(<span class="keywordtype">bool</span> async = <span class="keyword">true</span>, std::size_t buffer_size = 8192);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md391"></a>
-Documentation Updates</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md422"></a>
+Documentation Updates</h3>
 <p>When adding features:</p><ol type="1">
 <li>Update relevant documentation files</li>
 <li>Add examples to the docs</li>
 <li>Update the API reference if needed</li>
 <li>Add performance implications to <a class="el" href="PERFORMANCE_8md.html">PERFORMANCE.md</a></li>
 </ol>
-<h1><a class="anchor" id="autotoc_md392"></a>
-Submitting Changes</h1>
-<h2><a class="anchor" id="autotoc_md393"></a>
-Pull Request Process</h2>
+<h2><a class="anchor" id="autotoc_md423"></a>
+Submitting Changes</h2>
+<h3><a class="anchor" id="autotoc_md424"></a>
+Pull Request Process</h3>
 <ol type="1">
 <li><b>Update Your Fork</b> <div class="fragment"><div class="line">git remote add upstream https://github.com/kcenon/logger_system.git</div>
 <div class="line">git fetch upstream</div>
@@ -310,29 +315,31 @@ Pull Request Process</h2>
 <div class="line">- [ ] No new warnings</div>
 </div><!-- fragment --></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md394"></a>
-Review Process</h2>
+<h3><a class="anchor" id="autotoc_md425"></a>
+Review Process</h3>
 <ul>
 <li>At least one maintainer review required</li>
 <li>All CI checks must pass</li>
 <li>Address review feedback promptly</li>
 <li>Squash commits before merging</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md395"></a>
-Questions?</h1>
+<h2><a class="anchor" id="autotoc_md426"></a>
+Questions?</h2>
 <p>If you have questions:</p><ul>
 <li>Check the documentation</li>
 <li>Open an issue for clarification</li>
 <li>Join discussions in existing issues</li>
 </ul>
-<p>Thank you for contributing! </p>
+<h2><a class="anchor" id="autotoc_md427"></a>
+Thank you for contributing!</h2>
+<p><em>Last Updated: 2025-10-20</em> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Oct 20 2025 03:52:12 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Oct 20 2025 13:58:15 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

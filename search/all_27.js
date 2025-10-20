@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['✨_20core_20features_0',['✨ Core Features',['../index.html#autotoc_md2',1,'']]]
+  ['고급_20주제_20tt_20docs_20advanced_20tt_0',['고급 주제 (&lt;tt&gt;docs/advanced/&lt;/tt&gt;)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md784',1,'']]]
 ];

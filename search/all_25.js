@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['★_20insight_20─────────────────────────────────────_0',['★ Insight ─────────────────────────────────────',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PHASE__2__RESOURCE__MANAGEMENT.html#autotoc_md826',1,'']]]
+  ['✨_20core_20features_0',['✨ Core Features',['../index.html#autotoc_md2',1,'']]]
 ];
