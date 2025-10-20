@@ -1,3 +1,5 @@
+> **Language:** **English** | [한국어](SECURITY_KO.md)
+
 # Security Guide
 
 This document outlines the current security posture of the logger_system and provides guidance for secure deployments.
@@ -66,3 +68,7 @@ This document outlines the current security posture of the logger_system and pro
 - Pluggable crypto provider interface for at-rest encryption.
 - Policy-driven sanitizer configuration (YAML/JSON).
 
+
+---
+
+*Last Updated: 2025-10-20*

@@ -1,3 +1,5 @@
+> **Language:** **English** | [한국어](PERFORMANCE_KO.md)
+
 # Logger System Performance Guide
 
 ## Overview
@@ -337,3 +339,7 @@ valgrind --tool=massif ./your_app
 - Use Grand Central Dispatch for async operations
 - Consider os_log for system integration
 - Optimize for unified buffer cache
+
+---
+
+*Last Updated: 2025-10-20*

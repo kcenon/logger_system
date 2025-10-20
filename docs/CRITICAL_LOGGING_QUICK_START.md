@@ -1,3 +1,28 @@
+> **Language:** **English** | [한국어](CRITICAL_LOGGING_QUICK_START_KO.md)
+
+## Table of Contents
+
+- [🎯 Goal](#-goal)
+- [🚀 Quick Start](#-quick-start)
+  - [Step 1: Include Headers](#step-1-include-headers)
+  - [Step 2: Create Hybrid Writer](#step-2-create-hybrid-writer)
+  - [Step 3: Verify](#step-3-verify)
+- [📊 3 Usage Scenarios](#-3-usage-scenarios)
+  - [Scenario 1: General Web Services (Recommended)](#scenario-1-general-web-services-recommended)
+  - [Scenario 2: Finance/Medical Systems (Maximum Reliability)](#scenario-2-financemedical-systems-maximum-reliability)
+  - [Scenario 3: Games/Real-time Systems (High Performance)](#scenario-3-gamesreal-time-systems-high-performance)
+- [🔧 Configuration Options](#-configuration-options)
+- [✅ Verification Methods](#-verification-methods)
+  - [Test 1: Check Critical Logs](#test-1-check-critical-logs)
+  - [Test 2: Crash Simulation](#test-2-crash-simulation)
+  - [Test 3: Ctrl+C Test](#test-3-ctrlc-test)
+- [📚 Learn More](#-learn-more)
+- [🐛 Troubleshooting](#-troubleshooting)
+  - ["WAL file not created"](#wal-file-not-created)
+  - ["Performance too slow"](#performance-too-slow)
+  - ["Signal handler not working"](#signal-handler-not-working)
+- [💡 Key Points](#-key-points)
+
 # Critical Logging Quick Start
 
 **⚠️ Apply Critical Log Loss Prevention in 5 Minutes**
@@ -226,3 +251,7 @@ config.sync_on_critical = false;  // 10x faster
 ---
 
 **Have questions or issues? Open an issue!**
+
+---
+
+*Last Updated: 2025-10-20*

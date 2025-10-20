@@ -1,3 +1,5 @@
+> **Language:** **English** | [한국어](CUSTOM_WRITERS_KO.md)
+
 # Creating Custom Writers
 
 This guide explains how to create custom writers for the Logger System to send logs to various destinations.
@@ -521,3 +523,7 @@ public:
     }
 };
 ```
+
+---
+
+*Last Updated: 2025-10-20*

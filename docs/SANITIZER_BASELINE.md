@@ -1,3 +1,5 @@
+> **Language:** **English** | [한국어](SANITIZER_BASELINE_KO.md)
+
 # logger_system Sanitizer Baseline
 
 **Phase**: 0 - Foundation and Tooling

@@ -9,7 +9,7 @@
 
 > **Language:** **English** | [한국어](README_KO.md)
 
-## Project Overview
+## Overview
 
 The Logger System Project is a production-ready, high-performance C++20 asynchronous logging framework designed to provide comprehensive logging capabilities for multithreaded applications. Built with a modular, interface-based architecture and seamless integration with the thread system ecosystem, it delivers enterprise-grade logging performance with minimal overhead and maximum flexibility.
 

@@ -1,3 +1,5 @@
+> **Language:** **English** | [한국어](CONTRIBUTING_KO.md)
+
 # Contributing to Logger System
 
 Thank you for your interest in contributing to the Logger System! This document provides guidelines and information for contributors.
@@ -289,3 +291,6 @@ If you have questions:
 - Join discussions in existing issues
 
 Thank you for contributing!
+---
+
+*Last Updated: 2025-10-20*

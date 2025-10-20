@@ -1,3 +1,5 @@
+> **Language:** **English** | [한국어](GETTING_STARTED_KO.md)
+
 # Getting Started with Logger System
 
 This guide will help you get started with the Logger System quickly.
@@ -281,3 +283,7 @@ auto context = thread_module::thread_context(logger_interface);
 - Check the [API Reference](API-REFERENCE.md) for detailed documentation
 - See [Performance Guide](PERFORMANCE.md) for optimization tips
 - Learn about [Custom Writers](CUSTOM-WRITERS.md) for specialized output
+
+---
+
+*Last Updated: 2025-10-20*

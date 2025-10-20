@@ -1,3 +1,5 @@
+> **Language:** **English** | [한국어](CURRENT_STATE_KO.md)
+
 # System Current State - Phase 0 Baseline
 
 **Document Version**: 1.0
@@ -127,3 +129,7 @@ USE_THREAD_SYSTEM=ON        # Enable thread_system integration (optional)
 ---
 
 **Status**: Phase 0 - Baseline established
+
+---
+
+*Last Updated: 2025-10-20*

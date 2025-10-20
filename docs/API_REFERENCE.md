@@ -1,3 +1,5 @@
+> **Language:** **English** | [한국어](API_REFERENCE_KO.md)
+
 # API Reference
 
 ## Table of Contents
@@ -605,3 +607,6 @@ auto logger = logger_module::logger_builder()
     .build()
     .value();  // or handle error properly
 ```
+---
+
+*Last Updated: 2025-10-20*

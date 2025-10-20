@@ -1,3 +1,5 @@
+> **Language:** **English** | [한국어](MIGRATION_GUIDE_KO.md)
+
 # Logger System Migration Guide
 
 ## Table of Contents
@@ -680,3 +682,6 @@ logger->set_formatter(std::make_unique<custom_formatter>());
 - [Issue Tracker](https://github.com/kcenon/logger_system/issues)
 
 For migration assistance, please file an issue with the `migration` label.
+---
+
+*Last Updated: 2025-10-20*
