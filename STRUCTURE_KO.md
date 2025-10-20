@@ -1,10 +1,10 @@
-# Logger System - Project Structure
+# Logger System - 프로젝트 구조
 
-**English | [한국어](STRUCTURE_KO.md)**
+**[English](STRUCTURE.md) | 한국어**
 
 ---
 
-## 📁 Directory Layout
+## 📁 디렉토리 레이아웃
 
 ```
 logger_system/
@@ -93,57 +93,57 @@ logger_system/
 └── 📄 README.md                 # Project overview & documentation
 ```
 
-## 🏗️ Namespace Structure
+## 🏗️ Namespace 구조
 
 ### Core Namespaces
-- **Root**: `kcenon::logger` - Main logger namespace
-- **Core functionality**: `kcenon::logger::core` - Essential logger components
-- **Interfaces**: `kcenon::logger::interfaces` - Abstract base classes
-- **Writers**: `kcenon::logger::writers` - Output destination implementations
-- **Formatters**: `kcenon::logger::formatters` - Message formatting implementations
-- **Implementation details**: `kcenon::logger::impl` - Internal implementation classes
-- **Utilities**: `kcenon::logger::utils` - Helper functions and utilities
+- **Root**: `kcenon::logger` - 메인 logger namespace
+- **Core functionality**: `kcenon::logger::core` - 핵심 logger 컴포넌트
+- **Interfaces**: `kcenon::logger::interfaces` - 추상 기본 클래스
+- **Writers**: `kcenon::logger::writers` - 출력 대상 구현체
+- **Formatters**: `kcenon::logger::formatters` - 메시지 포맷팅 구현체
+- **Implementation details**: `kcenon::logger::impl` - 내부 구현 클래스
+- **Utilities**: `kcenon::logger::utils` - 헬퍼 함수 및 유틸리티
 
 ### Nested Namespaces
-- `kcenon::logger::impl::async` - Asynchronous logging components
+- `kcenon::logger::impl::async` - 비동기 로깅 컴포넌트
 - `kcenon::logger::impl::di` - Dependency injection container
-- `kcenon::logger::impl::monitoring` - Performance monitoring components
+- `kcenon::logger::impl::monitoring` - 성능 모니터링 컴포넌트
 
-## 🔧 Key Components Overview
+## 🔧 주요 컴포넌트 개요
 
 ### 🎯 Public API Layer (`include/kcenon/logger/`)
-| Component | File | Purpose |
+| 컴포넌트 | 파일 | 목적 |
 |-----------|------|---------|
-| **Main Logger** | `core/logger.h` | Primary logging interface |
-| **Configuration** | `core/config.h` | Logger configuration management |
-| **Builder Pattern** | `core/builder.h` | Fluent logger construction |
-| **Writer Interface** | `interfaces/writer_interface.h` | Base class for all writers |
-| **Formatter Interface** | `interfaces/formatter_interface.h` | Base class for all formatters |
-| **File Writer** | `writers/file_writer.h` | File output implementation |
-| **Console Writer** | `writers/console_writer.h` | Console output implementation |
-| **JSON Formatter** | `formatters/json_formatter.h` | JSON message formatting |
-| **XML Formatter** | `formatters/xml_formatter.h` | XML message formatting |
+| **Main Logger** | `core/logger.h` | 주요 로깅 interface |
+| **Configuration** | `core/config.h` | Logger 설정 관리 |
+| **Builder Pattern** | `core/builder.h` | Fluent logger 생성 |
+| **Writer Interface** | `interfaces/writer_interface.h` | 모든 writer의 기본 클래스 |
+| **Formatter Interface** | `interfaces/formatter_interface.h` | 모든 formatter의 기본 클래스 |
+| **File Writer** | `writers/file_writer.h` | 파일 출력 구현체 |
+| **Console Writer** | `writers/console_writer.h` | 콘솔 출력 구현체 |
+| **JSON Formatter** | `formatters/json_formatter.h` | JSON 메시지 포맷팅 |
+| **XML Formatter** | `formatters/xml_formatter.h` | XML 메시지 포맷팅 |
 
 ### ⚙️ Implementation Layer (`src/`)
-| Component | Directory | Purpose |
+| 컴포넌트 | 디렉토리 | 목적 |
 |-----------|-----------|---------|
-| **Async Pipeline** | `impl/async/` | Non-blocking logging operations |
+| **Async Pipeline** | `impl/async/` | Non-blocking 로깅 작업 |
 | **DI Container** | `impl/di/` | Dependency injection framework |
-| **Writer Implementations** | `impl/writers/` | Concrete writer classes |
-| **Formatter Implementations** | `impl/formatters/` | Concrete formatter classes |
-| **Filter System** | `impl/filters/` | Message filtering logic |
-| **Monitoring** | `impl/monitoring/` | Performance metrics collection |
+| **Writer Implementations** | `impl/writers/` | 구체적인 writer 클래스 |
+| **Formatter Implementations** | `impl/formatters/` | 구체적인 formatter 클래스 |
+| **Filter System** | `impl/filters/` | 메시지 필터링 로직 |
+| **Monitoring** | `impl/monitoring/` | 성능 메트릭 수집 |
 
-## 📊 Performance Characteristics
+## 📊 성능 특성
 
 - **Throughput**: 4.34M+ messages/second (async mode)
-- **Latency**: Sub-microsecond logging calls (async mode)
-- **Memory**: Zero-copy message pipeline where possible
-- **Thread Safety**: Lock-free queues for high-performance async logging
+- **Latency**: Sub-microsecond 로깅 호출 (async mode)
+- **Memory**: 가능한 경우 zero-copy 메시지 pipeline
+- **Thread Safety**: 고성능 async 로깅을 위한 lock-free queue
 
-## 🔄 Migration Guide
+## 🔄 마이그레이션 가이드
 
-### Step 1: Backup Current Setup
+### Step 1: 현재 설정 백업
 ```bash
 # Automatic backup of old structure
 mkdir -p old_structure/
@@ -151,7 +151,7 @@ cp -r include/ old_structure/include_backup/
 cp -r src/ old_structure/src_backup/
 ```
 
-### Step 2: Update Include Paths
+### Step 2: Include 경로 업데이트
 ```cpp
 // Old style
 #include "logger/logger.h"
@@ -160,7 +160,7 @@ cp -r src/ old_structure/src_backup/
 #include "kcenon/logger/core/logger.h"
 ```
 
-### Step 3: Update Namespace Usage
+### Step 3: Namespace 사용 업데이트
 ```cpp
 // Old style
 using namespace logger;
@@ -169,14 +169,14 @@ using namespace logger;
 using namespace kcenon::logger::core;
 ```
 
-### Step 4: Run Migration Scripts
+### Step 4: 마이그레이션 스크립트 실행
 ```bash
 # Automated namespace migration
 ./scripts/migrate_namespaces.sh
 ./scripts/update_cmake.sh
 ```
 
-## 🚀 Quick Start with New Structure
+## 🚀 새로운 구조로 빠른 시작
 
 ```cpp
 #include "kcenon/logger/core/logger.h"
