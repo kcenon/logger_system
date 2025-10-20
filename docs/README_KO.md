@@ -74,7 +74,7 @@
 ## 🤝 도움 및 지원
 
 - **이슈**: [GitHub Issues](https://github.com/kcenon/logger_system/issues)에서 버그 보고 및 기능 요청
-- **토론**: [GitHub Discussions](https://github.com/kcenon/logger_system/discussions)에서 커뮤니티 지원 및 질문
+- **토론**: [GitHub Discussions](https://github.com/kcenon/logger_system/discussions)에서 유지보수 지원 및 질문
 - **보안**: **[SECURITY.md](SECURITY.md)** ([한국어](SECURITY_KO.md)) 가이드라인에 따라 보안 이슈 보고
 
 ---
