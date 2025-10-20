@@ -21,7 +21,9 @@ Logger System Project는 프로덕션 환경에서 사용 가능한 고성능 C+
 
 ### 🎯 고성능 로깅
 - **비동기 처리**: 배치 큐 처리를 통한 논블로킹 로그 작업
-- **다중 출력 대상**: Console, file, rotating file, network, encrypted writer 지원
+- **다중 출력 대상**: Console, file, rotating file, network, encrypted, hybrid writer 지원
+- **Critical Writer** 🆕: 즉시 기록이 필요한 중요한 메시지를 위한 동기식 로깅
+- **Crash-Safe Logging** 🆕: 비정상 종료 시 로그 보존을 위한 긴급 flush 메커니즘
 - **스레드 세이프 작업**: hot path에서 락 없이 여러 스레드에서 동시 로깅
 - **제로카피 설계**: 최소한의 할당으로 효율적인 메시지 전달
 - **설정 가능한 배치 처리**: 최적의 처리량을 위한 조정 가능한 배치 크기 및 큐 깊이
@@ -372,20 +374,176 @@ LoggerSystem_print_configuration()
 
 이 logger는 dependency injection을 통해 [Thread System](https://github.com/kcenon/thread_system)과 원활하게 작동하도록 설계되었습니다:
 
+### Dependency Injection 통합
+
+Logger system은 서비스 의존성 관리를 위한 내장 DI container를 제공합니다:
+
+```cpp
+#include <kcenon/logger/core/di/di_container_interface.h>
+#include <kcenon/logger/core/logger_builder.h>
+
+// Logger 생성 및 구성
+auto logger = kcenon::logger::logger_builder()
+    .use_template("production")
+    .add_writer("console", std::make_unique<kcenon::logger::console_writer>())
+    .build()
+    .value();
+
+// DI container에 logger 등록
+auto& container = kcenon::logger::di_container::global();
+container.register_singleton<kcenon::logger::logger_interface>(logger);
+
+// 나중에 애플리케이션 어디서나 사용
+auto retrieved_logger = container.resolve<kcenon::logger::logger_interface>();
+if (retrieved_logger) {
+    retrieved_logger->log(kcenon::logger::log_level::info, "DI를 통한 logger 사용");
+}
+```
+
+### 크로스 시스템 DI 통합
+
+logger_system과 thread_system을 함께 사용할 때:
+
 ```cpp
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/thread/interfaces/service_container.h>
+#include <kcenon/thread/core/thread_pool.h>
 
-// Service container에 logger 등록
-auto logger = std::make_shared<kcenon::logger::logger>();
-logger->add_writer(std::make_unique<kcenon::logger::console_writer>());
+int main() {
+    // 1. Logger 생성
+    auto logger = kcenon::logger::logger_builder()
+        .use_template("production")
+        .add_writer("file", std::make_unique<kcenon::logger::file_writer>("app.log"))
+        .build()
+        .value();
 
-kcenon::thread::service_container::global()
-    .register_singleton<kcenon::thread::interfaces::logger_interface>(logger);
+    // 2. Thread system의 service container에 logger 등록
+    kcenon::thread::service_container::global()
+        .register_singleton<kcenon::thread::logger_interface>(logger);
 
-// 이제 thread system 컴포넌트가 자동으로 이 logger를 사용합니다
-auto context = kcenon::thread::thread_context(); // Container에서 logger를 resolve합니다
+    // 3. Logging context로 thread pool 생성
+    auto context = kcenon::thread::thread_context();  // Logger 자동 resolve
+    auto pool = std::make_shared<kcenon::thread::thread_pool>("WorkerPool", context);
+
+    // 4. Thread pool 작업이 자동으로 로깅됩니다
+    pool->start();
+    pool->submit_task([]() {
+        // Worker task도 context를 통해 logger에 접근 가능
+    });
+
+    return 0;
+}
 ```
+
+### 고급 Writer 유형
+
+#### Critical Writer - 중요 메시지를 위한 동기식 로깅
+
+`critical_writer`는 비동기 큐를 우회하고 메시지를 동기적으로 기록하여 중요한 정보가 즉시 유지되도록 보장합니다:
+
+```cpp
+#include <kcenon/logger/writers/critical_writer.h>
+#include <kcenon/logger/writers/file_writer.h>
+
+// File writer를 감싸는 critical writer 생성
+auto critical = std::make_unique<kcenon::logger::critical_writer>(
+    std::make_unique<kcenon::logger::file_writer>("critical.log")
+);
+
+auto logger = kcenon::logger::logger_builder()
+    .add_writer("critical", std::move(critical))
+    .build()
+    .value();
+
+// 이 로그는 즉시 기록됩니다 (큐에 넣지 않음)
+logger->log(kcenon::logger::log_level::error, "치명적 오류 발생");
+// ⚠️ 이 줄이 실행되기 전에 파일 업데이트가 보장됩니다
+```
+
+**사용 사례**:
+- 애플리케이션 종료 전 치명적 오류 로깅
+- 즉시 유지가 필요한 보안 감사 추적
+- 데이터 손실이 허용되지 않는 트랜잭션 로깅
+
+**⚠️ 성능 경고**: Critical writer는 쓰기가 완료될 때까지 호출 스레드를 차단합니다. 정말 중요한 메시지에만 사용하세요.
+
+#### Hybrid Writer - 두 가지 장점 모두
+
+`hybrid_writer`는 로그 레벨에 따라 비동기와 동기 모드 간 자동 전환합니다:
+
+```cpp
+#include <kcenon/logger/writers/hybrid_writer.h>
+#include <kcenon/logger/writers/rotating_file_writer.h>
+
+// Hybrid 동작 구성
+kcenon::logger::hybrid_writer_config config;
+config.sync_level = kcenon::logger::log_level::error;  // Error 이상은 동기
+config.async_queue_size = 10000;
+
+auto hybrid = std::make_unique<kcenon::logger::hybrid_writer>(
+    std::make_unique<kcenon::logger::rotating_file_writer>(
+        "hybrid.log",
+        10 * 1024 * 1024,  // 파일당 10MB
+        5                   // 5개 파일 유지
+    ),
+    config
+);
+
+auto logger = kcenon::logger::logger_builder()
+    .add_writer("hybrid", std::move(hybrid))
+    .build()
+    .value();
+
+// Debug/Info: 큐에 넣음 (비동기)
+logger->log(kcenon::logger::log_level::debug, "디버깅 정보");
+
+// Error: 즉시 기록 (동기)
+logger->log(kcenon::logger::log_level::error, "중요한 오류!");
+```
+
+### Crash-Safe Logging
+
+Crash-safe logger는 비정상 종료 시 로그를 flush하기 위한 신호 핸들러를 자동으로 설치합니다:
+
+```cpp
+#include <kcenon/logger/safety/crash_safe_logger.h>
+
+int main() {
+    // Crash-safe wrapper로 logger 생성
+    auto logger = kcenon::logger::crash_safe_logger::create(
+        kcenon::logger::logger_builder()
+            .use_template("production")
+            .add_writer("file", std::make_unique<kcenon::logger::file_writer>("app.log"))
+            .build()
+            .value()
+    );
+
+    // Crash 감지를 위한 신호 핸들러 설치
+    kcenon::logger::crash_safe_logger::install_signal_handlers();
+
+    // 일반 로깅
+    logger->log(kcenon::logger::log_level::info, "애플리케이션 시작");
+
+    // 애플리케이션이 크래시되면 종료 전 로그가 자동으로 flush됩니다
+    // SIGSEGV, SIGABRT, SIGFPE, SIGILL, SIGTERM, SIGINT 처리
+
+    return 0;
+}
+```
+
+**보호되는 신호**:
+- `SIGSEGV`: 세그멘테이션 오류
+- `SIGABRT`: 중단 신호
+- `SIGFPE`: 부동 소수점 예외
+- `SIGILL`: 불법 명령
+- `SIGTERM`: 종료 요청
+- `SIGINT`: 인터럽트 (Ctrl+C)
+
+**⚠️ 중요 사항**:
+- 신호 핸들러에는 제한이 있습니다 (async-signal-safe 함수만)
+- 치명적인 크래시에서 100% 로그 보존을 보장할 수 없습니다
+- 디버거 동작에 영향을 줄 수 있습니다 (필요시 디버그 빌드에서 비활성화)
+- 모든 플랫폼에서 사용 가능하지 않습니다 (Windows는 다른 메커니즘 사용)
 
 ## 빠른 시작
 
