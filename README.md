@@ -21,7 +21,9 @@ The Logger System Project is a production-ready, high-performance C++20 asynchro
 
 ### 🎯 High-Performance Logging
 - **Asynchronous Processing**: Non-blocking log operations with batched queue processing
-- **Multiple Output Targets**: Console, file, rotating file, network, and encrypted writers
+- **Multiple Output Targets**: Console, file, rotating file, network, encrypted, and hybrid writers
+- **Critical Writer** 🆕: Synchronous logging for critical messages that must be written immediately
+- **Crash-Safe Logging** 🆕: Emergency flush mechanism to preserve logs during abnormal termination
 - **Thread-Safe Operations**: Concurrent logging from multiple threads without locks on hot path
 - **Zero-Copy Design**: Efficient message passing with minimal allocations
 - **Configurable Batching**: Tunable batch sizes and queue depths for optimal throughput
@@ -372,19 +374,107 @@ LoggerSystem_print_configuration()
 
 This logger is designed to work seamlessly with the [Thread System](https://github.com/kcenon/thread_system) through dependency injection:
 
+### Dependency Injection Integration
+
+The logger system provides a built-in DI container for managing service dependencies:
+
+```cpp
+#include <kcenon/logger/core/di/di_container_interface.h>
+#include <kcenon/logger/core/logger_builder.h>
+
+// Create and configure logger
+auto logger = kcenon::logger::logger_builder()
+    .use_template("production")
+    .add_writer("console", std::make_unique<kcenon::logger::console_writer>())
+    .build()
+    .value();
+
+// Register logger in DI container
+auto& container = kcenon::logger::di_container::global();
+container.register_singleton<kcenon::logger::logger_interface>(logger);
+
+// Later, anywhere in your application
+auto retrieved_logger = container.resolve<kcenon::logger::logger_interface>();
+if (retrieved_logger) {
+    retrieved_logger->log(kcenon::logger::log_level::info, "Using injected logger");
+}
+```
+
+### Cross-System DI Integration
+
+When using both logger_system and thread_system together:
+
 ```cpp
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/thread/interfaces/service_container.h>
+#include <kcenon/thread/core/thread_pool.h>
 
-// Register logger in the service container
-auto logger = std::make_shared<kcenon::logger::logger>();
-logger->add_writer(std::make_unique<kcenon::logger::console_writer>());
+int main() {
+    // 1. Create logger
+    auto logger = kcenon::logger::logger_builder()
+        .use_template("production")
+        .add_writer("file", std::make_unique<kcenon::logger::file_writer>("app.log"))
+        .build()
+        .value();
 
-kcenon::thread::service_container::global()
-    .register_singleton<kcenon::thread::interfaces::logger_interface>(logger);
+    // 2. Register logger in thread system's service container
+    kcenon::thread::service_container::global()
+        .register_singleton<kcenon::thread::logger_interface>(logger);
 
-// Now thread system components will automatically use this logger
-auto context = kcenon::thread::thread_context(); // Will resolve logger from container
+    // 3. Create thread pool with logging context
+    auto context = kcenon::thread::thread_context();  // Auto-resolves logger
+    auto pool = std::make_shared<kcenon::thread::thread_pool>("WorkerPool", context);
+
+    // 4. Thread pool operations are now automatically logged
+    pool->start();
+    pool->submit_task([]() {
+        // Worker tasks can also access the logger via context
+    });
+
+    return 0;
+}
+```
+
+### Custom Service Registration
+
+Register custom services and components:
+
+```cpp
+#include <kcenon/logger/core/di/di_container_interface.h>
+
+// Register custom writer factory
+auto& container = kcenon::logger::di_container::global();
+
+container.register_factory<kcenon::logger::log_writer_interface>(
+    "database_writer",
+    []() -> std::shared_ptr<kcenon::logger::log_writer_interface> {
+        return std::make_shared<database_log_writer>(
+            "host=localhost;db=logs;user=app"
+        );
+    }
+);
+
+// Resolve and use
+auto db_writer = container.resolve<kcenon::logger::log_writer_interface>("database_writer");
+```
+
+### DI Container Lifecycle
+
+```cpp
+// Scoped containers for isolated contexts
+{
+    auto scoped_container = kcenon::logger::di_container::create_scope();
+
+    // Register services in this scope only
+    scoped_container->register_singleton<kcenon::logger::logger_interface>(
+        kcenon::logger::logger_builder().build().value()
+    );
+
+    // Services are automatically cleaned up when scope exits
+}
+
+// Clear global container
+kcenon::logger::di_container::global().clear();
 ```
 
 ## Quick Start
@@ -509,6 +599,160 @@ if (!builder_result) {
               << builder_result.get_error().message() << "\n";
 }
 ```
+
+### Advanced Writer Types
+
+#### Critical Writer - Synchronous Logging for Critical Messages
+
+The `critical_writer` bypasses the asynchronous queue and writes messages synchronously, ensuring critical information is persisted immediately:
+
+```cpp
+#include <kcenon/logger/writers/critical_writer.h>
+#include <kcenon/logger/writers/file_writer.h>
+
+// Create a critical writer wrapping a file writer
+auto critical = std::make_unique<kcenon::logger::critical_writer>(
+    std::make_unique<kcenon::logger::file_writer>("critical.log")
+);
+
+auto logger = kcenon::logger::logger_builder()
+    .add_writer("critical", std::move(critical))
+    .build()
+    .value();
+
+// This log is written immediately, not queued
+logger->log(kcenon::logger::log_level::error, "Critical error occurred");
+// ⚠️ File is guaranteed to be updated before this line executes
+```
+
+**Use Cases**:
+- Fatal error logging before application termination
+- Security audit trails requiring immediate persistence
+- Transactional logging where data loss is unacceptable
+- Pre-crash diagnostics
+
+**⚠️ Performance Warning**: Critical writer blocks the calling thread until write completes. Use sparingly for truly critical messages only.
+
+#### Hybrid Writer - Best of Both Worlds
+
+The `hybrid_writer` automatically switches between asynchronous and synchronous modes based on log level:
+
+```cpp
+#include <kcenon/logger/writers/hybrid_writer.h>
+#include <kcenon/logger/writers/rotating_file_writer.h>
+
+// Configure hybrid behavior
+kcenon::logger::hybrid_writer_config config;
+config.sync_level = kcenon::logger::log_level::error;  // Errors and above sync
+config.async_queue_size = 10000;
+
+auto hybrid = std::make_unique<kcenon::logger::hybrid_writer>(
+    std::make_unique<kcenon::logger::rotating_file_writer>(
+        "hybrid.log",
+        10 * 1024 * 1024,  // 10MB per file
+        5                   // Keep 5 files
+    ),
+    config
+);
+
+auto logger = kcenon::logger::logger_builder()
+    .add_writer("hybrid", std::move(hybrid))
+    .build()
+    .value();
+
+// Debug/Info: queued (async)
+logger->log(kcenon::logger::log_level::debug, "Debugging info");
+
+// Error: written immediately (sync)
+logger->log(kcenon::logger::log_level::error, "Critical error!");
+```
+
+**Benefits**:
+- Performance: Info/debug logs are asynchronous (low overhead)
+- Reliability: Error/fatal logs are synchronous (guaranteed persistence)
+- Simplicity: Single writer instead of multiple configurations
+
+### Crash-Safe Logging
+
+The crash-safe logger automatically installs signal handlers to flush logs during abnormal termination:
+
+```cpp
+#include <kcenon/logger/safety/crash_safe_logger.h>
+
+int main() {
+    // Create logger with crash-safe wrapper
+    auto logger = kcenon::logger::crash_safe_logger::create(
+        kcenon::logger::logger_builder()
+            .use_template("production")
+            .add_writer("file", std::make_unique<kcenon::logger::file_writer>("app.log"))
+            .build()
+            .value()
+    );
+
+    // Install signal handlers for crash detection
+    kcenon::logger::crash_safe_logger::install_signal_handlers();
+
+    // Normal logging
+    logger->log(kcenon::logger::log_level::info, "Application started");
+
+    // If the application crashes, logs are automatically flushed before exit
+    // Handles SIGSEGV, SIGABRT, SIGFPE, SIGILL, SIGTERM, SIGINT
+
+    return 0;
+}
+```
+
+**Protected Signals**:
+- `SIGSEGV`: Segmentation fault
+- `SIGABRT`: Abort signal
+- `SIGFPE`: Floating point exception
+- `SIGILL`: Illegal instruction
+- `SIGTERM`: Termination request
+- `SIGINT`: Interrupt (Ctrl+C)
+
+**How It Works**:
+1. Signal handler intercepts crash signals
+2. Flushes all pending logs to disk
+3. Calls original signal handler (if any)
+4. Re-raises signal for normal crash handling
+
+**⚠️ Important Notes**:
+- Signal handlers have limitations (async-signal-safe functions only)
+- Cannot guarantee 100% log preservation in catastrophic crashes
+- May impact debugger behavior (disable in debug builds if needed)
+- Not available on all platforms (Windows uses different mechanism)
+
+### Encrypted Writer - Secure Logging
+
+The `encrypted_writer` encrypts log messages before writing to disk:
+
+```cpp
+#include <kcenon/logger/writers/encrypted_writer.h>
+
+// Create encrypted writer with AES-256
+kcenon::logger::encryption_config enc_config;
+enc_config.algorithm = kcenon::logger::encryption_algorithm::aes_256_gcm;
+enc_config.key = get_encryption_key();  // Your key management function
+
+auto encrypted = std::make_unique<kcenon::logger::encrypted_writer>(
+    std::make_unique<kcenon::logger::file_writer>("secure.log.enc"),
+    enc_config
+);
+
+auto logger = kcenon::logger::logger_builder()
+    .add_writer("encrypted", std::move(encrypted))
+    .build()
+    .value();
+
+// Messages are encrypted before writing
+logger->log(kcenon::logger::log_level::info, "Sensitive data: " + user_info);
+```
+
+**⚠️ Security Warning**:
+- **Never hard-code encryption keys** in source code
+- Use secure key management systems (HSM, KMS, vault)
+- Rotate keys regularly
+- Encrypted logs are useless without proper key management
 
 ### Interface Architecture
 
