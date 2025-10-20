@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION__KO.html">한국어</a> </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md431"></a>
+<h2><a class="anchor" id="autotoc_md440"></a>
 Table of Contents</h2>
 <ul>
 <li>Overview<ul>
@@ -187,13 +187,13 @@ Table of Contents</h2>
 <li>Version History</li>
 <li>License</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md432"></a>
+<h1><a class="anchor" id="autotoc_md441"></a>
 Critical Log Loss Prevention Guide</h1>
 <p><b>Version:</b> 1.1.0 <b>Author:</b> kcenon <b>Date:</b> 2025-01-17</p>
-<h2><a class="anchor" id="autotoc_md433"></a>
+<h2><a class="anchor" id="autotoc_md442"></a>
 Overview</h2>
 <p>This document describes mechanisms to prevent critical log message loss in logger_system.</p>
-<h3><a class="anchor" id="autotoc_md434"></a>
+<h3><a class="anchor" id="autotoc_md443"></a>
 Problem</h3>
 <p>Issues that can occur when using asynchronous loggers:</p>
 <ol type="1">
@@ -202,7 +202,7 @@ Problem</h3>
 <li><b>Insufficient Signal Handling</b>: Termination without handling SIGTERM, SIGSEGV, etc.</li>
 <li><b>I/O Buffering</b>: Delayed writes due to filesystem buffering</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md435"></a>
+<h3><a class="anchor" id="autotoc_md444"></a>
 Solution</h3>
 <p>This solution provides the following mechanisms:</p>
 <ol type="1">
@@ -213,7 +213,7 @@ Solution</h3>
 <li><b>File Descriptor Sync</b>: Force flush to OS buffers via <code>fsync()</code> call</li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md437"></a>
+<h2><a class="anchor" id="autotoc_md446"></a>
 Architecture</h2>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                      Application Code                           │</div>
@@ -281,12 +281,12 @@ Architecture</h2>
 <div class="line">│  SIGABRT → Emergency Flush → Re-raise signal                    │</div>
 <div class="line">└─────────────────────────────────────────────────────────────────┘</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md439"></a>
+<h2><a class="anchor" id="autotoc_md448"></a>
 Class Structure</h2>
-<h3><a class="anchor" id="autotoc_md440"></a>
+<h3><a class="anchor" id="autotoc_md449"></a>
 1. &lt;tt&gt;critical_writer&lt;/tt&gt;</h3>
 <p>A writer wrapper that processes critical logs synchronously.</p>
-<h4><a class="anchor" id="autotoc_md441"></a>
+<h4><a class="anchor" id="autotoc_md450"></a>
 Key Features:</h4>
 <ul>
 <li><b>Level-based Routing</b>: Choose sync/async based on log level</li>
@@ -295,7 +295,7 @@ Key Features:</h4>
 <li><b>Signal Handling</b>: Automatic flush on abnormal termination</li>
 <li><b>File Sync</b>: Reflect to disk including OS buffers via <code>fsync()</code> call</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md442"></a>
+<h4><a class="anchor" id="autotoc_md451"></a>
 Configuration:</h4>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>critical_writer_config {</div>
 <div class="line">    <span class="comment">// Immediate flush for critical/fatal messages (default: true)</span></div>
@@ -319,7 +319,7 @@ Configuration:</h4>
 <div class="line">    <span class="comment">// Critical write timeout in ms (0 = unlimited)</span></div>
 <div class="line">    uint32_t critical_write_timeout_ms = 5000;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md443"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md452"></a>
 Usage Example:</h4>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/critical_writer.h&gt;</span></div>
 <div class="line"> </div>
@@ -342,17 +342,17 @@ Usage Example:</h4>
 <div class="line">);</div>
 <div class="line"> </div>
 <div class="line">logger.add_writer(std::move(critical));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md444"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md453"></a>
 2. &lt;tt&gt;hybrid_writer&lt;/tt&gt;</h3>
 <p>A hybrid writer that processes normal logs asynchronously and critical logs synchronously.</p>
-<h4><a class="anchor" id="autotoc_md445"></a>
+<h4><a class="anchor" id="autotoc_md454"></a>
 Features:</h4>
 <ul>
 <li><b>Performance + Safety</b>: High throughput with async, immediate flush when critical</li>
 <li><b>Automatic Routing</b>: Automatically select path based on log level</li>
 <li><b>Simple Configuration</b>: Integrates critical_writer + async_writer into one</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md446"></a>
+<h4><a class="anchor" id="autotoc_md455"></a>
 Usage Example:</h4>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/critical_writer.h&gt;</span></div>
 <div class="line"> </div>
@@ -371,9 +371,9 @@ Usage Example:</h4>
 <div class="line">logger.log(log_level::info, <span class="stringliteral">&quot;Fast async&quot;</span>);       <span class="comment">// → Async queue</span></div>
 <div class="line">logger.log(log_level::critical, <span class="stringliteral">&quot;Immediate&quot;</span>);    <span class="comment">// → Bypass queue + flush</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md448"></a>
+<h2><a class="anchor" id="autotoc_md457"></a>
 How It Works</h2>
-<h3><a class="anchor" id="autotoc_md449"></a>
+<h3><a class="anchor" id="autotoc_md458"></a>
 1. Level-Based Routing</h3>
 <div class="fragment"><div class="line"><span class="keywordtype">bool</span> critical_writer::is_critical_level(log_level level)<span class="keyword"> const </span>{</div>
 <div class="line">    <span class="comment">// Critical and fatal always require immediate flush</span></div>
@@ -394,7 +394,7 @@ How It Works</h2>
 <li><code>log_level::error</code> (4): Process immediately if configured</li>
 <li><code>log_level::warn</code> (3) and below: Normal path (async possible)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md450"></a>
+<h3><a class="anchor" id="autotoc_md459"></a>
 2. Critical Write Flow</h3>
 <div class="fragment"><div class="line">result_void critical_writer::write(...) {</div>
 <div class="line">    <span class="keywordflow">if</span> (is_critical_level(level)) {</div>
@@ -423,7 +423,7 @@ How It Works</h2>
 <div class="line">    <span class="comment">// Non-critical: delegate normally</span></div>
 <div class="line">    <span class="keywordflow">return</span> wrapped_writer_-&gt;write(...);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md451"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md460"></a>
 Step-by-Step Explanation:</h4>
 <ol type="1">
 <li><b>Exclusive Lock</b>: Guarantee ordering between critical writes</li>
@@ -432,14 +432,14 @@ Step-by-Step Explanation:</h4>
 <li><b>Immediate Flush</b>: Empty buffer (<code>fflush()</code>)</li>
 <li><b>File Sync</b>: Reflect to disk including OS buffers (<code>fsync()</code>)</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md452"></a>
+<h3><a class="anchor" id="autotoc_md461"></a>
 3. Write-Ahead Logging (WAL)</h3>
 <p>WAL is an additional safety measure for crash recovery.</p>
-<h4><a class="anchor" id="autotoc_md453"></a>
+<h4><a class="anchor" id="autotoc_md462"></a>
 WAL Format:</h4>
 <div class="fragment"><div class="line">[2025-01-17 14:30:45.123] [CRITICAL] [main.cpp:42:handle_error] Out of memory</div>
 <div class="line">[2025-01-17 14:30:45.456] [FATAL] [main.cpp:50:main] Terminating</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md454"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md463"></a>
 WAL Usage:</h4>
 <div class="fragment"><div class="line"><span class="comment">// Enable WAL</span></div>
 <div class="line">critical_writer_config config;</div>
@@ -454,10 +454,10 @@ WAL Usage:</h4>
 <div class="line"><span class="comment">// Crash recovery (separate tool)</span></div>
 <div class="line"><span class="comment">// $ cat logs/.critical.wal | grep CRITICAL</span></div>
 <div class="line"><span class="comment">// → Can check critical logs just before crash</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md455"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md464"></a>
 4. Signal Handler</h3>
 <p>Preserves logs even during abnormal termination.</p>
-<h4><a class="anchor" id="autotoc_md456"></a>
+<h4><a class="anchor" id="autotoc_md465"></a>
 Handled Signals:</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -471,7 +471,7 @@ Handled Signals:</h4>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>SIGABRT</code>   </td><td class="markdownTableBodyNone">abort() call   </td><td class="markdownTableBodyNone">Emergency flush → Re-raise   </td></tr>
 </table>
-<h4><a class="anchor" id="autotoc_md457"></a>
+<h4><a class="anchor" id="autotoc_md466"></a>
 Signal Handler Implementation:</h4>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> critical_writer::signal_handler(<span class="keywordtype">int</span> signal) {</div>
 <div class="line">    critical_writer* writer = instance_.load();</div>
@@ -497,17 +497,17 @@ Signal Handler Implementation:</h4>
 <div class="line">        std::raise(signal);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md458"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md467"></a>
 Important Notes:</h4>
 <ul>
 <li><b>No memory allocation</b> inside signal handler</li>
 <li><b>Use only signal-safe functions</b> (async-signal-safe)</li>
 <li>Avoid complex logic, perform minimal flush only</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md459"></a>
+<h3><a class="anchor" id="autotoc_md468"></a>
 5. File Descriptor Sync</h3>
 <p><code>fflush()</code> only empties C library buffers; OS kernel buffers remain. Must call <code>fsync()</code> to fully write to disk.</p>
-<h4><a class="anchor" id="autotoc_md460"></a>
+<h4><a class="anchor" id="autotoc_md469"></a>
 Buffer Layers:</h4>
 <div class="fragment"><div class="line">Application</div>
 <div class="line">    ↓ fprintf/write</div>
@@ -518,7 +518,7 @@ Buffer Layers:</h4>
 <div class="line">[Disk Controller]</div>
 <div class="line">    ↓</div>
 <div class="line">[Physical Disk]</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md461"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md470"></a>
 Implementation:</h4>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> critical_writer::sync_file_descriptor() {</div>
 <div class="line"><span class="preprocessor">#ifdef __unix__</span></div>
@@ -532,9 +532,9 @@ Implementation:</h4>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md463"></a>
+<h2><a class="anchor" id="autotoc_md472"></a>
 Performance Impact</h2>
-<h3><a class="anchor" id="autotoc_md464"></a>
+<h3><a class="anchor" id="autotoc_md473"></a>
 1. Critical Log Overhead</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -551,29 +551,29 @@ Performance Impact</h2>
 <td class="markdownTableBodyNone"><code>fsync()</code>   </td><td class="markdownTableBodyNone"><b>1-10 ms</b>   </td><td class="markdownTableBodyNone">OS kernel → disk sync   </td></tr>
 </table>
 <p><b>Total Overhead</b>: <b>1-10 ms per critical log</b></p>
-<h3><a class="anchor" id="autotoc_md465"></a>
+<h3><a class="anchor" id="autotoc_md474"></a>
 2. Normal Log Impact</h3>
 <ul>
 <li><b>Normal/Debug/Info/Warn</b>: No impact (uses async queue)</li>
 <li><b>Error</b> (if <code>force_flush_on_error=false</code>): No impact</li>
 <li><b>Critical/Fatal</b>: Above overhead occurs</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md466"></a>
+<h3><a class="anchor" id="autotoc_md475"></a>
 3. Optimization Strategies</h3>
-<h4><a class="anchor" id="autotoc_md467"></a>
+<h4><a class="anchor" id="autotoc_md476"></a>
 Strategy 1: Disable &lt;tt&gt;sync_on_critical&lt;/tt&gt;</h4>
 <div class="fragment"><div class="line">critical_writer_config config;</div>
 <div class="line">config.sync_on_critical = <span class="keyword">false</span>;  <span class="comment">// Skip fsync()</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Overhead: 1-10 ms → ~200 μs</span></div>
 <div class="line"><span class="comment">// Risk: Medium (Remains in OS buffer, possible loss on kernel crash)</span></div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md468"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md477"></a>
 Strategy 2: Disable &lt;tt&gt;force_flush_on_error&lt;/tt&gt;</h4>
 <div class="fragment"><div class="line">config.force_flush_on_error = <span class="keyword">false</span>;  <span class="comment">// Process errors asynchronously</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Error level also uses async queue → No overhead</span></div>
 <div class="line"><span class="comment">// Only critical/fatal processed immediately</span></div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md469"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md478"></a>
 Strategy 3: Use Hybrid Writer</h4>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hybrid = std::make_unique&lt;hybrid_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>),</div>
@@ -584,7 +584,7 @@ Strategy 3: Use Hybrid Writer</h4>
 <div class="line"><span class="comment">// Normal logs: Async (fast)</span></div>
 <div class="line"><span class="comment">// Critical logs: Sync (safe)</span></div>
 <div class="line"><span class="comment">// Average performance impact: &lt; 1%</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md470"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md479"></a>
 4. Benchmark Results (Estimated)</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -597,9 +597,9 @@ Strategy 3: Use Hybrid Writer</h4>
 <td class="markdownTableBodyNone">All critical (worst case)   </td><td class="markdownTableBodyNone">100 msg/s   </td><td class="markdownTableBodyNone">10 ms   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md472"></a>
+<h2><a class="anchor" id="autotoc_md481"></a>
 Production Recommendations</h2>
-<h3><a class="anchor" id="autotoc_md473"></a>
+<h3><a class="anchor" id="autotoc_md482"></a>
 1. Default Configuration (General Services)</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hybrid = std::make_unique&lt;hybrid_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;rotating_file_writer&gt;(</div>
@@ -622,7 +622,7 @@ Production Recommendations</h2>
 <li>Prepare for abnormal termination with signal handler</li>
 <li>Prioritize performance without WAL</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md474"></a>
+<h3><a class="anchor" id="autotoc_md483"></a>
 2. High Reliability Configuration (Finance/Medical)</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hybrid = std::make_unique&lt;hybrid_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;rotating_file_writer&gt;(</div>
@@ -647,7 +647,7 @@ Production Recommendations</h2>
 <li>Longer log retention period</li>
 <li>Safety first</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md475"></a>
+<h3><a class="anchor" id="autotoc_md484"></a>
 3. High Performance Configuration (Games/Real-time Systems)</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hybrid = std::make_unique&lt;hybrid_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;logs/performance.log&quot;</span>),</div>
@@ -667,9 +667,9 @@ Production Recommendations</h2>
 <li>Performance first</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md477"></a>
+<h2><a class="anchor" id="autotoc_md486"></a>
 Testing &amp; Verification</h2>
-<h3><a class="anchor" id="autotoc_md478"></a>
+<h3><a class="anchor" id="autotoc_md487"></a>
 1. Critical Log Loss Test</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;csignal&gt;</span></div>
 <div class="line"> </div>
@@ -695,7 +695,7 @@ Testing &amp; Verification</h2>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Verification: Check logs exist in test_signal.log and test_signal.wal</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md479"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md488"></a>
 Verification Method:</h4>
 <div class="fragment"><div class="line"># 1. Run program</div>
 <div class="line">$ ./test_signal_safety</div>
@@ -710,7 +710,7 @@ Verification Method:</h4>
 <div class="line"> </div>
 <div class="line">$ cat test_signal.wal</div>
 <div class="line">[2025-01-17 14:30:45.123] [CRITICAL] [test.cpp:10:test] Before signal</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md480"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md489"></a>
 2. WAL Recovery Test</h3>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> test_wal_recovery() {</div>
 <div class="line">    <span class="comment">// Step 1: Write with WAL</span></div>
@@ -738,7 +738,7 @@ Verification Method:</h4>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Recovered: &quot;</span> &lt;&lt; line &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md481"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md490"></a>
 3. Performance Benchmark</h3>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> benchmark_critical_overhead() {</div>
 <div class="line">    logger log(<span class="keyword">false</span>);</div>
@@ -760,9 +760,9 @@ Verification Method:</h4>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Average: &quot;</span> &lt;&lt; (duration / 1000.0) &lt;&lt; <span class="stringliteral">&quot; ms/log\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md483"></a>
+<h2><a class="anchor" id="autotoc_md492"></a>
 Troubleshooting</h2>
-<h3><a class="anchor" id="autotoc_md484"></a>
+<h3><a class="anchor" id="autotoc_md493"></a>
 Issue 1: WAL File Not Created</h3>
 <p><b>Symptom</b>: </p><div class="fragment"><div class="line">[critical_writer] Failed to open WAL: logs/.critical.wal</div>
 </div><!-- fragment --><p><b>Cause</b>: Directory doesn't exist</p>
@@ -777,7 +777,7 @@ Issue 1: WAL File Not Created</h3>
 <div class="line">        .wal_path = <span class="stringliteral">&quot;logs/.critical.wal&quot;</span></div>
 <div class="line">    }</div>
 <div class="line">);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md485"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md494"></a>
 Issue 2: Signal Handler Not Working</h3>
 <p><b>Symptom</b>: Logs not flushed on Ctrl+C</p>
 <p><b>Cause</b>: Signal handler disabled or conflicts</p>
@@ -793,7 +793,7 @@ Issue 2: Signal Handler Not Working</h3>
 <div class="line">    <span class="comment">// Explicit flush on exit</span></div>
 <div class="line">    logger.flush();</div>
 <div class="line">});</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md486"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md495"></a>
 Issue 3: Performance Degradation</h3>
 <p><b>Symptom</b>: Overall throughput decreases after using critical logs</p>
 <p><b>Cause</b>: Processing all logs as critical</p>
@@ -807,9 +807,9 @@ Issue 3: Performance Degradation</h3>
 <div class="line"><span class="comment">// Or disable sync_on_critical</span></div>
 <div class="line">config.sync_on_critical = <span class="keyword">false</span>;  <span class="comment">// Skip fsync → 10x faster</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md488"></a>
+<h2><a class="anchor" id="autotoc_md497"></a>
 FAQ</h2>
-<h3><a class="anchor" id="autotoc_md489"></a>
+<h3><a class="anchor" id="autotoc_md498"></a>
 Q1: Should I wrap all logs with critical_writer?</h3>
 <p><b>A</b>: No. Use a mix of normal writer and critical_writer:</p>
 <div class="fragment"><div class="line"><span class="comment">// Normal logs: async writer (performance)</span></div>
@@ -832,7 +832,7 @@ Q1: Should I wrap all logs with critical_writer?</h3>
 <div class="line">        std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;all.log&quot;</span>)</div>
 <div class="line">    )</div>
 <div class="line">);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md490"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md499"></a>
 Q2: When should I use WAL?</h3>
 <p><b>A</b>: Use WAL in these cases:</p>
 <ul>
@@ -842,7 +842,7 @@ Q2: When should I use WAL?</h3>
 <li>❌ General application logs (overkill)</li>
 <li>❌ High-performance game logs</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md491"></a>
+<h3><a class="anchor" id="autotoc_md500"></a>
 Q3: fsync() overhead is too high.</h3>
 <p><b>A</b>: Consider these options:</p>
 <ol type="1">
@@ -853,7 +853,7 @@ Q3: fsync() overhead is too high.</h3>
 <div class="line">/dev/sda1 /logs xfs noatime,nodiratime 0 0</div>
 </div><!-- fragment --></li>
 </ol>
-<h3><a class="anchor" id="autotoc_md492"></a>
+<h3><a class="anchor" id="autotoc_md501"></a>
 Q4: What can I do in a signal handler?</h3>
 <p><b>A</b>: <b>Very limited</b>. Only async-signal-safe functions:</p>
 <p>✅ <b>Allowed</b>:</p><ul>
@@ -869,7 +869,7 @@ Q4: What can I do in a signal handler?</h3>
 </ul>
 <p>This implementation performs minimal flush only.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md494"></a>
+<h2><a class="anchor" id="autotoc_md503"></a>
 References</h2>
 <ul>
 <li><a href="https://man7.org/linux/man-pages/man7/signal-safety.7.html">POSIX Signal Safety</a></li>
@@ -878,7 +878,7 @@ References</h2>
 <li><a href="https://github.com/gabime/spdlog#asynchronous-logging">spdlog Async Logging</a></li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md496"></a>
+<h2><a class="anchor" id="autotoc_md505"></a>
 Version History</h2>
 <ul>
 <li><b>1.1.0</b> (2025-01-17): Initial implementation<ul>
@@ -891,7 +891,7 @@ Version History</h2>
 </li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md498"></a>
+<h2><a class="anchor" id="autotoc_md507"></a>
 License</h2>
 <p>BSD 3-Clause License Copyright (c) 2025, kcenon</p>
 <hr  />
@@ -902,7 +902,7 @@ License</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Oct 20 2025 14:25:59 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Oct 20 2025 23:34:43 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

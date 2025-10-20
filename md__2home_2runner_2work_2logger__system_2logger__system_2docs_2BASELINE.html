@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | 한국어 </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md302"></a>
+<h2><a class="anchor" id="autotoc_md311"></a>
 Table of Contents</h2>
 <ul>
 <li>Executive Summary</li>
@@ -156,11 +156,11 @@ Table of Contents</h2>
 <li>References</li>
 <li>Revision History</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md303"></a>
+<h1><a class="anchor" id="autotoc_md312"></a>
 logger_system Performance Baseline</h1>
 <p><b>Phase</b>: 0 - Foundation and Tooling <b>Task</b>: 0.2 - Baseline Performance Benchmarking <b>Date Created</b>: 2025-10-07 <b>Status</b>: Infrastructure Complete - Awaiting Measurement</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md305"></a>
+<h2><a class="anchor" id="autotoc_md314"></a>
 Executive Summary</h2>
 <p>This document records the performance baseline for logger_system, established during Phase 0. These metrics serve as the reference point for measuring improvements and detecting regressions throughout Phases 1-6.</p>
 <p><b>Baseline Measurement Status</b>: ⏳ Pending</p><ul>
@@ -170,9 +170,9 @@ Executive Summary</h2>
 <li>Ready to run measurements</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md307"></a>
+<h2><a class="anchor" id="autotoc_md316"></a>
 Measurement Environment</h2>
-<h3><a class="anchor" id="autotoc_md308"></a>
+<h3><a class="anchor" id="autotoc_md317"></a>
 Hardware Specifications</h3>
 <p><b>To be recorded</b>:</p><ul>
 <li>CPU: [Model, cores, frequency]</li>
@@ -180,7 +180,7 @@ Hardware Specifications</h3>
 <li>Storage: [Type, speed]</li>
 <li>OS: [Version]</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md309"></a>
+<h3><a class="anchor" id="autotoc_md318"></a>
 Software Configuration</h3>
 <ul>
 <li>Compiler: Clang [version]</li>
@@ -189,9 +189,9 @@ Software Configuration</h3>
 <li>Google Benchmark: [version]</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md311"></a>
+<h2><a class="anchor" id="autotoc_md320"></a>
 Baseline Metrics</h2>
-<h3><a class="anchor" id="autotoc_md312"></a>
+<h3><a class="anchor" id="autotoc_md321"></a>
 1. Write Latency</h3>
 <p><b>Measurement</b>: Single log write performance</p>
 <table class="markdownTable">
@@ -246,10 +246,10 @@ Baseline Metrics</h2>
 <td class="markdownTableBodyNone">5000 bytes   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
 <hr  />
-<h3><a class="anchor" id="autotoc_md314"></a>
+<h3><a class="anchor" id="autotoc_md323"></a>
 2. Throughput</h3>
 <p><b>Measurement</b>: Sustained logging performance (messages/sec)</p>
-<h4><a class="anchor" id="autotoc_md315"></a>
+<h4><a class="anchor" id="autotoc_md324"></a>
 Single-threaded Throughput</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -261,7 +261,7 @@ Single-threaded Throughput</h4>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Async Writer   </td><td class="markdownTableBodyNone">&gt; 500k   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
-<h4><a class="anchor" id="autotoc_md316"></a>
+<h4><a class="anchor" id="autotoc_md325"></a>
 Multi-threaded Throughput</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -278,7 +278,7 @@ Multi-threaded Throughput</h4>
 <td class="markdownTableBodyNone">16   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
 <p><b>Target</b>: Near-linear scaling up to 4 threads (&gt; 3.5x)</p>
-<h4><a class="anchor" id="autotoc_md317"></a>
+<h4><a class="anchor" id="autotoc_md326"></a>
 Burst Throughput</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -292,7 +292,7 @@ Burst Throughput</h4>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">10,000   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
-<h4><a class="anchor" id="autotoc_md318"></a>
+<h4><a class="anchor" id="autotoc_md327"></a>
 Sustained Throughput</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -306,10 +306,10 @@ Sustained Throughput</h4>
 </table>
 <p><b>Target</b>: &lt; 10% degradation over time</p>
 <hr  />
-<h3><a class="anchor" id="autotoc_md320"></a>
+<h3><a class="anchor" id="autotoc_md329"></a>
 3. File Rotation</h3>
 <p><b>Measurement</b>: Rotation overhead and performance impact</p>
-<h4><a class="anchor" id="autotoc_md321"></a>
+<h4><a class="anchor" id="autotoc_md330"></a>
 Rotation Overhead</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -319,7 +319,7 @@ Rotation Overhead</h4>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">File size deviation   </td><td class="markdownTableBodyNone">&lt; 5%   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
-<h4><a class="anchor" id="autotoc_md322"></a>
+<h4><a class="anchor" id="autotoc_md331"></a>
 Performance During Rotation</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -331,7 +331,7 @@ Performance During Rotation</h4>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">1 MB   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
-<h4><a class="anchor" id="autotoc_md323"></a>
+<h4><a class="anchor" id="autotoc_md332"></a>
 Max Files Impact</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -345,7 +345,7 @@ Max Files Impact</h4>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">20   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
-<h4><a class="anchor" id="autotoc_md324"></a>
+<h4><a class="anchor" id="autotoc_md333"></a>
 Concurrent Rotation</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -358,10 +358,10 @@ Concurrent Rotation</h4>
 <td class="markdownTableBodyNone">8   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
 <hr  />
-<h3><a class="anchor" id="autotoc_md326"></a>
+<h3><a class="anchor" id="autotoc_md335"></a>
 4. Async Writer</h3>
 <p><b>Measurement</b>: Asynchronous logging performance</p>
-<h4><a class="anchor" id="autotoc_md327"></a>
+<h4><a class="anchor" id="autotoc_md336"></a>
 Async vs Sync Comparison</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -372,7 +372,7 @@ Async vs Sync Comparison</h4>
 <td class="markdownTableBodyNone">Latency (p99, μs)   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
 <p><b>Target</b>: &gt; 2x throughput improvement</p>
-<h4><a class="anchor" id="autotoc_md328"></a>
+<h4><a class="anchor" id="autotoc_md337"></a>
 Queue Latency</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -384,7 +384,7 @@ Queue Latency</h4>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">p99   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">&lt; 1000   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
-<h4><a class="anchor" id="autotoc_md329"></a>
+<h4><a class="anchor" id="autotoc_md338"></a>
 Queue Size Impact</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -398,7 +398,7 @@ Queue Size Impact</h4>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">100,000   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
-<h4><a class="anchor" id="autotoc_md330"></a>
+<h4><a class="anchor" id="autotoc_md339"></a>
 Queue Saturation</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -408,7 +408,7 @@ Queue Saturation</h4>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Block rate under load   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">Graceful degradation   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
-<h4><a class="anchor" id="autotoc_md331"></a>
+<h4><a class="anchor" id="autotoc_md340"></a>
 Multi-threaded Async</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -422,7 +422,7 @@ Multi-threaded Async</h4>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">16   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
-<h4><a class="anchor" id="autotoc_md332"></a>
+<h4><a class="anchor" id="autotoc_md341"></a>
 Flush Overhead</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -433,9 +433,9 @@ Flush Overhead</h4>
 <td class="markdownTableBodyNone">Flush 1000 messages   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">&lt; 100   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md334"></a>
+<h2><a class="anchor" id="autotoc_md343"></a>
 Performance Targets Summary</h2>
-<h3><a class="anchor" id="autotoc_md335"></a>
+<h3><a class="anchor" id="autotoc_md344"></a>
 Phase 0 Success Criteria</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -453,7 +453,7 @@ Phase 0 Success Criteria</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Async   </td><td class="markdownTableBodyNone">Throughput improvement   </td><td class="markdownTableBodyNone">&gt; 2x   </td><td class="markdownTableBodyNone">⏳   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md336"></a>
+<h3><a class="anchor" id="autotoc_md345"></a>
 Known Performance Issues</h3>
 <p><b>To be identified during baseline measurement</b>:</p><ul>
 <li>Thread safety bottlenecks (Phase 1 target)</li>
@@ -461,14 +461,14 @@ Known Performance Issues</h3>
 <li>Inefficient error handling (Phase 3 target)</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md338"></a>
+<h2><a class="anchor" id="autotoc_md347"></a>
 How to Run Benchmarks</h2>
-<h3><a class="anchor" id="autotoc_md339"></a>
+<h3><a class="anchor" id="autotoc_md348"></a>
 Prerequisites</h3>
 <div class="fragment"><div class="line"># Install Google Benchmark</div>
 <div class="line">brew install google-benchmark  # macOS</div>
 <div class="line">sudo apt-get install libbenchmark-dev  # Ubuntu</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md340"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md349"></a>
 Build and Run</h3>
 <div class="fragment"><div class="line">cd logger_system</div>
 <div class="line">cmake -B build -S . -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release</div>
@@ -484,7 +484,7 @@ Build and Run</h3>
 <div class="line">./build/benchmarks/logger_benchmarks \</div>
 <div class="line">  --benchmark_format=json \</div>
 <div class="line">  --benchmark_out=baseline_results.json</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md341"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md350"></a>
 Update This Document</h3>
 <p>After running benchmarks, update this document with actual measurements:</p>
 <ol type="1">
@@ -495,9 +495,9 @@ Update This Document</h3>
 <li>Commit updated baseline</li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md343"></a>
+<h2><a class="anchor" id="autotoc_md352"></a>
 Baseline Comparison (Phase 1+)</h2>
-<h3><a class="anchor" id="autotoc_md344"></a>
+<h3><a class="anchor" id="autotoc_md353"></a>
 Regression Detection</h3>
 <p>Performance regressions will be detected by comparing against this baseline:</p>
 <ul>
@@ -505,7 +505,7 @@ Regression Detection</h3>
 <li><b>Major regression</b>: &gt; 10% slower (fail CI)</li>
 <li><b>Critical regression</b>: &gt; 25% slower (block merge)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md345"></a>
+<h3><a class="anchor" id="autotoc_md354"></a>
 Improvement Tracking</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -518,9 +518,9 @@ Improvement Tracking</h3>
 <td class="markdownTableBodyNone">Phase 3   </td><td class="markdownTableBodyNone">Result&lt;T&gt; migration: &lt; 5% regression   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">Pending   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md347"></a>
+<h2><a class="anchor" id="autotoc_md356"></a>
 Benchmark Maintenance</h2>
-<h3><a class="anchor" id="autotoc_md348"></a>
+<h3><a class="anchor" id="autotoc_md357"></a>
 When to Re-baseline</h3>
 <ul>
 <li>After major architectural changes</li>
@@ -528,14 +528,14 @@ When to Re-baseline</h3>
 <li>After significant optimizations</li>
 <li>Every 6 months (scheduled)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md349"></a>
+<h3><a class="anchor" id="autotoc_md358"></a>
 Benchmark Versioning</h3>
 <p>Baseline results are versioned:</p><ul>
 <li><code>baseline_YYYYMMDD.json</code> - Date-stamped results</li>
 <li><code>baseline_phaseN.json</code> - Phase-specific baselines</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md351"></a>
+<h2><a class="anchor" id="autotoc_md360"></a>
 References</h2>
 <ul>
 <li>Benchmark Implementation</li>
@@ -543,7 +543,7 @@ References</h2>
 <li><a href="../../NEED_TO_FIX.md#phase-0-foundation-and-tooling-setup">Phase 0 Plan</a></li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md353"></a>
+<h2><a class="anchor" id="autotoc_md362"></a>
 Revision History</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -561,7 +561,7 @@ Revision History</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Oct 20 2025 14:25:59 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Oct 20 2025 23:34:43 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
