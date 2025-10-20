@@ -1,3 +1,5 @@
+> **Language:** **English** | [한국어](CI_CD_DASHBOARD_KO.md)
+
 # Logger System CI/CD Dashboard
 
 ## 🚀 Build Status
@@ -148,3 +150,6 @@ No recent test failures
 ---
 
 *This dashboard is automatically updated by CI/CD workflows. For real-time data, check the [GitHub Actions page](https://github.com/kcenon/logger_system/actions).*
+---
+
+*Last Updated: 2025-10-20*

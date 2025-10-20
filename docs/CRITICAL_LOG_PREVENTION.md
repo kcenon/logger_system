@@ -1,3 +1,63 @@
+> **Language:** **English** | [한국어](CRITICAL_LOG_PREVENTION_KO.md)
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Problem](#problem)
+  - [Solution](#solution)
+- [Architecture](#architecture)
+- [Class Structure](#class-structure)
+  - [1. `critical_writer`](#1-critical_writer)
+    - [Key Features:](#key-features)
+    - [Configuration:](#configuration)
+    - [Usage Example:](#usage-example)
+  - [2. `hybrid_writer`](#2-hybrid_writer)
+    - [Features:](#features)
+    - [Usage Example:](#usage-example)
+- [How It Works](#how-it-works)
+  - [1. Level-Based Routing](#1-level-based-routing)
+  - [2. Critical Write Flow](#2-critical-write-flow)
+    - [Step-by-Step Explanation:](#step-by-step-explanation)
+  - [3. Write-Ahead Logging (WAL)](#3-write-ahead-logging-wal)
+    - [WAL Format:](#wal-format)
+    - [WAL Usage:](#wal-usage)
+  - [4. Signal Handler](#4-signal-handler)
+    - [Handled Signals:](#handled-signals)
+    - [Signal Handler Implementation:](#signal-handler-implementation)
+    - [Important Notes:](#important-notes)
+  - [5. File Descriptor Sync](#5-file-descriptor-sync)
+    - [Buffer Layers:](#buffer-layers)
+    - [Implementation:](#implementation)
+- [Performance Impact](#performance-impact)
+  - [1. Critical Log Overhead](#1-critical-log-overhead)
+  - [2. Normal Log Impact](#2-normal-log-impact)
+  - [3. Optimization Strategies](#3-optimization-strategies)
+    - [Strategy 1: Disable `sync_on_critical`](#strategy-1-disable-sync_on_critical)
+    - [Strategy 2: Disable `force_flush_on_error`](#strategy-2-disable-force_flush_on_error)
+    - [Strategy 3: Use Hybrid Writer](#strategy-3-use-hybrid-writer)
+  - [4. Benchmark Results (Estimated)](#4-benchmark-results-estimated)
+- [Production Recommendations](#production-recommendations)
+  - [1. Default Configuration (General Services)](#1-default-configuration-general-services)
+  - [2. High Reliability Configuration (Finance/Medical)](#2-high-reliability-configuration-financemedical)
+  - [3. High Performance Configuration (Games/Real-time Systems)](#3-high-performance-configuration-gamesreal-time-systems)
+- [Testing & Verification](#testing-verification)
+  - [1. Critical Log Loss Test](#1-critical-log-loss-test)
+    - [Verification Method:](#verification-method)
+  - [2. WAL Recovery Test](#2-wal-recovery-test)
+  - [3. Performance Benchmark](#3-performance-benchmark)
+- [Troubleshooting](#troubleshooting)
+  - [Issue 1: WAL File Not Created](#issue-1-wal-file-not-created)
+  - [Issue 2: Signal Handler Not Working](#issue-2-signal-handler-not-working)
+  - [Issue 3: Performance Degradation](#issue-3-performance-degradation)
+- [FAQ](#faq)
+  - [Q1: Should I wrap all logs with critical_writer?](#q1-should-i-wrap-all-logs-with-critical_writer)
+  - [Q2: When should I use WAL?](#q2-when-should-i-use-wal)
+  - [Q3: fsync() overhead is too high.](#q3-fsync-overhead-is-too-high)
+  - [Q4: What can I do in a signal handler?](#q4-what-can-i-do-in-a-signal-handler)
+- [References](#references)
+- [Version History](#version-history)
+- [License](#license)
+
 # Critical Log Loss Prevention Guide
 
 **Version:** 1.1.0
@@ -800,3 +860,7 @@ This implementation performs minimal flush only.
 
 BSD 3-Clause License
 Copyright (c) 2025, kcenon
+
+---
+
+*Last Updated: 2025-10-20*

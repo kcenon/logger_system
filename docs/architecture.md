@@ -1,3 +1,54 @@
+> **Language:** **English** | [한국어](architecture_KO.md)
+
+## Table of Contents
+
+- [🏗️ Ecosystem Overview](#-ecosystem-overview)
+- [📋 Project Roles & Responsibilities](#-project-roles-responsibilities)
+  - [1. thread_system (Foundation)](#1-thread_system-foundation)
+    - [Responsibilities:](#responsibilities)
+    - [Key Components:](#key-components)
+    - [Dependencies:](#dependencies)
+  - [2. logger_system (Logging)](#2-logger_system-logging)
+    - [Responsibilities:](#responsibilities)
+    - [Key Components:](#key-components)
+    - [Dependencies:](#dependencies)
+  - [3. monitoring_system (Metrics)](#3-monitoring_system-metrics)
+    - [Responsibilities:](#responsibilities)
+    - [Key Components:](#key-components)
+    - [Dependencies:](#dependencies)
+  - [4. integrated_thread_system (Integration Hub)](#4-integrated_thread_system-integration-hub)
+    - [Responsibilities:](#responsibilities)
+    - [Key Components:](#key-components)
+    - [Dependencies:](#dependencies)
+- [🔄 Dependency Flow & Interface Contracts](#-dependency-flow-interface-contracts)
+  - [Interface Hierarchy](#interface-hierarchy)
+  - [Dependency Graph](#dependency-graph)
+  - [Build Order Requirements](#build-order-requirements)
+- [🔧 Integration Patterns](#-integration-patterns)
+  - [1. Interface-Based Integration](#1-interface-based-integration)
+  - [2. Dependency Injection Pattern](#2-dependency-injection-pattern)
+  - [3. Configuration Management](#3-configuration-management)
+- [📊 Performance Characteristics](#-performance-characteristics)
+  - [Design Principles](#design-principles)
+  - [Performance Metrics](#performance-metrics)
+- [🔄 Evolution: Monolithic → Modular](#-evolution-monolithic-modular)
+  - [Before: Monolithic Architecture](#before-monolithic-architecture)
+  - [After: Modular Architecture](#after-modular-architecture)
+  - [Migration Benefits](#migration-benefits)
+- [🚀 Getting Started](#-getting-started)
+  - [1. Development Environment Setup](#1-development-environment-setup)
+  - [2. Build Order (Local Development)](#2-build-order-local-development)
+  - [3. Verification](#3-verification)
+- [📚 Documentation Structure](#-documentation-structure)
+  - [thread_system](#thread_system)
+  - [logger_system](#logger_system)
+  - [monitoring_system](#monitoring_system)
+  - [integrated_thread_system](#integrated_thread_system)
+- [🔮 Future Roadmap](#-future-roadmap)
+  - [Phase 1: Stabilization (Current)](#phase-1-stabilization-current)
+  - [Phase 2: Enhancement](#phase-2-enhancement)
+  - [Phase 3: Ecosystem Expansion](#phase-3-ecosystem-expansion)
+
 # Threading Ecosystem Architecture
 
 A comprehensive overview of the modular threading ecosystem and inter-project relationships.
@@ -429,3 +480,7 @@ Each project maintains comprehensive documentation:
 ---
 
 **Note**: This architecture demonstrates the power of modular design in C++ ecosystem development. By carefully separating concerns and providing clean interfaces, we achieve both high performance and maintainable code while enabling flexible composition of components based on application needs.
+
+---
+
+*Last Updated: 2025-10-20*

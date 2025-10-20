@@ -1,3 +1,5 @@
+> **Language:** **English** | [한국어](README_KO.md)
+
 # Logger System Documentation
 
 Welcome to the comprehensive documentation for the Logger System - a high-performance, thread-safe C++20 logging framework.

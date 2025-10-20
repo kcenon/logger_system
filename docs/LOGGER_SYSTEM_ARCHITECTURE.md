@@ -1,3 +1,51 @@
+> **Language:** **English** | [한국어](LOGGER_SYSTEM_ARCHITECTURE_KO.md)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Architecture Diagram](#architecture-diagram)
+- [Core Components](#core-components)
+  - [1. Logger Interface Implementation](#1-logger-interface-implementation)
+  - [2. Configuration Management](#2-configuration-management)
+    - [Logger Configuration with Validation](#logger-configuration-with-validation)
+    - [Configuration Templates](#configuration-templates)
+  - [3. Builder Pattern with Validation](#3-builder-pattern-with-validation)
+  - [4. Interface Segregation](#4-interface-segregation)
+    - [Writer Interface](#writer-interface)
+    - [Filter Interface](#filter-interface)
+    - [Formatter Interface](#formatter-interface)
+  - [5. Log Entry Structure](#5-log-entry-structure)
+- [Advanced Features](#advanced-features)
+  - [1. Asynchronous Pipeline](#1-asynchronous-pipeline)
+  - [2. Error Handling with Result Pattern](#2-error-handling-with-result-pattern)
+  - [3. Performance Monitoring](#3-performance-monitoring)
+  - [4. Configuration Strategies](#4-configuration-strategies)
+- [Threading Model](#threading-model)
+  - [Synchronous Mode](#synchronous-mode)
+  - [Asynchronous Mode](#asynchronous-mode)
+  - [Thread Safety Guarantees](#thread-safety-guarantees)
+- [Memory Management](#memory-management)
+  - [Buffer Management](#buffer-management)
+  - [Object Lifetime](#object-lifetime)
+- [Performance Characteristics](#performance-characteristics)
+  - [Benchmarks](#benchmarks)
+  - [Optimization Strategies](#optimization-strategies)
+- [Integration Patterns](#integration-patterns)
+  - [Service Container Integration](#service-container-integration)
+  - [Direct Integration](#direct-integration)
+- [Extension Points](#extension-points)
+  - [Custom Writers](#custom-writers)
+  - [Custom Filters](#custom-filters)
+  - [Custom Formatters](#custom-formatters)
+- [Future Enhancements](#future-enhancements)
+  - [Performance Improvements](#performance-improvements)
+  - [Feature Additions](#feature-additions)
+  - [Platform Extensions](#platform-extensions)
+- [Best Practices](#best-practices)
+  - [For Library Users](#for-library-users)
+  - [For Contributors](#for-contributors)
+- [Platform Notes](#platform-notes)
+
 # Logger System Architecture
 
 ## Overview
@@ -373,3 +421,6 @@ public:
 - **Dependencies**: Minimal external dependencies, optional integrations
 
 This architecture provides a solid foundation for high-performance logging while maintaining flexibility, extensibility, and ease of use.
+---
+
+*Last Updated: 2025-10-20*

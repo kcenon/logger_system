@@ -1,3 +1,48 @@
+> **Language:** **English** | [한국어](CHANGELOG_KO.md)
+
+## Table of Contents
+
+- [[2.9.0] - Phase 5 P2 Migration Guide for Existing Users (2025-09-10)](#290-phase-5-p2-migration-guide-for-existing-users-2025-09-10)
+  - [Added - Phase 5 Task P2 Complete Implementation](#added-phase-5-task-p2-complete-implementation)
+    - [Migration Support](#migration-support)
+  - [Enhanced](#enhanced)
+- [[2.8.0] - Phase 5 P3 Complete API Documentation (2025-09-10)](#280-phase-5-p3-complete-api-documentation-2025-09-10)
+  - [Added - Phase 5 Task P3 Complete Implementation](#added-phase-5-task-p3-complete-implementation)
+    - [API Documentation](#api-documentation)
+  - [Enhanced](#enhanced)
+- [[2.7.0] - Phase 5 P4 CI/CD Monitoring Dashboard (2025-09-10)](#270-phase-5-p4-cicd-monitoring-dashboard-2025-09-10)
+  - [Added - Phase 5 Task P4 Complete Implementation](#added-phase-5-task-p4-complete-implementation)
+    - [CI/CD Monitoring Dashboard](#cicd-monitoring-dashboard)
+  - [Fixed](#fixed)
+- [[2.6.0] - Phase 5 P5 CI/CD Pipeline with Sanitizers (2025-09-09)](#260-phase-5-p5-cicd-pipeline-with-sanitizers-2025-09-09)
+  - [Added - Phase 5 Task P5 Complete Implementation](#added-phase-5-task-p5-complete-implementation)
+    - [CI/CD Pipeline](#cicd-pipeline)
+  - [Improved](#improved)
+  - [Configuration Options](#configuration-options)
+- [[2.5.0] - Phase 5 P1 Comprehensive Test Suite (2025-09-09)](#250-phase-5-p1-comprehensive-test-suite-2025-09-09)
+  - [Added - Phase 5 Task P1 Partial Implementation](#added-phase-5-task-p1-partial-implementation)
+    - [Test Coverage Enhancements](#test-coverage-enhancements)
+  - [Improved](#improved)
+  - [Known Issues](#known-issues)
+  - [Technical Debt](#technical-debt)
+- [[2.4.0] - Phase 4 O1, O3 & O4 Implementation (2025-09-10)](#240-phase-4-o1-o3-o4-implementation-2025-09-10)
+  - [Added - Phase 4 Tasks O1, O3 & O4 Complete](#added-phase-4-tasks-o1-o3-o4-complete)
+    - [Batch Processing (O1)](#batch-processing-o1)
+    - [Small String Optimization (O3)](#small-string-optimization-o3)
+    - [Benchmark Suite (O4)](#benchmark-suite-o4)
+  - [Technical Details](#technical-details)
+- [[2.3.0] - Phase 3 Overflow Policy System Implementation (2025-09-10)](#230-phase-3-overflow-policy-system-implementation-2025-09-10)
+  - [Added - Phase 3 Task A4 Complete](#added-phase-3-task-a4-complete)
+  - [Technical Details](#technical-details)
+- [[2.2.0] - Phase 2 Core Systems Complete (2025-09-09)](#220-phase-2-core-systems-complete-2025-09-09)
+  - [Added - All Phase 2 Tasks Complete](#added-all-phase-2-tasks-complete)
+- [[2.1.0] - Phase 1 Foundation Complete (2025-09-09)](#210-phase-1-foundation-complete-2025-09-09)
+  - [Added](#added)
+- [[2.0.0] - Major Refactoring (2025-07-26)](#200-major-refactoring-2025-07-26)
+  - [Changed](#changed)
+- [[1.0.0] - Initial Release (2025-07-01)](#100-initial-release-2025-07-01)
+  - [Added](#added)
+
 # Changelog
 
 All notable changes to the Logger System will be documented in this file.
@@ -389,3 +434,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic logging functionality
 - Console and file writers
 - Log levels and filtering
+---
+
+*Last Updated: 2025-10-20*

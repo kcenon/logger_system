@@ -1,3 +1,5 @@
+> **Language:** **English** | [한국어](BEST_PRACTICES_KO.md)
+
 # Logger System Best Practices Guide
 
 ## Table of Contents
@@ -598,3 +600,6 @@ Following these best practices will help you:
 - Scale your logging infrastructure effectively
 
 Remember: Good logging is invisible when everything works but invaluable when things go wrong.
+---
+
+*Last Updated: 2025-10-20*
