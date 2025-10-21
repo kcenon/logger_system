@@ -102,18 +102,18 @@ if(BUILD_WITH_COMMON_SYSTEM)
 
     if(NOT common_system_FOUND)
         # Check for common_system in multiple locations with comprehensive search
-        # Priority order: CI/CD workspace variations -> sibling -> parent -> source tree locations
+        # Priority order: Local Sources/ directory -> CI/CD workspace -> sibling directories
         set(_LOGGER_COMMON_PATHS
-            # GitHub Actions: various checkout patterns
-            "$ENV{GITHUB_WORKSPACE}/common_system/include"                      # Standard GITHUB_WORKSPACE
-            "${CMAKE_CURRENT_SOURCE_DIR}/common_system/include"                 # Same directory as logger_system
-            "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"              # Sibling (sanitizers.yml pattern)
-            "${CMAKE_CURRENT_SOURCE_DIR}/../../common_system/include"           # Parent directory
-            "${CMAKE_SOURCE_DIR}/common_system/include"                         # Relative to source root
-            "${CMAKE_SOURCE_DIR}/../common_system/include"                      # Sibling to source root
-            # Local development paths
+            # Local development paths (HIGHEST PRIORITY - no embedded subfolders)
             "/Users/dongcheolshin/Sources/common_system/include"                # macOS development
             "/home/${USER}/Sources/common_system/include"                       # Linux development
+            # GitHub Actions: various checkout patterns
+            "$ENV{GITHUB_WORKSPACE}/common_system/include"                      # Standard GITHUB_WORKSPACE
+            "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"              # Sibling (sanitizers.yml pattern)
+            "${CMAKE_CURRENT_SOURCE_DIR}/../../common_system/include"           # Parent directory
+            "${CMAKE_SOURCE_DIR}/../common_system/include"                      # Sibling to source root
+            # REMOVED: ${CMAKE_CURRENT_SOURCE_DIR}/common_system/include - no longer using embedded subfolders
+            # REMOVED: ${CMAKE_SOURCE_DIR}/common_system/include - no longer using embedded subfolders
         )
 
         message(STATUS "Searching for common_system in the following locations:")
@@ -234,22 +234,37 @@ endif()
 if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
     # Check if thread_system components are already added
     if(NOT TARGET interfaces)
-        # First try to find it as a sibling directory
-        if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/CMakeLists.txt")
-            message(STATUS "Found thread_system as sibling directory")
+        # Priority: Local Sources/ directory first, then sibling directory
+        set(_THREAD_SYSTEM_SEARCH_PATHS
+            "/Users/dongcheolshin/Sources/thread_system"                # macOS development (HIGHEST PRIORITY)
+            "/home/${USER}/Sources/thread_system"                        # Linux development
+            "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system"               # Sibling directory (fallback for CI)
+        )
+
+        set(_THREAD_SYSTEM_PATH "")
+        foreach(_path ${_THREAD_SYSTEM_SEARCH_PATHS})
+            if(EXISTS "${_path}/CMakeLists.txt")
+                message(STATUS "Found thread_system at: ${_path}")
+                set(_THREAD_SYSTEM_PATH "${_path}")
+                break()
+            endif()
+        endforeach()
+
+        if(_THREAD_SYSTEM_PATH)
+            message(STATUS "Using thread_system from: ${_THREAD_SYSTEM_PATH}")
             # Build thread_system as submodule to avoid vcpkg issues
             # Force the cache variable to be set before processing subdirectory
             set(BUILD_THREADSYSTEM_AS_SUBMODULE ON CACHE BOOL "Build ThreadSystem as submodule" FORCE)
             set(BUILD_TESTS OFF CACHE BOOL "Disable tests for thread_system" FORCE)
             set(BUILD_SAMPLES OFF CACHE BOOL "Disable samples for thread_system" FORCE)
             # Set THREAD_SYSTEM_ROOT before adding subdirectory for utilities to find main include
-            set(THREAD_SYSTEM_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" CACHE PATH "Thread system root directory" FORCE)
-            add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../thread_system" "${CMAKE_BINARY_DIR}/thread_system_build")
+            set(THREAD_SYSTEM_ROOT "${_THREAD_SYSTEM_PATH}" CACHE PATH "Thread system root directory" FORCE)
+            add_subdirectory("${_THREAD_SYSTEM_PATH}" "${CMAKE_BINARY_DIR}/thread_system_build")
 
             # Fix utilities include path for CI environment
             if(TARGET utilities)
                 target_include_directories(utilities PUBLIC
-                    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
+                    $<BUILD_INTERFACE:${_THREAD_SYSTEM_PATH}/include>
                 )
             endif()
 

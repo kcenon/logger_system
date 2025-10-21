@@ -11,26 +11,41 @@ function(logger_find_thread_system)
         return()
     endif()
     
-    # First check if thread_system is available as a sibling directory
-    if(EXISTS "${CMAKE_SOURCE_DIR}/../thread_system" AND IS_DIRECTORY "${CMAKE_SOURCE_DIR}/../thread_system")
-        message(STATUS "Found thread_system as sibling directory")
-        
+    # Priority: Local Sources/ directory first, then sibling directory
+    set(_LOGGER_THREAD_SEARCH_PATHS
+        "/Users/dongcheolshin/Sources/thread_system"                # macOS development (HIGHEST PRIORITY)
+        "/home/${USER}/Sources/thread_system"                        # Linux development
+        "${CMAKE_SOURCE_DIR}/../thread_system"                       # Sibling directory (fallback for CI)
+    )
+
+    set(_LOGGER_THREAD_SYSTEM_PATH "")
+    foreach(_path ${_LOGGER_THREAD_SEARCH_PATHS})
+        if(EXISTS "${_path}" AND IS_DIRECTORY "${_path}")
+            message(STATUS "Found thread_system at: ${_path}")
+            set(_LOGGER_THREAD_SYSTEM_PATH "${_path}")
+            break()
+        endif()
+    endforeach()
+
+    if(_LOGGER_THREAD_SYSTEM_PATH)
+        message(STATUS "Using thread_system from: ${_LOGGER_THREAD_SYSTEM_PATH}")
+
         # Add thread_system subdirectory
-        add_subdirectory(${CMAKE_SOURCE_DIR}/../thread_system ${CMAKE_BINARY_DIR}/thread_system)
+        add_subdirectory(${_LOGGER_THREAD_SYSTEM_PATH} ${CMAKE_BINARY_DIR}/thread_system)
 
         if(TARGET utilities)
             target_include_directories(utilities PUBLIC
-                $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/../thread_system/include>
+                $<BUILD_INTERFACE:${_LOGGER_THREAD_SYSTEM_PATH}/include>
             )
         endif()
-        
+
         # Set flags to indicate thread_system is available
         set(THREAD_SYSTEM_FOUND TRUE PARENT_SCOPE)
         set(USE_THREAD_SYSTEM TRUE PARENT_SCOPE)
-        
+
         # Add compile definition
         add_compile_definitions(USE_THREAD_SYSTEM)
-        
+
         message(STATUS "Using thread_system for interfaces and utilities")
     else()
         # Try to find installed thread_system
