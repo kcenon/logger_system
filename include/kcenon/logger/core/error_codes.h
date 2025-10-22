@@ -60,7 +60,9 @@ using Result = ::common::Result<T>;
 using VoidResult = ::common::VoidResult;
 namespace interfaces = ::common::interfaces;
 using ::common::ok;
-using ::common::error;
+// Updated: error() renamed to make_error() in common_system to avoid namespace conflict
+using ::common::make_error;
+using ::common::Err;  // Alternative error creation function (Rust style)
 using ::common::is_ok;
 using ::common::is_error;
 using ::common::get_value;
