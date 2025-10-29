@@ -366,6 +366,16 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 $<INSTALL_INTERFACE:include>
         )
 
+    # Suppress warnings inherited from parent project
+    target_compile_options(LoggerSystem PRIVATE
+        -Wno-sign-conversion
+        -Wno-conversion
+        -Wno-float-equal
+        -Wno-double-promotion
+        -Wno-shadow
+        -Wno-unused-private-field
+    )
+
         # common_system integration (conditional)
         if(BUILD_WITH_COMMON_SYSTEM AND common_system_FOUND)
             message(STATUS "Logger System: Using common_system interfaces")
