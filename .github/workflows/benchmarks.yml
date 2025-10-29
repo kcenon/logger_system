@@ -3,15 +3,8 @@ name: Benchmarks
 on:
   push:
     branches: [ main, phase-* ]
-    paths:
-      - 'benchmarks/**'
-      - 'sources/**'
-      - '.github/workflows/benchmarks.yml'
   pull_request:
     branches: [ main ]
-    paths:
-      - 'benchmarks/**'
-      - 'sources/**'
   workflow_dispatch:
     inputs:
       save_baseline:
