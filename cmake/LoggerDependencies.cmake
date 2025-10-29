@@ -31,7 +31,12 @@ function(logger_find_thread_system)
         message(STATUS "Using thread_system from: ${_LOGGER_THREAD_SYSTEM_PATH}")
 
         # Add thread_system subdirectory
-        add_subdirectory(${_LOGGER_THREAD_SYSTEM_PATH} ${CMAKE_BINARY_DIR}/thread_system)
+        # Check if thread_system is already included
+        if(NOT TARGET utilities)
+            add_subdirectory(${_LOGGER_THREAD_SYSTEM_PATH} ${CMAKE_BINARY_DIR}/thread_system)
+        else()
+            message(STATUS "thread_system already included, skipping add_subdirectory")
+        endif()
 
         if(TARGET utilities)
             target_include_directories(utilities PUBLIC
