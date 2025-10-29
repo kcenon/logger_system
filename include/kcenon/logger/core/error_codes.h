@@ -67,9 +67,8 @@ using ::common::is_ok;
 using ::common::is_error;
 using ::common::get_value;
 using ::common::get_error;
-namespace error_codes {
-using namespace ::common::error_codes;
-} // namespace error_codes
+// Import common system error codes as namespace alias (not 'using namespace')
+namespace error_codes = ::common::error_codes;
 } // namespace common
 } // namespace kcenon
 #endif // KCENON_COMMON_RESULT_SHIM_DEFINED
