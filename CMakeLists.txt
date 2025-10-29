@@ -366,15 +366,26 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 $<INSTALL_INTERFACE:include>
         )
 
-    # Suppress warnings inherited from parent project
-    target_compile_options(LoggerSystem PRIVATE
-        -Wno-sign-conversion
-        -Wno-conversion
-        -Wno-float-equal
-        -Wno-double-promotion
-        -Wno-shadow
-        -Wno-unused-private-field
-    )
+        # Suppress warnings inherited from parent project
+        if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+            target_compile_options(LoggerSystem PRIVATE
+                -Wno-sign-conversion
+                -Wno-conversion
+                -Wno-float-equal
+                -Wno-double-promotion
+                -Wno-shadow
+                -Wno-unused-private-field
+            )
+        elseif(MSVC)
+            target_compile_options(LoggerSystem PRIVATE
+                /wd4244  # conversion from 'type1' to 'type2', possible loss of data
+                /wd4267  # conversion from 'size_t' to 'type', possible loss of data
+                /wd4305  # truncation from 'type1' to 'type2'
+                /wd4456  # declaration of 'identifier' hides previous local declaration
+                /wd4457  # declaration of 'identifier' hides function parameter
+                /wd4458  # declaration of 'identifier' hides class member
+            )
+        endif()
 
         # common_system integration (conditional)
         if(BUILD_WITH_COMMON_SYSTEM AND common_system_FOUND)
