@@ -31,6 +31,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/backends/standalone_backend.h>
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+    #include <kcenon/logger/backends/thread_system_backend.h>
+#endif
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/logger_types.h>
 #include <iostream>
@@ -91,22 +95,43 @@ public:
 #endif
     std::vector<std::unique_ptr<base_writer>> writers_;
     std::mutex writers_mutex_;  // Protects writers_ vector from concurrent modification
+    std::unique_ptr<backends::integration_backend> backend_;  // Integration backend
 
-    impl(bool async, std::size_t buffer_size)
+    impl(bool async, std::size_t buffer_size, std::unique_ptr<backends::integration_backend> backend)
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
         : async_mode_(async), buffer_size_(buffer_size), running_(false), metrics_enabled_(false),
-          min_level_(kcenon::thread::log_level::info) {
+          min_level_(kcenon::thread::log_level::info), backend_(std::move(backend)) {
 #else
         : async_mode_(async), buffer_size_(buffer_size), running_(false), metrics_enabled_(false),
-          min_level_(logger_system::log_level::info) {
+          min_level_(logger_system::log_level::info), backend_(std::move(backend)) {
 #endif
         // Reserve space to avoid reallocation during typical usage
         writers_.reserve(10);
+
+        // Auto-detect backend if not provided
+        if (!backend_) {
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+            backend_ = std::make_unique<backends::thread_system_backend>();
+#else
+            backend_ = std::make_unique<backends::standalone_backend>();
+#endif
+        }
+
+        // Initialize backend if required
+        if (backend_->requires_initialization()) {
+            backend_->initialize();
+        }
+    }
+
+    ~impl() {
+        if (backend_) {
+            backend_->shutdown();
+        }
     }
 };
 
-logger::logger(bool async, std::size_t buffer_size)
-    : pimpl_(std::make_unique<impl>(async, buffer_size)) {
+logger::logger(bool async, std::size_t buffer_size, std::unique_ptr<backends::integration_backend> backend)
+    : pimpl_(std::make_unique<impl>(async, buffer_size, std::move(backend))) {
     // Initialize logger with configuration
 }
 
@@ -193,6 +218,9 @@ void logger::log(log_level level, const std::string& message) {
     // Record metrics if enabled
     auto start_time = std::chrono::high_resolution_clock::now();
 
+    // Convert level using backend
+    auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(level));
+
     {
         // Lock writers_ vector to prevent concurrent modification during iteration
         std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
@@ -200,7 +228,7 @@ void logger::log(log_level level, const std::string& message) {
             if (writer) {
                 // Create a simple log entry and write it
                 auto now = std::chrono::system_clock::now();
-                writer->write(convert_log_level(level), message, "", 0, "", now);
+                writer->write(converted_level, message, "", 0, "", now);
             }
         }
     }
@@ -225,6 +253,9 @@ void logger::log(log_level level,
     // Record metrics if enabled
     auto start_time = std::chrono::high_resolution_clock::now();
 
+    // Convert level using backend
+    auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(level));
+
     {
         // Lock writers_ vector to prevent concurrent modification during iteration
         std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
@@ -232,7 +263,7 @@ void logger::log(log_level level,
             if (writer) {
                 // Create a log entry with source location
                 auto now = std::chrono::system_clock::now();
-                writer->write(convert_log_level(level), message, file, line, function, now);
+                writer->write(converted_level, message, file, line, function, now);
             }
         }
     }

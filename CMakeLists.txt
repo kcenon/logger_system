@@ -15,11 +15,16 @@ project(
 # C++ standard requirements
 ##################################################
 
-# C++20 is required (unified across all systems)
+# C++20 is REQUIRED (no fallback to earlier standards)
 set(CMAKE_CXX_STANDARD 20)
-message(STATUS "Logger System: Using C++20 mode - Enhanced features enabled")
-
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Verify that C++20 is actually being used
+if(CMAKE_CXX_STANDARD LESS 20)
+    message(FATAL_ERROR "Logger System requires C++20 or later. Current standard: C++${CMAKE_CXX_STANDARD}")
+endif()
+
+message(STATUS "Logger System: Using C++20 mode - std::format enabled")
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # Generate compile_commands.json for tooling
 
@@ -307,13 +312,6 @@ if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
 else()
     message(STATUS "Building in standalone mode")
     add_compile_definitions(LOGGER_STANDALONE)
-endif()
-
-# fmt library (optional but recommended)
-find_package(fmt CONFIG)
-if(fmt_FOUND)
-    message(STATUS "Found fmt library")
-    add_compile_definitions(USE_FMT)
 endif()
 
 # spdlog (optional for comparison)

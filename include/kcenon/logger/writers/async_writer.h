@@ -82,51 +82,38 @@ public:
     
     /**
      * @brief Stop the async writer thread
+     * @param force_flush If true, process all remaining messages before stopping
      */
-    void stop() {
+    void stop(bool force_flush = true) {
         if (!running_.exchange(false)) {
             return; // Already stopped
+        }
+
+        // Process remaining messages if requested
+        if (force_flush) {
+            std::lock_guard<std::mutex> lock(queue_mutex_);
+            size_t remaining_count = message_queue_.size();
+            if (remaining_count > 0) {
+                std::cerr << "[async_writer] Info: Processing " << remaining_count
+                          << " remaining messages before shutdown.\n";
+            }
         }
 
         // Signal the worker thread to stop
         {
             std::lock_guard<std::mutex> lock(queue_mutex_);
-            queue_cv_.notify_all();  // Use notify_all() to ensure signal is received
+            queue_cv_.notify_all();
         }
 
-        // Wait for the worker thread to finish with timeout to prevent deadlock
+        // Wait for the worker thread to finish (infinite wait - shutdown prioritizes safety)
         if (worker_thread_.joinable()) {
-            // Use a future to implement timeout for join()
-            auto join_future = std::async(std::launch::async, [this]() {
-                if (worker_thread_.joinable()) {
-                    worker_thread_.join();
-                }
-            });
-
-            // Wait for up to 5 seconds for the thread to finish
-            auto status = join_future.wait_for(std::chrono::seconds(5));
-
-            if (status == std::future_status::timeout) {
-                // Thread didn't finish in time - this is a serious issue
-                // Log warning and detach to prevent undefined behavior
-                std::cerr << "[async_writer] Warning: Worker thread did not stop within 5 seconds. "
-                          << "Detaching thread to prevent deadlock. Some messages may be lost.\n";
-
-                // Detach the thread to avoid std::terminate() in thread destructor
-                // Note: This means the thread will continue running in background
-                if (worker_thread_.joinable()) {
-                    worker_thread_.detach();
-                }
-            }
+            worker_thread_.join();
         }
 
-        // Process any remaining messages (only if thread was joined successfully)
-        // If thread was detached, this might race with the background thread
-        try {
-            flush_remaining();
-        } catch (const std::exception& e) {
-            std::cerr << "[async_writer] Error flushing remaining messages: "
-                      << e.what() << "\n";
+        // Verify all messages were processed
+        if (!message_queue_.empty()) {
+            std::cerr << "[async_writer] Warning: " << message_queue_.size()
+                      << " messages were not processed during shutdown.\n";
         }
     }
     

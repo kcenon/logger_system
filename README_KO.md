@@ -35,6 +35,27 @@ Logger System Project는 프로덕션 환경에서 사용 가능한 고성능 C+
 - **Dependency Injection**: fallback 메커니즘을 갖춘 선택적 런타임 컴포넌트 주입
 - **Monitoring 통합**: health check 및 metrics를 지원하는 플러그 가능한 monitoring backend
 
+### 🔒 보안 기능 (v3.0.0)
+- **안전한 키 저장소**: 자동 메모리 정리 기능을 갖춘 RAII 기반 암호화 키 관리
+  - OpenSSL `OPENSSL_cleanse()`를 사용한 안전한 메모리 삭제
+  - 파일 권한 강제 적용 (0600 - 소유자 읽기/쓰기만 허용)
+  - 암호학적으로 안전한 랜덤 키 생성
+- **경로 검증**: 포괄적인 파일 경로 보안
+  - 경로 탐색 공격 방지
+  - 심볼릭 링크 검증
+  - 기본 디렉터리 강제 적용
+  - 파일명 문자 제한
+- **시그널 핸들러 안전성**: 중앙화된 시그널 핸들러 관리
+  - 스레드 안전한 로거 등록
+  - 크래시 시나리오를 위한 긴급 flush (SIGSEGV, SIGABRT, SIGTERM, SIGINT)
+  - signal-safe 함수만 사용 (POSIX 준수)
+- **보안 감사 로깅**: 변조 방지 감사 추적
+  - JSON 형식 감사 항목
+  - 무결성 검증을 위한 HMAC-SHA256 서명
+  - 수명주기, 암호화, 보안 이벤트 추적
+- **규정 준수 지원**: GDPR, PCI DSS, ISO 27001
+- **OWASP Top 10**: A01, A02, A03, A09 완화
+
 ### 🏗️ 아키텍처 하이라이트
 - **인터페이스 주도 설계**: abstract interface를 통한 명확한 분리 (ILogger, IMonitor, IMonitorable)
 - **모듈식 컴포넌트**: 플러그 가능한 writer, filter, formatter, sink

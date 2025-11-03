@@ -52,6 +52,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "metrics/logger_metrics.h"
 #include "di/di_container_interface.h"
 #include "di/di_container_factory.h"
+#include "../backends/integration_backend.h"
 
 // Use common_system interfaces when available
 #ifdef BUILD_WITH_COMMON_SYSTEM
@@ -187,17 +188,22 @@ public:
      * @brief Constructor with optional configuration
      * @param async Enable asynchronous logging (default: true)
      * @param buffer_size Size of the log buffer in bytes (default: 8192)
-     * 
+     * @param backend Integration backend for level conversion (default: auto-detect)
+     *
      * @details Creates a logger instance with the specified configuration.
      * In async mode, a background thread is created to process log messages,
      * providing better performance for high-throughput applications.
-     * 
+     *
+     * If no backend is specified, the logger will auto-detect the appropriate
+     * backend based on compile-time flags (USE_THREAD_SYSTEM_INTEGRATION).
+     *
      * @note The buffer_size parameter affects memory usage and batching efficiency.
      * Larger buffers can improve throughput but increase memory consumption.
-     * 
+     *
      * @since 1.0.0
      */
-    explicit logger(bool async = true, std::size_t buffer_size = 8192);
+    explicit logger(bool async = true, std::size_t buffer_size = 8192,
+                   std::unique_ptr<backends::integration_backend> backend = nullptr);
     
     /**
      * @brief Destructor - ensures all logs are flushed

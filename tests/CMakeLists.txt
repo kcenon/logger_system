@@ -98,3 +98,33 @@ add_test(NAME logger_thread_safety_test COMMAND logger_thread_safety_test)
 set_target_properties(logger_thread_safety_test PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
+
+# Security tests (Phase 4 - Task 4.1-4.4)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/security_test/security_test.cpp")
+    add_executable(logger_security_test unit/security_test/security_test.cpp)
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_security_test PRIVATE LoggerSystem GTest::gtest_main GTest::gtest)
+    else()
+        target_link_libraries(logger_security_test PRIVATE LoggerSystem gtest_main gtest)
+    endif()
+
+    # Link OpenSSL if available
+    find_package(OpenSSL)
+    if(OpenSSL_FOUND)
+        target_link_libraries(logger_security_test PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+        message(STATUS "Security tests: OpenSSL linked for secure key storage")
+    else()
+        message(WARNING "Security tests: OpenSSL not found, using fallback implementations")
+    endif()
+
+    # Link standard C++ library explicitly on macOS
+    if(APPLE)
+        target_link_libraries(logger_security_test PRIVATE c++)
+    endif()
+
+    add_test(NAME logger_security_test COMMAND logger_security_test)
+    set_target_properties(logger_security_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()

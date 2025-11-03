@@ -65,54 +65,94 @@ jobs:
         cmake -B build -S logger_system \
           -GNinja \
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
-          -DBUILD_BENCHMARKS=OFF \
+          -DBUILD_BENCHMARKS=ON \
           -DBUILD_TESTS=OFF \
           -DLOGGER_STANDALONE=ON
 
     - name: Build logger_system
       run: cmake --build build --config ${{ matrix.build_type }} -j
 
-    - name: Benchmark status
+    - name: Run benchmarks
       run: |
-        echo "⚠️ Benchmarks temporarily disabled due to API changes" >> $GITHUB_STEP_SUMMARY
-        echo "Logger API has been updated to use common interfaces." >> $GITHUB_STEP_SUMMARY
-        echo "Benchmark code needs to be updated to match new API." >> $GITHUB_STEP_SUMMARY
+        cd build/benchmarks
+        echo "Running benchmarks..."
+
+        # Run all benchmarks and output to JSON
+        for bench in logger_*_bench object_pool_bench; do
+          if [ -f "$bench" ]; then
+            echo "Running $bench..."
+            ./$bench --benchmark_format=json --benchmark_out=${bench}_results.json || true
+          fi
+        done
+
+        # Merge all results into single file
+        cd ../..
+        python3 -c "
+import json
+import glob
+results = {'benchmarks': []}
+for f in glob.glob('build/benchmarks/*_results.json'):
+    with open(f) as file:
+        data = json.load(file)
+        if 'benchmarks' in data:
+            results['benchmarks'].extend(data['benchmarks'])
+        if 'context' not in results and 'context' in data:
+            results['context'] = data['context']
+with open('build/benchmark_results_${{ matrix.os }}.json', 'w') as out:
+    json.dump(results, out, indent=2)
+        "
+
+        echo "✅ Benchmarks completed" >> $GITHUB_STEP_SUMMARY
+
+    - name: Upload benchmark results
+      uses: actions/upload-artifact@v4
+      with:
+        name: benchmark-results-${{ matrix.os }}
+        path: build/benchmark_results_${{ matrix.os }}.json
+        retention-days: 90
 
     - name: Save baseline (if requested)
       if: github.event.inputs.save_baseline == 'true' && github.ref == 'refs/heads/main'
       run: |
+        cd logger_system
         mkdir -p benchmarks/baselines
-        cp build/benchmarks/benchmark_results_${{ matrix.os }}.json \
+        cp ../build/benchmark_results_${{ matrix.os }}.json \
            benchmarks/baselines/baseline_${{ matrix.os }}_$(date +%Y%m%d).json
 
-    - name: Compare with baseline (if exists)
-      if: hashFiles('benchmarks/baselines/baseline_${{ matrix.os }}_*.json') != ''
+        echo "✅ Baseline saved: benchmarks/baselines/baseline_${{ matrix.os }}_$(date +%Y%m%d).json" >> $GITHUB_STEP_SUMMARY
+
+    - name: Compare with baseline
+      continue-on-error: true
       run: |
-        echo "Comparing with baseline..."
-        # Install compare.py from Google Benchmark tools
-        pip3 install --user scipy
+        cd logger_system
 
         # Find latest baseline
-        BASELINE=$(ls -t benchmarks/baselines/baseline_${{ matrix.os }}_*.json | head -1)
+        BASELINE=$(ls -t benchmarks/baselines/baseline_${{ matrix.os }}_*.json 2>/dev/null | head -1)
 
         if [ -f "$BASELINE" ]; then
-          echo "Baseline: $BASELINE"
-          echo "Current: build/benchmarks/benchmark_results_${{ matrix.os }}.json"
+          echo "## Benchmark Comparison" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Comparing with baseline: $BASELINE" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
 
-          # Download compare.py
-          curl -O https://raw.githubusercontent.com/google/benchmark/main/tools/compare.py
-          chmod +x compare.py
-
-          # Run comparison
-          python3 compare.py \
+          # Run comparison with 5% threshold
+          python3 scripts/compare_benchmarks.py \
             "$BASELINE" \
-            build/benchmarks/benchmark_results_${{ matrix.os }}.json
-        fi
+            ../build/benchmark_results_${{ matrix.os }}.json \
+            --threshold 5.0 \
+            --report ../build/benchmark_comparison.md \
+            --fail-on-regression || echo "::warning::Performance regressions detected"
 
-    - name: Check for performance regression
-      run: |
-        echo "Performance regression detection: TBD"
-        echo "Will be implemented in Phase 1 with baseline establishment"
+          # Add report to summary
+          if [ -f ../build/benchmark_comparison.md ]; then
+            cat ../build/benchmark_comparison.md >> $GITHUB_STEP_SUMMARY
+          fi
+        else
+          echo "## Benchmark Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "⚠️ No baseline found for comparison" >> $GITHUB_STEP_SUMMARY
+          echo "To create a baseline, run this workflow with 'save_baseline' input set to 'true'" >> $GITHUB_STEP_SUMMARY
+        fi
 
   report:
     name: Generate Benchmark Report
