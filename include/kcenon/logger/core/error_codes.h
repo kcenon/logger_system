@@ -304,6 +304,11 @@ enum class logger_error_code {
     decryption_failed = 1701,
     authentication_failed = 1702,
     sanitization_failed = 1703,
+    file_read_failed = 1704,
+    insecure_permissions = 1705,
+    path_traversal_detected = 1706,
+    invalid_key_size = 1707,
+    invalid_filename = 1708,
     
     // DI Container errors (1800-1899)
     di_not_available = 1800,
@@ -403,6 +408,16 @@ inline std::string logger_error_to_string(logger_error_code code) {
             return "Authentication failed";
         case logger_error_code::sanitization_failed:
             return "Sanitization failed";
+        case logger_error_code::file_read_failed:
+            return "Failed to read file";
+        case logger_error_code::insecure_permissions:
+            return "Insecure file permissions";
+        case logger_error_code::path_traversal_detected:
+            return "Path traversal attack detected";
+        case logger_error_code::invalid_key_size:
+            return "Invalid encryption key size";
+        case logger_error_code::invalid_filename:
+            return "Invalid filename";
             
         // DI Container errors
         case logger_error_code::di_not_available:
