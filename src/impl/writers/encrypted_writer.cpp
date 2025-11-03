@@ -6,6 +6,7 @@ All rights reserved.
 *****************************************************************************/
 
 #include <kcenon/logger/writers/encrypted_writer.h>
+#include <kcenon/logger/utils/error_handling_utils.h>
 #include <random>
 #include <fstream>
 #include <sstream>
@@ -38,30 +39,27 @@ result_void encrypted_writer::write(logger_system::log_level level,
                                     int line,
                                     const std::string& function,
                                     const std::chrono::system_clock::time_point& timestamp) {
-    
-    // Format the log entry
-    std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
-    
-    // Encrypt the formatted log
-    std::string encrypted;
-    try {
-        encrypted = encrypt_data(formatted);
-    } catch (const std::exception& e) {
-        return make_logger_error(logger_error_code::encryption_failed, e.what());
-    }
-    
-    // Write encrypted data as hex string (for demo purposes)
-    // In production, write binary data with proper framing
-    std::ostringstream hex_stream;
-    hex_stream << std::hex << std::setfill('0');
-    for (unsigned char c : encrypted) {
-        hex_stream << std::setw(2) << static_cast<int>(c);
-    }
-    
-    // Pass encrypted data to wrapped writer
-    return wrapped_writer_->write(level, 
-                                 "ENCRYPTED:" + hex_stream.str(),
-                                 "", 0, "", timestamp);
+
+    return utils::try_encryption_operation([&]() -> result_void {
+        // Format the log entry
+        std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
+
+        // Encrypt the formatted log
+        std::string encrypted = encrypt_data(formatted);
+
+        // Write encrypted data as hex string (for demo purposes)
+        // In production, write binary data with proper framing
+        std::ostringstream hex_stream;
+        hex_stream << std::hex << std::setfill('0');
+        for (unsigned char c : encrypted) {
+            hex_stream << std::setw(2) << static_cast<int>(c);
+        }
+
+        // Pass encrypted data to wrapped writer
+        return wrapped_writer_->write(level,
+                                     "ENCRYPTED:" + hex_stream.str(),
+                                     "", 0, "", timestamp);
+    });
 }
 
 result_void encrypted_writer::flush() {

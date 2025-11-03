@@ -52,20 +52,24 @@ public:
      * @param filename Path to the log file
      * @param max_size Maximum file size in bytes before rotation
      * @param max_files Maximum number of backup files to keep
+     * @param check_interval Number of writes between rotation checks (default: 100)
      */
     rotating_file_writer(const std::string& filename,
                         size_t max_size,
-                        size_t max_files);
+                        size_t max_files,
+                        size_t check_interval = 100);
 
     /**
      * @brief Construct with time-based rotation
      * @param filename Path to the log file
      * @param type Rotation type (daily or hourly)
      * @param max_files Maximum number of backup files to keep
+     * @param check_interval Number of writes between rotation checks (default: 100)
      */
     rotating_file_writer(const std::string& filename,
                         rotation_type type,
-                        size_t max_files);
+                        size_t max_files,
+                        size_t check_interval = 100);
 
     /**
      * @brief Construct with combined size and time rotation
@@ -73,12 +77,14 @@ public:
      * @param type Must be rotation_type::size_and_time
      * @param max_size Maximum file size in bytes before rotation
      * @param max_files Maximum number of backup files to keep
+     * @param check_interval Number of writes between rotation checks (default: 100)
      * @throws std::invalid_argument if type is not size_and_time
      */
     rotating_file_writer(const std::string& filename,
                         rotation_type type,
                         size_t max_size,
-                        size_t max_files);
+                        size_t max_files,
+                        size_t check_interval = 100);
 
     /**
      * @brief Write log entry with automatic rotation check
@@ -142,6 +148,8 @@ private:
     rotation_type rotation_type_;
     size_t max_size_;
     size_t max_files_;
+    size_t check_interval_;           ///< Number of writes between rotation checks
+    size_t writes_since_check_{0};    ///< Counter for writes since last check
     std::string base_filename_;
     std::string file_extension_;
     std::chrono::system_clock::time_point last_rotation_time_;

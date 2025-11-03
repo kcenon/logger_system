@@ -11,6 +11,7 @@ All rights reserved.
 #include <string>
 #include <chrono>
 #include <functional>
+#include <format>
 
 // Check if common_system is available
 #ifdef BUILD_WITH_COMMON_SYSTEM
@@ -118,7 +119,7 @@ public:
 
         try {
             // Create formatted message with location info
-            std::string formatted = fmt::format("[{}:{}:{}] {}",
+            std::string formatted = std::format("[{}:{}:{}] {}",
                 file, line, function, message);
             logger_->log(from_common_level(level), formatted);
             return ::common::VoidResult(std::monostate{});
@@ -140,7 +141,7 @@ public:
             // Format the entry with location if available
             std::string message = entry.message;
             if (!entry.file.empty()) {
-                message = fmt::format("[{}:{}:{}] {}",
+                message = std::format("[{}:{}:{}] {}",
                     entry.file, entry.line, entry.function, entry.message);
             }
 

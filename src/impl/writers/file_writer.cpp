@@ -6,6 +6,7 @@ All rights reserved.
 *****************************************************************************/
 
 #include <kcenon/logger/writers/file_writer.h>
+#include <kcenon/logger/utils/error_handling_utils.h>
 #include <filesystem>
 #include <ctime>
 #include <iostream>
@@ -31,38 +32,36 @@ result_void file_writer::write(logger_system::log_level level,
                                const std::string& function,
                                const std::chrono::system_clock::time_point& timestamp) {
     std::lock_guard<std::mutex> lock(write_mutex_);
-    
-    if (!file_stream_.is_open()) {
-        return make_logger_error(logger_error_code::file_write_failed,
-                                "File stream is not open");
-    }
-    
-    std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
-    
-    try {
-        file_stream_ << formatted << std::endl;
+
+    return utils::try_write_operation([&]() -> result_void {
+        // Check precondition
+        auto check = utils::check_condition(
+            file_stream_.is_open(),
+            logger_error_code::file_write_failed,
+            "File stream is not open"
+        );
+        if (!check) return check;
+
+        // Format and write
+        std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
+        file_stream_ << formatted << '\n';
         bytes_written_.fetch_add(formatted.size() + 1);  // +1 for newline
-        
-        if (!file_stream_.good()) {
-            return make_logger_error(logger_error_code::file_write_failed,
-                                    "Failed to write to file stream");
-        }
-        return {}; // Success
-    } catch (const std::exception& e) {
-        return make_logger_error(logger_error_code::file_write_failed, e.what());
-    }
+
+        // Verify stream state
+        return utils::check_stream_state(file_stream_, "write");
+    });
 }
 
 result_void file_writer::flush() {
     std::lock_guard<std::mutex> lock(write_mutex_);
-    if (file_stream_.is_open()) {
-        file_stream_.flush();
-        if (file_stream_.fail()) {
-            return make_logger_error(logger_error_code::flush_timeout,
-                                    "Failed to flush file stream");
+
+    return utils::try_write_operation([&]() -> result_void {
+        if (file_stream_.is_open()) {
+            file_stream_.flush();
+            return utils::check_stream_state(file_stream_, "flush");
         }
-    }
-    return {}; // Success
+        return {}; // Success - no-op if file is not open
+    }, logger_error_code::flush_timeout);
 }
 
 result_void file_writer::reopen() {
@@ -87,41 +86,39 @@ result_void file_writer::open() {
     // This ensures thread safety with concurrent operations
     // In debug builds, consider adding: assert(write_mutex_.try_lock() == false)
 
-    try {
+    return utils::try_open_operation([&]() -> result_void {
         // Create directory if it doesn't exist
         std::filesystem::path file_path(filename_);
         std::filesystem::path dir = file_path.parent_path();
-        if (!dir.empty() && !std::filesystem::exists(dir)) {
-            if (!std::filesystem::create_directories(dir)) {
-                return make_logger_error(logger_error_code::file_permission_denied,
-                                        "Failed to create directory: " + dir.string());
-            }
-        }
+
+        auto dir_result = utils::ensure_directory_exists(dir);
+        if (!dir_result) return dir_result;
 
         // Open file
         auto mode = append_mode_ ? std::ios::app : std::ios::trunc;
         file_stream_.open(filename_, std::ios::out | mode);
 
-        if (file_stream_.is_open()) {
-            // Set buffer
-            file_stream_.rdbuf()->pubsetbuf(buffer_.get(), buffer_size_);
+        // Check if file opened successfully
+        auto check = utils::check_condition(
+            file_stream_.is_open(),
+            logger_error_code::file_open_failed,
+            "Failed to open file: " + filename_
+        );
+        if (!check) return check;
 
-            // Get current file size if appending
-            if (append_mode_) {
-                file_stream_.seekp(0, std::ios::end);
-                bytes_written_ = file_stream_.tellp();
-            } else {
-                bytes_written_ = 0;
-            }
+        // Set buffer
+        file_stream_.rdbuf()->pubsetbuf(buffer_.get(), buffer_size_);
 
-            return {}; // Success
+        // Get current file size if appending
+        if (append_mode_) {
+            file_stream_.seekp(0, std::ios::end);
+            bytes_written_ = file_stream_.tellp();
         } else {
-            return make_logger_error(logger_error_code::file_open_failed,
-                                    "Failed to open file: " + filename_);
+            bytes_written_ = 0;
         }
-    } catch (const std::exception& e) {
-        return make_logger_error(logger_error_code::file_open_failed, e.what());
-    }
+
+        return {}; // Success
+    });
 }
 
 } // namespace kcenon::logger

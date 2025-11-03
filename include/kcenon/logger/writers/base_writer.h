@@ -47,6 +47,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/error_codes.h>
 #include "../interfaces/log_writer_interface.h"
 #include "../interfaces/log_entry.h"
+#include "../interfaces/log_formatter_interface.h"
 
 // Conditional monitoring interface (Phase 2.2.5)
 #ifdef BUILD_WITH_COMMON_SYSTEM
@@ -135,6 +136,18 @@ class base_writer : public log_writer_interface
 #endif
 {
 public:
+    /**
+     * @brief Constructor with optional formatter
+     * @param formatter Custom formatter (default: timestamp_formatter)
+     *
+     * @details If no formatter is provided, a default timestamp_formatter is created.
+     * This allows writers to use custom formatting strategies while maintaining
+     * backward compatibility.
+     *
+     * @since 1.2.0 (Phase 3)
+     */
+    explicit base_writer(std::unique_ptr<log_formatter_interface> formatter = nullptr);
+
     virtual ~base_writer() = default;
     
     /**
@@ -305,9 +318,44 @@ public:
     }
 #endif // BUILD_WITH_COMMON_SYSTEM
 
+    /**
+     * @brief Set a custom formatter
+     * @param formatter The formatter to use
+     *
+     * @details Allows changing the formatter at runtime. Ownership is transferred
+     * to the writer. This enables dynamic format switching (e.g., text to JSON).
+     *
+     * @note Thread-safety: Caller must ensure no concurrent writes during formatter change.
+     *
+     * @since 1.2.0 (Phase 3)
+     */
+    void set_formatter(std::unique_ptr<log_formatter_interface> formatter);
+
+    /**
+     * @brief Get the current formatter
+     * @return Pointer to current formatter (non-owning)
+     *
+     * @since 1.2.0 (Phase 3)
+     */
+    log_formatter_interface* get_formatter() const;
+
 protected:
     /**
-     * @brief Format a log entry to a human-readable string
+     * @brief Format a log entry using the current formatter
+     * @param entry The log entry to format
+     * @return Formatted string ready for output
+     *
+     * @details Uses the configured formatter to convert the log entry to a string.
+     * This is the recommended method for formatting in derived classes.
+     *
+     * @note Thread-safe if the formatter is thread-safe.
+     *
+     * @since 1.2.0 (Phase 3)
+     */
+    std::string format_log_entry(const log_entry& entry) const;
+
+    /**
+     * @brief Format a log entry to a human-readable string (legacy API)
      * @param level Log severity level
      * @param message Log message text
      * @param file Source file path
@@ -315,72 +363,75 @@ protected:
      * @param function Function name
      * @param timestamp Time of log entry
      * @return Formatted string ready for output
-     * 
+     *
      * @details Provides a default formatting implementation that derived classes
      * can use. The format includes timestamp, level, message, and optional source
      * location. Color codes are included if color output is enabled.
-     * 
+     *
+     * @deprecated Use format_log_entry(const log_entry&) instead.
+     * This method is provided for backward compatibility and will be removed
+     * in a future version. It internally converts parameters to log_entry and
+     * uses the formatter.
+     *
      * @note Format: "[YYYY-MM-DD HH:MM:SS.mmm] [LEVEL] message [file:line in function()]"
-     * 
-     * @example
-     * @code
-     * std::string formatted = format_log_entry(
-     *     log_level::error,
-     *     "Connection failed",
-     *     "network.cpp",
-     *     42,
-     *     "connect",
-     *     std::chrono::system_clock::now()
-     * );
-     * // Result: "[2025-01-10 14:30:15.123] [ERROR] Connection failed [network.cpp:42 in connect()]"
-     * @endcode
-     * 
+     *
      * @since 1.0.0
      */
+    [[deprecated("Use format_log_entry(const log_entry&) instead")]]
     std::string format_log_entry(logger_system::log_level level,
                                 const std::string& message,
                                 const std::string& file,
                                 int line,
                                 const std::string& function,
                                 const std::chrono::system_clock::time_point& timestamp);
-    
+
     /**
      * @brief Convert log level to string representation
      * @param level Log level to convert
      * @return String representation of the level
-     * 
+     *
      * @details Maps log levels to human-readable strings:
      * - trace -> "TRACE"
      * - debug -> "DEBUG"
      * - info -> "INFO"
      * - warning -> "WARNING"
      * - error -> "ERROR"
-     * 
+     *
+     * @deprecated This method is deprecated. Formatting is now handled by formatters.
+     *
      * @since 1.0.0
      */
+    [[deprecated("Formatting is now handled by formatters")]]
     std::string level_to_string(logger_system::log_level level) const;
-    
+
     /**
      * @brief Get ANSI color code for the specified log level
      * @param level Log level to get color for
      * @return ANSI escape sequence for color, or empty string if color is disabled
-     * 
+     *
      * @details Returns appropriate ANSI color codes for terminal output:
      * - trace -> Gray/Dim
      * - debug -> Cyan
      * - info -> Green
      * - warning -> Yellow
      * - error -> Red
-     * 
+     *
      * @note Returns empty string if use_color() is false.
-     * 
+     *
      * @warning Only use for terminals that support ANSI escape codes.
-     * 
+     *
+     * @deprecated This method is deprecated. Formatting is now handled by formatters.
+     *
      * @since 1.0.0
      */
+    [[deprecated("Formatting is now handled by formatters")]]
     std::string level_to_color(logger_system::log_level level) const;
-    
+
 private:
+    /** Current formatter (owns the formatter) */
+    std::unique_ptr<log_formatter_interface> formatter_;
+
+    /** Legacy color setting */
     bool use_color_ = true;
 };
 

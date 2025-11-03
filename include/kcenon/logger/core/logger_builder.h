@@ -70,6 +70,11 @@ All rights reserved.
 // #include "config_strategy_interface.h"
 // #include "configuration_templates.h"
 #include "logger.h"
+#include "../backends/integration_backend.h"
+#include "../backends/standalone_backend.h"
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+    #include "../backends/thread_system_backend.h"
+#endif
 #include "../writers/base_writer.h"
 #include "../writers/batch_writer.h"
 // TODO: Implement filtering system
@@ -589,6 +594,55 @@ public:
     */
     
     /**
+     * @brief Set integration backend explicitly
+     * @param backend Custom integration backend
+     * @return Reference to builder for chaining
+     *
+     * @details Allows setting a custom integration backend instead of using
+     * the auto-detected one. Useful for testing or custom integration scenarios.
+     *
+     * @since 1.2.0
+     */
+    logger_builder& with_backend(std::unique_ptr<backends::integration_backend> backend) {
+        backend_ = std::move(backend);
+        return *this;
+    }
+
+    /**
+     * @brief Use thread_system backend explicitly
+     * @return Reference to builder for chaining
+     *
+     * @details Explicitly selects the thread_system integration backend.
+     * This method is only available when USE_THREAD_SYSTEM_INTEGRATION is defined.
+     *
+     * @throws std::runtime_error if thread_system is not available
+     *
+     * @since 1.2.0
+     */
+    logger_builder& with_thread_system_backend() {
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+        backend_ = std::make_unique<backends::thread_system_backend>();
+#else
+        throw std::runtime_error("thread_system backend not available (USE_THREAD_SYSTEM_INTEGRATION not defined)");
+#endif
+        return *this;
+    }
+
+    /**
+     * @brief Use standalone backend explicitly
+     * @return Reference to builder for chaining
+     *
+     * @details Explicitly selects the standalone integration backend.
+     * This is the default backend when no external integration is required.
+     *
+     * @since 1.2.0
+     */
+    logger_builder& with_standalone_backend() {
+        backend_ = std::make_unique<backends::standalone_backend>();
+        return *this;
+    }
+
+    /**
      * @brief Set error handler
      * @param handler Error handler function
      * @return Reference to builder for chaining
@@ -684,8 +738,17 @@ public:
             );
         }
         
+        // Auto-detect backend if not explicitly set
+        if (!backend_) {
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+            backend_ = std::make_unique<backends::thread_system_backend>();
+#else
+            backend_ = std::make_unique<backends::standalone_backend>();
+#endif
+        }
+
         // Create logger with validated configuration
-        auto logger_instance = std::make_unique<logger>(config_.async, config_.buffer_size);
+        auto logger_instance = std::make_unique<logger>(config_.async, config_.buffer_size, std::move(backend_));
         
         // Apply configuration settings
         logger_instance->set_min_level(config_.min_level);
@@ -766,6 +829,7 @@ private:
     // TODO: Implement filtering system
     // std::vector<std::unique_ptr<log_filter>> filters_;
     std::unique_ptr<log_formatter_interface> formatter_;
+    std::unique_ptr<backends::integration_backend> backend_;  // Integration backend (Phase 3.2)
     // TODO: Re-enable when strategy pattern is implemented
     // std::vector<std::unique_ptr<config_strategy_interface>> strategies_;
     mutable logger_config built_config_;  // Store last built configuration
