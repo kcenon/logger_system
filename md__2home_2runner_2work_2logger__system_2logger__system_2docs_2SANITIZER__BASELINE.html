@@ -96,17 +96,17 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE__KO.html">한국어</a> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md879"></a>
+<h1><a class="anchor" id="autotoc_md893"></a>
 logger_system Sanitizer Baseline</h1>
 <p><b>Phase</b>: 0 - Foundation and Tooling <b>Task</b>: 0.1 - CI/CD Pipeline Enhancement <b>Date Created</b>: 2025-10-07 <b>Status</b>: Baseline Establishment</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md881"></a>
+<h2><a class="anchor" id="autotoc_md895"></a>
 Executive Summary</h2>
 <p>This document records the baseline sanitizer warnings for logger_system. During Phase 0, sanitizer tests are configured and running, but warnings are allowed to establish a baseline. Phase 1 will address thread safety issues identified by sanitizers.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md883"></a>
+<h2><a class="anchor" id="autotoc_md897"></a>
 Sanitizer Configuration</h2>
-<h3><a class="anchor" id="autotoc_md884"></a>
+<h3><a class="anchor" id="autotoc_md898"></a>
 Enabled Sanitizers</h3>
 <ol type="1">
 <li><b>ThreadSanitizer (TSan)</b><ul>
@@ -129,9 +129,9 @@ Enabled Sanitizers</h3>
 </li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md886"></a>
+<h2><a class="anchor" id="autotoc_md900"></a>
 Baseline Warnings</h2>
-<h3><a class="anchor" id="autotoc_md887"></a>
+<h3><a class="anchor" id="autotoc_md901"></a>
 ThreadSanitizer Warnings</h3>
 <p><b>Status</b>: ⏳ To be measured</p>
 <table class="markdownTable">
@@ -153,7 +153,7 @@ ThreadSanitizer Warnings</h3>
 <li>Concurrent file handle access</li>
 <li>Async queue operations without proper synchronization</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md888"></a>
+<h3><a class="anchor" id="autotoc_md902"></a>
 AddressSanitizer Warnings</h3>
 <p><b>Status</b>: ⏳ To be measured</p>
 <table class="markdownTable">
@@ -171,7 +171,7 @@ AddressSanitizer Warnings</h3>
 <li>Buffer overruns in message formatting</li>
 <li>Use-after-free in async operations</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md889"></a>
+<h3><a class="anchor" id="autotoc_md903"></a>
 UndefinedBehaviorSanitizer Warnings</h3>
 <p><b>Status</b>: ⏳ To be measured</p>
 <table class="markdownTable">
@@ -185,9 +185,9 @@ UndefinedBehaviorSanitizer Warnings</h3>
 <td class="markdownTableBodyNone">Pointer operations   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">TBD   </td><td class="markdownTableBodyNone">0 warnings   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md891"></a>
+<h2><a class="anchor" id="autotoc_md905"></a>
 How to Run Sanitizers Locally</h2>
-<h3><a class="anchor" id="autotoc_md892"></a>
+<h3><a class="anchor" id="autotoc_md906"></a>
 ThreadSanitizer</h3>
 <div class="fragment"><div class="line">cd logger_system</div>
 <div class="line">cmake -B build -S . \</div>
@@ -198,7 +198,7 @@ ThreadSanitizer</h3>
 <div class="line"> </div>
 <div class="line">cmake --build build</div>
 <div class="line">cd build &amp;&amp; ctest --output-on-failure</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md893"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md907"></a>
 AddressSanitizer</h3>
 <div class="fragment"><div class="line">cd logger_system</div>
 <div class="line">cmake -B build -S . \</div>
@@ -209,7 +209,7 @@ AddressSanitizer</h3>
 <div class="line"> </div>
 <div class="line">cmake --build build</div>
 <div class="line">cd build &amp;&amp; ctest --output-on-failure</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md894"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md908"></a>
 UndefinedBehaviorSanitizer</h3>
 <div class="fragment"><div class="line">cd logger_system</div>
 <div class="line">cmake -B build -S . \</div>
@@ -221,7 +221,7 @@ UndefinedBehaviorSanitizer</h3>
 <div class="line">cmake --build build</div>
 <div class="line">cd build &amp;&amp; ctest --output-on-failure</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md896"></a>
+<h2><a class="anchor" id="autotoc_md910"></a>
 CI/CD Integration</h2>
 <p>Sanitizers run automatically on:</p><ul>
 <li>Every push to main/phase-* branches</li>
@@ -230,7 +230,7 @@ CI/CD Integration</h2>
 </ul>
 <p>See <code>.github/workflows/sanitizers.yml</code> for configuration.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md898"></a>
+<h2><a class="anchor" id="autotoc_md912"></a>
 Phase 1 Action Items</h2>
 <p>Based on baseline measurements, Phase 1 will address:</p>
 <ol type="1">
@@ -254,7 +254,7 @@ Phase 1 Action Items</h2>
 </li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md900"></a>
+<h2><a class="anchor" id="autotoc_md914"></a>
 Exemptions</h2>
 <p>Currently no exemptions. All sanitizer warnings will be addressed in Phase 1-2.</p>
 <hr  />
@@ -265,7 +265,7 @@ Exemptions</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 1 2025 04:54:12 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Nov 3 2025 16:39:02 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

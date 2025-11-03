@@ -96,9 +96,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html">한국어</a> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md719"></a>
+<h1><a class="anchor" id="autotoc_md733"></a>
 Logger System Migration Guide</h1>
-<h2><a class="anchor" id="autotoc_md720"></a>
+<h2><a class="anchor" id="autotoc_md734"></a>
 Table of Contents</h2>
 <ol type="1">
 <li>Overview</li>
@@ -110,14 +110,14 @@ Table of Contents</h2>
 <li>Step-by-Step Migration</li>
 <li>Common Issues and Solutions</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md721"></a>
+<h2><a class="anchor" id="autotoc_md735"></a>
 Overview</h2>
 <p>This guide helps you migrate to Logger System from:</p><ul>
 <li>Earlier versions of Logger System (1.x to 2.x)</li>
 <li>Other popular logging libraries (spdlog, Boost.Log, glog, log4cpp)</li>
 <li>Custom logging solutions</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md722"></a>
+<h3><a class="anchor" id="autotoc_md736"></a>
 Breaking Changes Summary (v2.0+)</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -133,11 +133,11 @@ Breaking Changes Summary (v2.0+)</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">DI Container   </td><td class="markdownTableBodyNone">Required   </td><td class="markdownTableBodyNone">Optional   </td><td class="markdownTableBodyNone">Low   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md723"></a>
+<h2><a class="anchor" id="autotoc_md737"></a>
 Version Migration</h2>
-<h3><a class="anchor" id="autotoc_md724"></a>
+<h3><a class="anchor" id="autotoc_md738"></a>
 From v1.x to v2.x</h3>
-<h4><a class="anchor" id="autotoc_md725"></a>
+<h4><a class="anchor" id="autotoc_md739"></a>
 1. Error Handling Migration</h4>
 <p><b>Old (v1.x):</b> </p><div class="fragment"><div class="line"><span class="keywordflow">try</span> {</div>
 <div class="line">    logger-&gt;add_writer(<span class="keyword">new</span> file_writer(<span class="stringliteral">&quot;app.log&quot;</span>));</div>
@@ -148,7 +148,7 @@ From v1.x to v2.x</h3>
 <div class="line"><span class="keywordflow">if</span> (!result) {</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed: &quot;</span> &lt;&lt; result.error().message() &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md726"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md740"></a>
 2. Memory Management Migration</h4>
 <p><b>Old (v1.x):</b> </p><div class="fragment"><div class="line"><span class="comment">// Manual memory management</span></div>
 <div class="line">base_writer* writer = <span class="keyword">new</span> file_writer(<span class="stringliteral">&quot;app.log&quot;</span>);</div>
@@ -157,7 +157,7 @@ From v1.x to v2.x</h3>
 </div><!-- fragment --><p><b>New (v2.x):</b> </p><div class="fragment"><div class="line"><span class="comment">// RAII with unique_ptr</span></div>
 <div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>);</div>
 <div class="line">logger-&gt;add_writer(std::move(writer));  <span class="comment">// Explicit ownership transfer</span></div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md727"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md741"></a>
 3. Configuration Migration</h4>
 <p><b>Old (v1.x):</b> </p><div class="fragment"><div class="line">logger* log = <span class="keyword">new</span> logger();</div>
 <div class="line">log-&gt;set_min_level(log_level::info);</div>
@@ -172,15 +172,15 @@ From v1.x to v2.x</h3>
 <div class="line">    .with_console_writer()</div>
 <div class="line">    .with_file_writer(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md728"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md742"></a>
 4. Logging API Migration</h4>
 <p><b>Old (v1.x):</b> </p><div class="fragment"><div class="line">LOG_INFO(logger, <span class="stringliteral">&quot;Message with %s&quot;</span>, param);</div>
 <div class="line">LOG_DEBUG_F(logger, <span class="stringliteral">&quot;Formatted: {}&quot;</span>, value);</div>
 </div><!-- fragment --><p><b>New (v2.x):</b> </p><div class="fragment"><div class="line">logger-&gt;info(<span class="stringliteral">&quot;Message with param&quot;</span>, {{<span class="stringliteral">&quot;param&quot;</span>, param}});</div>
 <div class="line">logger-&gt;debug(<span class="stringliteral">&quot;Message&quot;</span>, {{<span class="stringliteral">&quot;value&quot;</span>, value}});</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md729"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md743"></a>
 API Changes</h2>
-<h3><a class="anchor" id="autotoc_md730"></a>
+<h3><a class="anchor" id="autotoc_md744"></a>
 Core Logger API</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -200,7 +200,7 @@ Core Logger API</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>shutdown()</code>   </td><td class="markdownTableBodyNone">Destructor   </td><td class="markdownTableBodyNone">Automatic cleanup   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md731"></a>
+<h3><a class="anchor" id="autotoc_md745"></a>
 Writer API</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -214,7 +214,7 @@ Writer API</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>set_buffer_size(n)</code>   </td><td class="markdownTableBodyNone">Constructor parameter   </td><td class="markdownTableBodyNone">Immutable after creation   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md732"></a>
+<h3><a class="anchor" id="autotoc_md746"></a>
 Configuration API</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -234,9 +234,9 @@ Configuration API</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>config.max_files</code>   </td><td class="markdownTableBodyNone"><code>with_max_files(size_t)</code>   </td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md733"></a>
+<h2><a class="anchor" id="autotoc_md747"></a>
 Configuration Migration</h2>
-<h3><a class="anchor" id="autotoc_md734"></a>
+<h3><a class="anchor" id="autotoc_md748"></a>
 From INI/XML Configuration</h3>
 <p><b>Old (config.ini):</b> </p><div class="fragment"><div class="line">[logger]</div>
 <div class="line">level = INFO</div>
@@ -264,7 +264,7 @@ From INI/XML Configuration</h3>
 <div class="line">        .with_max_files(5)</div>
 <div class="line">        .build();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md735"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md749"></a>
 Environment-based Configuration</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> create_logger() {</div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> env = std::getenv(<span class="stringliteral">&quot;LOG_ENV&quot;</span>);</div>
@@ -288,9 +288,9 @@ Environment-based Configuration</h3>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">return</span> builder.build();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md736"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md750"></a>
 Migration from Other Libraries</h2>
-<h3><a class="anchor" id="autotoc_md737"></a>
+<h3><a class="anchor" id="autotoc_md751"></a>
 From spdlog</h3>
 <div class="fragment"><div class="line"><span class="comment">// spdlog</span></div>
 <div class="line"><span class="preprocessor">#include &quot;spdlog/spdlog.h&quot;</span></div>
@@ -312,7 +312,7 @@ From spdlog</h3>
 <div class="line">    </div>
 <div class="line">logger-&gt;info(<span class="stringliteral">&quot;Hello World&quot;</span>);</div>
 <div class="line">logger-&gt;error(<span class="stringliteral">&quot;Error code&quot;</span>, {{<span class="stringliteral">&quot;code&quot;</span>, 404}});</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md738"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md752"></a>
 spdlog Pattern Migration</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -332,7 +332,7 @@ spdlog Pattern Migration</h4>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>%@</code>   </td><td class="markdownTableBodyNone"><code>source%</code>   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md739"></a>
+<h3><a class="anchor" id="autotoc_md753"></a>
 From Boost.Log</h3>
 <div class="fragment"><div class="line"><span class="comment">// Boost.Log</span></div>
 <div class="line"><span class="preprocessor">#include &lt;boost/log/trivial.hpp&gt;</span></div>
@@ -353,7 +353,7 @@ From Boost.Log</h3>
 <div class="line">    </div>
 <div class="line">logger-&gt;info(<span class="stringliteral">&quot;An informational message&quot;</span>);</div>
 <div class="line">logger-&gt;error(<span class="stringliteral">&quot;An error message&quot;</span>);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md740"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md754"></a>
 From Google glog</h3>
 <div class="fragment"><div class="line"><span class="comment">// glog</span></div>
 <div class="line"><span class="preprocessor">#include &lt;glog/logging.h&gt;</span></div>
@@ -373,7 +373,7 @@ From Google glog</h3>
 <div class="line">    logger-&gt;critical(<span class="stringliteral">&quot;Condition failed&quot;</span>);</div>
 <div class="line">    std::abort();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md741"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md755"></a>
 From log4cpp</h3>
 <div class="fragment"><div class="line"><span class="comment">// log4cpp</span></div>
 <div class="line"><span class="preprocessor">#include &lt;log4cpp/Category.hh&gt;</span></div>
@@ -395,9 +395,9 @@ From log4cpp</h3>
 <div class="line">    </div>
 <div class="line">logger-&gt;info(<span class="stringliteral">&quot;Information message&quot;</span>);</div>
 <div class="line">logger-&gt;error(<span class="stringliteral">&quot;Error message&quot;</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md742"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md756"></a>
 Compatibility Wrappers</h2>
-<h3><a class="anchor" id="autotoc_md743"></a>
+<h3><a class="anchor" id="autotoc_md757"></a>
 Legacy API Wrapper</h3>
 <p>Create a compatibility header for gradual migration:</p>
 <div class="fragment"><div class="line"><span class="comment">// compatibility/logger_v1_compat.h</span></div>
@@ -449,7 +449,7 @@ Legacy API Wrapper</h3>
 <div class="line">                  &lt;&lt; <span class="stringliteral">&quot;Use logger_builder instead.\n&quot;</span>;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md744"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md758"></a>
 Wrapper for Other Libraries</h3>
 <div class="fragment"><div class="line"><span class="comment">// compatibility/spdlog_compat.h</span></div>
 <div class="line"><span class="preprocessor">#pragma once</span></div>
@@ -504,9 +504,9 @@ Wrapper for Other Libraries</h3>
 <div class="line">        <span class="keywordflow">return</span> std::make_shared&lt;logger_wrapper&gt;(std::move(impl));</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md745"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md759"></a>
 Step-by-Step Migration</h2>
-<h3><a class="anchor" id="autotoc_md746"></a>
+<h3><a class="anchor" id="autotoc_md760"></a>
 Phase 1: Preparation (1-2 days)</h3>
 <ol type="1">
 <li><b>Audit Current Usage</b> <div class="fragment"><div class="line"># Find all logging calls</div>
@@ -522,7 +522,7 @@ Phase 1: Preparation (1-2 days)</h3>
 <div class="line"><span class="keyword">using namespace </span>logger_v1_compat;  <span class="comment">// Temporary during migration</span></div>
 </div><!-- fragment --></li>
 </ol>
-<h3><a class="anchor" id="autotoc_md747"></a>
+<h3><a class="anchor" id="autotoc_md761"></a>
 Phase 2: Core Migration (2-3 days)</h3>
 <ol type="1">
 <li><b>Update Logger Creation</b> <div class="fragment"><div class="line"><span class="comment">// Find and replace patterns</span></div>
@@ -542,7 +542,7 @@ Phase 2: Core Migration (2-3 days)</h3>
 <div class="line"><span class="comment">// NEW: log-&gt;info(&quot;User logged in&quot;, {{&quot;user&quot;, username}});</span></div>
 </div><!-- fragment --></li>
 </ol>
-<h3><a class="anchor" id="autotoc_md748"></a>
+<h3><a class="anchor" id="autotoc_md762"></a>
 Phase 3: Feature Migration (2-3 days)</h3>
 <ol type="1">
 <li><b>Migrate Configuration</b> <div class="fragment"><div class="line"><span class="comment">// Replace configuration files with code</span></div>
@@ -568,7 +568,7 @@ Phase 3: Feature Migration (2-3 days)</h3>
 <div class="line">};</div>
 </div><!-- fragment --></li>
 </ol>
-<h3><a class="anchor" id="autotoc_md749"></a>
+<h3><a class="anchor" id="autotoc_md763"></a>
 Phase 4: Optimization (1-2 days)</h3>
 <ol type="1">
 <li><b>Enable New Features</b> <div class="fragment"><div class="line"><span class="comment">// Take advantage of v2 features</span></div>
@@ -583,7 +583,7 @@ Phase 4: Optimization (1-2 days)</h3>
 <div class="line"><span class="comment">// Fix any remaining legacy calls</span></div>
 </div><!-- fragment --></li>
 </ol>
-<h3><a class="anchor" id="autotoc_md750"></a>
+<h3><a class="anchor" id="autotoc_md764"></a>
 Phase 5: Validation (1 day)</h3>
 <ol type="1">
 <li><b>Run Tests</b> <div class="fragment"><div class="line"># Run all tests</div>
@@ -604,9 +604,9 @@ Phase 5: Validation (1 day)</h3>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md751"></a>
+<h2><a class="anchor" id="autotoc_md765"></a>
 Common Issues and Solutions</h2>
-<h3><a class="anchor" id="autotoc_md752"></a>
+<h3><a class="anchor" id="autotoc_md766"></a>
 Issue 1: Memory Leaks with Raw Pointers</h3>
 <p><b>Problem:</b> </p><div class="fragment"><div class="line"><span class="comment">// Leak: writer not deleted if add_writer throws</span></div>
 <div class="line">base_writer* writer = <span class="keyword">new</span> file_writer(<span class="stringliteral">&quot;app.log&quot;</span>);</div>
@@ -617,7 +617,7 @@ Issue 1: Memory Leaks with Raw Pointers</h3>
 <div class="line"><span class="keywordflow">if</span> (!result) {</div>
 <div class="line">    <span class="comment">// Handle error - writer automatically cleaned up</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md753"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md767"></a>
 Issue 2: Exception Safety</h3>
 <p><b>Problem:</b> </p><div class="fragment"><div class="line"><span class="keywordflow">try</span> {</div>
 <div class="line">    logger-&gt;log(level, message);  <span class="comment">// May throw in v1</span></div>
@@ -629,7 +629,7 @@ Issue 2: Exception Safety</h3>
 <div class="line">    <span class="comment">// Fallback to stderr</span></div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;[FALLBACK] &quot;</span> &lt;&lt; message &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md754"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md768"></a>
 Issue 3: Thread Safety</h3>
 <p><b>Problem:</b> </p><div class="fragment"><div class="line"><span class="comment">// v1: Manual synchronization needed</span></div>
 <div class="line">std::mutex log_mutex;</div>
@@ -639,7 +639,7 @@ Issue 3: Thread Safety</h3>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Solution:</b> </p><div class="fragment"><div class="line"><span class="comment">// v2: Thread-safe by default</span></div>
 <div class="line">logger-&gt;log(level, message);  <span class="comment">// No external locking needed</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md755"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md769"></a>
 Issue 4: Configuration Changes</h3>
 <p><b>Problem:</b> </p><div class="fragment"><div class="line"><span class="comment">// v1: Runtime configuration changes</span></div>
 <div class="line">logger-&gt;set_min_level(log_level::debug);  <span class="comment">// Dynamic change</span></div>
@@ -648,7 +648,7 @@ Issue 4: Configuration Changes</h3>
 <div class="line">    .copy_from(logger)  <span class="comment">// Preserve existing config</span></div>
 <div class="line">    .with_min_level(log_level::debug)  <span class="comment">// Override level</span></div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md756"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md770"></a>
 Issue 5: Custom Formatters</h3>
 <p><b>Problem:</b> </p><div class="fragment"><div class="line"><span class="comment">// v1: String-based format</span></div>
 <div class="line">logger-&gt;set_format(<span class="stringliteral">&quot;[%time%] [%level%] %message%&quot;</span>);</div>
@@ -661,7 +661,7 @@ Issue 5: Custom Formatters</h3>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">logger-&gt;set_formatter(std::make_unique&lt;custom_formatter&gt;());</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md757"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md771"></a>
 Migration Checklist</h2>
 <ul>
 <li>[ ] Backup current codebase</li>
@@ -680,7 +680,7 @@ Migration Checklist</h2>
 <li>[ ] Code review</li>
 <li>[ ] Merge to main branch</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md758"></a>
+<h2><a class="anchor" id="autotoc_md772"></a>
 Support and Resources</h2>
 <ul>
 <li>API Documentation</li>
@@ -688,7 +688,7 @@ Support and Resources</h2>
 <li><a href="../samples/">Example Code</a></li>
 <li><a href="https://github.com/kcenon/logger_system/issues">Issue Tracker</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md759"></a>
+<h2><a class="anchor" id="autotoc_md773"></a>
 For migration assistance, please file an issue with the &lt;tt&gt;migration&lt;/tt&gt; label.</h2>
 <p><em>Last Updated: 2025-10-20</em> </p>
 </div></div><!-- contents -->
@@ -697,7 +697,7 @@ For migration assistance, please file an issue with the &lt;tt&gt;migration&lt;/
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 1 2025 04:54:12 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Nov 3 2025 16:39:02 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

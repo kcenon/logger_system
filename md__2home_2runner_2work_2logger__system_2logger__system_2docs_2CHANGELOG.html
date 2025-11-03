@@ -97,9 +97,21 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | 한국어 </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md441"></a>
+<h2><a class="anchor" id="autotoc_md442"></a>
 Table of Contents</h2>
 <ul>
+<li>[3.0.0] - Phase 4 Security Hardening Complete (2025-11-04)<ul>
+<li>Added - Phase 4 Tasks 4.1-4.4 Complete<ul>
+<li>Secure Key Storage</li>
+<li>Path Validation</li>
+<li>Signal Handler Safety</li>
+<li>Security Audit Logging</li>
+</ul>
+</li>
+<li>Security</li>
+<li>Tests</li>
+</ul>
+</li>
 <li>[2.9.0] - Phase 5 P2 Migration Guide for Existing Users (2025-09-10)<ul>
 <li>Added - Phase 5 Task P2 Complete Implementation<ul>
 <li>Migration Support</li>
@@ -175,15 +187,190 @@ Table of Contents</h2>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md442"></a>
+<h1><a class="anchor" id="autotoc_md443"></a>
 Changelog</h1>
 <p>All notable changes to the Logger System will be documented in this file.</p>
-<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>, and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
-<h2><a class="anchor" id="autotoc_md443"></a>
+<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,</p>
+<hr  />
+<h2><a class="anchor" id="autotoc_md445"></a>
+[3.0.0] - Phase 4 Security Hardening Complete (2025-11-04)</h2>
+<h3><a class="anchor" id="autotoc_md446"></a>
+Added - Phase 4 Tasks 4.1-4.4 Complete</h3>
+<h4><a class="anchor" id="autotoc_md447"></a>
+Secure Key Storage</h4>
+<ul>
+<li>**<code>secure_key</code> class**: RAII wrapper for encryption keys with automatic memory cleanup<ul>
+<li>Move-only semantics to prevent accidental key copying</li>
+<li>Uses <code>OPENSSL_cleanse()</code> for secure memory erasure on destruction</li>
+<li>Falls back to manual volatile-based zeroing when OpenSSL is unavailable</li>
+</ul>
+</li>
+<li>**<code>secure_key_storage</code> class**: Secure key management with comprehensive security features<ul>
+<li>Cryptographically secure random key generation using OpenSSL <code>RAND_bytes()</code></li>
+<li>File permission enforcement (0600 - owner read/write only)</li>
+<li>Path traversal prevention during key save/load operations</li>
+<li>Key size validation (default 32 bytes for AES-256)</li>
+<li>Permission verification on key load (rejects world/group-readable files)</li>
+</ul>
+</li>
+</ul>
+<p><b>Location</b>: <code>include/kcenon/logger/security/secure_key_storage.h</code></p>
+<h4><a class="anchor" id="autotoc_md448"></a>
+Path Validation</h4>
+<ul>
+<li>**<code>path_validator</code> class**: Comprehensive file path security validation<ul>
+<li>Path traversal attack prevention (blocks <code>../</code> and similar patterns)</li>
+<li>Symbolic link validation (optional, disabled by default for security)</li>
+<li>Base directory enforcement (all paths must be within allowed directory)</li>
+<li>Filename character restrictions (alphanumeric, hyphen, underscore, period only)</li>
+<li>Special filename protection (blocks <code>.</code>, <code>..</code>, empty names)</li>
+</ul>
+</li>
+<li><b>Utility methods</b>:<ul>
+<li><code>is_safe_filename()</code>: Character-level filename validation</li>
+<li><code>sanitize_filename()</code>: Automatic filename cleaning with invalid character replacement</li>
+<li><code>safe_join()</code>: Secure path joining with automatic validation</li>
+</ul>
+</li>
+</ul>
+<p><b>Location</b>: <code>include/kcenon/logger/security/path_validator.h</code></p>
+<h4><a class="anchor" id="autotoc_md449"></a>
+Signal Handler Safety</h4>
+<ul>
+<li>**<code>signal_manager</code> singleton**: Centralized signal handler management<ul>
+<li>Thread-safe logger registration/unregistration</li>
+<li>Automatic handler installation on first logger registration</li>
+<li>Automatic handler removal when last logger is unregistered</li>
+<li>Prevents global state conflicts with multiple logger instances</li>
+<li>Uses only signal-safe functions in handlers (POSIX compliant)</li>
+</ul>
+</li>
+<li>**<code>critical_logger_interface</code>**: Interface for emergency flushing<ul>
+<li>Signal-safe emergency buffer access</li>
+<li>Direct file descriptor access for write() syscalls</li>
+<li>No allocations or locks in signal context</li>
+</ul>
+</li>
+<li><b>Supported signals</b>: SIGSEGV, SIGABRT, SIGTERM, SIGINT</li>
+<li><b>Emergency flush</b>: Uses signal-safe <code>write()</code> and <code>fsync()</code> syscalls</li>
+</ul>
+<p><b>Location</b>: <code>include/kcenon/logger/security/signal_manager.h</code></p>
+<h4><a class="anchor" id="autotoc_md450"></a>
+Security Audit Logging</h4>
+<ul>
+<li>**<code>audit_logger</code> class**: Tamper-evident security event logging<ul>
+<li>JSON-formatted audit entries for easy parsing</li>
+<li>ISO8601 timestamp formatting</li>
+<li>JSON string escaping for safe data representation</li>
+<li>Optional HMAC-SHA256 signatures for tamper detection</li>
+<li>Configurable audit file location</li>
+</ul>
+</li>
+<li><b>Audit events tracked</b>:<ul>
+<li>Logger lifecycle: started, stopped</li>
+<li>Writer management: added, removed</li>
+<li>Encryption: key loaded, generated, rotated</li>
+<li>Security violations: permission denied, path traversal, insecure permissions</li>
+<li>Authentication: success, failure</li>
+<li>File access: granted, denied</li>
+</ul>
+</li>
+<li><b>HMAC tamper detection</b>:<ul>
+<li>Uses OpenSSL HMAC-SHA256 when available</li>
+<li>Falls back to simple hash (demonstration only)</li>
+<li>Signatures appended to audit log entries</li>
+<li><code>verify_entry()</code> method for integrity verification</li>
+</ul>
+</li>
+</ul>
+<p><b>Location</b>: <code>include/kcenon/logger/security/audit_logger.h</code></p>
+<h3><a class="anchor" id="autotoc_md451"></a>
+Security</h3>
+<ul>
+<li><b>New error codes added</b> (1704-1708):<ul>
+<li><code>file_read_failed</code>: File reading operation failed</li>
+<li><code>insecure_permissions</code>: File permissions too permissive</li>
+<li><code>path_traversal_detected</code>: Path traversal attack attempt</li>
+<li><code>invalid_key_size</code>: Encryption key size mismatch</li>
+<li><code>invalid_filename</code>: Filename contains invalid characters</li>
+</ul>
+</li>
+<li><b>OWASP Top 10 mitigations</b>:<ul>
+<li><b>A01:2021 - Broken Access Control</b>: Path validation prevents unauthorized file access</li>
+<li><b>A02:2021 - Cryptographic Failures</b>: Secure key storage with proper permissions</li>
+<li><b>A03:2021 - Injection</b>: Path and filename sanitization prevents path traversal</li>
+<li><b>A09:2021 - Security Logging Failures</b>: Comprehensive security audit logging</li>
+</ul>
+</li>
+<li><b>Compliance support</b>:<ul>
+<li><b>GDPR</b>: Encryption key management, access control, audit trails</li>
+<li><b>PCI DSS</b>: Log encryption, access logging, key rotation support</li>
+<li><b>ISO 27001</b>: Security policy documentation, risk mitigation, monitoring</li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md452"></a>
+Tests</h3>
+<ul>
+<li><b>18 comprehensive security tests</b> with 100% pass rate:<ul>
+<li><code>SecureKeyConstruction</code>: Key object creation</li>
+<li><code>SecureKeyMove</code>: Move semantics validation</li>
+<li><code>GenerateKey</code>: Cryptographically secure random generation</li>
+<li><code>SaveAndLoadKey</code>: File I/O with permission enforcement</li>
+<li><code>LoadKeyWithInsecurePermissions</code>: Permission rejection</li>
+<li><code>LoadKeyWithInvalidSize</code>: Size validation</li>
+<li><code>PathValidatorValidPath</code>: Valid path acceptance</li>
+<li><code>PathValidatorPathTraversal</code>: Attack detection</li>
+<li><code>PathValidatorSymlink</code>: Symbolic link handling</li>
+<li><code>PathValidatorInvalidFilename</code>: Character restriction</li>
+<li><code>IsSafeFilename</code>: Filename validation logic</li>
+<li><code>SanitizeFilename</code>: Automatic cleaning</li>
+<li><code>SafeJoin</code>: Secure path concatenation</li>
+<li><code>SafeJoinWithAbsolutePath</code>: Absolute path rejection</li>
+<li><code>AuditLoggerInitialize</code>: Audit system initialization</li>
+<li><code>AuditLoggerWithHMAC</code>: HMAC signature generation</li>
+<li><code>AuditLoggerSecurityEvents</code>: Event logging</li>
+<li><code>IntegrationSecureKeyWorkflow</code>: End-to-end workflow</li>
+</ul>
+</li>
+</ul>
+<p><b>Location</b>: <code>tests/unit/security_test/security_test.cpp</code></p>
+<h3><a class="anchor" id="autotoc_md453"></a>
+Dependencies</h3>
+<ul>
+<li><b>OpenSSL</b> (optional but recommended):<ul>
+<li>Used for: <code>RAND_bytes()</code>, <code>OPENSSL_cleanse()</code>, <code>HMAC()</code></li>
+<li>Fallback implementations provided when unavailable</li>
+<li>Detected automatically via CMake <code>find_package(OpenSSL)</code></li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md454"></a>
+Documentation</h3>
+<ul>
+<li><b>Phase 4 planning documents</b>:<ul>
+<li><code>LOGGER_SYSTEM_INTEGRATION.md</code>: Overall integration status</li>
+<li><code>LOGGER_SYSTEM_PHASE_4.md</code>: Detailed phase 4 specification</li>
+</ul>
+</li>
+<li><b>Updated error code documentation</b> in <code><a class="el" href="API__REFERENCE_8md.html">docs/API_REFERENCE.md</a></code></li>
+</ul>
+<h3><a class="anchor" id="autotoc_md455"></a>
+Technical Details</h3>
+<ul>
+<li><b>Memory safety</b>: All security-sensitive data (keys) cleared on destruction</li>
+<li><b>Thread safety</b>: Mutex-protected shared state in audit_logger and signal_manager</li>
+<li><b>Cross-platform</b>: Works on Linux, macOS, Windows (with conditional compilation)</li>
+<li><b>Zero-dependency core</b>: Security features work without external libraries (with fallbacks)</li>
+<li><b>Minimal overhead</b>: Path validation adds &lt;1μs per operation</li>
+</ul>
+<hr  />
+<p> and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<h2><a class="anchor" id="autotoc_md457"></a>
 [2.9.0] - Phase 5 P2 Migration Guide for Existing Users (2025-09-10)</h2>
-<h3><a class="anchor" id="autotoc_md444"></a>
+<h3><a class="anchor" id="autotoc_md458"></a>
 Added - Phase 5 Task P2 Complete Implementation</h3>
-<h4><a class="anchor" id="autotoc_md445"></a>
+<h4><a class="anchor" id="autotoc_md459"></a>
 Migration Support</h4>
 <ul>
 <li><b>Comprehensive Migration Guide</b> (docs/MIGRATION_GUIDE.md)<ul>
@@ -212,18 +399,18 @@ Migration Support</h4>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md446"></a>
+<h3><a class="anchor" id="autotoc_md460"></a>
 Enhanced</h3>
 <ul>
 <li>Added compatibility layer for smooth transition</li>
 <li>Provided migration path from popular logging libraries</li>
 <li>Included performance benchmarks for migration decisions</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md447"></a>
+<h2><a class="anchor" id="autotoc_md461"></a>
 [2.8.0] - Phase 5 P3 Complete API Documentation (2025-09-10)</h2>
-<h3><a class="anchor" id="autotoc_md448"></a>
+<h3><a class="anchor" id="autotoc_md462"></a>
 Added - Phase 5 Task P3 Complete Implementation</h3>
-<h4><a class="anchor" id="autotoc_md449"></a>
+<h4><a class="anchor" id="autotoc_md463"></a>
 API Documentation</h4>
 <ul>
 <li><b>Comprehensive API Documentation</b> (docs/API_DOCUMENTATION.md)<ul>
@@ -256,7 +443,7 @@ API Documentation</h4>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md450"></a>
+<h3><a class="anchor" id="autotoc_md464"></a>
 Enhanced</h3>
 <ul>
 <li>Improved code documentation with<dl class="params"><dt>Parameters</dt><dd>
@@ -271,11 +458,11 @@ return tags</li>
 <li>Added version information with <dl class="section since"><dt>Since</dt><dd>tags</dd></dl>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md451"></a>
+<h2><a class="anchor" id="autotoc_md465"></a>
 [2.7.0] - Phase 5 P4 CI/CD Monitoring Dashboard (2025-09-10)</h2>
-<h3><a class="anchor" id="autotoc_md452"></a>
+<h3><a class="anchor" id="autotoc_md466"></a>
 Added - Phase 5 Task P4 Complete Implementation</h3>
-<h4><a class="anchor" id="autotoc_md453"></a>
+<h4><a class="anchor" id="autotoc_md467"></a>
 CI/CD Monitoring Dashboard</h4>
 <ul>
 <li><b>Comprehensive Dashboard Documentation</b> (docs/CI_CD_DASHBOARD.md)<ul>
@@ -304,7 +491,7 @@ CI/CD Monitoring Dashboard</h4>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md454"></a>
+<h3><a class="anchor" id="autotoc_md468"></a>
 Fixed</h3>
 <ul>
 <li>Build errors related to missing headers</li>
@@ -312,11 +499,11 @@ Fixed</h3>
 <li>Namespace resolution issues</li>
 <li>Configuration template compatibility</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md455"></a>
+<h2><a class="anchor" id="autotoc_md469"></a>
 [2.6.0] - Phase 5 P5 CI/CD Pipeline with Sanitizers (2025-09-09)</h2>
-<h3><a class="anchor" id="autotoc_md456"></a>
+<h3><a class="anchor" id="autotoc_md470"></a>
 Added - Phase 5 Task P5 Complete Implementation</h3>
-<h4><a class="anchor" id="autotoc_md457"></a>
+<h4><a class="anchor" id="autotoc_md471"></a>
 CI/CD Pipeline</h4>
 <ul>
 <li><b>GitHub Actions Workflow</b><ul>
@@ -351,7 +538,7 @@ CI/CD Pipeline</h4>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md458"></a>
+<h3><a class="anchor" id="autotoc_md472"></a>
 Improved</h3>
 <ul>
 <li><b>Build System</b><ul>
@@ -368,7 +555,7 @@ Improved</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md459"></a>
+<h3><a class="anchor" id="autotoc_md473"></a>
 Configuration Options</h3>
 <ul>
 <li><code>LOGGER_ENABLE_SANITIZERS</code>: Enable sanitizers in debug builds</li>
@@ -377,11 +564,11 @@ Configuration Options</h3>
 <li><code>LOGGER_WARNINGS_AS_ERRORS</code>: Treat warnings as errors</li>
 <li><code>LOGGER_ENABLE_COVERAGE</code>: Enable code coverage reporting</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md460"></a>
+<h2><a class="anchor" id="autotoc_md474"></a>
 [2.5.0] - Phase 5 P1 Comprehensive Test Suite (2025-09-09)</h2>
-<h3><a class="anchor" id="autotoc_md461"></a>
+<h3><a class="anchor" id="autotoc_md475"></a>
 Added - Phase 5 Task P1 Partial Implementation</h3>
-<h4><a class="anchor" id="autotoc_md462"></a>
+<h4><a class="anchor" id="autotoc_md476"></a>
 Test Coverage Enhancements</h4>
 <ul>
 <li><b>Mock Implementations</b><ul>
@@ -421,7 +608,7 @@ Test Coverage Enhancements</h4>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md463"></a>
+<h3><a class="anchor" id="autotoc_md477"></a>
 Improved</h3>
 <ul>
 <li><b>Test Organization</b><ul>
@@ -440,25 +627,25 @@ Improved</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md464"></a>
+<h3><a class="anchor" id="autotoc_md478"></a>
 Known Issues</h3>
 <ul>
 <li>Some integration tests require full thread_system integration</li>
 <li>Certain template configurations need further tuning</li>
 <li>Build system needs refinement for standalone mode</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md465"></a>
+<h3><a class="anchor" id="autotoc_md479"></a>
 Technical Debt</h3>
 <ul>
 <li>Need to complete remaining test coverage to reach 80% target</li>
 <li>Mock implementations could be extended with more scenarios</li>
 <li>Stress tests need platform-specific optimizations</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md466"></a>
+<h2><a class="anchor" id="autotoc_md480"></a>
 [2.4.0] - Phase 4 O1, O3 &amp; O4 Implementation (2025-09-10)</h2>
-<h3><a class="anchor" id="autotoc_md467"></a>
+<h3><a class="anchor" id="autotoc_md481"></a>
 Added - Phase 4 Tasks O1, O3 &amp; O4 Complete</h3>
-<h4><a class="anchor" id="autotoc_md468"></a>
+<h4><a class="anchor" id="autotoc_md482"></a>
 Batch Processing (O1)</h4>
 <ul>
 <li><b>Batch Writer Implementation</b><ul>
@@ -484,7 +671,7 @@ Batch Processing (O1)</h4>
 </ul>
 </li>
 </ul>
-<h4><a class="anchor" id="autotoc_md469"></a>
+<h4><a class="anchor" id="autotoc_md483"></a>
 Small String Optimization (O3)</h4>
 <ul>
 <li><b>SSO Implementation</b><ul>
@@ -509,7 +696,7 @@ Small String Optimization (O3)</h4>
 </ul>
 </li>
 </ul>
-<h4><a class="anchor" id="autotoc_md470"></a>
+<h4><a class="anchor" id="autotoc_md484"></a>
 Benchmark Suite (O4)</h4>
 <ul>
 <li><b>Comprehensive Benchmark Suite</b><ul>
@@ -542,7 +729,7 @@ Benchmark Suite (O4)</h4>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md471"></a>
+<h3><a class="anchor" id="autotoc_md485"></a>
 Technical Details</h3>
 <ul>
 <li>Batch Writer: <code>sources/logger/writers/batch_writer.cpp</code> (186 lines), <code>batch_writer.h</code> (218 lines)</li>
@@ -552,9 +739,9 @@ Technical Details</h3>
 <li>Configuration: Added <code>enable_batch_writing</code> to <code>logger_config</code></li>
 <li>CMake: Enhanced benchmark build configuration with Google Benchmark v1.8.3</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md472"></a>
+<h2><a class="anchor" id="autotoc_md486"></a>
 [2.3.0] - Phase 3 Overflow Policy System Implementation (2025-09-10)</h2>
-<h3><a class="anchor" id="autotoc_md473"></a>
+<h3><a class="anchor" id="autotoc_md487"></a>
 Added - Phase 3 Task A4 Complete</h3>
 <ul>
 <li><b>Comprehensive Overflow Policy System</b><ul>
@@ -598,16 +785,16 @@ Added - Phase 3 Task A4 Complete</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md474"></a>
+<h3><a class="anchor" id="autotoc_md488"></a>
 Technical Details</h3>
 <ul>
 <li>Implementation: <code>sources/logger/flow/</code> (417 lines)</li>
 <li>Headers: <code>overflow_policy.h</code> with templated queue</li>
 <li>Build integration: Full CMake support</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md475"></a>
+<h2><a class="anchor" id="autotoc_md489"></a>
 [2.2.0] - Phase 2 Core Systems Complete (2025-09-09)</h2>
-<h3><a class="anchor" id="autotoc_md476"></a>
+<h3><a class="anchor" id="autotoc_md490"></a>
 Added - All Phase 2 Tasks Complete</h3>
 <ul>
 <li><b>Abstract DI Interface</b> [C1]<ul>
@@ -639,9 +826,9 @@ Added - All Phase 2 Tasks Complete</h3>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md477"></a>
+<h2><a class="anchor" id="autotoc_md491"></a>
 [2.1.0] - Phase 1 Foundation Complete (2025-09-09)</h2>
-<h3><a class="anchor" id="autotoc_md478"></a>
+<h3><a class="anchor" id="autotoc_md492"></a>
 Added</h3>
 <ul>
 <li>Thread system integration</li>
@@ -650,24 +837,24 @@ Added</h3>
 <li>Interface segregation (SOLID)</li>
 <li>Configuration validation framework</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md479"></a>
+<h2><a class="anchor" id="autotoc_md493"></a>
 [2.0.0] - Major Refactoring (2025-07-26)</h2>
-<h3><a class="anchor" id="autotoc_md480"></a>
+<h3><a class="anchor" id="autotoc_md494"></a>
 Changed</h3>
 <ul>
 <li>Complete architecture overhaul</li>
 <li>Modern C++20 implementation</li>
 <li>Modular design with clear separation of concerns</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md481"></a>
+<h2><a class="anchor" id="autotoc_md495"></a>
 [1.0.0] - Initial Release (2025-07-01)</h2>
-<h3><a class="anchor" id="autotoc_md482"></a>
+<h3><a class="anchor" id="autotoc_md496"></a>
 Added</h3>
 <ul>
 <li>Basic logging functionality</li>
 <li>Console and file writers </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md483"></a>
+<h2><a class="anchor" id="autotoc_md497"></a>
 - Log levels and filtering</h2>
 <p><em>Last Updated: 2025-10-20</em> </p>
 </div></div><!-- contents -->
@@ -676,7 +863,7 @@ Added</h3>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 1 2025 04:54:12 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Nov 3 2025 16:39:02 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
