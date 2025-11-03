@@ -49,6 +49,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Phase 3: Code Quality - 2025-11-03
 
 ### Added
+- **Common Utility Functions (Phase 3.4)**: Extracted shared utilities to reduce code duplication
+  - `time_utils.h`: Timestamp formatting utilities
+    - `format_timestamp()`: Human-readable format (YYYY-MM-DD HH:MM:SS.mmm)
+    - `format_iso8601()`: ISO 8601 / RFC 3339 format with UTC timezone
+    - `format_compact()`: Compact format for filenames (YYYYMMDDHHMMSSmmm)
+    - `format_for_rotation()`: Format for rotating file writers (YYYYMMDD or YYYYMMDD_HH)
+  - `string_utils.h`: String conversion and escaping utilities
+    - `level_to_string()`: Convert log level to human-readable string
+    - `level_to_color()`: Convert log level to ANSI color code
+    - `escape_json()`: JSON string escaping
+    - `escape_xml()`: XML string escaping
+    - `extract_filename()`: Extract filename from full path
+    - `trim()`, `to_lower()`, `to_upper()`, `replace_all()`: String manipulation helpers
+  - `file_utils.h`: File path validation and sanitization utilities (security-focused)
+    - `validate_log_path()`: Path traversal attack prevention
+    - `sanitize_filename()`: Remove dangerous characters from filenames
+    - `set_file_permissions()`: Unix/POSIX permission management
+    - `is_writable()`, `get_file_size()`: File system utilities
+    - `generate_temp_filename()`: Safe temporary file naming
+  - Located in `include/kcenon/logger/utils/`
+
 - **Error Handling Utilities (Phase 3.3)**: Unified error handling across all writers
   - `error_handling_utils.h`: Comprehensive error handling helper functions
   - `try_write_operation()`: Generic error handler for write operations with specialized exception handling
@@ -129,6 +150,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - All exception types properly categorized (filesystem_error, ios_base::failure, system_error, bad_alloc)
   - Consistent error code mapping across all writers
 
+- **Formatters refactored to use common utilities (Phase 3.4)**: Eliminated code duplication in formatters
+  - `timestamp_formatter.h`: Now uses `utils::time_utils` and `utils::string_utils`
+  - `json_formatter.h`: Now uses `utils::time_utils` and `utils::string_utils`
+  - Removed duplicate private functions from both formatters
+  - Consistent behavior across all formatting operations
+  - Reduced formatter code size by ~150 lines
+
 ### Deprecated
 - **Legacy base_writer formatting methods**: Marked for future removal
   - `format_log_entry(level, message, file, line, function, timestamp)` - Use formatter instead
@@ -149,9 +177,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Better error message consistency across all writers
   - Reduced boilerplate code in write operations
   - Improved error code accuracy with proper exception type detection
-- **Improved maintainability**: Single source of truth for formatting and error handling logic
+- **Common utility functions**: Extracted shared code to reusable utilities
+  - ~150 lines of duplicate code removed from formatters
+  - Thread-safe, stateless utility functions
+  - Security-focused file utilities ready for Phase 4
+  - Consistent timestamp formatting across all components
+- **Improved maintainability**: Single source of truth for formatting, error handling, and common utilities
 - **Enhanced extensibility**: Easy to add new formatters (XML, YAML, custom formats) and backends
-- **Better testability**: Formatters, backends, and error handlers can be tested independently
+- **Better testability**: Formatters, backends, error handlers, and utilities can be tested independently
 
 ### Benefits
 - **Simplified Testing**: Fewer conditional compilation paths to test

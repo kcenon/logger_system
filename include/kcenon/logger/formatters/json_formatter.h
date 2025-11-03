@@ -33,6 +33,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include "../interfaces/log_formatter_interface.h"
+#include "../utils/time_utils.h"
+#include "../utils/string_utils.h"
 #include <sstream>
 #include <iomanip>
 
@@ -136,34 +138,34 @@ public:
         // Timestamp (ISO 8601)
         if (options_.include_timestamp) {
             if (!first) oss << "," << newline;
-            oss << indent << "\"timestamp\":\"" << format_iso8601(entry.timestamp) << "\"";
+            oss << indent << "\"timestamp\":\"" << utils::time_utils::format_iso8601(entry.timestamp) << "\"";
             first = false;
         }
 
         // Level
         if (options_.include_level) {
             if (!first) oss << "," << newline;
-            oss << indent << "\"level\":\"" << level_to_string(entry.level) << "\"";
+            oss << indent << "\"level\":\"" << utils::string_utils::level_to_string(entry.level) << "\"";
             first = false;
         }
 
         // Thread ID
         if (options_.include_thread_id && entry.thread_id) {
             if (!first) oss << "," << newline;
-            oss << indent << "\"thread_id\":\"" << escape_json(entry.thread_id->to_string()) << "\"";
+            oss << indent << "\"thread_id\":\"" << utils::string_utils::escape_json(entry.thread_id->to_string()) << "\"";
             first = false;
         }
 
         // Message (always include)
         if (!first) oss << "," << newline;
-        oss << indent << "\"message\":\"" << escape_json(entry.message.to_string()) << "\"";
+        oss << indent << "\"message\":\"" << utils::string_utils::escape_json(entry.message.to_string()) << "\"";
         first = false;
 
         // Source location
         if (options_.include_source_location && entry.location) {
             std::string file_path = entry.location->file.to_string();
             if (!file_path.empty()) {
-                oss << "," << newline << indent << "\"file\":\"" << escape_json(file_path) << "\"";
+                oss << "," << newline << indent << "\"file\":\"" << utils::string_utils::escape_json(file_path) << "\"";
             }
 
             if (entry.location->line > 0) {
@@ -172,7 +174,7 @@ public:
 
             std::string func = entry.location->function.to_string();
             if (!func.empty()) {
-                oss << "," << newline << indent << "\"function\":\"" << escape_json(func) << "\"";
+                oss << "," << newline << indent << "\"function\":\"" << utils::string_utils::escape_json(func) << "\"";
             }
         }
 
@@ -192,102 +194,8 @@ public:
     }
 
 private:
-    /**
-     * @brief Format timestamp to ISO 8601 / RFC 3339
-     * @param tp Time point to format
-     * @return ISO 8601 formatted timestamp string
-     *
-     * @details Produces format: YYYY-MM-DDTHH:MM:SS.sssZ
-     * Example: 2025-11-03T14:30:15.123Z
-     *
-     * @note Uses UTC timezone (Z suffix)
-     *
-     * @since 1.2.0
-     */
-    static std::string format_iso8601(
-        const std::chrono::system_clock::time_point& tp
-    ) {
-        auto time_t = std::chrono::system_clock::to_time_t(tp);
-        std::tm tm_buf{};
-
-#ifdef _WIN32
-        gmtime_s(&tm_buf, &time_t);  // Windows thread-safe UTC version
-#else
-        gmtime_r(&time_t, &tm_buf);  // POSIX thread-safe UTC version
-#endif
-
-        // Format base timestamp
-        char buffer[32];
-        std::strftime(buffer, sizeof(buffer), "%Y-%m-%dT%H:%M:%S", &tm_buf);
-
-        // Add milliseconds
-        auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
-            tp.time_since_epoch()
-        ) % 1000;
-
-        std::ostringstream oss;
-        oss << buffer << "."
-            << std::setfill('0') << std::setw(3) << ms.count()
-            << "Z";  // UTC timezone
-
-        return oss.str();
-    }
-
-    /**
-     * @brief Escape special characters for JSON
-     * @param str String to escape
-     * @return JSON-escaped string
-     *
-     * @details Escapes: " \ / \b \f \n \r \t
-     *
-     * @since 1.2.0
-     */
-    static std::string escape_json(const std::string& str) {
-        std::ostringstream oss;
-        for (char c : str) {
-            switch (c) {
-                case '"':  oss << "\\\""; break;
-                case '\\': oss << "\\\\"; break;
-                case '/':  oss << "\\/"; break;
-                case '\b': oss << "\\b"; break;
-                case '\f': oss << "\\f"; break;
-                case '\n': oss << "\\n"; break;
-                case '\r': oss << "\\r"; break;
-                case '\t': oss << "\\t"; break;
-                default:
-                    // Handle control characters
-                    if (c >= 0 && c < 0x20) {
-                        oss << "\\u"
-                            << std::hex << std::setw(4) << std::setfill('0')
-                            << static_cast<int>(c);
-                    } else {
-                        oss << c;
-                    }
-                    break;
-            }
-        }
-        return oss.str();
-    }
-
-    /**
-     * @brief Convert log level to string
-     * @param level Log level to convert
-     * @return String representation of level
-     *
-     * @since 1.2.0
-     */
-    static std::string level_to_string(logger_system::log_level level) {
-        switch (level) {
-            case logger_system::log_level::fatal:   return "CRITICAL";
-            case logger_system::log_level::error:   return "ERROR";
-            case logger_system::log_level::warn:    return "WARNING";
-            case logger_system::log_level::info:    return "INFO";
-            case logger_system::log_level::debug:   return "DEBUG";
-            case logger_system::log_level::trace:   return "TRACE";
-            case logger_system::log_level::off:     return "OFF";
-        }
-        return "UNKNOWN";
-    }
+    // Note: Formatting functions moved to utils::time_utils and utils::string_utils (Phase 3.4)
+    // This reduces code duplication and improves maintainability.
 };
 
 } // namespace kcenon::logger

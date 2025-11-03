@@ -386,7 +386,16 @@ Detailed work for each phase is documented separately:
   - ✅ All modified files compile successfully
   - ✅ CHANGELOG.md updated
   - **Benefits achieved**: Eliminated try-catch duplication, improved error message consistency, better error code accuracy
-- [ ] Task 3.4: Extract common utilities (pending)
+- [x] **Task 3.4: Extract Common Utilities (Completed)** - 2025-11-04
+  - ✅ time_utils.h created with timestamp formatting functions
+  - ✅ string_utils.h created with string conversion and escaping utilities
+  - ✅ file_utils.h created with path validation and sanitization utilities (security-focused)
+  - ✅ timestamp_formatter.h refactored to use common utilities
+  - ✅ json_formatter.h refactored to use common utilities
+  - ✅ Removed ~150 lines of duplicate code from formatters
+  - ✅ LoggerSystem library builds successfully
+  - ✅ CHANGELOG.md updated
+  - **Benefits achieved**: Reduced code duplication, thread-safe utilities, security foundation for Phase 4
 
 ### Phase 4: Security Hardening
 - [ ] Not started

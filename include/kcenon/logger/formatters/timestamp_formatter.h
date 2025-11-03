@@ -33,6 +33,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include "../interfaces/log_formatter_interface.h"
+#include "../utils/time_utils.h"
+#include "../utils/string_utils.h"
 #include <sstream>
 #include <iomanip>
 #include <ctime>
@@ -112,17 +114,17 @@ public:
 
         // Timestamp
         if (options_.include_timestamp) {
-            oss << "[" << format_timestamp(entry.timestamp) << "] ";
+            oss << "[" << utils::time_utils::format_timestamp(entry.timestamp) << "] ";
         }
 
         // Level (with color)
         if (options_.include_level) {
             if (options_.use_colors) {
-                oss << level_to_color(entry.level);
+                oss << utils::string_utils::level_to_color(entry.level, true);
             }
-            oss << "[" << level_to_string(entry.level) << "] ";
+            oss << "[" << utils::string_utils::level_to_string(entry.level) << "] ";
             if (options_.use_colors) {
-                oss << "\033[0m";  // Reset color
+                oss << utils::string_utils::color_reset();
             }
         }
 
@@ -141,10 +143,7 @@ public:
             // Extract filename from path
             std::string file_path = entry.location->file.to_string();
             if (!file_path.empty()) {
-                size_t pos = file_path.find_last_of("/\\");
-                std::string filename = (pos != std::string::npos)
-                    ? file_path.substr(pos + 1)
-                    : file_path;
+                std::string filename = utils::string_utils::extract_filename(file_path);
                 oss << filename << ":" << entry.location->line;
             }
 
@@ -171,88 +170,8 @@ public:
     }
 
 private:
-    /**
-     * @brief Format timestamp to YYYY-MM-DD HH:MM:SS.mmm
-     * @param tp Time point to format
-     * @return Formatted timestamp string
-     *
-     * @note Uses thread-safe time conversion functions
-     *
-     * @since 1.2.0
-     */
-    static std::string format_timestamp(
-        const std::chrono::system_clock::time_point& tp
-    ) {
-        auto time_t = std::chrono::system_clock::to_time_t(tp);
-        std::tm tm_buf{};
-
-#ifdef _WIN32
-        localtime_s(&tm_buf, &time_t);  // Windows thread-safe version
-#else
-        localtime_r(&time_t, &tm_buf);  // POSIX thread-safe version
-#endif
-
-        // Format base timestamp
-        char buffer[32];
-        std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", &tm_buf);
-
-        // Add milliseconds
-        auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
-            tp.time_since_epoch()
-        ) % 1000;
-
-        std::ostringstream oss;
-        oss << buffer << "."
-            << std::setfill('0') << std::setw(3) << ms.count();
-
-        return oss.str();
-    }
-
-    /**
-     * @brief Convert log level to string
-     * @param level Log level to convert
-     * @return String representation of level
-     *
-     * @since 1.2.0
-     */
-    static std::string level_to_string(logger_system::log_level level) {
-        switch (level) {
-            case logger_system::log_level::fatal:   return "CRITICAL";
-            case logger_system::log_level::error:   return "ERROR";
-            case logger_system::log_level::warn:    return "WARNING";
-            case logger_system::log_level::info:    return "INFO";
-            case logger_system::log_level::debug:   return "DEBUG";
-            case logger_system::log_level::trace:   return "TRACE";
-            case logger_system::log_level::off:     return "OFF";
-        }
-        return "UNKNOWN";
-    }
-
-    /**
-     * @brief Get ANSI color code for log level
-     * @param level Log level to get color for
-     * @return ANSI escape sequence for color
-     *
-     * @note Returns empty string if colors are disabled
-     *
-     * @since 1.2.0
-     */
-    std::string level_to_color(logger_system::log_level level) const {
-        if (!options_.use_colors) {
-            return "";
-        }
-
-        switch (level) {
-            case logger_system::log_level::fatal:   return "\033[1;35m"; // Bright Magenta
-            case logger_system::log_level::error:   return "\033[1;31m"; // Bright Red
-            case logger_system::log_level::warn:    return "\033[1;33m"; // Bright Yellow
-            case logger_system::log_level::info:    return "\033[1;32m"; // Bright Green
-            case logger_system::log_level::debug:   return "\033[1;36m"; // Bright Cyan
-            case logger_system::log_level::trace:   return "\033[1;37m"; // Bright White
-            case logger_system::log_level::off:     return "";           // No color for off
-        }
-        return "";
-    }
+    // Note: Formatting functions moved to utils::time_utils and utils::string_utils (Phase 3.4)
+    // This reduces code duplication and improves maintainability.
 };
 
 } // namespace kcenon::logger
