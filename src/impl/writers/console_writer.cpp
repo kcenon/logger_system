@@ -72,12 +72,12 @@ result_void console_writer::write(logger_system::log_level level,
     }
     
     stream << format_log_entry(level, message, file, line, function, timestamp);
-    
+
     if (use_color()) {
         stream << "\033[0m"; // Reset color
     }
-    
-    stream << std::endl;
+
+    stream << '\n';
     
     // Check for stream failure
     if (stream.fail()) {

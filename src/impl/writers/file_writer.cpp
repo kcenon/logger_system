@@ -38,9 +38,9 @@ result_void file_writer::write(logger_system::log_level level,
     }
     
     std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
-    
+
     try {
-        file_stream_ << formatted << std::endl;
+        file_stream_ << formatted << '\n';
         bytes_written_.fetch_add(formatted.size() + 1);  // +1 for newline
         
         if (!file_stream_.good()) {
