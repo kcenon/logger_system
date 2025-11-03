@@ -35,6 +35,27 @@ The Logger System Project is a production-ready, high-performance C++20 asynchro
 - **Dependency Injection**: Optional runtime component injection with fallback mechanisms
 - **Monitoring Integration**: Pluggable monitoring backend with health checks and metrics
 
+### 🔒 Security Features (v3.0.0)
+- **Secure Key Storage**: RAII-based encryption key management with automatic memory cleanup
+  - Uses OpenSSL `OPENSSL_cleanse()` for secure memory erasure
+  - File permission enforcement (0600 - owner read/write only)
+  - Cryptographically secure random key generation
+- **Path Validation**: Comprehensive file path security
+  - Path traversal attack prevention
+  - Symbolic link validation
+  - Base directory enforcement
+  - Filename character restrictions
+- **Signal Handler Safety**: Centralized signal handler management
+  - Thread-safe logger registration
+  - Emergency flush for crash scenarios (SIGSEGV, SIGABRT, SIGTERM, SIGINT)
+  - Uses only signal-safe functions (POSIX compliant)
+- **Security Audit Logging**: Tamper-evident audit trail
+  - JSON-formatted audit entries
+  - HMAC-SHA256 signatures for integrity verification
+  - Tracks lifecycle, encryption, and security events
+- **Compliance Support**: GDPR, PCI DSS, ISO 27001
+- **OWASP Top 10**: Mitigations for A01, A02, A03, A09
+
 ### 🏗️ Architecture Highlights
 - **Interface-Driven Design**: Clean separation via abstract interfaces (ILogger, IMonitor, IMonitorable)
 - **Modular Components**: Pluggable writers, filters, formatters, and sinks
