@@ -31,10 +31,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/logger/formatters/timestamp_formatter.h>
+#include <kcenon/logger/core/small_string.h>
+#include <kcenon/logger/interfaces/log_entry.h>
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
 #include <sstream>
+#include <thread>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -44,6 +48,46 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 namespace kcenon::logger {
+
+// base_writer implementation
+
+base_writer::base_writer(std::unique_ptr<log_formatter_interface> formatter)
+    : formatter_(std::move(formatter)) {
+    if (!formatter_) {
+        // Default to timestamp_formatter if none provided
+        formatter_ = std::make_unique<timestamp_formatter>();
+    }
+
+    // Apply color setting from legacy API to formatter
+    auto opts = formatter_->get_options();
+    opts.use_colors = use_color_;
+    formatter_->set_options(opts);
+}
+
+void base_writer::set_formatter(std::unique_ptr<log_formatter_interface> formatter) {
+    if (formatter) {
+        formatter_ = std::move(formatter);
+
+        // Apply current color setting to new formatter
+        auto opts = formatter_->get_options();
+        opts.use_colors = use_color_;
+        formatter_->set_options(opts);
+    }
+}
+
+log_formatter_interface* base_writer::get_formatter() const {
+    return formatter_.get();
+}
+
+std::string base_writer::format_log_entry(const log_entry& entry) const {
+    if (!formatter_) {
+        // Fallback if formatter is somehow null
+        return entry.message.to_string();
+    }
+    return formatter_->format(entry);
+}
+
+// Legacy formatting methods (for backward compatibility)
 
 console_writer::console_writer(bool use_stderr, bool auto_detect_color)
     : use_stderr_(use_stderr) {
@@ -127,40 +171,31 @@ bool console_writer::is_color_supported() const {
 #endif
 }
 
-// base_writer implementation
 std::string base_writer::format_log_entry(logger_system::log_level level,
                                          const std::string& message,
                                          const std::string& file,
                                          int line,
                                          const std::string& function,
                                          const std::chrono::system_clock::time_point& timestamp) {
-    auto time_t = std::chrono::system_clock::to_time_t(timestamp);
-    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
-        timestamp.time_since_epoch()) % 1000;
+    // Convert legacy API to log_entry and use formatter
+    log_entry entry(level, message, timestamp);
 
-    // Use thread-safe time conversion
-    std::tm tm_buf{};
-#ifdef _WIN32
-    localtime_s(&tm_buf, &time_t);  // Windows thread-safe version
-#else
-    localtime_r(&time_t, &tm_buf);  // POSIX thread-safe version
-#endif
+    // Set thread ID as optional small_string
+    std::ostringstream tid_stream;
+    tid_stream << std::this_thread::get_id();
+    entry.thread_id = small_string_64(tid_stream.str());
 
-    std::ostringstream oss;
-    oss << "[" << std::put_time(&tm_buf, "%Y-%m-%d %H:%M:%S");
-    oss << "." << std::setfill('0') << std::setw(3) << ms.count() << "] ";
-    oss << "[" << level_to_string(level) << "] ";
-    
     if (!file.empty()) {
-        // Extract filename from path
-        size_t pos = file.find_last_of("/\\");
-        std::string filename = (pos != std::string::npos) ? file.substr(pos + 1) : file;
-        oss << filename << ":" << line << " (" << function << ") ";
+        source_location loc(file, line, function);
+        entry.location = loc;
+
+        // Enable source location in formatter options (thread-unsafe, but for legacy API)
+        auto opts = formatter_->get_options();
+        opts.include_source_location = true;
+        formatter_->set_options(opts);
     }
-    
-    oss << message;
-    
-    return oss.str();
+
+    return format_log_entry(entry);
 }
 
 std::string base_writer::level_to_string(logger_system::log_level level) const {
