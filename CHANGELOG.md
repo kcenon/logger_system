@@ -9,6 +9,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## C++20 and std::format Migration - 2025-11-03
+
+### Changed
+- **C++20 now REQUIRED**: Enforced C++20 as minimum standard (no fallback to C++17)
+  - Added CMake check to fail build if C++20 is not available
+  - `CMAKE_CXX_STANDARD_REQUIRED ON` prevents fallback
+  - Clear error message when C++20 requirement is not met
+
+- **Removed fmt library dependency**: Migrated to std::format
+  - Removed fmt from vcpkg.json dependencies
+  - Removed fmt find_package from CMakeLists.txt
+  - Updated common_logger_adapter.h to use std::format
+  - All fmt::format calls replaced with std::format
+  - Cleaner dependency tree (one less external dependency)
+
+### Removed
+- **fmt library**: No longer required or used
+  - Removed from CMakeLists.txt (line 312-317)
+  - Removed from vcpkg.json
+  - Removed USE_FMT compile definition
+
+### Benefits
+- **Simpler dependencies**: Using only C++ standard library features
+- **Better portability**: No external formatting library needed
+- **Consistent with common_system**: Both now use std::format exclusively
+- **Build performance**: Faster compilation without fmt dependency
+- **Forward compatibility**: std::format is the C++ standard approach
+
+### Breaking Changes
+- ⚠️ **C++20 compiler required**: Projects using older compilers must upgrade
+  - GCC 10+ (full std::format support in GCC 13+)
+  - Clang 14+ (full std::format support in Clang 15+)
+  - MSVC 19.29+ (Visual Studio 2019 16.10+)
+  - Apple Clang 14.0+ (Xcode 14+)
+
+---
+
 ## Phase 3: Code Quality - 2025-11-03
 
 ### Added
@@ -88,6 +125,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Cache efficiency measurements
   - Located in `benchmarks/object_pool_bench.cpp`
 
+- **Benchmark Infrastructure**: Complete CI/CD integration for performance regression detection
+  - `compare_benchmarks.py`: Python script for automated benchmark comparison
+  - Detects performance regressions with configurable threshold (default: 5%)
+  - Generates markdown reports showing improvements and regressions
+  - Integrated into GitHub Actions workflow
+  - Baseline results stored in `benchmarks/baselines/`
+  - Automatic comparison on every pull request
+  - Located in `scripts/compare_benchmarks.py`
+
 ### Changed
 - **rotating_file_writer**: Periodic rotation checks for improved performance
   - Added `check_interval` parameter (default: 100 writes)
@@ -96,6 +142,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Maintains rotation accuracy with configurable interval
   - All constructors now accept optional `check_interval` parameter
   - Backward compatible with default value
+
+- **Benchmark Workflow**: Enhanced GitHub Actions benchmarks.yml
+  - Benchmarks now enabled (BUILD_BENCHMARKS=ON, previously disabled)
+  - Automated benchmark execution on push and PR
+  - Results uploaded as artifacts (90-day retention)
+  - Baseline comparison with regression detection using compare_benchmarks.py
+  - Markdown reports in GitHub Step Summary
+  - Manual baseline saving via workflow_dispatch
+  - Performance threshold: 5% regression detection
+  - Located in `.github/workflows/benchmarks.yml`
 
 ### Performance
 - **object_pool improvements** (8 threads):
