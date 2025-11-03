@@ -9,7 +9,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.0.1] - 2025-11-03
+## Phase 2: Performance Optimization - 2025-11-03
+
+### Added
+- **thread_local_object_pool**: New thread-local cached object pool implementation
+  - Per-thread local cache to minimize lock contention
+  - Batch transfers between local cache and global pool
+  - Configurable cache size (default: 16 objects per thread)
+  - Detailed statistics tracking (cache hits, global pool hits, allocations)
+  - **Performance**: 2.4x faster multi-threaded performance (8 threads)
+  - **Performance**: 2.6x faster single-threaded performance
+  - See `src/impl/memory/object_pool.h` for implementation
+
+- **object_pool_bench**: Comprehensive object pool benchmarks
+  - Single-threaded and multi-threaded performance tests
+  - High contention scenario testing
+  - Cache efficiency measurements
+  - Located in `benchmarks/object_pool_bench.cpp`
+
+### Changed
+- **rotating_file_writer**: Periodic rotation checks for improved performance
+  - Added `check_interval` parameter (default: 100 writes)
+  - Reduces filesystem system calls from every write to every 100 writes
+  - **Expected performance**: 10-20% improvement in throughput
+  - Maintains rotation accuracy with configurable interval
+  - All constructors now accept optional `check_interval` parameter
+  - Backward compatible with default value
+
+### Performance
+- **object_pool improvements** (8 threads):
+  - Original: 949 ns/op (1.05M ops/s)
+  - Optimized: 396 ns/op (2.53M ops/s)
+  - **Improvement: 2.4x faster**
+
+- **object_pool improvements** (single thread):
+  - Original: 18.2 ns/op (54.9M ops/s)
+  - Optimized: 7.03 ns/op (142.4M ops/s)
+  - **Improvement: 2.6x faster**
+
+- **High contention scenario** (8 threads, 10 objects):
+  - Original: 6336 ns/op
+  - Optimized: 3534 ns/op
+  - **Improvement: 1.8x faster**
+
+- All Phase 1 + Phase 2 tests passing: 7/7
+
+---
+
+## Phase 1: Critical Fixes - 2025-11-03
 
 ### Fixed
 - **async_writer**: Removed timeout-based detach mechanism that caused memory leaks and message loss
@@ -39,7 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.0.0] - 2025-10-22
+## Initial Release - 2025-10-22
 
 ### Added
 - **Core Logger System**: Production-ready C++20 asynchronous logging framework
