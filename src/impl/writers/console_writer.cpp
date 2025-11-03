@@ -34,6 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/formatters/timestamp_formatter.h>
 #include <kcenon/logger/core/small_string.h>
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/logger/utils/error_handling_utils.h>
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
@@ -107,29 +108,26 @@ result_void console_writer::write(logger_system::log_level level,
                                   const std::string& function,
                                   const std::chrono::system_clock::time_point& timestamp) {
     std::lock_guard<std::mutex> lock(write_mutex_);
-    
-    auto& stream = (use_stderr_ || level <= logger_system::log_level::error) 
-                   ? std::cerr : std::cout;
-    
-    if (use_color()) {
-        stream << level_to_color(level);
-    }
-    
-    stream << format_log_entry(level, message, file, line, function, timestamp);
 
-    if (use_color()) {
-        stream << "\033[0m"; // Reset color
-    }
+    return utils::try_write_operation([&]() -> result_void {
+        auto& stream = (use_stderr_ || level <= logger_system::log_level::error)
+                       ? std::cerr : std::cout;
 
-    stream << '\n';
-    
-    // Check for stream failure
-    if (stream.fail()) {
-        return make_logger_error(logger_error_code::processing_failed, 
-                                "Console write failed");
-    }
-    
-    return {}; // Success
+        if (use_color()) {
+            stream << level_to_color(level);
+        }
+
+        stream << format_log_entry(level, message, file, line, function, timestamp);
+
+        if (use_color()) {
+            stream << "\033[0m"; // Reset color
+        }
+
+        stream << '\n';
+
+        // Verify stream state
+        return utils::check_stream_state(stream, "console write");
+    }, logger_error_code::processing_failed);
 }
 
 result_void console_writer::flush() {

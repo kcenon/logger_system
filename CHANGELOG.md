@@ -49,6 +49,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Phase 3: Code Quality - 2025-11-03
 
 ### Added
+- **Error Handling Utilities (Phase 3.3)**: Unified error handling across all writers
+  - `error_handling_utils.h`: Comprehensive error handling helper functions
+  - `try_write_operation()`: Generic error handler for write operations with specialized exception handling
+  - `try_open_operation()`: Specialized handler for file open operations
+  - `try_network_operation()`: Specialized handler for network operations
+  - `try_encryption_operation()`: Specialized handler for encryption operations
+  - `check_condition()`: Helper for precondition validation
+  - `check_stream_state()`: Helper for stream state verification
+  - `check_file_exists()`: Helper for file existence validation
+  - `ensure_directory_exists()`: Helper for directory creation with error handling
+  - Located in `include/kcenon/logger/utils/error_handling_utils.h`
+
 - **Integration Backend Interface (Phase 3.2)**: Runtime polymorphism replaces conditional compilation
   - `integration_backend`: Abstract interface for external system integration
   - `standalone_backend`: Default backend for independent logger operation
@@ -108,6 +120,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Simplifies adding new writer types
   - Enables runtime format switching (text → JSON)
 
+- **All writers updated with unified error handling (Phase 3.3)**: Consistent error handling across codebase
+  - `file_writer.cpp`: Replaced try-catch patterns with `try_write_operation` and `try_open_operation`
+  - `rotating_file_writer.cpp`: Applied error handling utilities to write, rotation, and cleanup operations
+  - `encrypted_writer.cpp`: Integrated `try_encryption_operation` for encryption workflows
+  - `console_writer.cpp`: Added stream state validation with `check_stream_state`
+  - `critical_writer.cpp`: Enhanced WAL operations and signal handler safety with error utilities
+  - All exception types properly categorized (filesystem_error, ios_base::failure, system_error, bad_alloc)
+  - Consistent error code mapping across all writers
+
 ### Deprecated
 - **Legacy base_writer formatting methods**: Marked for future removal
   - `format_log_entry(level, message, file, line, function, timestamp)` - Use formatter instead
@@ -123,9 +144,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Easier to add new integration backends
 
 - **50% reduction in code duplication**: Formatting logic centralized in formatters
-- **Improved maintainability**: Single source of truth for formatting logic
+- **Unified error handling**: Eliminated try-catch duplication across all writers
+  - Consistent exception handling with specialized error handlers
+  - Better error message consistency across all writers
+  - Reduced boilerplate code in write operations
+  - Improved error code accuracy with proper exception type detection
+- **Improved maintainability**: Single source of truth for formatting and error handling logic
 - **Enhanced extensibility**: Easy to add new formatters (XML, YAML, custom formats) and backends
-- **Better testability**: Formatters and backends can be tested independently
+- **Better testability**: Formatters, backends, and error handlers can be tested independently
 
 ### Benefits
 - **Simplified Testing**: Fewer conditional compilation paths to test

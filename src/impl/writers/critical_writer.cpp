@@ -7,6 +7,7 @@ All rights reserved.
 
 #include <kcenon/logger/writers/critical_writer.h>
 #include <kcenon/logger/core/error_codes.h>
+#include <kcenon/logger/utils/error_handling_utils.h>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
@@ -38,19 +39,29 @@ critical_writer::critical_writer(
 
     // Initialize write-ahead log if enabled
     if (config_.write_ahead_log) {
-        try {
+        auto wal_result = utils::try_open_operation([&]() -> result_void {
             wal_stream_ = std::make_unique<std::ofstream>(
                 config_.wal_path,
                 std::ios::app | std::ios::binary
             );
-            if (!wal_stream_->is_open()) {
-                std::cerr << "[critical_writer] Failed to open WAL: "
-                          << config_.wal_path << std::endl;
+
+            auto check = utils::check_condition(
+                wal_stream_->is_open(),
+                logger_error_code::file_open_failed,
+                "Failed to open WAL: " + config_.wal_path
+            );
+
+            if (!check) {
                 wal_stream_.reset();
+                return check;
             }
-        } catch (const std::exception& e) {
+
+            return {};
+        });
+
+        if (!wal_result) {
             std::cerr << "[critical_writer] WAL initialization failed: "
-                      << e.what() << std::endl;
+                      << wal_result.error_message() << std::endl;
             wal_stream_.reset();
         }
     }
@@ -122,12 +133,15 @@ result_void critical_writer::write(
 
         // Write to WAL first (if enabled)
         if (wal_stream_ && wal_stream_->is_open()) {
-            try {
+            auto wal_result = utils::try_write_operation([&]() -> result_void {
                 write_to_wal(level, message, file, line, function, timestamp);
                 stats_.wal_writes.fetch_add(1, std::memory_order_relaxed);
-            } catch (const std::exception& e) {
+                return {};
+            });
+
+            if (!wal_result) {
                 std::cerr << "[critical_writer] WAL write failed: "
-                          << e.what() << std::endl;
+                          << wal_result.error_message() << std::endl;
             }
         }
 
@@ -143,12 +157,15 @@ result_void critical_writer::write(
 
         // Sync file descriptor if configured
         if (config_.sync_on_critical) {
-            try {
+            auto sync_result = utils::try_write_operation([&]() -> result_void {
                 sync_file_descriptor();
                 stats_.sync_calls.fetch_add(1, std::memory_order_relaxed);
-            } catch (const std::exception& e) {
+                return {};
+            }, logger_error_code::flush_timeout);
+
+            if (!sync_result) {
                 std::cerr << "[critical_writer] fsync failed: "
-                          << e.what() << std::endl;
+                          << sync_result.error_message() << std::endl;
             }
         }
 
@@ -165,11 +182,14 @@ result_void critical_writer::flush() {
 
     // Flush WAL
     if (wal_stream_ && wal_stream_->is_open()) {
-        try {
+        auto wal_flush_result = utils::try_write_operation([&]() -> result_void {
             wal_stream_->flush();
-        } catch (const std::exception& e) {
+            return utils::check_stream_state(*wal_stream_, "WAL flush");
+        }, logger_error_code::flush_timeout);
+
+        if (!wal_flush_result) {
             std::cerr << "[critical_writer] WAL flush failed: "
-                      << e.what() << std::endl;
+                      << wal_flush_result.error_message() << std::endl;
         }
     }
 

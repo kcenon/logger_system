@@ -6,6 +6,7 @@ All rights reserved.
 *****************************************************************************/
 
 #include <kcenon/logger/writers/rotating_file_writer.h>
+#include <kcenon/logger/utils/error_handling_utils.h>
 #include <filesystem>
 #include <algorithm>
 #include <regex>
@@ -91,22 +92,23 @@ result_void rotating_file_writer::write(logger_system::log_level level,
     // Lock the mutex first to ensure atomic check-and-rotate operation
     std::lock_guard<std::mutex> lock(write_mutex_);
 
-    // Write to file with mutex already held
-    if (!file_stream_.is_open()) {
-        return make_logger_error(logger_error_code::file_write_failed,
-                                "File stream is not open");
-    }
+    return utils::try_write_operation([&]() -> result_void {
+        // Check precondition
+        auto check = utils::check_condition(
+            file_stream_.is_open(),
+            logger_error_code::file_write_failed,
+            "File stream is not open"
+        );
+        if (!check) return check;
 
-    std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
-
-    try {
+        // Format and write
+        std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
         file_stream_ << formatted << '\n';
         bytes_written_.fetch_add(formatted.size() + 1);
 
-        if (!file_stream_.good()) {
-            return make_logger_error(logger_error_code::file_write_failed,
-                                    "Failed to write to file stream");
-        }
+        // Verify stream state
+        auto stream_check = utils::check_stream_state(file_stream_, "write");
+        if (!stream_check) return stream_check;
 
         // ✅ Periodic rotation check optimization (Phase 2)
         // Check rotation only every check_interval_ writes instead of every write
@@ -121,9 +123,7 @@ result_void rotating_file_writer::write(logger_system::log_level level,
         }
 
         return {};
-    } catch (const std::exception& e) {
-        return make_logger_error(logger_error_code::file_write_failed, e.what());
-    }
+    });
 }
 
 void rotating_file_writer::rotate() {
@@ -162,25 +162,28 @@ void rotating_file_writer::perform_rotation() {
     // Generate new filename for the current log
     std::string rotated_name = generate_rotated_filename();
 
-    // Rename current file
-    try {
+    // Rename current file (with error handling)
+    auto rename_result = utils::try_write_operation([&]() -> result_void {
         if (std::filesystem::exists(filename_)) {
             std::filesystem::rename(filename_, rotated_name);
         }
-    } catch (const std::exception& e) {
-        std::cerr << "Failed to rotate log file: " << e.what() << std::endl;
+        return {};
+    }, logger_error_code::file_rotation_failed);
+
+    if (!rename_result) {
+        std::cerr << "Failed to rotate log file: " << rename_result.error_message() << std::endl;
     }
 
     // Clean up old files
     cleanup_old_files();
 
-    // Open new file
-    try {
+    // Open new file (with error handling)
+    auto open_result = utils::try_open_operation([&]() -> result_void {
         std::filesystem::path file_path(filename_);
         std::filesystem::path dir = file_path.parent_path();
-        if (!dir.empty() && !std::filesystem::exists(dir)) {
-            std::filesystem::create_directories(dir);
-        }
+
+        auto dir_result = utils::ensure_directory_exists(dir);
+        if (!dir_result) return dir_result;
 
         auto mode = append_mode_ ? std::ios::app : std::ios::trunc;
         file_stream_.open(filename_, std::ios::out | mode);
@@ -189,8 +192,12 @@ void rotating_file_writer::perform_rotation() {
             file_stream_.rdbuf()->pubsetbuf(buffer_.get(), buffer_size_);
             bytes_written_ = 0;
         }
-    } catch (const std::exception& e) {
-        std::cerr << "Failed to open new log file: " << e.what() << std::endl;
+
+        return {};
+    });
+
+    if (!open_result) {
+        std::cerr << "Failed to open new log file: " << open_result.error_message() << std::endl;
     }
 
     // Update rotation time - protected by mutex
@@ -258,7 +265,7 @@ std::string rotating_file_writer::generate_rotated_filename(int index) const {
 
 void rotating_file_writer::cleanup_old_files() {
     auto backup_files = get_backup_files();
-    
+
     if (backup_files.size() > max_files_) {
         // Sort by modification time (oldest first)
         std::sort(backup_files.begin(), backup_files.end(),
@@ -266,14 +273,17 @@ void rotating_file_writer::cleanup_old_files() {
                      return std::filesystem::last_write_time(a) <
                             std::filesystem::last_write_time(b);
                  });
-        
+
         // Remove oldest files
         size_t files_to_remove = backup_files.size() - max_files_;
         for (size_t i = 0; i < files_to_remove; ++i) {
-            try {
+            auto remove_result = utils::try_write_operation([&]() -> result_void {
                 std::filesystem::remove(backup_files[i]);
-            } catch (const std::exception& e) {
-                std::cerr << "Failed to remove old log file: " << e.what() << std::endl;
+                return {};
+            }, logger_error_code::file_rotation_failed);
+
+            if (!remove_result) {
+                std::cerr << "Failed to remove old log file: " << remove_result.error_message() << std::endl;
             }
         }
     }
@@ -285,15 +295,16 @@ std::vector<std::string> rotating_file_writer::get_backup_files() const {
     if (dir.empty()) {
         dir = ".";
     }
-    
+
     // Create regex pattern for backup files
     // Pattern: base_filename + file_extension + "." + (number or timestamp)
     // Example: "test_rotating.log.1" or "test.log.20250108"
     std::string escaped_ext = std::regex_replace(file_extension_, std::regex(R"(\.)"), R"(\\.)");
     std::string pattern = base_filename_ + escaped_ext + R"(\.(\d+|\d{8}|\d{8}_\d{2}|\d{8}_\d{6}))";
     std::regex backup_regex(pattern);
-    
-    try {
+
+    // Use error handling utility for directory iteration
+    auto result = utils::try_write_operation([&]() -> result_void {
         for (const auto& entry : std::filesystem::directory_iterator(dir)) {
             if (entry.is_regular_file()) {
                 std::string filename = entry.path().filename().string();
@@ -302,10 +313,13 @@ std::vector<std::string> rotating_file_writer::get_backup_files() const {
                 }
             }
         }
-    } catch (const std::exception& e) {
-        std::cerr << "Error listing backup files: " << e.what() << std::endl;
+        return {};
+    }, logger_error_code::file_rotation_failed);
+
+    if (!result) {
+        std::cerr << "Error listing backup files: " << result.error_message() << std::endl;
     }
-    
+
     return files;
 }
 
