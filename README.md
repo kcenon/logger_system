@@ -165,6 +165,9 @@ This project addresses the fundamental challenge faced by developers worldwide: 
 
 *Benchmarked on Apple M1 (8-core) @ 3.2GHz, 16GB, macOS Sonoma*
 
+<!-- AUTO-GENERATED: Do not edit manually -->
+<!-- Performance metrics are automatically updated by CI/CD -->
+
 > **🚀 Architecture Update**: Latest modular architecture provides seamless integration with thread_system ecosystem. Asynchronous processing delivers exceptional performance without blocking application threads.
 
 #### Core Performance Metrics (Latest Benchmarks)
@@ -178,6 +181,8 @@ This project addresses the fundamental challenge faced by developers worldwide: 
   - 15.7x lower latency compared to spdlog
 - **Memory efficiency**: <2MB baseline with adaptive buffer management
 - **Queue utilization**: Automatic optimization maintains high throughput
+
+<!-- END AUTO-GENERATED -->
 
 #### Performance Comparison with Industry Standards
 | Logger Type | Single Thread | 4 Threads | 8 Threads | 16 Threads | Best Use Case |
