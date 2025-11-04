@@ -1,0 +1,99 @@
+{
+  "summary": {
+    "avg_memory_throughput_mb_per_sec": 10814.56
+  },
+  "detailed_metrics": {
+    "throughput": {},
+    "latency": {},
+    "memory": {
+      "BM_ObjectPool_SingleThread": {
+        "bytes_per_second": 14280067604.46115,
+        "cpu_time_ms": 1.8207196716546004e-05,
+        "iterations": 38525041
+      },
+      "BM_ThreadLocalObjectPool_SingleThread": {
+        "bytes_per_second": 37193076938.49444,
+        "cpu_time_ms": 6.990548279454201e-06,
+        "iterations": 99921490
+      },
+      "BM_ObjectPool_MultiThread/real_time/threads:1": {
+        "bytes_per_second": 14259548883.940716,
+        "cpu_time_ms": 1.8215367237376818e-05,
+        "iterations": 38357942
+      },
+      "BM_ObjectPool_MultiThread/real_time/threads:2": {
+        "bytes_per_second": 3497066780.0992985,
+        "cpu_time_ms": 5.93056519095215e-05,
+        "iterations": 9340560
+      },
+      "BM_ObjectPool_MultiThread/real_time/threads:4": {
+        "bytes_per_second": 930046014.6739441,
+        "cpu_time_ms": 0.0002069624938947863,
+        "iterations": 2587952
+      },
+      "BM_ObjectPool_MultiThread/real_time/threads:8": {
+        "bytes_per_second": 276084023.7065949,
+        "cpu_time_ms": 0.000751732807147579,
+        "iterations": 798704
+      },
+      "BM_ThreadLocalObjectPool_MultiThread/real_time/threads:1": {
+        "bytes_per_second": 35245854436.05641,
+        "cpu_time_ms": 7.366220471189634e-06,
+        "iterations": 94578353
+      },
+      "BM_ThreadLocalObjectPool_MultiThread/real_time/threads:2": {
+        "bytes_per_second": 5411869876.07072,
+        "cpu_time_ms": 4.8008024862797224e-05,
+        "iterations": 13559858
+      },
+      "BM_ThreadLocalObjectPool_MultiThread/real_time/threads:4": {
+        "bytes_per_second": 1657414571.2134404,
+        "cpu_time_ms": 0.00015559627481882588,
+        "iterations": 4751232
+      },
+      "BM_ThreadLocalObjectPool_MultiThread/real_time/threads:8": {
+        "bytes_per_second": 647816652.6169221,
+        "cpu_time_ms": 0.0003848164985031597,
+        "iterations": 1803800
+      }
+    },
+    "rotation": {},
+    "context": {
+      "date": "2025-11-03T22:35:56+09:00",
+      "host_name": "Shinui-MacBookAir.local",
+      "executable": "./build/bin/logger_benchmarks",
+      "num_cpus": 8,
+      "mhz_per_cpu": 24,
+      "cpu_scaling_enabled": false,
+      "caches": [
+        {
+          "type": "Data",
+          "level": 1,
+          "size": 65536,
+          "num_sharing": 0
+        },
+        {
+          "type": "Instruction",
+          "level": 1,
+          "size": 131072,
+          "num_sharing": 0
+        },
+        {
+          "type": "Unified",
+          "level": 2,
+          "size": 4194304,
+          "num_sharing": 1
+        }
+      ],
+      "load_avg": [
+        2.29688,
+        1.99756,
+        1.87305
+      ],
+      "library_version": "v1.9.4",
+      "library_build_type": "release",
+      "json_schema_version": 1
+    },
+    "timestamp": "2025-11-03T22:35:56+09:00"
+  }
+}
