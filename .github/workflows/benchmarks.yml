@@ -2,7 +2,7 @@ name: Benchmarks
 
 on:
   push:
-    branches: [ main, phase-* ]
+    branches: [ main, phase-*, feature/ci-performance-automation ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -11,6 +11,9 @@ on:
         description: 'Save as baseline'
         required: false
         default: 'false'
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
 
 jobs:
   benchmark:
@@ -48,12 +51,17 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake ninja-build clang libbenchmark-dev libgtest-dev libfmt-dev
+        sudo apt-get install -y \
+          cmake ninja-build clang \
+          libbenchmark-dev libgtest-dev libfmt-dev \
+          python3-pip
+        pip3 install matplotlib
 
     - name: Install dependencies (macOS)
       if: runner.os == 'macOS'
       run: |
         brew install ninja google-benchmark googletest fmt
+        pip3 install matplotlib
 
     - name: Set up compiler
       run: |
@@ -81,7 +89,13 @@ jobs:
         for bench in logger_*_bench object_pool_bench; do
           if [ -f "$bench" ]; then
             echo "Running $bench..."
-            ./$bench --benchmark_format=json --benchmark_out=${bench}_results.json || true
+            ./$bench \
+              --benchmark_format=json \
+              --benchmark_out=${bench}_results.json \
+              --benchmark_repetitions=10 \
+              --benchmark_report_aggregates_only=true \
+              --benchmark_min_time=5.0 \
+              || true
           fi
         done
 
@@ -104,55 +118,121 @@ with open('build/benchmark_results_${{ matrix.os }}.json', 'w') as out:
 
         echo "✅ Benchmarks completed" >> $GITHUB_STEP_SUMMARY
 
-    - name: Upload benchmark results
-      uses: actions/upload-artifact@v4
-      with:
-        name: benchmark-results-${{ matrix.os }}
-        path: build/benchmark_results_${{ matrix.os }}.json
-        retention-days: 90
-
-    - name: Save baseline (if requested)
-      if: github.event.inputs.save_baseline == 'true' && github.ref == 'refs/heads/main'
+    - name: Parse benchmark results
       run: |
         cd logger_system
-        mkdir -p benchmarks/baselines
-        cp ../build/benchmark_results_${{ matrix.os }}.json \
-           benchmarks/baselines/baseline_${{ matrix.os }}_$(date +%Y%m%d).json
+        mkdir -p benchmarks/results
 
-        echo "✅ Baseline saved: benchmarks/baselines/baseline_${{ matrix.os }}_$(date +%Y%m%d).json" >> $GITHUB_STEP_SUMMARY
+        # Copy merged results
+        cp ../build/benchmark_results_${{ matrix.os }}.json \
+           benchmarks/results/latest_${{ matrix.os }}.json
+
+        # Parse benchmarks
+        python3 scripts/performance/parse_benchmarks.py \
+          benchmarks/results/latest_${{ matrix.os }}.json
 
     - name: Compare with baseline
       continue-on-error: true
       run: |
         cd logger_system
 
-        # Find latest baseline
-        BASELINE=$(ls -t benchmarks/baselines/baseline_${{ matrix.os }}_*.json 2>/dev/null | head -1)
-
-        if [ -f "$BASELINE" ]; then
-          echo "## Benchmark Comparison" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Comparing with baseline: $BASELINE" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-
-          # Run comparison with 5% threshold
-          python3 scripts/compare_benchmarks.py \
-            "$BASELINE" \
-            ../build/benchmark_results_${{ matrix.os }}.json \
-            --threshold 5.0 \
-            --report ../build/benchmark_comparison.md \
-            --fail-on-regression || echo "::warning::Performance regressions detected"
-
-          # Add report to summary
-          if [ -f ../build/benchmark_comparison.md ]; then
-            cat ../build/benchmark_comparison.md >> $GITHUB_STEP_SUMMARY
+        # Create baseline.json if it doesn't exist (use latest OS-specific baseline)
+        if [ ! -f benchmarks/baselines/baseline.json ]; then
+          LATEST_BASELINE=$(ls -t benchmarks/baselines/baseline_${{ matrix.os }}_*.json 2>/dev/null | head -1)
+          if [ -f "$LATEST_BASELINE" ]; then
+            echo "Creating baseline.json from $LATEST_BASELINE"
+            # Parse the latest baseline to create summary
+            python3 scripts/performance/parse_benchmarks.py "$LATEST_BASELINE"
+            cp benchmarks/results/summary.json benchmarks/baselines/baseline.json
           fi
-        else
-          echo "## Benchmark Results" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "⚠️ No baseline found for comparison" >> $GITHUB_STEP_SUMMARY
-          echo "To create a baseline, run this workflow with 'save_baseline' input set to 'true'" >> $GITHUB_STEP_SUMMARY
         fi
+
+        # Run comparison
+        python3 scripts/performance/compare_baselines.py || \
+          echo "::warning::Performance regression detected"
+
+    - name: Generate performance badges
+      if: matrix.os == 'ubuntu-22.04'
+      run: |
+        cd logger_system
+        python3 scripts/performance/generate_badges.py
+
+    - name: Generate performance charts
+      if: matrix.os == 'ubuntu-22.04'
+      run: |
+        cd logger_system
+        python3 scripts/performance/generate_charts.py
+
+    - name: Update README
+      if: matrix.os == 'ubuntu-22.04' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        cd logger_system
+        python3 scripts/performance/update_readme.py
+
+    - name: Upload benchmark results
+      uses: actions/upload-artifact@v4
+      with:
+        name: benchmark-results-${{ matrix.os }}
+        path: |
+          logger_system/benchmarks/results/
+          logger_system/docs/performance/
+        retention-days: 90
+
+    - name: Add comparison report to summary
+      if: hashFiles('logger_system/benchmarks/results/comparison_report.md') != ''
+      run: |
+        echo "## 📊 Performance Comparison" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        cat logger_system/benchmarks/results/comparison_report.md >> $GITHUB_STEP_SUMMARY
+
+    - name: Post PR comment
+      if: github.event_name == 'pull_request' && matrix.os == 'ubuntu-22.04'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const reportPath = 'logger_system/benchmarks/results/comparison_report.md';
+
+          if (fs.existsSync(reportPath)) {
+            const report = fs.readFileSync(reportPath, 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            });
+          }
+
+    - name: Commit performance updates
+      if: matrix.os == 'ubuntu-22.04' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        repository: logger_system
+        commit_message: "chore: update performance metrics [skip ci]"
+        file_pattern: |
+          README.md
+          docs/performance/**
+          benchmarks/results/**
+        commit_user_name: github-actions[bot]
+        commit_user_email: github-actions[bot]@users.noreply.github.com
+
+    - name: Save baseline (if requested)
+      if: github.event.inputs.save_baseline == 'true' && github.ref == 'refs/heads/main'
+      run: |
+        cd logger_system
+
+        # Save OS-specific baseline
+        mkdir -p benchmarks/baselines
+        cp ../build/benchmark_results_${{ matrix.os }}.json \
+           benchmarks/baselines/baseline_${{ matrix.os }}_$(date +%Y%m%d).json
+
+        # Update main baseline.json
+        if [ -f benchmarks/results/summary.json ]; then
+          cp benchmarks/results/summary.json benchmarks/baselines/baseline.json
+        fi
+
+        echo "✅ Baseline saved: benchmarks/baselines/baseline_${{ matrix.os }}_$(date +%Y%m%d).json" >> $GITHUB_STEP_SUMMARY
 
   report:
     name: Generate Benchmark Report
@@ -166,16 +246,41 @@ with open('build/benchmark_results_${{ matrix.os }}.json', 'w') as out:
 
     - name: Generate summary
       run: |
-        echo "# Benchmark Results Summary" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "## Phase 0: Baseline Measurement" >> $GITHUB_STEP_SUMMARY
+        echo "# 📊 Benchmark Results Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
 
         for dir in benchmark-results-*; do
           if [ -d "$dir" ]; then
-            echo "### $dir" >> $GITHUB_STEP_SUMMARY
-            if [ -f "$dir/benchmark_results_"*.json ]; then
+            echo "## $dir" >> $GITHUB_STEP_SUMMARY
+
+            # Check for summary
+            if [ -f "$dir/benchmarks/results/summary.json" ]; then
               echo "✅ Benchmarks completed" >> $GITHUB_STEP_SUMMARY
+
+              # Extract key metrics
+              python3 -c "
+import json
+import sys
+
+try:
+    with open('$dir/benchmarks/results/summary.json') as f:
+        data = json.load(f)
+        summary = data.get('summary', {})
+
+    if 'peak_throughput_msg_per_sec' in summary:
+        throughput = summary['peak_throughput_msg_per_sec']
+        print(f'  - **Peak Throughput**: {throughput/1_000_000:.2f}M msg/s')
+
+    if 'avg_latency_ns' in summary:
+        latency = summary['avg_latency_ns']
+        if latency < 1000:
+            print(f'  - **Avg Latency**: {latency:.1f} ns')
+        else:
+            print(f'  - **Avg Latency**: {latency/1000:.2f} μs')
+except:
+    pass
+              " >> $GITHUB_STEP_SUMMARY
+
               echo "" >> $GITHUB_STEP_SUMMARY
             else
               echo "❌ No results found" >> $GITHUB_STEP_SUMMARY
@@ -184,7 +289,7 @@ with open('build/benchmark_results_${{ matrix.os }}.json', 'w') as out:
           fi
         done
 
-        echo "## Next Steps" >> $GITHUB_STEP_SUMMARY
-        echo "- Review benchmark results" >> $GITHUB_STEP_SUMMARY
-        echo "- Document baseline in docs/BASELINE.md" >> $GITHUB_STEP_SUMMARY
-        echo "- Set performance targets for Phase 1" >> $GITHUB_STEP_SUMMARY
+        echo "## 📈 Next Steps" >> $GITHUB_STEP_SUMMARY
+        echo "- Review detailed results in artifacts" >> $GITHUB_STEP_SUMMARY
+        echo "- Check performance badges at docs/performance/badges/" >> $GITHUB_STEP_SUMMARY
+        echo "- View trend charts at docs/performance/charts/" >> $GITHUB_STEP_SUMMARY

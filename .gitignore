@@ -54,6 +54,12 @@ docs/latex/
 
 # Benchmark results
 benchmark_results/
+benchmarks/results/
+
+# Auto-generated performance metrics (CI/CD)
+docs/performance/badges/
+docs/performance/charts/
+docs/performance/performance_history.json
 
 # Coverage
 *.gcda
