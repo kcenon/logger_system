@@ -283,6 +283,8 @@ enum class logger_error_code {
     buffer_overflow = 1300,
     queue_full = 1301,
     queue_stopped = 1302,
+    queue_overflow_dropped = 1303,
+    queue_overflow_blocked = 1304,
     
     // Configuration errors (1400-1499)
     invalid_configuration = 1400,
@@ -298,6 +300,8 @@ enum class logger_error_code {
     processing_failed = 1601,
     filter_error = 1602,
     formatter_error = 1603,
+    batch_processing_timeout = 1604,
+    batch_processing_failed = 1605,
     
     // Security errors (1700-1799)
     encryption_failed = 1700,
@@ -316,11 +320,14 @@ enum class logger_error_code {
     registration_failed = 1802,
     creation_failed = 1803,
     operation_failed = 1804,
+    async_operation_not_running = 1805,
+    async_operation_already_running = 1806,
 
     // Writer errors (1900-1999)
     writer_not_available = 1900,
     writer_configuration_error = 1901,
-    writer_operation_failed = 1902
+    writer_operation_failed = 1902,
+    destructor_cleanup_failed = 1903
 };
 
 /**
@@ -374,6 +381,10 @@ inline std::string logger_error_to_string(logger_error_code code) {
             return "Queue is full";
         case logger_error_code::queue_stopped:
             return "Queue is stopped";
+        case logger_error_code::queue_overflow_dropped:
+            return "Queue overflow: messages dropped";
+        case logger_error_code::queue_overflow_blocked:
+            return "Queue overflow: operation blocked";
             
         // Configuration errors
         case logger_error_code::invalid_configuration:
@@ -398,6 +409,10 @@ inline std::string logger_error_to_string(logger_error_code code) {
             return "Filter error";
         case logger_error_code::formatter_error:
             return "Formatter error";
+        case logger_error_code::batch_processing_timeout:
+            return "Batch processing timeout";
+        case logger_error_code::batch_processing_failed:
+            return "Batch processing failed";
             
         // Security errors
         case logger_error_code::encryption_failed:
@@ -430,6 +445,20 @@ inline std::string logger_error_to_string(logger_error_code code) {
             return "Failed to create component from factory";
         case logger_error_code::operation_failed:
             return "DI container operation failed";
+        case logger_error_code::async_operation_not_running:
+            return "Async operation not running";
+        case logger_error_code::async_operation_already_running:
+            return "Async operation already running";
+
+        // Writer errors
+        case logger_error_code::writer_not_available:
+            return "Writer not available";
+        case logger_error_code::writer_configuration_error:
+            return "Writer configuration error";
+        case logger_error_code::writer_operation_failed:
+            return "Writer operation failed";
+        case logger_error_code::destructor_cleanup_failed:
+            return "Destructor cleanup failed";
             
         default:
             return "Unknown logger error code";
@@ -454,6 +483,12 @@ public:
               static_cast<int>(code),
               msg.empty() ? logger_error_to_string(code) : msg,
               "logger_system"}) {}
+
+    explicit result(const common::error_info& error)
+        : value_(error) {}
+
+    explicit result(common::error_info&& error)
+        : value_(std::move(error)) {}
 
     // Static factory method to avoid constructor ambiguity
     static result ok_value(const T& value) {
@@ -494,6 +529,12 @@ public:
               msg.empty() ? logger_error_to_string(code) : msg,
               "logger_system"}) {}
 
+    explicit result_void(const common::error_info& error)
+        : value_(error) {}
+
+    explicit result_void(common::error_info&& error)
+        : value_(std::move(error)) {}
+
     static result_void success() {
         return result_void(common::ok());
     }
@@ -522,13 +563,58 @@ private:
     common::VoidResult value_;
 };
 
+/**
+ * @brief Create a logger error result (void)
+ * @param code The logger error code
+ * @param message Error message (optional, uses error_to_string if empty)
+ * @return result_void containing the error
+ */
 inline result_void make_logger_error(logger_error_code code, const std::string& message = "") {
     return result_void{code, message};
 }
 
+/**
+ * @brief Create a logger error result with details (void)
+ * @param code The logger error code
+ * @param message Error message
+ * @param details Additional error details
+ * @return result_void containing the error with details
+ */
+inline result_void make_logger_error(logger_error_code code, const std::string& message, const std::string& details) {
+    return result_void(common::error_info{
+        static_cast<int>(code),
+        message.empty() ? logger_error_to_string(code) : message,
+        "logger_system",
+        details
+    });
+}
+
+/**
+ * @brief Create a logger error result (typed)
+ * @param code The logger error code
+ * @param message Error message (optional, uses error_to_string if empty)
+ * @return result<T> containing the error
+ */
 template<typename T>
 inline result<T> make_logger_error(logger_error_code code, const std::string& message = "") {
     return result<T>{code, message};
+}
+
+/**
+ * @brief Create a logger error result with details (typed)
+ * @param code The logger error code
+ * @param message Error message
+ * @param details Additional error details
+ * @return result<T> containing the error with details
+ */
+template<typename T>
+inline result<T> make_logger_error(logger_error_code code, const std::string& message, const std::string& details) {
+    return result<T>(common::error_info{
+        static_cast<int>(code),
+        message.empty() ? logger_error_to_string(code) : message,
+        "logger_system",
+        details
+    });
 }
 
 using error_code = logger_error_code;

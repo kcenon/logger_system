@@ -6,6 +6,7 @@ All rights reserved.
 *****************************************************************************/
 
 #include <kcenon/logger/writers/network_writer.h>
+#include <kcenon/logger/utils/error_handling_utils.h>
 
 #ifdef _WIN32
     #include <winsock2.h>
@@ -67,20 +68,30 @@ network_writer::network_writer(const std::string& host,
 network_writer::~network_writer() {
     running_ = false;
     buffer_cv_.notify_all();
-    
-    if (worker_thread_.joinable()) {
-        worker_thread_.join();
-    }
-    
-    if (reconnect_thread_.joinable()) {
-        reconnect_thread_.join();
-    }
-    
-    disconnect();
-    
+
+    // Join threads with error handling
+    utils::safe_destructor_operation("worker_thread_join", [this]() {
+        if (worker_thread_.joinable()) {
+            worker_thread_.join();
+        }
+    });
+
+    utils::safe_destructor_operation("reconnect_thread_join", [this]() {
+        if (reconnect_thread_.joinable()) {
+            reconnect_thread_.join();
+        }
+    });
+
+    // Disconnect with error handling
+    utils::safe_destructor_operation("network_disconnect", [this]() {
+        disconnect();
+    });
+
 #ifdef _WIN32
-    // Cleanup Winsock
-    WSACleanup();
+    // Cleanup Winsock with error handling
+    utils::safe_destructor_operation("winsock_cleanup", []() {
+        WSACleanup();
+    });
 #endif
 }
 

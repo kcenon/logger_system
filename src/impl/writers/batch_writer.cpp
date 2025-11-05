@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include <kcenon/logger/writers/batch_writer.h>
+#include <kcenon/logger/utils/error_handling_utils.h>
 #include <algorithm>
 
 namespace kcenon::logger {
@@ -51,10 +52,12 @@ batch_writer::batch_writer(std::unique_ptr<base_writer> underlying_writer,
 
 batch_writer::~batch_writer() {
     shutting_down_ = true;
-    
-    // Flush any remaining entries
+
+    // Flush any remaining entries with proper error handling
     if (!batch_.empty()) {
-        flush();
+        utils::safe_destructor_result_operation("final_batch_flush", [this]() {
+            return flush();
+        });
     }
 }
 
