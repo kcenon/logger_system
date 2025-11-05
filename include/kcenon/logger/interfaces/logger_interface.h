@@ -39,14 +39,40 @@
 #include <string>
 #include "logger_types.h"
 
+// Include Result pattern for exception-free error handling
+#if __has_include(<kcenon/common/patterns/result.h>)
+#include <kcenon/common/patterns/result.h>
+#elif __has_include(<common/patterns/result.h>)
+#include <common/patterns/result.h>
+#endif
+
 namespace logger_system {
 
 // Log level is defined in logger_types.h
+
+// Type aliases for Result pattern
+#ifdef KCENON_COMMON_RESULT_AVAILABLE
+using VoidResult = kcenon::common::VoidResult;
+#else
+// Fallback if common_system not available
+struct VoidResult {
+    bool success{true};
+    std::string error_message;
+
+    VoidResult() = default;
+    explicit VoidResult(bool s) : success(s) {}
+    VoidResult(bool s, std::string msg) : success(s), error_message(std::move(msg)) {}
+
+    bool is_ok() const { return success; }
+    bool has_error() const { return !success; }
+};
+#endif
 
 /**
  * @brief Logger interface for standalone mode
  *
  * This interface provides a logging contract for standalone logger implementations.
+ * All methods are noexcept and return VoidResult for exception-free error handling.
  */
 class logger_interface {
 public:
@@ -56,8 +82,10 @@ public:
    * @brief Log a message with specified level
    * @param level Log level
    * @param message Log message
+   * @return VoidResult indicating success or failure
+   * @note This method is noexcept - all errors are returned via VoidResult
    */
-  virtual void log(log_level level, const std::string& message) = 0;
+  virtual VoidResult log(log_level level, const std::string& message) noexcept = 0;
 
   /**
    * @brief Log a message with source location information
@@ -66,22 +94,26 @@ public:
    * @param file Source file name
    * @param line Source line number
    * @param function Function name
+   * @return VoidResult indicating success or failure
+   * @note This method is noexcept - all errors are returned via VoidResult
    */
-  virtual void log(log_level level, const std::string& message,
-                   const std::string& file, int line,
-                   const std::string& function) = 0;
+  virtual VoidResult log(log_level level, const std::string& message,
+                         const std::string& file, int line,
+                         const std::string& function) noexcept = 0;
 
   /**
    * @brief Check if logging is enabled for the specified level
    * @param level Log level to check
    * @return true if logging is enabled for this level
    */
-  virtual bool is_enabled(log_level level) const = 0;
+  virtual bool is_enabled(log_level level) const noexcept = 0;
 
   /**
    * @brief Flush any buffered log messages
+   * @return VoidResult indicating success or failure
+   * @note This method is noexcept - all errors are returned via VoidResult
    */
-  virtual void flush() = 0;
+  virtual VoidResult flush() noexcept = 0;
 };
 
 /**
