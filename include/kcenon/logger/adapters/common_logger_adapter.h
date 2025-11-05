@@ -89,6 +89,7 @@ public:
 
     /**
      * @brief Log a message with specified level
+     * @note No try-catch needed - logger operations are noexcept
      */
     ::common::VoidResult log(::common::interfaces::log_level level,
                              const std::string& message) override {
@@ -96,16 +97,14 @@ public:
             return ::common::error_info(1, "Logger not initialized", "logger_system");
         }
 
-        try {
-            logger_->log(from_common_level(level), message);
-            return ::common::VoidResult(std::monostate{});
-        } catch (const std::exception& e) {
-            return ::common::error_info(2, e.what(), "logger_system");
-        }
+        // Logger operations are designed to be noexcept - simply call and return success
+        logger_->log(from_common_level(level), message);
+        return ::common::VoidResult(std::monostate{});
     }
 
     /**
      * @brief Log a message with source location information
+     * @note No try-catch needed - logger operations are noexcept
      */
     ::common::VoidResult log_with_location(
         ::common::interfaces::log_level level,
@@ -117,19 +116,22 @@ public:
             return ::common::error_info(1, "Logger not initialized", "logger_system");
         }
 
+        // Create formatted message with location info
+        // Logger operations are noexcept - format may throw but we catch at API boundary
         try {
-            // Create formatted message with location info
             std::string formatted = std::format("[{}:{}:{}] {}",
                 file, line, function, message);
             logger_->log(from_common_level(level), formatted);
-            return ::common::VoidResult(std::monostate{});
         } catch (const std::exception& e) {
-            return ::common::error_info(2, e.what(), "logger_system");
+            // Only format can throw - return error for format failure
+            return ::common::error_info(2, std::string("Format error: ") + e.what(), "logger_system");
         }
+        return ::common::VoidResult(std::monostate{});
     }
 
     /**
      * @brief Log a structured entry
+     * @note No try-catch needed - logger operations are noexcept
      */
     ::common::VoidResult log_entry(
         const ::common::interfaces::log_entry& entry) override {
@@ -137,8 +139,8 @@ public:
             return ::common::error_info(1, "Logger not initialized", "logger_system");
         }
 
+        // Format the entry with location if available
         try {
-            // Format the entry with location if available
             std::string message = entry.message;
             if (!entry.file.empty()) {
                 message = std::format("[{}:{}:{}] {}",
@@ -146,26 +148,25 @@ public:
             }
 
             logger_->log(from_common_level(entry.level), message);
-            return ::common::VoidResult(std::monostate{});
         } catch (const std::exception& e) {
-            return ::common::error_info(2, e.what(), "logger_system");
+            // Only format can throw
+            return ::common::error_info(2, std::string("Format error: ") + e.what(), "logger_system");
         }
+        return ::common::VoidResult(std::monostate{});
     }
 
     /**
      * @brief Set the minimum log level
+     * @note No try-catch needed - logger operations are noexcept
      */
     ::common::VoidResult set_level(::common::interfaces::log_level level) override {
         if (!logger_) {
             return ::common::error_info(1, "Logger not initialized", "logger_system");
         }
 
-        try {
-            logger_->set_level(from_common_level(level));
-            return ::common::VoidResult(std::monostate{});
-        } catch (const std::exception& e) {
-            return ::common::error_info(2, e.what(), "logger_system");
-        }
+        // Logger operations are designed to be noexcept
+        logger_->set_level(from_common_level(level));
+        return ::common::VoidResult(std::monostate{});
     }
 
     /**
@@ -181,18 +182,16 @@ public:
 
     /**
      * @brief Flush all pending log messages
+     * @note No try-catch needed - logger operations are noexcept
      */
     ::common::VoidResult flush() override {
         if (!logger_) {
             return ::common::error_info(1, "Logger not initialized", "logger_system");
         }
 
-        try {
-            logger_->flush();
-            return ::common::VoidResult(std::monostate{});
-        } catch (const std::exception& e) {
-            return ::common::error_info(2, e.what(), "logger_system");
-        }
+        // Logger operations are designed to be noexcept
+        logger_->flush();
+        return ::common::VoidResult(std::monostate{});
     }
 
     /**
