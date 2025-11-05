@@ -77,24 +77,22 @@ critical_writer::~critical_writer() {
 
     // Restore signal handlers
     if (config_.enable_signal_handlers) {
-        restore_signal_handlers();
+        utils::safe_destructor_operation("restore_signal_handlers", [this]() {
+            restore_signal_handlers();
+        });
     }
 
-    // Final flush
-    try {
-        flush();
-    } catch (...) {
-        // Ignore exceptions in destructor
-    }
+    // Final flush - use safe operation to log any errors
+    utils::safe_destructor_result_operation("final_flush", [this]() {
+        return flush();
+    });
 
-    // Close WAL
+    // Close WAL with proper error logging
     if (wal_stream_) {
-        try {
+        utils::safe_destructor_operation("wal_close", [this]() {
             wal_stream_->flush();
             wal_stream_->close();
-        } catch (...) {
-            // Ignore exceptions in destructor
-        }
+        });
     }
 
     // Clear global instance
