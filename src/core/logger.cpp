@@ -42,6 +42,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <chrono>
 #include <type_traits>
 #include <atomic>
+#include <shared_mutex>
 
 namespace kcenon::logger {
 
@@ -112,8 +113,8 @@ public:
 #else
     std::atomic<logger_system::log_level> min_level_;
 #endif
-    std::vector<std::unique_ptr<base_writer>> writers_;
-    std::mutex writers_mutex_;  // Protects writers_ vector from concurrent modification
+    std::vector<std::shared_ptr<base_writer>> writers_;
+    std::shared_mutex writers_mutex_;  // Protects writers_ vector from concurrent modification
     std::unique_ptr<backends::integration_backend> backend_;  // Integration backend
 
     impl(bool async, std::size_t buffer_size, std::unique_ptr<backends::integration_backend> backend)
@@ -163,7 +164,12 @@ logger::~logger() {
 result_void logger::start() {
     if (pimpl_ && !pimpl_->running_) {
         pimpl_->running_ = true;
-        // Initialize async processing if needed
+        // TODO: Implement async processing with background thread and queue
+        // Currently operates in synchronous mode regardless of async_mode_ setting
+        // Full async implementation requires:
+        // - Background worker thread
+        // - Lock-free or mutex-protected message queue
+        // - Proper shutdown synchronization
     }
     return result_void::success();
 }
@@ -182,22 +188,22 @@ bool logger::is_running() const {
 
 result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
     if (pimpl_ && writer) {
-        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
-        pimpl_->writers_.push_back(std::move(writer));
+        std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
+        pimpl_->writers_.push_back(std::shared_ptr<base_writer>(std::move(writer)));
     }
     return result_void::success();
 }
 
 void logger::add_writer(const std::string& /*name*/, std::unique_ptr<base_writer> writer) {
     if (pimpl_ && writer) {
-        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
-        pimpl_->writers_.push_back(std::move(writer));
+        std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
+        pimpl_->writers_.push_back(std::shared_ptr<base_writer>(std::move(writer)));
     }
 }
 
 result_void logger::clear_writers() {
     if (pimpl_) {
-        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
+        std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
         pimpl_->writers_.clear();
     }
     return result_void::success();
@@ -240,15 +246,21 @@ void logger::log(log_level level, const std::string& message) {
     // Convert level using backend
     auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(level));
 
+    // TODO: Queue message for async processing when async mode is fully implemented
+    // Current implementation: synchronous write to all writers
+
+    // Copy writer pointers under lock to minimize lock hold time
+    std::vector<std::shared_ptr<base_writer>> local_writers;
     {
-        // Lock writers_ vector to prevent concurrent modification during iteration
-        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
-        for (auto& writer : pimpl_->writers_) {
-            if (writer) {
-                // Create a simple log entry and write it
-                auto now = std::chrono::system_clock::now();
-                writer->write(converted_level, message, "", 0, "", now);
-            }
+        std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
+        local_writers = pimpl_->writers_;  // Copy shared_ptrs (cheap, just reference counting)
+    }
+
+    // Write without holding lock to avoid I/O under lock
+    for (auto& writer : local_writers) {
+        if (writer) {
+            auto now = std::chrono::system_clock::now();
+            writer->write(converted_level, message, "", 0, "", now);
         }
     }
 
@@ -275,15 +287,18 @@ void logger::log(log_level level,
     // Convert level using backend
     auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(level));
 
+    // Copy writer pointers under lock to minimize lock hold time
+    std::vector<std::shared_ptr<base_writer>> local_writers;
     {
-        // Lock writers_ vector to prevent concurrent modification during iteration
-        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
-        for (auto& writer : pimpl_->writers_) {
-            if (writer) {
-                // Create a log entry with source location
-                auto now = std::chrono::system_clock::now();
-                writer->write(converted_level, message, file, line, function, now);
-            }
+        std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
+        local_writers = pimpl_->writers_;  // Copy shared_ptrs (cheap, just reference counting)
+    }
+
+    // Write without holding lock to avoid I/O under lock
+    for (auto& writer : local_writers) {
+        if (writer) {
+            auto now = std::chrono::system_clock::now();
+            writer->write(converted_level, message, file, line, function, now);
         }
     }
 
@@ -301,8 +316,15 @@ bool logger::is_enabled(log_level level) const {
 
 void logger::flush() {
     if (pimpl_) {
-        std::lock_guard<std::mutex> lock(pimpl_->writers_mutex_);
-        for (auto& writer : pimpl_->writers_) {
+        // Copy writer pointers under lock
+        std::vector<std::shared_ptr<base_writer>> local_writers;
+        {
+            std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
+            local_writers = pimpl_->writers_;
+        }
+
+        // Flush without holding lock
+        for (auto& writer : local_writers) {
             if (writer) {
                 writer->flush();
             }
@@ -359,8 +381,13 @@ common::Result<common::interfaces::metrics_snapshot> logger::get_monitoring_data
             "Logger not initialized");
     }
 
-    // Add basic statistics
-    snapshot.add_metric("writers_count", static_cast<double>(pimpl_->writers_.size()));
+    // Add basic statistics (protected by shared lock)
+    size_t writers_count = 0;
+    {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
+        writers_count = pimpl_->writers_.size();
+    }
+    snapshot.add_metric("writers_count", static_cast<double>(writers_count));
     snapshot.add_metric("async_mode", pimpl_->async_mode_ ? 1.0 : 0.0);
 
     // Add metrics from internal monitor if available
@@ -412,13 +439,21 @@ common::Result<common::interfaces::health_check_result> logger::health_check() {
         result.metadata["running"] = "true";
     }
 
-    // Check writers
-    if (pimpl_->writers_.empty()) {
+    // Check writers (protected by shared lock)
+    size_t writers_count = 0;
+    bool writers_empty = false;
+    {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
+        writers_count = pimpl_->writers_.size();
+        writers_empty = pimpl_->writers_.empty();
+    }
+
+    if (writers_empty) {
         result.status = common::interfaces::health_status::degraded;
         result.message = "No writers configured";
         result.metadata["writers_count"] = "0";
     } else {
-        result.metadata["writers_count"] = std::to_string(pimpl_->writers_.size());
+        result.metadata["writers_count"] = std::to_string(writers_count);
     }
 
     // Check metrics if enabled
