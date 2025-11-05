@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['마이그레이션_20가이드_0',['Logger System 마이그레이션 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md774',1,'']]]
+  ['내부_20문서_0',['내부 문서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md922',1,'']]]
 ];

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['로그_20손실_20방지_20가이드_0',['크리티컬 로그 손실 방지 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION__KO.html#autotoc_md597',1,'']]],
-  ['로깅_20빠른_20시작_1',['크리티컬 로깅 빠른 시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START__KO.html#autotoc_md632',1,'']]],
-  ['로드맵_2',['로드맵',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__KO.html#autotoc_md933',1,'']]]
+  ['권장사항_20프로덕션_0',['권장사항 (프로덕션)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__KO.html#autotoc_md1047',1,'']]],
+  ['권한_20오류_1',['문제 3: Git 자동 커밋 권한 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md916',1,'']]]
 ];

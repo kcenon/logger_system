@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['🚀_20빠른_20탐색_0',['🚀 빠른 탐색',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md882',1,'']]],
-  ['🚀_20build_20status_1',['🚀 Build Status',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md166',1,'']]],
-  ['🚀_20getting_20started_2',['🚀 Getting Started',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md324',1,'']]],
-  ['🚀_20quick_20navigation_3',['🚀 Quick Navigation',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md867',1,'']]],
-  ['🚀_20quick_20start_4',['🚀 Quick Start',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md605',1,'']]],
-  ['🚀_20strong_20performance_20excellence_20strong_5',['🚀 &lt;strong&gt;Performance Excellence&lt;/strong&gt;',['../index.html#autotoc_md11',1,'']]]
+  ['제안서_0',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]],
+  ['제안_20디렉토리_20구조_1',['📁 제안 디렉토리 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md873',1,'']]],
+  ['제안_20솔루션_20아키텍처_2',['🎯 제안 솔루션 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md870',1,'']]],
+  ['제안_201_3a_20배지_20중심_20디자인_3',['제안 1: 배지 중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md894',1,'']]],
+  ['제안_202_3a_20테이블_20중심_20디자인_4',['제안 2: 테이블 중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md895',1,'']]],
+  ['제안_203_3a_20카드_20스타일_20디자인_5',['제안 3: 카드 스타일 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md896',1,'']]],
+  ['제한사항_6',['중요한 제한사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__KO.html#autotoc_md1046',1,'']]]
 ];

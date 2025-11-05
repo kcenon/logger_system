@@ -14,7 +14,7 @@ var searchData=
   ['queue_20tuning_11',['Issue ARC-009: Async Queue Tuning',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES.html#autotoc_md362',1,'']]],
   ['quick_20api_20overview_12',['Quick API Overview',['../index.html#autotoc_md76',1,'']]],
   ['quick_20links_13',['🔗 Quick Links',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md190',1,'']]],
-  ['quick_20navigation_14',['🚀 Quick Navigation',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md867',1,'']]],
+  ['quick_20navigation_14',['🚀 Quick Navigation',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md983',1,'']]],
   ['quick_20start_15',['quick start',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md605',1,'🚀 Quick Start'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md601',1,'Critical Logging Quick Start'],['../index.html#autotoc_md44',1,'Quick Start']]],
   ['quick_20start_20with_20builder_20pattern_20recommended_16',['Quick Start with Builder Pattern (Recommended)',['../index.html#autotoc_md45',1,'']]]
 ];

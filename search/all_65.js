@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['🔄_20ci_20cd_20pipeline_20health_0',['🔄 CI/CD Pipeline Health',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md185',1,'']]],
-  ['🔄_20dependency_20flow_20interface_20contracts_1',['🔄 Dependency Flow &amp; Interface Contracts',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md309',1,'']]],
-  ['🔄_20evolution_3a_20monolithic_20→_20modular_2',['🔄 Evolution: Monolithic → Modular',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md320',1,'']]],
-  ['🔄_20strong_20design_20patterns_20implementation_20strong_3',['🔄 &lt;strong&gt;Design Patterns Implementation&lt;/strong&gt;',['../index.html#autotoc_md28',1,'']]]
+  ['자동화_20제안서_0',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]],
+  ['자동_20업데이트_1',['Phase 4: README.md 자동 업데이트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md889',1,'']]],
+  ['자동_20업데이트_20예상_20소요_3a_201시간_2',['Phase 3: README 자동 업데이트 (예상 소요: 1시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md908',1,'']]],
+  ['자동_20커밋_3',['4.2 GitHub Actions에서 자동 커밋',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md891',1,'']]],
+  ['자동_20커밋_20권한_20오류_4',['문제 3: Git 자동 커밋 권한 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md916',1,'']]],
+  ['자동_20코멘트_5',['2. PR 자동 코멘트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md902',1,'']]],
+  ['자료_6',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md919',1,'']]]
 ];

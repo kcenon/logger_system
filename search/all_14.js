@@ -8,7 +8,8 @@ var searchData=
   ['key_20points_5',['💡 Key Points',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md629',1,'']]],
   ['key_20storage_6',['Secure Key Storage',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md447',1,'']]],
   ['known_20issues_7',['known issues',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md478',1,'Known Issues'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html#autotoc_md655',1,'Known Issues']]],
-  ['known_20performance_20issues_8',['Known Performance Issues',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE.html#autotoc_md420',1,'']]],
-  ['korean_20files_9',['Korean Files',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html#autotoc_md964',1,'']]],
-  ['korean_20translation_20summary_10',['Korean Translation Summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html',1,'']]]
+  ['known_20issues_20limitations_8',['🐛 Known Issues &amp; Limitations',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md966',1,'']]],
+  ['known_20performance_20issues_9',['Known Performance Issues',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE.html#autotoc_md420',1,'']]],
+  ['korean_20files_10',['Korean Files',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html#autotoc_md1080',1,'']]],
+  ['korean_20translation_20summary_11',['Korean Translation Summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html',1,'']]]
 ];

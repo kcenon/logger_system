@@ -1,6 +1,11 @@
 var searchData=
 [
-  ['성능_20가이드_0',['Logger System 성능 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE__KO.html#autotoc_md810',1,'']]],
-  ['성능_20기준선_1',['logger_system 성능 기준선',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE__KO.html#autotoc_md439',1,'']]],
-  ['성능_20엔지니어_2',['성능 엔지니어',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md886',1,'']]]
+  ['문서화_20예상_20소요_3a_201시간_0',['Phase 6: 문서화 (예상 소요: 1시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md911',1,'']]],
+  ['문서_1',['문서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md922',1,'내부 문서'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md995',1,'핵심 문서'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md993',1,'Logger System 문서']]],
+  ['문서_20구조_2',['📚 문서 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md994',1,'']]],
+  ['문서_20유지관리_3',['🔧 문서 유지관리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1003',1,'']]],
+  ['문제_201_3a_20벤치마크_20빌드_20실패_4',['문제 1: 벤치마크 빌드 실패',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md914',1,'']]],
+  ['문제_202_3a_20python_20스크립트_20실행_20오류_5',['문제 2: Python 스크립트 실행 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md915',1,'']]],
+  ['문제_203_3a_20git_20자동_20커밋_20권한_20오류_6',['문제 3: Git 자동 커밋 권한 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md916',1,'']]],
+  ['문제_204_3a_20배지가_20readme에_20표시되지_20않음_7',['문제 4: 배지가 README에 표시되지 않음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md917',1,'']]]
 ];

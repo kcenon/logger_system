@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['현재_20기능_0',['현재 기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__KO.html#autotoc_md929',1,'']]],
-  ['현재_20상태_20phase_200_20기준선_1',['시스템 현재 상태 - Phase 0 기준선',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE__KO.html#autotoc_md664',1,'']]]
+  ['실패_0',['문제 1: 벤치마크 빌드 실패',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md914',1,'']]],
+  ['실행_20결과_1',['1. GitHub Actions 실행 결과',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md901',1,'']]],
+  ['실행_20및_20json_20저장_2',['1.2 벤치마크 실행 및 JSON 저장',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md878',1,'']]],
+  ['실행_20오류_3',['문제 2: Python 스크립트 실행 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md915',1,'']]]
 ];

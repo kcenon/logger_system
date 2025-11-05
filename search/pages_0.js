@@ -6,5 +6,6 @@ var searchData=
   ['architecture_20logger_20system_3',['Architecture - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html',1,'']]],
   ['architecture_5fissues_4',['ARCHITECTURE_ISSUES',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES.html',1,'']]],
   ['architecture_5fissues_5fko_5',['ARCHITECTURE_ISSUES_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES__KO.html',1,'']]],
-  ['architecture_5fko_6',['architecture_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture__KO.html',1,'']]]
+  ['architecture_5fko_6',['architecture_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture__KO.html',1,'']]],
+  ['automation_20implementation_20summary_7',['CI/CD Performance Automation - Implementation Summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html',1,'']]]
 ];

@@ -2,8 +2,8 @@ var searchData=
 [
   ['ubuntu_20clang_20build_0',['2. Ubuntu Clang Build',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html#autotoc_md648',1,'']]],
   ['ubuntu_20gcc_20build_1',['1. Ubuntu GCC Build',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html#autotoc_md647',1,'']]],
-  ['undefinedbehaviorsanitizer_2',['UndefinedBehaviorSanitizer',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md908',1,'']]],
-  ['undefinedbehaviorsanitizer_20warnings_3',['UndefinedBehaviorSanitizer Warnings',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md903',1,'']]],
+  ['undefinedbehaviorsanitizer_2',['UndefinedBehaviorSanitizer',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md1024',1,'']]],
+  ['undefinedbehaviorsanitizer_20warnings_3',['UndefinedBehaviorSanitizer Warnings',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md1019',1,'']]],
   ['unit_20tests_4',['Unit Tests',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CONTRIBUTING.html#autotoc_md514',1,'']]],
   ['update_5',['📊 Dashboard Update',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md191',1,'']]],
   ['update_20this_20document_6',['Update This Document',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE.html#autotoc_md425',1,'']]],
@@ -18,10 +18,11 @@ var searchData=
   ['use_20cases_15',['Real-World Impact &amp; Use Cases',['../index.html#autotoc_md16',1,'']]],
   ['use_20hybrid_20writer_16',['Strategy 3: Use Hybrid Writer',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION.html#autotoc_md566',1,'']]],
   ['use_20wal_17',['Q2: When should I use WAL?',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION.html#autotoc_md587',1,'']]],
-  ['users_18',['users',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md869',1,'Existing Users'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md855',1,'For Library Users'],['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md868',1,'New Users']]],
+  ['users_18',['users',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md985',1,'Existing Users'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md855',1,'For Library Users'],['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md984',1,'New Users']]],
   ['users_202025_2009_2010_19',['[2.9.0] - Phase 5 P2 Migration Guide for Existing Users (2025-09-10)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md457',1,'']]],
   ['using_20as_20a_20package_20',['Using as a Package',['../index.html#autotoc_md38',1,'']]],
   ['using_20as_20installed_20package_21',['Using as Installed Package',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html#autotoc_md713',1,'']]],
   ['using_20cmake_20fetchcontent_20recommended_22',['Using CMake FetchContent (Recommended)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html#autotoc_md711',1,'']]],
-  ['using_20service_20container_23',['Using Service Container',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html#autotoc_md726',1,'']]]
+  ['using_20service_20container_23',['Using Service Container',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html#autotoc_md726',1,'']]],
+  ['utc_24',['Daily Schedule (2 AM UTC)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md949',1,'']]]
 ];

@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['문서_0',['문서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md879',1,'핵심 문서'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md877',1,'Logger System 문서']]],
-  ['문서_20구조_1',['📚 문서 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md878',1,'']]],
-  ['문서_20유지관리_2',['🔧 문서 유지관리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md887',1,'']]]
+  ['단계_0',['📝 다음 단계',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md926',1,'']]]
 ];

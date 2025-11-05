@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['시스템_20현재_20상태_20phase_200_20기준선_0',['시스템 현재 상태 - Phase 0 기준선',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE__KO.html#autotoc_md664',1,'']]],
-  ['시작하기_1',['Logger System 시작하기',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED__KO.html#autotoc_md730',1,'']]],
-  ['시작_2',['크리티컬 로깅 빠른 시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START__KO.html#autotoc_md632',1,'']]]
+  ['배지가_20readme에_20표시되지_20않음_0',['문제 4: 배지가 README에 표시되지 않음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md917',1,'']]],
+  ['배지_20및_20차트_20생성_1',['Phase 3: 배지 및 차트 생성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md885',1,'']]],
+  ['배지_20및_20차트_20예상_20소요_3a_201_205시간_2',['Phase 2: 배지 및 차트 (예상 소요: 1.5시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md907',1,'']]],
+  ['배지_20생성_20스크립트_3',['3.1 성능 배지 생성 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md886',1,'']]],
+  ['배지_20중심_20디자인_4',['제안 1: 배지 중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md894',1,'']]]
 ];

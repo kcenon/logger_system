@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['크리티컬_20로그_20손실_20방지_20가이드_0',['크리티컬 로그 손실 방지 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION__KO.html#autotoc_md597',1,'']]],
-  ['크리티컬_20로깅_20빠른_20시작_1',['크리티컬 로깅 빠른 시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START__KO.html#autotoc_md632',1,'']]]
+  ['스레딩_20생태계_20아키텍처_0',['스레딩 생태계 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture__KO.html#autotoc_md383',1,'']]],
+  ['스크립트_1',['스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md882',1,'2.1 벤치마크 결과 파싱 스크립트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md883',1,'2.2 기준선 비교 스크립트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md886',1,'3.1 성능 배지 생성 스크립트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md887',1,'3.2 트렌드 차트 생성 스크립트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md890',1,'4.1 README 업데이트 스크립트']]],
+  ['스크립트_20실행_20오류_2',['문제 2: Python 스크립트 실행 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md915',1,'']]],
+  ['스타일_20디자인_3',['제안 3: 카드 스타일 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md896',1,'']]]
 ];

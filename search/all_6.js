@@ -6,5 +6,8 @@ var searchData=
   ['6_20coverage_20analysis_3',['6. Coverage Analysis',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html#autotoc_md652',1,'']]],
   ['6_20factory_20pattern_4',['6. Factory Pattern',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html#autotoc_md150',1,'']]],
   ['6_20filters_5',['6. Filters',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html#autotoc_md122',1,'']]],
-  ['6_20integration_6',['6. Integration',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES.html#autotoc_md365',1,'']]]
+  ['6_20integration_6',['6. Integration',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES.html#autotoc_md365',1,'']]],
+  ['6074779f_7',['Phase 3: Documentation Automation (Commit: 6074779f)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md937',1,'']]],
+  ['6_3a_20문서화_20예상_20소요_3a_201시간_8',['Phase 6: 문서화 (예상 소요: 1시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md911',1,'']]],
+  ['6_3a_20documentation_20this_20commit_9',['Phase 6: Documentation (This commit)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md940',1,'']]]
 ];

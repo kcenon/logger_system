@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['생성_0',['커스텀 작성기 생성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS__KO.html#autotoc_md211',1,'']]],
-  ['생태계_20아키텍처_1',['스레딩 생태계 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture__KO.html#autotoc_md383',1,'']]]
+  ['모델_20범위_0',['위협 모델 (범위)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__KO.html#autotoc_md1044',1,'']]],
+  ['모범_20사례_20가이드_1',['Logger System 모범 사례 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES__KO.html#autotoc_md704',1,'']]]
 ];

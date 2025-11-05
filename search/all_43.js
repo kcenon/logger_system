@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['아키텍처_0',['아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture__KO.html#autotoc_md383',1,'스레딩 생태계 아키텍처'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md859',1,'Logger System 아키텍처']]],
-  ['아키텍처_20이슈_20phase_200_20식별_1',['아키텍처 이슈 - Phase 0 식별',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES__KO.html#autotoc_md380',1,'']]]
+  ['변경사항_0',['최근 변경사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1004',1,'']]],
+  ['변경에_20따른_20벤치마크_20코드_20수정_1',['1.3 API 변경에 따른 벤치마크 코드 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md879',1,'']]],
+  ['변경_20이력_2',['변경 이력',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md498',1,'']]]
 ];

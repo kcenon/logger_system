@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['📚_20문서_20구조_0',['📚 문서 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md878',1,'']]],
-  ['📚_20documentation_20structure_1',['📚 documentation structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md328',1,'📚 Documentation Structure'],['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md863',1,'📚 Documentation Structure']]],
-  ['📚_20learn_20more_2',['📚 Learn More',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md622',1,'']]]
+  ['이력_0',['변경 이력',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md498',1,'']]],
+  ['이슈_20phase_200_20식별_1',['아키텍처 이슈 - Phase 0 식별',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES__KO.html#autotoc_md380',1,'']]]
 ];

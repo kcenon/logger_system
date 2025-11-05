@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['방지_20가이드_0',['크리티컬 로그 손실 방지 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION__KO.html#autotoc_md597',1,'']]]
+  ['도구_20및_20라이브러리_0',['도구 및 라이브러리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md920',1,'']]],
+  ['도움_20및_20지원_1',['🤝 도움 및 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1006',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['위협_20모델_20범위_0',['위협 모델 (범위)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__KO.html#autotoc_md928',1,'']]]
+  ['빌드_20실패_0',['문제 1: 벤치마크 빌드 실패',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md914',1,'']]]
 ];

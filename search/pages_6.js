@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['migration_5fguide_0',['MIGRATION_GUIDE',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html',1,'']]],
-  ['migration_5fguide_5fko_1',['MIGRATION_GUIDE_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html',1,'']]]
+  ['logger_20system_0',['logger system',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html',1,'Architecture - Logger System'],['../index.html',1,'Logger System']]],
+  ['logger_5fsystem_5farchitecture_1',['LOGGER_SYSTEM_ARCHITECTURE',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html',1,'']]],
+  ['logger_5fsystem_5farchitecture_5fko_2',['LOGGER_SYSTEM_ARCHITECTURE_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE__KO.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['대시보드_0',['Logger System CI/CD 대시보드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD__KO.html#autotoc_md194',1,'']]]
+  ['고급_20주제_20tt_20docs_20advanced_20tt_0',['고급 주제 (&lt;tt&gt;docs/advanced/&lt;/tt&gt;)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md997',1,'']]]
 ];

@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['🔧_20문서_20유지관리_0',['🔧 문서 유지관리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md887',1,'']]],
-  ['🔧_20advanced_20capabilities_1',['🔧 Advanced Capabilities',['../index.html#autotoc_md4',1,'']]],
-  ['🔧_20configuration_20options_2',['🔧 Configuration Options',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md615',1,'']]],
-  ['🔧_20documentation_20maintenance_3',['🔧 Documentation Maintenance',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md872',1,'']]],
-  ['🔧_20integration_20patterns_4',['🔧 Integration Patterns',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md313',1,'']]],
-  ['🔧_20strong_20developer_20productivity_20strong_5',['🔧 &lt;strong&gt;Developer Productivity&lt;/strong&gt;',['../index.html#autotoc_md13',1,'']]]
+  ['전체_20예시_0',['🔄 CI/CD 워크플로우 전체 예시',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md898',1,'']]],
+  ['전체_20워크플로우_1',['전체 워크플로우',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md871',1,'']]]
 ];

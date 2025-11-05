@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['커스텀_20작성기_20생성_0',['커스텀 작성기 생성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS__KO.html#autotoc_md211',1,'']]]
+  ['수정_0',['수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md877',1,'1.1 GitHub Actions 워크플로우 수정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md879',1,'1.3 API 변경에 따른 벤치마크 코드 수정']]]
 ];

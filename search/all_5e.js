@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📅_20release_20history_0',['📅 Release History',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md188',1,'']]]
+  ['오류_0',['오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md915',1,'문제 2: Python 스크립트 실행 오류'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md916',1,'문제 3: Git 자동 커밋 권한 오류']]]
 ];

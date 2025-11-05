@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['🎯_20goal_0',['🎯 Goal',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md603',1,'']]],
-  ['🎯_20high_20performance_20logging_1',['🎯 High-Performance Logging',['../index.html#autotoc_md3',1,'']]],
-  ['🎯_20strong_20ideal_20applications_20strong_2',['🎯 &lt;strong&gt;Ideal Applications&lt;/strong&gt;',['../index.html#autotoc_md17',1,'']]]
+  ['안전한_20구성_20체크리스트_0',['안전한 구성 체크리스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__KO.html#autotoc_md1048',1,'']]]
 ];

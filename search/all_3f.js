@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['스레딩_20생태계_20아키텍처_0',['스레딩 생태계 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture__KO.html#autotoc_md383',1,'']]]
+  ['방지_20가이드_0',['크리티컬 로그 손실 방지 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION__KO.html#autotoc_md597',1,'']]]
 ];

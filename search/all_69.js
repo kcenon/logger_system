@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔥_20sanitizer_20results_0',['🔥 Sanitizer Results',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md177',1,'']]]
+  ['저장_0',['1.2 벤치마크 실행 및 JSON 저장',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md878',1,'']]]
 ];

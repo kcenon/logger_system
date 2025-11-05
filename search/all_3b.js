@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['상태_20phase_200_20기준선_0',['시스템 현재 상태 - Phase 0 기준선',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE__KO.html#autotoc_md664',1,'']]]
+  ['마이그레이션_20가이드_0',['Logger System 마이그레이션 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md774',1,'']]]
 ];
