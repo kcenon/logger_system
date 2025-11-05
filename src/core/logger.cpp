@@ -46,16 +46,35 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace kcenon::logger {
 
 namespace {
+/**
+ * @brief Check if a log level meets the minimum threshold
+ *
+ * IMPORTANT: This function handles two different log level semantics:
+ *
+ * 1. thread_system::log_level (descending severity):
+ *    critical(0) > error(1) > warning(2) > info(3) > debug(4) > trace(5)
+ *    → Use <= comparison (lower number = more severe)
+ *
+ * 2. logger_system::log_level (ascending severity):
+ *    trace(0) < debug(1) < info(2) < warn(3) < error(4) < fatal(5)
+ *    → Use >= comparison (higher number = more severe)
+ *
+ * @param level The log level to check
+ * @param minimum The minimum threshold level
+ * @return true if the message should be logged
+ */
 template <typename Level>
 bool meets_threshold(Level level, Level minimum) {
     using underlying_type = std::underlying_type_t<Level>;
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-    // thread::log_level uses descending severity: critical(0) > error(1) > warning(2) > info(3)
-    // So we need level <= minimum to allow more severe messages
+    // thread::log_level: descending severity (0 = most severe)
+    // Example: if minimum=warning(2), log critical(0), error(1), warning(2)
+    //          but skip info(3), debug(4), trace(5)
     return static_cast<underlying_type>(level) <= static_cast<underlying_type>(minimum);
 #else
-    // logger_system::log_level uses ascending severity: trace(0) < debug(1) < info(2) < warn(3)
-    // So we need level >= minimum to allow more severe messages
+    // logger_system::log_level: ascending severity (0 = least severe)
+    // Example: if minimum=warn(3), log warn(3), error(4), fatal(5)
+    //          but skip trace(0), debug(1), info(2)
     return static_cast<underlying_type>(level) >= static_cast<underlying_type>(minimum);
 #endif
 }

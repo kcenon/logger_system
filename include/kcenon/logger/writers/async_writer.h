@@ -40,11 +40,14 @@ public:
      * @brief Constructor
      * @param wrapped_writer The writer to wrap with async functionality
      * @param queue_size Maximum queue size for pending messages
+     * @param flush_timeout Maximum time to wait for flush operation (in seconds)
      */
-    explicit async_writer(std::unique_ptr<base_writer> wrapped_writer, 
-                         std::size_t queue_size = 10000)
+    explicit async_writer(std::unique_ptr<base_writer> wrapped_writer,
+                         std::size_t queue_size = 10000,
+                         std::chrono::seconds flush_timeout = std::chrono::seconds(5))
         : wrapped_writer_(std::move(wrapped_writer))
         , max_queue_size_(queue_size)
+        , flush_timeout_(flush_timeout)
         , running_(false) {
         if (!wrapped_writer_) {
             throw std::invalid_argument("Wrapped writer cannot be null");
@@ -166,14 +169,15 @@ public:
 
         // Wait for the queue to be empty with a timeout to prevent indefinite blocking
         std::unique_lock<std::mutex> lock(queue_mutex_);
-        bool flushed = flush_cv_.wait_for(lock, std::chrono::seconds(5), [this]() {
+        bool flushed = flush_cv_.wait_for(lock, flush_timeout_, [this]() {
             return message_queue_.empty();
         });
 
         if (!flushed) {
             // Timeout occurred - worker thread may have exited or is blocked
             return make_logger_error(logger_error_code::flush_timeout,
-                                    "Flush operation timed out after 5 seconds");
+                                    "Flush operation timed out after " +
+                                    std::to_string(flush_timeout_.count()) + " seconds");
         }
 
         // Flush the wrapped writer
@@ -260,12 +264,13 @@ private:
     
     std::unique_ptr<base_writer> wrapped_writer_;
     std::size_t max_queue_size_;
-    
+    std::chrono::seconds flush_timeout_;  // Configurable flush timeout
+
     std::queue<queued_message> message_queue_;
     mutable std::mutex queue_mutex_;
     std::condition_variable queue_cv_;
     std::condition_variable flush_cv_;
-    
+
     std::atomic<bool> running_;
     std::thread worker_thread_;
 };
