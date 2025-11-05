@@ -39,6 +39,20 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <sstream>
 #include <iostream>
 
+// Check for source_location support (C++20)
+#if defined(__has_include)
+#  if __has_include(<source_location>)
+#    include <source_location>
+#    if defined(__cpp_lib_source_location) && __cpp_lib_source_location >= 201907L
+#      define LOGGER_HAS_SOURCE_LOCATION 1
+#    endif
+#  endif
+#endif
+
+#ifndef LOGGER_HAS_SOURCE_LOCATION
+#  define LOGGER_HAS_SOURCE_LOCATION 0
+#endif
+
 namespace kcenon::logger::utils {
 
 /**
@@ -47,6 +61,9 @@ namespace kcenon::logger::utils {
  * Provides additional context information for errors to aid in debugging
  * and troubleshooting. This context can be used to track where and when
  * errors occurred.
+ *
+ * When C++20 source_location is available, location information is captured
+ * automatically. Otherwise, it can be provided manually.
  */
 struct error_context {
     logger_error_code code;
@@ -54,8 +71,38 @@ struct error_context {
     std::string operation;     // Operation being performed
     std::string source_file;   // Source file where error occurred
     int source_line;           // Line number where error occurred
+    std::string function_name; // Function where error occurred
     std::chrono::system_clock::time_point timestamp;
 
+#if LOGGER_HAS_SOURCE_LOCATION
+    /**
+     * @brief Construct error context with automatic source location capture
+     * @param error_code The logger error code
+     * @param error_message Detailed error message
+     * @param op Operation being performed (optional)
+     * @param loc Source location (automatically captured)
+     */
+    error_context(
+        logger_error_code error_code,
+        std::string error_message,
+        std::string op = "",
+        std::source_location loc = std::source_location::current()
+    ) : code(error_code),
+        message(std::move(error_message)),
+        operation(std::move(op)),
+        source_file(loc.file_name()),
+        source_line(static_cast<int>(loc.line())),
+        function_name(loc.function_name()),
+        timestamp(std::chrono::system_clock::now()) {}
+#else
+    /**
+     * @brief Construct error context with manual location information
+     * @param error_code The logger error code
+     * @param error_message Detailed error message
+     * @param op Operation being performed (optional)
+     * @param file Source file name (optional)
+     * @param line Source line number (optional)
+     */
     error_context(
         logger_error_code error_code,
         std::string error_message,
@@ -67,7 +114,9 @@ struct error_context {
         operation(std::move(op)),
         source_file(std::move(file)),
         source_line(line),
+        function_name(""),
         timestamp(std::chrono::system_clock::now()) {}
+#endif
 
     /**
      * @brief Convert error context to a formatted string
@@ -87,6 +136,9 @@ struct error_context {
             if (source_line > 0) {
                 oss << ":" << source_line;
             }
+        }
+        if (!function_name.empty()) {
+            oss << " in " << function_name << "()";
         }
         return oss.str();
     }

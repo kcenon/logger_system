@@ -484,6 +484,12 @@ public:
               msg.empty() ? logger_error_to_string(code) : msg,
               "logger_system"}) {}
 
+    explicit result(const common::error_info& error)
+        : value_(error) {}
+
+    explicit result(common::error_info&& error)
+        : value_(std::move(error)) {}
+
     // Static factory method to avoid constructor ambiguity
     static result ok_value(const T& value) {
         result res(logger_error_code::success);
@@ -523,6 +529,12 @@ public:
               msg.empty() ? logger_error_to_string(code) : msg,
               "logger_system"}) {}
 
+    explicit result_void(const common::error_info& error)
+        : value_(error) {}
+
+    explicit result_void(common::error_info&& error)
+        : value_(std::move(error)) {}
+
     static result_void success() {
         return result_void(common::ok());
     }
@@ -551,13 +563,58 @@ private:
     common::VoidResult value_;
 };
 
+/**
+ * @brief Create a logger error result (void)
+ * @param code The logger error code
+ * @param message Error message (optional, uses error_to_string if empty)
+ * @return result_void containing the error
+ */
 inline result_void make_logger_error(logger_error_code code, const std::string& message = "") {
     return result_void{code, message};
 }
 
+/**
+ * @brief Create a logger error result with details (void)
+ * @param code The logger error code
+ * @param message Error message
+ * @param details Additional error details
+ * @return result_void containing the error with details
+ */
+inline result_void make_logger_error(logger_error_code code, const std::string& message, const std::string& details) {
+    return result_void(common::error_info{
+        static_cast<int>(code),
+        message.empty() ? logger_error_to_string(code) : message,
+        "logger_system",
+        details
+    });
+}
+
+/**
+ * @brief Create a logger error result (typed)
+ * @param code The logger error code
+ * @param message Error message (optional, uses error_to_string if empty)
+ * @return result<T> containing the error
+ */
 template<typename T>
 inline result<T> make_logger_error(logger_error_code code, const std::string& message = "") {
     return result<T>{code, message};
+}
+
+/**
+ * @brief Create a logger error result with details (typed)
+ * @param code The logger error code
+ * @param message Error message
+ * @param details Additional error details
+ * @return result<T> containing the error with details
+ */
+template<typename T>
+inline result<T> make_logger_error(logger_error_code code, const std::string& message, const std::string& details) {
+    return result<T>(common::error_info{
+        static_cast<int>(code),
+        message.empty() ? logger_error_to_string(code) : message,
+        "logger_system",
+        details
+    });
 }
 
 using error_code = logger_error_code;
