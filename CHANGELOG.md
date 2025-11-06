@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased] - Security Improvements
+
+### Removed
+- **encrypted_writer**: Removed insecure XOR-based encryption implementation
+  - Deleted `include/kcenon/logger/writers/encrypted_writer.h`
+  - Deleted `src/impl/writers/encrypted_writer.cpp`
+  - Removed from integration tests
+  - Updated documentation to recommend vetted crypto libraries
+
+### Changed
+- **Documentation**: Updated security guidance
+  - SECURITY.md now recommends OpenSSL, libsodium, or Botan for encryption
+  - README.md provides guidance for implementing custom encrypted writers
+  - Added best practices for production log encryption
+
+### Migration Guide
+- If using `encrypted_writer`, implement a custom writer with a production-grade crypto library
+- See SECURITY.md for implementation examples using AES-GCM or ChaCha20-Poly1305
+- Use proper key management (HSM, KMS, or OS keychain)
+
+---
+
 ## C++20 and std::format Migration - 2025-11-03
 
 ### Changed
