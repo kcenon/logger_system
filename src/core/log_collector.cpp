@@ -44,6 +44,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <thread>
 #include <atomic>
 #include <vector>
+#include <cstdio>
 
 namespace kcenon::logger {
 
@@ -70,10 +71,20 @@ public:
                  const std::chrono::system_clock::time_point& timestamp) {
         {
             std::unique_lock<std::mutex> lock(queue_mutex_);
-            
+
             // Check if queue is full
             if (queue_.size() >= buffer_size_) {
-                // Drop the message
+                // Track dropped message
+                uint64_t dropped_count = dropped_messages_.fetch_add(1, std::memory_order_relaxed) + 1;
+
+                // Log warning periodically (every 100 dropped messages) to avoid log spam
+                if (dropped_count % 100 == 1) {
+                    // Note: We can't use the logger here as it would create recursion
+                    // In production, this metric should be exposed via monitoring
+                    fprintf(stderr, "[WARNING] Log queue full: %llu messages dropped total\n",
+                           static_cast<unsigned long long>(dropped_count));
+                }
+
                 return false;
             }
             
@@ -255,13 +266,16 @@ private:
     std::size_t buffer_size_;
     std::atomic<bool> running_;
     std::thread worker_thread_;
-    
+
     std::queue<log_entry> queue_;
     mutable std::mutex queue_mutex_;
     std::condition_variable queue_cv_;
 
     std::vector<std::weak_ptr<base_writer>> writers_;
     std::mutex writers_mutex_;
+
+    // Track dropped messages when queue is full
+    std::atomic<uint64_t> dropped_messages_{0};
 };
 
 // log_collector implementation
