@@ -89,9 +89,12 @@ public:
     
     /**
      * @brief Add a writer
-     * @param writer Pointer to writer (ownership remains with caller)
+     * @param writer Shared pointer to writer
+     *
+     * The collector stores a weak reference to prevent circular dependencies
+     * and ensure safe access even if the writer is destroyed.
      */
-    void add_writer(base_writer* writer);
+    void add_writer(std::shared_ptr<base_writer> writer);
     
     /**
      * @brief Clear all writers

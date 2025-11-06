@@ -105,7 +105,10 @@ public:
         return true;
     }
     
-    void add_writer(base_writer* writer) {
+    void add_writer(std::shared_ptr<base_writer> writer) {
+        if (!writer) {
+            return;
+        }
         std::lock_guard<std::mutex> lock(writers_mutex_);
         writers_.push_back(writer);
     }
@@ -141,8 +144,10 @@ public:
             // If not running, don't process queue (already drained by process_loop)
             // Just flush the writers
             std::lock_guard<std::mutex> writer_lock(writers_mutex_);
-            for (auto* writer : writers_) {
-                writer->flush();
+            for (auto& weak_writer : writers_) {
+                if (auto writer = weak_writer.lock()) {
+                    writer->flush();
+                }
             }
             return;
         }
@@ -161,8 +166,10 @@ public:
 
         // Flush all writers
         std::lock_guard<std::mutex> writer_lock(writers_mutex_);
-        for (auto* writer : writers_) {
-            writer->flush();
+        for (auto& weak_writer : writers_) {
+            if (auto writer = weak_writer.lock()) {
+                writer->flush();
+            }
         }
     }
     
@@ -210,18 +217,26 @@ private:
 
         // Flush all writers after processing remaining messages
         std::lock_guard<std::mutex> writer_lock(writers_mutex_);
-        for (auto* writer : writers_) {
-            writer->flush();
+        for (auto& weak_writer : writers_) {
+            if (auto writer = weak_writer.lock()) {
+                writer->flush();
+            }
         }
     }
     
     void write_to_all(const log_entry& entry) {
         // Copy the writers list under lock, then release the lock before calling write()
         // This prevents deadlock if a writer logs internally and avoids blocking add_writer()
-        std::vector<base_writer*> writers_snapshot;
+        // Use shared_ptr to ensure writers remain valid during write operation
+        std::vector<std::shared_ptr<base_writer>> writers_snapshot;
         {
             std::lock_guard<std::mutex> lock(writers_mutex_);
-            writers_snapshot = writers_;
+            writers_snapshot.reserve(writers_.size());
+            for (auto& weak_writer : writers_) {
+                if (auto writer = weak_writer.lock()) {
+                    writers_snapshot.push_back(writer);
+                }
+            }
         }
 
         // Write to all writers without holding the mutex
@@ -230,7 +245,7 @@ private:
         int line = entry.location ? entry.location->line : 0;
         std::string function = entry.location ? entry.location->function.to_string() : "";
 
-        for (auto* writer : writers_snapshot) {
+        for (auto& writer : writers_snapshot) {
             writer->write(entry.level, entry.message.to_string(), file,
                          line, function, entry.timestamp);
         }
@@ -244,8 +259,8 @@ private:
     std::queue<log_entry> queue_;
     mutable std::mutex queue_mutex_;
     std::condition_variable queue_cv_;
-    
-    std::vector<base_writer*> writers_;
+
+    std::vector<std::weak_ptr<base_writer>> writers_;
     std::mutex writers_mutex_;
 };
 
@@ -287,7 +302,7 @@ bool log_collector::enqueue(logger_system::log_level level,
 #endif
 }
 
-void log_collector::add_writer(base_writer* writer) {
+void log_collector::add_writer(std::shared_ptr<base_writer> writer) {
     pimpl_->add_writer(writer);
 }
 
