@@ -14,11 +14,10 @@ This document outlines the current security posture of the logger_system and pro
 
 - Sanitization: `log_sanitizer` and `sanitizing_filter` can redact common sensitive patterns (credit cards, SSN, email, IP, API keys, passwords) and support custom rules.
 - Access control filter: Restrict logging based on file patterns, user context, and log levels.
-- Encryption writer (demo): `encrypted_writer` wraps any writer and applies a simple XOR-based transformation.
 
 ## Important Limitations
 
-- The included `encrypted_writer` is for demonstration only and is NOT cryptographically secure. Do not use in production.
+- No built-in encryption writer. For production encryption, integrate a vetted crypto library (see recommendations below).
 - No built-in TLS for the `network_writer`/`log_server`. Traffic is plaintext by default.
 - Authentication/authorization for the `log_server` is not implemented.
 
@@ -29,9 +28,10 @@ This document outlines the current security posture of the logger_system and pro
    - Add organization-specific rules (e.g., JWT, internal tokens, ticket numbers).
 
 2. Encryption at Rest
-   - Replace `encrypted_writer` with a production-ready solution based on a vetted crypto library (e.g., OpenSSL, libsodium).
+   - Implement encryption using a vetted crypto library (e.g., OpenSSL, libsodium, Botan).
    - Use authenticated encryption (AES-GCM or ChaCha20-Poly1305).
    - Rotate keys periodically and store them in a secure vault (OS keychain, KMS, HSM). Never commit keys.
+   - Example: Create a custom writer that wraps file_writer and encrypts data before writing.
 
 3. Encryption in Transit
    - Prefer shipping logs over a secure transport (mTLS, TLS termination at a proxy, or a syslog/OTLP exporter with TLS).

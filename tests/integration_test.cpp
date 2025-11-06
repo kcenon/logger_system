@@ -10,7 +10,6 @@ All rights reserved.
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/logger/writers/file_writer.h>
 #include <kcenon/logger/writers/rotating_file_writer.h>
-#include <kcenon/logger/writers/encrypted_writer.h>
 
 #include <thread>
 #include <chrono>
@@ -115,44 +114,7 @@ TEST_F(IntegrationTest, MetricsCollection) {
     test_logger->stop();
 }
 
-// Test 3: Encrypted writer
-TEST_F(IntegrationTest, EncryptedWriting) {
-    // Generate encryption key
-    auto key = encrypted_writer::generate_key();
-    ASSERT_EQ(key.size(), 32);  // AES-256 key size
-
-    // Save and load key
-    ASSERT_TRUE(encrypted_writer::save_key(key, "test.key"));
-    auto loaded_key = encrypted_writer::load_key("test.key");
-    ASSERT_EQ(key, loaded_key);
-
-    // Create logger with encrypted writer
-    auto test_logger = std::make_shared<logger>();
-    test_logger->start();
-
-    auto file = std::make_unique<file_writer>("test_encrypted.log");
-    auto encrypted = std::make_unique<encrypted_writer>(std::move(file), key);
-    test_logger->add_writer(std::move(encrypted));
-
-    test_logger->log(log_level::info, "Encrypted test message");
-    test_logger->log(log_level::warning, "Another encrypted message");
-
-    test_logger->flush();
-    test_logger->stop();
-
-    // Verify encrypted file exists
-    EXPECT_TRUE(std::filesystem::exists("test_encrypted.log"));
-
-    // Encrypted file should contain non-plaintext data
-    std::ifstream file_stream("test_encrypted.log", std::ios::binary);
-    std::string encrypted_content((std::istreambuf_iterator<char>(file_stream)),
-                                  std::istreambuf_iterator<char>());
-    EXPECT_FALSE(encrypted_content.empty());
-    // Should NOT contain plaintext message
-    EXPECT_EQ(encrypted_content.find("Encrypted test message"), std::string::npos);
-}
-
-// Test 4: Rotating file writer
+// Test 3: Rotating file writer (encrypted_writer removed due to security concerns)
 TEST_F(IntegrationTest, FileRotation) {
     auto test_logger = std::make_shared<logger>();
     test_logger->start();

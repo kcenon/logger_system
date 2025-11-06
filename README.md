@@ -21,7 +21,7 @@ The Logger System Project is a production-ready, high-performance C++20 asynchro
 
 ### 🎯 High-Performance Logging
 - **Asynchronous Processing**: Non-blocking log operations with batched queue processing
-- **Multiple Output Targets**: Console, file, rotating file, network, encrypted, and hybrid writers
+- **Multiple Output Targets**: Console, file, rotating file, network, and hybrid writers
 - **Critical Writer** 🆕: Synchronous logging for critical messages that must be written immediately
 - **Crash-Safe Logging** 🆕: Emergency flush mechanism to preserve logs during abnormal termination
 - **Thread-Safe Operations**: Concurrent logging from multiple threads without locks on hot path
@@ -224,10 +224,10 @@ This project addresses the fundamental challenge faced by developers worldwide: 
 - **Log Server**: Receive and process logs from multiple sources
 - **Real-time Analysis**: Analyze log patterns and generate statistics
 - **Alert System**: Define rules to trigger alerts based on log patterns
-- **Security Features**: Log encryption, sensitive data sanitization, and access control
+- **Security Features**: Sensitive data sanitization and access control
 - **Integration Testing**: Comprehensive test suite for all components
 
-> Security note: `encrypted_writer` is a demonstration component using a simple XOR scheme and is not suitable for production use. See SECURITY.md for guidance and recommended alternatives.
+> Security note: For production log encryption, integrate a vetted cryptographic library (OpenSSL, libsodium, Botan). See SECURITY.md for implementation guidance and best practices.
 
 ## Technology Stack & Architecture
 
@@ -748,37 +748,33 @@ int main() {
 - May impact debugger behavior (disable in debug builds if needed)
 - Not available on all platforms (Windows uses different mechanism)
 
-### Encrypted Writer - Secure Logging
+### Encrypted Logging - Production Guidance
 
-The `encrypted_writer` encrypts log messages before writing to disk:
+**Note**: The `encrypted_writer` has been removed due to security concerns (it used XOR encryption, not suitable for production).
+
+For production log encryption, implement a custom writer using a vetted cryptographic library:
 
 ```cpp
-#include <kcenon/logger/writers/encrypted_writer.h>
+// Example: Create custom encrypted writer with OpenSSL/libsodium
+class production_encrypted_writer : public kcenon::logger::log_writer_interface {
+    std::unique_ptr<kcenon::logger::log_writer_interface> inner_writer_;
+    // Your crypto library instance (OpenSSL, libsodium, Botan)
 
-// Create encrypted writer with AES-256
-kcenon::logger::encryption_config enc_config;
-enc_config.algorithm = kcenon::logger::encryption_algorithm::aes_256_gcm;
-enc_config.key = get_encryption_key();  // Your key management function
-
-auto encrypted = std::make_unique<kcenon::logger::encrypted_writer>(
-    std::make_unique<kcenon::logger::file_writer>("secure.log.enc"),
-    enc_config
-);
-
-auto logger = kcenon::logger::logger_builder()
-    .add_writer("encrypted", std::move(encrypted))
-    .build()
-    .value();
-
-// Messages are encrypted before writing
-logger->log(kcenon::logger::log_level::info, "Sensitive data: " + user_info);
+public:
+    result_void write(const kcenon::logger::log_entry& entry) override {
+        // 1. Serialize entry to bytes
+        // 2. Encrypt using AES-GCM or ChaCha20-Poly1305
+        // 3. Write encrypted data via inner_writer_
+        return inner_writer_->write(encrypted_entry);
+    }
+};
 ```
 
-**⚠️ Security Warning**:
-- **Never hard-code encryption keys** in source code
-- Use secure key management systems (HSM, KMS, vault)
+**Security Best Practices**:
+- Use authenticated encryption (AES-GCM, ChaCha20-Poly1305)
+- Store keys in secure vaults (HSM, KMS, OS keychain)
 - Rotate keys regularly
-- Encrypted logs are useless without proper key management
+- See SECURITY.md for detailed guidance
 
 ### Interface Architecture
 
@@ -979,25 +975,6 @@ std::string report = analyzer->generate_report(std::chrono::minutes(10));
 
 ### Security Features
 
-#### Log Encryption
-
-```cpp
-#include <logger_system/writers/encrypted_writer.h>
-
-// Generate encryption key
-auto key = encrypted_writer::generate_key(32);  // 32 bytes for AES-256
-
-// Save key securely
-encrypted_writer::save_key(key, "logger.key");
-
-// Create encrypted writer
-auto file = std::make_unique<file_writer>("secure.log");
-auto encrypted = std::make_unique<encrypted_writer>(std::move(file), key);
-logger->add_writer("secure", std::move(encrypted));
-
-// Note: Demo uses XOR encryption - use proper crypto library in production
-```
-
 #### Sensitive Data Sanitization
 
 ```cpp
@@ -1101,8 +1078,8 @@ ctest --test-dir build
 
 - Is the logger lock-free?
   - The current async queue uses mutex/condition_variable for portability and simplicity. A lock-free MPMC queue is planned; see the `USE_LOCKFREE` placeholder.
-- Is `encrypted_writer` production-ready?
-  - No. It is a demonstration. Use a vetted crypto library and authenticated encryption (e.g., AES-GCM, ChaCha20-Poly1305) with proper key management.
+- Does the logger support log encryption?
+  - The `encrypted_writer` has been removed due to security concerns. For production encryption, implement a custom writer using a vetted crypto library (OpenSSL, libsodium, Botan) with authenticated encryption (AES-GCM, ChaCha20-Poly1305) and proper key management. See SECURITY.md for guidance.
 - How do I route only errors to a dedicated file?
   - Use `router_builder(router).when_level(log_level::error).route_to("error_file", true);` and register a writer under that name.
 - How do I get JSON output?
