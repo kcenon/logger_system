@@ -62,9 +62,12 @@ class log_collector {
 public:
     /**
      * @brief Constructor
-     * @param buffer_size Size of the log buffer
+     * @param buffer_size Size of the log buffer (max queued entries)
+     * @param batch_size Number of entries to process in each batch (default: 100)
+     *                   Higher values improve throughput but increase latency
+     *                   Lower values reduce latency but may decrease throughput
      */
-    explicit log_collector(std::size_t buffer_size = 8192);
+    explicit log_collector(std::size_t buffer_size = 8192, std::size_t batch_size = 100);
     
     /**
      * @brief Destructor

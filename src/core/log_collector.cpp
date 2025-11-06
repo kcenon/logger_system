@@ -50,8 +50,9 @@ namespace kcenon::logger {
 
 class log_collector::impl {
 public:
-    explicit impl(std::size_t buffer_size)
+    explicit impl(std::size_t buffer_size, std::size_t batch_size)
         : buffer_size_(buffer_size)
+        , batch_size_(batch_size)
         , running_(false) {
     }
     
@@ -199,9 +200,10 @@ private:
                 return !queue_.empty() || !running_.load();
             });
 
-            // Process batch of entries
+            // Process batch of entries (configurable batch size)
             std::vector<log_entry> batch;
-            while (!queue_.empty() && batch.size() < 100) {
+            batch.reserve(batch_size_);  // Pre-allocate for efficiency
+            while (!queue_.empty() && batch.size() < batch_size_) {
                 batch.push_back(std::move(queue_.front()));
                 queue_.pop();
             }
@@ -264,6 +266,7 @@ private:
     
 private:
     std::size_t buffer_size_;
+    std::size_t batch_size_;
     std::atomic<bool> running_;
     std::thread worker_thread_;
 
@@ -279,8 +282,8 @@ private:
 };
 
 // log_collector implementation
-log_collector::log_collector(std::size_t buffer_size)
-    : pimpl_(std::make_unique<impl>(buffer_size)) {
+log_collector::log_collector(std::size_t buffer_size, std::size_t batch_size)
+    : pimpl_(std::make_unique<impl>(buffer_size, batch_size)) {
 }
 
 log_collector::~log_collector() = default;
