@@ -1,7 +1,7 @@
 var searchData=
 [
   ['label_0',['For migration assistance, please file an issue with the &lt;tt&gt;migration&lt;/tt&gt; label.',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md772',1,'']]],
-  ['language_20switcher_20format_1',['Language Switcher Format',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html#autotoc_md1077',1,'']]],
+  ['language_20switcher_20format_1',['Language Switcher Format',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html#autotoc_md1078',1,'']]],
   ['last_2030_20days_2',['Workflow Execution Stats (Last 30 Days)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md185',1,'']]],
   ['last_207_20days_3',['Build Failures (Last 7 Days)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md180',1,'']]],
   ['latency_4',['latency',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE.html#autotoc_md395',1,'1. Write Latency'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BASELINE.html#autotoc_md411',1,'Queue Latency']]],

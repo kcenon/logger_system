@@ -32,7 +32,7 @@ var searchData=
   ['2_20dependency_20injection_20pattern_29',['2. Dependency Injection Pattern',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md314',1,'']]],
   ['2_20error_20handling_20with_20result_20pattern_30',['2. Error Handling with Result Pattern',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md829',1,'']]],
   ['2_20excessive_20string_20formatting_31',['2. Excessive String Formatting',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html#autotoc_md798',1,'']]],
-  ['2_20files_32',['advanced/ Directory (2 files)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html#autotoc_md1075',1,'']]],
+  ['2_20files_32',['advanced/ Directory (2 files)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html#autotoc_md1076',1,'']]],
   ['2_20github_20actions에서_20자동_20커밋_33',['4.2 GitHub Actions에서 자동 커밋',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md890',1,'']]],
   ['2_20high_20reliability_20configuration_20finance_20medical_34',['2. High Reliability Configuration (Finance/Medical)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION.html#autotoc_md570',1,'']]],
   ['2_20lazy_20evaluation_35',['2. Lazy Evaluation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html#autotoc_md678',1,'']]],

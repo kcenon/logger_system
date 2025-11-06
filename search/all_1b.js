@@ -66,7 +66,7 @@ var searchData=
   ['risk_20assessment_63',['Risk Assessment',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES.html#autotoc_md374',1,'']]],
   ['roadmap_64',['roadmap',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md332',1,'🔮 Future Roadmap'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html#autotoc_md1040',1,'Roadmap']]],
   ['roles_20responsibilities_65',['📋 Project Roles &amp; Responsibilities',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md288',1,'']]],
-  ['root_20directory_2019_20files_66',['Root Directory (19 files)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html#autotoc_md1074',1,'']]],
+  ['root_20directory_2019_20files_66',['Root Directory (19 files)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html#autotoc_md1075',1,'']]],
   ['rotating_20file_20writer_67',['2. Rotating File Writer',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS.html#autotoc_md201',1,'']]],
   ['rotating_20file_20writer_20tt_20writers_20rotating_5ffile_5fwriter_20h_20tt_68',['Rotating File Writer (&lt;tt&gt;writers/rotating_file_writer.h&lt;/tt&gt;)',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html#autotoc_md111',1,'']]],
   ['rotating_5ffile_5fwriter_20h_20tt_69',['Rotating File Writer (&lt;tt&gt;writers/rotating_file_writer.h&lt;/tt&gt;)',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html#autotoc_md111',1,'']]],

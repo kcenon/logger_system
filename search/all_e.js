@@ -10,7 +10,7 @@ var searchData=
   ['enabled_20sanitizers_7',['Enabled Sanitizers',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html#autotoc_md1013',1,'']]],
   ['encrypted_20logging_20production_20guidance_8',['Encrypted Logging - Production Guidance',['../index.html#autotoc_md53',1,'']]],
   ['engineers_9',['Performance Engineers',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md986',1,'']]],
-  ['english_20files_10',['English Files',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html#autotoc_md1078',1,'']]],
+  ['english_20files_10',['English Files',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html#autotoc_md1079',1,'']]],
   ['enhanced_11',['enhanced',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md463',1,'Enhanced'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md459',1,'Enhanced']]],
   ['enhanced_20architecture_20new_20in_20phase_201_12',['Enhanced Architecture (New in Phase 1)',['../index.html#autotoc_md24',1,'']]],
   ['enhancement_13',['Phase 2: Enhancement',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md334',1,'']]],

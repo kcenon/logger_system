@@ -10,7 +10,7 @@ var searchData=
   ['4_20configuration_20strategies_7',['4. Configuration Strategies',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md831',1,'']]],
   ['4_20database_20writer_8',['4. Database Writer',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS.html#autotoc_md203',1,'']]],
   ['4_20documentation_9',['4. Documentation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES.html#autotoc_md356',1,'']]],
-  ['4_20files_10',['guides/ Directory (4 files)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html#autotoc_md1076',1,'']]],
+  ['4_20files_10',['guides/ Directory (4 files)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html#autotoc_md1077',1,'']]],
   ['4_20integrated_5fthread_5fsystem_20integration_20hub_11',['4. integrated_thread_system (Integration Hub)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md304',1,'']]],
   ['4_20interface_20segregation_12',['4. Interface Segregation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md822',1,'']]],
   ['4_20logging_20api_20migration_13',['4. Logging API Migration',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md741',1,'']]],

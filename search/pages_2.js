@@ -10,12 +10,13 @@ var searchData=
   ['ci_5fcd_5fdashboard_5fko_7',['CI_CD_DASHBOARD_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD__KO.html',1,'']]],
   ['contributing_8',['CONTRIBUTING',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CONTRIBUTING.html',1,'']]],
   ['contributing_5fko_9',['CONTRIBUTING_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CONTRIBUTING__KO.html',1,'']]],
-  ['critical_5flog_5fprevention_10',['CRITICAL_LOG_PREVENTION',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION.html',1,'']]],
-  ['critical_5flog_5fprevention_5fko_11',['CRITICAL_LOG_PREVENTION_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION__KO.html',1,'']]],
-  ['critical_5flogging_5fquick_5fstart_12',['CRITICAL_LOGGING_QUICK_START',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html',1,'']]],
-  ['critical_5flogging_5fquick_5fstart_5fko_13',['CRITICAL_LOGGING_QUICK_START_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START__KO.html',1,'']]],
-  ['current_5fstate_14',['CURRENT_STATE',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html',1,'']]],
-  ['current_5fstate_5fko_15',['CURRENT_STATE_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE__KO.html',1,'']]],
-  ['custom_5fwriters_16',['CUSTOM_WRITERS',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS.html',1,'']]],
-  ['custom_5fwriters_5fko_17',['CUSTOM_WRITERS_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS__KO.html',1,'']]]
+  ['coverage_10',['Test Coverage',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TESTING__GUIDE.html',1,'']]],
+  ['critical_5flog_5fprevention_11',['CRITICAL_LOG_PREVENTION',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION.html',1,'']]],
+  ['critical_5flog_5fprevention_5fko_12',['CRITICAL_LOG_PREVENTION_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOG__PREVENTION__KO.html',1,'']]],
+  ['critical_5flogging_5fquick_5fstart_13',['CRITICAL_LOGGING_QUICK_START',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html',1,'']]],
+  ['critical_5flogging_5fquick_5fstart_5fko_14',['CRITICAL_LOGGING_QUICK_START_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START__KO.html',1,'']]],
+  ['current_5fstate_15',['CURRENT_STATE',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html',1,'']]],
+  ['current_5fstate_5fko_16',['CURRENT_STATE_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE__KO.html',1,'']]],
+  ['custom_5fwriters_17',['CUSTOM_WRITERS',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS.html',1,'']]],
+  ['custom_5fwriters_5fko_18',['CUSTOM_WRITERS_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS__KO.html',1,'']]]
 ];
