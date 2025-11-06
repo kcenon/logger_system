@@ -144,6 +144,9 @@ public:
      * This allows writers to use custom formatting strategies while maintaining
      * backward compatibility.
      *
+     * @note The formatter is immutable after construction for thread safety.
+     * To use a different formatter, create a new writer instance.
+     *
      * @since 1.2.0 (Phase 3)
      */
     explicit base_writer(std::unique_ptr<log_formatter_interface> formatter = nullptr);
@@ -319,21 +322,11 @@ public:
 #endif // BUILD_WITH_COMMON_SYSTEM
 
     /**
-     * @brief Set a custom formatter
-     * @param formatter The formatter to use
-     *
-     * @details Allows changing the formatter at runtime. Ownership is transferred
-     * to the writer. This enables dynamic format switching (e.g., text to JSON).
-     *
-     * @note Thread-safety: Caller must ensure no concurrent writes during formatter change.
-     *
-     * @since 1.2.0 (Phase 3)
-     */
-    void set_formatter(std::unique_ptr<log_formatter_interface> formatter);
-
-    /**
      * @brief Get the current formatter
-     * @return Pointer to current formatter (non-owning)
+     * @return Pointer to current formatter (non-owning, read-only access)
+     *
+     * @details The formatter is immutable after construction for thread safety.
+     * To use a different formatter, create a new writer instance.
      *
      * @since 1.2.0 (Phase 3)
      */

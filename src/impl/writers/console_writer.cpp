@@ -65,17 +65,6 @@ base_writer::base_writer(std::unique_ptr<log_formatter_interface> formatter)
     formatter_->set_options(opts);
 }
 
-void base_writer::set_formatter(std::unique_ptr<log_formatter_interface> formatter) {
-    if (formatter) {
-        formatter_ = std::move(formatter);
-
-        // Apply current color setting to new formatter
-        auto opts = formatter_->get_options();
-        opts.use_colors = use_color_;
-        formatter_->set_options(opts);
-    }
-}
-
 log_formatter_interface* base_writer::get_formatter() const {
     return formatter_.get();
 }

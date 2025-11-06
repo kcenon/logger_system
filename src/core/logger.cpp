@@ -179,7 +179,7 @@ result_void logger::start() {
                 std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
                 for (const auto& writer : pimpl_->writers_) {
                     if (writer) {
-                        pimpl_->collector_->add_writer(writer.get());
+                        pimpl_->collector_->add_writer(writer);
                     }
                 }
             }
@@ -220,7 +220,7 @@ result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
 
         // Register with collector if in async mode and running
         if (pimpl_->async_mode_ && pimpl_->collector_ && pimpl_->running_) {
-            pimpl_->collector_->add_writer(shared_writer.get());
+            pimpl_->collector_->add_writer(shared_writer);
         }
     }
     return result_void::success();
@@ -237,7 +237,7 @@ void logger::add_writer(const std::string& /*name*/, std::unique_ptr<base_writer
 
         // Register with collector if in async mode and running
         if (pimpl_->async_mode_ && pimpl_->collector_ && pimpl_->running_) {
-            pimpl_->collector_->add_writer(shared_writer.get());
+            pimpl_->collector_->add_writer(shared_writer);
         }
     }
 }
