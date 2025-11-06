@@ -161,18 +161,24 @@ public:
 private:
     template<typename StringType>
     std::string escape_json(const StringType& str) const {
-        std::string escaped;
-        for (char c : str) {
-            if (c == '"') escaped += "\\\"";
-            else if (c == '\\') escaped += "\\\\";
-            else if (c == '\n') escaped += "\\n";
-            else if (c == '\r') escaped += "\\r";
-            else if (c == '\t') escaped += "\\t";
-            else if (c == '\b') escaped += "\\b";
-            else if (c == '\f') escaped += "\\f";
-            else escaped += c;
+        std::ostringstream escaped;
+        for (unsigned char c : str) {
+            if (c == '"') escaped << "\\\"";
+            else if (c == '\\') escaped << "\\\\";
+            else if (c == '\n') escaped << "\\n";
+            else if (c == '\r') escaped << "\\r";
+            else if (c == '\t') escaped << "\\t";
+            else if (c == '\b') escaped << "\\b";
+            else if (c == '\f') escaped << "\\f";
+            // Escape all other control characters (0x00-0x1F) as \uXXXX
+            else if (c >= 0x00 && c <= 0x1F) {
+                escaped << "\\u"
+                       << std::hex << std::setw(4) << std::setfill('0')
+                       << static_cast<int>(c);
+            }
+            else escaped << c;
         }
-        return escaped;
+        return escaped.str();
     }
 };
 
