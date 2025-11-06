@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/core/log_collector.h>
 #include <kcenon/logger/backends/standalone_backend.h>
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
     #include <kcenon/logger/backends/thread_system_backend.h>
@@ -116,6 +117,7 @@ public:
     std::vector<std::shared_ptr<base_writer>> writers_;
     std::shared_mutex writers_mutex_;  // Protects writers_ vector from concurrent modification
     std::unique_ptr<backends::integration_backend> backend_;  // Integration backend
+    std::unique_ptr<log_collector> collector_;  // Async log collector for async mode
 
     impl(bool async, std::size_t buffer_size, std::unique_ptr<backends::integration_backend> backend)
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
@@ -141,6 +143,11 @@ public:
         if (backend_->requires_initialization()) {
             backend_->initialize();
         }
+
+        // Create log collector for async mode
+        if (async_mode_) {
+            collector_ = std::make_unique<log_collector>(buffer_size_);
+        }
     }
 
     ~impl() {
@@ -164,12 +171,22 @@ logger::~logger() {
 result_void logger::start() {
     if (pimpl_ && !pimpl_->running_) {
         pimpl_->running_ = true;
-        // TODO: Implement async processing with background thread and queue
-        // Currently operates in synchronous mode regardless of async_mode_ setting
-        // Full async implementation requires:
-        // - Background worker thread
-        // - Lock-free or mutex-protected message queue
-        // - Proper shutdown synchronization
+
+        // Start async collector if in async mode
+        if (pimpl_->async_mode_ && pimpl_->collector_) {
+            // Register all existing writers with the collector
+            {
+                std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
+                for (const auto& writer : pimpl_->writers_) {
+                    if (writer) {
+                        pimpl_->collector_->add_writer(writer);
+                    }
+                }
+            }
+
+            // Start the background processing thread
+            pimpl_->collector_->start();
+        }
     }
     return result_void::success();
 }
@@ -177,6 +194,12 @@ result_void logger::start() {
 result_void logger::stop() {
     if (pimpl_ && pimpl_->running_) {
         flush();
+
+        // Stop async collector if in async mode
+        if (pimpl_->async_mode_ && pimpl_->collector_) {
+            pimpl_->collector_->stop();
+        }
+
         pimpl_->running_ = false;
     }
     return result_void::success();
@@ -188,23 +211,48 @@ bool logger::is_running() const {
 
 result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
     if (pimpl_ && writer) {
-        std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
-        pimpl_->writers_.push_back(std::shared_ptr<base_writer>(std::move(writer)));
+        std::shared_ptr<base_writer> shared_writer(std::move(writer));
+
+        {
+            std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
+            pimpl_->writers_.push_back(shared_writer);
+        }
+
+        // Register with collector if in async mode and running
+        if (pimpl_->async_mode_ && pimpl_->collector_ && pimpl_->running_) {
+            pimpl_->collector_->add_writer(shared_writer);
+        }
     }
     return result_void::success();
 }
 
 void logger::add_writer(const std::string& /*name*/, std::unique_ptr<base_writer> writer) {
     if (pimpl_ && writer) {
-        std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
-        pimpl_->writers_.push_back(std::shared_ptr<base_writer>(std::move(writer)));
+        std::shared_ptr<base_writer> shared_writer(std::move(writer));
+
+        {
+            std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
+            pimpl_->writers_.push_back(shared_writer);
+        }
+
+        // Register with collector if in async mode and running
+        if (pimpl_->async_mode_ && pimpl_->collector_ && pimpl_->running_) {
+            pimpl_->collector_->add_writer(shared_writer);
+        }
     }
 }
 
 result_void logger::clear_writers() {
     if (pimpl_) {
-        std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
-        pimpl_->writers_.clear();
+        {
+            std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
+            pimpl_->writers_.clear();
+        }
+
+        // Clear collectors writers if in async mode
+        if (pimpl_->async_mode_ && pimpl_->collector_) {
+            pimpl_->collector_->clear_writers();
+        }
     }
     return result_void::success();
 }
@@ -287,7 +335,22 @@ void logger::log(log_level level,
     // Convert level using backend
     auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(level));
 
-    // Copy writer pointers under lock to minimize lock hold time
+    // Use async path if in async mode
+    if (pimpl_->async_mode_ && pimpl_->collector_) {
+        // Enqueue to collector for background processing
+        auto now = std::chrono::system_clock::now();
+        pimpl_->collector_->enqueue(converted_level, message, file, line, function, now);
+
+        // Update metrics if enabled (async path is much faster)
+        if (pimpl_->metrics_enabled_) {
+            auto end_time = std::chrono::high_resolution_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
+            metrics::record_message_logged(duration.count());
+        }
+        return;
+    }
+
+    // Synchronous path: Copy writer pointers under lock to minimize lock hold time
     std::vector<std::shared_ptr<base_writer>> local_writers;
     {
         std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
@@ -316,6 +379,11 @@ bool logger::is_enabled(log_level level) const {
 
 void logger::flush() {
     if (pimpl_) {
+        // Flush collector first if in async mode
+        if (pimpl_->async_mode_ && pimpl_->collector_) {
+            pimpl_->collector_->flush();
+        }
+
         // Copy writer pointers under lock
         std::vector<std::shared_ptr<base_writer>> local_writers;
         {
