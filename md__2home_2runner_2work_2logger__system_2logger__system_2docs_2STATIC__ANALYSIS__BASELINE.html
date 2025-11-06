@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE__KO.html">한국어</a> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md1051"></a>
+<h1><a class="anchor" id="autotoc_md1050"></a>
 Static Analysis Baseline - logger_system</h1>
 <p><b>Date</b>: 2025-10-03 <br  />
  <b>Version</b>: 1.0.0 <br  />
@@ -104,19 +104,19 @@ Static Analysis Baseline - logger_system</h1>
 <li>clang-tidy: 18.x</li>
 <li>cppcheck: 2.x</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1052"></a>
+<h2><a class="anchor" id="autotoc_md1051"></a>
 Overview</h2>
 <p>This document establishes the baseline for static analysis warnings in logger_system. The goal is to track improvements over time and prevent regression.</p>
-<h2><a class="anchor" id="autotoc_md1053"></a>
+<h2><a class="anchor" id="autotoc_md1052"></a>
 Clang-Tidy Baseline</h2>
-<h3><a class="anchor" id="autotoc_md1054"></a>
+<h3><a class="anchor" id="autotoc_md1053"></a>
 Configuration</h3>
 <ul>
 <li>Checks enabled: modernize-*, concurrency-*, performance-*, bugprone-*, cert-*, cppcoreguidelines-*</li>
 <li>Standard: C++20</li>
 <li>Configuration file: .clang-tidy</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1055"></a>
+<h3><a class="anchor" id="autotoc_md1054"></a>
 Initial Baseline (Phase 0)</h3>
 <p><b>Total Warnings</b>: TBD <br  />
  Run: <code>clang-tidy -p build/compile_commands.json &lt;source_files&gt;</code></p>
@@ -127,19 +127,19 @@ Initial Baseline (Phase 0)</h3>
 <li>readability-*: TBD</li>
 <li>bugprone-*: TBD</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1056"></a>
+<h3><a class="anchor" id="autotoc_md1055"></a>
 Notable Suppressions</h3>
 <p>See .clang-tidy for full list of suppressed checks.</p>
-<h2><a class="anchor" id="autotoc_md1057"></a>
+<h2><a class="anchor" id="autotoc_md1056"></a>
 Cppcheck Baseline</h2>
-<h3><a class="anchor" id="autotoc_md1058"></a>
+<h3><a class="anchor" id="autotoc_md1057"></a>
 Configuration</h3>
 <ul>
 <li>Project file: .cppcheck</li>
 <li>Enable: all checks</li>
 <li>Standard: C++20</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1059"></a>
+<h3><a class="anchor" id="autotoc_md1058"></a>
 Initial Baseline (Phase 0)</h3>
 <p><b>Total Issues</b>: TBD <br  />
  Run: <code>cppcheck --project=.cppcheck --enable=all</code></p>
@@ -149,10 +149,10 @@ Initial Baseline (Phase 0)</h3>
 <li>Style: TBD</li>
 <li>Performance: TBD</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1060"></a>
+<h3><a class="anchor" id="autotoc_md1059"></a>
 Notable Suppressions</h3>
 <p>See .cppcheck for full list of suppressions.</p>
-<h2><a class="anchor" id="autotoc_md1061"></a>
+<h2><a class="anchor" id="autotoc_md1060"></a>
 Target Goals</h2>
 <p><b>Phase 1 Goals</b> (By 2025-11-01):</p><ul>
 <li>clang-tidy: 0 errors, &lt; 20 warnings</li>
@@ -165,9 +165,9 @@ Target Goals</h2>
 <p><b>Phase 3 Goals</b> (By 2026-01-01):</p><ul>
 <li>All warnings resolved or explicitly documented</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1062"></a>
+<h2><a class="anchor" id="autotoc_md1061"></a>
 How to Run Analysis</h2>
-<h3><a class="anchor" id="autotoc_md1063"></a>
+<h3><a class="anchor" id="autotoc_md1062"></a>
 Clang-Tidy</h3>
 <div class="fragment"><div class="line"># Generate compile commands</div>
 <div class="line">cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON</div>
@@ -177,14 +177,14 @@ Clang-Tidy</h3>
 <div class="line"> </div>
 <div class="line"># Or check all files</div>
 <div class="line">find src include -name &quot;*.cpp&quot; -o -name &quot;*.h&quot; | xargs clang-tidy -p build</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1064"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1063"></a>
 Cppcheck</h3>
 <div class="fragment"><div class="line"># Using project configuration</div>
 <div class="line">cppcheck --project=.cppcheck --enable=all --xml 2&gt; cppcheck.xml</div>
 <div class="line"> </div>
 <div class="line"># Generate HTML report</div>
 <div class="line">cppcheck-htmlreport --file=cppcheck.xml --report-dir=build/cppcheck-report</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1065"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1064"></a>
 Tracking Changes</h2>
 <p>Any increase in warnings should be documented here with justification:</p>
 <table class="markdownTable">
@@ -195,7 +195,7 @@ Tracking Changes</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">2025-10-03   </td><td class="markdownTableBodyNone">cppcheck   </td><td class="markdownTableBodyNone">Initial baseline   </td><td class="markdownTableBodyNone">Phase 0 setup   </td><td class="markdownTableBodyNone">N/A   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md1066"></a>
+<h2><a class="anchor" id="autotoc_md1065"></a>
 Notes</h2>
 <ul>
 <li>Baseline will be updated after fixing initial warnings in Phase 1</li>
@@ -210,7 +210,7 @@ Notes</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Nov 5 2025 23:18:18 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Nov 6 2025 00:41:10 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

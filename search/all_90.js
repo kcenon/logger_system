@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['📚_20문서_20구조_0',['📚 문서 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md994',1,'']]],
-  ['📚_20참고_20자료_1',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md919',1,'']]],
-  ['📚_20documentation_20structure_2',['📚 documentation structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md328',1,'📚 Documentation Structure'],['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md979',1,'📚 Documentation Structure']]],
-  ['📚_20learn_20more_3',['📚 Learn More',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md622',1,'']]],
-  ['📚_20references_4',['📚 References',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md970',1,'']]]
+  ['📚_20문서_20구조_0',['📚 문서 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md993',1,'']]],
+  ['📚_20참고_20자료_1',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md918',1,'']]],
+  ['📚_20documentation_20structure_2',['📚 documentation structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md327',1,'📚 Documentation Structure'],['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md978',1,'📚 Documentation Structure']]],
+  ['📚_20learn_20more_3',['📚 Learn More',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md621',1,'']]],
+  ['📚_20references_4',['📚 References',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md969',1,'']]]
 ];
