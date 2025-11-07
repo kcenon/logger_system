@@ -48,28 +48,20 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined(KCENON_COMMON_RESULT_AVAILABLE)
 #ifndef KCENON_COMMON_RESULT_SHIM_DEFINED
 #define KCENON_COMMON_RESULT_SHIM_DEFINED
-namespace common {
-namespace interfaces {
-} // namespace interfaces
-} // namespace common
 namespace kcenon {
-namespace common {
-using ::common::error_info;
+namespace logger {
+using ::kcenon::common::error_info;
 template<typename T>
-using Result = ::common::Result<T>;
-using VoidResult = ::common::VoidResult;
-namespace interfaces = ::common::interfaces;
-using ::common::ok;
-// Updated: error() renamed to make_error() in common_system to avoid namespace conflict
-using ::common::make_error;
-using ::common::Err;  // Alternative error creation function (Rust style)
-using ::common::is_ok;
-using ::common::is_error;
-using ::common::get_value;
-using ::common::get_error;
-// Import common system error codes as namespace alias (not 'using namespace')
-namespace error_codes = ::common::error_codes;
-} // namespace common
+using Result = ::kcenon::common::Result<T>;
+using VoidResult = ::kcenon::common::VoidResult;
+using ::kcenon::common::ok;
+using ::kcenon::common::make_error;
+using ::kcenon::common::Err;
+using ::kcenon::common::is_ok;
+using ::kcenon::common::is_error;
+using ::kcenon::common::get_value;
+using ::kcenon::common::get_error;
+} // namespace logger
 } // namespace kcenon
 #endif // KCENON_COMMON_RESULT_SHIM_DEFINED
 #else

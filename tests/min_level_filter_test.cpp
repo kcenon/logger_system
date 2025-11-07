@@ -54,19 +54,19 @@ public:
 
 #ifdef BUILD_WITH_COMMON_SYSTEM
     // IMonitorable interface implementation
-    common::Result<common::interfaces::metrics_snapshot>
+    kcenon::common::Result<kcenon::common::interfaces::metrics_snapshot>
     get_monitoring_data() override {
-        common::interfaces::metrics_snapshot snapshot;
+        kcenon::common::interfaces::metrics_snapshot snapshot;
         snapshot.source_id = "memory_writer";
         snapshot.capture_time = std::chrono::system_clock::now();
         return snapshot;
     }
 
-    common::Result<common::interfaces::health_check_result>
+    kcenon::common::Result<kcenon::common::interfaces::health_check_result>
     health_check() override {
-        common::interfaces::health_check_result result;
+        kcenon::common::interfaces::health_check_result result;
         result.timestamp = std::chrono::system_clock::now();
-        result.status = common::interfaces::health_status::healthy;
+        result.status = kcenon::common::interfaces::health_status::healthy;
         result.message = "Memory writer operational";
         return result;
     }
