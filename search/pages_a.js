@@ -6,6 +6,7 @@ var searchData=
   ['security_5fko_3',['SECURITY_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__KO.html',1,'']]],
   ['static_5fanalysis_5fbaseline_4',['STATIC_ANALYSIS_BASELINE',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html',1,'']]],
   ['static_5fanalysis_5fbaseline_5fko_5',['STATIC_ANALYSIS_BASELINE_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE__KO.html',1,'']]],
-  ['summary_6',['summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html',1,'CI/CD Performance Automation - Implementation Summary'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html',1,'Korean Translation Summary']]],
-  ['system_7',['system',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html',1,'Architecture - Logger System'],['../index.html',1,'Logger System']]]
+  ['strategy_6',['Conditional Compilation Refactoring Strategy',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CONDITIONAL__COMPILATION__REFACTORING.html',1,'']]],
+  ['summary_7',['summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html',1,'CI/CD Performance Automation - Implementation Summary'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html',1,'Korean Translation Summary']]],
+  ['system_8',['system',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html',1,'Architecture - Logger System'],['../index.html',1,'Logger System']]]
 ];
