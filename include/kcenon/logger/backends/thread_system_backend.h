@@ -10,6 +10,11 @@ All rights reserved.
 #include "integration_backend.h"
 #include <kcenon/logger/core/thread_integration_detector.h>
 
+// Conditional includes based on integration settings
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
+#include <kcenon/thread/interfaces/logger_interface.h>
+#endif
+
 /**
  * @file thread_system_backend.h
  * @brief Thread system integration backend implementation
@@ -27,8 +32,6 @@ All rights reserved.
 namespace kcenon::logger::backends {
 
 #ifdef USE_THREAD_SYSTEM_INTEGRATION
-
-#include <kcenon/thread/interfaces/logger_interface.h>
 
 /**
  * @class thread_system_backend
