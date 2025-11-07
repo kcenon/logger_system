@@ -61,8 +61,6 @@ using ::kcenon::common::is_ok;
 using ::kcenon::common::is_error;
 using ::kcenon::common::get_value;
 using ::kcenon::common::get_error;
-// Import common system error codes
-namespace error = ::kcenon::common::error;
 } // namespace logger
 } // namespace kcenon
 #endif // KCENON_COMMON_RESULT_SHIM_DEFINED
