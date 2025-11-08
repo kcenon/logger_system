@@ -12,7 +12,17 @@ All rights reserved.
 #include <set>
 #include <mutex>
 #include <atomic>
-#include <unistd.h>
+
+// Platform-specific headers and definitions
+#ifdef _WIN32
+    #include <io.h>
+    #define STDERR_FILENO 2
+    #define write _write
+    #define fsync _commit
+    using ssize_t = intptr_t;
+#else
+    #include <unistd.h>
+#endif
 
 namespace kcenon::logger::security {
 
