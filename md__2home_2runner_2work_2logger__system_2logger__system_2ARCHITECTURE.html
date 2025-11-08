@@ -140,7 +140,7 @@ Core Principles</h2>
 </li>
 <li><b>Performance First</b>: Optimized for production workloads<ul>
 <li>Batched processing for maximum throughput</li>
-<li>Lock-free operations on hot path</li>
+<li>Mutex-based async logging with optimized batching to reduce lock contention</li>
 <li>Minimal allocations with small string optimization</li>
 </ul>
 </li>
@@ -299,10 +299,10 @@ Core Components</h1>
 <li>Back-pressure handling</li>
 <li>Emergency overflow handling</li>
 </ul>
-<p><b>Performance</b>:</p><ul>
-<li>Average enqueue: 148 nanoseconds</li>
-<li>Peak throughput: 4.34M messages/second (single thread)</li>
-<li>Multi-thread: 1.07M messages/s (4 threads)</li>
+<p><b>Performance</b> (Target goals - actual measurements TBD):</p><ul>
+<li>Target enqueue latency: &lt;200 nanoseconds</li>
+<li>Target throughput: 1M+ messages/second</li>
+<li>Mutex-based implementation with batching to reduce lock contention</li>
 </ul>
 <hr  />
 <h2><a class="anchor" id="autotoc_md108"></a>
@@ -489,14 +489,14 @@ Asynchronous Processing</h2>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md133"></a>
 Thread Safety Guarantees</h2>
 <ol type="1">
-<li><b>Lock-Free Enqueue</b>: Application threads never block on locks during log()</li>
+<li><b>Async Enqueue</b>: Application threads use mutex-protected queue during log()</li>
 <li><b>Single Writer Thread</b>: One worker thread processes all batches</li>
 <li><b>Writer Isolation</b>: Each writer is called serially from worker thread</li>
-<li><b>Queue Protection</b>: Internal queue uses mutex only on worker thread</li>
+<li><b>Queue Protection</b>: Internal queue uses mutex with optimized batching to reduce contention</li>
 </ol>
 <p><b>Performance Impact</b>:</p><ul>
-<li>Enqueue latency: 148ns average</li>
-<li>No contention on hot path</li>
+<li>Batching reduces lock acquisition by 100x</li>
+<li>Minimal lock contention in typical workloads</li>
 <li>Batching reduces writer calls by 100x</li>
 </ul>
 <hr  />
@@ -562,10 +562,10 @@ Benchmarks</h2>
 <h2><a class="anchor" id="autotoc_md141"></a>
 Optimization Techniques</h2>
 <ol type="1">
-<li><b>Batching</b>: Processes 100 entries per batch (configurable)</li>
+<li><b>Batching</b>: Processes 100 entries per batch (configurable) - reduces lock contention</li>
 <li><b>Zero-Copy</b>: Move semantics for log_entry transfer</li>
 <li><b>SSO</b>: Small string optimization eliminates 95% of allocations</li>
-<li><b>Lock-Free Enqueue</b>: Application threads never wait</li>
+<li><b>Async Logging</b>: Background worker thread handles I/O</li>
 <li><b>Adaptive Queue</b>: Grows/shrinks based on load</li>
 <li><b>Writer Pooling</b>: Reuses writer connections</li>
 </ol>
@@ -709,7 +709,7 @@ References</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 8 2025 01:08:56 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Nov 8 2025 02:31:53 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
