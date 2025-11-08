@@ -18,7 +18,7 @@
 #include <sstream>
 
 using namespace kcenon::logger;
-namespace ci = common::interfaces;
+namespace ci = kcenon::common::interfaces;
 
 namespace {
 
@@ -47,8 +47,8 @@ ci::log_level to_common_level(log_level level) {
     }
 }
 
-common::VoidResult make_adapter_error(const std::string& message) {
-    return common::VoidResult(common::error_info{1, message, "logger_system"});
+kcenon::common::VoidResult make_adapter_error(const std::string& message) {
+    return kcenon::common::VoidResult(kcenon::common::error_info{1, message, "logger_system"});
 }
 
 class logger_interface_adapter : public ci::ILogger {
@@ -56,15 +56,15 @@ public:
     explicit logger_interface_adapter(std::shared_ptr<logger> logger)
         : logger_(std::move(logger)) {}
 
-    common::VoidResult log(ci::log_level level, const std::string& message) override {
+    kcenon::common::VoidResult log(ci::log_level level, const std::string& message) override {
         if (!logger_) {
             return make_adapter_error("Logger not initialized");
         }
         logger_->log(to_logger_level(level), message);
-        return common::ok();
+        return kcenon::common::ok();
     }
 
-    common::VoidResult log(ci::log_level level,
+    kcenon::common::VoidResult log(ci::log_level level,
                            const std::string& message,
                            const std::string& file,
                            int line,
@@ -75,10 +75,10 @@ public:
         std::ostringstream oss;
         oss << "[" << file << ':' << line << ':' << function << "] " << message;
         logger_->log(to_logger_level(level), oss.str());
-        return common::ok();
+        return kcenon::common::ok();
     }
 
-    common::VoidResult log(const ci::log_entry& entry) override {
+    kcenon::common::VoidResult log(const ci::log_entry& entry) override {
         if (!logger_) {
             return make_adapter_error("Logger not initialized");
         }
@@ -88,19 +88,19 @@ public:
         }
         oss << entry.message;
         logger_->log(to_logger_level(entry.level), oss.str());
-        return common::ok();
+        return kcenon::common::ok();
     }
 
     bool is_enabled(ci::log_level level) const override {
         return logger_ && logger_->is_enabled(to_logger_level(level));
     }
 
-    common::VoidResult set_level(ci::log_level level) override {
+    kcenon::common::VoidResult set_level(ci::log_level level) override {
         if (!logger_) {
             return make_adapter_error("Logger not initialized");
         }
         logger_->set_min_level(to_logger_level(level));
-        return common::ok();
+        return kcenon::common::ok();
     }
 
     ci::log_level get_level() const override {
@@ -110,12 +110,12 @@ public:
         return to_common_level(logger_->get_min_level());
     }
 
-    common::VoidResult flush() override {
+    kcenon::common::VoidResult flush() override {
         if (!logger_) {
             return make_adapter_error("Logger not initialized");
         }
         logger_->flush();
-        return common::ok();
+        return kcenon::common::ok();
     }
 
 private:
@@ -137,7 +137,7 @@ private:
     size_t metric_count_ = 0;
 
 public:
-    common::VoidResult record_metric(
+    kcenon::common::VoidResult record_metric(
         const std::string& name,
         double value) override
     {
@@ -148,10 +148,10 @@ public:
         std::cout << "[Monitor] Recorded metric: " << name
                   << " = " << value << std::endl;
 
-        return common::ok();
+        return kcenon::common::ok();
     }
 
-    common::VoidResult record_metric(
+    kcenon::common::VoidResult record_metric(
         const std::string& name,
         double value,
         const std::unordered_map<std::string, std::string>& tags) override
@@ -170,10 +170,10 @@ public:
         std::cout << "[Monitor] Recorded tagged metric: " << tagged_name
                   << " = " << value << std::endl;
 
-        return common::ok();
+        return kcenon::common::ok();
     }
 
-    common::Result<ci::metrics_snapshot> get_metrics() override {
+    kcenon::common::Result<ci::metrics_snapshot> get_metrics() override {
         std::lock_guard<std::mutex> lock(metrics_mutex_);
 
         ci::metrics_snapshot snapshot;
@@ -184,26 +184,26 @@ public:
             snapshot.add_metric(name, value);
         }
 
-        return common::Result<ci::metrics_snapshot>::ok(std::move(snapshot));
+        return kcenon::common::Result<ci::metrics_snapshot>::ok(std::move(snapshot));
     }
 
-    common::Result<ci::health_check_result> check_health() override {
+    kcenon::common::Result<ci::health_check_result> check_health() override {
         ci::health_check_result result;
         result.timestamp = std::chrono::system_clock::now();
         result.status = ci::health_status::healthy;
         result.message = "Example monitor operational";
         result.metadata["metrics_count"] = std::to_string(metric_count_);
 
-        return common::Result<ci::health_check_result>::ok(std::move(result));
+        return kcenon::common::Result<ci::health_check_result>::ok(std::move(result));
     }
 
-    common::VoidResult reset() override {
+    kcenon::common::VoidResult reset() override {
         std::lock_guard<std::mutex> lock(metrics_mutex_);
         metrics_.clear();
         metric_count_ = 0;
 
         std::cout << "[Monitor] Metrics reset" << std::endl;
-        return common::ok();
+        return kcenon::common::ok();
     }
 
     size_t get_metric_count() const {
@@ -247,9 +247,9 @@ void example_1_basic_di_pattern() {
 
     // Step 5: Get health status from logger (IMonitorable interface)
     auto health = logger_instance->health_check();
-    if (common::is_ok(health)) {
+    if (kcenon::common::is_ok(health)) {
         std::cout << "Logger health: "
-                  << ci::to_string(common::get_value(health).status) << std::endl;
+                  << ci::to_string(kcenon::common::get_value(health).status) << std::endl;
     }
 }
 
@@ -362,9 +362,9 @@ void use_logger_via_interface(std::shared_ptr<ci::ILogger> logger) {
     // Check if logger supports monitoring (IMonitorable)
     if (auto monitorable = std::dynamic_pointer_cast<ci::IMonitorable>(logger)) {
         auto data = monitorable->get_monitoring_data();
-        if (common::is_ok(data)) {
+        if (kcenon::common::is_ok(data)) {
             std::cout << "Logger provides monitoring data from "
-                      << common::get_value(data).source_id << std::endl;
+                      << kcenon::common::get_value(data).source_id << std::endl;
         }
     }
 }
