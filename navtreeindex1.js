@@ -249,5 +249,5 @@ var NAVTREEINDEX1 =
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE.html#autotoc_md696":[23,0,5],
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE__KO.html":[24],
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CURRENT__STATE__KO.html#autotoc_md699":[24,0],
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html":[33]
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE.html":[34]
 };

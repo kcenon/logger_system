@@ -7,7 +7,7 @@ var searchData=
   ['6_20factory_20pattern_4',['6. Factory Pattern',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html#autotoc_md149',1,'']]],
   ['6_20filters_5',['6. Filters',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html#autotoc_md121',1,'']]],
   ['6_20integration_6',['6. Integration',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES.html#autotoc_md364',1,'']]],
-  ['6074779f_7',['Phase 3: Documentation Automation (Commit: 6074779f)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md972',1,'']]],
-  ['6_3a_20문서화_20예상_20소요_3a_201시간_8',['Phase 6: 문서화 (예상 소요: 1시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md946',1,'']]],
-  ['6_3a_20documentation_20this_20commit_9',['Phase 6: Documentation (This commit)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md975',1,'']]]
+  ['6074779f_7',['Phase 3: Documentation Automation (Commit: 6074779f)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md1012',1,'']]],
+  ['6_3a_20문서화_20예상_20소요_3a_201시간_8',['Phase 6: 문서화 (예상 소요: 1시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md986',1,'']]],
+  ['6_3a_20documentation_20this_20commit_9',['Phase 6: Documentation (This commit)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md1015',1,'']]]
 ];
