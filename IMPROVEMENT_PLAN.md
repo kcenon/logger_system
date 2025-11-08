@@ -464,13 +464,43 @@ auto config = logger_config_builder()
 ### Sprint 2: Singleton Removal (Week 3-4)
 **Goal**: Introduce Dependency Injection pattern
 
-- [ ] **Task 2.1**: Create logger_context class
-- [ ] **Task 2.2**: Convert signal_manager to DI
-- [ ] **Task 2.3**: Convert critical_writer to DI
-- [ ] **Task 2.4**: Write tests (mocking)
+- [x] **Task 2.1**: Create logger_context class ✅ **COMPLETED** (2025-11-08)
+  - **Status**: Created logger_context.h and logger_context.cpp
+  - **Files**:
+    - include/kcenon/logger/core/logger_context.h
+    - src/core/logger_context.cpp
+  - **Commit**: 5da30e45 "Refactor signal_manager to use dependency injection pattern"
+
+- [x] **Task 2.2**: Convert signal_manager to DI ✅ **COMPLETED** (2025-11-08)
+  - **Status**: Converted from singleton to interface-based DI pattern
+  - **Files**:
+    - include/kcenon/logger/security/signal_manager_interface.h (new)
+    - include/kcenon/logger/security/signal_manager.h (modified)
+    - src/security/signal_manager.cpp (new)
+  - **Changes**:
+    - Removed singleton pattern
+    - Added signal_manager_interface for abstraction
+    - Maintained C signal API compatibility with static pointer
+  - **Commit**: 5da30e45
+
+- [ ] **Task 2.3**: Convert critical_writer to DI (Deferred)
+  - **Status**: Postponed to future sprint
+  - **Reason**: critical_writer has complex signal handler integration
+
+- [x] **Task 2.4**: Write tests (mocking) ✅ **COMPLETED** (2025-11-08)
+  - **Status**: Created unit tests with mock support
+  - **Files**: tests/unit/core_test/logger_context_test.cpp
+  - **Coverage**:
+    - Default constructor test
+    - Injection constructor test
+    - Multiple independent contexts test
+    - Dynamic replacement test
+    - Mock injection test
+  - **Commit**: 5da30e45
 
 **Resources**: 1 developer (Senior)
 **Risk Level**: Medium (API changes)
+**Status**: ⚠️ **PARTIALLY COMPLETED** (3/4 tasks done, critical_writer deferred)
 
 ---
 

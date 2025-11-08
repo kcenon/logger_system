@@ -7,36 +7,49 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
+#include "signal_manager_interface.h"
 #include <csignal>
 #include <set>
 #include <mutex>
 #include <atomic>
-#include <unistd.h>
+
+// Platform-specific headers and definitions
+#ifdef _WIN32
+    #include <io.h>
+    #define STDERR_FILENO 2
+    #define write _write
+    #define fsync _commit
+    using ssize_t = intptr_t;
+#else
+    #include <unistd.h>
+#endif
 
 namespace kcenon::logger::security {
 
-// Forward declaration
-class critical_logger_interface;
-
 /**
  * @class signal_manager
- * @brief Singleton manager for safe signal handler installation
+ * @brief Manager for safe signal handler installation
  *
  * Features:
  * - Centralized signal handler management
  * - Thread-safe logger registration
  * - Uses only signal-safe functions in handlers
  * - Prevents global state conflicts when multiple loggers exist
+ * - Implements signal_manager_interface for dependency injection
+ *
+ * @since 2.0.0 - Converted from singleton to DI pattern
  */
-class signal_manager {
+class signal_manager : public signal_manager_interface {
 public:
     /**
-     * @brief Get singleton instance
+     * @brief Default constructor
      */
-    static signal_manager& instance() {
-        static signal_manager mgr;
-        return mgr;
-    }
+    signal_manager() = default;
+
+    /**
+     * @brief Destructor
+     */
+    ~signal_manager() override = default;
 
     /**
      * @brief Register a logger to receive signal notifications
@@ -44,7 +57,7 @@ public:
      *
      * Signal handlers are installed when the first logger is registered.
      */
-    void register_logger(critical_logger_interface* log) {
+    void register_logger(critical_logger_interface* log) override {
         std::lock_guard lock(mutex_);
 
         loggers_.insert(log);
@@ -61,7 +74,7 @@ public:
      *
      * Signal handlers are removed when the last logger is unregistered.
      */
-    void unregister_logger(critical_logger_interface* log) {
+    void unregister_logger(critical_logger_interface* log) override {
         std::lock_guard lock(mutex_);
 
         loggers_.erase(log);
@@ -75,29 +88,33 @@ public:
     /**
      * @brief Check if signal handlers are installed
      */
-    bool are_handlers_installed() const {
+    bool are_handlers_installed() const override {
         return handlers_installed_.load();
     }
 
     /**
      * @brief Get number of registered loggers
      */
-    size_t logger_count() const {
+    size_t logger_count() const override {
         std::lock_guard lock(mutex_);
         return loggers_.size();
     }
 
-private:
-    signal_manager() = default;
-
     // Prevent copying and moving
     signal_manager(const signal_manager&) = delete;
     signal_manager& operator=(const signal_manager&) = delete;
+    signal_manager(signal_manager&&) = delete;
+    signal_manager& operator=(signal_manager&&) = delete;
+
+private:
 
     /**
      * @brief Install signal handlers
      */
     void install_handlers() {
+        // Set current instance for signal handler
+        current_instance_.store(this, std::memory_order_release);
+
         // Save original handlers
         original_sigsegv_ = std::signal(SIGSEGV, signal_handler);
         original_sigabrt_ = std::signal(SIGABRT, signal_handler);
@@ -118,6 +135,9 @@ private:
         std::signal(SIGINT, original_sigint_);
 
         handlers_installed_.store(false);
+
+        // Clear current instance
+        current_instance_.store(nullptr, std::memory_order_release);
     }
 
     /**
@@ -168,12 +188,16 @@ private:
         // Note: We cannot safely lock mutex_ here (not signal-safe)
         // Instead, we access the loggers directly (risk of race condition,
         // but in a crash scenario, this is acceptable)
-        auto& mgr = instance();
+        signal_manager* mgr = current_instance_.load(std::memory_order_acquire);
+        if (!mgr) {
+            // No instance available, nothing to flush
+            _exit(128 + sig);
+        }
 
         // Call emergency_flush on each logger
         // Note: This assumes the logger pointers are still valid
         // In production, consider using a signal-safe data structure
-        for (auto* log : mgr.loggers_) {
+        for (auto* log : mgr->loggers_) {
             if (log) {
                 emergency_flush(log);
             }
@@ -182,35 +206,35 @@ private:
         // Call original handler (or terminate)
         switch (sig) {
             case SIGSEGV:
-                if (mgr.original_sigsegv_ != SIG_DFL &&
-                    mgr.original_sigsegv_ != SIG_IGN) {
-                    mgr.original_sigsegv_(sig);
+                if (mgr->original_sigsegv_ != SIG_DFL &&
+                    mgr->original_sigsegv_ != SIG_IGN) {
+                    mgr->original_sigsegv_(sig);
                 } else {
                     std::signal(SIGSEGV, SIG_DFL);
                     std::raise(SIGSEGV);
                 }
                 break;
             case SIGABRT:
-                if (mgr.original_sigabrt_ != SIG_DFL &&
-                    mgr.original_sigabrt_ != SIG_IGN) {
-                    mgr.original_sigabrt_(sig);
+                if (mgr->original_sigabrt_ != SIG_DFL &&
+                    mgr->original_sigabrt_ != SIG_IGN) {
+                    mgr->original_sigabrt_(sig);
                 } else {
                     std::signal(SIGABRT, SIG_DFL);
                     std::raise(SIGABRT);
                 }
                 break;
             case SIGTERM:
-                if (mgr.original_sigterm_ != SIG_DFL &&
-                    mgr.original_sigterm_ != SIG_IGN) {
-                    mgr.original_sigterm_(sig);
+                if (mgr->original_sigterm_ != SIG_DFL &&
+                    mgr->original_sigterm_ != SIG_IGN) {
+                    mgr->original_sigterm_(sig);
                 } else {
                     _exit(128 + sig);
                 }
                 break;
             case SIGINT:
-                if (mgr.original_sigint_ != SIG_DFL &&
-                    mgr.original_sigint_ != SIG_IGN) {
-                    mgr.original_sigint_(sig);
+                if (mgr->original_sigint_ != SIG_DFL &&
+                    mgr->original_sigint_ != SIG_IGN) {
+                    mgr->original_sigint_(sig);
                 } else {
                     _exit(128 + sig);
                 }
@@ -225,6 +249,10 @@ private:
      * @param log Logger interface
      */
     static void emergency_flush(critical_logger_interface* log);
+
+    /// Current instance for signal handler (static due to C signal API limitation)
+    /// Note: Only one instance can handle signals at a time
+    static std::atomic<signal_manager*> current_instance_;
 
     mutable std::mutex mutex_;
     std::set<critical_logger_interface*> loggers_;
