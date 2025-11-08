@@ -107,18 +107,15 @@ if(BUILD_WITH_COMMON_SYSTEM)
 
     if(NOT common_system_FOUND)
         # Check for common_system in multiple locations with comprehensive search
-        # Priority order: Local Sources/ directory -> CI/CD workspace -> sibling directories
+        # Priority order: Environment variable -> CI/CD workspace -> sibling directories
         set(_LOGGER_COMMON_PATHS
-            # Local development paths (HIGHEST PRIORITY - no embedded subfolders)
-            "/Users/dongcheolshin/Sources/common_system/include"                # macOS development
-            "/home/${USER}/Sources/common_system/include"                       # Linux development
+            # Environment variable (HIGHEST PRIORITY)
+            "$ENV{COMMON_SYSTEM_ROOT}/include"
             # GitHub Actions: various checkout patterns
             "$ENV{GITHUB_WORKSPACE}/common_system/include"                      # Standard GITHUB_WORKSPACE
             "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"              # Sibling (sanitizers.yml pattern)
             "${CMAKE_CURRENT_SOURCE_DIR}/../../common_system/include"           # Parent directory
             "${CMAKE_SOURCE_DIR}/../common_system/include"                      # Sibling to source root
-            # REMOVED: ${CMAKE_CURRENT_SOURCE_DIR}/common_system/include - no longer using embedded subfolders
-            # REMOVED: ${CMAKE_SOURCE_DIR}/common_system/include - no longer using embedded subfolders
         )
 
         message(STATUS "Searching for common_system in the following locations:")
@@ -239,11 +236,10 @@ endif()
 if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
     # Check if thread_system components are already added
     if(NOT TARGET interfaces)
-        # Priority: Local Sources/ directory first, then sibling directory
+        # Priority: Environment variable, then sibling directory
         set(_THREAD_SYSTEM_SEARCH_PATHS
-            "/Users/dongcheolshin/Sources/thread_system"                # macOS development (HIGHEST PRIORITY)
-            "/home/${USER}/Sources/thread_system"                        # Linux development
-            "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system"               # Sibling directory (fallback for CI)
+            "$ENV{THREAD_SYSTEM_ROOT}"                                   # Environment variable (HIGHEST PRIORITY)
+            "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system"               # Sibling directory
         )
 
         set(_THREAD_SYSTEM_PATH "")
