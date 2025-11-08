@@ -156,7 +156,12 @@ protected:
         if (logger_) {
             logger_->flush();
         }
+        // Use longer wait time for sanitizer builds which are slower
+        #if defined(__SANITIZE_UNDEFINED__) || defined(__SANITIZE_ADDRESS__) || defined(__SANITIZE_THREAD__)
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        #else
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        #endif
     }
 
     /**
