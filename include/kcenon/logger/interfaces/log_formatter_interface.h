@@ -70,8 +70,8 @@ struct format_options {
     /** Include thread ID in formatted output */
     bool include_thread_id = true;
 
-    /** Include source location (file, line, function) in formatted output */
-    bool include_source_location = false;
+    /** Include source location (file, line, function) in formatted output when available */
+    bool include_source_location = true;
 
     /** Use ANSI color codes (only applicable to terminal output) */
     bool use_colors = false;

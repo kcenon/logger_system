@@ -172,16 +172,16 @@ std::string base_writer::format_log_entry(logger_system::log_level level,
     tid_stream << std::this_thread::get_id();
     entry.thread_id = small_string_64(tid_stream.str());
 
-    if (!file.empty()) {
+    // Always set source location if provided (even if empty)
+    // The formatter will decide whether to include it based on its options
+    if (!file.empty() || line != 0 || !function.empty()) {
         source_location loc(file, line, function);
         entry.location = loc;
-
-        // Enable source location in formatter options (thread-unsafe, but for legacy API)
-        auto opts = formatter_->get_options();
-        opts.include_source_location = true;
-        formatter_->set_options(opts);
     }
 
+    // Thread-safe: Create temporary formatter options without modifying shared state
+    // The formatter's format() method will respect include_source_location setting
+    // from its own configuration, or detect location presence automatically
     return format_log_entry(entry);
 }
 
