@@ -19,7 +19,7 @@
 #include <unordered_map>
 
 using namespace kcenon::logger;
-namespace ci = common::interfaces;
+namespace ci = kcenon::common::interfaces;
 
 /**
  * @brief Aggregating monitor that collects metrics from multiple sources
@@ -40,16 +40,16 @@ public:
                   << component->get_component_name() << std::endl;
     }
 
-    common::VoidResult record_metric(
+    kcenon::common::VoidResult record_metric(
         const std::string& name,
         double value) override
     {
         std::lock_guard<std::mutex> lock(mutex_);
         aggregated_metrics_[name] = value;
-        return common::ok();
+        return kcenon::common::ok();
     }
 
-    common::VoidResult record_metric(
+    kcenon::common::VoidResult record_metric(
         const std::string& name,
         double value,
         const std::unordered_map<std::string, std::string>& tags) override
@@ -61,7 +61,7 @@ public:
         return record_metric(tagged_name, value);
     }
 
-    common::Result<ci::metrics_snapshot> get_metrics() override {
+    kcenon::common::Result<ci::metrics_snapshot> get_metrics() override {
         std::lock_guard<std::mutex> lock(mutex_);
 
         ci::metrics_snapshot snapshot;
@@ -76,8 +76,8 @@ public:
         // Collect metrics from all registered components
         for (const auto& component : monitored_components_) {
             auto comp_data = component->get_monitoring_data();
-            if (common::is_ok(comp_data)) {
-                const auto& component_metrics = common::get_value(comp_data);
+            if (kcenon::common::is_ok(comp_data)) {
+                const auto& component_metrics = kcenon::common::get_value(comp_data);
                 for (const auto& metric : component_metrics.metrics) {
                     snapshot.metrics.push_back(metric);
                 }
@@ -86,10 +86,10 @@ public:
             }
         }
 
-        return common::Result<ci::metrics_snapshot>::ok(std::move(snapshot));
+        return kcenon::common::Result<ci::metrics_snapshot>::ok(std::move(snapshot));
     }
 
-    common::Result<ci::health_check_result> check_health() override {
+    kcenon::common::Result<ci::health_check_result> check_health() override {
         std::lock_guard<std::mutex> lock(mutex_);
 
         ci::health_check_result result;
@@ -102,8 +102,8 @@ public:
             auto comp_health = component->health_check();
             const auto component_name = component->get_component_name();
 
-            if (common::is_ok(comp_health)) {
-                const auto& component_result = common::get_value(comp_health);
+            if (kcenon::common::is_ok(comp_health)) {
+                const auto& component_result = kcenon::common::get_value(comp_health);
                 result.metadata["component_status:" + component_name] = ci::to_string(component_result.status);
 
                 if (component_result.status == ci::health_status::unhealthy) {
@@ -115,7 +115,7 @@ public:
                     result.message = "One or more components degraded";
                 }
             } else {
-                const auto& error = common::get_error(comp_health);
+                const auto& error = kcenon::common::get_error(comp_health);
                 result.metadata["component_status:" + component_name] = "error:" + error.message;
                 if (result.status == ci::health_status::healthy) {
                     result.status = ci::health_status::degraded;
@@ -124,13 +124,13 @@ public:
             }
         }
 
-        return common::Result<ci::health_check_result>::ok(std::move(result));
+        return kcenon::common::Result<ci::health_check_result>::ok(std::move(result));
     }
 
-    common::VoidResult reset() override {
+    kcenon::common::VoidResult reset() override {
         std::lock_guard<std::mutex> lock(mutex_);
         aggregated_metrics_.clear();
-        return common::ok();
+        return kcenon::common::ok();
     }
 
     // IMonitorProvider implementation
@@ -219,14 +219,14 @@ void example_1_basic_integration() {
 
     // Get aggregated metrics
     auto metrics = monitor->get_metrics();
-    if (common::is_ok(metrics)) {
-        print_metrics_snapshot(common::get_value(metrics));
+    if (kcenon::common::is_ok(metrics)) {
+        print_metrics_snapshot(kcenon::common::get_value(metrics));
     }
 
     // Check aggregated health
     auto health = monitor->check_health();
-    if (common::is_ok(health)) {
-        print_health_result(common::get_value(health));
+    if (kcenon::common::is_ok(health)) {
+        print_health_result(kcenon::common::get_value(health));
     }
 }
 
@@ -271,9 +271,9 @@ void example_2_multiple_loggers() {
 
     // Get combined metrics
     auto metrics = monitor->get_metrics();
-    if (common::is_ok(metrics)) {
+    if (kcenon::common::is_ok(metrics)) {
         std::cout << "Combined metrics from all loggers:" << std::endl;
-        print_metrics_snapshot(common::get_value(metrics));
+        print_metrics_snapshot(kcenon::common::get_value(metrics));
     }
 }
 
@@ -305,16 +305,16 @@ void example_3_imonitorable_interface() {
 
         // Get monitoring data directly from logger
         auto data = monitorable->get_monitoring_data();
-        if (common::is_ok(data)) {
+        if (kcenon::common::is_ok(data)) {
             std::cout << "\nDirect monitoring data from logger:" << std::endl;
-            print_metrics_snapshot(common::get_value(data));
+            print_metrics_snapshot(kcenon::common::get_value(data));
         }
 
         // Health check directly from logger
         auto health = monitorable->health_check();
-        if (common::is_ok(health)) {
+        if (kcenon::common::is_ok(health)) {
             std::cout << "\nDirect health check from logger:" << std::endl;
-            print_health_result(common::get_value(health));
+            print_health_result(kcenon::common::get_value(health));
         }
     }
 }
@@ -356,17 +356,17 @@ void example_4_monitoring_system_simulation() {
 
     // Monitoring system can query the monitor
     auto metrics = monitor->get_metrics();
-    if (common::is_ok(metrics)) {
+    if (kcenon::common::is_ok(metrics)) {
         std::cout << "Monitoring system received metrics:" << std::endl;
-        print_metrics_snapshot(common::get_value(metrics));
+        print_metrics_snapshot(kcenon::common::get_value(metrics));
     }
 
     // Monitoring system can check logger health through IMonitorable
     if (auto monitorable = std::dynamic_pointer_cast<ci::IMonitorable>(logger_instance)) {
         auto health = monitorable->health_check();
-        if (common::is_ok(health)) {
+        if (kcenon::common::is_ok(health)) {
             std::cout << "\nLogger health status:" << std::endl;
-            print_health_result(common::get_value(health));
+            print_health_result(kcenon::common::get_value(health));
         }
     }
 
