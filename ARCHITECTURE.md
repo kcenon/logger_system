@@ -46,7 +46,7 @@ The Logger System is a production-ready C++20 asynchronous logging framework des
 
 4. **Performance First**: Optimized for production workloads
    - Batched processing for maximum throughput
-   - Lock-free operations on hot path
+   - Mutex-based async logging with optimized batching to reduce lock contention
    - Minimal allocations with small string optimization
 
 5. **Type Safety**: Comprehensive compile-time guarantees
@@ -219,10 +219,10 @@ public:
 - Back-pressure handling
 - Emergency overflow handling
 
-**Performance**:
-- Average enqueue: 148 nanoseconds
-- Peak throughput: 4.34M messages/second (single thread)
-- Multi-thread: 1.07M messages/s (4 threads)
+**Performance** (Target goals - actual measurements TBD):
+- Target enqueue latency: <200 nanoseconds
+- Target throughput: 1M+ messages/second
+- Mutex-based implementation with batching to reduce lock contention
 
 ---
 
@@ -417,14 +417,14 @@ auto logger_instance = logger_builder()
 
 ### Thread Safety Guarantees
 
-1. **Lock-Free Enqueue**: Application threads never block on locks during log()
+1. **Async Enqueue**: Application threads use mutex-protected queue during log()
 2. **Single Writer Thread**: One worker thread processes all batches
 3. **Writer Isolation**: Each writer is called serially from worker thread
-4. **Queue Protection**: Internal queue uses mutex only on worker thread
+4. **Queue Protection**: Internal queue uses mutex with optimized batching to reduce contention
 
 **Performance Impact**:
-- Enqueue latency: 148ns average
-- No contention on hot path
+- Batching reduces lock acquisition by 100x
+- Minimal lock contention in typical workloads
 - Batching reduces writer calls by 100x
 
 ---
@@ -491,10 +491,10 @@ struct log_entry {
 
 ### Optimization Techniques
 
-1. **Batching**: Processes 100 entries per batch (configurable)
+1. **Batching**: Processes 100 entries per batch (configurable) - reduces lock contention
 2. **Zero-Copy**: Move semantics for log_entry transfer
 3. **SSO**: Small string optimization eliminates 95% of allocations
-4. **Lock-Free Enqueue**: Application threads never wait
+4. **Async Logging**: Background worker thread handles I/O
 5. **Adaptive Queue**: Grows/shrinks based on load
 6. **Writer Pooling**: Reuses writer connections
 
