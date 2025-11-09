@@ -8,19 +8,15 @@
 #include <chrono>
 #include <unordered_map>
 
-// Check if common_system is available
-#ifdef BUILD_WITH_COMMON_SYSTEM
+// common_system integration
 #include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/common/patterns/result.h>
 #include <kcenon/common/adapters/typed_adapter.h>
-#endif
 
 #include "../core/logger.h"
 #include "../interfaces/logger_interface.h"
 
 namespace kcenon::logger::adapters {
-
-#ifdef BUILD_WITH_COMMON_SYSTEM
 
 /**
  * @brief Adapter to expose kcenon::logger as common::interfaces::ILogger
@@ -224,7 +220,5 @@ public:
         return std::make_shared<common_system_logger_adapter>(lg);
     }
 };
-
-#endif // BUILD_WITH_COMMON_SYSTEM
 
 } // namespace kcenon::logger::adapters
