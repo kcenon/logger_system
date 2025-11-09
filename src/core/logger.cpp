@@ -147,8 +147,6 @@ result_void logger::start() {
 
 result_void logger::stop() {
     if (pimpl_ && pimpl_->running_) {
-        pimpl_->running_ = false;
-
         // Stop async collector if in async mode
         // The collector's stop() drains the queue and flushes writers automatically
         if (pimpl_->async_mode_ && pimpl_->collector_) {
@@ -157,6 +155,8 @@ result_void logger::stop() {
             // Synchronous mode: manually flush writers
             flush();
         }
+
+        pimpl_->running_ = false;
     }
     return result_void::success();
 }
