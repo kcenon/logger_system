@@ -87,6 +87,7 @@ jobs:
     - name: Run tests with ${{ matrix.sanitizer }} sanitizer
       run: |
         cd logger_system/build
+        # Thread sanitizer timeout is automatically handled by CMakeLists.txt
         ctest --output-on-failure --verbose
       env:
         TSAN_OPTIONS: "halt_on_error=0 second_deadlock_stack=1"
