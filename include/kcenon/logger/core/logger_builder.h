@@ -601,13 +601,7 @@ public:
      * @since 1.2.0
      */
     logger_builder& with_thread_system_backend() {
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
         backend_ = std::make_unique<backends::thread_system_backend>();
-#else
-        throw std::runtime_error(
-            "thread_system backend not available. "
-            "Build with USE_THREAD_SYSTEM_INTEGRATION to enable.");
-#endif
         return *this;
     }
 
