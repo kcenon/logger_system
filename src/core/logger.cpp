@@ -147,14 +147,16 @@ result_void logger::start() {
 
 result_void logger::stop() {
     if (pimpl_ && pimpl_->running_) {
-        flush();
+        pimpl_->running_ = false;
 
         // Stop async collector if in async mode
+        // The collector's stop() will process all remaining messages and flush writers
         if (pimpl_->async_mode_ && pimpl_->collector_) {
             pimpl_->collector_->stop();
+        } else {
+            // Synchronous mode: manually flush writers
+            flush();
         }
-
-        pimpl_->running_ = false;
     }
     return result_void::success();
 }
