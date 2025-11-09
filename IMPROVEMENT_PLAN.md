@@ -533,30 +533,34 @@ auto config = logger_config_builder()
   - **Status**: build/bin/basic_integration_test passes (5/5 tests)
   - **Results**: All tests passing, no errors
 
-#### Phase 2: Core Files Conversion (IN PROGRESS)
+#### Phase 2: Core Files Conversion ✅ **COMPLETED** (2025-11-09)
 **Target**: 4 core files with highest impact
+**Result**: 384 lines deleted, 19 lines added, 25 conditional compilation blocks removed
 
-- [ ] **Task 3.7**: Convert logger.h (highest priority)
-  - Remove `#ifdef USE_THREAD_SYSTEM_INTEGRATION` (4 instances)
-  - Remove `#ifdef BUILD_WITH_COMMON_SYSTEM` (6 instances)
-  - Use backend pattern for all integration points
-  - **Test** → **Commit**
+- [x] **Task 3.7**: Convert logger.h ✅ **COMPLETED** (2025-11-09)
+  - Removed `#ifdef USE_THREAD_SYSTEM_INTEGRATION` (4 instances)
+  - Removed `#ifdef BUILD_WITH_COMMON_SYSTEM` (6 instances)
+  - Always use logger_system::log_level types
+  - Removed IMonitorable inheritance (use adapter pattern instead)
+  - **Commit**: 23ebde86 "Remove conditional compilation from logger.h and logger.cpp"
 
-- [ ] **Task 3.8**: Convert logger.cpp
-  - Remove `#ifdef USE_THREAD_SYSTEM_INTEGRATION` (5 instances)
-  - Remove `#ifdef BUILD_WITH_COMMON_SYSTEM` (2 instances)
-  - Convert level conversion to backend calls
-  - **Test** → **Commit**
+- [x] **Task 3.8**: Convert logger.cpp ✅ **COMPLETED** (2025-11-09)
+  - Removed `#ifdef USE_THREAD_SYSTEM_INTEGRATION` (7 instances)
+  - Removed `#ifdef BUILD_WITH_COMMON_SYSTEM` (2 instances)
+  - Simplified meets_threshold to use ascending severity only
+  - Default to standalone_backend (users inject thread_system_backend)
+  - **Commit**: 23ebde86
 
-- [ ] **Task 3.9**: Convert log_collector.h
-  - Remove `#ifdef` for log level type selection
-  - Use backend-provided types
-  - **Test** → **Commit**
+- [x] **Task 3.9**: Convert log_collector.h ✅ **COMPLETED** (2025-11-09)
+  - Removed `#ifdef USE_THREAD_SYSTEM_INTEGRATION` (1 instance)
+  - Always use logger_system interface
+  - **Commit**: 93d08e01 "Remove conditional compilation from log_collector.h and log_collector.cpp"
 
-- [ ] **Task 3.10**: Convert log_collector.cpp
-  - Remove backend auto-detection `#ifdef`
-  - Use configuration-based backend selection
-  - **Test** → **Commit**
+- [x] **Task 3.10**: Convert log_collector.cpp ✅ **COMPLETED** (2025-11-09)
+  - Removed `#ifdef USE_THREAD_SYSTEM_INTEGRATION` (5 instances)
+  - Removed level conversion logic (30+ lines)
+  - Direct logger_system::log_level usage
+  - **Commit**: 93d08e01
 
 #### Phase 3: Interface Files Conversion
 **Target**: 8 interface/adapter files
