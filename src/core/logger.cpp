@@ -322,22 +322,21 @@ bool logger::is_enabled(log_level level) const {
 
 void logger::flush() {
     if (pimpl_) {
-        // Flush collector first if in async mode
         if (pimpl_->async_mode_ && pimpl_->collector_) {
+            // Async mode: collector handles both queue draining and writer flushing
             pimpl_->collector_->flush();
-        }
+        } else {
+            // Synchronous mode: manually flush writers
+            std::vector<std::shared_ptr<base_writer>> local_writers;
+            {
+                std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
+                local_writers = pimpl_->writers_;
+            }
 
-        // Copy writer pointers under lock
-        std::vector<std::shared_ptr<base_writer>> local_writers;
-        {
-            std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
-            local_writers = pimpl_->writers_;
-        }
-
-        // Flush without holding lock
-        for (auto& writer : local_writers) {
-            if (writer) {
-                writer->flush();
+            for (auto& writer : local_writers) {
+                if (writer) {
+                    writer->flush();
+                }
             }
         }
     }
