@@ -35,24 +35,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string>
 #include <chrono>
 
-// Conditional include based on build mode
-#include <kcenon/logger/core/thread_integration_detector.h>
-
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    #include <kcenon/thread/interfaces/logger_interface.h>
-#else
-    #include <kcenon/logger/interfaces/logger_interface.h>
-#endif
-
+// Always use logger_system interface (Phase 3-4)
+#include <kcenon/logger/interfaces/logger_interface.h>
 #include <kcenon/logger/core/error_codes.h>
 #include "../interfaces/log_writer_interface.h"
 #include "../interfaces/log_entry.h"
 #include "../interfaces/log_formatter_interface.h"
-
-// Conditional monitoring interface (Phase 2.2.5)
-#ifdef BUILD_WITH_COMMON_SYSTEM
-    #include <kcenon/common/interfaces/monitoring_interface.h>
-#endif
 
 /**
  * @file base_writer.h
@@ -122,19 +110,15 @@ namespace kcenon::logger {
  * - Handle destination-specific output logic
  * - Manage buffering and flushing
  * - Provide health status information
- * - Expose monitoring metrics and health checks
  *
  * @note All derived classes must implement the pure virtual methods.
+ * @note For monitoring integration, use performance_monitor_adapter (Phase 3.3)
  *
  * @warning Writers used in async mode must be thread-safe.
  *
  * @since 1.0.0
  */
-class base_writer : public log_writer_interface
-#ifdef BUILD_WITH_COMMON_SYSTEM
-                  , public common::interfaces::IMonitorable
-#endif
-{
+class base_writer : public log_writer_interface {
 public:
     /**
      * @brief Constructor with optional formatter
@@ -272,54 +256,11 @@ public:
      *
      * @note Default implementation always returns true. Override for writers
      * that can detect failure conditions.
+     * @note For monitoring integration, use performance_monitor_adapter (Phase 3.3)
      *
      * @since 1.0.0
      */
     virtual bool is_healthy() const override { return true; }
-
-#ifdef BUILD_WITH_COMMON_SYSTEM
-    // IMonitorable interface implementation (Phase 2.2.5)
-
-    /**
-     * @brief Get monitoring data for this writer
-     * @return Result containing metrics snapshot
-     *
-     * @details Provides basic writer metrics. Derived classes can override
-     * to add writer-specific metrics.
-     */
-    virtual common::Result<common::interfaces::metrics_snapshot> get_monitoring_data() override {
-        common::interfaces::metrics_snapshot snapshot;
-        snapshot.source_id = "logger_writer::" + get_name();
-        snapshot.capture_time = std::chrono::system_clock::now();
-        snapshot.add_metric("is_healthy", is_healthy() ? 1.0 : 0.0);
-        return snapshot;
-    }
-
-    /**
-     * @brief Perform health check on this writer
-     * @return Result containing health check result
-     */
-    virtual common::Result<common::interfaces::health_check_result> health_check() override {
-        common::interfaces::health_check_result result;
-        result.timestamp = std::chrono::system_clock::now();
-        result.status = is_healthy() ?
-            common::interfaces::health_status::healthy :
-            common::interfaces::health_status::unhealthy;
-        result.message = is_healthy() ?
-            "Writer operational" :
-            "Writer unhealthy";
-        result.metadata["writer_name"] = get_name();
-        return result;
-    }
-
-    /**
-     * @brief Get component name for monitoring
-     * @return Component identifier
-     */
-    virtual std::string get_component_name() const override {
-        return "logger_writer::" + get_name();
-    }
-#endif // BUILD_WITH_COMMON_SYSTEM
 
     /**
      * @brief Get the current formatter

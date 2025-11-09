@@ -38,19 +38,6 @@ protected:
      * @param level Log level
      * @return String representation
      */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    std::string level_to_string(kcenon::thread::log_level level) const {
-        switch (level) {
-            case kcenon::thread::log_level::critical: return "CRITICAL";
-            case kcenon::thread::log_level::error:    return "ERROR";
-            case kcenon::thread::log_level::warning:  return "WARNING";
-            case kcenon::thread::log_level::info:     return "INFO";
-            case kcenon::thread::log_level::debug:    return "DEBUG";
-            case kcenon::thread::log_level::trace:    return "TRACE";
-            default: return "UNKNOWN";
-        }
-    }
-#else
     std::string level_to_string(logger_system::log_level level) const {
         switch (level) {
             case logger_system::log_level::fatal:  return "FATAL";
@@ -62,7 +49,6 @@ protected:
             default: return "UNKNOWN";
         }
     }
-#endif
     
     /**
      * @brief Format timestamp to ISO8601 string
@@ -190,10 +176,10 @@ class compact_formatter : public base_formatter {
 public:
     std::string format(const log_entry& entry) const override {
         std::ostringstream oss;
-        
+
         // Ultra-compact format: LEVEL|MESSAGE
-        oss << level_to_string(entry.level)[0] << "|" << entry.message;
-        
+        oss << level_to_string(entry.level)[0] << "|" << entry.message.to_string();
+
         return oss.str();
     }
     
