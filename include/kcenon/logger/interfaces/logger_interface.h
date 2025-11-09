@@ -26,13 +26,8 @@
 #pragma once
 
 // Logger interface for standalone mode
-// Note: This interface is used when LOGGER_STANDALONE_MODE is defined
-// For thread_system integration, use kcenon::thread::logger_interface instead
+// Note: Integration with thread_system is handled via backend pattern
 #include <kcenon/logger/core/thread_integration_detector.h>
-
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-#warning "This local logger_interface.h should not be used in integration mode. Use thread_system's logger_interface.h instead."
-#endif
 
 #include <memory>
 #include <mutex>
@@ -40,33 +35,14 @@
 #include "logger_types.h"
 
 // Include Result pattern for exception-free error handling
-#if __has_include(<kcenon/common/patterns/result.h>)
 #include <kcenon/common/patterns/result.h>
-#elif __has_include(<common/patterns/result.h>)
-#include <common/patterns/result.h>
-#endif
 
 namespace logger_system {
 
 // Log level is defined in logger_types.h
 
-// Type aliases for Result pattern
-#ifdef KCENON_COMMON_RESULT_AVAILABLE
+// Type alias for Result pattern
 using VoidResult = kcenon::common::VoidResult;
-#else
-// Fallback if common_system not available
-struct VoidResult {
-    bool success{true};
-    std::string error_message;
-
-    VoidResult() = default;
-    explicit VoidResult(bool s) : success(s) {}
-    VoidResult(bool s, std::string msg) : success(s), error_message(std::move(msg)) {}
-
-    bool is_ok() const { return success; }
-    bool has_error() const { return !success; }
-};
-#endif
 
 /**
  * @brief Logger interface for standalone mode

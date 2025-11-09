@@ -13,11 +13,9 @@ All rights reserved.
 #include <functional>
 #include <format>
 
-// Check if common_system is available
-#ifdef BUILD_WITH_COMMON_SYSTEM
+// common_system integration
 #include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/common/patterns/result.h>
-#endif
 
 #include "../logger.h"
 #include "../log_level.h"
@@ -26,8 +24,6 @@ All rights reserved.
 namespace kcenon {
 namespace logger {
 namespace adapters {
-
-#ifdef BUILD_WITH_COMMON_SYSTEM
 
 /**
  * @brief Convert log levels between logger_system and common_system
@@ -307,8 +303,6 @@ public:
         return std::make_unique<logger_from_common_adapter>(common_logger);
     }
 };
-
-#endif // BUILD_WITH_COMMON_SYSTEM
 
 } // namespace adapters
 } // namespace logger

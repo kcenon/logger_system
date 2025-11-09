@@ -46,15 +46,8 @@ All rights reserved.
 #include <optional>
 #include "../core/small_string.h"
 
-// Conditional include based on build mode
-#include <kcenon/logger/core/thread_integration_detector.h>
-
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    #include <kcenon/thread/interfaces/logger_interface.h>
-#else
-    #include <kcenon/logger/interfaces/logger_interface.h>
-#endif
-
+// Note: thread_system integration is handled via backend pattern
+#include <kcenon/logger/interfaces/logger_interface.h>
 #include <kcenon/logger/interfaces/logger_types.h>
 
 namespace kcenon::logger {
