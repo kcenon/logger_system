@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['🔍_20현재_20상태_20분석_0',['🔍 현재 상태 분석',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md941',1,'']]],
-  ['🔍_20code_20quality_1',['🔍 Code Quality',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md170',1,'']]]
+  ['🔗_20ecosystem_20integration_0',['🔗 Ecosystem Integration',['../index.html#autotoc_md8',1,'']]],
+  ['🔗_20quick_20links_1',['🔗 Quick Links',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md188',1,'']]],
+  ['🔗_20strong_20module_20dependencies_20strong_2',['🔗 &lt;strong&gt;Module Dependencies&lt;/strong&gt;',['../index.html#autotoc_md35',1,'']]]
 ];

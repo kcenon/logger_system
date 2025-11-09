@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🚨_20recent_20issues_0',['🚨 Recent Issues',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md179',1,'']]]
+  ['🛡️_20strong_20production_20grade_20reliability_20strong_0',['🛡️ &lt;strong&gt;Production-Grade Reliability&lt;/strong&gt;',['../index.html#autotoc_md12',1,'']]]
 ];

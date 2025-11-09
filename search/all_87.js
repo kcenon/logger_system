@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🐛_20known_20issues_20limitations_0',['🐛 Known Issues &amp; Limitations',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md1041',1,'']]],
-  ['🐛_20troubleshooting_1',['🐛 Troubleshooting',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md659',1,'']]]
+  ['📁_20제안_20디렉토리_20구조_0',['📁 제안 디렉토리 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md815',1,'']]],
+  ['📁_20strong_20directory_20organization_20strong_1',['📁 &lt;strong&gt;Directory Organization&lt;/strong&gt;',['../index.html#autotoc_md30',1,'']]]
 ];

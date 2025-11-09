@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['체크리스트_0',['체크리스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md980',1,'✅ 구현 체크리스트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__KO.html#autotoc_md1123',1,'안전한 구성 체크리스트']]]
+  ['출력_20설정_0',['Phase 1: 벤치마크 재활성화 및 JSON 출력 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md818',1,'']]]
 ];

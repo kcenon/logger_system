@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔮_20future_20roadmap_0',['🔮 Future Roadmap',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md332',1,'']]]
+  ['🚨_20recent_20issues_0',['🚨 Recent Issues',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md178',1,'']]]
 ];

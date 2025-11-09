@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['실패_0',['문제 1: 벤치마크 빌드 실패',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md989',1,'']]],
-  ['실행_20결과_1',['1. GitHub Actions 실행 결과',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md976',1,'']]],
-  ['실행_20및_20json_20저장_2',['1.2 벤치마크 실행 및 JSON 저장',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md953',1,'']]],
-  ['실행_20오류_3',['문제 2: Python 스크립트 실행 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md990',1,'']]]
+  ['아키텍처_0',['아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture__KO.html#autotoc_md337',1,'스레딩 생태계 아키텍처'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md812',1,'🎯 제안 솔루션 아키텍처'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md801',1,'Logger System 아키텍처']]]
 ];

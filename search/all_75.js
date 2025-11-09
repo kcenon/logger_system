@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['카드_20스타일_20디자인_0',['제안 3: 카드 스타일 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md971',1,'']]]
+  ['코드_20수정_0',['1.3 API 변경에 따른 벤치마크 코드 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md821',1,'']]],
+  ['코멘트_1',['2. PR 자동 코멘트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md844',1,'']]]
 ];

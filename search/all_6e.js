@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['중심_20디자인_0',['중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md969',1,'제안 1: 배지 중심 디자인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md970',1,'제안 2: 테이블 중심 디자인']]],
-  ['중요한_20제한사항_1',['중요한 제한사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__KO.html#autotoc_md1121',1,'']]]
+  ['차트_20생성_0',['Phase 3: 배지 및 차트 생성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md827',1,'']]],
+  ['차트_20생성_20스크립트_1',['3.2 트렌드 차트 생성 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md829',1,'']]],
+  ['차트_20예상_20소요_3a_201_205시간_2',['Phase 2: 배지 및 차트 (예상 소요: 1.5시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md849',1,'']]]
 ];

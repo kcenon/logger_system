@@ -1,14 +1,10 @@
 var searchData=
 [
-  ['sanitizer_5fbaseline_0',['SANITIZER_BASELINE',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE.html',1,'']]],
-  ['sanitizer_5fbaseline_5fko_1',['SANITIZER_BASELINE_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SANITIZER__BASELINE__KO.html',1,'']]],
-  ['security_2',['SECURITY',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html',1,'']]],
-  ['security_5fko_3',['SECURITY_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__KO.html',1,'']]],
-  ['semantic_20standard_4',['Log Level Semantic Standard',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOG__LEVEL__SEMANTIC__STANDARD.html',1,'']]],
-  ['standard_5',['Log Level Semantic Standard',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOG__LEVEL__SEMANTIC__STANDARD.html',1,'']]],
-  ['static_5fanalysis_5fbaseline_6',['STATIC_ANALYSIS_BASELINE',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE.html',1,'']]],
-  ['static_5fanalysis_5fbaseline_5fko_7',['STATIC_ANALYSIS_BASELINE_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2STATIC__ANALYSIS__BASELINE__KO.html',1,'']]],
-  ['strategy_8',['Conditional Compilation Refactoring Strategy',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CONDITIONAL__COMPILATION__REFACTORING.html',1,'']]],
-  ['summary_9',['summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html',1,'CI/CD Performance Automation - Implementation Summary'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html',1,'Korean Translation Summary']]],
-  ['system_10',['system',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html',1,'Architecture - Logger System'],['../index.html',1,'Logger System']]]
+  ['security_0',['SECURITY',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY.html',1,'']]],
+  ['security_5fko_1',['SECURITY_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__KO.html',1,'']]],
+  ['semantic_20standard_2',['Log Level Semantic Standard',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOG__LEVEL__SEMANTIC__STANDARD.html',1,'']]],
+  ['standard_3',['Log Level Semantic Standard',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOG__LEVEL__SEMANTIC__STANDARD.html',1,'']]],
+  ['strategy_4',['Conditional Compilation Refactoring Strategy',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CONDITIONAL__COMPILATION__REFACTORING.html',1,'']]],
+  ['summary_5',['summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html',1,'CI/CD Performance Automation - Implementation Summary'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2TRANSLATION__SUMMARY.html',1,'Korean Translation Summary']]],
+  ['system_6',['system',['../md__2home_2runner_2work_2logger__system_2logger__system_2ARCHITECTURE.html',1,'Architecture - Logger System'],['../index.html',1,'Logger System']]]
 ];

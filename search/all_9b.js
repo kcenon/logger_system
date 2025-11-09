@@ -1,10 +1,4 @@
 var searchData=
 [
-  ['🚀_20빠른_20탐색_0',['🚀 빠른 탐색',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1073',1,'']]],
-  ['🚀_20build_20status_1',['🚀 Build Status',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md165',1,'']]],
-  ['🚀_20getting_20started_2',['🚀 Getting Started',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md323',1,'']]],
-  ['🚀_20next_20steps_3',['🚀 Next Steps',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md1032',1,'']]],
-  ['🚀_20quick_20navigation_4',['🚀 Quick Navigation',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1058',1,'']]],
-  ['🚀_20quick_20start_5',['🚀 Quick Start',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md640',1,'']]],
-  ['🚀_20strong_20performance_20excellence_20strong_6',['🚀 &lt;strong&gt;Performance Excellence&lt;/strong&gt;',['../index.html#autotoc_md11',1,'']]]
+  ['🛠️_20구현_20상세_204단계_0',['🛠️ 구현 상세 (4단계)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md817',1,'']]]
 ];

@@ -12,8 +12,6 @@ var searchData=
   ['critical_5flog_5fprevention_5fko_2emd_9',['CRITICAL_LOG_PREVENTION_KO.md',['../CRITICAL__LOG__PREVENTION__KO_8md.html',1,'']]],
   ['critical_5flogging_5fquick_5fstart_2emd_10',['CRITICAL_LOGGING_QUICK_START.md',['../CRITICAL__LOGGING__QUICK__START_8md.html',1,'']]],
   ['critical_5flogging_5fquick_5fstart_5fko_2emd_11',['CRITICAL_LOGGING_QUICK_START_KO.md',['../CRITICAL__LOGGING__QUICK__START__KO_8md.html',1,'']]],
-  ['current_5fstate_2emd_12',['CURRENT_STATE.md',['../CURRENT__STATE_8md.html',1,'']]],
-  ['current_5fstate_5fko_2emd_13',['CURRENT_STATE_KO.md',['../CURRENT__STATE__KO_8md.html',1,'']]],
-  ['custom_5fwriters_2emd_14',['CUSTOM_WRITERS.md',['../CUSTOM__WRITERS_8md.html',1,'']]],
-  ['custom_5fwriters_5fko_2emd_15',['CUSTOM_WRITERS_KO.md',['../CUSTOM__WRITERS__KO_8md.html',1,'']]]
+  ['custom_5fwriters_2emd_12',['CUSTOM_WRITERS.md',['../CUSTOM__WRITERS_8md.html',1,'']]],
+  ['custom_5fwriters_5fko_2emd_13',['CUSTOM_WRITERS_KO.md',['../CUSTOM__WRITERS__KO_8md.html',1,'']]]
 ];

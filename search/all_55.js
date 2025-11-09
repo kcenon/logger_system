@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['식별_0',['아키텍처 이슈 - Phase 0 식별',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__ISSUES__KO.html#autotoc_md379',1,'']]]
+  ['신규_20사용자_0',['신규 사용자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md941',1,'']]]
 ];

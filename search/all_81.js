@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['핵심_20문서_0',['핵심 문서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1070',1,'']]]
+  ['🌐_20strong_20cross_20platform_20compatibility_20strong_0',['🌐 &lt;strong&gt;Cross-Platform Compatibility&lt;/strong&gt;',['../index.html#autotoc_md14',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['참고_20자료_0',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md994',1,'']]]
+  ['최근_20변경사항_0',['최근 변경사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md946',1,'']]]
 ];

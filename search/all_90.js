@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['📚_20문서_20구조_0',['📚 문서 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1069',1,'']]],
-  ['📚_20참고_20자료_1',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md994',1,'']]],
-  ['📚_20documentation_20structure_2',['📚 documentation structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2architecture.html#autotoc_md327',1,'📚 Documentation Structure'],['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1054',1,'📚 Documentation Structure']]],
-  ['📚_20learn_20more_3',['📚 Learn More',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md657',1,'']]],
-  ['📚_20references_4',['📚 References',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md1045',1,'']]]
+  ['📝_20다음_20단계_0',['📝 다음 단계',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md868',1,'']]],
+  ['📝_20configuration_20options_1',['📝 Configuration Options',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md903',1,'']]],
+  ['📝_20dependency_20status_2',['📝 Dependency Status',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md181',1,'']]]
 ];

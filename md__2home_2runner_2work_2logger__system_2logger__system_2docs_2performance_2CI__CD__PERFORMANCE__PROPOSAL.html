@@ -93,9 +93,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">CI/CD 성능 지표 자동화 제안서</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md937"></a> <b>문서 버전:</b> 1.0 <b>작성일:</b> 2025-11-04 <b>프로젝트:</b> logger_system <b>목적:</b> 실시간 성능 지표 추적 및 README 자동 업데이트</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md804"></a> <b>문서 버전:</b> 1.0 <b>작성일:</b> 2025-11-04 <b>프로젝트:</b> logger_system <b>목적:</b> 실시간 성능 지표 추적 및 README 자동 업데이트</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md939"></a>
+<h1><a class="anchor" id="autotoc_md806"></a>
 📊 Executive Summary</h1>
 <p>logger_system의 성능 지표를 CI/CD 파이프라인을 통해 자동으로 수집하고, README.md 및 문서에 동적으로 표시하는 시스템을 구축합니다.</p>
 <p><b>기대 효과:</b></p><ul>
@@ -106,9 +106,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li>✅ 벤치마크 결과 아티팩트로 보관</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md941"></a>
+<h1><a class="anchor" id="autotoc_md808"></a>
 🔍 현재 상태 분석</h1>
-<h2><a class="anchor" id="autotoc_md942"></a>
+<h2><a class="anchor" id="autotoc_md809"></a>
 ✅ 장점</h2>
 <ol type="1">
 <li><b>벤치마크 인프라 완비</b><ul>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </ul>
 </li>
 <li><b>문서화 구조 우수</b><ul>
-<li><code><a class="el" href="BASELINE_8md.html">BASELINE.md</a></code>: 기준 성능 지표 기록</li>
+<li><code>BASELINE.md</code>: 기준 성능 지표 기록</li>
 <li><code>benchmarks/README.md</code>: 벤치마크 사용법 문서화</li>
 </ul>
 </li>
@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </ul>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md943"></a>
+<h2><a class="anchor" id="autotoc_md810"></a>
 ❌ 개선 필요 사항</h2>
 <ol type="1">
 <li><b>벤치마크 비활성화</b> <div class="fragment"><div class="line"># 현재 상태 (.github/workflows/benchmarks.yml:68)</div>
@@ -161,9 +161,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md945"></a>
+<h1><a class="anchor" id="autotoc_md812"></a>
 🎯 제안 솔루션 아키텍처</h1>
-<h2><a class="anchor" id="autotoc_md946"></a>
+<h2><a class="anchor" id="autotoc_md813"></a>
 전체 워크플로우</h2>
 <div class="fragment"><div class="line">┌──────────────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                       GitHub Actions Trigger                          │</div>
@@ -223,7 +223,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">│  - Post PR comment with results                                       │</div>
 <div class="line">└──────────────────────────────────────────────────────────────────────┘</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md948"></a>
+<h1><a class="anchor" id="autotoc_md815"></a>
 📁 제안 디렉토리 구조</h1>
 <div class="fragment"><div class="line">logger_system/</div>
 <div class="line">├── .github/</div>
@@ -259,11 +259,11 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">        ├── generate_charts.py          # 차트 생성</div>
 <div class="line">        └── update_readme.py            # README 업데이트</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md950"></a>
+<h1><a class="anchor" id="autotoc_md817"></a>
 🛠️ 구현 상세 (4단계)</h1>
-<h2><a class="anchor" id="autotoc_md951"></a>
+<h2><a class="anchor" id="autotoc_md818"></a>
 Phase 1: 벤치마크 재활성화 및 JSON 출력 설정</h2>
-<h3><a class="anchor" id="autotoc_md952"></a>
+<h3><a class="anchor" id="autotoc_md819"></a>
 1.1 GitHub Actions 워크플로우 수정</h3>
 <p><b>파일:</b> <code>.github/workflows/benchmarks.yml</code></p>
 <p><b>변경 사항:</b></p>
@@ -274,7 +274,7 @@ Phase 1: 벤치마크 재활성화 및 JSON 출력 설정</h2>
 <div class="line">-DBUILD_BENCHMARKS=ON</div>
 <div class="line">-DLOGGER_STANDALONE=ON</div>
 <div class="line">-DCMAKE_BUILD_TYPE=Release</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md953"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md820"></a>
 1.2 벤치마크 실행 및 JSON 저장</h3>
 <div class="fragment"><div class="line">- name: Run Benchmarks</div>
 <div class="line">  run: |</div>
@@ -297,7 +297,7 @@ Phase 1: 벤치마크 재활성화 및 JSON 출력 설정</h2>
 <div class="line">    name: benchmark-results-${{ matrix.os }}</div>
 <div class="line">    path: benchmarks/results/latest.json</div>
 <div class="line">    retention-days: 90</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md954"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md821"></a>
 1.3 API 변경에 따른 벤치마크 코드 수정</h3>
 <p><b>필요 작업:</b> 벤치마크 코드가 새 API와 호환되도록 업데이트</p>
 <div class="fragment"><div class="line"><span class="comment">// 예시: logger_throughput_bench.cpp</span></div>
@@ -311,9 +311,9 @@ Phase 1: 벤치마크 재활성화 및 JSON 출력 설정</h2>
 <div class="line">    .build()</div>
 <div class="line">    .value();</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md956"></a>
+<h2><a class="anchor" id="autotoc_md823"></a>
 Phase 2: 결과 파싱 및 기준선 비교</h2>
-<h3><a class="anchor" id="autotoc_md957"></a>
+<h3><a class="anchor" id="autotoc_md824"></a>
 2.1 벤치마크 결과 파싱 스크립트</h3>
 <p><b>파일:</b> <code>scripts/performance/parse_benchmarks.py</code></p>
 <div class="fragment"><div class="line"><span class="comment">#!/usr/bin/env python3</span></div>
@@ -417,7 +417,7 @@ Phase 2: 결과 파싱 및 기준선 비교</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">if</span> __name__ == <span class="stringliteral">&quot;__main__&quot;</span>:</div>
 <div class="line">    main()</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md958"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md825"></a>
 2.2 기준선 비교 스크립트</h3>
 <p><b>파일:</b> <code>scripts/performance/compare_baselines.py</code></p>
 <div class="fragment"><div class="line"><span class="comment">#!/usr/bin/env python3</span></div>
@@ -566,9 +566,9 @@ Phase 2: 결과 파싱 및 기준선 비교</h2>
 <div class="line"><span class="keywordflow">if</span> __name__ == <span class="stringliteral">&quot;__main__&quot;</span>:</div>
 <div class="line">    main()</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md960"></a>
+<h2><a class="anchor" id="autotoc_md827"></a>
 Phase 3: 배지 및 차트 생성</h2>
-<h3><a class="anchor" id="autotoc_md961"></a>
+<h3><a class="anchor" id="autotoc_md828"></a>
 3.1 성능 배지 생성 스크립트</h3>
 <p><b>파일:</b> <code>scripts/performance/generate_badges.py</code></p>
 <div class="fragment"><div class="line"><span class="comment">#!/usr/bin/env python3</span></div>
@@ -748,7 +748,7 @@ Phase 3: 배지 및 차트 생성</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">if</span> __name__ == <span class="stringliteral">&quot;__main__&quot;</span>:</div>
 <div class="line">    main()</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md962"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md829"></a>
 3.2 트렌드 차트 생성 스크립트</h3>
 <p><b>파일:</b> <code>scripts/performance/generate_charts.py</code></p>
 <div class="fragment"><div class="line"><span class="comment">#!/usr/bin/env python3</span></div>
@@ -888,9 +888,9 @@ Phase 3: 배지 및 차트 생성</h2>
 <div class="line"><span class="keywordflow">if</span> __name__ == <span class="stringliteral">&quot;__main__&quot;</span>:</div>
 <div class="line">    main()</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md964"></a>
+<h2><a class="anchor" id="autotoc_md831"></a>
 Phase 4: README.md 자동 업데이트</h2>
-<h3><a class="anchor" id="autotoc_md965"></a>
+<h3><a class="anchor" id="autotoc_md832"></a>
 4.1 README 업데이트 스크립트</h3>
 <p><b>파일:</b> <code>scripts/performance/update_readme.py</code></p>
 <div class="fragment"><div class="line"><span class="comment">#!/usr/bin/env python3</span></div>
@@ -984,7 +984,7 @@ Phase 4: README.md 자동 업데이트</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">if</span> __name__ == <span class="stringliteral">&quot;__main__&quot;</span>:</div>
 <div class="line">    main()</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md966"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md833"></a>
 4.2 GitHub Actions에서 자동 커밋</h3>
 <p><b>파일:</b> <code>.github/workflows/benchmarks.yml</code> (추가 부분)</p>
 <div class="fragment"><div class="line">- name: Update Documentation with Performance Metrics</div>
@@ -1018,9 +1018,9 @@ Phase 4: README.md 자동 업데이트</h2>
 <div class="line">    commit_user_name: github-actions[bot]</div>
 <div class="line">    commit_user_email: github-actions[bot]@users.noreply.github.com</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md968"></a>
+<h1><a class="anchor" id="autotoc_md835"></a>
 🎨 README.md 성능 섹션 디자인</h1>
-<h2><a class="anchor" id="autotoc_md969"></a>
+<h2><a class="anchor" id="autotoc_md836"></a>
 제안 1: 배지 중심 디자인</h2>
 <div class="fragment"><div class="line">## 📊 Performance Benchmarks</div>
 <div class="line"> </div>
@@ -1041,7 +1041,7 @@ Phase 4: README.md 자동 업데이트</h2>
 <div class="line">![Throughput Trend](docs/performance/charts/throughput_trend.png)</div>
 <div class="line"> </div>
 <div class="line">&lt;!-- END AUTO-GENERATED --&gt;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md970"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md837"></a>
 제안 2: 테이블 중심 디자인</h2>
 <div class="fragment"><div class="line">## 📊 Performance Benchmarks</div>
 <div class="line"> </div>
@@ -1060,7 +1060,7 @@ Phase 4: README.md 자동 업데이트</h2>
 <div class="line">[View Detailed Report](benchmarks/results/comparison_report.md) | [Historical Data](docs/performance/performance_history.json)</div>
 <div class="line"> </div>
 <div class="line">&lt;!-- END AUTO-GENERATED --&gt;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md971"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md838"></a>
 제안 3: 카드 스타일 디자인</h2>
 <div class="fragment"><div class="line">## 📊 Performance Benchmarks</div>
 <div class="line"> </div>
@@ -1092,7 +1092,7 @@ Phase 4: README.md 자동 업데이트</h2>
 <div class="line"> </div>
 <div class="line">&lt;!-- END AUTO-GENERATED --&gt;</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md973"></a>
+<h1><a class="anchor" id="autotoc_md840"></a>
 🔄 CI/CD 워크플로우 전체 예시</h1>
 <p><b>파일:</b> <code>.github/workflows/benchmarks.yml</code> (완전 버전)</p>
 <div class="fragment"><div class="line">name: Benchmarks</div>
@@ -1302,9 +1302,9 @@ Phase 4: README.md 자동 업데이트</h2>
 <div class="line">          fi</div>
 <div class="line">        done</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md975"></a>
+<h1><a class="anchor" id="autotoc_md842"></a>
 📈 예상 결과물</h1>
-<h2><a class="anchor" id="autotoc_md976"></a>
+<h2><a class="anchor" id="autotoc_md843"></a>
 1. GitHub Actions 실행 결과</h2>
 <div class="fragment"><div class="line">✅ Build logger_system</div>
 <div class="line">✅ Run Benchmarks</div>
@@ -1322,7 +1322,7 @@ Phase 4: README.md 자동 업데이트</h2>
 <div class="line">  - latency_trend.png</div>
 <div class="line">✅ Update README.md</div>
 <div class="line">✅ Commit changes</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md977"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md844"></a>
 2. PR 자동 코멘트</h2>
 <div class="fragment"><div class="line"># Performance Comparison Report</div>
 <div class="line"> </div>
@@ -1335,7 +1335,7 @@ Phase 4: README.md 자동 업데이트</h2>
 <div class="line">## ⚖️ Stable Metrics</div>
 <div class="line"> </div>
 <div class="line">- **avg_latency_ns**: 150 → 148 (-1.33%)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md978"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md845"></a>
 3. 업데이트된 README.md</h2>
 <p>자동으로 최신 성능 지표가 반영된 README.md:</p>
 <div class="fragment"><div class="line">## 📊 Performance Benchmarks</div>
@@ -1356,9 +1356,9 @@ Phase 4: README.md 자동 업데이트</h2>
 <div class="line"> </div>
 <div class="line">&lt;!-- END AUTO-GENERATED --&gt;</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md980"></a>
+<h1><a class="anchor" id="autotoc_md847"></a>
 ✅ 구현 체크리스트</h1>
-<h2><a class="anchor" id="autotoc_md981"></a>
+<h2><a class="anchor" id="autotoc_md848"></a>
 Phase 1: 인프라 구축 (예상 소요: 2시간)</h2>
 <ul>
 <li>[ ] <code>scripts/performance/</code> 디렉토리 생성</li>
@@ -1367,7 +1367,7 @@ Phase 1: 인프라 구축 (예상 소요: 2시간)</h2>
 <li>[ ] Python 의존성 설치 (<code>matplotlib</code>, <code>scipy</code>)</li>
 <li>[ ] 로컬에서 스크립트 테스트</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md982"></a>
+<h2><a class="anchor" id="autotoc_md849"></a>
 Phase 2: 배지 및 차트 (예상 소요: 1.5시간)</h2>
 <ul>
 <li>[ ] <code>generate_badges.py</code> 작성</li>
@@ -1375,14 +1375,14 @@ Phase 2: 배지 및 차트 (예상 소요: 1.5시간)</h2>
 <li>[ ] <code>docs/performance/</code> 디렉토리 구조 생성</li>
 <li>[ ] 샘플 배지 및 차트 생성 테스트</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md983"></a>
+<h2><a class="anchor" id="autotoc_md850"></a>
 Phase 3: README 자동 업데이트 (예상 소요: 1시간)</h2>
 <ul>
 <li>[ ] <code>update_readme.py</code> 작성</li>
 <li>[ ] README.md에 자동 생성 마커 추가</li>
 <li>[ ] 로컬에서 README 업데이트 테스트</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md984"></a>
+<h2><a class="anchor" id="autotoc_md851"></a>
 Phase 4: CI/CD 통합 (예상 소요: 2시간)</h2>
 <ul>
 <li>[ ] <code>.github/workflows/benchmarks.yml</code> 업데이트</li>
@@ -1391,7 +1391,7 @@ Phase 4: CI/CD 통합 (예상 소요: 2시간)</h2>
 <li>[ ] 자동 커밋 액션 설정</li>
 <li>[ ] PR 코멘트 기능 추가</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md985"></a>
+<h2><a class="anchor" id="autotoc_md852"></a>
 Phase 5: 테스트 및 검증 (예상 소요: 1.5시간)</h2>
 <ul>
 <li>[ ] 로컬에서 전체 워크플로우 시뮬레이션</li>
@@ -1399,7 +1399,7 @@ Phase 5: 테스트 및 검증 (예상 소요: 1.5시간)</h2>
 <li>[ ] 성능 회귀 시나리오 테스트</li>
 <li>[ ] 배지 및 차트 시각화 검증</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md986"></a>
+<h2><a class="anchor" id="autotoc_md853"></a>
 Phase 6: 문서화 (예상 소요: 1시간)</h2>
 <ul>
 <li>[ ] 이 제안서를 <code><a class="el" href="CI__CD__PERFORMANCE__PROPOSAL_8md.html">docs/performance/CI_CD_PERFORMANCE_PROPOSAL.md</a></code>로 저장</li>
@@ -1408,9 +1408,9 @@ Phase 6: 문서화 (예상 소요: 1시간)</h2>
 </ul>
 <p><b>총 예상 소요 시간: 9시간</b></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md988"></a>
+<h1><a class="anchor" id="autotoc_md855"></a>
 🔧 트러블슈팅 가이드</h1>
-<h2><a class="anchor" id="autotoc_md989"></a>
+<h2><a class="anchor" id="autotoc_md856"></a>
 문제 1: 벤치마크 빌드 실패</h2>
 <p><b>증상:</b> </p><div class="fragment"><div class="line">CMake Error: Could not find benchmark</div>
 </div><!-- fragment --><p><b>해결책:</b> </p><div class="fragment"><div class="line"># Ubuntu</div>
@@ -1424,11 +1424,11 @@ Phase 6: 문서화 (예상 소요: 1시간)</h2>
 <div class="line">cd benchmark</div>
 <div class="line">cmake -B build -DCMAKE_BUILD_TYPE=Release</div>
 <div class="line">sudo cmake --build build --target install</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md990"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md857"></a>
 문제 2: Python 스크립트 실행 오류</h2>
 <p><b>증상:</b> </p><div class="fragment"><div class="line">ModuleNotFoundError: No module named &#39;matplotlib&#39;</div>
 </div><!-- fragment --><p><b>해결책:</b> </p><div class="fragment"><div class="line">pip3 install matplotlib scipy</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md991"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md858"></a>
 문제 3: Git 자동 커밋 권한 오류</h2>
 <p><b>증상:</b> </p><div class="fragment"><div class="line">Error: refusing to allow a GitHub App to create or update workflow</div>
 </div><!-- fragment --><p><b>해결책:</b></p>
@@ -1437,7 +1437,7 @@ Phase 6: 문서화 (예상 소요: 1시간)</h2>
 </div><!-- fragment --><p>또는 Personal Access Token 사용: </p><div class="fragment"><div class="line">- uses: stefanzweifel/git-auto-commit-action@v5</div>
 <div class="line">  with:</div>
 <div class="line">    token: ${{ secrets.GITHUB_TOKEN }}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md992"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md859"></a>
 문제 4: 배지가 README에 표시되지 않음</h2>
 <p><b>증상:</b> 배지 이미지가 깨짐</p>
 <p><b>해결책:</b></p>
@@ -1448,9 +1448,9 @@ Phase 6: 문서화 (예상 소요: 1시간)</h2>
 </div><!-- fragment --></li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md994"></a>
+<h1><a class="anchor" id="autotoc_md861"></a>
 📚 참고 자료</h1>
-<h2><a class="anchor" id="autotoc_md995"></a>
+<h2><a class="anchor" id="autotoc_md862"></a>
 도구 및 라이브러리</h2>
 <ul>
 <li><a href="https://github.com/google/benchmark">Google Benchmark</a> - C++ 벤치마킹 프레임워크</li>
@@ -1458,21 +1458,21 @@ Phase 6: 문서화 (예상 소요: 1시간)</h2>
 <li><a href="https://matplotlib.org/">Matplotlib</a> - Python 차트 라이브러리</li>
 <li><a href="https://docs.github.com/en/actions">GitHub Actions</a> - CI/CD 플랫폼</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md996"></a>
+<h2><a class="anchor" id="autotoc_md863"></a>
 관련 프로젝트 예시</h2>
 <ul>
 <li><a href="https://github.com/gabime/spdlog#benchmarks">spdlog Benchmarks</a></li>
 <li><a href="https://github.com/fmtlib/fmt#performance">fmt Performance</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md997"></a>
+<h2><a class="anchor" id="autotoc_md864"></a>
 내부 문서</h2>
 <ul>
 <li><code>benchmarks/README.md</code> - 벤치마크 사용 가이드</li>
-<li><code><a class="el" href="BASELINE_8md.html">BASELINE.md</a></code> - 기준 성능 지표</li>
+<li><code>BASELINE.md</code> - 기준 성능 지표</li>
 <li><code><a class="el" href="LOGGER__SYSTEM__ARCHITECTURE_8md.html">docs/LOGGER_SYSTEM_ARCHITECTURE.md</a></code> - 시스템 아키텍처</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md999"></a>
+<h1><a class="anchor" id="autotoc_md866"></a>
 🎯 성공 지표</h1>
 <p>이 제안이 성공적으로 구현되면 다음을 달성합니다:</p>
 <ol type="1">
@@ -1502,7 +1502,7 @@ Phase 6: 문서화 (예상 소요: 1시간)</h2>
 </li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1001"></a>
+<h1><a class="anchor" id="autotoc_md868"></a>
 📝 다음 단계</h1>
 <ol type="1">
 <li><b>승인 및 리뷰</b><ul>
@@ -1540,7 +1540,7 @@ Phase 6: 문서화 (예상 소요: 1시간)</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Nov 9 2025 01:45:17 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Nov 9 2025 02:39:18 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
