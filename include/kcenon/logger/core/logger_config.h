@@ -13,13 +13,9 @@ All rights reserved.
 #include <kcenon/logger/core/thread_integration_detector.h>
 #include <kcenon/logger/core/error_codes.h>
 
-// Conditional include based on build mode
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    #include <kcenon/thread/interfaces/logger_interface.h>
-#else
-    #include <kcenon/logger/interfaces/logger_interface.h>
-    #include <kcenon/logger/interfaces/logger_types.h>
-#endif
+// Always use logger_system's own interface
+#include <kcenon/logger/interfaces/logger_interface.h>
+#include <kcenon/logger/interfaces/logger_types.h>
 
 namespace kcenon::logger {
 
@@ -34,11 +30,7 @@ struct logger_config {
     // Basic settings
     bool async = true;
     std::size_t buffer_size = 8192;
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    kcenon::thread::log_level min_level = kcenon::thread::log_level::info;
-#else
     logger_system::log_level min_level = logger_system::log_level::info;
-#endif
     
     // Performance settings
     std::size_t batch_size = 100;
@@ -249,11 +241,7 @@ struct logger_config {
     static logger_config debug_config() {
         logger_config config;
         config.async = false;  // Synchronous for immediate output
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-        config.min_level = kcenon::thread::log_level::trace;
-#else
         config.min_level = logger_system::log_level::trace;
-#endif
         config.enable_metrics = true;
         config.enable_crash_handler = true;
         config.enable_color_output = true;
@@ -270,11 +258,7 @@ struct logger_config {
         logger_config config;
         config.async = true;
         config.buffer_size = 16384;
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-        config.min_level = kcenon::thread::log_level::warning;
-#else
         config.min_level = logger_system::log_level::warn;
-#endif
         config.enable_metrics = true;
         config.enable_crash_handler = true;
         config.enable_color_output = false;

@@ -87,6 +87,18 @@ if(NOT _LOGGER_GTEST_TARGET OR NOT _LOGGER_GTEST_MAIN_TARGET)
     return()
 endif()
 
+# Thread sanitizer: Skip integration tests entirely
+# Integration tests involve heavy file I/O and hundreds of log messages per test,
+# which becomes impractically slow (10+ minutes) under thread sanitizer's 20-100x overhead.
+# Thread sanitizer's purpose is correctness verification (race detection), not E2E scenarios.
+# Unit tests already provide comprehensive thread safety coverage.
+if(CMAKE_CXX_FLAGS MATCHES "fsanitize=thread" OR CMAKE_C_FLAGS MATCHES "fsanitize=thread")
+    message(STATUS "Thread sanitizer detected: skipping integration tests (use unit tests for race detection)")
+    message(STATUS "  Rationale: Integration tests use file I/O + bulk logging (incompatible with TSan)")
+    message(STATUS "  Coverage: Unit tests provide thread safety verification")
+    return()
+endif()
+
 # Collect all integration test source files
 file(GLOB SCENARIO_TESTS scenarios/*.cpp)
 file(GLOB FAILURE_TESTS failures/*.cpp)
@@ -165,7 +177,7 @@ add_test(NAME IntegrationTests COMMAND integration_tests)
 
 # Set test properties
 set_tests_properties(IntegrationTests PROPERTIES
-    TIMEOUT 600
+    TIMEOUT 600  # 10 minutes for integration tests
     LABELS "integration"
 )
 

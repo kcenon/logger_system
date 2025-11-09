@@ -32,14 +32,9 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
-// Conditional include based on build mode
+// Always use logger_system's own interface
 #include <kcenon/logger/core/thread_integration_detector.h>
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    #include <kcenon/thread/interfaces/logger_interface.h>
-#else
-    #include <kcenon/logger/interfaces/logger_interface.h>
-#endif
-
+#include <kcenon/logger/interfaces/logger_interface.h>
 #include <kcenon/logger/interfaces/logger_types.h>
 
 #include <memory>

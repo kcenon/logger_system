@@ -33,11 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/log_collector.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/log_entry.h>
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-#include <kcenon/thread/interfaces/logger_interface.h>
-#else
 #include <kcenon/logger/interfaces/logger_interface.h>
-#endif
 #include <queue>
 #include <mutex>
 #include <condition_variable>
@@ -59,12 +55,8 @@ public:
     ~impl() {
         stop();
     }
-    
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    bool enqueue(kcenon::thread::log_level level,
-#else
+
     bool enqueue(logger_system::log_level level,
-#endif
                  const std::string& message,
                  const std::string& file,
                  int line,
@@ -88,25 +80,9 @@ public:
 
                 return false;
             }
-            
+
             // Create log_entry with optional source location
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-            // Convert kcenon::thread::log_level to logger_system::log_level
-            logger_system::log_level logger_level;
-            switch (level) {
-                case kcenon::thread::log_level::trace: logger_level = logger_system::log_level::trace; break;
-                case kcenon::thread::log_level::debug: logger_level = logger_system::log_level::debug; break;
-                case kcenon::thread::log_level::info: logger_level = logger_system::log_level::info; break;
-                case kcenon::thread::log_level::warning: logger_level = logger_system::log_level::warn; break;
-                case kcenon::thread::log_level::error: logger_level = logger_system::log_level::error; break;
-                case kcenon::thread::log_level::critical: logger_level = logger_system::log_level::fatal; break;
-                default: logger_level = logger_system::log_level::info; break;
-            }
-#else
-            // In standalone mode, no conversion needed
-            logger_system::log_level logger_level = level;
-#endif
-            log_entry entry(logger_level, message, timestamp);
+            log_entry entry(level, message, timestamp);
             if (!file.empty() || line != 0 || !function.empty()) {
                 entry.location = source_location{file, line, function};
             }
@@ -288,35 +264,13 @@ log_collector::log_collector(std::size_t buffer_size, std::size_t batch_size)
 
 log_collector::~log_collector() = default;
 
-namespace {
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-// Convert logger_system::log_level to kcenon::thread::log_level
-kcenon::thread::log_level convert_log_level(logger_system::log_level level) {
-    switch (level) {
-        case logger_system::log_level::trace: return kcenon::thread::log_level::trace;
-        case logger_system::log_level::debug: return kcenon::thread::log_level::debug;
-        case logger_system::log_level::info: return kcenon::thread::log_level::info;
-        case logger_system::log_level::warn: return kcenon::thread::log_level::warning;
-        case logger_system::log_level::error: return kcenon::thread::log_level::error;
-        case logger_system::log_level::fatal: return kcenon::thread::log_level::critical;
-        case logger_system::log_level::off: return kcenon::thread::log_level::critical; // fallback
-        default: return kcenon::thread::log_level::info;
-    }
-}
-#endif
-}
-
 bool log_collector::enqueue(logger_system::log_level level,
                            const std::string& message,
                            const std::string& file,
                            int line,
                            const std::string& function,
                            const std::chrono::system_clock::time_point& timestamp) {
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    return pimpl_->enqueue(convert_log_level(level), message, file, line, function, timestamp);
-#else
     return pimpl_->enqueue(level, message, file, line, function, timestamp);
-#endif
 }
 
 void log_collector::add_writer(std::shared_ptr<base_writer> writer) {

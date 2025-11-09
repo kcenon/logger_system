@@ -12,14 +12,9 @@
 #include <string>
 #include <vector>
 
-// Use thread_system log_level when integrated
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    #include <kcenon/thread/interfaces/logger_interface.h>
-    using log_level = kcenon::thread::log_level;
-#else
-    #include <kcenon/logger/interfaces/logger_types.h>
-    using log_level = logger_system::log_level;
-#endif
+// Always use logger_system::log_level (matches logger implementation)
+#include <kcenon/logger/interfaces/logger_types.h>
+using log_level = logger_system::log_level;
 
 namespace {
 
