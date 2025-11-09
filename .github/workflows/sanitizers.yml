@@ -87,15 +87,8 @@ jobs:
     - name: Run tests with ${{ matrix.sanitizer }} sanitizer
       run: |
         cd logger_system/build
-        # Thread sanitizer has 20-100x performance overhead, so we need a much higher timeout
-        # Default CTest timeout is ~1500s, which is insufficient for thread sanitizer integration tests
-        if [[ "${{ matrix.sanitizer }}" == "thread" ]]; then
-          # Thread sanitizer: 1200 seconds (20 minutes) per test
-          ctest --output-on-failure --verbose --timeout 1200
-        else
-          # Address/undefined sanitizers: use default timeout
-          ctest --output-on-failure --verbose
-        fi
+        # Thread sanitizer timeout is automatically handled by CMakeLists.txt
+        ctest --output-on-failure --verbose
       env:
         TSAN_OPTIONS: "halt_on_error=0 second_deadlock_stack=1"
         ASAN_OPTIONS: "halt_on_error=0 detect_leaks=1"

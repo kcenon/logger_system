@@ -164,8 +164,16 @@ endif()
 add_test(NAME IntegrationTests COMMAND integration_tests)
 
 # Set test properties
+# Thread sanitizer has 20-100x performance overhead, so we need a much higher timeout
+if(CMAKE_CXX_FLAGS MATCHES "fsanitize=thread" OR CMAKE_C_FLAGS MATCHES "fsanitize=thread")
+    set(INTEGRATION_TEST_TIMEOUT 1200)  # 20 minutes for thread sanitizer
+    message(STATUS "Thread sanitizer detected: setting integration test timeout to ${INTEGRATION_TEST_TIMEOUT}s")
+else()
+    set(INTEGRATION_TEST_TIMEOUT 600)   # 10 minutes for normal builds
+endif()
+
 set_tests_properties(IntegrationTests PROPERTIES
-    TIMEOUT 600
+    TIMEOUT ${INTEGRATION_TEST_TIMEOUT}
     LABELS "integration"
 )
 
