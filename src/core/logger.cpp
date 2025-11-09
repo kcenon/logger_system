@@ -33,9 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/core/log_collector.h>
 #include <kcenon/logger/backends/standalone_backend.h>
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    #include <kcenon/logger/backends/thread_system_backend.h>
-#endif
+#include <kcenon/logger/backends/thread_system_backend.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/logger_types.h>
 #include <iostream>
@@ -51,56 +49,24 @@ namespace {
 /**
  * @brief Check if a log level meets the minimum threshold
  *
- * IMPORTANT: This function handles two different log level semantics:
- *
- * 1. thread_system::log_level (descending severity):
- *    critical(0) > error(1) > warning(2) > info(3) > debug(4) > trace(5)
- *    → Use <= comparison (lower number = more severe)
- *
- * 2. logger_system::log_level (ascending severity):
- *    trace(0) < debug(1) < info(2) < warn(3) < error(4) < fatal(5)
- *    → Use >= comparison (higher number = more severe)
+ * logger_system::log_level uses ascending severity:
+ * trace(0) < debug(1) < info(2) < warn(3) < error(4) < fatal(5)
+ * → Use >= comparison (higher number = more severe)
  *
  * @param level The log level to check
  * @param minimum The minimum threshold level
  * @return true if the message should be logged
+ *
+ * @example if minimum=warn(3), log warn(3), error(4), fatal(5)
+ *          but skip trace(0), debug(1), info(2)
  */
 template <typename Level>
 bool meets_threshold(Level level, Level minimum) {
     using underlying_type = std::underlying_type_t<Level>;
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    // thread::log_level: descending severity (0 = most severe)
-    // Example: if minimum=warning(2), log critical(0), error(1), warning(2)
-    //          but skip info(3), debug(4), trace(5)
-    return static_cast<underlying_type>(level) <= static_cast<underlying_type>(minimum);
-#else
     // logger_system::log_level: ascending severity (0 = least severe)
-    // Example: if minimum=warn(3), log warn(3), error(4), fatal(5)
-    //          but skip trace(0), debug(1), info(2)
     return static_cast<underlying_type>(level) >= static_cast<underlying_type>(minimum);
-#endif
 }
 } // namespace
-
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-// Helper function to convert kcenon::thread::log_level to logger_system::log_level
-logger_system::log_level convert_log_level(kcenon::thread::log_level level) {
-    switch (level) {
-        case kcenon::thread::log_level::critical: return logger_system::log_level::fatal;
-        case kcenon::thread::log_level::error: return logger_system::log_level::error;
-        case kcenon::thread::log_level::warning: return logger_system::log_level::warn;
-        case kcenon::thread::log_level::info: return logger_system::log_level::info;
-        case kcenon::thread::log_level::debug: return logger_system::log_level::debug;
-        case kcenon::thread::log_level::trace: return logger_system::log_level::trace;
-        default: return logger_system::log_level::info;
-    }
-}
-#else
-// In standalone mode, no conversion needed - both types are the same
-logger_system::log_level convert_log_level(logger_system::log_level level) {
-    return level;
-}
-#endif
 
 // Simple implementation class for logger PIMPL
 class logger::impl {
@@ -109,34 +75,22 @@ public:
     std::size_t buffer_size_;
     bool running_;
     bool metrics_enabled_;
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    std::atomic<kcenon::thread::log_level> min_level_;
-#else
     std::atomic<logger_system::log_level> min_level_;
-#endif
     std::vector<std::shared_ptr<base_writer>> writers_;
     std::shared_mutex writers_mutex_;  // Protects writers_ vector from concurrent modification
     std::unique_ptr<backends::integration_backend> backend_;  // Integration backend
     std::unique_ptr<log_collector> collector_;  // Async log collector for async mode
 
     impl(bool async, std::size_t buffer_size, std::unique_ptr<backends::integration_backend> backend)
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-        : async_mode_(async), buffer_size_(buffer_size), running_(false), metrics_enabled_(false),
-          min_level_(kcenon::thread::log_level::info), backend_(std::move(backend)) {
-#else
         : async_mode_(async), buffer_size_(buffer_size), running_(false), metrics_enabled_(false),
           min_level_(logger_system::log_level::info), backend_(std::move(backend)) {
-#endif
         // Reserve space to avoid reallocation during typical usage
         writers_.reserve(10);
 
         // Auto-detect backend if not provided
+        // Users can provide thread_system_backend or other backends via constructor
         if (!backend_) {
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-            backend_ = std::make_unique<backends::thread_system_backend>();
-#else
             backend_ = std::make_unique<backends::standalone_backend>();
-#endif
         }
 
         // Initialize backend if required
@@ -257,15 +211,6 @@ result_void logger::clear_writers() {
     return result_void::success();
 }
 
-#ifdef BUILD_WITH_COMMON_SYSTEM
-void logger::set_monitor(std::unique_ptr<common::interfaces::IMonitor> monitor) {
-    monitor_ = std::move(monitor);
-    if (monitor_) {
-        enable_metrics_collection(true);
-    }
-}
-#endif
-
 void logger::set_min_level(log_level level) {
     if (pimpl_) {
         pimpl_->min_level_.store(level);
@@ -276,11 +221,7 @@ log_level logger::get_min_level() const {
     if (pimpl_) {
         return pimpl_->min_level_.load();
     }
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    return kcenon::thread::log_level::info;
-#else
     return logger_system::log_level::info;
-#endif
 }
 
 void logger::log(log_level level, const std::string& message) {
@@ -434,131 +375,5 @@ result<logger_metrics> logger::get_current_metrics() const {
     // Use static factory method to avoid constructor ambiguity
     return result<logger_metrics>::ok_value(metrics::g_logger_stats);
 }
-
-#ifdef BUILD_WITH_COMMON_SYSTEM
-// IMonitorable interface implementation (Phase 2.2)
-
-common::Result<common::interfaces::metrics_snapshot> logger::get_monitoring_data() {
-    common::interfaces::metrics_snapshot snapshot;
-    snapshot.source_id = "logger_system::logger";
-    snapshot.capture_time = std::chrono::system_clock::now();
-
-    if (!pimpl_) {
-        return common::error_info(
-            static_cast<int>(logger_error_code::invalid_argument),
-            "Logger not initialized");
-    }
-
-    // Add basic statistics (protected by shared lock)
-    size_t writers_count = 0;
-    {
-        std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
-        writers_count = pimpl_->writers_.size();
-    }
-    snapshot.add_metric("writers_count", static_cast<double>(writers_count));
-    snapshot.add_metric("async_mode", pimpl_->async_mode_ ? 1.0 : 0.0);
-
-    // Add metrics from internal monitor if available
-    if (monitor_) {
-        auto monitor_result = monitor_->get_metrics();
-        if (monitor_result.is_ok()) {
-            const auto& monitor_metrics = monitor_result.value();
-            // Merge monitor metrics into snapshot
-            for (const auto& metric : monitor_metrics.metrics) {
-                snapshot.metrics.push_back(metric);
-            }
-        }
-    }
-
-    // Add performance metrics if enabled
-    if (pimpl_->metrics_enabled_) {
-        auto& stats = metrics::g_logger_stats;
-        snapshot.add_metric("messages_logged", static_cast<double>(stats.messages_logged.load()));
-        snapshot.add_metric("messages_dropped", static_cast<double>(stats.messages_dropped.load()));
-        snapshot.add_metric("queue_size", static_cast<double>(stats.queue_size.load()));
-        snapshot.add_metric("max_queue_size", static_cast<double>(stats.max_queue_size.load()));
-    }
-
-    return snapshot;
-}
-
-common::Result<common::interfaces::health_check_result> logger::health_check() {
-    common::interfaces::health_check_result result;
-    result.timestamp = std::chrono::system_clock::now();
-    auto start_time = std::chrono::high_resolution_clock::now();
-
-    if (!pimpl_) {
-        result.status = common::interfaces::health_status::unhealthy;
-        result.message = "Logger not initialized";
-        auto end_time = std::chrono::high_resolution_clock::now();
-        result.check_duration = std::chrono::duration_cast<std::chrono::milliseconds>(
-            end_time - start_time);
-        return result;
-    }
-
-    // Check if logger is running
-    if (!pimpl_->running_) {
-        result.status = common::interfaces::health_status::degraded;
-        result.message = "Logger is not running";
-        result.metadata["running"] = "false";
-    } else {
-        result.status = common::interfaces::health_status::healthy;
-        result.message = "Logger operational";
-        result.metadata["running"] = "true";
-    }
-
-    // Check writers (protected by shared lock)
-    size_t writers_count = 0;
-    bool writers_empty = false;
-    {
-        std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
-        writers_count = pimpl_->writers_.size();
-        writers_empty = pimpl_->writers_.empty();
-    }
-
-    if (writers_empty) {
-        result.status = common::interfaces::health_status::degraded;
-        result.message = "No writers configured";
-        result.metadata["writers_count"] = "0";
-    } else {
-        result.metadata["writers_count"] = std::to_string(writers_count);
-    }
-
-    // Check metrics if enabled
-    if (pimpl_->metrics_enabled_) {
-        auto& stats = metrics::g_logger_stats;
-        auto dropped = stats.messages_dropped.load();
-        auto logged = stats.messages_logged.load();
-
-        if (logged > 0) {
-            double drop_rate = static_cast<double>(dropped) / static_cast<double>(logged + dropped);
-            result.metadata["drop_rate"] = std::to_string(drop_rate);
-
-            if (drop_rate > 0.1) {
-                result.status = common::interfaces::health_status::degraded;
-                result.message = "High message drop rate detected";
-            } else if (drop_rate > 0.5) {
-                result.status = common::interfaces::health_status::unhealthy;
-                result.message = "Critical message drop rate";
-            }
-        }
-
-        result.metadata["queue_size"] = std::to_string(stats.queue_size.load());
-    }
-
-    // Add async mode info
-    result.metadata["async_mode"] = pimpl_->async_mode_ ? "true" : "false";
-
-    auto end_time = std::chrono::high_resolution_clock::now();
-    result.check_duration = std::chrono::duration_cast<std::chrono::milliseconds>(
-        end_time - start_time);
-
-    return result;
-}
-
-std::string logger::get_component_name() const {
-    return "logger_system::logger";
-}
-#endif // BUILD_WITH_COMMON_SYSTEM
 
 } // namespace kcenon::logger

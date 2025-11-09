@@ -39,27 +39,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "thread_integration_detector.h"
 
-// Conditional include based on build mode
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    // Integration mode: Use thread_system's interface for ecosystem compatibility
-    #include <kcenon/thread/interfaces/logger_interface.h>
-#else
-    // Standalone mode: Use local interface for independence
-    #include <kcenon/logger/interfaces/logger_interface.h>
-#endif
+// Always use logger_system's own interface
+#include <kcenon/logger/interfaces/logger_interface.h>
 
 #include "error_codes.h"
 #include "metrics/logger_metrics.h"
 #include "di/di_container_interface.h"
 #include "di/di_container_factory.h"
 #include "../backends/integration_backend.h"
-
-// Use common_system interfaces when available
-#ifdef BUILD_WITH_COMMON_SYSTEM
-    #include <kcenon/common/interfaces/monitoring_interface.h>
-    #include "monitoring/monitoring_factory.h"
-#endif
-
 #include <kcenon/logger/interfaces/logger_types.h>
 
 /**
@@ -116,16 +103,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace kcenon::logger {
 
-// Type aliases for consistency across modes
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-// In integration mode, use thread_module types
-using log_level = kcenon::thread::log_level;
-#else
-// In standalone mode, use logger_system types
+// Type aliases - always use logger_system types
 using log_level = logger_system::log_level;
-#endif
-
-// Type aliases from logger_system namespace for convenience
 using health_status = logger_system::health_status;
 using overflow_policy = logger_system::overflow_policy;
 
@@ -135,13 +114,6 @@ using performance_metrics = metrics::logger_performance_stats; // Alias for exam
 
 using di_container_interface = di::di_container_interface;
 using di_container_factory = di::di_container_factory;
-
-#ifdef BUILD_WITH_COMMON_SYSTEM
-// common_system monitoring interfaces (required for Phase 2.2+)
-using monitoring_interface = common::interfaces::IMonitor;
-using monitoring_metrics = common::interfaces::metrics_snapshot;
-using monitoring_factory = monitoring::monitoring_factory;
-#endif
 
 // Metric type enum
 enum class metric_type {
@@ -177,12 +149,10 @@ class logger_metrics_collector;
  * before destroying the logger to prevent loss of buffered messages.
  *
  * @since 1.0.0
+ *
+ * @note For integration with common_system monitoring interfaces, use logger_monitoring_adapter
  */
-class logger
-#ifdef BUILD_WITH_COMMON_SYSTEM
-    : public common::interfaces::IMonitorable
-#endif
-{
+class logger {
 public:
     /**
      * @brief Constructor with optional configuration
@@ -530,100 +500,6 @@ public:
      */
     result_void enable_di(di::di_container_factory::container_type type =
                          di::di_container_factory::container_type::automatic);
-    
-#ifdef BUILD_WITH_COMMON_SYSTEM
-    // Monitoring Support Methods (Phase 2.2+)
-
-    /**
-     * @brief Set a custom monitoring implementation
-     * @param monitor Unique pointer to IMonitor implementation
-     */
-    void set_monitor(std::unique_ptr<common::interfaces::IMonitor> monitor);
-
-    /**
-     * @brief Enable monitoring with specified backend
-     * @param type Type of monitoring backend to use
-     * @return result_void indicating success or error
-     */
-    result_void enable_monitoring(monitoring::monitoring_factory::monitor_type type =
-                                 monitoring::monitoring_factory::monitor_type::automatic);
-
-    /**
-     * @brief Disable monitoring
-     * @return result_void indicating success or error
-     */
-    result_void disable_monitoring();
-
-    /**
-     * @brief Check if monitoring is enabled
-     * @return true if monitoring is enabled
-     */
-    bool is_monitoring_enabled() const;
-
-    /**
-     * @brief Collect current metrics
-     * @return Result containing metrics snapshot or error
-     */
-    result<common::interfaces::metrics_snapshot> collect_metrics() const;
-
-    /**
-     * @brief Perform health check
-     * @return Result containing health check result or error
-     */
-    result<health_status> check_health() const;
-
-    /**
-     * @brief Reset monitoring metrics
-     * @return result_void indicating success or error
-     */
-    result_void reset_monitoring_metrics();
-
-    /**
-     * @brief Get the monitoring backend name
-     * @return Name of the current monitoring backend
-     */
-    std::string get_monitoring_backend() const;
-
-    /**
-     * @brief Record a custom metric
-     * @param name Metric name
-     * @param value Metric value
-     * @param type Metric type
-     */
-    void record_metric(const std::string& name, double value,
-                      metric_type type = metric_type::gauge);
-#endif // BUILD_WITH_COMMON_SYSTEM
-
-#ifdef BUILD_WITH_COMMON_SYSTEM
-    // IMonitorable interface implementation (Phase 2.2+)
-
-    /**
-     * @brief Get monitoring data (IMonitorable interface)
-     * @return Result containing metrics snapshot or error
-     *
-     * @details Collects comprehensive metrics about the logger's current state,
-     * including message counts, queue utilization, writer statistics, and error rates.
-     */
-    common::Result<common::interfaces::metrics_snapshot> get_monitoring_data() override;
-
-    /**
-     * @brief Perform health check (IMonitorable interface)
-     * @return Result containing health check result or error
-     *
-     * @details Evaluates the logger's health based on various factors such as
-     * queue capacity, writer availability, error rates, and operational status.
-     */
-    common::Result<common::interfaces::health_check_result> health_check() override;
-
-    /**
-     * @brief Get component name for monitoring (IMonitorable interface)
-     * @return Component identifier string
-     *
-     * @details Returns a unique identifier for this logger instance in the
-     * monitoring system, typically "logger_system::logger".
-     */
-    std::string get_component_name() const override;
-#endif // BUILD_WITH_COMMON_SYSTEM
 
 private:
     class impl;
@@ -632,11 +508,6 @@ private:
     // DI support members
     di::di_container_interface* external_di_container_ = nullptr;
     std::unique_ptr<di::di_container_interface> internal_di_container_;
-
-#ifdef BUILD_WITH_COMMON_SYSTEM
-    // Monitoring support member (Phase 2.2+)
-    std::unique_ptr<common::interfaces::IMonitor> monitor_;
-#endif
 };
 
 } // namespace kcenon::logger
