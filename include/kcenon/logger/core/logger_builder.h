@@ -601,12 +601,12 @@ public:
      * @since 1.2.0
      */
     logger_builder& with_thread_system_backend() {
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
+#if __has_include(<kcenon/thread/interfaces/logger_interface.h>)
         backend_ = std::make_unique<backends::thread_system_backend>();
 #else
         throw std::runtime_error(
             "thread_system backend not available. "
-            "Build with USE_THREAD_SYSTEM_INTEGRATION to enable.");
+            "thread_system must be installed to use this backend.");
 #endif
         return *this;
     }

@@ -66,18 +66,7 @@ if(DEFINED BUILD_INTEGRATION_TESTS)
     endif()
     set(LOGGER_BUILD_INTEGRATION_TESTS ${_LOGGER_BUILD_IT_VALUE} CACHE BOOL "Build integration tests" FORCE)
 endif()
-option(USE_LOCKFREE "Use lock-free implementation" ON)
-option(USE_THREAD_SYSTEM "Use external thread_system if available" ON)
-option(LOGGER_STANDALONE "Build in standalone mode without thread_system" OFF)
 option(NO_VCPKG "Skip vcpkg and use system libraries only" OFF)
-option(BUILD_WITH_COMMON_SYSTEM "Build with common_system integration (optional)" ON)
-
-# LOGGER_STANDALONE_MODE takes precedence - force disable thread_system only
-# common_system is still allowed for Result type compatibility
-if(LOGGER_STANDALONE_MODE)
-    message(STATUS "LOGGER_STANDALONE_MODE is ON - forcing USE_THREAD_SYSTEM=OFF (common_system still allowed)")
-    set(USE_THREAD_SYSTEM OFF CACHE BOOL "Disabled by LOGGER_STANDALONE_MODE" FORCE)
-endif()
 
 # Disable tests and benchmarks for MinGW builds due to compatibility issues
 if(MINGW)
@@ -99,13 +88,12 @@ endif()
 include(FetchContent)
 
 # common_system integration (required for Phase 2.2+)
-if(BUILD_WITH_COMMON_SYSTEM)
-    message(STATUS "=== Dependency Management (FetchContent) ===")
+message(STATUS "=== Dependency Management (FetchContent) ===")
 
-    # Try to find common_system package first (for local development)
-    find_package(common_system CONFIG QUIET)
+# Try to find common_system package first (for local development)
+find_package(common_system CONFIG QUIET)
 
-    if(NOT common_system_FOUND)
+if(NOT common_system_FOUND)
         # Check for common_system in multiple locations with comprehensive search
         # Priority order: Environment variable -> CI/CD workspace -> sibling directories
         set(_LOGGER_COMMON_PATHS
@@ -157,16 +145,11 @@ if(BUILD_WITH_COMMON_SYSTEM)
                     "This should not happen. Please check:\n"
                     "  1. Internet connectivity\n"
                     "  2. GitHub repository access\n"
-                    "  3. CMake version >= 3.14\n"
-                    "\nAs last resort, set BUILD_WITH_COMMON_SYSTEM=OFF (not recommended for Phase 2.2+).")
+                    "  3. CMake version >= 3.14")
             endif()
         endif()
-    else()
-        message(STATUS "Found common_system package")
-    endif()
 else()
-    message(STATUS "Building without common_system integration (BUILD_WITH_COMMON_SYSTEM=OFF)")
-    message(WARNING "Standalone mode is not fully supported in Phase 2.2+")
+    message(STATUS "Found common_system package")
 endif()
 
 ##################################################
@@ -381,9 +364,9 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
             )
         endif()
 
-        # common_system integration (conditional)
-        if(BUILD_WITH_COMMON_SYSTEM AND common_system_FOUND)
-            message(STATUS "Logger System: Using common_system interfaces")
+        # common_system integration (always linked if available)
+        if(common_system_FOUND)
+            message(STATUS "Logger System: common_system found, linking for Result<T> compatibility")
 
             # Add common_system include path
             if(TARGET kcenon::common_system)
@@ -395,32 +378,20 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                         $<BUILD_INTERFACE:${COMMON_SYSTEM_INCLUDE_DIR}>
                 )
             endif()
-
-            target_compile_definitions(LoggerSystem
-                PUBLIC
-                    LOGGER_BUILD_WITH_COMMON_SYSTEM
-                    BUILD_WITH_COMMON_SYSTEM
-                    LOGGER_USING_COMMON_INTERFACES
-            )
         else()
-            message(STATUS "Logger System: Building without common_system")
-            # No common_system compile definitions
+            message(STATUS "Logger System: common_system not found, using standalone mode")
         endif()
 
-        # Add thread_system integration if available and not explicitly disabled
-        option(LOGGER_STANDALONE_MODE "Build logger_system in standalone mode without thread_system integration" OFF)
-
-        if(THREAD_SYSTEM_FOUND AND NOT LOGGER_STANDALONE_MODE)
-            message(STATUS "Logger System: Using thread_system integration mode")
+        # thread_system integration (always linked if available)
+        if(THREAD_SYSTEM_FOUND)
+            message(STATUS "Logger System: thread_system found, backend available for use")
             target_include_directories(LoggerSystem
                 PUBLIC
                     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
             )
             target_link_libraries(LoggerSystem PRIVATE thread_base interfaces utilities)
-            target_compile_definitions(LoggerSystem PUBLIC USE_THREAD_SYSTEM_INTEGRATION)
         else()
-            message(STATUS "Logger System: Using standalone mode")
-            target_compile_definitions(LoggerSystem PUBLIC LOGGER_STANDALONE_MODE)
+            message(STATUS "Logger System: thread_system not found, only standalone backend available")
         endif()
 
         set(USE_LEGACY_SOURCES FALSE)
