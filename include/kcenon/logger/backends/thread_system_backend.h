@@ -10,8 +10,10 @@ All rights reserved.
 #include "integration_backend.h"
 #include <kcenon/logger/core/thread_integration_detector.h>
 
-// thread_system integration
+// Conditional includes based on integration settings
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
 #include <kcenon/thread/interfaces/logger_interface.h>
+#endif
 
 /**
  * @file thread_system_backend.h
@@ -24,10 +26,12 @@ All rights reserved.
  * (critical=0) to logger_system's ascending scheme (trace=0).
  *
  * @note Part of Phase 3: Code Quality Improvements
- * @note Backend pattern allows runtime integration without conditional compilation
+ * @note Only available when USE_THREAD_SYSTEM_INTEGRATION is defined
  */
 
 namespace kcenon::logger::backends {
+
+#ifdef USE_THREAD_SYSTEM_INTEGRATION
 
 /**
  * @class thread_system_backend
@@ -122,5 +126,7 @@ public:
         return false;
     }
 };
+
+#endif // USE_THREAD_SYSTEM_INTEGRATION
 
 } // namespace kcenon::logger::backends
