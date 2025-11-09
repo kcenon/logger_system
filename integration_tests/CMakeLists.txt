@@ -92,6 +92,13 @@ file(GLOB SCENARIO_TESTS scenarios/*.cpp)
 file(GLOB FAILURE_TESTS failures/*.cpp)
 file(GLOB PERFORMANCE_TESTS performance/*.cpp)
 
+# Thread sanitizer: exclude performance tests (they take too long with 20-100x overhead)
+# Performance tests are designed to measure throughput/latency, not to find race conditions
+if(CMAKE_CXX_FLAGS MATCHES "fsanitize=thread" OR CMAKE_C_FLAGS MATCHES "fsanitize=thread")
+    message(STATUS "Thread sanitizer detected: excluding performance tests from integration tests")
+    set(PERFORMANCE_TESTS "")  # Empty the performance tests list
+endif()
+
 # Create integration test executable
 add_executable(integration_tests
     ${SCENARIO_TESTS}
@@ -164,12 +171,13 @@ endif()
 add_test(NAME IntegrationTests COMMAND integration_tests)
 
 # Set test properties
-# Thread sanitizer has 20-100x performance overhead, so we need a much higher timeout
+# Thread sanitizer has 20-100x performance overhead
+# Performance tests are excluded for thread sanitizer, so we use a moderate timeout
 if(CMAKE_CXX_FLAGS MATCHES "fsanitize=thread" OR CMAKE_C_FLAGS MATCHES "fsanitize=thread")
-    set(INTEGRATION_TEST_TIMEOUT 1200)  # 20 minutes for thread sanitizer
-    message(STATUS "Thread sanitizer detected: setting integration test timeout to ${INTEGRATION_TEST_TIMEOUT}s")
+    set(INTEGRATION_TEST_TIMEOUT 600)  # 10 minutes (without perf tests)
+    message(STATUS "Thread sanitizer: integration test timeout = ${INTEGRATION_TEST_TIMEOUT}s (performance tests excluded)")
 else()
-    set(INTEGRATION_TEST_TIMEOUT 600)   # 10 minutes for normal builds
+    set(INTEGRATION_TEST_TIMEOUT 600)  # 10 minutes for normal builds
 endif()
 
 set_tests_properties(IntegrationTests PROPERTIES
