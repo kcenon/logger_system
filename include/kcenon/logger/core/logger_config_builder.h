@@ -117,11 +117,7 @@ public:
      * @param level Minimum log level to output
      * @return Reference to builder for chaining
      */
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    logger_config_builder& set_min_level(kcenon::thread::log_level level) {
-#else
     logger_config_builder& set_min_level(logger_system::log_level level) {
-#endif
         config_.min_level = level;
         return *this;
     }

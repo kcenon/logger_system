@@ -586,21 +586,34 @@ auto config = logger_config_builder()
 - [x] **Task 3.17**: Batch test interface files → **Commit** ✅
   - **Commit**: 1eec522d "Remove conditional compilation from interface files (Phase 3)"
 
-#### Phase 4: Writer/Formatter Files Conversion
+#### Phase 4: Writer/Formatter Files Conversion ✅ **COMPLETED** (2025-11-09)
 **Target**: 4 writer/formatter files
+**Result**: 7 conditional compilation blocks removed, 79 lines deleted
 
-- [ ] **Task 3.18**: Convert base_writer.h
-- [ ] **Task 3.19**: Convert base_formatter.h
-- [ ] **Task 3.20**: Convert timestamp_formatter.h
-- [ ] **Task 3.21**: Convert json_formatter.h
-- [ ] **Task 3.22**: Batch test writer/formatter files → **Commit**
+- [x] **Task 3.18**: Convert base_writer.h ✅ (2025-11-09)
+  - Removed USE_THREAD_SYSTEM_INTEGRATION block (2 instances)
+  - Removed BUILD_WITH_COMMON_SYSTEM block (2 instances)
+  - Removed IMonitorable multiple inheritance (use adapter pattern instead)
+- [x] **Task 3.19**: Convert base_formatter.h ✅ (2025-11-09)
+  - Removed USE_THREAD_SYSTEM_INTEGRATION block
+  - Fixed existing bug in compact_formatter (entry.message.to_string())
+- [x] **Task 3.20**: Convert timestamp_formatter.h ✅ (2025-11-09)
+  - Removed USE_THREAD_SYSTEM_INTEGRATION block
+- [x] **Task 3.21**: Convert json_formatter.h ✅ (2025-11-09)
+  - Removed USE_THREAD_SYSTEM_INTEGRATION block
+- [x] **Task 3.22**: Batch test writer/formatter files → **Commit** ✅ (2025-11-09)
+  - **Commit**: 51bac2f5 "Remove conditional compilation from writer and formatter files (Phase 4)"
 
-#### Phase 5: Utility Files Conversion
-**Target**: 3 utility files
+#### Phase 5: Utility Files Conversion ✅ **COMPLETED** (2025-11-09)
+**Target**: 2 utility files (note: only 2 files found, not 3 as originally planned)
+**Result**: 2 conditional compilation blocks removed, 7 lines deleted
 
-- [ ] **Task 3.23**: Convert string_utils.h
-- [ ] **Task 3.24**: Convert logger_config_builder.h
-- [ ] **Task 3.25**: Batch test utility files → **Commit**
+- [x] **Task 3.23**: Convert string_utils.h ✅ (2025-11-09)
+  - Removed USE_THREAD_SYSTEM_INTEGRATION block
+- [x] **Task 3.24**: Convert logger_config_builder.h ✅ (2025-11-09)
+  - Removed USE_THREAD_SYSTEM_INTEGRATION block
+- [x] **Task 3.25**: Batch test utility files → **Commit** ✅ (2025-11-09)
+  - **Commit**: c2fead4b "Remove conditional compilation from utility files (Phase 5)"
 
 #### Phase 6: Final Integration & Cleanup
 - [ ] **Task 3.26**: Run full test suite (all unit + integration tests)
@@ -611,12 +624,14 @@ auto config = logger_config_builder()
 
 **Resources**: 2 developers (1 Senior + 1 Mid)
 **Risk Level**: Medium (progressive approach mitigates risk)
-**Status**: 🔄 **IN PROGRESS** - Phases 1-3 complete, Phase 4 pending
+**Status**: 🔄 **IN PROGRESS** - Phases 1-5 complete, Phase 6 pending
 **Timeline**:
 - Phase 1: ✅ Complete (2025-11-09)
 - Phase 2: ✅ Complete (2025-11-09)
 - Phase 3: ✅ Complete (2025-11-09)
-- Phase 4-6: Pending
+- Phase 4: ✅ Complete (2025-11-09) - 7 blocks removed, 4 files
+- Phase 5: ✅ Complete (2025-11-09) - 2 blocks removed, 2 files
+- Phase 6: Pending
 
 ---
 

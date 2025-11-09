@@ -151,17 +151,32 @@ protected:
 
     /**
      * @brief Wait for logger to flush all messages
+     *
+     * @details This method properly waits for the flush to complete by calling
+     * flush(), then stopping the logger to ensure all async operations complete,
+     * and finally restarting it if needed.
+     *
+     * @note The fundamental issue with the previous implementation was that it only
+     * waited for a fixed duration, which could be insufficient in CI environments
+     * with slower I/O or higher load. This implementation ensures completion.
      */
     void WaitForFlush(std::chrono::milliseconds timeout = std::chrono::seconds(5)) {
-        if (logger_) {
-            logger_->flush();
+        if (!logger_) {
+            return;
         }
-        // Use longer wait time for sanitizer builds which are slower
-        #if defined(__SANITIZE_UNDEFINED__) || defined(__SANITIZE_ADDRESS__) || defined(__SANITIZE_THREAD__)
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        #else
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        #endif
+
+        // Flush the logger to trigger write operations
+        logger_->flush();
+
+        // Stop the logger to ensure all async operations complete
+        // This guarantees that all queued messages are processed and written
+        if (logger_->is_running()) {
+            logger_->stop();
+        }
+
+        // Restart the logger if it was running
+        // This allows subsequent test operations to continue
+        logger_->start();
     }
 
     /**
