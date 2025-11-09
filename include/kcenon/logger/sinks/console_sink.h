@@ -46,7 +46,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <iostream>
 #include <mutex>
-#include "../interfaces/log_sink_interface.h"
+#include "../interfaces/output_sink_interface.h"
 
 namespace kcenon::logger {
 
@@ -77,7 +77,7 @@ namespace kcenon::logger {
  *
  * @since 1.3.0
  */
-class console_sink : public log_sink_interface {
+class console_sink : public output_sink_interface {
 public:
     /**
      * @brief Construct a console sink

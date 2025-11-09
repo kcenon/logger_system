@@ -50,7 +50,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <memory>
 #include "../interfaces/log_writer_interface.h"
 #include "../interfaces/log_formatter_interface.h"
-#include "../interfaces/log_sink_interface.h"
+#include "../interfaces/output_sink_interface.h"
 
 namespace kcenon::logger {
 
@@ -113,7 +113,7 @@ public:
      * @since 1.3.0
      */
     composite_writer(std::unique_ptr<log_formatter_interface> formatter,
-                    std::unique_ptr<log_sink_interface> sink)
+                    std::unique_ptr<output_sink_interface> sink)
         : formatter_(std::move(formatter))
         , sink_(std::move(sink))
     {
@@ -216,13 +216,13 @@ public:
      *
      * @since 1.3.0
      */
-    log_sink_interface* get_sink() const {
+    output_sink_interface* get_sink() const {
         return sink_.get();
     }
 
 private:
     std::unique_ptr<log_formatter_interface> formatter_; ///< Formatting stage
-    std::unique_ptr<log_sink_interface> sink_;          ///< Output stage
+    std::unique_ptr<output_sink_interface> sink_;       ///< Output stage
 };
 
 /**
@@ -246,7 +246,7 @@ private:
  */
 inline std::unique_ptr<composite_writer> make_composite_writer(
     std::unique_ptr<log_formatter_interface> formatter,
-    std::unique_ptr<log_sink_interface> sink)
+    std::unique_ptr<output_sink_interface> sink)
 {
     return std::make_unique<composite_writer>(
         std::move(formatter),

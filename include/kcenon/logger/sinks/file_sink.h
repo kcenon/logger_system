@@ -17,7 +17,7 @@ All rights reserved.
 #include <fstream>
 #include <mutex>
 #include <filesystem>
-#include "../interfaces/log_sink_interface.h"
+#include "../interfaces/output_sink_interface.h"
 
 namespace kcenon::logger {
 
@@ -32,7 +32,7 @@ namespace kcenon::logger {
  *
  * @since 1.3.0
  */
-class file_sink : public log_sink_interface {
+class file_sink : public output_sink_interface {
 public:
     /**
      * @brief Construct a file sink
