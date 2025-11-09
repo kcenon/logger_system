@@ -47,29 +47,8 @@ public:
         return "memory_writer";
     }
 
-#ifdef BUILD_WITH_COMMON_SYSTEM
-    // IMonitorable interface implementation
-    kcenon::common::Result<kcenon::common::interfaces::metrics_snapshot>
-    get_monitoring_data() override {
-        kcenon::common::interfaces::metrics_snapshot snapshot;
-        snapshot.source_id = "memory_writer";
-        snapshot.capture_time = std::chrono::system_clock::now();
-        return snapshot;
-    }
-
-    kcenon::common::Result<kcenon::common::interfaces::health_check_result>
-    health_check() override {
-        kcenon::common::interfaces::health_check_result result;
-        result.timestamp = std::chrono::system_clock::now();
-        result.status = kcenon::common::interfaces::health_status::healthy;
-        result.message = "Memory writer operational";
-        return result;
-    }
-
-    std::string get_component_name() const override {
-        return "memory_writer";
-    }
-#endif
+    // Note: IMonitorable interface removed from base_writer (Phase 4)
+    // Use performance_monitor_adapter for monitoring integration if needed
 
     const std::vector<entry_record>& records() const {
         return records_;
