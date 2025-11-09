@@ -72,9 +72,7 @@ All rights reserved.
 #include "logger.h"
 #include "../backends/integration_backend.h"
 #include "../backends/standalone_backend.h"
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    #include "../backends/thread_system_backend.h"
-#endif
+#include "../backends/thread_system_backend.h"
 #include "../writers/base_writer.h"
 #include "../writers/batch_writer.h"
 // TODO: Implement filtering system
@@ -737,14 +735,11 @@ public:
                 "Number of writers exceeds max_writers configuration"
             );
         }
-        
+
         // Auto-detect backend if not explicitly set
+        // Users can provide thread_system_backend or other backends via with_backend()
         if (!backend_) {
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-            backend_ = std::make_unique<backends::thread_system_backend>();
-#else
             backend_ = std::make_unique<backends::standalone_backend>();
-#endif
         }
 
         // Create logger with validated configuration
