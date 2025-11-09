@@ -505,14 +505,14 @@ auto config = logger_config_builder()
 ---
 
 ### Sprint 3-6: Backend Pattern Conversion (Week 5-12)
-**Goal**: Remove conditional compilation
+**Goal**: Remove conditional compilation through progressive full conversion
 
+**Strategy**: Incremental conversion with per-file commits to minimize risk
+
+#### Phase 1: Infrastructure Setup (COMPLETED)
 - [x] **Task 3.1**: Design integration_backend interface ✅ **COMPLETED** (2025-11-09)
   - **Status**: Interface already existed and well-designed
   - **Files**: include/kcenon/logger/backends/integration_backend.h
-- [x] **Task 3.2**: Convert existing conditional code → backend calls ✅ **PARTIALLY COMPLETED** (2025-11-09)
-  - **Status**: Backend infrastructure in place, full conversion deferred to future sprints
-  - **Reason**: Complete conversion requires extensive refactoring (6-week effort)
 - [x] **Task 3.3**: Implement monitoring_backend (separate library) ✅ **COMPLETED** (2025-11-09)
   - **Status**: monitoring_backend.h and monitoring_integration_detector.h created
   - **Features**:
@@ -533,9 +533,72 @@ auto config = logger_config_builder()
   - **Status**: build/bin/basic_integration_test passes (5/5 tests)
   - **Results**: All tests passing, no errors
 
+#### Phase 2: Core Files Conversion (IN PROGRESS)
+**Target**: 4 core files with highest impact
+
+- [ ] **Task 3.7**: Convert logger.h (highest priority)
+  - Remove `#ifdef USE_THREAD_SYSTEM_INTEGRATION` (4 instances)
+  - Remove `#ifdef BUILD_WITH_COMMON_SYSTEM` (6 instances)
+  - Use backend pattern for all integration points
+  - **Test** → **Commit**
+
+- [ ] **Task 3.8**: Convert logger.cpp
+  - Remove `#ifdef USE_THREAD_SYSTEM_INTEGRATION` (5 instances)
+  - Remove `#ifdef BUILD_WITH_COMMON_SYSTEM` (2 instances)
+  - Convert level conversion to backend calls
+  - **Test** → **Commit**
+
+- [ ] **Task 3.9**: Convert log_collector.h
+  - Remove `#ifdef` for log level type selection
+  - Use backend-provided types
+  - **Test** → **Commit**
+
+- [ ] **Task 3.10**: Convert log_collector.cpp
+  - Remove backend auto-detection `#ifdef`
+  - Use configuration-based backend selection
+  - **Test** → **Commit**
+
+#### Phase 3: Interface Files Conversion
+**Target**: 8 interface/adapter files
+
+- [ ] **Task 3.11**: Convert logger_interface.h
+- [ ] **Task 3.12**: Convert log_entry.h
+- [ ] **Task 3.13**: Convert logger_config.h
+- [ ] **Task 3.14**: Convert logger_builder.h
+- [ ] **Task 3.15**: Convert common_logger_adapter.h
+- [ ] **Task 3.16**: Convert common_system_adapter.h
+- [ ] **Task 3.17**: Batch test interface files → **Commit**
+
+#### Phase 4: Writer/Formatter Files Conversion
+**Target**: 4 writer/formatter files
+
+- [ ] **Task 3.18**: Convert base_writer.h
+- [ ] **Task 3.19**: Convert base_formatter.h
+- [ ] **Task 3.20**: Convert timestamp_formatter.h
+- [ ] **Task 3.21**: Convert json_formatter.h
+- [ ] **Task 3.22**: Batch test writer/formatter files → **Commit**
+
+#### Phase 5: Utility Files Conversion
+**Target**: 3 utility files
+
+- [ ] **Task 3.23**: Convert string_utils.h
+- [ ] **Task 3.24**: Convert logger_config_builder.h
+- [ ] **Task 3.25**: Batch test utility files → **Commit**
+
+#### Phase 6: Final Integration & Cleanup
+- [ ] **Task 3.26**: Run full test suite (all unit + integration tests)
+- [ ] **Task 3.27**: Update CMakeLists.txt to remove conditional flags
+- [ ] **Task 3.28**: Update documentation
+- [ ] **Task 3.29**: Measure build matrix reduction (64 → 3 combinations)
+- [ ] **Task 3.30**: Final commit with summary
+
 **Resources**: 2 developers (1 Senior + 1 Mid)
-**Risk Level**: High (large-scale refactoring)
-**Status**: ⚠️ **INFRASTRUCTURE COMPLETE** - Full code conversion deferred to future work
+**Risk Level**: Medium (progressive approach mitigates risk)
+**Status**: 🔄 **IN PROGRESS** - Phase 1 complete, Phase 2 starting
+**Timeline**:
+- Phase 1: ✅ Complete (2025-11-09)
+- Phase 2: 🔄 In Progress (2025-11-09)
+- Phase 3-6: Pending
 
 ---
 
