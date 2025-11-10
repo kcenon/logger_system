@@ -105,11 +105,11 @@ public:
      */
     statistics get_statistics() const {
         std::lock_guard<std::mutex> lock(mutex_);
-        return {
-            .total_size = pool_size_.load(),
-            .available_count = available_objects_.size(),
-            .in_use_count = pool_size_.load() - available_objects_.size()
-        };
+        statistics stats;
+        stats.total_size = pool_size_.load();
+        stats.available_count = available_objects_.size();
+        stats.in_use_count = pool_size_.load() - available_objects_.size();
+        return stats;
     }
 
     /**
@@ -306,13 +306,13 @@ public:
      */
     statistics get_statistics() const {
         std::lock_guard<std::mutex> lock(global_mutex_);
-        return statistics{
-            .global_size = global_size_.load(std::memory_order_relaxed),
-            .global_pool_size = global_pool_.size(),
-            .local_cache_hits = local_cache_hits_.load(std::memory_order_relaxed),
-            .global_pool_hits = global_pool_hits_.load(std::memory_order_relaxed),
-            .new_allocations = new_allocations_.load(std::memory_order_relaxed)
-        };
+        statistics stats;
+        stats.global_size = global_size_.load(std::memory_order_relaxed);
+        stats.global_pool_size = global_pool_.size();
+        stats.local_cache_hits = local_cache_hits_.load(std::memory_order_relaxed);
+        stats.global_pool_hits = global_pool_hits_.load(std::memory_order_relaxed);
+        stats.new_allocations = new_allocations_.load(std::memory_order_relaxed);
+        return stats;
     }
 
     /**
