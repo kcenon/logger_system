@@ -66,8 +66,11 @@ struct critical_writer_config {
     /// Force immediate flush for error messages (default: false)
     bool force_flush_on_error = false;
 
-    /// Enable signal handlers for graceful shutdown (default: true)
-    bool enable_signal_handlers = true;
+    /// Enable signal handlers for graceful shutdown (default: false)
+    /// @deprecated Signal handling should be managed by logger and signal_manager (DI pattern)
+    /// @since 2.0.0 Changed default from true to false
+    [[deprecated("Signal handling is now managed by logger and signal_manager. Use logger_context instead.")]]
+    bool enable_signal_handlers = false;
 
     /// Enable write-ahead logging for maximum durability (default: false)
     bool write_ahead_log = false;

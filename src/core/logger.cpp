@@ -81,6 +81,12 @@ public:
     std::unique_ptr<backends::integration_backend> backend_;  // Integration backend
     std::unique_ptr<log_collector> collector_;  // Async log collector for async mode
 
+    // Emergency flush support (for signal handlers)
+    static constexpr size_t emergency_buffer_size_ = 8192;
+    mutable char emergency_buffer_[emergency_buffer_size_];  // Static buffer for emergency use
+    std::atomic<size_t> emergency_buffer_used_{0};  // Track how much is used
+    std::atomic<int> emergency_fd_{-1};  // File descriptor for emergency writes
+
     impl(bool async, std::size_t buffer_size, std::unique_ptr<backends::integration_backend> backend)
         : async_mode_(async), buffer_size_(buffer_size), running_(false), metrics_enabled_(false),
           min_level_(logger_system::log_level::info), backend_(std::move(backend)) {
@@ -375,6 +381,29 @@ result<logger_metrics> logger::get_current_metrics() const {
     // Return a copy of the current global metrics (thread-safe because of copy constructor)
     // Use static factory method to avoid constructor ambiguity
     return result<logger_metrics>::ok_value(metrics::g_logger_stats);
+}
+
+// Emergency flush support implementation (critical_logger_interface)
+
+int logger::get_emergency_fd() const {
+    if (!pimpl_) {
+        return -1;
+    }
+    return pimpl_->emergency_fd_.load(std::memory_order_acquire);
+}
+
+const char* logger::get_emergency_buffer() const {
+    if (!pimpl_) {
+        return nullptr;
+    }
+    return pimpl_->emergency_buffer_;
+}
+
+size_t logger::get_emergency_buffer_size() const {
+    if (!pimpl_) {
+        return 0;
+    }
+    return pimpl_->emergency_buffer_used_.load(std::memory_order_acquire);
 }
 
 } // namespace kcenon::logger

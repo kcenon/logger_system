@@ -12,6 +12,7 @@ All rights reserved.
 #include <set>
 #include <atomic>
 #include <csignal>
+#include <kcenon/logger/security/signal_manager_interface.h>
 
 /**
  * @file logger_context.h
@@ -45,7 +46,7 @@ namespace kcenon::logger {
 
 // Forward declarations
 namespace security {
-    class signal_manager_interface;
+    class critical_logger_interface;
 }
 
 namespace core {
@@ -133,6 +134,37 @@ public:
      */
     bool is_initialized() const {
         return signal_manager_ != nullptr;
+    }
+
+    /**
+     * @brief Register a logger for emergency flush support
+     * @param log Logger implementing critical_logger_interface
+     *
+     * @details Registers the logger with signal_manager for emergency flushing
+     * in case of signals (SIGSEGV, SIGABRT, SIGTERM, SIGINT).
+     *
+     * @since 2.0.0
+     */
+    void register_logger(security::critical_logger_interface* log) {
+        std::lock_guard lock(mutex_);
+        if (signal_manager_) {
+            signal_manager_->register_logger(log);
+        }
+    }
+
+    /**
+     * @brief Unregister a logger from emergency flush support
+     * @param log Logger to unregister
+     *
+     * @details Unregisters the logger from signal_manager.
+     *
+     * @since 2.0.0
+     */
+    void unregister_logger(security::critical_logger_interface* log) {
+        std::lock_guard lock(mutex_);
+        if (signal_manager_) {
+            signal_manager_->unregister_logger(log);
+        }
     }
 
 private:

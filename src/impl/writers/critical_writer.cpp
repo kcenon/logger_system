@@ -298,6 +298,11 @@ void critical_writer::sync_file_descriptor() {
 }
 
 void critical_writer::install_signal_handlers() {
+    // DEPRECATED: Signal handling should be managed by logger and signal_manager
+    // through dependency injection pattern. This method is kept for backwards
+    // compatibility but will be removed in a future version.
+    // Use logger_context::register_logger() instead.
+
     // Set global instance
     instance_.store(this);
 
@@ -323,6 +328,8 @@ void critical_writer::install_signal_handlers() {
 }
 
 void critical_writer::restore_signal_handlers() {
+    // DEPRECATED: Part of deprecated signal handler mechanism
+    // Use logger_context::unregister_logger() instead
 #ifdef _WIN32
     // Windows: Restore original handlers
     if (original_sigterm_) ::signal(SIGTERM, original_sigterm_);
@@ -340,6 +347,9 @@ void critical_writer::restore_signal_handlers() {
 }
 
 void critical_writer::signal_handler(int signal) {
+    // DEPRECATED: This signal handler is deprecated in favor of signal_manager
+    // integrated through logger_context. Kept for backwards compatibility only.
+    //
     // IMPORTANT: This is a signal handler - only async-signal-safe operations allowed!
     // See POSIX.1-2008 or https://man7.org/linux/man-pages/man7/signal-safety.7.html
 
