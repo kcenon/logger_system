@@ -48,6 +48,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "di/di_container_factory.h"
 #include "../backends/integration_backend.h"
 #include <kcenon/logger/interfaces/logger_types.h>
+#include <kcenon/logger/security/signal_manager.h>
 
 /**
  * @file logger.h
@@ -152,7 +153,7 @@ class logger_metrics_collector;
  *
  * @note For integration with common_system monitoring interfaces, use logger_monitoring_adapter
  */
-class logger {
+class logger : public security::critical_logger_interface {
 public:
     /**
      * @brief Constructor with optional configuration
@@ -500,6 +501,40 @@ public:
      */
     result_void enable_di(di::di_container_factory::container_type type =
                          di::di_container_factory::container_type::automatic);
+
+    // Emergency Flush Support (critical_logger_interface implementation)
+
+    /**
+     * @brief Get file descriptor for emergency writing
+     * @return File descriptor or -1 if not available
+     *
+     * @details This method provides a file descriptor for signal-safe emergency writing.
+     * It must be signal-safe (no allocations, no locks).
+     *
+     * @since 2.0.0
+     */
+    int get_emergency_fd() const override;
+
+    /**
+     * @brief Get emergency buffer pointer
+     * @return Pointer to buffer or nullptr
+     *
+     * @details This method must be signal-safe. The buffer contains pending log messages
+     * that should be flushed in case of emergency shutdown.
+     *
+     * @since 2.0.0
+     */
+    const char* get_emergency_buffer() const override;
+
+    /**
+     * @brief Get emergency buffer size
+     * @return Buffer size in bytes
+     *
+     * @details This method must be signal-safe.
+     *
+     * @since 2.0.0
+     */
+    size_t get_emergency_buffer_size() const override;
 
 private:
     class impl;
