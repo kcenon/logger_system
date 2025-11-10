@@ -943,7 +943,7 @@ matrix:
   7. logger_security_test
 
 **Commit**: 736009e8 "Migrate to C++17 minimum requirement"
-**Pull Request**: Pending
+**Pull Request**: #86
 **Date**: 2025-11-11
 
 ---
