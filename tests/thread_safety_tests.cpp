@@ -127,11 +127,12 @@ TEST_F(ThreadSafetyTest, HighThroughputStress) {
             {
                 std::unique_lock<std::mutex> lock(barrier_mutex);
                 ++barrier_count;
-                if (barrier_count < barrier_threshold) {
-                    barrier_cv.wait(lock, [&]() { return barrier_count >= barrier_threshold; });
-                } else {
+                if (barrier_count >= barrier_threshold) {
+                    // All threads have arrived, notify everyone
                     barrier_cv.notify_all();
                 }
+                // Wait until all threads have arrived
+                barrier_cv.wait(lock, [&]() { return barrier_count >= barrier_threshold; });
             }
 
             for (int j = 0; j < messages_per_thread; ++j) {
