@@ -11,7 +11,7 @@
 
 ## Overview
 
-The Logger System Project is a production-ready, high-performance C++20 asynchronous logging framework designed to provide comprehensive logging capabilities for multithreaded applications. Built with a modular, interface-based architecture and seamless integration with the thread system ecosystem, it delivers enterprise-grade logging performance with minimal overhead and maximum flexibility.
+The Logger System Project is a production-ready, high-performance C++17 asynchronous logging framework designed to provide comprehensive logging capabilities for multithreaded applications. Built with a modular, interface-based architecture and seamless integration with the thread system ecosystem, it delivers enterprise-grade logging performance with minimal overhead and maximum flexibility.
 
 > **🏗️ Modular Architecture**: Streamlined interface-based design with pluggable components for writers, filters, formatters, and monitoring integration.
 
@@ -141,8 +141,8 @@ This project addresses the fundamental challenge faced by developers worldwide: 
 
 ### 🌐 **Cross-Platform Compatibility**
 - **Universal support**: Works on Windows, Linux, and macOS
-- **Compiler flexibility**: Compatible with GCC, Clang, and MSVC
-- **C++ standard adaptation**: Graceful fallback from C++20 to older standards
+- **Compiler flexibility**: Compatible with GCC 7+, Clang 5+, and MSVC 2017+
+- **C++ standard adaptation**: C++17 minimum with optional C++20 feature detection
 - **Architecture independence**: Optimized for both x86 and ARM processors
 
 ### 📈 **Enterprise-Ready Features**
@@ -232,7 +232,7 @@ This project addresses the fundamental challenge faced by developers worldwide: 
 ## Technology Stack & Architecture
 
 ### 🏗️ **Modern C++ Foundation**
-- **C++20 features**: `std::format`, concepts, and ranges for enhanced performance
+- **C++17 core**: With optional C++20 feature detection (uses fmt library for formatting)
 - **Template metaprogramming**: Type-safe, compile-time optimizations
 - **Memory management**: Smart pointers and RAII for automatic resource cleanup
 - **Exception safety**: Strong exception safety guarantees throughout
