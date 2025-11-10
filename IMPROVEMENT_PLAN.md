@@ -483,9 +483,23 @@ auto config = logger_config_builder()
     - Maintained C signal API compatibility with static pointer
   - **Commit**: 5da30e45
 
-- [ ] **Task 2.3**: Convert critical_writer to DI (Deferred)
-  - **Status**: Postponed to future sprint
-  - **Reason**: critical_writer has complex signal handler integration
+- [x] **Task 2.3**: Convert critical_writer to DI ✅ **COMPLETED** (2025-11-10)
+  - **Status**: Completed using Option B approach (logger class redesign)
+  - **Implementation**: Redesigned logger to implement critical_logger_interface
+  - **Files**:
+    - include/kcenon/logger/core/logger.h (modified)
+    - src/core/logger.cpp (modified)
+    - include/kcenon/logger/core/logger_context.h (modified)
+    - include/kcenon/logger/writers/critical_writer.h (modified)
+    - src/impl/writers/critical_writer.cpp (modified)
+  - **Changes**:
+    - Logger now implements critical_logger_interface with emergency buffer/fd
+    - logger_context provides register_logger()/unregister_logger() methods
+    - Deprecated critical_writer's signal handler config (enable_signal_handlers)
+    - Added deprecation comments to critical_writer signal handler methods
+    - Changed default of enable_signal_handlers from true to false
+  - **Backwards Compatibility**: Signal handlers in critical_writer kept but deprecated
+  - **Commit**: 4a9dc9c5
 
 - [x] **Task 2.4**: Write tests (mocking) ✅ **COMPLETED** (2025-11-08)
   - **Status**: Created unit tests with mock support
@@ -500,7 +514,7 @@ auto config = logger_config_builder()
 
 **Resources**: 1 developer (Senior)
 **Risk Level**: Medium (API changes)
-**Status**: ⚠️ **PARTIALLY COMPLETED** (3/4 tasks done, critical_writer deferred)
+**Status**: ✅ **COMPLETED** (4/4 tasks done)
 
 ---
 
