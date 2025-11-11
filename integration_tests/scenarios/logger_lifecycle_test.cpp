@@ -100,7 +100,8 @@ TEST_F(LoggerLifecycleTest, LogMessagesBeforeStart) {
 
     WaitForFlush();
 
-    EXPECT_TRUE(WaitForLogLines(log_file, message_count));
+    // Use longer timeout for sanitizer environments where operations are slower
+    EXPECT_TRUE(WaitForLogLines(log_file, message_count, std::chrono::seconds(30)));
     EXPECT_EQ(CountLogLines(log_file), message_count);
 }
 

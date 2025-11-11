@@ -177,7 +177,7 @@ add_test(NAME IntegrationTests COMMAND integration_tests)
 
 # Set test properties
 set_tests_properties(IntegrationTests PROPERTIES
-    TIMEOUT 600  # 10 minutes for integration tests
+    TIMEOUT 900  # 15 minutes for integration tests (extended for Debug builds and sanitizers)
     LABELS "integration"
 )
 

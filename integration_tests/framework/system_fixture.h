@@ -156,27 +156,36 @@ protected:
      * flush(), then stopping the logger to ensure all async operations complete,
      * and finally restarting it if needed.
      *
-     * @note The fundamental issue with the previous implementation was that it only
-     * waited for a fixed duration, which could be insufficient in CI environments
-     * with slower I/O or higher load. This implementation ensures completion.
+     * @note In Address Sanitizer environments, stop/start operations can be very slow
+     * (2-5x overhead). This implementation adds a small delay after stop() to ensure
+     * all async operations complete before proceeding.
      */
     void WaitForFlush(std::chrono::milliseconds timeout = std::chrono::seconds(5)) {
         if (!logger_) {
             return;
         }
 
+        bool was_running = logger_->is_running();
+
         // Flush the logger to trigger write operations
         logger_->flush();
 
         // Stop the logger to ensure all async operations complete
         // This guarantees that all queued messages are processed and written
-        if (logger_->is_running()) {
+        if (was_running) {
             logger_->stop();
+
+            // Give some time for async operations to complete
+            // This is especially important in sanitizer environments where
+            // operations are significantly slower
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
         }
 
         // Restart the logger if it was running
         // This allows subsequent test operations to continue
-        logger_->start();
+        if (was_running) {
+            logger_->start();
+        }
     }
 
     /**
