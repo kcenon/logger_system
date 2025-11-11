@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.16)
 project(
     LoggerSystem
     VERSION 1.0.0
-    DESCRIPTION "High-performance C++20 logging system with asynchronous batching"
+    DESCRIPTION "High-performance C++17 logging system with asynchronous batching"
     HOMEPAGE_URL "https://github.com/kcenon/logger_system"
     LANGUAGES CXX
 )
@@ -15,16 +15,16 @@ project(
 # C++ standard requirements
 ##################################################
 
-# C++20 is REQUIRED (no fallback to earlier standards)
-set(CMAKE_CXX_STANDARD 20)
+# C++17 is REQUIRED (no fallback to earlier standards)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Verify that C++20 is actually being used
-if(CMAKE_CXX_STANDARD LESS 20)
-    message(FATAL_ERROR "Logger System requires C++20 or later. Current standard: C++${CMAKE_CXX_STANDARD}")
+# Verify that C++17 is actually being used
+if(CMAKE_CXX_STANDARD LESS 17)
+    message(FATAL_ERROR "Logger System requires C++17 or later. Current standard: C++${CMAKE_CXX_STANDARD}")
 endif()
 
-message(STATUS "Logger System: Using C++20 mode - std::format enabled")
+message(STATUS "Logger System: Using C++17 mode with optional C++20 feature detection")
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # Generate compile_commands.json for tooling
 
@@ -189,7 +189,7 @@ configure_build_types()
 # Check required headers
 check_required_headers()
 
-# Check C++20 features
+# Check C++ features
 check_cpp_features()
 
 ##################################################
