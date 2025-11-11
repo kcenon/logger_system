@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['제안서_0',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]]
+  ['test_20coverage_0',['Test Coverage',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TESTING__GUIDE.html',1,'']]],
+  ['translation_20summary_1',['Korean Translation Summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TRANSLATION__SUMMARY.html',1,'']]]
 ];

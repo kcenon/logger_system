@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['testing_5fguide_2emd_0',['TESTING_GUIDE.md',['../TESTING__GUIDE_8md.html',1,'']]],
-  ['translation_5fsummary_2emd_1',['TRANSLATION_SUMMARY.md',['../TRANSLATION__SUMMARY_8md.html',1,'']]]
+  ['readme_2emd_0',['readme.md',['../docs_2README_8md.html',1,'(Global Namespace)'],['../README_8md.html',1,'(Global Namespace)']]],
+  ['readme_5fko_2emd_1',['README_KO.md',['../README__KO_8md.html',1,'']]]
 ];
