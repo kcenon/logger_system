@@ -244,8 +244,10 @@ TEST_F(LoggerLifecycleTest, SyncVsAsyncMode) {
     logger_->start();
 
     logger_->log(kcenon::logger::log_level::info, "Async message");
-    WaitForFlush();
+    logger_->flush();
 
+    // WaitForFile() already waits up to 5 seconds for the file to be created
+    // No need for WaitForFlush() which adds stop/start overhead
     EXPECT_TRUE(WaitForFile(async_file));
     EXPECT_EQ(CountLogLines(async_file), 1);
 }

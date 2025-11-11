@@ -178,7 +178,8 @@ protected:
             // Give some time for async operations to complete
             // This is especially important in sanitizer environments where
             // operations are significantly slower
-            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            // Reduced to 20ms to minimize cumulative delay in Debug builds
+            std::this_thread::sleep_for(std::chrono::milliseconds(20));
         }
 
         // Restart the logger if it was running
