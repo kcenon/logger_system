@@ -112,13 +112,28 @@ TEST_F(ThreadSafetyTest, HighThroughputStress) {
 
     std::vector<std::thread> threads;
     std::atomic<int> errors{0};
-    std::barrier sync_point(num_threads);
+
+    // C++17 compatible barrier using condition_variable
+    std::mutex barrier_mutex;
+    std::condition_variable barrier_cv;
+    int barrier_count = 0;
+    const int barrier_threshold = num_threads;
 
     auto start_time = std::chrono::high_resolution_clock::now();
 
     for (int i = 0; i < num_threads; ++i) {
         threads.emplace_back([&, thread_id = i]() {
-            sync_point.arrive_and_wait(); // All start together
+            // C++17 compatible barrier synchronization
+            {
+                std::unique_lock<std::mutex> lock(barrier_mutex);
+                ++barrier_count;
+                if (barrier_count >= barrier_threshold) {
+                    // All threads have arrived, notify everyone
+                    barrier_cv.notify_all();
+                }
+                // Wait until all threads have arrived
+                barrier_cv.wait(lock, [&]() { return barrier_count >= barrier_threshold; });
+            }
 
             for (int j = 0; j < messages_per_thread; ++j) {
                 try {

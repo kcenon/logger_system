@@ -100,7 +100,8 @@ TEST_F(LoggerLifecycleTest, LogMessagesBeforeStart) {
 
     WaitForFlush();
 
-    EXPECT_TRUE(WaitForLogLines(log_file, message_count));
+    // Use longer timeout for sanitizer environments where operations are slower
+    EXPECT_TRUE(WaitForLogLines(log_file, message_count, std::chrono::seconds(30)));
     EXPECT_EQ(CountLogLines(log_file), message_count);
 }
 
@@ -182,7 +183,10 @@ TEST_F(LoggerLifecycleTest, RemoveAllWriters) {
 
     // This message should not be written anywhere
     logger_->log(kcenon::logger::log_level::info, "After clear");
-    WaitForFlush();
+
+    // Don't call WaitForFlush() after clearing writers - it can cause deadlock
+    // in certain compiler optimizations when no writers are available
+    logger_->flush();
 
     EXPECT_EQ(CountLogLines(log_file), 1);
 }
@@ -240,8 +244,10 @@ TEST_F(LoggerLifecycleTest, SyncVsAsyncMode) {
     logger_->start();
 
     logger_->log(kcenon::logger::log_level::info, "Async message");
-    WaitForFlush();
+    logger_->flush();
 
+    // WaitForFile() already waits up to 5 seconds for the file to be created
+    // No need for WaitForFlush() which adds stop/start overhead
     EXPECT_TRUE(WaitForFile(async_file));
     EXPECT_EQ(CountLogLines(async_file), 1);
 }

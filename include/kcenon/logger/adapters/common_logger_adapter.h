@@ -11,7 +11,7 @@ All rights reserved.
 #include <string>
 #include <chrono>
 #include <functional>
-#include <format>
+#include <fmt/format.h>
 
 // common_system integration
 #include <kcenon/common/interfaces/logger_interface.h>
@@ -115,7 +115,7 @@ public:
         // Create formatted message with location info
         // Logger operations are noexcept - format may throw but we catch at API boundary
         try {
-            std::string formatted = std::format("[{}:{}:{}] {}",
+            std::string formatted = fmt::format("[{}:{}:{}] {}",
                 file, line, function, message);
             logger_->log(from_common_level(level), formatted);
         } catch (const std::exception& e) {
@@ -139,7 +139,7 @@ public:
         try {
             std::string message = entry.message;
             if (!entry.file.empty()) {
-                message = std::format("[{}:{}:{}] {}",
+                message = fmt::format("[{}:{}:{}] {}",
                     entry.file, entry.line, entry.function, entry.message);
             }
 
