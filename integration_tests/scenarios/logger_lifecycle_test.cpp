@@ -183,7 +183,10 @@ TEST_F(LoggerLifecycleTest, RemoveAllWriters) {
 
     // This message should not be written anywhere
     logger_->log(kcenon::logger::log_level::info, "After clear");
-    WaitForFlush();
+
+    // Don't call WaitForFlush() after clearing writers - it can cause deadlock
+    // in certain compiler optimizations when no writers are available
+    logger_->flush();
 
     EXPECT_EQ(CountLogLines(log_file), 1);
 }
