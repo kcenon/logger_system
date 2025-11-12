@@ -1,589 +1,422 @@
+# Changelog - Logger System
+
 > **Language:** **English** | [한국어](CHANGELOG_KO.md)
 
-## Table of Contents
-
-- [[3.0.0] - Phase 4 Security Hardening Complete (2025-11-04)](#300-phase-4-security-hardening-complete-2025-11-04)
-  - [Added - Phase 4 Tasks 4.1-4.4 Complete](#added-phase-4-tasks-41-44-complete)
-    - [Secure Key Storage](#secure-key-storage)
-    - [Path Validation](#path-validation)
-    - [Signal Handler Safety](#signal-handler-safety)
-    - [Security Audit Logging](#security-audit-logging)
-  - [Security](#security)
-  - [Tests](#tests)
-- [[2.9.0] - Phase 5 P2 Migration Guide for Existing Users (2025-09-10)](#290-phase-5-p2-migration-guide-for-existing-users-2025-09-10)
-  - [Added - Phase 5 Task P2 Complete Implementation](#added-phase-5-task-p2-complete-implementation)
-    - [Migration Support](#migration-support)
-  - [Enhanced](#enhanced)
-- [[2.8.0] - Phase 5 P3 Complete API Documentation (2025-09-10)](#280-phase-5-p3-complete-api-documentation-2025-09-10)
-  - [Added - Phase 5 Task P3 Complete Implementation](#added-phase-5-task-p3-complete-implementation)
-    - [API Documentation](#api-documentation)
-  - [Enhanced](#enhanced)
-- [[2.7.0] - Phase 5 P4 CI/CD Monitoring Dashboard (2025-09-10)](#270-phase-5-p4-cicd-monitoring-dashboard-2025-09-10)
-  - [Added - Phase 5 Task P4 Complete Implementation](#added-phase-5-task-p4-complete-implementation)
-    - [CI/CD Monitoring Dashboard](#cicd-monitoring-dashboard)
-  - [Fixed](#fixed)
-- [[2.6.0] - Phase 5 P5 CI/CD Pipeline with Sanitizers (2025-09-09)](#260-phase-5-p5-cicd-pipeline-with-sanitizers-2025-09-09)
-  - [Added - Phase 5 Task P5 Complete Implementation](#added-phase-5-task-p5-complete-implementation)
-    - [CI/CD Pipeline](#cicd-pipeline)
-  - [Improved](#improved)
-  - [Configuration Options](#configuration-options)
-- [[2.5.0] - Phase 5 P1 Comprehensive Test Suite (2025-09-09)](#250-phase-5-p1-comprehensive-test-suite-2025-09-09)
-  - [Added - Phase 5 Task P1 Partial Implementation](#added-phase-5-task-p1-partial-implementation)
-    - [Test Coverage Enhancements](#test-coverage-enhancements)
-  - [Improved](#improved)
-  - [Known Issues](#known-issues)
-  - [Technical Debt](#technical-debt)
-- [[2.4.0] - Phase 4 O1, O3 & O4 Implementation (2025-09-10)](#240-phase-4-o1-o3-o4-implementation-2025-09-10)
-  - [Added - Phase 4 Tasks O1, O3 & O4 Complete](#added-phase-4-tasks-o1-o3-o4-complete)
-    - [Batch Processing (O1)](#batch-processing-o1)
-    - [Small String Optimization (O3)](#small-string-optimization-o3)
-    - [Benchmark Suite (O4)](#benchmark-suite-o4)
-  - [Technical Details](#technical-details)
-- [[2.3.0] - Phase 3 Overflow Policy System Implementation (2025-09-10)](#230-phase-3-overflow-policy-system-implementation-2025-09-10)
-  - [Added - Phase 3 Task A4 Complete](#added-phase-3-task-a4-complete)
-  - [Technical Details](#technical-details)
-- [[2.2.0] - Phase 2 Core Systems Complete (2025-09-09)](#220-phase-2-core-systems-complete-2025-09-09)
-  - [Added - All Phase 2 Tasks Complete](#added-all-phase-2-tasks-complete)
-- [[2.1.0] - Phase 1 Foundation Complete (2025-09-09)](#210-phase-1-foundation-complete-2025-09-09)
-  - [Added](#added)
-- [[2.0.0] - Major Refactoring (2025-07-26)](#200-major-refactoring-2025-07-26)
-  - [Changed](#changed)
-- [[1.0.0] - Initial Release (2025-07-01)](#100-initial-release-2025-07-01)
-  - [Added](#added)
-
-# Changelog
-
-All notable changes to the Logger System will be documented in this file.
+All notable changes to the Logger System project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-
----
-
-## [3.0.0] - Phase 4 Security Hardening Complete (2025-11-04)
-
-### Added - Phase 4 Tasks 4.1-4.4 Complete
-
-#### Secure Key Storage
-
-- **`secure_key` class**: RAII wrapper for encryption keys with automatic memory cleanup
-  - Move-only semantics to prevent accidental key copying
-  - Uses `OPENSSL_cleanse()` for secure memory erasure on destruction
-  - Falls back to manual volatile-based zeroing when OpenSSL is unavailable
-- **`secure_key_storage` class**: Secure key management with comprehensive security features
-  - Cryptographically secure random key generation using OpenSSL `RAND_bytes()`
-  - File permission enforcement (0600 - owner read/write only)
-  - Path traversal prevention during key save/load operations
-  - Key size validation (default 32 bytes for AES-256)
-  - Permission verification on key load (rejects world/group-readable files)
-
-**Location**: `include/kcenon/logger/security/secure_key_storage.h`
-
-#### Path Validation
-
-- **`path_validator` class**: Comprehensive file path security validation
-  - Path traversal attack prevention (blocks `../` and similar patterns)
-  - Symbolic link validation (optional, disabled by default for security)
-  - Base directory enforcement (all paths must be within allowed directory)
-  - Filename character restrictions (alphanumeric, hyphen, underscore, period only)
-  - Special filename protection (blocks `.`, `..`, empty names)
-- **Utility methods**:
-  - `is_safe_filename()`: Character-level filename validation
-  - `sanitize_filename()`: Automatic filename cleaning with invalid character replacement
-  - `safe_join()`: Secure path joining with automatic validation
-
-**Location**: `include/kcenon/logger/security/path_validator.h`
-
-#### Signal Handler Safety
-
-- **`signal_manager` singleton**: Centralized signal handler management
-  - Thread-safe logger registration/unregistration
-  - Automatic handler installation on first logger registration
-  - Automatic handler removal when last logger is unregistered
-  - Prevents global state conflicts with multiple logger instances
-  - Uses only signal-safe functions in handlers (POSIX compliant)
-- **`critical_logger_interface`**: Interface for emergency flushing
-  - Signal-safe emergency buffer access
-  - Direct file descriptor access for write() syscalls
-  - No allocations or locks in signal context
-- **Supported signals**: SIGSEGV, SIGABRT, SIGTERM, SIGINT
-- **Emergency flush**: Uses signal-safe `write()` and `fsync()` syscalls
-
-**Location**: `include/kcenon/logger/security/signal_manager.h`
-
-#### Security Audit Logging
-
-- **`audit_logger` class**: Tamper-evident security event logging
-  - JSON-formatted audit entries for easy parsing
-  - ISO8601 timestamp formatting
-  - JSON string escaping for safe data representation
-  - Optional HMAC-SHA256 signatures for tamper detection
-  - Configurable audit file location
-- **Audit events tracked**:
-  - Logger lifecycle: started, stopped
-  - Writer management: added, removed
-  - Encryption: key loaded, generated, rotated
-  - Security violations: permission denied, path traversal, insecure permissions
-  - Authentication: success, failure
-  - File access: granted, denied
-- **HMAC tamper detection**:
-  - Uses OpenSSL HMAC-SHA256 when available
-  - Falls back to simple hash (demonstration only)
-  - Signatures appended to audit log entries
-  - `verify_entry()` method for integrity verification
-
-**Location**: `include/kcenon/logger/security/audit_logger.h`
-
-### Security
-
-- **New error codes added** (1704-1708):
-  - `file_read_failed`: File reading operation failed
-  - `insecure_permissions`: File permissions too permissive
-  - `path_traversal_detected`: Path traversal attack attempt
-  - `invalid_key_size`: Encryption key size mismatch
-  - `invalid_filename`: Filename contains invalid characters
-- **OWASP Top 10 mitigations**:
-  - **A01:2021 - Broken Access Control**: Path validation prevents unauthorized file access
-  - **A02:2021 - Cryptographic Failures**: Secure key storage with proper permissions
-  - **A03:2021 - Injection**: Path and filename sanitization prevents path traversal
-  - **A09:2021 - Security Logging Failures**: Comprehensive security audit logging
-- **Compliance support**:
-  - **GDPR**: Encryption key management, access control, audit trails
-  - **PCI DSS**: Log encryption, access logging, key rotation support
-  - **ISO 27001**: Security policy documentation, risk mitigation, monitoring
-
-### Tests
-
-- **18 comprehensive security tests** with 100% pass rate:
-  - `SecureKeyConstruction`: Key object creation
-  - `SecureKeyMove`: Move semantics validation
-  - `GenerateKey`: Cryptographically secure random generation
-  - `SaveAndLoadKey`: File I/O with permission enforcement
-  - `LoadKeyWithInsecurePermissions`: Permission rejection
-  - `LoadKeyWithInvalidSize`: Size validation
-  - `PathValidatorValidPath`: Valid path acceptance
-  - `PathValidatorPathTraversal`: Attack detection
-  - `PathValidatorSymlink`: Symbolic link handling
-  - `PathValidatorInvalidFilename`: Character restriction
-  - `IsSafeFilename`: Filename validation logic
-  - `SanitizeFilename`: Automatic cleaning
-  - `SafeJoin`: Secure path concatenation
-  - `SafeJoinWithAbsolutePath`: Absolute path rejection
-  - `AuditLoggerInitialize`: Audit system initialization
-  - `AuditLoggerWithHMAC`: HMAC signature generation
-  - `AuditLoggerSecurityEvents`: Event logging
-  - `IntegrationSecureKeyWorkflow`: End-to-end workflow
-
-**Location**: `tests/unit/security_test/security_test.cpp`
-
-### Dependencies
-
-- **OpenSSL** (optional but recommended):
-  - Used for: `RAND_bytes()`, `OPENSSL_cleanse()`, `HMAC()`
-  - Fallback implementations provided when unavailable
-  - Detected automatically via CMake `find_package(OpenSSL)`
-
-### Documentation
-
-- **Phase 4 planning documents**:
-  - `LOGGER_SYSTEM_INTEGRATION.md`: Overall integration status
-  - `LOGGER_SYSTEM_PHASE_4.md`: Detailed phase 4 specification
-- **Updated error code documentation** in `docs/API_REFERENCE.md`
-
-### Technical Details
-
-- **Memory safety**: All security-sensitive data (keys) cleared on destruction
-- **Thread safety**: Mutex-protected shared state in audit_logger and signal_manager
-- **Cross-platform**: Works on Linux, macOS, Windows (with conditional compilation)
-- **Zero-dependency core**: Security features work without external libraries (with fallbacks)
-- **Minimal overhead**: Path validation adds <1μs per operation
-
----
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.9.0] - Phase 5 P2 Migration Guide for Existing Users (2025-09-10)
-
-### Added - Phase 5 Task P2 Complete Implementation
-
-#### Migration Support
-- **Comprehensive Migration Guide** (docs/MIGRATION_GUIDE.md)
-  - Version migration (v1.x to v2.x)
-  - API change mappings and compatibility tables
-  - Configuration migration strategies
-  - Migration from other libraries (spdlog, Boost.Log, glog, log4cpp)
-  - Step-by-step migration process
-  - Common pitfalls and solutions
-
-- **Compatibility Wrapper** (sources/logger/compatibility/logger_v1_compat.h)
-  - Legacy API support for gradual migration
-  - Deprecated macros (LOG_INFO, LOG_ERROR, etc.)
-  - Legacy function signatures
-  - Backward compatibility helpers
-  - Automatic deprecation warnings
-
-- **Migration Example** (samples/migration_example.cpp)
-  - Side-by-side API comparison
-  - Gradual migration strategy demonstration
-  - Performance comparison v1 vs v2
-  - Common migration pitfalls
-  - Real-world migration scenarios
-
-### Enhanced
-- Added compatibility layer for smooth transition
-- Provided migration path from popular logging libraries
-- Included performance benchmarks for migration decisions
-
-## [2.8.0] - Phase 5 P3 Complete API Documentation (2025-09-10)
-
-### Added - Phase 5 Task P3 Complete Implementation
-
-#### API Documentation
-- **Comprehensive API Documentation** (docs/API_DOCUMENTATION.md)
-  - Complete API reference with all classes and methods
-  - Quick start guide with code examples
-  - Configuration templates and strategies
-  - Advanced features documentation
-  - Performance optimization guide
-  - Migration guide from other logging libraries
-
-- **Best Practices Guide** (docs/BEST_PRACTICES.md)
-  - Design principles and patterns
-  - Configuration best practices
-  - Performance guidelines
-  - Error handling strategies
-  - Security considerations
-  - Testing strategies
-  - Production deployment guide
-  - Common pitfalls and solutions
-
-- **Doxygen Documentation**
-  - Added comprehensive Doxygen comments to all major headers
-  - Documented logger.h with full method descriptions
-  - Documented logger_builder.h with builder pattern explanations
-  - Documented log_entry.h with structure field descriptions
-  - Documented base_writer.h with interface requirements
-  - Updated Doxyfile for optimal documentation generation
-
-### Enhanced
-- Improved code documentation with @brief, @param, @return tags
-- Added usage examples in header file comments
-- Included thread safety and performance notes
-- Added version information with @since tags
-
-## [2.7.0] - Phase 5 P4 CI/CD Monitoring Dashboard (2025-09-10)
-
-### Added - Phase 5 Task P4 Complete Implementation
-
-#### CI/CD Monitoring Dashboard
-- **Comprehensive Dashboard Documentation** (docs/CI_CD_DASHBOARD.md)
-  - Build status tracking for all platforms
-  - Performance metrics visualization
-  - Code quality indicators
-  - Test coverage reports
-  - Sanitizer results summary
-  - Build time analysis
-  - Dependency status tracking
-
-- **Metrics Collection Script** (scripts/collect_metrics.py)
-  - Automated metrics extraction from CI/CD runs
-  - Test results parsing (JUnit XML, JSON)
-  - Coverage data collection (Cobertura XML)
-  - Build log analysis
-  - Performance benchmark parsing
-  - Dashboard update automation
-
-- **Missing Components Added**
-  - async_writer.h: Asynchronous writer implementation
-  - lightweight_container.h: Standalone DI container
-  - Configuration enhancements: timestamp and source location options
-
-### Fixed
-- Build errors related to missing headers
-- Sanitizer configuration conflicts
-- Namespace resolution issues
-- Configuration template compatibility
-
-## [2.6.0] - Phase 5 P5 CI/CD Pipeline with Sanitizers (2025-09-09)
-
-### Added - Phase 5 Task P5 Complete Implementation
-
-#### CI/CD Pipeline
-- **GitHub Actions Workflow**
-  - Multi-platform CI pipeline (Ubuntu, macOS, Windows)
-  - Sanitizer tests (AddressSanitizer, ThreadSanitizer, UndefinedBehaviorSanitizer)
-  - Compiler warning checks with multiple compilers (GCC, Clang)
-  - Code coverage analysis with gcovr/lcov
-  - Static analysis with cppcheck and clang-tidy
-  - Documentation generation with Doxygen
-  - Release build validation
-
-- **Sanitizer Configuration** (LoggerSanitizers.cmake)
-  - Support for Address, Thread, Undefined, and Memory sanitizers
-  - Platform-specific sanitizer settings
-  - Runtime options configuration
-  - Automatic sanitizer application to test targets
-
-- **Warning Configuration** (LoggerWarnings.cmake)
-  - Comprehensive warning flags for GCC, Clang, and MSVC
-  - Option to treat warnings as errors
-  - Compiler-specific warning optimizations
-  - Third-party code warning suppression
-
-- **Coverage Configuration** (LoggerCoverage.cmake)
-  - Code coverage support with gcov/lcov/gcovr
-  - HTML, XML, and JSON report generation
-  - Coverage target for easy report generation
-  - Coverage reset functionality
-
-### Improved
-- **Build System**
-  - Enhanced CMakeLists.txt with modular configuration
-  - Automatic sanitizer/warning/coverage application to targets
-  - Better feature detection and configuration
-
-- **Quality Assurance**
-  - Automated testing with multiple sanitizers
-  - Strict compiler warning enforcement
-  - Code coverage tracking
-  - Static analysis integration
-
-### Configuration Options
-- `LOGGER_ENABLE_SANITIZERS`: Enable sanitizers in debug builds
-- `LOGGER_SANITIZER_TYPE`: Select sanitizer type (address/thread/undefined/memory)
-- `LOGGER_ENABLE_WARNINGS`: Enable comprehensive compiler warnings
-- `LOGGER_WARNINGS_AS_ERRORS`: Treat warnings as errors
-- `LOGGER_ENABLE_COVERAGE`: Enable code coverage reporting
-
-## [2.5.0] - Phase 5 P1 Comprehensive Test Suite (2025-09-09)
-
-### Added - Phase 5 Task P1 Partial Implementation
-
-#### Test Coverage Enhancements
-- **Mock Implementations**
-  - `mock_writer.hpp`: Controllable mock writer for unit testing
-  - `mock_monitor.hpp`: Mock monitoring interface for testing health checks
-  - `mock_di_container.hpp`: Mock dependency injection container
-  - All mocks support failure simulation and inspection methods
-
-- **Stress Testing Suite**
-  - Concurrent logging stress test (20 threads, 1000 messages each)
-  - Memory stability test under sustained load
-  - Buffer overflow handling verification
-  - Writer switching stress test
-  - Random load pattern simulation
-  - Writer failure recovery testing
-  - Async writer performance benchmarking
-
-- **Integration Testing Suite**
-  - Complete pipeline integration tests
-  - DI container integration verification
-  - Configuration template testing
-  - Batch writer integration tests
-  - Monitoring and health check integration
-  - Multi-writer synchronization tests
-  - Error recovery and fallback mechanism tests
-  - Performance tuning strategy validation
-  - Environment-based configuration tests
-
-- **Configuration Templates**
-  - Pre-defined templates: production, debug, high_performance, low_latency
-  - Performance strategies: conservative, balanced, aggressive
-  - Template configuration system with automatic settings
-  - Environment detection from LOG_ENV and LOG_LEVEL variables
-
-### Improved
-- **Test Organization**
-  - Created dedicated `mocks/` directory for mock implementations
-  - Added `stress_test/` directory for stress tests
-  - Added `integration_test/` directory for integration tests
-  - Updated CMakeLists.txt to include new test directories
-
-- **Builder Pattern Enhancements**
-  - Added `apply_template()` method for configuration templates
-  - Added `apply_performance_strategy()` method for performance tuning
-  - Added `detect_environment()` for automatic environment configuration
-  - Added monitoring and health check configuration methods
-  - Added error handler and overflow policy configuration
-
-### Known Issues
-- Some integration tests require full thread_system integration
-- Certain template configurations need further tuning
-- Build system needs refinement for standalone mode
-
-### Technical Debt
-- Need to complete remaining test coverage to reach 80% target
-- Mock implementations could be extended with more scenarios
-- Stress tests need platform-specific optimizations
-
-## [2.4.0] - Phase 4 O1, O3 & O4 Implementation (2025-09-10)
-
-### Added - Phase 4 Tasks O1, O3 & O4 Complete
-
-#### Batch Processing (O1)
-- **Batch Writer Implementation**
-  - New `batch_writer` class that wraps any existing writer
-  - Configurable batch size (default: 100 entries)
-  - Automatic flush on timeout (default: 1000ms)
-  - Thread-safe batch accumulation with mutex protection
-  - Preserves original log entry timestamps
-  
-- **Performance Optimizations**
-  - Reduced system call overhead by 30-50% through batching
-  - Minimized I/O operations by writing multiple entries at once
-  - Pre-allocated batch storage to avoid dynamic allocations
-  - Optional batch writing can be enabled/disabled at runtime
-  
-- **Integration Features**
-  - Automatic batch writer wrapping in `logger_builder`
-  - Configuration through `enable_batch_writing` flag
-  - Strategy pattern integration for production/performance modes
-  - Batch size configuration in all template strategies
-
-#### Small String Optimization (O3)
-- **SSO Implementation**
-  - Custom `small_string` template class with configurable SSO threshold
-  - Stack allocation for strings under threshold (default 256 bytes)
-  - Automatic heap allocation for larger strings
-  - Zero-copy string_view conversion support
-  
-- **Performance Benefits**
-  - Reduced heap allocations by 70-90% for typical log messages
-  - Faster string operations for short messages
-  - Lower memory fragmentation
-  - Improved cache locality
-  
-- **Integration Features**
-  - Applied to log_entry message field (256 bytes)
-  - Applied to source_location paths (256 bytes)
-  - Applied to thread_id (64 bytes) and category (128 bytes)
-  - Transparent API compatibility with std::string
-  
-#### Benchmark Suite (O4)
-- **Comprehensive Benchmark Suite**
-  - Google Benchmark integration with automatic fetching
-  - 8+ specialized benchmark executables
-  - Performance measurement infrastructure
-  - Latency percentile tracking (P50, P95, P99)
-  
-- **Benchmark Coverage**
-  - Configuration template performance comparison
-  - Message size impact analysis (10B to 16KB)
-  - Queue behavior under various loads
-  - Multi-writer performance testing
-  - Filter impact measurements
-  - Structured vs plain logging comparison
-  
-- **Batch Processing Benchmarks**
-  - Simulated batch vs direct writing comparison
-  - Multi-threaded batch processing
-  - Configurable batch size testing (1-500)
-  - Thread scalability analysis (1-8 threads)
-  
-- **Infrastructure Improvements**
-  - FetchBenchmark.cmake for dependency management
-  - Automated benchmark execution targets
-  - Performance regression detection capability
-
-### Technical Details
-- Batch Writer: `sources/logger/writers/batch_writer.cpp` (186 lines), `batch_writer.h` (218 lines)
-- Small String Optimization: `sources/logger/core/small_string.h` (445 lines)
-- Modified files for SSO: `log_entry.h`, `base_writer.h`, `base_formatter.h`, `log_filter.h`, `log_collector.cpp`
-- Benchmarks: `comprehensive_benchmark.cpp`, `batch_processing_benchmark.cpp` (700+ lines total)
-- Configuration: Added `enable_batch_writing` to `logger_config`
-- CMake: Enhanced benchmark build configuration with Google Benchmark v1.8.3
-
-## [2.3.0] - Phase 3 Overflow Policy System Implementation (2025-09-10)
-
-### Added - Phase 3 Task A4 Complete
-
-- **Comprehensive Overflow Policy System**
-  - Multiple overflow handling strategies (drop oldest, drop newest, block, grow)
-  - Policy factory for easy policy creation and switching
-  - Custom policy support with user-defined handlers
-  - Thread-safe overflow queue implementation
-  - Statistics tracking for all policy operations
-
-- **Adaptive Backpressure System**
-  - Dynamic batch size adjustment based on system load
-  - Automatic flush interval adaptation
-  - Load threshold-based pressure control
-  - Configurable adaptation parameters (rate, thresholds, limits)
-  - Real-time metrics tracking with sliding window
-  - Manual and automatic adaptation modes
-
-- **Policy Features**
-  - Drop Oldest: Removes oldest messages when queue is full
-  - Drop Newest: Rejects new messages when queue is full
-  - Block: Waits for space with configurable timeout
-  - Grow: Dynamically increases queue capacity up to max limit
-  - Custom: User-defined overflow handling logic
-
-- **Performance Optimization**
-  - Lock-free statistics tracking with atomic operations
-  - Efficient queue management with minimal locking
-  - Adaptive batch sizing for optimal throughput
-  - Backpressure mechanism to prevent system overload
-
-- **Test Coverage**
-  - 22 comprehensive unit tests covering all policies
-  - Concurrent access testing for thread safety
-  - Adaptive backpressure algorithm validation
-  - Boundary condition and stress testing
-  - 100% test pass rate (22/22 tests passing)
-
-### Technical Details
-- Implementation: `sources/logger/flow/` (417 lines)
-- Headers: `overflow_policy.h` with templated queue
-- Build integration: Full CMake support
-
-## [2.2.0] - Phase 2 Core Systems Complete (2025-09-09)
-
-### Added - All Phase 2 Tasks Complete
-
-- **Abstract DI Interface** [C1]
-  - Design di_container_interface abstraction
-  - Implement lightweight_container (no external dependencies)
-  - Create adapter for thread_system (optional integration)
-  - Enable runtime component injection with fallback
-
-- **Monitoring Interface** [C2]
-  - Create abstract monitoring_interface
-  - Implement basic metrics collector (standalone)
-  - Add optional thread_system monitoring adapter
-  - Create health check system with minimal overhead
-
-- **Enhanced Builder** [C3]
-  - Add template configurations (production, debug, high_performance, low_latency)
-  - Support environment-based configuration
-  - Implement performance tuning strategies
-  - Strategy composition with priority-based ordering
-
-- **CMake Modularization** [C4]
-  - Create proper package configuration
-  - Add feature flags module with 15+ configurable options
-  - Dependency detection module
-  - Automatic feature validation and conflict resolution
-
-## [2.1.0] - Phase 1 Foundation Complete (2025-09-09)
-
-### Added
-- Thread system integration
-- Result pattern implementation  
-- Interface segregation (SOLID)
-- Configuration validation framework
-
-## [2.0.0] - Major Refactoring (2025-07-26)
-
-### Changed
-- Complete architecture overhaul
-- Modern C++20 implementation
-- Modular design with clear separation of concerns
-
-## [1.0.0] - Initial Release (2025-07-01)
-
-### Added
-- Basic logging functionality
-- Console and file writers
-- Log levels and filtering
 ---
 
-*Last Updated: 2025-10-20*
+## [Unreleased] - Security Improvements
+
+### Removed
+- **encrypted_writer**: Removed insecure XOR-based encryption implementation
+  - Deleted `include/kcenon/logger/writers/encrypted_writer.h`
+  - Deleted `src/impl/writers/encrypted_writer.cpp`
+  - Removed from integration tests
+  - Updated documentation to recommend vetted crypto libraries
+
+### Changed
+- **Documentation**: Updated security guidance
+  - SECURITY.md now recommends OpenSSL, libsodium, or Botan for encryption
+  - README.md provides guidance for implementing custom encrypted writers
+  - Added best practices for production log encryption
+
+### Migration Guide
+- If using `encrypted_writer`, implement a custom writer with a production-grade crypto library
+- See SECURITY.md for implementation examples using AES-GCM or ChaCha20-Poly1305
+- Use proper key management (HSM, KMS, or OS keychain)
+
+---
+
+## C++20 and std::format Migration - 2025-11-03
+
+### Changed
+- **C++20 now REQUIRED**: Enforced C++20 as minimum standard (no fallback to C++17)
+  - Added CMake check to fail build if C++20 is not available
+  - `CMAKE_CXX_STANDARD_REQUIRED ON` prevents fallback
+  - Clear error message when C++20 requirement is not met
+
+- **Removed fmt library dependency**: Migrated to std::format
+  - Removed fmt from vcpkg.json dependencies
+  - Removed fmt find_package from CMakeLists.txt
+  - Updated common_logger_adapter.h to use std::format
+  - All fmt::format calls replaced with std::format
+  - Cleaner dependency tree (one less external dependency)
+
+### Removed
+- **fmt library**: No longer required or used
+  - Removed from CMakeLists.txt (line 312-317)
+  - Removed from vcpkg.json
+  - Removed USE_FMT compile definition
+
+### Benefits
+- **Simpler dependencies**: Using only C++ standard library features
+- **Better portability**: No external formatting library needed
+- **Consistent with common_system**: Both now use std::format exclusively
+- **Build performance**: Faster compilation without fmt dependency
+- **Forward compatibility**: std::format is the C++ standard approach
+
+### Breaking Changes
+- ⚠️ **C++20 compiler required**: Projects using older compilers must upgrade
+  - GCC 10+ (full std::format support in GCC 13+)
+  - Clang 14+ (full std::format support in Clang 15+)
+  - MSVC 19.29+ (Visual Studio 2019 16.10+)
+  - Apple Clang 14.0+ (Xcode 14+)
+
+---
+
+## Phase 3: Code Quality - 2025-11-03
+
+### Added
+- **Common Utility Functions (Phase 3.4)**: Extracted shared utilities to reduce code duplication
+  - `time_utils.h`: Timestamp formatting utilities
+    - `format_timestamp()`: Human-readable format (YYYY-MM-DD HH:MM:SS.mmm)
+    - `format_iso8601()`: ISO 8601 / RFC 3339 format with UTC timezone
+    - `format_compact()`: Compact format for filenames (YYYYMMDDHHMMSSmmm)
+    - `format_for_rotation()`: Format for rotating file writers (YYYYMMDD or YYYYMMDD_HH)
+  - `string_utils.h`: String conversion and escaping utilities
+    - `level_to_string()`: Convert log level to human-readable string
+    - `level_to_color()`: Convert log level to ANSI color code
+    - `escape_json()`: JSON string escaping
+    - `escape_xml()`: XML string escaping
+    - `extract_filename()`: Extract filename from full path
+    - `trim()`, `to_lower()`, `to_upper()`, `replace_all()`: String manipulation helpers
+  - `file_utils.h`: File path validation and sanitization utilities (security-focused)
+    - `validate_log_path()`: Path traversal attack prevention
+    - `sanitize_filename()`: Remove dangerous characters from filenames
+    - `set_file_permissions()`: Unix/POSIX permission management
+    - `is_writable()`, `get_file_size()`: File system utilities
+    - `generate_temp_filename()`: Safe temporary file naming
+  - Located in `include/kcenon/logger/utils/`
+
+- **Error Handling Utilities (Phase 3.3)**: Unified error handling across all writers
+  - `error_handling_utils.h`: Comprehensive error handling helper functions
+  - `try_write_operation()`: Generic error handler for write operations with specialized exception handling
+  - `try_open_operation()`: Specialized handler for file open operations
+  - `try_network_operation()`: Specialized handler for network operations
+  - `try_encryption_operation()`: Specialized handler for encryption operations
+  - `check_condition()`: Helper for precondition validation
+  - `check_stream_state()`: Helper for stream state verification
+  - `check_file_exists()`: Helper for file existence validation
+  - `ensure_directory_exists()`: Helper for directory creation with error handling
+  - Located in `include/kcenon/logger/utils/error_handling_utils.h`
+
+- **Integration Backend Interface (Phase 3.2)**: Runtime polymorphism replaces conditional compilation
+  - `integration_backend`: Abstract interface for external system integration
+  - `standalone_backend`: Default backend for independent logger operation
+  - `thread_system_backend`: Backend for thread_system integration
+  - Automatic backend detection based on compile-time flags
+  - Explicit backend selection via `logger_builder::with_*_backend()` methods
+  - Located in `include/kcenon/logger/backends/`
+
+- **Formatter Interface (Strategy Pattern)**: Implemented formatter interface to eliminate code duplication
+  - `log_formatter_interface`: Abstract interface for log formatters with configurable options
+  - `format_options`: Struct for controlling timestamp, thread ID, source location, colors, and pretty-printing
+  - `formatter_factory`: Type alias for dependency injection support
+  - Located in `include/kcenon/logger/interfaces/log_formatter_interface.h`
+
+- **timestamp_formatter**: Default human-readable formatter
+  - Millisecond-precision timestamps in YYYY-MM-DD HH:MM:SS.mmm format
+  - Color-coded log levels (ANSI escape codes)
+  - Thread ID tracking
+  - Source location information (file, line, function)
+  - Automatic filename extraction from paths
+  - Located in `include/kcenon/logger/formatters/timestamp_formatter.h`
+
+- **json_formatter**: JSON-structured formatter for log aggregation systems
+  - ISO 8601 / RFC 3339 timestamp format (UTC)
+  - Proper JSON escaping of special characters
+  - Optional pretty-printing for readability
+  - Structured source location information
+  - Compatible with ELK, Splunk, CloudWatch, and other log aggregation tools
+  - Located in `include/kcenon/logger/formatters/json_formatter.h`
+
+### Changed
+- **logger**: Integrated with backend interface for level conversion
+  - Added `backend_` parameter to constructor (optional, auto-detects if not provided)
+  - Replaced conditional `convert_log_level()` with `backend_->normalize_level()`
+  - Backend initialization and shutdown handled automatically
+  - Log level conversion now performed at runtime via backends
+  - Located in `src/core/logger.cpp`
+
+- **logger_builder**: Added backend selection methods
+  - `with_backend()`: Set custom integration backend
+  - `with_thread_system_backend()`: Explicitly use thread_system backend
+  - `with_standalone_backend()`: Explicitly use standalone backend
+  - Auto-detection in `build()` method if no backend specified
+  - Located in `include/kcenon/logger/core/logger_builder.h`
+
+- **base_writer**: Integrated formatter interface to eliminate code duplication
+  - Added `formatter_` member for Strategy pattern implementation
+  - Constructor now accepts optional `log_formatter_interface` (defaults to `timestamp_formatter`)
+  - New `set_formatter()` method for runtime formatter switching
+  - New `format_log_entry(const log_entry&)` method using formatters
+  - Legacy formatting methods (`format_log_entry`, `level_to_string`, `level_to_color`) marked as deprecated
+  - Backward compatible with existing code
+
+- **Formatting logic moved to formatters**: Eliminated duplication across all writers
+  - Removed formatting logic from individual writer implementations
+  - All writers now delegate formatting to the configured formatter
+  - Simplifies adding new writer types
+  - Enables runtime format switching (text → JSON)
+
+- **All writers updated with unified error handling (Phase 3.3)**: Consistent error handling across codebase
+  - `file_writer.cpp`: Replaced try-catch patterns with `try_write_operation` and `try_open_operation`
+  - `rotating_file_writer.cpp`: Applied error handling utilities to write, rotation, and cleanup operations
+  - `encrypted_writer.cpp`: Integrated `try_encryption_operation` for encryption workflows
+  - `console_writer.cpp`: Added stream state validation with `check_stream_state`
+  - `critical_writer.cpp`: Enhanced WAL operations and signal handler safety with error utilities
+  - All exception types properly categorized (filesystem_error, ios_base::failure, system_error, bad_alloc)
+  - Consistent error code mapping across all writers
+
+- **Formatters refactored to use common utilities (Phase 3.4)**: Eliminated code duplication in formatters
+  - `timestamp_formatter.h`: Now uses `utils::time_utils` and `utils::string_utils`
+  - `json_formatter.h`: Now uses `utils::time_utils` and `utils::string_utils`
+  - Removed duplicate private functions from both formatters
+  - Consistent behavior across all formatting operations
+  - Reduced formatter code size by ~150 lines
+
+### Deprecated
+- **Legacy base_writer formatting methods**: Marked for future removal
+  - `format_log_entry(level, message, file, line, function, timestamp)` - Use formatter instead
+  - `level_to_string(log_level)` - Formatting now handled by formatters
+  - `level_to_color(log_level)` - Formatting now handled by formatters
+  - Methods remain functional for backward compatibility
+
+### Code Quality
+- **90% reduction in conditional compilation**: Runtime polymorphism replaces #ifdef directives
+  - Test combinations reduced from 16 to 4 (75% reduction)
+  - Improved code readability without #ifdef blocks
+  - Runtime backend switching capability
+  - Easier to add new integration backends
+
+- **50% reduction in code duplication**: Formatting logic centralized in formatters
+- **Unified error handling**: Eliminated try-catch duplication across all writers
+  - Consistent exception handling with specialized error handlers
+  - Better error message consistency across all writers
+  - Reduced boilerplate code in write operations
+  - Improved error code accuracy with proper exception type detection
+- **Common utility functions**: Extracted shared code to reusable utilities
+  - ~150 lines of duplicate code removed from formatters
+  - Thread-safe, stateless utility functions
+  - Security-focused file utilities ready for Phase 4
+  - Consistent timestamp formatting across all components
+- **Improved maintainability**: Single source of truth for formatting, error handling, and common utilities
+- **Enhanced extensibility**: Easy to add new formatters (XML, YAML, custom formats) and backends
+- **Better testability**: Formatters, backends, error handlers, and utilities can be tested independently
+
+### Benefits
+- **Simplified Testing**: Fewer conditional compilation paths to test
+- **Runtime Flexibility**: Can switch backends at runtime for testing
+- **Cleaner Codebase**: Less #ifdef clutter, more readable code
+- **Easy Extension**: Adding new integration backends requires no conditional compilation
+
+### Backward Compatibility
+- All existing code continues to work without modifications
+- Default formatter (timestamp_formatter) maintains original formatting behavior
+- Legacy API methods remain functional with deprecation warnings
+- All tests passing: 3/3 integration tests
+
+---
+
+## Phase 2: Performance Optimization - 2025-11-03
+
+### Added
+- **thread_local_object_pool**: New thread-local cached object pool implementation
+  - Per-thread local cache to minimize lock contention
+  - Batch transfers between local cache and global pool
+  - Configurable cache size (default: 16 objects per thread)
+  - Detailed statistics tracking (cache hits, global pool hits, allocations)
+  - **Performance**: 2.4x faster multi-threaded performance (8 threads)
+  - **Performance**: 2.6x faster single-threaded performance
+  - See `src/impl/memory/object_pool.h` for implementation
+
+- **object_pool_bench**: Comprehensive object pool benchmarks
+  - Single-threaded and multi-threaded performance tests
+  - High contention scenario testing
+  - Cache efficiency measurements
+  - Located in `benchmarks/object_pool_bench.cpp`
+
+- **Benchmark Infrastructure**: Complete CI/CD integration for performance regression detection
+  - `compare_benchmarks.py`: Python script for automated benchmark comparison
+  - Detects performance regressions with configurable threshold (default: 5%)
+  - Generates markdown reports showing improvements and regressions
+  - Integrated into GitHub Actions workflow
+  - Baseline results stored in `benchmarks/baselines/`
+  - Automatic comparison on every pull request
+  - Located in `scripts/compare_benchmarks.py`
+
+### Changed
+- **rotating_file_writer**: Periodic rotation checks for improved performance
+  - Added `check_interval` parameter (default: 100 writes)
+  - Reduces filesystem system calls from every write to every 100 writes
+  - **Expected performance**: 10-20% improvement in throughput
+  - Maintains rotation accuracy with configurable interval
+  - All constructors now accept optional `check_interval` parameter
+  - Backward compatible with default value
+
+- **Benchmark Workflow**: Enhanced GitHub Actions benchmarks.yml
+  - Benchmarks now enabled (BUILD_BENCHMARKS=ON, previously disabled)
+  - Automated benchmark execution on push and PR
+  - Results uploaded as artifacts (90-day retention)
+  - Baseline comparison with regression detection using compare_benchmarks.py
+  - Markdown reports in GitHub Step Summary
+  - Manual baseline saving via workflow_dispatch
+  - Performance threshold: 5% regression detection
+  - Located in `.github/workflows/benchmarks.yml`
+
+### Performance
+- **object_pool improvements** (8 threads):
+  - Original: 949 ns/op (1.05M ops/s)
+  - Optimized: 396 ns/op (2.53M ops/s)
+  - **Improvement: 2.4x faster**
+
+- **object_pool improvements** (single thread):
+  - Original: 18.2 ns/op (54.9M ops/s)
+  - Optimized: 7.03 ns/op (142.4M ops/s)
+  - **Improvement: 2.6x faster**
+
+- **High contention scenario** (8 threads, 10 objects):
+  - Original: 6336 ns/op
+  - Optimized: 3534 ns/op
+  - **Improvement: 1.8x faster**
+
+- All Phase 1 + Phase 2 tests passing: 7/7
+
+---
+
+## Phase 1: Critical Fixes - 2025-11-03
+
+### Fixed
+- **async_writer**: Removed timeout-based detach mechanism that caused memory leaks and message loss
+  - Replaced 5-second timeout with infinite wait for safer shutdown
+  - Worker thread now always joins properly without detaching
+  - Added `force_flush` parameter to control remaining message processing
+  - Eliminated potential use-after-free scenarios during shutdown
+
+- **file_writer**: Changed `std::endl` to `'\n'` for 50-100x performance improvement
+  - Eliminated forced disk synchronization (`fsync`) on every write
+  - Leverages OS buffering for better I/O performance
+  - Explicit `flush()` method still available when needed
+  - **Expected improvement**: ~10K msg/s → ~1M msg/s on SSD
+
+- **rotating_file_writer**: Changed `std::endl` to `'\n'` for better performance
+  - Consistent with file_writer improvements
+  - Maintains all rotation functionality while improving throughput
+
+- **console_writer**: Changed `std::endl` to `'\n'` for better performance
+  - Reduces console output overhead
+  - Maintains proper newline behavior
+
+### Performance
+- File writing performance improved by **50-100x** (from ~10K msg/s to ~1M msg/s on SSD)
+- Async writer shutdown now prioritizes safety over speed (no message loss)
+- All existing tests pass without regressions (7/7 tests passing)
+
+---
+
+## Initial Release - 2025-10-22
+
+### Added
+- **Core Logger System**: Production-ready C++20 asynchronous logging framework
+  - Asynchronous processing with non-blocking log operations
+  - Multiple output targets (console, file, rotating file, network, encrypted, hybrid)
+  - Thread-safe operations with concurrent logging support
+  - Zero-copy design for efficient message passing
+
+- **Critical Writer**: Synchronous logging for critical messages requiring immediate write
+  - Emergency flush mechanism to preserve logs during abnormal termination
+  - Crash-safe logging with automatic buffer flushing
+
+- **Advanced Architecture**:
+  - Interface-driven design with ILogger, IMonitor, IMonitorable abstractions
+  - Modular components with pluggable writers, filters, formatters
+  - Zero circular dependencies through interface-only dependencies
+  - Independent compilation without ecosystem dependencies
+
+- **Builder Pattern API**: Fluent, type-safe logger construction
+  - Configuration strategies (template-based, environment-aware, performance tuning)
+  - Comprehensive validation with Result<T> error handling
+  - Dependency injection for optional runtime component injection
+
+- **CMake Build System**: Comprehensive build configuration
+  - 15+ feature flags for flexible builds
+  - Automatic dependency detection
+  - Cross-platform support (Windows, Linux, macOS)
+  - Compiler support (GCC, Clang, MSVC)
+
+- **Writers**:
+  - `console_writer`: Standard output/error stream logging
+  - `file_writer`: Basic file output
+  - `rotating_file_writer`: Automatic log rotation by size/time
+  - `network_writer`: Remote logging over network
+  - `critical_writer`: Synchronous critical message logging
+  - `hybrid_writer`: Combined multiple writer support
+
+- **Formatters**:
+  - `text_formatter`: Plain text format
+  - `json_formatter`: Structured JSON logging
+  - `xml_formatter`: XML format for legacy systems
+  - Custom formatter support via IFormatter interface
+
+- **Filters**:
+  - Log level filtering
+  - Pattern-based message filtering
+  - Custom filter support via IFilter interface
+
+- **Integration Support**:
+  - common_system integration (ILogger, IMonitor, Result<T> pattern)
+  - thread_system integration (threading primitives, logger_interface)
+  - monitoring_system integration (metrics and health monitoring via IMonitor)
+
+- **Performance Features**:
+  - Configurable batching with tunable batch sizes and queue depths
+  - Lock-free operations on hot path
+  - Minimal allocations with efficient memory management
+  - ~15 seconds build time for independent compilation
+
+### Changed
+- N/A (Initial release)
+
+### Deprecated
+- N/A (Initial release)
+
+### Removed
+- N/A (Initial release)
+
+### Fixed
+- N/A (Initial release)
+
+### Security
+- Thread-safe operations ensure concurrent logging without data races
+- Encrypted writer support for sensitive log data
+
+---
+
+## Project Information
+
+**Repository:** https://github.com/kcenon/logger_system
+**Documentation:** [docs/](docs/)
+**License:** See LICENSE file
+**Maintainer:** kcenon@naver.com
+
+---
+
+## Version Support Matrix
+
+| Version | Release Date | C++ Standard | CMake Minimum | Status |
+|---------|--------------|--------------|---------------|---------|
+| 1.0.0   | 2025-10-22   | C++20        | 3.16          | Current |
+
+---
+
+## Migration Guide
+
+For migration from integrated thread_system or standalone logger implementations, see [MIGRATION.md](MIGRATION.md).
+
+---
+
+**Last Updated:** 2025-10-22
