@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['사례_20가이드_0',['Logger System 모범 사례 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES__KO.html#autotoc_md712',1,'']]],
-  ['사용자_1',['사용자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1026',1,'기존 사용자'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1025',1,'신규 사용자']]],
-  ['사항_2',['❌ 개선 필요 사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md894',1,'']]]
+  ['변경됨_0',['변경됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md726',1,'']]],
+  ['변경사항_1',['최근 변경사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1175',1,'']]],
+  ['변경에_20따른_20벤치마크_20코드_20수정_2',['1.3 API 변경에 따른 벤치마크 코드 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1100',1,'']]],
+  ['변경_20이력_20logger_20system_3',['변경 이력 - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html',1,'']]]
 ];

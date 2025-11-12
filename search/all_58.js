@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['안전한_20구성_20체크리스트_0',['안전한 구성 체크리스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md885',1,'']]]
+  ['솔루션_20아키텍처_0',['🎯 제안 솔루션 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1091',1,'']]]
 ];

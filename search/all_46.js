@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['비교_0',['Phase 2: 결과 파싱 및 기준선 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md907',1,'']]],
-  ['비교_20스크립트_1',['2.2 기준선 비교 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md909',1,'']]]
+  ['버전_20지원_20매트릭스_0',['버전 지원 매트릭스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md734',1,'']]]
 ];

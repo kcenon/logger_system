@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['않음_0',['문제 4: 배지가 README에 표시되지 않음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md943',1,'']]]
+  ['수락_20기준_0',['수락 기준',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1081',1,'']]],
+  ['수정됨_1',['수정됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md729',1,'']]],
+  ['수정_2',['수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1098',1,'1.1 GitHub Actions 워크플로우 수정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1100',1,'1.3 API 변경에 따른 벤치마크 코드 수정']]]
 ];

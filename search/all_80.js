@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['현재_20기능_0',['현재 기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md882',1,'']]],
-  ['현재_20상태_20분석_1',['🔍 현재 상태 분석',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md892',1,'']]]
+  ['코드_20수정_0',['1.3 API 변경에 따른 벤치마크 코드 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1100',1,'']]],
+  ['코멘트_1',['2. PR 자동 코멘트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1123',1,'']]]
 ];

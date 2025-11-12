@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['📖_20외부_20리소스_0',['📖 외부 리소스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1031',1,'']]],
-  ['📖_20external_20resources_1',['📖 External Resources',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1016',1,'']]],
-  ['📖_20strong_20key_20files_20and_20their_20purpose_20strong_2',['📖 &lt;strong&gt;Key Files and Their Purpose&lt;/strong&gt;',['../index.html#autotoc_md31',1,'']]]
+  ['현재_20기능_0',['현재 기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1037',1,'']]],
+  ['현재_20상태_20분석_1',['🔍 현재 상태 분석',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1087',1,'']]],
+  ['현재_20설정_20백업_2',['Step 1: 현재 설정 백업',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md673',1,'']]]
 ];

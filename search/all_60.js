@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['위협_20모델_20범위_0',['위협 모델 (범위)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md881',1,'']]]
+  ['않음_0',['문제 4: 배지가 README에 표시되지 않음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1138',1,'']]]
 ];

@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['🚀_20빠른_20탐색_0',['🚀 빠른 탐색',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1024',1,'']]],
-  ['🚀_20build_20status_1',['🚀 Build Status',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md292',1,'']]],
-  ['🚀_20getting_20started_2',['🚀 Getting Started',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_201-architecture.html#autotoc_md201',1,'']]],
-  ['🚀_20next_20steps_3',['🚀 Next Steps',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md983',1,'']]],
-  ['🚀_20quick_20navigation_4',['🚀 Quick Navigation',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1009',1,'']]],
-  ['🚀_20quick_20start_5',['🚀 Quick Start',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md436',1,'']]],
-  ['🚀_20strong_20performance_20excellence_20strong_6',['🚀 &lt;strong&gt;Performance Excellence&lt;/strong&gt;',['../index.html#autotoc_md11',1,'']]]
+  ['📖_20외부_20리소스_0',['📖 외부 리소스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1176',1,'']]],
+  ['📖_20external_20resources_1',['📖 External Resources',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1161',1,'']]],
+  ['📖_20strong_20key_20files_20and_20their_20purpose_20strong_2',['📖 &lt;strong&gt;Key Files and Their Purpose&lt;/strong&gt;',['../index.html#autotoc_md31',1,'']]]
 ];

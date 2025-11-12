@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['지표_20자동화_20제안서_0',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]]
+  ['변경_20이력_20logger_20system_0',['변경 이력 - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html',1,'']]]
 ];

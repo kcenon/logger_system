@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['크리티컬_20로그_20손실_20방지_20가이드_0',['크리티컬 로그 손실 방지 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION__KO.html#autotoc_md428',1,'']]],
-  ['크리티컬_20로깅_20빠른_20시작_1',['크리티컬 로깅 빠른 시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START__KO.html#autotoc_md463',1,'']]]
+  ['지원_0',['🤝 도움 및 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1177',1,'']]],
+  ['지원_20매트릭스_1',['버전 지원 매트릭스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md734',1,'']]],
+  ['지표_2',['🎯 성공 지표',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1145',1,'']]],
+  ['지표_20자동화_20제안서_3',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]]
 ];

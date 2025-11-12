@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Logger System: CHANGELOG</title>
+<title>Logger System: Changelog - Logger System</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,780 +90,564 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">CHANGELOG</div></div>
+  <div class="headertitle"><div class="title">Changelog - Logger System</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>,</p>
-<blockquote class="doxtable">
-<p>&zwj;<b>Language:</b> <b>English</b> | 한국어 </p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md678"></a> </p><blockquote class="doxtable">
+<p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html">한국어</a> </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md572"></a>
-Table of Contents</h2>
-<ul>
-<li>[3.0.0] - Phase 4 Security Hardening Complete (2025-11-04)<ul>
-<li>Added - Phase 4 Tasks 4.1-4.4 Complete<ul>
-<li>Secure Key Storage</li>
-<li>Path Validation</li>
-<li>Signal Handler Safety</li>
-<li>Security Audit Logging</li>
-</ul>
-</li>
-<li>Security</li>
-<li>Tests</li>
-</ul>
-</li>
-<li>[2.9.0] - Phase 5 P2 Migration Guide for Existing Users (2025-09-10)<ul>
-<li>Added - Phase 5 Task P2 Complete Implementation<ul>
-<li>Migration Support</li>
-</ul>
-</li>
-<li>Enhanced</li>
-</ul>
-</li>
-<li>[2.8.0] - Phase 5 P3 Complete API Documentation (2025-09-10)<ul>
-<li>Added - Phase 5 Task P3 Complete Implementation<ul>
-<li>API Documentation</li>
-</ul>
-</li>
-<li>Enhanced</li>
-</ul>
-</li>
-<li>[2.7.0] - Phase 5 P4 CI/CD Monitoring Dashboard (2025-09-10)<ul>
-<li>Added - Phase 5 Task P4 Complete Implementation<ul>
-<li>CI/CD Monitoring Dashboard</li>
-</ul>
-</li>
-<li>Fixed</li>
-</ul>
-</li>
-<li>[2.6.0] - Phase 5 P5 CI/CD Pipeline with Sanitizers (2025-09-09)<ul>
-<li>Added - Phase 5 Task P5 Complete Implementation<ul>
-<li>CI/CD Pipeline</li>
-</ul>
-</li>
-<li>Improved</li>
-<li>Configuration Options</li>
-</ul>
-</li>
-<li>[2.5.0] - Phase 5 P1 Comprehensive Test Suite (2025-09-09)<ul>
-<li>Added - Phase 5 Task P1 Partial Implementation<ul>
-<li>Test Coverage Enhancements</li>
-</ul>
-</li>
-<li>Improved</li>
-<li>Known Issues</li>
-<li>Technical Debt</li>
-</ul>
-</li>
-<li>[2.4.0] - Phase 4 O1, O3 &amp; O4 Implementation (2025-09-10)<ul>
-<li>Added - Phase 4 Tasks O1, O3 &amp; O4 Complete<ul>
-<li>Batch Processing (O1)</li>
-<li>Small String Optimization (O3)</li>
-<li>Benchmark Suite (O4)</li>
-</ul>
-</li>
-<li>Technical Details</li>
-</ul>
-</li>
-<li>[2.3.0] - Phase 3 Overflow Policy System Implementation (2025-09-10)<ul>
-<li>Added - Phase 3 Task A4 Complete</li>
-<li>Technical Details</li>
-</ul>
-</li>
-<li>[2.2.0] - Phase 2 Core Systems Complete (2025-09-09)<ul>
-<li>Added - All Phase 2 Tasks Complete</li>
-</ul>
-</li>
-<li>[2.1.0] - Phase 1 Foundation Complete (2025-09-09)<ul>
-<li>Added</li>
-</ul>
-</li>
-<li>[2.0.0] - Major Refactoring (2025-07-26)<ul>
-<li>Changed</li>
-</ul>
-</li>
-<li>[1.0.0] - Initial Release (2025-07-01)<ul>
-<li>Added</li>
-</ul>
-</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md573"></a>
-Changelog</h1>
-<p>All notable changes to the Logger System will be documented in this file.</p>
-<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,</p>
+<p>All notable changes to the Logger System project will be documented in this file.</p>
+<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>, and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md575"></a>
-[3.0.0] - Phase 4 Security Hardening Complete (2025-11-04)</h2>
-<h3><a class="anchor" id="autotoc_md576"></a>
-Added - Phase 4 Tasks 4.1-4.4 Complete</h3>
-<h4><a class="anchor" id="autotoc_md577"></a>
-Secure Key Storage</h4>
+<h1><a class="anchor" id="autotoc_md680"></a>
+[Unreleased] - Security Improvements</h1>
+<h2><a class="anchor" id="autotoc_md681"></a>
+Removed</h2>
 <ul>
-<li>**<code>secure_key</code> class**: RAII wrapper for encryption keys with automatic memory cleanup<ul>
-<li>Move-only semantics to prevent accidental key copying</li>
-<li>Uses <code>OPENSSL_cleanse()</code> for secure memory erasure on destruction</li>
-<li>Falls back to manual volatile-based zeroing when OpenSSL is unavailable</li>
-</ul>
-</li>
-<li>**<code>secure_key_storage</code> class**: Secure key management with comprehensive security features<ul>
-<li>Cryptographically secure random key generation using OpenSSL <code>RAND_bytes()</code></li>
-<li>File permission enforcement (0600 - owner read/write only)</li>
-<li>Path traversal prevention during key save/load operations</li>
-<li>Key size validation (default 32 bytes for AES-256)</li>
-<li>Permission verification on key load (rejects world/group-readable files)</li>
+<li><b>encrypted_writer</b>: Removed insecure XOR-based encryption implementation<ul>
+<li>Deleted <code>include/kcenon/logger/writers/encrypted_writer.h</code></li>
+<li>Deleted <code>src/impl/writers/encrypted_writer.cpp</code></li>
+<li>Removed from integration tests</li>
+<li>Updated documentation to recommend vetted crypto libraries</li>
 </ul>
 </li>
 </ul>
-<p><b>Location</b>: <code>include/kcenon/logger/security/secure_key_storage.h</code></p>
-<h4><a class="anchor" id="autotoc_md578"></a>
-Path Validation</h4>
+<h2><a class="anchor" id="autotoc_md682"></a>
+Changed</h2>
 <ul>
-<li>**<code>path_validator</code> class**: Comprehensive file path security validation<ul>
-<li>Path traversal attack prevention (blocks <code>../</code> and similar patterns)</li>
-<li>Symbolic link validation (optional, disabled by default for security)</li>
-<li>Base directory enforcement (all paths must be within allowed directory)</li>
-<li>Filename character restrictions (alphanumeric, hyphen, underscore, period only)</li>
-<li>Special filename protection (blocks <code>.</code>, <code>..</code>, empty names)</li>
-</ul>
-</li>
-<li><b>Utility methods</b>:<ul>
-<li><code>is_safe_filename()</code>: Character-level filename validation</li>
-<li><code>sanitize_filename()</code>: Automatic filename cleaning with invalid character replacement</li>
-<li><code>safe_join()</code>: Secure path joining with automatic validation</li>
+<li><b>Documentation</b>: Updated security guidance<ul>
+<li><a class="el" href="SECURITY_8md.html">SECURITY.md</a> now recommends OpenSSL, libsodium, or Botan for encryption</li>
+<li>README.md provides guidance for implementing custom encrypted writers</li>
+<li>Added best practices for production log encryption</li>
 </ul>
 </li>
 </ul>
-<p><b>Location</b>: <code>include/kcenon/logger/security/path_validator.h</code></p>
-<h4><a class="anchor" id="autotoc_md579"></a>
-Signal Handler Safety</h4>
+<h2><a class="anchor" id="autotoc_md683"></a>
+Migration Guide</h2>
 <ul>
-<li>**<code>signal_manager</code> singleton**: Centralized signal handler management<ul>
-<li>Thread-safe logger registration/unregistration</li>
-<li>Automatic handler installation on first logger registration</li>
-<li>Automatic handler removal when last logger is unregistered</li>
-<li>Prevents global state conflicts with multiple logger instances</li>
-<li>Uses only signal-safe functions in handlers (POSIX compliant)</li>
-</ul>
-</li>
-<li>**<code>critical_logger_interface</code>**: Interface for emergency flushing<ul>
-<li>Signal-safe emergency buffer access</li>
-<li>Direct file descriptor access for write() syscalls</li>
-<li>No allocations or locks in signal context</li>
-</ul>
-</li>
-<li><b>Supported signals</b>: SIGSEGV, SIGABRT, SIGTERM, SIGINT</li>
-<li><b>Emergency flush</b>: Uses signal-safe <code>write()</code> and <code>fsync()</code> syscalls</li>
-</ul>
-<p><b>Location</b>: <code>include/kcenon/logger/security/signal_manager.h</code></p>
-<h4><a class="anchor" id="autotoc_md580"></a>
-Security Audit Logging</h4>
-<ul>
-<li>**<code>audit_logger</code> class**: Tamper-evident security event logging<ul>
-<li>JSON-formatted audit entries for easy parsing</li>
-<li>ISO8601 timestamp formatting</li>
-<li>JSON string escaping for safe data representation</li>
-<li>Optional HMAC-SHA256 signatures for tamper detection</li>
-<li>Configurable audit file location</li>
-</ul>
-</li>
-<li><b>Audit events tracked</b>:<ul>
-<li>Logger lifecycle: started, stopped</li>
-<li>Writer management: added, removed</li>
-<li>Encryption: key loaded, generated, rotated</li>
-<li>Security violations: permission denied, path traversal, insecure permissions</li>
-<li>Authentication: success, failure</li>
-<li>File access: granted, denied</li>
-</ul>
-</li>
-<li><b>HMAC tamper detection</b>:<ul>
-<li>Uses OpenSSL HMAC-SHA256 when available</li>
-<li>Falls back to simple hash (demonstration only)</li>
-<li>Signatures appended to audit log entries</li>
-<li><code>verify_entry()</code> method for integrity verification</li>
-</ul>
-</li>
-</ul>
-<p><b>Location</b>: <code>include/kcenon/logger/security/audit_logger.h</code></p>
-<h3><a class="anchor" id="autotoc_md581"></a>
-Security</h3>
-<ul>
-<li><b>New error codes added</b> (1704-1708):<ul>
-<li><code>file_read_failed</code>: File reading operation failed</li>
-<li><code>insecure_permissions</code>: File permissions too permissive</li>
-<li><code>path_traversal_detected</code>: Path traversal attack attempt</li>
-<li><code>invalid_key_size</code>: Encryption key size mismatch</li>
-<li><code>invalid_filename</code>: Filename contains invalid characters</li>
-</ul>
-</li>
-<li><b>OWASP Top 10 mitigations</b>:<ul>
-<li><b>A01:2021 - Broken Access Control</b>: Path validation prevents unauthorized file access</li>
-<li><b>A02:2021 - Cryptographic Failures</b>: Secure key storage with proper permissions</li>
-<li><b>A03:2021 - Injection</b>: Path and filename sanitization prevents path traversal</li>
-<li><b>A09:2021 - Security Logging Failures</b>: Comprehensive security audit logging</li>
-</ul>
-</li>
-<li><b>Compliance support</b>:<ul>
-<li><b>GDPR</b>: Encryption key management, access control, audit trails</li>
-<li><b>PCI DSS</b>: Log encryption, access logging, key rotation support</li>
-<li><b>ISO 27001</b>: Security policy documentation, risk mitigation, monitoring</li>
-</ul>
-</li>
-</ul>
-<h3><a class="anchor" id="autotoc_md582"></a>
-Tests</h3>
-<ul>
-<li><b>18 comprehensive security tests</b> with 100% pass rate:<ul>
-<li><code>SecureKeyConstruction</code>: Key object creation</li>
-<li><code>SecureKeyMove</code>: Move semantics validation</li>
-<li><code>GenerateKey</code>: Cryptographically secure random generation</li>
-<li><code>SaveAndLoadKey</code>: File I/O with permission enforcement</li>
-<li><code>LoadKeyWithInsecurePermissions</code>: Permission rejection</li>
-<li><code>LoadKeyWithInvalidSize</code>: Size validation</li>
-<li><code>PathValidatorValidPath</code>: Valid path acceptance</li>
-<li><code>PathValidatorPathTraversal</code>: Attack detection</li>
-<li><code>PathValidatorSymlink</code>: Symbolic link handling</li>
-<li><code>PathValidatorInvalidFilename</code>: Character restriction</li>
-<li><code>IsSafeFilename</code>: Filename validation logic</li>
-<li><code>SanitizeFilename</code>: Automatic cleaning</li>
-<li><code>SafeJoin</code>: Secure path concatenation</li>
-<li><code>SafeJoinWithAbsolutePath</code>: Absolute path rejection</li>
-<li><code>AuditLoggerInitialize</code>: Audit system initialization</li>
-<li><code>AuditLoggerWithHMAC</code>: HMAC signature generation</li>
-<li><code>AuditLoggerSecurityEvents</code>: Event logging</li>
-<li><code>IntegrationSecureKeyWorkflow</code>: End-to-end workflow</li>
-</ul>
-</li>
-</ul>
-<p><b>Location</b>: <code>tests/unit/security_test/security_test.cpp</code></p>
-<h3><a class="anchor" id="autotoc_md583"></a>
-Dependencies</h3>
-<ul>
-<li><b>OpenSSL</b> (optional but recommended):<ul>
-<li>Used for: <code>RAND_bytes()</code>, <code>OPENSSL_cleanse()</code>, <code>HMAC()</code></li>
-<li>Fallback implementations provided when unavailable</li>
-<li>Detected automatically via CMake <code>find_package(OpenSSL)</code></li>
-</ul>
-</li>
-</ul>
-<h3><a class="anchor" id="autotoc_md584"></a>
-Documentation</h3>
-<ul>
-<li><b>Phase 4 planning documents</b>:<ul>
-<li><code>LOGGER_SYSTEM_INTEGRATION.md</code>: Overall integration status</li>
-<li><code>LOGGER_SYSTEM_PHASE_4.md</code>: Detailed phase 4 specification</li>
-</ul>
-</li>
-<li><b>Updated error code documentation</b> in <code>docs/API_REFERENCE.md</code></li>
-</ul>
-<h3><a class="anchor" id="autotoc_md585"></a>
-Technical Details</h3>
-<ul>
-<li><b>Memory safety</b>: All security-sensitive data (keys) cleared on destruction</li>
-<li><b>Thread safety</b>: Mutex-protected shared state in audit_logger and signal_manager</li>
-<li><b>Cross-platform</b>: Works on Linux, macOS, Windows (with conditional compilation)</li>
-<li><b>Zero-dependency core</b>: Security features work without external libraries (with fallbacks)</li>
-<li><b>Minimal overhead</b>: Path validation adds &lt;1μs per operation</li>
+<li>If using <code>encrypted_writer</code>, implement a custom writer with a production-grade crypto library</li>
+<li>See <a class="el" href="SECURITY_8md.html">SECURITY.md</a> for implementation examples using AES-GCM or ChaCha20-Poly1305</li>
+<li>Use proper key management (HSM, KMS, or OS keychain)</li>
 </ul>
 <hr  />
-<p> and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
-<h2><a class="anchor" id="autotoc_md587"></a>
-[2.9.0] - Phase 5 P2 Migration Guide for Existing Users (2025-09-10)</h2>
-<h3><a class="anchor" id="autotoc_md588"></a>
-Added - Phase 5 Task P2 Complete Implementation</h3>
-<h4><a class="anchor" id="autotoc_md589"></a>
-Migration Support</h4>
+<h1><a class="anchor" id="autotoc_md685"></a>
+C++20 and std::format Migration - 2025-11-03</h1>
+<h2><a class="anchor" id="autotoc_md686"></a>
+Changed</h2>
 <ul>
-<li><b>Comprehensive Migration Guide</b> (docs/MIGRATION_GUIDE.md)<ul>
-<li>Version migration (v1.x to v2.x)</li>
-<li>API change mappings and compatibility tables</li>
-<li>Configuration migration strategies</li>
-<li>Migration from other libraries (spdlog, Boost.Log, glog, log4cpp)</li>
-<li>Step-by-step migration process</li>
-<li>Common pitfalls and solutions</li>
+<li><b>C++20 now REQUIRED</b>: Enforced C++20 as minimum standard (no fallback to C++17)<ul>
+<li>Added CMake check to fail build if C++20 is not available</li>
+<li><code>CMAKE_CXX_STANDARD_REQUIRED ON</code> prevents fallback</li>
+<li>Clear error message when C++20 requirement is not met</li>
 </ul>
 </li>
-<li><b>Compatibility Wrapper</b> (sources/logger/compatibility/logger_v1_compat.h)<ul>
-<li>Legacy API support for gradual migration</li>
-<li>Deprecated macros (LOG_INFO, LOG_ERROR, etc.)</li>
-<li>Legacy function signatures</li>
-<li>Backward compatibility helpers</li>
-<li>Automatic deprecation warnings</li>
-</ul>
-</li>
-<li><b>Migration Example</b> (samples/migration_example.cpp)<ul>
-<li>Side-by-side API comparison</li>
-<li>Gradual migration strategy demonstration</li>
-<li>Performance comparison v1 vs v2</li>
-<li>Common migration pitfalls</li>
-<li>Real-world migration scenarios</li>
+<li><b>Removed fmt library dependency</b>: Migrated to std::format<ul>
+<li>Removed fmt from vcpkg.json dependencies</li>
+<li>Removed fmt find_package from CMakeLists.txt</li>
+<li>Updated common_logger_adapter.h to use std::format</li>
+<li>All fmt::format calls replaced with std::format</li>
+<li>Cleaner dependency tree (one less external dependency)</li>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md590"></a>
-Enhanced</h3>
+<h2><a class="anchor" id="autotoc_md687"></a>
+Removed</h2>
 <ul>
-<li>Added compatibility layer for smooth transition</li>
-<li>Provided migration path from popular logging libraries</li>
-<li>Included performance benchmarks for migration decisions</li>
+<li><b>fmt library</b>: No longer required or used<ul>
+<li>Removed from CMakeLists.txt (line 312-317)</li>
+<li>Removed from vcpkg.json</li>
+<li>Removed USE_FMT compile definition</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md591"></a>
-[2.8.0] - Phase 5 P3 Complete API Documentation (2025-09-10)</h2>
-<h3><a class="anchor" id="autotoc_md592"></a>
-Added - Phase 5 Task P3 Complete Implementation</h3>
-<h4><a class="anchor" id="autotoc_md593"></a>
-API Documentation</h4>
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md688"></a>
+Benefits</h2>
 <ul>
-<li><b>Comprehensive API Documentation</b> (docs/API_DOCUMENTATION.md)<ul>
-<li>Complete API reference with all classes and methods</li>
-<li>Quick start guide with code examples</li>
-<li>Configuration templates and strategies</li>
-<li>Advanced features documentation</li>
-<li>Performance optimization guide</li>
-<li>Migration guide from other logging libraries</li>
+<li><b>Simpler dependencies</b>: Using only C++ standard library features</li>
+<li><b>Better portability</b>: No external formatting library needed</li>
+<li><b>Consistent with common_system</b>: Both now use std::format exclusively</li>
+<li><b>Build performance</b>: Faster compilation without fmt dependency</li>
+<li><b>Forward compatibility</b>: std::format is the C++ standard approach</li>
 </ul>
-</li>
-<li><b>Best Practices Guide</b> (docs/BEST_PRACTICES.md)<ul>
-<li>Design principles and patterns</li>
-<li>Configuration best practices</li>
-<li>Performance guidelines</li>
-<li>Error handling strategies</li>
-<li>Security considerations</li>
-<li>Testing strategies</li>
-<li>Production deployment guide</li>
-<li>Common pitfalls and solutions</li>
-</ul>
-</li>
-<li><b>Doxygen Documentation</b><ul>
-<li>Added comprehensive Doxygen comments to all major headers</li>
-<li>Documented logger.h with full method descriptions</li>
-<li>Documented logger_builder.h with builder pattern explanations</li>
-<li>Documented log_entry.h with structure field descriptions</li>
-<li>Documented base_writer.h with interface requirements</li>
-<li>Updated Doxyfile for optimal documentation generation</li>
-</ul>
-</li>
-</ul>
-<h3><a class="anchor" id="autotoc_md594"></a>
-Enhanced</h3>
+<h2><a class="anchor" id="autotoc_md689"></a>
+Breaking Changes</h2>
 <ul>
-<li>Improved code documentation with<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname"></td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-return tags</li>
-<li>Added usage examples in header file comments</li>
-<li>Included thread safety and performance notes</li>
-<li>Added version information with <dl class="section since"><dt>Since</dt><dd>tags</dd></dl>
+<li>⚠️ <b>C++20 compiler required</b>: Projects using older compilers must upgrade<ul>
+<li>GCC 10+ (full std::format support in GCC 13+)</li>
+<li>Clang 14+ (full std::format support in Clang 15+)</li>
+<li>MSVC 19.29+ (Visual Studio 2019 16.10+)</li>
+<li>Apple Clang 14.0+ (Xcode 14+)</li>
+</ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md595"></a>
-[2.7.0] - Phase 5 P4 CI/CD Monitoring Dashboard (2025-09-10)</h2>
-<h3><a class="anchor" id="autotoc_md596"></a>
-Added - Phase 5 Task P4 Complete Implementation</h3>
-<h4><a class="anchor" id="autotoc_md597"></a>
-CI/CD Monitoring Dashboard</h4>
+<hr  />
+<h1><a class="anchor" id="autotoc_md691"></a>
+Phase 3: Code Quality - 2025-11-03</h1>
+<h2><a class="anchor" id="autotoc_md692"></a>
+Added</h2>
 <ul>
-<li><b>Comprehensive Dashboard Documentation</b> (docs/CI_CD_DASHBOARD.md)<ul>
-<li>Build status tracking for all platforms</li>
-<li>Performance metrics visualization</li>
-<li>Code quality indicators</li>
-<li>Test coverage reports</li>
-<li>Sanitizer results summary</li>
-<li>Build time analysis</li>
-<li>Dependency status tracking</li>
+<li><b>Common Utility Functions (Phase 3.4)</b>: Extracted shared utilities to reduce code duplication<ul>
+<li><code>time_utils.h</code>: Timestamp formatting utilities<ul>
+<li><code>format_timestamp()</code>: Human-readable format (YYYY-MM-DD HH:MM:SS.mmm)</li>
+<li><code>format_iso8601()</code>: ISO 8601 / RFC 3339 format with UTC timezone</li>
+<li><code>format_compact()</code>: Compact format for filenames (YYYYMMDDHHMMSSmmm)</li>
+<li><code>format_for_rotation()</code>: Format for rotating file writers (YYYYMMDD or YYYYMMDD_HH)</li>
 </ul>
 </li>
-<li><b>Metrics Collection Script</b> (scripts/collect_metrics.py)<ul>
-<li>Automated metrics extraction from CI/CD runs</li>
-<li>Test results parsing (JUnit XML, JSON)</li>
-<li>Coverage data collection (Cobertura XML)</li>
-<li>Build log analysis</li>
-<li>Performance benchmark parsing</li>
-<li>Dashboard update automation</li>
+<li><code>string_utils.h</code>: String conversion and escaping utilities<ul>
+<li><code>level_to_string()</code>: Convert log level to human-readable string</li>
+<li><code>level_to_color()</code>: Convert log level to ANSI color code</li>
+<li><code>escape_json()</code>: JSON string escaping</li>
+<li><code>escape_xml()</code>: XML string escaping</li>
+<li><code>extract_filename()</code>: Extract filename from full path</li>
+<li><code>trim()</code>, <code>to_lower()</code>, <code>to_upper()</code>, <code>replace_all()</code>: String manipulation helpers</li>
 </ul>
 </li>
-<li><b>Missing Components Added</b><ul>
-<li>async_writer.h: Asynchronous writer implementation</li>
-<li>lightweight_container.h: Standalone DI container</li>
-<li>Configuration enhancements: timestamp and source location options</li>
+<li><code>file_utils.h</code>: File path validation and sanitization utilities (security-focused)<ul>
+<li><code>validate_log_path()</code>: Path traversal attack prevention</li>
+<li><code>sanitize_filename()</code>: Remove dangerous characters from filenames</li>
+<li><code>set_file_permissions()</code>: Unix/POSIX permission management</li>
+<li><code>is_writable()</code>, <code>get_file_size()</code>: File system utilities</li>
+<li><code>generate_temp_filename()</code>: Safe temporary file naming</li>
+</ul>
+</li>
+<li>Located in <code>include/kcenon/logger/utils/</code></li>
+</ul>
+</li>
+<li><b>Error Handling Utilities (Phase 3.3)</b>: Unified error handling across all writers<ul>
+<li><code>error_handling_utils.h</code>: Comprehensive error handling helper functions</li>
+<li><code>try_write_operation()</code>: Generic error handler for write operations with specialized exception handling</li>
+<li><code>try_open_operation()</code>: Specialized handler for file open operations</li>
+<li><code>try_network_operation()</code>: Specialized handler for network operations</li>
+<li><code>try_encryption_operation()</code>: Specialized handler for encryption operations</li>
+<li><code>check_condition()</code>: Helper for precondition validation</li>
+<li><code>check_stream_state()</code>: Helper for stream state verification</li>
+<li><code>check_file_exists()</code>: Helper for file existence validation</li>
+<li><code>ensure_directory_exists()</code>: Helper for directory creation with error handling</li>
+<li>Located in <code>include/kcenon/logger/utils/error_handling_utils.h</code></li>
+</ul>
+</li>
+<li><b>Integration Backend Interface (Phase 3.2)</b>: Runtime polymorphism replaces conditional compilation<ul>
+<li><code>integration_backend</code>: Abstract interface for external system integration</li>
+<li><code>standalone_backend</code>: Default backend for independent logger operation</li>
+<li><code>thread_system_backend</code>: Backend for thread_system integration</li>
+<li>Automatic backend detection based on compile-time flags</li>
+<li>Explicit backend selection via <code>logger_builder::with_*_backend()</code> methods</li>
+<li>Located in <code>include/kcenon/logger/backends/</code></li>
+</ul>
+</li>
+<li><b>Formatter Interface (Strategy Pattern)</b>: Implemented formatter interface to eliminate code duplication<ul>
+<li><code>log_formatter_interface</code>: Abstract interface for log formatters with configurable options</li>
+<li><code>format_options</code>: Struct for controlling timestamp, thread ID, source location, colors, and pretty-printing</li>
+<li><code>formatter_factory</code>: Type alias for dependency injection support</li>
+<li>Located in <code>include/kcenon/logger/interfaces/log_formatter_interface.h</code></li>
+</ul>
+</li>
+<li><b>timestamp_formatter</b>: Default human-readable formatter<ul>
+<li>Millisecond-precision timestamps in YYYY-MM-DD HH:MM:SS.mmm format</li>
+<li>Color-coded log levels (ANSI escape codes)</li>
+<li>Thread ID tracking</li>
+<li>Source location information (file, line, function)</li>
+<li>Automatic filename extraction from paths</li>
+<li>Located in <code>include/kcenon/logger/formatters/timestamp_formatter.h</code></li>
+</ul>
+</li>
+<li><b>json_formatter</b>: JSON-structured formatter for log aggregation systems<ul>
+<li>ISO 8601 / RFC 3339 timestamp format (UTC)</li>
+<li>Proper JSON escaping of special characters</li>
+<li>Optional pretty-printing for readability</li>
+<li>Structured source location information</li>
+<li>Compatible with ELK, Splunk, CloudWatch, and other log aggregation tools</li>
+<li>Located in <code>include/kcenon/logger/formatters/json_formatter.h</code></li>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md598"></a>
-Fixed</h3>
+<h2><a class="anchor" id="autotoc_md693"></a>
+Changed</h2>
 <ul>
-<li>Build errors related to missing headers</li>
-<li>Sanitizer configuration conflicts</li>
-<li>Namespace resolution issues</li>
-<li>Configuration template compatibility</li>
+<li><b>logger</b>: Integrated with backend interface for level conversion<ul>
+<li>Added <code>backend_</code> parameter to constructor (optional, auto-detects if not provided)</li>
+<li>Replaced conditional <code>convert_log_level()</code> with <code>backend_-&gt;normalize_level()</code></li>
+<li>Backend initialization and shutdown handled automatically</li>
+<li>Log level conversion now performed at runtime via backends</li>
+<li>Located in <code>src/core/logger.cpp</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md599"></a>
-[2.6.0] - Phase 5 P5 CI/CD Pipeline with Sanitizers (2025-09-09)</h2>
-<h3><a class="anchor" id="autotoc_md600"></a>
-Added - Phase 5 Task P5 Complete Implementation</h3>
-<h4><a class="anchor" id="autotoc_md601"></a>
-CI/CD Pipeline</h4>
+</li>
+<li><b>logger_builder</b>: Added backend selection methods<ul>
+<li><code>with_backend()</code>: Set custom integration backend</li>
+<li><code>with_thread_system_backend()</code>: Explicitly use thread_system backend</li>
+<li><code>with_standalone_backend()</code>: Explicitly use standalone backend</li>
+<li>Auto-detection in <code>build()</code> method if no backend specified</li>
+<li>Located in <code>include/kcenon/logger/core/logger_builder.h</code></li>
+</ul>
+</li>
+<li><b>base_writer</b>: Integrated formatter interface to eliminate code duplication<ul>
+<li>Added <code>formatter_</code> member for Strategy pattern implementation</li>
+<li>Constructor now accepts optional <code>log_formatter_interface</code> (defaults to <code>timestamp_formatter</code>)</li>
+<li>New <code>set_formatter()</code> method for runtime formatter switching</li>
+<li>New <code>format_log_entry(const log_entry&amp;)</code> method using formatters</li>
+<li>Legacy formatting methods (<code>format_log_entry</code>, <code>level_to_string</code>, <code>level_to_color</code>) marked as deprecated</li>
+<li>Backward compatible with existing code</li>
+</ul>
+</li>
+<li><b>Formatting logic moved to formatters</b>: Eliminated duplication across all writers<ul>
+<li>Removed formatting logic from individual writer implementations</li>
+<li>All writers now delegate formatting to the configured formatter</li>
+<li>Simplifies adding new writer types</li>
+<li>Enables runtime format switching (text → JSON)</li>
+</ul>
+</li>
+<li><b>All writers updated with unified error handling (Phase 3.3)</b>: Consistent error handling across codebase<ul>
+<li><code>file_writer.cpp</code>: Replaced try-catch patterns with <code>try_write_operation</code> and <code>try_open_operation</code></li>
+<li><code>rotating_file_writer.cpp</code>: Applied error handling utilities to write, rotation, and cleanup operations</li>
+<li><code>encrypted_writer.cpp</code>: Integrated <code>try_encryption_operation</code> for encryption workflows</li>
+<li><code>console_writer.cpp</code>: Added stream state validation with <code>check_stream_state</code></li>
+<li><code>critical_writer.cpp</code>: Enhanced WAL operations and signal handler safety with error utilities</li>
+<li>All exception types properly categorized (filesystem_error, ios_base::failure, system_error, bad_alloc)</li>
+<li>Consistent error code mapping across all writers</li>
+</ul>
+</li>
+<li><b>Formatters refactored to use common utilities (Phase 3.4)</b>: Eliminated code duplication in formatters<ul>
+<li><code>timestamp_formatter.h</code>: Now uses <code>utils::time_utils</code> and <code>utils::string_utils</code></li>
+<li><code>json_formatter.h</code>: Now uses <code>utils::time_utils</code> and <code>utils::string_utils</code></li>
+<li>Removed duplicate private functions from both formatters</li>
+<li>Consistent behavior across all formatting operations</li>
+<li>Reduced formatter code size by ~150 lines</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md694"></a>
+Deprecated</h2>
 <ul>
-<li><b>GitHub Actions Workflow</b><ul>
-<li>Multi-platform CI pipeline (Ubuntu, macOS, Windows)</li>
-<li>Sanitizer tests (AddressSanitizer, ThreadSanitizer, UndefinedBehaviorSanitizer)</li>
-<li>Compiler warning checks with multiple compilers (GCC, Clang)</li>
-<li>Code coverage analysis with gcovr/lcov</li>
-<li>Static analysis with cppcheck and clang-tidy</li>
-<li>Documentation generation with Doxygen</li>
-<li>Release build validation</li>
-</ul>
-</li>
-<li><b>Sanitizer Configuration</b> (LoggerSanitizers.cmake)<ul>
-<li>Support for Address, Thread, Undefined, and Memory sanitizers</li>
-<li>Platform-specific sanitizer settings</li>
-<li>Runtime options configuration</li>
-<li>Automatic sanitizer application to test targets</li>
-</ul>
-</li>
-<li><b>Warning Configuration</b> (LoggerWarnings.cmake)<ul>
-<li>Comprehensive warning flags for GCC, Clang, and MSVC</li>
-<li>Option to treat warnings as errors</li>
-<li>Compiler-specific warning optimizations</li>
-<li>Third-party code warning suppression</li>
-</ul>
-</li>
-<li><b>Coverage Configuration</b> (LoggerCoverage.cmake)<ul>
-<li>Code coverage support with gcov/lcov/gcovr</li>
-<li>HTML, XML, and JSON report generation</li>
-<li>Coverage target for easy report generation</li>
-<li>Coverage reset functionality</li>
+<li><b>Legacy base_writer formatting methods</b>: Marked for future removal<ul>
+<li><code>format_log_entry(level, message, file, line, function, timestamp)</code> - Use formatter instead</li>
+<li><code>level_to_string(log_level)</code> - Formatting now handled by formatters</li>
+<li><code>level_to_color(log_level)</code> - Formatting now handled by formatters</li>
+<li>Methods remain functional for backward compatibility</li>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md602"></a>
-Improved</h3>
+<h2><a class="anchor" id="autotoc_md695"></a>
+Code Quality</h2>
 <ul>
-<li><b>Build System</b><ul>
-<li>Enhanced CMakeLists.txt with modular configuration</li>
-<li>Automatic sanitizer/warning/coverage application to targets</li>
-<li>Better feature detection and configuration</li>
+<li><b>90% reduction in conditional compilation</b>: Runtime polymorphism replaces #ifdef directives<ul>
+<li>Test combinations reduced from 16 to 4 (75% reduction)</li>
+<li>Improved code readability without #ifdef blocks</li>
+<li>Runtime backend switching capability</li>
+<li>Easier to add new integration backends</li>
 </ul>
 </li>
-<li><b>Quality Assurance</b><ul>
-<li>Automated testing with multiple sanitizers</li>
-<li>Strict compiler warning enforcement</li>
-<li>Code coverage tracking</li>
-<li>Static analysis integration</li>
+<li><b>50% reduction in code duplication</b>: Formatting logic centralized in formatters</li>
+<li><b>Unified error handling</b>: Eliminated try-catch duplication across all writers<ul>
+<li>Consistent exception handling with specialized error handlers</li>
+<li>Better error message consistency across all writers</li>
+<li>Reduced boilerplate code in write operations</li>
+<li>Improved error code accuracy with proper exception type detection</li>
 </ul>
 </li>
+<li><b>Common utility functions</b>: Extracted shared code to reusable utilities<ul>
+<li>~150 lines of duplicate code removed from formatters</li>
+<li>Thread-safe, stateless utility functions</li>
+<li>Security-focused file utilities ready for Phase 4</li>
+<li>Consistent timestamp formatting across all components</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md603"></a>
-Configuration Options</h3>
+</li>
+<li><b>Improved maintainability</b>: Single source of truth for formatting, error handling, and common utilities</li>
+<li><b>Enhanced extensibility</b>: Easy to add new formatters (XML, YAML, custom formats) and backends</li>
+<li><b>Better testability</b>: Formatters, backends, error handlers, and utilities can be tested independently</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md696"></a>
+Benefits</h2>
 <ul>
-<li><code>LOGGER_ENABLE_SANITIZERS</code>: Enable sanitizers in debug builds</li>
-<li><code>LOGGER_SANITIZER_TYPE</code>: Select sanitizer type (address/thread/undefined/memory)</li>
-<li><code>LOGGER_ENABLE_WARNINGS</code>: Enable comprehensive compiler warnings</li>
-<li><code>LOGGER_WARNINGS_AS_ERRORS</code>: Treat warnings as errors</li>
-<li><code>LOGGER_ENABLE_COVERAGE</code>: Enable code coverage reporting</li>
+<li><b>Simplified Testing</b>: Fewer conditional compilation paths to test</li>
+<li><b>Runtime Flexibility</b>: Can switch backends at runtime for testing</li>
+<li><b>Cleaner Codebase</b>: Less #ifdef clutter, more readable code</li>
+<li><b>Easy Extension</b>: Adding new integration backends requires no conditional compilation</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md604"></a>
-[2.5.0] - Phase 5 P1 Comprehensive Test Suite (2025-09-09)</h2>
-<h3><a class="anchor" id="autotoc_md605"></a>
-Added - Phase 5 Task P1 Partial Implementation</h3>
-<h4><a class="anchor" id="autotoc_md606"></a>
-Test Coverage Enhancements</h4>
+<h2><a class="anchor" id="autotoc_md697"></a>
+Backward Compatibility</h2>
 <ul>
-<li><b>Mock Implementations</b><ul>
-<li><code>mock_writer.hpp</code>: Controllable mock writer for unit testing</li>
-<li><code>mock_monitor.hpp</code>: Mock monitoring interface for testing health checks</li>
-<li><code>mock_di_container.hpp</code>: Mock dependency injection container</li>
-<li>All mocks support failure simulation and inspection methods</li>
+<li>All existing code continues to work without modifications</li>
+<li>Default formatter (timestamp_formatter) maintains original formatting behavior</li>
+<li>Legacy API methods remain functional with deprecation warnings</li>
+<li>All tests passing: 3/3 integration tests</li>
 </ul>
-</li>
-<li><b>Stress Testing Suite</b><ul>
-<li>Concurrent logging stress test (20 threads, 1000 messages each)</li>
-<li>Memory stability test under sustained load</li>
-<li>Buffer overflow handling verification</li>
-<li>Writer switching stress test</li>
-<li>Random load pattern simulation</li>
-<li>Writer failure recovery testing</li>
-<li>Async writer performance benchmarking</li>
-</ul>
-</li>
-<li><b>Integration Testing Suite</b><ul>
-<li>Complete pipeline integration tests</li>
-<li>DI container integration verification</li>
-<li>Configuration template testing</li>
-<li>Batch writer integration tests</li>
-<li>Monitoring and health check integration</li>
-<li>Multi-writer synchronization tests</li>
-<li>Error recovery and fallback mechanism tests</li>
-<li>Performance tuning strategy validation</li>
-<li>Environment-based configuration tests</li>
-</ul>
-</li>
-<li><b>Configuration Templates</b><ul>
-<li>Pre-defined templates: production, debug, high_performance, low_latency</li>
-<li>Performance strategies: conservative, balanced, aggressive</li>
-<li>Template configuration system with automatic settings</li>
-<li>Environment detection from LOG_ENV and LOG_LEVEL variables</li>
-</ul>
-</li>
-</ul>
-<h3><a class="anchor" id="autotoc_md607"></a>
-Improved</h3>
+<hr  />
+<h1><a class="anchor" id="autotoc_md699"></a>
+Phase 2: Performance Optimization - 2025-11-03</h1>
+<h2><a class="anchor" id="autotoc_md700"></a>
+Added</h2>
 <ul>
-<li><b>Test Organization</b><ul>
-<li>Created dedicated <code>mocks/</code> directory for mock implementations</li>
-<li>Added <code>stress_test/</code> directory for stress tests</li>
-<li>Added <code>integration_test/</code> directory for integration tests</li>
-<li>Updated CMakeLists.txt to include new test directories</li>
+<li><b>thread_local_object_pool</b>: New thread-local cached object pool implementation<ul>
+<li>Per-thread local cache to minimize lock contention</li>
+<li>Batch transfers between local cache and global pool</li>
+<li>Configurable cache size (default: 16 objects per thread)</li>
+<li>Detailed statistics tracking (cache hits, global pool hits, allocations)</li>
+<li><b>Performance</b>: 2.4x faster multi-threaded performance (8 threads)</li>
+<li><b>Performance</b>: 2.6x faster single-threaded performance</li>
+<li>See <code>src/impl/memory/object_pool.h</code> for implementation</li>
 </ul>
 </li>
-<li><b>Builder Pattern Enhancements</b><ul>
-<li>Added <code>apply_template()</code> method for configuration templates</li>
-<li>Added <code>apply_performance_strategy()</code> method for performance tuning</li>
-<li>Added <code>detect_environment()</code> for automatic environment configuration</li>
-<li>Added monitoring and health check configuration methods</li>
-<li>Added error handler and overflow policy configuration</li>
+<li><b>object_pool_bench</b>: Comprehensive object pool benchmarks<ul>
+<li>Single-threaded and multi-threaded performance tests</li>
+<li>High contention scenario testing</li>
+<li>Cache efficiency measurements</li>
+<li>Located in <code>benchmarks/object_pool_bench.cpp</code></li>
+</ul>
+</li>
+<li><b>Benchmark Infrastructure</b>: Complete CI/CD integration for performance regression detection<ul>
+<li><code>compare_benchmarks.py</code>: Python script for automated benchmark comparison</li>
+<li>Detects performance regressions with configurable threshold (default: 5%)</li>
+<li>Generates markdown reports showing improvements and regressions</li>
+<li>Integrated into GitHub Actions workflow</li>
+<li>Baseline results stored in <code>benchmarks/baselines/</code></li>
+<li>Automatic comparison on every pull request</li>
+<li>Located in <code>scripts/compare_benchmarks.py</code></li>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md608"></a>
-Known Issues</h3>
+<h2><a class="anchor" id="autotoc_md701"></a>
+Changed</h2>
 <ul>
-<li>Some integration tests require full thread_system integration</li>
-<li>Certain template configurations need further tuning</li>
-<li>Build system needs refinement for standalone mode</li>
+<li><b>rotating_file_writer</b>: Periodic rotation checks for improved performance<ul>
+<li>Added <code>check_interval</code> parameter (default: 100 writes)</li>
+<li>Reduces filesystem system calls from every write to every 100 writes</li>
+<li><b>Expected performance</b>: 10-20% improvement in throughput</li>
+<li>Maintains rotation accuracy with configurable interval</li>
+<li>All constructors now accept optional <code>check_interval</code> parameter</li>
+<li>Backward compatible with default value</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md609"></a>
-Technical Debt</h3>
+</li>
+<li><b>Benchmark Workflow</b>: Enhanced GitHub Actions benchmarks.yml<ul>
+<li>Benchmarks now enabled (BUILD_BENCHMARKS=ON, previously disabled)</li>
+<li>Automated benchmark execution on push and PR</li>
+<li>Results uploaded as artifacts (90-day retention)</li>
+<li>Baseline comparison with regression detection using compare_benchmarks.py</li>
+<li>Markdown reports in GitHub Step Summary</li>
+<li>Manual baseline saving via workflow_dispatch</li>
+<li>Performance threshold: 5% regression detection</li>
+<li>Located in <code>.github/workflows/benchmarks.yml</code></li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md702"></a>
+Performance</h2>
 <ul>
-<li>Need to complete remaining test coverage to reach 80% target</li>
-<li>Mock implementations could be extended with more scenarios</li>
-<li>Stress tests need platform-specific optimizations</li>
+<li><b>object_pool improvements</b> (8 threads):<ul>
+<li>Original: 949 ns/op (1.05M ops/s)</li>
+<li>Optimized: 396 ns/op (2.53M ops/s)</li>
+<li><b>Improvement: 2.4x faster</b></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md610"></a>
-[2.4.0] - Phase 4 O1, O3 &amp; O4 Implementation (2025-09-10)</h2>
-<h3><a class="anchor" id="autotoc_md611"></a>
-Added - Phase 4 Tasks O1, O3 &amp; O4 Complete</h3>
-<h4><a class="anchor" id="autotoc_md612"></a>
-Batch Processing (O1)</h4>
+</li>
+<li><b>object_pool improvements</b> (single thread):<ul>
+<li>Original: 18.2 ns/op (54.9M ops/s)</li>
+<li>Optimized: 7.03 ns/op (142.4M ops/s)</li>
+<li><b>Improvement: 2.6x faster</b></li>
+</ul>
+</li>
+<li><b>High contention scenario</b> (8 threads, 10 objects):<ul>
+<li>Original: 6336 ns/op</li>
+<li>Optimized: 3534 ns/op</li>
+<li><b>Improvement: 1.8x faster</b></li>
+</ul>
+</li>
+<li>All Phase 1 + Phase 2 tests passing: 7/7</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md704"></a>
+Phase 1: Critical Fixes - 2025-11-03</h1>
+<h2><a class="anchor" id="autotoc_md705"></a>
+Fixed</h2>
 <ul>
-<li><b>Batch Writer Implementation</b><ul>
-<li>New <code>batch_writer</code> class that wraps any existing writer</li>
-<li>Configurable batch size (default: 100 entries)</li>
-<li>Automatic flush on timeout (default: 1000ms)</li>
-<li>Thread-safe batch accumulation with mutex protection</li>
-<li>Preserves original log entry timestamps</li>
+<li><b>async_writer</b>: Removed timeout-based detach mechanism that caused memory leaks and message loss<ul>
+<li>Replaced 5-second timeout with infinite wait for safer shutdown</li>
+<li>Worker thread now always joins properly without detaching</li>
+<li>Added <code>force_flush</code> parameter to control remaining message processing</li>
+<li>Eliminated potential use-after-free scenarios during shutdown</li>
 </ul>
 </li>
-<li><b>Performance Optimizations</b><ul>
-<li>Reduced system call overhead by 30-50% through batching</li>
-<li>Minimized I/O operations by writing multiple entries at once</li>
-<li>Pre-allocated batch storage to avoid dynamic allocations</li>
-<li>Optional batch writing can be enabled/disabled at runtime</li>
+<li><b>file_writer</b>: Changed <code>std::endl</code> to &lsquo;&rsquo;<br  />
+'<code>for 50-100x performance improvement<ul>
+<li>Eliminated forced disk synchronization (fsync<code>) on every write</code></li>
+<li><code>Leverages OS buffering for better I/O performance</code></li>
+<li><code>Explicit</code>flush()` method still available when needed</li>
+<li><b>Expected improvement</b>: ~10K msg/s → ~1M msg/s on SSD</li>
+</ul>
+</code></li>
+<li><code><b>rotating_file_writer</b>: Changed <code>std::endl</code> to &lsquo;&rsquo;<br  />
+'` for better performance<ul>
+<li>Consistent with file_writer improvements</li>
+<li>Maintains all rotation functionality while improving throughput</li>
+</ul>
+</code></li>
+<li><code><b>console_writer</b>: Changed <code>std::endl</code> to &lsquo;&rsquo;<br  />
+'` for better performance<ul>
+<li>Reduces console output overhead</li>
+<li>Maintains proper newline behavior</li>
+</ul>
+</code></li>
+</ul>
+<p><code></code></p>
+<h2><a class="anchor" id="autotoc_md706"></a>
+Performance</h2>
+<p><code></p><ul>
+<li>File writing performance improved by <b>50-100x</b> (from ~10K msg/s to ~1M msg/s on SSD)</li>
+<li>Async writer shutdown now prioritizes safety over speed (no message loss)</li>
+<li>All existing tests pass without regressions (7/7 tests passing)</li>
+</ul>
+<p></code></p>
+<p><code></p><hr  />
+<p></code></p>
+<p><code></code></p>
+<h1><a class="anchor" id="autotoc_md708"></a>
+Initial Release - 2025-10-22</h1>
+<p><code></code></p>
+<p><code></code></p>
+<h2><a class="anchor" id="autotoc_md709"></a>
+Added</h2>
+<p><code></p><ul>
+<li><b>Core Logger System</b>: Production-ready C++20 asynchronous logging framework<ul>
+<li>Asynchronous processing with non-blocking log operations</li>
+<li>Multiple output targets (console, file, rotating file, network, encrypted, hybrid)</li>
+<li>Thread-safe operations with concurrent logging support</li>
+<li>Zero-copy design for efficient message passing</li>
 </ul>
 </li>
-<li><b>Integration Features</b><ul>
-<li>Automatic batch writer wrapping in <code>logger_builder</code></li>
-<li>Configuration through <code>enable_batch_writing</code> flag</li>
-<li>Strategy pattern integration for production/performance modes</li>
-<li>Batch size configuration in all template strategies</li>
+<li><b>Critical Writer</b>: Synchronous logging for critical messages requiring immediate write<ul>
+<li>Emergency flush mechanism to preserve logs during abnormal termination</li>
+<li>Crash-safe logging with automatic buffer flushing</li>
 </ul>
 </li>
-</ul>
-<h4><a class="anchor" id="autotoc_md613"></a>
-Small String Optimization (O3)</h4>
-<ul>
-<li><b>SSO Implementation</b><ul>
-<li>Custom <code>small_string</code> template class with configurable SSO threshold</li>
-<li>Stack allocation for strings under threshold (default 256 bytes)</li>
-<li>Automatic heap allocation for larger strings</li>
-<li>Zero-copy string_view conversion support</li>
+<li><b>Advanced Architecture</b>:<ul>
+<li>Interface-driven design with ILogger, IMonitor, IMonitorable abstractions</li>
+<li>Modular components with pluggable writers, filters, formatters</li>
+<li>Zero circular dependencies through interface-only dependencies</li>
+<li>Independent compilation without ecosystem dependencies</li>
 </ul>
 </li>
-<li><b>Performance Benefits</b><ul>
-<li>Reduced heap allocations by 70-90% for typical log messages</li>
-<li>Faster string operations for short messages</li>
-<li>Lower memory fragmentation</li>
-<li>Improved cache locality</li>
+<li><b>Builder Pattern API</b>: Fluent, type-safe logger construction<ul>
+<li>Configuration strategies (template-based, environment-aware, performance tuning)</li>
+<li>Comprehensive validation with Result&lt;T&gt; error handling</li>
+<li>Dependency injection for optional runtime component injection</li>
 </ul>
 </li>
-<li><b>Integration Features</b><ul>
-<li>Applied to log_entry message field (256 bytes)</li>
-<li>Applied to source_location paths (256 bytes)</li>
-<li>Applied to thread_id (64 bytes) and category (128 bytes)</li>
-<li>Transparent API compatibility with std::string</li>
+<li><b>CMake Build System</b>: Comprehensive build configuration<ul>
+<li>15+ feature flags for flexible builds</li>
+<li>Automatic dependency detection</li>
+<li>Cross-platform support (Windows, Linux, macOS)</li>
+<li>Compiler support (GCC, Clang, MSVC)</li>
 </ul>
 </li>
-</ul>
-<h4><a class="anchor" id="autotoc_md614"></a>
-Benchmark Suite (O4)</h4>
-<ul>
-<li><b>Comprehensive Benchmark Suite</b><ul>
-<li>Google Benchmark integration with automatic fetching</li>
-<li>8+ specialized benchmark executables</li>
-<li>Performance measurement infrastructure</li>
-<li>Latency percentile tracking (P50, P95, P99)</li>
+<li><b>Writers</b>:<ul>
+<li><code>console_writer</code>: Standard output/error stream logging</li>
+<li><code>file_writer</code>: Basic file output</li>
+<li><code>rotating_file_writer</code>: Automatic log rotation by size/time</li>
+<li><code>network_writer</code>: Remote logging over network</li>
+<li><code>critical_writer</code>: Synchronous critical message logging</li>
+<li><code>hybrid_writer</code>: Combined multiple writer support</li>
 </ul>
 </li>
-<li><b>Benchmark Coverage</b><ul>
-<li>Configuration template performance comparison</li>
-<li>Message size impact analysis (10B to 16KB)</li>
-<li>Queue behavior under various loads</li>
-<li>Multi-writer performance testing</li>
-<li>Filter impact measurements</li>
-<li>Structured vs plain logging comparison</li>
+<li><b>Formatters</b>:<ul>
+<li><code>text_formatter</code>: Plain text format</li>
+<li><code>json_formatter</code>: Structured JSON logging</li>
+<li><code>xml_formatter</code>: XML format for legacy systems</li>
+<li>Custom formatter support via IFormatter interface</li>
 </ul>
 </li>
-<li><b>Batch Processing Benchmarks</b><ul>
-<li>Simulated batch vs direct writing comparison</li>
-<li>Multi-threaded batch processing</li>
-<li>Configurable batch size testing (1-500)</li>
-<li>Thread scalability analysis (1-8 threads)</li>
+<li><b>Filters</b>:<ul>
+<li>Log level filtering</li>
+<li>Pattern-based message filtering</li>
+<li>Custom filter support via IFilter interface</li>
 </ul>
 </li>
-<li><b>Infrastructure Improvements</b><ul>
-<li>FetchBenchmark.cmake for dependency management</li>
-<li>Automated benchmark execution targets</li>
-<li>Performance regression detection capability</li>
+<li><b>Integration Support</b>:<ul>
+<li>common_system integration (ILogger, IMonitor, Result&lt;T&gt; pattern)</li>
+<li>thread_system integration (threading primitives, logger_interface)</li>
+<li>monitoring_system integration (metrics and health monitoring via IMonitor)</li>
 </ul>
 </li>
-</ul>
-<h3><a class="anchor" id="autotoc_md615"></a>
-Technical Details</h3>
-<ul>
-<li>Batch Writer: <code>sources/logger/writers/batch_writer.cpp</code> (186 lines), <code>batch_writer.h</code> (218 lines)</li>
-<li>Small String Optimization: <code>sources/logger/core/small_string.h</code> (445 lines)</li>
-<li>Modified files for SSO: <code>log_entry.h</code>, <code>base_writer.h</code>, <code>base_formatter.h</code>, <code>log_filter.h</code>, <code>log_collector.cpp</code></li>
-<li>Benchmarks: <code>comprehensive_benchmark.cpp</code>, <code>batch_processing_benchmark.cpp</code> (700+ lines total)</li>
-<li>Configuration: Added <code>enable_batch_writing</code> to <code>logger_config</code></li>
-<li>CMake: Enhanced benchmark build configuration with Google Benchmark v1.8.3</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md616"></a>
-[2.3.0] - Phase 3 Overflow Policy System Implementation (2025-09-10)</h2>
-<h3><a class="anchor" id="autotoc_md617"></a>
-Added - Phase 3 Task A4 Complete</h3>
-<ul>
-<li><b>Comprehensive Overflow Policy System</b><ul>
-<li>Multiple overflow handling strategies (drop oldest, drop newest, block, grow)</li>
-<li>Policy factory for easy policy creation and switching</li>
-<li>Custom policy support with user-defined handlers</li>
-<li>Thread-safe overflow queue implementation</li>
-<li>Statistics tracking for all policy operations</li>
-</ul>
-</li>
-<li><b>Adaptive Backpressure System</b><ul>
-<li>Dynamic batch size adjustment based on system load</li>
-<li>Automatic flush interval adaptation</li>
-<li>Load threshold-based pressure control</li>
-<li>Configurable adaptation parameters (rate, thresholds, limits)</li>
-<li>Real-time metrics tracking with sliding window</li>
-<li>Manual and automatic adaptation modes</li>
-</ul>
-</li>
-<li><b>Policy Features</b><ul>
-<li>Drop Oldest: Removes oldest messages when queue is full</li>
-<li>Drop Newest: Rejects new messages when queue is full</li>
-<li>Block: Waits for space with configurable timeout</li>
-<li>Grow: Dynamically increases queue capacity up to max limit</li>
-<li>Custom: User-defined overflow handling logic</li>
-</ul>
-</li>
-<li><b>Performance Optimization</b><ul>
-<li>Lock-free statistics tracking with atomic operations</li>
-<li>Efficient queue management with minimal locking</li>
-<li>Adaptive batch sizing for optimal throughput</li>
-<li>Backpressure mechanism to prevent system overload</li>
-</ul>
-</li>
-<li><b>Test Coverage</b><ul>
-<li>22 comprehensive unit tests covering all policies</li>
-<li>Concurrent access testing for thread safety</li>
-<li>Adaptive backpressure algorithm validation</li>
-<li>Boundary condition and stress testing</li>
-<li>100% test pass rate (22/22 tests passing)</li>
+<li><b>Performance Features</b>:<ul>
+<li>Configurable batching with tunable batch sizes and queue depths</li>
+<li>Lock-free operations on hot path</li>
+<li>Minimal allocations with efficient memory management</li>
+<li>~15 seconds build time for independent compilation</li>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md618"></a>
-Technical Details</h3>
-<ul>
-<li>Implementation: <code>sources/logger/flow/</code> (417 lines)</li>
-<li>Headers: <code>overflow_policy.h</code> with templated queue</li>
-<li>Build integration: Full CMake support</li>
+<p></code></p>
+<p><code></code></p>
+<h2><a class="anchor" id="autotoc_md710"></a>
+Changed</h2>
+<p><code></p><ul>
+<li>N/A (Initial release)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md619"></a>
-[2.2.0] - Phase 2 Core Systems Complete (2025-09-09)</h2>
-<h3><a class="anchor" id="autotoc_md620"></a>
-Added - All Phase 2 Tasks Complete</h3>
-<ul>
-<li><b>Abstract DI Interface</b> [C1]<ul>
-<li>Design di_container_interface abstraction</li>
-<li>Implement lightweight_container (no external dependencies)</li>
-<li>Create adapter for thread_system (optional integration)</li>
-<li>Enable runtime component injection with fallback</li>
+<p></code></p>
+<p><code></code></p>
+<h2><a class="anchor" id="autotoc_md711"></a>
+Deprecated</h2>
+<p><code></p><ul>
+<li>N/A (Initial release)</li>
 </ul>
-</li>
-<li><b>Monitoring Interface</b> [C2]<ul>
-<li>Create abstract monitoring_interface</li>
-<li>Implement basic metrics collector (standalone)</li>
-<li>Add optional thread_system monitoring adapter</li>
-<li>Create health check system with minimal overhead</li>
+<p></code></p>
+<p><code></code></p>
+<h2><a class="anchor" id="autotoc_md712"></a>
+Removed</h2>
+<p><code></p><ul>
+<li>N/A (Initial release)</li>
 </ul>
-</li>
-<li><b>Enhanced Builder</b> [C3]<ul>
-<li>Add template configurations (production, debug, high_performance, low_latency)</li>
-<li>Support environment-based configuration</li>
-<li>Implement performance tuning strategies</li>
-<li>Strategy composition with priority-based ordering</li>
+<p></code></p>
+<p><code></code></p>
+<h2><a class="anchor" id="autotoc_md713"></a>
+Fixed</h2>
+<p><code></p><ul>
+<li>N/A (Initial release)</li>
 </ul>
-</li>
-<li><b>CMake Modularization</b> [C4]<ul>
-<li>Create proper package configuration</li>
-<li>Add feature flags module with 15+ configurable options</li>
-<li>Dependency detection module</li>
-<li>Automatic feature validation and conflict resolution</li>
+<p></code></p>
+<p><code></code></p>
+<h2><a class="anchor" id="autotoc_md714"></a>
+Security</h2>
+<p><code></p><ul>
+<li>Thread-safe operations ensure concurrent logging without data races</li>
+<li>Encrypted writer support for sensitive log data</li>
 </ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md621"></a>
-[2.1.0] - Phase 1 Foundation Complete (2025-09-09)</h2>
-<h3><a class="anchor" id="autotoc_md622"></a>
-Added</h3>
-<ul>
-<li>Thread system integration</li>
-<li>Result pattern implementation <br  />
-</li>
-<li>Interface segregation (SOLID)</li>
-<li>Configuration validation framework</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md623"></a>
-[2.0.0] - Major Refactoring (2025-07-26)</h2>
-<h3><a class="anchor" id="autotoc_md624"></a>
-Changed</h3>
-<ul>
-<li>Complete architecture overhaul</li>
-<li>Modern C++20 implementation</li>
-<li>Modular design with clear separation of concerns</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md625"></a>
-[1.0.0] - Initial Release (2025-07-01)</h2>
-<h3><a class="anchor" id="autotoc_md626"></a>
-Added</h3>
-<ul>
-<li>Basic logging functionality</li>
-<li>Console and file writers </li>
-</ul>
-<h2><a class="anchor" id="autotoc_md627"></a>
-- Log levels and filtering</h2>
-<p><em>Last Updated: 2025-10-20</em> </p>
+<p></code></p>
+<p><code></p><hr  />
+<p></code></p>
+<p><code></code></p>
+<h1><a class="anchor" id="autotoc_md716"></a>
+Project Information</h1>
+<p><code></code></p>
+<p><code><b>Repository:</b> <a href="https://github.com/kcenon/logger_system">https://github.com/kcenon/logger_system</a> <b>Documentation:</b> <a href="docs/">docs/</a> <b>License:</b> See LICENSE file <b>Maintainer:</b> <a href="#" onclick="location.href='mai'+'lto:'+'kce'+'no'+'n@n'+'av'+'er.'+'co'+'m'; return false;">kceno<span class="obfuscator">.nosp@m.</span>n@na<span class="obfuscator">.nosp@m.</span>ver.c<span class="obfuscator">.nosp@m.</span>om</a></code></p>
+<p><code></p><hr  />
+<p></code></p>
+<p><code></code></p>
+<h1><a class="anchor" id="autotoc_md718"></a>
+Version Support Matrix</h1>
+<p><code></code></p>
+<p><code></p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Version   </th><th class="markdownTableHeadNone">Release Date   </th><th class="markdownTableHeadNone">C++ Standard   </th><th class="markdownTableHeadNone">CMake Minimum   </th><th class="markdownTableHeadNone">Status    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1.0.0   </td><td class="markdownTableBodyNone">2025-10-22   </td><td class="markdownTableBodyNone">C++20   </td><td class="markdownTableBodyNone">3.16   </td><td class="markdownTableBodyNone">Current   </td></tr>
+</table>
+<p></code></p>
+<p><code></p><hr  />
+<p></code></p>
+<p><code></code></p>
+<h1><a class="anchor" id="autotoc_md720"></a>
+Migration Guide</h1>
+<p><code></code></p>
+<p><code>For migration from integrated thread_system or standalone logger implementations, see <a class="el" href="MIGRATION_8md.html">MIGRATION.md</a>.</code></p>
+<p><code></p><hr  />
+<p></code></p>
+<p><code><b>Last Updated:</b> 2025-10-22 </code></p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Nov 11 2025 14:29:10 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Nov 12 2025 01:16:32 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

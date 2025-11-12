@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['검증_20예상_20소요_3a_201_205시간_0',['Phase 5: 테스트 및 검증 (예상 소요: 1.5시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md936',1,'']]]
+  ['개선_20필요_20사항_0',['❌ 개선 필요 사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1089',1,'']]],
+  ['개요_1',['🔧 주요 컴포넌트 개요',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md668',1,'']]]
 ];

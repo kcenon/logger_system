@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['📁_20제안_20디렉토리_20구조_0',['📁 제안 디렉토리 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md899',1,'']]],
-  ['📁_20strong_20directory_20organization_20strong_1',['📁 &lt;strong&gt;Directory Organization&lt;/strong&gt;',['../index.html#autotoc_md30',1,'']]]
+  ['파싱_20및_20기준선_20비교_0',['Phase 2: 결과 파싱 및 기준선 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1102',1,'']]],
+  ['파싱_20스크립트_1',['2.1 벤치마크 결과 파싱 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1103',1,'']]]
 ];

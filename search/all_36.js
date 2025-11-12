@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['따른_20벤치마크_20코드_20수정_0',['1.3 API 변경에 따른 벤치마크 코드 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md905',1,'']]]
+  ['도구_20및_20라이브러리_0',['도구 및 라이브러리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1141',1,'']]],
+  ['도움_20및_20지원_1',['🤝 도움 및 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1177',1,'']]]
 ];

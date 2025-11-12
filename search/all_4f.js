@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['소요_3a_201시간_0',['소요: 1시간',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md934',1,'Phase 3: README 자동 업데이트 (예상 소요: 1시간)'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md937',1,'Phase 6: 문서화 (예상 소요: 1시간)']]],
-  ['소요_3a_201_205시간_1',['소요: 1 5시간',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md933',1,'Phase 2: 배지 및 차트 (예상 소요: 1.5시간)'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md936',1,'Phase 5: 테스트 및 검증 (예상 소요: 1.5시간)']]],
-  ['소요_3a_202시간_2',['소요: 2시간',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md932',1,'Phase 1: 인프라 구축 (예상 소요: 2시간)'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md935',1,'Phase 4: CI/CD 통합 (예상 소요: 2시간)']]]
+  ['사례_20가이드_0',['Logger System 모범 사례 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES__KO.html#autotoc_md819',1,'']]],
+  ['사용자_1',['사용자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1171',1,'기존 사용자'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1170',1,'신규 사용자']]],
+  ['사용_20업데이트_2',['Step 3: Namespace 사용 업데이트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md675',1,'']]],
+  ['사용_20중단됨_3',['사용 중단됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md727',1,'']]],
+  ['사항_4',['❌ 개선 필요 사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1089',1,'']]]
 ];

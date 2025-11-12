@@ -96,14 +96,14 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE__KO.html">한국어</a> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md836"></a>
+<h1><a class="anchor" id="autotoc_md991"></a>
 Logger System Performance Guide</h1>
-<h2><a class="anchor" id="autotoc_md837"></a>
+<h2><a class="anchor" id="autotoc_md992"></a>
 Overview</h2>
 <p>The Logger System is designed for high-performance logging in multi-threaded applications. This guide covers performance characteristics, benchmarks, and optimization strategies.</p>
-<h2><a class="anchor" id="autotoc_md838"></a>
+<h2><a class="anchor" id="autotoc_md993"></a>
 Performance Characteristics</h2>
-<h3><a class="anchor" id="autotoc_md839"></a>
+<h3><a class="anchor" id="autotoc_md994"></a>
 Synchronous Mode</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -121,7 +121,7 @@ Synchronous Mode</h3>
 <li>No additional memory overhead</li>
 <li>Zero background CPU usage</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md840"></a>
+<h3><a class="anchor" id="autotoc_md995"></a>
 Asynchronous Mode</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -138,9 +138,9 @@ Asynchronous Mode</h3>
 <li>One background thread</li>
 <li>Queue is currently mutex/condition-variable backed with batch size ≈100 (tunable in code)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md841"></a>
+<h2><a class="anchor" id="autotoc_md996"></a>
 Benchmarks</h2>
-<h3><a class="anchor" id="autotoc_md842"></a>
+<h3><a class="anchor" id="autotoc_md997"></a>
 Test Environment</h3>
 <ul>
 <li>CPU: Intel Core i7-9700K @ 3.6GHz</li>
@@ -148,7 +148,7 @@ Test Environment</h3>
 <li>OS: Ubuntu 20.04 LTS</li>
 <li>Compiler: GCC 10.3 with -O3</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md843"></a>
+<h3><a class="anchor" id="autotoc_md998"></a>
 Single Thread Performance</h3>
 <div class="fragment"><div class="line"><span class="comment">// Benchmark: 1 million log messages</span></div>
 <div class="line"><span class="keyword">auto</span> logger = std::make_shared&lt;logger_module::logger&gt;(<span class="keyword">true</span>, 16384);</div>
@@ -164,7 +164,7 @@ Single Thread Performance</h3>
 <li>Sync mode: ~2.5M logs/second (null writer)</li>
 <li>Sync mode: ~15K logs/second (console writer)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md844"></a>
+<h3><a class="anchor" id="autotoc_md999"></a>
 Multi-threaded Performance</h3>
 <div class="fragment"><div class="line"><span class="comment">// Benchmark: 4 threads, 250K messages each</span></div>
 <div class="line">std::vector&lt;std::thread&gt; threads;</div>
@@ -180,7 +180,7 @@ Multi-threaded Performance</h3>
 <li>Async mode: ~950K logs/second (total)</li>
 <li>Sync mode: ~12K logs/second (console, contention)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md845"></a>
+<h3><a class="anchor" id="autotoc_md1000"></a>
 Memory Usage</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -194,9 +194,9 @@ Memory Usage</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Per log entry   </td><td class="markdownTableBodyNone">~32-128 bytes   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md846"></a>
+<h2><a class="anchor" id="autotoc_md1001"></a>
 Optimization Strategies</h2>
-<h3><a class="anchor" id="autotoc_md847"></a>
+<h3><a class="anchor" id="autotoc_md1002"></a>
 1. Choose the Right Mode</h3>
 <p><b>Use Synchronous Mode When:</b></p><ul>
 <li>Logging frequency is low (&lt; 100 logs/sec)</li>
@@ -210,7 +210,7 @@ Optimization Strategies</h2>
 <li>Multiple threads are logging</li>
 <li>I/O performance varies</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md848"></a>
+<h3><a class="anchor" id="autotoc_md1003"></a>
 2. Buffer Size Tuning</h3>
 <div class="fragment"><div class="line"><span class="comment">// Calculate optimal buffer size</span></div>
 <div class="line"><span class="keywordtype">size_t</span> logs_per_second = 10000;</div>
@@ -228,10 +228,10 @@ Optimization Strategies</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md849"></a>
+<h3><a class="anchor" id="autotoc_md1004"></a>
 2.1 Batch Size Considerations</h3>
 <p>Batching reduces per-message overhead. If you maintain a custom build, consider exposing batch size and wake-up policies to tune latency vs. throughput for your workload.</p>
-<h3><a class="anchor" id="autotoc_md850"></a>
+<h3><a class="anchor" id="autotoc_md1005"></a>
 3. Level Filtering</h3>
 <div class="fragment"><div class="line"><span class="comment">// Filter early to avoid processing</span></div>
 <div class="line">logger-&gt;set_min_level(log_level::info);</div>
@@ -241,7 +241,7 @@ Optimization Strategies</h2>
 <div class="line">    std::string expensive_msg = build_debug_string();</div>
 <div class="line">    logger-&gt;log(log_level::debug, expensive_msg);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md851"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1006"></a>
 4. Message Construction</h3>
 <div class="fragment"><div class="line"><span class="comment">// Avoid string concatenation in hot paths</span></div>
 <div class="line"><span class="comment">// Bad:</span></div>
@@ -255,9 +255,9 @@ Optimization Strategies</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Better (when available):</span></div>
 <div class="line">logger-&gt;log(log_level::info, std::format(<span class="stringliteral">&quot;Value: {} Status: {}&quot;</span>, value, status));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md852"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1007"></a>
 5. Writer Optimization</h3>
-<h4><a class="anchor" id="autotoc_md853"></a>
+<h4><a class="anchor" id="autotoc_md1008"></a>
 Console Writer</h4>
 <div class="fragment"><div class="line"><span class="comment">// Disable colors for better performance</span></div>
 <div class="line"><span class="keyword">auto</span> console = std::make_unique&lt;console_writer&gt;();</div>
@@ -265,7 +265,7 @@ Console Writer</h4>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Use stderr for all output (single stream)</span></div>
 <div class="line"><span class="keyword">auto</span> console = std::make_unique&lt;console_writer&gt;(<span class="keyword">true</span>);</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md854"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1009"></a>
 Custom High-Performance Writer</h4>
 <div class="fragment"><div class="line"><span class="keyword">class </span>memory_writer : <span class="keyword">public</span> base_writer {</div>
 <div class="line">    std::vector&lt;std::string&gt; logs_;</div>
@@ -286,7 +286,7 @@ Custom High-Performance Writer</h4>
 <div class="line">        <span class="comment">// No-op for memory writer</span></div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md855"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1010"></a>
 6. Batch Processing</h3>
 <p>For custom writers, implement batching:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>batched_file_writer : <span class="keyword">public</span> base_writer {</div>
@@ -309,9 +309,9 @@ Custom High-Performance Writer</h4>
 <div class="line">        batch_.clear();</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md856"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1011"></a>
 Performance Anti-patterns</h2>
-<h3><a class="anchor" id="autotoc_md857"></a>
+<h3><a class="anchor" id="autotoc_md1012"></a>
 1. Synchronous I/O in Hot Paths</h3>
 <div class="fragment"><div class="line"><span class="comment">// Bad: Blocks on every call</span></div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; item : large_collection) {</div>
@@ -321,14 +321,14 @@ Performance Anti-patterns</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Good: Use async or batch</span></div>
 <div class="line"><span class="keyword">auto</span> async_logger = std::make_shared&lt;logger&gt;(<span class="keyword">true</span>);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md858"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1013"></a>
 2. Excessive String Formatting</h3>
 <div class="fragment"><div class="line"><span class="comment">// Bad: Creates many temporaries</span></div>
 <div class="line">logger-&gt;log(level, <span class="stringliteral">&quot;A: &quot;</span> + a + <span class="stringliteral">&quot; B: &quot;</span> + b + <span class="stringliteral">&quot; C: &quot;</span> + c);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Good: Single allocation</span></div>
 <div class="line">logger-&gt;log(level, std::format(<span class="stringliteral">&quot;A: {} B: {} C: {}&quot;</span>, a, b, c));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md859"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1014"></a>
 3. Logging in Tight Loops</h3>
 <div class="fragment"><div class="line"><span class="comment">// Bad: Logs every iteration</span></div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 1000000; ++i) {</div>
@@ -349,9 +349,9 @@ Performance Anti-patterns</h2>
 <div class="line">- For remote logging, network latency and packet loss dominate; batch and compress where appropriate.</div>
 <div class="line">- Use transport security (TLS/mTLS) <span class="keywordflow">for</span> in-transit logs; see SECURITY.md <span class="keywordflow">for</span> guidance.</div>
 <div class="line">- For storage, prefer rotating files with retention policies and, <span class="keywordflow">if</span> needed, encryption-at-rest <span class="keyword">using </span>authenticated encryption.</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md860"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1015"></a>
 Profiling and Monitoring</h2>
-<h3><a class="anchor" id="autotoc_md861"></a>
+<h3><a class="anchor" id="autotoc_md1016"></a>
 Built-in Metrics</h3>
 <p>Monitor logger performance:</p>
 <div class="fragment"><div class="line"><span class="comment">// Check if buffers are overflowing</span></div>
@@ -368,7 +368,7 @@ Built-in Metrics</h3>
 <div class="line">        <span class="keywordflow">return</span> dropped_messages_.load();</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md862"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1017"></a>
 External Profiling</h3>
 <p>Use system tools:</p><ul>
 <li><code>perf</code> for CPU profiling</li>
@@ -384,7 +384,7 @@ External Profiling</h3>
 <div class="line"> </div>
 <div class="line"># Memory profiling</div>
 <div class="line">valgrind --tool=massif ./your_app</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md863"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1018"></a>
 Best Practices Summary</h2>
 <ol type="1">
 <li><b>Default to Async Mode</b> - Better performance for most use cases</li>
@@ -395,23 +395,23 @@ Best Practices Summary</h2>
 <li><b>Profile Real Workloads</b> - Measure actual performance</li>
 <li><b>Monitor Health</b> - Track dropped messages and latency</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md864"></a>
+<h2><a class="anchor" id="autotoc_md1019"></a>
 Platform-Specific Optimizations</h2>
-<h3><a class="anchor" id="autotoc_md865"></a>
+<h3><a class="anchor" id="autotoc_md1020"></a>
 Linux</h3>
 <ul>
 <li>Use <code>io_uring</code> for file writes (future)</li>
 <li>Consider <code>mmap</code> for large log files</li>
 <li>Tune kernel buffers for network logging</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md866"></a>
+<h3><a class="anchor" id="autotoc_md1021"></a>
 Windows</h3>
 <ul>
 <li>Use overlapped I/O for async file writes</li>
 <li>Consider ETW for system integration</li>
 <li>Optimize console API usage</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md867"></a>
+<h3><a class="anchor" id="autotoc_md1022"></a>
 macOS</h3>
 <ul>
 <li>Use Grand Central Dispatch for async operations</li>
@@ -426,7 +426,7 @@ macOS</h3>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Nov 11 2025 14:29:10 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Nov 12 2025 01:16:32 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

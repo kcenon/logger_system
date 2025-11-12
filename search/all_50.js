@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['손실_20방지_20가이드_0',['크리티컬 로그 손실 방지 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION__KO.html#autotoc_md428',1,'']]]
+  ['상세_204단계_0',['🛠️ 구현 상세 (4단계)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1096',1,'']]],
+  ['상태_20분석_1',['🔍 현재 상태 분석',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1087',1,'']]]
 ];

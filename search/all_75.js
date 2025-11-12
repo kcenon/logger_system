@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['코드_20수정_0',['1.3 API 변경에 따른 벤치마크 코드 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md905',1,'']]],
-  ['코멘트_1',['2. PR 자동 코멘트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md928',1,'']]]
+  ['중단됨_0',['사용 중단됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md727',1,'']]],
+  ['중심_20디자인_1',['중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1115',1,'제안 1: 배지 중심 디자인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1116',1,'제안 2: 테이블 중심 디자인']]],
+  ['중요한_20제한사항_2',['중요한 제한사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1038',1,'']]]
 ];

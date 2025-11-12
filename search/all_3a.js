@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['리소스_0',['📖 외부 리소스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1031',1,'']]]
+  ['레이아웃_0',['📁 디렉토리 레이아웃',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md664',1,'']]],
+  ['레퍼런스_1',['API 레퍼런스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_202-API__REFERENCE__KO.html#autotoc_md214',1,'']]]
 ];

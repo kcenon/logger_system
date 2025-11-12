@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📂_20directory_20structure_20new_0',['📂 Directory Structure (New)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2IMPLEMENTATION__SUMMARY.html#autotoc_md970',1,'']]]
+  ['표시되지_20않음_0',['문제 4: 배지가 README에 표시되지 않음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1138',1,'']]]
 ];

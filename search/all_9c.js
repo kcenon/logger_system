@@ -1,4 +1,9 @@
 var searchData=
 [
-  ['🛡️_20strong_20production_20grade_20reliability_20strong_0',['🛡️ &lt;strong&gt;Production-Grade Reliability&lt;/strong&gt;',['../index.html#autotoc_md12',1,'']]]
+  ['🔄_20마이그레이션_20가이드_0',['🔄 마이그레이션 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md672',1,'']]],
+  ['🔄_20ci_20cd_20워크플로우_20전체_20예시_1',['🔄 CI/CD 워크플로우 전체 예시',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1119',1,'']]],
+  ['🔄_20ci_20cd_20pipeline_20health_2',['🔄 CI/CD Pipeline Health',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md311',1,'']]],
+  ['🔄_20dependency_20flow_20interface_20contracts_3',['🔄 Dependency Flow &amp; Interface Contracts',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_201-architecture.html#autotoc_md112',1,'']]],
+  ['🔄_20evolution_3a_20monolithic_20→_20modular_4',['🔄 Evolution: Monolithic → Modular',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_201-architecture.html#autotoc_md123',1,'']]],
+  ['🔄_20strong_20design_20patterns_20implementation_20strong_5',['🔄 &lt;strong&gt;Design Patterns Implementation&lt;/strong&gt;',['../index.html#autotoc_md28',1,'']]]
 ];

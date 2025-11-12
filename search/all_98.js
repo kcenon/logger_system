@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔮_20future_20roadmap_0',['🔮 Future Roadmap',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_201-architecture.html#autotoc_md210',1,'']]]
+  ['📋_20project_20roles_20responsibilities_0',['📋 Project Roles &amp; Responsibilities',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_201-architecture.html#autotoc_md92',1,'']]]
 ];

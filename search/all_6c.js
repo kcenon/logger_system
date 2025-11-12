@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['중심_20디자인_0',['중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md920',1,'제안 1: 배지 중심 디자인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md921',1,'제안 2: 테이블 중심 디자인']]],
-  ['중요한_20제한사항_1',['중요한 제한사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md883',1,'']]]
+  ['자동화_20제안서_0',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]],
+  ['자동_20업데이트_1',['Phase 4: README.md 자동 업데이트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1110',1,'']]],
+  ['자동_20업데이트_20예상_20소요_3a_201시간_2',['Phase 3: README 자동 업데이트 (예상 소요: 1시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1129',1,'']]],
+  ['자동_20커밋_3',['4.2 GitHub Actions에서 자동 커밋',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1112',1,'']]],
+  ['자동_20커밋_20권한_20오류_4',['문제 3: Git 자동 커밋 권한 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1137',1,'']]],
+  ['자동_20코멘트_5',['2. PR 자동 코멘트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1123',1,'']]],
+  ['자료_6',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1140',1,'']]]
 ];

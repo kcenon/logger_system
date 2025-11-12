@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['디렉토리_20구조_0',['📁 제안 디렉토리 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md899',1,'']]],
-  ['디자인_1',['디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md920',1,'제안 1: 배지 중심 디자인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md921',1,'제안 2: 테이블 중심 디자인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md922',1,'제안 3: 카드 스타일 디자인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md919',1,'🎨 README.md 성능 섹션 디자인']]]
+  ['대시보드_0',['Logger System CI/CD 대시보드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD__KO.html#autotoc_md320',1,'']]]
 ];
