@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['📖_20외부_20리소스_0',['📖 외부 리소스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1176',1,'']]],
-  ['📖_20external_20resources_1',['📖 External Resources',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1161',1,'']]],
-  ['📖_20strong_20key_20files_20and_20their_20purpose_20strong_2',['📖 &lt;strong&gt;Key Files and Their Purpose&lt;/strong&gt;',['../index.html#autotoc_md31',1,'']]]
+  ['📝_20다음_20단계_0',['📝 다음 단계',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1240',1,'']]],
+  ['📝_20dependency_20status_1',['📝 Dependency Status',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md276',1,'']]]
 ];

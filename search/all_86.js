@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['특성_0',['📊 성능 특성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md671',1,'']]],
-  ['특징_1',['주요 특징',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1077',1,'']]]
+  ['파싱_20및_20기준선_20비교_0',['Phase 2: 결과 파싱 및 기준선 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1195',1,'']]],
+  ['파싱_20스크립트_1',['2.1 벤치마크 결과 파싱 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1196',1,'']]]
 ];

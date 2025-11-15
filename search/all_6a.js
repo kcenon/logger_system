@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['이력_20logger_20system_0',['변경 이력 - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html',1,'']]]
+  ['인프라_20구축_20예상_20소요_3a_202시간_0',['Phase 1: 인프라 구축 (예상 소요: 2시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1220',1,'']]]
 ];
