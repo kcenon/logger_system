@@ -1,5 +1,8 @@
 # Baseline Performance Metrics
 
+> **📖 User Documentation**: For user-friendly performance documentation and analysis,
+> see [`docs/performance/BASELINE.md`](../docs/performance/BASELINE.md)
+
 **Document Version**: 1.0
 **Created**: 2025-10-07
 **System**: logger_system
