@@ -294,7 +294,7 @@ std::string network_writer::format_for_network(const buffered_log& log) {
     oss << std::put_time(std::gmtime(&time_t), "%Y-%m-%dT%H:%M:%SZ") << "\",";
     
     // Level
-    oss << "\"level\":\"" << level_to_string(log.level) << "\",";
+    oss << "\"level\":\"" << logger_system::log_level_to_string(log.level) << "\",";
     
     // Message
     oss << "\"message\":\"" << escape_json(log.message) << "\"";

@@ -101,8 +101,13 @@ result_void rotating_file_writer::write(logger_system::log_level level,
         );
         if (!check) return check;
 
+        // Create log_entry for new API
+        log_entry entry = (!file.empty() || line != 0 || !function.empty())
+            ? log_entry(level, message, file, line, function, timestamp)
+            : log_entry(level, message, timestamp);
+
         // Format and write
-        std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
+        std::string formatted = format_log_entry(entry);
         file_stream_ << formatted << '\n';
         bytes_written_.fetch_add(formatted.size() + 1);
 

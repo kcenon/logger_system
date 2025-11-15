@@ -102,11 +102,36 @@ result_void console_writer::write(logger_system::log_level level,
         auto& stream = (use_stderr_ || level <= logger_system::log_level::error)
                        ? std::cerr : std::cout;
 
+        // Create log_entry for new API
+        log_entry entry = (!file.empty() || line != 0 || !function.empty())
+            ? log_entry(level, message, file, line, function, timestamp)
+            : log_entry(level, message, timestamp);
+
         if (use_color()) {
-            stream << level_to_color(level);
+            // Simple color mapping based on level
+            switch (level) {
+                case logger_system::log_level::fatal:
+                case logger_system::log_level::error:
+                    stream << "\033[31m"; // Red
+                    break;
+                case logger_system::log_level::warning:
+                    stream << "\033[33m"; // Yellow
+                    break;
+                case logger_system::log_level::info:
+                    stream << "\033[32m"; // Green
+                    break;
+                case logger_system::log_level::debug:
+                    stream << "\033[36m"; // Cyan
+                    break;
+                case logger_system::log_level::trace:
+                    stream << "\033[37m"; // White
+                    break;
+                default:
+                    break;
+            }
         }
 
-        stream << format_log_entry(level, message, file, line, function, timestamp);
+        stream << format_log_entry(entry);
 
         if (use_color()) {
             stream << "\033[0m"; // Reset color
@@ -156,61 +181,6 @@ bool console_writer::is_color_supported() const {
     const char* term = std::getenv("TERM");
     return isatty(STDOUT_FILENO) && term && std::string(term) != "dumb";
 #endif
-}
-
-std::string base_writer::format_log_entry(logger_system::log_level level,
-                                         const std::string& message,
-                                         const std::string& file,
-                                         int line,
-                                         const std::string& function,
-                                         const std::chrono::system_clock::time_point& timestamp) {
-    // Convert legacy API to log_entry and use formatter
-    log_entry entry(level, message, timestamp);
-
-    // Set thread ID as optional small_string
-    std::ostringstream tid_stream;
-    tid_stream << std::this_thread::get_id();
-    entry.thread_id = small_string_64(tid_stream.str());
-
-    // Always set source location if provided (even if empty)
-    // The formatter will decide whether to include it based on its options
-    if (!file.empty() || line != 0 || !function.empty()) {
-        source_location loc(file, line, function);
-        entry.location = loc;
-    }
-
-    // Thread-safe: Create temporary formatter options without modifying shared state
-    // The formatter's format() method will respect include_source_location setting
-    // from its own configuration, or detect location presence automatically
-    return format_log_entry(entry);
-}
-
-std::string base_writer::level_to_string(logger_system::log_level level) const {
-    switch (level) {
-        case logger_system::log_level::fatal: return "CRITICAL";
-        case logger_system::log_level::error:    return "ERROR";
-        case logger_system::log_level::warn:  return "WARNING";
-        case logger_system::log_level::info:     return "INFO";
-        case logger_system::log_level::debug:    return "DEBUG";
-        case logger_system::log_level::trace:    return "TRACE";
-        case logger_system::log_level::off:      return "OFF";
-    }
-    return "UNKNOWN";
-}
-
-std::string base_writer::level_to_color(logger_system::log_level level) const {
-    if (!use_color()) return "";
-    
-    switch (level) {
-        case logger_system::log_level::fatal: return "\033[1;35m"; // Bright Magenta
-        case logger_system::log_level::error:    return "\033[1;31m"; // Bright Red
-        case logger_system::log_level::warn:  return "\033[1;33m"; // Bright Yellow
-        case logger_system::log_level::info:     return "\033[1;32m"; // Bright Green
-        case logger_system::log_level::debug:    return "\033[1;36m"; // Bright Cyan
-        case logger_system::log_level::trace:    return "\033[1;37m"; // Bright White
-        case logger_system::log_level::off:      return ""; // No color for off
-    }
-    return "";
 }
 
 } // namespace kcenon::logger
