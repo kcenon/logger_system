@@ -156,19 +156,6 @@ public:
      */
     virtual std::string get_name() const = 0;
 
-    /**
-     * @brief Get the format type name (legacy API)
-     * @return Format type (e.g., "json", "plain", "xml")
-     *
-     * @deprecated Use get_name() instead
-     *
-     * @since 1.0.0
-     */
-    [[deprecated("Use get_name() instead")]]
-    virtual std::string get_format_type() const {
-        return get_name();
-    }
-
 protected:
     /** Current formatting options */
     format_options options_;
