@@ -78,26 +78,25 @@ public:
      * @details Converts from thread_system's descending level scheme to
      * logger_system's ascending scheme. Unknown levels default to info.
      *
+     * Uses direct int-based mapping to avoid ABI dependencies on
+     * kcenon::thread::log_level enum type. This ensures the backend
+     * works correctly regardless of which log_level type is used
+     * in the calling code.
+     *
      * @since 1.2.0
+     * @note ABI-safe implementation (Phase 3.1 fix)
      */
     logger_system::log_level normalize_level(int external_level) const override {
         // thread_system uses descending levels (critical=0, trace=5)
         // logger_system uses ascending levels (trace=0, fatal=5)
-        auto level = static_cast<kcenon::thread::log_level>(external_level);
-
-        switch (level) {
-            case kcenon::thread::log_level::critical:
-                return logger_system::log_level::fatal;
-            case kcenon::thread::log_level::error:
-                return logger_system::log_level::error;
-            case kcenon::thread::log_level::warning:
-                return logger_system::log_level::warning;
-            case kcenon::thread::log_level::info:
-                return logger_system::log_level::info;
-            case kcenon::thread::log_level::debug:
-                return logger_system::log_level::debug;
-            case kcenon::thread::log_level::trace:
-                return logger_system::log_level::trace;
+        // Direct int-based mapping without type dependency
+        switch (external_level) {
+            case 0: return logger_system::log_level::fatal;     // thread::critical
+            case 1: return logger_system::log_level::error;     // thread::error
+            case 2: return logger_system::log_level::warning;   // thread::warning
+            case 3: return logger_system::log_level::info;      // thread::info
+            case 4: return logger_system::log_level::debug;     // thread::debug
+            case 5: return logger_system::log_level::trace;     // thread::trace
             default:
                 // Unknown level - default to info
                 return logger_system::log_level::info;
