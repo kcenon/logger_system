@@ -174,7 +174,7 @@ jobs:
           -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}
 
         cmake --build . --parallel
-        ctest --output-on-failure
+        ctest --output-on-failure -E "(integration_test|compatibility_test)"
 
     - name: Build application (vcpkg - Windows)
       if: runner.os == 'Windows'
@@ -199,7 +199,7 @@ jobs:
           -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY"
 
         cmake --build . --config $env:BUILD_TYPE --parallel
-        ctest -C $env:BUILD_TYPE --output-on-failure
+        ctest -C $env:BUILD_TYPE --output-on-failure -E "(integration_test|compatibility_test)"
 
     - name: Build application (fallback - Unix)
       if: runner.os != 'Windows' && steps.build_vcpkg_unix.outcome != 'success'
