@@ -11,11 +11,25 @@ function(logger_find_thread_system)
         return()
     endif()
     
-    # Priority: Local Sources/ directory first, then sibling directory
-    set(_LOGGER_THREAD_SEARCH_PATHS
-        "/Users/dongcheolshin/Sources/thread_system"                # macOS development (HIGHEST PRIORITY)
-        "/home/${USER}/Sources/thread_system"                        # Linux development
-        "${CMAKE_SOURCE_DIR}/../thread_system"                       # Sibling directory (fallback for CI)
+    # Priority: Environment variable, CMake variable, then standard paths
+    set(_LOGGER_THREAD_SEARCH_PATHS)
+
+    # 1. Check environment variable
+    if(DEFINED ENV{THREAD_SYSTEM_ROOT})
+        list(APPEND _LOGGER_THREAD_SEARCH_PATHS "$ENV{THREAD_SYSTEM_ROOT}")
+    endif()
+
+    # 2. Check CMake variable
+    if(DEFINED THREAD_SYSTEM_ROOT)
+        list(APPEND _LOGGER_THREAD_SEARCH_PATHS "${THREAD_SYSTEM_ROOT}")
+    endif()
+
+    # 3. Standard search paths
+    list(APPEND _LOGGER_THREAD_SEARCH_PATHS
+        "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system"              # Parent directory
+        "${CMAKE_SOURCE_DIR}/thread_system"                          # Root directory
+        "${CMAKE_SOURCE_DIR}/../thread_system"                       # Sibling directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/../../thread_system"            # Grandparent directory
     )
 
     set(_LOGGER_THREAD_SYSTEM_PATH "")
