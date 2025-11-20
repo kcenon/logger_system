@@ -119,7 +119,7 @@ target_include_directories(logger_integration_tests PRIVATE
 
 # Add common_system include path (required for Phase 2.2+)
 if(COMMON_SYSTEM_INCLUDE_DIR)
-    target_include_directories(integration_tests PRIVATE
+    target_include_directories(logger_integration_tests PRIVATE
         ${COMMON_SYSTEM_INCLUDE_DIR}
     )
 endif()
@@ -131,7 +131,7 @@ if(common_system_FOUND)
     endif()
 endif()
 
-# Ensure GTest targets are built before integration_tests
+# Ensure GTest targets are built before logger_integration_tests
 # This prevents "file truncated" errors during parallel builds
 add_dependencies(logger_integration_tests ${_LOGGER_GTEST_TARGET} ${_LOGGER_GTEST_MAIN_TARGET})
 
@@ -152,7 +152,7 @@ endif()
 target_compile_features(logger_integration_tests PRIVATE cxx_std_20)
 
 # Apply coverage flags if enabled
-# Note: This must be done here because integration_tests is added after
+# Note: This must be done here because logger_integration_tests is added after
 # logger_enable_coverage_for_all() is called in the parent CMakeLists.txt
 if(LOGGER_ENABLE_COVERAGE AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
