@@ -218,7 +218,10 @@ endif()
 # Try to find thread_system (only if not in standalone mode)
 if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
     # Check if thread_system components are already added
-    if(NOT TARGET interfaces)
+    if(TARGET ThreadSystem OR TARGET thread_system)
+        message(STATUS "thread_system targets already available from parent build")
+        set(THREAD_SYSTEM_FOUND TRUE)
+    elseif(NOT TARGET interfaces)
         # Priority: Environment variable, then sibling directory
         set(_THREAD_SYSTEM_SEARCH_PATHS
             "$ENV{THREAD_SYSTEM_ROOT}"                                   # Environment variable (HIGHEST PRIORITY)
@@ -271,16 +274,13 @@ if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
         add_compile_definitions(USE_THREAD_SYSTEM)
 
         # Create a unified thread_system target that includes all components
-        if(NOT TARGET thread_system)
+        if(NOT TARGET thread_system AND NOT TARGET ThreadSystem)
             add_library(thread_system INTERFACE)
             if(TARGET utilities AND TARGET interfaces AND TARGET thread_base)
                 target_link_libraries(thread_system INTERFACE
                     utilities
                     interfaces
                     thread_base
-                    thread_pool
-                    typed_thread_pool
-                    lockfree
                 )
             endif()
         endif()
@@ -385,11 +385,17 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
         # thread_system integration (always linked if available)
         if(THREAD_SYSTEM_FOUND)
             message(STATUS "Logger System: thread_system found, backend available for use")
-            target_include_directories(LoggerSystem
-                PUBLIC
-                    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
-            )
-            target_link_libraries(LoggerSystem PRIVATE thread_base interfaces utilities)
+            if(TARGET ThreadSystem)
+                target_link_libraries(LoggerSystem PRIVATE ThreadSystem)
+            elseif(TARGET thread_system)
+                target_link_libraries(LoggerSystem PRIVATE thread_system)
+            else()
+                target_include_directories(LoggerSystem
+                    PUBLIC
+                        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
+                )
+                target_link_libraries(LoggerSystem PRIVATE thread_base interfaces utilities)
+            endif()
         else()
             message(STATUS "Logger System: thread_system not found, only standalone backend available")
         endif()
