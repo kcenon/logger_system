@@ -32,14 +32,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/writers/console_writer.h>
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-#include <kcenon/thread/interfaces/logger_interface.h>
-using log_level_type = kcenon::thread::log_level;
-namespace log_levels = kcenon::thread;
-#else
 using log_level_type = logger_system::log_level;
 namespace log_levels = logger_system;
-#endif
 #include <thread>
 #include <vector>
 #include <iostream>

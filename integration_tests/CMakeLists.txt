@@ -105,21 +105,21 @@ file(GLOB FAILURE_TESTS failures/*.cpp)
 file(GLOB PERFORMANCE_TESTS performance/*.cpp)
 
 # Create integration test executable
-add_executable(integration_tests
+add_executable(logger_integration_tests
     ${SCENARIO_TESTS}
     ${FAILURE_TESTS}
     ${PERFORMANCE_TESTS}
 )
 
 # Include directories
-target_include_directories(integration_tests PRIVATE
+target_include_directories(logger_integration_tests PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/include
 )
 
 # Add common_system include path (required for Phase 2.2+)
 if(COMMON_SYSTEM_INCLUDE_DIR)
-    target_include_directories(integration_tests PRIVATE
+    target_include_directories(logger_integration_tests PRIVATE
         ${COMMON_SYSTEM_INCLUDE_DIR}
     )
 endif()
@@ -127,17 +127,17 @@ endif()
 # Link common_system (required)
 if(common_system_FOUND)
     if(TARGET kcenon::common_system)
-        target_link_libraries(integration_tests PRIVATE kcenon::common_system)
+    target_link_libraries(logger_integration_tests PRIVATE kcenon::common_system)
     endif()
 endif()
 
-# Ensure GTest targets are built before integration_tests
+# Ensure GTest targets are built before logger_integration_tests
 # This prevents "file truncated" errors during parallel builds
-add_dependencies(integration_tests ${_LOGGER_GTEST_TARGET} ${_LOGGER_GTEST_MAIN_TARGET})
+add_dependencies(logger_integration_tests ${_LOGGER_GTEST_TARGET} ${_LOGGER_GTEST_MAIN_TARGET})
 
 # Link libraries
 # Note: GTest targets may already include gtest, so we link gtest_main which depends on gtest
-target_link_libraries(integration_tests PRIVATE
+target_link_libraries(logger_integration_tests PRIVATE
     ${_LOGGER_GTEST_MAIN_TARGET}
     LoggerSystem  # Correct target name
 )
@@ -145,18 +145,18 @@ target_link_libraries(integration_tests PRIVATE
 # Only link gtest separately if gtest_main doesn't already provide it
 # This avoids duplicate library warnings
 if(NOT ${_LOGGER_GTEST_MAIN_TARGET} MATCHES "gtest_main")
-    target_link_libraries(integration_tests PRIVATE ${_LOGGER_GTEST_TARGET})
+    target_link_libraries(logger_integration_tests PRIVATE ${_LOGGER_GTEST_TARGET})
 endif()
 
 # Compiler settings
-target_compile_features(integration_tests PRIVATE cxx_std_20)
+target_compile_features(logger_integration_tests PRIVATE cxx_std_20)
 
 # Apply coverage flags if enabled
-# Note: This must be done here because integration_tests is added after
+# Note: This must be done here because logger_integration_tests is added after
 # logger_enable_coverage_for_all() is called in the parent CMakeLists.txt
 if(LOGGER_ENABLE_COVERAGE AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
-        target_compile_options(integration_tests PRIVATE
+        target_compile_options(logger_integration_tests PRIVATE
             --coverage
             -fprofile-arcs
             -ftest-coverage
@@ -164,25 +164,25 @@ if(LOGGER_ENABLE_COVERAGE AND CMAKE_BUILD_TYPE STREQUAL "Debug")
             -g   # Debug symbols
         )
 
-        target_link_options(integration_tests PRIVATE
+        target_link_options(logger_integration_tests PRIVATE
             --coverage
         )
 
-        message(STATUS "Enabled code coverage for integration_tests")
+        message(STATUS "Enabled code coverage for logger_integration_tests")
     endif()
 endif()
 
 # Add test to CTest
-add_test(NAME IntegrationTests COMMAND integration_tests)
+add_test(NAME LoggerIntegrationTests COMMAND logger_integration_tests)
 
 # Set test properties
-set_tests_properties(IntegrationTests PROPERTIES
+set_tests_properties(LoggerIntegrationTests PROPERTIES
     TIMEOUT 1200  # 20 minutes for integration tests (extended for Debug builds and sanitizers)
     LABELS "integration"
 )
 
 # Install integration tests (optional)
-install(TARGETS integration_tests
+install(TARGETS logger_integration_tests
     RUNTIME DESTINATION bin/tests
 )
 
