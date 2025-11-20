@@ -47,6 +47,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "di/di_container_interface.h"
 #include "di/di_container_factory.h"
 #include "../backends/integration_backend.h"
+#include "log_context.h"
 #include <kcenon/logger/interfaces/logger_types.h>
 #include <kcenon/logger/security/signal_manager.h>
 
@@ -227,6 +228,13 @@ public:
              const std::string& file,
              int line,
              const std::string& function);
+
+    /**
+     * @brief Log using a precomputed log_context.
+     */
+    void log(log_level level,
+             const std::string& message,
+             const core::log_context& context);
     
     /**
      * @brief Check if a log level is enabled

@@ -322,6 +322,12 @@ void logger::log(log_level level,
     }
 }
 
+void logger::log(log_level level,
+                const std::string& message,
+                const core::log_context& context) {
+    log(level, message, std::string(context.file), context.line, std::string(context.function));
+}
+
 bool logger::is_enabled(log_level level) const {
     return pimpl_ && meets_threshold(level, pimpl_->min_level_.load());
 }
