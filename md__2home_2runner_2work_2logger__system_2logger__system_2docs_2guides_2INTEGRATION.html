@@ -105,6 +105,7 @@ Table of Contents</h1>
 <li>Integration with monitoring_system</li>
 <li>Build Configuration</li>
 <li>Code Examples</li>
+<li>Result Handling Cheatsheet</li>
 <li>Error Code Registry</li>
 <li>Troubleshooting</li>
 </ul>
@@ -212,7 +213,7 @@ Result&lt;T&gt; Pattern Usage</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">if</span> (!result) {</div>
 <div class="line">    <span class="comment">// Handle error</span></div>
-<div class="line">    <span class="keyword">auto</span> error = result.get_error();</div>
+<div class="line">    <span class="keyword">auto</span> error = result.error();</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed to create logger: &quot;</span> &lt;&lt; error.message()</div>
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot; (code: &quot;</span> &lt;&lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(error.code()) &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
 <div class="line">    <span class="keywordflow">return</span> -1;</div>
@@ -225,7 +226,7 @@ Result&lt;T&gt; Pattern Usage</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">if</span> (!add_result) {</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed to add writer: &quot;</span></div>
-<div class="line">              &lt;&lt; add_result.get_error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">              &lt;&lt; add_result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Hot path logging uses void for zero overhead</span></div>
@@ -476,7 +477,7 @@ Example 1: Basic Integration with common_system</h2>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (!result) {</div>
 <div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;Logger creation failed: &quot;</span></div>
-<div class="line">                  &lt;&lt; result.get_error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">                  &lt;&lt; result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">        <span class="keywordflow">return</span> -1;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
@@ -535,9 +536,9 @@ Example 3: Error Handling with Result&lt;T&gt;</h2>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (!result) {</div>
 <div class="line">        <span class="keywordflow">return</span> common::error&lt;std::unique_ptr&lt;kcenon::logger::logger&gt;&gt;(</div>
-<div class="line">            result.get_error().code(),</div>
+<div class="line">            result.error().code(),</div>
 <div class="line">            std::format(<span class="stringliteral">&quot;Failed to create logger from config &#39;{}&#39;: {}&quot;</span>,</div>
-<div class="line">                        config_file, result.get_error().message()),</div>
+<div class="line">                        config_file, result.error().message()),</div>
 <div class="line">            <span class="stringliteral">&quot;logger_factory&quot;</span></div>
 <div class="line">        );</div>
 <div class="line">    }</div>
@@ -549,7 +550,7 @@ Example 3: Error Handling with Result&lt;T&gt;</h2>
 <div class="line">    <span class="keyword">auto</span> logger_result = create_configured_logger(<span class="stringliteral">&quot;config.json&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (!logger_result) {</div>
-<div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;Error: &quot;</span> &lt;&lt; logger_result.get_error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;Error: &quot;</span> &lt;&lt; logger_result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">        <span class="keywordflow">return</span> -1;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
@@ -600,8 +601,23 @@ Example 4: DI Container Integration</h2>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md1009"></a>
+Result Handling Cheatsheet</h1>
+<ul>
+<li>Prefer <code>result.is_err()</code> / <code>result.error()</code> for every public API: legacy <code>.get_error()</code> is maintained only for backward compatibility.</li>
+<li>Bubble up failures with <code>return Result&lt;void&gt;::err(result.error());</code> to avoid losing diagnostic context.</li>
+<li>When DI containers orchestrate several operations, capture both <code>err.code</code> and <code>err.module</code> for log filtering.</li>
+</ul>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> add_writer_result = logger-&gt;add_writer(<span class="stringliteral">&quot;network&quot;</span>, std::move(writer));</div>
+<div class="line"><span class="keywordflow">if</span> (add_writer_result.is_err()) {</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; err = add_writer_result.error();</div>
+<div class="line">    log_error(<span class="stringliteral">&quot;writer_add_failed&quot;</span>,</div>
+<div class="line">              fmt::format(<span class="stringliteral">&quot;[{}] code={} message={}&quot;</span>,</div>
+<div class="line">                          err.module, err.code, err.message));</div>
+<div class="line">    <span class="keywordflow">return</span> Result&lt;void&gt;::err(err);</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1010"></a>
 Error Code Registry</h1>
-<h2><a class="anchor" id="autotoc_md1010"></a>
+<h2><a class="anchor" id="autotoc_md1011"></a>
 Allocated Error Code Range</h2>
 <p>Logger system uses error codes <b>-200 to -299</b> in the centralized error code registry:</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
@@ -637,7 +653,7 @@ Allocated Error Code Range</h2>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">} <span class="comment">// namespace kcenon::logger</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1011"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1012"></a>
 Error Message Mapping</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/error_codes.h&gt;</span></div>
 <div class="line"> </div>
@@ -655,9 +671,9 @@ Error Message Mapping</h2>
 <div class="line">            <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown error&quot;</span>;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1012"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1013"></a>
 Troubleshooting</h1>
-<h2><a class="anchor" id="autotoc_md1013"></a>
+<h2><a class="anchor" id="autotoc_md1014"></a>
 Build Fails with "common_system not found"</h2>
 <p><b>Problem</b>: CMake cannot find common_system</p>
 <p><b>Solution 1</b>: Ensure common_system is in a sibling directory </p><div class="fragment"><div class="line">/path/to/systems/</div>
@@ -670,7 +686,7 @@ Build Fails with "common_system not found"</h2>
 <div class="line">cmake -B build -DCMAKE_INSTALL_PREFIX=/usr/local</div>
 <div class="line">cmake --build build</div>
 <div class="line">sudo cmake --install build</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1014"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1015"></a>
 Linker Errors: Undefined References</h2>
 <p><b>Problem</b>: Linking fails with undefined symbol errors</p>
 <p><b>Solution</b>: Ensure proper link order </p><div class="fragment"><div class="line">target_link_libraries(MyApp PRIVATE</div>
@@ -679,7 +695,7 @@ Linker Errors: Undefined References</h2>
 <div class="line">    LoggerSystem::logger       # Service systems</div>
 <div class="line">    kcenon::monitoring_system  # Optional systems (last)</div>
 <div class="line">)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1015"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1016"></a>
 Runtime: Logger Not Outputting</h2>
 <p><b>Problem</b>: Logger created but no output visible</p>
 <p><b>Solution</b>: Check configuration and flush </p><div class="fragment"><div class="line"><span class="keyword">auto</span> logger = kcenon::logger::logger_builder()</div>
@@ -691,7 +707,7 @@ Runtime: Logger Not Outputting</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Ensure flush before exit</span></div>
 <div class="line">logger-&gt;flush();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1016"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1017"></a>
 Integration: IMonitor Not Injecting</h2>
 <p><b>Problem</b>: Monitoring metrics not being recorded</p>
 <p><b>Solution</b>: Verify monitoring is enabled and injected </p><div class="fragment"><div class="line"><span class="comment">// Enable monitoring at build time</span></div>
@@ -704,7 +720,7 @@ Integration: IMonitor Not Injecting</h2>
 <div class="line"><span class="keywordflow">if</span> (logger-&gt;has_monitor()) {</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Monitoring active\n&quot;</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1017"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1018"></a>
 Performance: High Latency</h2>
 <p><b>Problem</b>: Logging operations taking too long</p>
 <p><b>Solution</b>: Tune performance parameters </p><div class="fragment"><div class="line"># Increase batch size for throughput</div>
@@ -715,27 +731,27 @@ Performance: High Latency</h2>
 <div class="line"> </div>
 <div class="line"># Increase queue size to reduce drops</div>
 <div class="line">cmake -DLOGGER_DEFAULT_QUEUE_SIZE=50000</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1018"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1019"></a>
 Best Practices</h1>
-<h2><a class="anchor" id="autotoc_md1019"></a>
+<h2><a class="anchor" id="autotoc_md1020"></a>
 1. Use Result&lt;T&gt; for Error Handling</h2>
 <p>Always check <code>Result&lt;T&gt;</code> return values: </p><div class="fragment"><div class="line"><span class="comment">// Good: Check result</span></div>
 <div class="line"><span class="keyword">auto</span> result = logger_builder().build();</div>
 <div class="line"><span class="keywordflow">if</span> (!result) {</div>
-<div class="line">    handle_error(result.get_error());</div>
+<div class="line">    handle_error(result.error());</div>
 <div class="line">    <span class="keywordflow">return</span>;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Bad: Ignore result (may throw)</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder().build().value();  <span class="comment">// May throw if error</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1020"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1021"></a>
 2. Prefer Interface-Based Design</h2>
 <p>Use common interfaces for flexibility: </p><div class="fragment"><div class="line"><span class="comment">// Good: Use interface</span></div>
 <div class="line">std::shared_ptr&lt;common::interfaces::ILogger&gt; logger = create_logger();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Less flexible: Use concrete type</span></div>
 <div class="line">std::shared_ptr&lt;kcenon::logger::logger&gt; logger = create_logger();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1021"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1022"></a>
 3. Leverage DI for Testing</h2>
 <p>Use dependency injection for testability: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyService {</div>
 <div class="line">    std::shared_ptr&lt;common::interfaces::ILogger&gt; logger_;</div>
@@ -747,7 +763,7 @@ Best Practices</h1>
 <div class="line"><span class="comment">// Easy to test with mock logger</span></div>
 <div class="line"><span class="keyword">auto</span> mock_logger = std::make_shared&lt;MockLogger&gt;();</div>
 <div class="line">MyService service(mock_logger);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1022"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1023"></a>
 4. Monitor Performance in Production</h2>
 <p>Enable metrics in production builds: </p><div class="fragment"><div class="line">logger-&gt;enable_metrics_collection(<span class="keyword">true</span>);</div>
 <div class="line"> </div>
@@ -756,7 +772,7 @@ Best Practices</h1>
 <div class="line"><span class="keywordflow">if</span> (metrics.get_queue_utilization_percent() &gt; 80) {</div>
 <div class="line">    <span class="comment">// Queue is filling up, increase capacity or reduce log volume</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1023"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1024"></a>
 References</h1>
 <ul>
 <li><a class="el" href="index.html#md__2home_2runner_2work_2logger__system_2logger__system_2README">logger_system README.md</a> - Project overview</li>
@@ -770,7 +786,7 @@ References</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 20 2025 12:02:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Nov 21 2025 01:58:22 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

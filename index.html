@@ -128,8 +128,10 @@ Basic Example</h3>
 <div class="line">        .add_writer(<span class="stringliteral">&quot;file&quot;</span>, std::make_unique&lt;kcenon::logger::file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>))</div>
 <div class="line">        .build();</div>
 <div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (!result) {</div>
-<div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed to create logger: &quot;</span> &lt;&lt; result.get_error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    <span class="keywordflow">if</span> (result.is_err()) {</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; err = result.error();</div>
+<div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed to create logger: &quot;</span> &lt;&lt; err.message</div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; (code: &quot;</span> &lt;&lt; err.code &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
 <div class="line">        <span class="keywordflow">return</span> -1;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
@@ -137,11 +139,12 @@ Basic Example</h3>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Log messages with error handling</span></div>
 <div class="line">    logger-&gt;log(kcenon::logger::log_level::info, <span class="stringliteral">&quot;Application started&quot;</span>);</div>
-<div class="line">    logger-&gt;log(kcenon::logger::log_level::error, <span class="stringliteral">&quot;Something went wrong&quot;</span>);</div>
+<div class="line">logger-&gt;log(kcenon::logger::log_level::error, <span class="stringliteral">&quot;Something went wrong&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md5"></a>
+</div><!-- fragment --><p>Need a quick reminder later? See the <a href="docs/guides/INTEGRATION.md#result-handling-cheatsheet">Result Handling Cheatsheet</a> for canonical snippets that can be reused across the ecosystem.</p>
+<h3><a class="anchor" id="autotoc_md5"></a>
 Installation</h3>
 <p><b>Using CMake</b>: </p><div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div>
 <div class="line">cmake ..</div>
@@ -266,7 +269,7 @@ Key Components</h3>
 <li><b>Formatters</b>: Configurable output formats (plain, JSON, logfmt, custom)</li>
 <li><b>Security</b>: Path validation, secure storage, audit logging</li>
 </ul>
-<p><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_201-architecture.html">🏛️ Detailed Architecture Guide →</a></p>
+<p>🏛️ Detailed Architecture Guide →</p>
 <hr  />
 <h2><a class="anchor" id="autotoc_md22"></a>
 Ecosystem Integration</h2>
@@ -323,9 +326,9 @@ Core Documentation</h3>
 <ul>
 <li>📘 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES.html">Features</a> - Comprehensive feature documentation</li>
 <li>📊 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html">Benchmarks</a> - Performance analysis and comparisons</li>
-<li>🏗️ <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_201-architecture.html">Architecture</a> - System design and internals</li>
+<li>🏗️ Architecture - System design and internals</li>
 <li>📋 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html">Project Structure</a> - Directory organization and files</li>
-<li>🔧 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_202-API__REFERENCE.html">API Reference</a> - Complete API documentation</li>
+<li>🔧 API Reference - Complete API documentation</li>
 </ul>
 <h3><a class="anchor" id="autotoc_md29"></a>
 Advanced Topics</h3>
@@ -527,7 +530,7 @@ Acknowledgments</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 20 2025 12:02:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Nov 21 2025 01:58:22 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

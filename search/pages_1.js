@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['api_5freference_0',['02-API_REFERENCE',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_202-API__REFERENCE.html',1,'']]],
-  ['api_5freference_5fko_1',['02-API_REFERENCE_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_202-API__REFERENCE__KO.html',1,'']]],
-  ['architecture_2',['01-architecture',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_201-architecture.html',1,'']]],
-  ['architecture_20logger_20system_3',['Architecture - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ARCHITECTURE.html',1,'']]],
-  ['architecture_5fko_4',['01-architecture_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_201-architecture__KO.html',1,'']]],
-  ['asked_20questions_5',['Logger System - Frequently Asked Questions',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2FAQ.html',1,'']]]
+  ['baseline_20metrics_0',['Logger System - Performance Baseline Metrics',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html',1,'']]],
+  ['benchmarks_1',['Logger System Performance Benchmarks',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html',1,'']]],
+  ['best_5fpractices_2',['BEST_PRACTICES',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html',1,'']]],
+  ['best_5fpractices_5fko_3',['BEST_PRACTICES_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES__KO.html',1,'']]]
 ];

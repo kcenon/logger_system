@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['migration_2emd_0',['MIGRATION.md',['../MIGRATION_8md.html',1,'']]],
-  ['migration_5fguide_2emd_1',['MIGRATION_GUIDE.md',['../MIGRATION__GUIDE_8md.html',1,'']]],
-  ['migration_5fguide_5fko_2emd_2',['MIGRATION_GUIDE_KO.md',['../MIGRATION__GUIDE__KO_8md.html',1,'']]]
+  ['performance_2emd_0',['PERFORMANCE.md',['../PERFORMANCE_8md.html',1,'']]],
+  ['performance_5fko_2emd_1',['PERFORMANCE_KO.md',['../PERFORMANCE__KO_8md.html',1,'']]],
+  ['production_5fquality_2emd_2',['PRODUCTION_QUALITY.md',['../PRODUCTION__QUALITY_8md.html',1,'']]],
+  ['project_5fstructure_2emd_3',['PROJECT_STRUCTURE.md',['../PROJECT__STRUCTURE_8md.html',1,'']]]
 ];

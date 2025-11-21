@@ -594,7 +594,7 @@ Path Validation</h2>
 <div class="line">kcenon::logger::path_validator validator(<span class="stringliteral">&quot;/var/log/app&quot;</span>);</div>
 <div class="line"><span class="keyword">auto</span> result = validator.validate(<span class="stringliteral">&quot;/var/log/app/user-input.log&quot;</span>);</div>
 <div class="line"><span class="keywordflow">if</span> (!result) {</div>
-<div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Invalid path: &quot;</span> &lt;&lt; result.get_error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Invalid path: &quot;</span> &lt;&lt; result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md845"></a>
 Signal Handler Safety</h2>
@@ -829,8 +829,8 @@ Distributed Logging</h2>
 See Also</h1>
 <ul>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html">Performance Benchmarks</a> - Detailed performance analysis</li>
-<li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_201-architecture.html">Architecture Overview</a> - System architecture and design</li>
-<li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_202-API__REFERENCE.html">API Reference</a> - Complete API documentation</li>
+<li>Architecture Overview - System architecture and design</li>
+<li>API Reference - Complete API documentation</li>
 <li>Security Guide - Security best practices</li>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html">Getting Started</a> - Quick start guide </li>
 </ul>
@@ -840,7 +840,7 @@ See Also</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 20 2025 12:02:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Nov 21 2025 01:58:22 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
