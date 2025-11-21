@@ -464,7 +464,7 @@ auto result = logger_builder()
 
 if (!result) {
     // Builder state unchanged, no resources leaked
-    std::cerr << "Failed: " << result.get_error().message() << "\n";
+    std::cerr << "Failed: " << result.error().message() << "\n";
 }
 ```
 
@@ -483,7 +483,7 @@ if (!result) {
    ```cpp
    auto result = logger->start();  // result_void
    if (!result) {
-       std::cerr << "Failed to start: " << result.get_error().message() << "\n";
+       std::cerr << "Failed to start: " << result.error().message() << "\n";
    }
    ```
 
@@ -491,7 +491,7 @@ if (!result) {
    ```cpp
    auto result = logger->add_writer("file", std::make_unique<file_writer>("app.log"));
    if (!result) {
-       std::cerr << "Failed to add writer: " << result.get_error().message() << "\n";
+       std::cerr << "Failed to add writer: " << result.error().message() << "\n";
    }
    ```
 
@@ -503,7 +503,7 @@ if (!result) {
 
    if (!result) {
        // Detailed validation error
-       std::cerr << "Invalid config: " << result.get_error().message() << "\n";
+       std::cerr << "Invalid config: " << result.error().message() << "\n";
    }
    ```
 

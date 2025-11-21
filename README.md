@@ -41,8 +41,10 @@ int main() {
         .add_writer("file", std::make_unique<kcenon::logger::file_writer>("app.log"))
         .build();
 
-    if (!result) {
-        std::cerr << "Failed to create logger: " << result.get_error().message() << "\n";
+    if (result.is_err()) {
+        const auto& err = result.error();
+        std::cerr << "Failed to create logger: " << err.message
+                  << " (code: " << err.code << ")\n";
         return -1;
     }
 
@@ -50,11 +52,13 @@ int main() {
 
     // Log messages with error handling
     logger->log(kcenon::logger::log_level::info, "Application started");
-    logger->log(kcenon::logger::log_level::error, "Something went wrong");
+logger->log(kcenon::logger::log_level::error, "Something went wrong");
 
-    return 0;
+return 0;
 }
 ```
+
+Need a quick reminder later? See the [Result Handling Cheatsheet](docs/guides/INTEGRATION.md#result-handling-cheatsheet) for canonical snippets that can be reused across the ecosystem.
 
 ### Installation
 
