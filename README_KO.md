@@ -41,8 +41,10 @@ int main() {
         .add_writer("file", std::make_unique<kcenon::logger::file_writer>("app.log"))
         .build();
 
-    if (!result) {
-        std::cerr << "Failed to create logger: " << result.get_error().message() << "\n";
+    if (result.is_err()) {
+        const auto& err = result.error();
+        std::cerr << "Failed to create logger: " << err.message
+                  << " (code: " << err.code << ")\n";
         return -1;
     }
 
@@ -50,11 +52,17 @@ int main() {
 
     // 에러 핸들링이 포함된 로그 메시지
     logger->log(kcenon::logger::log_level::info, "Application started");
-    logger->log(kcenon::logger::log_level::error, "Something went wrong");
+logger->log(kcenon::logger::log_level::error, "Something went wrong");
 
-    return 0;
+return 0;
 }
 ```
+
+### Result 처리 요약
+- `result.is_err()` / `result.error()` 패턴을 사용해 Builder, writer 추가, validation API의 실패를 감지하세요.
+- 실패를 호출자에게 전달할 때는 `return Result<void>::err(result.error());`처럼 `common::error_info`를 그대로 넘기는 방식이 권장됩니다.
+- DI 컨테이너나 모듈 경계를 넘는 경우 `err.code`, `err.message`, `err.module`을 로그에 남기면 추적이 쉬워집니다.
+- 보다 자세한 내용은 [Result Handling Cheatsheet](docs/guides/INTEGRATION.md#result-handling-cheatsheet)를 참고하세요.
 
 ### 설치
 

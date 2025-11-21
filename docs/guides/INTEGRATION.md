@@ -13,6 +13,7 @@
 - [Integration with monitoring_system](#integration-with-monitoring_system)
 - [Build Configuration](#build-configuration)
 - [Code Examples](#code-examples)
+- [Result Handling Cheatsheet](#result-handling-cheatsheet)
 - [Error Code Registry](#error-code-registry)
 - [Troubleshooting](#troubleshooting)
 
@@ -127,7 +128,7 @@ auto result = kcenon::logger::logger_builder()
 
 if (!result) {
     // Handle error
-    auto error = result.get_error();
+    auto error = result.error();
     std::cerr << "Failed to create logger: " << error.message()
               << " (code: " << static_cast<int>(error.code()) << ")\n";
     return -1;
@@ -144,7 +145,7 @@ auto add_result = logger->add_writer("file",
 
 if (!add_result) {
     std::cerr << "Failed to add writer: "
-              << add_result.get_error().message() << "\n";
+              << add_result.error().message() << "\n";
 }
 
 // Hot path logging uses void for zero overhead
@@ -437,7 +438,7 @@ int main() {
 
     if (!result) {
         std::cerr << "Logger creation failed: "
-                  << result.get_error().message() << "\n";
+                  << result.error().message() << "\n";
         return -1;
     }
 
@@ -502,9 +503,9 @@ create_configured_logger(const std::string& config_file) {
 
     if (!result) {
         return common::error<std::unique_ptr<kcenon::logger::logger>>(
-            result.get_error().code(),
+            result.error().code(),
             std::format("Failed to create logger from config '{}': {}",
-                        config_file, result.get_error().message()),
+                        config_file, result.error().message()),
             "logger_factory"
         );
     }
@@ -516,7 +517,7 @@ int main() {
     auto logger_result = create_configured_logger("config.json");
 
     if (!logger_result) {
-        std::cerr << "Error: " << logger_result.get_error().message() << "\n";
+        std::cerr << "Error: " << logger_result.error().message() << "\n";
         return -1;
     }
 
@@ -568,6 +569,23 @@ int main() {
     }
 
     return 0;
+}
+```
+
+## Result Handling Cheatsheet
+
+- Prefer `result.is_err()` / `result.error()` for every public API: legacy `.get_error()` is maintained only for backward compatibility.
+- Bubble up failures with `return Result<void>::err(result.error());` to avoid losing diagnostic context.
+- When DI containers orchestrate several operations, capture both `err.code` and `err.module` for log filtering.
+
+```cpp
+auto add_writer_result = logger->add_writer("network", std::move(writer));
+if (add_writer_result.is_err()) {
+    const auto& err = add_writer_result.error();
+    log_error("writer_add_failed",
+              fmt::format("[{}] code={} message={}",
+                          err.module, err.code, err.message));
+    return Result<void>::err(err);
 }
 ```
 
@@ -736,7 +754,7 @@ Always check `Result<T>` return values:
 // Good: Check result
 auto result = logger_builder().build();
 if (!result) {
-    handle_error(result.get_error());
+    handle_error(result.error());
     return;
 }
 

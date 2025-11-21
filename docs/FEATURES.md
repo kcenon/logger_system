@@ -595,7 +595,7 @@ auto key_storage = kcenon::logger::secure_key_storage::create();
 kcenon::logger::path_validator validator("/var/log/app");
 auto result = validator.validate("/var/log/app/user-input.log");
 if (!result) {
-    std::cerr << "Invalid path: " << result.get_error().message() << "\n";
+    std::cerr << "Invalid path: " << result.error().message() << "\n";
 }
 ```
 

@@ -481,7 +481,7 @@ if (result) {
 auto log_result = logger->log(thread_module::log_level::info, "Message");
 if (!log_result) {
     std::cerr << "Logging failed: " 
-              << log_result.get_error().message() << "\n";
+              << log_result.error().message() << "\n";
 }
 ```
 
@@ -508,7 +508,7 @@ config.buffer_size = 0;  // Invalid!
 auto validation = config.validate();
 if (!validation) {
     std::cerr << "Invalid config: " 
-              << validation.get_error().message() << "\n";
+              << validation.error().message() << "\n";
 }
 ```
 
