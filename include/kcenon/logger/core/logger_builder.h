@@ -783,8 +783,8 @@ public:
         // Store configuration in logger (if we add a config getter)
         built_config_ = config_;
 
-        // Return logger instance - move into result
-        return std::move(logger_instance);
+        // Return logger instance (NRVO will be applied automatically)
+        return logger_instance;
     }
     
     /**

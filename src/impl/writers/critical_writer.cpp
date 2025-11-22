@@ -66,7 +66,7 @@ critical_writer::critical_writer(
         }
     }
 
-    // Install signal handlers if enabled
+    // Install signal handlers if enabled (deprecated - for backward compatibility)
     if (config_.enable_signal_handlers) {
         install_signal_handlers();
     }
@@ -75,7 +75,7 @@ critical_writer::critical_writer(
 critical_writer::~critical_writer() {
     shutting_down_.store(true);
 
-    // Restore signal handlers
+    // Restore signal handlers (deprecated - for backward compatibility)
     if (config_.enable_signal_handlers) {
         utils::safe_destructor_operation("restore_signal_handlers", [this]() {
             restore_signal_handlers();

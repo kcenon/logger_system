@@ -45,7 +45,7 @@ TEST_F(SecurityTest, SecureKeyConstruction) {
 
 TEST_F(SecurityTest, SecureKeyMove) {
     secure_key key1(32);
-    auto* original_data = key1.data().data();
+    [[maybe_unused]] auto* original_data = key1.data().data();
 
     secure_key key2(std::move(key1));
 

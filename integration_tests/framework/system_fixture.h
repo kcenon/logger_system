@@ -160,7 +160,7 @@ protected:
      * (2-5x overhead). This implementation adds a small delay after stop() to ensure
      * all async operations complete before proceeding.
      */
-    void WaitForFlush(std::chrono::milliseconds timeout = std::chrono::seconds(5)) {
+    void WaitForFlush([[maybe_unused]] std::chrono::milliseconds timeout = std::chrono::seconds(5)) {
         if (!logger_) {
             return;
         }

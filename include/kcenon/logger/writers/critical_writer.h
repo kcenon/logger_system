@@ -69,7 +69,7 @@ struct critical_writer_config {
     /// Enable signal handlers for graceful shutdown (default: false)
     /// @deprecated Signal handling should be managed by logger and signal_manager (DI pattern)
     /// @since 2.0.0 Changed default from true to false
-    [[deprecated("Signal handling is now managed by logger and signal_manager. Use logger_context instead.")]]
+    /// @note This field is deprecated. Use logger_context for signal handling instead.
     bool enable_signal_handlers = false;
 
     /// Enable write-ahead logging for maximum durability (default: false)

@@ -57,10 +57,10 @@ public:
     // Implement the legacy write interface required by base_writer
     kcenon::logger::result_void write(logger_system::log_level level,
                                       const std::string& message,
-                                      const std::string& file,
-                                      int line,
-                                      const std::string& function,
-                                      const std::chrono::system_clock::time_point& timestamp) override {
+                                      [[maybe_unused]] const std::string& file,
+                                      [[maybe_unused]] int line,
+                                      [[maybe_unused]] const std::string& function,
+                                      [[maybe_unused]] const std::chrono::system_clock::time_point& timestamp) override {
         entry_record rec;
         rec.level = level;
         rec.message = message;
