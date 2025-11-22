@@ -104,7 +104,7 @@ TEST_F(LogFormattingIntegrationTest, TimestampPresence) {
 TEST_F(LogFormattingIntegrationTest, ThreadIdInclusion) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
-    std::thread::id main_thread_id = std::this_thread::get_id();
+    [[maybe_unused]] std::thread::id main_thread_id = std::this_thread::get_id();
 
     logger_->log(kcenon::logger::log_level::info, "Main thread log");
 

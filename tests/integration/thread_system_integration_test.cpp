@@ -47,12 +47,12 @@ protected:
  * @brief Test plugin loading and unloading
  */
 TEST_F(ThreadSystemIntegrationTest, PluginLoadingUnloading) {
+#ifdef USE_THREAD_SYSTEM
     // Simulated test for plugin loading
     bool plugin_loaded = false;
     bool plugin_unloaded = false;
 
     // Simulate plugin loading
-#ifdef USE_THREAD_SYSTEM
     plugin_loaded = true;
     EXPECT_TRUE(plugin_loaded) << "Thread system plugin should load successfully";
 

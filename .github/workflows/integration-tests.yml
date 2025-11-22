@@ -357,7 +357,7 @@ jobs:
         cmake --build build
 
     - name: Generate Coverage Report
-      timeout-minutes: 10  # Allow more time for coverage tests
+      timeout-minutes: 20  # Allow more time for coverage tests with instrumentation
       run: |
         cd build
 
