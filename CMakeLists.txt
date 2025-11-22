@@ -15,16 +15,16 @@ project(
 # C++ standard requirements
 ##################################################
 
-# C++17 is REQUIRED (no fallback to earlier standards)
-set(CMAKE_CXX_STANDARD 17)
+# C++20 is REQUIRED
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Verify that C++17 is actually being used
-if(CMAKE_CXX_STANDARD LESS 17)
-    message(FATAL_ERROR "Logger System requires C++17 or later. Current standard: C++${CMAKE_CXX_STANDARD}")
+# Verify that C++20 is actually being used
+if(CMAKE_CXX_STANDARD LESS 20)
+    message(FATAL_ERROR "Logger System requires C++20 or later. Current standard: C++${CMAKE_CXX_STANDARD}")
 endif()
 
-message(STATUS "Logger System: Using C++17 mode with optional C++20 feature detection")
+message(STATUS "Logger System: Using C++20 mode")
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # Generate compile_commands.json for tooling
 
@@ -88,69 +88,19 @@ endif()
 include(FetchContent)
 
 # common_system integration (required for Phase 2.2+)
-message(STATUS "=== Dependency Management (FetchContent) ===")
+message(STATUS "=== Dependency Management (FindOrFetch) ===")
+include(FindOrFetch)
 
-# Try to find common_system package first (for local development)
-find_package(common_system CONFIG QUIET)
-
-if(NOT common_system_FOUND)
-        # Check for common_system in multiple locations with comprehensive search
-        # Priority order: Environment variable -> CI/CD workspace -> sibling directories
-        set(_LOGGER_COMMON_PATHS
-            # Environment variable (HIGHEST PRIORITY)
-            "$ENV{COMMON_SYSTEM_ROOT}/include"
-            # GitHub Actions: various checkout patterns
-            "$ENV{GITHUB_WORKSPACE}/common_system/include"                      # Standard GITHUB_WORKSPACE
-            "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"              # Sibling (sanitizers.yml pattern)
-            "${CMAKE_CURRENT_SOURCE_DIR}/../../common_system/include"           # Parent directory
-            "${CMAKE_SOURCE_DIR}/../common_system/include"                      # Sibling to source root
-        )
-
-        message(STATUS "Searching for common_system in the following locations:")
-        foreach(_path ${_LOGGER_COMMON_PATHS})
-            message(STATUS "  Checking: ${_path}")
-            if(EXISTS "${_path}/kcenon/common/patterns/result.h")
-                message(STATUS "  ✓ Found common_system at: ${_path}")
-                set(COMMON_SYSTEM_INCLUDE_DIR "${_path}")
-                set(common_system_FOUND TRUE)
-                break()
-            else()
-                message(STATUS "  ✗ Not found")
-            endif()
-        endforeach()
-
-        if(NOT common_system_FOUND)
-            # Fallback to FetchContent (Phase 5: Modern dependency management)
-            message(STATUS "  ⚠ Local common_system not found, using FetchContent")
-            message(STATUS "  Fetching common_system from GitHub...")
-
-            FetchContent_Declare(
-                common_system
-                GIT_REPOSITORY https://github.com/kcenon/common_system.git
-                GIT_TAG        main  # TODO: Pin to specific tag/commit for reproducibility
-                GIT_SHALLOW    TRUE  # Faster checkout
-                GIT_PROGRESS   TRUE  # Show download progress
-            )
-
-            # Make common_system available
-            FetchContent_MakeAvailable(common_system)
-
-            # After FetchContent, set the include directory
-            if(TARGET common_system OR EXISTS "${common_system_SOURCE_DIR}/include/kcenon/common/patterns/result.h")
-                message(STATUS "  ✓ FetchContent: common_system available at ${common_system_SOURCE_DIR}")
-                set(COMMON_SYSTEM_INCLUDE_DIR "${common_system_SOURCE_DIR}/include")
-                set(common_system_FOUND TRUE)
-            else()
-                message(FATAL_ERROR "FetchContent failed to provide common_system.\n"
-                    "This should not happen. Please check:\n"
-                    "  1. Internet connectivity\n"
-                    "  2. GitHub repository access\n"
-                    "  3. CMake version >= 3.14")
-            endif()
-        endif()
-else()
-    message(STATUS "Found common_system package")
-endif()
+find_or_fetch_dependency(
+    PACKAGE_NAME common_system
+    LIBRARY_NAME kcenon::common_system
+    GIT_REPOSITORY https://github.com/kcenon/common_system.git
+    GIT_TAG main
+    INCLUDE_PATH "kcenon/common/patterns/result.h"
+    SEARCH_PATHS 
+        "$ENV{COMMON_SYSTEM_ROOT}"
+        "$ENV{GITHUB_WORKSPACE}/common_system"
+)
 
 ##################################################
 # Include Custom CMake Modules
