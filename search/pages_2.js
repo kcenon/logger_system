@@ -1,19 +1,4 @@
 var searchData=
 [
-  ['cd_20성능_20지표_20자동화_20제안서_0',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]],
-  ['changelog_20logger_20system_1',['Changelog - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html',1,'']]],
-  ['ci_20cd_20성능_20지표_20자동화_20제안서_2',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]],
-  ['ci_5fcd_5fdashboard_3',['CI_CD_DASHBOARD',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html',1,'']]],
-  ['ci_5fcd_5fdashboard_5fko_4',['CI_CD_DASHBOARD_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD__KO.html',1,'']]],
-  ['compilation_20refactoring_20strategy_5',['Conditional Compilation Refactoring Strategy',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CONDITIONAL__COMPILATION__REFACTORING.html',1,'']]],
-  ['conditional_20compilation_20refactoring_20strategy_6',['Conditional Compilation Refactoring Strategy',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CONDITIONAL__COMPILATION__REFACTORING.html',1,'']]],
-  ['contributing_7',['CONTRIBUTING',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2CONTRIBUTING.html',1,'']]],
-  ['contributing_5fko_8',['CONTRIBUTING_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2CONTRIBUTING__KO.html',1,'']]],
-  ['coverage_9',['Test Coverage',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TESTING__GUIDE.html',1,'']]],
-  ['critical_5flog_5fprevention_10',['CRITICAL_LOG_PREVENTION',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION.html',1,'']]],
-  ['critical_5flog_5fprevention_5fko_11',['CRITICAL_LOG_PREVENTION_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION__KO.html',1,'']]],
-  ['critical_5flogging_5fquick_5fstart_12',['CRITICAL_LOGGING_QUICK_START',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html',1,'']]],
-  ['critical_5flogging_5fquick_5fstart_5fko_13',['CRITICAL_LOGGING_QUICK_START_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START__KO.html',1,'']]],
-  ['custom_5fwriters_14',['CUSTOM_WRITERS',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS.html',1,'']]],
-  ['custom_5fwriters_5fko_15',['CUSTOM_WRITERS_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS__KO.html',1,'']]]
+  ['304_3a_20complete_20async_20processing_20implementation_0',['LOG-304: Complete Async Processing Implementation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html',1,'']]]
 ];

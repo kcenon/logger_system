@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['baseline_20metrics_0',['Logger System - Performance Baseline Metrics',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html',1,'']]],
-  ['benchmarks_1',['Logger System Performance Benchmarks',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html',1,'']]],
-  ['best_5fpractices_2',['BEST_PRACTICES',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html',1,'']]],
-  ['best_5fpractices_5fko_3',['BEST_PRACTICES_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES__KO.html',1,'']]]
+  ['102_3a_20add_20comprehensive_20filter_20tests_0',['LOG-102: Add Comprehensive Filter Tests',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html',1,'']]],
+  ['105_3a_20add_20router_20integration_20tests_1',['LOG-105: Add Router Integration Tests',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html',1,'']]]
 ];

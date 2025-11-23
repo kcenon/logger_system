@@ -1231,242 +1231,537 @@ var NAVTREE =
         [ "로드맵", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1119", null ]
       ] ]
     ] ],
+    [ "LOG-001: Complete Filtering System Implementation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html", [
+      [ "Metadata", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1138", null ],
+      [ "1. Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1140", [
+        [ "1.1 Problem Statement", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1141", null ],
+        [ "1.2 Objectives", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1142", null ],
+        [ "1.3 Scope", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1143", null ]
+      ] ],
+      [ "2. Changes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1145", [
+        [ "2.1 API Additions", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1146", null ],
+        [ "2.2 Filter Chain Logic", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1147", null ],
+        [ "2.3 Implementation Details", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1148", null ]
+      ] ],
+      [ "3. Test Plan", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1150", [
+        [ "3.1 Unit Tests (Minimum 15)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1151", [
+          [ "level_filter_test.cpp (5)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1152", null ],
+          [ "regex_filter_test.cpp (5)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1153", null ],
+          [ "composite_filter_test.cpp (5)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1154", null ]
+        ] ],
+        [ "3.2 Integration Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1155", null ],
+        [ "3.3 Performance Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1156", null ]
+      ] ],
+      [ "4. Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1158", [
+        [ "4.1 Implementation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1159", null ],
+        [ "4.2 Test Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1160", null ],
+        [ "4.3 Documentation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1161", null ]
+      ] ],
+      [ "5. Acceptance Criteria", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1163", null ],
+      [ "6. Related Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1165", null ],
+      [ "7. References", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html#autotoc_md1167", null ]
+    ] ],
+    [ "LOG-002: Complete Routing System Integration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html", [
+      [ "Metadata", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1169", null ],
+      [ "1. Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1171", [
+        [ "1.1 Problem Statement", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1172", null ],
+        [ "1.2 Objectives", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1173", null ],
+        [ "1.3 Scope", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1174", null ]
+      ] ],
+      [ "2. Changes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1176", [
+        [ "2.1 API Additions", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1177", null ],
+        [ "2.2 Routing Logic", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1178", null ],
+        [ "2.3 Implementation Steps", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1179", null ]
+      ] ],
+      [ "3. Test Plan", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1181", [
+        [ "3.1 Unit Tests (Minimum 10)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1182", [
+          [ "routing_rules_test.cpp (5)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1183", null ],
+          [ "builder_routing_test.cpp (5)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1184", null ]
+        ] ],
+        [ "3.2 Integration Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1185", null ]
+      ] ],
+      [ "4. Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1187", [
+        [ "4.1 Implementation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1188", null ],
+        [ "4.2 Test Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1189", null ],
+        [ "4.3 Documentation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1190", null ]
+      ] ],
+      [ "5. Acceptance Criteria", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1192", null ],
+      [ "6. Related Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1194", null ],
+      [ "7. References", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html#autotoc_md1196", null ]
+    ] ],
+    [ "LOG-003: Complete Monitoring Interface Migration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html", [
+      [ "Metadata", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1198", null ],
+      [ "1. Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1200", [
+        [ "1.1 Problem Statement", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1201", null ],
+        [ "1.2 Objectives", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1202", null ],
+        [ "1.3 Scope", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1203", null ]
+      ] ],
+      [ "2. Changes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1205", [
+        [ "2.1 Removal Targets", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1206", null ],
+        [ "2.2 Migration Path", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1207", null ],
+        [ "2.3 Implementation Steps", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1208", null ]
+      ] ],
+      [ "3. Test Plan", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1210", [
+        [ "3.1 Compatibility Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1211", null ],
+        [ "3.2 Integration Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1212", null ],
+        [ "3.3 Regression Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1213", null ]
+      ] ],
+      [ "4. Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1215", [
+        [ "4.1 Implementation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1216", null ],
+        [ "4.2 Test Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1217", null ],
+        [ "4.3 Documentation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1218", null ]
+      ] ],
+      [ "5. Acceptance Criteria", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1220", null ],
+      [ "6. Related Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1222", null ],
+      [ "7. References", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html#autotoc_md1224", null ]
+    ] ],
+    [ "LOG-004: Reactivate Builder Strategy Pattern", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html", [
+      [ "Metadata", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1226", null ],
+      [ "1. Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1228", [
+        [ "1.1 Problem Statement", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1229", null ],
+        [ "1.2 Objectives", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1230", null ],
+        [ "1.3 Scope", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1231", null ]
+      ] ],
+      [ "2. Changes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1233", [
+        [ "2.1 Strategy Interface", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1234", null ],
+        [ "2.2 Built-in Strategies", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1235", null ],
+        [ "2.3 Configuration Templates", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1236", null ],
+        [ "2.4 Methods to Uncomment/Implement", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1237", null ]
+      ] ],
+      [ "3. Test Plan", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1239", [
+        [ "3.1 Unit Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1240", [
+          [ "strategy_test.cpp (existing, needs update)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1241", null ],
+          [ "template_test.cpp (5)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1242", null ],
+          [ "environment_test.cpp (5)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1243", null ]
+        ] ],
+        [ "3.2 Integration Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1244", null ]
+      ] ],
+      [ "4. Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1246", [
+        [ "4.1 Implementation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1247", null ],
+        [ "4.2 Test Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1248", null ],
+        [ "4.3 Documentation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1249", null ]
+      ] ],
+      [ "5. Acceptance Criteria", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1251", null ],
+      [ "6. Related Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1253", null ],
+      [ "7. References", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html#autotoc_md1255", null ]
+    ] ],
+    [ "LOG-005: Complete Structured Logger Implementation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html", [
+      [ "Metadata", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1257", null ],
+      [ "1. Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1259", [
+        [ "1.1 Problem Statement", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1260", null ],
+        [ "1.2 Objectives", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1261", null ],
+        [ "1.3 Scope", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1262", null ]
+      ] ],
+      [ "2. Changes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1264", [
+        [ "2.1 Complete structured_log_entry", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1265", null ],
+        [ "2.2 Implement log_structured()", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1266", null ],
+        [ "2.3 JSON Output Format", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1267", null ]
+      ] ],
+      [ "3. Test Plan", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1269", [
+        [ "3.1 Unit Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1270", [
+          [ "structured_entry_test.cpp (7)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1271", null ],
+          [ "structured_logger_test.cpp (5)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1272", null ]
+        ] ],
+        [ "3.2 Integration Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1273", null ]
+      ] ],
+      [ "4. Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1275", [
+        [ "4.1 Implementation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1276", null ],
+        [ "4.2 Test Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1277", null ],
+        [ "4.3 Documentation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1278", null ]
+      ] ],
+      [ "5. Acceptance Criteria", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1280", null ],
+      [ "6. Related Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1282", null ],
+      [ "7. References", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html#autotoc_md1284", null ]
+    ] ],
+    [ "LOG-006: Implement Log Sanitizer", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html", [
+      [ "Metadata", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1286", null ],
+      [ "1. Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1288", [
+        [ "1.1 Problem Statement", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1289", null ],
+        [ "1.2 Objectives", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1290", null ],
+        [ "1.3 Scope", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1291", null ]
+      ] ],
+      [ "2. Changes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1293", [
+        [ "2.1 Sanitizer Interface", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1294", null ],
+        [ "2.2 Built-in Patterns", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1295", null ],
+        [ "2.3 Integration Points", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1296", null ]
+      ] ],
+      [ "3. Test Plan", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1298", [
+        [ "3.1 Unit Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1299", [
+          [ "sanitizer_patterns_test.cpp (8)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1300", null ],
+          [ "sanitizer_config_test.cpp (5)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1301", null ],
+          [ "sanitizer_integration_test.cpp (4)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1302", null ]
+        ] ],
+        [ "3.2 Performance Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1303", null ]
+      ] ],
+      [ "4. Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1305", [
+        [ "4.1 Implementation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1306", null ],
+        [ "4.2 Test Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1307", null ],
+        [ "4.3 Documentation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1308", null ]
+      ] ],
+      [ "5. Acceptance Criteria", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1310", null ],
+      [ "6. Related Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1312", null ],
+      [ "7. References", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html#autotoc_md1314", null ]
+    ] ],
+    [ "LOG-102: Add Comprehensive Filter Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html", [
+      [ "Metadata", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1316", null ],
+      [ "1. Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1318", [
+        [ "1.1 Problem Statement", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1319", null ],
+        [ "1.2 Objectives", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1320", null ],
+        [ "1.3 Scope", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1321", null ]
+      ] ],
+      [ "2. Test Categories", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1323", [
+        [ "2.1 Level Filter Tests (5) - Expand Existing", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1324", null ],
+        [ "2.2 Regex Filter Tests (7) - NEW", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1325", null ],
+        [ "2.3 Function Filter Tests (5) - NEW", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1326", null ],
+        [ "2.4 Composite Filter Tests (8) - NEW", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1327", null ],
+        [ "2.5 Integration Tests (5) - NEW", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1328", null ]
+      ] ],
+      [ "3. Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1330", [
+        [ "3.1 Implementation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1331", null ],
+        [ "3.2 Coverage Targets", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1332", null ]
+      ] ],
+      [ "4. Acceptance Criteria", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1334", null ],
+      [ "5. Related Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1336", null ],
+      [ "6. References", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html#autotoc_md1338", null ]
+    ] ],
+    [ "LOG-105: Add Router Integration Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html", [
+      [ "Metadata", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1340", null ],
+      [ "1. Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1342", [
+        [ "1.1 Problem Statement", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1343", null ],
+        [ "1.2 Objectives", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1344", null ],
+        [ "1.3 Scope", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1345", null ]
+      ] ],
+      [ "2. Test Categories", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1347", [
+        [ "2.1 Routing Rule Tests (6)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1348", null ],
+        [ "2.2 Router Builder Tests (5)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1349", null ],
+        [ "2.3 Router Tests (7)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1350", null ],
+        [ "2.4 Integration Tests (4)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1351", null ]
+      ] ],
+      [ "3. Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1353", [
+        [ "3.1 Implementation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1354", null ],
+        [ "3.2 Coverage Targets", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1355", null ]
+      ] ],
+      [ "4. Acceptance Criteria", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1357", null ],
+      [ "5. Related Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1359", null ],
+      [ "6. References", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-105-router-tests.html#autotoc_md1361", null ]
+    ] ],
+    [ "LOG-304: Complete Async Processing Implementation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html", [
+      [ "Metadata", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1363", null ],
+      [ "1. Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1365", [
+        [ "1.1 Problem Statement", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1366", null ],
+        [ "1.2 Objectives", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1367", null ],
+        [ "1.3 Scope", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1368", null ]
+      ] ],
+      [ "2. Changes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1370", [
+        [ "2.1 Async Path Completion", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1371", null ],
+        [ "2.2 Async Configuration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1372", null ],
+        [ "2.3 Proper Shutdown", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1373", null ]
+      ] ],
+      [ "3. Test Plan", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1375", [
+        [ "3.1 Unit Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1376", [
+          [ "async_queue_test.cpp (6)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1377", null ],
+          [ "async_logger_test.cpp (6)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1378", null ]
+        ] ],
+        [ "3.2 Integration Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1379", null ],
+        [ "3.3 Performance Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1380", null ]
+      ] ],
+      [ "4. Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1382", [
+        [ "4.1 Implementation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1383", null ],
+        [ "4.2 Test Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1384", null ],
+        [ "4.3 Documentation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1385", null ]
+      ] ],
+      [ "5. Acceptance Criteria", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1387", null ],
+      [ "6. Related Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1389", null ],
+      [ "7. References", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1391", null ]
+    ] ],
+    [ "LOG-401: Implement Multi-Producer Lock-free Queue", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html", [
+      [ "Metadata", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1393", null ],
+      [ "1. Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1395", [
+        [ "1.1 Problem Statement", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1396", null ],
+        [ "1.2 Objectives", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1397", null ],
+        [ "1.3 Scope", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1398", null ]
+      ] ],
+      [ "2. Changes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1400", [
+        [ "2.1 MPMC Queue Interface", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1401", null ],
+        [ "2.2 Implementation Strategy", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1402", null ],
+        [ "2.3 Memory Ordering", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1403", null ]
+      ] ],
+      [ "3. Test Plan", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1405", [
+        [ "3.1 Correctness Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1406", [
+          [ "mpmc_queue_test.cpp (10)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1407", null ]
+        ] ],
+        [ "3.2 Stress Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1408", null ],
+        [ "3.3 Performance Benchmarks", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1409", null ]
+      ] ],
+      [ "4. Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1411", [
+        [ "4.1 Implementation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1412", null ],
+        [ "4.2 Test Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1413", null ],
+        [ "4.3 Documentation Checklist", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1414", null ]
+      ] ],
+      [ "5. Acceptance Criteria", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1416", null ],
+      [ "6. Related Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1418", null ],
+      [ "7. References", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html#autotoc_md1420", null ]
+    ] ],
+    [ "Logger System Work Priority Directive", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html", [
+      [ "1. Executive Summary", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1423", null ],
+      [ "2. Actual Code State Analysis", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1425", [
+        [ "2.1 Commented Out (Ready to Uncomment)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1426", null ],
+        [ "2.2 Exists But Not Integrated", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1427", null ],
+        [ "2.3 Placeholder Implementations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1428", null ],
+        [ "2.4 Missing Entirely", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1429", null ]
+      ] ],
+      [ "3. Revised Dependency Graph", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1431", null ],
+      [ "4. Quick Wins (Low Effort, High Impact)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1433", null ],
+      [ "5. Recommended Execution Order", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1435", [
+        [ "Phase 1: Unblock (Week 1)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1436", null ],
+        [ "Phase 2: Complete Integration (Week 2)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1438", null ],
+        [ "Phase 3: Strategy & Async (Week 3)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1440", null ],
+        [ "Phase 4: Polish (Week 4+)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1442", null ]
+      ] ],
+      [ "6. Risk Analysis", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1444", null ],
+      [ "7. Success Metrics", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1446", null ],
+      [ "8. Appendix: Full Ticket List", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1448", [
+        [ "HIGH Priority (Must Do)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1449", null ],
+        [ "MEDIUM Priority (Should Do)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1450", null ],
+        [ "LOW Priority (Nice to Have)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html#autotoc_md1451", null ]
+      ] ]
+    ] ],
     [ "Logger System - Performance Baseline Metrics", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html", [
-      [ "</blockquote>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1138", null ],
-      [ "System Information", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1140", [
-        [ "Hardware Configuration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1141", null ],
-        [ "Software Configuration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1142", null ]
+      [ "</blockquote>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1491", null ],
+      [ "System Information", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1493", [
+        [ "Hardware Configuration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1494", null ],
+        [ "Software Configuration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1495", null ]
       ] ],
-      [ "Performance Metrics", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1144", [
-        [ "Logging Throughput", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1145", null ],
-        [ "Latency (Async Mode)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1146", null ],
-        [ "Memory Performance", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1147", null ]
+      [ "Performance Metrics", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1497", [
+        [ "Logging Throughput", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1498", null ],
+        [ "Latency (Async Mode)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1499", null ],
+        [ "Memory Performance", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1500", null ]
       ] ],
-      [ "Benchmark Results", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1149", null ],
-      [ "Key Features", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1151", null ],
-      [ "Baseline Validation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1153", [
-        [ "Phase 0 Requirements", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1154", null ],
-        [ "Acceptance Criteria", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1155", null ]
+      [ "Benchmark Results", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1502", null ],
+      [ "Key Features", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1504", null ],
+      [ "Baseline Validation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1506", [
+        [ "Phase 0 Requirements", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1507", null ],
+        [ "Acceptance Criteria", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1508", null ]
       ] ]
     ] ],
     [ "Logger System - 성능 기준 메트릭", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html", [
-      [ "시스템 정보", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1160", [
-        [ "하드웨어 구성", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1161", null ],
-        [ "소프트웨어 구성", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1162", null ]
+      [ "시스템 정보", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1513", [
+        [ "하드웨어 구성", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1514", null ],
+        [ "소프트웨어 구성", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1515", null ]
       ] ],
-      [ "성능 메트릭", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1164", [
-        [ "로깅 Throughput", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1165", null ],
-        [ "Latency (Async Mode)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1166", null ],
-        [ "메모리 성능", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1167", null ]
+      [ "성능 메트릭", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1517", [
+        [ "로깅 Throughput", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1518", null ],
+        [ "Latency (Async Mode)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1519", null ],
+        [ "메모리 성능", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1520", null ]
       ] ],
-      [ "벤치마크 결과", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1169", null ],
-      [ "주요 특징", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1171", null ],
-      [ "Baseline 검증", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1173", [
-        [ "Phase 0 요구사항", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1174", null ],
-        [ "수락 기준", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1175", null ]
+      [ "벤치마크 결과", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1522", null ],
+      [ "주요 특징", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1524", null ],
+      [ "Baseline 검증", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1526", [
+        [ "Phase 0 요구사항", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1527", null ],
+        [ "수락 기준", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1528", null ]
       ] ]
     ] ],
     [ "CI/CD 성능 지표 자동화 제안서", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html", [
-      [ "📊 Executive Summary", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1179", null ],
-      [ "🔍 현재 상태 분석", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1181", [
-        [ "✅ 장점", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1182", null ],
-        [ "❌ 개선 필요 사항", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1183", null ]
+      [ "📊 Executive Summary", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1532", null ],
+      [ "🔍 현재 상태 분석", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1534", [
+        [ "✅ 장점", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1535", null ],
+        [ "❌ 개선 필요 사항", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1536", null ]
       ] ],
-      [ "🎯 제안 솔루션 아키텍처", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1185", [
-        [ "전체 워크플로우", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1186", null ]
+      [ "🎯 제안 솔루션 아키텍처", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1538", [
+        [ "전체 워크플로우", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1539", null ]
       ] ],
-      [ "📁 제안 디렉토리 구조", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1188", null ],
-      [ "🛠️ 구현 상세 (4단계)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1190", [
-        [ "Phase 1: 벤치마크 재활성화 및 JSON 출력 설정", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1191", [
-          [ "1.1 GitHub Actions 워크플로우 수정", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1192", null ],
-          [ "1.2 벤치마크 실행 및 JSON 저장", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1193", null ],
-          [ "1.3 API 변경에 따른 벤치마크 코드 수정", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1194", null ]
+      [ "📁 제안 디렉토리 구조", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1541", null ],
+      [ "🛠️ 구현 상세 (4단계)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1543", [
+        [ "Phase 1: 벤치마크 재활성화 및 JSON 출력 설정", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1544", [
+          [ "1.1 GitHub Actions 워크플로우 수정", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1545", null ],
+          [ "1.2 벤치마크 실행 및 JSON 저장", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1546", null ],
+          [ "1.3 API 변경에 따른 벤치마크 코드 수정", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1547", null ]
         ] ],
-        [ "Phase 2: 결과 파싱 및 기준선 비교", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1196", [
-          [ "2.1 벤치마크 결과 파싱 스크립트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1197", null ],
-          [ "2.2 기준선 비교 스크립트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1198", null ]
+        [ "Phase 2: 결과 파싱 및 기준선 비교", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1549", [
+          [ "2.1 벤치마크 결과 파싱 스크립트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1550", null ],
+          [ "2.2 기준선 비교 스크립트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1551", null ]
         ] ],
-        [ "Phase 3: 배지 및 차트 생성", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1200", [
-          [ "3.1 성능 배지 생성 스크립트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1201", null ],
-          [ "3.2 트렌드 차트 생성 스크립트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1202", null ]
+        [ "Phase 3: 배지 및 차트 생성", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1553", [
+          [ "3.1 성능 배지 생성 스크립트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1554", null ],
+          [ "3.2 트렌드 차트 생성 스크립트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1555", null ]
         ] ],
-        [ "Phase 4: README.md 자동 업데이트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1204", [
-          [ "4.1 README 업데이트 스크립트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1205", null ],
-          [ "4.2 GitHub Actions에서 자동 커밋", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1206", null ]
+        [ "Phase 4: README.md 자동 업데이트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1557", [
+          [ "4.1 README 업데이트 스크립트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1558", null ],
+          [ "4.2 GitHub Actions에서 자동 커밋", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1559", null ]
         ] ]
       ] ],
-      [ "🎨 README.md 성능 섹션 디자인", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1208", [
-        [ "제안 1: 배지 중심 디자인", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1209", null ],
-        [ "제안 2: 테이블 중심 디자인", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1210", null ],
-        [ "제안 3: 카드 스타일 디자인", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1211", null ]
+      [ "🎨 README.md 성능 섹션 디자인", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1561", [
+        [ "제안 1: 배지 중심 디자인", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1562", null ],
+        [ "제안 2: 테이블 중심 디자인", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1563", null ],
+        [ "제안 3: 카드 스타일 디자인", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1564", null ]
       ] ],
-      [ "🔄 CI/CD 워크플로우 전체 예시", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1213", null ],
-      [ "📈 예상 결과물", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1215", [
-        [ "1. GitHub Actions 실행 결과", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1216", null ],
-        [ "2. PR 자동 코멘트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1217", null ],
-        [ "3. 업데이트된 README.md", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1218", null ]
+      [ "🔄 CI/CD 워크플로우 전체 예시", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1566", null ],
+      [ "📈 예상 결과물", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1568", [
+        [ "1. GitHub Actions 실행 결과", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1569", null ],
+        [ "2. PR 자동 코멘트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1570", null ],
+        [ "3. 업데이트된 README.md", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1571", null ]
       ] ],
-      [ "✅ 구현 체크리스트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1220", [
-        [ "Phase 1: 인프라 구축 (예상 소요: 2시간)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1221", null ],
-        [ "Phase 2: 배지 및 차트 (예상 소요: 1.5시간)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1222", null ],
-        [ "Phase 3: README 자동 업데이트 (예상 소요: 1시간)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1223", null ],
-        [ "Phase 4: CI/CD 통합 (예상 소요: 2시간)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1224", null ],
-        [ "Phase 5: 테스트 및 검증 (예상 소요: 1.5시간)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1225", null ],
-        [ "Phase 6: 문서화 (예상 소요: 1시간)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1226", null ]
+      [ "✅ 구현 체크리스트", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1573", [
+        [ "Phase 1: 인프라 구축 (예상 소요: 2시간)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1574", null ],
+        [ "Phase 2: 배지 및 차트 (예상 소요: 1.5시간)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1575", null ],
+        [ "Phase 3: README 자동 업데이트 (예상 소요: 1시간)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1576", null ],
+        [ "Phase 4: CI/CD 통합 (예상 소요: 2시간)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1577", null ],
+        [ "Phase 5: 테스트 및 검증 (예상 소요: 1.5시간)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1578", null ],
+        [ "Phase 6: 문서화 (예상 소요: 1시간)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1579", null ]
       ] ],
-      [ "🔧 트러블슈팅 가이드", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1228", [
-        [ "문제 1: 벤치마크 빌드 실패", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1229", null ],
-        [ "문제 2: Python 스크립트 실행 오류", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1230", null ],
-        [ "문제 3: Git 자동 커밋 권한 오류", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1231", null ],
-        [ "문제 4: 배지가 README에 표시되지 않음", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1232", null ]
+      [ "🔧 트러블슈팅 가이드", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1581", [
+        [ "문제 1: 벤치마크 빌드 실패", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1582", null ],
+        [ "문제 2: Python 스크립트 실행 오류", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1583", null ],
+        [ "문제 3: Git 자동 커밋 권한 오류", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1584", null ],
+        [ "문제 4: 배지가 README에 표시되지 않음", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1585", null ]
       ] ],
-      [ "📚 참고 자료", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1234", [
-        [ "도구 및 라이브러리", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1235", null ],
-        [ "관련 프로젝트 예시", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1236", null ],
-        [ "내부 문서", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1237", null ]
+      [ "📚 참고 자료", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1587", [
+        [ "도구 및 라이브러리", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1588", null ],
+        [ "관련 프로젝트 예시", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1589", null ],
+        [ "내부 문서", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1590", null ]
       ] ],
-      [ "🎯 성공 지표", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1239", null ],
-      [ "📝 다음 단계", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1241", null ]
+      [ "🎯 성공 지표", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1592", null ],
+      [ "📝 다음 단계", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1594", null ]
     ] ],
     [ "Logger System Production Quality", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html", [
-      [ "Table of Contents", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1245", null ],
-      [ "Executive Summary", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1247", [
-        [ "Production Readiness Status: ✅ <strong>READY</strong>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1248", null ]
+      [ "Table of Contents", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1598", null ],
+      [ "Executive Summary", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1600", [
+        [ "Production Readiness Status: ✅ <strong>READY</strong>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1601", null ]
       ] ],
-      [ "Build & Testing Infrastructure", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1250", [
-        [ "Continuous Integration Pipelines", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1251", [
-          [ "1. Main CI Pipeline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1252", null ],
-          [ "2. Sanitizer Pipeline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1254", null ],
-          [ "3. Performance Benchmark Pipeline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1256", null ],
-          [ "4. Code Coverage Pipeline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1258", null ],
-          [ "5. Static Analysis Pipeline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1260", null ]
+      [ "Build & Testing Infrastructure", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1603", [
+        [ "Continuous Integration Pipelines", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1604", [
+          [ "1. Main CI Pipeline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1605", null ],
+          [ "2. Sanitizer Pipeline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1607", null ],
+          [ "3. Performance Benchmark Pipeline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1609", null ],
+          [ "4. Code Coverage Pipeline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1611", null ],
+          [ "5. Static Analysis Pipeline", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1613", null ]
         ] ],
-        [ "Test Organization", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1262", [
-          [ "Unit Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1263", null ],
-          [ "Integration Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1265", null ],
-          [ "Benchmarks", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1267", null ]
+        [ "Test Organization", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1615", [
+          [ "Unit Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1616", null ],
+          [ "Integration Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1618", null ],
+          [ "Benchmarks", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1620", null ]
         ] ]
       ] ],
-      [ "Thread Safety & Concurrency", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1269", [
-        [ "Thread Safety Grade: <strong>A+</strong>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1270", null ],
-        [ "Writer Thread Safety", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1271", null ],
-        [ "Asynchronous Processing Architecture", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1273", null ],
-        [ "Concurrency Patterns", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1275", null ]
+      [ "Thread Safety & Concurrency", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1622", [
+        [ "Thread Safety Grade: <strong>A+</strong>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1623", null ],
+        [ "Writer Thread Safety", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1624", null ],
+        [ "Asynchronous Processing Architecture", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1626", null ],
+        [ "Concurrency Patterns", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1628", null ]
       ] ],
-      [ "Resource Management (RAII)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1277", [
-        [ "RAII Compliance Grade: <strong>A</strong>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1278", null ],
-        [ "Smart Pointer Usage", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1279", null ],
-        [ "Memory Leak Detection", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1281", null ],
-        [ "Exception Safety", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1283", null ]
+      [ "Resource Management (RAII)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1630", [
+        [ "RAII Compliance Grade: <strong>A</strong>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1631", null ],
+        [ "Smart Pointer Usage", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1632", null ],
+        [ "Memory Leak Detection", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1634", null ],
+        [ "Exception Safety", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1636", null ]
       ] ],
-      [ "Error Handling Strategy", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1285", [
-        [ "Error Handling Grade: <strong>A</strong> (90% Complete)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1286", null ],
-        [ "Result<T> Pattern", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1287", null ],
-        [ "Error Code Registry", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1289", null ],
-        [ "Hot Path Optimization", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1291", null ]
+      [ "Error Handling Strategy", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1638", [
+        [ "Error Handling Grade: <strong>A</strong> (90% Complete)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1639", null ],
+        [ "Result<T> Pattern", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1640", null ],
+        [ "Error Code Registry", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1642", null ],
+        [ "Hot Path Optimization", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1644", null ]
       ] ],
-      [ "Performance Characteristics", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1293", [
-        [ "Baseline Metrics", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1294", null ],
-        [ "Performance Baselines (CI/CD)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1296", null ]
+      [ "Performance Characteristics", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1646", [
+        [ "Baseline Metrics", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1647", null ],
+        [ "Performance Baselines (CI/CD)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1649", null ]
       ] ],
-      [ "Security Features", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1298", [
-        [ "Security Grade: <strong>A</strong> (v3.0.0)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1299", null ],
-        [ "1. Secure Key Storage", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1300", null ],
-        [ "2. Path Validation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1301", null ],
-        [ "3. Signal Handler Safety", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1302", null ],
-        [ "4. Security Audit Logging", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1303", null ],
-        [ "5. Compliance Support", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1304", null ],
-        [ "6. OWASP Top 10 Mitigations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1305", null ]
+      [ "Security Features", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1651", [
+        [ "Security Grade: <strong>A</strong> (v3.0.0)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1652", null ],
+        [ "1. Secure Key Storage", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1653", null ],
+        [ "2. Path Validation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1654", null ],
+        [ "3. Signal Handler Safety", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1655", null ],
+        [ "4. Security Audit Logging", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1656", null ],
+        [ "5. Compliance Support", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1657", null ],
+        [ "6. OWASP Top 10 Mitigations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1658", null ]
       ] ],
-      [ "Operational Metrics", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1307", [
-        [ "Built-in Metrics Collection", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1308", null ],
-        [ "Health Checks", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1310", null ]
+      [ "Operational Metrics", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1660", [
+        [ "Built-in Metrics Collection", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1661", null ],
+        [ "Health Checks", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1663", null ]
       ] ],
-      [ "Platform Support", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1312", [
-        [ "Officially Supported Platforms", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1313", null ],
-        [ "Minimum Requirements", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1314", null ],
-        [ "Cross-Platform Compatibility", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1316", null ]
+      [ "Platform Support", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1665", [
+        [ "Officially Supported Platforms", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1666", null ],
+        [ "Minimum Requirements", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1667", null ],
+        [ "Cross-Platform Compatibility", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1669", null ]
       ] ],
-      [ "Remaining Work & Future Enhancements", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1318", [
-        [ "Current Status: <strong>90% Production Ready</strong>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1319", null ]
+      [ "Remaining Work & Future Enhancements", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1671", [
+        [ "Current Status: <strong>90% Production Ready</strong>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1672", null ]
       ] ],
-      [ "See Also", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1321", null ]
+      [ "See Also", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1674", null ]
     ] ],
     [ "Logger System Project Structure", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html", [
-      [ "Table of Contents", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1324", null ],
-      [ "Directory Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1326", null ],
-      [ "Core Module Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1328", [
-        [ "logger.h / logger.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1329", null ],
-        [ "logger_builder.h / logger_builder.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1331", null ],
-        [ "log_entry.h", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1333", null ],
-        [ "result_types.h", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1335", null ]
+      [ "Table of Contents", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1677", null ],
+      [ "Directory Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1679", null ],
+      [ "Core Module Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1681", [
+        [ "logger.h / logger.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1682", null ],
+        [ "logger_builder.h / logger_builder.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1684", null ],
+        [ "log_entry.h", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1686", null ],
+        [ "result_types.h", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1688", null ]
       ] ],
-      [ "Writer Implementations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1337", [
-        [ "console_writer.h / console_writer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1338", null ],
-        [ "file_writer.h / file_writer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1340", null ],
-        [ "rotating_file_writer.h / rotating_file_writer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1342", null ],
-        [ "network_writer.h / network_writer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1344", null ],
-        [ "critical_writer.h / critical_writer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1346", null ],
-        [ "hybrid_writer.h / hybrid_writer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1348", null ]
+      [ "Writer Implementations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1690", [
+        [ "console_writer.h / console_writer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1691", null ],
+        [ "file_writer.h / file_writer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1693", null ],
+        [ "rotating_file_writer.h / rotating_file_writer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1695", null ],
+        [ "network_writer.h / network_writer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1697", null ],
+        [ "critical_writer.h / critical_writer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1699", null ],
+        [ "hybrid_writer.h / hybrid_writer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1701", null ]
       ] ],
-      [ "Filter Implementations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1350", [
-        [ "level_filter.h / level_filter.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1351", null ],
-        [ "regex_filter.h / regex_filter.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1353", null ],
-        [ "function_filter.h / function_filter.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1355", null ]
+      [ "Filter Implementations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1703", [
+        [ "level_filter.h / level_filter.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1704", null ],
+        [ "regex_filter.h / regex_filter.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1706", null ],
+        [ "function_filter.h / function_filter.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1708", null ]
       ] ],
-      [ "Formatter Implementations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1357", [
-        [ "plain_formatter.h / plain_formatter.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1358", null ],
-        [ "json_formatter.h / json_formatter.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1360", null ],
-        [ "custom_formatter.h / custom_formatter.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1362", null ]
+      [ "Formatter Implementations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1710", [
+        [ "plain_formatter.h / plain_formatter.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1711", null ],
+        [ "json_formatter.h / json_formatter.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1713", null ],
+        [ "custom_formatter.h / custom_formatter.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1715", null ]
       ] ],
-      [ "Configuration System", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1364", [
-        [ "config_templates.h / config_templates.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1365", null ],
-        [ "config_validator.h / config_validator.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1367", null ],
-        [ "config_strategy.h / config_strategy.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1369", null ]
+      [ "Configuration System", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1717", [
+        [ "config_templates.h / config_templates.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1718", null ],
+        [ "config_validator.h / config_validator.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1720", null ],
+        [ "config_strategy.h / config_strategy.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1722", null ]
       ] ],
-      [ "Security Components", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1371", [
-        [ "secure_key_storage.h / secure_key_storage.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1372", null ],
-        [ "path_validator.h / path_validator.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1374", null ],
-        [ "log_sanitizer.h / log_sanitizer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1376", null ]
+      [ "Security Components", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1724", [
+        [ "secure_key_storage.h / secure_key_storage.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1725", null ],
+        [ "path_validator.h / path_validator.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1727", null ],
+        [ "log_sanitizer.h / log_sanitizer.cpp", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1729", null ]
       ] ],
-      [ "Testing Organization", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1378", [
-        [ "Unit Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1379", null ],
-        [ "Integration Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1381", null ],
-        [ "Benchmarks", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1383", null ]
+      [ "Testing Organization", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1731", [
+        [ "Unit Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1732", null ],
+        [ "Integration Tests", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1734", null ],
+        [ "Benchmarks", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1736", null ]
       ] ],
-      [ "Build System", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1385", [
-        [ "CMakeLists.txt (Root)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1386", null ],
-        [ "CMake Modules", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1388", null ]
+      [ "Build System", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1738", [
+        [ "CMakeLists.txt (Root)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1739", null ],
+        [ "CMake Modules", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1741", null ]
       ] ],
-      [ "Module Dependencies", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1390", [
-        [ "Dependency Graph", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1391", null ],
-        [ "External Dependencies", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1392", null ]
+      [ "Module Dependencies", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1743", [
+        [ "Dependency Graph", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1744", null ],
+        [ "External Dependencies", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1745", null ]
       ] ],
-      [ "File Naming Conventions", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1394", [
-        [ "Header Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1395", null ],
-        [ "Source Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1396", null ],
-        [ "Documentation Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1397", null ]
+      [ "File Naming Conventions", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1747", [
+        [ "Header Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1748", null ],
+        [ "Source Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1749", null ],
+        [ "Documentation Files", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1750", null ]
       ] ],
-      [ "See Also", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1399", null ]
+      [ "See Also", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md1752", null ]
     ] ],
     [ "README_KO", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html", [
-      [ "Logger System 문서", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1415", [
-        [ "📚 문서 구조", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1416", [
-          [ "핵심 문서", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1417", null ],
-          [ "가이드 (<tt>docs/guides/</tt>)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1418", null ],
-          [ "고급 주제 (<tt>docs/advanced/</tt>)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1419", null ]
+      [ "Logger System 문서", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1768", [
+        [ "📚 문서 구조", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1769", [
+          [ "핵심 문서", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1770", null ],
+          [ "가이드 (<tt>docs/guides/</tt>)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1771", null ],
+          [ "고급 주제 (<tt>docs/advanced/</tt>)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1772", null ]
         ] ],
-        [ "🚀 빠른 탐색", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1420", [
-          [ "신규 사용자", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1421", null ],
-          [ "기존 사용자", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1422", null ],
-          [ "기여자", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1423", null ],
-          [ "성능 엔지니어", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1424", null ]
+        [ "🚀 빠른 탐색", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1773", [
+          [ "신규 사용자", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1774", null ],
+          [ "기존 사용자", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1775", null ],
+          [ "기여자", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1776", null ],
+          [ "성능 엔지니어", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1777", null ]
         ] ],
-        [ "🔧 문서 유지관리", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1425", [
-          [ "최근 변경사항", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1426", null ]
+        [ "🔧 문서 유지관리", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1778", [
+          [ "최근 변경사항", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1779", null ]
         ] ],
-        [ "📖 외부 리소스", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1427", null ],
-        [ "🤝 도움 및 지원", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1428", null ]
+        [ "📖 외부 리소스", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1780", null ],
+        [ "🤝 도움 및 지원", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1781", null ]
       ] ]
     ] ]
   ] ]
@@ -1478,7 +1773,8 @@ var NAVTREEINDEX =
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES.html#autotoc_md826",
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CONDITIONAL__COMPILATION__REFACTORING.html#autotoc_md186",
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE.html#autotoc_md485",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md1058"
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md1058",
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html#autotoc_md1384"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

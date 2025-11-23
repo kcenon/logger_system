@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🧪_20test_20results_0',['🧪 Test Results',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md139',1,'']]]
+  ['🛠️_20구현_20상세_204단계_0',['🛠️ 구현 상세 (4단계)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1543',1,'']]]
 ];

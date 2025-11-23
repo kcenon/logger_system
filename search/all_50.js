@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['새로운_20구조로_20빠른_20시작_0',['🚀 새로운 구조로 빠른 시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md516',1,'']]]
+  ['상세_204단계_0',['🛠️ 구현 상세 (4단계)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1543',1,'']]],
+  ['상태_20분석_1',['🔍 현재 상태 분석',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1534',1,'']]]
 ];
