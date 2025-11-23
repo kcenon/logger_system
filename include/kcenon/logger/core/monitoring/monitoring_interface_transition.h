@@ -31,9 +31,39 @@
  * @file monitoring_interface_transition.h
  * @brief Transition header for migrating from logger::monitoring to common::interfaces
  *
- * DEPRECATED: This file provides compatibility during migration to common_system interfaces.
- * It will be removed in version 3.0.0. Please migrate to using common::interfaces::IMonitor
- * and common::interfaces::IMonitorable directly.
+ * @deprecated This entire file is deprecated and scheduled for removal in version 3.0.0.
+ *
+ * ## Migration Guide
+ *
+ * Replace the following types:
+ * | Old Type (Deprecated)                          | New Type                                    |
+ * |------------------------------------------------|---------------------------------------------|
+ * | kcenon::logger::monitoring::health_status      | common::interfaces::health_status           |
+ * | kcenon::logger::monitoring::metric_value       | common::interfaces::metric_value            |
+ * | kcenon::logger::monitoring::monitoring_data    | common::interfaces::metrics_snapshot        |
+ * | kcenon::logger::monitoring::health_check_result| common::interfaces::health_check_result     |
+ * | kcenon::logger::monitoring::monitoring_interface| common::interfaces::IMonitor               |
+ * | kcenon::logger::monitoring::basic_monitoring   | (Create custom IMonitor implementation)     |
+ *
+ * ## Example Migration
+ *
+ * Before (deprecated):
+ * ```cpp
+ * #include <kcenon/logger/core/monitoring/monitoring_interface_transition.h>
+ * using kcenon::logger::monitoring::basic_monitoring;
+ * basic_monitoring monitor;
+ * monitor.set_metric("count", 42);
+ * ```
+ *
+ * After (recommended):
+ * ```cpp
+ * #include <kcenon/common/interfaces/monitoring_interface.h>
+ * // Use common::interfaces::IMonitor implementations
+ * ```
+ *
+ * ## Timeline
+ * - v2.x: Deprecation warnings enabled (current)
+ * - v3.0: This file will be removed
  */
 
 #pragma once
