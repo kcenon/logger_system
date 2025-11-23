@@ -36,6 +36,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/backends/thread_system_backend.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/logger_types.h>
+#include <kcenon/logger/interfaces/log_filter_interface.h>
+#include <kcenon/logger/interfaces/log_entry.h>
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -80,6 +82,8 @@ public:
     std::shared_mutex writers_mutex_;  // Protects writers_ vector from concurrent modification
     std::unique_ptr<backends::integration_backend> backend_;  // Integration backend
     std::unique_ptr<log_collector> collector_;  // Async log collector for async mode
+    std::unique_ptr<log_filter_interface> filter_;  // Global filter for log entries
+    mutable std::shared_mutex filter_mutex_;  // Protects filter_ from concurrent access
 
     // Emergency flush support (for signal handlers)
     static constexpr size_t emergency_buffer_size_ = 8192;
@@ -237,14 +241,22 @@ void logger::log(log_level level, const std::string& message) {
         return;
     }
 
+    // Apply filter if set
+    {
+        std::shared_lock<std::shared_mutex> filter_lock(pimpl_->filter_mutex_);
+        if (pimpl_->filter_) {
+            log_entry entry(level, message);
+            if (!pimpl_->filter_->should_log(entry)) {
+                return;  // Message filtered out
+            }
+        }
+    }
+
     // Record metrics if enabled
     auto start_time = std::chrono::high_resolution_clock::now();
 
     // Convert level using backend
     auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(level));
-
-    // TODO: Queue message for async processing when async mode is fully implemented
-    // Current implementation: synchronous write to all writers
 
     // Copy writer pointers under lock to minimize lock hold time
     std::vector<std::shared_ptr<base_writer>> local_writers;
@@ -276,6 +288,17 @@ void logger::log(log_level level,
                 const std::string& function) {
     if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
         return;
+    }
+
+    // Apply filter if set
+    {
+        std::shared_lock<std::shared_mutex> filter_lock(pimpl_->filter_mutex_);
+        if (pimpl_->filter_) {
+            log_entry entry(level, message, file, line, function);
+            if (!pimpl_->filter_->should_log(entry)) {
+                return;  // Message filtered out
+            }
+        }
     }
 
     // Record metrics if enabled
@@ -410,6 +433,23 @@ size_t logger::get_emergency_buffer_size() const {
         return 0;
     }
     return pimpl_->emergency_buffer_used_.load(std::memory_order_acquire);
+}
+
+// Filter support implementation
+
+void logger::set_filter(std::unique_ptr<log_filter_interface> filter) {
+    if (pimpl_) {
+        std::lock_guard<std::shared_mutex> lock(pimpl_->filter_mutex_);
+        pimpl_->filter_ = std::move(filter);
+    }
+}
+
+bool logger::has_filter() const {
+    if (!pimpl_) {
+        return false;
+    }
+    std::shared_lock<std::shared_mutex> lock(pimpl_->filter_mutex_);
+    return pimpl_->filter_ != nullptr;
 }
 
 } // namespace kcenon::logger

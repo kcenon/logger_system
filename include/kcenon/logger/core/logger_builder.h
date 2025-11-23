@@ -75,8 +75,7 @@ All rights reserved.
 #include "../backends/thread_system_backend.h"
 #include "../writers/base_writer.h"
 #include "../writers/batch_writer.h"
-// TODO: Implement filtering system
-// #include "../filters/log_filter.h"
+#include "../filters/log_filter.h"
 #include "../interfaces/log_formatter_interface.h"
 #include "di/di_container_interface.h"
 
@@ -354,18 +353,67 @@ public:
         return *this;
     }
     
-    // TODO: Implement filtering system
     /**
      * @brief Add a filter to the logger
      * @param filter Filter instance
      * @return Reference to builder for chaining
+     *
+     * @details Adds a filter that determines whether log entries should be processed.
+     * Multiple filters can be added; they are combined using AND logic (all must pass).
+     *
+     * @example
+     * @code
+     * auto logger = logger_builder()
+     *     .add_filter(std::make_unique<filters::level_filter>(log_level::info))
+     *     .add_filter(std::make_unique<filters::regex_filter>("error|warning"))
+     *     .build();
+     * @endcode
+     *
+     * @since 2.0.0
      */
-    /*
-    logger_builder& add_filter(std::unique_ptr<log_filter> filter) {
-        filters_.push_back(std::move(filter));
+    logger_builder& add_filter(std::unique_ptr<log_filter_interface> filter) {
+        if (filter) {
+            filters_.push_back(std::move(filter));
+        }
         return *this;
     }
-    */
+
+    /**
+     * @brief Add a level filter (convenience method)
+     * @param min_level Minimum log level to pass through
+     * @return Reference to builder for chaining
+     *
+     * @since 2.0.0
+     */
+    logger_builder& add_level_filter(logger_system::log_level min_level) {
+        filters_.push_back(std::make_unique<filters::level_filter>(min_level));
+        return *this;
+    }
+
+    /**
+     * @brief Add a regex filter (convenience method)
+     * @param pattern Regex pattern to match against log messages
+     * @param include_matches If true, only matching messages pass; if false, non-matching pass
+     * @return Reference to builder for chaining
+     *
+     * @since 2.0.0
+     */
+    logger_builder& add_regex_filter(const std::string& pattern, bool include_matches = true) {
+        filters_.push_back(std::make_unique<filters::regex_filter>(pattern, include_matches));
+        return *this;
+    }
+
+    /**
+     * @brief Add a function-based filter (convenience method)
+     * @param predicate Function that returns true for entries that should pass
+     * @return Reference to builder for chaining
+     *
+     * @since 2.0.0
+     */
+    logger_builder& add_function_filter(std::function<bool(const log_entry&)> predicate) {
+        filters_.push_back(std::make_unique<filters::function_filter>(std::move(predicate)));
+        return *this;
+    }
     
     /**
      * @brief Set formatter for the logger
@@ -758,9 +806,7 @@ public:
             }
         }
 
-        // TODO: Implement filtering system
-        // Filter application disabled until log_filter is implemented
-        /*
+        // Apply filters if any were added
         if (!filters_.empty()) {
             // Create composite filter if multiple filters
             if (filters_.size() == 1) {
@@ -773,7 +819,7 @@ public:
                 logger_instance->set_filter(std::move(composite));
             }
         }
-        */
+        filters_.clear();  // Clear after moving
 
         // Start logger if async
         if (config_.async) {
@@ -806,8 +852,7 @@ public:
 private:
     logger_config config_;
     std::vector<std::pair<std::string, std::unique_ptr<base_writer>>> writers_;
-    // TODO: Implement filtering system
-    // std::vector<std::unique_ptr<log_filter>> filters_;
+    std::vector<std::unique_ptr<log_filter_interface>> filters_;
     std::unique_ptr<log_formatter_interface> formatter_;
     std::unique_ptr<backends::integration_backend> backend_;  // Integration backend (Phase 3.2)
     // TODO: Re-enable when strategy pattern is implemented
