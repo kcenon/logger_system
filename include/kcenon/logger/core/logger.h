@@ -128,7 +128,7 @@ enum class metric_type {
 class log_collector;
 class base_writer;
 class logger_metrics_collector;
-// class log_filter;  // TODO: Implement filtering system
+class log_filter_interface;  // Forward declaration for filtering system
 // class log_router;  // TODO: Implement routing system
 
 /**
@@ -454,13 +454,36 @@ public:
      */
     base_writer* get_writer(const std::string& name);
     
-    // TODO: Implement filtering and routing system
-    // /**
-    //  * @brief Set global filter
-    //  * @param filter Filter to apply to all logs
-    //  */
-    // void set_filter(std::unique_ptr<log_filter> filter);
-    //
+    /**
+     * @brief Set global filter for log entries
+     * @param filter Filter to apply to all logs
+     *
+     * @details Sets a filter that determines whether log entries should be processed.
+     * If a filter is set, only entries that pass the filter will be logged.
+     * Pass nullptr to remove the current filter.
+     *
+     * @example
+     * @code
+     * // Only log warning and above
+     * logger.set_filter(std::make_unique<filters::level_filter>(log_level::warning));
+     *
+     * // Remove filter
+     * logger.set_filter(nullptr);
+     * @endcode
+     *
+     * @since 2.0.0
+     */
+    void set_filter(std::unique_ptr<log_filter_interface> filter);
+
+    /**
+     * @brief Check if a filter is currently set
+     * @return true if a filter is active, false otherwise
+     *
+     * @since 2.0.0
+     */
+    bool has_filter() const;
+
+    // TODO: Implement routing system
     // /**
     //  * @brief Get the log router for configuration
     //  * @return Reference to the log router
