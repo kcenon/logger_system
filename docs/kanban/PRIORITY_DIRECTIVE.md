@@ -1,228 +1,233 @@
 # Logger System Work Priority Directive
 
-**Document Version**: 1.0
+**Document Version**: 2.0 (Revised based on codebase analysis)
 **Created**: 2025-11-23
-**Total Tickets**: 20
+**Total Tickets**: 21
 
 ---
 
 ## 1. Executive Summary
 
-Analysis of Logger System's 20 tickets across 5 work tracks:
+Analysis of Logger System codebase revealed **actual implementation status** vs original ticket estimates:
 
-| Track | Tickets | Key Objective | Est. Duration |
-|-------|---------|---------------|---------------|
-| CORE | 4 | Complete Filtering/Routing | 10-16d |
-| TEST | 4 | Achieve 75% Coverage | 10-15d |
-| DOC | 5 | Write Extension Guides | 7-12d |
-| REFACTOR | 4 | Legacy Cleanup | 8-12d |
-| PERF | 3 | Performance Automation | 5-8d |
+| Track | Tickets | Key Finding | Est. Duration |
+|-------|---------|-------------|---------------|
+| CORE | 6 | Code exists but not integrated | 15-21d |
+| TEST | 3 | Major coverage gaps | 4-7d |
+| DOC | 5 | After implementation | 7-12d |
+| REFACTOR | 4 | Commented code cleanup | 8-12d |
+| PERF | 3 | Stub implementations | 5-8d |
 
-**Total Estimated Duration**: ~40-63 days (single developer)
+**Key Discovery**: Several features have complete implementations that are simply **commented out** or **not wired** into the main system.
 
 ---
 
-## 2. Dependency Graph
+## 2. Actual Code State Analysis
+
+### 2.1 Commented Out (Ready to Uncomment)
+
+| Feature | File | Lines | State |
+|---------|------|-------|-------|
+| Filter integration | `logger_builder.h` | 78, 357, 761-776, 809-810 | 7 TODOs |
+| Strategy pattern | `logger_builder.h` | 69, 422-454, 456-482, 562-575, 649-655, 690-706, 813 | Entirely commented |
+| DI container | `logger_builder.h` | 562-575 | Commented |
+
+### 2.2 Exists But Not Integrated
+
+| Feature | Location | Status |
+|---------|----------|--------|
+| Filter classes | `filters/*.h` | Complete implementations, not used |
+| Router | `routing/log_router.h` | Complete interface, not wired |
+| Log analyzer | `analysis/log_analyzer.h` | Exists, not connected |
+
+### 2.3 Placeholder Implementations
+
+| Feature | File | Issue |
+|---------|------|-------|
+| Structured logger | `structured_logger.h:136-140` | `log_structured()` is no-op |
+| MPMC queue | `lockfree_queue.h:211-215` | `static_assert` stub |
+
+### 2.4 Missing Entirely
+
+| Feature | Referenced In | Status |
+|---------|---------------|--------|
+| Log sanitizer | `security_demo.cpp:34` | Header doesn't exist |
+
+---
+
+## 3. Revised Dependency Graph
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                         CORE PIPELINE                                │
-│                                                                      │
-│   ┌─────────────┐                      ┌─────────────┐              │
-│   │ LOG-001     │                      │ LOG-003     │              │
-│   │ Filtering   │                      │ Monitoring  │              │
-│   │ (Base)      │                      │ Migration   │              │
-│   └──────┬──────┘                      └──────┬──────┘              │
-│          │                                    │                      │
-│          ├────────────────┐                   │                      │
-│          ▼                │                   ▼                      │
-│   ┌─────────────┐         │           ┌─────────────┐              │
-│   │ LOG-002     │         │           │ LOG-301     │              │
-│   │ Routing     │         │           │ Deprecated  │              │
-│   └──────┬──────┘         │           │ Removal     │              │
-│          │                │           └─────────────┘              │
-│          │                │                                         │
-│          ▼                ▼                                         │
-│   ┌─────────────┐  ┌─────────────┐                                 │
-│   │ LOG-203     │  │ LOG-004     │                                 │
-│   │ Router Guide│  │ Strategy    │                                 │
-│   └─────────────┘  └─────────────┘                                 │
-└─────────────────────────────────────────────────────────────────────┘
-                              │
-                              │ After LOG-001 completion
-                              ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                         TEST PIPELINE                                │
-│                                                                      │
-│   ┌─────────────┐                                                   │
-│   │ LOG-101     │ ◄──── Can run in parallel with CORE tickets       │
-│   │ Coverage 75%│                                                   │
-│   └──────┬──────┘                                                   │
+│                    CRITICAL PATH (Week 1)                           │
+│                                                                     │
+│   ┌─────────────┐     ┌─────────────┐     ┌─────────────┐          │
+│   │ LOG-001     │     │ LOG-005     │     │ LOG-006     │          │
+│   │ Filtering   │     │ Structured  │     │ Sanitizer   │          │
+│   │ (uncomment) │     │ (implement) │     │ (create)    │          │
+│   └──────┬──────┘     └─────────────┘     └─────────────┘          │
 │          │                                                          │
-│          ├────────────────┬────────────────┐                        │
-│          ▼                ▼                ▼                        │
-│   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                │
-│   │ LOG-102     │  │ LOG-103     │  │ LOG-104     │                │
-│   │ Filter Tests│  │ Formatter   │  │ Stress      │                │
-│   │ (LOG-001)   │  │ Tests       │  │ Tests       │                │
-│   └─────────────┘  └─────────────┘  └─────────────┘                │
-└─────────────────────────────────────────────────────────────────────┘
+│          │            ┌─────────────┐                               │
+│          │            │ LOG-003     │                               │
+│          │            │ Monitoring  │                               │
+│          │            │ Migration   │                               │
+│          │            └──────┬──────┘                               │
+│          │                   │                                      │
+└──────────┼───────────────────┼──────────────────────────────────────┘
+           │                   │
+           ▼                   ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│                    PHASE 2 (Week 2)                                  │
+│                                                                      │
+│   ┌─────────────┐     ┌─────────────┐     ┌─────────────┐           │
+│   │ LOG-002     │     │ LOG-102     │     │ LOG-301     │           │
+│   │ Routing     │     │ Filter      │     │ Remove      │           │
+│   │ (wire up)   │     │ Tests       │     │ Deprecated  │           │
+│   └──────┬──────┘     └─────────────┘     └─────────────┘           │
+│          │                                                           │
+│          ▼                                                           │
+│   ┌─────────────┐                                                   │
+│   │ LOG-105     │                                                   │
+│   │ Router      │                                                   │
+│   │ Tests       │                                                   │
+│   └─────────────┘                                                   │
+└──────────────────────────────────────────────────────────────────────┘
+           │
+           ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│                    PHASE 3 (Week 3)                                  │
+│                                                                      │
+│   ┌─────────────┐     ┌─────────────┐     ┌─────────────┐           │
+│   │ LOG-004     │     │ LOG-304     │     │ LOG-402     │           │
+│   │ Strategy    │     │ Async       │     │ Perf        │           │
+│   │ Pattern     │     │ Complete    │     │ Regression  │           │
+│   └─────────────┘     └─────────────┘     └─────────────┘           │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 3. Critical Path Analysis
+## 4. Quick Wins (Low Effort, High Impact)
 
-### 3.1 Longest Dependency Chains
-
-```
-LOG-001 → LOG-002 → LOG-203
-  3-5d     3-5d     1-2d   = 7-12d
-
-LOG-001 → LOG-004
-  3-5d     2-3d              = 5-8d
-
-LOG-003 → LOG-301 → LOG-204
-  2-3d     1d       1-2d    = 4-6d
-```
-
-### 3.2 Parallelizable Work
-
-| Parallel Group | Tickets | Condition |
-|----------------|---------|-----------|
-| Group A | LOG-001, LOG-003, LOG-101 | Can start immediately (no dependencies) |
-| Group B | LOG-002, LOG-102, LOG-301 | After LOG-001 or LOG-003 completion |
-| Group C | LOG-004, LOG-203, LOG-204 | After Group B partial completion |
-| Group D | LOG-103, LOG-104, LOG-201, LOG-202, LOG-205 | Independent (anytime) |
-| Group E | LOG-302, LOG-303, LOG-304, LOG-401, LOG-402, LOG-403 | Independent (anytime) |
+| Ticket | Effort | Impact | Why |
+|--------|--------|--------|-----|
+| **LOG-001** | Medium | 🔴 Critical | Just uncomment and test; code exists |
+| **LOG-005** | Low | 🔴 High | Replace no-op with actual implementation |
+| **LOG-003** | Low | 🟡 Medium | Straightforward migration, enables cleanup |
 
 ---
 
-## 4. Recommended Execution Order
+## 5. Recommended Execution Order
 
-### Phase 1: Foundation Building (Can Start Simultaneously)
-**Objective**: Establish core infrastructure
+### Phase 1: Unblock (Week 1)
 
-| Order | Ticket | Priority | Est. Duration | Reason |
-|-------|--------|----------|---------------|--------|
-| 1-1 | **LOG-001** | 🔴 HIGH | 3-5d | Filtering - prerequisite for all CORE tickets |
-| 1-2 | **LOG-003** | 🔴 HIGH | 2-3d | Monitoring Migration - prerequisite for legacy cleanup |
-| 1-3 | **LOG-101** | 🔴 HIGH | 4-6d | Test Coverage - establish quality baseline |
+**Goal**: Make commented/stub code functional
 
-**Phase 1 Completion Criteria**: Filtering system implemented, monitoring transition complete, tests at 75%
+| Day | Ticket | Action | Est. Hours |
+|-----|--------|--------|------------|
+| 1-2 | LOG-001 | Uncomment filter code, test | 16h |
+| 2-3 | LOG-005 | Implement structured logger | 12h |
+| 3 | LOG-006 | Create sanitizer class | 12h |
+| 3-4 | LOG-003 | Migration + deprecation | 12h |
 
----
-
-### Phase 2: Complete Core Features (After Phase 1)
-**Objective**: Complete routing system and tests
-
-| Order | Ticket | Priority | Est. Duration | Prerequisites |
-|-------|--------|----------|---------------|---------------|
-| 2-1 | **LOG-002** | 🔴 HIGH | 3-5d | LOG-001 |
-| 2-2 | **LOG-102** | 🔴 HIGH | 2-3d | LOG-001 |
-| 2-3 | **LOG-301** | 🟡 MEDIUM | 1d | LOG-003 |
-
-**Parallel Work**: LOG-103, LOG-104, LOG-202, LOG-205 (independent)
-
-**Phase 2 Completion Criteria**: Routing implemented, filter tests complete, deprecated code removed
+**Parallel**: LOG-005, LOG-006, LOG-003 are independent
 
 ---
 
-### Phase 3: Documentation & Quality (After Phase 2)
-**Objective**: Complete documentation and improve code quality
+### Phase 2: Complete Integration (Week 2)
 
-| Order | Ticket | Priority | Est. Duration | Prerequisites |
-|-------|--------|----------|---------------|---------------|
-| 3-1 | **LOG-004** | 🟡 MEDIUM | 2-3d | LOG-001 |
-| 3-2 | **LOG-201** | 🟡 MEDIUM | 1-2d | LOG-001 |
-| 3-3 | **LOG-203** | 🟡 MEDIUM | 1-2d | LOG-002 |
-| 3-4 | **LOG-204** | 🟡 MEDIUM | 1-2d | LOG-003 |
-| 3-5 | **LOG-402** | 🟡 MEDIUM | 2-3d | - |
+**Goal**: Wire up all existing code
 
-**Phase 3 Completion Criteria**: Strategy pattern activated, extension guides written, performance regression detection
+| Day | Ticket | Action | Est. Hours |
+|-----|--------|--------|------------|
+| 1-2 | LOG-002 | Wire router to logger | 16h |
+| 2-3 | LOG-102 | Add filter tests | 16h |
+| 3 | LOG-105 | Add router tests | 8h |
+| 3-4 | LOG-301 | Remove deprecated code | 8h |
 
 ---
 
-### Phase 4: Optimization & Finalization (After Phase 3)
-**Objective**: Additional improvements and optimization
+### Phase 3: Strategy & Async (Week 3)
 
-| Order | Ticket | Priority | Est. Duration | Prerequisites |
-|-------|--------|----------|---------------|---------------|
-| 4-1 | **LOG-304** | 🟡 MEDIUM | 3-5d | - |
-| 4-2 | **LOG-302** | 🟢 LOW | 2-3d | - |
-| 4-3 | **LOG-303** | 🟢 LOW | 2-3d | - |
-| 4-4 | **LOG-401** | 🟢 LOW | 2-3d | - |
-| 4-5 | **LOG-403** | 🟢 LOW | 1-2d | - |
+**Goal**: Re-enable advanced features
 
-**Phase 4 Completion Criteria**: Async fully implemented, C++20 features utilized, performance optimized
+| Day | Ticket | Action | Est. Hours |
+|-----|--------|--------|------------|
+| 1-2 | LOG-004 | Uncomment strategy pattern | 16h |
+| 2-3 | LOG-304 | Complete async path | 16h |
+| 3-4 | LOG-402 | Performance regression CI | 12h |
 
 ---
 
-## 5. Immediately Actionable Tickets
+### Phase 4: Polish (Week 4+)
 
-Tickets with no dependencies that can **start immediately**:
+**Goal**: Documentation and optimization
 
-1. ⭐ **LOG-001** - Complete Filtering System Implementation (Required starting point)
-2. ⭐ **LOG-003** - Complete Monitoring Migration (Required starting point)
-3. ⭐ **LOG-101** - Achieve 75% Test Coverage (Required starting point)
-4. **LOG-103** - Formatter Integration Tests (Optional)
-5. **LOG-104** - Extreme Performance Tests (Optional)
-6. **LOG-202** - Custom Formatter Guide (Optional)
-7. **LOG-205** - Performance Tuning Guide (Optional)
-8. **LOG-302~304** - Refactoring work (Optional)
-9. **LOG-401~403** - Performance work (Optional)
-
-**Recommended**: Start LOG-001, LOG-003, LOG-101 simultaneously in parallel
+| Ticket | Action |
+|--------|--------|
+| LOG-201~205 | Write guides |
+| LOG-302~303 | C++20, MinGW |
+| LOG-401, LOG-403 | MPMC, SAST |
 
 ---
 
-## 6. Blocker Analysis
+## 6. Risk Analysis
 
-**Tickets blocking the most other tickets (resolve first)**:
-1. **LOG-001** - Directly blocks 4 tickets
-2. **LOG-003** - Directly blocks 2 tickets
-3. **LOG-002** - Directly blocks 1 ticket
-
----
-
-## 7. Timeline Estimate (Single Developer)
-
-| Week | Phase | Main Tasks | Cumulative Progress |
-|------|-------|------------|---------------------|
-| Week 1 | Phase 1 | LOG-001, LOG-003, LOG-101 | 25% |
-| Week 2 | Phase 2 | LOG-002, LOG-102, LOG-301 | 45% |
-| Week 3 | Phase 2-3 | LOG-004, LOG-103, LOG-104 | 60% |
-| Week 4 | Phase 3 | LOG-201~205, LOG-402 | 80% |
-| Week 5 | Phase 4 | LOG-302~304, LOG-401, LOG-403 | 100% |
+| Risk | Probability | Impact | Mitigation |
+|------|-------------|--------|------------|
+| Filter code has bugs after uncommenting | Medium | High | Extensive unit tests (LOG-102) |
+| Async path changes break existing code | Medium | High | Keep sync fallback, gradual rollout |
+| Sanitizer regex performance | Low | Medium | Benchmark during implementation |
+| MPMC queue correctness | Medium | High | Use proven algorithm, stress testing |
 
 ---
 
-**Document Author**: Claude
+## 7. Success Metrics
+
+| Metric | Current | Target | Measured By |
+|--------|---------|--------|-------------|
+| Commented TODOs | 7+ | 0 | grep TODO |
+| Placeholder functions | 2 | 0 | Code review |
+| Filter test coverage | ~10% | 90% | gcov/lcov |
+| Router test coverage | 0% | 85% | gcov/lcov |
+| Example code working | 50% | 100% | Build + run demos |
+
+---
+
+## 8. Appendix: Full Ticket List
+
+### HIGH Priority (Must Do)
+
+| ID | Title | Duration | Dependencies | Blocks |
+|----|-------|----------|--------------|--------|
+| LOG-001 | Filtering System Integration | 3-5d | - | 4 |
+| LOG-002 | Routing System Integration | 3-5d | LOG-001 | 2 |
+| LOG-003 | Monitoring Migration | 2-3d | - | 2 |
+| LOG-005 | Structured Logger | 2-3d | - | 0 |
+| LOG-006 | Log Sanitizer | 2-3d | - | 0 |
+| LOG-102 | Filter Tests | 2-3d | LOG-001 | 0 |
+| LOG-105 | Router Tests | 1-2d | LOG-002 | 0 |
+
+### MEDIUM Priority (Should Do)
+
+| ID | Title | Duration | Dependencies |
+|----|-------|----------|--------------|
+| LOG-004 | Strategy Pattern | 2-3d | LOG-001 |
+| LOG-301 | Remove Deprecated | 1d | LOG-003 |
+| LOG-304 | Async Complete | 3-5d | - |
+| LOG-402 | Perf Regression CI | 2-3d | - |
+| LOG-201~205 | Documentation | 7-12d | Various |
+
+### LOW Priority (Nice to Have)
+
+| ID | Title | Duration |
+|----|-------|----------|
+| LOG-302 | C++20 Features | 2-3d |
+| LOG-303 | MinGW Compat | 2-3d |
+| LOG-401 | MPMC Queue | 2-3d |
+| LOG-403 | SAST CI | 1-2d |
+
+---
+
+**Document Author**: Claude (Based on codebase analysis)
 **Last Modified**: 2025-11-23
-
----
-
-## Appendix: Full Ticket List (Quick Reference)
-
-| ID | Title | Priority | Duration | Dependencies |
-|----|-------|----------|----------|--------------|
-| LOG-001 | Complete Filtering System Implementation | HIGH | 3-5d | - |
-| LOG-002 | Complete Routing System Implementation | HIGH | 3-5d | LOG-001 |
-| LOG-003 | Complete Monitoring Migration | HIGH | 2-3d | - |
-| LOG-004 | Reactivate Builder Strategy Pattern | MEDIUM | 2-3d | LOG-001 |
-| LOG-101 | Achieve 75% Test Coverage | HIGH | 4-6d | - |
-| LOG-102 | Add Filter Tests | HIGH | 2-3d | LOG-001 |
-| LOG-103 | Add Formatter Integration Tests | MEDIUM | 2-3d | - |
-| LOG-104 | Add Extreme Performance Tests | MEDIUM | 2-3d | - |
-| LOG-201 | Custom Filter Writing Guide | MEDIUM | 1-2d | LOG-001 |
-| LOG-202 | Custom Formatter Writing Guide | MEDIUM | 1-2d | - |
-| LOG-203 | Custom Router Writing Guide | MEDIUM | 1-2d | LOG-002 |
-| LOG-204 | Deprecated API Migration Guide | MEDIUM | 1-2d | LOG-003 |
-| LOG-205 | Detailed Performance Tuning Guide | MEDIUM | 2-3d | - |
-| LOG-301 | Remove Basic Monitoring Class | MEDIUM | 1d | LOG-003 |
-| LOG-302 | Leverage C++20 Features | LOW | 2-3d | - |
-| LOG-303 | Resolve MinGW Compatibility | LOW | 2-3d | - |
-| LOG-304 | Complete Async Processing | MEDIUM | 3-5d | - |
-| LOG-401 | Multi-Producer Lock-free Queue | LOW | 2-3d | - |
-| LOG-402 | Automate Performance Regression Detection | MEDIUM | 2-3d | - |
-| LOG-403 | Add SAST Security Analysis to CI | LOW | 1-2d | - |
