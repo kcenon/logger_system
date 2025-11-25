@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['quality_0',['Logger System Production Quality',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html',1,'']]],
-  ['questions_1',['Logger System - Frequently Asked Questions',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2FAQ.html',1,'']]],
-  ['queue_2',['LOG-401: Implement Multi-Producer Lock-free Queue',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html',1,'']]]
+  ['기준_20메트릭_0',['Logger System - 성능 기준 메트릭',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html',1,'']]]
 ];

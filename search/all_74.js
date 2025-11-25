@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['주요_20컴포넌트_20개요_0',['🔧 주요 컴포넌트 개요',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md507',1,'']]],
-  ['주요_20특징_1',['주요 특징',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1524',1,'']]],
-  ['주제_20tt_20docs_20advanced_20tt_2',['고급 주제 (&lt;tt&gt;docs/advanced/&lt;/tt&gt;)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1772',1,'']]]
+  ['중단됨_0',['사용 중단됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md746',1,'']]],
+  ['중심_20디자인_1',['중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1209',1,'제안 1: 배지 중심 디자인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1210',1,'제안 2: 테이블 중심 디자인']]],
+  ['중요한_20제한사항_2',['중요한 제한사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1116',1,'']]]
 ];

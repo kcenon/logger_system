@@ -1,25 +1,4 @@
 var searchData=
 [
-  ['cd_20성능_20지표_20자동화_20제안서_0',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]],
-  ['changelog_20logger_20system_1',['Changelog - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html',1,'']]],
-  ['ci_20cd_20성능_20지표_20자동화_20제안서_2',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]],
-  ['ci_5fcd_5fdashboard_3',['CI_CD_DASHBOARD',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html',1,'']]],
-  ['ci_5fcd_5fdashboard_5fko_4',['CI_CD_DASHBOARD_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD__KO.html',1,'']]],
-  ['compilation_20refactoring_20strategy_5',['Conditional Compilation Refactoring Strategy',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CONDITIONAL__COMPILATION__REFACTORING.html',1,'']]],
-  ['complete_20async_20processing_20implementation_6',['LOG-304: Complete Async Processing Implementation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-304-async-complete.html',1,'']]],
-  ['complete_20filtering_20system_20implementation_7',['LOG-001: Complete Filtering System Implementation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html',1,'']]],
-  ['complete_20monitoring_20interface_20migration_8',['LOG-003: Complete Monitoring Interface Migration',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-003-monitoring-migration.html',1,'']]],
-  ['complete_20routing_20system_20integration_9',['LOG-002: Complete Routing System Integration',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html',1,'']]],
-  ['complete_20structured_20logger_20implementation_10',['LOG-005: Complete Structured Logger Implementation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html',1,'']]],
-  ['comprehensive_20filter_20tests_11',['LOG-102: Add Comprehensive Filter Tests',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html',1,'']]],
-  ['conditional_20compilation_20refactoring_20strategy_12',['Conditional Compilation Refactoring Strategy',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CONDITIONAL__COMPILATION__REFACTORING.html',1,'']]],
-  ['contributing_13',['CONTRIBUTING',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2CONTRIBUTING.html',1,'']]],
-  ['contributing_5fko_14',['CONTRIBUTING_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2CONTRIBUTING__KO.html',1,'']]],
-  ['coverage_15',['Test Coverage',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TESTING__GUIDE.html',1,'']]],
-  ['critical_5flog_5fprevention_16',['CRITICAL_LOG_PREVENTION',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION.html',1,'']]],
-  ['critical_5flog_5fprevention_5fko_17',['CRITICAL_LOG_PREVENTION_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION__KO.html',1,'']]],
-  ['critical_5flogging_5fquick_5fstart_18',['CRITICAL_LOGGING_QUICK_START',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html',1,'']]],
-  ['critical_5flogging_5fquick_5fstart_5fko_19',['CRITICAL_LOGGING_QUICK_START_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START__KO.html',1,'']]],
-  ['custom_5fwriters_20',['CUSTOM_WRITERS',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS.html',1,'']]],
-  ['custom_5fwriters_5fko_21',['CUSTOM_WRITERS_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS__KO.html',1,'']]]
+  ['korean_20translation_20summary_0',['Korean Translation Summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TRANSLATION__SUMMARY.html',1,'']]]
 ];

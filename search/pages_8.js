@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['features_0',['Logger System Features',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES.html',1,'']]],
-  ['filter_20tests_1',['LOG-102: Add Comprehensive Filter Tests',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-102-filter-tests.html',1,'']]],
-  ['filtering_20system_20implementation_2',['LOG-001: Complete Filtering System Implementation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html',1,'']]],
-  ['free_20queue_3',['LOG-401: Implement Multi-Producer Lock-free Queue',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-401-multi-producer.html',1,'']]],
-  ['frequently_20asked_20questions_4',['Logger System - Frequently Asked Questions',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2FAQ.html',1,'']]]
+  ['metrics_0',['Logger System - Performance Baseline Metrics',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html',1,'']]],
+  ['migration_20guide_20logger_20system_1',['Migration Guide - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2MIGRATION.html',1,'']]],
+  ['migration_5fguide_2',['MIGRATION_GUIDE',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html',1,'']]],
+  ['migration_5fguide_5fko_3',['MIGRATION_GUIDE_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html',1,'']]]
 ];

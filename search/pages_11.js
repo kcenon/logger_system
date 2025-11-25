@@ -1,26 +1,4 @@
 var searchData=
 [
-  ['sanitizer_0',['LOG-006: Implement Log Sanitizer',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-006-log-sanitizer.html',1,'']]],
-  ['security_1',['SECURITY',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY.html',1,'']]],
-  ['security_5fko_2',['SECURITY_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html',1,'']]],
-  ['semantic_20standard_3',['Log Level Semantic Standard',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOG__LEVEL__SEMANTIC__STANDARD.html',1,'']]],
-  ['standard_4',['Log Level Semantic Standard',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOG__LEVEL__SEMANTIC__STANDARD.html',1,'']]],
-  ['strategy_5',['Conditional Compilation Refactoring Strategy',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CONDITIONAL__COMPILATION__REFACTORING.html',1,'']]],
-  ['strategy_20pattern_6',['LOG-004: Reactivate Builder Strategy Pattern',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-004-builder-strategy.html',1,'']]],
-  ['structure_7',['structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE.html',1,'Logger System - Project Structure'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html',1,'Logger System Project Structure']]],
-  ['structured_20logger_20implementation_8',['LOG-005: Complete Structured Logger Implementation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-005-structured-logger.html',1,'']]],
-  ['summary_9',['Korean Translation Summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TRANSLATION__SUMMARY.html',1,'']]],
-  ['system_10',['system',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html',1,'변경 이력 - Logger System'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ARCHITECTURE.html',1,'Architecture - Logger System'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html',1,'Changelog - Logger System'],['../index.html',1,'Logger System'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2MIGRATION.html',1,'Migration Guide - Logger System']]],
-  ['system_20성능_20기준_20메트릭_11',['Logger System - 성능 기준 메트릭',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html',1,'']]],
-  ['system_20프로젝트_20구조_12',['Logger System - 프로젝트 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html',1,'']]],
-  ['system_20features_13',['Logger System Features',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES.html',1,'']]],
-  ['system_20frequently_20asked_20questions_14',['Logger System - Frequently Asked Questions',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2FAQ.html',1,'']]],
-  ['system_20implementation_15',['LOG-001: Complete Filtering System Implementation',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-001-filtering-system.html',1,'']]],
-  ['system_20integration_16',['LOG-002: Complete Routing System Integration',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2LOG-002-routing-system.html',1,'']]],
-  ['system_20integration_20guide_17',['Logger System Integration Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2INTEGRATION.html',1,'']]],
-  ['system_20performance_20baseline_20metrics_18',['Logger System - Performance Baseline Metrics',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html',1,'']]],
-  ['system_20performance_20benchmarks_19',['Logger System Performance Benchmarks',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html',1,'']]],
-  ['system_20production_20quality_20',['Logger System Production Quality',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html',1,'']]],
-  ['system_20project_20structure_21',['system project structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE.html',1,'Logger System - Project Structure'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html',1,'Logger System Project Structure']]],
-  ['system_20work_20priority_20directive_22',['Logger System Work Priority Directive',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2kanban_2PRIORITY__DIRECTIVE.html',1,'']]]
+  ['변경_20이력_20logger_20system_0',['변경 이력 - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html',1,'']]]
 ];

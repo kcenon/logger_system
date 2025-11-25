@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['경로_20업데이트_0',['Step 2: Include 경로 업데이트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md513',1,'']]]
+  ['고급_20주제_20tt_20docs_20advanced_20tt_0',['고급 주제 (&lt;tt&gt;docs/advanced/&lt;/tt&gt;)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1419',1,'']]]
 ];
