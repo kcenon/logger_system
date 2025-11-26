@@ -161,7 +161,7 @@ vcpkg build failed. Falling back to system libraries...
 - [x] Upgrade to upload-artifact@v4 (completed)
 - [ ] Consider matrix builds for multiple configurations
 - [ ] Add benchmark result tracking
-- [ ] Implement coverage reporting
+- [x] Implement coverage reporting (see coverage.yml)
 
 ## Troubleshooting
 
