@@ -160,8 +160,17 @@ vcpkg build failed. Falling back to system libraries...
 - [x] Add Windows MSYS2 workflow improvements (completed)
 - [x] Upgrade to upload-artifact@v4 (completed)
 - [ ] Consider matrix builds for multiple configurations
-- [ ] Add benchmark result tracking
+- [x] Add benchmark result tracking (completed - using github-action-benchmark)
 - [x] Implement coverage reporting (see coverage.yml)
+
+### Benchmark Result Tracking
+
+Added historical benchmark tracking using `benchmark-action/github-action-benchmark@v1`:
+- Stores benchmark data in `gh-pages` branch under `dev/bench/`
+- Provides interactive performance trend charts
+- Alerts on 10% performance regression
+- Auto-comments on PRs when performance degrades
+- View trends at: `https://<owner>.github.io/<repo>/dev/bench/`
 
 ## Troubleshooting
 

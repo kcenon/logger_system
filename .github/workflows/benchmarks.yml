@@ -234,6 +234,34 @@ with open('build/benchmark_results_${{ matrix.os }}.json', 'w') as out:
 
         echo "✅ Baseline saved: benchmarks/baselines/baseline_${{ matrix.os }}_$(date +%Y%m%d).json" >> $GITHUB_STEP_SUMMARY
 
+    # Historical benchmark tracking with github-action-benchmark
+    - name: Store benchmark results for tracking
+      if: matrix.os == 'ubuntu-22.04'
+      uses: benchmark-action/github-action-benchmark@v1
+      with:
+        name: Logger System Performance
+        tool: 'googlecpp'
+        output-file-path: build/benchmark_results_${{ matrix.os }}.json
+        # Store data in gh-pages branch
+        gh-pages-branch: gh-pages
+        benchmark-data-dir-path: dev/bench
+        # Commit benchmark data only on main branch push
+        auto-push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        # Alert on performance regression (10% threshold)
+        alert-threshold: '110%'
+        # Comment on PR with comparison
+        comment-on-alert: true
+        fail-on-alert: false
+        # GitHub token for pushing and commenting
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Add performance tracking link to summary
+      if: matrix.os == 'ubuntu-22.04' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "## 📈 Performance Tracking" >> $GITHUB_STEP_SUMMARY
+        echo "View historical performance trends: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/dev/bench/" >> $GITHUB_STEP_SUMMARY
+
   report:
     name: Generate Benchmark Report
     needs: benchmark
