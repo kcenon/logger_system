@@ -66,9 +66,11 @@ All rights reserved.
 
 #include "thread_integration_detector.h"
 #include "logger_config.h"
-// TODO: Re-enable when strategy pattern is implemented
-// #include "config_strategy_interface.h"
-// #include "configuration_templates.h"
+#include "strategies/config_strategy_interface.h"
+#include "strategies/environment_strategy.h"
+#include "strategies/performance_strategy.h"
+#include "strategies/deployment_strategy.h"
+#include "strategies/composite_strategy.h"
 #include "logger.h"
 #include "../backends/integration_backend.h"
 #include "../backends/standalone_backend.h"
@@ -467,8 +469,16 @@ public:
         return *this;
     }
     
-    // TODO: Re-enable when strategy pattern is implemented
-    /*
+    /**
+     * @brief Apply a configuration strategy
+     * @param strategy Strategy to apply during build
+     * @return Reference to builder for chaining
+     *
+     * @details Strategies are applied in priority order during build().
+     * Higher priority strategies are applied first.
+     *
+     * @since 2.0.0
+     */
     logger_builder& apply_strategy(std::unique_ptr<config_strategy_interface> strategy) {
         if (strategy) {
             strategies_.push_back(std::move(strategy));
@@ -476,85 +486,69 @@ public:
         return *this;
     }
 
-    logger_builder& for_environment(const std::string& env) {
-        auto strategy = config_strategy_factory::create_environment(env);
-        if (strategy) {
-            apply_strategy(std::move(strategy));
-        }
-        return *this;
+    /**
+     * @brief Configure for a specific deployment environment
+     * @param env Deployment environment type
+     * @return Reference to builder for chaining
+     *
+     * @details Applies pre-configured settings optimized for the environment:
+     * - development: Verbose, colored, synchronous
+     * - staging: JSON, file + console, rotation
+     * - production: Optimized, warning+, crash protection
+     * - testing: Memory buffer, synchronous
+     *
+     * @since 2.0.0
+     */
+    logger_builder& for_environment(deployment_env env) {
+        return apply_strategy(std::make_unique<deployment_strategy>(env));
     }
 
-    logger_builder& with_performance_tuning(const std::string& level = "balanced") {
-        auto strategy = config_strategy_factory::create_tuning(level);
-        if (strategy) {
-            apply_strategy(std::move(strategy));
-        }
-        return *this;
+    /**
+     * @brief Apply performance tuning
+     * @param level Performance tuning level
+     * @return Reference to builder for chaining
+     *
+     * @details Applies performance-optimized settings:
+     * - low_latency: Small buffers, immediate flush
+     * - balanced: Default balanced settings
+     * - high_throughput: Large buffers, batch processing
+     * - minimal_overhead: Reduced features, lower CPU usage
+     *
+     * @since 2.0.0
+     */
+    logger_builder& with_performance_tuning(performance_level level) {
+        return apply_strategy(std::make_unique<performance_strategy>(level));
     }
 
+    /**
+     * @brief Auto-configure from environment variables
+     * @return Reference to builder for chaining
+     *
+     * @details Reads LOG_* environment variables and applies them:
+     * - LOG_LEVEL, LOG_ASYNC, LOG_BUFFER_SIZE, LOG_BATCH_SIZE
+     * - LOG_FLUSH_INTERVAL, LOG_COLOR, LOG_METRICS
+     *
+     * @since 2.0.0
+     */
     logger_builder& auto_configure() {
-        auto strategy = config_strategy_factory::from_environment();
-        if (strategy) {
+        auto strategy = std::make_unique<environment_strategy>();
+        if (strategy->is_applicable()) {
             apply_strategy(std::move(strategy));
         }
         return *this;
     }
-    */
-    
-    // TODO: Re-enable when configuration_template enum is implemented
-    /*
-    logger_builder& apply_template(kcenon::logger::configuration_template template_type) {
-        auto template_config = kcenon::logger::get_template_config(template_type);
-        config_.min_level = template_config.min_level;
-        config_.buffer_size = template_config.buffer_size;
-        config_.async = template_config.async_mode;
-        config_.enable_batch_writing = template_config.enable_batch_writing;
-        config_.batch_size = template_config.batch_size;
-        config_.flush_interval = template_config.flush_interval;
-        // Convert kcenon::logger::overflow_policy to logger_config::overflow_policy
-        switch (template_config.overflow_policy_type) {
-            case kcenon::logger::overflow_policy::block:
-                config_.queue_overflow_policy = logger_config::overflow_policy::block;
-                break;
-            case kcenon::logger::overflow_policy::drop_oldest:
-                config_.queue_overflow_policy = logger_config::overflow_policy::drop_oldest;
-                break;
-            case kcenon::logger::overflow_policy::drop_newest:
-                config_.queue_overflow_policy = logger_config::overflow_policy::drop_newest;
-                break;
-            case kcenon::logger::overflow_policy::grow:
-                config_.queue_overflow_policy = logger_config::overflow_policy::grow;
-                break;
-        }
-        return *this;
-    }
 
-    logger_builder& apply_performance_strategy(kcenon::logger::performance_strategy strategy) {
-        auto perf_config = kcenon::logger::get_performance_config(strategy);
-        config_.min_level = perf_config.min_level;
-        config_.buffer_size = perf_config.buffer_size;
-        config_.async = perf_config.async_mode;
-        config_.enable_batch_writing = perf_config.enable_batch_writing;
-        config_.batch_size = perf_config.batch_size;
-        config_.flush_interval = perf_config.flush_interval;
-        // Convert kcenon::logger::overflow_policy to logger_config::overflow_policy
-        switch (perf_config.overflow_policy_type) {
-            case kcenon::logger::overflow_policy::block:
-                config_.queue_overflow_policy = logger_config::overflow_policy::block;
-                break;
-            case kcenon::logger::overflow_policy::drop_oldest:
-                config_.queue_overflow_policy = logger_config::overflow_policy::drop_oldest;
-                break;
-            case kcenon::logger::overflow_policy::drop_newest:
-                config_.queue_overflow_policy = logger_config::overflow_policy::drop_newest;
-                break;
-            case kcenon::logger::overflow_policy::grow:
-                config_.queue_overflow_policy = logger_config::overflow_policy::grow;
-                break;
-        }
+    /**
+     * @brief Clear all registered strategies
+     * @return Reference to builder for chaining
+     *
+     * @since 2.0.0
+     */
+    logger_builder& clear_strategies() {
+        strategies_.clear();
         return *this;
     }
-    */
+    
     
     /**
      * @brief Detect environment from environment variables
@@ -607,20 +601,6 @@ public:
         return *this;
     }
     
-    // TODO: Re-enable when DI pattern is fully implemented
-    /*
-    template<typename T>
-    logger_builder& with_di_container(std::shared_ptr<di_container_interface<T>> container) {
-        // Store for later use
-        // Note: Implementation would need to handle type erasure or specific container type
-        return *this;
-    }
-
-    logger_builder& with_writer_from_di(const std::string& name) {
-        // Implementation would resolve from DI container
-        return *this;
-    }
-    */
     
     /**
      * @brief Set integration backend explicitly
@@ -694,13 +674,6 @@ public:
         return *this;
     }
 
-    // TODO: Re-enable when strategy pattern is implemented
-    /*
-    logger_builder& clear_strategies() {
-        strategies_.clear();
-        return *this;
-    }
-    */
 
     /**
      * @brief Build the logger with validation
@@ -735,23 +708,21 @@ public:
      * @since 1.0.0
      */
     result<std::unique_ptr<logger>> build() {
-        // TODO: Re-enable when strategy pattern is implemented
-        /*
-        // Apply all strategies first
-        for (const auto& strategy : strategies_) {
-            if (auto can_apply = strategy->can_apply(config_); !can_apply) {
-                // Log warning but continue with other strategies
-                continue;
-            }
+        // Apply all strategies in priority order (highest first)
+        if (!strategies_.empty()) {
+            // Sort strategies by priority (descending)
+            std::sort(strategies_.begin(), strategies_.end(),
+                [](const auto& a, const auto& b) {
+                    return a->priority() > b->priority();
+                });
 
-            if (auto result = strategy->apply(config_); !result) {
-                return make_logger_error<std::unique_ptr<logger>>(
-                    logger_error_code::invalid_configuration,
-                    "Strategy application failed"
-                );
+            // Apply each applicable strategy
+            for (const auto& strategy : strategies_) {
+                if (strategy->is_applicable()) {
+                    strategy->apply(config_);
+                }
             }
         }
-        */
 
         // Validate configuration
         if (auto validation = config_.validate(); !validation) {
@@ -855,8 +826,7 @@ private:
     std::vector<std::unique_ptr<log_filter_interface>> filters_;
     std::unique_ptr<log_formatter_interface> formatter_;
     std::unique_ptr<backends::integration_backend> backend_;  // Integration backend (Phase 3.2)
-    // TODO: Re-enable when strategy pattern is implemented
-    // std::vector<std::unique_ptr<config_strategy_interface>> strategies_;
+    std::vector<std::unique_ptr<config_strategy_interface>> strategies_;  // Configuration strategies
     mutable logger_config built_config_;  // Store last built configuration
     std::shared_ptr<common::interfaces::IMonitor> monitor_;  // Phase 2.2.4
     std::chrono::milliseconds health_check_interval_{1000};
