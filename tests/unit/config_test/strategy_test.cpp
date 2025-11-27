@@ -1,18 +1,24 @@
 /*****************************************************************************
 BSD 3-Clause License
 
-Copyright (c) 2025, 🍀☀🌕🌥 🌊
+Copyright (c) 2025, kcenon
 All rights reserved.
 *****************************************************************************/
 
 #include <gtest/gtest.h>
-#include "../../sources/logger/config/config_strategy_interface.h"
-#include "../../sources/logger/config/logger_builder.h"
-#include "../../sources/logger/writers/console_writer.h"
+#include <kcenon/logger/core/strategies/config_strategy_interface.h>
+#include <kcenon/logger/core/strategies/environment_strategy.h>
+#include <kcenon/logger/core/strategies/performance_strategy.h>
+#include <kcenon/logger/core/strategies/deployment_strategy.h>
+#include <kcenon/logger/core/strategies/composite_strategy.h>
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/factories/writer_factory.h>
+#include <kcenon/logger/factories/formatter_factory.h>
+#include <kcenon/logger/factories/filter_factory.h>
 #include <chrono>
 #include <cstdlib>
 
-using namespace logger_module;
+using namespace kcenon::logger;
 
 class ConfigStrategyTest : public ::testing::Test {
 protected:
@@ -20,384 +26,429 @@ protected:
         // Reset any environment variables
         unsetenv("LOG_ENV");
         unsetenv("LOG_LEVEL");
+        unsetenv("LOG_ASYNC");
+        unsetenv("LOG_BUFFER_SIZE");
+        unsetenv("LOG_BATCH_SIZE");
+        unsetenv("LOG_COLOR");
+        unsetenv("LOG_METRICS");
     }
-    
+
     void TearDown() override {
         // Clean up
         unsetenv("LOG_ENV");
         unsetenv("LOG_LEVEL");
+        unsetenv("LOG_ASYNC");
+        unsetenv("LOG_BUFFER_SIZE");
+        unsetenv("LOG_BATCH_SIZE");
+        unsetenv("LOG_COLOR");
+        unsetenv("LOG_METRICS");
     }
 };
 
-// Template Strategy Tests
+//============================================================================
+// Performance Strategy Tests
+//============================================================================
 
-TEST_F(ConfigStrategyTest, TemplateStrategy_HighPerformance) {
-    auto strategy = std::make_unique<template_strategy>(
-        template_strategy::template_type::high_performance);
-    
-    EXPECT_EQ(strategy->get_name(), "high_performance");
-    EXPECT_TRUE(strategy->should_override());
-    
-    logger_config config;
-    auto result = strategy->apply(config);
-    EXPECT_TRUE(result);
-    
-    // Verify high performance settings
-    EXPECT_EQ(config.buffer_size, 65536);
-    EXPECT_EQ(config.batch_size, 500);
-    EXPECT_TRUE(config.use_lock_free);
-}
+TEST_F(ConfigStrategyTest, PerformanceStrategy_LowLatency) {
+    performance_strategy strategy(performance_level::low_latency);
 
-TEST_F(ConfigStrategyTest, TemplateStrategy_LowLatency) {
-    auto strategy = std::make_unique<template_strategy>(
-        template_strategy::template_type::low_latency);
-    
-    EXPECT_EQ(strategy->get_name(), "low_latency");
-    
+    EXPECT_EQ(strategy.get_name(), "performance:low_latency");
+    EXPECT_EQ(strategy.priority(), 50);
+
     logger_config config;
-    auto result = strategy->apply(config);
-    EXPECT_TRUE(result);
-    
+    strategy.apply(config);
+
     // Verify low latency settings
+    EXPECT_TRUE(config.async);
+    EXPECT_EQ(config.buffer_size, 4096);
     EXPECT_EQ(config.batch_size, 10);
     EXPECT_EQ(config.flush_interval, std::chrono::milliseconds(10));
+    EXPECT_TRUE(config.use_lock_free);
+    EXPECT_FALSE(config.enable_batch_writing);
 }
 
-TEST_F(ConfigStrategyTest, TemplateStrategy_Debug) {
-    auto strategy = std::make_unique<template_strategy>(
-        template_strategy::template_type::debug);
-    
-    EXPECT_EQ(strategy->get_name(), "debug");
-    
+TEST_F(ConfigStrategyTest, PerformanceStrategy_Balanced) {
+    performance_strategy strategy(performance_level::balanced);
+
+    EXPECT_EQ(strategy.get_name(), "performance:balanced");
+
     logger_config config;
-    auto result = strategy->apply(config);
-    EXPECT_TRUE(result);
-    
-    // Verify debug settings
-    EXPECT_FALSE(config.async);
-    EXPECT_EQ(config.min_level, thread_module::log_level::trace);
+    strategy.apply(config);
+
+    // Verify balanced settings
+    EXPECT_TRUE(config.async);
+    EXPECT_EQ(config.buffer_size, 8192);
+    EXPECT_EQ(config.batch_size, 100);
+    EXPECT_EQ(config.flush_interval, std::chrono::milliseconds(1000));
+    EXPECT_TRUE(config.enable_batch_writing);
 }
 
-TEST_F(ConfigStrategyTest, TemplateStrategy_Production) {
-    auto strategy = std::make_unique<template_strategy>(
-        template_strategy::template_type::production);
-    
-    EXPECT_EQ(strategy->get_name(), "production");
-    
+TEST_F(ConfigStrategyTest, PerformanceStrategy_HighThroughput) {
+    performance_strategy strategy(performance_level::high_throughput);
+
+    EXPECT_EQ(strategy.get_name(), "performance:high_throughput");
+
     logger_config config;
-    auto result = strategy->apply(config);
-    EXPECT_TRUE(result);
-    
-    // Verify production settings
-    EXPECT_TRUE(config.enable_metrics);
-    EXPECT_TRUE(config.enable_crash_handler);
+    strategy.apply(config);
+
+    // Verify high throughput settings
+    EXPECT_TRUE(config.async);
+    EXPECT_EQ(config.buffer_size, 65536);
+    EXPECT_EQ(config.batch_size, 500);
+    EXPECT_EQ(config.flush_interval, std::chrono::milliseconds(5000));
+    EXPECT_TRUE(config.use_lock_free);
+    EXPECT_EQ(config.max_queue_size, 100000);
+    EXPECT_EQ(config.writer_thread_count, 2);
+    EXPECT_TRUE(config.enable_compression);
+    EXPECT_TRUE(config.enable_batch_writing);
+}
+
+TEST_F(ConfigStrategyTest, PerformanceStrategy_MinimalOverhead) {
+    performance_strategy strategy(performance_level::minimal_overhead);
+
+    EXPECT_EQ(strategy.get_name(), "performance:minimal_overhead");
+
+    logger_config config;
+    strategy.apply(config);
+
+    // Verify minimal overhead settings
+    EXPECT_FALSE(config.enable_metrics);
+    EXPECT_FALSE(config.enable_structured_logging);
+    EXPECT_FALSE(config.enable_source_location);
     EXPECT_FALSE(config.enable_color_output);
 }
 
-// Environment Strategy Tests
+//============================================================================
+// Deployment Strategy Tests
+//============================================================================
 
-TEST_F(ConfigStrategyTest, EnvironmentStrategy_Development) {
-    auto strategy = std::make_unique<environment_strategy>(
-        environment_strategy::environment::development);
-    
-    EXPECT_EQ(strategy->get_name(), "development");
-    EXPECT_GT(strategy->get_priority(), 50); // Higher than default
-    
+TEST_F(ConfigStrategyTest, DeploymentStrategy_Development) {
+    deployment_strategy strategy(deployment_env::development);
+
+    EXPECT_EQ(strategy.get_name(), "deployment:development");
+    EXPECT_EQ(strategy.priority(), 75);
+
     logger_config config;
-    auto result = strategy->apply(config);
-    EXPECT_TRUE(result);
-    
+    strategy.apply(config);
+
     // Verify development settings
     EXPECT_FALSE(config.async);
-    EXPECT_EQ(config.min_level, thread_module::log_level::trace);
+    EXPECT_EQ(config.min_level, logger_system::log_level::trace);
     EXPECT_TRUE(config.enable_color_output);
-    EXPECT_FALSE(config.enable_metrics);
+    EXPECT_TRUE(config.enable_source_location);
+    EXPECT_EQ(config.batch_size, 1);
 }
 
-TEST_F(ConfigStrategyTest, EnvironmentStrategy_Testing) {
-    auto strategy = std::make_unique<environment_strategy>(
-        environment_strategy::environment::testing);
-    
-    EXPECT_EQ(strategy->get_name(), "testing");
-    
-    logger_config config;
-    auto result = strategy->apply(config);
-    EXPECT_TRUE(result);
-    
-    // Verify testing settings
-    EXPECT_TRUE(config.async);
-    EXPECT_EQ(config.min_level, thread_module::log_level::debug);
-    EXPECT_TRUE(config.enable_metrics);
-    EXPECT_FALSE(config.enable_crash_handler);
-}
+TEST_F(ConfigStrategyTest, DeploymentStrategy_Staging) {
+    deployment_strategy strategy(deployment_env::staging);
 
-TEST_F(ConfigStrategyTest, EnvironmentStrategy_Staging) {
-    auto strategy = std::make_unique<environment_strategy>(
-        environment_strategy::environment::staging);
-    
-    EXPECT_EQ(strategy->get_name(), "staging");
-    
+    EXPECT_EQ(strategy.get_name(), "deployment:staging");
+
     logger_config config;
-    auto result = strategy->apply(config);
-    EXPECT_TRUE(result);
-    
+    strategy.apply(config);
+
     // Verify staging settings
     EXPECT_TRUE(config.async);
-    EXPECT_EQ(config.min_level, thread_module::log_level::info);
-    EXPECT_TRUE(config.enable_metrics);
-    EXPECT_TRUE(config.enable_crash_handler);
+    EXPECT_EQ(config.min_level, logger_system::log_level::info);
     EXPECT_TRUE(config.enable_structured_logging);
+    EXPECT_TRUE(config.enable_batch_writing);
 }
 
-// Performance Tuning Strategy Tests
+TEST_F(ConfigStrategyTest, DeploymentStrategy_Production) {
+    deployment_strategy strategy(deployment_env::production);
 
-TEST_F(ConfigStrategyTest, PerformanceTuning_Conservative) {
-    auto strategy = std::make_unique<performance_tuning_strategy>(
-        performance_tuning_strategy::tuning_level::conservative);
-    
-    EXPECT_EQ(strategy->get_name(), "conservative_tuning");
-    
-    logger_config config;
-    config.async = true; // Required for performance tuning
-    auto result = strategy->apply(config);
-    EXPECT_TRUE(result);
-    
-    // Verify conservative settings
-    EXPECT_EQ(config.buffer_size, 4096);
-    EXPECT_EQ(config.batch_size, 50);
-    EXPECT_EQ(config.max_queue_size, 1000);
-    EXPECT_EQ(config.writer_thread_count, 1);
-}
+    EXPECT_EQ(strategy.get_name(), "deployment:production");
 
-TEST_F(ConfigStrategyTest, PerformanceTuning_Balanced) {
-    auto strategy = std::make_unique<performance_tuning_strategy>(
-        performance_tuning_strategy::tuning_level::balanced);
-    
-    EXPECT_EQ(strategy->get_name(), "balanced_tuning");
-    
     logger_config config;
-    config.async = true;
-    auto result = strategy->apply(config);
-    EXPECT_TRUE(result);
-    
-    // Verify balanced settings
-    EXPECT_EQ(config.buffer_size, 8192);
-    EXPECT_EQ(config.batch_size, 100);
-    EXPECT_EQ(config.max_queue_size, 10000);
-    EXPECT_EQ(config.writer_thread_count, 2);
-}
+    strategy.apply(config);
 
-TEST_F(ConfigStrategyTest, PerformanceTuning_Aggressive) {
-    auto strategy = std::make_unique<performance_tuning_strategy>(
-        performance_tuning_strategy::tuning_level::aggressive);
-    
-    EXPECT_EQ(strategy->get_name(), "aggressive_tuning");
-    
-    logger_config config;
-    config.async = true;
-    auto result = strategy->apply(config);
-    EXPECT_TRUE(result);
-    
-    // Verify aggressive settings
-    EXPECT_EQ(config.buffer_size, 65536);
-    EXPECT_EQ(config.batch_size, 500);
-    EXPECT_EQ(config.max_queue_size, 100000);
-    EXPECT_EQ(config.writer_thread_count, 4);
-    EXPECT_TRUE(config.use_lock_free);
+    // Verify production settings
+    EXPECT_TRUE(config.async);
+    EXPECT_EQ(config.min_level, logger_system::log_level::warn);
+    EXPECT_TRUE(config.enable_crash_handler);
+    EXPECT_FALSE(config.enable_color_output);
+    EXPECT_TRUE(config.enable_structured_logging);
     EXPECT_TRUE(config.enable_compression);
 }
 
-TEST_F(ConfigStrategyTest, PerformanceTuning_RequiresAsync) {
-    auto strategy = std::make_unique<performance_tuning_strategy>(
-        performance_tuning_strategy::tuning_level::balanced);
-    
+TEST_F(ConfigStrategyTest, DeploymentStrategy_Testing) {
+    deployment_strategy strategy(deployment_env::testing);
+
+    EXPECT_EQ(strategy.get_name(), "deployment:testing");
+
     logger_config config;
-    config.async = false; // Disabled
-    
-    // Should fail can_apply check
-    auto can_apply = strategy->can_apply(config);
-    EXPECT_FALSE(can_apply);
+    strategy.apply(config);
+
+    // Verify testing settings
+    EXPECT_FALSE(config.async);
+    EXPECT_EQ(config.min_level, logger_system::log_level::trace);
+    EXPECT_FALSE(config.enable_crash_handler);
+    EXPECT_TRUE(config.enable_source_location);
 }
 
+//============================================================================
+// Environment Strategy Tests
+//============================================================================
+
+TEST_F(ConfigStrategyTest, EnvironmentStrategy_LogLevel) {
+    setenv("LOG_LEVEL", "error", 1);
+
+    environment_strategy strategy;
+    EXPECT_TRUE(strategy.is_applicable());
+    EXPECT_EQ(strategy.priority(), 100);
+
+    logger_config config;
+    strategy.apply(config);
+
+    EXPECT_EQ(config.min_level, logger_system::log_level::error);
+}
+
+TEST_F(ConfigStrategyTest, EnvironmentStrategy_MultipleVars) {
+    setenv("LOG_LEVEL", "debug", 1);
+    setenv("LOG_ASYNC", "false", 1);
+    setenv("LOG_BUFFER_SIZE", "16384", 1);
+    setenv("LOG_COLOR", "true", 1);
+    setenv("LOG_METRICS", "true", 1);
+
+    environment_strategy strategy;
+    EXPECT_TRUE(strategy.is_applicable());
+
+    logger_config config;
+    strategy.apply(config);
+
+    EXPECT_EQ(config.min_level, logger_system::log_level::debug);
+    EXPECT_FALSE(config.async);
+    EXPECT_EQ(config.buffer_size, 16384);
+    EXPECT_TRUE(config.enable_color_output);
+    EXPECT_TRUE(config.enable_metrics);
+}
+
+TEST_F(ConfigStrategyTest, EnvironmentStrategy_NotApplicable) {
+    // No LOG_* environment variables set
+    environment_strategy strategy;
+    EXPECT_FALSE(strategy.is_applicable());
+}
+
+//============================================================================
 // Composite Strategy Tests
+//============================================================================
 
-TEST_F(ConfigStrategyTest, CompositeStrategy_Multiple) {
-    auto composite = std::make_unique<composite_strategy>();
-    
-    // Add strategies - use testing environment instead which keeps async=true
-    composite->add_strategy(std::make_unique<environment_strategy>(
-        environment_strategy::environment::testing));
-    composite->add_strategy(std::make_unique<performance_tuning_strategy>(
-        performance_tuning_strategy::tuning_level::conservative));
-    
+TEST_F(ConfigStrategyTest, CompositeStrategy_AppliesInOrder) {
+    composite_strategy composite;
+
+    // Add strategies with different priorities
+    composite.add<deployment_strategy>(deployment_env::development);  // priority 75
+    composite.add<performance_strategy>(performance_level::high_throughput);  // priority 50
+
+    EXPECT_EQ(composite.size(), 2);
+
     logger_config config;
-    config.async = true; // Required for performance tuning
-    
-    auto result = composite->apply(config);
-    EXPECT_TRUE(result);
-    
-    // Environment strategy should apply first (higher priority)
-    // Then performance tuning modifies some settings
-    EXPECT_EQ(config.min_level, thread_module::log_level::debug); // From testing environment
-    EXPECT_EQ(config.buffer_size, 4096); // From performance tuning
+    composite.apply(config);
+
+    // Deployment (higher priority) applied first, then performance
+    // Performance strategy overrides async to true
+    EXPECT_TRUE(config.async);  // High throughput sets this
+    EXPECT_TRUE(config.enable_color_output);  // Development sets this
 }
 
-// Factory Tests
+TEST_F(ConfigStrategyTest, CompositeStrategy_Empty) {
+    composite_strategy composite;
 
-TEST_F(ConfigStrategyTest, Factory_CreateTemplate) {
-    auto strategy = config_strategy_factory::create_template("high_performance");
-    ASSERT_NE(strategy, nullptr);
-    EXPECT_EQ(strategy->get_name(), "high_performance");
-    
-    auto invalid = config_strategy_factory::create_template("invalid_name");
-    EXPECT_EQ(invalid, nullptr);
+    EXPECT_TRUE(composite.empty());
+
+    logger_config config;
+    logger_config original = config;
+
+    composite.apply(config);
+
+    // Config should be unchanged
+    EXPECT_EQ(config.buffer_size, original.buffer_size);
 }
 
-TEST_F(ConfigStrategyTest, Factory_CreateEnvironment) {
-    auto strategy = config_strategy_factory::create_environment("development");
-    ASSERT_NE(strategy, nullptr);
-    EXPECT_EQ(strategy->get_name(), "development");
-    
-    // Test alias
-    auto dev = config_strategy_factory::create_environment("dev");
+TEST_F(ConfigStrategyTest, CompositeStrategy_Clear) {
+    composite_strategy composite;
+    composite.add<deployment_strategy>(deployment_env::production);
+
+    EXPECT_EQ(composite.size(), 1);
+
+    composite.clear();
+
+    EXPECT_TRUE(composite.empty());
+}
+
+//============================================================================
+// Writer Factory Tests
+//============================================================================
+
+TEST_F(ConfigStrategyTest, WriterFactory_CreateConsole) {
+    auto writer = writer_factory::create_console();
+    ASSERT_NE(writer, nullptr);
+    EXPECT_EQ(writer->get_name(), "console");
+}
+
+TEST_F(ConfigStrategyTest, WriterFactory_CreateFile) {
+    auto writer = writer_factory::create_file("/tmp/test.log");
+    ASSERT_NE(writer, nullptr);
+    EXPECT_EQ(writer->get_name(), "file");
+}
+
+TEST_F(ConfigStrategyTest, WriterFactory_CreateRotatingFile) {
+    auto writer = writer_factory::create_rotating_file(
+        "/tmp/test.log", 10 * 1024 * 1024, 5);
+    ASSERT_NE(writer, nullptr);
+    EXPECT_EQ(writer->get_name(), "rotating_file");
+}
+
+TEST_F(ConfigStrategyTest, WriterFactory_CreateDevelopment) {
+    auto writer = writer_factory::create_development();
+    ASSERT_NE(writer, nullptr);
+    EXPECT_EQ(writer->get_name(), "console");
+}
+
+TEST_F(ConfigStrategyTest, WriterFactory_Registry) {
+    // Register custom type
+    writer_factory::register_type("custom", []() {
+        return writer_factory::create_console();
+    });
+
+    EXPECT_TRUE(writer_factory::has_type("custom"));
+
+    auto writer = writer_factory::create("custom");
+    ASSERT_NE(writer, nullptr);
+}
+
+//============================================================================
+// Formatter Factory Tests
+//============================================================================
+
+TEST_F(ConfigStrategyTest, FormatterFactory_CreatePlain) {
+    auto formatter = formatter_factory::create_plain();
+    ASSERT_NE(formatter, nullptr);
+    EXPECT_EQ(formatter->get_name(), "timestamp_formatter");
+}
+
+TEST_F(ConfigStrategyTest, FormatterFactory_CreateJson) {
+    auto formatter = formatter_factory::create_json();
+    ASSERT_NE(formatter, nullptr);
+    EXPECT_EQ(formatter->get_name(), "json_formatter");
+}
+
+TEST_F(ConfigStrategyTest, FormatterFactory_CreateByType) {
+    auto plain = formatter_factory::create(format_type::plain);
+    auto json = formatter_factory::create(format_type::json);
+    auto compact = formatter_factory::create(format_type::compact);
+
+    ASSERT_NE(plain, nullptr);
+    ASSERT_NE(json, nullptr);
+    ASSERT_NE(compact, nullptr);
+}
+
+TEST_F(ConfigStrategyTest, FormatterFactory_Presets) {
+    auto dev = formatter_factory::create_development();
+    auto prod = formatter_factory::create_production();
+
     ASSERT_NE(dev, nullptr);
-    EXPECT_EQ(dev->get_name(), "development");
+    ASSERT_NE(prod, nullptr);
+
+    // Development should have colors enabled
+    EXPECT_TRUE(dev->get_options().use_colors);
+
+    // Production should use JSON
+    EXPECT_EQ(prod->get_name(), "json_formatter");
 }
 
-TEST_F(ConfigStrategyTest, Factory_CreateTuning) {
-    auto strategy = config_strategy_factory::create_tuning("aggressive");
-    ASSERT_NE(strategy, nullptr);
-    EXPECT_EQ(strategy->get_name(), "aggressive_tuning");
-    
-    // Test alias
-    auto high = config_strategy_factory::create_tuning("high");
-    ASSERT_NE(high, nullptr);
-    EXPECT_EQ(high->get_name(), "aggressive_tuning");
+//============================================================================
+// Filter Factory Tests
+//============================================================================
+
+TEST_F(ConfigStrategyTest, FilterFactory_CreateLevel) {
+    auto filter = filter_factory::create_level(logger_system::log_level::warn);
+    ASSERT_NE(filter, nullptr);
+    EXPECT_EQ(filter->get_name(), "level_filter");
 }
 
-TEST_F(ConfigStrategyTest, Factory_FromEnvironment) {
-    // Test LOG_ENV variable
-    setenv("LOG_ENV", "production", 1);
-    auto strategy = config_strategy_factory::from_environment();
-    ASSERT_NE(strategy, nullptr);
-    EXPECT_EQ(strategy->get_name(), "production");
-    
-    // Test LOG_LEVEL variable
-    unsetenv("LOG_ENV");
-    setenv("LOG_LEVEL", "DEBUG", 1);
-    auto debug = config_strategy_factory::from_environment();
-    ASSERT_NE(debug, nullptr);
-    EXPECT_EQ(debug->get_name(), "debug");
-    
-    // Test no environment variables
-    unsetenv("LOG_ENV");
-    unsetenv("LOG_LEVEL");
-    auto none = config_strategy_factory::from_environment();
-    EXPECT_EQ(none, nullptr);
+TEST_F(ConfigStrategyTest, FilterFactory_CreateRegex) {
+    auto filter = filter_factory::create_regex("error|warning");
+    ASSERT_NE(filter, nullptr);
+    EXPECT_EQ(filter->get_name(), "regex_filter");
 }
 
+TEST_F(ConfigStrategyTest, FilterFactory_Builder) {
+    auto filter = filter_factory::create_builder()
+        .with_min_level(logger_system::log_level::info)
+        .exclude_pattern("password|secret")
+        .build();
+
+    ASSERT_NE(filter, nullptr);
+}
+
+TEST_F(ConfigStrategyTest, FilterFactory_Production) {
+    auto filter = filter_factory::create_production();
+    ASSERT_NE(filter, nullptr);
+}
+
+//============================================================================
 // Builder Integration Tests
-
-TEST_F(ConfigStrategyTest, Builder_UseTemplate) {
-    logger_builder builder;
-    builder.use_template("high_performance");
-    
-    auto& config = builder.get_config();
-    // The template should be applied when build() is called
-    // For now just verify builder accepts the call
-    EXPECT_NO_THROW(builder.validate());
-}
-
-TEST_F(ConfigStrategyTest, Builder_ApplyStrategy) {
-    logger_builder builder;
-    
-    auto strategy = std::make_unique<template_strategy>(
-        template_strategy::template_type::debug);
-    builder.apply_strategy(std::move(strategy));
-    
-    // Build and verify
-    auto result = builder.build();
-    EXPECT_TRUE(result);
-}
+//============================================================================
 
 TEST_F(ConfigStrategyTest, Builder_ForEnvironment) {
     logger_builder builder;
-    builder.for_environment("testing");  // Use testing instead of development
-    
+    builder.for_environment(deployment_env::development);
+
     auto result = builder.build();
-    EXPECT_TRUE(result);
+    EXPECT_TRUE(result.has_value());
 }
 
 TEST_F(ConfigStrategyTest, Builder_WithPerformanceTuning) {
     logger_builder builder;
-    builder.with_async(true)  // Required for performance tuning
-           .with_performance_tuning("aggressive");
-    
+    builder.with_performance_tuning(performance_level::balanced);
+
     auto result = builder.build();
-    EXPECT_TRUE(result);
+    EXPECT_TRUE(result.has_value());
 }
 
 TEST_F(ConfigStrategyTest, Builder_AutoConfigure) {
-    setenv("LOG_ENV", "testing", 1);
-    
+    setenv("LOG_LEVEL", "warn", 1);
+
     logger_builder builder;
     builder.auto_configure();
-    
+
+    auto& config = builder.get_config();
+    // After auto_configure and before build, strategies are stored but not applied
+    // After build, they are applied
+
     auto result = builder.build();
-    EXPECT_TRUE(result);
+    EXPECT_TRUE(result.has_value());
 }
 
 TEST_F(ConfigStrategyTest, Builder_ClearStrategies) {
     logger_builder builder;
-    builder.use_template("debug")
-           .for_environment("production")
-           .clear_strategies(); // Should clear all
-    
+    builder.for_environment(deployment_env::production)
+           .with_performance_tuning(performance_level::high_throughput)
+           .clear_strategies();
+
+    // After clearing, no strategies should be applied
     auto result = builder.build();
-    EXPECT_TRUE(result);
+    EXPECT_TRUE(result.has_value());
 }
 
 TEST_F(ConfigStrategyTest, Builder_ChainedStrategies) {
     logger_builder builder;
-    
-    // Chain multiple strategy applications
-    builder.use_template("production")
-           .for_environment("staging")
-           .with_performance_tuning("balanced");
-    
+
+    builder.for_environment(deployment_env::staging)
+           .with_performance_tuning(performance_level::balanced)
+           .add_writer("console", writer_factory::create_console());
+
     auto result = builder.build();
-    EXPECT_TRUE(result);
+    EXPECT_TRUE(result.has_value());
 }
 
-// Edge Cases
-
-TEST_F(ConfigStrategyTest, Builder_BackwardCompatibility) {
+TEST_F(ConfigStrategyTest, Builder_ApplyStrategy) {
     logger_builder builder;
-    
-    // Old way should still work
-    builder.use_template("high_performance");
-    
-    auto result = builder.build();
-    EXPECT_TRUE(result);
-}
 
-TEST_F(ConfigStrategyTest, Strategy_InvalidConfiguration) {
-    logger_builder builder;
-    
-    // Apply performance tuning without async (strategy should be skipped)
-    builder.with_async(false)
-           .with_performance_tuning("aggressive");
-    
-    // Add at least one writer so the logger can function
-    builder.add_writer("console", std::make_unique<console_writer>());
-    
-    // The strategy should be skipped due to can_apply check
+    auto strategy = std::make_unique<deployment_strategy>(deployment_env::testing);
+    builder.apply_strategy(std::move(strategy));
+
     auto result = builder.build();
-    EXPECT_TRUE(result); // Should still build, just skip the strategy
-    
-    // Verify that performance tuning was not applied (buffer size should be default)
-    if (result) {
-        auto& config = builder.get_config();
-        EXPECT_NE(config.buffer_size, 65536); // Aggressive tuning would set this
-    }
+    EXPECT_TRUE(result.has_value());
 }
