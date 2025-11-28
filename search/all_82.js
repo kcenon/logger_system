@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['테스트_20및_20검증_20예상_20소요_3a_201_205시간_0',['Phase 5: 테스트 및 검증 (예상 소요: 1.5시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1225',1,'']]],
-  ['테이블_20중심_20디자인_1',['제안 2: 테이블 중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1210',1,'']]]
+  ['정보_0',['정보',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1247',1,'시스템 정보'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md786',1,'프로젝트 정보']]],
+  ['정의_1',['레벨 정의',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md903',1,'']]],
+  ['정적_20분석_20파이프라인_2',['5. 정적 분석 파이프라인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1420',1,'']]]
 ];

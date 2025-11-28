@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🤝_20도움_20및_20지원_0',['🤝 도움 및 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1781',1,'']]],
-  ['🤝_20help_20support_1',['🤝 Help &amp; Support',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1766',1,'']]]
+  ['필요_20사항_0',['❌ 개선 필요 사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1270',1,'']]],
+  ['필터링_1',['필터링',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md920',1,'레벨 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md922',1,'조건부 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md921',1,'패턴 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md919',1,'필터링']]]
 ];

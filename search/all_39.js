@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['레이아웃_0',['📁 디렉토리 레이아웃',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md503',1,'']]],
-  ['레퍼런스_1',['API 레퍼런스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html#autotoc_md586',1,'']]]
+  ['대시보드_0',['Logger System CI/CD 대시보드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD__KO.html#autotoc_md159',1,'']]]
 ];

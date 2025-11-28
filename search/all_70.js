@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['전체_20예시_0',['🔄 CI/CD 워크플로우 전체 예시',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1213',1,'']]],
-  ['전체_20워크플로우_1',['전체 워크플로우',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1186',1,'']]]
+  ['완료_0',['오류 처리 등급: &lt;strong&gt;A&lt;/strong&gt; (90% 완료)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1434',1,'']]],
+  ['완료_20strong_1',['프로덕션 준비 상태: ✅ &lt;strong&gt;준비 완료&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1412',1,'']]]
 ];

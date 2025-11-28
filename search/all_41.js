@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['및_20검증_20예상_20소요_3a_201_205시간_0',['Phase 5: 테스트 및 검증 (예상 소요: 1.5시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1225',1,'']]],
-  ['및_20기준선_20비교_1',['Phase 2: 결과 파싱 및 기준선 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1196',1,'']]],
-  ['및_20라이브러리_2',['도구 및 라이브러리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1235',1,'']]],
-  ['및_20지원_3',['🤝 도움 및 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1428',1,'']]],
-  ['및_20차트_20생성_4',['Phase 3: 배지 및 차트 생성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1200',1,'']]],
-  ['및_20차트_20예상_20소요_3a_201_205시간_5',['Phase 2: 배지 및 차트 (예상 소요: 1.5시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1222',1,'']]],
-  ['및_20json_20저장_6',['1.2 벤치마크 실행 및 JSON 저장',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1193',1,'']]],
-  ['및_20json_20출력_20설정_7',['Phase 1: 벤치마크 재활성화 및 JSON 출력 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1191',1,'']]]
+  ['로거_0',['vs spdlog (가장 인기 있는 C++ 로거)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md715',1,'']]],
+  ['로그_20레벨_1',['로그 레벨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md902',1,'']]],
+  ['로그_20손실_20방지_20가이드_2',['크리티컬 로그 손실 방지 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION__KO.html#autotoc_md267',1,'']]],
+  ['로그_20작성자_3',['로그 작성자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md907',1,'']]],
+  ['로깅_4',['로깅',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md924',1,'비동기 로깅'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1446',1,'4. 보안 감사 로깅']]],
+  ['로깅_20라이브러리_5',['vs glog (Google 로깅 라이브러리)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md719',1,'']]],
+  ['로깅_20빠른_20시작_6',['크리티컬 로깅 빠른 시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START__KO.html#autotoc_md302',1,'']]],
+  ['로깅_20throughput_7',['로깅 Throughput',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1252',1,'']]],
+  ['로드맵_8',['로드맵',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1206',1,'']]]
 ];

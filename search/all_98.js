@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['📚_20문서_20구조_0',['📚 문서 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1416',1,'']]],
-  ['📚_20참고_20자료_1',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1234',1,'']]],
-  ['📚_20documentation_20structure_2',['📚 documentation structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md631',1,'📚 Documentation Structure'],['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1401',1,'📚 Documentation Structure']]],
-  ['📚_20learn_20more_3',['📚 Learn More',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md292',1,'']]]
+  ['테스트_0',['테스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1588',1,'유닛 테스트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1590',1,'통합 테스트']]],
+  ['테스트_20및_20검증_20예상_20소요_3a_201_205시간_1',['Phase 5: 테스트 및 검증 (예상 소요: 1.5시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1312',1,'']]],
+  ['테스트_20환경_2',['테스트 환경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md705',1,'']]],
+  ['테스팅_20구성_3',['테스팅 구성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1587',1,'']]],
+  ['테스팅_20인프라_4',['빌드 &amp; 테스팅 인프라',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1414',1,'']]],
+  ['테이블_20중심_20디자인_5',['제안 2: 테이블 중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1297',1,'']]]
 ];

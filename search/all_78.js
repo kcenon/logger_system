@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['체크리스트_0',['체크리스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1220',1,'✅ 구현 체크리스트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1118',1,'안전한 구성 체크리스트']]]
+  ['의존성_0',['의존성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1597',1,'모듈 의존성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1599',1,'외부 의존성']]],
+  ['의존성_20그래프_1',['의존성 그래프',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1598',1,'']]]
 ];

@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['문서화_20예상_20소요_3a_201시간_0',['Phase 6: 문서화 (예상 소요: 1시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1226',1,'']]],
-  ['문서_1',['문서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1237',1,'내부 문서'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1417',1,'핵심 문서'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1415',1,'Logger System 문서']]],
-  ['문서_20구조_2',['📚 문서 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1416',1,'']]],
-  ['문서_20유지관리_3',['🔧 문서 유지관리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1425',1,'']]],
-  ['문제_201_3a_20벤치마크_20빌드_20실패_4',['문제 1: 벤치마크 빌드 실패',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1229',1,'']]],
-  ['문제_202_3a_20python_20스크립트_20실행_20오류_5',['문제 2: Python 스크립트 실행 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1230',1,'']]],
-  ['문제_203_3a_20git_20자동_20커밋_20권한_20오류_6',['문제 3: Git 자동 커밋 권한 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1231',1,'']]],
-  ['문제_204_3a_20배지가_20readme에_20표시되지_20않음_7',['문제 4: 배지가 README에 표시되지 않음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1232',1,'']]]
+  ['레벨별_20사용_20지침_0',['레벨별 사용 지침',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md904',1,'']]],
+  ['레벨_1',['로그 레벨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md902',1,'']]],
+  ['레벨_20정의_2',['레벨 정의',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md903',1,'']]],
+  ['레벨_20필터링_3',['레벨 필터링',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md920',1,'']]],
+  ['레이아웃_4',['📁 디렉토리 레이아웃',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md503',1,'']]],
+  ['레지스트리_5',['오류 코드 레지스트리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1436',1,'']]],
+  ['레퍼런스_6',['API 레퍼런스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html#autotoc_md586',1,'']]]
 ];

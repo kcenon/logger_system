@@ -93,15 +93,15 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Changelog - Logger System</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md697"></a> </p><blockquote class="doxtable">
+<div class="textblock"><p><a class="anchor" id="autotoc_md732"></a> </p><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html">한국어</a> </p>
 </blockquote>
 <p>All notable changes to the Logger System project will be documented in this file.</p>
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>, and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md699"></a>
+<h1><a class="anchor" id="autotoc_md734"></a>
 [Unreleased] - Security Improvements</h1>
-<h2><a class="anchor" id="autotoc_md700"></a>
+<h2><a class="anchor" id="autotoc_md735"></a>
 Removed</h2>
 <ul>
 <li><b>encrypted_writer</b>: Removed insecure XOR-based encryption implementation<ul>
@@ -112,7 +112,7 @@ Removed</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md701"></a>
+<h2><a class="anchor" id="autotoc_md736"></a>
 Changed</h2>
 <ul>
 <li><b>Documentation</b>: Updated security guidance<ul>
@@ -122,7 +122,7 @@ Changed</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md702"></a>
+<h2><a class="anchor" id="autotoc_md737"></a>
 Migration Guide</h2>
 <ul>
 <li>If using <code>encrypted_writer</code>, implement a custom writer with a production-grade crypto library</li>
@@ -130,9 +130,9 @@ Migration Guide</h2>
 <li>Use proper key management (HSM, KMS, or OS keychain)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md704"></a>
+<h1><a class="anchor" id="autotoc_md739"></a>
 C++20 and std::format Migration - 2025-11-03</h1>
-<h2><a class="anchor" id="autotoc_md705"></a>
+<h2><a class="anchor" id="autotoc_md740"></a>
 Changed</h2>
 <ul>
 <li><b>C++20 now REQUIRED</b>: Enforced C++20 as minimum standard (no fallback to C++17)<ul>
@@ -150,7 +150,7 @@ Changed</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md706"></a>
+<h2><a class="anchor" id="autotoc_md741"></a>
 Removed</h2>
 <ul>
 <li><b>fmt library</b>: No longer required or used<ul>
@@ -160,7 +160,7 @@ Removed</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md707"></a>
+<h2><a class="anchor" id="autotoc_md742"></a>
 Benefits</h2>
 <ul>
 <li><b>Simpler dependencies</b>: Using only C++ standard library features</li>
@@ -169,7 +169,7 @@ Benefits</h2>
 <li><b>Build performance</b>: Faster compilation without fmt dependency</li>
 <li><b>Forward compatibility</b>: std::format is the C++ standard approach</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md708"></a>
+<h2><a class="anchor" id="autotoc_md743"></a>
 Breaking Changes</h2>
 <ul>
 <li>⚠️ <b>C++20 compiler required</b>: Projects using older compilers must upgrade<ul>
@@ -181,9 +181,9 @@ Breaking Changes</h2>
 </li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md710"></a>
+<h1><a class="anchor" id="autotoc_md745"></a>
 Phase 3: Code Quality - 2025-11-03</h1>
-<h2><a class="anchor" id="autotoc_md711"></a>
+<h2><a class="anchor" id="autotoc_md746"></a>
 Added</h2>
 <ul>
 <li><b>Common Utility Functions (Phase 3.4)</b>: Extracted shared utilities to reduce code duplication<ul>
@@ -262,7 +262,7 @@ Added</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md712"></a>
+<h2><a class="anchor" id="autotoc_md747"></a>
 Changed</h2>
 <ul>
 <li><b>logger</b>: Integrated with backend interface for level conversion<ul>
@@ -316,7 +316,7 @@ Changed</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md713"></a>
+<h2><a class="anchor" id="autotoc_md748"></a>
 Deprecated</h2>
 <ul>
 <li><b>Legacy base_writer formatting methods</b>: Marked for future removal<ul>
@@ -327,7 +327,7 @@ Deprecated</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md714"></a>
+<h2><a class="anchor" id="autotoc_md749"></a>
 Code Quality</h2>
 <ul>
 <li><b>90% reduction in conditional compilation</b>: Runtime polymorphism replaces #ifdef directives<ul>
@@ -356,7 +356,7 @@ Code Quality</h2>
 <li><b>Enhanced extensibility</b>: Easy to add new formatters (XML, YAML, custom formats) and backends</li>
 <li><b>Better testability</b>: Formatters, backends, error handlers, and utilities can be tested independently</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md715"></a>
+<h2><a class="anchor" id="autotoc_md750"></a>
 Benefits</h2>
 <ul>
 <li><b>Simplified Testing</b>: Fewer conditional compilation paths to test</li>
@@ -364,7 +364,7 @@ Benefits</h2>
 <li><b>Cleaner Codebase</b>: Less #ifdef clutter, more readable code</li>
 <li><b>Easy Extension</b>: Adding new integration backends requires no conditional compilation</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md716"></a>
+<h2><a class="anchor" id="autotoc_md751"></a>
 Backward Compatibility</h2>
 <ul>
 <li>All existing code continues to work without modifications</li>
@@ -373,9 +373,9 @@ Backward Compatibility</h2>
 <li>All tests passing: 3/3 integration tests</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md718"></a>
+<h1><a class="anchor" id="autotoc_md753"></a>
 Phase 2: Performance Optimization - 2025-11-03</h1>
-<h2><a class="anchor" id="autotoc_md719"></a>
+<h2><a class="anchor" id="autotoc_md754"></a>
 Added</h2>
 <ul>
 <li><b>thread_local_object_pool</b>: New thread-local cached object pool implementation<ul>
@@ -406,7 +406,7 @@ Added</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md720"></a>
+<h2><a class="anchor" id="autotoc_md755"></a>
 Changed</h2>
 <ul>
 <li><b>rotating_file_writer</b>: Periodic rotation checks for improved performance<ul>
@@ -430,7 +430,7 @@ Changed</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md721"></a>
+<h2><a class="anchor" id="autotoc_md756"></a>
 Performance</h2>
 <ul>
 <li><b>object_pool improvements</b> (8 threads):<ul>
@@ -454,9 +454,9 @@ Performance</h2>
 <li>All Phase 1 + Phase 2 tests passing: 7/7</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md723"></a>
+<h1><a class="anchor" id="autotoc_md758"></a>
 Phase 1: Critical Fixes - 2025-11-03</h1>
-<h2><a class="anchor" id="autotoc_md724"></a>
+<h2><a class="anchor" id="autotoc_md759"></a>
 Fixed</h2>
 <ul>
 <li><b>async_writer</b>: Removed timeout-based detach mechanism that caused memory leaks and message loss<ul>
@@ -488,7 +488,7 @@ Fixed</h2>
 </code></li>
 </ul>
 <p><code></code></p>
-<h2><a class="anchor" id="autotoc_md725"></a>
+<h2><a class="anchor" id="autotoc_md760"></a>
 Performance</h2>
 <p><code></p><ul>
 <li>File writing performance improved by <b>50-100x</b> (from ~10K msg/s to ~1M msg/s on SSD)</li>
@@ -499,11 +499,11 @@ Performance</h2>
 <p><code></p><hr  />
 <p></code></p>
 <p><code></code></p>
-<h1><a class="anchor" id="autotoc_md727"></a>
+<h1><a class="anchor" id="autotoc_md762"></a>
 Initial Release - 2025-10-22</h1>
 <p><code></code></p>
 <p><code></code></p>
-<h2><a class="anchor" id="autotoc_md728"></a>
+<h2><a class="anchor" id="autotoc_md763"></a>
 Added</h2>
 <p><code></p><ul>
 <li><b>Core Logger System</b>: Production-ready C++20 asynchronous logging framework<ul>
@@ -576,35 +576,35 @@ Added</h2>
 </ul>
 <p></code></p>
 <p><code></code></p>
-<h2><a class="anchor" id="autotoc_md729"></a>
+<h2><a class="anchor" id="autotoc_md764"></a>
 Changed</h2>
 <p><code></p><ul>
 <li>N/A (Initial release)</li>
 </ul>
 <p></code></p>
 <p><code></code></p>
-<h2><a class="anchor" id="autotoc_md730"></a>
+<h2><a class="anchor" id="autotoc_md765"></a>
 Deprecated</h2>
 <p><code></p><ul>
 <li>N/A (Initial release)</li>
 </ul>
 <p></code></p>
 <p><code></code></p>
-<h2><a class="anchor" id="autotoc_md731"></a>
+<h2><a class="anchor" id="autotoc_md766"></a>
 Removed</h2>
 <p><code></p><ul>
 <li>N/A (Initial release)</li>
 </ul>
 <p></code></p>
 <p><code></code></p>
-<h2><a class="anchor" id="autotoc_md732"></a>
+<h2><a class="anchor" id="autotoc_md767"></a>
 Fixed</h2>
 <p><code></p><ul>
 <li>N/A (Initial release)</li>
 </ul>
 <p></code></p>
 <p><code></code></p>
-<h2><a class="anchor" id="autotoc_md733"></a>
+<h2><a class="anchor" id="autotoc_md768"></a>
 Security</h2>
 <p><code></p><ul>
 <li>Thread-safe operations ensure concurrent logging without data races</li>
@@ -614,14 +614,14 @@ Security</h2>
 <p><code></p><hr  />
 <p></code></p>
 <p><code></code></p>
-<h1><a class="anchor" id="autotoc_md735"></a>
+<h1><a class="anchor" id="autotoc_md770"></a>
 Project Information</h1>
 <p><code></code></p>
 <p><code><b>Repository:</b> <a href="https://github.com/kcenon/logger_system">https://github.com/kcenon/logger_system</a> <b>Documentation:</b> <a href="docs/">docs/</a> <b>License:</b> See LICENSE file <b>Maintainer:</b> <a href="#" onclick="location.href='mai'+'lto:'+'kce'+'no'+'n@n'+'av'+'er.'+'co'+'m'; return false;">kceno<span class="obfuscator">.nosp@m.</span>n@na<span class="obfuscator">.nosp@m.</span>ver.c<span class="obfuscator">.nosp@m.</span>om</a></code></p>
 <p><code></p><hr  />
 <p></code></p>
 <p><code></code></p>
-<h1><a class="anchor" id="autotoc_md737"></a>
+<h1><a class="anchor" id="autotoc_md772"></a>
 Version Support Matrix</h1>
 <p><code></code></p>
 <p><code></p><table class="markdownTable">
@@ -634,7 +634,7 @@ Version Support Matrix</h1>
 <p><code></p><hr  />
 <p></code></p>
 <p><code></code></p>
-<h1><a class="anchor" id="autotoc_md739"></a>
+<h1><a class="anchor" id="autotoc_md774"></a>
 Migration Guide</h1>
 <p><code></code></p>
 <p><code>For migration from integrated thread_system or standalone logger implementations, see <a class="el" href="MIGRATION_8md.html">MIGRATION.md</a>.</code></p>
@@ -647,7 +647,7 @@ Migration Guide</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 27 2025 23:24:00 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Nov 28 2025 11:42:39 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

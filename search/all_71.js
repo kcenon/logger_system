@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['정보_0',['정보',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1160',1,'시스템 정보'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md751',1,'프로젝트 정보']]]
+  ['외부_20리소스_0',['📖 외부 리소스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1636',1,'']]],
+  ['외부_20의존성_1',['외부 의존성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1599',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['새로운_20구조로_20빠른_20시작_0',['🚀 새로운 구조로 빠른 시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md516',1,'']]]
+  ['버전_20지원_20매트릭스_0',['버전 지원 매트릭스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md788',1,'']]]
 ];

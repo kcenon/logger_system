@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['파싱_20및_20기준선_20비교_0',['Phase 2: 결과 파싱 및 기준선 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1196',1,'']]],
-  ['파싱_20스크립트_1',['2.1 벤치마크 결과 파싱 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1197',1,'']]]
+  ['준비_20상태_3a_20✅_20strong_20준비_20완료_20strong_0',['프로덕션 준비 상태: ✅ &lt;strong&gt;준비 완료&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1412',1,'']]],
+  ['준수_20등급_3a_20strong_20a_20strong_1',['RAII 준수 등급: &lt;strong&gt;A&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1428',1,'']]]
 ];

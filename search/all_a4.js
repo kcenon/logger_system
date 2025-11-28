@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🧪_20test_20results_0',['🧪 Test Results',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md139',1,'']]]
+  ['플랫폼_0',['공식 지원 플랫폼',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1450',1,'']]],
+  ['플랫폼_20지원_1',['플랫폼 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1449',1,'']]]
 ];

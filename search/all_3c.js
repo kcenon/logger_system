@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['마이그레이션_20가이드_0',['마이그레이션 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md755',1,'마이그레이션 가이드'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md511',1,'🔄 마이그레이션 가이드'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1066',1,'Logger System 마이그레이션 가이드']]],
-  ['마이그레이션_20스크립트_20실행_1',['Step 4: 마이그레이션 스크립트 실행',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md515',1,'']]]
+  ['등급_3a_20strong_20a_20strong_0',['등급: strong a strong',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1423',1,'스레드 안전성 등급: &lt;strong&gt;A+&lt;/strong&gt;'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1428',1,'RAII 준수 등급: &lt;strong&gt;A&lt;/strong&gt;']]],
+  ['등급_3a_20strong_20a_20strong_2090_20완료_1',['오류 처리 등급: &lt;strong&gt;A&lt;/strong&gt; (90% 완료)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1434',1,'']]],
+  ['등급_3a_20strong_20a_20strong_20v3_200_200_2',['보안 등급: &lt;strong&gt;A&lt;/strong&gt; (v3.0.0)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1442',1,'']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['상세_204단계_0',['🛠️ 구현 상세 (4단계)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1190',1,'']]],
-  ['상태_20분석_1',['🔍 현재 상태 분석',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1181',1,'']]]
+  ['백업_0',['Step 1: 현재 설정 백업',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md512',1,'']]]
 ];

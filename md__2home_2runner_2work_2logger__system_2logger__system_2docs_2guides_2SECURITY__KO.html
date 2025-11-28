@@ -96,31 +96,31 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY.html">English</a> | <b>한국어</b> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md1113"></a>
+<h1><a class="anchor" id="autotoc_md1200"></a>
 보안 가이드</h1>
 <p>이 문서는 logger_system의 현재 보안 상태를 설명하고 안전한 배포를 위한 지침을 제공합니다.</p>
-<h2><a class="anchor" id="autotoc_md1114"></a>
+<h2><a class="anchor" id="autotoc_md1201"></a>
 위협 모델 (범위)</h2>
 <ul>
 <li>민감한 데이터가 실수로 로그에 입력될 수 있습니다 (PII, 자격 증명, API 키).</li>
 <li>로그는 공유 디스크에 저장되거나 네트워크를 통해 중앙 수집기로 전송될 수 있습니다.</li>
 <li>공격자는 적절히 보호되지 않은 경우 로그를 읽거나 변조하거나 재생할 수 있습니다.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1115"></a>
+<h2><a class="anchor" id="autotoc_md1202"></a>
 현재 기능</h2>
 <ul>
 <li>살균화: <code>log_sanitizer</code> 및 <code>sanitizing_filter</code>는 일반적인 민감 패턴(신용카드, SSN, 이메일, IP, API 키, 비밀번호)을 편집하고 사용자 정의 규칙을 지원할 수 있습니다.</li>
 <li>접근 제어 필터: 파일 패턴, 사용자 컨텍스트 및 로그 레벨을 기반으로 로깅을 제한합니다.</li>
 <li>암호화 작성기 (데모): <code>encrypted_writer</code>는 모든 작성기를 래핑하고 간단한 XOR 기반 변환을 적용합니다.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1116"></a>
+<h2><a class="anchor" id="autotoc_md1203"></a>
 중요한 제한사항</h2>
 <ul>
 <li>포함된 <code>encrypted_writer</code>는 데모용일 뿐이며 암호학적으로 안전하지 않습니다. 프로덕션에서 사용하지 마십시오.</li>
 <li><code>network_writer</code>/<code>log_server</code>에 대한 내장 TLS가 없습니다. 트래픽은 기본적으로 평문입니다.</li>
 <li><code>log_server</code>에 대한 인증/권한 부여가 구현되지 않았습니다.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1117"></a>
+<h2><a class="anchor" id="autotoc_md1204"></a>
 권장사항 (프로덕션)</h2>
 <ol type="1">
 <li>살균화 우선<ul>
@@ -157,7 +157,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </ul>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1118"></a>
+<h2><a class="anchor" id="autotoc_md1205"></a>
 안전한 구성 체크리스트</h2>
 <ul>
 <li>[ ] 살균화 규칙이 활성화되고 사용자 정의됨.</li>
@@ -169,7 +169,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li>[ ] 보존 및 교체가 구성됨; 이전 로그가 안전하게 삭제됨.</li>
 <li>[ ] 서버가 TLS/인증 및 속도 제한 뒤에 있음.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1119"></a>
+<h2><a class="anchor" id="autotoc_md1206"></a>
 로드맵</h2>
 <ul>
 <li><code>network_writer</code>/<code>log_server</code>에 대한 선택적 TLS 지원.</li>
@@ -184,7 +184,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 27 2025 23:24:00 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Nov 28 2025 11:42:39 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

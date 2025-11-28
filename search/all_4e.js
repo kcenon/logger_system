@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['사례_20가이드_0',['Logger System 모범 사례 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES__KO.html#autotoc_md896',1,'']]],
-  ['사용자_1',['사용자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1422',1,'기존 사용자'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1421',1,'신규 사용자']]],
-  ['사용_20업데이트_2',['Step 3: Namespace 사용 업데이트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md514',1,'']]],
-  ['사용_20중단됨_3',['사용 중단됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md746',1,'']]],
-  ['사항_4',['❌ 개선 필요 사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1183',1,'']]]
+  ['배지가_20readme에_20표시되지_20않음_0',['문제 4: 배지가 README에 표시되지 않음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1319',1,'']]],
+  ['배지_20및_20차트_20생성_1',['Phase 3: 배지 및 차트 생성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1287',1,'']]],
+  ['배지_20및_20차트_20예상_20소요_3a_201_205시간_2',['Phase 2: 배지 및 차트 (예상 소요: 1.5시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1309',1,'']]],
+  ['배지_20생성_20스크립트_3',['3.1 성능 배지 생성 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1288',1,'']]],
+  ['배지_20중심_20디자인_4',['제안 1: 배지 중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1296',1,'']]]
 ];

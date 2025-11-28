@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🔍_20현재_20상태_20분석_0',['🔍 현재 상태 분석',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1181',1,'']]],
-  ['🔍_20code_20quality_1',['🔍 Code Quality',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md136',1,'']]]
+  ['특성_0',['특성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md928',1,'성능 특성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1438',1,'성능 특성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md510',1,'📊 성능 특성']]],
+  ['특징_1',['주요 특징',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1258',1,'']]]
 ];

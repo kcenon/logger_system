@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['메모리_20성능_0',['메모리 성능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1167',1,'']]],
-  ['메트릭_1',['메트릭',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1164',1,'성능 메트릭'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html',1,'Logger System - 성능 기준 메트릭']]]
+  ['따른_20벤치마크_20코드_20수정_0',['1.3 API 변경에 따른 벤치마크 코드 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1281',1,'']]]
 ];

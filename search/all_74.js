@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['중단됨_0',['사용 중단됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md746',1,'']]],
-  ['중심_20디자인_1',['중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1209',1,'제안 1: 배지 중심 디자인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1210',1,'제안 2: 테이블 중심 디자인']]],
-  ['중요한_20제한사항_2',['중요한 제한사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1116',1,'']]]
+  ['워크플로우_0',['전체 워크플로우',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1273',1,'']]],
+  ['워크플로우_20수정_1',['1.1 GitHub Actions 워크플로우 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1279',1,'']]],
+  ['워크플로우_20전체_20예시_2',['🔄 CI/CD 워크플로우 전체 예시',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1300',1,'']]]
 ];

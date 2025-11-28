@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🧪_20test_20results_0',['🧪 Test Results',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md300',1,'']]]
+  ['핸들러_20안전성_0',['3. 시그널 핸들러 안전성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1445',1,'']]]
 ];

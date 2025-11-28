@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['수락_20기준_0',['수락 기준',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1175',1,'']]],
-  ['수정됨_1',['수정됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md748',1,'']]],
-  ['수정_2',['수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1192',1,'1.1 GitHub Actions 워크플로우 수정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1194',1,'1.3 API 변경에 따른 벤치마크 코드 수정']]]
+  ['빌드_20시스템_0',['빌드 시스템',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1594',1,'']]],
+  ['빌드_20실패_1',['문제 1: 벤치마크 빌드 실패',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1316',1,'']]],
+  ['빌드_20테스팅_20인프라_2',['빌드 &amp; 테스팅 인프라',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1414',1,'']]]
 ];
