@@ -101,7 +101,7 @@ Logger System</h1>
 </blockquote>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Overview</h2>
-<p>A production-ready, high-performance C++17 asynchronous logging framework designed for multithreaded applications. Built with a modular, interface-based architecture and seamless ecosystem integration.</p>
+<p>A production-ready, high-performance C++20 asynchronous logging framework designed for multithreaded applications. Built with a modular, interface-based architecture and seamless ecosystem integration.</p>
 <p><b>Key Features</b>:</p><ul>
 <li>🚀 <b>Ultra-fast async logging</b>: 4.34M messages/second, 148ns latency</li>
 <li>🔒 <b>Thread-safe by design</b>: Zero data races, production-proven</li>
@@ -156,8 +156,8 @@ Installation</h3>
 Prerequisites</h3>
 <ul>
 <li><b>CMake</b>: 3.20+</li>
-<li><b>C++ Compiler</b>: GCC 7+, Clang 5+, MSVC 2017+</li>
-<li><b>C++ Standard</b>: C++17 (C++20 features optional)</li>
+<li><b>C++ Compiler</b>: GCC 11+, Clang 14+, MSVC 2022+, Apple Clang 14+</li>
+<li><b>C++ Standard</b>: C++20</li>
 <li><b>Dependencies</b>: fmt library (header-only mode available)</li>
 </ul>
 <hr  />
@@ -430,14 +430,14 @@ Officially Supported</h3>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Platform   </th><th class="markdownTableHeadNone">Architecture   </th><th class="markdownTableHeadNone">Compilers   </th><th class="markdownTableHeadNone">Status    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Ubuntu 22.04+</b>   </td><td class="markdownTableBodyNone">x86_64, ARM64   </td><td class="markdownTableBodyNone">GCC 11+, Clang 15+   </td><td class="markdownTableBodyNone">✅ Fully tested    </td></tr>
+<td class="markdownTableBodyNone"><b>Ubuntu 22.04+</b>   </td><td class="markdownTableBodyNone">x86_64, ARM64   </td><td class="markdownTableBodyNone">GCC 11+, Clang 14+   </td><td class="markdownTableBodyNone">✅ Fully tested    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>macOS Sonoma+</b>   </td><td class="markdownTableBodyNone">x86_64, ARM64 (M1/M2)   </td><td class="markdownTableBodyNone">Apple Clang 15+   </td><td class="markdownTableBodyNone">✅ Fully tested    </td></tr>
+<td class="markdownTableBodyNone"><b>macOS Sonoma+</b>   </td><td class="markdownTableBodyNone">x86_64, ARM64 (M1/M2)   </td><td class="markdownTableBodyNone">Apple Clang 14+   </td><td class="markdownTableBodyNone">✅ Fully tested    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Windows 11</b>   </td><td class="markdownTableBodyNone">x86_64   </td><td class="markdownTableBodyNone">MSVC 2022, MSYS2   </td><td class="markdownTableBodyNone">✅ Fully tested   </td></tr>
+<td class="markdownTableBodyNone"><b>Windows 11</b>   </td><td class="markdownTableBodyNone">x86_64   </td><td class="markdownTableBodyNone">MSVC 2022   </td><td class="markdownTableBodyNone">✅ Fully tested   </td></tr>
 </table>
 <p><b>Minimum Requirements</b>:</p><ul>
-<li>C++17 compiler</li>
+<li>C++20 compiler</li>
 <li>CMake 3.20+</li>
 <li>fmt library</li>
 </ul>
@@ -519,7 +519,7 @@ License</h2>
 Acknowledgments</h2>
 <ul>
 <li>Inspired by modern logging frameworks (spdlog, Boost.Log, glog)</li>
-<li>Built with C++20 features for maximum performance and safety</li>
+<li>Built with C++20 features (GCC 11+, Clang 14+, MSVC 2022+) for maximum performance and safety</li>
 <li>Maintained by <a href="#" onclick="location.href='mai'+'lto:'+'kce'+'no'+'n@n'+'av'+'er.'+'co'+'m'; return false;">kceno<span class="obfuscator">.nosp@m.</span>n@na<span class="obfuscator">.nosp@m.</span>ver.c<span class="obfuscator">.nosp@m.</span>om</a></li>
 </ul>
 <hr  />
@@ -530,7 +530,7 @@ Acknowledgments</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Nov 30 2025 00:20:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Nov 30 2025 03:23:09 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
