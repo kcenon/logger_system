@@ -11,7 +11,7 @@
 
 ## Overview
 
-A production-ready, high-performance C++17 asynchronous logging framework designed for multithreaded applications. Built with a modular, interface-based architecture and seamless ecosystem integration.
+A production-ready, high-performance C++20 asynchronous logging framework designed for multithreaded applications. Built with a modular, interface-based architecture and seamless ecosystem integration.
 
 **Key Features**:
 - 🚀 **Ultra-fast async logging**: 4.34M messages/second, 148ns latency
@@ -79,8 +79,8 @@ target_link_libraries(your_app PRIVATE LoggerSystem::logger)
 ### Prerequisites
 
 - **CMake**: 3.20+
-- **C++ Compiler**: GCC 7+, Clang 5+, MSVC 2017+
-- **C++ Standard**: C++17 (C++20 features optional)
+- **C++ Compiler**: GCC 11+, Clang 14+, MSVC 2022+, Apple Clang 14+
+- **C++ Standard**: C++20
 - **Dependencies**: fmt library (header-only mode available)
 
 ---
@@ -359,12 +359,12 @@ cmake -DLOGGER_WARNINGS_AS_ERRORS=ON  # Treat warnings as errors
 
 | Platform | Architecture | Compilers | Status |
 |----------|--------------|-----------|--------|
-| **Ubuntu 22.04+** | x86_64, ARM64 | GCC 11+, Clang 15+ | ✅ Fully tested |
-| **macOS Sonoma+** | x86_64, ARM64 (M1/M2) | Apple Clang 15+ | ✅ Fully tested |
-| **Windows 11** | x86_64 | MSVC 2022, MSYS2 | ✅ Fully tested |
+| **Ubuntu 22.04+** | x86_64, ARM64 | GCC 11+, Clang 14+ | ✅ Fully tested |
+| **macOS Sonoma+** | x86_64, ARM64 (M1/M2) | Apple Clang 14+ | ✅ Fully tested |
+| **Windows 11** | x86_64 | MSVC 2022 | ✅ Fully tested |
 
 **Minimum Requirements**:
-- C++17 compiler
+- C++20 compiler
 - CMake 3.20+
 - fmt library
 
@@ -455,7 +455,7 @@ This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICE
 ## Acknowledgments
 
 - Inspired by modern logging frameworks (spdlog, Boost.Log, glog)
-- Built with C++20 features for maximum performance and safety
+- Built with C++20 features (GCC 11+, Clang 14+, MSVC 2022+) for maximum performance and safety
 - Maintained by kcenon@naver.com
 
 ---
