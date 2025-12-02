@@ -84,6 +84,9 @@ endif()
 # Dependency Management (Unified CMake Module)
 ##################################################
 
+# Add cmake modules path (required before including UnifiedDependencies)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 # Include unified dependency management module
 include(UnifiedDependencies)
 
@@ -114,9 +117,6 @@ endif()
 ##################################################
 # Include Custom CMake Modules
 ##################################################
-
-# Add custom cmake modules path
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # Include feature configuration module
 include(LoggerFeatures)
