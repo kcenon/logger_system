@@ -168,40 +168,29 @@ logger_find_all_dependencies()
 # Print feature configuration summary
 logger_print_features()
 
-# Skip vcpkg if NO_VCPKG option is set or if LOGGER_STANDALONE_MODE is ON
-if(NO_VCPKG OR LOGGER_STANDALONE_MODE)
+# Skip vcpkg if NO_VCPKG option is set
+if(NO_VCPKG)
     message(STATUS "Skipping vcpkg - using system libraries only")
     set(SKIP_VCPKG ON)
 endif()
 
-# Find thread_system (optional, respects LOGGER_STANDALONE_MODE)
-if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
-    # Use unified dependency resolution
-    unified_find_dependency(thread_system OPTIONAL)
+# Find thread_system (required dependency)
+unified_find_dependency(thread_system REQUIRED)
 
-    if(thread_system_FOUND)
-        set(THREAD_SYSTEM_FOUND TRUE)
-        message(STATUS "Using thread_system for interfaces and utilities")
-        add_compile_definitions(USE_THREAD_SYSTEM)
+set(THREAD_SYSTEM_FOUND TRUE)
+message(STATUS "Using thread_system for interfaces and utilities")
+add_compile_definitions(USE_THREAD_SYSTEM)
 
-        # Create a unified thread_system target if needed
-        if(NOT TARGET thread_system AND NOT TARGET ThreadSystem)
-            add_library(thread_system INTERFACE)
-            if(TARGET utilities AND TARGET interfaces AND TARGET thread_base)
-                target_link_libraries(thread_system INTERFACE
-                    utilities
-                    interfaces
-                    thread_base
-                )
-            endif()
-        endif()
-    else()
-        message(STATUS "thread_system not found, using standalone mode")
-        add_compile_definitions(LOGGER_STANDALONE)
+# Create a unified thread_system target if needed
+if(NOT TARGET thread_system AND NOT TARGET ThreadSystem)
+    add_library(thread_system INTERFACE)
+    if(TARGET utilities AND TARGET interfaces AND TARGET thread_base)
+        target_link_libraries(thread_system INTERFACE
+            utilities
+            interfaces
+            thread_base
+        )
     endif()
-else()
-    message(STATUS "Building in standalone mode")
-    add_compile_definitions(LOGGER_STANDALONE)
 endif()
 
 # spdlog (optional for comparison)
@@ -293,22 +282,18 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
             message(STATUS "Logger System: common_system not found, using standalone mode")
         endif()
 
-        # thread_system integration (always linked if available)
-        if(THREAD_SYSTEM_FOUND)
-            message(STATUS "Logger System: thread_system found, backend available for use")
-            if(TARGET ThreadSystem)
-                target_link_libraries(LoggerSystem PRIVATE ThreadSystem)
-            elseif(TARGET thread_system)
-                target_link_libraries(LoggerSystem PRIVATE thread_system)
-            else()
-                target_include_directories(LoggerSystem
-                    PUBLIC
-                        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
-                )
-                target_link_libraries(LoggerSystem PRIVATE thread_base interfaces utilities)
-            endif()
+        # thread_system integration (required dependency)
+        message(STATUS "Logger System: thread_system found, backend available for use")
+        if(TARGET ThreadSystem)
+            target_link_libraries(LoggerSystem PRIVATE ThreadSystem)
+        elseif(TARGET thread_system)
+            target_link_libraries(LoggerSystem PRIVATE thread_system)
         else()
-            message(STATUS "Logger System: thread_system not found, only standalone backend available")
+            target_include_directories(LoggerSystem
+                PUBLIC
+                    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
+            )
+            target_link_libraries(LoggerSystem PRIVATE thread_base interfaces utilities)
         endif()
 
         set(USE_LEGACY_SOURCES FALSE)
