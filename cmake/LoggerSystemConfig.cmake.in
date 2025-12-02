@@ -11,17 +11,8 @@ include(CMakeFindDependencyMacro)
 # Find required dependencies
 find_dependency(Threads REQUIRED)
 
-# Optionally find thread_system if it was used in the build
-set(LoggerSystem_USE_THREAD_SYSTEM @USE_THREAD_SYSTEM@)
-if(LoggerSystem_USE_THREAD_SYSTEM AND NOT @LOGGER_STANDALONE@)
-    # Try to find thread_system, but don't fail if not found
-    find_package(ThreadSystem QUIET)
-    if(ThreadSystem_FOUND)
-        message(STATUS "Found ThreadSystem: ${ThreadSystem_DIR}")
-    else()
-        message(STATUS "ThreadSystem not found, using standalone mode")
-    endif()
-endif()
+# Find thread_system (required dependency)
+find_dependency(ThreadSystem REQUIRED)
 
 # Include the exported targets
 include("${CMAKE_CURRENT_LIST_DIR}/LoggerSystemTargets.cmake")

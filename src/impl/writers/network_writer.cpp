@@ -7,6 +7,7 @@ All rights reserved.
 
 #include <kcenon/logger/writers/network_writer.h>
 #include <kcenon/logger/utils/error_handling_utils.h>
+#include <kcenon/thread/core/thread_base.h>
 
 #ifdef _WIN32
     #include <winsock2.h>
@@ -28,8 +29,74 @@ All rights reserved.
 #include <sstream>
 #include <iomanip>
 #include <iostream>
+#include <functional>
 
 namespace kcenon::logger {
+
+/**
+ * @brief Worker thread for sending buffered logs
+ */
+class network_send_worker : public kcenon::thread::thread_base {
+public:
+    using send_callback = std::function<void()>;
+
+    explicit network_send_worker(send_callback callback, std::atomic<bool>& running)
+        : thread_base("network_send_worker")
+        , callback_(std::move(callback))
+        , running_(running)
+        , has_work_(false) {}
+
+    void notify_work() {
+        has_work_.store(true, std::memory_order_release);
+    }
+
+protected:
+    [[nodiscard]] auto should_continue_work() const -> bool override {
+        return running_.load(std::memory_order_acquire) && has_work_.load(std::memory_order_acquire);
+    }
+
+    auto do_work() -> kcenon::thread::result_void override {
+        has_work_.store(false, std::memory_order_release);
+        if (callback_ && running_.load(std::memory_order_acquire)) {
+            callback_();
+        }
+        return {};
+    }
+
+private:
+    send_callback callback_;
+    std::atomic<bool>& running_;
+    std::atomic<bool> has_work_;
+};
+
+/**
+ * @brief Worker thread for reconnection attempts
+ */
+class network_reconnect_worker : public kcenon::thread::thread_base {
+public:
+    using reconnect_callback = std::function<void()>;
+
+    explicit network_reconnect_worker(reconnect_callback callback, std::atomic<bool>& running)
+        : thread_base("network_reconnect_worker")
+        , callback_(std::move(callback))
+        , running_(running) {}
+
+protected:
+    [[nodiscard]] auto should_continue_work() const -> bool override {
+        return running_.load(std::memory_order_acquire);
+    }
+
+    auto do_work() -> kcenon::thread::result_void override {
+        if (callback_ && running_.load(std::memory_order_acquire)) {
+            callback_();
+        }
+        return {};
+    }
+
+private:
+    reconnect_callback callback_;
+    std::atomic<bool>& running_;
+};
 
 network_writer::network_writer(const std::string& host,
                                uint16_t port,
@@ -42,7 +109,7 @@ network_writer::network_writer(const std::string& host,
     , buffer_size_(buffer_size)
     , reconnect_interval_(reconnect_interval)
     , socket_fd_(-1) {
-    
+
 #ifdef _WIN32
     // Initialize Winsock
     WSADATA wsaData;
@@ -50,35 +117,43 @@ network_writer::network_writer(const std::string& host,
         throw std::runtime_error("Failed to initialize Winsock");
     }
 #endif
-    
+
     running_ = true;
-    
-    // Start worker thread
-    worker_thread_ = std::thread(&network_writer::worker_thread, this);
-    
-    // Start reconnect thread for TCP
+
+    // Create and start send worker
+    send_worker_ = std::make_unique<network_send_worker>(
+        [this] { process_buffer(); }, running_);
+    send_worker_->set_wake_interval(std::chrono::milliseconds(10));
+    send_worker_->start();
+
+    // Create and start reconnect worker for TCP
     if (protocol_ == protocol_type::tcp) {
-        reconnect_thread_ = std::thread(&network_writer::reconnect_thread, this);
+        reconnect_worker_ = std::make_unique<network_reconnect_worker>(
+            [this] { attempt_reconnect(); }, running_);
+        reconnect_worker_->set_wake_interval(reconnect_interval_);
+        reconnect_worker_->start();
     }
-    
+
     // Initial connection attempt
     connect();
 }
 
 network_writer::~network_writer() {
     running_ = false;
-    buffer_cv_.notify_all();
 
-    // Join threads with error handling
-    utils::safe_destructor_operation("worker_thread_join", [this]() {
-        if (worker_thread_.joinable()) {
-            worker_thread_.join();
+    // Stop workers with error handling
+    // IMPORTANT: Reset workers after stop to join their threads before accessing any members
+    utils::safe_destructor_operation("send_worker_stop", [this]() {
+        if (send_worker_) {
+            send_worker_->stop();
+            send_worker_.reset();
         }
     });
 
-    utils::safe_destructor_operation("reconnect_thread_join", [this]() {
-        if (reconnect_thread_.joinable()) {
-            reconnect_thread_.join();
+    utils::safe_destructor_operation("reconnect_worker_stop", [this]() {
+        if (reconnect_worker_) {
+            reconnect_worker_->stop();
+            reconnect_worker_.reset();
         }
     });
 
@@ -114,8 +189,12 @@ result_void network_writer::write(logger_system::log_level level,
     }
     
     buffer_.push({level, message, file, line, function, timestamp});
-    buffer_cv_.notify_one();
-    
+
+    // Notify send worker
+    if (send_worker_) {
+        send_worker_->notify_work();
+    }
+
     return {}; // Success
 }
 
@@ -248,38 +327,27 @@ bool network_writer::send_data(const std::string& data) {
     return true;
 }
 
-void network_writer::worker_thread() {
-    while (running_) {
-        std::unique_lock<std::mutex> lock(buffer_mutex_);
-        
-        // Wait for logs or shutdown
-        buffer_cv_.wait(lock, [this] {
-            return !buffer_.empty() || !running_;
-        });
-        
-        // Process buffered logs
-        while (!buffer_.empty() && running_) {
-            auto log = std::move(buffer_.front());
-            buffer_.pop();
-            lock.unlock();
-            
-            // Format and send
-            std::string formatted = format_for_network(log);
-            send_data(formatted);
-            
-            lock.lock();
-        }
+void network_writer::process_buffer() {
+    std::unique_lock<std::mutex> lock(buffer_mutex_);
+
+    // Process buffered logs
+    while (!buffer_.empty() && running_) {
+        auto log = std::move(buffer_.front());
+        buffer_.pop();
+        lock.unlock();
+
+        // Format and send
+        std::string formatted = format_for_network(log);
+        send_data(formatted);
+
+        lock.lock();
     }
 }
 
-void network_writer::reconnect_thread() {
-    while (running_) {
-        std::this_thread::sleep_for(reconnect_interval_);
-        
-        if (!connected_ && running_) {
-            std::cout << "Attempting to reconnect to " << host_ << ":" << port_ << std::endl;
-            connect();
-        }
+void network_writer::attempt_reconnect() {
+    if (!connected_ && running_) {
+        std::cout << "Attempting to reconnect to " << host_ << ":" << port_ << std::endl;
+        connect();
     }
 }
 

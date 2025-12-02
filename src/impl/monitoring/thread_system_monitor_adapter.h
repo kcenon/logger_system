@@ -330,26 +330,4 @@ public:
 
 } // namespace kcenon::logger
 
-#else
-
-namespace kcenon::logger {
-
-/**
- * @brief Fallback when thread_system is not available
- * 
- * When thread_system is not available, this adapter simply
- * wraps the basic monitor to maintain API compatibility.
- */
-class thread_system_monitor_adapter : public basic_monitor {
-public:
-    thread_system_monitor_adapter() = default;
-    ~thread_system_monitor_adapter() override = default;
-    
-    std::string get_backend_name() const override {
-        return "basic(no thread_system)";
-    }
-};
-
-} // namespace kcenon::logger
-
 #endif // USE_THREAD_SYSTEM

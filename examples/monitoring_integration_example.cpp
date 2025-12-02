@@ -238,7 +238,10 @@ void example_1_basic_integration() {
     auto logger_instance = std::shared_ptr<logger>(std::move(logger_result.value()));
 
     // Register logger as monitored component
-    monitor->register_component(std::static_pointer_cast<ci::IMonitorable>(logger_instance));
+    // TODO: Implement IMonitorable interface on logger class (Phase 2.2)
+    // Currently logger doesn't inherit from IMonitorable
+    // monitor->register_component(std::static_pointer_cast<ci::IMonitorable>(logger_instance));
+    std::cout << "[Note: logger IMonitorable integration pending Phase 2.2]" << std::endl;
 
     // Perform logging operations
     for (int i = 0; i < 5; ++i) {
@@ -287,8 +290,10 @@ void example_2_multiple_loggers() {
     auto logger2 = std::shared_ptr<logger>(std::move(logger2_result.value()));
 
     // Register both loggers
-    monitor->register_component(std::static_pointer_cast<ci::IMonitorable>(logger1));
-    monitor->register_component(std::static_pointer_cast<ci::IMonitorable>(logger2));
+    // TODO: Implement IMonitorable interface on logger class (Phase 2.2)
+    // monitor->register_component(std::static_pointer_cast<ci::IMonitorable>(logger1));
+    // monitor->register_component(std::static_pointer_cast<ci::IMonitorable>(logger2));
+    std::cout << "[Note: logger IMonitorable integration pending Phase 2.2]" << std::endl;
 
     // Both loggers use the same monitor
     logger1->log(log_level::info, "Message from logger 1");

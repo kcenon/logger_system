@@ -37,7 +37,8 @@
 #if !defined(LOGGER_MONITORING_INTEGRATION_DETECTED)
 #define LOGGER_MONITORING_INTEGRATION_DETECTED
 
-#if !defined(USE_MONITORING_SYSTEM) && !defined(LOGGER_STANDALONE_MODE)
+// Detect monitoring_system integration based on header availability
+#if !defined(USE_MONITORING_SYSTEM)
 #  if __has_include(<kcenon/monitoring/interfaces/monitoring_interface.h>)
 #    define USE_MONITORING_SYSTEM 1
 #  endif

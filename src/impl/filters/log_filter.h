@@ -7,14 +7,9 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-// Conditional include based on build mode
+// thread_system is a required dependency - always use its logger interface
 #include <kcenon/logger/core/thread_integration_detector.h>
-
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    #include <kcenon/thread/interfaces/logger_interface.h>
-#else
-    #include <kcenon/logger/interfaces/logger_interface.h>
-#endif
+#include <kcenon/thread/interfaces/logger_interface.h>
 
 #include <kcenon/logger/interfaces/log_filter_interface.h>
 #include <kcenon/logger/interfaces/log_entry.h>
