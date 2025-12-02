@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System Production Quality</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1330"></a> <b>Last Updated</b>: 2025-11-15 <b>Version</b>: 3.0.0</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1337"></a> <b>Last Updated</b>: 2025-11-15 <b>Version</b>: 3.0.0</p>
 <p>This document details the production-ready features, quality assurance processes, and operational characteristics of the logger system.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1332"></a>
+<h1><a class="anchor" id="autotoc_md1339"></a>
 Table of Contents</h1>
 <ul>
 <li>Executive Summary</li>
@@ -110,9 +110,9 @@ Table of Contents</h1>
 <li>Platform Support</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1334"></a>
+<h1><a class="anchor" id="autotoc_md1341"></a>
 Executive Summary</h1>
-<h2><a class="anchor" id="autotoc_md1335"></a>
+<h2><a class="anchor" id="autotoc_md1342"></a>
 Production Readiness Status: ✅ &lt;strong&gt;READY&lt;/strong&gt;</h2>
 <p>The logger system is production-ready with comprehensive quality assurance:</p>
 <p><b>Quality Grades</b>:</p><ul>
@@ -131,11 +131,11 @@ Production Readiness Status: ✅ &lt;strong&gt;READY&lt;/strong&gt;</h2>
 <li>✅ Static analysis (clang-tidy, cppcheck)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1337"></a>
+<h1><a class="anchor" id="autotoc_md1344"></a>
 Build &amp; Testing Infrastructure</h1>
-<h2><a class="anchor" id="autotoc_md1338"></a>
+<h2><a class="anchor" id="autotoc_md1345"></a>
 Continuous Integration Pipelines</h2>
-<h3><a class="anchor" id="autotoc_md1339"></a>
+<h3><a class="anchor" id="autotoc_md1346"></a>
 1. Main CI Pipeline</h3>
 <p><b>Workflow</b>: <code>.github/workflows/ci.yml</code></p>
 <p><b>Platforms Tested</b>:</p><ul>
@@ -166,7 +166,7 @@ Continuous Integration Pipelines</h2>
 <li>Build time &lt; 5 minutes (parallel builds)</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md1341"></a>
+<h3><a class="anchor" id="autotoc_md1348"></a>
 2. Sanitizer Pipeline</h3>
 <p><b>Workflow</b>: <code>.github/workflows/sanitizers.yml</code></p>
 <p><b>Sanitizers Tested</b>:</p>
@@ -204,7 +204,7 @@ Continuous Integration Pipelines</h2>
 <div class="line">  runtime error: ...</div>
 <div class="line">  Total: 0 errors</div>
 </div><!-- fragment --><hr  />
-<h3><a class="anchor" id="autotoc_md1343"></a>
+<h3><a class="anchor" id="autotoc_md1350"></a>
 3. Performance Benchmark Pipeline</h3>
 <p><b>Workflow</b>: <code>.github/workflows/benchmarks.yml</code></p>
 <p><b>Benchmarks Run</b>:</p><ol type="1">
@@ -234,7 +234,7 @@ Continuous Integration Pipelines</h2>
 <li>Historical tracking in <code>benchmarks/results/</code></li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md1345"></a>
+<h3><a class="anchor" id="autotoc_md1352"></a>
 4. Code Coverage Pipeline</h3>
 <p><b>Workflow</b>: <code>.github/workflows/coverage.yml</code></p>
 <p><b>Coverage Tools</b>:</p><ul>
@@ -259,7 +259,7 @@ Continuous Integration Pipelines</h2>
 <div class="line">lcov --remove coverage.info &#39;/usr/*&#39; &#39;*/test/*&#39; --output-file coverage.info</div>
 <div class="line">genhtml coverage.info --output-directory coverage-report</div>
 </div><!-- fragment --><hr  />
-<h3><a class="anchor" id="autotoc_md1347"></a>
+<h3><a class="anchor" id="autotoc_md1354"></a>
 5. Static Analysis Pipeline</h3>
 <p><b>Workflow</b>: <code>.github/workflows/static-analysis.yml</code></p>
 <p><b>Tools</b>:</p>
@@ -281,9 +281,9 @@ Continuous Integration Pipelines</h2>
 <div class="line">cppcheck: 0 errors, 0 warnings, 0 style issues</div>
 <div class="line">IWYU: 3 suggestions (advisory)</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1349"></a>
+<h2><a class="anchor" id="autotoc_md1356"></a>
 Test Organization</h2>
-<h3><a class="anchor" id="autotoc_md1350"></a>
+<h3><a class="anchor" id="autotoc_md1357"></a>
 Unit Tests</h3>
 <p><b>Framework</b>: Google Test (GTest) <b>Location</b>: <code>tests/unit/</code> <b>Count</b>: 150+ test cases</p>
 <p><b>Coverage by Module</b>: </p><table class="markdownTable">
@@ -308,7 +308,7 @@ Unit Tests</h3>
 <li>Performance validation tests</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md1352"></a>
+<h3><a class="anchor" id="autotoc_md1359"></a>
 Integration Tests</h3>
 <p><b>Framework</b>: Google Test (GTest) <b>Location</b>: <code>tests/integration/</code> <b>Count</b>: 30+ test scenarios</p>
 <p><b>Test Scenarios</b>:</p><ol type="1">
@@ -338,7 +338,7 @@ Integration Tests</h3>
 </li>
 </ol>
 <hr  />
-<h3><a class="anchor" id="autotoc_md1354"></a>
+<h3><a class="anchor" id="autotoc_md1361"></a>
 Benchmarks</h3>
 <p><b>Framework</b>: Google Benchmark <b>Location</b>: <code>tests/benchmarks/</code> <b>Count</b>: 20+ benchmarks</p>
 <p><b>Benchmark Types</b>:</p><ol type="1">
@@ -368,12 +368,12 @@ Benchmarks</h3>
 </li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1356"></a>
+<h1><a class="anchor" id="autotoc_md1363"></a>
 Thread Safety &amp; Concurrency</h1>
-<h2><a class="anchor" id="autotoc_md1357"></a>
+<h2><a class="anchor" id="autotoc_md1364"></a>
 Thread Safety Grade: &lt;strong&gt;A+&lt;/strong&gt;</h2>
 <p><b>Status</b>: 100% verified, zero data races detected</p>
-<h2><a class="anchor" id="autotoc_md1358"></a>
+<h2><a class="anchor" id="autotoc_md1365"></a>
 Writer Thread Safety</h2>
 <p><b>Verification Status</b> (90% Complete):</p>
 <table class="markdownTable">
@@ -399,7 +399,7 @@ Writer Thread Safety</h2>
 <li>Lock-free operations on hot path where possible</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1360"></a>
+<h2><a class="anchor" id="autotoc_md1367"></a>
 Asynchronous Processing Architecture</h2>
 <p><b>Design Principles</b>:</p><ol type="1">
 <li><b>Non-blocking enqueue</b>: Log operations never block caller (except in sync mode)</li>
@@ -422,7 +422,7 @@ Asynchronous Processing Architecture</h2>
 <li><b>Queue overhead</b>: &lt;2MB memory</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1362"></a>
+<h2><a class="anchor" id="autotoc_md1369"></a>
 Concurrency Patterns</h2>
 <p><b>Producer-Consumer Pattern</b>: </p><div class="fragment"><div class="line">Application Threads (Producers)</div>
 <div class="line">         │</div>
@@ -441,12 +441,12 @@ Concurrency Patterns</h2>
 <li><b>State</b>: <code>std::atomic&lt;bool&gt;</code> for lifecycle flags</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1364"></a>
+<h1><a class="anchor" id="autotoc_md1371"></a>
 Resource Management (RAII)</h1>
-<h2><a class="anchor" id="autotoc_md1365"></a>
+<h2><a class="anchor" id="autotoc_md1372"></a>
 RAII Compliance Grade: &lt;strong&gt;A&lt;/strong&gt;</h2>
 <p><b>Status</b>: 100% smart pointers, zero memory leaks</p>
-<h2><a class="anchor" id="autotoc_md1366"></a>
+<h2><a class="anchor" id="autotoc_md1373"></a>
 Smart Pointer Usage</h2>
 <p><b>100% Smart Pointer Adoption</b>:</p><ul>
 <li>**<code>std::unique_ptr</code>**: Exclusive ownership (writers, filters, formatters)</li>
@@ -462,7 +462,7 @@ Smart Pointer Usage</h2>
 <div class="line"><span class="keyword">auto</span> logger = std::make_shared&lt;logger&gt;();</div>
 <div class="line"><span class="keyword">auto</span> structured = std::make_shared&lt;structured_logger&gt;(logger);</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1368"></a>
+<h2><a class="anchor" id="autotoc_md1375"></a>
 Memory Leak Detection</h2>
 <p><b>AddressSanitizer Results</b>: </p><div class="fragment"><div class="line"># Full test suite run</div>
 <div class="line">==12345==ERROR: LeakSanitizer: detected memory leaks</div>
@@ -478,7 +478,7 @@ Memory Leak Detection</h2>
 <div class="line">==12345==</div>
 <div class="line">==12345== All heap blocks were freed -- no leaks are possible</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1370"></a>
+<h2><a class="anchor" id="autotoc_md1377"></a>
 Exception Safety</h2>
 <p><b>Exception Safety Guarantees</b>:</p>
 <p><b>Strong Exception Safety</b> (Core Operations):</p><ul>
@@ -505,12 +505,12 @@ Exception Safety</h2>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed: &quot;</span> &lt;&lt; result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1372"></a>
+<h1><a class="anchor" id="autotoc_md1379"></a>
 Error Handling Strategy</h1>
-<h2><a class="anchor" id="autotoc_md1373"></a>
+<h2><a class="anchor" id="autotoc_md1380"></a>
 Error Handling Grade: &lt;strong&gt;A&lt;/strong&gt; (90% Complete)</h2>
 <p><b>Dual API Design</b>: Balance between comprehensive error reporting and high-performance logging</p>
-<h2><a class="anchor" id="autotoc_md1374"></a>
+<h2><a class="anchor" id="autotoc_md1381"></a>
 Result&lt;T&gt; Pattern</h2>
 <p><b>Usage Areas</b>:</p><ol type="1">
 <li><b>Core operations</b> (lifecycle, configuration): <div class="fragment"><div class="line"><span class="keyword">auto</span> result = logger-&gt;start();  <span class="comment">// result_void</span></div>
@@ -534,7 +534,7 @@ Result&lt;T&gt; Pattern</h2>
 </div><!-- fragment --></li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1376"></a>
+<h2><a class="anchor" id="autotoc_md1383"></a>
 Error Code Registry</h2>
 <p><b>Allocated Range</b>: -200 to -299 (centralized in common_system)</p>
 <p><b>Error Categories</b>:</p>
@@ -576,7 +576,7 @@ Error Code Registry</h2>
 <div class="line">    flush_failed = -232,</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1378"></a>
+<h2><a class="anchor" id="autotoc_md1385"></a>
 Hot Path Optimization</h2>
 <p><b>Logging Methods</b>: <code>void</code> return type for zero overhead</p>
 <p><b>Rationale</b>:</p><ul>
@@ -598,9 +598,9 @@ Hot Path Optimization</h2>
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1380"></a>
+<h1><a class="anchor" id="autotoc_md1387"></a>
 Performance Characteristics</h1>
-<h2><a class="anchor" id="autotoc_md1381"></a>
+<h2><a class="anchor" id="autotoc_md1388"></a>
 Baseline Metrics</h2>
 <p><b>Platform</b>: Apple M1 @ 3.2GHz, 16GB RAM, macOS Sonoma</p>
 <p><b>Throughput</b>:</p><ul>
@@ -622,7 +622,7 @@ Baseline Metrics</h2>
 <li><b>Allocations/msg</b>: 0.12</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1383"></a>
+<h2><a class="anchor" id="autotoc_md1390"></a>
 Performance Baselines (CI/CD)</h2>
 <p><b>Baseline File</b>: <code>benchmarks/BASELINE.md</code></p>
 <p><b>Regression Detection</b>: </p><div class="fragment"><div class="line">Throughput Baseline:</div>
@@ -643,12 +643,12 @@ Performance Baselines (CI/CD)</h2>
 <li>Regression alerts to maintainers</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1385"></a>
+<h1><a class="anchor" id="autotoc_md1392"></a>
 Security Features</h1>
-<h2><a class="anchor" id="autotoc_md1386"></a>
+<h2><a class="anchor" id="autotoc_md1393"></a>
 Security Grade: &lt;strong&gt;A&lt;/strong&gt; (v3.0.0)</h2>
 <p><b>Security Features Introduced in v3.0.0</b>:</p>
-<h2><a class="anchor" id="autotoc_md1387"></a>
+<h2><a class="anchor" id="autotoc_md1394"></a>
 1. Secure Key Storage</h2>
 <ul>
 <li>RAII-based encryption key management</li>
@@ -656,7 +656,7 @@ Security Grade: &lt;strong&gt;A&lt;/strong&gt; (v3.0.0)</h2>
 <li>File permission enforcement (0600)</li>
 <li>Cryptographically secure random key generation</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1388"></a>
+<h2><a class="anchor" id="autotoc_md1395"></a>
 2. Path Validation</h2>
 <ul>
 <li>Path traversal attack prevention</li>
@@ -664,7 +664,7 @@ Security Grade: &lt;strong&gt;A&lt;/strong&gt; (v3.0.0)</h2>
 <li>Base directory enforcement</li>
 <li>Filename character restrictions</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1389"></a>
+<h2><a class="anchor" id="autotoc_md1396"></a>
 3. Signal Handler Safety</h2>
 <ul>
 <li>Centralized signal handler management</li>
@@ -672,7 +672,7 @@ Security Grade: &lt;strong&gt;A&lt;/strong&gt; (v3.0.0)</h2>
 <li>Emergency flush for crash scenarios (SIGSEGV, SIGABRT, etc.)</li>
 <li>POSIX async-signal-safe functions only</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1390"></a>
+<h2><a class="anchor" id="autotoc_md1397"></a>
 4. Security Audit Logging</h2>
 <ul>
 <li>Tamper-evident audit trail</li>
@@ -680,7 +680,7 @@ Security Grade: &lt;strong&gt;A&lt;/strong&gt; (v3.0.0)</h2>
 <li>HMAC-SHA256 signatures for integrity verification</li>
 <li>Tracks lifecycle, encryption, and security events</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1391"></a>
+<h2><a class="anchor" id="autotoc_md1398"></a>
 5. Compliance Support</h2>
 <ul>
 <li><b>GDPR</b>: Data minimization, right to erasure, audit trails</li>
@@ -688,7 +688,7 @@ Security Grade: &lt;strong&gt;A&lt;/strong&gt; (v3.0.0)</h2>
 <li><b>ISO 27001</b>: Information security management</li>
 <li><b>SOC 2</b>: Security, availability, processing integrity</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1392"></a>
+<h2><a class="anchor" id="autotoc_md1399"></a>
 6. OWASP Top 10 Mitigations</h2>
 <ul>
 <li><b>A01 (Broken Access Control)</b>: Role-based access control</li>
@@ -697,9 +697,9 @@ Security Grade: &lt;strong&gt;A&lt;/strong&gt; (v3.0.0)</h2>
 <li><b>A09 (Security Logging Failures)</b>: Comprehensive audit logging</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1394"></a>
+<h1><a class="anchor" id="autotoc_md1401"></a>
 Operational Metrics</h1>
-<h2><a class="anchor" id="autotoc_md1395"></a>
+<h2><a class="anchor" id="autotoc_md1402"></a>
 Built-in Metrics Collection</h2>
 <p><b>Metrics Available</b>:</p><ul>
 <li><b>Throughput</b>: Messages per second</li>
@@ -718,7 +718,7 @@ Built-in Metrics Collection</h2>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Avg latency: &quot;</span> &lt;&lt; metrics.get_avg_enqueue_time_ns() &lt;&lt; <span class="stringliteral">&quot; ns\n&quot;</span>;</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Queue util: &quot;</span> &lt;&lt; metrics.get_queue_utilization_percent() &lt;&lt; <span class="stringliteral">&quot;%\n&quot;</span>;</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1397"></a>
+<h2><a class="anchor" id="autotoc_md1404"></a>
 Health Checks</h2>
 <p><b>Health Check Endpoints</b>:</p><ul>
 <li><code>is_running()</code>: Logger is active</li>
@@ -730,9 +730,9 @@ Health Checks</h2>
 <div class="line">    <span class="keywordflow">return</span> logger-&gt;is_running() &amp;&amp; logger-&gt;is_queue_healthy();</div>
 <div class="line">});</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1399"></a>
+<h1><a class="anchor" id="autotoc_md1406"></a>
 Platform Support</h1>
-<h2><a class="anchor" id="autotoc_md1400"></a>
+<h2><a class="anchor" id="autotoc_md1407"></a>
 Officially Supported Platforms</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -748,7 +748,7 @@ Officially Supported Platforms</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Fedora 38+</b>   </td><td class="markdownTableBodyNone">x86_64   </td><td class="markdownTableBodyNone">GCC 13+, Clang 16+   </td><td class="markdownTableBodyNone">⚠️ Community tested   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md1401"></a>
+<h2><a class="anchor" id="autotoc_md1408"></a>
 Minimum Requirements</h2>
 <p><b>C++ Standard</b>: C++17 (C++20 features are optional and auto-detected)</p>
 <p><b>Compilers</b>:</p><ul>
@@ -763,7 +763,7 @@ Minimum Requirements</h2>
 <li>Optional: thread_system, common_system, monitoring_system</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1403"></a>
+<h2><a class="anchor" id="autotoc_md1410"></a>
 Cross-Platform Compatibility</h2>
 <p><b>Platform-Specific Code</b>:</p><ul>
 <li>Console colors: ANSI codes (Unix), Windows Console API (Windows)</li>
@@ -777,9 +777,9 @@ Cross-Platform Compatibility</h2>
 <li>Fallback implementations where needed</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1405"></a>
+<h1><a class="anchor" id="autotoc_md1412"></a>
 Remaining Work &amp; Future Enhancements</h1>
-<h2><a class="anchor" id="autotoc_md1406"></a>
+<h2><a class="anchor" id="autotoc_md1413"></a>
 Current Status: &lt;strong&gt;90% Production Ready&lt;/strong&gt;</h2>
 <p><b>Remaining Optional Enhancements</b>:</p>
 <ol type="1">
@@ -805,7 +805,7 @@ Current Status: &lt;strong&gt;90% Production Ready&lt;/strong&gt;</h2>
 </li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1408"></a>
+<h1><a class="anchor" id="autotoc_md1415"></a>
 See Also</h1>
 <ul>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html">Performance Benchmarks</a> - Detailed performance analysis</li>
@@ -819,7 +819,7 @@ See Also</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Dec 2 2025 17:35:32 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Dec 2 2025 23:53:25 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
