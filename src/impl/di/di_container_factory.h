@@ -98,20 +98,17 @@ public:
     
     /**
      * @brief Check if thread_system is available
-     * @return true if thread_system can be used
+     * @return true if thread_system can be used (always true as thread_system is required)
      */
     static bool is_thread_system_available() {
-#ifdef USE_THREAD_SYSTEM
-        // Try to create a test container to verify availability
+        // thread_system is a required dependency - always available
+        // Try to create a test container to verify runtime availability
         try {
             kcenon::thread::service_container test_container;
             return true;
         } catch (...) {
             return false;
         }
-#else
-        return false;
-#endif
     }
     
     /**
@@ -134,14 +131,12 @@ public:
     
     /**
      * @brief Get the currently available container type
-     * @return The best available container type
+     * @return The best available container type (thread_system as it's a required dependency)
      */
     static container_type get_available_type() {
-#ifdef USE_THREAD_SYSTEM
         if (is_thread_system_available()) {
             return container_type::thread_system;
         }
-#endif
         return container_type::lightweight;
     }
 };

@@ -9,7 +9,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased] - Security Improvements
+## [Unreleased]
+
+### thread_system Required Dependency - 2025-12-03
+
+#### Changed
+- **thread_system is now a required dependency**: Removed standalone mode
+  - CMake configuration fails with FATAL_ERROR if thread_system is not found
+  - All internal threading now uses thread_system's thread_base class
+  - Simplified codebase by removing conditional compilation paths
+
+- **Threading Migration**: Internal threading migrated to thread_system's thread_base
+  - `log_collector.cpp`: Uses `log_collector_worker` class extending thread_base
+  - `network_writer.cpp`: Uses `network_send_worker` and `network_reconnect_worker`
+  - `batch_processor.cpp`: Uses `batch_processing_worker`
+
+#### Removed
+- **LOGGER_STANDALONE_MODE**: CMake option removed
+- **LOGGER_STANDALONE**: Compile definition removed
+- **--standalone** and **--with-thread**: Build script options removed
+- **Fallback implementations**: Standalone mode fallbacks in headers removed
+
+#### Breaking Changes
+- ⚠️ **thread_system is now required**: Projects must have thread_system available
+- Build will fail if thread_system is not found (no more standalone fallback)
+- `--standalone` option in build.sh no longer works
+
+#### Benefits
+- **Simpler codebase**: ~90% reduction in conditional compilation
+- **Consistent threading**: All threading uses thread_base for better lifecycle management
+- **Easier maintenance**: Single code path instead of standalone + integrated modes
+- **Better integration**: Full thread_system features always available
+
+---
+
+## Security Improvements
 
 ### Removed
 - **encrypted_writer**: Removed insecure XOR-based encryption implementation

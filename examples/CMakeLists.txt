@@ -16,8 +16,8 @@ if(BUILD_SAMPLES)
     )
 endif()
 
-# Phase 4 DI Pattern examples - available when common_system integration is enabled and not in standalone mode
-if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
+# Phase 4 DI Pattern examples - available when common_system integration is enabled
+if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM)
     # DI Pattern example
     add_executable(di_pattern_example di_pattern_example.cpp)
     target_link_libraries(di_pattern_example PRIVATE LoggerSystem)
@@ -35,8 +35,8 @@ if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
     message(STATUS "Phase 4 DI pattern examples enabled")
 endif()
 
-# Advanced examples - only available in integration mode and when samples are enabled
-if(NOT LOGGER_STANDALONE_MODE AND BUILD_SAMPLES AND NOT BUILD_WITH_COMMON_SYSTEM)
+# Advanced examples - available when samples are enabled and common_system is not integrated
+if(BUILD_SAMPLES AND NOT BUILD_WITH_COMMON_SYSTEM)
     # Metrics demo sample
     add_executable(metrics_demo metrics_demo.cpp)
     target_link_libraries(metrics_demo PRIVATE LoggerSystem)
@@ -74,7 +74,5 @@ if(NOT LOGGER_STANDALONE_MODE AND BUILD_SAMPLES AND NOT BUILD_WITH_COMMON_SYSTEM
 else()
     if(BUILD_WITH_COMMON_SYSTEM)
         message(STATUS "Advanced examples skipped when common_system integration is enabled")
-    else()
-        message(STATUS "Advanced examples skipped in standalone mode")
     endif()
 endif()

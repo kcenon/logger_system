@@ -24,12 +24,14 @@ All rights reserved.
 #include <chrono>
 #include <atomic>
 #include <memory>
-#include <thread>
 #include <functional>
 #include <mutex>              // Added for synchronization primitives
 #include <condition_variable> // Added for threading coordination
 
 namespace kcenon::logger::async {
+
+// Forward declaration for processing worker
+class batch_processing_worker;
 
 /**
  * @brief Advanced batch processor with dynamic sizing and back-pressure handling
@@ -194,9 +196,9 @@ public:
 
 private:
     /**
-     * @brief Main processing loop
+     * @brief Single iteration of processing loop
      */
-    void process_loop();
+    void process_loop_iteration();
 
     /**
      * @brief Process current batch
@@ -254,8 +256,8 @@ private:
     static constexpr size_t queue_size = 8192;  // Must be power of 2
     std::unique_ptr<lockfree_spsc_queue<batch_entry, queue_size>> queue_;
 
-    // Processing thread
-    std::thread processing_thread_;
+    // Processing worker (using thread_system's thread_base)
+    std::unique_ptr<batch_processing_worker> processing_worker_;
     std::atomic<bool> running_{false};
     std::atomic<bool> should_stop_{false};
 

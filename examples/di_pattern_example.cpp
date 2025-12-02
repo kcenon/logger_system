@@ -275,11 +275,13 @@ void example_1_basic_di_pattern() {
               << " metrics" << std::endl;
 
     // Step 5: Get health status from logger (IMonitorable interface)
-    auto health = logger_instance->health_check();
-    if (kcenon::common::is_ok(health)) {
-        std::cout << "Logger health: "
-                  << ci::to_string(kcenon::common::get_value(health).status) << std::endl;
-    }
+    // TODO: Implement health_check() in logger class (Phase 2.2)
+    // auto health = logger_instance->health_check();
+    // if (kcenon::common::is_ok(health)) {
+    //     std::cout << "Logger health: "
+    //               << ci::to_string(kcenon::common::get_value(health).status) << std::endl;
+    // }
+    std::cout << "Logger health: [health_check() not yet implemented]" << std::endl;
 }
 
 /**
@@ -330,11 +332,12 @@ void example_3_runtime_monitor_injection() {
     logger_instance->log(log_level::info, "Message 1 - no monitoring");
 
     // Inject monitor at runtime
+    // TODO: Implement set_monitor() in logger class (Phase 2.2)
     auto monitor = std::make_unique<example_monitor>();
     auto* monitor_ref = monitor.get();
-    logger_instance->set_monitor(std::move(monitor));
+    // logger_instance->set_monitor(std::move(monitor));
 
-    std::cout << "\nPhase 2: Monitor injected at runtime" << std::endl;
+    std::cout << "\nPhase 2: Monitor injected at runtime [set_monitor() not yet implemented]" << std::endl;
     logger_instance->log(log_level::info, "Message 2 - with monitoring");
     logger_instance->log(log_level::info, "Message 3 - with monitoring");
 
@@ -355,11 +358,12 @@ void example_4_monitor_swapping() {
     if (!logger_result) return;
     auto logger_instance = std::shared_ptr<logger>(std::move(logger_result.value()));
 
+    // TODO: Implement set_monitor() in logger class (Phase 2.2)
     auto monitor1 = std::make_unique<example_monitor>();
     auto* monitor1_ref = monitor1.get();
-    logger_instance->set_monitor(std::move(monitor1));
+    // logger_instance->set_monitor(std::move(monitor1));
 
-    std::cout << "Using Monitor 1" << std::endl;
+    std::cout << "Using Monitor 1 [set_monitor() not yet implemented]" << std::endl;
     logger_instance->log(log_level::info, "Message to Monitor 1");
     logger_instance->log(log_level::info, "Another message to Monitor 1");
 
@@ -368,9 +372,9 @@ void example_4_monitor_swapping() {
     // Swap monitors at runtime
     auto monitor2 = std::make_unique<example_monitor>();
     auto* monitor2_ref = monitor2.get();
-    logger_instance->set_monitor(std::move(monitor2));
+    // logger_instance->set_monitor(std::move(monitor2));
 
-    std::cout << "\nSwapped to Monitor 2" << std::endl;
+    std::cout << "\nSwapped to Monitor 2 [set_monitor() not yet implemented]" << std::endl;
     logger_instance->log(log_level::info, "Message to Monitor 2");
 
     size_t monitor2_metrics = monitor2_ref->get_metric_count();

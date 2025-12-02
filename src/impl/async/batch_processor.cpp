@@ -7,10 +7,40 @@ All rights reserved.
 
 #include "batch_processor.h"
 #include "../memory/object_pool.h"
+#include <kcenon/thread/core/thread_base.h>
 #include <algorithm>
 #include <chrono>
 
 namespace kcenon::logger::async {
+
+/**
+ * @brief Worker thread for batch processing using thread_system's thread_base
+ */
+class batch_processing_worker : public kcenon::thread::thread_base {
+public:
+    using process_callback = std::function<void()>;
+
+    explicit batch_processing_worker(process_callback callback, std::atomic<bool>& should_stop)
+        : thread_base("batch_processing_worker")
+        , callback_(std::move(callback))
+        , should_stop_(should_stop) {}
+
+protected:
+    [[nodiscard]] auto should_continue_work() const -> bool override {
+        return !should_stop_.load(std::memory_order_relaxed);
+    }
+
+    auto do_work() -> kcenon::thread::result_void override {
+        if (callback_ && !should_stop_.load(std::memory_order_relaxed)) {
+            callback_();
+        }
+        return {};
+    }
+
+private:
+    process_callback callback_;
+    std::atomic<bool>& should_stop_;
+};
 
 batch_processor::batch_processor(std::unique_ptr<base_writer> writer, const config& cfg)
     : config_(cfg)
@@ -45,7 +75,10 @@ bool batch_processor::start() {
     }
 
     should_stop_ = false;
-    processing_thread_ = std::thread(&batch_processor::process_loop, this);
+    processing_worker_ = std::make_unique<batch_processing_worker>(
+        [this] { process_loop_iteration(); }, should_stop_);
+    processing_worker_->set_wake_interval(std::chrono::milliseconds(10));
+    processing_worker_->start();
     return true;
 }
 
@@ -56,8 +89,9 @@ void batch_processor::stop(bool flush_remaining) {
 
     should_stop_ = true;
 
-    if (processing_thread_.joinable()) {
-        processing_thread_.join();
+    if (processing_worker_) {
+        processing_worker_->stop();
+        processing_worker_.reset();
     }
 
     if (flush_remaining) {
@@ -111,60 +145,54 @@ size_t batch_processor::get_queue_size() const {
     return queue_->size();
 }
 
-void batch_processor::process_loop() {
+void batch_processor::process_loop_iteration() {
+    static thread_local std::chrono::steady_clock::time_point last_flush_time = std::chrono::steady_clock::now();
+    static thread_local std::chrono::steady_clock::time_point last_adjustment_time = std::chrono::steady_clock::now();
+
+    const auto batch_size = current_batch_size_.load(std::memory_order_relaxed);
+    const auto wait_time = current_wait_time_.load(std::memory_order_relaxed);
+
     std::vector<batch_entry> current_batch;
-    auto last_flush_time = std::chrono::steady_clock::now();
-    auto last_adjustment_time = std::chrono::steady_clock::now();
+    current_batch.reserve(batch_size);
 
-    while (!should_stop_.load(std::memory_order_relaxed)) {
-        const auto batch_size = current_batch_size_.load(std::memory_order_relaxed);
-        const auto wait_time = current_wait_time_.load(std::memory_order_relaxed);
+    const auto deadline = std::chrono::steady_clock::now() + wait_time;
+    const auto entries_collected = collect_entries(current_batch, batch_size, deadline);
 
-        current_batch.clear();
-        current_batch.reserve(batch_size);
+    if (entries_collected > 0) {
+        const auto process_start = std::chrono::steady_clock::now();
+        const auto processed = process_batch(current_batch);
+        const auto process_end = std::chrono::steady_clock::now();
 
-        const auto deadline = std::chrono::steady_clock::now() + wait_time;
-        const auto entries_collected = collect_entries(current_batch, batch_size, deadline);
+        const auto processing_time = process_end - process_start;
+        const bool flushed_by_size = (entries_collected >= batch_size);
+        const bool flushed_by_time = should_flush_by_time(last_flush_time);
 
-        if (entries_collected > 0) {
-            const auto process_start = std::chrono::steady_clock::now();
-            const auto processed = process_batch(current_batch);
-            const auto process_end = std::chrono::steady_clock::now();
-
-            const auto processing_time = process_end - process_start;
-            const bool flushed_by_size = (entries_collected >= batch_size);
-            const bool flushed_by_time = should_flush_by_time(last_flush_time);
-
-            std::string flush_reason;
-            if (flushed_by_size) {
-                flush_reason = "size";
-                stats_.flush_by_size.fetch_add(1, std::memory_order_relaxed);
-            } else if (flushed_by_time) {
-                flush_reason = "time";
-                stats_.flush_by_time.fetch_add(1, std::memory_order_relaxed);
-            } else {
-                flush_reason = "partial";
-            }
-
-            update_stats(processed, processing_time, flush_reason);
-            last_flush_time = process_end;
-
-            // Handle back-pressure
-            if (config_.enable_back_pressure && !handle_back_pressure()) {
-                continue;
-            }
-
-            // Dynamic batch size adjustment
-            if (config_.enable_dynamic_sizing) {
-                const auto now = std::chrono::steady_clock::now();
-                if (now - last_adjustment_time > std::chrono::seconds(5)) {
-                    adjust_batch_size();
-                    last_adjustment_time = now;
-                }
-            }
+        std::string flush_reason;
+        if (flushed_by_size) {
+            flush_reason = "size";
+            stats_.flush_by_size.fetch_add(1, std::memory_order_relaxed);
+        } else if (flushed_by_time) {
+            flush_reason = "time";
+            stats_.flush_by_time.fetch_add(1, std::memory_order_relaxed);
         } else {
-            // No entries collected, short sleep to avoid busy waiting
-            std::this_thread::sleep_for(std::chrono::microseconds(100));
+            flush_reason = "partial";
+        }
+
+        update_stats(processed, processing_time, flush_reason);
+        last_flush_time = process_end;
+
+        // Handle back-pressure
+        if (config_.enable_back_pressure) {
+            handle_back_pressure();
+        }
+
+        // Dynamic batch size adjustment
+        if (config_.enable_dynamic_sizing) {
+            const auto now = std::chrono::steady_clock::now();
+            if (now - last_adjustment_time > std::chrono::seconds(5)) {
+                adjust_batch_size();
+                last_adjustment_time = now;
+            }
         }
     }
 }

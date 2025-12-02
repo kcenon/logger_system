@@ -37,13 +37,13 @@
 #if !defined(LOGGER_THREAD_INTEGRATION_DETECTED)
 #define LOGGER_THREAD_INTEGRATION_DETECTED
 
-#if !defined(USE_THREAD_SYSTEM) && !defined(LOGGER_STANDALONE_MODE)
-#  if __has_include(<kcenon/thread/interfaces/logger_interface.h>)
-#    define USE_THREAD_SYSTEM 1
-#  endif
+// thread_system is a required dependency - always define USE_THREAD_SYSTEM
+#if !defined(USE_THREAD_SYSTEM)
+#  define USE_THREAD_SYSTEM 1
 #endif
 
-#if !defined(USE_THREAD_SYSTEM_INTEGRATION) && defined(USE_THREAD_SYSTEM)
+// Enable integration if headers are available
+#if !defined(USE_THREAD_SYSTEM_INTEGRATION)
 #  if __has_include(<kcenon/thread/interfaces/logger_interface.h>)
 #    define USE_THREAD_SYSTEM_INTEGRATION 1
 #  endif

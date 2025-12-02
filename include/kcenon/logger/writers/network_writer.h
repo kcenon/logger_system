@@ -8,7 +8,6 @@ All rights reserved.
 *****************************************************************************/
 
 #include "base_writer.h"
-#include <thread>
 #include <queue>
 #include <condition_variable>
 #include <atomic>
@@ -17,6 +16,10 @@ All rights reserved.
 #include <cstdint>
 
 namespace kcenon::logger {
+
+// Forward declarations for worker threads
+class network_send_worker;
+class network_reconnect_worker;
 
 /**
  * @class network_writer
@@ -102,8 +105,8 @@ private:
     bool connect();
     void disconnect();
     bool send_data(const std::string& data);
-    void worker_thread();
-    void reconnect_thread();
+    void process_buffer();
+    void attempt_reconnect();
     
     // Format log for network transmission
     std::string format_for_network(const buffered_log& log);
@@ -125,9 +128,9 @@ private:
     mutable std::mutex buffer_mutex_;
     std::condition_variable buffer_cv_;
     
-    // Worker threads
-    std::thread worker_thread_;
-    std::thread reconnect_thread_;
+    // Worker threads (using thread_system's thread_base)
+    std::unique_ptr<network_send_worker> send_worker_;
+    std::unique_ptr<network_reconnect_worker> reconnect_worker_;
     
     // Statistics
     mutable std::mutex stats_mutex_;
