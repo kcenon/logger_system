@@ -81,83 +81,42 @@ if(MINGW)
 endif()
 
 ##################################################
-# Dependency Management (Phase 5: Modern CMake FetchContent)
+# Dependency Management (Unified CMake Module)
 ##################################################
 
-# Use FetchContent for dependency management (CMake 3.14+)
-include(FetchContent)
+# Add cmake modules path (required before including UnifiedDependencies)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-# common_system integration (required for Phase 2.2+)
-message(STATUS "=== Dependency Management (FetchContent) ===")
+# Include unified dependency management module
+include(UnifiedDependencies)
 
-# Try to find common_system package first (for local development)
-find_package(common_system CONFIG QUIET)
+# Setup dependency resolution mode
+# Supports: UNIFIED_USE_LOCAL, UNIFIED_USE_FETCHCONTENT, find_package with fallback
+unified_setup_dependency_mode()
 
-if(NOT common_system_FOUND)
-        # Check for common_system in multiple locations with comprehensive search
-        # Priority order: Environment variable -> CI/CD workspace -> sibling directories
-        set(_LOGGER_COMMON_PATHS
-            # Environment variable (HIGHEST PRIORITY)
-            "$ENV{COMMON_SYSTEM_ROOT}/include"
-            # GitHub Actions: various checkout patterns
-            "$ENV{GITHUB_WORKSPACE}/common_system/include"                      # Standard GITHUB_WORKSPACE
-            "${CMAKE_CURRENT_SOURCE_DIR}/../common_system/include"              # Sibling (sanitizers.yml pattern)
-            "${CMAKE_CURRENT_SOURCE_DIR}/../../common_system/include"           # Parent directory
-            "${CMAKE_SOURCE_DIR}/../common_system/include"                      # Sibling to source root
-        )
+message(STATUS "=== Dependency Management (UnifiedDependencies) ===")
 
-        message(STATUS "Searching for common_system in the following locations:")
-        foreach(_path ${_LOGGER_COMMON_PATHS})
-            message(STATUS "  Checking: ${_path}")
-            if(EXISTS "${_path}/kcenon/common/patterns/result.h")
-                message(STATUS "  ✓ Found common_system at: ${_path}")
-                set(COMMON_SYSTEM_INCLUDE_DIR "${_path}")
-                set(common_system_FOUND TRUE)
-                break()
-            else()
-                message(STATUS "  ✗ Not found")
-            endif()
-        endforeach()
+# Find common_system (required dependency)
+unified_find_dependency(common_system REQUIRED)
 
-        if(NOT common_system_FOUND)
-            # Fallback to FetchContent (Phase 5: Modern dependency management)
-            message(STATUS "  ⚠ Local common_system not found, using FetchContent")
-            message(STATUS "  Fetching common_system from GitHub...")
-
-            FetchContent_Declare(
-                common_system
-                GIT_REPOSITORY https://github.com/kcenon/common_system.git
-                GIT_TAG        main  # TODO: Pin to specific tag/commit for reproducibility
-                GIT_SHALLOW    TRUE  # Faster checkout
-                GIT_PROGRESS   TRUE  # Show download progress
-            )
-
-            # Make common_system available
-            FetchContent_MakeAvailable(common_system)
-
-            # After FetchContent, set the include directory
-            if(TARGET common_system OR EXISTS "${common_system_SOURCE_DIR}/include/kcenon/common/patterns/result.h")
-                message(STATUS "  ✓ FetchContent: common_system available at ${common_system_SOURCE_DIR}")
-                set(COMMON_SYSTEM_INCLUDE_DIR "${common_system_SOURCE_DIR}/include")
-                set(common_system_FOUND TRUE)
-            else()
-                message(FATAL_ERROR "FetchContent failed to provide common_system.\n"
-                    "This should not happen. Please check:\n"
-                    "  1. Internet connectivity\n"
-                    "  2. GitHub repository access\n"
-                    "  3. CMake version >= 3.14")
-            endif()
-        endif()
+# Set COMMON_SYSTEM_INCLUDE_DIR for backward compatibility
+if(common_system_FOUND AND common_system_SOURCE_DIR)
+    set(COMMON_SYSTEM_INCLUDE_DIR "${common_system_SOURCE_DIR}/include")
+elseif(COMMON_SYSTEM_INCLUDE_DIR)
+    # Already set by UnifiedDependencies
 else()
-    message(STATUS "Found common_system package")
+    # Try to get from target
+    if(TARGET ${common_system_TARGET})
+        get_target_property(_cs_inc ${common_system_TARGET} INTERFACE_INCLUDE_DIRECTORIES)
+        if(_cs_inc)
+            list(GET _cs_inc 0 COMMON_SYSTEM_INCLUDE_DIR)
+        endif()
+    endif()
 endif()
 
 ##################################################
 # Include Custom CMake Modules
 ##################################################
-
-# Add custom cmake modules path
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # Include feature configuration module
 include(LoggerFeatures)
@@ -215,65 +174,17 @@ if(NO_VCPKG OR LOGGER_STANDALONE_MODE)
     set(SKIP_VCPKG ON)
 endif()
 
-# Try to find thread_system (only if not in standalone mode)
+# Find thread_system (optional, respects LOGGER_STANDALONE_MODE)
 if(USE_THREAD_SYSTEM AND NOT LOGGER_STANDALONE_MODE)
-    # Check if thread_system components are already added
-    if(TARGET ThreadSystem OR TARGET thread_system)
-        message(STATUS "thread_system targets already available from parent build")
+    # Use unified dependency resolution
+    unified_find_dependency(thread_system OPTIONAL)
+
+    if(thread_system_FOUND)
         set(THREAD_SYSTEM_FOUND TRUE)
-    elseif(NOT TARGET interfaces)
-        # Priority: Environment variable, then sibling directory
-        set(_THREAD_SYSTEM_SEARCH_PATHS
-            "$ENV{THREAD_SYSTEM_ROOT}"                                   # Environment variable (HIGHEST PRIORITY)
-            "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system"               # Sibling directory
-        )
-
-        set(_THREAD_SYSTEM_PATH "")
-        foreach(_path ${_THREAD_SYSTEM_SEARCH_PATHS})
-            if(EXISTS "${_path}/CMakeLists.txt")
-                message(STATUS "Found thread_system at: ${_path}")
-                set(_THREAD_SYSTEM_PATH "${_path}")
-                break()
-            endif()
-        endforeach()
-
-        if(_THREAD_SYSTEM_PATH)
-            message(STATUS "Using thread_system from: ${_THREAD_SYSTEM_PATH}")
-            # Build thread_system as submodule to avoid vcpkg issues
-            # Force the cache variable to be set before processing subdirectory
-            set(BUILD_THREADSYSTEM_AS_SUBMODULE ON CACHE BOOL "Build ThreadSystem as submodule" FORCE)
-            set(BUILD_TESTS OFF CACHE BOOL "Disable tests for thread_system" FORCE)
-            set(BUILD_SAMPLES OFF CACHE BOOL "Disable samples for thread_system" FORCE)
-            # Set THREAD_SYSTEM_ROOT before adding subdirectory for utilities to find main include
-            set(THREAD_SYSTEM_ROOT "${_THREAD_SYSTEM_PATH}" CACHE PATH "Thread system root directory" FORCE)
-            add_subdirectory("${_THREAD_SYSTEM_PATH}" "${CMAKE_BINARY_DIR}/thread_system_build")
-
-            # Fix utilities include path for CI environment
-            if(TARGET utilities)
-                target_include_directories(utilities PUBLIC
-                    $<BUILD_INTERFACE:${_THREAD_SYSTEM_PATH}/include>
-                )
-            endif()
-
-            set(THREAD_SYSTEM_FOUND TRUE)
-        else()
-            # Try to find it as an installed package
-            find_package(thread_system CONFIG QUIET)
-            if(thread_system_FOUND)
-                message(STATUS "Found thread_system package")
-                set(THREAD_SYSTEM_FOUND TRUE)
-            endif()
-        endif()
-    else()
-        message(STATUS "thread_system components already included")
-        set(THREAD_SYSTEM_FOUND TRUE)
-    endif()
-
-    if(THREAD_SYSTEM_FOUND)
         message(STATUS "Using thread_system for interfaces and utilities")
         add_compile_definitions(USE_THREAD_SYSTEM)
 
-        # Create a unified thread_system target that includes all components
+        # Create a unified thread_system target if needed
         if(NOT TARGET thread_system AND NOT TARGET ThreadSystem)
             add_library(thread_system INTERFACE)
             if(TARGET utilities AND TARGET interfaces AND TARGET thread_base)
