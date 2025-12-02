@@ -142,15 +142,18 @@ network_writer::~network_writer() {
     running_ = false;
 
     // Stop workers with error handling
+    // IMPORTANT: Reset workers after stop to join their threads before accessing any members
     utils::safe_destructor_operation("send_worker_stop", [this]() {
         if (send_worker_) {
             send_worker_->stop();
+            send_worker_.reset();
         }
     });
 
     utils::safe_destructor_operation("reconnect_worker_stop", [this]() {
         if (reconnect_worker_) {
             reconnect_worker_->stop();
+            reconnect_worker_.reset();
         }
     });
 
