@@ -75,7 +75,7 @@ jobs:
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
           -DBUILD_BENCHMARKS=ON \
           -DBUILD_TESTS=OFF \
-          -DLOGGER_STANDALONE=ON
+          -DLOGGER_STANDALONE_MODE=ON
 
     - name: Build logger_system
       run: cmake --build build --config ${{ matrix.build_type }} -j
