@@ -38,10 +38,6 @@ show_help() {
     echo "  --docs            Generate Doxygen documentation"
     echo "  --clean-docs      Clean and regenerate Doxygen documentation"
     echo ""
-    echo -e "${BOLD}Logger-Specific Options:${NC}"
-    echo "  --standalone      Build in standalone mode without thread_system"
-    echo "  --with-thread     Build with thread_system integration"
-    echo ""
     echo -e "${BOLD}C++ Compatibility Options:${NC}"
     echo "  --cpp17           Force C++17 mode (disable C++20 features)"
     echo "  --force-fmt       Force fmt library usage even if std::format available"
@@ -433,8 +429,6 @@ AUTO_SELECT=0
 FORCE_CPP17=0
 FORCE_FMT=0
 NO_VCPKG=0
-STANDALONE_MODE=0
-WITH_THREAD=0
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -477,14 +471,6 @@ while [[ $# -gt 0 ]]; do
             ;;
         --no-format)
             DISABLE_STD_FORMAT=1
-            shift
-            ;;
-        --standalone)
-            STANDALONE_MODE=1
-            shift
-            ;;
-        --with-thread)
-            WITH_THREAD=1
             shift
             ;;
         --cpp17)
@@ -653,13 +639,7 @@ if [ $NO_VCPKG -eq 1 ]; then
     print_info "Skipping vcpkg - using system libraries only"
 fi
 
-if [ $STANDALONE_MODE -eq 1 ]; then
-    CMAKE_ARGS+=" -DLOGGER_STANDALONE=ON"
-    print_info "Building in standalone mode without thread_system"
-elif [ $WITH_THREAD -eq 1 ]; then
-    CMAKE_ARGS+=" -DUSE_THREAD_SYSTEM=ON"
-    print_info "Building with thread_system integration"
-fi
+# thread_system is a required dependency - no standalone option needed
 
 # Set build targets based on option
 if [ "$TARGET" == "lib-only" ]; then
