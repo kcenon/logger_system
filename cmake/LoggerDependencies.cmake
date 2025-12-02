@@ -1,89 +1,10 @@
 ##################################################
 # Logger System Dependency Detection Module
 #
-# This module handles finding and configuring external dependencies
+# This module handles finding and configuring external dependencies.
+# Note: thread_system and common_system are now handled by UnifiedDependencies.cmake
+# in the main CMakeLists.txt for consistent dependency resolution.
 ##################################################
-
-# Function to find and configure thread_system dependency
-function(logger_find_thread_system)
-    if(NOT USE_THREAD_SYSTEM OR LOGGER_STANDALONE)
-        message(STATUS "Skipping thread_system (standalone mode or disabled)")
-        return()
-    endif()
-    
-    # Priority: Environment variable, CMake variable, then standard paths
-    set(_LOGGER_THREAD_SEARCH_PATHS)
-
-    # 1. Check environment variable
-    if(DEFINED ENV{THREAD_SYSTEM_ROOT})
-        list(APPEND _LOGGER_THREAD_SEARCH_PATHS "$ENV{THREAD_SYSTEM_ROOT}")
-    endif()
-
-    # 2. Check CMake variable
-    if(DEFINED THREAD_SYSTEM_ROOT)
-        list(APPEND _LOGGER_THREAD_SEARCH_PATHS "${THREAD_SYSTEM_ROOT}")
-    endif()
-
-    # 3. Standard search paths
-    list(APPEND _LOGGER_THREAD_SEARCH_PATHS
-        "${CMAKE_CURRENT_SOURCE_DIR}/../thread_system"              # Parent directory
-        "${CMAKE_SOURCE_DIR}/thread_system"                          # Root directory
-        "${CMAKE_SOURCE_DIR}/../thread_system"                       # Sibling directory
-        "${CMAKE_CURRENT_SOURCE_DIR}/../../thread_system"            # Grandparent directory
-    )
-
-    set(_LOGGER_THREAD_SYSTEM_PATH "")
-    foreach(_path ${_LOGGER_THREAD_SEARCH_PATHS})
-        if(EXISTS "${_path}" AND IS_DIRECTORY "${_path}")
-            message(STATUS "Found thread_system at: ${_path}")
-            set(_LOGGER_THREAD_SYSTEM_PATH "${_path}")
-            break()
-        endif()
-    endforeach()
-
-    if(_LOGGER_THREAD_SYSTEM_PATH)
-        message(STATUS "Using thread_system from: ${_LOGGER_THREAD_SYSTEM_PATH}")
-
-        # Add thread_system subdirectory
-        # Check if thread_system is already included
-        if(NOT TARGET utilities)
-            add_subdirectory(${_LOGGER_THREAD_SYSTEM_PATH} ${CMAKE_BINARY_DIR}/thread_system)
-        else()
-            message(STATUS "thread_system already included, skipping add_subdirectory")
-        endif()
-
-        if(TARGET utilities)
-            target_include_directories(utilities PUBLIC
-                $<BUILD_INTERFACE:${_LOGGER_THREAD_SYSTEM_PATH}/include>
-            )
-        endif()
-
-        # Set flags to indicate thread_system is available
-        set(THREAD_SYSTEM_FOUND TRUE PARENT_SCOPE)
-        set(USE_THREAD_SYSTEM TRUE PARENT_SCOPE)
-
-        # Add compile definition
-        add_compile_definitions(USE_THREAD_SYSTEM)
-
-        message(STATUS "Using thread_system for interfaces and utilities")
-    else()
-        # Try to find installed thread_system
-        find_package(ThreadSystem QUIET)
-        
-        if(ThreadSystem_FOUND)
-            message(STATUS "Found installed ThreadSystem: ${ThreadSystem_DIR}")
-            set(THREAD_SYSTEM_FOUND TRUE PARENT_SCOPE)
-            set(USE_THREAD_SYSTEM TRUE PARENT_SCOPE)
-            add_compile_definitions(USE_THREAD_SYSTEM)
-        else()
-            message(STATUS "thread_system not found - building in standalone mode")
-            set(THREAD_SYSTEM_FOUND FALSE PARENT_SCOPE)
-            set(USE_THREAD_SYSTEM FALSE PARENT_SCOPE)
-            set(LOGGER_STANDALONE TRUE PARENT_SCOPE)
-            add_compile_definitions(LOGGER_STANDALONE)
-        endif()
-    endif()
-endfunction()
 
 # Function to find optional compression libraries
 function(logger_find_compression)
@@ -202,20 +123,20 @@ function(logger_find_benchmark_dependencies)
 endfunction()
 
 # Main function to find all dependencies
+# Note: thread_system and common_system are handled by UnifiedDependencies.cmake
 function(logger_find_all_dependencies)
     message(STATUS "========================================")
     message(STATUS "Detecting Logger System Dependencies...")
-    
+
     # Required dependencies
     find_package(Threads REQUIRED)
-    
-    # Optional dependencies
-    logger_find_thread_system()
+
+    # Optional dependencies (thread_system handled by UnifiedDependencies)
     logger_find_compression()
     logger_find_encryption()
     logger_find_test_dependencies()
     logger_find_benchmark_dependencies()
-    
+
     message(STATUS "Dependency Detection Complete")
     message(STATUS "========================================")
 endfunction()
