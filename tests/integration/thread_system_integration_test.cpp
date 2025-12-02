@@ -45,9 +45,10 @@ protected:
 
 /**
  * @brief Test plugin loading and unloading
+ *
+ * @note thread_system is a required dependency, so this test always runs.
  */
 TEST_F(ThreadSystemIntegrationTest, PluginLoadingUnloading) {
-#ifdef USE_THREAD_SYSTEM
     // Simulated test for plugin loading
     bool plugin_loaded = false;
     bool plugin_unloaded = false;
@@ -59,16 +60,14 @@ TEST_F(ThreadSystemIntegrationTest, PluginLoadingUnloading) {
     // Simulate plugin unloading
     plugin_unloaded = true;
     EXPECT_TRUE(plugin_unloaded) << "Thread system plugin should unload successfully";
-#else
-    GTEST_SKIP() << "Thread system integration not available without USE_THREAD_SYSTEM";
-#endif
 }
 
 /**
  * @brief Test thread pool utilization
+ *
+ * @note thread_system is a required dependency, so this test always runs.
  */
 TEST_F(ThreadSystemIntegrationTest, ThreadPoolUtilization) {
-#ifdef USE_THREAD_SYSTEM
     // Simulate thread pool test
     std::atomic<int> counter{0};
     std::vector<std::thread> threads;
@@ -93,18 +92,17 @@ TEST_F(ThreadSystemIntegrationTest, ThreadPoolUtilization) {
     }
 
     EXPECT_EQ(counter.load(), num_tasks) << "All tasks should complete";
-#else
-    GTEST_SKIP() << "Thread system integration not available without USE_THREAD_SYSTEM";
-#endif
 }
 
 /**
  * @brief Test performance improvements with thread_system
+ *
+ * @note thread_system is a required dependency, so threading is always available.
  */
 TEST_F(ThreadSystemIntegrationTest, PerformanceImprovement) {
     const int num_messages = 1000;
 
-    // Benchmark without plugin (simulated)
+    // Benchmark without threading (sequential)
     auto start = std::chrono::high_resolution_clock::now();
     {
         std::ofstream log_file("test_logs/perf_without.log");
@@ -116,8 +114,7 @@ TEST_F(ThreadSystemIntegrationTest, PerformanceImprovement) {
     auto end = std::chrono::high_resolution_clock::now();
     auto duration_without = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
-#ifdef USE_THREAD_SYSTEM
-    // Benchmark with plugin (simulated with parallel writes)
+    // Benchmark with threading (parallel writes)
     start = std::chrono::high_resolution_clock::now();
     {
         // Simulate improved performance with threading
@@ -147,20 +144,16 @@ TEST_F(ThreadSystemIntegrationTest, PerformanceImprovement) {
     std::cout << "With threading: " << duration_with << "us" << std::endl;
 
     // We don't expect exact improvement in this simulation, just verify it runs
-    // Using microseconds instead of milliseconds to avoid 0ms measurements in fast CI environments
     EXPECT_GT(duration_without, 0);
     EXPECT_GT(duration_with, 0);
-#else
-    std::cout << "Baseline performance: " << duration_without << "us for " << num_messages << " messages" << std::endl;
-    EXPECT_GT(duration_without, 0);
-#endif
 }
 
 /**
  * @brief Test plugin health monitoring and recovery
+ *
+ * @note thread_system is a required dependency, so this test always runs.
  */
 TEST_F(ThreadSystemIntegrationTest, PluginHealthMonitoring) {
-#ifdef USE_THREAD_SYSTEM
     // Simulate health monitoring
     struct HealthStatus {
         bool is_healthy = true;
@@ -180,16 +173,14 @@ TEST_F(ThreadSystemIntegrationTest, PluginHealthMonitoring) {
 
     EXPECT_TRUE(health_status.is_healthy);
     EXPECT_EQ(health_status.consecutive_failures, 0);
-#else
-    GTEST_SKIP() << "Plugin health monitoring not available without USE_THREAD_SYSTEM";
-#endif
 }
 
 /**
  * @brief Test concurrent plugin access
+ *
+ * @note thread_system is a required dependency, so this test always runs.
  */
 TEST_F(ThreadSystemIntegrationTest, ConcurrentPluginAccess) {
-#ifdef USE_THREAD_SYSTEM
     // Create multiple threads accessing the plugin simulation
     std::vector<std::thread> threads;
     std::atomic<int> success_count{0};
@@ -214,9 +205,6 @@ TEST_F(ThreadSystemIntegrationTest, ConcurrentPluginAccess) {
     }
 
     EXPECT_EQ(success_count.load(), 10);
-#else
-    GTEST_SKIP() << "Concurrent plugin access test not available without USE_THREAD_SYSTEM";
-#endif
 }
 
 int main(int argc, char** argv) {

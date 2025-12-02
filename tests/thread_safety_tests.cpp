@@ -10,10 +10,7 @@ All rights reserved.
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/logger/writers/file_writer.h>
 #include <kcenon/logger/writers/rotating_file_writer.h>
-
-#ifndef LOGGER_STANDALONE_MODE
 #include <kcenon/logger/writers/async_writer.h>
-#endif
 
 #include <thread>
 #include <vector>
