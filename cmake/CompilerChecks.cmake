@@ -251,7 +251,11 @@ function(check_cpp_features)
         message(STATUS "✅ std::format support detected")
         add_compile_definitions(USE_STD_FORMAT=1)
     else()
-        message(STATUS "⚠️  std::format not available, using fmt library as fallback")
+        message(FATAL_ERROR "std::format is required. Please use a C++20 compliant compiler:\n"
+            "  - GCC 13+ \n"
+            "  - Clang 14+ \n"
+            "  - MSVC 19.29+ (Visual Studio 2019 16.10+)\n"
+            "  - Apple Clang 15+")
     endif()
     
     # Check for std::jthread
