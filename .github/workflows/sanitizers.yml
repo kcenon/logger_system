@@ -44,7 +44,9 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake ninja-build clang libgtest-dev libfmt-dev
+        sudo apt-get install -y cmake ninja-build clang libgtest-dev
+        # Install libc++ for std::format support
+        sudo apt-get install -y libc++-dev libc++abi-dev
 
     - name: Set up compiler
       run: |
@@ -61,14 +63,15 @@ jobs:
         ls -la ../ | head -20
         echo "======================================"
 
-        SANITIZER_FLAGS="-fsanitize=${{ matrix.sanitizer }} -fno-omit-frame-pointer -g"
+        # Add libc++ flag for std::format support
+        SANITIZER_FLAGS="-fsanitize=${{ matrix.sanitizer }} -fno-omit-frame-pointer -g -stdlib=libc++"
         cmake -B build -S . \
           -GNinja \
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
           -DCMAKE_CXX_FLAGS="${SANITIZER_FLAGS}" \
-          -DCMAKE_C_FLAGS="${SANITIZER_FLAGS}" \
-          -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }}" \
-          -DCMAKE_SHARED_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }}" \
+          -DCMAKE_C_FLAGS="-fsanitize=${{ matrix.sanitizer }} -fno-omit-frame-pointer -g" \
+          -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }} -stdlib=libc++" \
+          -DCMAKE_SHARED_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }} -stdlib=libc++" \
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_SAMPLES=OFF \
           -DBUILD_WITH_COMMON_SYSTEM=ON \

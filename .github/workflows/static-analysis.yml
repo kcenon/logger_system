@@ -26,7 +26,9 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake ninja-build clang clang-tidy libfmt-dev libspdlog-dev
+        sudo apt-get install -y cmake ninja-build clang clang-tidy
+        # Install libc++ for std::format support
+        sudo apt-get install -y libc++-dev libc++abi-dev
 
     - name: Configure CMake
       run: |
@@ -35,6 +37,7 @@ jobs:
           -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
           -DCMAKE_CXX_COMPILER=clang++ \
           -DCMAKE_C_COMPILER=clang \
+          -DCMAKE_CXX_FLAGS="-stdlib=libc++" \
           -DBUILD_WITH_COMMON_SYSTEM=ON \
           -DLOGGER_BUILD_TESTS=OFF \
           -DLOGGER_BUILD_BENCHMARKS=OFF \

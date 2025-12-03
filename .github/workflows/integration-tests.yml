@@ -35,24 +35,25 @@ jobs:
           }
         done
 
-        # Install dependencies with retry
-        for i in 1 2 3; do
-          echo "Attempt $i: Installing dependencies..."
-          sudo apt-get install -y \
-            cmake \
-            ninja-build \
-            ${{ matrix.compiler.cc }} \
-            ${{ matrix.compiler.cxx }} \
-            libfmt-dev \
-            libspdlog-dev && break || {
-            echo "apt-get install failed, retrying in 10 seconds..."
-            sleep 10
-          }
-        done
+        # Install base dependencies
+        sudo apt-get install -y cmake ninja-build software-properties-common
+
+        # Install GCC 13 for std::format support
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+        sudo apt-get update
+        sudo apt-get install -y gcc-13 g++-13
+
+        # Install Clang with libc++ for std::format support
+        sudo apt-get install -y clang libc++-dev libc++abi-dev
+
+        # Set GCC 13 as default for GCC builds
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
 
         # Verify installation
-        ${{ matrix.compiler.cc }} --version
-        ${{ matrix.compiler.cxx }} --version
+        gcc --version
+        g++ --version
+        clang++ --version
         cmake --version
         ninja --version
         # GTest is now fetched via CMake FetchContent - no system package needed
@@ -91,6 +92,13 @@ jobs:
         echo "GTest: Will be fetched via FetchContent if needed"
         echo "==========================="
 
+        # Set compiler-specific flags for std::format support
+        EXTRA_CXX_FLAGS=""
+        if [ "${{ matrix.compiler.name }}" = "Clang" ]; then
+          # Use libc++ for Clang on Linux for std::format support
+          EXTRA_CXX_FLAGS="-stdlib=libc++"
+        fi
+
         cmake -B build \
           -G Ninja \
           -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
@@ -98,6 +106,7 @@ jobs:
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON \
           -DBUILD_WITH_COMMON_SYSTEM=ON \
           -DCMAKE_PREFIX_PATH="/usr" \
+          -DCMAKE_CXX_FLAGS="${EXTRA_CXX_FLAGS}" \
           --debug-find || {
             echo "::error::CMake configuration failed"
             echo "CMake logs:"
@@ -283,21 +292,17 @@ jobs:
           }
         done
 
-        # Install dependencies with retry
-        for i in 1 2 3; do
-          echo "Attempt $i: Installing dependencies..."
-          sudo apt-get install -y \
-            cmake \
-            ninja-build \
-            gcc \
-            g++ \
-            lcov \
-            libfmt-dev \
-            libspdlog-dev && break || {
-            echo "apt-get install failed, retrying in 10 seconds..."
-            sleep 10
-          }
-        done
+        # Install base dependencies
+        sudo apt-get install -y cmake ninja-build lcov software-properties-common
+
+        # Install GCC 13 for std::format support
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+        sudo apt-get update
+        sudo apt-get install -y gcc-13 g++-13
+
+        # Set GCC 13 as default
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
 
         # Verify installation
         gcc --version
@@ -459,20 +464,17 @@ jobs:
           }
         done
 
-        # Install dependencies with retry
-        for i in 1 2 3; do
-          echo "Attempt $i: Installing dependencies..."
-          sudo apt-get install -y \
-            cmake \
-            ninja-build \
-            gcc \
-            g++ \
-            libfmt-dev \
-            libspdlog-dev && break || {
-            echo "apt-get install failed, retrying in 10 seconds..."
-            sleep 10
-          }
-        done
+        # Install base dependencies
+        sudo apt-get install -y cmake ninja-build software-properties-common
+
+        # Install GCC 13 for std::format support
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+        sudo apt-get update
+        sudo apt-get install -y gcc-13 g++-13
+
+        # Set GCC 13 as default
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
 
         # Verify installation
         gcc --version
@@ -565,20 +567,17 @@ jobs:
           }
         done
 
-        # Install dependencies with retry
-        for i in 1 2 3; do
-          echo "Attempt $i: Installing dependencies..."
-          sudo apt-get install -y \
-            cmake \
-            ninja-build \
-            gcc \
-            g++ \
-            libfmt-dev \
-            libspdlog-dev && break || {
-            echo "apt-get install failed, retrying in 10 seconds..."
-            sleep 10
-          }
-        done
+        # Install base dependencies
+        sudo apt-get install -y cmake ninja-build software-properties-common
+
+        # Install GCC 13 for std::format support
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+        sudo apt-get update
+        sudo apt-get install -y gcc-13 g++-13
+
+        # Set GCC 13 as default
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
 
         # Verify installation
         gcc --version

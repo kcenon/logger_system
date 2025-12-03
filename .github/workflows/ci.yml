@@ -54,8 +54,17 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y cmake build-essential gdb pkg-config curl zip unzip tar autoconf automake autoconf-archive ninja-build
-        sudo apt install -y clang lld
+        # Install GCC 13 for std::format support
+        sudo apt install -y software-properties-common
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+        sudo apt update
+        sudo apt install -y gcc-13 g++-13
+        # Install Clang with libc++ for std::format support
+        sudo apt install -y clang lld libc++-dev libc++abi-dev
         sudo apt install -y libgtest-dev libgmock-dev
+        # Set GCC 13 as default
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
 
     - name: Install dependencies (macOS)
       if: runner.os == 'macOS'
@@ -162,6 +171,13 @@ jobs:
       continue-on-error: true
       run: |
         cd build
+        # Set compiler-specific flags for std::format support
+        EXTRA_CXX_FLAGS=""
+        if [ "${{ matrix.compiler }}" = "clang" ] && [ "${{ runner.os }}" = "Linux" ]; then
+          # Use libc++ for Clang on Linux for std::format support
+          EXTRA_CXX_FLAGS="-stdlib=libc++"
+        fi
+
         cmake .. \
           -G Ninja \
           -DBUILD_TESTS=ON \
@@ -171,7 +187,8 @@ jobs:
           -DLOGGER_BUILD_INTEGRATION_TESTS=OFF \
           -DCMAKE_TOOLCHAIN_FILE="${GITHUB_WORKSPACE}/vcpkg/scripts/buildsystems/vcpkg.cmake" \
           -DCMAKE_C_COMPILER=${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }} \
-          -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}
+          -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }} \
+          -DCMAKE_CXX_FLAGS="${EXTRA_CXX_FLAGS}"
 
         cmake --build . --parallel
         ctest --output-on-failure -E "(integration_test|compatibility_test)"
@@ -209,6 +226,13 @@ jobs:
         mkdir -p build
         cd build
 
+        # Set compiler-specific flags for std::format support
+        EXTRA_CXX_FLAGS=""
+        if [ "${{ matrix.compiler }}" = "clang" ] && [ "${{ runner.os }}" = "Linux" ]; then
+          # Use libc++ for Clang on Linux for std::format support
+          EXTRA_CXX_FLAGS="-stdlib=libc++"
+        fi
+
         cmake .. \
           -G Ninja \
           -DBUILD_TESTS=ON \
@@ -216,7 +240,8 @@ jobs:
           -DLOGGER_STANDALONE_MODE=ON \
           -DUSE_THREAD_SYSTEM=OFF \
           -DCMAKE_C_COMPILER=${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }} \
-          -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}
+          -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }} \
+          -DCMAKE_CXX_FLAGS="${EXTRA_CXX_FLAGS}"
 
         cmake --build . --parallel
 
@@ -314,13 +339,17 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y cmake build-essential ninja-build clang lld
+        sudo apt install -y cmake build-essential ninja-build
+        # Install Clang with libc++ for std::format support
+        sudo apt install -y clang lld libc++-dev libc++abi-dev
         sudo apt install -y libgtest-dev libgmock-dev
 
     - name: Configure CMake with ${{ matrix.sanitizer.name }}
       run: |
         mkdir -p build
         cd build
+        # Add libc++ flag for std::format support
+        SANITIZER_FLAGS="${{ matrix.sanitizer.flags }} -stdlib=libc++"
         cmake .. \
           -G Ninja \
           -DCMAKE_BUILD_TYPE=Debug \
@@ -330,9 +359,9 @@ jobs:
           -DCMAKE_C_COMPILER=clang \
           -DCMAKE_CXX_COMPILER=clang++ \
           -DCMAKE_C_FLAGS="${{ matrix.sanitizer.flags }}" \
-          -DCMAKE_CXX_FLAGS="${{ matrix.sanitizer.flags }}" \
-          -DCMAKE_EXE_LINKER_FLAGS="${{ matrix.sanitizer.flags }}" \
-          -DCMAKE_SHARED_LINKER_FLAGS="${{ matrix.sanitizer.flags }}"
+          -DCMAKE_CXX_FLAGS="${SANITIZER_FLAGS}" \
+          -DCMAKE_EXE_LINKER_FLAGS="${SANITIZER_FLAGS}" \
+          -DCMAKE_SHARED_LINKER_FLAGS="${SANITIZER_FLAGS}"
 
     - name: Build with ${{ matrix.sanitizer.name }}
       run: |
