@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System - Frequently Asked Questions</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md993"></a> </p><blockquote class="doxtable">
+<div class="textblock"><p><a class="anchor" id="autotoc_md1006"></a> </p><blockquote class="doxtable">
 <p>&zwj;<b>Version:</b> 1.0 <b>Last Updated:</b> 2025-11-11 <b>Audience:</b> Users, Developers </p>
 </blockquote>
 <p>This FAQ addresses common questions about the logger_system, covering logging levels, writers, performance, and integration.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md995"></a>
+<h1><a class="anchor" id="autotoc_md1008"></a>
 Table of Contents</h1>
 <ol type="1">
 <li>General Questions</li>
@@ -110,9 +110,9 @@ Table of Contents</h1>
 <li>Advanced Topics</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md997"></a>
+<h1><a class="anchor" id="autotoc_md1010"></a>
 General Questions</h1>
-<h2><a class="anchor" id="autotoc_md998"></a>
+<h2><a class="anchor" id="autotoc_md1011"></a>
 1. What is the logger_system?</h2>
 <p>A high-performance, thread-safe logging system for C++20:</p><ul>
 <li><b>Multiple log levels</b> (trace, debug, info, warn, error, critical)</li>
@@ -128,7 +128,7 @@ General Questions</h1>
 <div class="line">logger-&gt;warn(<span class="stringliteral">&quot;Low memory&quot;</span>, {{<span class="stringliteral">&quot;free_mb&quot;</span>, 128}});</div>
 <div class="line">logger-&gt;error(<span class="stringliteral">&quot;Connection failed&quot;</span>, {{<span class="stringliteral">&quot;host&quot;</span>, <span class="stringliteral">&quot;db.example.com&quot;</span>}});</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1000"></a>
+<h2><a class="anchor" id="autotoc_md1013"></a>
 2. What C++ standard is required?</h2>
 <p><b>Required:</b> C++20</p>
 <p><b>Compiler Support:</b></p><ul>
@@ -137,9 +137,9 @@ General Questions</h1>
 <li>MSVC 2019+</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1002"></a>
+<h1><a class="anchor" id="autotoc_md1015"></a>
 Logging Basics</h1>
-<h2><a class="anchor" id="autotoc_md1003"></a>
+<h2><a class="anchor" id="autotoc_md1016"></a>
 3. How do I create a logger?</h2>
 <div class="fragment"><div class="line"><span class="comment">// Simple logger with default console writer</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger::create(<span class="stringliteral">&quot;app&quot;</span>);</div>
@@ -156,7 +156,7 @@ Logging Basics</h1>
 <div class="line">    logger_writer::syslog(<span class="stringliteral">&quot;my_app&quot;</span>)</div>
 <div class="line">});</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1005"></a>
+<h2><a class="anchor" id="autotoc_md1018"></a>
 4. How do I log messages?</h2>
 <div class="fragment"><div class="line"><span class="comment">// Basic logging</span></div>
 <div class="line">logger-&gt;trace(<span class="stringliteral">&quot;Detailed trace information&quot;</span>);</div>
@@ -176,9 +176,9 @@ Logging Basics</h1>
 <div class="line"><span class="comment">// Format strings</span></div>
 <div class="line">logger-&gt;info(<span class="stringliteral">&quot;Processing {} items in {} ms&quot;</span>, count, duration);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1007"></a>
+<h1><a class="anchor" id="autotoc_md1020"></a>
 Log Levels</h1>
-<h2><a class="anchor" id="autotoc_md1008"></a>
+<h2><a class="anchor" id="autotoc_md1021"></a>
 5. What log levels are available?</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -197,7 +197,7 @@ Log Levels</h1>
 <td class="markdownTableBodyNone"><b>critical</b>   </td><td class="markdownTableBodyNone">Critical failures   </td><td class="markdownTableBodyNone">System crashes   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1010"></a>
+<h2><a class="anchor" id="autotoc_md1023"></a>
 6. How do I set the log level?</h2>
 <div class="fragment"><div class="line"><span class="comment">// Set minimum log level</span></div>
 <div class="line">logger-&gt;set_level(log_level::info);</div>
@@ -208,7 +208,7 @@ Log Levels</h1>
 <div class="line">logger-&gt;info(<span class="stringliteral">&quot;Logged&quot;</span>);       <span class="comment">// Logged</span></div>
 <div class="line">logger-&gt;error(<span class="stringliteral">&quot;Logged&quot;</span>);      <span class="comment">// Logged</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1012"></a>
+<h2><a class="anchor" id="autotoc_md1025"></a>
 7. Can I change log level at runtime?</h2>
 <div class="fragment"><div class="line"><span class="comment">// Start with info level</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger::create(<span class="stringliteral">&quot;app&quot;</span>);</div>
@@ -224,9 +224,9 @@ Log Levels</h1>
 <div class="line"><span class="keyword">auto</span> level = config.get&lt;std::string&gt;(<span class="stringliteral">&quot;log_level&quot;</span>);</div>
 <div class="line">logger-&gt;set_level(parse_log_level(level));</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1014"></a>
+<h1><a class="anchor" id="autotoc_md1027"></a>
 Writers</h1>
-<h2><a class="anchor" id="autotoc_md1015"></a>
+<h2><a class="anchor" id="autotoc_md1028"></a>
 8. What writers are available?</h2>
 <p><b>Console Writer:</b> </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = logger_writer::console();</div>
 </div><!-- fragment --><p><b>File Writer:</b> </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = logger_writer::file(<span class="stringliteral">&quot;/var/log/app.log&quot;</span>, {</div>
@@ -243,7 +243,7 @@ Writers</h1>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> writer = std::make_shared&lt;DatabaseWriter&gt;(db);</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1017"></a>
+<h2><a class="anchor" id="autotoc_md1030"></a>
 9. How do I use multiple writers?</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger::create(<span class="stringliteral">&quot;app&quot;</span>, {</div>
 <div class="line">    logger_writer::console(),              <span class="comment">// Dev/debugging</span></div>
@@ -257,7 +257,7 @@ Writers</h1>
 <div class="line">    log_level::error  <span class="comment">// Only errors and critical</span></div>
 <div class="line">);</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1019"></a>
+<h2><a class="anchor" id="autotoc_md1032"></a>
 10. How does log rotation work?</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> writer = logger_writer::file(<span class="stringliteral">&quot;/var/log/app.log&quot;</span>, {</div>
 <div class="line">    .max_size = 10 * 1024 * 1024,  <span class="comment">// Rotate at 10 MB</span></div>
@@ -272,9 +272,9 @@ Writers</h1>
 <div class="line"><span class="comment">// ...</span></div>
 <div class="line"><span class="comment">// app.log.7.gz</span></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1021"></a>
+<h1><a class="anchor" id="autotoc_md1034"></a>
 Performance</h1>
-<h2><a class="anchor" id="autotoc_md1022"></a>
+<h2><a class="anchor" id="autotoc_md1035"></a>
 11. What is the performance?</h2>
 <p><b>Benchmarks</b> (3.2 GHz Intel Core i7):</p>
 <table class="markdownTable">
@@ -288,7 +288,7 @@ Performance</h1>
 <td class="markdownTableBodyNone">Structured logging   </td><td class="markdownTableBodyNone">1M logs/s   </td><td class="markdownTableBodyNone">1 μs   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1024"></a>
+<h2><a class="anchor" id="autotoc_md1037"></a>
 12. How do I enable asynchronous logging?</h2>
 <div class="fragment"><div class="line"><span class="comment">// Async logger with background thread</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger::create_async(<span class="stringliteral">&quot;app&quot;</span>, {</div>
@@ -301,7 +301,7 @@ Performance</h1>
 <div class="line"><span class="comment">// Log operations return immediately</span></div>
 <div class="line">logger-&gt;info(<span class="stringliteral">&quot;Fast logging&quot;</span>);  <span class="comment">// &lt;500 ns</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1026"></a>
+<h2><a class="anchor" id="autotoc_md1039"></a>
 13. How do I optimize performance?</h2>
 <div class="fragment"><div class="line"><span class="comment">// 1. Use async logging</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger::create_async(<span class="stringliteral">&quot;app&quot;</span>);</div>
@@ -317,9 +317,9 @@ Performance</h1>
 <div class="line"><span class="comment">// 4. Use structured logging (pre-formatted)</span></div>
 <div class="line">logger-&gt;info(<span class="stringliteral">&quot;event&quot;</span>, {{<span class="stringliteral">&quot;type&quot;</span>, <span class="stringliteral">&quot;user_login&quot;</span>}});</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1028"></a>
+<h1><a class="anchor" id="autotoc_md1041"></a>
 Integration</h1>
-<h2><a class="anchor" id="autotoc_md1029"></a>
+<h2><a class="anchor" id="autotoc_md1042"></a>
 14. How do I integrate with monitoring_system?</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;logger/adapters/monitoring_adapter.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -331,7 +331,7 @@ Integration</h1>
 <div class="line"><span class="comment">// - log_messages_total{level=&quot;error&quot;}</span></div>
 <div class="line"><span class="comment">// - log_messages_total{level=&quot;warn&quot;}</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1031"></a>
+<h2><a class="anchor" id="autotoc_md1044"></a>
 15. How do I integrate with thread_system?</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;logger/adapters/thread_adapter.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -341,9 +341,9 @@ Integration</h1>
 <div class="line">    .executor = executor</div>
 <div class="line">});</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1033"></a>
+<h1><a class="anchor" id="autotoc_md1046"></a>
 Advanced Topics</h1>
-<h2><a class="anchor" id="autotoc_md1034"></a>
+<h2><a class="anchor" id="autotoc_md1047"></a>
 16. Is it thread-safe?</h2>
 <p><b>Yes</b>, all operations are thread-safe by default.</p>
 <div class="fragment"><div class="line"><span class="comment">// Multiple threads can log concurrently</span></div>
@@ -354,7 +354,7 @@ Advanced Topics</h1>
 <div class="line">    });</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1036"></a>
+<h2><a class="anchor" id="autotoc_md1049"></a>
 17. How do I create custom log formats?</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>JsonFormatter : <span class="keyword">public</span> log_formatter_interface {</div>
 <div class="line">    <span class="keyword">auto</span> format(<span class="keyword">const</span> log_entry&amp; entry) -&gt; std::string <span class="keyword">override</span> {</div>
@@ -369,7 +369,7 @@ Advanced Topics</h1>
 <div class="line"> </div>
 <div class="line">logger-&gt;set_formatter(std::make_shared&lt;JsonFormatter&gt;());</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1038"></a>
+<h2><a class="anchor" id="autotoc_md1051"></a>
 18. How do I filter logs?</h2>
 <div class="fragment"><div class="line"><span class="comment">// Filter by level</span></div>
 <div class="line">logger-&gt;set_level(log_level::warn);</div>
@@ -385,7 +385,7 @@ Advanced Topics</h1>
 <div class="line">           entry.fields.contains(<span class="stringliteral">&quot;important&quot;</span>);</div>
 <div class="line">});</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1040"></a>
+<h2><a class="anchor" id="autotoc_md1053"></a>
 19. How do I handle critical logs?</h2>
 <div class="fragment"><div class="line"><span class="comment">// Critical logs trigger immediate actions</span></div>
 <div class="line">logger-&gt;on_critical([](<span class="keyword">const</span> log_entry&amp; entry) {</div>
@@ -401,7 +401,7 @@ Advanced Topics</h1>
 <div class="line"> </div>
 <div class="line">logger-&gt;critical(<span class="stringliteral">&quot;System failure&quot;</span>, {{<span class="stringliteral">&quot;errno&quot;</span>, errno}});</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1042"></a>
+<h2><a class="anchor" id="autotoc_md1055"></a>
 20. Where can I find more information?</h2>
 <p><b>Documentation:</b></p><ul>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html">Getting Started</a> - Quick start guide</li>
@@ -421,7 +421,7 @@ Advanced Topics</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Dec 2 2025 23:53:25 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Dec 3 2025 07:47:42 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
