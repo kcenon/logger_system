@@ -9,6 +9,34 @@ Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문�
 
 ---
 
+## [Unreleased]
+
+### CMake fmt Fallback 제거 - 2025-12-03
+
+#### 변경됨
+- **CMake 설정에서 std::format 필수**: 모든 fmt 라이브러리 fallback 로직 제거
+  - `cmake/CompilerChecks.cmake`: std::format을 사용할 수 없으면 FATAL_ERROR 발생
+  - `cmake/LoggerCompatibility.cmake`: fmt 탐지, C++17 모드, vcpkg fallback 제거
+
+#### 제거됨
+- **CMake의 fmt 라이브러리 fallback**:
+  - `check_std_format()`: find_package(fmt) 및 vcpkg fallback 로직 제거
+  - `configure_logger_compatibility()`: C++17 호환 모드 완전 제거
+  - `setup_formatting_library()`: fmt::format 및 basic formatting 분기 제거
+  - `setup_vcpkg_fmt_fallback()`: 함수 완전 제거
+
+#### 이점
+- **깔끔한 CMake 설정**: fallback 복잡성 없이 단순화된 기능 감지
+- **일관된 빌드 동작**: 모든 플랫폼과 CI 환경에서 동일한 동작
+- **의존성 감소**: 조건부 fmt 라이브러리 링킹 없음
+- **프로젝트 간 정렬**: thread_system, container_system, network_system, database_system과 일치
+
+#### 관련 이슈
+- 프로젝트 간 표준화 작업의 일부
+- 참고: thread_system#219, container_system#168, network_system#257, database_system#203
+
+---
+
 ## [1.0.0] - 2025-10-22
 
 ### 추가됨

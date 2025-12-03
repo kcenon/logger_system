@@ -24,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, macos-13]
+        os: [ubuntu-22.04, macos-14]
         compiler: [clang]
         build_type: [Release]
 
@@ -51,28 +51,49 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
+        # Install LLVM 17 with libc++ for std::format support
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        sudo add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main"
+        sudo apt-get update
         sudo apt-get install -y \
-          cmake ninja-build clang \
-          libbenchmark-dev libgtest-dev libfmt-dev \
+          cmake ninja-build clang-17 libc++-17-dev libc++abi-17-dev lld-17 \
+          libbenchmark-dev libgtest-dev \
           python3-pip
+        # Create symlinks for clang-17
+        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
+        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
         pip3 install matplotlib
 
     - name: Install dependencies (macOS)
       if: runner.os == 'macOS'
       run: |
-        brew install ninja google-benchmark googletest fmt
+        brew install ninja google-benchmark googletest
         pip3 install matplotlib
 
-    - name: Set up compiler
+    - name: Set up compiler (Ubuntu)
+      if: runner.os == 'Linux'
+      run: |
+        echo "CC=clang-17" >> $GITHUB_ENV
+        echo "CXX=clang++-17" >> $GITHUB_ENV
+
+    - name: Set up compiler (macOS)
+      if: runner.os == 'macOS'
       run: |
         echo "CC=clang" >> $GITHUB_ENV
         echo "CXX=clang++" >> $GITHUB_ENV
 
     - name: Configure CMake
       run: |
+        # Add libc++ flag for Linux to support std::format
+        EXTRA_CXX_FLAGS=""
+        if [ "${{ runner.os }}" = "Linux" ]; then
+          EXTRA_CXX_FLAGS="-stdlib=libc++"
+        fi
+
         cmake -B build -S logger_system \
           -GNinja \
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          -DCMAKE_CXX_FLAGS="${EXTRA_CXX_FLAGS}" \
           -DBUILD_BENCHMARKS=ON \
           -DBUILD_TESTS=OFF \
           -DLOGGER_STANDALONE_MODE=ON
