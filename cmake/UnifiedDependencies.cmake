@@ -253,7 +253,7 @@ macro(unified_find_dependency DEP_NAME)
                 set(_env_root "$ENV{${DEP_NAME}_ROOT}")
                 if(EXISTS "${_env_root}/CMakeLists.txt")
                     message(STATUS "[UnifiedDependencies] ${DEP_NAME}: Found via environment variable")
-                    add_subdirectory("${_env_root}" "${CMAKE_BINARY_DIR}/_deps/${DEP_NAME}")
+                    add_subdirectory("${_env_root}" "${CMAKE_BINARY_DIR}/_deps/${DEP_NAME}" EXCLUDE_FROM_ALL)
                     _unified_find_existing_target(${DEP_NAME} _new_target)
                     set(${DEP_NAME}_TARGET "${_new_target}")
                     set(${DEP_NAME}_FOUND TRUE)
@@ -320,13 +320,8 @@ macro(_unified_resolve_local DEP_NAME IS_REQUIRED)
             set(USE_UNIT_TEST OFF CACHE BOOL "" FORCE)
         endif()
 
-        # Temporarily skip install rules for dependencies
-        set(_skip_install_save "${CMAKE_SKIP_INSTALL_RULES}")
-        set(CMAKE_SKIP_INSTALL_RULES ON)
-
-        add_subdirectory("${_local_path}" "${CMAKE_BINARY_DIR}/_local/${DEP_NAME}")
-
-        set(CMAKE_SKIP_INSTALL_RULES "${_skip_install_save}")
+        # Use EXCLUDE_FROM_ALL to prevent installation of local dependencies
+        add_subdirectory("${_local_path}" "${CMAKE_BINARY_DIR}/_local/${DEP_NAME}" EXCLUDE_FROM_ALL)
 
         # Post-load handling
         if(${DEP_NAME} STREQUAL "logger_system")
@@ -366,10 +361,6 @@ macro(_unified_resolve_fetchcontent DEP_NAME GIT_TAG)
     else()
         message(STATUS "[UnifiedDependencies] ${DEP_NAME}: Fetching from GitHub...")
 
-        # Skip install rules during FetchContent
-        set(_skip_install_save "${CMAKE_SKIP_INSTALL_RULES}")
-        set(CMAKE_SKIP_INSTALL_RULES TRUE)
-
         # Special pre-fetch configuration
         if(${DEP_NAME} STREQUAL "thread_system")
             set(USE_STD_FORMAT ON CACHE BOOL "Use std::format" FORCE)
@@ -405,9 +396,19 @@ macro(_unified_resolve_fetchcontent DEP_NAME GIT_TAG)
             GIT_SHALLOW TRUE
         )
 
-        FetchContent_MakeAvailable(${_fetch_name})
-
-        set(CMAKE_SKIP_INSTALL_RULES "${_skip_install_save}")
+        # Use FetchContent_Populate + add_subdirectory with EXCLUDE_FROM_ALL
+        # instead of FetchContent_MakeAvailable to prevent installation of
+        # FetchContent dependencies (fixes cmake_install.cmake not found error)
+        FetchContent_GetProperties(${_fetch_name})
+        string(TOLOWER "${_fetch_name}" _fetch_name_lower)
+        if(NOT ${_fetch_name_lower}_POPULATED)
+            FetchContent_Populate(${_fetch_name})
+            add_subdirectory(
+                ${${_fetch_name_lower}_SOURCE_DIR}
+                ${${_fetch_name_lower}_BINARY_DIR}
+                EXCLUDE_FROM_ALL
+            )
+        endif()
 
         # Post-fetch: Set paths for dependent systems
         if(${DEP_NAME} STREQUAL "common_system")
