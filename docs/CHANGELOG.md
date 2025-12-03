@@ -11,6 +11,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### CMake fmt Fallback Removal - 2025-12-03
+
+#### Changed
+- **CMake configuration now requires std::format**: Removed all fmt library fallback logic
+  - `cmake/CompilerChecks.cmake`: Now fails with FATAL_ERROR if std::format is unavailable
+  - `cmake/LoggerCompatibility.cmake`: Removed fmt detection, C++17 mode, and vcpkg fallback
+
+#### Removed
+- **fmt library fallback in CMake**:
+  - `check_std_format()`: Removed find_package(fmt) and vcpkg fallback logic
+  - `configure_logger_compatibility()`: Removed C++17 compatibility mode entirely
+  - `setup_formatting_library()`: Removed fmt::format and basic formatting branches
+  - `setup_vcpkg_fmt_fallback()`: Function completely removed
+
+#### Benefits
+- **Cleaner CMake configuration**: Simplified feature detection without fallback complexity
+- **Consistent build behavior**: Same behavior across all platforms and CI environments
+- **Reduced dependencies**: No conditional fmt library linking
+- **Cross-project alignment**: Matches thread_system, container_system, network_system, database_system
+
+#### Related Issues
+- Part of cross-project standardization effort
+- See: thread_system#219, container_system#168, network_system#257, database_system#203
+
+---
+
 ### thread_system Required Dependency - 2025-12-03
 
 #### Changed
