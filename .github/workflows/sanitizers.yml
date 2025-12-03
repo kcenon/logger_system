@@ -44,14 +44,19 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake ninja-build clang libgtest-dev
-        # Install libc++ for std::format support
-        sudo apt-get install -y libc++-dev libc++abi-dev
+        # Install LLVM 17 with libc++ for std::format support
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        sudo add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main"
+        sudo apt-get update
+        sudo apt-get install -y cmake ninja-build clang-17 libc++-17-dev libc++abi-17-dev lld-17 libgtest-dev
+        # Create symlinks for clang-17
+        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
+        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
 
     - name: Set up compiler
       run: |
-        echo "CC=clang" >> $GITHUB_ENV
-        echo "CXX=clang++" >> $GITHUB_ENV
+        echo "CC=clang-17" >> $GITHUB_ENV
+        echo "CXX=clang++-17" >> $GITHUB_ENV
 
     - name: Configure CMake with ${{ matrix.sanitizer }} sanitizer
       run: |

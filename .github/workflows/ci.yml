@@ -54,17 +54,26 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y cmake build-essential gdb pkg-config curl zip unzip tar autoconf automake autoconf-archive ninja-build
+
         # Install GCC 13 for std::format support
         sudo apt install -y software-properties-common
         sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
         sudo apt update
         sudo apt install -y gcc-13 g++-13
-        # Install Clang with libc++ for std::format support
-        sudo apt install -y clang lld libc++-dev libc++abi-dev
+
+        # Install LLVM 17 with libc++ for std::format support (Clang builds)
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        sudo add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main"
+        sudo apt update
+        sudo apt install -y clang-17 lld-17 libc++-17-dev libc++abi-17-dev
         sudo apt install -y libgtest-dev libgmock-dev
+
         # Set GCC 13 as default
         sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
         sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
+        # Set Clang 17 as default
+        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
+        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
 
     - name: Install dependencies (macOS)
       if: runner.os == 'macOS'
@@ -340,9 +349,15 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y cmake build-essential ninja-build
-        # Install Clang with libc++ for std::format support
-        sudo apt install -y clang lld libc++-dev libc++abi-dev
+        # Install LLVM 17 with libc++ for std::format support
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        sudo add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main"
+        sudo apt update
+        sudo apt install -y clang-17 lld-17 libc++-17-dev libc++abi-17-dev
         sudo apt install -y libgtest-dev libgmock-dev
+        # Set Clang 17 as default
+        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
+        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
 
     - name: Configure CMake with ${{ matrix.sanitizer.name }}
       run: |
