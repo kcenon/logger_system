@@ -38,7 +38,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace kcenon::logger::async {
 
 async_worker::async_worker(std::size_t queue_size)
-    : queue_size_(queue_size) {
+    : queue_size_(queue_size)
+#if !LOGGER_HAS_JTHREAD
+    , stop_source_(std::make_shared<simple_stop_source>())
+#endif
+{
 }
 
 async_worker::~async_worker() {
@@ -51,11 +55,22 @@ void async_worker::start() {
         return;
     }
 
+#if LOGGER_HAS_JTHREAD
     // Create worker thread with std::jthread
     // The stop_token is automatically provided by jthread
-    worker_thread_ = std::jthread([this](std::stop_token stop_token) {
+    worker_thread_ = compat_jthread([this](std::stop_token stop_token) {
         worker_loop(stop_token);
     });
+#else
+    // Reset stop source for new start
+    stop_source_->reset();
+
+    // Create worker thread with manual stop source
+    auto stop = stop_source_;
+    worker_thread_ = compat_jthread([this, stop](simple_stop_source& /*unused*/) {
+        worker_loop(*stop);
+    });
+#endif
 }
 
 void async_worker::stop() {
@@ -64,12 +79,14 @@ void async_worker::stop() {
         return;
     }
 
-    // Request stop via jthread's stop_source
-    if (worker_thread_.joinable()) {
-        worker_thread_.request_stop();
-        queue_cv_.notify_all();
-        worker_thread_.join();
-    }
+    // Request stop
+    worker_thread_.request_stop();
+
+    // Wake up the worker thread
+    queue_cv_.notify_all();
+
+    // Wait for thread to finish
+    worker_thread_.join();
 
     // Process any remaining tasks
     drain_queue();
@@ -143,6 +160,7 @@ std::uint64_t async_worker::dropped_count() const noexcept {
     return dropped_count_.load(std::memory_order_relaxed);
 }
 
+#if LOGGER_HAS_JTHREAD
 void async_worker::worker_loop(std::stop_token stop_token) {
     while (!stop_token.stop_requested()) {
         task_type task;
@@ -177,11 +195,49 @@ void async_worker::worker_loop(std::stop_token stop_token) {
                 task();
             } catch (...) {
                 // Swallow exceptions to prevent thread termination
-                // In production, this could be logged or handled differently
             }
         }
     }
 }
+#else
+void async_worker::worker_loop(simple_stop_source& stop) {
+    while (!stop.stop_requested()) {
+        task_type task;
+
+        {
+            std::unique_lock<std::mutex> lock(queue_mutex_);
+
+            // Wait for task or stop signal
+            queue_cv_.wait(lock, [this, &stop]() {
+                return stop.stop_requested() || !queue_.empty();
+            });
+
+            // Check if we should stop
+            if (stop.stop_requested()) {
+                break;
+            }
+
+            // Check if we have work
+            if (queue_.empty()) {
+                continue;
+            }
+
+            // Get task from queue
+            task = std::move(queue_.front());
+            queue_.pop();
+        }
+
+        // Execute task outside the lock
+        if (task) {
+            try {
+                task();
+            } catch (...) {
+                // Swallow exceptions to prevent thread termination
+            }
+        }
+    }
+}
+#endif
 
 void async_worker::drain_queue() {
     std::queue<task_type> remaining;

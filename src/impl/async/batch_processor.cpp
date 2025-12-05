@@ -7,12 +7,17 @@ All rights reserved.
 
 /**
  * @file batch_processor.cpp
- * @brief Batch processor implementation using std::jthread
- * @since 1.3.0 - Refactored to use std::jthread instead of thread_system
+ * @brief Batch processor implementation with jthread compatibility
+ * @since 1.3.0 - Refactored to use jthread compatibility layer
+ *
+ * This implementation uses C++20 std::jthread with std::stop_token for
+ * cooperative cancellation where available, with fallback to std::thread
+ * for environments without jthread support (e.g., libc++).
  */
 
 #include "batch_processor.h"
 #include "../memory/object_pool.h"
+#include "jthread_compat.h"
 
 #include <algorithm>
 #include <chrono>
@@ -22,17 +27,22 @@ All rights reserved.
 namespace kcenon::logger::async {
 
 /**
- * @brief Worker thread for batch processing using std::jthread
+ * @brief Worker thread for batch processing with jthread compatibility
  *
- * Uses std::jthread with std::stop_token for cooperative cancellation.
- * This replaces the previous thread_system's thread_base dependency.
+ * Uses std::jthread with std::stop_token for cooperative cancellation
+ * where available, falls back to std::thread with manual stop mechanism
+ * for environments without jthread support (e.g., libc++).
  */
 class batch_processing_jthread_worker {
 public:
     using process_callback = std::function<void()>;
 
     explicit batch_processing_jthread_worker(process_callback callback)
-        : callback_(std::move(callback)) {}
+        : callback_(std::move(callback))
+#if !LOGGER_HAS_JTHREAD
+        , stop_source_(std::make_shared<simple_stop_source>())
+#endif
+    {}
 
     ~batch_processing_jthread_worker() {
         stop();
@@ -43,8 +53,9 @@ public:
             return;  // Already started
         }
 
+#if LOGGER_HAS_JTHREAD
         auto callback = callback_;
-        thread_ = std::jthread([callback](std::stop_token stop_token) {
+        thread_ = compat_jthread([callback](std::stop_token stop_token) {
             while (!stop_token.stop_requested()) {
                 if (callback) {
                     callback();
@@ -53,6 +64,22 @@ public:
                 std::this_thread::sleep_for(std::chrono::milliseconds(10));
             }
         });
+#else
+        // Reset stop source for new start
+        stop_source_->reset();
+
+        auto callback = callback_;
+        auto stop = stop_source_;
+        thread_ = compat_jthread([callback, stop](simple_stop_source& /*unused*/) {
+            while (!stop->stop_requested()) {
+                if (callback) {
+                    callback();
+                }
+                // Brief sleep to control loop frequency
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            }
+        });
+#endif
     }
 
     void stop() {
@@ -60,10 +87,9 @@ public:
             return;  // Already stopped
         }
 
-        if (thread_.joinable()) {
-            thread_.request_stop();
-            thread_.join();
-        }
+        // Request stop and join thread
+        thread_.request_stop();
+        thread_.join();
     }
 
     [[nodiscard]] bool is_running() const noexcept {
@@ -72,8 +98,11 @@ public:
 
 private:
     process_callback callback_;
-    std::jthread thread_;
+    compat_jthread thread_;
     std::atomic<bool> running_{false};
+#if !LOGGER_HAS_JTHREAD
+    std::shared_ptr<simple_stop_source> stop_source_;
+#endif
 };
 
 batch_processor::batch_processor(std::unique_ptr<base_writer> writer, const config& cfg)

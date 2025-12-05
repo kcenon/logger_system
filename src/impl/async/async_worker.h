@@ -9,22 +9,26 @@ All rights reserved.
 
 /**
  * @file async_worker.h
- * @brief Standalone async worker implementation using C++20 std::jthread
+ * @brief Standalone async worker implementation with jthread compatibility
  * @author 🍀☀🌕🌥 🌊
  * @since 1.3.0
  *
  * @details This file provides a standalone async worker that uses std::jthread
- * for cooperative cancellation support. It eliminates the dependency on
- * thread_system while maintaining high performance for async logging operations.
+ * for cooperative cancellation support where available, with a fallback to
+ * std::thread + manual stop mechanism for environments without jthread support
+ * (e.g., libc++ on macOS/Clang).
  *
  * Key features:
- * - std::jthread with std::stop_token for graceful shutdown
+ * - std::jthread with std::stop_token for graceful shutdown (when available)
+ * - Fallback to std::thread with manual stop signaling (for libc++)
  * - Lock-free queue for high-throughput message passing
  * - Configurable queue size and batch processing
  * - Cooperative cancellation without blocking operations
  *
  * @note Part of Issue #222: Remove thread_system dependency
  */
+
+#include "jthread_compat.h"
 
 #include <atomic>
 #include <chrono>
@@ -46,11 +50,12 @@ namespace kcenon::logger::async {
 using task_type = std::function<void()>;
 
 /**
- * @brief Standalone async worker using C++20 std::jthread
+ * @brief Standalone async worker with jthread compatibility
  *
  * This worker provides a background thread for processing logging tasks
  * asynchronously. It uses std::jthread's cooperative cancellation mechanism
- * via std::stop_token for graceful shutdown without forceful termination.
+ * via std::stop_token for graceful shutdown when available, or falls back
+ * to manual stop mechanism for environments without jthread support.
  *
  * Thread Safety:
  * - enqueue() is thread-safe for multiple producers
@@ -109,7 +114,7 @@ public:
     /**
      * @brief Start the worker thread
      *
-     * Creates a std::jthread that processes tasks from the queue.
+     * Creates a background thread that processes tasks from the queue.
      * The thread will run until stop() is called or the worker is destroyed.
      *
      * Thread-safe: Can be called from any thread.
@@ -120,9 +125,9 @@ public:
     /**
      * @brief Stop the worker thread gracefully
      *
-     * Signals the worker thread to stop via std::stop_token and waits
-     * for it to complete processing remaining tasks. This method:
-     * 1. Requests stop via std::stop_source
+     * Signals the worker thread to stop and waits for it to complete
+     * processing remaining tasks. This method:
+     * 1. Requests stop via stop mechanism
      * 2. Wakes up the worker thread
      * 3. Waits for the thread to join
      * 4. Processes any remaining tasks in the queue
@@ -193,14 +198,25 @@ public:
     [[nodiscard]] std::uint64_t dropped_count() const noexcept;
 
 private:
+#if LOGGER_HAS_JTHREAD
     /**
-     * @brief Worker thread main loop
+     * @brief Worker thread main loop (jthread version)
      * @param stop_token Token for cooperative cancellation
      *
      * Processes tasks from the queue until stop is requested.
      * Uses condition variable for efficient waiting.
      */
     void worker_loop(std::stop_token stop_token);
+#else
+    /**
+     * @brief Worker thread main loop (fallback version)
+     * @param stop Stop source for manual cancellation
+     *
+     * Processes tasks from the queue until stop is requested.
+     * Uses condition variable for efficient waiting.
+     */
+    void worker_loop(simple_stop_source& stop);
+#endif
 
     /**
      * @brief Process all remaining tasks in the queue
@@ -213,11 +229,20 @@ private:
     const std::size_t queue_size_;          ///< Maximum queue capacity
     std::queue<task_type> queue_;           ///< Task queue
     mutable std::mutex queue_mutex_;        ///< Protects queue_ access
-    std::condition_variable_any queue_cv_;  ///< Signals new tasks or stop
 
-    std::jthread worker_thread_;            ///< Background worker thread
+#if LOGGER_HAS_JTHREAD
+    std::condition_variable_any queue_cv_;  ///< Signals new tasks or stop (jthread)
+#else
+    std::condition_variable queue_cv_;      ///< Signals new tasks or stop (fallback)
+#endif
+
+    compat_jthread worker_thread_;          ///< Background worker thread
     std::atomic<bool> running_{false};      ///< Worker state flag
     std::atomic<std::uint64_t> dropped_count_{0};  ///< Overflow counter
+
+#if !LOGGER_HAS_JTHREAD
+    std::shared_ptr<simple_stop_source> stop_source_;  ///< Stop source for fallback
+#endif
 };
 
 } // namespace kcenon::logger::async

@@ -7,12 +7,17 @@ All rights reserved.
 
 /**
  * @file network_writer.cpp
- * @brief Network writer implementation using std::jthread
- * @since 1.3.0 - Refactored to use std::jthread instead of thread_system
+ * @brief Network writer implementation with jthread compatibility
+ * @since 1.3.0 - Refactored to use jthread compatibility layer
+ *
+ * This implementation uses C++20 std::jthread with std::stop_token for
+ * cooperative cancellation where available, with fallback to std::thread
+ * for environments without jthread support (e.g., libc++).
  */
 
 #include <kcenon/logger/writers/network_writer.h>
 #include <kcenon/logger/utils/error_handling_utils.h>
+#include "../async/jthread_compat.h"
 
 #ifdef _WIN32
     #include <winsock2.h>
@@ -39,15 +44,24 @@ All rights reserved.
 
 namespace kcenon::logger {
 
+using namespace async;
+
 /**
- * @brief Worker thread for sending buffered logs using std::jthread
+ * @brief Worker thread for sending buffered logs with jthread compatibility
+ *
+ * Uses std::jthread with std::stop_token for cooperative cancellation
+ * where available, falls back to std::thread with manual stop mechanism.
  */
 class network_send_jthread_worker {
 public:
     using send_callback = std::function<void()>;
 
     explicit network_send_jthread_worker(send_callback callback)
-        : callback_(std::move(callback)) {}
+        : callback_(std::move(callback))
+#if !LOGGER_HAS_JTHREAD
+        , stop_source_(std::make_shared<simple_stop_source>())
+#endif
+    {}
 
     ~network_send_jthread_worker() {
         stop();
@@ -58,8 +72,9 @@ public:
             return;  // Already started
         }
 
+#if LOGGER_HAS_JTHREAD
         auto callback = callback_;
-        thread_ = std::jthread([callback](std::stop_token stop_token) {
+        thread_ = compat_jthread([callback](std::stop_token stop_token) {
             while (!stop_token.stop_requested()) {
                 if (callback) {
                     callback();
@@ -67,6 +82,21 @@ public:
                 std::this_thread::sleep_for(std::chrono::milliseconds(10));
             }
         });
+#else
+        // Reset stop source for new start
+        stop_source_->reset();
+
+        auto callback = callback_;
+        auto stop = stop_source_;
+        thread_ = compat_jthread([callback, stop](simple_stop_source& /*unused*/) {
+            while (!stop->stop_requested()) {
+                if (callback) {
+                    callback();
+                }
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            }
+        });
+#endif
     }
 
     void stop() {
@@ -74,10 +104,9 @@ public:
             return;  // Already stopped
         }
 
-        if (thread_.joinable()) {
-            thread_.request_stop();
-            thread_.join();
-        }
+        // Request stop and join thread
+        thread_.request_stop();
+        thread_.join();
     }
 
     void notify_work() {
@@ -86,13 +115,19 @@ public:
 
 private:
     send_callback callback_;
-    std::jthread thread_;
+    compat_jthread thread_;
     std::atomic<bool> running_{false};
     std::atomic<bool> has_work_{false};
+#if !LOGGER_HAS_JTHREAD
+    std::shared_ptr<simple_stop_source> stop_source_;
+#endif
 };
 
 /**
- * @brief Worker thread for reconnection attempts using std::jthread
+ * @brief Worker thread for reconnection attempts with jthread compatibility
+ *
+ * Uses std::jthread with std::stop_token for cooperative cancellation
+ * where available, falls back to std::thread with manual stop mechanism.
  */
 class network_reconnect_jthread_worker {
 public:
@@ -101,7 +136,11 @@ public:
     explicit network_reconnect_jthread_worker(reconnect_callback callback,
                                               std::chrono::seconds interval)
         : callback_(std::move(callback))
-        , reconnect_interval_(interval) {}
+        , reconnect_interval_(interval)
+#if !LOGGER_HAS_JTHREAD
+        , stop_source_(std::make_shared<simple_stop_source>())
+#endif
+    {}
 
     ~network_reconnect_jthread_worker() {
         stop();
@@ -112,9 +151,10 @@ public:
             return;  // Already started
         }
 
+#if LOGGER_HAS_JTHREAD
         auto callback = callback_;
         auto interval = reconnect_interval_;
-        thread_ = std::jthread([callback, interval](std::stop_token stop_token) {
+        thread_ = compat_jthread([callback, interval](std::stop_token stop_token) {
             while (!stop_token.stop_requested()) {
                 if (callback) {
                     callback();
@@ -128,6 +168,28 @@ public:
                 }
             }
         });
+#else
+        // Reset stop source for new start
+        stop_source_->reset();
+
+        auto callback = callback_;
+        auto interval = reconnect_interval_;
+        auto stop = stop_source_;
+        thread_ = compat_jthread([callback, interval, stop](simple_stop_source& /*unused*/) {
+            while (!stop->stop_requested()) {
+                if (callback) {
+                    callback();
+                }
+                // Sleep with stop checking
+                for (auto elapsed = std::chrono::milliseconds{0};
+                     elapsed < std::chrono::duration_cast<std::chrono::milliseconds>(interval)
+                        && !stop->stop_requested();
+                     elapsed += std::chrono::milliseconds(100)) {
+                    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                }
+            }
+        });
+#endif
     }
 
     void stop() {
@@ -135,17 +197,19 @@ public:
             return;  // Already stopped
         }
 
-        if (thread_.joinable()) {
-            thread_.request_stop();
-            thread_.join();
-        }
+        // Request stop and join thread
+        thread_.request_stop();
+        thread_.join();
     }
 
 private:
     reconnect_callback callback_;
     std::chrono::seconds reconnect_interval_;
-    std::jthread thread_;
+    compat_jthread thread_;
     std::atomic<bool> running_{false};
+#if !LOGGER_HAS_JTHREAD
+    std::shared_ptr<simple_stop_source> stop_source_;
+#endif
 };
 
 network_writer::network_writer(const std::string& host,

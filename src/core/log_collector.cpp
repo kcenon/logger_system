@@ -32,18 +32,21 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /**
  * @file log_collector.cpp
- * @brief Asynchronous log collector implementation using std::jthread
+ * @brief Asynchronous log collector implementation with jthread compatibility
  *
  * This implementation uses C++20 std::jthread with std::stop_token for
- * cooperative cancellation, eliminating the dependency on thread_system.
+ * cooperative cancellation where available, with fallback to std::thread
+ * for environments without jthread support (e.g., libc++).
  *
- * @since 1.3.0 - Refactored to use std::jthread instead of std::thread
+ * @since 1.3.0 - Refactored to use jthread compatibility layer
  */
 
 #include <kcenon/logger/core/log_collector.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/interfaces/logger_interface.h>
+
+#include "../impl/async/jthread_compat.h"
 
 #include <atomic>
 #include <condition_variable>
@@ -67,7 +70,11 @@ namespace kcenon::logger {
 struct log_collector_shared_state {
     std::queue<log_entry> queue;
     mutable std::mutex queue_mutex;
+#if LOGGER_HAS_JTHREAD
     std::condition_variable_any queue_cv;  // Works with stop_token
+#else
+    std::condition_variable queue_cv;       // Standard condition variable
+#endif
     std::vector<std::weak_ptr<base_writer>> writers;
     std::mutex writers_mutex;
     const std::size_t batch_size;
@@ -79,16 +86,20 @@ struct log_collector_shared_state {
 };
 
 /**
- * @brief Worker thread for log processing using std::jthread
+ * @brief Worker thread for log processing with jthread compatibility
  *
- * Uses std::jthread with std::stop_token for cooperative cancellation.
- * This enables graceful shutdown without polling or busy-waiting.
+ * Uses std::jthread where available, falls back to std::thread with
+ * manual stop mechanism otherwise.
  */
 class log_collector_jthread_worker {
 public:
     explicit log_collector_jthread_worker(std::shared_ptr<log_collector_shared_state> state)
         : state_(std::move(state))
-        , running_(false) {}
+        , running_(false)
+#if !LOGGER_HAS_JTHREAD
+        , stop_source_(std::make_shared<async::simple_stop_source>())
+#endif
+    {}
 
     ~log_collector_jthread_worker() {
         stop();
@@ -99,11 +110,23 @@ public:
             return;  // Already started
         }
 
+#if LOGGER_HAS_JTHREAD
         // Capture state by shared_ptr - survives worker destruction
         auto state = state_;
-        thread_ = std::jthread([state](std::stop_token stop_token) {
+        thread_ = async::compat_jthread([state](std::stop_token stop_token) {
             worker_loop(state, stop_token);
         });
+#else
+        // Reset stop source for new start
+        stop_source_->reset();
+
+        // Capture state and stop source by shared_ptr
+        auto state = state_;
+        auto stop = stop_source_;
+        thread_ = async::compat_jthread([state, stop](async::simple_stop_source& /*unused*/) {
+            worker_loop(state, *stop);
+        });
+#endif
     }
 
     void stop() {
@@ -111,14 +134,16 @@ public:
             return;  // Already stopped
         }
 
-        if (thread_.joinable()) {
-            thread_.request_stop();
-            // Wake up the worker in case it's waiting
-            if (state_) {
-                state_->queue_cv.notify_all();
-            }
-            thread_.join();
+        // Request stop
+        thread_.request_stop();
+
+        // Wake up the worker in case it's waiting
+        if (state_) {
+            state_->queue_cv.notify_all();
         }
+
+        // Wait for thread to finish
+        thread_.join();
     }
 
     void notify_work() {
@@ -132,6 +157,7 @@ public:
     }
 
 private:
+#if LOGGER_HAS_JTHREAD
     static void worker_loop(std::shared_ptr<log_collector_shared_state> state,
                            std::stop_token stop_token) {
         if (!state) {
@@ -145,7 +171,6 @@ private:
                 std::unique_lock<std::mutex> lock(state->queue_mutex);
 
                 // Wait for work or stop signal using condition_variable_any
-                // This overload accepts stop_token for cooperative cancellation
                 bool has_work = state->queue_cv.wait(lock, stop_token, [&state]() {
                     return !state->queue.empty();
                 });
@@ -155,7 +180,7 @@ private:
                     break;
                 }
 
-                // Check if we actually have work (not spurious wakeup)
+                // Check if we actually have work
                 if (!has_work || state->queue.empty()) {
                     continue;
                 }
@@ -174,6 +199,49 @@ private:
             }
         }
     }
+#else
+    static void worker_loop(std::shared_ptr<log_collector_shared_state> state,
+                           async::simple_stop_source& stop) {
+        if (!state) {
+            return;
+        }
+
+        while (!stop.stop_requested()) {
+            std::vector<log_entry> batch;
+
+            {
+                std::unique_lock<std::mutex> lock(state->queue_mutex);
+
+                // Wait for work or stop signal
+                state->queue_cv.wait(lock, [&state, &stop]() {
+                    return stop.stop_requested() || !state->queue.empty();
+                });
+
+                // Check if stop was requested
+                if (stop.stop_requested()) {
+                    break;
+                }
+
+                // Check if we actually have work
+                if (state->queue.empty()) {
+                    continue;
+                }
+
+                // Extract batch from queue
+                batch.reserve(std::min(state->batch_size, state->queue.size()));
+                while (!state->queue.empty() && batch.size() < state->batch_size) {
+                    batch.push_back(std::move(state->queue.front()));
+                    state->queue.pop();
+                }
+            }
+
+            // Process batch outside the lock
+            for (const auto& entry : batch) {
+                write_to_all(state, entry);
+            }
+        }
+    }
+#endif
 
     static void write_to_all(const std::shared_ptr<log_collector_shared_state>& state,
                             const log_entry& entry) {
@@ -211,8 +279,11 @@ private:
 
 private:
     std::shared_ptr<log_collector_shared_state> state_;
-    std::jthread thread_;
+    async::compat_jthread thread_;
     std::atomic<bool> running_;
+#if !LOGGER_HAS_JTHREAD
+    std::shared_ptr<async::simple_stop_source> stop_source_;
+#endif
 };
 
 class log_collector::impl {
