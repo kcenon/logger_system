@@ -174,23 +174,35 @@ if(NO_VCPKG)
     set(SKIP_VCPKG ON)
 endif()
 
-# Find thread_system (required dependency)
-unified_find_dependency(thread_system REQUIRED)
+# thread_system is now OPTIONAL (Issue #222)
+# logger_system now uses standalone std::jthread implementation
+option(LOGGER_USE_THREAD_SYSTEM "Enable optional thread_system integration" OFF)
 
-set(THREAD_SYSTEM_FOUND TRUE)
-message(STATUS "Using thread_system for interfaces and utilities")
-add_compile_definitions(USE_THREAD_SYSTEM)
+if(LOGGER_USE_THREAD_SYSTEM)
+    unified_find_dependency(thread_system QUIET)
+    if(thread_system_FOUND)
+        set(THREAD_SYSTEM_FOUND TRUE)
+        message(STATUS "Using thread_system for optional integration features")
+        add_compile_definitions(USE_THREAD_SYSTEM)
 
-# Create a unified thread_system target if needed
-if(NOT TARGET thread_system AND NOT TARGET ThreadSystem)
-    add_library(thread_system INTERFACE)
-    if(TARGET utilities AND TARGET interfaces AND TARGET thread_base)
-        target_link_libraries(thread_system INTERFACE
-            utilities
-            interfaces
-            thread_base
-        )
+        # Create a unified thread_system target if needed
+        if(NOT TARGET thread_system AND NOT TARGET ThreadSystem)
+            add_library(thread_system INTERFACE)
+            if(TARGET utilities AND TARGET interfaces AND TARGET thread_base)
+                target_link_libraries(thread_system INTERFACE
+                    utilities
+                    interfaces
+                    thread_base
+                )
+            endif()
+        endif()
+    else()
+        message(STATUS "thread_system not found, using standalone mode")
+        set(THREAD_SYSTEM_FOUND FALSE)
     endif()
+else()
+    message(STATUS "Logger System: Using standalone mode (thread_system integration disabled)")
+    set(THREAD_SYSTEM_FOUND FALSE)
 endif()
 
 # spdlog (optional for comparison)
@@ -282,18 +294,22 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
             message(STATUS "Logger System: common_system not found, using standalone mode")
         endif()
 
-        # thread_system integration (required dependency)
-        message(STATUS "Logger System: thread_system found, backend available for use")
-        if(TARGET ThreadSystem)
-            target_link_libraries(LoggerSystem PRIVATE ThreadSystem)
-        elseif(TARGET thread_system)
-            target_link_libraries(LoggerSystem PRIVATE thread_system)
+        # thread_system integration (optional, for advanced features)
+        if(THREAD_SYSTEM_FOUND)
+            message(STATUS "Logger System: thread_system found, optional backend available")
+            if(TARGET ThreadSystem)
+                target_link_libraries(LoggerSystem PRIVATE ThreadSystem)
+            elseif(TARGET thread_system)
+                target_link_libraries(LoggerSystem PRIVATE thread_system)
+            else()
+                target_include_directories(LoggerSystem
+                    PUBLIC
+                        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
+                )
+                target_link_libraries(LoggerSystem PRIVATE thread_base interfaces utilities)
+            endif()
         else()
-            target_include_directories(LoggerSystem
-                PUBLIC
-                    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
-            )
-            target_link_libraries(LoggerSystem PRIVATE thread_base interfaces utilities)
+            message(STATUS "Logger System: Using standalone async implementation (no thread_system)")
         endif()
 
         set(USE_LEGACY_SOURCES FALSE)
