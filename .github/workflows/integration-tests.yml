@@ -103,6 +103,12 @@ jobs:
         # libc++ does not implement std::jthread/std::stop_token yet
         # GCC 13+ libstdc++ supports both std::format and std::jthread
 
+        # For Clang builds, explicitly use GCC 13's libstdc++
+        EXTRA_CXX_FLAGS=""
+        if [ "${{ matrix.compiler.name }}" = "Clang" ]; then
+          EXTRA_CXX_FLAGS="--gcc-toolchain=/usr"
+        fi
+
         cmake -B build \
           -G Ninja \
           -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
@@ -110,6 +116,7 @@ jobs:
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON \
           -DBUILD_WITH_COMMON_SYSTEM=ON \
           -DCMAKE_PREFIX_PATH="/usr" \
+          -DCMAKE_CXX_FLAGS="${EXTRA_CXX_FLAGS}" \
           --debug-find || {
             echo "::error::CMake configuration failed"
             echo "CMake logs:"
@@ -206,7 +213,8 @@ jobs:
       working-directory: build
       run: |
         echo "=== Running Integration Tests ==="
-        ctest --output-on-failure -L "integration" -C ${{ matrix.build-type }}
+        # Increase timeout for macOS (slower CI runners)
+        ctest --output-on-failure -L "integration" -C ${{ matrix.build-type }} --timeout 1800
 
     - name: Upload test results
       if: failure()
