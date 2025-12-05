@@ -185,12 +185,15 @@ jobs:
         # libc++ does not implement std::jthread/std::stop_token yet
         # GCC 13+ libstdc++ supports both std::format and std::jthread
 
-        # For Clang on Linux, use GCC 13's libstdc++
-        # Clang needs explicit path to GCC 13 installation for C++20 headers
+        # For Clang on Linux, use Clang 17 with GCC 13's libstdc++
+        # Clang 17 supports --gcc-install-dir for explicit GCC path
         EXTRA_CXX_FLAGS=""
+        C_COMPILER="${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }}"
+        CXX_COMPILER="${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}"
         if [ "${{ matrix.compiler }}" = "clang" ] && [ "${{ runner.os }}" = "Linux" ]; then
-          # Find GCC 13 installation directory
-          GCC13_DIR=$(dirname $(dirname $(which g++-13 2>/dev/null || echo "/usr/bin/g++")))
+          # Use Clang 17 explicitly (supports --gcc-install-dir)
+          C_COMPILER="clang-17"
+          CXX_COMPILER="clang++-17"
           EXTRA_CXX_FLAGS="--gcc-install-dir=/usr/lib/gcc/x86_64-linux-gnu/13"
         fi
 
@@ -202,8 +205,8 @@ jobs:
           -DUSE_THREAD_SYSTEM=OFF \
           -DLOGGER_BUILD_INTEGRATION_TESTS=OFF \
           -DCMAKE_TOOLCHAIN_FILE="${GITHUB_WORKSPACE}/vcpkg/scripts/buildsystems/vcpkg.cmake" \
-          -DCMAKE_C_COMPILER=${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }} \
-          -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }} \
+          -DCMAKE_C_COMPILER=$C_COMPILER \
+          -DCMAKE_CXX_COMPILER=$CXX_COMPILER \
           -DCMAKE_CXX_FLAGS="${EXTRA_CXX_FLAGS}"
 
         cmake --build . --parallel
@@ -245,10 +248,15 @@ jobs:
         # Note: Using libstdc++ (default) for std::jthread support
         # libc++ does not implement std::jthread/std::stop_token yet
 
-        # For Clang on Linux, use GCC 13's libstdc++
-        # Clang needs explicit path to GCC 13 installation for C++20 headers
+        # For Clang on Linux, use Clang 17 with GCC 13's libstdc++
+        # Clang 17 supports --gcc-install-dir for explicit GCC path
         EXTRA_CXX_FLAGS=""
+        C_COMPILER="${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }}"
+        CXX_COMPILER="${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}"
         if [ "${{ matrix.compiler }}" = "clang" ] && [ "${{ runner.os }}" = "Linux" ]; then
+          # Use Clang 17 explicitly (supports --gcc-install-dir)
+          C_COMPILER="clang-17"
+          CXX_COMPILER="clang++-17"
           EXTRA_CXX_FLAGS="--gcc-install-dir=/usr/lib/gcc/x86_64-linux-gnu/13"
         fi
 
@@ -258,8 +266,8 @@ jobs:
           -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
           -DLOGGER_STANDALONE_MODE=ON \
           -DUSE_THREAD_SYSTEM=OFF \
-          -DCMAKE_C_COMPILER=${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }} \
-          -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }} \
+          -DCMAKE_C_COMPILER=$C_COMPILER \
+          -DCMAKE_CXX_COMPILER=$CXX_COMPILER \
           -DCMAKE_CXX_FLAGS="${EXTRA_CXX_FLAGS}"
 
         cmake --build . --parallel

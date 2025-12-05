@@ -16,7 +16,7 @@ jobs:
         build-type: [Debug, Release]
         compiler:
           - { name: GCC, cc: gcc, cxx: g++ }
-          - { name: Clang, cc: clang, cxx: clang++ }
+          - { name: Clang, cc: clang-17, cxx: clang++-17 }
 
     steps:
     - name: Checkout code
@@ -103,8 +103,8 @@ jobs:
         # libc++ does not implement std::jthread/std::stop_token yet
         # GCC 13+ libstdc++ supports both std::format and std::jthread
 
-        # For Clang builds, explicitly use GCC 13's libstdc++
-        # Clang needs explicit path to GCC 13 installation for C++20 headers
+        # For Clang builds, use Clang 17 with GCC 13's libstdc++
+        # Clang 17 supports --gcc-install-dir for explicit GCC path
         EXTRA_CXX_FLAGS=""
         if [ "${{ matrix.compiler.name }}" = "Clang" ]; then
           EXTRA_CXX_FLAGS="--gcc-install-dir=/usr/lib/gcc/x86_64-linux-gnu/13"
@@ -113,6 +113,8 @@ jobs:
         cmake -B build \
           -G Ninja \
           -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
+          -DCMAKE_C_COMPILER=${{ matrix.compiler.cc }} \
+          -DCMAKE_CXX_COMPILER=${{ matrix.compiler.cxx }} \
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON \
           -DBUILD_WITH_COMMON_SYSTEM=ON \
