@@ -43,11 +43,12 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y gcc-13 g++-13
 
-        # Install LLVM 17 with libc++ for std::format support (Clang builds)
+        # Install Clang 17 (using libstdc++ for std::jthread support)
+        # Note: libc++ does not implement std::jthread/std::stop_token yet
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
         sudo add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main"
         sudo apt-get update
-        sudo apt-get install -y clang-17 lld-17 libc++-17-dev libc++abi-17-dev
+        sudo apt-get install -y clang-17 lld-17
 
         # Set GCC 13 as default for GCC builds
         sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
@@ -98,12 +99,9 @@ jobs:
         echo "GTest: Will be fetched via FetchContent if needed"
         echo "==========================="
 
-        # Set compiler-specific flags for std::format support
-        EXTRA_CXX_FLAGS=""
-        if [ "${{ matrix.compiler.name }}" = "Clang" ]; then
-          # Use libc++ for Clang on Linux for std::format support
-          EXTRA_CXX_FLAGS="-stdlib=libc++"
-        fi
+        # Note: Using libstdc++ (default) for std::jthread support
+        # libc++ does not implement std::jthread/std::stop_token yet
+        # GCC 13+ libstdc++ supports both std::format and std::jthread
 
         cmake -B build \
           -G Ninja \
@@ -112,7 +110,6 @@ jobs:
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON \
           -DBUILD_WITH_COMMON_SYSTEM=ON \
           -DCMAKE_PREFIX_PATH="/usr" \
-          -DCMAKE_CXX_FLAGS="${EXTRA_CXX_FLAGS}" \
           --debug-find || {
             echo "::error::CMake configuration failed"
             echo "CMake logs:"

@@ -84,16 +84,13 @@ jobs:
 
     - name: Configure CMake
       run: |
-        # Add libc++ flag for Linux to support std::format
-        EXTRA_CXX_FLAGS=""
-        if [ "${{ runner.os }}" = "Linux" ]; then
-          EXTRA_CXX_FLAGS="-stdlib=libc++"
-        fi
+        # Note: Using libstdc++ (default) for std::jthread support
+        # libc++ does not implement std::jthread/std::stop_token yet
+        # GCC 13+ libstdc++ supports both std::format and std::jthread
 
         cmake -B build -S logger_system \
           -GNinja \
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
-          -DCMAKE_CXX_FLAGS="${EXTRA_CXX_FLAGS}" \
           -DBUILD_BENCHMARKS=ON \
           -DBUILD_TESTS=OFF \
           -DLOGGER_STANDALONE_MODE=ON

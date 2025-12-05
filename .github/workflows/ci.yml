@@ -181,12 +181,9 @@ jobs:
       continue-on-error: true
       run: |
         cd build
-        # Set compiler-specific flags for std::format support
-        EXTRA_CXX_FLAGS=""
-        if [ "${{ matrix.compiler }}" = "clang" ] && [ "${{ runner.os }}" = "Linux" ]; then
-          # Use libc++ for Clang on Linux for std::format support
-          EXTRA_CXX_FLAGS="-stdlib=libc++"
-        fi
+        # Note: Using libstdc++ (default) for std::jthread support
+        # libc++ does not implement std::jthread/std::stop_token yet
+        # GCC 13+ libstdc++ supports both std::format and std::jthread
 
         cmake .. \
           -G Ninja \
@@ -197,8 +194,7 @@ jobs:
           -DLOGGER_BUILD_INTEGRATION_TESTS=OFF \
           -DCMAKE_TOOLCHAIN_FILE="${GITHUB_WORKSPACE}/vcpkg/scripts/buildsystems/vcpkg.cmake" \
           -DCMAKE_C_COMPILER=${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }} \
-          -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }} \
-          -DCMAKE_CXX_FLAGS="${EXTRA_CXX_FLAGS}"
+          -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}
 
         cmake --build . --parallel
         ctest --output-on-failure -E "(integration_test|compatibility_test)"
@@ -236,12 +232,8 @@ jobs:
         mkdir -p build
         cd build
 
-        # Set compiler-specific flags for std::format support
-        EXTRA_CXX_FLAGS=""
-        if [ "${{ matrix.compiler }}" = "clang" ] && [ "${{ runner.os }}" = "Linux" ]; then
-          # Use libc++ for Clang on Linux for std::format support
-          EXTRA_CXX_FLAGS="-stdlib=libc++"
-        fi
+        # Note: Using libstdc++ (default) for std::jthread support
+        # libc++ does not implement std::jthread/std::stop_token yet
 
         cmake .. \
           -G Ninja \
@@ -250,8 +242,7 @@ jobs:
           -DLOGGER_STANDALONE_MODE=ON \
           -DUSE_THREAD_SYSTEM=OFF \
           -DCMAKE_C_COMPILER=${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }} \
-          -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }} \
-          -DCMAKE_CXX_FLAGS="${EXTRA_CXX_FLAGS}"
+          -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}
 
         cmake --build . --parallel
 
@@ -365,8 +356,9 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        # Add libc++ flag for std::format support
-        SANITIZER_FLAGS="${{ matrix.sanitizer.flags }} -stdlib=libc++"
+        # Note: Using libstdc++ (default) for std::jthread support
+        # libc++ does not implement std::jthread/std::stop_token yet
+        SANITIZER_FLAGS="${{ matrix.sanitizer.flags }}"
         cmake .. \
           -G Ninja \
           -DCMAKE_BUILD_TYPE=Debug \
@@ -375,7 +367,7 @@ jobs:
           -DUSE_THREAD_SYSTEM=OFF \
           -DCMAKE_C_COMPILER=clang \
           -DCMAKE_CXX_COMPILER=clang++ \
-          -DCMAKE_C_FLAGS="${{ matrix.sanitizer.flags }}" \
+          -DCMAKE_C_FLAGS="${SANITIZER_FLAGS}" \
           -DCMAKE_CXX_FLAGS="${SANITIZER_FLAGS}" \
           -DCMAKE_EXE_LINKER_FLAGS="${SANITIZER_FLAGS}" \
           -DCMAKE_SHARED_LINKER_FLAGS="${SANITIZER_FLAGS}"

@@ -44,21 +44,21 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        # Install LLVM 17 with libc++ for std::format support
-        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-        sudo add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main"
+        # Install GCC 13 for std::format and std::jthread support
+        sudo apt install -y software-properties-common
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
         sudo apt-get update
-        # Note: Do NOT install libgtest-dev - it's compiled against libstdc++ and causes ABI issues
-        # GTest will be fetched via FetchContent and compiled with libc++
-        sudo apt-get install -y cmake ninja-build clang-17 libc++-17-dev libc++abi-17-dev lld-17
-        # Create symlinks for clang-17
-        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
-        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
+        sudo apt-get install -y cmake ninja-build gcc-13 g++-13
+        # Note: Using libstdc++ (GCC 13+) instead of libc++ because
+        # libc++ does not implement std::jthread/std::stop_token yet
+        # Set GCC 13 as default
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
 
     - name: Set up compiler
       run: |
-        echo "CC=clang-17" >> $GITHUB_ENV
-        echo "CXX=clang++-17" >> $GITHUB_ENV
+        echo "CC=gcc" >> $GITHUB_ENV
+        echo "CXX=g++" >> $GITHUB_ENV
 
     - name: Configure CMake with ${{ matrix.sanitizer }} sanitizer
       run: |
@@ -70,15 +70,16 @@ jobs:
         ls -la ../ | head -20
         echo "======================================"
 
-        # Add libc++ flag for std::format support
-        SANITIZER_FLAGS="-fsanitize=${{ matrix.sanitizer }} -fno-omit-frame-pointer -g -stdlib=libc++"
+        # Note: Using libstdc++ (default) for std::jthread support
+        # libc++ does not implement std::jthread/std::stop_token yet
+        SANITIZER_FLAGS="-fsanitize=${{ matrix.sanitizer }} -fno-omit-frame-pointer -g"
         cmake -B build -S . \
           -GNinja \
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
           -DCMAKE_CXX_FLAGS="${SANITIZER_FLAGS}" \
-          -DCMAKE_C_FLAGS="-fsanitize=${{ matrix.sanitizer }} -fno-omit-frame-pointer -g" \
-          -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }} -stdlib=libc++" \
-          -DCMAKE_SHARED_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }} -stdlib=libc++" \
+          -DCMAKE_C_FLAGS="${SANITIZER_FLAGS}" \
+          -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }}" \
+          -DCMAKE_SHARED_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }}" \
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_SAMPLES=OFF \
           -DBUILD_WITH_COMMON_SYSTEM=ON \
