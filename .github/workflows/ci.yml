@@ -341,22 +341,22 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y cmake build-essential ninja-build
-        # Install LLVM 17 with libc++ for std::format support
-        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-        sudo add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main"
+        # Install GCC 13 for std::format and std::jthread support
+        # Note: Using GCC instead of Clang because libc++ does not implement
+        # std::jthread/std::stop_token yet, and GCC 13+ libstdc++ supports both
+        sudo apt install -y software-properties-common
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
         sudo apt update
-        sudo apt install -y clang-17 lld-17 libc++-17-dev libc++abi-17-dev
-        # Note: Do NOT install libgtest-dev - it's compiled against libstdc++ and causes ABI issues
-        # GTest will be fetched via FetchContent and compiled with libc++
-        # Set Clang 17 as default
-        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
-        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
+        sudo apt install -y gcc-13 g++-13
+        # Set GCC 13 as default
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
 
     - name: Configure CMake with ${{ matrix.sanitizer.name }}
       run: |
         mkdir -p build
         cd build
-        # Note: Using libstdc++ (default) for std::jthread support
+        # Note: Using GCC 13+ libstdc++ for std::jthread support
         # libc++ does not implement std::jthread/std::stop_token yet
         SANITIZER_FLAGS="${{ matrix.sanitizer.flags }}"
         cmake .. \
@@ -365,8 +365,8 @@ jobs:
           -DBUILD_TESTS=ON \
           -DLOGGER_STANDALONE_MODE=ON \
           -DUSE_THREAD_SYSTEM=OFF \
-          -DCMAKE_C_COMPILER=clang \
-          -DCMAKE_CXX_COMPILER=clang++ \
+          -DCMAKE_C_COMPILER=gcc \
+          -DCMAKE_CXX_COMPILER=g++ \
           -DCMAKE_C_FLAGS="${SANITIZER_FLAGS}" \
           -DCMAKE_CXX_FLAGS="${SANITIZER_FLAGS}" \
           -DCMAKE_EXE_LINKER_FLAGS="${SANITIZER_FLAGS}" \
