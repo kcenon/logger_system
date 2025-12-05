@@ -5,9 +5,14 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
+/**
+ * @file network_writer.cpp
+ * @brief Network writer implementation using std::jthread
+ * @since 1.3.0 - Refactored to use std::jthread instead of thread_system
+ */
+
 #include <kcenon/logger/writers/network_writer.h>
 #include <kcenon/logger/utils/error_handling_utils.h>
-#include <kcenon/thread/core/thread_base.h>
 
 #ifdef _WIN32
     #include <winsock2.h>
@@ -24,78 +29,123 @@ All rights reserved.
     #include <unistd.h>
 #endif
 
-#include <cstring>
 #include <cerrno>
-#include <sstream>
+#include <cstring>
+#include <functional>
 #include <iomanip>
 #include <iostream>
-#include <functional>
+#include <sstream>
+#include <thread>
 
 namespace kcenon::logger {
 
 /**
- * @brief Worker thread for sending buffered logs
+ * @brief Worker thread for sending buffered logs using std::jthread
  */
-class network_send_worker : public kcenon::thread::thread_base {
+class network_send_jthread_worker {
 public:
     using send_callback = std::function<void()>;
 
-    explicit network_send_worker(send_callback callback, std::atomic<bool>& running)
-        : thread_base("network_send_worker")
-        , callback_(std::move(callback))
-        , running_(running)
-        , has_work_(false) {}
+    explicit network_send_jthread_worker(send_callback callback)
+        : callback_(std::move(callback)) {}
+
+    ~network_send_jthread_worker() {
+        stop();
+    }
+
+    void start() {
+        if (running_.exchange(true, std::memory_order_acq_rel)) {
+            return;  // Already started
+        }
+
+        auto callback = callback_;
+        thread_ = std::jthread([callback](std::stop_token stop_token) {
+            while (!stop_token.stop_requested()) {
+                if (callback) {
+                    callback();
+                }
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            }
+        });
+    }
+
+    void stop() {
+        if (!running_.exchange(false, std::memory_order_acq_rel)) {
+            return;  // Already stopped
+        }
+
+        if (thread_.joinable()) {
+            thread_.request_stop();
+            thread_.join();
+        }
+    }
 
     void notify_work() {
         has_work_.store(true, std::memory_order_release);
     }
 
-protected:
-    [[nodiscard]] auto should_continue_work() const -> bool override {
-        return running_.load(std::memory_order_acquire) && has_work_.load(std::memory_order_acquire);
-    }
-
-    auto do_work() -> kcenon::thread::result_void override {
-        has_work_.store(false, std::memory_order_release);
-        if (callback_ && running_.load(std::memory_order_acquire)) {
-            callback_();
-        }
-        return {};
-    }
-
 private:
     send_callback callback_;
-    std::atomic<bool>& running_;
-    std::atomic<bool> has_work_;
+    std::jthread thread_;
+    std::atomic<bool> running_{false};
+    std::atomic<bool> has_work_{false};
 };
 
 /**
- * @brief Worker thread for reconnection attempts
+ * @brief Worker thread for reconnection attempts using std::jthread
  */
-class network_reconnect_worker : public kcenon::thread::thread_base {
+class network_reconnect_jthread_worker {
 public:
     using reconnect_callback = std::function<void()>;
 
-    explicit network_reconnect_worker(reconnect_callback callback, std::atomic<bool>& running)
-        : thread_base("network_reconnect_worker")
-        , callback_(std::move(callback))
-        , running_(running) {}
+    explicit network_reconnect_jthread_worker(reconnect_callback callback,
+                                              std::chrono::seconds interval)
+        : callback_(std::move(callback))
+        , reconnect_interval_(interval) {}
 
-protected:
-    [[nodiscard]] auto should_continue_work() const -> bool override {
-        return running_.load(std::memory_order_acquire);
+    ~network_reconnect_jthread_worker() {
+        stop();
     }
 
-    auto do_work() -> kcenon::thread::result_void override {
-        if (callback_ && running_.load(std::memory_order_acquire)) {
-            callback_();
+    void start() {
+        if (running_.exchange(true, std::memory_order_acq_rel)) {
+            return;  // Already started
         }
-        return {};
+
+        auto callback = callback_;
+        auto interval = reconnect_interval_;
+        thread_ = std::jthread([callback, interval](std::stop_token stop_token) {
+            while (!stop_token.stop_requested()) {
+                if (callback) {
+                    callback();
+                }
+                // Sleep with stop checking
+                for (auto elapsed = std::chrono::milliseconds{0};
+                     elapsed < std::chrono::duration_cast<std::chrono::milliseconds>(interval)
+                        && !stop_token.stop_requested();
+                     elapsed += std::chrono::milliseconds(100)) {
+                    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                }
+            }
+        });
+    }
+
+    void stop() {
+        if (!running_.exchange(false, std::memory_order_acq_rel)) {
+            return;  // Already stopped
+        }
+
+        if (thread_.joinable()) {
+            thread_.request_stop();
+            thread_.join();
+        }
     }
 
 private:
     reconnect_callback callback_;
-    std::atomic<bool>& running_;
+    std::chrono::seconds reconnect_interval_;
+    std::jthread thread_;
+    std::atomic<bool> running_{false};
 };
 
 network_writer::network_writer(const std::string& host,
@@ -121,16 +171,14 @@ network_writer::network_writer(const std::string& host,
     running_ = true;
 
     // Create and start send worker
-    send_worker_ = std::make_unique<network_send_worker>(
-        [this] { process_buffer(); }, running_);
-    send_worker_->set_wake_interval(std::chrono::milliseconds(10));
+    send_worker_ = std::make_unique<network_send_jthread_worker>(
+        [this] { process_buffer(); });
     send_worker_->start();
 
     // Create and start reconnect worker for TCP
     if (protocol_ == protocol_type::tcp) {
-        reconnect_worker_ = std::make_unique<network_reconnect_worker>(
-            [this] { attempt_reconnect(); }, running_);
-        reconnect_worker_->set_wake_interval(reconnect_interval_);
+        reconnect_worker_ = std::make_unique<network_reconnect_jthread_worker>(
+            [this] { attempt_reconnect(); }, reconnect_interval_);
         reconnect_worker_->start();
     }
 
@@ -176,9 +224,9 @@ result_void network_writer::write(logger_system::log_level level,
                                   int line,
                                   const std::string& function,
                                   const std::chrono::system_clock::time_point& timestamp) {
-    
+
     std::lock_guard<std::mutex> lock(buffer_mutex_);
-    
+
     // Check buffer size
     if (buffer_.size() >= buffer_size_) {
         // Drop oldest message
@@ -187,7 +235,7 @@ result_void network_writer::write(logger_system::log_level level,
         stats_.send_failures++;
         // Note: We still accept the new message after dropping the oldest
     }
-    
+
     buffer_.push({level, message, file, line, function, timestamp});
 
     // Notify send worker
@@ -202,7 +250,7 @@ result_void network_writer::flush() {
     std::unique_lock<std::mutex> lock(buffer_mutex_);
     auto start = std::chrono::steady_clock::now();
     auto timeout = std::chrono::seconds(5); // 5 second timeout
-    
+
     while (!buffer_.empty()) {
         if (buffer_cv_.wait_for(lock, timeout, [this] { return buffer_.empty() || !running_; })) {
             if (!buffer_.empty() && !running_) {
@@ -213,7 +261,7 @@ result_void network_writer::flush() {
             return make_logger_error(logger_error_code::flush_timeout,
                                     "Network flush timeout");
         }
-        
+
         if (std::chrono::steady_clock::now() - start > timeout) {
             return make_logger_error(logger_error_code::flush_timeout,
                                     "Network flush exceeded timeout");
@@ -231,7 +279,7 @@ bool network_writer::connect() {
     if (connected_) {
         return true;
     }
-    
+
     // Create socket
     int sock_type = (protocol_ == protocol_type::tcp) ? SOCK_STREAM : SOCK_DGRAM;
     socket_fd_ = socket(AF_INET, sock_type, 0);
@@ -239,7 +287,7 @@ bool network_writer::connect() {
         std::cerr << "Failed to create socket: " << strerror(errno) << std::endl;
         return false;
     }
-    
+
     // Resolve hostname
     struct hostent* server = gethostbyname(host_.c_str());
     if (!server) {
@@ -248,21 +296,21 @@ bool network_writer::connect() {
         socket_fd_ = -1;
         return false;
     }
-    
+
     // Setup server address
     struct sockaddr_in server_addr{};
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(port_);
     std::memcpy(&server_addr.sin_addr.s_addr, server->h_addr, server->h_length);
-    
+
     // Connect (TCP only)
     if (protocol_ == protocol_type::tcp) {
         if (::connect(socket_fd_, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
-            std::cerr << "Failed to connect to " << host_ << ":" << port_ 
+            std::cerr << "Failed to connect to " << host_ << ":" << port_
                      << " - " << strerror(errno) << std::endl;
             close(socket_fd_);
             socket_fd_ = -1;
-            
+
             std::lock_guard<std::mutex> lock(stats_mutex_);
             stats_.connection_failures++;
             stats_.last_error = std::chrono::system_clock::now();
@@ -277,15 +325,15 @@ bool network_writer::connect() {
             return false;
         }
     }
-    
+
     connected_ = true;
-    
+
     std::lock_guard<std::mutex> lock(stats_mutex_);
     stats_.last_connected = std::chrono::system_clock::now();
-    
-    std::cout << "Connected to " << host_ << ":" << port_ 
+
+    std::cout << "Connected to " << host_ << ":" << port_
               << " via " << (protocol_ == protocol_type::tcp ? "TCP" : "UDP") << std::endl;
-    
+
     return true;
 }
 
@@ -301,7 +349,7 @@ bool network_writer::send_data(const std::string& data) {
     if (!connected_ || socket_fd_ < 0) {
         return false;
     }
-    
+
 #ifdef _WIN32
     int sent = ::send(socket_fd_, data.c_str(), static_cast<int>(data.length()), 0);
 #else
@@ -312,18 +360,18 @@ bool network_writer::send_data(const std::string& data) {
             // TCP connection lost
             std::cerr << "Send failed: " << strerror(errno) << std::endl;
             disconnect();
-            
+
             std::lock_guard<std::mutex> lock(stats_mutex_);
             stats_.send_failures++;
             stats_.last_error = std::chrono::system_clock::now();
         }
         return false;
     }
-    
+
     std::lock_guard<std::mutex> lock(stats_mutex_);
     stats_.messages_sent++;
     stats_.bytes_sent += sent;
-    
+
     return true;
 }
 
@@ -355,34 +403,34 @@ std::string network_writer::format_for_network(const buffered_log& log) {
     // Format as JSON for network transmission
     std::ostringstream oss;
     oss << "{";
-    
+
     // Timestamp
     auto time_t = std::chrono::system_clock::to_time_t(log.timestamp);
     oss << "\"@timestamp\":\"";
     oss << std::put_time(std::gmtime(&time_t), "%Y-%m-%dT%H:%M:%SZ") << "\",";
-    
+
     // Level
     oss << "\"level\":\"" << logger_system::log_level_to_string(log.level) << "\",";
-    
+
     // Message
     oss << "\"message\":\"" << escape_json(log.message) << "\"";
-    
+
     // Optional fields
     if (!log.file.empty()) {
         oss << ",\"file\":\"" << escape_json(log.file) << "\"";
         oss << ",\"line\":" << log.line;
     }
-    
+
     if (!log.function.empty()) {
         oss << ",\"function\":\"" << escape_json(log.function) << "\"";
     }
-    
+
     // Add hostname
     char hostname[256];
     if (gethostname(hostname, sizeof(hostname)) == 0) {
         oss << ",\"host\":\"" << hostname << "\"";
     }
-    
+
     oss << "}\n";
     return oss.str();
 }
