@@ -16,7 +16,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04]
+        # Ubuntu 24.04 has GCC 14 by default - full C++20 support
+        os: [ubuntu-24.04]
         sanitizer: [thread, address, undefined]
         build_type: [Debug]
 
@@ -44,16 +45,12 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        # Install GCC 13 for std::format and std::jthread support
-        sudo apt install -y software-properties-common
-        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-        sudo apt-get update
-        sudo apt-get install -y cmake ninja-build gcc-13 g++-13
-        # Note: Using libstdc++ (GCC 13+) instead of libc++ because
-        # libc++ does not implement std::jthread/std::stop_token yet
-        # Set GCC 13 as default
-        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
-        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
+        # Ubuntu 24.04 has GCC 14 by default - full C++20 support
+        sudo apt-get install -y cmake ninja-build
+
+        # Verify compiler version
+        echo "=== GCC Version ==="
+        gcc --version | head -1
 
     - name: Set up compiler
       run: |
@@ -70,8 +67,7 @@ jobs:
         ls -la ../ | head -20
         echo "======================================"
 
-        # Note: Using libstdc++ (default) for std::jthread support
-        # libc++ does not implement std::jthread/std::stop_token yet
+        # Ubuntu 24.04 GCC 14 has full C++20 support including std::jthread
         SANITIZER_FLAGS="-fsanitize=${{ matrix.sanitizer }} -fno-omit-frame-pointer -g"
         cmake -B build -S . \
           -GNinja \
