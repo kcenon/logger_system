@@ -185,10 +185,13 @@ jobs:
         # libc++ does not implement std::jthread/std::stop_token yet
         # GCC 13+ libstdc++ supports both std::format and std::jthread
 
-        # For Clang on Linux, use GCC 13's libstdc++ via --gcc-toolchain
+        # For Clang on Linux, use GCC 13's libstdc++
+        # Clang needs explicit path to GCC 13 installation for C++20 headers
         EXTRA_CXX_FLAGS=""
         if [ "${{ matrix.compiler }}" = "clang" ] && [ "${{ runner.os }}" = "Linux" ]; then
-          EXTRA_CXX_FLAGS="--gcc-toolchain=/usr"
+          # Find GCC 13 installation directory
+          GCC13_DIR=$(dirname $(dirname $(which g++-13 2>/dev/null || echo "/usr/bin/g++")))
+          EXTRA_CXX_FLAGS="--gcc-install-dir=/usr/lib/gcc/x86_64-linux-gnu/13"
         fi
 
         cmake .. \
@@ -242,10 +245,11 @@ jobs:
         # Note: Using libstdc++ (default) for std::jthread support
         # libc++ does not implement std::jthread/std::stop_token yet
 
-        # For Clang on Linux, use GCC 13's libstdc++ via --gcc-toolchain
+        # For Clang on Linux, use GCC 13's libstdc++
+        # Clang needs explicit path to GCC 13 installation for C++20 headers
         EXTRA_CXX_FLAGS=""
         if [ "${{ matrix.compiler }}" = "clang" ] && [ "${{ runner.os }}" = "Linux" ]; then
-          EXTRA_CXX_FLAGS="--gcc-toolchain=/usr"
+          EXTRA_CXX_FLAGS="--gcc-install-dir=/usr/lib/gcc/x86_64-linux-gnu/13"
         fi
 
         cmake .. \

@@ -104,9 +104,10 @@ jobs:
         # GCC 13+ libstdc++ supports both std::format and std::jthread
 
         # For Clang builds, explicitly use GCC 13's libstdc++
+        # Clang needs explicit path to GCC 13 installation for C++20 headers
         EXTRA_CXX_FLAGS=""
         if [ "${{ matrix.compiler.name }}" = "Clang" ]; then
-          EXTRA_CXX_FLAGS="--gcc-toolchain=/usr"
+          EXTRA_CXX_FLAGS="--gcc-install-dir=/usr/lib/gcc/x86_64-linux-gnu/13"
         fi
 
         cmake -B build \
