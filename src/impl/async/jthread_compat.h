@@ -215,6 +215,20 @@ public:
 #endif
     }
 
+#if !LOGGER_HAS_JTHREAD
+    /**
+     * @brief Get the stop source (fallback mode only)
+     * @return Shared pointer to the stop source
+     *
+     * This is used by async_worker to pass the stop source to the worker loop,
+     * ensuring the same stop source is used for both request_stop() and
+     * stop_requested() checks.
+     */
+    [[nodiscard]] std::shared_ptr<simple_stop_source> get_stop_source() const noexcept {
+        return stop_source_;
+    }
+#endif
+
 private:
 #if LOGGER_HAS_JTHREAD
     std::jthread thread_;

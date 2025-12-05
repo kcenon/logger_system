@@ -58,9 +58,6 @@ public:
 
     explicit network_send_jthread_worker(send_callback callback)
         : callback_(std::move(callback))
-#if !LOGGER_HAS_JTHREAD
-        , stop_source_(std::make_shared<simple_stop_source>())
-#endif
     {}
 
     ~network_send_jthread_worker() {
@@ -83,13 +80,12 @@ public:
             }
         });
 #else
-        // Reset stop source for new start
-        stop_source_->reset();
-
+        // Create worker thread with manual stop source
+        // Note: We use the stop_source created by compat_jthread to ensure
+        // request_stop() correctly signals the worker loop
         auto callback = callback_;
-        auto stop = stop_source_;
-        thread_ = compat_jthread([callback, stop](simple_stop_source& /*unused*/) {
-            while (!stop->stop_requested()) {
+        thread_ = compat_jthread([callback](simple_stop_source& stop) {
+            while (!stop.stop_requested()) {
                 if (callback) {
                     callback();
                 }
@@ -118,9 +114,6 @@ private:
     compat_jthread thread_;
     std::atomic<bool> running_{false};
     std::atomic<bool> has_work_{false};
-#if !LOGGER_HAS_JTHREAD
-    std::shared_ptr<simple_stop_source> stop_source_;
-#endif
 };
 
 /**
@@ -137,9 +130,6 @@ public:
                                               std::chrono::seconds interval)
         : callback_(std::move(callback))
         , reconnect_interval_(interval)
-#if !LOGGER_HAS_JTHREAD
-        , stop_source_(std::make_shared<simple_stop_source>())
-#endif
     {}
 
     ~network_reconnect_jthread_worker() {
@@ -169,21 +159,20 @@ public:
             }
         });
 #else
-        // Reset stop source for new start
-        stop_source_->reset();
-
+        // Create worker thread with manual stop source
+        // Note: We use the stop_source created by compat_jthread to ensure
+        // request_stop() correctly signals the worker loop
         auto callback = callback_;
         auto interval = reconnect_interval_;
-        auto stop = stop_source_;
-        thread_ = compat_jthread([callback, interval, stop](simple_stop_source& /*unused*/) {
-            while (!stop->stop_requested()) {
+        thread_ = compat_jthread([callback, interval](simple_stop_source& stop) {
+            while (!stop.stop_requested()) {
                 if (callback) {
                     callback();
                 }
                 // Sleep with stop checking
                 for (auto elapsed = std::chrono::milliseconds{0};
                      elapsed < std::chrono::duration_cast<std::chrono::milliseconds>(interval)
-                        && !stop->stop_requested();
+                        && !stop.stop_requested();
                      elapsed += std::chrono::milliseconds(100)) {
                     std::this_thread::sleep_for(std::chrono::milliseconds(100));
                 }
@@ -207,9 +196,6 @@ private:
     std::chrono::seconds reconnect_interval_;
     compat_jthread thread_;
     std::atomic<bool> running_{false};
-#if !LOGGER_HAS_JTHREAD
-    std::shared_ptr<simple_stop_source> stop_source_;
-#endif
 };
 
 network_writer::network_writer(const std::string& host,

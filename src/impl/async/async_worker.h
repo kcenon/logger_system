@@ -239,10 +239,6 @@ private:
     compat_jthread worker_thread_;          ///< Background worker thread
     std::atomic<bool> running_{false};      ///< Worker state flag
     std::atomic<std::uint64_t> dropped_count_{0};  ///< Overflow counter
-
-#if !LOGGER_HAS_JTHREAD
-    std::shared_ptr<simple_stop_source> stop_source_;  ///< Stop source for fallback
-#endif
 };
 
 } // namespace kcenon::logger::async

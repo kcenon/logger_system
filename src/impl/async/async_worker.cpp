@@ -39,9 +39,6 @@ namespace kcenon::logger::async {
 
 async_worker::async_worker(std::size_t queue_size)
     : queue_size_(queue_size)
-#if !LOGGER_HAS_JTHREAD
-    , stop_source_(std::make_shared<simple_stop_source>())
-#endif
 {
 }
 
@@ -62,13 +59,11 @@ void async_worker::start() {
         worker_loop(stop_token);
     });
 #else
-    // Reset stop source for new start
-    stop_source_->reset();
-
     // Create worker thread with manual stop source
-    auto stop = stop_source_;
-    worker_thread_ = compat_jthread([this, stop](simple_stop_source& /*unused*/) {
-        worker_loop(*stop);
+    // Note: We use the stop_source created by compat_jthread to ensure
+    // request_stop() correctly signals the worker loop
+    worker_thread_ = compat_jthread([this](simple_stop_source& stop) {
+        worker_loop(stop);
     });
 #endif
 }
