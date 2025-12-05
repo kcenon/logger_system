@@ -11,6 +11,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Standalone async implementation (Issue #222) - 2025-12-06
+
+#### Changed
+- **thread_system is now OPTIONAL**: Logger system can build and run standalone
+  - CMake option `LOGGER_USE_THREAD_SYSTEM` (default: OFF) controls integration
+  - When disabled, uses C++20 std::jthread for all async operations
+  - Full thread_system integration still available when enabled
+
+- **C++20 std::jthread migration**: All internal threading uses std::jthread
+  - `log_collector.cpp`: Uses `log_collector_jthread_worker` with stop_token
+  - `network_writer.cpp`: Uses `network_send_jthread_worker` and `network_reconnect_jthread_worker`
+  - `batch_processor.cpp`: Uses `batch_processing_jthread_worker`
+  - `async_worker.h/cpp`: New standalone async worker implementation
+
+#### Added
+- **async_worker class**: New standalone async worker using std::jthread
+  - Located in `src/impl/async/async_worker.h` and `async_worker.cpp`
+  - Features cooperative cancellation via std::stop_token
+  - Lock-free enqueue path with overflow detection
+  - Configurable queue size and dropped task counting
+
+#### Benefits
+- **Resolves circular dependency**: thread_system can now use logger_system for logging
+- **Standalone operation**: logger_system works without external threading dependencies
+- **Better shutdown**: std::jthread provides cleaner RAII-based thread management
+- **Cooperative cancellation**: No more polling/busy-waiting in shutdown path
+
+#### Migration Guide
+- **Default behavior**: logger_system now builds standalone (no thread_system)
+- **To enable thread_system integration**:
+  ```cmake
+  cmake -DLOGGER_USE_THREAD_SYSTEM=ON ...
+  ```
+- Existing functionality preserved when integration is enabled
+
+#### Related Issues
+- Closes #222: Implement async_worker class using std::jthread
+- Prerequisite for #223, #224, #225
+
+---
+
 ### CMake fmt Fallback Removal - 2025-12-03
 
 #### Changed

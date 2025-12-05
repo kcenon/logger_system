@@ -11,6 +11,47 @@ Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문�
 
 ## [Unreleased]
 
+### 독립형 비동기 구현 (Issue #222) - 2025-12-06
+
+#### 변경됨
+- **thread_system이 이제 선택 사항**: Logger 시스템은 독립적으로 빌드 및 실행 가능
+  - CMake 옵션 `LOGGER_USE_THREAD_SYSTEM` (기본값: OFF)으로 통합 제어
+  - 비활성화 시 모든 비동기 작업에 C++20 std::jthread 사용
+  - 활성화 시 전체 thread_system 통합 지원
+
+- **C++20 std::jthread 마이그레이션**: 모든 내부 스레딩이 std::jthread 사용
+  - `log_collector.cpp`: stop_token을 사용하는 `log_collector_jthread_worker`
+  - `network_writer.cpp`: `network_send_jthread_worker` 및 `network_reconnect_jthread_worker`
+  - `batch_processor.cpp`: `batch_processing_jthread_worker`
+  - `async_worker.h/cpp`: 새로운 독립형 비동기 워커 구현
+
+#### 추가됨
+- **async_worker 클래스**: std::jthread를 사용하는 새로운 독립형 비동기 워커
+  - `src/impl/async/async_worker.h` 및 `async_worker.cpp`에 위치
+  - std::stop_token을 통한 협력적 취소 기능
+  - 오버플로우 감지가 있는 락프리 enqueue 경로
+  - 설정 가능한 큐 크기 및 드롭된 작업 카운팅
+
+#### 이점
+- **순환 의존성 해결**: thread_system에서 이제 logger_system을 로깅에 사용 가능
+- **독립적 운영**: 외부 스레딩 의존성 없이 logger_system 작동
+- **더 나은 종료**: std::jthread가 더 깔끔한 RAII 기반 스레드 관리 제공
+- **협력적 취소**: 종료 경로에서 폴링/바쁜 대기 없음
+
+#### 마이그레이션 가이드
+- **기본 동작**: logger_system이 이제 독립적으로 빌드됨 (thread_system 없음)
+- **thread_system 통합을 활성화하려면**:
+  ```cmake
+  cmake -DLOGGER_USE_THREAD_SYSTEM=ON ...
+  ```
+- 통합 활성화 시 기존 기능 유지
+
+#### 관련 이슈
+- #222 종료: std::jthread를 사용하는 async_worker 클래스 구현
+- #223, #224, #225의 선행 작업
+
+---
+
 ### CMake fmt Fallback 제거 - 2025-12-03
 
 #### 변경됨
