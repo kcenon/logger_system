@@ -91,6 +91,22 @@ set_target_properties(logger_thread_safety_test PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+# ILogger interface compatibility tests (Phase 2 - Issue #223)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/ilogger_interface_test.cpp")
+    add_executable(logger_ilogger_interface_test unit/ilogger_interface_test.cpp)
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_ilogger_interface_test PRIVATE LoggerSystem GTest::gtest_main)
+    else()
+        target_link_libraries(logger_ilogger_interface_test PRIVATE LoggerSystem gtest_main)
+    endif()
+
+    add_test(NAME logger_ilogger_interface_test COMMAND logger_ilogger_interface_test)
+    set_target_properties(logger_ilogger_interface_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
+
 # Security tests (Phase 4 - Task 4.1-4.4)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/security_test/security_test.cpp")
     add_executable(logger_security_test unit/security_test/security_test.cpp)

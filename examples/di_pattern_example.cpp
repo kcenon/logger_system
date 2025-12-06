@@ -390,7 +390,8 @@ void use_logger_via_interface(std::shared_ptr<ci::ILogger> logger) {
     // This function only depends on ILogger interface
     // Can work with any logger implementation
 
-    logger->log(ci::log_level::info, "Used via interface - loose coupling!");
+    // Use std::string explicitly to avoid ambiguity between log overloads
+    logger->log(ci::log_level::info, std::string("Used via interface - loose coupling!"));
 
     // Check if logger supports monitoring (IMonitorable)
     if (auto monitorable = std::dynamic_pointer_cast<ci::IMonitorable>(logger)) {
