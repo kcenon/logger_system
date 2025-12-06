@@ -278,33 +278,37 @@ Ecosystem Integration</h2>
 Dependencies</h3>
 <p><b>Required</b>:</p><ul>
 <li><b><a href="https://github.com/kcenon/common_system">common_system</a></b>: Core interfaces (ILogger, IMonitor, Result&lt;T&gt;)</li>
-<li><b><a href="https://github.com/kcenon/thread_system">thread_system</a></b>: Threading primitives</li>
 </ul>
 <p><b>Optional</b>:</p><ul>
+<li><b><a href="https://github.com/kcenon/thread_system">thread_system</a></b>: Enhanced threading primitives (optional since v3.1.0)</li>
 <li><b><a href="https://github.com/kcenon/monitoring_system">monitoring_system</a></b>: Metrics and health monitoring</li>
 </ul>
+<blockquote class="doxtable">
+<p>&zwj;<b>Note</b>: Since v3.1.0 (Issue #225), <code>thread_system</code> is optional. The logger system uses a standalone implementation by default and can optionally integrate with <code>thread_system</code> when available. </p>
+</blockquote>
 <h3><a class="anchor" id="autotoc_md24"></a>
 Integration Pattern</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;kcenon/thread/interfaces/service_container.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/console_writer.h&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main() {</div>
-<div class="line">    <span class="comment">// 1. Create logger</span></div>
+<div class="line">    <span class="comment">// Create logger using builder pattern (standalone mode, no thread_system required)</span></div>
 <div class="line">    <span class="keyword">auto</span> logger = kcenon::logger::logger_builder()</div>
 <div class="line">        .use_template(<span class="stringliteral">&quot;production&quot;</span>)</div>
+<div class="line">        .add_writer(<span class="stringliteral">&quot;console&quot;</span>, std::make_unique&lt;kcenon::logger::console_writer&gt;())</div>
 <div class="line">        .build()</div>
 <div class="line">        .value();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// 2. Register in service container (optional, for ecosystem integration)</span></div>
-<div class="line">    kcenon::thread::service_container::global()</div>
-<div class="line">        .register_singleton&lt;kcenon::thread::logger_interface&gt;(logger);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// 3. Use logger anywhere in your application</span></div>
+<div class="line">    <span class="comment">// Use logger anywhere in your application</span></div>
 <div class="line">    logger-&gt;log(kcenon::logger::log_level::info, <span class="stringliteral">&quot;System initialized&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><b>Benefits</b>:</p><ul>
+</div><!-- fragment --><blockquote class="doxtable">
+<p>&zwj;<b>Note</b>: When <code>thread_system</code> is available and <code>USE_THREAD_SYSTEM</code> is defined, additional integration features are enabled (service container registration, advanced thread pool integration, etc.). </p>
+</blockquote>
+<p><b>Benefits</b>:</p><ul>
 <li>Interface-only dependencies (no circular references)</li>
 <li>Independent compilation and deployment</li>
 <li>Runtime component injection via DI pattern</li>
@@ -530,7 +534,7 @@ Acknowledgments</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Dec 6 2025 10:43:35 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Dec 6 2025 11:11:00 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
