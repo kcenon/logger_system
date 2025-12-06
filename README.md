@@ -202,7 +202,7 @@ Part of a modular C++ ecosystem with clean interface boundaries:
 - **[thread_system](https://github.com/kcenon/thread_system)**: Enhanced threading primitives (optional since v3.1.0)
 - **[monitoring_system](https://github.com/kcenon/monitoring_system)**: Metrics and health monitoring
 
-> **Note**: Since v3.1.0 (Issue #225), `thread_system` is optional. The logger system uses a standalone implementation by default and can optionally integrate with `thread_system` when available.
+> **Note**: Since v3.1.0, `thread_system` is optional. The logger system uses a standalone std::jthread implementation by default. For advanced async processing, enable thread_system integration with `-DLOGGER_USE_THREAD_SYSTEM=ON` (see Issue #224).
 
 ### Integration Pattern
 
@@ -226,7 +226,7 @@ int main() {
 }
 ```
 
-> **Note**: When `thread_system` is available and `USE_THREAD_SYSTEM` is defined, additional integration features are enabled (service container registration, advanced thread pool integration, etc.).
+> **Note**: When `thread_system` is available and `LOGGER_HAS_THREAD_SYSTEM` is defined (via `-DLOGGER_USE_THREAD_SYSTEM=ON`), additional integration features are enabled including shared thread pool for async processing. See [thread_system integration](docs/integration/THREAD_SYSTEM.md) for details.
 
 **Benefits**:
 - Interface-only dependencies (no circular references)

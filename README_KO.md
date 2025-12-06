@@ -206,7 +206,7 @@ target_link_libraries(your_app PRIVATE LoggerSystem::logger)
 - **[thread_system](https://github.com/kcenon/thread_system)**: 향상된 Threading primitive (v3.1.0부터 선택사항)
 - **[monitoring_system](https://github.com/kcenon/monitoring_system)**: Metric 및 health monitoring
 
-> **참고**: v3.1.0 (Issue #225) 이후로 `thread_system`은 선택사항입니다. logger 시스템은 기본적으로 독립 실행(standalone) 구현을 사용하며, `thread_system`이 있을 경우 선택적으로 통합할 수 있습니다.
+> **참고**: v3.1.0 이후로 `thread_system`은 선택사항입니다. logger 시스템은 기본적으로 독립 std::jthread 구현을 사용합니다. 고급 비동기 처리를 위해 `-DLOGGER_USE_THREAD_SYSTEM=ON`으로 thread_system 통합을 활성화할 수 있습니다 (Issue #224 참고).
 
 ### 통합 패턴
 
@@ -230,7 +230,7 @@ int main() {
 }
 ```
 
-> **참고**: `thread_system`이 사용 가능하고 `USE_THREAD_SYSTEM`이 정의된 경우 추가 통합 기능(서비스 컨테이너 등록, 고급 스레드 풀 통합 등)이 활성화됩니다.
+> **참고**: `thread_system`이 사용 가능하고 `LOGGER_HAS_THREAD_SYSTEM`이 정의된 경우 (`-DLOGGER_USE_THREAD_SYSTEM=ON`으로 설정) 공유 스레드 풀을 통한 비동기 처리 등 추가 통합 기능이 활성화됩니다. 자세한 내용은 [thread_system 통합](docs/integration/THREAD_SYSTEM.md)을 참고하세요.
 
 **장점**:
 - 인터페이스 전용 의존성 (순환 참조 없음)
