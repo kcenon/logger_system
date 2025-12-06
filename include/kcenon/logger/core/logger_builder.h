@@ -74,7 +74,6 @@ All rights reserved.
 #include "logger.h"
 #include "../backends/integration_backend.h"
 #include "../backends/standalone_backend.h"
-#include "../backends/thread_system_backend.h"
 #include "../writers/base_writer.h"
 #include "../writers/batch_writer.h"
 #include "../filters/log_filter.h"
@@ -618,24 +617,20 @@ public:
     }
 
     /**
-     * @brief Use thread_system backend explicitly
+     * @brief Use thread_system backend explicitly (DEPRECATED)
      * @return Reference to builder for chaining
      *
-     * @details Explicitly selects the thread_system integration backend.
-     * This method is only available when USE_THREAD_SYSTEM_INTEGRATION is defined.
-     *
-     * @throws std::runtime_error if thread_system is not available
+     * @deprecated thread_system backend has been removed in favor of standalone mode.
+     *             This method now falls back to standalone backend for backward compatibility.
+     *             Will be removed in v3.0.0.
      *
      * @since 1.2.0
+     * @note Since Issue #225, thread_system is optional and this method uses standalone backend.
      */
+    [[deprecated("thread_system backend removed; use with_standalone_backend() instead")]]
     logger_builder& with_thread_system_backend() {
-#if __has_include(<kcenon/thread/interfaces/logger_interface.h>)
-        backend_ = std::make_unique<backends::thread_system_backend>();
-#else
-        throw std::runtime_error(
-            "thread_system backend not available. "
-            "thread_system must be installed to use this backend.");
-#endif
+        // Fallback to standalone backend for backward compatibility
+        backend_ = std::make_unique<backends::standalone_backend>();
         return *this;
     }
 

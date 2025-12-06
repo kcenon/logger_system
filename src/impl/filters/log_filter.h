@@ -7,10 +7,8 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-// thread_system is a required dependency - always use its logger interface
-#include <kcenon/logger/core/thread_integration_detector.h>
-#include <kcenon/thread/interfaces/logger_interface.h>
-
+// Use logger_system's log_level (thread_system is now optional)
+#include <kcenon/logger/interfaces/logger_types.h>
 #include <kcenon/logger/interfaces/log_filter_interface.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <string>
@@ -53,7 +51,7 @@ public:
      * @param function Function name
      * @return true if the log should be processed
      */
-    virtual bool should_log(kcenon::thread::log_level level,
+    virtual bool should_log(logger_system::log_level level,
                            const std::string& message,
                            const std::string& file,
                            int line,
@@ -74,10 +72,10 @@ public:
  */
 class level_filter : public log_filter {
 public:
-    explicit level_filter(kcenon::thread::log_level min_level)
+    explicit level_filter(logger_system::log_level min_level)
         : min_level_(min_level) {}
-    
-    bool should_log(kcenon::thread::log_level level,
+
+    bool should_log(logger_system::log_level level,
                    const std::string& message,
                    const std::string& file,
                    int line,
@@ -88,17 +86,17 @@ public:
         (void)function;
         return static_cast<int>(level) >= static_cast<int>(min_level_);
     }
-    
-    void set_min_level(kcenon::thread::log_level level) {
+
+    void set_min_level(logger_system::log_level level) {
         min_level_ = level;
     }
-    
+
     std::string get_name() const override {
         return "level_filter";
     }
-    
+
 private:
-    kcenon::thread::log_level min_level_;
+    logger_system::log_level min_level_;
 };
 
 /**
@@ -109,8 +107,8 @@ class regex_filter : public log_filter {
 public:
     explicit regex_filter(const std::string& pattern, bool include = true)
         : pattern_(pattern), include_(include) {}
-    
-    bool should_log(kcenon::thread::log_level level,
+
+    bool should_log(logger_system::log_level level,
                    const std::string& message,
                    const std::string& file,
                    int line,
@@ -122,11 +120,11 @@ public:
         bool matches = std::regex_search(message, pattern_);
         return include_ ? matches : !matches;
     }
-    
+
     std::string get_name() const override {
         return "regex_filter";
     }
-    
+
 private:
     std::regex pattern_;
     bool include_;  // true = include matching, false = exclude matching
@@ -138,27 +136,27 @@ private:
  */
 class function_filter : public log_filter {
 public:
-    using filter_function = std::function<bool(kcenon::thread::log_level,
+    using filter_function = std::function<bool(logger_system::log_level,
                                                const std::string&,
                                                const std::string&,
                                                int,
                                                const std::string&)>;
-    
+
     explicit function_filter(filter_function func)
         : filter_func_(std::move(func)) {}
-    
-    bool should_log(kcenon::thread::log_level level,
+
+    bool should_log(logger_system::log_level level,
                    const std::string& message,
                    const std::string& file,
                    int line,
                    const std::string& function) const override {
         return filter_func_(level, message, file, line, function);
     }
-    
+
     std::string get_name() const override {
         return "function_filter";
     }
-    
+
 private:
     filter_function filter_func_;
 };
@@ -173,15 +171,15 @@ public:
         AND,  // All filters must pass
         OR    // At least one filter must pass
     };
-    
+
     explicit composite_filter(logic_type logic = logic_type::AND)
         : logic_(logic) {}
-    
+
     void add_filter(std::unique_ptr<log_filter> filter) {
         filters_.push_back(std::move(filter));
     }
-    
-    bool should_log(kcenon::thread::log_level level,
+
+    bool should_log(logger_system::log_level level,
                    const std::string& message,
                    const std::string& file,
                    int line,
@@ -189,7 +187,7 @@ public:
         if (filters_.empty()) {
             return true;  // No filters = pass all
         }
-        
+
         if (logic_ == logic_type::AND) {
             for (const auto& filter : filters_) {
                 if (!filter->should_log(level, message, file, line, function)) {
@@ -206,11 +204,11 @@ public:
             return false;
         }
     }
-    
+
     std::string get_name() const override {
         return "composite_filter";
     }
-    
+
 private:
     logic_type logic_;
     std::vector<std::unique_ptr<log_filter>> filters_;
