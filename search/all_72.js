@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['요구사항_0',['요구사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1471',1,'최소 요구사항'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1281',1,'Phase 0 요구사항']]],
-  ['요약_1',['요약',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md701',1,'요약'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1431',1,'요약']]]
+  ['외부_20리소스_0',['📖 외부 리소스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1670',1,'']]],
+  ['외부_20의존성_1',['외부 의존성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1633',1,'']]]
 ];

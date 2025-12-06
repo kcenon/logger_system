@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['회귀_20기준_0',['성능 회귀 기준',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md729',1,'']]],
-  ['회전_20파일_20작성자_1',['회전 파일 작성자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md930',1,'']]]
+  ['활성화_0',['비동기 모드 활성화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md959',1,'']]]
 ];

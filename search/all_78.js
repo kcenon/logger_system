@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['의존성_0',['의존성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1617',1,'모듈 의존성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1619',1,'외부 의존성']]],
-  ['의존성_20그래프_1',['의존성 그래프',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1618',1,'']]]
+  ['유닛_20테스트_0',['유닛 테스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1622',1,'']]],
+  ['유지관리_1',['🔧 문서 유지관리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1668',1,'']]]
 ];

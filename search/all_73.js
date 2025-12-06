@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['우위_0',['경쟁 우위',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md703',1,'']]]
+  ['요구사항_0',['요구사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1485',1,'최소 요구사항'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1295',1,'Phase 0 요구사항']]],
+  ['요약_1',['요약',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md701',1,'요약'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1445',1,'요약']]]
 ];

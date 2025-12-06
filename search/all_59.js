@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['빠른_20시작_0',['빠른 시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START__KO.html#autotoc_md302',1,'크리티컬 로깅 빠른 시작'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md516',1,'🚀 새로운 구조로 빠른 시작']]],
-  ['빠른_20탐색_1',['🚀 빠른 탐색',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1649',1,'']]]
+  ['빌드_20시스템_0',['빌드 시스템',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1628',1,'']]],
+  ['빌드_20실패_1',['문제 1: 벤치마크 빌드 실패',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1350',1,'']]],
+  ['빌드_20테스팅_20인프라_2',['빌드 &amp; 테스팅 인프라',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1448',1,'']]]
 ];

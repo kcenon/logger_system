@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['최근_20변경사항_0',['최근 변경사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1655',1,'']]],
-  ['최소_20요구사항_1',['최소 요구사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1471',1,'']]],
-  ['최적화_20팁_2',['최적화 팁',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md950',1,'']]]
+  ['체크리스트_0',['체크리스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1341',1,'✅ 구현 체크리스트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1239',1,'안전한 구성 체크리스트']]]
 ];

@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['변경됨_0',['변경됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md793',1,'변경됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md800',1,'변경됨']]],
-  ['변경사항_1',['최근 변경사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1655',1,'']]],
-  ['변경에_20따른_20벤치마크_20코드_20수정_2',['1.3 API 변경에 따른 벤치마크 코드 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1301',1,'']]],
-  ['변경_20이력_20logger_20system_3',['변경 이력 - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html',1,'']]]
+  ['벤치마크_0',['벤치마크',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1626',1,'벤치마크'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md721',1,'지연시간 벤치마크'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html',1,'Logger System 성능 벤치마크']]],
+  ['벤치마크_20결과_1',['벤치마크 결과',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md963',1,'벤치마크 결과'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1290',1,'벤치마크 결과']]],
+  ['벤치마크_20결과_20파싱_20스크립트_2',['2.1 벤치마크 결과 파싱 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1318',1,'']]],
+  ['벤치마크_20빌드_20실패_3',['문제 1: 벤치마크 빌드 실패',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1350',1,'']]],
+  ['벤치마크_20실행_20및_20json_20저장_4',['1.2 벤치마크 실행 및 JSON 저장',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1314',1,'']]],
+  ['벤치마크_20재활성화_20및_20json_20출력_20설정_5',['Phase 1: 벤치마크 재활성화 및 JSON 출력 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1312',1,'']]],
+  ['벤치마크_20코드_20수정_6',['1.3 API 변경에 따른 벤치마크 코드 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1315',1,'']]],
+  ['벤치마크_20파이프라인_7',['3. 성능 벤치마크 파이프라인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1452',1,'']]]
 ];

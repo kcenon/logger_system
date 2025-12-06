@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['외부_20리소스_0',['📖 외부 리소스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1656',1,'']]],
-  ['외부_20의존성_1',['외부 의존성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1619',1,'']]]
+  ['완료_0',['오류 처리 등급: &lt;strong&gt;A&lt;/strong&gt; (90% 완료)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1468',1,'']]],
+  ['완료_20strong_1',['프로덕션 준비 상태: ✅ &lt;strong&gt;준비 완료&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1446',1,'']]]
 ];

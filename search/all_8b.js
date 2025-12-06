@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['처리량_0',['스레드 수별 처리량',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md712',1,'']]],
-  ['처리_20등급_3a_20strong_20a_20strong_2090_20완료_1',['오류 처리 등급: &lt;strong&gt;A&lt;/strong&gt; (90% 완료)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1454',1,'']]],
-  ['처리_20아키텍처_2',['비동기 처리 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1445',1,'']]],
-  ['처리_20전략_3',['오류 처리 전략',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1453',1,'']]]
+  ['참고사항_0',['참고사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md975',1,'']]],
+  ['참고_20문서_1',['참고 문서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1640',1,'']]],
+  ['참고_20자료_2',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1355',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🎨_20readme_20md_20성능_20섹션_20디자인_0',['🎨 README.md 성능 섹션 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1315',1,'']]]
+  ['회귀_20기준_0',['성능 회귀 기준',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md729',1,'']]],
+  ['회전_20파일_20작성자_1',['회전 파일 작성자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md944',1,'']]]
 ];

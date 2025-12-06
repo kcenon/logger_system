@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['카드_20스타일_20디자인_0',['제안 3: 카드 스타일 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1318',1,'']]]
+  ['출력_20설정_0',['Phase 1: 벤치마크 재활성화 및 JSON 출력 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1312',1,'']]]
 ];

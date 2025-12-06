@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['보안_0',['보안',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md804',1,'']]],
-  ['보안_20가이드_1',['보안 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1220',1,'']]],
-  ['보안_20감사_20로깅_2',['4. 보안 감사 로깅',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1466',1,'']]],
-  ['보안_20기능_3',['보안 기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1461',1,'']]],
-  ['보안_20등급_3a_20strong_20a_20strong_20v3_200_200_4',['보안 등급: &lt;strong&gt;A&lt;/strong&gt; (v3.0.0)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1462',1,'']]],
-  ['보안_20컴포넌트_5',['보안 컴포넌트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1600',1,'']]],
-  ['보안_20키_20저장소_6',['1. 보안 키 저장소',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1463',1,'']]]
+  ['변경됨_0',['변경됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md800',1,'변경됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md807',1,'변경됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md814',1,'변경됨']]],
+  ['변경사항_1',['최근 변경사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1669',1,'']]],
+  ['변경에_20따른_20벤치마크_20코드_20수정_2',['1.3 API 변경에 따른 벤치마크 코드 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1315',1,'']]],
+  ['변경_20이력_20logger_20system_3',['변경 이력 - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html',1,'']]]
 ];

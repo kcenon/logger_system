@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['트러블슈팅_20가이드_0',['🔧 트러블슈팅 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1335',1,'']]],
-  ['트렌드_20차트_20생성_20스크립트_1',['3.2 트렌드 차트 생성 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1309',1,'']]]
+  ['통합_0',['통합',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md969',1,'common_system 통합'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md968',1,'monitoring_system 통합'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md967',1,'thread_system 통합']]],
+  ['통합_20기능_1',['통합 기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md966',1,'']]],
+  ['통합_20예상_20소요_3a_202시간_2',['Phase 4: CI/CD 통합 (예상 소요: 2시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1345',1,'']]],
+  ['통합_20테스트_3',['통합 테스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1624',1,'']]],
+  ['통합_20파이프라인_4',['지속적 통합 파이프라인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1449',1,'']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['유닛_20테스트_0',['유닛 테스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1608',1,'']]],
-  ['유지관리_1',['🔧 문서 유지관리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1654',1,'']]]
+  ['위협_20모델_20범위_0',['위협 모델 (범위)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1235',1,'']]]
 ];

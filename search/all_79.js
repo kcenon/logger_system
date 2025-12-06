@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['이력_20logger_20system_0',['변경 이력 - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html',1,'']]],
-  ['이슈_1',['관련 이슈',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md796',1,'']]],
-  ['이점_2',['이점',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md795',1,'']]]
+  ['의존성_0',['의존성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1631',1,'모듈 의존성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1633',1,'외부 의존성']]],
+  ['의존성_20그래프_1',['의존성 그래프',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1632',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['위협_20모델_20범위_0',['위협 모델 (범위)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1221',1,'']]]
+  ['원격_20작성자_0',['원격 작성자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md945',1,'']]],
+  ['원칙_1',['설계 원칙',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md933',1,'']]]
 ];
