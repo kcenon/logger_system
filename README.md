@@ -197,34 +197,36 @@ Part of a modular C++ ecosystem with clean interface boundaries:
 
 **Required**:
 - **[common_system](https://github.com/kcenon/common_system)**: Core interfaces (ILogger, IMonitor, Result<T>)
-- **[thread_system](https://github.com/kcenon/thread_system)**: Threading primitives
 
 **Optional**:
+- **[thread_system](https://github.com/kcenon/thread_system)**: Enhanced threading primitives (optional since v3.1.0)
 - **[monitoring_system](https://github.com/kcenon/monitoring_system)**: Metrics and health monitoring
+
+> **Note**: Since v3.1.0 (Issue #225), `thread_system` is optional. The logger system uses a standalone implementation by default and can optionally integrate with `thread_system` when available.
 
 ### Integration Pattern
 
 ```cpp
 #include <kcenon/logger/core/logger.h>
-#include <kcenon/thread/interfaces/service_container.h>
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/writers/console_writer.h>
 
 int main() {
-    // 1. Create logger
+    // Create logger using builder pattern (standalone mode, no thread_system required)
     auto logger = kcenon::logger::logger_builder()
         .use_template("production")
+        .add_writer("console", std::make_unique<kcenon::logger::console_writer>())
         .build()
         .value();
 
-    // 2. Register in service container (optional, for ecosystem integration)
-    kcenon::thread::service_container::global()
-        .register_singleton<kcenon::thread::logger_interface>(logger);
-
-    // 3. Use logger anywhere in your application
+    // Use logger anywhere in your application
     logger->log(kcenon::logger::log_level::info, "System initialized");
 
     return 0;
 }
 ```
+
+> **Note**: When `thread_system` is available and `USE_THREAD_SYSTEM` is defined, additional integration features are enabled (service container registration, advanced thread pool integration, etc.).
 
 **Benefits**:
 - Interface-only dependencies (no circular references)

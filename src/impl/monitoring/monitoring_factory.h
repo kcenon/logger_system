@@ -103,18 +103,28 @@ public:
     
     /**
      * @brief Get the currently available monitor type
-     * @return The best available monitor type (thread_system as it's a required dependency)
+     * @return The best available monitor type
+     * @note Since Issue #225, thread_system is OPTIONAL
      */
     static monitor_type get_available_type() {
+#ifdef USE_THREAD_SYSTEM
         return monitor_type::thread_system;
+#else
+        return monitor_type::basic;
+#endif
     }
 
     /**
      * @brief Check if thread_system monitoring is available
-     * @return true (thread_system is a required dependency)
+     * @return true if thread_system is available
+     * @note Since Issue #225, thread_system is OPTIONAL
      */
     static bool is_thread_system_available() {
+#ifdef USE_THREAD_SYSTEM
         return true;
+#else
+        return false;
+#endif
     }
 };
 

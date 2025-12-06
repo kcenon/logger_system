@@ -36,10 +36,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/level_converter.h>
 #include <kcenon/logger/backends/standalone_backend.h>
 
-// Conditionally include thread_system_backend when integration is enabled
-#if defined(USE_THREAD_SYSTEM_INTEGRATION)
-#include <kcenon/logger/backends/thread_system_backend.h>
-#endif
+// Note: thread_system_backend was removed in Issue #225
+// thread_system is now optional and standalone_backend is the default
 
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/logger_types.h>

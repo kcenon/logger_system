@@ -11,6 +11,11 @@ All rights reserved.
  *
  * This file tests the integration of logger_system with thread_system plugin,
  * verifying loading, unloading, and performance improvements.
+ *
+ * @note Since Issue #225, thread_system is OPTIONAL. These tests simulate
+ *       threading behavior without requiring thread_system to be installed.
+ *       When USE_THREAD_SYSTEM is defined, additional thread_system-specific
+ *       tests could be enabled.
  */
 
 #include <gtest/gtest.h>
@@ -46,7 +51,7 @@ protected:
 /**
  * @brief Test plugin loading and unloading
  *
- * @note thread_system is a required dependency, so this test always runs.
+ * @note thread_system is OPTIONAL (Issue #225). This test simulates plugin behavior.
  */
 TEST_F(ThreadSystemIntegrationTest, PluginLoadingUnloading) {
     // Simulated test for plugin loading
@@ -65,7 +70,7 @@ TEST_F(ThreadSystemIntegrationTest, PluginLoadingUnloading) {
 /**
  * @brief Test thread pool utilization
  *
- * @note thread_system is a required dependency, so this test always runs.
+ * @note thread_system is OPTIONAL (Issue #225). This test uses std::thread directly.
  */
 TEST_F(ThreadSystemIntegrationTest, ThreadPoolUtilization) {
     // Simulate thread pool test
@@ -97,7 +102,7 @@ TEST_F(ThreadSystemIntegrationTest, ThreadPoolUtilization) {
 /**
  * @brief Test performance improvements with thread_system
  *
- * @note thread_system is a required dependency, so threading is always available.
+ * @note thread_system is OPTIONAL (Issue #225). This test compares sequential vs parallel writes.
  */
 TEST_F(ThreadSystemIntegrationTest, PerformanceImprovement) {
     const int num_messages = 1000;
@@ -151,7 +156,7 @@ TEST_F(ThreadSystemIntegrationTest, PerformanceImprovement) {
 /**
  * @brief Test plugin health monitoring and recovery
  *
- * @note thread_system is a required dependency, so this test always runs.
+ * @note thread_system is OPTIONAL (Issue #225). This test simulates health monitoring.
  */
 TEST_F(ThreadSystemIntegrationTest, PluginHealthMonitoring) {
     // Simulate health monitoring
@@ -178,7 +183,7 @@ TEST_F(ThreadSystemIntegrationTest, PluginHealthMonitoring) {
 /**
  * @brief Test concurrent plugin access
  *
- * @note thread_system is a required dependency, so this test always runs.
+ * @note thread_system is OPTIONAL (Issue #225). This test uses std::thread directly.
  */
 TEST_F(ThreadSystemIntegrationTest, ConcurrentPluginAccess) {
     // Create multiple threads accessing the plugin simulation

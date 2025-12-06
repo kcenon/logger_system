@@ -98,10 +98,11 @@ public:
     
     /**
      * @brief Check if thread_system is available
-     * @return true if thread_system can be used (always true as thread_system is required)
+     * @return true if thread_system can be used
+     * @note Since Issue #225, thread_system is OPTIONAL
      */
     static bool is_thread_system_available() {
-        // thread_system is a required dependency - always available
+#ifdef USE_THREAD_SYSTEM
         // Try to create a test container to verify runtime availability
         try {
             kcenon::thread::service_container test_container;
@@ -109,6 +110,9 @@ public:
         } catch (...) {
             return false;
         }
+#else
+        return false;
+#endif
     }
     
     /**
