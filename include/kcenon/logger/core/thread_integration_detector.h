@@ -31,22 +31,48 @@
 
 /**
  * @file thread_integration_detector.h
- * @brief Automatically toggles thread_system integration macros when headers are available.
+ * @brief Conditionally enables thread_system integration when available
+ * @since 1.3.0 - thread_system is now OPTIONAL (Issue #222)
+ *
+ * @details This header detects whether thread_system integration should be
+ * enabled based on:
+ * 1. CMake option LOGGER_USE_THREAD_SYSTEM (sets USE_THREAD_SYSTEM macro)
+ * 2. Header availability via __has_include
+ *
+ * When thread_system is not available, logger_system uses its standalone
+ * std::jthread implementation for async operations.
  */
 
 #if !defined(LOGGER_THREAD_INTEGRATION_DETECTED)
 #define LOGGER_THREAD_INTEGRATION_DETECTED
 
-// thread_system is a required dependency - always define USE_THREAD_SYSTEM
-#if !defined(USE_THREAD_SYSTEM)
-#  define USE_THREAD_SYSTEM 1
-#endif
+// thread_system integration is now OPTIONAL (Issue #222)
+// USE_THREAD_SYSTEM is defined by CMake when LOGGER_USE_THREAD_SYSTEM=ON
+// and thread_system is found
 
-// Enable integration if headers are available
-#if !defined(USE_THREAD_SYSTEM_INTEGRATION)
-#  if __has_include(<kcenon/thread/interfaces/logger_interface.h>)
-#    define USE_THREAD_SYSTEM_INTEGRATION 1
+// Auto-detect thread_system availability via header presence
+#if defined(USE_THREAD_SYSTEM)
+#  if !defined(USE_THREAD_SYSTEM_INTEGRATION)
+#    if __has_include(<kcenon/thread/interfaces/logger_interface.h>)
+#      define USE_THREAD_SYSTEM_INTEGRATION 1
+#    endif
 #  endif
 #endif
+
+// Provide a compile-time check for integration status
+namespace kcenon::logger::detail {
+
+/**
+ * @brief Compile-time constant indicating thread_system integration status
+ */
+constexpr bool has_thread_system_integration() noexcept {
+#if defined(USE_THREAD_SYSTEM_INTEGRATION)
+    return true;
+#else
+    return false;
+#endif
+}
+
+} // namespace kcenon::logger::detail
 
 #endif // LOGGER_THREAD_INTEGRATION_DETECTED

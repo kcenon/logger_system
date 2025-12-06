@@ -32,16 +32,23 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
-// Always use logger_system's own interface
-#include <kcenon/logger/core/thread_integration_detector.h>
+/**
+ * @file log_collector.h
+ * @brief Asynchronous log collector using C++20 std::jthread
+ * @author 🍀☀🌕🌥 🌊
+ * @since 1.3.0 - Standalone implementation without thread_system dependency
+ *
+ * @details This collector uses C++20 std::jthread with std::stop_token for
+ * cooperative cancellation, eliminating the need for external thread libraries.
+ */
+
 #include <kcenon/logger/interfaces/logger_interface.h>
 #include <kcenon/logger/interfaces/logger_types.h>
 
-#include <memory>
-#include <vector>
-#include <thread>
 #include <atomic>
 #include <chrono>
+#include <memory>
+#include <vector>
 
 namespace kcenon::logger {
 

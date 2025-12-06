@@ -32,18 +32,25 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/core/log_collector.h>
+#include <kcenon/logger/core/thread_integration_detector.h>
 #include <kcenon/logger/backends/standalone_backend.h>
+
+// Conditionally include thread_system_backend when integration is enabled
+#if defined(USE_THREAD_SYSTEM_INTEGRATION)
 #include <kcenon/logger/backends/thread_system_backend.h>
+#endif
+
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/logger_types.h>
 #include <kcenon/logger/interfaces/log_filter_interface.h>
 #include <kcenon/logger/interfaces/log_entry.h>
-#include <iostream>
-#include <vector>
-#include <chrono>
-#include <type_traits>
+
 #include <atomic>
+#include <chrono>
+#include <iostream>
 #include <shared_mutex>
+#include <type_traits>
+#include <vector>
 
 namespace kcenon::logger {
 

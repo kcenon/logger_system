@@ -11,8 +11,14 @@ include(CMakeFindDependencyMacro)
 # Find required dependencies
 find_dependency(Threads REQUIRED)
 
-# Find thread_system (required dependency)
-find_dependency(ThreadSystem REQUIRED)
+# thread_system is optional (Issue #222: standalone std::jthread implementation)
+set(LoggerSystem_USE_THREAD_SYSTEM @LOGGER_USE_THREAD_SYSTEM@)
+if(LoggerSystem_USE_THREAD_SYSTEM)
+    find_dependency(ThreadSystem QUIET)
+    if(NOT ThreadSystem_FOUND)
+        message(STATUS "LoggerSystem: thread_system not found, using standalone mode")
+    endif()
+endif()
 
 # Include the exported targets
 include("${CMAKE_CURRENT_LIST_DIR}/LoggerSystemTargets.cmake")

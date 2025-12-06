@@ -30,8 +30,8 @@ All rights reserved.
 
 namespace kcenon::logger::async {
 
-// Forward declaration for processing worker
-class batch_processing_worker;
+// Forward declaration for processing worker (std::jthread-based)
+class batch_processing_jthread_worker;
 
 /**
  * @brief Advanced batch processor with dynamic sizing and back-pressure handling
@@ -256,8 +256,8 @@ private:
     static constexpr size_t queue_size = 8192;  // Must be power of 2
     std::unique_ptr<lockfree_spsc_queue<batch_entry, queue_size>> queue_;
 
-    // Processing worker (using thread_system's thread_base)
-    std::unique_ptr<batch_processing_worker> processing_worker_;
+    // Processing worker (using std::jthread)
+    std::unique_ptr<batch_processing_jthread_worker> processing_worker_;
     std::atomic<bool> running_{false};
     std::atomic<bool> should_stop_{false};
 

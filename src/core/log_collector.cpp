@@ -30,138 +30,221 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
+/**
+ * @file log_collector.cpp
+ * @brief Asynchronous log collector implementation with jthread compatibility
+ *
+ * This implementation uses C++20 std::jthread with std::stop_token for
+ * cooperative cancellation where available, with fallback to std::thread
+ * for environments without jthread support (e.g., libc++).
+ *
+ * @since 1.3.0 - Refactored to use jthread compatibility layer
+ */
+
 #include <kcenon/logger/core/log_collector.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/interfaces/logger_interface.h>
-#include <queue>
-#include <mutex>
-#include <condition_variable>
+
+#include "../impl/async/jthread_compat.h"
+
 #include <atomic>
-#include <vector>
+#include <condition_variable>
+#include <cstdio>
 #include <functional>
 #include <memory>
+#include <mutex>
+#include <queue>
 #include <thread>
-#include <cstdio>
+#include <vector>
 
 namespace kcenon::logger {
 
 /**
  * @brief Shared state for log processing - survives impl destruction
  *
- * This structure holds all the data that the worker callback needs to access.
- * By using shared_ptr, the callback can safely access this data even after
- * the impl object is destroyed, preventing use-after-free bugs.
+ * This structure holds all the data that the worker needs to access.
+ * By using shared_ptr, the worker can safely access this data even after
+ * the impl object starts destruction, preventing use-after-free bugs.
  */
 struct log_collector_shared_state {
     std::queue<log_entry> queue;
     mutable std::mutex queue_mutex;
+#if LOGGER_HAS_JTHREAD
+    std::condition_variable_any queue_cv;  // Works with stop_token
+#else
+    std::condition_variable queue_cv;       // Standard condition variable
+#endif
     std::vector<std::weak_ptr<base_writer>> writers;
     std::mutex writers_mutex;
-    std::shared_ptr<std::atomic<bool>> running;
     const std::size_t batch_size;
+    const std::size_t buffer_size;
 
-    explicit log_collector_shared_state(std::size_t batch_sz)
-        : running(std::make_shared<std::atomic<bool>>(false))
-        , batch_size(batch_sz) {}
+    explicit log_collector_shared_state(std::size_t buffer_sz, std::size_t batch_sz)
+        : batch_size(batch_sz)
+        , buffer_size(buffer_sz) {}
 };
 
 /**
- * @brief Worker thread for log processing
+ * @brief Worker thread for log processing with jthread compatibility
  *
- * Uses std::thread directly instead of thread_base to ensure proper thread
- * lifetime management. The shared_ptr to state ensures data survives beyond
- * the worker object.
+ * Uses std::jthread where available, falls back to std::thread with
+ * manual stop mechanism otherwise.
  */
-class log_collector_worker {
+class log_collector_jthread_worker {
 public:
-    explicit log_collector_worker(std::shared_ptr<log_collector_shared_state> state)
-        : state_(std::move(state)) {}
+    explicit log_collector_jthread_worker(std::shared_ptr<log_collector_shared_state> state)
+        : state_(std::move(state))
+        , running_(false)
+    {}
 
-    ~log_collector_worker() {
+    ~log_collector_jthread_worker() {
         stop();
     }
 
     void start() {
-        if (thread_.joinable()) {
+        if (running_.exchange(true, std::memory_order_acq_rel)) {
             return;  // Already started
         }
+
+#if LOGGER_HAS_JTHREAD
         // Capture state by shared_ptr - survives worker destruction
         auto state = state_;
-        thread_ = std::thread([state]() {
-            worker_loop(state);
+        thread_ = async::compat_jthread([state](std::stop_token stop_token) {
+            worker_loop(state, stop_token);
         });
+#else
+        // Create worker thread with manual stop source
+        // Note: We use the stop_source created by compat_jthread to ensure
+        // request_stop() correctly signals the worker loop
+        auto state = state_;
+        thread_ = async::compat_jthread([state](async::simple_stop_source& stop) {
+            worker_loop(state, stop);
+        });
+#endif
     }
 
     void stop() {
+        if (!running_.exchange(false, std::memory_order_acq_rel)) {
+            return;  // Already stopped
+        }
+
+        // Request stop
+        thread_.request_stop();
+
+        // Wake up the worker in case it's waiting
         if (state_) {
-            state_->running->store(false, std::memory_order_release);
+            state_->queue_cv.notify_all();
         }
-        cv_.notify_all();
-        if (thread_.joinable()) {
-            thread_.join();
-        }
+
+        // Wait for thread to finish
+        thread_.join();
     }
 
     void notify_work() {
-        cv_.notify_one();
+        if (state_) {
+            state_->queue_cv.notify_one();
+        }
+    }
+
+    [[nodiscard]] bool is_running() const noexcept {
+        return running_.load(std::memory_order_acquire);
     }
 
 private:
-    static void worker_loop(std::shared_ptr<log_collector_shared_state> state) {
-        if (!state) return;
+#if LOGGER_HAS_JTHREAD
+    static void worker_loop(std::shared_ptr<log_collector_shared_state> state,
+                           std::stop_token stop_token) {
+        if (!state) {
+            return;
+        }
 
-        std::mutex wait_mutex;
-        while (state->running->load(std::memory_order_acquire)) {
-            // Wait for work or timeout
+        while (!stop_token.stop_requested()) {
+            std::vector<log_entry> batch;
+
             {
-                std::unique_lock<std::mutex> lock(wait_mutex);
-                // Use a short timeout to periodically check running flag
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                std::unique_lock<std::mutex> lock(state->queue_mutex);
+
+                // Wait for work or stop signal using condition_variable_any
+                bool has_work = state->queue_cv.wait(lock, stop_token, [&state]() {
+                    return !state->queue.empty();
+                });
+
+                // Check if stop was requested
+                if (stop_token.stop_requested()) {
+                    break;
+                }
+
+                // Check if we actually have work
+                if (!has_work || state->queue.empty()) {
+                    continue;
+                }
+
+                // Extract batch from queue
+                batch.reserve(std::min(state->batch_size, state->queue.size()));
+                while (!state->queue.empty() && batch.size() < state->batch_size) {
+                    batch.push_back(std::move(state->queue.front()));
+                    state->queue.pop();
+                }
             }
 
-            // Check running again after wait
-            if (!state->running->load(std::memory_order_acquire)) {
-                break;
+            // Process batch outside the lock
+            for (const auto& entry : batch) {
+                write_to_all(state, entry);
             }
-
-            // Process batch
-            process_batch(state);
         }
     }
-
-    static void process_batch(std::shared_ptr<log_collector_shared_state>& state) {
-        if (!state || !state->running->load(std::memory_order_acquire)) {
+#else
+    static void worker_loop(std::shared_ptr<log_collector_shared_state> state,
+                           async::simple_stop_source& stop) {
+        if (!state) {
             return;
         }
 
-        std::vector<log_entry> batch;
-        {
-            std::lock_guard<std::mutex> lock(state->queue_mutex);
-            if (!state->running->load(std::memory_order_acquire)) {
-                return;
-            }
-            batch.reserve(std::min(state->batch_size, state->queue.size()));
-            while (!state->queue.empty() && batch.size() < state->batch_size) {
-                batch.push_back(std::move(state->queue.front()));
-                state->queue.pop();
-            }
-        }
+        while (!stop.stop_requested()) {
+            std::vector<log_entry> batch;
 
-        if (!state->running->load(std::memory_order_acquire)) {
-            return;
-        }
+            {
+                std::unique_lock<std::mutex> lock(state->queue_mutex);
 
-        // Write batch to all writers
-        for (const auto& entry : batch) {
-            write_to_all(state, entry);
+                // Wait for work or stop signal
+                state->queue_cv.wait(lock, [&state, &stop]() {
+                    return stop.stop_requested() || !state->queue.empty();
+                });
+
+                // Check if stop was requested
+                if (stop.stop_requested()) {
+                    break;
+                }
+
+                // Check if we actually have work
+                if (state->queue.empty()) {
+                    continue;
+                }
+
+                // Extract batch from queue
+                batch.reserve(std::min(state->batch_size, state->queue.size()));
+                while (!state->queue.empty() && batch.size() < state->batch_size) {
+                    batch.push_back(std::move(state->queue.front()));
+                    state->queue.pop();
+                }
+            }
+
+            // Process batch outside the lock
+            for (const auto& entry : batch) {
+                write_to_all(state, entry);
+            }
         }
     }
+#endif
 
-    static void write_to_all(std::shared_ptr<log_collector_shared_state>& state,
+    static void write_to_all(const std::shared_ptr<log_collector_shared_state>& state,
                             const log_entry& entry) {
-        if (!state) return;
+        if (!state) {
+            return;
+        }
 
+        // Snapshot writers under lock
         std::vector<std::shared_ptr<base_writer>> writers_snapshot;
         {
             std::lock_guard<std::mutex> lock(state->writers_mutex);
@@ -173,32 +256,36 @@ private:
             }
         }
 
+        // Extract entry fields
         std::string file = entry.location ? entry.location->file.to_string() : "";
         int line = entry.location ? entry.location->line : 0;
         std::string function = entry.location ? entry.location->function.to_string() : "";
 
+        // Write to all writers without holding mutex
         for (auto& writer : writers_snapshot) {
-            writer->write(entry.level, entry.message.to_string(), file,
-                         line, function, entry.timestamp);
+            try {
+                writer->write(entry.level, entry.message.to_string(), file,
+                             line, function, entry.timestamp);
+            } catch (...) {
+                // Swallow exceptions to prevent thread termination
+            }
         }
     }
 
 private:
     std::shared_ptr<log_collector_shared_state> state_;
-    std::thread thread_;
-    std::condition_variable cv_;
+    async::compat_jthread thread_;
+    std::atomic<bool> running_;
 };
 
 class log_collector::impl {
 public:
     explicit impl(std::size_t buffer_size, std::size_t batch_size)
-        : buffer_size_(buffer_size)
-        , state_(std::make_shared<log_collector_shared_state>(batch_size))
-        , worker_(std::make_unique<log_collector_worker>(state_)) {
+        : state_(std::make_shared<log_collector_shared_state>(buffer_size, batch_size))
+        , worker_(std::make_unique<log_collector_jthread_worker>(state_)) {
     }
 
     ~impl() {
-        // stop() will set running to false and stop the worker thread
         stop();
     }
 
@@ -209,19 +296,17 @@ public:
                  const std::string& function,
                  const std::chrono::system_clock::time_point& timestamp) {
         {
-            std::unique_lock<std::mutex> lock(state_->queue_mutex);
+            std::lock_guard<std::mutex> lock(state_->queue_mutex);
 
             // Check if queue is full
-            if (state_->queue.size() >= buffer_size_) {
+            if (state_->queue.size() >= state_->buffer_size) {
                 // Track dropped message
-                uint64_t dropped_count = dropped_messages_.fetch_add(1, std::memory_order_relaxed) + 1;
+                std::uint64_t dropped = dropped_messages_.fetch_add(1, std::memory_order_relaxed) + 1;
 
-                // Log warning periodically (every 100 dropped messages) to avoid log spam
-                if (dropped_count % 100 == 1) {
-                    // Note: We can't use the logger here as it would create recursion
-                    // In production, this metric should be exposed via monitoring
-                    fprintf(stderr, "[WARNING] Log queue full: %llu messages dropped total\n",
-                           static_cast<unsigned long long>(dropped_count));
+                // Log warning periodically (every 100 dropped messages) to avoid spam
+                if (dropped % 100 == 1) {
+                    std::fprintf(stderr, "[WARNING] Log queue full: %llu messages dropped total\n",
+                               static_cast<unsigned long long>(dropped));
                 }
 
                 return false;
@@ -256,76 +341,63 @@ public:
     }
 
     void start() {
-        if (!state_->running->exchange(true)) {
-            if (worker_) {
-                worker_->start();
-            }
+        if (worker_) {
+            worker_->start();
         }
     }
 
     void stop() {
-        // Always set running to false first
-        bool was_running = state_->running->exchange(false);
-
-        // Stop the worker thread - it will join in stop()
+        // Stop the worker thread first
         if (worker_) {
             worker_->stop();
         }
 
-        // Only drain queue and flush if we were actually running
-        if (was_running) {
-            // Process any remaining entries
-            drain_queue();
-
-            // Flush all writers
-            flush_writers();
-        }
-    }
-
-    void flush() {
-        if (!state_->running->load()) {
-            // Just flush the writers
-            flush_writers();
-            return;
-        }
-
-        // Process all remaining entries
+        // Drain remaining entries
         drain_queue();
 
         // Flush all writers
         flush_writers();
     }
 
-    std::pair<size_t, size_t> get_queue_metrics() const {
+    void flush() {
+        // Wait for queue to be empty
+        while (true) {
+            {
+                std::lock_guard<std::mutex> lock(state_->queue_mutex);
+                if (state_->queue.empty()) {
+                    break;
+                }
+            }
+            // Brief yield to allow worker to process
+            std::this_thread::sleep_for(std::chrono::microseconds(100));
+        }
+
+        // Flush all writers
+        flush_writers();
+    }
+
+    [[nodiscard]] std::pair<std::size_t, std::size_t> get_queue_metrics() const {
         std::lock_guard<std::mutex> lock(state_->queue_mutex);
-        return {state_->queue.size(), buffer_size_};
+        return {state_->queue.size(), state_->buffer_size};
     }
 
 private:
     void drain_queue() {
-        std::unique_lock<std::mutex> lock(state_->queue_mutex);
-        while (!state_->queue.empty()) {
-            auto entry = std::move(state_->queue.front());
-            state_->queue.pop();
-            lock.unlock();
+        std::queue<log_entry> remaining;
+        {
+            std::lock_guard<std::mutex> lock(state_->queue_mutex);
+            std::swap(remaining, state_->queue);
+        }
 
+        // Process remaining entries
+        while (!remaining.empty()) {
+            auto entry = std::move(remaining.front());
+            remaining.pop();
             write_to_all(entry);
-
-            lock.lock();
         }
     }
 
     void flush_writers() {
-        std::lock_guard<std::mutex> writer_lock(state_->writers_mutex);
-        for (auto& weak_writer : state_->writers) {
-            if (auto writer = weak_writer.lock()) {
-                writer->flush();
-            }
-        }
-    }
-
-    void write_to_all(const log_entry& entry) {
-        // Copy the writers list under lock, then release the lock before calling write()
         std::vector<std::shared_ptr<base_writer>> writers_snapshot;
         {
             std::lock_guard<std::mutex> lock(state_->writers_mutex);
@@ -337,27 +409,52 @@ private:
             }
         }
 
-        // Write to all writers without holding the mutex
+        for (auto& writer : writers_snapshot) {
+            try {
+                writer->flush();
+            } catch (...) {
+                // Swallow exceptions during flush
+            }
+        }
+    }
+
+    void write_to_all(const log_entry& entry) {
+        // Snapshot writers under lock
+        std::vector<std::shared_ptr<base_writer>> writers_snapshot;
+        {
+            std::lock_guard<std::mutex> lock(state_->writers_mutex);
+            writers_snapshot.reserve(state_->writers.size());
+            for (auto& weak_writer : state_->writers) {
+                if (auto writer = weak_writer.lock()) {
+                    writers_snapshot.push_back(writer);
+                }
+            }
+        }
+
+        // Extract entry fields
         std::string file = entry.location ? entry.location->file.to_string() : "";
         int line = entry.location ? entry.location->line : 0;
         std::string function = entry.location ? entry.location->function.to_string() : "";
 
+        // Write to all writers without holding mutex
         for (auto& writer : writers_snapshot) {
-            writer->write(entry.level, entry.message.to_string(), file,
-                         line, function, entry.timestamp);
+            try {
+                writer->write(entry.level, entry.message.to_string(), file,
+                             line, function, entry.timestamp);
+            } catch (...) {
+                // Swallow exceptions to prevent issues
+            }
         }
     }
 
 private:
-    const std::size_t buffer_size_;
     std::shared_ptr<log_collector_shared_state> state_;
-    std::unique_ptr<log_collector_worker> worker_;
-
-    // Track dropped messages when queue is full
-    std::atomic<uint64_t> dropped_messages_{0};
+    std::unique_ptr<log_collector_jthread_worker> worker_;
+    std::atomic<std::uint64_t> dropped_messages_{0};
 };
 
-// log_collector implementation
+// log_collector public interface implementation
+
 log_collector::log_collector(std::size_t buffer_size, std::size_t batch_size)
     : pimpl_(std::make_unique<impl>(buffer_size, batch_size)) {
 }
@@ -393,7 +490,7 @@ void log_collector::flush() {
     pimpl_->flush();
 }
 
-std::pair<size_t, size_t> log_collector::get_queue_metrics() const {
+std::pair<std::size_t, std::size_t> log_collector::get_queue_metrics() const {
     return pimpl_->get_queue_metrics();
 }
 

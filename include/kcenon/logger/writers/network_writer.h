@@ -17,9 +17,9 @@ All rights reserved.
 
 namespace kcenon::logger {
 
-// Forward declarations for worker threads
-class network_send_worker;
-class network_reconnect_worker;
+// Forward declarations for worker threads (std::jthread-based)
+class network_send_jthread_worker;
+class network_reconnect_jthread_worker;
 
 /**
  * @class network_writer
@@ -128,9 +128,9 @@ private:
     mutable std::mutex buffer_mutex_;
     std::condition_variable buffer_cv_;
     
-    // Worker threads (using thread_system's thread_base)
-    std::unique_ptr<network_send_worker> send_worker_;
-    std::unique_ptr<network_reconnect_worker> reconnect_worker_;
+    // Worker threads (using std::jthread)
+    std::unique_ptr<network_send_jthread_worker> send_worker_;
+    std::unique_ptr<network_reconnect_jthread_worker> reconnect_worker_;
     
     // Statistics
     mutable std::mutex stats_mutex_;
