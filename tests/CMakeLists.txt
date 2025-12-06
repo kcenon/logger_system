@@ -136,3 +136,43 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/security_test/security_test.cpp")
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
 endif()
+
+# thread_system_integration module tests (Issue #224)
+# Tests for optional thread_system integration module
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/thread_system_integration_module_test.cpp")
+    add_executable(logger_thread_system_integration_module_test
+        unit/thread_system_integration_module_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_thread_system_integration_module_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_thread_system_integration_module_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    # Link thread_system if available for full integration tests
+    if(THREAD_SYSTEM_FOUND)
+        if(TARGET ThreadSystem)
+            target_link_libraries(logger_thread_system_integration_module_test
+                PRIVATE ThreadSystem
+            )
+        elseif(TARGET thread_system)
+            target_link_libraries(logger_thread_system_integration_module_test
+                PRIVATE thread_system
+            )
+        endif()
+    endif()
+
+    add_test(NAME logger_thread_system_integration_module_test
+        COMMAND logger_thread_system_integration_module_test
+    )
+    set_target_properties(logger_thread_system_integration_module_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "thread_system_integration module tests: Added (THREAD_SYSTEM_FOUND=${THREAD_SYSTEM_FOUND})")
+endif()
