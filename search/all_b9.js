@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['📊_20성능_20특성_0',['📊 성능 특성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md510',1,'']]],
-  ['📊_203_20usage_20scenarios_1',['📊 3 Usage Scenarios',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md280',1,'']]],
-  ['📊_20dashboard_20update_2',['📊 Dashboard Update',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md156',1,'']]],
-  ['📊_20executive_20summary_3',['📊 Executive Summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1282',1,'']]],
-  ['📊_20performance_20characteristics_4',['📊 Performance Characteristics',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md620',1,'']]],
-  ['📊_20performance_20metrics_5',['📊 Performance Metrics',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md133',1,'']]]
+  ['🎯_20성공_20지표_0',['🎯 성공 지표',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1394',1,'']]],
+  ['🎯_20제안_20솔루션_20아키텍처_1',['🎯 제안 솔루션 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1340',1,'']]],
+  ['🎯_20goal_2',['🎯 Goal',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md273',1,'']]],
+  ['🎯_20high_20performance_20logging_3',['🎯 High-Performance Logging',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES.html#autotoc_md857',1,'']]],
+  ['🎯_20public_20api_20layer_20tt_20include_20kcenon_20logger_20tt_4',['🎯 Public API Layer (&lt;tt&gt;include/kcenon/logger/&lt;/tt&gt;)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md508',1,'']]]
 ];

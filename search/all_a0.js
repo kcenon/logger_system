@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['포맷터_0',['커스텀 포맷터',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md933',1,'']]],
-  ['포맷팅_1',['포맷팅',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md930',1,'']]],
-  ['포맷_2',['포맷',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md931',1,'기본 포맷'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md932',1,'JSON 포맷']]],
-  ['포인터_20사용_3',['스마트 포인터 사용',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1445',1,'']]]
+  ['트러블슈팅_20가이드_0',['🔧 트러블슈팅 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1383',1,'']]],
+  ['트렌드_20차트_20생성_20스크립트_1',['3.2 트렌드 차트 생성 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1357',1,'']]]
 ];

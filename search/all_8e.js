@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['최근_20변경사항_0',['최근 변경사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1651',1,'']]],
-  ['최소_20요구사항_1',['최소 요구사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1467',1,'']]],
-  ['최적화_20팁_2',['최적화 팁',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md946',1,'']]]
+  ['차트_20생성_0',['Phase 3: 배지 및 차트 생성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1355',1,'']]],
+  ['차트_20생성_20스크립트_1',['3.2 트렌드 차트 생성 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1357',1,'']]],
+  ['차트_20예상_20소요_3a_201_205시간_2',['Phase 2: 배지 및 차트 (예상 소요: 1.5시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1377',1,'']]]
 ];

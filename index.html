@@ -284,7 +284,7 @@ Dependencies</h3>
 <li><b><a href="https://github.com/kcenon/monitoring_system">monitoring_system</a></b>: Metrics and health monitoring</li>
 </ul>
 <blockquote class="doxtable">
-<p>&zwj;<b>Note</b>: Since v3.1.0 (Issue #225), <code>thread_system</code> is optional. The logger system uses a standalone implementation by default and can optionally integrate with <code>thread_system</code> when available. </p>
+<p>&zwj;<b>Note</b>: Since v3.1.0, <code>thread_system</code> is optional. The logger system uses a standalone std::jthread implementation by default. For advanced async processing, enable thread_system integration with <code>-DLOGGER_USE_THREAD_SYSTEM=ON</code> (see Issue #224). </p>
 </blockquote>
 <h3><a class="anchor" id="autotoc_md24"></a>
 Integration Pattern</h3>
@@ -306,7 +306,7 @@ Integration Pattern</h3>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 </div><!-- fragment --><blockquote class="doxtable">
-<p>&zwj;<b>Note</b>: When <code>thread_system</code> is available and <code>USE_THREAD_SYSTEM</code> is defined, additional integration features are enabled (service container registration, advanced thread pool integration, etc.). </p>
+<p>&zwj;<b>Note</b>: When <code>thread_system</code> is available and <code>LOGGER_HAS_THREAD_SYSTEM</code> is defined (via <code>-DLOGGER_USE_THREAD_SYSTEM=ON</code>), additional integration features are enabled including shared thread pool for async processing. See <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM.html">thread_system integration</a> for details. </p>
 </blockquote>
 <p><b>Benefits</b>:</p><ul>
 <li>Interface-only dependencies (no circular references)</li>
@@ -534,7 +534,7 @@ Acknowledgments</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Dec 6 2025 11:11:00 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Dec 6 2025 11:41:36 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

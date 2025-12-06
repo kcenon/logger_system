@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['참고사항_0',['참고사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md957',1,'']]],
-  ['참고_20문서_1',['참고 문서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1622',1,'']]],
-  ['참고_20자료_2',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1337',1,'']]]
+  ['준비_20상태_3a_20✅_20strong_20준비_20완료_20strong_0',['프로덕션 준비 상태: ✅ &lt;strong&gt;준비 완료&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1480',1,'']]],
+  ['준수_20등급_3a_20strong_20a_20strong_1',['RAII 준수 등급: &lt;strong&gt;A&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1496',1,'']]]
 ];

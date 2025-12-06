@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['지표_20자동화_20제안서_0',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]]
+  ['프로덕션_20품질_0',['Logger System 프로덕션 품질',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html',1,'']]],
+  ['프로젝트_20구조_1',['프로젝트 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html',1,'Logger System 프로젝트 구조'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html',1,'Logger System - 프로젝트 구조']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['📁_20디렉토리_20레이아웃_0',['📁 디렉토리 레이아웃',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md503',1,'']]],
-  ['📁_20제안_20디렉토리_20구조_1',['📁 제안 디렉토리 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1291',1,'']]]
+  ['회귀_20기준_0',['성능 회귀 기준',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md729',1,'']]],
+  ['회전_20파일_20작성자_1',['회전 파일 작성자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md926',1,'']]]
 ];

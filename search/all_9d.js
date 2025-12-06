@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['팁_0',['최적화 팁',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md946',1,'']]]
+  ['탐색_0',['🚀 빠른 탐색',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1697',1,'']]],
+  ['탐지_1',['메모리 누수 탐지',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1498',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📅_20release_20history_0',['📅 Release History',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md153',1,'']]]
+  ['후_20손상된_20예제_20파일_20수정_20issue_20228_202025_2012_2006_0',['#226 API 변경 후 손상된 예제 파일 수정 (Issue #228) - 2025-12-06',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md767',1,'']]]
 ];

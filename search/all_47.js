@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['멀티스레드_20비교_204_20스레드_0',['멀티스레드 비교 (4 스레드)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md717',1,'']]],
-  ['멀티스레드_20성능_1',['멀티스레드 성능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md711',1,'']]]
+  ['매트릭스_0',['버전 지원 매트릭스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md804',1,'']]]
 ];
