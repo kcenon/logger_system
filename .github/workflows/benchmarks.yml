@@ -25,7 +25,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04, macos-14]
-        compiler: [clang]
+        # Ubuntu uses GCC 13 for std::format+std::jthread, macOS uses Clang
+        compiler: [gcc]
         build_type: [Release]
 
     steps:
@@ -51,30 +52,32 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
-        # Install LLVM 17 with libc++ for std::format support
-        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-        sudo add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main"
+        # Install GCC 13 for std::format and std::jthread support
+        # (Clang 17 with libstdc++ doesn't support std::format,
+        #  and libc++ doesn't support std::jthread)
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
         sudo apt-get update
         sudo apt-get install -y \
-          cmake ninja-build clang-17 libc++-17-dev libc++abi-17-dev lld-17 \
+          cmake ninja-build gcc-13 g++-13 \
           libbenchmark-dev libgtest-dev \
           python3-pip
-        # Create symlinks for clang-17
-        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
-        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
+        # Set GCC 13 as default
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
         pip3 install matplotlib
 
     - name: Install dependencies (macOS)
       if: runner.os == 'macOS'
       run: |
         brew install ninja google-benchmark googletest
-        pip3 install matplotlib
+        # Use --break-system-packages for PEP 668 compliant Python
+        pip3 install --break-system-packages matplotlib || pip3 install matplotlib --user
 
     - name: Set up compiler (Ubuntu)
       if: runner.os == 'Linux'
       run: |
-        echo "CC=clang-17" >> $GITHUB_ENV
-        echo "CXX=clang++-17" >> $GITHUB_ENV
+        echo "CC=gcc-13" >> $GITHUB_ENV
+        echo "CXX=g++-13" >> $GITHUB_ENV
 
     - name: Set up compiler (macOS)
       if: runner.os == 'macOS'
@@ -88,9 +91,9 @@ jobs:
 
     - name: Configure CMake
       run: |
-        # Note: Using libstdc++ (default) for std::jthread support
-        # libc++ does not implement std::jthread/std::stop_token yet
-        # GCC 13+ libstdc++ supports both std::format and std::jthread
+        # Note: Using GCC 13+ on Ubuntu for both std::format and std::jthread support
+        # Clang 17 with libstdc++ doesn't support std::format,
+        # and libc++ doesn't support std::jthread yet
 
         cmake -B build -S logger_system \
           -GNinja \
