@@ -201,34 +201,36 @@ target_link_libraries(your_app PRIVATE LoggerSystem::logger)
 
 **필수**:
 - **[common_system](https://github.com/kcenon/common_system)**: 핵심 인터페이스 (ILogger, IMonitor, Result<T>)
-- **[thread_system](https://github.com/kcenon/thread_system)**: Threading primitive
 
 **선택사항**:
+- **[thread_system](https://github.com/kcenon/thread_system)**: 향상된 Threading primitive (v3.1.0부터 선택사항)
 - **[monitoring_system](https://github.com/kcenon/monitoring_system)**: Metric 및 health monitoring
+
+> **참고**: v3.1.0 (Issue #225) 이후로 `thread_system`은 선택사항입니다. logger 시스템은 기본적으로 독립 실행(standalone) 구현을 사용하며, `thread_system`이 있을 경우 선택적으로 통합할 수 있습니다.
 
 ### 통합 패턴
 
 ```cpp
 #include <kcenon/logger/core/logger.h>
-#include <kcenon/thread/interfaces/service_container.h>
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/writers/console_writer.h>
 
 int main() {
-    // 1. Logger 생성
+    // Builder 패턴으로 logger 생성 (standalone 모드, thread_system 불필요)
     auto logger = kcenon::logger::logger_builder()
         .use_template("production")
+        .add_writer("console", std::make_unique<kcenon::logger::console_writer>())
         .build()
         .value();
 
-    // 2. Service container에 등록 (선택사항, 생태계 통합용)
-    kcenon::thread::service_container::global()
-        .register_singleton<kcenon::thread::logger_interface>(logger);
-
-    // 3. 애플리케이션 어디서나 logger 사용
+    // 애플리케이션 어디서나 logger 사용
     logger->log(kcenon::logger::log_level::info, "System initialized");
 
     return 0;
 }
 ```
+
+> **참고**: `thread_system`이 사용 가능하고 `USE_THREAD_SYSTEM`이 정의된 경우 추가 통합 기능(서비스 컨테이너 등록, 고급 스레드 풀 통합 등)이 활성화됩니다.
 
 **장점**:
 - 인터페이스 전용 의존성 (순환 참조 없음)
