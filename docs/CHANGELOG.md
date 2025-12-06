@@ -76,6 +76,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `flush()` now returns `common::VoidResult` instead of `void`
   - `set_level()` now returns `common::VoidResult` instead of `void`
 
+#### Deprecated
+- **logger_types.h**: Deprecated in favor of `kcenon/common/interfaces/logger_interface.h`
+  - `logger_system::log_level` marked as deprecated, use `common::interfaces::log_level`
+  - Will be removed in v3.0.0
+
+- **logger_interface.h** (logger_system namespace): Deprecated in favor of common_system's ILogger
+  - `logger_system::logger_interface` marked as deprecated, use `common::interfaces::ILogger`
+  - Will be removed in v3.0.0
+
 #### Backward Compatibility
 - **All existing APIs preserved**: Native `logger_system::log_level` overloads still work
   - `log(log_level, message)` - unchanged signature, unchanged behavior

@@ -6,6 +6,18 @@
  * BSD 3-Clause License
  * Copyright (c) 2025, kcenon
  * All rights reserved.
+ *
+ * @deprecated This header is deprecated in favor of common_system's standard types.
+ *             Use kcenon/common/interfaces/logger_interface.h instead.
+ *             - Use common::interfaces::log_level instead of logger_system::log_level
+ *             - Use common::interfaces::log_entry instead of custom log entry types
+ *             This header will be removed in v3.0.0.
+ *
+ * @note Migration guide:
+ *       - Replace #include <kcenon/logger/interfaces/logger_types.h>
+ *         with #include <kcenon/common/interfaces/logger_interface.h>
+ *       - Replace logger_system::log_level with common::interfaces::log_level
+ *       - Note: log_level values are identical between both enums
  */
 
 #pragma once
@@ -17,6 +29,9 @@ namespace logger_system {
 
 /**
  * @brief Log levels enumeration
+ * @deprecated Use common::interfaces::log_level instead.
+ *             This enum is maintained for backward compatibility only.
+ *             Will be removed in v3.0.0.
  */
 enum class log_level {
     trace = 0,
