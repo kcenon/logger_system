@@ -131,13 +131,8 @@ int main() {
     // Filter that only logs messages from specific threads
     auto thread_id = std::this_thread::get_id();
     auto thread_filter = std::make_unique<function_filter>(
-        [thread_id](log_level level, const std::string& msg, 
-                   const std::string& file, int line, const std::string& func) {
-            (void)level;
-            (void)msg;
-            (void)file;
-            (void)line;
-            (void)func;
+        [thread_id](const log_entry& entry) {
+            (void)entry;
             return std::this_thread::get_id() == thread_id;
         }
     );

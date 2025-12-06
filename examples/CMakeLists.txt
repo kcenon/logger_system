@@ -65,12 +65,6 @@ if(BUILD_SAMPLES AND NOT BUILD_WITH_COMMON_SYSTEM)
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
 
-    # Migration example sample
-    add_executable(migration_example migration_example.cpp)
-    target_link_libraries(migration_example PRIVATE LoggerSystem)
-    set_target_properties(migration_example PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
 else()
     if(BUILD_WITH_COMMON_SYSTEM)
         message(STATUS "Advanced examples skipped when common_system integration is enabled")
