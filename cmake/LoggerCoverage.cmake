@@ -10,6 +10,8 @@ set(LOGGER_COVERAGE_TARGETS
     version_compatibility_test
     logger_min_level_threshold_test
     logger_thread_safety_test
+    logger_ilogger_interface_test
+    logger_security_test
     logger_integration_tests
     integration_test
     stress_test
