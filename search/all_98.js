@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['탐색_0',['🚀 빠른 탐색',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1675',1,'']]],
-  ['탐지_1',['메모리 누수 탐지',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1476',1,'']]]
+  ['탐색_0',['🚀 빠른 탐색',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1645',1,'']]],
+  ['탐지_1',['메모리 누수 탐지',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1446',1,'']]]
 ];

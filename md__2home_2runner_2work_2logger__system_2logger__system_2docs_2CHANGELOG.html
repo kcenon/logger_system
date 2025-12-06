@@ -145,8 +145,101 @@ Related Issues</h3>
 </ul>
 <hr  />
 <h2><a class="anchor" id="autotoc_md741"></a>
-Standalone async implementation (Issue #222) - 2025-12-06</h2>
+common::interfaces::ILogger Implementation - 2025-12-06</h2>
 <h3><a class="anchor" id="autotoc_md742"></a>
+Added</h3>
+<ul>
+<li><b>ILogger interface implementation (Issue #223)</b>: Logger now implements <code>common::interfaces::ILogger</code><ul>
+<li>Full compatibility with standardized logging interface from common_system</li>
+<li>Seamless integration with thread_system and other kcenon ecosystem components</li>
+<li>Type-safe log level conversion between <code>logger_system::log_level</code> and <code>common::interfaces::log_level</code></li>
+</ul>
+</li>
+<li><b>New level_converter.h</b>: Utility header for converting between log level types<ul>
+<li><code>to_logger_system_level()</code>: Convert from common to native log level</li>
+<li><code>to_common_level()</code>: Convert from native to common log level</li>
+<li>Constexpr functions for zero-overhead conversion</li>
+</ul>
+</li>
+<li><b>ILogger interface methods</b>:<ul>
+<li><code>log(log_level, const std::string&amp;)</code> → Returns <code>VoidResult</code></li>
+<li><code>log(log_level, std::string_view, const source_location&amp;)</code> → Returns <code>VoidResult</code></li>
+<li><code>log(log_level, message, file, line, function)</code> → Returns <code>VoidResult</code></li>
+<li><code>log(const log_entry&amp;)</code> → Structured logging support</li>
+<li><code>is_enabled(log_level)</code> → Check if level is enabled</li>
+<li><code>set_level(log_level)</code> → Set minimum log level, returns <code>VoidResult</code></li>
+<li><code>get_level()</code> → Get current minimum level as <code>common::interfaces::log_level</code></li>
+<li><code>flush()</code> → Flush buffers, returns <code>VoidResult</code></li>
+</ul>
+</li>
+<li><b>ILogger interface compatibility tests</b>: New test suite in <code>tests/unit/ilogger_interface_test.cpp</code><ul>
+<li>13 comprehensive tests for interface compatibility</li>
+<li>Tests for polymorphic usage, level conversion, and backward compatibility</li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md743"></a>
+Changed</h3>
+<ul>
+<li><b>logger class now inherits from both</b>:<ul>
+<li><code>security::critical_logger_interface</code> (existing)</li>
+<li><code>common::interfaces::ILogger</code> (new - standardized interface)</li>
+</ul>
+</li>
+<li><b>Return types updated for ILogger compliance</b>:<ul>
+<li><code>log()</code> methods now return <code>common::VoidResult</code> instead of <code>void</code></li>
+<li><code>flush()</code> now returns <code>common::VoidResult</code> instead of <code>void</code></li>
+<li><code>set_level()</code> now returns <code>common::VoidResult</code> instead of <code>void</code></li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md744"></a>
+Deprecated</h3>
+<ul>
+<li><b>logger_types.h</b>: Deprecated in favor of <code>kcenon/common/interfaces/logger_interface.h</code><ul>
+<li><code>logger_system::log_level</code> marked as deprecated, use <code>common::interfaces::log_level</code></li>
+<li>Will be removed in v3.0.0</li>
+</ul>
+</li>
+<li><b>logger_interface.h</b> (logger_system namespace): Deprecated in favor of common_system's ILogger<ul>
+<li><code>logger_system::logger_interface</code> marked as deprecated, use <code>common::interfaces::ILogger</code></li>
+<li>Will be removed in v3.0.0</li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md745"></a>
+Backward Compatibility</h3>
+<ul>
+<li><b>All existing APIs preserved</b>: Native <code>logger_system::log_level</code> overloads still work<ul>
+<li><code>log(log_level, message)</code> - unchanged signature, unchanged behavior</li>
+<li><code>log(log_level, message, file, line, function)</code> - unchanged</li>
+<li><code>is_enabled(log_level)</code> - unchanged</li>
+<li><code>set_min_level(log_level)</code> - unchanged</li>
+<li><code>get_min_level()</code> - returns native log_level</li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md746"></a>
+Migration Guide</h3>
+<p>Existing code continues to work without changes. To use the new ILogger interface:</p>
+<div class="fragment"><div class="line"><span class="comment">// Use logger through ILogger interface</span></div>
+<div class="line">std::shared_ptr&lt;common::interfaces::ILogger&gt; ilogger = my_logger;</div>
+<div class="line">ilogger-&gt;log(common::interfaces::log_level::info, <span class="stringliteral">&quot;Message&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Or mix both styles</span></div>
+<div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;Native style&quot;</span>);  <span class="comment">// Still works</span></div>
+<div class="line">logger-&gt;log(ci::log_level::info, std::string(<span class="stringliteral">&quot;ILogger style&quot;</span>));  <span class="comment">// New</span></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md747"></a>
+Related Issues</h3>
+<ul>
+<li>Closes #223 (implement common::interfaces::ILogger)</li>
+<li>Prerequisite for #224 (thread_system integration)</li>
+<li>Prerequisite for #225 (thread_system_backend removal)</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md749"></a>
+Standalone async implementation (Issue #222) - 2025-12-06</h2>
+<h3><a class="anchor" id="autotoc_md750"></a>
 Changed</h3>
 <ul>
 <li><b>thread_system is now OPTIONAL</b>: Logger system can build and run standalone<ul>
@@ -163,7 +256,7 @@ Changed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md743"></a>
+<h3><a class="anchor" id="autotoc_md751"></a>
 Added</h3>
 <ul>
 <li><b>async_worker class</b>: New standalone async worker using std::jthread<ul>
@@ -174,7 +267,7 @@ Added</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md744"></a>
+<h3><a class="anchor" id="autotoc_md752"></a>
 Benefits</h3>
 <ul>
 <li><b>Resolves circular dependency</b>: thread_system can now use logger_system for logging</li>
@@ -182,7 +275,7 @@ Benefits</h3>
 <li><b>Better shutdown</b>: std::jthread provides cleaner RAII-based thread management</li>
 <li><b>Cooperative cancellation</b>: No more polling/busy-waiting in shutdown path</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md745"></a>
+<h3><a class="anchor" id="autotoc_md753"></a>
 Migration Guide</h3>
 <ul>
 <li><b>Default behavior</b>: logger_system now builds standalone (no thread_system)</li>
@@ -190,16 +283,16 @@ Migration Guide</h3>
 </div><!-- fragment --></li>
 <li>Existing functionality preserved when integration is enabled</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md746"></a>
+<h3><a class="anchor" id="autotoc_md754"></a>
 Related Issues</h3>
 <ul>
 <li>Closes #222: Implement async_worker class using std::jthread</li>
 <li>Prerequisite for #223, #224, #225</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md748"></a>
+<h2><a class="anchor" id="autotoc_md756"></a>
 CMake fmt Fallback Removal - 2025-12-03</h2>
-<h3><a class="anchor" id="autotoc_md749"></a>
+<h3><a class="anchor" id="autotoc_md757"></a>
 Changed</h3>
 <ul>
 <li><b>CMake configuration now requires std::format</b>: Removed all fmt library fallback logic<ul>
@@ -208,7 +301,7 @@ Changed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md750"></a>
+<h3><a class="anchor" id="autotoc_md758"></a>
 Removed</h3>
 <ul>
 <li><b>fmt library fallback in CMake</b>:<ul>
@@ -219,7 +312,7 @@ Removed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md751"></a>
+<h3><a class="anchor" id="autotoc_md759"></a>
 Benefits</h3>
 <ul>
 <li><b>Cleaner CMake configuration</b>: Simplified feature detection without fallback complexity</li>
@@ -227,604 +320,31 @@ Benefits</h3>
 <li><b>Reduced dependencies</b>: No conditional fmt library linking</li>
 <li><b>Cross-project alignment</b>: Matches thread_system, container_system, network_system, database_system</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md752"></a>
+<h3><a class="anchor" id="autotoc_md760"></a>
 Related Issues</h3>
 <ul>
 <li>Part of cross-project standardization effort</li>
 <li>See: thread_system#219, container_system#168, network_system#257, database_system#203</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md754"></a>
+<h2><a class="anchor" id="autotoc_md762"></a>
 thread_system Required Dependency - 2025-12-03</h2>
-<h3><a class="anchor" id="autotoc_md755"></a>
+<h3><a class="anchor" id="autotoc_md763"></a>
 Changed</h3>
 <ul>
 <li><b>thread_system is now a required dependency</b>: Removed standalone mode<ul>
 <li>CMake configuration fails with FATAL_ERROR if thread_system is not found</li>
-<li>All internal threading now uses thread_system's thread_base class</li>
-<li>Simplified codebase by removing conditional compilation paths</li>
-</ul>
-</li>
-<li><b>Threading Migration</b>: Internal threading migrated to thread_system's thread_base<ul>
-<li><code>log_collector.cpp</code>: Uses <code>log_collector_worker</code> class extending thread_base</li>
-<li><code>network_writer.cpp</code>: Uses <code>network_send_worker</code> and <code>network_reconnect_worker</code></li>
-<li><code>batch_processor.cpp</code>: Uses <code>batch_processing_worker</code></li>
+<li>All internal threading now uses thread_system's thread_base class </li>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md756"></a>
-Removed</h3>
-<ul>
-<li><b>LOGGER_STANDALONE_MODE</b>: CMake option removed</li>
-<li><b>LOGGER_STANDALONE</b>: Compile definition removed</li>
-<li><b>&ndash;standalone</b> and <b>&ndash;with-thread</b>: Build script options removed</li>
-<li><b>Fallback implementations</b>: Standalone mode fallbacks in headers removed</li>
-</ul>
-<h3><a class="anchor" id="autotoc_md757"></a>
-Breaking Changes</h3>
-<ul>
-<li>⚠️ <b>thread_system is now required</b>: Projects must have thread_system available</li>
-<li>Build will fail if thread_system is not found (no more standalone fallback)</li>
-<li><code>--standalone</code> option in build.sh no longer works</li>
-</ul>
-<h3><a class="anchor" id="autotoc_md758"></a>
-Benefits</h3>
-<ul>
-<li><b>Simpler codebase</b>: ~90% reduction in conditional compilation</li>
-<li><b>Consistent threading</b>: All threading uses thread_base for better lifecycle management</li>
-<li><b>Easier maintenance</b>: Single code path instead of standalone + integrated modes</li>
-<li><b>Better integration</b>: Full thread_system features always available</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md760"></a>
-Security Improvements</h1>
-<h2><a class="anchor" id="autotoc_md761"></a>
-Removed</h2>
-<ul>
-<li><b>encrypted_writer</b>: Removed insecure XOR-based encryption implementation<ul>
-<li>Deleted <code>include/kcenon/logger/writers/encrypted_writer.h</code></li>
-<li>Deleted <code>src/impl/writers/encrypted_writer.cpp</code></li>
-<li>Removed from integration tests</li>
-<li>Updated documentation to recommend vetted crypto libraries</li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md762"></a>
-Changed</h2>
-<ul>
-<li><b>Documentation</b>: Updated security guidance<ul>
-<li><a class="el" href="SECURITY_8md.html">SECURITY.md</a> now recommends OpenSSL, libsodium, or Botan for encryption</li>
-<li>README.md provides guidance for implementing custom encrypted writers</li>
-<li>Added best practices for production log encryption</li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md763"></a>
-Migration Guide</h2>
-<ul>
-<li>If using <code>encrypted_writer</code>, implement a custom writer with a production-grade crypto library</li>
-<li>See <a class="el" href="SECURITY_8md.html">SECURITY.md</a> for implementation examples using AES-GCM or ChaCha20-Poly1305</li>
-<li>Use proper key management (HSM, KMS, or OS keychain)</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md765"></a>
-C++20 and std::format Migration - 2025-11-03</h1>
-<h2><a class="anchor" id="autotoc_md766"></a>
-Changed</h2>
-<ul>
-<li><b>C++20 now REQUIRED</b>: Enforced C++20 as minimum standard (no fallback to C++17)<ul>
-<li>Added CMake check to fail build if C++20 is not available</li>
-<li><code>CMAKE_CXX_STANDARD_REQUIRED ON</code> prevents fallback</li>
-<li>Clear error message when C++20 requirement is not met</li>
-</ul>
-</li>
-<li><b>Removed fmt library dependency</b>: Migrated to std::format<ul>
-<li>Removed fmt from vcpkg.json dependencies</li>
-<li>Removed fmt find_package from CMakeLists.txt</li>
-<li>Updated common_logger_adapter.h to use std::format</li>
-<li>All fmt::format calls replaced with std::format</li>
-<li>Cleaner dependency tree (one less external dependency)</li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md767"></a>
-Removed</h2>
-<ul>
-<li><b>fmt library</b>: No longer required or used<ul>
-<li>Removed from CMakeLists.txt (line 312-317)</li>
-<li>Removed from vcpkg.json</li>
-<li>Removed USE_FMT compile definition</li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md768"></a>
-Benefits</h2>
-<ul>
-<li><b>Simpler dependencies</b>: Using only C++ standard library features</li>
-<li><b>Better portability</b>: No external formatting library needed</li>
-<li><b>Consistent with common_system</b>: Both now use std::format exclusively</li>
-<li><b>Build performance</b>: Faster compilation without fmt dependency</li>
-<li><b>Forward compatibility</b>: std::format is the C++ standard approach</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md769"></a>
-Breaking Changes</h2>
-<ul>
-<li>⚠️ <b>C++20 compiler required</b>: Projects using older compilers must upgrade<ul>
-<li>GCC 10+ (full std::format support in GCC 13+)</li>
-<li>Clang 14+ (full std::format support in Clang 15+)</li>
-<li>MSVC 19.29+ (Visual Studio 2019 16.10+)</li>
-<li>Apple Clang 14.0+ (Xcode 14+)</li>
-</ul>
-</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md771"></a>
-Phase 3: Code Quality - 2025-11-03</h1>
-<h2><a class="anchor" id="autotoc_md772"></a>
-Added</h2>
-<ul>
-<li><b>Common Utility Functions (Phase 3.4)</b>: Extracted shared utilities to reduce code duplication<ul>
-<li><code>time_utils.h</code>: Timestamp formatting utilities<ul>
-<li><code>format_timestamp()</code>: Human-readable format (YYYY-MM-DD HH:MM:SS.mmm)</li>
-<li><code>format_iso8601()</code>: ISO 8601 / RFC 3339 format with UTC timezone</li>
-<li><code>format_compact()</code>: Compact format for filenames (YYYYMMDDHHMMSSmmm)</li>
-<li><code>format_for_rotation()</code>: Format for rotating file writers (YYYYMMDD or YYYYMMDD_HH)</li>
-</ul>
-</li>
-<li><code>string_utils.h</code>: String conversion and escaping utilities<ul>
-<li><code>level_to_string()</code>: Convert log level to human-readable string</li>
-<li><code>level_to_color()</code>: Convert log level to ANSI color code</li>
-<li><code>escape_json()</code>: JSON string escaping</li>
-<li><code>escape_xml()</code>: XML string escaping</li>
-<li><code>extract_filename()</code>: Extract filename from full path</li>
-<li><code>trim()</code>, <code>to_lower()</code>, <code>to_upper()</code>, <code>replace_all()</code>: String manipulation helpers</li>
-</ul>
-</li>
-<li><code>file_utils.h</code>: File path validation and sanitization utilities (security-focused)<ul>
-<li><code>validate_log_path()</code>: Path traversal attack prevention</li>
-<li><code>sanitize_filename()</code>: Remove dangerous characters from filenames</li>
-<li><code>set_file_permissions()</code>: Unix/POSIX permission management</li>
-<li><code>is_writable()</code>, <code>get_file_size()</code>: File system utilities</li>
-<li><code>generate_temp_filename()</code>: Safe temporary file naming</li>
-</ul>
-</li>
-<li>Located in <code>include/kcenon/logger/utils/</code></li>
-</ul>
-</li>
-<li><b>Error Handling Utilities (Phase 3.3)</b>: Unified error handling across all writers<ul>
-<li><code>error_handling_utils.h</code>: Comprehensive error handling helper functions</li>
-<li><code>try_write_operation()</code>: Generic error handler for write operations with specialized exception handling</li>
-<li><code>try_open_operation()</code>: Specialized handler for file open operations</li>
-<li><code>try_network_operation()</code>: Specialized handler for network operations</li>
-<li><code>try_encryption_operation()</code>: Specialized handler for encryption operations</li>
-<li><code>check_condition()</code>: Helper for precondition validation</li>
-<li><code>check_stream_state()</code>: Helper for stream state verification</li>
-<li><code>check_file_exists()</code>: Helper for file existence validation</li>
-<li><code>ensure_directory_exists()</code>: Helper for directory creation with error handling</li>
-<li>Located in <code>include/kcenon/logger/utils/error_handling_utils.h</code></li>
-</ul>
-</li>
-<li><b>Integration Backend Interface (Phase 3.2)</b>: Runtime polymorphism replaces conditional compilation<ul>
-<li><code>integration_backend</code>: Abstract interface for external system integration</li>
-<li><code>standalone_backend</code>: Default backend for independent logger operation</li>
-<li><code>thread_system_backend</code>: Backend for thread_system integration</li>
-<li>Automatic backend detection based on compile-time flags</li>
-<li>Explicit backend selection via <code>logger_builder::with_*_backend()</code> methods</li>
-<li>Located in <code>include/kcenon/logger/backends/</code></li>
-</ul>
-</li>
-<li><b>Formatter Interface (Strategy Pattern)</b>: Implemented formatter interface to eliminate code duplication<ul>
-<li><code>log_formatter_interface</code>: Abstract interface for log formatters with configurable options</li>
-<li><code>format_options</code>: Struct for controlling timestamp, thread ID, source location, colors, and pretty-printing</li>
-<li><code>formatter_factory</code>: Type alias for dependency injection support</li>
-<li>Located in <code>include/kcenon/logger/interfaces/log_formatter_interface.h</code></li>
-</ul>
-</li>
-<li><b>timestamp_formatter</b>: Default human-readable formatter<ul>
-<li>Millisecond-precision timestamps in YYYY-MM-DD HH:MM:SS.mmm format</li>
-<li>Color-coded log levels (ANSI escape codes)</li>
-<li>Thread ID tracking</li>
-<li>Source location information (file, line, function)</li>
-<li>Automatic filename extraction from paths</li>
-<li>Located in <code>include/kcenon/logger/formatters/timestamp_formatter.h</code></li>
-</ul>
-</li>
-<li><b>json_formatter</b>: JSON-structured formatter for log aggregation systems<ul>
-<li>ISO 8601 / RFC 3339 timestamp format (UTC)</li>
-<li>Proper JSON escaping of special characters</li>
-<li>Optional pretty-printing for readability</li>
-<li>Structured source location information</li>
-<li>Compatible with ELK, Splunk, CloudWatch, and other log aggregation tools</li>
-<li>Located in <code>include/kcenon/logger/formatters/json_formatter.h</code></li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md773"></a>
-Changed</h2>
-<ul>
-<li><b>logger</b>: Integrated with backend interface for level conversion<ul>
-<li>Added <code>backend_</code> parameter to constructor (optional, auto-detects if not provided)</li>
-<li>Replaced conditional <code>convert_log_level()</code> with <code>backend_-&gt;normalize_level()</code></li>
-<li>Backend initialization and shutdown handled automatically</li>
-<li>Log level conversion now performed at runtime via backends</li>
-<li>Located in <code>src/core/logger.cpp</code></li>
-</ul>
-</li>
-<li><b>logger_builder</b>: Added backend selection methods<ul>
-<li><code>with_backend()</code>: Set custom integration backend</li>
-<li><code>with_thread_system_backend()</code>: Explicitly use thread_system backend</li>
-<li><code>with_standalone_backend()</code>: Explicitly use standalone backend</li>
-<li>Auto-detection in <code>build()</code> method if no backend specified</li>
-<li>Located in <code>include/kcenon/logger/core/logger_builder.h</code></li>
-</ul>
-</li>
-<li><b>base_writer</b>: Integrated formatter interface to eliminate code duplication<ul>
-<li>Added <code>formatter_</code> member for Strategy pattern implementation</li>
-<li>Constructor now accepts optional <code>log_formatter_interface</code> (defaults to <code>timestamp_formatter</code>)</li>
-<li>New <code>set_formatter()</code> method for runtime formatter switching</li>
-<li>New <code>format_log_entry(const log_entry&amp;)</code> method using formatters</li>
-<li>Legacy formatting methods (<code>format_log_entry</code>, <code>level_to_string</code>, <code>level_to_color</code>) marked as deprecated</li>
-<li>Backward compatible with existing code</li>
-</ul>
-</li>
-<li><b>Formatting logic moved to formatters</b>: Eliminated duplication across all writers<ul>
-<li>Removed formatting logic from individual writer implementations</li>
-<li>All writers now delegate formatting to the configured formatter</li>
-<li>Simplifies adding new writer types</li>
-<li>Enables runtime format switching (text → JSON)</li>
-</ul>
-</li>
-<li><b>All writers updated with unified error handling (Phase 3.3)</b>: Consistent error handling across codebase<ul>
-<li><code>file_writer.cpp</code>: Replaced try-catch patterns with <code>try_write_operation</code> and <code>try_open_operation</code></li>
-<li><code>rotating_file_writer.cpp</code>: Applied error handling utilities to write, rotation, and cleanup operations</li>
-<li><code>encrypted_writer.cpp</code>: Integrated <code>try_encryption_operation</code> for encryption workflows</li>
-<li><code>console_writer.cpp</code>: Added stream state validation with <code>check_stream_state</code></li>
-<li><code>critical_writer.cpp</code>: Enhanced WAL operations and signal handler safety with error utilities</li>
-<li>All exception types properly categorized (filesystem_error, ios_base::failure, system_error, bad_alloc)</li>
-<li>Consistent error code mapping across all writers</li>
-</ul>
-</li>
-<li><b>Formatters refactored to use common utilities (Phase 3.4)</b>: Eliminated code duplication in formatters<ul>
-<li><code>timestamp_formatter.h</code>: Now uses <code>utils::time_utils</code> and <code>utils::string_utils</code></li>
-<li><code>json_formatter.h</code>: Now uses <code>utils::time_utils</code> and <code>utils::string_utils</code></li>
-<li>Removed duplicate private functions from both formatters</li>
-<li>Consistent behavior across all formatting operations</li>
-<li>Reduced formatter code size by ~150 lines</li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md774"></a>
-Deprecated</h2>
-<ul>
-<li><b>Legacy base_writer formatting methods</b>: Marked for future removal<ul>
-<li><code>format_log_entry(level, message, file, line, function, timestamp)</code> - Use formatter instead</li>
-<li><code>level_to_string(log_level)</code> - Formatting now handled by formatters</li>
-<li><code>level_to_color(log_level)</code> - Formatting now handled by formatters</li>
-<li>Methods remain functional for backward compatibility</li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md775"></a>
-Code Quality</h2>
-<ul>
-<li><b>90% reduction in conditional compilation</b>: Runtime polymorphism replaces #ifdef directives<ul>
-<li>Test combinations reduced from 16 to 4 (75% reduction)</li>
-<li>Improved code readability without #ifdef blocks</li>
-<li>Runtime backend switching capability</li>
-<li>Easier to add new integration backends</li>
-</ul>
-</li>
-<li><b>50% reduction in code duplication</b>: Formatting logic centralized in formatters</li>
-<li><b>Unified error handling</b>: Eliminated try-catch duplication across all writers<ul>
-<li>Consistent exception handling with specialized error handlers</li>
-<li>Better error message consistency across all writers</li>
-<li>Reduced boilerplate code in write operations</li>
-<li>Improved error code accuracy with proper exception type detection</li>
-</ul>
-</li>
-<li><b>Common utility functions</b>: Extracted shared code to reusable utilities<ul>
-<li>~150 lines of duplicate code removed from formatters</li>
-<li>Thread-safe, stateless utility functions</li>
-<li>Security-focused file utilities ready for Phase 4</li>
-<li>Consistent timestamp formatting across all components</li>
-</ul>
-</li>
-<li><b>Improved maintainability</b>: Single source of truth for formatting, error handling, and common utilities</li>
-<li><b>Enhanced extensibility</b>: Easy to add new formatters (XML, YAML, custom formats) and backends</li>
-<li><b>Better testability</b>: Formatters, backends, error handlers, and utilities can be tested independently</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md776"></a>
-Benefits</h2>
-<ul>
-<li><b>Simplified Testing</b>: Fewer conditional compilation paths to test</li>
-<li><b>Runtime Flexibility</b>: Can switch backends at runtime for testing</li>
-<li><b>Cleaner Codebase</b>: Less #ifdef clutter, more readable code</li>
-<li><b>Easy Extension</b>: Adding new integration backends requires no conditional compilation</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md777"></a>
-Backward Compatibility</h2>
-<ul>
-<li>All existing code continues to work without modifications</li>
-<li>Default formatter (timestamp_formatter) maintains original formatting behavior</li>
-<li>Legacy API methods remain functional with deprecation warnings</li>
-<li>All tests passing: 3/3 integration tests</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md779"></a>
-Phase 2: Performance Optimization - 2025-11-03</h1>
-<h2><a class="anchor" id="autotoc_md780"></a>
-Added</h2>
-<ul>
-<li><b>thread_local_object_pool</b>: New thread-local cached object pool implementation<ul>
-<li>Per-thread local cache to minimize lock contention</li>
-<li>Batch transfers between local cache and global pool</li>
-<li>Configurable cache size (default: 16 objects per thread)</li>
-<li>Detailed statistics tracking (cache hits, global pool hits, allocations)</li>
-<li><b>Performance</b>: 2.4x faster multi-threaded performance (8 threads)</li>
-<li><b>Performance</b>: 2.6x faster single-threaded performance</li>
-<li>See <code>src/impl/memory/object_pool.h</code> for implementation</li>
-</ul>
-</li>
-<li><b>object_pool_bench</b>: Comprehensive object pool benchmarks<ul>
-<li>Single-threaded and multi-threaded performance tests</li>
-<li>High contention scenario testing</li>
-<li>Cache efficiency measurements</li>
-<li>Located in <code>benchmarks/object_pool_bench.cpp</code></li>
-</ul>
-</li>
-<li><b>Benchmark Infrastructure</b>: Complete CI/CD integration for performance regression detection<ul>
-<li><code>compare_benchmarks.py</code>: Python script for automated benchmark comparison</li>
-<li>Detects performance regressions with configurable threshold (default: 5%)</li>
-<li>Generates markdown reports showing improvements and regressions</li>
-<li>Integrated into GitHub Actions workflow</li>
-<li>Baseline results stored in <code>benchmarks/baselines/</code></li>
-<li>Automatic comparison on every pull request</li>
-<li>Located in <code>scripts/compare_benchmarks.py</code></li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md781"></a>
-Changed</h2>
-<ul>
-<li><b>rotating_file_writer</b>: Periodic rotation checks for improved performance<ul>
-<li>Added <code>check_interval</code> parameter (default: 100 writes)</li>
-<li>Reduces filesystem system calls from every write to every 100 writes</li>
-<li><b>Expected performance</b>: 10-20% improvement in throughput</li>
-<li>Maintains rotation accuracy with configurable interval</li>
-<li>All constructors now accept optional <code>check_interval</code> parameter</li>
-<li>Backward compatible with default value</li>
-</ul>
-</li>
-<li><b>Benchmark Workflow</b>: Enhanced GitHub Actions benchmarks.yml<ul>
-<li>Benchmarks now enabled (BUILD_BENCHMARKS=ON, previously disabled)</li>
-<li>Automated benchmark execution on push and PR</li>
-<li>Results uploaded as artifacts (90-day retention)</li>
-<li>Baseline comparison with regression detection using compare_benchmarks.py</li>
-<li>Markdown reports in GitHub Step Summary</li>
-<li>Manual baseline saving via workflow_dispatch</li>
-<li>Performance threshold: 5% regression detection</li>
-<li>Located in <code>.github/workflows/benchmarks.yml</code></li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md782"></a>
-Performance</h2>
-<ul>
-<li><b>object_pool improvements</b> (8 threads):<ul>
-<li>Original: 949 ns/op (1.05M ops/s)</li>
-<li>Optimized: 396 ns/op (2.53M ops/s)</li>
-<li><b>Improvement: 2.4x faster</b></li>
-</ul>
-</li>
-<li><b>object_pool improvements</b> (single thread):<ul>
-<li>Original: 18.2 ns/op (54.9M ops/s)</li>
-<li>Optimized: 7.03 ns/op (142.4M ops/s)</li>
-<li><b>Improvement: 2.6x faster</b></li>
-</ul>
-</li>
-<li><b>High contention scenario</b> (8 threads, 10 objects):<ul>
-<li>Original: 6336 ns/op</li>
-<li>Optimized: 3534 ns/op</li>
-<li><b>Improvement: 1.8x faster</b></li>
-</ul>
-</li>
-<li>All Phase 1 + Phase 2 tests passing: 7/7</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md784"></a>
-Phase 1: Critical Fixes - 2025-11-03</h1>
-<h2><a class="anchor" id="autotoc_md785"></a>
-Fixed</h2>
-<ul>
-<li><b>async_writer</b>: Removed timeout-based detach mechanism that caused memory leaks and message loss<ul>
-<li>Replaced 5-second timeout with infinite wait for safer shutdown</li>
-<li>Worker thread now always joins properly without detaching</li>
-<li>Added <code>force_flush</code> parameter to control remaining message processing</li>
-<li>Eliminated potential use-after-free scenarios during shutdown</li>
-</ul>
-</li>
-<li><b>file_writer</b>: Changed <code>std::endl</code> to &lsquo;&rsquo;<br  />
-'<code>for 50-100x performance improvement<ul>
-<li>Eliminated forced disk synchronization (fsync<code>) on every write</code></li>
-<li><code>Leverages OS buffering for better I/O performance</code></li>
-<li><code>Explicit</code>flush()` method still available when needed</li>
-<li><b>Expected improvement</b>: ~10K msg/s → ~1M msg/s on SSD</li>
-</ul>
-</code></li>
-<li><code><b>rotating_file_writer</b>: Changed <code>std::endl</code> to &lsquo;&rsquo;<br  />
-'` for better performance<ul>
-<li>Consistent with file_writer improvements</li>
-<li>Maintains all rotation functionality while improving throughput</li>
-</ul>
-</code></li>
-<li><code><b>console_writer</b>: Changed <code>std::endl</code> to &lsquo;&rsquo;<br  />
-'` for better performance<ul>
-<li>Reduces console output overhead</li>
-<li>Maintains proper newline behavior</li>
-</ul>
-</code></li>
-</ul>
-<p><code></code></p>
-<h2><a class="anchor" id="autotoc_md786"></a>
-Performance</h2>
-<p><code></p><ul>
-<li>File writing performance improved by <b>50-100x</b> (from ~10K msg/s to ~1M msg/s on SSD)</li>
-<li>Async writer shutdown now prioritizes safety over speed (no message loss)</li>
-<li>All existing tests pass without regressions (7/7 tests passing)</li>
-</ul>
-<p></code></p>
-<p><code></p><hr  />
-<p></code></p>
-<p><code></code></p>
-<h1><a class="anchor" id="autotoc_md788"></a>
-Initial Release - 2025-10-22</h1>
-<p><code></code></p>
-<p><code></code></p>
-<h2><a class="anchor" id="autotoc_md789"></a>
-Added</h2>
-<p><code></p><ul>
-<li><b>Core Logger System</b>: Production-ready C++20 asynchronous logging framework<ul>
-<li>Asynchronous processing with non-blocking log operations</li>
-<li>Multiple output targets (console, file, rotating file, network, encrypted, hybrid)</li>
-<li>Thread-safe operations with concurrent logging support</li>
-<li>Zero-copy design for efficient message passing</li>
-</ul>
-</li>
-<li><b>Critical Writer</b>: Synchronous logging for critical messages requiring immediate write<ul>
-<li>Emergency flush mechanism to preserve logs during abnormal termination</li>
-<li>Crash-safe logging with automatic buffer flushing</li>
-</ul>
-</li>
-<li><b>Advanced Architecture</b>:<ul>
-<li>Interface-driven design with ILogger, IMonitor, IMonitorable abstractions</li>
-<li>Modular components with pluggable writers, filters, formatters</li>
-<li>Zero circular dependencies through interface-only dependencies</li>
-<li>Independent compilation without ecosystem dependencies</li>
-</ul>
-</li>
-<li><b>Builder Pattern API</b>: Fluent, type-safe logger construction<ul>
-<li>Configuration strategies (template-based, environment-aware, performance tuning)</li>
-<li>Comprehensive validation with Result&lt;T&gt; error handling</li>
-<li>Dependency injection for optional runtime component injection</li>
-</ul>
-</li>
-<li><b>CMake Build System</b>: Comprehensive build configuration<ul>
-<li>15+ feature flags for flexible builds</li>
-<li>Automatic dependency detection</li>
-<li>Cross-platform support (Windows, Linux, macOS)</li>
-<li>Compiler support (GCC, Clang, MSVC)</li>
-</ul>
-</li>
-<li><b>Writers</b>:<ul>
-<li><code>console_writer</code>: Standard output/error stream logging</li>
-<li><code>file_writer</code>: Basic file output</li>
-<li><code>rotating_file_writer</code>: Automatic log rotation by size/time</li>
-<li><code>network_writer</code>: Remote logging over network</li>
-<li><code>critical_writer</code>: Synchronous critical message logging</li>
-<li><code>hybrid_writer</code>: Combined multiple writer support</li>
-</ul>
-</li>
-<li><b>Formatters</b>:<ul>
-<li><code>text_formatter</code>: Plain text format</li>
-<li><code>json_formatter</code>: Structured JSON logging</li>
-<li><code>xml_formatter</code>: XML format for legacy systems</li>
-<li>Custom formatter support via IFormatter interface</li>
-</ul>
-</li>
-<li><b>Filters</b>:<ul>
-<li>Log level filtering</li>
-<li>Pattern-based message filtering</li>
-<li>Custom filter support via IFilter interface</li>
-</ul>
-</li>
-<li><b>Integration Support</b>:<ul>
-<li>common_system integration (ILogger, IMonitor, Result&lt;T&gt; pattern)</li>
-<li>thread_system integration (threading primitives, logger_interface)</li>
-<li>monitoring_system integration (metrics and health monitoring via IMonitor)</li>
-</ul>
-</li>
-<li><b>Performance Features</b>:<ul>
-<li>Configurable batching with tunable batch sizes and queue depths</li>
-<li>Lock-free operations on hot path</li>
-<li>Minimal allocations with efficient memory management</li>
-<li>~15 seconds build time for independent compilation</li>
-</ul>
-</li>
-</ul>
-<p></code></p>
-<p><code></code></p>
-<h2><a class="anchor" id="autotoc_md790"></a>
-Changed</h2>
-<p><code></p><ul>
-<li>N/A (Initial release)</li>
-</ul>
-<p></code></p>
-<p><code></code></p>
-<h2><a class="anchor" id="autotoc_md791"></a>
-Deprecated</h2>
-<p><code></p><ul>
-<li>N/A (Initial release)</li>
-</ul>
-<p></code></p>
-<p><code></code></p>
-<h2><a class="anchor" id="autotoc_md792"></a>
-Removed</h2>
-<p><code></p><ul>
-<li>N/A (Initial release)</li>
-</ul>
-<p></code></p>
-<p><code></code></p>
-<h2><a class="anchor" id="autotoc_md793"></a>
-Fixed</h2>
-<p><code></p><ul>
-<li>N/A (Initial release)</li>
-</ul>
-<p></code></p>
-<p><code></code></p>
-<h2><a class="anchor" id="autotoc_md794"></a>
-Security</h2>
-<p><code></p><ul>
-<li>Thread-safe operations ensure concurrent logging without data races</li>
-<li>Encrypted writer support for sensitive log data</li>
-</ul>
-<p></code></p>
-<p><code></p><hr  />
-<p></code></p>
-<p><code></code></p>
-<h1><a class="anchor" id="autotoc_md796"></a>
-Project Information</h1>
-<p><code></code></p>
-<p><code><b>Repository:</b> <a href="https://github.com/kcenon/logger_system">https://github.com/kcenon/logger_system</a> <b>Documentation:</b> <a href="docs/">docs/</a> <b>License:</b> See LICENSE file <b>Maintainer:</b> <a href="#" onclick="location.href='mai'+'lto:'+'kce'+'no'+'n@n'+'av'+'er.'+'co'+'m'; return false;">kceno<span class="obfuscator">.nosp@m.</span>n@na<span class="obfuscator">.nosp@m.</span>ver.c<span class="obfuscator">.nosp@m.</span>om</a></code></p>
-<p><code></p><hr  />
-<p></code></p>
-<p><code></code></p>
-<h1><a class="anchor" id="autotoc_md798"></a>
-Version Support Matrix</h1>
-<p><code></code></p>
-<p><code></p><table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Version   </th><th class="markdownTableHeadNone">Release Date   </th><th class="markdownTableHeadNone">C++ Standard   </th><th class="markdownTableHeadNone">CMake Minimum   </th><th class="markdownTableHeadNone">Status    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">1.0.0   </td><td class="markdownTableBodyNone">2025-10-22   </td><td class="markdownTableBodyNone">C++20   </td><td class="markdownTableBodyNone">3.16   </td><td class="markdownTableBodyNone">Current   </td></tr>
-</table>
-<p></code></p>
-<p><code></p><hr  />
-<p></code></p>
-<p><code></code></p>
-<h1><a class="anchor" id="autotoc_md800"></a>
-Migration Guide</h1>
-<p><code></code></p>
-<p><code>For migration from integrated thread_system or standalone logger implementations, see <a class="el" href="MIGRATION_8md.html">MIGRATION.md</a>.</code></p>
-<p><code></p><hr  />
-<p></code></p>
-<p><code><b>Last Updated:</b> 2025-10-22 </code></p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Dec 6 2025 08:13:50 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Dec 6 2025 10:43:35 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
