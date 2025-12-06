@@ -11,6 +11,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fix broken example files after #226 API changes (Issue #228) - 2025-12-06
+
+#### Removed
+- **migration_example.cpp**: Removed example file demonstrating non-existent v1 API
+  - Referenced `logger_module::v1_compat` namespace that was never implemented
+  - Used undefined functions: `create_logger()`, `create_file_logger()`, `add_file_writer()`
+  - Used undefined macros: `LOG_INFO`, `LOG_DEBUG`, `LOG_ERROR`, `LOG_WARNING`
+  - Used undefined types: `logger_config_v1`
+
+#### Changed
+- **advanced_features_demo.cpp**: Comprehensive rewrite to work with current API
+  - Removed `thread_module` namespace (not available in standalone mode)
+  - Added `filters::` namespace for filter classes
+  - Removed routing code (get_router() not implemented)
+  - Added `<filesystem>` for directory creation
+  - Improved output messages for clarity
+
+#### Disabled (awaiting feature implementation)
+- **distributed_logging_demo.cpp**: Commented out in CMakeLists.txt
+  - Requires unimplemented features: `log_server`, `log_aggregator`, `log_analyzer::time_window_stats`
+- **security_demo.cpp**: Commented out in CMakeLists.txt
+  - Requires unimplemented features: `log_sanitizer`, `structured_logger`, `get_router()`
+
+#### Related Issues
+- Fixes #228: fix(examples): broken example files after #226 API changes
+
+---
+
 ### Standalone async implementation (Issue #222) - 2025-12-06
 
 #### Changed

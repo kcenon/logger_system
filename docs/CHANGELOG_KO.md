@@ -11,6 +11,34 @@ Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문�
 
 ## [Unreleased]
 
+### #226 API 변경 후 손상된 예제 파일 수정 (Issue #228) - 2025-12-06
+
+#### 제거됨
+- **migration_example.cpp**: 존재하지 않는 v1 API를 시연하는 예제 파일 제거
+  - 구현되지 않은 `logger_module::v1_compat` 네임스페이스 참조
+  - 정의되지 않은 함수 사용: `create_logger()`, `create_file_logger()`, `add_file_writer()`
+  - 정의되지 않은 매크로 사용: `LOG_INFO`, `LOG_DEBUG`, `LOG_ERROR`, `LOG_WARNING`
+  - 정의되지 않은 타입 사용: `logger_config_v1`
+
+#### 변경됨
+- **advanced_features_demo.cpp**: 현재 API에 맞게 전체 재작성
+  - `thread_module` 네임스페이스 제거 (독립 모드에서 사용 불가)
+  - 필터 클래스에 `filters::` 네임스페이스 추가
+  - 라우팅 코드 제거 (get_router() 미구현)
+  - 디렉토리 생성을 위한 `<filesystem>` 추가
+  - 명확성을 위한 출력 메시지 개선
+
+#### 비활성화됨 (기능 구현 대기)
+- **distributed_logging_demo.cpp**: CMakeLists.txt에서 주석 처리
+  - 미구현 기능 필요: `log_server`, `log_aggregator`, `log_analyzer::time_window_stats`
+- **security_demo.cpp**: CMakeLists.txt에서 주석 처리
+  - 미구현 기능 필요: `log_sanitizer`, `structured_logger`, `get_router()`
+
+#### 관련 이슈
+- #228 수정: fix(examples): #226 API 변경 후 손상된 예제 파일
+
+---
+
 ### 독립형 비동기 구현 (Issue #222) - 2025-12-06
 
 #### 변경됨
