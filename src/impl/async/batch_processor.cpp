@@ -5,41 +5,104 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
+/**
+ * @file batch_processor.cpp
+ * @brief Batch processor implementation with jthread compatibility
+ * @since 1.3.0 - Refactored to use jthread compatibility layer
+ *
+ * This implementation uses C++20 std::jthread with std::stop_token for
+ * cooperative cancellation where available, with fallback to std::thread
+ * for environments without jthread support (e.g., libc++).
+ */
+
 #include "batch_processor.h"
 #include "../memory/object_pool.h"
-#include <kcenon/thread/core/thread_base.h>
+#include "jthread_compat.h"
+
 #include <algorithm>
 #include <chrono>
+#include <condition_variable>
+#include <thread>
 
 namespace kcenon::logger::async {
 
 /**
- * @brief Worker thread for batch processing using thread_system's thread_base
+ * @brief Worker thread for batch processing with jthread compatibility
+ *
+ * Uses std::jthread with std::stop_token for cooperative cancellation
+ * where available, falls back to std::thread with manual stop mechanism
+ * for environments without jthread support (e.g., libc++).
  */
-class batch_processing_worker : public kcenon::thread::thread_base {
+class batch_processing_jthread_worker {
 public:
     using process_callback = std::function<void()>;
 
-    explicit batch_processing_worker(process_callback callback, std::atomic<bool>& should_stop)
-        : thread_base("batch_processing_worker")
-        , callback_(std::move(callback))
-        , should_stop_(should_stop) {}
+    explicit batch_processing_jthread_worker(process_callback callback)
+        : callback_(std::move(callback))
+#if !LOGGER_HAS_JTHREAD
+        , stop_source_(std::make_shared<simple_stop_source>())
+#endif
+    {}
 
-protected:
-    [[nodiscard]] auto should_continue_work() const -> bool override {
-        return !should_stop_.load(std::memory_order_relaxed);
+    ~batch_processing_jthread_worker() {
+        stop();
     }
 
-    auto do_work() -> kcenon::thread::result_void override {
-        if (callback_ && !should_stop_.load(std::memory_order_relaxed)) {
-            callback_();
+    void start() {
+        if (running_.exchange(true, std::memory_order_acq_rel)) {
+            return;  // Already started
         }
-        return {};
+
+#if LOGGER_HAS_JTHREAD
+        auto callback = callback_;
+        thread_ = compat_jthread([callback](std::stop_token stop_token) {
+            while (!stop_token.stop_requested()) {
+                if (callback) {
+                    callback();
+                }
+                // Brief sleep to control loop frequency
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            }
+        });
+#else
+        // Reset stop source for new start
+        stop_source_->reset();
+
+        auto callback = callback_;
+        auto stop = stop_source_;
+        thread_ = compat_jthread([callback, stop](simple_stop_source& /*unused*/) {
+            while (!stop->stop_requested()) {
+                if (callback) {
+                    callback();
+                }
+                // Brief sleep to control loop frequency
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            }
+        });
+#endif
+    }
+
+    void stop() {
+        if (!running_.exchange(false, std::memory_order_acq_rel)) {
+            return;  // Already stopped
+        }
+
+        // Request stop and join thread
+        thread_.request_stop();
+        thread_.join();
+    }
+
+    [[nodiscard]] bool is_running() const noexcept {
+        return running_.load(std::memory_order_acquire);
     }
 
 private:
     process_callback callback_;
-    std::atomic<bool>& should_stop_;
+    compat_jthread thread_;
+    std::atomic<bool> running_{false};
+#if !LOGGER_HAS_JTHREAD
+    std::shared_ptr<simple_stop_source> stop_source_;
+#endif
 };
 
 batch_processor::batch_processor(std::unique_ptr<base_writer> writer, const config& cfg)
@@ -75,9 +138,8 @@ bool batch_processor::start() {
     }
 
     should_stop_ = false;
-    processing_worker_ = std::make_unique<batch_processing_worker>(
-        [this] { process_loop_iteration(); }, should_stop_);
-    processing_worker_->set_wake_interval(std::chrono::milliseconds(10));
+    processing_worker_ = std::make_unique<batch_processing_jthread_worker>(
+        [this] { process_loop_iteration(); });
     processing_worker_->start();
     return true;
 }
