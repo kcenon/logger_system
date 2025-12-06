@@ -174,16 +174,22 @@ if(NO_VCPKG)
     set(SKIP_VCPKG ON)
 endif()
 
-# thread_system is now OPTIONAL (Issue #222)
-# logger_system now uses standalone std::jthread implementation
+# thread_system is now OPTIONAL (Issue #222, #224)
+# logger_system uses standalone std::jthread implementation by default
+# When enabled, provides optional integration with thread_system's thread_pool
 option(LOGGER_USE_THREAD_SYSTEM "Enable optional thread_system integration" OFF)
 
 if(LOGGER_USE_THREAD_SYSTEM)
     unified_find_dependency(thread_system QUIET)
     if(thread_system_FOUND)
         set(THREAD_SYSTEM_FOUND TRUE)
-        message(STATUS "Using thread_system for optional integration features")
-        add_compile_definitions(USE_THREAD_SYSTEM)
+        message(STATUS "Logger System: thread_system integration enabled")
+
+        # Define LOGGER_HAS_THREAD_SYSTEM for conditional compilation
+        # This macro is used in:
+        # - include/kcenon/logger/integration/thread_system_integration.h
+        # - src/integration/thread_system_integration.cpp
+        add_compile_definitions(LOGGER_HAS_THREAD_SYSTEM)
 
         # Create a unified thread_system target if needed
         if(NOT TARGET thread_system AND NOT TARGET ThreadSystem)
@@ -197,7 +203,7 @@ if(LOGGER_USE_THREAD_SYSTEM)
             endif()
         endif()
     else()
-        message(STATUS "thread_system not found, using standalone mode")
+        message(STATUS "Logger System: thread_system not found, using standalone mode")
         set(THREAD_SYSTEM_FOUND FALSE)
     endif()
 else()
