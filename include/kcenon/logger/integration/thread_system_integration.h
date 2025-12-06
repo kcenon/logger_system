@@ -65,6 +65,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <atomic>
 #include <functional>
 #include <memory>
+#include <mutex>
 #include <string>
 
 // Conditional include for thread_system
