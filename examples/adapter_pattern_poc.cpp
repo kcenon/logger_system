@@ -35,6 +35,10 @@
  * conditional compilation in logger_system. This is NOT production code,
  * but a conceptual example to validate the approach.
  *
+ * @note Since Issue #225, thread_system is OPTIONAL and logger_system uses
+ *       standalone mode by default. This POC illustrates the architectural
+ *       pattern that enables this flexibility.
+ *
  * Compile: clang++ -std=c++20 -I../include adapter_pattern_poc.cpp
  */
 
