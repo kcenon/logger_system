@@ -96,9 +96,6 @@ public:
     explicit log_collector_jthread_worker(std::shared_ptr<log_collector_shared_state> state)
         : state_(std::move(state))
         , running_(false)
-#if !LOGGER_HAS_JTHREAD
-        , stop_source_(std::make_shared<async::simple_stop_source>())
-#endif
     {}
 
     ~log_collector_jthread_worker() {
@@ -117,14 +114,12 @@ public:
             worker_loop(state, stop_token);
         });
 #else
-        // Reset stop source for new start
-        stop_source_->reset();
-
-        // Capture state and stop source by shared_ptr
+        // Create worker thread with manual stop source
+        // Note: We use the stop_source created by compat_jthread to ensure
+        // request_stop() correctly signals the worker loop
         auto state = state_;
-        auto stop = stop_source_;
-        thread_ = async::compat_jthread([state, stop](async::simple_stop_source& /*unused*/) {
-            worker_loop(state, *stop);
+        thread_ = async::compat_jthread([state](async::simple_stop_source& stop) {
+            worker_loop(state, stop);
         });
 #endif
     }
@@ -281,9 +276,6 @@ private:
     std::shared_ptr<log_collector_shared_state> state_;
     async::compat_jthread thread_;
     std::atomic<bool> running_;
-#if !LOGGER_HAS_JTHREAD
-    std::shared_ptr<async::simple_stop_source> stop_source_;
-#endif
 };
 
 class log_collector::impl {
