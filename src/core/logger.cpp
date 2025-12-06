@@ -33,6 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/core/log_collector.h>
 #include <kcenon/logger/core/thread_integration_detector.h>
+#include <kcenon/logger/core/level_converter.h>
 #include <kcenon/logger/backends/standalone_backend.h>
 
 // Conditionally include thread_system_backend when integration is enabled
@@ -44,6 +45,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/interfaces/logger_types.h>
 #include <kcenon/logger/interfaces/log_filter_interface.h>
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/common/patterns/result.h>
 
 #include <atomic>
 #include <chrono>
@@ -243,6 +245,196 @@ log_level logger::get_min_level() const {
     return logger_system::log_level::info;
 }
 
+// =========================================================================
+// ILogger interface implementation (common::interfaces::ILogger)
+// =========================================================================
+
+common::VoidResult logger::log(common::interfaces::log_level level,
+                               const std::string& message) {
+    auto native_level = to_logger_system_level(level);
+
+    if (!pimpl_ || !meets_threshold(native_level, pimpl_->min_level_.load())) {
+        return common::ok();
+    }
+
+    // Apply filter if set
+    {
+        std::shared_lock<std::shared_mutex> filter_lock(pimpl_->filter_mutex_);
+        if (pimpl_->filter_) {
+            log_entry entry(native_level, message);
+            if (!pimpl_->filter_->should_log(entry)) {
+                return common::ok();  // Message filtered out (not an error)
+            }
+        }
+    }
+
+    // Record metrics if enabled
+    auto start_time = std::chrono::high_resolution_clock::now();
+
+    // Convert level using backend
+    auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(native_level));
+
+    // Copy writer pointers under lock to minimize lock hold time
+    std::vector<std::shared_ptr<base_writer>> local_writers;
+    {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
+        local_writers = pimpl_->writers_;
+    }
+
+    // Write without holding lock to avoid I/O under lock
+    for (auto& writer : local_writers) {
+        if (writer) {
+            auto now = std::chrono::system_clock::now();
+            writer->write(converted_level, message, "", 0, "", now);
+        }
+    }
+
+    // Update metrics after logging
+    if (pimpl_->metrics_enabled_) {
+        auto end_time = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
+        metrics::record_message_logged(duration.count());
+    }
+
+    return common::ok();
+}
+
+common::VoidResult logger::log(common::interfaces::log_level level,
+                               std::string_view message,
+                               const common::source_location& loc) {
+    return log(level, std::string(message),
+               std::string(loc.file_name()), loc.line(), std::string(loc.function_name()));
+}
+
+common::VoidResult logger::log(common::interfaces::log_level level,
+                               const std::string& message,
+                               const std::string& file,
+                               int line,
+                               const std::string& function) {
+    auto native_level = to_logger_system_level(level);
+
+    if (!pimpl_ || !meets_threshold(native_level, pimpl_->min_level_.load())) {
+        return common::ok();
+    }
+
+    // Apply filter if set
+    {
+        std::shared_lock<std::shared_mutex> filter_lock(pimpl_->filter_mutex_);
+        if (pimpl_->filter_) {
+            log_entry entry(native_level, message, file, line, function);
+            if (!pimpl_->filter_->should_log(entry)) {
+                return common::ok();  // Message filtered out
+            }
+        }
+    }
+
+    // Record metrics if enabled
+    auto start_time = std::chrono::high_resolution_clock::now();
+
+    // Convert level using backend
+    auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(native_level));
+
+    // Use async path if in async mode
+    if (pimpl_->async_mode_ && pimpl_->collector_) {
+        // Enqueue to collector for background processing
+        auto now = std::chrono::system_clock::now();
+        pimpl_->collector_->enqueue(converted_level, message, file, line, function, now);
+
+        // Update metrics if enabled (async path is much faster)
+        if (pimpl_->metrics_enabled_) {
+            auto end_time = std::chrono::high_resolution_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
+            metrics::record_message_logged(duration.count());
+        }
+        return common::ok();
+    }
+
+    // Synchronous path: Copy writer pointers under lock to minimize lock hold time
+    std::vector<std::shared_ptr<base_writer>> local_writers;
+    {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
+        local_writers = pimpl_->writers_;
+    }
+
+    // Write without holding lock to avoid I/O under lock
+    for (auto& writer : local_writers) {
+        if (writer) {
+            auto now = std::chrono::system_clock::now();
+            writer->write(converted_level, message, file, line, function, now);
+        }
+    }
+
+    // Update metrics after logging
+    if (pimpl_->metrics_enabled_) {
+        auto end_time = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
+        metrics::record_message_logged(duration.count());
+    }
+
+    return common::ok();
+}
+
+common::VoidResult logger::log(const common::interfaces::log_entry& entry) {
+    return log(entry.level, entry.message, entry.file, entry.line, entry.function);
+}
+
+bool logger::is_enabled(common::interfaces::log_level level) const {
+    auto native_level = to_logger_system_level(level);
+    return pimpl_ && meets_threshold(native_level, pimpl_->min_level_.load());
+}
+
+common::VoidResult logger::set_level(common::interfaces::log_level level) {
+    if (!pimpl_) {
+        return common::make_error<std::monostate>(
+            static_cast<int>(logger_error_code::invalid_configuration),
+            "Logger not initialized",
+            "logger_system");
+    }
+
+    pimpl_->min_level_.store(to_logger_system_level(level));
+    return common::ok();
+}
+
+common::interfaces::log_level logger::get_level() const {
+    if (pimpl_) {
+        return to_common_level(pimpl_->min_level_.load());
+    }
+    return common::interfaces::log_level::info;
+}
+
+common::VoidResult logger::flush() {
+    if (!pimpl_) {
+        return common::make_error<std::monostate>(
+            static_cast<int>(logger_error_code::invalid_configuration),
+            "Logger not initialized",
+            "logger_system");
+    }
+
+    if (pimpl_->async_mode_ && pimpl_->collector_) {
+        // Async mode: collector handles both queue draining and writer flushing
+        pimpl_->collector_->flush();
+    } else {
+        // Synchronous mode: manually flush writers
+        std::vector<std::shared_ptr<base_writer>> local_writers;
+        {
+            std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
+            local_writers = pimpl_->writers_;
+        }
+
+        for (auto& writer : local_writers) {
+            if (writer) {
+                writer->flush();
+            }
+        }
+    }
+
+    return common::ok();
+}
+
+// =========================================================================
+// Backward-compatible API implementation (logger_system native types)
+// =========================================================================
+
 void logger::log(log_level level, const std::string& message) {
     if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
         return;
@@ -289,10 +481,10 @@ void logger::log(log_level level, const std::string& message) {
 }
 
 void logger::log(log_level level,
-                const std::string& message,
-                const std::string& file,
-                int line,
-                const std::string& function) {
+                 const std::string& message,
+                 const std::string& file,
+                 int line,
+                 const std::string& function) {
     if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
         return;
     }
@@ -353,35 +545,13 @@ void logger::log(log_level level,
 }
 
 void logger::log(log_level level,
-                const std::string& message,
-                const core::log_context& context) {
+                 const std::string& message,
+                 const core::log_context& context) {
     log(level, message, std::string(context.file), context.line, std::string(context.function));
 }
 
 bool logger::is_enabled(log_level level) const {
     return pimpl_ && meets_threshold(level, pimpl_->min_level_.load());
-}
-
-void logger::flush() {
-    if (pimpl_) {
-        if (pimpl_->async_mode_ && pimpl_->collector_) {
-            // Async mode: collector handles both queue draining and writer flushing
-            pimpl_->collector_->flush();
-        } else {
-            // Synchronous mode: manually flush writers
-            std::vector<std::shared_ptr<base_writer>> local_writers;
-            {
-                std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
-                local_writers = pimpl_->writers_;
-            }
-
-            for (auto& writer : local_writers) {
-                if (writer) {
-                    writer->flush();
-                }
-            }
-        }
-    }
 }
 
 result_void logger::enable_metrics_collection(bool enable) {

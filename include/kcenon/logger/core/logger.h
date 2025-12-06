@@ -36,11 +36,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <vector>
 #include <atomic>
 #include <thread>
+#include <string_view>
 
 #include "thread_integration_detector.h"
 
 // Always use logger_system's own interface
 #include <kcenon/logger/interfaces/logger_interface.h>
+
+// Include common_system's ILogger interface for standardized logging
+#include <kcenon/common/interfaces/logger_interface.h>
 
 #include "error_codes.h"
 #include "metrics/logger_metrics.h"
@@ -144,17 +148,20 @@ class log_filter_interface;  // Forward declaration for filtering system
  * - Integration with monitoring backends for production observability
  *
  * The logger uses the PIMPL idiom to hide implementation details and maintain ABI stability.
- * Implements common::interfaces::IMonitorable for observability (Phase 2.2) and can be
- * adapted to legacy thread_system interfaces through dedicated adapter classes.
+ * Implements common::interfaces::ILogger for standardized logging interface (Phase 2) and
+ * common::interfaces::IMonitorable for observability (Phase 2.2). Can be adapted to legacy
+ * thread_system interfaces through dedicated adapter classes.
  *
  * @warning When using asynchronous mode, ensure proper shutdown by calling stop() and flush()
  * before destroying the logger to prevent loss of buffered messages.
  *
  * @since 1.0.0
+ * @since 2.0.0 Implements common::interfaces::ILogger
  *
  * @note For integration with common_system monitoring interfaces, use logger_monitoring_adapter
  */
-class logger : public security::critical_logger_interface {
+class logger : public security::critical_logger_interface,
+               public common::interfaces::ILogger {
 public:
     /**
      * @brief Constructor with optional configuration
@@ -190,37 +197,135 @@ public:
      */
     ~logger();
     
+    // =========================================================================
+    // ILogger interface implementation (common::interfaces::ILogger)
+    // =========================================================================
+
     /**
-     * @brief Log a simple message
-     * @param level Severity level of the message
+     * @brief Log a message with specified level (ILogger interface)
+     * @param level Log level using common::interfaces::log_level
+     * @param message Log message
+     * @return VoidResult indicating success or error
+     *
+     * @note Implements common::interfaces::ILogger::log
+     * @since 2.0.0
+     */
+    common::VoidResult log(common::interfaces::log_level level,
+                           const std::string& message) override;
+
+    /**
+     * @brief Log a message with source location (ILogger interface, C++20)
+     * @param level Log level
+     * @param message Log message (string_view for efficiency)
+     * @param loc Source location (automatically captured at call site)
+     * @return VoidResult indicating success or error
+     *
+     * @note Implements common::interfaces::ILogger::log with source_location
+     * @since 2.0.0
+     */
+    common::VoidResult log(common::interfaces::log_level level,
+                           std::string_view message,
+                           const common::source_location& loc = common::source_location::current()) override;
+
+    /**
+     * @brief Log a message with source location information (ILogger interface, legacy)
+     * @param level Log level
+     * @param message Log message
+     * @param file Source file name
+     * @param line Source line number
+     * @param function Function name
+     * @return VoidResult indicating success or error
+     *
+     * @deprecated Use log(log_level, std::string_view, const source_location&) instead
+     * @note Implements common::interfaces::ILogger::log (legacy overload)
+     * @since 2.0.0
+     */
+    common::VoidResult log(common::interfaces::log_level level,
+                           const std::string& message,
+                           const std::string& file,
+                           int line,
+                           const std::string& function) override;
+
+    /**
+     * @brief Log a structured entry (ILogger interface)
+     * @param entry Log entry containing all information
+     * @return VoidResult indicating success or error
+     *
+     * @note Implements common::interfaces::ILogger::log(const log_entry&)
+     * @since 2.0.0
+     */
+    common::VoidResult log(const common::interfaces::log_entry& entry) override;
+
+    /**
+     * @brief Check if logging is enabled for the specified level (ILogger interface)
+     * @param level Log level to check using common::interfaces::log_level
+     * @return true if logging is enabled for this level
+     *
+     * @note Implements common::interfaces::ILogger::is_enabled
+     * @since 2.0.0
+     */
+    bool is_enabled(common::interfaces::log_level level) const override;
+
+    /**
+     * @brief Set the minimum log level (ILogger interface)
+     * @param level Minimum level for messages to be logged
+     * @return VoidResult indicating success or error
+     *
+     * @note Implements common::interfaces::ILogger::set_level
+     * @since 2.0.0
+     */
+    common::VoidResult set_level(common::interfaces::log_level level) override;
+
+    /**
+     * @brief Get the current minimum log level (ILogger interface)
+     * @return Current minimum log level using common::interfaces::log_level
+     *
+     * @note Implements common::interfaces::ILogger::get_level
+     * @since 2.0.0
+     */
+    common::interfaces::log_level get_level() const override;
+
+    /**
+     * @brief Flush any buffered log messages (ILogger interface)
+     * @return VoidResult indicating success or error
+     *
+     * @note Implements common::interfaces::ILogger::flush
+     * @since 2.0.0
+     */
+    common::VoidResult flush() override;
+
+    // =========================================================================
+    // Backward-compatible API (logger_system native types)
+    // These methods allow seamless use of logger_system::log_level
+    // =========================================================================
+
+    /**
+     * @brief Log a simple message using native log_level
+     * @param level Severity level of the message using logger_system::log_level
      * @param message The message to log
-     * 
+     *
      * @details Logs a message without source location information.
      * The message is queued for asynchronous processing if async mode is enabled.
-     * 
+     * Internally converts to common::interfaces::log_level.
+     *
      * @note Messages below the minimum log level are discarded for performance.
-     * 
+     *
      * @since 1.0.0
      */
     void log(log_level level, const std::string& message);
-    
+
     /**
-     * @brief Log a message with source location
-     * @param level Severity level of the message
+     * @brief Log a message with source location using native log_level
+     * @param level Severity level of the message using logger_system::log_level
      * @param message The message to log
      * @param file Source file name (typically __FILE__)
      * @param line Line number in source file (typically __LINE__)
      * @param function Function name (typically __FUNCTION__)
-     * 
+     *
      * @details Logs a message with complete source location information for debugging.
      * This overload is useful for tracking the exact origin of log messages.
-     * 
-     * @example
-     * @code
-     * logger.log(log_level::error, "Database connection failed", 
-     *           __FILE__, __LINE__, __FUNCTION__);
-     * @endcode
-     * 
+     * Internally converts to common::interfaces::log_level.
+     *
      * @since 1.0.0
      */
     void log(log_level level,
@@ -230,45 +335,28 @@ public:
              const std::string& function);
 
     /**
-     * @brief Log using a precomputed log_context.
+     * @brief Log using a precomputed log_context
+     * @param level Severity level using logger_system::log_level
+     * @param message The message to log
+     * @param context Source location context
+     *
+     * @since 1.0.0
      */
     void log(log_level level,
              const std::string& message,
              const core::log_context& context);
-    
+
     /**
-     * @brief Check if a log level is enabled
-     * @param level The log level to check
+     * @brief Check if a log level is enabled using native log_level
+     * @param level The log level to check using logger_system::log_level
      * @return true if messages at this level will be logged, false otherwise
-     * 
+     *
      * @details Use this method to avoid expensive message construction
      * for log levels that won't be output.
-     * 
-     * @example
-     * @code
-     * if (logger.is_enabled(log_level::debug)) {
-     *     std::string expensive_debug_info = gather_debug_data();
-     *     logger.log(log_level::debug, expensive_debug_info);
-     * }
-     * @endcode
-     * 
+     *
      * @since 1.0.0
      */
     bool is_enabled(log_level level) const;
-    
-    /**
-     * @brief Flush all pending log messages
-     * 
-     * @details Forces immediate writing of all buffered messages to their destinations.
-     * This is a blocking operation that waits until all messages are processed.
-     * 
-     * @note In synchronous mode, this is a no-op as messages are written immediately.
-     * 
-     * @warning May cause performance degradation if called frequently in async mode.
-     * 
-     * @since 1.0.0
-     */
-    void flush();
     
     // Additional logger-specific methods
     
@@ -310,38 +398,29 @@ public:
     result_void clear_writers();
     
     /**
-     * @brief Set the minimum log level
-     * @param level Minimum level to log
-     * 
+     * @brief Set the minimum log level (legacy API)
+     * @param level Minimum level to log using logger_system::log_level
+     *
      * @details Sets the threshold for message logging. Messages with a level
      * below this threshold are discarded for performance optimization.
-     * 
+     *
+     * @deprecated Use set_level(common::interfaces::log_level) instead
      * @note This is a thread-safe operation that takes effect immediately.
-     * 
-     * @example
-     * @code
-     * // In production, only log warnings and errors
-     * logger.set_min_level(log_level::warning);
-     * 
-     * // In development, log everything
-     * logger.set_min_level(log_level::trace);
-     * @endcode
-     * 
+     *
      * @since 1.0.0
      */
     void set_min_level(log_level level);
-    void set_level(log_level level) { set_min_level(level); }
-    
+
     /**
-     * @brief Get the minimum log level
-     * @return Current minimum log level
-     * 
+     * @brief Get the minimum log level (legacy API)
+     * @return Current minimum log level using logger_system::log_level
+     *
+     * @deprecated Use get_level() which returns common::interfaces::log_level instead
      * @details Returns the current threshold level for message logging.
-     * 
+     *
      * @since 1.0.0
      */
     log_level get_min_level() const;
-    log_level get_level() const { return get_min_level(); }
     
     /**
      * @brief Start the logger (for async mode)

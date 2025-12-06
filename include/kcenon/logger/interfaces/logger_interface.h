@@ -54,6 +54,25 @@
 
 #pragma once
 
+/**
+ * @file logger_interface.h
+ * @brief Logger interface for standalone mode
+ *
+ * @deprecated This header is deprecated in favor of common_system's standard interface.
+ *             Use kcenon/common/interfaces/logger_interface.h instead.
+ *             - Use common::interfaces::ILogger instead of logger_system::logger_interface
+ *             - Use common::interfaces::log_level instead of logger_system::log_level
+ *             This header will be removed in v3.0.0.
+ *
+ * @note Migration guide:
+ *       - Replace logger_interface with common::interfaces::ILogger
+ *       - Replace log(log_level, const std::string&) with
+ *         log(common::interfaces::log_level, const std::string&)
+ *       - Use the new source_location-based log() method where possible
+ *
+ * @see kcenon/common/interfaces/logger_interface.h for the standard interface
+ */
+
 // Logger interface for standalone mode
 // Note: Integration with thread_system is handled via backend pattern
 #include <kcenon/logger/core/thread_integration_detector.h>
@@ -78,6 +97,10 @@ using VoidResult = kcenon::common::VoidResult;
  *
  * This interface provides a logging contract for standalone logger implementations.
  * All methods are noexcept and return VoidResult for exception-free error handling.
+ *
+ * @deprecated Use common::interfaces::ILogger instead.
+ *             This interface is maintained for backward compatibility only.
+ *             Will be removed in v3.0.0.
  */
 class logger_interface {
 public:

@@ -15,6 +15,10 @@ on:
     # Run daily at 2 AM UTC
     - cron: '0 2 * * *'
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   benchmark:
     name: Run Performance Benchmarks
@@ -25,7 +29,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04, macos-14]
-        compiler: [clang]
+        # Ubuntu uses GCC 13 for std::format+std::jthread, macOS uses Clang
+        compiler: [gcc]
         build_type: [Release]
 
     steps:
@@ -51,30 +56,32 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
-        # Install LLVM 17 with libc++ for std::format support
-        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-        sudo add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main"
+        # Install GCC 13 for std::format and std::jthread support
+        # (Clang 17 with libstdc++ doesn't support std::format,
+        #  and libc++ doesn't support std::jthread)
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
         sudo apt-get update
         sudo apt-get install -y \
-          cmake ninja-build clang-17 libc++-17-dev libc++abi-17-dev lld-17 \
+          cmake ninja-build gcc-13 g++-13 \
           libbenchmark-dev libgtest-dev \
           python3-pip
-        # Create symlinks for clang-17
-        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
-        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
+        # Set GCC 13 as default
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
         pip3 install matplotlib
 
     - name: Install dependencies (macOS)
       if: runner.os == 'macOS'
       run: |
         brew install ninja google-benchmark googletest
-        pip3 install matplotlib
+        # Use --break-system-packages for PEP 668 compliant Python
+        pip3 install --break-system-packages matplotlib || pip3 install matplotlib --user
 
     - name: Set up compiler (Ubuntu)
       if: runner.os == 'Linux'
       run: |
-        echo "CC=clang-17" >> $GITHUB_ENV
-        echo "CXX=clang++-17" >> $GITHUB_ENV
+        echo "CC=gcc-13" >> $GITHUB_ENV
+        echo "CXX=g++-13" >> $GITHUB_ENV
 
     - name: Set up compiler (macOS)
       if: runner.os == 'macOS'
@@ -82,11 +89,15 @@ jobs:
         echo "CC=clang" >> $GITHUB_ENV
         echo "CXX=clang++" >> $GITHUB_ENV
 
+    - name: Set matrix environment variables
+      run: |
+        echo "MATRIX_OS=${{ matrix.os }}" >> $GITHUB_ENV
+
     - name: Configure CMake
       run: |
-        # Note: Using libstdc++ (default) for std::jthread support
-        # libc++ does not implement std::jthread/std::stop_token yet
-        # GCC 13+ libstdc++ supports both std::format and std::jthread
+        # Note: Using GCC 13+ on Ubuntu for both std::format and std::jthread support
+        # Clang 17 with libstdc++ doesn't support std::format,
+        # and libc++ doesn't support std::jthread yet
 
         cmake -B build -S logger_system \
           -GNinja \
@@ -100,39 +111,41 @@ jobs:
 
     - name: Run benchmarks
       run: |
-        cd build/benchmarks
+        cd build/bin
         echo "Running benchmarks..."
 
-        # Run all benchmarks and output to JSON
-        for bench in logger_*_bench object_pool_bench; do
-          if [ -f "$bench" ]; then
-            echo "Running $bench..."
-            ./$bench \
+        # List available benchmark binaries
+        echo "Available benchmark binaries:"
+        ls -la *benchmark* 2>/dev/null || ls -la *bench* 2>/dev/null || echo "No benchmark binaries found"
+
+        # Run the logger_benchmarks binary (built by CMakeLists.txt)
+        if [ -f "logger_benchmarks" ]; then
+          echo "Running logger_benchmarks..."
+          ./logger_benchmarks \
+            --benchmark_format=json \
+            --benchmark_out=logger_benchmarks_results.json \
+            --benchmark_repetitions=3 \
+            --benchmark_report_aggregates_only=true \
+            --benchmark_min_time=1.0 \
+            || true
+        else
+          echo "⚠️ logger_benchmarks binary not found"
+          # Try to find in parent benchmarks directory
+          if [ -f "../benchmarks/logger_benchmarks" ]; then
+            echo "Found in ../benchmarks/, running..."
+            ../benchmarks/logger_benchmarks \
               --benchmark_format=json \
-              --benchmark_out=${bench}_results.json \
-              --benchmark_repetitions=10 \
+              --benchmark_out=logger_benchmarks_results.json \
+              --benchmark_repetitions=3 \
               --benchmark_report_aggregates_only=true \
-              --benchmark_min_time=5.0 \
+              --benchmark_min_time=1.0 \
               || true
           fi
-        done
+        fi
 
         # Merge all results into single file
         cd ../..
-        python3 -c "
-import json
-import glob
-results = {'benchmarks': []}
-for f in glob.glob('build/benchmarks/*_results.json'):
-    with open(f) as file:
-        data = json.load(file)
-        if 'benchmarks' in data:
-            results['benchmarks'].extend(data['benchmarks'])
-        if 'context' not in results and 'context' in data:
-            results['context'] = data['context']
-with open('build/benchmark_results_${{ matrix.os }}.json', 'w') as out:
-    json.dump(results, out, indent=2)
-        "
+        python3 logger_system/scripts/ci/merge_benchmark_results.py
 
         echo "✅ Benchmarks completed" >> $GITHUB_STEP_SUMMARY
 
@@ -205,6 +218,7 @@ with open('build/benchmark_results_${{ matrix.os }}.json', 'w') as out:
 
     - name: Post PR comment
       if: github.event_name == 'pull_request' && matrix.os == 'ubuntu-22.04'
+      continue-on-error: true  # Don't fail workflow if comment fails
       uses: actions/github-script@v7
       with:
         script: |
@@ -214,12 +228,18 @@ with open('build/benchmark_results_${{ matrix.os }}.json', 'w') as out:
           if (fs.existsSync(reportPath)) {
             const report = fs.readFileSync(reportPath, 'utf8');
 
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: report
-            });
+            try {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: report
+              });
+              console.log('Successfully posted PR comment');
+            } catch (error) {
+              console.log('Failed to post PR comment:', error.message);
+              console.log('This is non-fatal - benchmark results are in step summary');
+            }
           }
 
     - name: Commit performance updates
@@ -253,21 +273,24 @@ with open('build/benchmark_results_${{ matrix.os }}.json', 'w') as out:
         echo "✅ Baseline saved: benchmarks/baselines/baseline_${{ matrix.os }}_$(date +%Y%m%d).json" >> $GITHUB_STEP_SUMMARY
 
     # Historical benchmark tracking with github-action-benchmark
+    # Only run on main branch push (not PRs) since it requires gh-pages branch access
     - name: Store benchmark results for tracking
-      if: matrix.os == 'ubuntu-22.04'
+      if: matrix.os == 'ubuntu-22.04' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+      continue-on-error: true  # Don't fail workflow if benchmark tracking fails
+      working-directory: logger_system
       uses: benchmark-action/github-action-benchmark@v1
       with:
         name: Logger System Performance
         tool: 'googlecpp'
-        output-file-path: build/benchmark_results_${{ matrix.os }}.json
+        output-file-path: benchmarks/results/latest_${{ matrix.os }}.json
         # Store data in gh-pages branch
         gh-pages-branch: gh-pages
         benchmark-data-dir-path: dev/bench
-        # Commit benchmark data only on main branch push
-        auto-push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        # Auto-push on main branch
+        auto-push: true
         # Alert on performance regression (10% threshold)
         alert-threshold: '110%'
-        # Comment on PR with comparison
+        # Comment on alert
         comment-on-alert: true
         fail-on-alert: false
         # GitHub token for pushing and commenting
@@ -287,6 +310,9 @@ with open('build/benchmark_results_${{ matrix.os }}.json', 'w') as out:
     if: always()
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
     - name: Download all artifacts
       uses: actions/download-artifact@v4
 
@@ -304,28 +330,7 @@ with open('build/benchmark_results_${{ matrix.os }}.json', 'w') as out:
               echo "✅ Benchmarks completed" >> $GITHUB_STEP_SUMMARY
 
               # Extract key metrics
-              python3 -c "
-import json
-import sys
-
-try:
-    with open('$dir/benchmarks/results/summary.json') as f:
-        data = json.load(f)
-        summary = data.get('summary', {})
-
-    if 'peak_throughput_msg_per_sec' in summary:
-        throughput = summary['peak_throughput_msg_per_sec']
-        print(f'  - **Peak Throughput**: {throughput/1_000_000:.2f}M msg/s')
-
-    if 'avg_latency_ns' in summary:
-        latency = summary['avg_latency_ns']
-        if latency < 1000:
-            print(f'  - **Avg Latency**: {latency:.1f} ns')
-        else:
-            print(f'  - **Avg Latency**: {latency/1000:.2f} μs')
-except:
-    pass
-              " >> $GITHUB_STEP_SUMMARY
+              python3 scripts/ci/extract_benchmark_metrics.py "$dir/benchmarks/results/summary.json" >> $GITHUB_STEP_SUMMARY
 
               echo "" >> $GITHUB_STEP_SUMMARY
             else

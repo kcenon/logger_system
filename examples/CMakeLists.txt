@@ -51,6 +51,14 @@ if(BUILD_SAMPLES AND NOT BUILD_WITH_COMMON_SYSTEM)
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
 
+    # NOTE: The following examples are temporarily disabled due to API compatibility issues.
+    # They use deprecated or not-yet-implemented APIs that need to be updated.
+    # See Issue #228 for tracking: examples need API updates for v2 compatibility
+    #
+    # - distributed_logging_demo.cpp: Uses unimplemented network classes (log_server, log_aggregator)
+    # - security_demo.cpp: Uses unimplemented log_sanitizer class
+    # - migration_example.cpp: Removed - used non-existent compatibility.h and v1 APIs
+    #
     # TODO: distributed_logging_demo requires unimplemented features (log_server, log_aggregator)
     # Re-enable when Issue #XXX is resolved
     # add_executable(distributed_logging_demo distributed_logging_demo.cpp)

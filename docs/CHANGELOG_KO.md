@@ -39,6 +39,80 @@ Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문�
 
 ---
 
+### common::interfaces::ILogger 구현 - 2025-12-06
+
+#### 추가됨
+- **ILogger 인터페이스 구현 (Issue #223)**: Logger가 이제 `common::interfaces::ILogger`를 구현
+  - common_system의 표준화된 로깅 인터페이스와 완전한 호환성
+  - thread_system 및 기타 kcenon 생태계 컴포넌트와 원활한 통합
+  - `logger_system::log_level`과 `common::interfaces::log_level` 간 타입 안전 로그 레벨 변환
+
+- **새로운 level_converter.h**: 로그 레벨 타입 간 변환을 위한 유틸리티 헤더
+  - `to_logger_system_level()`: common에서 네이티브 로그 레벨로 변환
+  - `to_common_level()`: 네이티브에서 common 로그 레벨로 변환
+  - 제로 오버헤드 변환을 위한 constexpr 함수
+
+- **ILogger 인터페이스 메서드**:
+  - `log(log_level, const std::string&)` → `VoidResult` 반환
+  - `log(log_level, std::string_view, const source_location&)` → `VoidResult` 반환
+  - `log(log_level, message, file, line, function)` → `VoidResult` 반환
+  - `log(const log_entry&)` → 구조화된 로깅 지원
+  - `is_enabled(log_level)` → 레벨 활성화 여부 확인
+  - `set_level(log_level)` → 최소 로그 레벨 설정, `VoidResult` 반환
+  - `get_level()` → `common::interfaces::log_level`로 현재 최소 레벨 반환
+  - `flush()` → 버퍼 플러시, `VoidResult` 반환
+
+- **ILogger 인터페이스 호환성 테스트**: `tests/unit/ilogger_interface_test.cpp`에 새 테스트 스위트
+  - 인터페이스 호환성을 위한 13개의 포괄적인 테스트
+  - 다형적 사용, 레벨 변환 및 하위 호환성 테스트
+
+#### 변경됨
+- **logger 클래스가 이제 두 인터페이스 모두 상속**:
+  - `security::critical_logger_interface` (기존)
+  - `common::interfaces::ILogger` (새로운 표준화된 인터페이스)
+
+- **ILogger 준수를 위한 반환 타입 업데이트**:
+  - `log()` 메서드가 이제 `void` 대신 `common::VoidResult` 반환
+  - `flush()`가 이제 `void` 대신 `common::VoidResult` 반환
+  - `set_level()`이 이제 `void` 대신 `common::VoidResult` 반환
+
+#### 사용 중단됨
+- **logger_types.h**: `kcenon/common/interfaces/logger_interface.h`를 사용하도록 권장
+  - `logger_system::log_level` 사용 중단 표시, `common::interfaces::log_level` 사용
+  - v3.0.0에서 제거 예정
+
+- **logger_interface.h** (logger_system 네임스페이스): common_system의 ILogger를 사용하도록 권장
+  - `logger_system::logger_interface` 사용 중단 표시, `common::interfaces::ILogger` 사용
+  - v3.0.0에서 제거 예정
+
+#### 하위 호환성
+- **모든 기존 API 유지**: 네이티브 `logger_system::log_level` 오버로드가 여전히 작동
+  - `log(log_level, message)` - 시그니처 및 동작 변경 없음
+  - `log(log_level, message, file, line, function)` - 변경 없음
+  - `is_enabled(log_level)` - 변경 없음
+  - `set_min_level(log_level)` - 변경 없음
+  - `get_min_level()` - 네이티브 log_level 반환
+
+#### 마이그레이션 가이드
+기존 코드는 변경 없이 계속 작동합니다. 새로운 ILogger 인터페이스를 사용하려면:
+
+```cpp
+// ILogger 인터페이스를 통해 logger 사용
+std::shared_ptr<common::interfaces::ILogger> ilogger = my_logger;
+ilogger->log(common::interfaces::log_level::info, "Message");
+
+// 또는 두 스타일 혼합 사용
+logger->log(log_level::info, "Native style");  // 여전히 작동
+logger->log(ci::log_level::info, std::string("ILogger style"));  // 새로운 방식
+```
+
+#### 관련 이슈
+- #223 종료 (common::interfaces::ILogger 구현)
+- #224의 선행 작업 (thread_system 통합)
+- #225의 선행 작업 (thread_system_backend 제거)
+
+---
+
 ### 독립형 비동기 구현 (Issue #222) - 2025-12-06
 
 #### 변경됨
