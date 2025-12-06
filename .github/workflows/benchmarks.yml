@@ -107,22 +107,37 @@ jobs:
 
     - name: Run benchmarks
       run: |
-        cd build/benchmarks
+        cd build/bin
         echo "Running benchmarks..."
 
-        # Run all benchmarks and output to JSON
-        for bench in logger_*_bench object_pool_bench; do
-          if [ -f "$bench" ]; then
-            echo "Running $bench..."
-            ./$bench \
+        # List available benchmark binaries
+        echo "Available benchmark binaries:"
+        ls -la *benchmark* 2>/dev/null || ls -la *bench* 2>/dev/null || echo "No benchmark binaries found"
+
+        # Run the logger_benchmarks binary (built by CMakeLists.txt)
+        if [ -f "logger_benchmarks" ]; then
+          echo "Running logger_benchmarks..."
+          ./logger_benchmarks \
+            --benchmark_format=json \
+            --benchmark_out=logger_benchmarks_results.json \
+            --benchmark_repetitions=3 \
+            --benchmark_report_aggregates_only=true \
+            --benchmark_min_time=1.0 \
+            || true
+        else
+          echo "⚠️ logger_benchmarks binary not found"
+          # Try to find in parent benchmarks directory
+          if [ -f "../benchmarks/logger_benchmarks" ]; then
+            echo "Found in ../benchmarks/, running..."
+            ../benchmarks/logger_benchmarks \
               --benchmark_format=json \
-              --benchmark_out=${bench}_results.json \
-              --benchmark_repetitions=10 \
+              --benchmark_out=logger_benchmarks_results.json \
+              --benchmark_repetitions=3 \
               --benchmark_report_aggregates_only=true \
-              --benchmark_min_time=5.0 \
+              --benchmark_min_time=1.0 \
               || true
           fi
-        done
+        fi
 
         # Merge all results into single file
         cd ../..

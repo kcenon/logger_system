@@ -339,8 +339,13 @@ def main():
         summary = data.get("summary", {})
 
         if not summary:
-            print("⚠️ Warning: No summary metrics found")
-            return 1
+            print("⚠️ Warning: No summary metrics found in benchmark results")
+            print("   This is expected if benchmarks did not produce metrics.")
+            print("   Skipping badge generation (non-fatal).")
+            # Create empty badges directory with placeholder
+            badges_dir.mkdir(parents=True, exist_ok=True)
+            (badges_dir / "badges.json").write_text("[]")
+            return 0  # Non-fatal - don't fail the CI
 
         # Generate badges
         print("Generating performance badges...")

@@ -36,5 +36,31 @@ def merge_results(output_pattern: str, matrix_os: str) -> None:
 
 if __name__ == '__main__':
     matrix_os = os.environ.get('MATRIX_OS', 'unknown')
-    pattern = 'build/benchmarks/*_results.json'
-    merge_results(pattern, matrix_os)
+    # Search in both bin and benchmarks directories
+    patterns = [
+        'build/bin/*_results.json',
+        'build/benchmarks/*_results.json',
+    ]
+
+    results = {'benchmarks': []}
+    files_found = []
+
+    for pattern in patterns:
+        for f in glob.glob(pattern):
+            files_found.append(f)
+            try:
+                with open(f) as file:
+                    data = json.load(file)
+                    if 'benchmarks' in data:
+                        results['benchmarks'].extend(data['benchmarks'])
+                    if 'context' not in results and 'context' in data:
+                        results['context'] = data['context']
+            except (json.JSONDecodeError, IOError) as e:
+                print(f"Warning: Could not process {f}: {e}", file=sys.stderr)
+
+    output_file = f'build/benchmark_results_{matrix_os}.json'
+    with open(output_file, 'w') as out:
+        json.dump(results, out, indent=2)
+
+    print(f"Found files: {files_found}")
+    print(f"Merged {len(results['benchmarks'])} benchmarks to {output_file}")
