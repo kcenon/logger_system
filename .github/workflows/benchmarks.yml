@@ -273,21 +273,24 @@ jobs:
         echo "✅ Baseline saved: benchmarks/baselines/baseline_${{ matrix.os }}_$(date +%Y%m%d).json" >> $GITHUB_STEP_SUMMARY
 
     # Historical benchmark tracking with github-action-benchmark
+    # Only run on main branch push (not PRs) since it requires gh-pages branch access
     - name: Store benchmark results for tracking
-      if: matrix.os == 'ubuntu-22.04'
+      if: matrix.os == 'ubuntu-22.04' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+      continue-on-error: true  # Don't fail workflow if benchmark tracking fails
+      working-directory: logger_system
       uses: benchmark-action/github-action-benchmark@v1
       with:
         name: Logger System Performance
         tool: 'googlecpp'
-        output-file-path: build/benchmark_results_${{ matrix.os }}.json
+        output-file-path: benchmarks/results/latest_${{ matrix.os }}.json
         # Store data in gh-pages branch
         gh-pages-branch: gh-pages
         benchmark-data-dir-path: dev/bench
-        # Commit benchmark data only on main branch push
-        auto-push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        # Auto-push on main branch
+        auto-push: true
         # Alert on performance regression (10% threshold)
         alert-threshold: '110%'
-        # Comment on PR with comparison
+        # Comment on alert
         comment-on-alert: true
         fail-on-alert: false
         # GitHub token for pushing and commenting
