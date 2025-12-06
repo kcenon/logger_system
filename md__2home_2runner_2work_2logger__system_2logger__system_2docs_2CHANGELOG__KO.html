@@ -93,17 +93,60 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">변경 이력 - Logger System</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md796"></a> </p><blockquote class="doxtable">
+<div class="textblock"><p><a class="anchor" id="autotoc_md802"></a> </p><blockquote class="doxtable">
 <p>&zwj;<b>언어:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html">English</a> | <b>한국어</b> </p>
 </blockquote>
 <p>Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문서화됩니다.</p>
 <p>형식은 <a href="https://keepachangelog.com/ko/1.0.0/">Keep a Changelog</a>를 따르며, 이 프로젝트는 <a href="https://semver.org/lang/ko/spec/v2.0.0.html">Semantic Versioning</a>을 준수합니다.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md798"></a>
+<h1><a class="anchor" id="autotoc_md804"></a>
 [Unreleased]</h1>
-<h2><a class="anchor" id="autotoc_md799"></a>
+<h2><a class="anchor" id="autotoc_md805"></a>
+#226 API 변경 후 손상된 예제 파일 수정 (Issue #228) - 2025-12-06</h2>
+<h3><a class="anchor" id="autotoc_md806"></a>
+제거됨</h3>
+<ul>
+<li><b>migration_example.cpp</b>: 존재하지 않는 v1 API를 시연하는 예제 파일 제거<ul>
+<li>구현되지 않은 <code>logger_module::v1_compat</code> 네임스페이스 참조</li>
+<li>정의되지 않은 함수 사용: <code>create_logger()</code>, <code>create_file_logger()</code>, <code>add_file_writer()</code></li>
+<li>정의되지 않은 매크로 사용: <code>LOG_INFO</code>, <code>LOG_DEBUG</code>, <code>LOG_ERROR</code>, <code>LOG_WARNING</code></li>
+<li>정의되지 않은 타입 사용: <code>logger_config_v1</code></li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md807"></a>
+변경됨</h3>
+<ul>
+<li><b>advanced_features_demo.cpp</b>: 현재 API에 맞게 전체 재작성<ul>
+<li><code>thread_module</code> 네임스페이스 제거 (독립 모드에서 사용 불가)</li>
+<li>필터 클래스에 <code>filters::</code> 네임스페이스 추가</li>
+<li>라우팅 코드 제거 (get_router() 미구현)</li>
+<li>디렉토리 생성을 위한 <code>&lt;filesystem&gt;</code> 추가</li>
+<li>명확성을 위한 출력 메시지 개선</li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md808"></a>
+비활성화됨 (기능 구현 대기)</h3>
+<ul>
+<li><b>distributed_logging_demo.cpp</b>: CMakeLists.txt에서 주석 처리<ul>
+<li>미구현 기능 필요: <code>log_server</code>, <code>log_aggregator</code>, <code>log_analyzer::time_window_stats</code></li>
+</ul>
+</li>
+<li><b>security_demo.cpp</b>: CMakeLists.txt에서 주석 처리<ul>
+<li>미구현 기능 필요: <code>log_sanitizer</code>, <code>structured_logger</code>, <code>get_router()</code></li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md809"></a>
+관련 이슈</h3>
+<ul>
+<li>#228 수정: fix(examples): #226 API 변경 후 손상된 예제 파일</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md811"></a>
 독립형 비동기 구현 (Issue #222) - 2025-12-06</h2>
-<h3><a class="anchor" id="autotoc_md800"></a>
+<h3><a class="anchor" id="autotoc_md812"></a>
 변경됨</h3>
 <ul>
 <li><b>thread_system이 이제 선택 사항</b>: Logger 시스템은 독립적으로 빌드 및 실행 가능<ul>
@@ -120,7 +163,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md801"></a>
+<h3><a class="anchor" id="autotoc_md813"></a>
 추가됨</h3>
 <ul>
 <li><b>async_worker 클래스</b>: std::jthread를 사용하는 새로운 독립형 비동기 워커<ul>
@@ -131,7 +174,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md802"></a>
+<h3><a class="anchor" id="autotoc_md814"></a>
 이점</h3>
 <ul>
 <li><b>순환 의존성 해결</b>: thread_system에서 이제 logger_system을 로깅에 사용 가능</li>
@@ -139,7 +182,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li><b>더 나은 종료</b>: std::jthread가 더 깔끔한 RAII 기반 스레드 관리 제공</li>
 <li><b>협력적 취소</b>: 종료 경로에서 폴링/바쁜 대기 없음</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md803"></a>
+<h3><a class="anchor" id="autotoc_md815"></a>
 마이그레이션 가이드</h3>
 <ul>
 <li><b>기본 동작</b>: logger_system이 이제 독립적으로 빌드됨 (thread_system 없음)</li>
@@ -147,16 +190,16 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </div><!-- fragment --></li>
 <li>통합 활성화 시 기존 기능 유지</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md804"></a>
+<h3><a class="anchor" id="autotoc_md816"></a>
 관련 이슈</h3>
 <ul>
 <li>#222 종료: std::jthread를 사용하는 async_worker 클래스 구현</li>
 <li>#223, #224, #225의 선행 작업</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md806"></a>
+<h2><a class="anchor" id="autotoc_md818"></a>
 CMake fmt Fallback 제거 - 2025-12-03</h2>
-<h3><a class="anchor" id="autotoc_md807"></a>
+<h3><a class="anchor" id="autotoc_md819"></a>
 변경됨</h3>
 <ul>
 <li><b>CMake 설정에서 std::format 필수</b>: 모든 fmt 라이브러리 fallback 로직 제거<ul>
@@ -165,7 +208,7 @@ CMake fmt Fallback 제거 - 2025-12-03</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md808"></a>
+<h3><a class="anchor" id="autotoc_md820"></a>
 제거됨</h3>
 <ul>
 <li><b>CMake의 fmt 라이브러리 fallback</b>:<ul>
@@ -176,7 +219,7 @@ CMake fmt Fallback 제거 - 2025-12-03</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md809"></a>
+<h3><a class="anchor" id="autotoc_md821"></a>
 이점</h3>
 <ul>
 <li><b>깔끔한 CMake 설정</b>: fallback 복잡성 없이 단순화된 기능 감지</li>
@@ -184,16 +227,16 @@ CMake fmt Fallback 제거 - 2025-12-03</h2>
 <li><b>의존성 감소</b>: 조건부 fmt 라이브러리 링킹 없음</li>
 <li><b>프로젝트 간 정렬</b>: thread_system, container_system, network_system, database_system과 일치</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md810"></a>
+<h3><a class="anchor" id="autotoc_md822"></a>
 관련 이슈</h3>
 <ul>
 <li>프로젝트 간 표준화 작업의 일부</li>
 <li>참고: thread_system#219, container_system#168, network_system#257, database_system#203</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md812"></a>
+<h1><a class="anchor" id="autotoc_md824"></a>
 [1.0.0] - 2025-10-22</h1>
-<h2><a class="anchor" id="autotoc_md813"></a>
+<h2><a class="anchor" id="autotoc_md825"></a>
 추가됨</h2>
 <ul>
 <li><b>핵심 Logger System</b>: 프로덕션 준비 완료된 C++20 비동기 로깅 프레임워크<ul>
@@ -264,38 +307,38 @@ CMake fmt Fallback 제거 - 2025-12-03</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md814"></a>
+<h2><a class="anchor" id="autotoc_md826"></a>
 변경됨</h2>
 <ul>
 <li>해당 없음 (최초 릴리스)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md815"></a>
+<h2><a class="anchor" id="autotoc_md827"></a>
 사용 중단됨</h2>
 <ul>
 <li>해당 없음 (최초 릴리스)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md816"></a>
+<h2><a class="anchor" id="autotoc_md828"></a>
 제거됨</h2>
 <ul>
 <li>해당 없음 (최초 릴리스)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md817"></a>
+<h2><a class="anchor" id="autotoc_md829"></a>
 수정됨</h2>
 <ul>
 <li>해당 없음 (최초 릴리스)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md818"></a>
+<h2><a class="anchor" id="autotoc_md830"></a>
 보안</h2>
 <ul>
 <li>스레드 안전 작업으로 데이터 경쟁 없는 동시 로깅 보장</li>
 <li>민감한 로그 데이터를 위한 암호화 writer 지원</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md820"></a>
+<h1><a class="anchor" id="autotoc_md832"></a>
 프로젝트 정보</h1>
 <p><b>저장소:</b> <a href="https://github.com/kcenon/logger_system">https://github.com/kcenon/logger_system</a> <b>문서:</b> <a href="docs/">docs/</a> <b>라이선스:</b> LICENSE 파일 참조 <b>관리자:</b> <a href="#" onclick="location.href='mai'+'lto:'+'kce'+'no'+'n@n'+'av'+'er.'+'co'+'m'; return false;">kceno<span class="obfuscator">.nosp@m.</span>n@na<span class="obfuscator">.nosp@m.</span>ver.c<span class="obfuscator">.nosp@m.</span>om</a></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md822"></a>
+<h1><a class="anchor" id="autotoc_md834"></a>
 버전 지원 매트릭스</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -304,7 +347,7 @@ CMake fmt Fallback 제거 - 2025-12-03</h2>
 <td class="markdownTableBodyNone">1.0.0   </td><td class="markdownTableBodyNone">2025-10-22   </td><td class="markdownTableBodyNone">C++20   </td><td class="markdownTableBodyNone">3.16   </td><td class="markdownTableBodyNone">현재   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md824"></a>
+<h1><a class="anchor" id="autotoc_md836"></a>
 마이그레이션 가이드</h1>
 <p>통합 thread_system 또는 독립형 logger 구현에서 마이그레이션하려면 <a class="el" href="MIGRATION_8md.html">MIGRATION.md</a>를 참조하십시오.</p>
 <hr  />
@@ -315,7 +358,7 @@ CMake fmt Fallback 제거 - 2025-12-03</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Dec 6 2025 01:40:48 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Dec 6 2025 08:13:50 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
