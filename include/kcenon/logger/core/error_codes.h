@@ -56,7 +56,6 @@ using Result = ::kcenon::common::Result<T>;
 using VoidResult = ::kcenon::common::VoidResult;
 using ::kcenon::common::ok;
 using ::kcenon::common::make_error;
-using ::kcenon::common::Err;
 using ::kcenon::common::is_ok;
 using ::kcenon::common::is_error;
 using ::kcenon::common::get_value;
