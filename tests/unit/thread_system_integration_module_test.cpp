@@ -94,11 +94,11 @@ protected:
  */
 TEST_F(ThreadSystemIntegrationModuleTest, HasThreadSystemSupport) {
 #ifdef LOGGER_HAS_THREAD_SYSTEM
-    EXPECT_TRUE(has_thread_system_support())
-        << "has_thread_system_support() should return true when LOGGER_HAS_THREAD_SYSTEM is defined";
+    EXPECT_TRUE(has_thread_system_support()) << "has_thread_system_support() should return true "
+                                                "when LOGGER_HAS_THREAD_SYSTEM is defined";
 #else
-    EXPECT_FALSE(has_thread_system_support())
-        << "has_thread_system_support() should return false when LOGGER_HAS_THREAD_SYSTEM is not defined";
+    EXPECT_FALSE(has_thread_system_support()) << "has_thread_system_support() should return false "
+                                                 "when LOGGER_HAS_THREAD_SYSTEM is not defined";
 #endif
 }
 
@@ -120,14 +120,10 @@ TEST_F(ThreadSystemIntegrationModuleTest, DefaultBackendIsStandalone) {
 TEST_F(ThreadSystemIntegrationModuleTest, SubmitTaskInStandaloneMode) {
     std::atomic<bool> executed{false};
 
-    bool submitted = thread_system_integration::submit_task([&executed]() {
-        executed = true;
-    });
+    bool submitted = thread_system_integration::submit_task([&executed]() { executed = true; });
 
-    EXPECT_FALSE(submitted)
-        << "submit_task() should return false in standalone mode";
-    EXPECT_FALSE(executed)
-        << "Task should not be executed when submit_task() returns false";
+    EXPECT_FALSE(submitted) << "submit_task() should return false in standalone mode";
+    EXPECT_FALSE(executed) << "Task should not be executed when submit_task() returns false";
 }
 
 // ============================================================================
@@ -150,10 +146,8 @@ TEST_F(ThreadSystemIntegrationModuleTest, EnableWithDefaultPool) {
         << "Backend name should be 'thread_pool' after enable()";
 
     auto pool = thread_system_integration::get_thread_pool();
-    EXPECT_NE(pool, nullptr)
-        << "Default thread pool should be created";
-    EXPECT_TRUE(pool->is_running())
-        << "Default thread pool should be running";
+    EXPECT_NE(pool, nullptr) << "Default thread pool should be created";
+    EXPECT_TRUE(pool->is_running()) << "Default thread pool should be running";
 }
 
 /**
@@ -222,21 +216,17 @@ TEST_F(ThreadSystemIntegrationModuleTest, SubmitTaskWithEnabledBackend) {
 
     std::atomic<bool> executed{false};
 
-    bool submitted = thread_system_integration::submit_task([&executed]() {
-        executed = true;
-    });
+    bool submitted = thread_system_integration::submit_task([&executed]() { executed = true; });
 
-    EXPECT_TRUE(submitted)
-        << "submit_task() should return true when backend is enabled";
+    EXPECT_TRUE(submitted) << "submit_task() should return true when backend is enabled";
 
     // Wait for task execution
     auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(5);
     while (!executed && std::chrono::steady_clock::now() < deadline) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::this_thread::yield();
     }
 
-    EXPECT_TRUE(executed)
-        << "Task should be executed by thread_pool";
+    EXPECT_TRUE(executed) << "Task should be executed by thread_pool";
 }
 
 /**
@@ -250,9 +240,8 @@ TEST_F(ThreadSystemIntegrationModuleTest, SubmitMultipleTasks) {
     std::atomic<int> counter{0};
 
     for (int i = 0; i < num_tasks; ++i) {
-        bool submitted = thread_system_integration::submit_task([&counter]() {
-            counter.fetch_add(1, std::memory_order_relaxed);
-        });
+        bool submitted = thread_system_integration::submit_task(
+            [&counter]() { counter.fetch_add(1, std::memory_order_relaxed); });
         EXPECT_TRUE(submitted);
     }
 
@@ -262,8 +251,7 @@ TEST_F(ThreadSystemIntegrationModuleTest, SubmitMultipleTasks) {
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
 
-    EXPECT_EQ(counter.load(), num_tasks)
-        << "All tasks should be executed";
+    EXPECT_EQ(counter.load(), num_tasks) << "All tasks should be executed";
 }
 
 /**
@@ -307,8 +295,7 @@ TEST_F(ThreadSystemIntegrationModuleTest, ThreadSafetyOfEnableDisable) {
         thread.join();
     }
 
-    EXPECT_EQ(errors.load(), 0)
-        << "No errors should occur during concurrent enable/disable";
+    EXPECT_EQ(errors.load(), 0) << "No errors should occur during concurrent enable/disable";
 }
 
 /**
@@ -324,9 +311,8 @@ TEST_F(ThreadSystemIntegrationModuleTest, BackendSwitchingDoesNotLoseTasks) {
 
     // Submit tasks before switching
     for (int i = 0; i < tasks_before; ++i) {
-        thread_system_integration::submit_task([&executed_count]() {
-            executed_count.fetch_add(1, std::memory_order_relaxed);
-        });
+        thread_system_integration::submit_task(
+            [&executed_count]() { executed_count.fetch_add(1, std::memory_order_relaxed); });
     }
 
     // Wait briefly for some tasks to start processing
@@ -338,16 +324,15 @@ TEST_F(ThreadSystemIntegrationModuleTest, BackendSwitchingDoesNotLoseTasks) {
 
     // Submit more tasks after switching
     for (int i = 0; i < tasks_after; ++i) {
-        thread_system_integration::submit_task([&executed_count]() {
-            executed_count.fetch_add(1, std::memory_order_relaxed);
-        });
+        thread_system_integration::submit_task(
+            [&executed_count]() { executed_count.fetch_add(1, std::memory_order_relaxed); });
     }
 
     // Wait for all tasks to complete
     auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(10);
     while (executed_count.load() < tasks_before + tasks_after &&
            std::chrono::steady_clock::now() < deadline) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::this_thread::yield();
     }
 
     // Note: Some tasks from before the switch may be lost if pool was stopped
@@ -356,7 +341,7 @@ TEST_F(ThreadSystemIntegrationModuleTest, BackendSwitchingDoesNotLoseTasks) {
         << "At least post-switch tasks should be executed";
 }
 
-#endif // LOGGER_HAS_THREAD_SYSTEM
+#endif  // LOGGER_HAS_THREAD_SYSTEM
 
 // ============================================================================
 // Standalone mode stub tests (always run)
