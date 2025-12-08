@@ -32,18 +32,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #pragma once
 
-#include <chrono>
-#include <thread>
-#include <atomic>
-#include <vector>
-#include <functional>
-#include <random>
+#include <kcenon/logger/interfaces/log_writer_interface.h>
+
 #include <algorithm>
+#include <atomic>
+#include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <functional>
+#include <random>
 #include <sstream>
-
-#include <kcenon/logger/interfaces/log_writer_interface.h>
+#include <thread>
+#include <vector>
 
 namespace integration_tests {
 
@@ -62,16 +62,14 @@ public:
         : start_(clock_type::now()), callback_(std::move(callback)) {}
 
     ~ScopedTimer() {
-        auto duration = std::chrono::duration_cast<duration_type>(
-            clock_type::now() - start_);
+        auto duration = std::chrono::duration_cast<duration_type>(clock_type::now() - start_);
         if (callback_) {
             callback_(duration);
         }
     }
 
     duration_type elapsed() const {
-        return std::chrono::duration_cast<duration_type>(
-            clock_type::now() - start_);
+        return std::chrono::duration_cast<duration_type>(clock_type::now() - start_);
     }
 
 private:
@@ -94,7 +92,8 @@ public:
     }
 
     double mean() const {
-        if (samples_.empty()) return 0.0;
+        if (samples_.empty())
+            return 0.0;
         int64_t sum = 0;
         for (auto s : samples_) {
             sum += s;
@@ -103,12 +102,14 @@ public:
     }
 
     int64_t min() const {
-        if (samples_.empty()) return 0;
+        if (samples_.empty())
+            return 0;
         return *std::min_element(samples_.begin(), samples_.end());
     }
 
     int64_t max() const {
-        if (samples_.empty()) return 0;
+        if (samples_.empty())
+            return 0;
         return *std::max_element(samples_.begin(), samples_.end());
     }
 
@@ -134,11 +135,13 @@ public:
 
 private:
     int64_t percentile(int p) const {
-        if (samples_.empty()) return 0;
+        if (samples_.empty())
+            return 0;
         auto sorted = samples_;
         std::sort(sorted.begin(), sorted.end());
         size_t index = (sorted.size() * p) / 100;
-        if (index >= sorted.size()) index = sorted.size() - 1;
+        if (index >= sorted.size())
+            index = sorted.size() - 1;
         return sorted[index];
     }
 
@@ -165,13 +168,11 @@ public:
     /**
      * @brief Simulate variable CPU work with random duration
      */
-    static void simulate_variable_work(
-        std::chrono::microseconds min_duration,
-        std::chrono::microseconds max_duration) {
+    static void simulate_variable_work(std::chrono::microseconds min_duration,
+                                       std::chrono::microseconds max_duration) {
         static thread_local std::mt19937 gen(std::random_device{}());
-        std::uniform_int_distribution<> dis(
-            static_cast<int>(min_duration.count()),
-            static_cast<int>(max_duration.count()));
+        std::uniform_int_distribution<> dis(static_cast<int>(min_duration.count()),
+                                            static_cast<int>(max_duration.count()));
 
         simulate_work(std::chrono::microseconds(dis(gen)));
     }
@@ -183,8 +184,7 @@ public:
  */
 class BarrierSync {
 public:
-    explicit BarrierSync(size_t count)
-        : threshold_(count), count_(count), generation_(0) {}
+    explicit BarrierSync(size_t count) : threshold_(count), count_(count), generation_(0) {}
 
     void arrive_and_wait() {
         std::unique_lock<std::mutex> lock(mutex_);
@@ -213,8 +213,8 @@ private:
 class RateLimiter {
 public:
     explicit RateLimiter(size_t ops_per_second)
-        : interval_(std::chrono::seconds(1) / ops_per_second),
-          last_op_(std::chrono::steady_clock::now()) {}
+        : interval_(std::chrono::seconds(1) / ops_per_second)
+        , last_op_(std::chrono::steady_clock::now()) {}
 
     void acquire() {
         std::unique_lock<std::mutex> lock(mutex_);
@@ -241,7 +241,10 @@ private:
 class TempLogFile {
 public:
     explicit TempLogFile(const std::string& prefix = "test_log")
-        : path_(fs::temp_directory_path() / (prefix + "_" + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()) + ".log")) {}
+        : path_(fs::temp_directory_path() /
+                (prefix + "_" +
+                 std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()) +
+                 ".log")) {}
 
     ~TempLogFile() {
         if (fs::exists(path_)) {
@@ -343,16 +346,15 @@ private:
 /**
  * @brief Helper to wait for atomic counter to reach expected value
  */
-template<typename T>
-bool WaitForAtomicValue(const std::atomic<T>& counter,
-                       T expected,
-                       std::chrono::milliseconds timeout) {
+template <typename T>
+bool WaitForAtomicValue(const std::atomic<T>& counter, T expected,
+                        std::chrono::milliseconds timeout) {
     auto start = std::chrono::steady_clock::now();
     while (counter.load() < expected) {
         if (std::chrono::steady_clock::now() - start > timeout) {
             return false;
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::this_thread::yield();
     }
     return true;
 }
@@ -360,9 +362,9 @@ bool WaitForAtomicValue(const std::atomic<T>& counter,
 /**
  * @brief Helper to measure throughput (operations per second)
  */
-inline double CalculateThroughput(size_t operations,
-                                 std::chrono::nanoseconds duration) {
-    if (duration.count() == 0) return 0.0;
+inline double CalculateThroughput(size_t operations, std::chrono::nanoseconds duration) {
+    if (duration.count() == 0)
+        return 0.0;
     return (static_cast<double>(operations) * 1'000'000'000.0) / duration.count();
 }
 
@@ -398,4 +400,4 @@ inline std::string GenerateRandomString(size_t length) {
     return result;
 }
 
-} // namespace integration_tests
+}  // namespace integration_tests
