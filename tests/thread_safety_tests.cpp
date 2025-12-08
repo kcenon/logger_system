@@ -7,20 +7,20 @@ All rights reserved.
 
 #include <gtest/gtest.h>
 #include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/writers/async_writer.h>
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/logger/writers/file_writer.h>
 #include <kcenon/logger/writers/rotating_file_writer.h>
-#include <kcenon/logger/writers/async_writer.h>
 
-#include <thread>
-#include <vector>
 #include <atomic>
+#include <barrier>
 #include <chrono>
 #include <filesystem>
 #include <fstream>
-#include <sstream>
-#include <barrier>
 #include <random>
+#include <sstream>
+#include <thread>
+#include <vector>
 
 using namespace kcenon::logger;
 using namespace std::chrono_literals;
@@ -37,14 +37,8 @@ protected:
 
     void cleanup_test_files() {
         std::vector<std::string> test_files = {
-            "test_concurrent.log",
-            "test_rotation.log",
-            "test_async.log",
-            "test_shutdown.log",
-            "test_multiple.log",
-            "test_multiple2.log",
-            "test_format.log"
-        };
+            "test_concurrent.log", "test_rotation.log",  "test_async.log", "test_shutdown.log",
+            "test_multiple.log",   "test_multiple2.log", "test_format.log"};
 
         for (const auto& file : test_files) {
             std::filesystem::remove(file);
@@ -73,15 +67,15 @@ TEST_F(ThreadSafetyTest, ConcurrentLogging) {
         threads.emplace_back([&, thread_id = i]() {
             for (int j = 0; j < messages_per_thread; ++j) {
                 try {
-                    std::string msg = "Thread " + std::to_string(thread_id) +
-                                    " message " + std::to_string(j);
+                    std::string msg =
+                        "Thread " + std::to_string(thread_id) + " message " + std::to_string(j);
                     test_logger->log(log_level::info, msg);
                 } catch (...) {
                     ++errors;
                 }
 
                 if (j % 100 == 0) {
-                    std::this_thread::sleep_for(1ms);
+                    std::this_thread::yield();
                 }
             }
         });
@@ -100,7 +94,7 @@ TEST_F(ThreadSafetyTest, ConcurrentLogging) {
 
 // Test 2: High throughput stress test
 TEST_F(ThreadSafetyTest, HighThroughputStress) {
-    auto test_logger = std::make_shared<logger>(true, 16384); // Larger buffer
+    auto test_logger = std::make_shared<logger>(true, 16384);  // Larger buffer
     test_logger->start();
     test_logger->add_writer(std::make_unique<file_writer>("test_async.log"));
 
@@ -134,9 +128,9 @@ TEST_F(ThreadSafetyTest, HighThroughputStress) {
 
             for (int j = 0; j < messages_per_thread; ++j) {
                 try {
-                    test_logger->log(log_level::info,
-                                   "High throughput test: thread " + std::to_string(thread_id) +
-                                   " msg " + std::to_string(j));
+                    test_logger->log(log_level::info, "High throughput test: thread " +
+                                                          std::to_string(thread_id) + " msg " +
+                                                          std::to_string(j));
                 } catch (...) {
                     ++errors;
                 }
@@ -167,8 +161,8 @@ TEST_F(ThreadSafetyTest, HighThroughputStress) {
 TEST_F(ThreadSafetyTest, RotatingFileWriterConcurrency) {
     auto test_logger = std::make_shared<logger>();
     test_logger->start();
-    test_logger->add_writer(std::make_unique<rotating_file_writer>(
-        "test_rotation.log", 1024 * 10, 3)); // 10KB max, 3 backups
+    test_logger->add_writer(std::make_unique<rotating_file_writer>("test_rotation.log", 1024 * 10,
+                                                                   3));  // 10KB max, 3 backups
 
     const int num_threads = 8;
     const int messages_per_thread = 500;
@@ -182,8 +176,8 @@ TEST_F(ThreadSafetyTest, RotatingFileWriterConcurrency) {
                 try {
                     // Create longer messages to trigger rotation
                     std::string msg = "Rotation test thread " + std::to_string(thread_id) +
-                                    " message " + std::to_string(j) +
-                                    " - padding data to increase file size quickly";
+                                      " message " + std::to_string(j) +
+                                      " - padding data to increase file size quickly";
                     test_logger->log(log_level::info, msg);
                 } catch (...) {
                     ++errors;
@@ -221,10 +215,10 @@ TEST_F(ThreadSafetyTest, StartStopStress) {
             threads.emplace_back([&, thread_id = i]() {
                 for (int j = 0; j < messages_per_cycle; ++j) {
                     try {
-                        test_logger->log(log_level::info,
-                                       "Cycle " + std::to_string(cycle) +
-                                       " thread " + std::to_string(thread_id) +
-                                       " msg " + std::to_string(j));
+                        test_logger->log(log_level::info, "Cycle " + std::to_string(cycle) +
+                                                              " thread " +
+                                                              std::to_string(thread_id) + " msg " +
+                                                              std::to_string(j));
                     } catch (...) {
                         ++errors;
                     }
@@ -267,22 +261,30 @@ TEST_F(ThreadSafetyTest, MultipleWritersConcurrent) {
                     // Cycle through different log levels
                     log_level level;
                     switch (j % 4) {
-                        case 0: level = log_level::debug; break;
-                        case 1: level = log_level::info; break;
-                        case 2: level = log_level::warning; break;
-                        case 3: level = log_level::error; break;
-                        default: level = log_level::info;
+                        case 0:
+                            level = log_level::debug;
+                            break;
+                        case 1:
+                            level = log_level::info;
+                            break;
+                        case 2:
+                            level = log_level::warning;
+                            break;
+                        case 3:
+                            level = log_level::error;
+                            break;
+                        default:
+                            level = log_level::info;
                     }
 
-                    test_logger->log(level,
-                                   "Multiple writers test: " + std::to_string(thread_id) +
-                                   ":" + std::to_string(j));
+                    test_logger->log(level, "Multiple writers test: " + std::to_string(thread_id) +
+                                                ":" + std::to_string(j));
                 } catch (...) {
                     ++errors;
                 }
 
                 if (j % 50 == 0) {
-                    std::this_thread::sleep_for(1ms);
+                    std::this_thread::yield();
                 }
             }
         });
@@ -319,9 +321,9 @@ TEST_F(ThreadSafetyTest, FlushDuringLogging) {
         threads.emplace_back([&, thread_id = i]() {
             for (int j = 0; j < messages_per_thread && running.load(); ++j) {
                 try {
-                    test_logger->log(log_level::info,
-                                   "Concurrent flush test " + std::to_string(thread_id) +
-                                   ":" + std::to_string(j));
+                    test_logger->log(log_level::info, "Concurrent flush test " +
+                                                          std::to_string(thread_id) + ":" +
+                                                          std::to_string(j));
                 } catch (...) {
                     ++errors;
                 }
@@ -371,15 +373,14 @@ TEST_F(ThreadSafetyTest, SourceLocationConcurrency) {
         threads.emplace_back([&]() {
             for (int j = 0; j < messages_per_thread; ++j) {
                 try {
-                    test_logger->log(log_level::info,
-                                   "Source location test " + std::to_string(j),
-                                   __FILE__, __LINE__, __FUNCTION__);
+                    test_logger->log(log_level::info, "Source location test " + std::to_string(j),
+                                     __FILE__, __LINE__, __FUNCTION__);
                 } catch (...) {
                     ++errors;
                 }
 
                 if (j % 100 == 0) {
-                    std::this_thread::sleep_for(1ms);
+                    std::this_thread::yield();
                 }
             }
         });
@@ -416,23 +417,34 @@ TEST_F(ThreadSafetyTest, MixedLogLevelsStress) {
                 try {
                     log_level level;
                     switch (level_dist(rng)) {
-                        case 0: level = log_level::trace; break;
-                        case 1: level = log_level::debug; break;
-                        case 2: level = log_level::info; break;
-                        case 3: level = log_level::warning; break;
-                        case 4: level = log_level::error; break;
-                        default: level = log_level::critical; break;
+                        case 0:
+                            level = log_level::trace;
+                            break;
+                        case 1:
+                            level = log_level::debug;
+                            break;
+                        case 2:
+                            level = log_level::info;
+                            break;
+                        case 3:
+                            level = log_level::warning;
+                            break;
+                        case 4:
+                            level = log_level::error;
+                            break;
+                        default:
+                            level = log_level::critical;
+                            break;
                     }
 
-                    test_logger->log(level,
-                                   "Mixed level test " + std::to_string(thread_id) +
-                                   ":" + std::to_string(j));
+                    test_logger->log(level, "Mixed level test " + std::to_string(thread_id) + ":" +
+                                                std::to_string(j));
                 } catch (...) {
                     ++errors;
                 }
 
                 if (j % 50 == 0) {
-                    std::this_thread::sleep_for(1ms);
+                    std::this_thread::yield();
                 }
             }
         });
@@ -466,9 +478,9 @@ TEST_F(ThreadSafetyTest, DynamicWriterAddition) {
         threads.emplace_back([&, thread_id = i]() {
             for (int j = 0; j < messages_per_thread && running.load(); ++j) {
                 try {
-                    test_logger->log(log_level::info,
-                                   "Dynamic writer test " + std::to_string(thread_id) +
-                                   ":" + std::to_string(j));
+                    test_logger->log(log_level::info, "Dynamic writer test " +
+                                                          std::to_string(thread_id) + ":" +
+                                                          std::to_string(j));
                 } catch (...) {
                     ++errors;
                 }
@@ -519,9 +531,9 @@ TEST_F(ThreadSafetyTest, MemorySafetyTest) {
                 for (int j = 0; j < messages_per_thread; ++j) {
                     try {
                         test_logger->log(log_level::info,
-                                       "Memory safety iter " + std::to_string(iteration) +
-                                       " thread " + std::to_string(thread_id) +
-                                       " msg " + std::to_string(j));
+                                         "Memory safety iter " + std::to_string(iteration) +
+                                             " thread " + std::to_string(thread_id) + " msg " +
+                                             std::to_string(j));
                     } catch (...) {
                         ++total_errors;
                     }

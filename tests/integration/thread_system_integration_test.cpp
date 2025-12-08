@@ -19,14 +19,15 @@ All rights reserved.
  */
 
 #include <gtest/gtest.h>
-#include <memory>
+
+#include <atomic>
 #include <chrono>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <memory>
 #include <thread>
 #include <vector>
-#include <atomic>
-#include <filesystem>
-#include <iostream>
-#include <fstream>
 
 namespace fs = std::filesystem;
 
@@ -85,7 +86,7 @@ TEST_F(ThreadSystemIntegrationTest, ThreadPoolUtilization) {
     for (int i = 0; i < num_tasks; ++i) {
         threads.emplace_back([&counter]() {
             counter++;
-            std::this_thread::sleep_for(std::chrono::microseconds(100));
+            std::this_thread::yield();
         });
     }
 
@@ -117,7 +118,8 @@ TEST_F(ThreadSystemIntegrationTest, PerformanceImprovement) {
         log_file.close();
     }
     auto end = std::chrono::high_resolution_clock::now();
-    auto duration_without = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    auto duration_without =
+        std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
     // Benchmark with threading (parallel writes)
     start = std::chrono::high_resolution_clock::now();
@@ -130,7 +132,8 @@ TEST_F(ThreadSystemIntegrationTest, PerformanceImprovement) {
             threads.emplace_back([t, &num_messages, &num_threads]() {
                 std::ofstream log_file("test_logs/perf_with_" + std::to_string(t) + ".log");
                 for (int i = t; i < num_messages; i += num_threads) {
-                    log_file << "[INFO] Performance test message with thread_system: " << i << std::endl;
+                    log_file << "[INFO] Performance test message with thread_system: " << i
+                             << std::endl;
                 }
                 log_file.close();
             });
@@ -173,7 +176,7 @@ TEST_F(ThreadSystemIntegrationTest, PluginHealthMonitoring) {
         health_status.is_healthy = true;
         health_status.consecutive_failures = 0;
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::this_thread::yield();
     }
 
     EXPECT_TRUE(health_status.is_healthy);
