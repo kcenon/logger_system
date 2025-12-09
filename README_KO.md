@@ -200,7 +200,7 @@ target_link_libraries(your_app PRIVATE LoggerSystem::logger)
 ### 의존성
 
 **필수**:
-- **[common_system](https://github.com/kcenon/common_system)**: 핵심 인터페이스 (ILogger, IMonitor, Result<T>)
+- **[common_system](https://github.com/kcenon/common_system)**: 핵심 인터페이스 (ILogger, IMonitor, Result<T>) 및 C++20 Concepts 지원
 
 **선택사항**:
 - **[thread_system](https://github.com/kcenon/thread_system)**: 향상된 Threading primitive (v3.1.0부터 선택사항)
