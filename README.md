@@ -196,7 +196,7 @@ Part of a modular C++ ecosystem with clean interface boundaries:
 ### Dependencies
 
 **Required**:
-- **[common_system](https://github.com/kcenon/common_system)**: Core interfaces (ILogger, IMonitor, Result<T>)
+- **[common_system](https://github.com/kcenon/common_system)**: Core interfaces (ILogger, IMonitor, Result<T>) with C++20 Concepts support
 
 **Optional**:
 - **[thread_system](https://github.com/kcenon/thread_system)**: Enhanced threading primitives (optional since v3.1.0)

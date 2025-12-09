@@ -36,6 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdexcept>
 #include <utility>
 #include <optional>
+#include <concepts>
 
 #if __has_include(<kcenon/common/patterns/result.h>)
 #include <kcenon/common/patterns/result.h>
@@ -460,13 +461,12 @@ inline std::string logger_error_to_string(logger_error_code code) {
 template<typename T>
 class result {
 public:
-    // Move constructor (works for all types)
-    result(T value)
+    // Move constructor (only enabled for move-constructible types)
+    result(T&& value) requires std::move_constructible<T>
         : value_(common::ok<T>(std::move(value))) {}
 
-    // Copy constructor (only enabled for copyable types)
-    template<typename U = T>
-    result(const T& value, typename std::enable_if<std::is_copy_constructible<U>::value, int>::type = 0)
+    // Copy constructor (only enabled for copyable types that are not rvalue references)
+    result(const T& value) requires std::copy_constructible<T>
         : value_(common::ok<T>(value)) {}
 
     result(logger_error_code code, const std::string& msg = "")
