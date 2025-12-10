@@ -2,9 +2,14 @@
 
 # Logger System Migration Guide
 
+**Version**: 3.0.0
+**Last Updated**: 2025-12-10
+
 ## Table of Contents
 1. [Overview](#overview)
 2. [Version Migration](#version-migration)
+   - [From v2.x to v3.0](#from-v2x-to-v30)
+   - [From v1.x to v2.x](#from-v1x-to-v2x)
 3. [API Changes](#api-changes)
 4. [Configuration Migration](#configuration-migration)
 5. [Migration from Other Libraries](#migration-from-other-libraries)
@@ -15,21 +20,263 @@
 ## Overview
 
 This guide helps you migrate to Logger System from:
-- Earlier versions of Logger System (1.x to 2.x)
+- Earlier versions of Logger System (v2.x to v3.0, v1.x to v2.x)
 - Other popular logging libraries (spdlog, Boost.Log, glog, log4cpp)
 - Custom logging solutions
 
-### Breaking Changes Summary (v2.0+)
+### Breaking Changes Summary
 
-| Component | v1.x | v2.x | Impact |
-|-----------|------|------|--------|
-| Error Handling | Exceptions | Result types | High |
-| Memory Management | Raw pointers | Smart pointers | High |
-| Configuration | Direct setters | Builder pattern | Medium |
-| Async Operations | Manual threads | Built-in async | Low |
-| DI Container | Required | Optional | Low |
+| Version | Component | Change | Impact |
+|---------|-----------|--------|--------|
+| **v3.0** | Namespace | `logger_module` → `kcenon::logger` | **High** |
+| **v3.0** | Interface | Implements `common::interfaces::ILogger` | **High** |
+| **v3.0** | Dependencies | thread_system now optional | Medium |
+| **v3.0** | C++ Standard | Requires C++20 | Medium |
+| **v3.0** | Result Types | Uses `common::VoidResult` | Medium |
+| v2.0 | Error Handling | Exceptions → Result types | High |
+| v2.0 | Memory Management | Raw pointers → Smart pointers | High |
+| v2.0 | Configuration | Direct setters → Builder pattern | Medium |
 
 ## Version Migration
+
+### From v2.x to v3.0
+
+#### Summary of Changes
+
+| Aspect | v2.x | v3.0 |
+|--------|------|------|
+| Namespace | `logger_module` | `kcenon::logger` |
+| Interface | `thread_module::logger_interface` | `common::interfaces::ILogger` |
+| Header Path | `<logger_system/...>` | `<kcenon/logger/...>` |
+| Result Type | `result_void` | `common::VoidResult` |
+| thread_system | Required | Optional |
+| C++ Standard | C++17 | C++20 |
+
+#### 1. Namespace Migration
+
+**Old (v2.x):**
+```cpp
+#include <logger_system/logger.h>
+#include <logger_system/logger_builder.h>
+#include <logger_system/writers/console_writer.h>
+
+using namespace logger_module;
+
+auto logger = logger_builder()
+    .use_template("production")
+    .build();
+```
+
+**New (v3.0):**
+```cpp
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/writers/console_writer.h>
+
+using namespace kcenon::logger;
+
+auto logger = logger_builder()
+    .use_template("production")
+    .build();
+```
+
+#### 2. Interface Migration
+
+**Old (v2.x):**
+```cpp
+class logger : public thread_module::logger_interface {
+    result_void log(thread_module::log_level level,
+                    const std::string& message) override;
+};
+
+// Usage
+logger->log(thread_module::log_level::info, "Message");
+```
+
+**New (v3.0):**
+```cpp
+class logger : public common::interfaces::ILogger {
+    common::VoidResult log(common::interfaces::log_level level,
+                           const std::string& message) override;
+};
+
+// Usage with ILogger interface (recommended)
+logger->log(common::interfaces::log_level::info, "Message");
+
+// Or with native API (backward compatible)
+logger->log(log_level::info, "Message");
+```
+
+#### 3. Dual API Support
+
+v3.0 provides both ILogger interface and native API:
+
+```cpp
+using namespace kcenon::logger;
+
+auto logger = logger_builder()
+    .use_template("production")
+    .add_writer("console", std::make_unique<console_writer>())
+    .build()
+    .value();
+
+// ILogger interface (standardized, recommended for new code)
+logger->log(common::interfaces::log_level::info, "Using ILogger interface");
+
+// With C++20 source_location (automatic)
+logger->log(common::interfaces::log_level::debug, "Source location captured automatically");
+
+// Native API (backward compatible)
+logger->log(log_level::info, "Using native API");
+logger->log(log_level::error, "With location", __FILE__, __LINE__, __func__);
+```
+
+#### 4. Result Type Migration
+
+**Old (v2.x):**
+```cpp
+result_void result = logger->log(level, message);
+if (!result) {
+    std::cerr << result.error().message() << "\n";
+}
+```
+
+**New (v3.0):**
+```cpp
+common::VoidResult result = logger->log(level, message);
+if (!result) {
+    std::cerr << result.error().message() << "\n";
+}
+
+// Or using auto (simpler)
+auto result = logger->log(level, message);
+if (!result) {
+    std::cerr << result.error().message() << "\n";
+}
+```
+
+#### 5. thread_system Dependency Changes
+
+**Old (v2.x):**
+```cpp
+// thread_system was required
+// CMakeLists.txt
+find_package(thread_system REQUIRED)
+target_link_libraries(your_app PRIVATE thread_system::thread_system)
+```
+
+**New (v3.0):**
+```cpp
+// thread_system is now optional
+// CMakeLists.txt
+find_package(common_system REQUIRED)  # Required
+find_package(logger_system REQUIRED)
+# find_package(thread_system OPTIONAL)  # Only if needed
+
+target_link_libraries(your_app PRIVATE
+    kcenon::common
+    kcenon::logger
+)
+```
+
+#### 6. Backend Selection (New in v3.0)
+
+```cpp
+using namespace kcenon::logger;
+
+// Standalone mode (default, no thread_system needed)
+auto logger = logger_builder()
+    .with_standalone_backend()  // Uses std::jthread
+    .build();
+
+// With thread_system integration (requires LOGGER_USE_THREAD_SYSTEM=ON)
+auto logger = logger_builder()
+    .with_thread_system_backend()  // Deprecated, falls back to standalone
+    .build();
+
+// Custom backend
+auto logger = logger_builder()
+    .with_backend(std::make_unique<my_custom_backend>())
+    .build();
+```
+
+#### 7. C++20 Source Location
+
+**New in v3.0:**
+```cpp
+// Source location is automatically captured
+logger->log(common::interfaces::log_level::info, "Debug message");
+// Output: [INFO] [main.cpp:42] [main()] Debug message
+
+// Explicit source location
+logger->log(common::interfaces::log_level::info, "Message",
+            common::source_location::current());
+```
+
+#### 8. Configuration Strategies (Enhanced in v3.0)
+
+```cpp
+using namespace kcenon::logger;
+
+// Deployment strategy
+auto logger = logger_builder()
+    .for_environment(deployment_env::production)  // New in v3.0
+    .build();
+
+// Performance strategy
+auto logger = logger_builder()
+    .with_performance_tuning(performance_level::high_throughput)  // New in v3.0
+    .build();
+
+// Environment variable configuration
+auto logger = logger_builder()
+    .auto_configure()  // Reads LOG_* environment variables
+    .build();
+```
+
+#### 9. Monitoring Integration (New in v3.0)
+
+```cpp
+#include <kcenon/monitoring/monitoring.h>
+
+auto monitor = std::make_shared<kcenon::monitoring::monitoring>();
+
+auto logger = logger_builder()
+    .with_monitoring(monitor)  // New in v3.0
+    .with_health_check_interval(std::chrono::seconds(30))
+    .build();
+```
+
+#### Migration Script
+
+For automated migration, use this script pattern:
+
+```bash
+#!/bin/bash
+# migrate_v2_to_v3.sh
+
+# Update includes
+find . -name "*.cpp" -o -name "*.h" | xargs sed -i '' \
+    -e 's|#include <logger_system/|#include <kcenon/logger/|g' \
+    -e 's|#include "logger_system/|#include "kcenon/logger/|g'
+
+# Update namespaces
+find . -name "*.cpp" -o -name "*.h" | xargs sed -i '' \
+    -e 's|logger_module::|kcenon::logger::|g' \
+    -e 's|namespace logger_module|namespace kcenon::logger|g' \
+    -e 's|using namespace logger_module|using namespace kcenon::logger|g'
+
+# Update interface references
+find . -name "*.cpp" -o -name "*.h" | xargs sed -i '' \
+    -e 's|thread_module::logger_interface|common::interfaces::ILogger|g' \
+    -e 's|thread_module::log_level|common::interfaces::log_level|g'
+
+# Update result types
+find . -name "*.cpp" -o -name "*.h" | xargs sed -i '' \
+    -e 's|result_void|common::VoidResult|g'
+```
+
+---
 
 ### From v1.x to v2.x
 
@@ -108,38 +355,30 @@ logger->debug("Message", {{"value", value}});
 
 ## API Changes
 
+### v3.0 API Changes Summary
+
+| v2.x | v3.0 | Notes |
+|------|------|-------|
+| `logger_module::logger` | `kcenon::logger::logger` | Namespace change |
+| `thread_module::logger_interface` | `common::interfaces::ILogger` | Interface change |
+| `thread_module::log_level` | `common::interfaces::log_level` | Level type change |
+| `result_void` | `common::VoidResult` | Result type change |
+| `set_min_level(level)` | `set_level(level)` | Method rename (deprecated) |
+| `get_min_level()` | `get_level()` | Method rename (deprecated) |
+| N/A | `log(level, msg, source_location)` | New C++20 overload |
+| N/A | `with_standalone_backend()` | New backend selection |
+| N/A | `for_environment(env)` | New configuration strategy |
+| N/A | `with_performance_tuning(level)` | New configuration strategy |
+| N/A | `with_monitoring(monitor)` | New monitoring integration |
+
 ### Core Logger API
 
-| v1.x Method | v2.x Equivalent | Notes |
-|-------------|-----------------|-------|
-| `log(level, msg)` | `log(level, msg, fields)` | Added structured fields |
-| `log_format(level, fmt, ...)` | `log(level, msg, fields)` | Use fields instead of format |
-| `set_min_level(level)` | Builder: `with_min_level(level)` | Configure via builder |
-| `add_writer(writer*)` | `add_writer(unique_ptr<writer>)` | Smart pointer required |
-| `remove_writer(name)` | `remove_writer(name)` | Unchanged |
-| `flush()` | `flush()` | Now returns result<void> |
-| `shutdown()` | Destructor | Automatic cleanup |
-
-### Writer API
-
-| v1.x Method | v2.x Equivalent | Notes |
-|-------------|-----------------|-------|
-| `write(string)` | `write(log_entry)` | Structured entry |
-| `set_format(string)` | `set_formatter(unique_ptr)` | Formatter object |
-| `enable_async()` | Use `async_writer` wrapper | Composition pattern |
-| `set_buffer_size(n)` | Constructor parameter | Immutable after creation |
-
-### Configuration API
-
-| v1.x Config | v2.x Builder Method | Notes |
-|-------------|---------------------|-------|
-| `config.async` | `with_async_mode(bool)` | |
-| `config.buffer_size` | `with_buffer_size(size_t)` | |
-| `config.min_level` | `with_min_level(log_level)` | |
-| `config.pattern` | `with_pattern(string)` | |
-| `config.colored` | `with_colored_output(bool)` | |
-| `config.rotation_size` | `with_rotation(size_t)` | |
-| `config.max_files` | `with_max_files(size_t)` | |
+| v1.x Method | v2.x Equivalent | v3.0 Equivalent |
+|-------------|-----------------|-----------------|
+| `log(level, msg)` | `log(level, msg, fields)` | `log(level, msg)` via ILogger |
+| `set_min_level(level)` | Builder: `with_min_level(level)` | `set_level(level)` + Builder |
+| `add_writer(writer*)` | `add_writer(unique_ptr<writer>)` | Same as v2.x |
+| `flush()` | `flush()` → result<void> | `flush()` → VoidResult |
 
 ## Configuration Migration
 
@@ -163,47 +402,47 @@ rotation = 10485760
 max_files = 5
 ```
 
-**New (code-based):**
+**New (code-based, v3.0):**
 ```cpp
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/logger/writers/rotating_file_writer.h>
+
+using namespace kcenon::logger;
+
 auto create_logger_from_config() {
     return logger_builder()
         .with_min_level(log_level::info)
-        .with_async_mode(true)
+        .with_async(true)
         .with_buffer_size(10000)
-        .with_console_writer()
-        .with_colored_output(true)
-        .with_file_writer("app.log")
-        .with_rotation(10 * 1024 * 1024)
-        .with_max_files(5)
+        .add_writer("console", std::make_unique<console_writer>(true))
+        .add_writer("file", std::make_unique<rotating_file_writer>(
+            "app.log", 10 * 1024 * 1024, 5))
         .build();
 }
 ```
 
-### Environment-based Configuration
+### Environment-based Configuration (v3.0)
 
 ```cpp
+using namespace kcenon::logger;
+
 auto create_logger() {
-    const auto env = std::getenv("LOG_ENV");
-    const auto level = std::getenv("LOG_LEVEL");
-    
-    auto builder = logger_builder();
-    
-    // Apply environment-specific settings
-    if (env) {
-        if (std::string(env) == "production") {
-            builder.with_configuration_template(configuration_template::production);
-        } else if (std::string(env) == "development") {
-            builder.with_configuration_template(configuration_template::debug);
-        }
-    }
-    
-    // Override with specific level if provided
-    if (level) {
-        builder.with_min_level(parse_level(level));
-    }
-    
-    return builder.build();
+    return logger_builder()
+        .auto_configure()  // Reads LOG_* environment variables
+        .build();
 }
+
+// Supported environment variables:
+// LOG_LEVEL: trace, debug, info, warn, error, fatal
+// LOG_ASYNC: true/false
+// LOG_BUFFER_SIZE: buffer size in bytes
+// LOG_BATCH_SIZE: batch size
+// LOG_FLUSH_INTERVAL: flush interval in ms
+// LOG_COLOR: true/false
+// LOG_METRICS: true/false
+// LOG_ENV: production/staging/development/testing
 ```
 
 ## Migration from Other Libraries
@@ -220,30 +459,27 @@ logger->set_level(spdlog::level::info);
 logger->info("Hello {}", "World");
 logger->error("Error code: {}", 404);
 
-// Logger System equivalent
-#include "logger_system/logger.h"
+// Logger System v3.0 equivalent
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/writers/file_writer.h>
+
+using namespace kcenon::logger;
 
 auto logger = logger_builder()
-    .with_name("my_logger")
-    .with_file_writer("logs/my_log.txt")
     .with_min_level(log_level::info)
-    .build();
-    
-logger->info("Hello World");
-logger->error("Error code", {{"code", 404}});
+    .add_writer("file", std::make_unique<file_writer>("logs/my_log.txt"))
+    .build()
+    .value();
+
+// Using ILogger interface
+logger->log(common::interfaces::log_level::info, "Hello World");
+logger->log(common::interfaces::log_level::error, "Error code: 404");
+
+// Or using native API
+logger->log(log_level::info, "Hello World");
+logger->log(log_level::error, "Error code: 404");
 ```
-
-#### spdlog Pattern Migration
-
-| spdlog Pattern | Logger System Equivalent |
-|----------------|-------------------------|
-| `%Y-%m-%d %H:%M:%S` | `%time%` with custom format |
-| `%l` | `%level%` |
-| `%n` | Logger name in context |
-| `%v` | `%message%` |
-| `%t` | `%thread%` |
-| `%P` | `%pid%` |
-| `%@` | `%source%` |
 
 ### From Boost.Log
 
@@ -258,15 +494,20 @@ logging::add_file_log("sample.log");
 BOOST_LOG_TRIVIAL(info) << "An informational message";
 BOOST_LOG_TRIVIAL(error) << "An error message";
 
-// Logger System equivalent
-#include "logger_system/logger.h"
+// Logger System v3.0 equivalent
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/writers/file_writer.h>
+
+using namespace kcenon::logger;
 
 auto logger = logger_builder()
-    .with_file_writer("sample.log")
-    .build();
-    
-logger->info("An informational message");
-logger->error("An error message");
+    .add_writer("file", std::make_unique<file_writer>("sample.log"))
+    .build()
+    .value();
+
+logger->log(common::interfaces::log_level::info, "An informational message");
+logger->log(common::interfaces::log_level::error, "An error message");
 ```
 
 ### From Google glog
@@ -280,390 +521,280 @@ LOG(INFO) << "Found " << num_cookies << " cookies";
 LOG(ERROR) << "Error code: " << error_code;
 CHECK(condition) << "Condition failed";
 
-// Logger System equivalent
-#include "logger_system/logger.h"
+// Logger System v3.0 equivalent
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/core/logger_builder.h>
 
-auto logger = create_logger();
-logger->info("Found cookies", {{"count", num_cookies}});
-logger->error("Error occurred", {{"code", error_code}});
+using namespace kcenon::logger;
+
+auto logger = logger_builder()
+    .use_template("production")
+    .build()
+    .value();
+
+logger->log(common::interfaces::log_level::info,
+            "Found " + std::to_string(num_cookies) + " cookies");
+logger->log(common::interfaces::log_level::error,
+            "Error code: " + std::to_string(error_code));
 if (!condition) {
-    logger->critical("Condition failed");
+    logger->log(common::interfaces::log_level::fatal, "Condition failed");
     std::abort();
 }
 ```
 
-### From log4cpp
-
-```cpp
-// log4cpp
-#include <log4cpp/Category.hh>
-#include <log4cpp/FileAppender.hh>
-
-log4cpp::Category& root = log4cpp::Category::getRoot();
-root.addAppender(new log4cpp::FileAppender("file", "app.log"));
-root.setPriority(log4cpp::Priority::INFO);
-root.info("Information message");
-root.error("Error message");
-
-// Logger System equivalent
-#include "logger_system/logger.h"
-
-auto logger = logger_builder()
-    .with_file_writer("app.log")
-    .with_min_level(log_level::info)
-    .build();
-    
-logger->info("Information message");
-logger->error("Error message");
-```
-
 ## Compatibility Wrappers
 
-### Legacy API Wrapper
+### v2.x to v3.0 Compatibility Header
 
-Create a compatibility header for gradual migration:
+```cpp
+// compatibility/logger_v2_compat.h
+#pragma once
+
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/core/logger_builder.h>
+
+// Namespace alias for gradual migration
+namespace logger_module = kcenon::logger;
+
+// Type aliases
+using result_void = common::VoidResult;
+
+template<typename T>
+using result = common::Result<T>;
+
+// Level mapping
+namespace thread_module {
+    using log_level = common::interfaces::log_level;
+}
+
+// Usage:
+// 1. Include this header
+// 2. Existing v2.x code will compile with minimal changes
+// 3. Gradually update to new namespaces
+// 4. Remove this header when migration is complete
+```
+
+### Legacy API Wrapper (v1.x compatibility)
 
 ```cpp
 // compatibility/logger_v1_compat.h
 #pragma once
-#include "logger_system/logger.h"
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/core/logger_builder.h>
 
 // Legacy macros for backward compatibility
 #define LOG_INFO(logger, msg, ...) \
-    logger->info(format_string(msg, ##__VA_ARGS__))
+    logger->log(common::interfaces::log_level::info, format_string(msg, ##__VA_ARGS__))
 
 #define LOG_ERROR(logger, msg, ...) \
-    logger->error(format_string(msg, ##__VA_ARGS__))
+    logger->log(common::interfaces::log_level::error, format_string(msg, ##__VA_ARGS__))
 
 #define LOG_DEBUG(logger, msg, ...) \
-    logger->debug(format_string(msg, ##__VA_ARGS__))
+    logger->log(common::interfaces::log_level::debug, format_string(msg, ##__VA_ARGS__))
 
 // Legacy function signatures
 namespace logger_v1_compat {
-    
-    // Old-style logger creation
-    [[deprecated("Use logger_builder instead")]]
-    inline logger* create_logger() {
-        static auto modern_logger = logger_builder().build();
-        return modern_logger.get();
-    }
-    
-    // Old-style writer addition
-    [[deprecated("Use add_writer with unique_ptr")]]
-    inline void add_writer(logger* log, base_writer* writer) {
-        if (log && writer) {
-            auto result = log->add_writer(
-                std::unique_ptr<base_writer>(writer)
-            );
-            if (!result) {
-                throw std::runtime_error(result.error().message());
-            }
-        }
-    }
-    
-    // Old-style configuration
-    [[deprecated("Use logger_builder for configuration")]]
-    inline void configure_logger(logger* log, 
-                                 log_level level,
-                                 bool async,
-                                 size_t buffer_size) {
-        // Note: This requires recreating the logger
-        // Better to use builder pattern from the start
-        std::cerr << "Warning: configure_logger is deprecated. "
-                  << "Use logger_builder instead.\n";
-    }
-}
-```
 
-### Wrapper for Other Libraries
-
-```cpp
-// compatibility/spdlog_compat.h
-#pragma once
-#include "logger_system/logger.h"
-
-namespace spdlog_compat {
-    
-    template<typename... Args>
-    class logger_wrapper {
-        std::shared_ptr<logger_module::logger> impl_;
-        
-    public:
-        explicit logger_wrapper(std::shared_ptr<logger_module::logger> impl)
-            : impl_(std::move(impl)) {}
-        
-        template<typename... T>
-        void info(const std::string& fmt, T&&... args) {
-            impl_->info(format(fmt, std::forward<T>(args)...));
-        }
-        
-        template<typename... T>
-        void error(const std::string& fmt, T&&... args) {
-            impl_->error(format(fmt, std::forward<T>(args)...));
-        }
-        
-        void set_level(int level) {
-            // Map spdlog levels to logger_system levels
-            static const std::map<int, log_level> level_map = {
-                {0, log_level::trace},
-                {1, log_level::debug},
-                {2, log_level::info},
-                {3, log_level::warning},
-                {4, log_level::error},
-                {5, log_level::critical}
-            };
-            
-            if (auto it = level_map.find(level); it != level_map.end()) {
-                // Note: Level changes require logger recreation in v2
-                std::cerr << "Warning: Dynamic level changes not supported. "
-                          << "Recreate logger with desired level.\n";
-            }
-        }
-    };
-    
-    // Factory function mimicking spdlog API
-    inline auto basic_logger_mt(const std::string& name, 
-                                const std::string& filename) {
-        auto impl = logger_builder()
-            .with_name(name)
-            .with_file_writer(filename)
-            .build();
-        return std::make_shared<logger_wrapper>(std::move(impl));
+    [[deprecated("Use kcenon::logger::logger_builder instead")]]
+    inline auto create_logger() {
+        return kcenon::logger::logger_builder().build();
     }
+
 }
 ```
 
 ## Step-by-Step Migration
 
-### Phase 1: Preparation (1-2 days)
+### Phase 1: Preparation
 
-1. **Audit Current Usage**
+1. **Check C++ Standard**
+```cmake
+# Ensure C++20 is enabled
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+```
+
+2. **Update Dependencies**
+```cmake
+# v3.0 requires common_system
+find_package(common_system REQUIRED)
+find_package(logger_system REQUIRED)
+
+# thread_system is now optional
+# find_package(thread_system OPTIONAL)
+```
+
+3. **Create Migration Branch**
 ```bash
-# Find all logging calls
-grep -r "LOG_\|->log\|logger->" --include="*.cpp" --include="*.h" src/
-
-# Count usage by type
-grep -r "LOG_INFO\|LOG_ERROR\|LOG_DEBUG" --include="*.cpp" src/ | wc -l
+git checkout -b migration/logger-v3.0
 ```
 
-2. **Create Migration Branch**
-```bash
-git checkout -b migration/logger-v2
-```
+### Phase 2: Namespace Migration
 
-3. **Add Compatibility Headers**
+1. **Update Include Paths**
 ```cpp
-// Add to your project
-#include "compatibility/logger_v1_compat.h"
-using namespace logger_v1_compat;  // Temporary during migration
+// OLD
+#include <logger_system/logger.h>
+
+// NEW
+#include <kcenon/logger/core/logger.h>
 ```
 
-### Phase 2: Core Migration (2-3 days)
-
-1. **Update Logger Creation**
+2. **Update Namespace Usage**
 ```cpp
-// Find and replace patterns
-// OLD: logger* log = new logger();
-// NEW: auto log = logger_builder().build();
+// OLD
+using namespace logger_module;
 
-// OLD: logger* log = create_logger();
-// NEW: auto log = logger_builder()
-//          .with_configuration_template(configuration_template::production)
-//          .build();
+// NEW
+using namespace kcenon::logger;
 ```
 
-2. **Update Writer Management**
+### Phase 3: Interface Migration
+
+1. **Update Interface References**
 ```cpp
-// OLD: log->add_writer(new file_writer("app.log"));
-// NEW: log->add_writer(std::make_unique<file_writer>("app.log"));
+// OLD
+class MyLogger : public thread_module::logger_interface { ... };
+
+// NEW
+class MyLogger : public common::interfaces::ILogger { ... };
 ```
 
-3. **Update Logging Calls**
+2. **Update Log Level Types**
 ```cpp
-// Use automated script for bulk conversion
-// OLD: LOG_INFO(log, "User %s logged in", username);
-// NEW: log->info("User logged in", {{"user", username}});
+// OLD
+thread_module::log_level::info
+
+// NEW
+common::interfaces::log_level::info
+// or (native API)
+kcenon::logger::log_level::info
 ```
 
-### Phase 3: Feature Migration (2-3 days)
-
-1. **Migrate Configuration**
-```cpp
-// Replace configuration files with code
-auto create_configured_logger() {
-    return logger_builder()
-        .with_configuration_template(get_template_for_environment())
-        .with_overrides_from_env()
-        .build();
-}
-```
-
-2. **Update Tests**
-```cpp
-// Update test fixtures
-class LoggerTest : public ::testing::Test {
-protected:
-    void SetUp() override {
-        // OLD: logger_ = new logger();
-        // NEW:
-        logger_ = logger_builder()
-            .with_min_level(log_level::trace)
-            .build();
-    }
-    
-    std::shared_ptr<logger> logger_;
-};
-```
-
-### Phase 4: Optimization (1-2 days)
-
-1. **Enable New Features**
-```cpp
-// Take advantage of v2 features
-auto logger = logger_builder()
-    .with_async_mode(true)
-    .with_batch_writing(true)
-    .with_structured_logging(true)
-    .build();
-```
-
-2. **Remove Compatibility Layer**
-```cpp
-// Remove compatibility headers
-// Remove using namespace logger_v1_compat;
-// Fix any remaining legacy calls
-```
-
-### Phase 5: Validation (1 day)
+### Phase 4: Validation
 
 1. **Run Tests**
 ```bash
-# Run all tests
-make test
-
-# Run with sanitizers
-make test SANITIZE=address
-make test SANITIZE=thread
+mkdir build && cd build
+cmake .. -DCMAKE_CXX_STANDARD=20
+make -j$(nproc)
+ctest --output-on-failure
 ```
 
-2. **Performance Testing**
-```cpp
-// Benchmark old vs new
-void benchmark_migration() {
-    auto start = now();
-    for (int i = 0; i < 1000000; ++i) {
-        logger->info("Test message", {{"id", i}});
-    }
-    auto duration = now() - start;
-    std::cout << "New version: " << duration << "ms\n";
-}
+2. **Check Sanitizers**
+```bash
+cmake .. -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined"
+make && ctest
 ```
 
 ## Common Issues and Solutions
 
-### Issue 1: Memory Leaks with Raw Pointers
+### Issue 1: Namespace Not Found
 
-**Problem:**
-```cpp
-// Leak: writer not deleted if add_writer throws
-base_writer* writer = new file_writer("app.log");
-logger->add_writer(writer);  // May throw in v1
+**Error:**
+```
+error: 'logger_module' is not a namespace-name
 ```
 
 **Solution:**
 ```cpp
-// RAII ensures cleanup
-auto writer = std::make_unique<file_writer>("app.log");
-auto result = logger->add_writer(std::move(writer));
-if (!result) {
-    // Handle error - writer automatically cleaned up
-}
+// Change from
+using namespace logger_module;
+
+// To
+using namespace kcenon::logger;
 ```
 
-### Issue 2: Exception Safety
+### Issue 2: Interface Type Mismatch
 
-**Problem:**
-```cpp
-try {
-    logger->log(level, message);  // May throw in v1
-} catch (...) {
-    // Lost log message
-}
+**Error:**
+```
+error: 'thread_module::logger_interface' is not a base of 'kcenon::logger::logger'
 ```
 
 **Solution:**
 ```cpp
-auto result = logger->log(level, message);
-if (!result) {
-    // Fallback to stderr
-    std::cerr << "[FALLBACK] " << message << std::endl;
-}
+// Change from
+thread_module::logger_interface* logger = ...;
+
+// To
+common::interfaces::ILogger* logger = ...;
 ```
 
-### Issue 3: Thread Safety
+### Issue 3: Result Type Mismatch
 
-**Problem:**
-```cpp
-// v1: Manual synchronization needed
-std::mutex log_mutex;
-{
-    std::lock_guard<std::mutex> lock(log_mutex);
-    logger->log(level, message);
-}
+**Error:**
+```
+error: cannot convert 'common::VoidResult' to 'result_void'
 ```
 
 **Solution:**
 ```cpp
-// v2: Thread-safe by default
-logger->log(level, message);  // No external locking needed
+// Change from
+result_void result = logger->log(...);
+
+// To
+common::VoidResult result = logger->log(...);
+// Or simply
+auto result = logger->log(...);
 ```
 
-### Issue 4: Configuration Changes
+### Issue 4: Missing thread_system
 
-**Problem:**
-```cpp
-// v1: Runtime configuration changes
-logger->set_min_level(log_level::debug);  // Dynamic change
+**Error:**
 ```
-
-**Solution:**
-```cpp
-// v2: Immutable configuration - recreate logger
-logger = logger_builder()
-    .copy_from(logger)  // Preserve existing config
-    .with_min_level(log_level::debug)  // Override level
-    .build();
-```
-
-### Issue 5: Custom Formatters
-
-**Problem:**
-```cpp
-// v1: String-based format
-logger->set_format("[%time%] [%level%] %message%");
+error: 'thread_module' has not been declared
 ```
 
 **Solution:**
 ```cpp
-// v2: Formatter objects
-class custom_formatter : public base_formatter {
-    std::string format(const log_entry& entry) override {
-        return format_timestamp(entry.timestamp) + " [" + 
-               to_string(entry.level) + "] " + entry.message;
-    }
-};
+// v3.0 doesn't require thread_system
+// Change from
+#include <thread_system/logger_interface.h>
 
-logger->set_formatter(std::make_unique<custom_formatter>());
+// To
+#include <common/interfaces/logger_interface.h>
+```
+
+### Issue 5: C++20 Not Enabled
+
+**Error:**
+```
+error: 'source_location' is not a member of 'std'
+```
+
+**Solution:**
+```cmake
+# Ensure C++20 is enabled
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 ```
 
 ## Migration Checklist
+
+### v2.x to v3.0 Migration
+
+- [ ] Enable C++20 in build system
+- [ ] Update common_system dependency
+- [ ] Update include paths (`logger_system/` → `kcenon/logger/`)
+- [ ] Update namespace (`logger_module` → `kcenon::logger`)
+- [ ] Update interface references (`thread_module::logger_interface` → `common::interfaces::ILogger`)
+- [ ] Update log level types (`thread_module::log_level` → `common::interfaces::log_level`)
+- [ ] Update result types (`result_void` → `common::VoidResult`)
+- [ ] Remove thread_system dependency if not needed
+- [ ] Update deprecated method calls (`set_min_level` → `set_level`)
+- [ ] Test with sanitizers
+- [ ] Performance benchmarks
+- [ ] Update documentation
+
+### v1.x to v2.x Migration
 
 - [ ] Backup current codebase
 - [ ] Create migration branch
 - [ ] Add compatibility headers
 - [ ] Update build system (CMake/Make)
-- [ ] Migrate logger creation code
-- [ ] Update writer management
+- [ ] Migrate logger creation to builder pattern
+- [ ] Update writer management to smart pointers
 - [ ] Convert logging calls
 - [ ] Update configuration
 - [ ] Migrate tests
@@ -676,12 +807,14 @@ logger->set_formatter(std::make_unique<custom_formatter>());
 
 ## Support and Resources
 
-- [API Documentation](API_DOCUMENTATION.md)
+- [API Reference](../API_REFERENCE.md)
+- [Architecture Documentation](../advanced/LOGGER_SYSTEM_ARCHITECTURE.md)
 - [Best Practices Guide](BEST_PRACTICES.md)
-- [Example Code](../samples/)
+- [Example Code](../../examples/)
 - [Issue Tracker](https://github.com/kcenon/logger_system/issues)
 
 For migration assistance, please file an issue with the `migration` label.
+
 ---
 
-*Last Updated: 2025-10-20*
+*Last Updated: 2025-12-10*
