@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['준비_20상태_3a_20✅_20strong_20준비_20완료_20strong_0',['프로덕션 준비 상태: ✅ &lt;strong&gt;준비 완료&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1480',1,'']]],
-  ['준수_20등급_3a_20strong_20a_20strong_1',['RAII 준수 등급: &lt;strong&gt;A&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1496',1,'']]]
+  ['전략_0',['오류 처리 전략',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1567',1,'']]],
+  ['전체_20공유_20풀_1',['패턴 1: 애플리케이션 전체 공유 풀',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1346',1,'']]],
+  ['전체_20예시_2',['🔄 CI/CD 워크플로우 전체 예시',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1434',1,'']]],
+  ['전체_20워크플로우_3',['전체 워크플로우',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1407',1,'']]]
 ];

@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['오류_0',['오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1385',1,'문제 2: Python 스크립트 실행 오류'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1386',1,'문제 3: Git 자동 커밋 권한 오류']]],
-  ['오류_20처리_20등급_3a_20strong_20a_20strong_2090_20완료_1',['오류 처리 등급: &lt;strong&gt;A&lt;/strong&gt; (90% 완료)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1502',1,'']]],
-  ['오류_20처리_20전략_2',['오류 처리 전략',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1501',1,'']]],
-  ['오류_20코드_20레지스트리_3',['오류 코드 레지스트리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1504',1,'']]],
-  ['오버헤드_20비교_4',['오버헤드 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1286',1,'']]]
+  ['업계_20비교_0',['업계 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md754',1,'']]],
+  ['업데이트된_20readme_20md_1',['3. 업데이트된 README.md',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1439',1,'']]],
+  ['업데이트_2',['업데이트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1425',1,'Phase 4: README.md 자동 업데이트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md529',1,'Step 2: Include 경로 업데이트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md530',1,'Step 3: Namespace 사용 업데이트']]],
+  ['업데이트_20스크립트_3',['4.1 README 업데이트 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1426',1,'']]],
+  ['업데이트_20예상_20소요_3a_201시간_4',['Phase 3: README 자동 업데이트 (예상 소요: 1시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1444',1,'']]]
 ];

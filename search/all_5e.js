@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['상세_20기능_0',['Logger System - 상세 기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html',1,'']]],
-  ['상세_204단계_1',['🛠️ 구현 상세 (4단계)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1345',1,'']]],
-  ['상태_20분석_2',['🔍 현재 상태 분석',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1336',1,'']]],
-  ['상태_3a_20✅_20strong_20준비_20완료_20strong_3',['프로덕션 준비 상태: ✅ &lt;strong&gt;준비 완료&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1480',1,'']]]
+  ['빠른_20시작_0',['빠른 시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html#autotoc_md613',1,'빠른 시작'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1334',1,'빠른 시작'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START__KO.html#autotoc_md302',1,'크리티컬 로깅 빠른 시작'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md532',1,'🚀 새로운 구조로 빠른 시작']]],
+  ['빠른_20탐색_1',['🚀 빠른 탐색',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1763',1,'']]]
 ];

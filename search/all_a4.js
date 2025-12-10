@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['패턴_0',['패턴',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1279',1,'사용 패턴'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1503',1,'Result&lt;T&gt; 패턴']]],
-  ['패턴_20필터링_1',['패턴 필터링',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md937',1,'']]],
-  ['패턴_201_3a_20애플리케이션_20전체_20공유_20풀_2',['패턴 1: 애플리케이션 전체 공유 풀',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1280',1,'']]],
-  ['패턴_202_3a_20사용자_20정의_20풀_20설정_3',['패턴 2: 사용자 정의 풀 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1281',1,'']]],
-  ['패턴_203_3a_20조건부_20통합_4',['패턴 3: 조건부 통합',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1282',1,'']]]
+  ['테스트_0',['테스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1722',1,'유닛 테스트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1724',1,'통합 테스트']]],
+  ['테스트_20및_20검증_20예상_20소요_3a_201_205시간_1',['Phase 5: 테스트 및 검증 (예상 소요: 1.5시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1446',1,'']]],
+  ['테스트_20환경_2',['테스트 환경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md745',1,'']]],
+  ['테스팅_20구성_3',['테스팅 구성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1721',1,'']]],
+  ['테스팅_20인프라_4',['빌드 &amp; 테스팅 인프라',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1548',1,'']]],
+  ['테이블_20중심_20디자인_5',['제안 2: 테이블 중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1431',1,'']]]
 ];

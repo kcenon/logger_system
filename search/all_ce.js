@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['🤝_20도움_20및_20지원_0',['🤝 도움 및 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1705',1,'']]],
-  ['🤝_20help_20support_1',['🤝 Help &amp; Support',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1690',1,'']]]
+  ['🔥_20sanitizer_20results_0',['🔥 Sanitizer Results',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md142',1,'']]]
 ];

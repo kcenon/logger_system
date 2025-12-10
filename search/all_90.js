@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['처리량_0',['스레드 수별 처리량',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md712',1,'']]],
-  ['처리_20등급_3a_20strong_20a_20strong_2090_20완료_1',['오류 처리 등급: &lt;strong&gt;A&lt;/strong&gt; (90% 완료)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1502',1,'']]],
-  ['처리_20아키텍처_2',['비동기 처리 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1493',1,'']]],
-  ['처리_20전략_3',['오류 처리 전략',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1501',1,'']]]
+  ['준비_20상태_3a_20✅_20strong_20준비_20완료_20strong_0',['프로덕션 준비 상태: ✅ &lt;strong&gt;준비 완료&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1546',1,'']]],
+  ['준수_20등급_3a_20strong_20a_20strong_1',['RAII 준수 등급: &lt;strong&gt;A&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1562',1,'']]]
 ];

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['🎨_20readme_20md_20성능_20섹션_20디자인_0',['🎨 README.md 성능 섹션 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1363',1,'']]]
+  ['현재_20기능_0',['현재 기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1284',1,'']]],
+  ['현재_20상태_20분석_1',['🔍 현재 상태 분석',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1402',1,'']]],
+  ['현재_20설정_20백업_2',['Step 1: 현재 설정 백업',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md528',1,'']]]
 ];

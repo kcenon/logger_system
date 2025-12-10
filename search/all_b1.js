@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['헤더_20파일_0',['헤더 파일',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1670',1,'']]]
+  ['플랫폼_0',['공식 지원 플랫폼',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1584',1,'']]],
+  ['플랫폼_20지원_1',['플랫폼 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1583',1,'']]]
 ];

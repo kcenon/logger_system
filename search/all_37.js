@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['다음_20단계_0',['📝 다음 단계',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1396',1,'']]]
+  ['누수_20탐지_0',['메모리 누수 탐지',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1564',1,'']]]
 ];

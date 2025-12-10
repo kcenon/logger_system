@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['설계_20원칙_0',['설계 원칙',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md915',1,'']]],
-  ['설정_1',['설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md955',1,'개발 설정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1271',1,'설정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1281',1,'패턴 2: 사용자 정의 풀 설정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md954',1,'프로덕션 설정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1346',1,'Phase 1: 벤치마크 재활성화 및 JSON 출력 설정']]],
-  ['설정_20백업_2',['Step 1: 현재 설정 백업',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md512',1,'']]],
-  ['설정_20시스템_3',['설정 시스템',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1643',1,'']]]
+  ['새니타이저_20파이프라인_0',['2. 새니타이저 파이프라인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1551',1,'']]],
+  ['새로운_20구조로_20빠른_20시작_1',['🚀 새로운 구조로 빠른 시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md532',1,'']]]
 ];

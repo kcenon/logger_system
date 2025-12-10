@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['안전성_0',['안전성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md958',1,'스레드 안전성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1283',1,'스레드 안전성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1499',1,'예외 안전성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1513',1,'3. 시그널 핸들러 안전성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1492',1,'Writer 스레드 안전성']]],
-  ['안전성_20동시성_1',['스레드 안전성 &amp; 동시성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1490',1,'']]],
-  ['안전성_20등급_3a_20strong_20a_20strong_2',['스레드 안전성 등급: &lt;strong&gt;A+&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1491',1,'']]],
-  ['안전한_20구성_20체크리스트_3',['안전한 구성 체크리스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1221',1,'']]]
+  ['신규_0',['신규',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1228',1,'5. 백엔드 선택 (v3.0 신규)'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1229',1,'6. C++20 source_location (v3.0 신규)']]],
+  ['신규_20사용자_1',['신규 사용자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1764',1,'']]]
 ];

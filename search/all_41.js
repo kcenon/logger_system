@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['런타임에_20활성화_0',['런타임에 활성화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1270',1,'']]],
-  ['런타임_20감지_20미작동_1',['런타임 감지 미작동',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1289',1,'']]]
+  ['라이브러리_0',['라이브러리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1456',1,'도구 및 라이브러리'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md759',1,'vs glog (Google 로깅 라이브러리)']]]
 ];

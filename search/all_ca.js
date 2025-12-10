@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🔮_20future_20roadmap_0',['🔮 Future Roadmap',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md636',1,'']]]
+  ['📝_20다음_20단계_0',['📝 다음 단계',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1462',1,'']]],
+  ['📝_20dependency_20status_1',['📝 Dependency Status',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md148',1,'']]]
 ];

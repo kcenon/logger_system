@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['대기_0',['비활성화됨 (기능 구현 대기)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md770',1,'']]],
-  ['대시보드_1',['Logger System CI/CD 대시보드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD__KO.html#autotoc_md159',1,'']]]
+  ['단계_0',['📝 다음 단계',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1462',1,'']]],
+  ['단일_20스레드_20비교_1',['단일 스레드 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md756',1,'']]],
+  ['단일_20스레드_20비동기_2',['지연시간 분포 (단일 스레드, 비동기)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md762',1,'']]],
+  ['단일_20스레드_20성능_3',['단일 스레드 성능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md750',1,'']]]
 ];

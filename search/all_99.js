@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['콘솔_20작성자_0',['콘솔 작성자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md924',1,'']]]
+  ['추가됨_0',['추가됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md814',1,'추가됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md823',1,'추가됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md835',1,'추가됨']]],
+  ['추상화_1',['3. 백엔드 추상화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md421',1,'']]]
 ];

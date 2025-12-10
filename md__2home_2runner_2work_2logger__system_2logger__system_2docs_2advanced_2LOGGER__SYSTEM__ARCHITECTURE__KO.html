@@ -96,22 +96,143 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE.html">English</a> | <b>한국어</b> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md408"></a>
-Logger System 아키텍처</h1>
+<h1><a class="anchor" id="autotoc_md414"></a>
+로거 시스템 아키텍처</h1>
+<p><b>버전</b>: 3.0.0 <b>최종 업데이트</b>: 2025-12-10</p>
 <blockquote class="doxtable">
 <p>&zwj;이 문서는 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE.html">LOGGER_SYSTEM_ARCHITECTURE.md</a>의 한국어 번역 버전입니다. </p>
 </blockquote>
-<p><em>이 문서의 번역은 진행 중입니다. 자세한 내용은 영문 버전을 참조하세요.</em></p>
+<h2><a class="anchor" id="autotoc_md415"></a>
+개요</h2>
+<p>Logger System (v3.0)은 common_system의 <code>common::interfaces::ILogger</code>를 구현하는 고성능 모듈러 로깅 프레임워크입니다. 기본적으로 <code>std::jthread</code>를 사용한 **독립 실행 모드**로 동작하며, thread_system과의 통합은 선택적입니다.</p>
+<h3><a class="anchor" id="autotoc_md416"></a>
+주요 기능 (v3.0)</h3>
+<ul>
+<li><b>ILogger 구현</b>: <code>common::interfaces::ILogger</code> 완전 구현</li>
+<li><b>독립 실행 모드</b>: thread_system 의존성 불필요 (<code>std::jthread</code> 사용)</li>
+<li><b>Dual API</b>: <code>common::interfaces::log_level</code>과 네이티브 <code>logger_system::log_level</code> 모두 지원</li>
+<li><b>C++20 지원</b>: Concepts와 <code>source_location</code> 활용</li>
+<li><b>포괄적 에러 처리</b>: Result 패턴 전면 적용</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md417"></a>
+아키텍처 다이어그램</h2>
+<div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────────┐</div>
+<div class="line">│                      클라이언트 애플리케이션                      │</div>
+<div class="line">├─────────────────────────────────────────────────────────────────┤</div>
+<div class="line">│             common::interfaces::ILogger (API)                    │</div>
+<div class="line">├─────────────────────────────────────────────────────────────────┤</div>
+<div class="line">│                  kcenon::logger::logger                          │</div>
+<div class="line">│  ┌─────────────────────────────────────────────────────────┐    │</div>
+<div class="line">│  │                   비동기 모드 (기본값)                    │    │</div>
+<div class="line">│  │  ┌────────────┐  ┌──────────────┐  ┌────────────┐       │    │</div>
+<div class="line">│  │  │    큐      │→ │ async_worker │→ │   배치     │       │    │</div>
+<div class="line">│  │  │            │  │ (std::jthread│  │  프로세서  │       │    │</div>
+<div class="line">│  │  │            │  │  독립 실행)  │  │            │       │    │</div>
+<div class="line">│  │  └────────────┘  └──────────────┘  └────────────┘       │    │</div>
+<div class="line">│  └─────────────────────────────────────────────────────────┘    │</div>
+<div class="line">├─────────────────────────────────────────────────────────────────┤</div>
+<div class="line">│               백엔드 추상화 레이어 (v3.0)                         │</div>
+<div class="line">│  ┌──────────────────────┐  ┌─────────────────────────────────┐  │</div>
+<div class="line">│  │  standalone_backend  │  │  thread_system_backend          │  │</div>
+<div class="line">│  │  (기본값)            │  │  (선택적, 링크 필요)              │  │</div>
+<div class="line">│  └──────────────────────┘  └─────────────────────────────────┘  │</div>
+<div class="line">└─────────────────────────────────────────────────────────────────┘</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md418"></a>
+핵심 컴포넌트</h2>
+<h3><a class="anchor" id="autotoc_md419"></a>
+1. ILogger 인터페이스 구현</h3>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>logger : <span class="keyword">public</span> common::interfaces::ILogger,</div>
+<div class="line">               <span class="keyword">public</span> security::critical_logger_interface {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="comment">// ILogger 인터페이스 구현</span></div>
+<div class="line">    common::VoidResult log(common::interfaces::log_level level,</div>
+<div class="line">                           <span class="keyword">const</span> std::string&amp; message) <span class="keyword">override</span>;</div>
+<div class="line"> </div>
+<div class="line">    common::VoidResult log(common::interfaces::log_level level,</div>
+<div class="line">                           std::string_view message,</div>
+<div class="line">                           <span class="keyword">const</span> common::source_location&amp; loc =</div>
+<div class="line">                               common::source_location::current()) <span class="keyword">override</span>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">bool</span> is_enabled(common::interfaces::log_level level) <span class="keyword">const override</span>;</div>
+<div class="line">    common::VoidResult set_level(common::interfaces::log_level level) <span class="keyword">override</span>;</div>
+<div class="line">    common::interfaces::log_level get_level() <span class="keyword">const override</span>;</div>
+<div class="line">    common::VoidResult flush() <span class="keyword">override</span>;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace kcenon::logger</span></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md420"></a>
+2. Dual API 설계</h3>
+<p>표준화된 인터페이스와 네이티브 API 모두 지원:</p>
+<div class="fragment"><div class="line"><span class="comment">// ILogger 인터페이스 (표준화, 권장)</span></div>
+<div class="line">logger-&gt;log(common::interfaces::log_level::info, <span class="stringliteral">&quot;ILogger 인터페이스 사용&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// C++20 source_location (자동)</span></div>
+<div class="line">logger-&gt;log(common::interfaces::log_level::debug, <span class="stringliteral">&quot;소스 위치 자동 캡처&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 네이티브 API (하위 호환)</span></div>
+<div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;네이티브 API 사용&quot;</span>);</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md421"></a>
+3. 백엔드 추상화</h3>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger::backends {</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 추상 백엔드 인터페이스</span></div>
+<div class="line"><span class="keyword">class </span>integration_backend {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keyword">virtual</span> common::interfaces::log_level to_common_level(</div>
+<div class="line">        logger_system::log_level level) <span class="keyword">const</span> = 0;</div>
+<div class="line">    <span class="keyword">virtual</span> logger_system::log_level from_common_level(</div>
+<div class="line">        common::interfaces::log_level level) <span class="keyword">const</span> = 0;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 독립 실행 백엔드 (v3.0 기본값)</span></div>
+<div class="line"><span class="keyword">class </span>standalone_backend : <span class="keyword">public</span> integration_backend {</div>
+<div class="line">    <span class="comment">// std::jthread로 비동기 처리</span></div>
+<div class="line">    <span class="comment">// 외부 의존성 없음</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace kcenon::logger::backends</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md422"></a>
+성능 특성</h2>
+<h3><a class="anchor" id="autotoc_md423"></a>
+벤치마크 (v3.0)</h3>
+<p><b>플랫폼</b>: Apple M1 (8코어) @ 3.2GHz, 16GB RAM, macOS Sonoma</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">모드   </th><th class="markdownTableHeadNone">작업   </th><th class="markdownTableHeadNone">지연 시간   </th><th class="markdownTableHeadNone">처리량   </th><th class="markdownTableHeadNone">메모리    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">비동기 (독립 실행)   </td><td class="markdownTableBodyNone">큐잉   </td><td class="markdownTableBodyNone">~148ns   </td><td class="markdownTableBodyNone">4.34M msg/s   </td><td class="markdownTableBodyNone">~2MB    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">비동기 (thread_sys)   </td><td class="markdownTableBodyNone">큐잉   </td><td class="markdownTableBodyNone">~140ns   </td><td class="markdownTableBodyNone">4.34M msg/s   </td><td class="markdownTableBodyNone">~2.5MB    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">동기   </td><td class="markdownTableBodyNone">직접 쓰기   </td><td class="markdownTableBodyNone">~100μs   </td><td class="markdownTableBodyNone">I/O 제한   </td><td class="markdownTableBodyNone">최소   </td></tr>
+</table>
+<h3><a class="anchor" id="autotoc_md424"></a>
+멀티스레드 성능</h3>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">스레드   </th><th class="markdownTableHeadNone">독립 실행   </th><th class="markdownTableHeadNone">thread_system 통합    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">4.34M msg/s   </td><td class="markdownTableBodyNone">4.34M msg/s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">4   </td><td class="markdownTableBodyNone">1.07M msg/s   </td><td class="markdownTableBodyNone">1.15M msg/s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">8   </td><td class="markdownTableBodyNone">412K msg/s   </td><td class="markdownTableBodyNone">450K msg/s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">16   </td><td class="markdownTableBodyNone">390K msg/s   </td><td class="markdownTableBodyNone">420K msg/s   </td></tr>
+</table>
 <hr  />
+<p><em>자세한 내용은 영문 버전 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE.html">LOGGER_SYSTEM_ARCHITECTURE.md</a>를 참조하세요.</em></p>
 <hr  />
-<p><em>Last Updated: 2025-10-20</em> </p>
+<p><em>Last Updated: 2025-12-10</em> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Dec 9 2025 09:14:52 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Dec 10 2025 06:10:46 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
