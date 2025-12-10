@@ -1,277 +1,460 @@
 > **Language:** **English** | [한국어](LOGGER_SYSTEM_ARCHITECTURE_KO.md)
 
+# Logger System Architecture
+
+**Version**: 3.0.0
+**Last Updated**: 2025-12-10
+
 ## Table of Contents
 
 - [Overview](#overview)
 - [Architecture Diagram](#architecture-diagram)
 - [Core Components](#core-components)
-  - [1. Logger Interface Implementation](#1-logger-interface-implementation)
-  - [2. Configuration Management](#2-configuration-management)
-    - [Logger Configuration with Validation](#logger-configuration-with-validation)
-    - [Configuration Templates](#configuration-templates)
-  - [3. Builder Pattern with Validation](#3-builder-pattern-with-validation)
-  - [4. Interface Segregation](#4-interface-segregation)
-    - [Writer Interface](#writer-interface)
-    - [Filter Interface](#filter-interface)
-    - [Formatter Interface](#formatter-interface)
-  - [5. Log Entry Structure](#5-log-entry-structure)
+  - [1. ILogger Interface Implementation](#1-ilogger-interface-implementation)
+  - [2. Dual API Design](#2-dual-api-design)
+  - [3. Configuration Management](#3-configuration-management)
+  - [4. Builder Pattern with Validation](#4-builder-pattern-with-validation)
+  - [5. Backend Abstraction](#5-backend-abstraction)
+  - [6. Interface Segregation](#6-interface-segregation)
+  - [7. Log Entry Structure](#7-log-entry-structure)
 - [Advanced Features](#advanced-features)
   - [1. Asynchronous Pipeline](#1-asynchronous-pipeline)
   - [2. Error Handling with Result Pattern](#2-error-handling-with-result-pattern)
-  - [3. Performance Monitoring](#3-performance-monitoring)
-  - [4. Configuration Strategies](#4-configuration-strategies)
+  - [3. C++20 Source Location](#3-c20-source-location)
+  - [4. Performance Monitoring](#4-performance-monitoring)
+  - [5. Configuration Strategies](#5-configuration-strategies)
 - [Threading Model](#threading-model)
-  - [Synchronous Mode](#synchronous-mode)
-  - [Asynchronous Mode](#asynchronous-mode)
-  - [Thread Safety Guarantees](#thread-safety-guarantees)
 - [Memory Management](#memory-management)
-  - [Buffer Management](#buffer-management)
-  - [Object Lifetime](#object-lifetime)
 - [Performance Characteristics](#performance-characteristics)
-  - [Benchmarks](#benchmarks)
-  - [Optimization Strategies](#optimization-strategies)
 - [Integration Patterns](#integration-patterns)
-  - [Service Container Integration](#service-container-integration)
-  - [Direct Integration](#direct-integration)
 - [Extension Points](#extension-points)
-  - [Custom Writers](#custom-writers)
-  - [Custom Filters](#custom-filters)
-  - [Custom Formatters](#custom-formatters)
 - [Future Enhancements](#future-enhancements)
-  - [Performance Improvements](#performance-improvements)
-  - [Feature Additions](#feature-additions)
-  - [Platform Extensions](#platform-extensions)
 - [Best Practices](#best-practices)
-  - [For Library Users](#for-library-users)
-  - [For Contributors](#for-contributors)
 - [Platform Notes](#platform-notes)
-
-# Logger System Architecture
 
 ## Overview
 
-The Logger System is designed as a high-performance, modular logging framework that implements the `thread_module::logger_interface` from the Thread System. It provides both synchronous and asynchronous logging capabilities with comprehensive error handling through the result pattern.
+The Logger System (v3.0) is a high-performance, modular logging framework that implements `common::interfaces::ILogger` from common_system. It operates in **standalone mode** by default using `std::jthread`, with optional integration with thread_system for enhanced threading capabilities.
+
+### Key Features (v3.0)
+- **ILogger Implementation**: Full implementation of `common::interfaces::ILogger`
+- **Standalone Mode**: No thread_system dependency required (uses `std::jthread`)
+- **Dual API**: Both `common::interfaces::log_level` and native `logger_system::log_level`
+- **C++20 Support**: Leverages Concepts and `source_location`
+- **Comprehensive Error Handling**: Result pattern throughout
 
 ## Architecture Diagram
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                      Client Application                      │
-├─────────────────────────────────────────────────────────────┤
-│                    logger_interface (API)                    │
-├─────────────────────────────────────────────────────────────┤
-│                         logger                               │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │                    Sync Mode                         │    │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌────────────┐  │    │
-│  │  │   Format    │→ │   Write     │→ │   Flush    │  │    │
-│  │  └─────────────┘  └─────────────┘  └────────────┘  │    │
-│  └─────────────────────────────────────────────────────┘    │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │                   Async Mode                         │    │
-│  │  ┌────────────┐  ┌──────────────┐  ┌────────────┐  │    │
-│  │  │   Queue    │→ │ log_collector │→ │   Batch    │  │    │
-│  │  └────────────┘  └──────────────┘  └────────────┘  │    │
-│  └─────────────────────────────────────────────────────┘    │
-├─────────────────────────────────────────────────────────────┤
-│            Configuration & Builder Pattern Layer            │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐  │
-│  │ logger_builder  │  │ logger_config   │  │ Templates   │  │  
-│  │                 │  │                 │  │             │  │
-│  │ • Fluent API    │  │ • Validation    │  │ • Production│  │
-│  │ • Result Types  │  │ • Defaults      │  │ • Debug     │  │
-│  │ • Error Checks  │  │ • Strategies    │  │ • High Perf │  │
-│  └─────────────────┘  └─────────────────┘  └─────────────┘  │
-├─────────────────────────────────────────────────────────────┤
-│                Interface Segregation Layer                   │
-│  ┌────────────────┐ ┌─────────────────┐ ┌─────────────────┐ │
-│  │ log_writer_    │ │ log_filter_     │ │ log_formatter_ │ │
-│  │ interface      │ │ interface       │ │ interface      │ │
-│  └────────────────┘ └─────────────────┘ └─────────────────┘ │
-├─────────────────────────────────────────────────────────────┤
-│                         Writers                              │
-│  ┌──────────────┐  ┌──────────────┐  ┌───────────────┐     │
-│  │ConsoleWriter │  │ FileWriter   │  │ CustomWriter  │     │
-│  └──────────────┘  └──────────────┘  └───────────────┘     │
-└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│                      Client Application                          │
+├─────────────────────────────────────────────────────────────────┤
+│             common::interfaces::ILogger (API)                    │
+│   ┌─────────────────────────────────────────────────────────┐   │
+│   │  ILogger Methods (Phase 2.0)                             │   │
+│   │  • log(level, message)                                   │   │
+│   │  • log(level, message, source_location)  ← C++20        │   │
+│   │  • is_enabled(level)                                     │   │
+│   │  • set_level(level) / get_level()                        │   │
+│   │  • flush()                                               │   │
+│   └─────────────────────────────────────────────────────────┘   │
+├─────────────────────────────────────────────────────────────────┤
+│                  kcenon::logger::logger                          │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │                    Sync Mode                             │    │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌────────────┐       │    │
+│  │  │   Format    │→ │   Write     │→ │   Flush    │       │    │
+│  │  └─────────────┘  └─────────────┘  └────────────┘       │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │                   Async Mode (Default)                   │    │
+│  │  ┌────────────┐  ┌──────────────┐  ┌────────────┐       │    │
+│  │  │   Queue    │→ │ async_worker │→ │   Batch    │       │    │
+│  │  │            │  │ (std::jthread│  │  Processor │       │    │
+│  │  │            │  │  standalone) │  │            │       │    │
+│  │  └────────────┘  └──────────────┘  └────────────┘       │    │
+│  └─────────────────────────────────────────────────────────┘    │
+├─────────────────────────────────────────────────────────────────┤
+│               Backend Abstraction Layer (v3.0)                   │
+│  ┌──────────────────────┐  ┌─────────────────────────────────┐  │
+│  │  standalone_backend  │  │  thread_system_backend          │  │
+│  │  (Default)           │  │  (Optional, requires linking)   │  │
+│  │  • std::jthread      │  │  • thread_pool integration      │  │
+│  │  • No dependencies   │  │  • Enhanced scheduling          │  │
+│  └──────────────────────┘  └─────────────────────────────────┘  │
+├─────────────────────────────────────────────────────────────────┤
+│            Configuration & Builder Pattern Layer                 │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  │
+│  │ logger_builder  │  │ logger_config   │  │ Config          │  │
+│  │                 │  │                 │  │ Strategies      │  │
+│  │ • Fluent API    │  │ • Validation    │  │ • deployment    │  │
+│  │ • Result Types  │  │ • Defaults      │  │ • performance   │  │
+│  │ • Backend Sel.  │  │ • C++20 opts    │  │ • environment   │  │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘  │
+├─────────────────────────────────────────────────────────────────┤
+│                Interface Segregation Layer                       │
+│  ┌────────────────┐ ┌─────────────────┐ ┌─────────────────────┐ │
+│  │ log_writer_    │ │ log_filter_     │ │ log_formatter_      │ │
+│  │ interface      │ │ interface       │ │ interface           │ │
+│  └────────────────┘ └─────────────────┘ └─────────────────────┘ │
+├─────────────────────────────────────────────────────────────────┤
+│                         Writers                                  │
+│  ┌────────────┐ ┌──────────┐ ┌──────────────┐ ┌──────────────┐  │
+│  │ console_   │ │ file_    │ │ rotating_    │ │ network_     │  │
+│  │ writer     │ │ writer   │ │ file_writer  │ │ writer       │  │
+│  └────────────┘ └──────────┘ └──────────────┘ └──────────────┘  │
+│  ┌────────────┐ ┌──────────┐ ┌──────────────┐                   │
+│  │ critical_  │ │ batch_   │ │ async_       │                   │
+│  │ writer     │ │ writer   │ │ writer       │                   │
+│  └────────────┘ └──────────┘ └──────────────┘                   │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ## Core Components
 
-### 1. Logger Interface Implementation
+### 1. ILogger Interface Implementation
 
-The system implements `thread_module::logger_interface` with enhanced error handling:
+Since v2.0, the logger implements `common::interfaces::ILogger` for ecosystem standardization:
 
 ```cpp
-class logger : public thread_module::logger_interface {
-    // Result pattern for comprehensive error handling
-    result_void log(log_level level, const std::string& message) override;
-    result_void log(log_level level, const std::string& message,
-                    const std::string& file, int line, 
-                    const std::string& function) override;
-    
-    bool is_enabled(log_level level) const override;
-    result_void flush() override;
+namespace kcenon::logger {
+
+class logger : public common::interfaces::ILogger,
+               public security::critical_logger_interface {
+public:
+    // ILogger interface implementation
+    common::VoidResult log(common::interfaces::log_level level,
+                           const std::string& message) override;
+
+    common::VoidResult log(common::interfaces::log_level level,
+                           std::string_view message,
+                           const common::source_location& loc =
+                               common::source_location::current()) override;
+
+    bool is_enabled(common::interfaces::log_level level) const override;
+
+    common::VoidResult set_level(common::interfaces::log_level level) override;
+
+    common::interfaces::log_level get_level() const override;
+
+    common::VoidResult flush() override;
 };
+
+}  // namespace kcenon::logger
 ```
 
-### 2. Configuration Management
+### 2. Dual API Design
+
+The logger supports both standardized and native APIs for flexibility and backward compatibility:
+
+```cpp
+namespace kcenon::logger {
+
+class logger {
+public:
+    // ========== ILogger Interface (Standardized) ==========
+    // Uses common::interfaces::log_level
+    common::VoidResult log(common::interfaces::log_level level,
+                           const std::string& message);
+
+    // With C++20 source_location (recommended)
+    common::VoidResult log(common::interfaces::log_level level,
+                           std::string_view message,
+                           const common::source_location& loc =
+                               common::source_location::current());
+
+    // ========== Native API (Backward Compatible) ==========
+    // Uses logger_system::log_level
+    void log(log_level level, const std::string& message);
+
+    void log(log_level level, const std::string& message,
+             const std::string& file, int line, const std::string& function);
+
+    bool is_enabled(log_level level) const;
+
+    // Deprecated: use set_level()/get_level() instead
+    void set_min_level(log_level level);
+    log_level get_min_level() const;
+};
+
+}  // namespace kcenon::logger
+```
+
+### 3. Configuration Management
 
 #### Logger Configuration with Validation
 
 ```cpp
+namespace kcenon::logger {
+
 struct logger_config {
     // Core settings
     bool async = true;
     std::size_t buffer_size = 8192;
-    thread_module::log_level min_level = thread_module::log_level::info;
-    
+    logger_system::log_level min_level = logger_system::log_level::info;
+
     // Performance tuning
     std::size_t batch_size = 100;
     std::chrono::milliseconds flush_interval{1000};
     overflow_policy queue_overflow_policy = overflow_policy::drop_newest;
-    
+
     // Feature flags
     bool enable_metrics = false;
     bool enable_crash_handler = false;
     bool enable_structured_logging = false;
-    
+    bool enable_source_location = true;  // C++20 feature
+
     // Comprehensive validation
     result_void validate() const;
 };
+
+}  // namespace kcenon::logger
 ```
 
 #### Configuration Templates
 
 Predefined configurations for common scenarios:
 
-- **Production**: Optimized for production environments with async logging
-- **Debug**: Immediate synchronous output for development  
-- **High Performance**: Maximum throughput configuration
-- **Low Latency**: Minimal latency for real-time systems
+| Template | Use Case | Async | Batch Size | Flush Interval |
+|----------|----------|-------|------------|----------------|
+| `default` | General purpose | true | 100 | 1000ms |
+| `production` | Production environments | true | 200 | 500ms |
+| `debug` | Development | false | 1 | 0ms |
+| `high_performance` | Maximum throughput | true | 500 | 2000ms |
+| `low_latency` | Real-time systems | true | 10 | 50ms |
 
-### 3. Builder Pattern with Validation
+### 4. Builder Pattern with Validation
 
 ```cpp
+namespace kcenon::logger {
+
 class logger_builder {
-    // Fluent interface with validation at each step
+public:
+    // Fluent interface with validation
     logger_builder& use_template(const std::string& template_name);
     logger_builder& with_async(bool async = true);
     logger_builder& with_buffer_size(std::size_t size);
-    logger_builder& add_writer(const std::string& name, 
-                              std::unique_ptr<log_writer_interface> writer);
-    
-    // Validation before building
+    logger_builder& with_min_level(logger_system::log_level level);
+
+    // Backend selection (v3.0)
+    logger_builder& with_standalone_backend();  // Default
+    logger_builder& with_backend(std::unique_ptr<backends::integration_backend> backend);
+
+    // Deprecated: thread_system backend removed in v3.0
+    [[deprecated("Use with_standalone_backend() instead")]]
+    logger_builder& with_thread_system_backend();
+
+    // Writers
+    logger_builder& add_writer(const std::string& name,
+                               std::unique_ptr<base_writer> writer);
+
+    // Build
     result_void validate() const;
     result<std::unique_ptr<logger>> build();
 };
+
+}  // namespace kcenon::logger
 ```
 
-### 4. Interface Segregation
+### 5. Backend Abstraction
+
+The v3.0 architecture introduces a backend abstraction layer for flexible async processing:
+
+```cpp
+namespace kcenon::logger::backends {
+
+// Abstract backend interface
+class integration_backend {
+public:
+    virtual ~integration_backend() = default;
+
+    // Log level conversion (dual API support)
+    virtual common::interfaces::log_level to_common_level(
+        logger_system::log_level level) const = 0;
+    virtual logger_system::log_level from_common_level(
+        common::interfaces::log_level level) const = 0;
+};
+
+// Standalone backend (default since v3.0)
+class standalone_backend : public integration_backend {
+    // Uses std::jthread for async processing
+    // No external dependencies
+};
+
+// Thread system backend (optional, requires LOGGER_USE_THREAD_SYSTEM=ON)
+class thread_system_backend : public integration_backend {
+    // Uses thread_system primitives
+    // Enhanced scheduling and worker pools
+};
+
+}  // namespace kcenon::logger::backends
+```
+
+### 6. Interface Segregation
 
 Clean separation of concerns through dedicated interfaces:
 
 #### Writer Interface
 ```cpp
+namespace kcenon::logger {
+
 class log_writer_interface {
 public:
+    virtual ~log_writer_interface() = default;
     virtual result_void write(const log_entry& entry) = 0;
     virtual result_void flush() = 0;
     virtual bool is_healthy() const { return true; }
 };
+
+}  // namespace kcenon::logger
 ```
 
 #### Filter Interface
 ```cpp
+namespace kcenon::logger {
+
 class log_filter_interface {
 public:
+    virtual ~log_filter_interface() = default;
     virtual bool should_log(const log_entry& entry) const = 0;
 };
+
+}  // namespace kcenon::logger
 ```
 
-#### Formatter Interface  
+#### Formatter Interface
 ```cpp
+namespace kcenon::logger {
+
 class log_formatter_interface {
 public:
+    virtual ~log_formatter_interface() = default;
     virtual std::string format(const log_entry& entry) const = 0;
 };
+
+}  // namespace kcenon::logger
 ```
 
-### 5. Log Entry Structure
+### 7. Log Entry Structure
 
 Unified data structure for all logging operations:
 
 ```cpp
+namespace kcenon::logger {
+
 struct log_entry {
-    thread_module::log_level level;
+    logger_system::log_level level;
     std::string message;
     std::string file;
     int line;
     std::string function;
     std::chrono::system_clock::time_point timestamp;
     std::thread::id thread_id;
-    std::unordered_map<std::string, std::string> context;  // For structured logging
+    std::unordered_map<std::string, std::string> context;  // Structured logging
 };
+
+}  // namespace kcenon::logger
 ```
 
 ## Advanced Features
 
 ### 1. Asynchronous Pipeline
 
-The async mode uses a sophisticated pipeline:
+The async mode (default) uses a sophisticated pipeline:
 
+```
+┌──────────────┐    ┌──────────────────┐    ┌──────────────┐
+│   Producer   │    │   async_worker   │    │   Writers    │
+│   (Caller)   │───▶│  (std::jthread)  │───▶│              │
+│              │    │                  │    │              │
+│ Non-blocking │    │ • Lock-free      │    │ • Console    │
+│ enqueue      │    │   dequeue        │    │ • File       │
+│              │    │ • Batch process  │    │ • Network    │
+└──────────────┘    └──────────────────┘    └──────────────┘
+```
+
+**Key Components:**
 - **Producer Side**: Non-blocking enqueue with overflow policies
-- **Consumer Side**: Background thread with batch processing
-- **Queue Management**: Currently mutex-backed (lock-free planned)
-- **Overflow Handling**: Configurable policies (drop oldest/newest, block, expand)
+- **Consumer Side**: `async_worker` using `std::jthread` (standalone mode)
+- **Queue Management**: Thread-safe queue with configurable overflow policies
+- **Batch Processing**: Intelligent batching for I/O efficiency
 
 ### 2. Error Handling with Result Pattern
 
-Comprehensive error handling throughout the system:
+Uses `common::Result<T>` and `common::VoidResult` from common_system:
 
 ```cpp
-enum class logger_error_code {
-    success = 0,
-    // Writer errors (1000-1099)
-    writer_not_found = 1000,
-    writer_initialization_failed = 1001,
-    writer_not_healthy = 1003,
-    
-    // File errors (1100-1199)  
-    file_open_failed = 1100,
-    file_write_failed = 1101,
-    
-    // Queue errors (1300-1399)
-    queue_full = 1301,
-    queue_stopped = 1302,
-    
-    // Configuration errors (1400-1499)
-    invalid_configuration = 1400
-};
+// Success
+return common::VoidResult{};
+
+// Error
+return common::make_error<void>(
+    common::ErrorCategory::Logger,
+    static_cast<int>(logger_error_code::queue_full),
+    "Queue is full"
+);
+
+// Usage
+auto result = logger->log(level, message);
+if (!result) {
+    std::cerr << "Error: " << result.error().message() << "\n";
+}
 ```
 
-### 3. Performance Monitoring
+### 3. C++20 Source Location
+
+Automatic source location capture using `common::source_location`:
+
+```cpp
+// Source location captured automatically
+logger->log(common::interfaces::log_level::info, "Debug message");
+// Output: [INFO] [main.cpp:42] [main()] Debug message
+
+// Explicit source location
+logger->log(common::interfaces::log_level::info, "Message",
+            common::source_location::current());
+```
+
+### 4. Performance Monitoring
 
 Built-in metrics collection:
 
 ```cpp
-class logger_metrics {
+namespace kcenon::logger::metrics {
+
+class logger_performance_stats {
 public:
     uint64_t get_messages_per_second() const;
     uint64_t get_avg_enqueue_time_ns() const;
     double get_queue_utilization_percent() const;
     uint64_t get_dropped_messages() const;
+    uint64_t get_total_messages() const;
+    uint64_t get_error_count() const;
 };
+
+}  // namespace kcenon::logger::metrics
 ```
 
-### 4. Configuration Strategies
+### 5. Configuration Strategies
 
-Flexible configuration management:
+Flexible configuration management with strategy pattern:
 
-- **Template Strategy**: Predefined configurations
-- **Environment Strategy**: Environment variable-based configuration  
-- **Performance Strategy**: Auto-tuning based on load
-- **Composite Strategy**: Combination of multiple strategies
+```cpp
+// Deployment strategy
+logger_builder().for_environment(deployment_env::production);
+
+// Performance strategy
+logger_builder().with_performance_tuning(performance_level::high_throughput);
+
+// Environment strategy (reads LOG_* env vars)
+logger_builder().auto_configure();
+
+// Composite strategy
+logger_builder()
+    .for_environment(deployment_env::production)
+    .with_performance_tuning(performance_level::balanced)
+    .auto_configure();  // Override with env vars
+```
 
 ## Threading Model
 
@@ -280,16 +463,16 @@ Flexible configuration management:
 - **Blocking**: Waits for I/O completion
 - **Use Cases**: Low-frequency logging, critical errors, simple applications
 
-### Asynchronous Mode  
-- **Execution**: Non-blocking enqueue, background processing
-- **Throughput**: High-volume logging capability
+### Asynchronous Mode (Default)
+- **Execution**: Non-blocking enqueue, background processing via `std::jthread`
+- **Throughput**: High-volume logging capability (4.34M msg/s)
 - **Use Cases**: High-frequency logging, performance-critical applications
 
 ### Thread Safety Guarantees
 - All public methods are thread-safe
 - Writers are called sequentially (no concurrent writes to same writer)
-- Internal state protected by appropriate synchronization
-- Lock-free queue planned for better scalability
+- Internal state protected by atomic operations
+- PIMPL idiom provides ABI stability
 
 ## Memory Management
 
@@ -297,84 +480,137 @@ Flexible configuration management:
 - Configurable buffer sizes with validation
 - Efficient memory usage with move semantics
 - Pre-allocated buffers in async mode
-- Smart overflow handling
+- Smart overflow handling policies
 
 ### Object Lifetime
 - RAII principles throughout
-- Shared ownership via smart pointers where appropriate
-- Clear ownership semantics for writers and filters
+- Unique ownership via `std::unique_ptr` for writers
+- Shared ownership via `std::shared_ptr` where appropriate
+- Clear ownership semantics
 
 ## Performance Characteristics
 
-### Benchmarks
+### Benchmarks (v3.0)
+
+**Platform**: Apple M1 (8-core) @ 3.2GHz, 16GB RAM, macOS Sonoma
 
 | Mode | Operation | Latency | Throughput | Memory |
-|------|-----------|---------|------------|---------|
+|------|-----------|---------|------------|--------|
+| Async (standalone) | Enqueue | ~148ns | 4.34M msg/s | ~2MB base |
+| Async (thread_sys) | Enqueue | ~140ns | 4.34M msg/s | ~2.5MB base |
 | Sync | Direct write | ~100μs | I/O limited | Minimal |
-| Async | Enqueue | ~50ns | >1M msg/sec | Buffer size |
+
+### Multi-threaded Performance
+
+| Threads | Standalone | With thread_system |
+|---------|------------|-------------------|
+| 1 | 4.34M msg/s | 4.34M msg/s |
+| 4 | 1.07M msg/s | 1.15M msg/s |
+| 8 | 412K msg/s | 450K msg/s |
+| 16 | 390K msg/s | 420K msg/s |
 
 ### Optimization Strategies
 
 1. **String Operations**: Minimized allocations, move semantics
-2. **Batch Processing**: Efficient I/O operations
+2. **Batch Processing**: Adaptive batching for I/O efficiency
 3. **Lock Contention**: Minimized through careful design
 4. **Cache Performance**: Data structure layout optimization
 
 ## Integration Patterns
 
-### Service Container Integration
+### ILogger Interface Integration
 ```cpp
-// Register as singleton
-service_container::global()
-    .register_singleton<logger_interface>(
-        logger_builder()
-            .use_template("production")
-            .build()
-            .value()
-    );
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/core/logger_builder.h>
+
+using namespace kcenon::logger;
+
+// Build logger
+auto logger = logger_builder()
+    .use_template("production")
+    .add_writer("console", std::make_unique<console_writer>())
+    .build()
+    .value();
+
+// Use through ILogger interface
+common::interfaces::ILogger* ilogger = logger.get();
+ilogger->log(common::interfaces::log_level::info, "Application started");
 ```
 
-### Direct Integration
-```cpp  
-// Inject into components
-class MyComponent {
-    MyComponent(std::shared_ptr<logger_interface> logger) 
-        : logger_(logger) {}
+### Dependency Injection
+```cpp
+class MyService {
+public:
+    MyService(std::shared_ptr<common::interfaces::ILogger> logger)
+        : logger_(std::move(logger)) {}
+
+    void do_work() {
+        logger_->log(common::interfaces::log_level::debug, "Processing...");
+    }
+
 private:
-    std::shared_ptr<logger_interface> logger_;
+    std::shared_ptr<common::interfaces::ILogger> logger_;
 };
+```
+
+### With Monitoring (Phase 2.2.4)
+```cpp
+auto monitor = std::make_shared<monitoring::monitoring>();
+
+auto logger = logger_builder()
+    .use_template("production")
+    .with_monitoring(monitor)
+    .with_health_check_interval(std::chrono::seconds(30))
+    .build()
+    .value();
 ```
 
 ## Extension Points
 
 ### Custom Writers
 ```cpp
-class custom_writer : public log_writer_interface {
+class database_writer : public kcenon::logger::log_writer_interface {
 public:
-    result_void write(const log_entry& entry) override {
-        // Custom implementation (database, network, etc.)
-        return result_void{};
+    result_void write(const kcenon::logger::log_entry& entry) override {
+        // Database insert logic
+        return common::VoidResult{};
+    }
+
+    result_void flush() override {
+        // Commit transaction
+        return common::VoidResult{};
     }
 };
+
+// Usage
+auto logger = logger_builder()
+    .add_writer("database", std::make_unique<database_writer>(connection))
+    .build();
 ```
 
 ### Custom Filters
 ```cpp
-class severity_filter : public log_filter_interface {
+class regex_filter : public kcenon::logger::log_filter_interface {
 public:
-    bool should_log(const log_entry& entry) const override {
-        return entry.level >= min_level_;
+    explicit regex_filter(const std::string& pattern)
+        : pattern_(pattern) {}
+
+    bool should_log(const kcenon::logger::log_entry& entry) const override {
+        return std::regex_search(entry.message, pattern_);
     }
+
+private:
+    std::regex pattern_;
 };
 ```
 
 ### Custom Formatters
 ```cpp
-class json_formatter : public log_formatter_interface {  
+class xml_formatter : public kcenon::logger::log_formatter_interface {
 public:
-    std::string format(const log_entry& entry) const override {
-        // JSON formatting logic
-        return json_string;
+    std::string format(const kcenon::logger::log_entry& entry) const override {
+        return "<log level=\"" + to_string(entry.level) + "\">"
+               + entry.message + "</log>";
     }
 };
 ```
@@ -386,41 +622,43 @@ public:
 2. **SIMD Optimizations**: Vectorized string operations
 3. **Memory Pool**: Custom allocators for frequent allocations
 
-### Feature Additions  
-1. **Structured Logging**: Native JSON/binary format support
+### Feature Additions
+1. **Distributed Tracing**: Trace ID propagation
 2. **Log Aggregation**: Built-in sampling and aggregation
-3. **Network Writers**: Remote logging with compression
-4. **Database Integration**: Direct database logging support
+3. **Compression**: Compressed network and file writers
+4. **Encryption**: Secure audit logging
 
 ### Platform Extensions
-1. **Windows Support**: Full Windows compatibility for network features
-2. **Mobile Platforms**: iOS/Android optimizations
-3. **Embedded Systems**: Resource-constrained environment support
+1. **Windows Event Log**: Native Windows event log support
+2. **syslog Integration**: RFC 5424 compliant syslog
+3. **Cloud Logging**: AWS CloudWatch, GCP Logging adapters
 
 ## Best Practices
 
 ### For Library Users
-- Use async mode for production systems
+- Use async mode (default) for production systems
+- Leverage C++20 source_location for automatic location capture
+- Use `is_enabled()` check before expensive message construction
 - Configure appropriate buffer sizes based on load
-- Implement custom writers for specialized needs
 - Monitor metrics for performance tuning
-- Use result pattern for error handling
+- Use ILogger interface for dependency injection
 
-### For Contributors  
+### For Contributors
 - Maintain thread safety guarantees
 - Follow RAII principles consistently
 - Use move semantics for efficiency
 - Document performance implications of changes
 - Write comprehensive tests for new features
+- Ensure backward compatibility with native API
 
 ## Platform Notes
 
 - **Linux/macOS**: Full support for all features
 - **Windows**: Core features supported, network components require WinSock initialization
 - **Cross-platform**: CMake build system with feature detection
-- **Dependencies**: Minimal external dependencies, optional integrations
+- **C++ Standard**: Requires C++20 (for Concepts and source_location)
+- **Dependencies**: common_system (required), thread_system (optional)
 
-This architecture provides a solid foundation for high-performance logging while maintaining flexibility, extensibility, and ease of use.
 ---
 
-*Last Updated: 2025-10-20*
+*Last Updated: 2025-12-10*
