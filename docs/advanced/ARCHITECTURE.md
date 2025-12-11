@@ -6,7 +6,7 @@
 
 The Logger System is a production-ready C++20 asynchronous logging framework designed with modular, interface-based architecture for high-performance multithreaded applications.
 
-**Version:** 1.0.0
+**Version:** 0.1.0.0
 **Last Updated:** 2025-10-22
 
 ---
@@ -627,5 +627,5 @@ See `core/error_codes.h` for complete error code listing.
 ---
 
 **Last Updated:** 2025-10-22
-**Version:** 1.0.0
+**Version:** 0.1.0.0
 **Maintainer:** kcenon@naver.com

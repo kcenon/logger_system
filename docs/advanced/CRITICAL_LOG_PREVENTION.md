@@ -60,7 +60,7 @@
 
 # Critical Log Loss Prevention Guide
 
-**Version:** 1.1.0
+**Version:** 0.1.1.0
 **Author:** kcenon
 **Date:** 2025-01-17
 
