@@ -29,7 +29,7 @@
    - 조직별 규칙(예: JWT, 내부 토큰, 티켓 번호)을 추가하세요.
 
 2. 저장 데이터 암호화
-   - 검증된 암호화 라이브러리(예: OpenSSL, libsodium)를 기반으로 한 프로덕션 준비 솔루션으로 `encrypted_writer`를 교체하세요.
+   - 검증된 암호화 라이브러리(예: OpenSSL, libsodium)를 기반으로 한 안전한 솔루션으로 `encrypted_writer`를 교체하세요.
    - 인증 암호화(AES-GCM 또는 ChaCha20-Poly1305)를 사용하세요.
    - 키를 주기적으로 교체하고 안전한 볼트(OS keychain, KMS, HSM)에 저장하세요. 키를 커밋하지 마세요.
 

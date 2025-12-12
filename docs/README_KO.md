@@ -19,7 +19,7 @@
 시작하기 및 모범 사례를 위한 필수 가이드:
 
 - **[GETTING_STARTED.md](guides/GETTING_STARTED.md)** ([한국어](guides/GETTING_STARTED_KO.md)) - 단계별 설정 및 기본 사용법
-- **[BEST_PRACTICES.md](guides/BEST_PRACTICES.md)** ([한국어](guides/BEST_PRACTICES_KO.md)) - 프로덕션 준비 패턴 및 권장사항
+- **[BEST_PRACTICES.md](guides/BEST_PRACTICES.md)** ([한국어](guides/BEST_PRACTICES_KO.md)) - 모범 사례 패턴 및 권장사항
 - **[MIGRATION_GUIDE.md](guides/MIGRATION_GUIDE.md)** ([한국어](guides/MIGRATION_GUIDE_KO.md)) - 이전 버전에서 마이그레이션
 - **[PERFORMANCE.md](guides/PERFORMANCE.md)** ([한국어](guides/PERFORMANCE_KO.md)) - 성능 분석 및 최적화
 
