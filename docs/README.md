@@ -19,7 +19,7 @@ Welcome to the comprehensive documentation for the Logger System - a high-perfor
 Essential guides for getting started and following best practices:
 
 - **[GETTING_STARTED.md](guides/GETTING_STARTED.md)** - Step-by-step setup and basic usage
-- **[BEST_PRACTICES.md](guides/BEST_PRACTICES.md)** - Production-ready patterns and recommendations
+- **[BEST_PRACTICES.md](guides/BEST_PRACTICES.md)** - Recommended patterns and best practices
 - **[MIGRATION_GUIDE.md](guides/MIGRATION_GUIDE.md)** - Migrating from older versions  
 - **[PERFORMANCE.md](guides/PERFORMANCE.md)** - Performance analysis and optimization
 
