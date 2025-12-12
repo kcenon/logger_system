@@ -4,7 +4,7 @@
 
 ## Overview
 
-The Logger System is a production-ready C++20 asynchronous logging framework designed with modular, interface-based architecture for high-performance multithreaded applications.
+The Logger System is a modern C++20 asynchronous logging framework designed with modular, interface-based architecture for high-performance multithreaded applications.
 
 **Version:** 0.1.0.0
 **Last Updated:** 2025-10-22

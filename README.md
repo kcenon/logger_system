@@ -11,7 +11,7 @@
 
 ## Overview
 
-A production-ready, high-performance C++20 asynchronous logging framework designed for multithreaded applications. Built with a modular, interface-based architecture and seamless ecosystem integration.
+A high-performance C++20 asynchronous logging framework designed for multithreaded applications. Built with a modular, interface-based architecture and seamless ecosystem integration.
 
 **Key Features**:
 - 🚀 **Ultra-fast async logging**: 4.34M messages/second, 148ns latency
