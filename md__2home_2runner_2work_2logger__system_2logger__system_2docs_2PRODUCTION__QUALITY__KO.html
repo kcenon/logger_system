@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System 프로덕션 품질</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1543"></a> <b>언어:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html">English</a> | <b>한국어</b></p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1545"></a> <b>언어:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html">English</a> | <b>한국어</b></p>
 <p><b>최종 업데이트</b>: 2025-11-28 <b>버전</b>: 3.0.0</p>
 <p>이 문서는 logger system의 품질, 품질 보증 프로세스 및 운영 특성을 상세히 설명합니다.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1545"></a>
+<h1><a class="anchor" id="autotoc_md1547"></a>
 요약</h1>
-<h2><a class="anchor" id="autotoc_md1546"></a>
+<h2><a class="anchor" id="autotoc_md1548"></a>
 개발 상태: ✅ &lt;strong&gt;개발 중&lt;/strong&gt;</h2>
 <p>logger system은 포괄적인 품질 보증을 제공합니다:</p>
 <p><b>품질 등급</b>:</p><ul>
@@ -118,11 +118,11 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li>✅ 정적 분석 (clang-tidy, cppcheck)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1548"></a>
+<h1><a class="anchor" id="autotoc_md1550"></a>
 빌드 &amp; 테스팅 인프라</h1>
-<h2><a class="anchor" id="autotoc_md1549"></a>
+<h2><a class="anchor" id="autotoc_md1551"></a>
 지속적 통합 파이프라인</h2>
-<h3><a class="anchor" id="autotoc_md1550"></a>
+<h3><a class="anchor" id="autotoc_md1552"></a>
 1. 메인 CI 파이프라인</h3>
 <p><b>테스트된 플랫폼</b>:</p><ul>
 <li><b>Ubuntu 22.04</b>: GCC 11, Clang 15</li>
@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li>모든 테스트 통과</li>
 <li>빌드 시간 &lt; 5분 (병렬 빌드)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1551"></a>
+<h3><a class="anchor" id="autotoc_md1553"></a>
 2. 새니타이저 파이프라인</h3>
 <p><b>테스트된 새니타이저</b>:</p>
 <p><b>AddressSanitizer (ASan)</b>:</p><ul>
@@ -159,7 +159,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <p><b>결과 요약</b>: </p><div class="fragment"><div class="line">AddressSanitizer: Total: 0 leaks</div>
 <div class="line">ThreadSanitizer: Total: 0 data races</div>
 <div class="line">UBSanitizer: Total: 0 errors</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1552"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1554"></a>
 3. 성능 벤치마크 파이프라인</h3>
 <p><b>실행되는 벤치마크</b>:</p><ol type="1">
 <li><b>처리량 벤치마크</b>: 단일/멀티스레드 로깅</li>
@@ -176,7 +176,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1553"></a>
+<h3><a class="anchor" id="autotoc_md1555"></a>
 4. 코드 커버리지 파이프라인</h3>
 <p><b>현재 커버리지</b>:</p><ul>
 <li><b>전체</b>: ~65% (테스트 스위트 확장으로 증가 중)</li>
@@ -190,7 +190,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li><b>목표</b>: 80%+</li>
 <li><b>중요 경로</b>: 90%+</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1554"></a>
+<h3><a class="anchor" id="autotoc_md1556"></a>
 5. 정적 분석 파이프라인</h3>
 <p><b>도구</b>:</p>
 <p><b>clang-tidy</b>: ✅ <b>PASSING</b> (이슈 제로)</p><ul>
@@ -200,12 +200,12 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li>검사: error, warning, style, performance, portability</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1556"></a>
+<h1><a class="anchor" id="autotoc_md1558"></a>
 스레드 안전성 &amp; 동시성</h1>
-<h2><a class="anchor" id="autotoc_md1557"></a>
+<h2><a class="anchor" id="autotoc_md1559"></a>
 스레드 안전성 등급: &lt;strong&gt;A+&lt;/strong&gt;</h2>
 <p><b>상태</b>: 100% 검증, 데이터 레이스 제로</p>
-<h2><a class="anchor" id="autotoc_md1558"></a>
+<h2><a class="anchor" id="autotoc_md1560"></a>
 Writer 스레드 안전성</h2>
 <p><b>검증 상태</b> (90% 완료):</p>
 <table class="markdownTable">
@@ -230,7 +230,7 @@ Writer 스레드 안전성</h2>
 <li>필요한 곳에 뮤텍스 기반 동기화</li>
 <li>가능한 곳에서 핫 패스에 락프리 연산</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1559"></a>
+<h2><a class="anchor" id="autotoc_md1561"></a>
 비동기 처리 아키텍처</h2>
 <p><b>설계 원칙</b>:</p><ol type="1">
 <li><b>논블로킹 인큐</b>: 로그 연산이 호출자를 차단하지 않음 (동기 모드 제외)</li>
@@ -249,12 +249,12 @@ Writer 스레드 안전성</h2>
 <li><b>큐 오버헤드</b>: &lt;2MB 메모리</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1561"></a>
+<h1><a class="anchor" id="autotoc_md1563"></a>
 리소스 관리 (RAII)</h1>
-<h2><a class="anchor" id="autotoc_md1562"></a>
+<h2><a class="anchor" id="autotoc_md1564"></a>
 RAII 준수 등급: &lt;strong&gt;A&lt;/strong&gt;</h2>
 <p><b>상태</b>: 100% 스마트 포인터, 메모리 누수 제로</p>
-<h2><a class="anchor" id="autotoc_md1563"></a>
+<h2><a class="anchor" id="autotoc_md1565"></a>
 스마트 포인터 사용</h2>
 <p><b>100% 스마트 포인터 채택</b>:</p><ul>
 <li>**<code>std::unique_ptr</code>**: 독점 소유권 (writers, filters, formatters)</li>
@@ -262,7 +262,7 @@ RAII 준수 등급: &lt;strong&gt;A&lt;/strong&gt;</h2>
 <li>퍼블릭 인터페이스에서 <b>로우 포인터 제로</b></li>
 <li>프로덕션 코드에서 <b>수동 <code>new</code>/<code>delete</code> 없음</b></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1564"></a>
+<h2><a class="anchor" id="autotoc_md1566"></a>
 메모리 누수 탐지</h2>
 <p><b>AddressSanitizer 결과</b>: </p><div class="fragment"><div class="line">Direct leaks: 0 bytes in 0 blocks</div>
 <div class="line">Indirect leaks: 0 bytes in 0 blocks</div>
@@ -272,7 +272,7 @@ RAII 준수 등급: &lt;strong&gt;A&lt;/strong&gt;</h2>
 <div class="line">total heap usage: 1,234 allocs, 1,234 frees</div>
 <div class="line"> </div>
 <div class="line">All heap blocks were freed -- no leaks are possible</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1565"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1567"></a>
 예외 안전성</h2>
 <p><b>예외 안전성 보장</b>:</p>
 <p><b>강력한 예외 안전성</b> (Core 연산):</p><ul>
@@ -286,12 +286,12 @@ RAII 준수 등급: &lt;strong&gt;A&lt;/strong&gt;</h2>
 <li>큐는 일관성 유지</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1567"></a>
+<h1><a class="anchor" id="autotoc_md1569"></a>
 오류 처리 전략</h1>
-<h2><a class="anchor" id="autotoc_md1568"></a>
+<h2><a class="anchor" id="autotoc_md1570"></a>
 오류 처리 등급: &lt;strong&gt;A&lt;/strong&gt; (90% 완료)</h2>
 <p><b>이중 API 설계</b>: 포괄적인 오류 리포팅과 고성능 로깅 간의 균형</p>
-<h2><a class="anchor" id="autotoc_md1569"></a>
+<h2><a class="anchor" id="autotoc_md1571"></a>
 Result&lt;T&gt; 패턴</h2>
 <p><b>사용 영역</b>:</p>
 <ol type="1">
@@ -306,7 +306,7 @@ Result&lt;T&gt; 패턴</h2>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1570"></a>
+<h2><a class="anchor" id="autotoc_md1572"></a>
 오류 코드 레지스트리</h2>
 <p><b>할당 범위</b>: -200 ~ -299 (common_system에서 중앙 집중화)</p>
 <table class="markdownTable">
@@ -326,9 +326,9 @@ Result&lt;T&gt; 패턴</h2>
 <td class="markdownTableBodyNone">-250 ~ -259   </td><td class="markdownTableBodyNone">보안   </td><td class="markdownTableBodyNone">경로 검증 실패, 암호화 실패   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1572"></a>
+<h1><a class="anchor" id="autotoc_md1574"></a>
 성능 특성</h1>
-<h2><a class="anchor" id="autotoc_md1573"></a>
+<h2><a class="anchor" id="autotoc_md1575"></a>
 기준선 메트릭</h2>
 <p><b>플랫폼</b>: Apple M1 @ 3.2GHz, 16GB RAM, macOS Sonoma</p>
 <p><b>처리량</b>:</p><ul>
@@ -350,12 +350,12 @@ Result&lt;T&gt; 패턴</h2>
 <li><b>할당/메시지</b>: 0.12</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1575"></a>
+<h1><a class="anchor" id="autotoc_md1577"></a>
 보안 기능</h1>
-<h2><a class="anchor" id="autotoc_md1576"></a>
+<h2><a class="anchor" id="autotoc_md1578"></a>
 보안 등급: &lt;strong&gt;A&lt;/strong&gt; (v3.0.0)</h2>
 <p><b>v3.0.0에서 도입된 보안 기능</b>:</p>
-<h2><a class="anchor" id="autotoc_md1577"></a>
+<h2><a class="anchor" id="autotoc_md1579"></a>
 1. 보안 키 저장소</h2>
 <ul>
 <li>RAII 기반 암호화 키 관리</li>
@@ -363,7 +363,7 @@ Result&lt;T&gt; 패턴</h2>
 <li>파일 권한 강제 (0600)</li>
 <li>암호학적으로 안전한 랜덤 키 생성</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1578"></a>
+<h2><a class="anchor" id="autotoc_md1580"></a>
 2. 경로 검증</h2>
 <ul>
 <li>경로 순회 공격 방지</li>
@@ -371,7 +371,7 @@ Result&lt;T&gt; 패턴</h2>
 <li>기본 디렉토리 강제</li>
 <li>파일명 문자 제한</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1579"></a>
+<h2><a class="anchor" id="autotoc_md1581"></a>
 3. 시그널 핸들러 안전성</h2>
 <ul>
 <li>중앙 집중식 시그널 핸들러 관리</li>
@@ -379,14 +379,14 @@ Result&lt;T&gt; 패턴</h2>
 <li>크래시 시나리오를 위한 긴급 플러시 (SIGSEGV, SIGABRT 등)</li>
 <li>POSIX async-signal-safe 함수만 사용</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1580"></a>
+<h2><a class="anchor" id="autotoc_md1582"></a>
 4. 보안 감사 로깅</h2>
 <ul>
 <li>변조 방지 감사 추적</li>
 <li>JSON 형식 감사 항목</li>
 <li>무결성 검증을 위한 HMAC-SHA256 서명</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1581"></a>
+<h2><a class="anchor" id="autotoc_md1583"></a>
 5. 컴플라이언스 지원</h2>
 <ul>
 <li><b>GDPR</b>: 데이터 최소화, 삭제 권리, 감사 추적</li>
@@ -395,9 +395,9 @@ Result&lt;T&gt; 패턴</h2>
 <li><b>SOC 2</b>: 보안, 가용성, 처리 무결성</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1583"></a>
+<h1><a class="anchor" id="autotoc_md1585"></a>
 플랫폼 지원</h1>
-<h2><a class="anchor" id="autotoc_md1584"></a>
+<h2><a class="anchor" id="autotoc_md1586"></a>
 공식 지원 플랫폼</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -409,7 +409,7 @@ Result&lt;T&gt; 패턴</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Windows 11</b>   </td><td class="markdownTableBodyNone">x86_64   </td><td class="markdownTableBodyNone">MSVC 2022, MSYS2 GCC   </td><td class="markdownTableBodyNone">✅ 완전 테스트   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md1585"></a>
+<h2><a class="anchor" id="autotoc_md1587"></a>
 최소 요구사항</h2>
 <p><b>C++ 표준</b>: C++17 (C++20 기능은 선택적이며 자동 감지)</p>
 <p><b>컴파일러</b>:</p><ul>
@@ -434,7 +434,7 @@ Result&lt;T&gt; 패턴</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 12 2025 05:23:51 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Dec 14 2025 06:43:45 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

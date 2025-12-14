@@ -96,22 +96,22 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html">English</a> | <b>한국어</b> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md1220"></a>
+<h1><a class="anchor" id="autotoc_md1222"></a>
 로거 시스템 마이그레이션 가이드</h1>
 <p><b>버전</b>: 3.0.0 <b>최종 업데이트</b>: 2025-12-10</p>
 <blockquote class="doxtable">
 <p>&zwj;이 문서는 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html">MIGRATION_GUIDE.md</a>의 한국어 번역 버전입니다. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md1221"></a>
+<h2><a class="anchor" id="autotoc_md1223"></a>
 개요</h2>
 <p>이 가이드는 다음으로부터의 마이그레이션을 도와줍니다:</p><ul>
 <li>Logger System 이전 버전 (v2.x → v3.0, v1.x → v2.x)</li>
 <li>다른 로깅 라이브러리 (spdlog, Boost.Log, glog, log4cpp)</li>
 <li>커스텀 로깅 솔루션</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1222"></a>
+<h2><a class="anchor" id="autotoc_md1224"></a>
 v2.x에서 v3.0으로 마이그레이션</h2>
-<h3><a class="anchor" id="autotoc_md1223"></a>
+<h3><a class="anchor" id="autotoc_md1225"></a>
 주요 변경사항 요약</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -127,13 +127,13 @@ v2.x에서 v3.0으로 마이그레이션</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>v3.0</b>   </td><td class="markdownTableBodyNone">Result 타입   </td><td class="markdownTableBodyNone"><code>common::VoidResult</code> 사용   </td><td class="markdownTableBodyNone">중간   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md1224"></a>
+<h3><a class="anchor" id="autotoc_md1226"></a>
 1. 네임스페이스 마이그레이션</h3>
 <p><b>기존 (v2.x):</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;logger_system/logger.h&gt;</span></div>
 <div class="line"><span class="keyword">using namespace </span>logger_module;</div>
 </div><!-- fragment --><p><b>신규 (v3.0):</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
 <div class="line"><span class="keyword">using namespace </span>kcenon::logger;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1225"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1227"></a>
 2. 인터페이스 마이그레이션</h3>
 <p><b>기존 (v2.x):</b> </p><div class="fragment"><div class="line">logger-&gt;log(thread_module::log_level::info, <span class="stringliteral">&quot;메시지&quot;</span>);</div>
 </div><!-- fragment --><p><b>신규 (v3.0):</b> </p><div class="fragment"><div class="line"><span class="comment">// ILogger 인터페이스 (권장)</span></div>
@@ -141,19 +141,19 @@ v2.x에서 v3.0으로 마이그레이션</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 네이티브 API (하위 호환)</span></div>
 <div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;메시지&quot;</span>);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1226"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1228"></a>
 3. Result 타입 마이그레이션</h3>
 <p><b>기존 (v2.x):</b> </p><div class="fragment"><div class="line">result_void result = logger-&gt;log(level, message);</div>
 </div><!-- fragment --><p><b>신규 (v3.0):</b> </p><div class="fragment"><div class="line">common::VoidResult result = logger-&gt;log(level, message);</div>
 <div class="line"><span class="comment">// 또는</span></div>
 <div class="line"><span class="keyword">auto</span> result = logger-&gt;log(level, message);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1227"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1229"></a>
 4. thread_system 의존성 변경</h3>
 <p><b>기존 (v2.x):</b> </p><div class="fragment"><div class="line">find_package(thread_system REQUIRED)</div>
 </div><!-- fragment --><p><b>신규 (v3.0):</b> </p><div class="fragment"><div class="line">find_package(common_system REQUIRED)  # 필수</div>
 <div class="line">find_package(logger_system REQUIRED)</div>
 <div class="line"># find_package(thread_system OPTIONAL)  # 필요시에만</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1228"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1230"></a>
 5. 백엔드 선택 (v3.0 신규)</h3>
 <div class="fragment"><div class="line"><span class="comment">// 독립 실행 모드 (기본값, thread_system 불필요)</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
@@ -164,14 +164,14 @@ v2.x에서 v3.0으로 마이그레이션</h2>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .with_thread_system_backend()  <span class="comment">// deprecated</span></div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1229"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1231"></a>
 6. C++20 source_location (v3.0 신규)</h3>
 <div class="fragment"><div class="line"><span class="comment">// 소스 위치 자동 캡처</span></div>
 <div class="line">logger-&gt;log(common::interfaces::log_level::info, <span class="stringliteral">&quot;디버그 메시지&quot;</span>);</div>
 <div class="line"><span class="comment">// 출력: [INFO] [main.cpp:42] [main()] 디버그 메시지</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1230"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1232"></a>
 마이그레이션 체크리스트</h2>
-<h3><a class="anchor" id="autotoc_md1231"></a>
+<h3><a class="anchor" id="autotoc_md1233"></a>
 v2.x → v3.0 마이그레이션</h3>
 <ul>
 <li>[ ] 빌드 시스템에서 C++20 활성화</li>
@@ -187,9 +187,9 @@ v2.x → v3.0 마이그레이션</h3>
 <li>[ ] 성능 벤치마크</li>
 <li>[ ] 문서 업데이트</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1232"></a>
+<h2><a class="anchor" id="autotoc_md1234"></a>
 일반적인 문제와 해결책</h2>
-<h3><a class="anchor" id="autotoc_md1233"></a>
+<h3><a class="anchor" id="autotoc_md1235"></a>
 문제 1: 네임스페이스를 찾을 수 없음</h3>
 <p><b>에러:</b> </p><div class="fragment"><div class="line">error: &#39;logger_module&#39; is not a namespace-name</div>
 </div><!-- fragment --><p><b>해결:</b> </p><div class="fragment"><div class="line"><span class="comment">// 변경 전</span></div>
@@ -197,7 +197,7 @@ v2.x → v3.0 마이그레이션</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 변경 후</span></div>
 <div class="line"><span class="keyword">using namespace </span>kcenon::logger;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1234"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1236"></a>
 문제 2: 인터페이스 타입 불일치</h3>
 <p><b>에러:</b> </p><div class="fragment"><div class="line">error: &#39;thread_module::logger_interface&#39; is not a base of &#39;kcenon::logger::logger&#39;</div>
 </div><!-- fragment --><p><b>해결:</b> </p><div class="fragment"><div class="line"><span class="comment">// 변경 전</span></div>
@@ -205,7 +205,7 @@ v2.x → v3.0 마이그레이션</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 변경 후</span></div>
 <div class="line">common::interfaces::ILogger* logger = ...;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1235"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1237"></a>
 문제 3: C++20 미활성화</h3>
 <p><b>에러:</b> </p><div class="fragment"><div class="line">error: &#39;source_location&#39; is not a member of &#39;std&#39;</div>
 </div><!-- fragment --><p><b>해결:</b> </p><div class="fragment"><div class="line">set(CMAKE_CXX_STANDARD 20)</div>
@@ -220,7 +220,7 @@ v2.x → v3.0 마이그레이션</h3>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 12 2025 05:23:51 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Dec 14 2025 06:43:45 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

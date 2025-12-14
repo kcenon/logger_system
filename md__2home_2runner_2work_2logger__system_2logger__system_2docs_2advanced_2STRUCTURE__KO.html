@@ -93,9 +93,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System - 프로젝트 구조</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md517"></a> <b><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE.html">English</a> | 한국어</b></p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md519"></a> <b><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE.html">English</a> | 한국어</b></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md519"></a>
+<h1><a class="anchor" id="autotoc_md521"></a>
 📁 디렉토리 레이아웃</h1>
 <div class="fragment"><div class="line">logger_system/</div>
 <div class="line">├── 📁 include/kcenon/logger/    # Public headers &amp; interfaces</div>
@@ -181,9 +181,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">├── 📄 CMakeLists.txt            # Build configuration</div>
 <div class="line">├── 📄 .clang-format             # Code formatting rules</div>
 <div class="line">└── 📄 README.md                 # Project overview &amp; documentation</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md520"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md522"></a>
 🏗️ Namespace 구조</h1>
-<h2><a class="anchor" id="autotoc_md521"></a>
+<h2><a class="anchor" id="autotoc_md523"></a>
 Core Namespaces</h2>
 <ul>
 <li><b>Root</b>: <code>kcenon::logger</code> - 메인 logger namespace</li>
@@ -194,16 +194,16 @@ Core Namespaces</h2>
 <li><b>Implementation details</b>: <code>kcenon::logger::impl</code> - 내부 구현 클래스</li>
 <li><b>Utilities</b>: <code>kcenon::logger::utils</code> - 헬퍼 함수 및 유틸리티</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md522"></a>
+<h2><a class="anchor" id="autotoc_md524"></a>
 Nested Namespaces</h2>
 <ul>
 <li><code>kcenon::logger::impl::async</code> - 비동기 로깅 컴포넌트</li>
 <li><code>kcenon::logger::impl::di</code> - Dependency injection container</li>
 <li><code>kcenon::logger::impl::monitoring</code> - 성능 모니터링 컴포넌트</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md523"></a>
+<h1><a class="anchor" id="autotoc_md525"></a>
 🔧 주요 컴포넌트 개요</h1>
-<h2><a class="anchor" id="autotoc_md524"></a>
+<h2><a class="anchor" id="autotoc_md526"></a>
 🎯 Public API Layer (&lt;tt&gt;include/kcenon/logger/&lt;/tt&gt;)</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -227,7 +227,7 @@ Nested Namespaces</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>XML Formatter</b>   </td><td class="markdownTableBodyNone"><code>formatters/xml_formatter.h</code>   </td><td class="markdownTableBodyNone">XML 메시지 포맷팅   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md525"></a>
+<h2><a class="anchor" id="autotoc_md527"></a>
 ⚙️ Implementation Layer (&lt;tt&gt;src/&lt;/tt&gt;)</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -245,7 +245,7 @@ Nested Namespaces</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Monitoring</b>   </td><td class="markdownTableBodyNone"><code>impl/monitoring/</code>   </td><td class="markdownTableBodyNone">성능 메트릭 수집   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md526"></a>
+<h1><a class="anchor" id="autotoc_md528"></a>
 📊 성능 특성</h1>
 <ul>
 <li><b>Throughput</b>: 4.34M+ messages/second (async mode)</li>
@@ -253,34 +253,34 @@ Nested Namespaces</h2>
 <li><b>Memory</b>: 가능한 경우 zero-copy 메시지 pipeline</li>
 <li><b>Thread Safety</b>: 고성능 async 로깅을 위한 lock-free queue</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md527"></a>
+<h1><a class="anchor" id="autotoc_md529"></a>
 🔄 마이그레이션 가이드</h1>
-<h2><a class="anchor" id="autotoc_md528"></a>
+<h2><a class="anchor" id="autotoc_md530"></a>
 Step 1: 현재 설정 백업</h2>
 <div class="fragment"><div class="line"># Automatic backup of old structure</div>
 <div class="line">mkdir -p old_structure/</div>
 <div class="line">cp -r include/ old_structure/include_backup/</div>
 <div class="line">cp -r src/ old_structure/src_backup/</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md529"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md531"></a>
 Step 2: Include 경로 업데이트</h2>
 <div class="fragment"><div class="line"><span class="comment">// Old style</span></div>
 <div class="line"><span class="preprocessor">#include &quot;logger/logger.h&quot;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// New style</span></div>
 <div class="line"><span class="preprocessor">#include &quot;kcenon/logger/core/logger.h&quot;</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md530"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md532"></a>
 Step 3: Namespace 사용 업데이트</h2>
 <div class="fragment"><div class="line"><span class="comment">// Old style</span></div>
 <div class="line"><span class="keyword">using namespace </span>logger;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// New style</span></div>
 <div class="line"><span class="keyword">using namespace </span>kcenon::logger::core;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md531"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md533"></a>
 Step 4: 마이그레이션 스크립트 실행</h2>
 <div class="fragment"><div class="line"># Automated namespace migration</div>
 <div class="line">./scripts/migrate_namespaces.sh</div>
 <div class="line">./scripts/update_cmake.sh</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md532"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md534"></a>
 🚀 새로운 구조로 빠른 시작</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;kcenon/logger/core/logger.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;kcenon/logger/core/builder.h&quot;</span></div>
@@ -308,7 +308,7 @@ Step 4: 마이그레이션 스크립트 실행</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 12 2025 05:23:51 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Dec 14 2025 06:43:45 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

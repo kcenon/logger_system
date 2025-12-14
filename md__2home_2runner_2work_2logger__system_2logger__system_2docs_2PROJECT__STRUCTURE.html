@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System Project Structure</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1589"></a> <b>Last Updated</b>: 2025-11-15 <b>Version</b>: 3.0.0</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1591"></a> <b>Last Updated</b>: 2025-11-15 <b>Version</b>: 3.0.0</p>
 <p>This document provides detailed descriptions of the logger system's directory structure, key files, and module dependencies.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1591"></a>
+<h1><a class="anchor" id="autotoc_md1593"></a>
 Table of Contents</h1>
 <ul>
 <li>Directory Overview</li>
@@ -111,7 +111,7 @@ Table of Contents</h1>
 <li>Module Dependencies</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1593"></a>
+<h1><a class="anchor" id="autotoc_md1595"></a>
 Directory Overview</h1>
 <div class="fragment"><div class="line">logger_system/</div>
 <div class="line">├── 📁 include/kcenon/logger/       # Public headers (API)</div>
@@ -181,9 +181,9 @@ Directory Overview</h1>
 <div class="line">├── 📄 README.md                    # Main documentation</div>
 <div class="line">└── 📄 README_KO.md                 # Korean documentation</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1595"></a>
+<h1><a class="anchor" id="autotoc_md1597"></a>
 Core Module Files</h1>
-<h2><a class="anchor" id="autotoc_md1596"></a>
+<h2><a class="anchor" id="autotoc_md1598"></a>
 logger.h / logger.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/core/</code> | <code>src/core/</code></p>
 <p><b>Purpose</b>: Main logger class with asynchronous processing</p>
@@ -226,7 +226,7 @@ logger.h / logger.cpp</h2>
 <li>Thread system queue (optional)</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1598"></a>
+<h2><a class="anchor" id="autotoc_md1600"></a>
 logger_builder.h / logger_builder.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/core/</code> | <code>src/core/</code></p>
 <p><b>Purpose</b>: Builder pattern for logger configuration with validation</p>
@@ -264,7 +264,7 @@ logger_builder.h / logger_builder.cpp</h2>
 <li><code>config_templates.h</code> - Predefined templates</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1600"></a>
+<h2><a class="anchor" id="autotoc_md1602"></a>
 log_entry.h</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/core/</code></p>
 <p><b>Purpose</b>: Data structure for log entries with metadata</p>
@@ -285,7 +285,7 @@ log_entry.h</h2>
 <li>Thread-safe by design</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1602"></a>
+<h2><a class="anchor" id="autotoc_md1604"></a>
 result_types.h</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/core/</code></p>
 <p><b>Purpose</b>: Error handling types and utilities</p>
@@ -324,9 +324,9 @@ result_types.h</h2>
 <li>I/O operations: -230 to -239</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1604"></a>
+<h1><a class="anchor" id="autotoc_md1606"></a>
 Writer Implementations</h1>
-<h2><a class="anchor" id="autotoc_md1605"></a>
+<h2><a class="anchor" id="autotoc_md1607"></a>
 console_writer.h / console_writer.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
 <p><b>Purpose</b>: Colored console output with ANSI support</p>
@@ -342,7 +342,7 @@ console_writer.h / console_writer.cpp</h2>
 <div class="line">    std::map&lt;log_level, std::string&gt; color_map;</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1607"></a>
+<h2><a class="anchor" id="autotoc_md1609"></a>
 file_writer.h / file_writer.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
 <p><b>Purpose</b>: Basic file writing with buffering</p>
@@ -360,7 +360,7 @@ file_writer.h / file_writer.cpp</h2>
 <div class="line">    std::chrono::milliseconds flush_interval = std::chrono::milliseconds(100);</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1609"></a>
+<h2><a class="anchor" id="autotoc_md1611"></a>
 rotating_file_writer.h / rotating_file_writer.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
 <p><b>Purpose</b>: Size and time-based file rotation</p>
@@ -386,7 +386,7 @@ rotating_file_writer.h / rotating_file_writer.cpp</h2>
 <div class="line">    <span class="keywordtype">int</span> rotation_hour = 0;                      <span class="comment">// For time-based rotation</span></div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1611"></a>
+<h2><a class="anchor" id="autotoc_md1613"></a>
 network_writer.h / network_writer.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
 <p><b>Purpose</b>: TCP/UDP network logging</p>
@@ -411,7 +411,7 @@ network_writer.h / network_writer.cpp</h2>
 <div class="line">    <span class="keywordtype">size_t</span> batch_size = 100;</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1613"></a>
+<h2><a class="anchor" id="autotoc_md1615"></a>
 critical_writer.h / critical_writer.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
 <p><b>Purpose</b>: Synchronous logging for critical messages</p>
@@ -425,7 +425,7 @@ critical_writer.h / critical_writer.cpp</h2>
 <div class="line">    std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;critical.log&quot;</span>)</div>
 <div class="line">);</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1615"></a>
+<h2><a class="anchor" id="autotoc_md1617"></a>
 hybrid_writer.h / hybrid_writer.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
 <p><b>Purpose</b>: Adaptive async/sync based on log level</p>
@@ -441,14 +441,14 @@ hybrid_writer.h / hybrid_writer.cpp</h2>
 <div class="line">    std::chrono::milliseconds flush_interval = std::chrono::milliseconds(100);</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1617"></a>
+<h1><a class="anchor" id="autotoc_md1619"></a>
 Filter Implementations</h1>
-<h2><a class="anchor" id="autotoc_md1618"></a>
+<h2><a class="anchor" id="autotoc_md1620"></a>
 level_filter.h / level_filter.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/filters/</code> | <code>src/filters/</code></p>
 <p><b>Purpose</b>: Filter by minimum log level</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1620"></a>
+<h2><a class="anchor" id="autotoc_md1622"></a>
 regex_filter.h / regex_filter.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/filters/</code> | <code>src/filters/</code></p>
 <p><b>Purpose</b>: Pattern matching on log messages</p>
@@ -458,31 +458,31 @@ regex_filter.h / regex_filter.cpp</h2>
 <li>Multiple pattern support</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1622"></a>
+<h2><a class="anchor" id="autotoc_md1624"></a>
 function_filter.h / function_filter.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/filters/</code> | <code>src/filters/</code></p>
 <p><b>Purpose</b>: Custom filtering logic via lambda/function</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1624"></a>
+<h1><a class="anchor" id="autotoc_md1626"></a>
 Formatter Implementations</h1>
-<h2><a class="anchor" id="autotoc_md1625"></a>
+<h2><a class="anchor" id="autotoc_md1627"></a>
 plain_formatter.h / plain_formatter.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/formatters/</code> | <code>src/formatters/</code></p>
 <p><b>Purpose</b>: Simple, human-readable text format</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1627"></a>
+<h2><a class="anchor" id="autotoc_md1629"></a>
 json_formatter.h / json_formatter.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/formatters/</code> | <code>src/formatters/</code></p>
 <p><b>Purpose</b>: Machine-parseable JSON output</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1629"></a>
+<h2><a class="anchor" id="autotoc_md1631"></a>
 custom_formatter.h / custom_formatter.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/formatters/</code> | <code>src/formatters/</code></p>
 <p><b>Purpose</b>: Base class for custom formatting logic</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1631"></a>
+<h1><a class="anchor" id="autotoc_md1633"></a>
 Configuration System</h1>
-<h2><a class="anchor" id="autotoc_md1632"></a>
+<h2><a class="anchor" id="autotoc_md1634"></a>
 config_templates.h / config_templates.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/config/</code> | <code>src/config/</code></p>
 <p><b>Purpose</b>: Predefined configurations</p>
@@ -493,7 +493,7 @@ config_templates.h / config_templates.cpp</h2>
 <li><code>low_latency</code>: Minimized latency</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1634"></a>
+<h2><a class="anchor" id="autotoc_md1636"></a>
 config_validator.h / config_validator.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/config/</code> | <code>src/config/</code></p>
 <p><b>Purpose</b>: Comprehensive validation framework</p>
@@ -504,14 +504,14 @@ config_validator.h / config_validator.cpp</h2>
 <li>Filter configuration</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1636"></a>
+<h2><a class="anchor" id="autotoc_md1638"></a>
 config_strategy.h / config_strategy.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/config/</code> | <code>src/config/</code></p>
 <p><b>Purpose</b>: Strategy pattern for flexible configuration</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1638"></a>
+<h1><a class="anchor" id="autotoc_md1640"></a>
 Security Components</h1>
-<h2><a class="anchor" id="autotoc_md1639"></a>
+<h2><a class="anchor" id="autotoc_md1641"></a>
 secure_key_storage.h / secure_key_storage.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/security/</code> | <code>src/security/</code></p>
 <p><b>Purpose</b>: RAII-based encryption key management</p>
@@ -521,7 +521,7 @@ secure_key_storage.h / secure_key_storage.cpp</h2>
 <li>Cryptographically secure key generation</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1641"></a>
+<h2><a class="anchor" id="autotoc_md1643"></a>
 path_validator.h / path_validator.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/security/</code> | <code>src/security/</code></p>
 <p><b>Purpose</b>: Path validation and security</p>
@@ -532,7 +532,7 @@ path_validator.h / path_validator.cpp</h2>
 <li>Filename character restrictions</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1643"></a>
+<h2><a class="anchor" id="autotoc_md1645"></a>
 log_sanitizer.h / log_sanitizer.cpp</h2>
 <p><b>Location</b>: <code>include/kcenon/logger/security/</code> | <code>src/security/</code></p>
 <p><b>Purpose</b>: Sensitive data sanitization</p>
@@ -543,9 +543,9 @@ log_sanitizer.h / log_sanitizer.cpp</h2>
 <li>Custom pattern support</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1645"></a>
+<h1><a class="anchor" id="autotoc_md1647"></a>
 Testing Organization</h1>
-<h2><a class="anchor" id="autotoc_md1646"></a>
+<h2><a class="anchor" id="autotoc_md1648"></a>
 Unit Tests</h2>
 <p><b>Location</b>: <code>tests/unit/</code></p>
 <p><b>Structure</b>: </p><div class="fragment"><div class="line">tests/unit/</div>
@@ -567,7 +567,7 @@ Unit Tests</h2>
 <div class="line">    └── config_templates_test.cpp</div>
 </div><!-- fragment --><p><b>Testing Framework</b>: Google Test (GTest) <b>Coverage Target</b>: 80%+</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1648"></a>
+<h2><a class="anchor" id="autotoc_md1650"></a>
 Integration Tests</h2>
 <p><b>Location</b>: <code>tests/integration/</code></p>
 <p><b>Focus Areas</b>:</p><ul>
@@ -577,7 +577,7 @@ Integration Tests</h2>
 <li>Multi-writer scenarios</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1650"></a>
+<h2><a class="anchor" id="autotoc_md1652"></a>
 Benchmarks</h2>
 <p><b>Location</b>: <code>tests/benchmarks/</code></p>
 <p><b>Benchmark Types</b>:</p><ul>
@@ -586,9 +586,9 @@ Benchmarks</h2>
 <li>Memory benchmarks (footprint, allocation patterns)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1652"></a>
+<h1><a class="anchor" id="autotoc_md1654"></a>
 Build System</h1>
-<h2><a class="anchor" id="autotoc_md1653"></a>
+<h2><a class="anchor" id="autotoc_md1655"></a>
 CMakeLists.txt (Root)</h2>
 <p><b>Location</b>: <code>CMakeLists.txt</code></p>
 <p><b>Key Options</b>: </p><div class="fragment"><div class="line"># Core Features</div>
@@ -615,7 +615,7 @@ CMakeLists.txt (Root)</h2>
 <div class="line">option(LOGGER_WARNINGS_AS_ERRORS &quot;Treat warnings as errors&quot; OFF)</div>
 <div class="line">option(LOGGER_ENABLE_COVERAGE &quot;Enable code coverage&quot; OFF)</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1655"></a>
+<h2><a class="anchor" id="autotoc_md1657"></a>
 CMake Modules</h2>
 <p><b>Location</b>: <code>cmake/</code></p>
 <p><b>Key Files</b>:</p><ul>
@@ -626,9 +626,9 @@ CMake Modules</h2>
 <li><code>CodeCoverage.cmake</code>: Coverage reporting</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1657"></a>
+<h1><a class="anchor" id="autotoc_md1659"></a>
 Module Dependencies</h1>
-<h2><a class="anchor" id="autotoc_md1658"></a>
+<h2><a class="anchor" id="autotoc_md1660"></a>
 Dependency Graph</h2>
 <div class="fragment"><div class="line">┌─────────────────┐</div>
 <div class="line">│  config module  │  (No dependencies)</div>
@@ -654,7 +654,7 @@ Dependency Graph</h2>
 <div class="line">         │  - thread_system             │</div>
 <div class="line">         │  - monitoring_system         │</div>
 <div class="line">         └──────────────────────────────┘</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1659"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1661"></a>
 External Dependencies</h2>
 <p><b>Required</b>:</p><ul>
 <li><b>fmt</b>: String formatting library (header-only mode available)</li>
@@ -667,23 +667,23 @@ External Dependencies</h2>
 <li><b>OpenSSL</b>: For secure key storage and encryption support</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1661"></a>
+<h1><a class="anchor" id="autotoc_md1663"></a>
 File Naming Conventions</h1>
-<h2><a class="anchor" id="autotoc_md1662"></a>
+<h2><a class="anchor" id="autotoc_md1664"></a>
 Header Files</h2>
 <ul>
 <li><b>Interface headers</b>: <code>*_interface.h</code> (e.g., <code>log_writer_interface.h</code>)</li>
 <li><b>Implementation headers</b>: <code>*.h</code> (e.g., <code>logger.h</code>, <code>file_writer.h</code>)</li>
 <li><b>Configuration headers</b>: <code>config_*.h</code> (e.g., <code>config_validator.h</code>)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1663"></a>
+<h2><a class="anchor" id="autotoc_md1665"></a>
 Source Files</h2>
 <ul>
 <li><b>Implementation</b>: <code>*.cpp</code> (matches header name)</li>
 <li><b>Tests</b>: <code>*_test.cpp</code> (e.g., <code>logger_test.cpp</code>)</li>
 <li><b>Benchmarks</b>: <code>*_benchmark.cpp</code> (e.g., <code>throughput_benchmark.cpp</code>)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1664"></a>
+<h2><a class="anchor" id="autotoc_md1666"></a>
 Documentation Files</h2>
 <ul>
 <li><b>Markdown</b>: <code>*.md</code> (English) or <code>*_KO.md</code> (Korean)</li>
@@ -691,7 +691,7 @@ Documentation Files</h2>
 <li><b>Guides</b>: <code>GUIDE_NAME.md</code> in <code>docs/guides/</code></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1666"></a>
+<h1><a class="anchor" id="autotoc_md1668"></a>
 See Also</h1>
 <ul>
 <li>Architecture Overview - System design and architecture</li>
@@ -705,7 +705,7 @@ See Also</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 12 2025 05:23:51 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Dec 14 2025 06:43:45 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
