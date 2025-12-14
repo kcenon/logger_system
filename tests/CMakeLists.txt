@@ -176,3 +176,55 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/thread_system_integration_module_tes
 
     message(STATUS "thread_system_integration module tests: Added (THREAD_SYSTEM_FOUND=${THREAD_SYSTEM_FOUND})")
 endif()
+
+##################################################
+# Automatic Coverage Registration
+#
+# Register all test targets for coverage instrumentation.
+# This eliminates the need to manually maintain a static list in LoggerCoverage.cmake.
+# New test targets added above will automatically be included in coverage reports.
+##################################################
+
+# List of all test targets defined in this file
+set(_LOGGER_TEST_TARGETS
+    basic_integration_test
+    logger_min_level_threshold_test
+    logger_thread_safety_test
+)
+
+# Conditionally added targets
+if(TARGET thread_system_integration_test)
+    list(APPEND _LOGGER_TEST_TARGETS thread_system_integration_test)
+endif()
+
+if(TARGET monitoring_integration_test)
+    list(APPEND _LOGGER_TEST_TARGETS monitoring_integration_test)
+endif()
+
+if(TARGET version_compatibility_test)
+    list(APPEND _LOGGER_TEST_TARGETS version_compatibility_test)
+endif()
+
+if(TARGET logger_ilogger_interface_test)
+    list(APPEND _LOGGER_TEST_TARGETS logger_ilogger_interface_test)
+endif()
+
+if(TARGET logger_security_test)
+    list(APPEND _LOGGER_TEST_TARGETS logger_security_test)
+endif()
+
+if(TARGET logger_thread_system_integration_module_test)
+    list(APPEND _LOGGER_TEST_TARGETS logger_thread_system_integration_module_test)
+endif()
+
+# Register all test targets for coverage instrumentation
+# The logger_register_coverage_target function is defined in cmake/LoggerCoverage.cmake
+foreach(_test_target IN LISTS _LOGGER_TEST_TARGETS)
+    if(TARGET ${_test_target} AND COMMAND logger_register_coverage_target)
+        logger_register_coverage_target(${_test_target})
+    endif()
+endforeach()
+
+# Cleanup
+unset(_LOGGER_TEST_TARGETS)
+unset(_test_target)
