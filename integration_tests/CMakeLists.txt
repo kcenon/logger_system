@@ -181,6 +181,13 @@ set_tests_properties(LoggerIntegrationTests PROPERTIES
     LABELS "integration"
 )
 
+# Register for coverage instrumentation (automatic system)
+# Note: This file also applies coverage flags directly above for backward compatibility,
+# but registration ensures consistency with the centralized coverage system.
+if(COMMAND logger_register_coverage_target)
+    logger_register_coverage_target(logger_integration_tests)
+endif()
+
 # Install integration tests (optional)
 install(TARGETS logger_integration_tests
     RUNTIME DESTINATION bin/tests
