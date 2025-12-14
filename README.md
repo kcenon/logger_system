@@ -76,12 +76,39 @@ find_package(LoggerSystem REQUIRED)
 target_link_libraries(your_app PRIVATE LoggerSystem::logger)
 ```
 
-### Prerequisites
+### Requirements
 
-- **CMake**: 3.20+
-- **C++ Compiler**: GCC 11+, Clang 14+, MSVC 2022+, Apple Clang 14+
-- **C++ Standard**: C++20
-- **Dependencies**: fmt library (header-only mode available)
+| Dependency | Version | Required | Description |
+|------------|---------|----------|-------------|
+| C++20 Compiler | GCC 11+ / Clang 14+ / MSVC 2022+ / Apple Clang 14+ | Yes | C++20 features required |
+| CMake | 3.20+ | Yes | Build system |
+| [common_system](https://github.com/kcenon/common_system) | latest | Yes | Common interfaces (ILogger, Result<T>) |
+| [thread_system](https://github.com/kcenon/thread_system) | latest | Optional | Async logging with thread pool support |
+| vcpkg | latest | Optional | Package management |
+| fmt | latest | Optional | Formatting library (header-only mode available) |
+
+#### Dependency Flow
+
+```
+logger_system
+├── common_system (required)
+└── thread_system (optional, for async logging with thread pool)
+    └── common_system (required)
+```
+
+#### Building with Dependencies
+
+```bash
+# Clone dependencies
+git clone https://github.com/kcenon/common_system.git
+git clone https://github.com/kcenon/thread_system.git  # Optional
+
+# Clone and build logger_system
+git clone https://github.com/kcenon/logger_system.git
+cd logger_system
+cmake -B build -DLOGGER_USE_THREAD_SYSTEM=ON  # Enable thread_system integration
+cmake --build build
+```
 
 ---
 
