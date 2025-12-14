@@ -3,19 +3,20 @@
 # Logger System Migration Guide
 
 **Version**: 3.0.0
-**Last Updated**: 2025-12-10
+**Last Updated**: 2025-12-14
 
 ## Table of Contents
 1. [Overview](#overview)
-2. [Version Migration](#version-migration)
+2. [CMake Configuration Changes](#cmake-configuration-changes)
+3. [Version Migration](#version-migration)
    - [From v2.x to v3.0](#from-v2x-to-v30)
    - [From v1.x to v2.x](#from-v1x-to-v2x)
-3. [API Changes](#api-changes)
-4. [Configuration Migration](#configuration-migration)
-5. [Migration from Other Libraries](#migration-from-other-libraries)
-6. [Compatibility Wrappers](#compatibility-wrappers)
-7. [Step-by-Step Migration](#step-by-step-migration)
-8. [Common Issues and Solutions](#common-issues-and-solutions)
+4. [API Changes](#api-changes)
+5. [Configuration Migration](#configuration-migration)
+6. [Migration from Other Libraries](#migration-from-other-libraries)
+7. [Compatibility Wrappers](#compatibility-wrappers)
+8. [Step-by-Step Migration](#step-by-step-migration)
+9. [Common Issues and Solutions](#common-issues-and-solutions)
 
 ## Overview
 
@@ -36,6 +37,80 @@ This guide helps you migrate to Logger System from:
 | v2.0 | Error Handling | Exceptions → Result types | High |
 | v2.0 | Memory Management | Raw pointers → Smart pointers | High |
 | v2.0 | Configuration | Direct setters → Builder pattern | Medium |
+
+## CMake Configuration Changes
+
+### v2.x (Previous)
+
+```cmake
+# CMakeLists.txt for v2.x
+find_package(thread_system REQUIRED)  # Was required
+find_package(logger_system REQUIRED)
+
+target_link_libraries(your_app PRIVATE
+    thread_system::thread_system
+    logger_system::logger_system
+)
+```
+
+```bash
+# Build flags for v2.x
+cmake -DUSE_THREAD_SYSTEM=ON ..  # Old flag name
+```
+
+### v3.0 (Current)
+
+```cmake
+# CMakeLists.txt for v3.0
+find_package(common_system REQUIRED)  # New required dependency
+find_package(logger_system REQUIRED)
+# find_package(thread_system)  # Optional now
+
+target_link_libraries(your_app PRIVATE
+    kcenon::common
+    kcenon::logger
+    # kcenon::thread  # Optional
+)
+```
+
+```bash
+# Build flags for v3.0
+cmake -DLOGGER_USE_THREAD_SYSTEM=ON ..   # New flag name (optional)
+cmake -DLOGGER_STANDALONE_MODE=ON ..     # Standalone mode (default)
+```
+
+### CMake Flag Changes Summary
+
+| v2.x Flag | v3.0 Flag | Default | Description |
+|-----------|-----------|---------|-------------|
+| `USE_THREAD_SYSTEM=ON` | `LOGGER_USE_THREAD_SYSTEM=ON` | `OFF` | Enable thread_system integration |
+| N/A | `LOGGER_STANDALONE_MODE=ON` | `ON` | Use standalone std::jthread worker |
+| `BUILD_TESTS=ON` | `BUILD_TESTS=ON` | `ON` | Build test suite |
+| `BUILD_EXAMPLES=ON` | `BUILD_EXAMPLES=ON` | `ON` | Build examples |
+
+### Target Name Changes
+
+| v2.x Target | v3.0 Target |
+|-------------|-------------|
+| `logger_system::logger_system` | `kcenon::logger` |
+| `thread_system::thread_system` | `kcenon::thread` (optional) |
+| N/A | `kcenon::common` (required) |
+
+### Dependency Changes
+
+**v2.x Dependency Tree:**
+```
+logger_system
+└── thread_system (required)
+```
+
+**v3.0 Dependency Tree:**
+```
+logger_system
+├── common_system (required)
+└── thread_system (optional, for async logging with thread pool)
+    └── common_system (required)
+```
 
 ## Version Migration
 
@@ -807,9 +882,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ## Support and Resources
 
+- [Quick Start Guide](QUICK_START.md)
 - [API Reference](../API_REFERENCE.md)
 - [Architecture Documentation](../advanced/LOGGER_SYSTEM_ARCHITECTURE.md)
 - [Best Practices Guide](BEST_PRACTICES.md)
+- [thread_system Integration](../integration/THREAD_SYSTEM.md)
 - [Example Code](../../examples/)
 - [Issue Tracker](https://github.com/kcenon/logger_system/issues)
 
@@ -817,4 +894,4 @@ For migration assistance, please file an issue with the `migration` label.
 
 ---
 
-*Last Updated: 2025-12-10*
+*Last Updated: 2025-12-14*
