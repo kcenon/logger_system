@@ -296,7 +296,15 @@ endmacro()
 # =============================================================================
 
 macro(_unified_resolve_local DEP_NAME IS_REQUIRED)
+    # Check multiple possible locations (workspace-relative first, then sibling)
+    set(_workspace_path "${CMAKE_CURRENT_SOURCE_DIR}/${DEP_NAME}")
     set(_local_path "${_UNIFIED_PARENT_DIR}/${DEP_NAME}")
+
+    # Prefer workspace-relative path (CI checkout pattern)
+    if(EXISTS "${_workspace_path}/CMakeLists.txt")
+        set(_local_path "${_workspace_path}")
+        message(STATUS "[UnifiedDependencies] ${DEP_NAME}: Found at workspace-relative path")
+    endif()
 
     if(EXISTS "${_local_path}/CMakeLists.txt")
         message(STATUS "[UnifiedDependencies] ${DEP_NAME}: Found local at ${_local_path}")
