@@ -24,12 +24,13 @@ var searchData=
   ['key_20components_21',['Key Components',['../index.html#autotoc_md22',1,'']]],
   ['key_20components_20overview_22',['Key Components Overview',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE.html#autotoc_md506',1,'']]],
   ['key_20components_3a_23',['key components:',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md624',1,'Key Components:'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md629',1,'Key Components:'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md634',1,'Key Components:'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md639',1,'Key Components:']]],
-  ['key_20features_24',['Key Features',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1374',1,'']]],
-  ['key_20features_20v3_200_25',['Key Features (v3.0)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md367',1,'']]],
-  ['key_20features_3a_26',['Key Features:',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION.html#autotoc_md210',1,'']]],
-  ['key_20highlights_27',['Key Highlights',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html#autotoc_md692',1,'']]],
-  ['key_20points_28',['💡 Key Points',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md301',1,'']]],
-  ['key_20storage_29',['key storage',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1523',1,'1. Secure Key Storage'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES.html#autotoc_md936',1,'Secure Key Storage']]],
-  ['korean_20files_30',['Korean Files',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TRANSLATION__SUMMARY.html#autotoc_md887',1,'']]],
-  ['korean_20translation_20summary_31',['Korean Translation Summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TRANSLATION__SUMMARY.html',1,'']]]
+  ['key_20concepts_24',['Key Concepts',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START.html#autotoc_md1302',1,'']]],
+  ['key_20features_25',['Key Features',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1468',1,'']]],
+  ['key_20features_20v3_200_26',['Key Features (v3.0)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md367',1,'']]],
+  ['key_20features_3a_27',['Key Features:',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION.html#autotoc_md210',1,'']]],
+  ['key_20highlights_28',['Key Highlights',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html#autotoc_md692',1,'']]],
+  ['key_20points_29',['💡 Key Points',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md301',1,'']]],
+  ['key_20storage_30',['key storage',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1617',1,'1. Secure Key Storage'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES.html#autotoc_md936',1,'Secure Key Storage']]],
+  ['korean_20files_31',['Korean Files',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TRANSLATION__SUMMARY.html#autotoc_md887',1,'']]],
+  ['korean_20translation_20summary_32',['Korean Translation Summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TRANSLATION__SUMMARY.html',1,'']]]
 ];

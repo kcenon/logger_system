@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🤝_20도움_20및_20지원_0',['🤝 도움 및 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1773',1,'']]],
-  ['🤝_20help_20support_1',['🤝 Help &amp; Support',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1758',1,'']]]
+  ['🔍_20현재_20상태_20분석_0',['🔍 현재 상태 분석',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1498',1,'']]],
+  ['🔍_20code_20quality_1',['🔍 Code Quality',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md138',1,'']]]
 ];

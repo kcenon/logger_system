@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['하드웨어_20구성_0',['하드웨어 구성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md748',1,'하드웨어 구성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1384',1,'하드웨어 구성']]],
-  ['하위_20호환성_1',['하위 호환성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md819',1,'']]],
-  ['하이라이트_2',['핵심 하이라이트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md744',1,'']]]
+  ['표시되지_20않음_0',['문제 4: 배지가 README에 표시되지 않음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1549',1,'']]]
 ];

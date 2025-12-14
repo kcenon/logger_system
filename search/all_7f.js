@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['위협_20모델_20범위_0',['위협 모델 (범위)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1285',1,'']]]
+  ['우위_0',['경쟁 우위',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md745',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🐛_20troubleshooting_0',['🐛 Troubleshooting',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md296',1,'']]]
+  ['확인_0',['4. 설치 확인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1337',1,'']]]
 ];

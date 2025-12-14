@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['특성_0',['특성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md424',1,'성능 특성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md986',1,'성능 특성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1574',1,'성능 특성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md528',1,'📊 성능 특성']]],
-  ['특징_1',['주요 특징',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1394',1,'']]]
+  ['키_20저장소_0',['1. 보안 키 저장소',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1673',1,'']]]
 ];

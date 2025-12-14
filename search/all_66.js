@@ -1,4 +1,10 @@
 var searchData=
 [
-  ['섹션_20디자인_0',['🎨 README.md 성능 섹션 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1431',1,'']]]
+  ['설계_0',['2. Dual API 설계',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md422',1,'']]],
+  ['설계_20원칙_1',['설계 원칙',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md957',1,'']]],
+  ['설정_2',['설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md997',1,'개발 설정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1433',1,'설정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1443',1,'패턴 2: 사용자 정의 풀 설정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md996',1,'프로덕션 설정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1508',1,'Phase 1: 벤치마크 재활성화 및 JSON 출력 설정']]],
+  ['설정_20백업_3',['Step 1: 현재 설정 백업',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md530',1,'']]],
+  ['설정_20시스템_4',['설정 시스템',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1805',1,'']]],
+  ['설치_5',['설치',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1333',1,'설치'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1335',1,'2. 의존성 설치']]],
+  ['설치_20확인_6',['4. 설치 확인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1337',1,'']]]
 ];

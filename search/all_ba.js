@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['환경_0',['테스트 환경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md747',1,'']]]
+  ['하드웨어_20구성_0',['하드웨어 구성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md748',1,'하드웨어 구성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1478',1,'하드웨어 구성']]],
+  ['하위_20호환성_1',['하위 호환성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md819',1,'']]],
+  ['하이라이트_2',['핵심 하이라이트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md744',1,'']]]
 ];

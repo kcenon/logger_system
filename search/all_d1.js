@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['🚀_20빠른_20탐색_0',['🚀 빠른 탐색',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1765',1,'']]],
-  ['🚀_20새로운_20구조로_20빠른_20시작_1',['🚀 새로운 구조로 빠른 시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md534',1,'']]],
-  ['🚀_20build_20status_2',['🚀 Build Status',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md133',1,'']]],
-  ['🚀_20getting_20started_3',['🚀 Getting Started',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md663',1,'']]],
-  ['🚀_20quick_20navigation_4',['🚀 Quick Navigation',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1750',1,'']]],
-  ['🚀_20quick_20start_5',['🚀 Quick Start',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md277',1,'']]]
+  ['📚_20문서_20구조_0',['📚 문서 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1855',1,'']]],
+  ['📚_20참고_20자료_1',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1551',1,'']]],
+  ['📚_20documentation_20structure_2',['📚 documentation structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md668',1,'📚 Documentation Structure'],['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1840',1,'📚 Documentation Structure']]],
+  ['📚_20learn_20more_3',['📚 Learn More',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md294',1,'']]]
 ];

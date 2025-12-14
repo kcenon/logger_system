@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['안전성_0',['안전성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1000',1,'스레드 안전성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1351',1,'스레드 안전성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1567',1,'예외 안전성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1581',1,'3. 시그널 핸들러 안전성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1560',1,'Writer 스레드 안전성']]],
-  ['안전성_20동시성_1',['스레드 안전성 &amp; 동시성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1558',1,'']]],
-  ['안전성_20등급_3a_20strong_20a_20strong_2',['스레드 안전성 등급: &lt;strong&gt;A+&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1559',1,'']]],
-  ['안전한_20구성_20체크리스트_3',['안전한 구성 체크리스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1289',1,'']]]
+  ['실패_0',['문제 1: 벤치마크 빌드 실패',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1546',1,'']]],
+  ['실행_1',['Step 4: 마이그레이션 스크립트 실행',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md533',1,'']]],
+  ['실행_20결과_2',['1. GitHub Actions 실행 결과',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1533',1,'']]],
+  ['실행_20모드_20vs_20통합_20모드_3',['독립 실행 모드 vs 통합 모드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__KO.html#autotoc_md683',1,'']]],
+  ['실행_20및_20json_20저장_4',['1.2 벤치마크 실행 및 JSON 저장',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1510',1,'']]],
+  ['실행_20오류_5',['문제 2: Python 스크립트 실행 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1547',1,'']]]
 ];

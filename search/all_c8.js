@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['📖_20외부_20리소스_0',['📖 외부 리소스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1772',1,'']]],
-  ['📖_20external_20resources_1',['📖 External Resources',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1757',1,'']]]
+  ['🏗️_20ecosystem_20overview_0',['🏗️ Ecosystem Overview',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md620',1,'']]],
+  ['🏗️_20namespace_20구조_1',['🏗️ Namespace 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md522',1,'']]]
 ];

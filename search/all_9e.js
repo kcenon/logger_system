@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['코드_20레지스트리_0',['오류 코드 레지스트리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1572',1,'']]],
-  ['코드_20수정_1',['1.3 API 변경에 따른 벤치마크 코드 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1417',1,'']]],
-  ['코드_20커버리지_20파이프라인_2',['4. 코드 커버리지 파이프라인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1555',1,'']]],
-  ['코멘트_3',['2. PR 자동 코멘트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1440',1,'']]],
-  ['코어_20모듈_20파일_4',['코어 모듈 파일',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1675',1,'']]]
+  ['추가됨_0',['추가됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md816',1,'추가됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md825',1,'추가됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md837',1,'추가됨']]],
+  ['추상화_1',['3. 백엔드 추상화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md423',1,'']]]
 ];

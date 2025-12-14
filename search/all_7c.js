@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['우위_0',['경쟁 우위',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md745',1,'']]]
+  ['완료_0',['오류 처리 등급: &lt;strong&gt;A&lt;/strong&gt; (90% 완료)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1664',1,'']]]
 ];

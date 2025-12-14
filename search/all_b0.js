@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['프로덕션_0',['권장사항 (프로덕션)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1288',1,'']]],
-  ['프로덕션_20설정_1',['프로덕션 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md996',1,'']]],
-  ['프로덕션_20품질_2',['Logger System 프로덕션 품질',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html',1,'']]],
-  ['프로젝트_20구조_3',['프로젝트 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html',1,'Logger System 프로젝트 구조'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html',1,'Logger System - 프로젝트 구조']]],
-  ['프로젝트_20예시_4',['관련 프로젝트 예시',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1459',1,'']]],
-  ['프로젝트_20정보_5',['프로젝트 정보',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md844',1,'']]],
-  ['프로파일링_6',['메모리 프로파일링',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md767',1,'']]]
+  ['파싱_20및_20기준선_20비교_0',['Phase 2: 결과 파싱 및 기준선 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1513',1,'']]],
+  ['파싱_20스크립트_1',['2.1 벤치마크 결과 파싱 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1514',1,'']]],
+  ['파이프라인_2',['파이프라인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1645',1,'지속적 통합 파이프라인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1646',1,'1. 메인 CI 파이프라인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1647',1,'2. 새니타이저 파이프라인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1648',1,'3. 성능 벤치마크 파이프라인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1649',1,'4. 코드 커버리지 파이프라인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1650',1,'5. 정적 분석 파이프라인']]],
+  ['파일_3',['파일',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1834',1,'문서 파일'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1833',1,'소스 파일'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1769',1,'코어 모듈 파일'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1832',1,'헤더 파일']]],
+  ['파일_20명명_20규칙_4',['파일 명명 규칙',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1831',1,'']]],
+  ['파일_20수정_20issue_20228_202025_2012_2006_5',['#226 API 변경 후 손상된 예제 파일 수정 (Issue #228) - 2025-12-06',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md809',1,'']]],
+  ['파일_20작성자_6',['파일 작성자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md967',1,'파일 작성자'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md968',1,'회전 파일 작성자']]]
 ];

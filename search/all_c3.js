@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['📁_20디렉토리_20레이아웃_0',['📁 디렉토리 레이아웃',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md521',1,'']]],
-  ['📁_20제안_20디렉토리_20구조_1',['📁 제안 디렉토리 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1411',1,'']]]
+  ['활성화_0',['활성화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1432',1,'런타임에 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1358',1,'런타임 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md983',1,'비동기 모드 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1357',1,'빌드 시 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1431',1,'빌드 시 활성화']]]
 ];

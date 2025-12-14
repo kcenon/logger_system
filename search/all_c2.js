@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['💡_20key_20points_0',['💡 Key Points',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md301',1,'']]]
+  ['환경_0',['테스트 환경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md747',1,'']]]
 ];

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['필요_20사항_0',['❌ 개선 필요 사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1406',1,'']]],
-  ['필터링_1',['필터링',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md978',1,'레벨 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md980',1,'조건부 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md979',1,'패턴 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md977',1,'필터링']]]
+  ['포맷터_0',['커스텀 포맷터',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md975',1,'']]],
+  ['포맷팅_1',['포맷팅',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md972',1,'']]],
+  ['포맷_2',['포맷',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md973',1,'기본 포맷'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md974',1,'JSON 포맷']]],
+  ['포인터_20사용_3',['스마트 포인터 사용',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1659',1,'']]]
 ];

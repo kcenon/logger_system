@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['풋프린트_0',['구성별 메모리 풋프린트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md768',1,'']]]
+  ['팁_0',['최적화 팁',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md988',1,'']]]
 ];

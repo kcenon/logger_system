@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['카드_20스타일_20디자인_0',['제안 3: 카드 스타일 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1434',1,'']]]
+  ['첫_20번째_20로거_20만들기_0',['첫 번째 로거 만들기',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1339',1,'']]]
 ];

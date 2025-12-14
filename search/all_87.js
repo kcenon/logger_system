@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['작성기_20생성_0',['커스텀 작성기 생성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS__KO.html#autotoc_md321',1,'']]],
-  ['작성자_1',['작성자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md965',1,'로그 작성자'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md969',1,'원격 작성자'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md970',1,'커스텀 작성자'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md966',1,'콘솔 작성자'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md967',1,'파일 작성자'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md968',1,'회전 파일 작성자']]]
+  ['일반적인_20문제와_20해결책_0',['일반적인 문제와 해결책',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1247',1,'']]],
+  ['일반적인_20문제_1',['일반적인 문제',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1368',1,'']]],
+  ['일반적인_20패턴_2',['일반적인 패턴',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1360',1,'']]]
 ];

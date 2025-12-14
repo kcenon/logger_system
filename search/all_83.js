@@ -1,10 +1,5 @@
 var searchData=
 [
-  ['인기_20있는_20c_20로거_0',['vs spdlog (가장 인기 있는 C++ 로거)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md757',1,'']]],
-  ['인터페이스_20구현_1',['1. ILogger 인터페이스 구현',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md421',1,'']]],
-  ['인터페이스_20마이그레이션_2',['2. 인터페이스 마이그레이션',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1227',1,'']]],
-  ['인터페이스_20변경_3',['인터페이스 변경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html#autotoc_md612',1,'']]],
-  ['인터페이스_20타입_20불일치_4',['문제 2: 인터페이스 타입 불일치',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1236',1,'']]],
-  ['인프라_5',['빌드 &amp; 테스팅 인프라',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1550',1,'']]],
-  ['인프라_20구축_20예상_20소요_3a_202시간_6',['Phase 1: 인프라 구축 (예상 소요: 2시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1444',1,'']]]
+  ['유닛_20테스트_0',['유닛 테스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1818',1,'']]],
+  ['유지관리_1',['🔧 문서 유지관리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1864',1,'']]]
 ];

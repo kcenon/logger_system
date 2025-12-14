@@ -1,13 +1,9 @@
 var searchData=
 [
-  ['시그널_20핸들러_20안전성_0',['3. 시그널 핸들러 안전성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1581',1,'']]],
-  ['시기_1',['thread_system 통합 사용 시기',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1353',1,'']]],
-  ['시스템_2',['시스템',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1730',1,'빌드 시스템'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1711',1,'설정 시스템']]],
-  ['시스템_20마이그레이션_20가이드_3',['로거 시스템 마이그레이션 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1222',1,'']]],
-  ['시스템_20아키텍처_4',['로거 시스템 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md416',1,'']]],
-  ['시스템_20정보_5',['시스템 정보',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1383',1,'']]],
-  ['시작하기_6',['Logger System 시작하기',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED__KO.html#autotoc_md1118',1,'']]],
-  ['시작_7',['시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html#autotoc_md615',1,'빠른 시작'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1336',1,'빠른 시작'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START__KO.html#autotoc_md304',1,'크리티컬 로깅 빠른 시작'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md534',1,'🚀 새로운 구조로 빠른 시작']]],
-  ['시_20지연시간_8',['부하 시 지연시간',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md765',1,'']]],
-  ['시_20활성화_9',['빌드 시 활성화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1337',1,'']]]
+  ['수락_20기준_0',['수락 기준',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1492',1,'']]],
+  ['수별_20처리량_1',['스레드 수별 처리량',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md754',1,'']]],
+  ['수정됨_2',['수정됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md841',1,'']]],
+  ['수정_3',['수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1509',1,'1.1 GitHub Actions 워크플로우 수정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1511',1,'1.3 API 변경에 따른 벤치마크 코드 수정']]],
+  ['수정_20issue_20228_202025_2012_2006_4',['#226 API 변경 후 손상된 예제 파일 수정 (Issue #228) - 2025-12-06',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md809',1,'']]],
+  ['수_20없음_5',['문제 1: 네임스페이스를 찾을 수 없음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1248',1,'']]]
 ];

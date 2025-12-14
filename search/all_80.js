@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['유닛_20테스트_0',['유닛 테스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1724',1,'']]],
-  ['유지관리_1',['🔧 문서 유지관리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1770',1,'']]]
+  ['워크플로우_0',['전체 워크플로우',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1503',1,'']]],
+  ['워크플로우_20수정_1',['1.1 GitHub Actions 워크플로우 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1509',1,'']]],
+  ['워크플로우_20전체_20예시_2',['🔄 CI/CD 워크플로우 전체 예시',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1530',1,'']]]
 ];

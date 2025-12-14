@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['현재_20기능_0',['현재 기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1286',1,'']]],
-  ['현재_20상태_20분석_1',['🔍 현재 상태 분석',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1404',1,'']]],
-  ['현재_20설정_20백업_2',['Step 1: 현재 설정 백업',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md530',1,'']]]
+  ['플래그_0',['기능 플래그',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1354',1,'']]],
+  ['플래그_20변경_20요약_1',['CMake 플래그 변경 요약',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1234',1,'']]],
+  ['플랫폼_2',['공식 지원 플랫폼',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1680',1,'']]],
+  ['플랫폼_20지원_3',['플랫폼 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1679',1,'']]]
 ];

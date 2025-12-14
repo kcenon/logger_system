@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['불일치_0',['문제 2: 인터페이스 타입 불일치',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1236',1,'']]]
+  ['부하_20시_20지연시간_0',['부하 시 지연시간',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md765',1,'']]]
 ];

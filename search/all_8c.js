@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['정보_0',['정보',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1383',1,'시스템 정보'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md844',1,'프로젝트 정보']]],
-  ['정의_1',['정의',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md961',1,'레벨 정의'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1341',1,'컴파일 정의']]],
-  ['정의_20풀_20설정_2',['패턴 2: 사용자 정의 풀 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1349',1,'']]],
-  ['정적_20분석_20파이프라인_3',['5. 정적 분석 파이프라인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1556',1,'']]]
+  ['재활성화_20및_20json_20출력_20설정_0',['Phase 1: 벤치마크 재활성화 및 JSON 출력 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1508',1,'']]]
 ];

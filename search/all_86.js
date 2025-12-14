@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['자동화_20제안서_0',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]],
-  ['자동_20업데이트_1',['Phase 4: README.md 자동 업데이트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1427',1,'']]],
-  ['자동_20업데이트_20예상_20소요_3a_201시간_2',['Phase 3: README 자동 업데이트 (예상 소요: 1시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1446',1,'']]],
-  ['자동_20커밋_3',['4.2 GitHub Actions에서 자동 커밋',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1429',1,'']]],
-  ['자동_20커밋_20권한_20오류_4',['문제 3: Git 자동 커밋 권한 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1454',1,'']]],
-  ['자동_20코멘트_5',['2. PR 자동 코멘트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1440',1,'']]],
-  ['자료_6',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1457',1,'']]]
+  ['인기_20있는_20c_20로거_0',['vs spdlog (가장 인기 있는 C++ 로거)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md757',1,'']]],
+  ['인터페이스_20구현_1',['1. ILogger 인터페이스 구현',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md421',1,'']]],
+  ['인터페이스_20마이그레이션_2',['2. 인터페이스 마이그레이션',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1240',1,'']]],
+  ['인터페이스_20변경_3',['인터페이스 변경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html#autotoc_md612',1,'']]],
+  ['인터페이스_20타입_20불일치_4',['문제 2: 인터페이스 타입 불일치',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1249',1,'']]],
+  ['인프라_5',['빌드 &amp; 테스팅 인프라',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1644',1,'']]],
+  ['인프라_20구축_20예상_20소요_3a_202시간_6',['Phase 1: 인프라 구축 (예상 소요: 2시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1538',1,'']]]
 ];
