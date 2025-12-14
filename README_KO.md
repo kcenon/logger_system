@@ -80,12 +80,39 @@ find_package(LoggerSystem REQUIRED)
 target_link_libraries(your_app PRIVATE LoggerSystem::logger)
 ```
 
-### 필요사항
+### 요구사항
 
-- **CMake**: 3.20+
-- **C++ 컴파일러**: GCC 7+, Clang 5+, MSVC 2017+
-- **C++ 표준**: C++17 (C++20 기능 선택사항)
-- **의존성**: fmt 라이브러리 (header-only 모드 가능)
+| 의존성 | 버전 | 필수 여부 | 설명 |
+|--------|------|----------|------|
+| C++20 컴파일러 | GCC 11+ / Clang 14+ / MSVC 2022+ / Apple Clang 14+ | 필수 | C++20 기능 필요 |
+| CMake | 3.20+ | 필수 | 빌드 시스템 |
+| [common_system](https://github.com/kcenon/common_system) | latest | 필수 | 공통 인터페이스 (ILogger, Result<T>) |
+| [thread_system](https://github.com/kcenon/thread_system) | latest | 선택 | 스레드 풀을 사용한 비동기 로깅 |
+| vcpkg | latest | 선택 | 패키지 관리 |
+| fmt | latest | 선택 | 포맷팅 라이브러리 (header-only 모드 가능) |
+
+#### 의존성 구조
+
+```
+logger_system
+├── common_system (필수)
+└── thread_system (선택, 스레드 풀 기반 비동기 로깅용)
+    └── common_system (필수)
+```
+
+#### 의존성과 함께 빌드하기
+
+```bash
+# 의존성 클론
+git clone https://github.com/kcenon/common_system.git
+git clone https://github.com/kcenon/thread_system.git  # 선택사항
+
+# logger_system 클론 및 빌드
+git clone https://github.com/kcenon/logger_system.git
+cd logger_system
+cmake -B build -DLOGGER_USE_THREAD_SYSTEM=ON  # thread_system 통합 활성화
+cmake --build build
+```
 
 ---
 
