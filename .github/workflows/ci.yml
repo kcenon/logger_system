@@ -50,6 +50,13 @@ jobs:
         path: common_system
         token: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Checkout thread_system dependency
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/thread_system
+        path: thread_system
+        token: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Install dependencies (Ubuntu)
       if: runner.os == 'Linux'
       run: |
@@ -181,7 +188,7 @@ jobs:
           -DBUILD_TESTS=ON \
           -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
           -DLOGGER_STANDALONE_MODE=ON \
-          -DUSE_THREAD_SYSTEM=OFF \
+          -DLOGGER_USE_THREAD_SYSTEM=ON \
           -DLOGGER_BUILD_INTEGRATION_TESTS=OFF \
           -DCMAKE_TOOLCHAIN_FILE="${GITHUB_WORKSPACE}/vcpkg/scripts/buildsystems/vcpkg.cmake" \
           -DCMAKE_C_COMPILER=$C_COMPILER \
@@ -206,7 +213,7 @@ jobs:
           -DBUILD_TESTS=ON `
           -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE `
           -DLOGGER_STANDALONE_MODE=ON `
-          -DUSE_THREAD_SYSTEM=OFF `
+          -DLOGGER_USE_THREAD_SYSTEM=ON `
           -DLOGGER_BUILD_INTEGRATION_TESTS=OFF `
           -DCMAKE_TOOLCHAIN_FILE="$env:GITHUB_WORKSPACE\vcpkg\scripts\buildsystems\vcpkg.cmake" `
           -DCMAKE_CXX_FLAGS="/std:c++20 /permissive- /Zc:__cplusplus /EHsc" `
@@ -232,7 +239,7 @@ jobs:
           -DBUILD_TESTS=ON \
           -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
           -DLOGGER_STANDALONE_MODE=ON \
-          -DUSE_THREAD_SYSTEM=OFF \
+          -DLOGGER_USE_THREAD_SYSTEM=ON \
           -DCMAKE_C_COMPILER=$C_COMPILER \
           -DCMAKE_CXX_COMPILER=$CXX_COMPILER
 
@@ -256,7 +263,7 @@ jobs:
           -DBUILD_TESTS=ON `
           -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE `
           -DLOGGER_STANDALONE_MODE=ON `
-          -DUSE_THREAD_SYSTEM=OFF `
+          -DLOGGER_USE_THREAD_SYSTEM=ON `
           -DLOGGER_BUILD_INTEGRATION_TESTS=OFF `
           -DCMAKE_CXX_FLAGS="/std:c++20 /permissive- /Zc:__cplusplus /EHsc" `
           -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY" `
@@ -329,6 +336,13 @@ jobs:
         path: common_system
         token: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Checkout thread_system dependency
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/thread_system
+        path: thread_system
+        token: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Install dependencies
       run: |
         sudo apt update
@@ -350,7 +364,7 @@ jobs:
           -DCMAKE_BUILD_TYPE=Debug \
           -DBUILD_TESTS=ON \
           -DLOGGER_STANDALONE_MODE=ON \
-          -DUSE_THREAD_SYSTEM=OFF \
+          -DLOGGER_USE_THREAD_SYSTEM=ON \
           -DCMAKE_C_COMPILER=gcc \
           -DCMAKE_CXX_COMPILER=g++ \
           -DCMAKE_C_FLAGS="${SANITIZER_FLAGS}" \
