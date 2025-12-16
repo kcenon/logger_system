@@ -21,7 +21,15 @@ All rights reserved.
 #if __has_include(<openssl/hmac.h>)
 #include <openssl/hmac.h>
 #include <openssl/evp.h>
+#include <openssl/opensslv.h>
 #define HAS_OPENSSL_HMAC 1
+
+// OpenSSL 3.x uses EVP_MAC API instead of deprecated HMAC()
+#if OPENSSL_VERSION_NUMBER >= 0x30000000L
+#include <openssl/core_names.h>
+#include <openssl/params.h>
+#define USE_OPENSSL_3X_API 1
+#endif
 #endif
 
 namespace kcenon::logger::security {
@@ -268,19 +276,68 @@ private:
         const secure_key& key
     ) {
 #ifdef HAS_OPENSSL_HMAC
-        // Use OpenSSL HMAC-SHA256
         unsigned char digest[EVP_MAX_MD_SIZE];
-        unsigned int digest_len = 0;
+        size_t digest_len = 0;
 
+#ifdef USE_OPENSSL_3X_API
+        // OpenSSL 3.x: Use EVP_MAC API (HMAC() is deprecated)
+        EVP_MAC* mac = EVP_MAC_fetch(nullptr, "HMAC", nullptr);
+        if (!mac) {
+            return "";
+        }
+
+        EVP_MAC_CTX* ctx = EVP_MAC_CTX_new(mac);
+        if (!ctx) {
+            EVP_MAC_free(mac);
+            return "";
+        }
+
+        // Set HMAC parameters (digest algorithm)
+        OSSL_PARAM params[] = {
+            OSSL_PARAM_construct_utf8_string(
+                OSSL_MAC_PARAM_DIGEST,
+                const_cast<char*>("SHA256"),
+                0
+            ),
+            OSSL_PARAM_END
+        };
+
+        if (EVP_MAC_init(ctx, key.data().data(), key.size(), params) != 1) {
+            EVP_MAC_CTX_free(ctx);
+            EVP_MAC_free(mac);
+            return "";
+        }
+
+        if (EVP_MAC_update(ctx,
+                          reinterpret_cast<const unsigned char*>(message.data()),
+                          message.size()) != 1) {
+            EVP_MAC_CTX_free(ctx);
+            EVP_MAC_free(mac);
+            return "";
+        }
+
+        if (EVP_MAC_final(ctx, digest, &digest_len, sizeof(digest)) != 1) {
+            EVP_MAC_CTX_free(ctx);
+            EVP_MAC_free(mac);
+            return "";
+        }
+
+        EVP_MAC_CTX_free(ctx);
+        EVP_MAC_free(mac);
+#else
+        // OpenSSL 1.1.x: Use legacy HMAC() function
+        unsigned int hmac_len = 0;
         HMAC(EVP_sha256(),
-             key.data().data(), key.size(),
+             key.data().data(), static_cast<int>(key.size()),
              reinterpret_cast<const unsigned char*>(message.data()), message.size(),
-             digest, &digest_len);
+             digest, &hmac_len);
+        digest_len = hmac_len;
+#endif
 
         // Convert to hex string
         std::ostringstream hex;
         hex << std::hex << std::setfill('0');
-        for (unsigned int i = 0; i < digest_len; ++i) {
+        for (size_t i = 0; i < digest_len; ++i) {
             hex << std::setw(2) << static_cast<int>(digest[i]);
         }
         return hex.str();

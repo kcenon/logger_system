@@ -298,6 +298,8 @@ All heap blocks were freed -- no leaks are possible
 - OpenSSL `OPENSSL_cleanse()`로 보안 메모리 삭제
 - 파일 권한 강제 (0600)
 - 암호학적으로 안전한 랜덤 키 생성
+- OpenSSL 3.x 호환 (HMAC 작업을 위한 EVP_MAC API)
+- OpenSSL 1.1.x 하위 호환 (deprecated, 2023년 9월 EOL)
 
 ### 2. 경로 검증
 - 경로 순회 공격 방지

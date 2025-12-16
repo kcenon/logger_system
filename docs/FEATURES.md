@@ -565,6 +565,8 @@ config.compression_level = 6;  // 1-9, higher = better compression
 - Automatic memory cleanup using OpenSSL `OPENSSL_cleanse()`
 - File permission enforcement (0600 - owner read/write only)
 - Cryptographically secure random key generation
+- **OpenSSL 3.x compatible** with EVP_MAC API for HMAC operations
+- Backward compatible with OpenSSL 1.1.x (deprecated, EOL September 2023)
 
 **Usage**:
 ```cpp
