@@ -585,7 +585,8 @@ option(LOGGER_ENABLE_COVERAGE "코드 커버리지 활성화" OFF)
 - **thread_system**: 스레딩 프리미티브 및 로거 인터페이스
 - **common_system**: 코어 인터페이스 (ILogger, IMonitor, Result<T>)
 - **monitoring_system**: 메트릭 수집 및 헬스 모니터링
-- **OpenSSL**: 보안 키 저장 및 암호화 지원
+- **OpenSSL 3.x** (권장): 보안 키 저장 및 암호화 지원
+  - OpenSSL 1.1.x 지원되지만 deprecated (2023년 9월 EOL)
 
 ---
 
