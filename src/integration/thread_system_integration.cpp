@@ -129,7 +129,7 @@ std::shared_ptr<kcenon::thread::thread_pool> thread_system_integration::create_d
 
     // Start the pool
     auto result = pool->start();
-    if (result.has_error()) {
+    if (!result.is_ok()) {
         // Failed to start pool - return nullptr to signal failure
         return nullptr;
     }
