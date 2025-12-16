@@ -173,7 +173,7 @@ TEST_F(ThreadSystemIntegrationModuleTest, DisableAfterEnable) {
 TEST_F(ThreadSystemIntegrationModuleTest, EnableWithCustomPool) {
     auto custom_pool = std::make_shared<kcenon::thread::thread_pool>("custom_test_pool");
     auto start_result = custom_pool->start();
-    ASSERT_TRUE(start_result.has_value()) << "Custom pool should start successfully";
+    ASSERT_TRUE(start_result.is_ok()) << "Custom pool should start successfully";
 
     thread_system_integration::enable(custom_pool);
 
@@ -190,7 +190,7 @@ TEST_F(ThreadSystemIntegrationModuleTest, EnableWithCustomPool) {
 TEST_F(ThreadSystemIntegrationModuleTest, SetThreadPool) {
     auto pool = std::make_shared<kcenon::thread::thread_pool>("set_pool_test");
     auto start_result = pool->start();
-    ASSERT_TRUE(start_result.has_value());
+    ASSERT_TRUE(start_result.is_ok());
 
     thread_system_integration::set_thread_pool(pool);
 

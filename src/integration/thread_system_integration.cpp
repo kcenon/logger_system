@@ -123,17 +123,13 @@ std::string thread_system_integration::get_backend_name() noexcept {
 }
 
 std::shared_ptr<kcenon::thread::thread_pool> thread_system_integration::create_default_pool() {
-    // Create a pool with thread count based on hardware concurrency
-    // Use at least 2 threads for logging to ensure responsiveness
-    const auto thread_count = std::max(2u, std::thread::hardware_concurrency());
-
     auto pool = std::make_shared<kcenon::thread::thread_pool>(
         "logger_async_pool"
     );
 
     // Start the pool
     auto result = pool->start();
-    if (!result) {
+    if (!result.is_ok()) {
         // Failed to start pool - return nullptr to signal failure
         return nullptr;
     }
