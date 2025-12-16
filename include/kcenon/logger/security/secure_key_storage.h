@@ -15,9 +15,11 @@ All rights reserved.
 #include <cstring>
 
 // OpenSSL for secure memory cleanup (optional, fallback to manual zeroing)
+// Note: OPENSSL_cleanse() and RAND_bytes() are supported in both OpenSSL 1.1.x and 3.x
 #if __has_include(<openssl/rand.h>)
 #include <openssl/rand.h>
 #include <openssl/crypto.h>
+#include <openssl/opensslv.h>
 #define HAS_OPENSSL 1
 #endif
 
