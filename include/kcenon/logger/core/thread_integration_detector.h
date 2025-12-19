@@ -51,9 +51,11 @@
 // and thread_system is found
 
 // Auto-detect thread_system availability via header presence
+// Note: thread_system v3.0+ uses common_system interfaces instead of
+// thread-specific logger_interface.h. Detection now uses umbrella headers.
 #if defined(USE_THREAD_SYSTEM)
 #  if !defined(USE_THREAD_SYSTEM_INTEGRATION)
-#    if __has_include(<kcenon/thread/interfaces/logger_interface.h>)
+#    if __has_include(<kcenon/thread/thread_pool.h>)
 #      define USE_THREAD_SYSTEM_INTEGRATION 1
 #    endif
 #  endif

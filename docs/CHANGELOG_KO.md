@@ -11,6 +11,33 @@ Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문�
 
 ## [Unreleased]
 
+### thread_system v3.0 호환성 (Issue #244) - 2025-12-19
+
+#### 주요 변경 (Breaking Changes)
+- **logger_adapter.h**: `shared::ILogger` 및 `shared::IService` 구현 제거
+  - `USE_THREAD_SYSTEM` 조건부 컴파일 분기가 제거됨
+  - thread_system 통합을 위해서는 `kcenon::common::interfaces::ILogger`를 제공하는
+    `common_logger_adapter.h`를 사용
+
+#### 변경됨
+- **thread_integration_detector.h**: 탐지 헤더 업데이트
+  - 제거된 `<kcenon/thread/interfaces/logger_interface.h>` 대신 `<kcenon/thread/thread_pool.h>` 사용
+  - thread_system v3.0은 thread 전용 인터페이스 대신 common_system 인터페이스를 사용
+
+#### 마이그레이션 가이드
+thread_system 통합 시 다음과 같이 변경:
+```cpp
+// 이전 (v2.x)
+#include <kcenon/logger/adapters/logger_adapter.h>
+// shared::ILogger 및 shared::IService 사용
+
+// 현재 (v3.0+)
+#include <kcenon/logger/adapters/common_logger_adapter.h>
+// kcenon::common::interfaces::ILogger 사용
+```
+
+---
+
 ### #226 API 변경 후 손상된 예제 파일 수정 (Issue #228) - 2025-12-06
 
 #### 제거됨

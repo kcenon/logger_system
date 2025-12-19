@@ -11,6 +11,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### thread_system v3.0 Compatibility (Issue #244) - 2025-12-19
+
+#### Breaking Changes
+- **logger_adapter.h**: Removed `shared::ILogger` and `shared::IService` implementation
+  - The `USE_THREAD_SYSTEM` conditional compilation branch has been removed
+  - For thread_system integration, use `common_logger_adapter.h` which provides
+    adapters for `kcenon::common::interfaces::ILogger`
+
+#### Changed
+- **thread_integration_detector.h**: Updated detection header
+  - Now uses `<kcenon/thread/thread_pool.h>` instead of removed `<kcenon/thread/interfaces/logger_interface.h>`
+  - thread_system v3.0 uses common_system interfaces instead of thread-specific interfaces
+
+#### Migration Guide
+For thread_system integration, replace:
+```cpp
+// Old (v2.x)
+#include <kcenon/logger/adapters/logger_adapter.h>
+// using shared::ILogger and shared::IService
+
+// New (v3.0+)
+#include <kcenon/logger/adapters/common_logger_adapter.h>
+// using kcenon::common::interfaces::ILogger
+```
+
+---
+
 ### Fix broken example files after #226 API changes (Issue #228) - 2025-12-06
 
 #### Removed
