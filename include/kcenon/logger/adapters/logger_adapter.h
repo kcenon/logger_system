@@ -35,145 +35,16 @@
 #include <sstream>
 #include <string_view>
 
-// Conditionally include thread_system interfaces when available
-#ifdef USE_THREAD_SYSTEM
-#include <kcenon/thread/interfaces/shared_interfaces.h>
-#endif
+// For thread_system v3.0+ integration, use common_logger_adapter.h which provides
+// adapters for kcenon::common::interfaces::ILogger
 
 namespace kcenon::logger::adapters {
 
-#ifdef USE_THREAD_SYSTEM
-
 /**
- * @brief Adapter to make logger compatible with ILogger interface (thread_system integration)
- * @note This adapter is only available when USE_THREAD_SYSTEM is defined
- */
-class logger_adapter : public shared::ILogger, public shared::IService {
-public:
-    /**
-     * @brief Constructor with logger instance
-     * @param logger Logger instance to adapt
-     */
-    explicit logger_adapter(std::shared_ptr<logger> logger_instance)
-        : logger_(std::move(logger_instance)) {
-    }
-
-    /**
-     * @brief Default constructor - creates a default logger
-     */
-    logger_adapter() : logger_(std::make_shared<logger>()) {
-    }
-
-    // ILogger interface
-    void log(shared::LogLevel level, std::string_view message) override {
-        if (!logger_) {
-            return;
-        }
-
-        // Convert shared::LogLevel to logger::log_level
-        logger::log_level logger_level;
-        switch (level) {
-            case shared::LogLevel::Trace:
-                logger_level = logger::log_level::trace;
-                break;
-            case shared::LogLevel::Debug:
-                logger_level = logger::log_level::debug;
-                break;
-            case shared::LogLevel::Info:
-                logger_level = logger::log_level::info;
-                break;
-            case shared::LogLevel::Warning:
-                logger_level = logger::log_level::warning;
-                break;
-            case shared::LogLevel::Error:
-                logger_level = logger::log_level::error;
-                break;
-            case shared::LogLevel::Critical:
-                logger_level = logger::log_level::critical;
-                break;
-            default:
-                logger_level = logger::log_level::info;
-        }
-
-        logger_->log(logger_level, std::string(message));
-    }
-
-    // IService interface
-    bool initialize() override {
-        if (logger_) {
-            is_running_ = true;
-            return true;
-        }
-        return false;
-    }
-
-    void shutdown() override {
-        if (logger_) {
-            logger_->flush();
-        }
-        is_running_ = false;
-    }
-
-    bool is_running() const override {
-        return is_running_ && logger_ != nullptr;
-    }
-
-    std::string name() const override {
-        return "LoggerAdapter";
-    }
-
-    /**
-     * @brief Get the underlying logger
-     * @return Logger instance
-     */
-    std::shared_ptr<logger> get_logger() const {
-        return logger_;
-    }
-
-    /**
-     * @brief Set minimum log level
-     * @param level Minimum level to log
-     */
-    void set_level(shared::LogLevel level) {
-        if (logger_) {
-            // Convert and set level
-            logger::log_level logger_level;
-            switch (level) {
-                case shared::LogLevel::Trace:
-                    logger_level = logger::log_level::trace;
-                    break;
-                case shared::LogLevel::Debug:
-                    logger_level = logger::log_level::debug;
-                    break;
-                case shared::LogLevel::Info:
-                    logger_level = logger::log_level::info;
-                    break;
-                case shared::LogLevel::Warning:
-                    logger_level = logger::log_level::warning;
-                    break;
-                case shared::LogLevel::Error:
-                    logger_level = logger::log_level::error;
-                    break;
-                case shared::LogLevel::Critical:
-                    logger_level = logger::log_level::critical;
-                    break;
-                default:
-                    logger_level = logger::log_level::info;
-            }
-            logger_->set_level(logger_level);
-        }
-    }
-
-private:
-    std::shared_ptr<logger> logger_;
-    bool is_running_{false};
-};
-
-#else // !USE_THREAD_SYSTEM
-
-/**
- * @brief Standalone logger adapter (no thread_system dependency)
- * @note This is the default adapter when thread_system is not available
+ * @brief Standalone logger adapter
+ * @note For thread_system integration, use common_logger_adapter.h which provides
+ *       adapters for kcenon::common::interfaces::ILogger (the unified interface
+ *       used by thread_system v3.0+)
  */
 class logger_adapter {
 public:
@@ -263,7 +134,5 @@ private:
     std::shared_ptr<logger> logger_;
     bool is_running_{false};
 };
-
-#endif // USE_THREAD_SYSTEM
 
 } // namespace kcenon::logger::adapters
