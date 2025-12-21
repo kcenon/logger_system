@@ -174,8 +174,26 @@ private:
 };
 
 // Convenience macros for logging (standalone mode)
+// @deprecated These macros are deprecated in favor of common_system's LOG_* macros.
+//             Use #include <kcenon/common/logging/log_macros.h> and LOG_INFO("message") instead.
+//             These macros will be removed in v3.0.0.
+
+// Helper macro to emit deprecation warning (compiler-specific)
+#if defined(__GNUC__) || defined(__clang__)
+#define THREAD_LOG_DEPRECATED_MSG "THREAD_LOG_* macros are deprecated. Use LOG_* macros from <kcenon/common/logging/log_macros.h> instead."
+#define THREAD_LOG_EMIT_DEPRECATION() \
+  _Pragma("GCC warning \"" THREAD_LOG_DEPRECATED_MSG "\"")
+#elif defined(_MSC_VER)
+#define THREAD_LOG_DEPRECATED_MSG "THREAD_LOG_* macros are deprecated. Use LOG_* macros from <kcenon/common/logging/log_macros.h> instead."
+#define THREAD_LOG_EMIT_DEPRECATION() \
+  __pragma(message(__FILE__ "(" _CRT_STRINGIZE(__LINE__) "): warning: " THREAD_LOG_DEPRECATED_MSG))
+#else
+#define THREAD_LOG_EMIT_DEPRECATION()
+#endif
+
 #define THREAD_LOG_IF_ENABLED(level, message)                                  \
   do {                                                                         \
+    THREAD_LOG_EMIT_DEPRECATION()                                              \
     if (auto logger = ::logger_system::logger_registry::get_logger()) {        \
       if (logger->is_enabled(level)) {                                         \
         logger->log(level, message, __FILE__, __LINE__, __FUNCTION__);         \

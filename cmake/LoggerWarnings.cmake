@@ -24,6 +24,7 @@ function(logger_add_warnings target)
             -Wcast-qual                 # Warn about cast removing qualifiers
             -Wconversion                # Warn about type conversions
             -Wctor-dtor-privacy         # Warn about useless constructors
+            -Wdeprecated-declarations   # Warn about deprecated API usage
             -Wdisabled-optimization     # Warn when optimization is disabled
             -Wformat=2                  # Format string checking
             -Winit-self                 # Warn about self-initialization

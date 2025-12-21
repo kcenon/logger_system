@@ -771,7 +771,10 @@ int main() {
 ```cpp
 // Using native logger_system types
 logger->log(log_level::info, "Message with native types");
-logger->log(log_level::error, "Error occurred", __FILE__, __LINE__, __func__);
+
+// Note: The source location is auto-captured internally in v2.x+
+// The legacy API with __FILE__, __LINE__, __func__ is deprecated and will be removed in v3.0.0
+logger->log(log_level::error, "Error occurred");
 ```
 
 ### Configuration Strategies

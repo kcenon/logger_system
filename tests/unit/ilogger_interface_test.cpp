@@ -200,7 +200,8 @@ TEST_F(ILoggerInterfaceTest, LevelConversionConsistency) {
 TEST_F(ILoggerInterfaceTest, BackwardCompatibilityWithNativeLogLevel) {
     // These should still work with logger_system::log_level
     logger_->log(log_level::info, "Native log level message");
-    logger_->log(log_level::warning, "Native warning", __FILE__, __LINE__, __FUNCTION__);
+    // Using simple message (source_location auto-captured internally)
+    logger_->log(log_level::warning, "Native warning message");
 
     EXPECT_TRUE(logger_->is_enabled(log_level::info));
     EXPECT_TRUE(logger_->is_enabled(log_level::error));
