@@ -712,7 +712,10 @@ Basic Usage with ILogger Interface</h3>
 Native API (Backward Compatible)</h3>
 <div class="fragment"><div class="line"><span class="comment">// Using native logger_system types</span></div>
 <div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;Message with native types&quot;</span>);</div>
-<div class="line">logger-&gt;log(log_level::error, <span class="stringliteral">&quot;Error occurred&quot;</span>, __FILE__, __LINE__, __func__);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Note: The source location is auto-captured internally in v2.x+</span></div>
+<div class="line"><span class="comment">// The legacy API with __FILE__, __LINE__, __func__ is deprecated and will be removed in v3.0.0</span></div>
+<div class="line">logger-&gt;log(log_level::error, <span class="stringliteral">&quot;Error occurred&quot;</span>);</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md602"></a>
 Configuration Strategies</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
@@ -774,7 +777,7 @@ Migration from v2.x</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 19 2025 13:01:53 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Dec 21 2025 16:22:06 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

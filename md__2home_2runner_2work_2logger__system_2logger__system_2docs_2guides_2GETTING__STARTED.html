@@ -192,17 +192,21 @@ Simple Console Logging</h3>
 <div class="line">}</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md1114"></a>
 Logging with Source Location</h3>
-<div class="fragment"><div class="line"><span class="comment">// Log with file, line, and function information</span></div>
-<div class="line">logger-&gt;log(thread_module::log_level::debug, </div>
-<div class="line">            <span class="stringliteral">&quot;Debug information&quot;</span>, </div>
-<div class="line">            __FILE__, __LINE__, __func__);</div>
+<p>Source location is automatically captured in v2.x+ using C++20's <code>std::source_location</code>. You no longer need to pass <code>__FILE__</code>, <code>__LINE__</code>, and <code>__func__</code> manually.</p>
+<div class="fragment"><div class="line"><span class="comment">// Simple logging - source location is auto-captured</span></div>
+<div class="line">logger-&gt;log(thread_module::log_level::debug, <span class="stringliteral">&quot;Debug information&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Convenience macro (if you define one)</span></div>
-<div class="line"><span class="preprocessor">#define LOG_DEBUG(logger, msg) \</span></div>
-<div class="line"><span class="preprocessor">    logger-&gt;log(thread_module::log_level::debug, msg, __FILE__, __LINE__, __func__)</span></div>
+<div class="line"><span class="comment">// For explicit source location, use the common::interfaces::ILogger interface:</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/common/interfaces/logger_interface.h&gt;</span></div>
+<div class="line">logger-&gt;log(common::interfaces::log_level::debug, <span class="stringliteral">&quot;Debug with explicit location&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">LOG_DEBUG(logger, <span class="stringliteral">&quot;This includes source location&quot;</span>);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1115"></a>
+<div class="line"><span class="comment">// Or use the LOG_* convenience macros from common_system:</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/common/logging/log_macros.h&gt;</span></div>
+<div class="line">LOG_DEBUG(<span class="stringliteral">&quot;This includes auto-captured source location&quot;</span>);</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p>&zwj;<b>Note:</b> The legacy API with <code>__FILE__, __LINE__, __func__</code> is deprecated and will be removed in v3.0.0. </p>
+</blockquote>
+<h3><a class="anchor" id="autotoc_md1115"></a>
 Structured JSON Output</h3>
 <p>The <code>structured_logger</code> provides JSON/logfmt/plain output. For strict JSON compliance at scale, consider integrating a JSON library (e.g., nlohmann/json):</p>
 <div class="fragment"><div class="line"><span class="comment">// Example using nlohmann::json (optional dependency)</span></div>
@@ -351,7 +355,7 @@ Next Steps</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 19 2025 13:01:53 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Dec 21 2025 16:22:06 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
