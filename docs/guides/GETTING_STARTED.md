@@ -104,18 +104,23 @@ int main() {
 
 ### Logging with Source Location
 
+Source location is automatically captured in v2.x+ using C++20's `std::source_location`.
+You no longer need to pass `__FILE__`, `__LINE__`, and `__func__` manually.
+
 ```cpp
-// Log with file, line, and function information
-logger->log(thread_module::log_level::debug, 
-            "Debug information", 
-            __FILE__, __LINE__, __func__);
+// Simple logging - source location is auto-captured
+logger->log(thread_module::log_level::debug, "Debug information");
 
-// Convenience macro (if you define one)
-#define LOG_DEBUG(logger, msg) \
-    logger->log(thread_module::log_level::debug, msg, __FILE__, __LINE__, __func__)
+// For explicit source location, use the common::interfaces::ILogger interface:
+#include <kcenon/common/interfaces/logger_interface.h>
+logger->log(common::interfaces::log_level::debug, "Debug with explicit location");
 
-LOG_DEBUG(logger, "This includes source location");
+// Or use the LOG_* convenience macros from common_system:
+#include <kcenon/common/logging/log_macros.h>
+LOG_DEBUG("This includes auto-captured source location");
 ```
+
+> **Note:** The legacy API with `__FILE__, __LINE__, __func__` is deprecated and will be removed in v3.0.0.
 
 ### Structured JSON Output
 

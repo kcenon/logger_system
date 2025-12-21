@@ -203,7 +203,10 @@ logger->log(common::interfaces::log_level::debug, "Source location captured auto
 
 // Native API (backward compatible)
 logger->log(log_level::info, "Using native API");
-logger->log(log_level::error, "With location", __FILE__, __LINE__, __func__);
+
+// Note: Manual source location (__FILE__, __LINE__, __func__) is deprecated.
+// Source location is now auto-captured. This API will be removed in v3.0.0.
+logger->log(log_level::error, "Error message");
 ```
 
 #### 4. Result Type Migration

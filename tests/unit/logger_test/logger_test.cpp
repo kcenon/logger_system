@@ -108,9 +108,8 @@ TEST_F(LoggerTest, SynchronousLogging) {
     sync_logger_->log(thread_module::log_level::error, "Error message");
     sync_logger_->log(thread_module::log_level::critical, "Critical message");
 
-    // Test with source location
-    sync_logger_->log(thread_module::log_level::info, "Message with location", __FILE__, __LINE__,
-                      __func__);
+    // Test with simple message (source_location auto-captured internally)
+    sync_logger_->log(thread_module::log_level::info, "Message with auto-captured location");
 }
 
 // Test asynchronous logging

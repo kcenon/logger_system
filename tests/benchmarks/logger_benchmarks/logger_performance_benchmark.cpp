@@ -156,8 +156,8 @@ static void BM_LoggingWithSourceLocation(benchmark::State& state) {
     const std::string message = "Message with source location";
     
     for (auto _ : state) {
-        sync_logger->log(thread_module::log_level::info, message, 
-                        __FILE__, __LINE__, __func__);
+        // Using simple message (source_location auto-captured internally)
+        sync_logger->log(thread_module::log_level::info, message);
     }
     
     state.SetItemsProcessed(state.iterations());

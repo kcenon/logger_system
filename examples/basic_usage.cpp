@@ -62,9 +62,8 @@ void basic_logging_example() {
     logger_instance->log(log_level_type::error, "An error occurred!");
     logger_instance->log(log_level_type::critical, "Critical system failure!");
 
-    // Log with source location
-    logger_instance->log(log_level_type::info, "Message with location",
-                __FILE__, __LINE__, __func__);
+    // Log with simple message (source_location auto-captured internally)
+    logger_instance->log(log_level_type::info, "Message with auto-captured location");
     
     // Stop and flush
     logger_instance->stop();
