@@ -39,6 +39,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: kcenon/thread_system
+        ref: feature/adopt-kcenon-feature-flags
         path: thread_system
         token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -79,6 +80,7 @@ jobs:
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_SAMPLES=OFF \
           -DBUILD_WITH_COMMON_SYSTEM=ON \
+          -DUNIFIED_USE_LOCAL=ON \
           -DUSE_THREAD_SYSTEM=ON || {
             echo "::error::CMake configuration failed"
             echo "CMake error log:"

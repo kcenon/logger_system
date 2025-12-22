@@ -11,6 +11,51 @@ Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문�
 
 ## [Unreleased]
 
+### KCENON 기능 감지 사용 (Issue #250) - 2025-12-22
+
+#### 변경됨
+- **error_handling_utils.h**: common_system의 통합된 KCENON_HAS_SOURCE_LOCATION 사용
+  - `<kcenon/common/config/feature_flags.h>` 포함하여 기능 감지
+  - 커스텀 source_location 감지 로직을 KCENON_HAS_SOURCE_LOCATION으로 대체
+  - 하위 호환성을 위해 LOGGER_HAS_SOURCE_LOCATION을 레거시 별칭으로 유지
+
+- **jthread_compat.h**: common_system의 통합된 KCENON_HAS_JTHREAD 사용
+  - `<kcenon/common/config/feature_flags.h>` 포함하여 기능 감지
+  - 커스텀 jthread 감지 로직을 KCENON_HAS_JTHREAD로 대체
+  - 하위 호환성을 위해 LOGGER_HAS_JTHREAD를 레거시 별칭으로 유지
+
+#### 수정됨
+- **logger.h**: common_system v3.0.0 호환성 빌드 오류 수정
+  - deprecated `log(level, message, file, line, function)` 메서드에서 `override` 키워드 제거
+  - 이 메서드는 common_system v3.0.0의 `common::interfaces::ILogger`에서 제거됨 (Issue #217)
+  - 하위 호환성을 위해 메서드는 유지하되 더 이상 인터페이스를 override하지 않음
+
+- **Windows MSVC LNK2019**: `thread_pool::is_running()` unresolved external symbol 오류 수정
+  - 원인: thread_system이 서브모듈로 빌드될 때 `KCENON_HAS_COMMON_EXECUTOR`가 정의되지 않음
+  - 해결: thread_system `core/CMakeLists.txt`에서 executor_interface.h 발견 시 KCENON_HAS_COMMON_EXECUTOR=1 정의 추가
+  - CI workflow에 `UNIFIED_USE_LOCAL=ON` 추가하여 로컬 checkout된 의존성 사용
+
+- **ilogger_interface_test.cpp**: common_system v3.0.0 API 변경에 맞춰 테스트 업데이트
+  - deprecated 메서드를 ILogger 포인터 대신 logger 클래스에서 직접 호출하도록 변경
+
+#### 마이그레이션 가이드
+LOGGER_HAS_* 매크로는 이제 common_system의 KCENON_HAS_*에 대한 별칭입니다.
+새 코드에서는 KCENON_HAS_*를 직접 사용:
+```cpp
+// 레거시 (계속 동작함)
+#if LOGGER_HAS_JTHREAD
+    std::jthread worker(...);
+#endif
+
+// 권장
+#include <kcenon/common/config/feature_flags.h>
+#if KCENON_HAS_JTHREAD
+    std::jthread worker(...);
+#endif
+```
+
+---
+
 ### Deprecated common_system API 마이그레이션 (Issue #248) - 2025-12-22
 
 #### 변경됨
