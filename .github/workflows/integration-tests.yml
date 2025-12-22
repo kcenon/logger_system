@@ -50,6 +50,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: kcenon/thread_system
+        ref: feature/adopt-kcenon-feature-flags
         path: thread_system
 
     - name: Cache FetchContent dependencies
@@ -142,6 +143,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: kcenon/thread_system
+        ref: feature/adopt-kcenon-feature-flags
         path: thread_system
 
     - name: Cache FetchContent dependencies
@@ -215,6 +217,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: kcenon/thread_system
+        ref: feature/adopt-kcenon-feature-flags
         path: thread_system
 
     - name: Setup vcpkg
@@ -302,6 +305,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: kcenon/thread_system
+        ref: feature/adopt-kcenon-feature-flags
         path: thread_system
 
     - name: Cache FetchContent dependencies
@@ -474,6 +478,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: kcenon/thread_system
+        ref: feature/adopt-kcenon-feature-flags
         path: thread_system
 
     - name: Cache FetchContent dependencies

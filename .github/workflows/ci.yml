@@ -54,6 +54,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: kcenon/thread_system
+        ref: feature/adopt-kcenon-feature-flags
         path: thread_system
         token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -340,6 +341,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: kcenon/thread_system
+        ref: feature/adopt-kcenon-feature-flags
         path: thread_system
         token: ${{ secrets.GITHUB_TOKEN }}
 
