@@ -24,6 +24,15 @@ Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문�
   - 커스텀 jthread 감지 로직을 KCENON_HAS_JTHREAD로 대체
   - 하위 호환성을 위해 LOGGER_HAS_JTHREAD를 레거시 별칭으로 유지
 
+#### 수정됨
+- **logger.h**: common_system v3.0.0 호환성 빌드 오류 수정
+  - deprecated `log(level, message, file, line, function)` 메서드에서 `override` 키워드 제거
+  - 이 메서드는 common_system v3.0.0의 `common::interfaces::ILogger`에서 제거됨 (Issue #217)
+  - 하위 호환성을 위해 메서드는 유지하되 더 이상 인터페이스를 override하지 않음
+
+- **ilogger_interface_test.cpp**: common_system v3.0.0 API 변경에 맞춰 테스트 업데이트
+  - deprecated 메서드를 ILogger 포인터 대신 logger 클래스에서 직접 호출하도록 변경
+
 #### 마이그레이션 가이드
 LOGGER_HAS_* 매크로는 이제 common_system의 KCENON_HAS_*에 대한 별칭입니다.
 새 코드에서는 KCENON_HAS_*를 직접 사용:

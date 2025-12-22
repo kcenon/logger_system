@@ -24,6 +24,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Replace custom jthread detection with KCENON_HAS_JTHREAD
   - Keep LOGGER_HAS_JTHREAD as legacy alias for backward compatibility
 
+#### Fixed
+- **logger.h**: Fixed build error with common_system v3.0.0 compatibility
+  - Removed `override` keyword from deprecated `log(level, message, file, line, function)` method
+  - This method was removed from `common::interfaces::ILogger` in v3.0.0 (Issue #217)
+  - Method preserved for backward compatibility but no longer overrides the interface
+
+- **ilogger_interface_test.cpp**: Updated test for common_system v3.0.0 API changes
+  - Test now calls deprecated method directly on logger class instead of through ILogger pointer
+
 #### Migration Guide
 The LOGGER_HAS_* macros are now aliases to KCENON_HAS_* from common_system.
 For new code, use KCENON_HAS_* directly:
