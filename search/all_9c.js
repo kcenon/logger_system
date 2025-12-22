@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['체크리스트_0',['체크리스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1547',1,'✅ 구현 체크리스트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1255',1,'마이그레이션 체크리스트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1393',1,'안전한 구성 체크리스트']]]
+  ['체크리스트_0',['체크리스트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1555',1,'✅ 구현 체크리스트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1263',1,'마이그레이션 체크리스트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1401',1,'안전한 구성 체크리스트']]]
 ];
