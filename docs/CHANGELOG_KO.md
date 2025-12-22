@@ -30,6 +30,11 @@ Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문�
   - 이 메서드는 common_system v3.0.0의 `common::interfaces::ILogger`에서 제거됨 (Issue #217)
   - 하위 호환성을 위해 메서드는 유지하되 더 이상 인터페이스를 override하지 않음
 
+- **Windows MSVC LNK2019**: `thread_pool::is_running()` unresolved external symbol 오류 수정
+  - 원인: thread_system이 서브모듈로 빌드될 때 `KCENON_HAS_COMMON_EXECUTOR`가 정의되지 않음
+  - 해결: thread_system `core/CMakeLists.txt`에서 executor_interface.h 발견 시 KCENON_HAS_COMMON_EXECUTOR=1 정의 추가
+  - CI workflow에 `UNIFIED_USE_LOCAL=ON` 추가하여 로컬 checkout된 의존성 사용
+
 - **ilogger_interface_test.cpp**: common_system v3.0.0 API 변경에 맞춰 테스트 업데이트
   - deprecated 메서드를 ILogger 포인터 대신 logger 클래스에서 직접 호출하도록 변경
 

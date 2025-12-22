@@ -30,6 +30,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - This method was removed from `common::interfaces::ILogger` in v3.0.0 (Issue #217)
   - Method preserved for backward compatibility but no longer overrides the interface
 
+- **Windows MSVC LNK2019**: Fixed unresolved external symbol for `thread_pool::is_running()`
+  - Root cause: `KCENON_HAS_COMMON_EXECUTOR` was not defined when thread_system built as submodule
+  - Fix: Updated thread_system `core/CMakeLists.txt` to define KCENON_HAS_COMMON_EXECUTOR=1 when executor_interface.h is found
+  - Added `UNIFIED_USE_LOCAL=ON` to CI workflows to use locally checked out dependencies
+
 - **ilogger_interface_test.cpp**: Updated test for common_system v3.0.0 API changes
   - Test now calls deprecated method directly on logger class instead of through ILogger pointer
 
