@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['감사_20로깅_0',['4. 보안 감사 로깅',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1694',1,'']]],
-  ['감지_1',['컴파일 타임 감지',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1458',1,'']]],
-  ['감지_20미작동_2',['런타임 감지 미작동',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1469',1,'']]]
+  ['감사_20로깅_0',['4. 보안 감사 로깅',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1704',1,'']]],
+  ['감지_1',['컴파일 타임 감지',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1468',1,'']]],
+  ['감지_20미작동_2',['런타임 감지 미작동',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1479',1,'']]],
+  ['감지_20사용_20issue_20250_202025_2012_2022_3',['KCENON 기능 감지 사용 (Issue #250) - 2025-12-22',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md823',1,'']]]
 ];

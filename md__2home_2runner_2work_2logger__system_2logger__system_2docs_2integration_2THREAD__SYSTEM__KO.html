@@ -93,20 +93,20 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">thread_system 통합 가이드</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1446"></a> </p><blockquote class="doxtable">
+<div class="textblock"><p><a class="anchor" id="autotoc_md1456"></a> </p><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM.html">English</a> | <b>한국어</b> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md1447"></a>
+<h1><a class="anchor" id="autotoc_md1457"></a>
 개요</h1>
 <p>이 가이드는 logger_system에서 고급 비동기 처리를 위한 선택적 <code>thread_system</code> 통합을 활성화하고 사용하는 방법을 설명합니다.</p>
 <p>v3.1.0 (Issue #222) 이후로 logger_system은 기본적으로 독립형 <code>std::jthread</code> 기반 비동기 워커를 사용합니다. <code>thread_system</code>의 고급 스레드 풀 기능을 활용하고자 하는 사용자를 위해 <code>thread_system_integration</code> 모듈을 통한 선택적 통합이 가능합니다 (Issue #224).</p>
-<h1><a class="anchor" id="autotoc_md1448"></a>
+<h1><a class="anchor" id="autotoc_md1458"></a>
 빠른 시작</h1>
-<h2><a class="anchor" id="autotoc_md1449"></a>
+<h2><a class="anchor" id="autotoc_md1459"></a>
 빌드 시 활성화</h2>
 <div class="fragment"><div class="line">cmake -S . -B build -DLOGGER_USE_THREAD_SYSTEM=ON</div>
 <div class="line">cmake --build build</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1450"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1460"></a>
 런타임에 활성화</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/thread_system_integration.h&gt;</span></div>
 <div class="line"> </div>
@@ -127,9 +127,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line"> </div>
 <div class="line"><span class="comment">// 완료 시 비활성화</span></div>
 <div class="line">thread_system_integration::disable();</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1451"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1461"></a>
 설정</h1>
-<h2><a class="anchor" id="autotoc_md1452"></a>
+<h2><a class="anchor" id="autotoc_md1462"></a>
 CMake 옵션</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -142,7 +142,7 @@ CMake 옵션</h2>
 <li><code>LOGGER_HAS_THREAD_SYSTEM</code> 컴파일 정의 설정</li>
 <li>LoggerSystem을 thread_system과 링크</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1453"></a>
+<h2><a class="anchor" id="autotoc_md1463"></a>
 컴파일 정의</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -150,12 +150,12 @@ CMake 옵션</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>LOGGER_HAS_THREAD_SYSTEM</code>   </td><td class="markdownTableBodyNone"><code>LOGGER_USE_THREAD_SYSTEM=ON</code>이고 thread_system 발견 시   </td><td class="markdownTableBodyNone">전체 통합 API 활성화   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md1454"></a>
+<h1><a class="anchor" id="autotoc_md1464"></a>
 API 레퍼런스</h1>
-<h2><a class="anchor" id="autotoc_md1455"></a>
+<h2><a class="anchor" id="autotoc_md1465"></a>
 thread_system_integration</h2>
 <p>thread_system 통합 관리를 제공하는 정적 클래스입니다.</p>
-<h3><a class="anchor" id="autotoc_md1456"></a>
+<h3><a class="anchor" id="autotoc_md1466"></a>
 메서드</h3>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger::integration {</div>
 <div class="line"> </div>
@@ -185,13 +185,13 @@ thread_system_integration</h2>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">} <span class="comment">// namespace kcenon::logger::integration</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1457"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1467"></a>
 async_backend_type</h2>
 <div class="fragment"><div class="line"><span class="keyword">enum class</span> async_backend_type {</div>
 <div class="line">    standalone,   <span class="comment">// 기본 std::jthread 기반 워커</span></div>
 <div class="line">    thread_pool   <span class="comment">// thread_system의 thread_pool</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1458"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1468"></a>
 컴파일 타임 감지</h2>
 <div class="fragment"><div class="line"><span class="comment">// thread_system 지원 가능 여부 확인</span></div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> has_thread_system_support() noexcept;</div>
@@ -202,9 +202,9 @@ async_backend_type</h2>
 <div class="line">} <span class="keywordflow">else</span> {</div>
 <div class="line">    <span class="comment">// standalone 기능만 사용</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1459"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1469"></a>
 사용 패턴</h1>
-<h2><a class="anchor" id="autotoc_md1460"></a>
+<h2><a class="anchor" id="autotoc_md1470"></a>
 패턴 1: 애플리케이션 전체 공유 풀</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/thread_system_integration.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
@@ -228,7 +228,7 @@ async_backend_type</h2>
 <div class="line">    thread_system_integration::disable();</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1461"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1471"></a>
 패턴 2: 사용자 정의 풀 설정</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/thread_system_integration.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/thread/core/thread_pool.h&gt;</span></div>
@@ -256,7 +256,7 @@ async_backend_type</h2>
 <div class="line">    pool-&gt;stop();</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1462"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1472"></a>
 패턴 3: 조건부 통합</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/thread_system_integration.h&gt;</span></div>
 <div class="line"> </div>
@@ -272,7 +272,7 @@ async_backend_type</h2>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;standalone 백엔드 사용 중 (thread_system 미사용)\n&quot;</span>;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1463"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1473"></a>
 스레드 안전성</h1>
 <p>모든 <code>thread_system_integration</code> 메서드는 스레드 안전합니다:</p>
 <ul>
@@ -280,9 +280,9 @@ async_backend_type</h2>
 <li>풀 접근은 뮤텍스로 보호됨</li>
 <li>여러 스레드에서 안전하게 <code>enable()</code>/<code>disable()</code> 호출 가능</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1464"></a>
+<h1><a class="anchor" id="autotoc_md1474"></a>
 성능 고려사항</h1>
-<h2><a class="anchor" id="autotoc_md1465"></a>
+<h2><a class="anchor" id="autotoc_md1475"></a>
 thread_system 통합 사용 시기</h2>
 <p><b>thread_pool 백엔드 사용 권장:</b></p><ul>
 <li>여러 로거가 동일한 스레드 풀 공유</li>
@@ -296,7 +296,7 @@ thread_system 통합 사용 시기</h2>
 <li>로깅 오버헤드 최소화 필요</li>
 <li>thread_system 미사용</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1466"></a>
+<h2><a class="anchor" id="autotoc_md1476"></a>
 오버헤드 비교</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -306,14 +306,14 @@ thread_system 통합 사용 시기</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">thread_pool   </td><td class="markdownTableBodyNone">~100ns   </td><td class="markdownTableBodyNone">높음   </td><td class="markdownTableBodyNone">thread_system   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md1467"></a>
+<h1><a class="anchor" id="autotoc_md1477"></a>
 문제 해결</h1>
-<h2><a class="anchor" id="autotoc_md1468"></a>
+<h2><a class="anchor" id="autotoc_md1478"></a>
 thread_system 미발견</h2>
 <div class="fragment"><div class="line">-- Logger System: thread_system not found, using standalone mode</div>
 </div><!-- fragment --><p><b>해결책</b>: thread_system이 설치되어 있거나 FetchContent를 통해 사용 가능한지 확인: </p><div class="fragment"><div class="line">set(UNIFIED_USE_LOCAL ON)  # 로컬 형제 디렉토리 사용</div>
 <div class="line">cmake -DLOGGER_USE_THREAD_SYSTEM=ON ..</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1469"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1479"></a>
 런타임 감지 미작동</h2>
 <p><code>enable()</code> 후 <code>is_enabled()</code>가 false를 반환하는 경우:</p>
 <ol type="1">
@@ -327,7 +327,7 @@ thread_system 미발견</h2>
 <div class="line">} <span class="keywordflow">else</span> {</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;설정된 풀 없음\n&quot;</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1470"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1480"></a>
 관련 문서</h1>
 <ul>
 <li>async_worker - Standalone 비동기 구현</li>
@@ -342,7 +342,7 @@ thread_system 미발견</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Dec 22 2025 01:46:36 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Dec 22 2025 14:49:10 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
