@@ -99,10 +99,21 @@ TEST_F(ILoggerInterfaceTest, LogWithSourceLocation) {
 }
 
 /**
- * @brief Test log method with explicit file/line/function
+ * @brief Test log method with explicit file/line/function (legacy API)
+ * @note This tests the deprecated API that will be removed in v3.0.0
  */
 TEST_F(ILoggerInterfaceTest, LogWithExplicitLocation) {
     ci::ILogger* ilogger = logger_.get();
+
+    // Suppress deprecation warning for this test - we're testing backward compatibility
+#if defined(__clang__) || defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4996)
+#endif
 
     auto result = ilogger->log(ci::log_level::debug,
                                std::string("Debug message"),
@@ -110,6 +121,13 @@ TEST_F(ILoggerInterfaceTest, LogWithExplicitLocation) {
                                42,
                                std::string("test_function"));
     EXPECT_TRUE(common::is_ok(result));
+
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
+#if defined(__clang__) || defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 }
 
 /**

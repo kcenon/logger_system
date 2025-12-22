@@ -11,6 +11,43 @@ Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문�
 
 ## [Unreleased]
 
+### Deprecated common_system API 마이그레이션 (Issue #248) - 2025-12-22
+
+#### 변경됨
+- **common_system_adapter.h**: source_location 기반 로깅 API 추가
+  - 새로운 `log(log_level, std::string_view, const source_location&)` 메서드
+  - Deprecated `log(log_level, string, file, line, function)` 메서드는 새 API로 위임
+  - 하위 호환성 코드에서 deprecation 경고 억제
+
+- **logger_interface.h**: THREAD_LOG_* 매크로 처리 방식 업데이트
+  - common_system 사용 가능 시 THREAD_LOG_* 매크로가 LOG_*로 리다이렉트됨
+  - 컴파일러 경고를 발생시키던 중복 매크로 재정의 제거
+  - common_system 없는 빌드를 위한 standalone 폴백 유지
+
+#### 마이그레이션 가이드
+새 코드에서는 common_system의 LOG_* 매크로를 직접 사용:
+```cpp
+// Deprecated (v3.0.0에서 제거 예정)
+THREAD_LOG_INFO("message");
+
+// 권장
+#include <kcenon/common/logging/log_macros.h>
+LOG_INFO("message");
+```
+
+ILogger 인터페이스 구현 시 새로운 source_location 기반 메서드 오버라이드:
+```cpp
+// Deprecated (v3.0.0에서 제거 예정)
+VoidResult log(log_level level, const std::string& msg,
+               const std::string& file, int line, const std::string& func) override;
+
+// 권장
+VoidResult log(log_level level, std::string_view msg,
+               const source_location& loc = source_location::current()) override;
+```
+
+---
+
 ### thread_system v3.0 호환성 (Issue #244) - 2025-12-19
 
 #### 주요 변경 (Breaking Changes)

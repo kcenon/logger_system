@@ -34,6 +34,7 @@
 
 #include <memory>
 #include <string>
+#include <string_view>
 #include <chrono>
 #include <unordered_map>
 
@@ -41,6 +42,7 @@
 #include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/common/patterns/result.h>
 #include <kcenon/common/adapters/typed_adapter.h>
+#include <kcenon/common/utils/source_location.h>
 
 #include "../core/logger.h"
 #include "../interfaces/logger_interface.h"
@@ -93,14 +95,15 @@ public:
     }
 
     /**
-     * @brief Log a message with source location information
+     * @brief Log a message with source location information (C++20 style)
+     *
+     * This is the preferred method that uses source_location for automatic
+     * capture of file, line, and function information.
      */
     ::common::VoidResult log(
         ::common::interfaces::log_level level,
-        const std::string& message,
-        const std::string& file,
-        int line,
-        const std::string& function) override {
+        std::string_view message,
+        const ::kcenon::common::source_location& loc = ::kcenon::common::source_location::current()) override {
         if (!this->impl_) {
             return ::common::VoidResult(
                 ::common::error_info(1, "Logger not initialized", "kcenon::logger"));
@@ -109,8 +112,10 @@ public:
         try {
             auto logger_level = convert_level_from_common(level);
             // Create formatted message with location info
-            std::string formatted = "[" + file + ":" + std::to_string(line) +
-                                   " in " + function + "] " + message;
+            std::string formatted = "[" + std::string(loc.file_name()) + ":" +
+                                   std::to_string(loc.line()) + " in " +
+                                   std::string(loc.function_name()) + "] " +
+                                   std::string(message);
             this->impl_->log(logger_level, formatted);
             return ::common::VoidResult(std::monostate{});
         } catch (const std::exception& e) {
@@ -118,6 +123,36 @@ public:
                 ::common::error_info(2, e.what(), "kcenon::logger"));
         }
     }
+
+    /**
+     * @brief Log a message with source location information (legacy)
+     * @deprecated Use log(log_level, std::string_view, const source_location&) instead.
+     *             Will be removed in v3.0.0.
+     */
+#if defined(__clang__) || defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4996)
+#endif
+    ::common::VoidResult log(
+        ::common::interfaces::log_level level,
+        const std::string& message,
+        const std::string& file,
+        int line,
+        const std::string& function) override {
+        // Delegate to the new source_location-based method
+        ::kcenon::common::source_location loc(file.c_str(), function.c_str(), line);
+        return log(level, std::string_view(message), loc);
+    }
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
+#if defined(__clang__) || defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
     /**
      * @brief Log a structured entry

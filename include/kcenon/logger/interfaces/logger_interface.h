@@ -173,27 +173,39 @@ private:
   inline static std::mutex mutex_{};
 };
 
+} // namespace logger_system
+
+// =============================================================================
 // Convenience macros for logging (standalone mode)
+// =============================================================================
+//
 // @deprecated These macros are deprecated in favor of common_system's LOG_* macros.
 //             Use #include <kcenon/common/logging/log_macros.h> and LOG_INFO("message") instead.
 //             These macros will be removed in v3.0.0.
+//
+// Migration: Simply replace THREAD_LOG_* with LOG_* and include the common_system header:
+//   Before: THREAD_LOG_INFO("message");
+//   After:  #include <kcenon/common/logging/log_macros.h>
+//           LOG_INFO("message");
 
-// Helper macro to emit deprecation warning (compiler-specific)
-#if defined(__GNUC__) || defined(__clang__)
-#define THREAD_LOG_DEPRECATED_MSG "THREAD_LOG_* macros are deprecated. Use LOG_* macros from <kcenon/common/logging/log_macros.h> instead."
-#define THREAD_LOG_EMIT_DEPRECATION() \
-  _Pragma("GCC warning \"" THREAD_LOG_DEPRECATED_MSG "\"")
-#elif defined(_MSC_VER)
-#define THREAD_LOG_DEPRECATED_MSG "THREAD_LOG_* macros are deprecated. Use LOG_* macros from <kcenon/common/logging/log_macros.h> instead."
-#define THREAD_LOG_EMIT_DEPRECATION() \
-  __pragma(message(__FILE__ "(" _CRT_STRINGIZE(__LINE__) "): warning: " THREAD_LOG_DEPRECATED_MSG))
+// Include common_system's log macros for the redirected implementation
+#if __has_include(<kcenon/common/logging/log_macros.h>)
+#include <kcenon/common/logging/log_macros.h>
+#define LOGGER_SYSTEM_HAS_COMMON_LOG_MACROS 1
 #else
-#define THREAD_LOG_EMIT_DEPRECATION()
+#define LOGGER_SYSTEM_HAS_COMMON_LOG_MACROS 0
 #endif
+
+#if LOGGER_SYSTEM_HAS_COMMON_LOG_MACROS
+// When common_system is available, THREAD_LOG_* macros are already defined
+// in log_macros.h as deprecated aliases to LOG_* macros.
+// No need to redefine them here.
+
+#else
+// Fallback for standalone mode when common_system is not available
 
 #define THREAD_LOG_IF_ENABLED(level, message)                                  \
   do {                                                                         \
-    THREAD_LOG_EMIT_DEPRECATION()                                              \
     if (auto logger = ::logger_system::logger_registry::get_logger()) {        \
       if (logger->is_enabled(level)) {                                         \
         logger->log(level, message, __FILE__, __LINE__, __FUNCTION__);         \
@@ -214,4 +226,4 @@ private:
 #define THREAD_LOG_TRACE(message)                                              \
   THREAD_LOG_IF_ENABLED(::logger_system::log_level::trace, message)
 
-} // namespace logger_system
+#endif // LOGGER_SYSTEM_HAS_COMMON_LOG_MACROS

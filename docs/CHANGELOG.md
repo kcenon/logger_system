@@ -11,6 +11,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Migrate from Deprecated common_system APIs (Issue #248) - 2025-12-22
+
+#### Changed
+- **common_system_adapter.h**: Added source_location-based logging API
+  - New `log(log_level, std::string_view, const source_location&)` method
+  - Deprecated `log(log_level, string, file, line, function)` now delegates to new API
+  - Suppressed deprecation warnings for backward compatibility code
+
+- **logger_interface.h**: Updated THREAD_LOG_* macro handling
+  - When common_system is available, THREAD_LOG_* macros now redirect to LOG_*
+  - Removed redundant macro redefinitions that caused compiler warnings
+  - Standalone fallback preserved for builds without common_system
+
+#### Migration Guide
+For new code, use the common_system's LOG_* macros directly:
+```cpp
+// Deprecated (will be removed in v3.0.0)
+THREAD_LOG_INFO("message");
+
+// Recommended
+#include <kcenon/common/logging/log_macros.h>
+LOG_INFO("message");
+```
+
+For implementations of ILogger interface, override the new source_location-based method:
+```cpp
+// Deprecated (will be removed in v3.0.0)
+VoidResult log(log_level level, const std::string& msg,
+               const std::string& file, int line, const std::string& func) override;
+
+// Recommended
+VoidResult log(log_level level, std::string_view msg,
+               const source_location& loc = source_location::current()) override;
+```
+
+---
+
 ### thread_system v3.0 Compatibility (Issue #244) - 2025-12-19
 
 #### Breaking Changes
