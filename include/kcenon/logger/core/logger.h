@@ -228,7 +228,7 @@ public:
                            const common::source_location& loc = common::source_location::current()) override;
 
     /**
-     * @brief Log a message with source location information (ILogger interface, legacy)
+     * @brief Log a message with source location information (legacy convenience method)
      * @param level Log level
      * @param message Log message
      * @param file Source file name
@@ -237,14 +237,15 @@ public:
      * @return VoidResult indicating success or error
      *
      * @deprecated Use log(log_level, std::string_view, const source_location&) instead
-     * @note Implements common::interfaces::ILogger::log (legacy overload)
+     * @note This method was removed from common::interfaces::ILogger in v3.0.0 (Issue #217).
+     *       It is preserved here for backward compatibility but no longer overrides ILogger.
      * @since 2.0.0
      */
     common::VoidResult log(common::interfaces::log_level level,
                            const std::string& message,
                            const std::string& file,
                            int line,
-                           const std::string& function) override;
+                           const std::string& function);
 
     /**
      * @brief Log a structured entry (ILogger interface)

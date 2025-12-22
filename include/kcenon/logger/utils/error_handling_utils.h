@@ -33,24 +33,20 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include <kcenon/logger/core/error_codes.h>
+#include <kcenon/common/config/feature_flags.h>
 #include <filesystem>
 #include <system_error>
 #include <chrono>
 #include <sstream>
 #include <iostream>
 
-// Check for source_location support (C++20)
-#if defined(__has_include)
-#  if __has_include(<source_location>)
-#    include <source_location>
-#    if defined(__cpp_lib_source_location) && __cpp_lib_source_location >= 201907L
-#      define LOGGER_HAS_SOURCE_LOCATION 1
-#    endif
-#  endif
+#if KCENON_HAS_SOURCE_LOCATION
+#  include <source_location>
 #endif
 
+// Legacy alias for backward compatibility
 #ifndef LOGGER_HAS_SOURCE_LOCATION
-#  define LOGGER_HAS_SOURCE_LOCATION 0
+#  define LOGGER_HAS_SOURCE_LOCATION KCENON_HAS_SOURCE_LOCATION
 #endif
 
 namespace kcenon::logger::utils {
@@ -74,7 +70,7 @@ struct error_context {
     std::string function_name; // Function where error occurred
     std::chrono::system_clock::time_point timestamp;
 
-#if LOGGER_HAS_SOURCE_LOCATION
+#if KCENON_HAS_SOURCE_LOCATION
     /**
      * @brief Construct error context with automatic source location capture
      * @param error_code The logger error code

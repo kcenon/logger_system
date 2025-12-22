@@ -24,47 +24,23 @@ All rights reserved.
  * @note This is an internal header, not part of the public API
  */
 
+#include <kcenon/common/config/feature_flags.h>
 #include <atomic>
 #include <condition_variable>
 #include <functional>
 #include <mutex>
 #include <thread>
-#include <version>
 
-namespace kcenon::logger::async {
-
-/**
- * @brief Check if std::jthread is available
- *
- * std::jthread requires:
- * - C++20 support
- * - Implementation of P0660R10 (stop_token and jthread)
- *
- * Known limitations:
- * - libc++ (Apple Clang, LLVM Clang with -stdlib=libc++) doesn't support jthread
- * - Only libstdc++ (GCC) fully supports jthread
- * - MSVC STL supports jthread from VS 2019 16.8+
- */
-#if defined(__cpp_lib_jthread) && __cpp_lib_jthread >= 201911L
-    // Full jthread support available
-    #define LOGGER_HAS_JTHREAD 1
-#elif defined(_LIBCPP_VERSION)
-    // libc++ doesn't support jthread yet
-    #define LOGGER_HAS_JTHREAD 0
-#elif defined(__GLIBCXX__) && defined(__cpp_lib_jthread)
-    // libstdc++ with jthread support
-    #define LOGGER_HAS_JTHREAD 1
-#elif defined(_MSC_VER) && _MSC_VER >= 1928
-    // MSVC 16.8+ has jthread support
-    #define LOGGER_HAS_JTHREAD 1
-#else
-    // Unknown or unsupported - fall back to manual implementation
-    #define LOGGER_HAS_JTHREAD 0
-#endif
-
-#if LOGGER_HAS_JTHREAD
+#if KCENON_HAS_JTHREAD
     #include <stop_token>
 #endif
+
+// Legacy alias for backward compatibility
+#ifndef LOGGER_HAS_JTHREAD
+    #define LOGGER_HAS_JTHREAD KCENON_HAS_JTHREAD
+#endif
+
+namespace kcenon::logger::async {
 
 /**
  * @brief Simple stop source for environments without std::stop_token
@@ -104,8 +80,8 @@ private:
 /**
  * @brief Wrapper for std::jthread or std::thread with manual stop mechanism
  *
- * When LOGGER_HAS_JTHREAD is true, this is a thin wrapper around std::jthread.
- * When LOGGER_HAS_JTHREAD is false, this provides equivalent functionality
+ * When KCENON_HAS_JTHREAD is true, this is a thin wrapper around std::jthread.
+ * When KCENON_HAS_JTHREAD is false, this provides equivalent functionality
  * using std::thread with a simple_stop_source.
  */
 class compat_jthread {
@@ -124,7 +100,7 @@ public:
      * - For jthread: void(std::stop_token)
      * - For fallback: void(simple_stop_source&)
      */
-#if LOGGER_HAS_JTHREAD
+#if KCENON_HAS_JTHREAD
     template<typename F>
     explicit compat_jthread(F&& func)
         : thread_(std::forward<F>(func)) {}
@@ -153,7 +129,7 @@ public:
 
     // Movable
     compat_jthread(compat_jthread&& other) noexcept
-#if LOGGER_HAS_JTHREAD
+#if KCENON_HAS_JTHREAD
         : thread_(std::move(other.thread_)) {}
 #else
         : stop_source_(std::move(other.stop_source_))
@@ -166,7 +142,7 @@ public:
                 request_stop();
                 join();
             }
-#if LOGGER_HAS_JTHREAD
+#if KCENON_HAS_JTHREAD
             thread_ = std::move(other.thread_);
 #else
             stop_source_ = std::move(other.stop_source_);
@@ -180,7 +156,7 @@ public:
      * @brief Check if thread is joinable
      */
     [[nodiscard]] bool joinable() const noexcept {
-#if LOGGER_HAS_JTHREAD
+#if KCENON_HAS_JTHREAD
         return thread_.joinable();
 #else
         return thread_.joinable();
@@ -191,7 +167,7 @@ public:
      * @brief Request the thread to stop
      */
     void request_stop() {
-#if LOGGER_HAS_JTHREAD
+#if KCENON_HAS_JTHREAD
         thread_.request_stop();
 #else
         if (stop_source_) {
@@ -204,7 +180,7 @@ public:
      * @brief Wait for thread to complete
      */
     void join() {
-#if LOGGER_HAS_JTHREAD
+#if KCENON_HAS_JTHREAD
         if (thread_.joinable()) {
             thread_.join();
         }
@@ -215,7 +191,7 @@ public:
 #endif
     }
 
-#if !LOGGER_HAS_JTHREAD
+#if !KCENON_HAS_JTHREAD
     /**
      * @brief Get the stop source (fallback mode only)
      * @return Shared pointer to the stop source
@@ -230,7 +206,7 @@ public:
 #endif
 
 private:
-#if LOGGER_HAS_JTHREAD
+#if KCENON_HAS_JTHREAD
     std::jthread thread_;
 #else
     std::shared_ptr<simple_stop_source> stop_source_;
@@ -256,7 +232,7 @@ public:
      * @param pred Predicate to check
      * @return true if predicate is satisfied, false if stop was requested
      */
-#if LOGGER_HAS_JTHREAD
+#if KCENON_HAS_JTHREAD
     template<typename Lock, typename Predicate>
     static bool wait(std::condition_variable_any& cv,
                      Lock& lock,

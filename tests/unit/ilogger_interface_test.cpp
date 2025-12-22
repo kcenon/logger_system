@@ -100,10 +100,13 @@ TEST_F(ILoggerInterfaceTest, LogWithSourceLocation) {
 
 /**
  * @brief Test log method with explicit file/line/function (legacy API)
- * @note This tests the deprecated API that will be removed in v3.0.0
+ * @note This tests the backward compatibility method that was removed from
+ *       common::interfaces::ILogger in v3.0.0 (Issue #217) but is still
+ *       available directly on the logger class.
  */
 TEST_F(ILoggerInterfaceTest, LogWithExplicitLocation) {
-    ci::ILogger* ilogger = logger_.get();
+    // Note: This method is no longer part of ILogger interface (removed in v3.0.0)
+    // but is still available directly on logger class for backward compatibility
 
     // Suppress deprecation warning for this test - we're testing backward compatibility
 #if defined(__clang__) || defined(__GNUC__)
@@ -115,7 +118,8 @@ TEST_F(ILoggerInterfaceTest, LogWithExplicitLocation) {
 #pragma warning(disable: 4996)
 #endif
 
-    auto result = ilogger->log(ci::log_level::debug,
+    // Call directly on logger (not through ILogger* since it's no longer in interface)
+    auto result = logger_->log(ci::log_level::debug,
                                std::string("Debug message"),
                                std::string("test_file.cpp"),
                                42,
