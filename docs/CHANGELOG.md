@@ -11,6 +11,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Use KCENON Feature Detection (Issue #250) - 2025-12-22
+
+#### Changed
+- **error_handling_utils.h**: Use unified KCENON_HAS_SOURCE_LOCATION from common_system
+  - Include `<kcenon/common/config/feature_flags.h>` for feature detection
+  - Replace custom source_location detection with KCENON_HAS_SOURCE_LOCATION
+  - Keep LOGGER_HAS_SOURCE_LOCATION as legacy alias for backward compatibility
+
+- **jthread_compat.h**: Use unified KCENON_HAS_JTHREAD from common_system
+  - Include `<kcenon/common/config/feature_flags.h>` for feature detection
+  - Replace custom jthread detection with KCENON_HAS_JTHREAD
+  - Keep LOGGER_HAS_JTHREAD as legacy alias for backward compatibility
+
+#### Migration Guide
+The LOGGER_HAS_* macros are now aliases to KCENON_HAS_* from common_system.
+For new code, use KCENON_HAS_* directly:
+```cpp
+// Legacy (still works)
+#if LOGGER_HAS_JTHREAD
+    std::jthread worker(...);
+#endif
+
+// Recommended
+#include <kcenon/common/config/feature_flags.h>
+#if KCENON_HAS_JTHREAD
+    std::jthread worker(...);
+#endif
+```
+
+---
+
 ### Migrate from Deprecated common_system APIs (Issue #248) - 2025-12-22
 
 #### Changed
