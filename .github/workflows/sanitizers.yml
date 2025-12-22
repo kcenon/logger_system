@@ -80,6 +80,7 @@ jobs:
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_SAMPLES=OFF \
           -DBUILD_WITH_COMMON_SYSTEM=ON \
+          -DUNIFIED_USE_LOCAL=ON \
           -DUSE_THREAD_SYSTEM=ON || {
             echo "::error::CMake configuration failed"
             echo "CMake error log:"
