@@ -60,6 +60,90 @@ When enabled, CMake will:
 |------------|--------------|--------|
 | `LOGGER_HAS_THREAD_SYSTEM` | `LOGGER_USE_THREAD_SYSTEM=ON` and thread_system found | Enables full integration API |
 
+## Dependency Configuration
+
+### Bidirectional Dependency Risk (Issue #252)
+
+Both `logger_system` and `thread_system` can optionally depend on each other:
+
+```
+           ┌──────────────────────┐
+           │    thread_system     │
+           │                      │
+           │  BUILD_WITH_LOGGER_  │◄──── Uses for debug output
+           │  SYSTEM              │
+           └──────────┬───────────┘
+                      │
+    BUILD_WITH_       │  LOGGER_USE_
+    LOGGER_SYSTEM     │  THREAD_SYSTEM
+                      │
+           ┌──────────▼───────────┐
+           │    logger_system     │
+           │                      │
+           │  LOGGER_HAS_THREAD_  │◄──── Uses for async I/O
+           │  SYSTEM              │
+           └──────────────────────┘
+```
+
+**WARNING**: Enabling both directions simultaneously creates circular dependency risk.
+
+### Recommended Configuration Matrix
+
+| Use Case | thread→logger | logger→thread | CMake Flags | Notes |
+|----------|---------------|---------------|-------------|-------|
+| Logger standalone | OFF | OFF | (default) | Minimal build, internal std::jthread |
+| Logger with thread_pool | OFF | **ON** | `LOGGER_USE_THREAD_SYSTEM=ON` | **Recommended** for async I/O |
+| Thread with debug logging | ON | OFF | `BUILD_WITH_LOGGER_SYSTEM=ON` | For debugging thread_system |
+| Production | OFF | **ON** | `LOGGER_USE_THREAD_SYSTEM=ON` | Avoid reverse for production |
+
+### Safe Configuration Examples
+
+**Recommended: Logger uses thread_system (one-way)**
+```bash
+# logger_system → thread_system only
+cmake -B build \
+    -DLOGGER_USE_THREAD_SYSTEM=ON \
+    -DBUILD_WITH_LOGGER_SYSTEM=OFF
+```
+
+**Standalone mode (no cross-dependency)**
+```bash
+# No integration, minimal dependencies
+cmake -B build \
+    -DLOGGER_USE_THREAD_SYSTEM=OFF
+```
+
+**NOT recommended: Bidirectional dependency**
+```bash
+# WARNING: May cause build order issues
+cmake -B build \
+    -DLOGGER_USE_THREAD_SYSTEM=ON \
+    -DBUILD_WITH_LOGGER_SYSTEM=ON  # Avoid this combination!
+```
+
+### CMake Conflict Detection
+
+logger_system includes automatic detection for bidirectional dependency risk. When both directions are enabled, CMake will emit a warning:
+
+```
+=================================================================
+BIDIRECTIONAL DEPENDENCY RISK DETECTED (Issue #252)
+=================================================================
+  logger_system → thread_system (LOGGER_USE_THREAD_SYSTEM=ON)
+  thread_system → logger_system (BUILD_WITH_LOGGER_SYSTEM=ON)
+
+This configuration may cause:
+  - Build order issues in unified builds
+  - Circular header include problems
+  - Initialization order complications
+
+RECOMMENDATION:
+  Enable only ONE direction. Preferred configuration:
+    LOGGER_USE_THREAD_SYSTEM=ON (for async I/O performance)
+    BUILD_WITH_LOGGER_SYSTEM=OFF (disable reverse dependency)
+=================================================================
+```
+
 ## API Reference
 
 ### thread_system_integration
@@ -267,7 +351,8 @@ if (pool) {
 
 - [async_worker](../internals/ASYNC_WORKER.md) - Standalone async implementation
 - [thread_system](https://github.com/kcenon/thread_system) - Thread pool library
-- [Issue #224](https://github.com/kcenon/logger_system/issues/224) - Feature request
+- [Issue #224](https://github.com/kcenon/logger_system/issues/224) - Optional integration feature request
+- [Issue #252](https://github.com/kcenon/logger_system/issues/252) - Bidirectional dependency resolution
 
 ---
 

@@ -131,6 +131,18 @@ if(common_system_FOUND)
     endif()
 endif()
 
+# Link thread_system (optional, required when LOGGER_HAS_THREAD_SYSTEM is defined)
+# This provides the include paths needed for thread_system_integration.h
+if(THREAD_SYSTEM_FOUND)
+    if(TARGET ThreadSystem)
+        target_link_libraries(logger_integration_tests PRIVATE ThreadSystem)
+    elseif(TARGET thread_system)
+        target_link_libraries(logger_integration_tests PRIVATE thread_system)
+    elseif(TARGET thread_base AND TARGET interfaces AND TARGET utilities)
+        target_link_libraries(logger_integration_tests PRIVATE thread_base interfaces utilities)
+    endif()
+endif()
+
 # Ensure GTest targets are built before logger_integration_tests
 # This prevents "file truncated" errors during parallel builds
 add_dependencies(logger_integration_tests ${_LOGGER_GTEST_TARGET} ${_LOGGER_GTEST_MAIN_TARGET})

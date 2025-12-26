@@ -60,6 +60,90 @@ thread_system_integration::disable();
 |------|---------------|------|
 | `LOGGER_HAS_THREAD_SYSTEM` | `LOGGER_USE_THREAD_SYSTEM=ON`이고 thread_system 발견 시 | 전체 통합 API 활성화 |
 
+## 의존성 구성
+
+### 양방향 의존성 위험 (Issue #252)
+
+`logger_system`과 `thread_system`은 서로를 선택적으로 의존할 수 있습니다:
+
+```
+           ┌──────────────────────┐
+           │    thread_system     │
+           │                      │
+           │  BUILD_WITH_LOGGER_  │◄──── 디버그 출력에 사용
+           │  SYSTEM              │
+           └──────────┬───────────┘
+                      │
+    BUILD_WITH_       │  LOGGER_USE_
+    LOGGER_SYSTEM     │  THREAD_SYSTEM
+                      │
+           ┌──────────▼───────────┐
+           │    logger_system     │
+           │                      │
+           │  LOGGER_HAS_THREAD_  │◄──── 비동기 I/O에 사용
+           │  SYSTEM              │
+           └──────────────────────┘
+```
+
+**경고**: 두 방향을 동시에 활성화하면 순환 의존성 위험이 발생합니다.
+
+### 권장 구성 매트릭스
+
+| 사용 사례 | thread→logger | logger→thread | CMake 플래그 | 비고 |
+|----------|---------------|---------------|-------------|------|
+| Logger 독립형 | OFF | OFF | (기본값) | 최소 빌드, 내부 std::jthread |
+| Logger with thread_pool | OFF | **ON** | `LOGGER_USE_THREAD_SYSTEM=ON` | 비동기 I/O **권장** |
+| Thread with 디버그 로깅 | ON | OFF | `BUILD_WITH_LOGGER_SYSTEM=ON` | thread_system 디버깅용 |
+| 프로덕션 | OFF | **ON** | `LOGGER_USE_THREAD_SYSTEM=ON` | 프로덕션에서는 역방향 피함 |
+
+### 안전한 구성 예제
+
+**권장: Logger가 thread_system 사용 (단방향)**
+```bash
+# logger_system → thread_system만
+cmake -B build \
+    -DLOGGER_USE_THREAD_SYSTEM=ON \
+    -DBUILD_WITH_LOGGER_SYSTEM=OFF
+```
+
+**독립형 모드 (상호 의존성 없음)**
+```bash
+# 통합 없음, 최소 의존성
+cmake -B build \
+    -DLOGGER_USE_THREAD_SYSTEM=OFF
+```
+
+**권장하지 않음: 양방향 의존성**
+```bash
+# 경고: 빌드 순서 문제가 발생할 수 있음
+cmake -B build \
+    -DLOGGER_USE_THREAD_SYSTEM=ON \
+    -DBUILD_WITH_LOGGER_SYSTEM=ON  # 이 조합은 피하세요!
+```
+
+### CMake 충돌 감지
+
+logger_system은 양방향 의존성 위험에 대한 자동 감지를 포함합니다. 두 방향이 모두 활성화되면 CMake가 경고를 출력합니다:
+
+```
+=================================================================
+BIDIRECTIONAL DEPENDENCY RISK DETECTED (Issue #252)
+=================================================================
+  logger_system → thread_system (LOGGER_USE_THREAD_SYSTEM=ON)
+  thread_system → logger_system (BUILD_WITH_LOGGER_SYSTEM=ON)
+
+This configuration may cause:
+  - Build order issues in unified builds
+  - Circular header include problems
+  - Initialization order complications
+
+RECOMMENDATION:
+  Enable only ONE direction. Preferred configuration:
+    LOGGER_USE_THREAD_SYSTEM=ON (for async I/O performance)
+    BUILD_WITH_LOGGER_SYSTEM=OFF (disable reverse dependency)
+=================================================================
+```
+
 ## API 레퍼런스
 
 ### thread_system_integration
@@ -267,7 +351,8 @@ if (pool) {
 
 - [async_worker](../internals/ASYNC_WORKER.md) - Standalone 비동기 구현
 - [thread_system](https://github.com/kcenon/thread_system) - 스레드 풀 라이브러리
-- [Issue #224](https://github.com/kcenon/logger_system/issues/224) - 기능 요청
+- [Issue #224](https://github.com/kcenon/logger_system/issues/224) - 선택적 통합 기능 요청
+- [Issue #252](https://github.com/kcenon/logger_system/issues/252) - 양방향 의존성 해결
 
 ---
 

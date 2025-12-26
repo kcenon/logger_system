@@ -179,11 +179,73 @@ endif()
 # When enabled, provides optional integration with thread_system's thread_pool
 option(LOGGER_USE_THREAD_SYSTEM "Enable optional thread_system integration" OFF)
 
+##################################################
+# Bidirectional Dependency Check (Issue #252)
+##################################################
+# WARNING: Circular dependency risk exists between logger_system and thread_system
+#
+# Possible configurations:
+# - logger_system → thread_system (LOGGER_USE_THREAD_SYSTEM=ON): Uses thread_pool for async I/O
+# - thread_system → logger_system (BUILD_WITH_LOGGER_SYSTEM=ON): Uses logger for debug output
+#
+# RECOMMENDATION: Enable only ONE direction in production:
+# - Preferred: logger_system → thread_system (for async performance)
+# - Avoid: Bidirectional dependency (may cause build order issues)
+#
+# See: docs/integration/THREAD_SYSTEM.md for recommended configurations
+
+function(check_bidirectional_dependency_risk)
+    # Check if we're enabling logger → thread direction
+    if(LOGGER_USE_THREAD_SYSTEM)
+        # Check if thread_system has reverse dependency (thread → logger)
+        if(DEFINED BUILD_WITH_LOGGER_SYSTEM AND BUILD_WITH_LOGGER_SYSTEM)
+            message(WARNING
+                "=================================================================\n"
+                "BIDIRECTIONAL DEPENDENCY RISK DETECTED (Issue #252)\n"
+                "=================================================================\n"
+                "  logger_system → thread_system (LOGGER_USE_THREAD_SYSTEM=ON)\n"
+                "  thread_system → logger_system (BUILD_WITH_LOGGER_SYSTEM=ON)\n"
+                "\n"
+                "This configuration may cause:\n"
+                "  - Build order issues in unified builds\n"
+                "  - Circular header include problems\n"
+                "  - Initialization order complications\n"
+                "\n"
+                "RECOMMENDATION:\n"
+                "  Enable only ONE direction. Preferred configuration:\n"
+                "    LOGGER_USE_THREAD_SYSTEM=ON (for async I/O performance)\n"
+                "    BUILD_WITH_LOGGER_SYSTEM=OFF (disable reverse dependency)\n"
+                "\n"
+                "See: docs/integration/THREAD_SYSTEM.md#dependency-configuration\n"
+                "=================================================================")
+        endif()
+
+        # Additional check: Inspect thread_system target for reverse dependency
+        if(TARGET thread_system::thread_system)
+            get_target_property(THREAD_DEFS thread_system::thread_system
+                               INTERFACE_COMPILE_DEFINITIONS)
+            if(THREAD_DEFS)
+                string(FIND "${THREAD_DEFS}" "BUILD_WITH_LOGGER_SYSTEM" _bidep_pos)
+                if(NOT _bidep_pos EQUAL -1)
+                    message(WARNING
+                        "Bidirectional dependency detected: thread_system target has "
+                        "BUILD_WITH_LOGGER_SYSTEM in compile definitions. "
+                        "Consider disabling one direction.")
+                endif()
+            endif()
+        endif()
+    endif()
+endfunction()
+
+# Perform dependency check
+check_bidirectional_dependency_risk()
+
 if(LOGGER_USE_THREAD_SYSTEM)
     unified_find_dependency(thread_system QUIET)
     if(thread_system_FOUND)
         set(THREAD_SYSTEM_FOUND TRUE)
         message(STATUS "Logger System: thread_system integration enabled")
+        message(STATUS "  Direction: logger_system → thread_system (using thread_pool for async I/O)")
 
         # Define LOGGER_HAS_THREAD_SYSTEM for conditional compilation
         # This macro is used in:
