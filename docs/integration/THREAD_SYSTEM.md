@@ -1,12 +1,52 @@
-# thread_system Integration Guide
+# Async Integration Guide
 
 > **Language:** **English** | [한국어](THREAD_SYSTEM_KO.md)
 
 ## Overview
 
-This guide explains how to enable and use the optional `thread_system` integration for advanced async processing in logger_system.
+This guide explains how to enable and use async processing integration in logger_system.
 
-Since v3.1.0 (Issue #222), logger_system uses a standalone `std::jthread`-based async worker by default. For users who want to leverage `thread_system`'s advanced thread pool features, optional integration is available via the `thread_system_integration` module (Issue #224).
+Since v3.1.0 (Issue #222), logger_system uses a standalone `std::jthread`-based async worker by default. Multiple integration options are available:
+
+1. **Standalone** (default): Built-in async worker using `std::jthread`
+2. **IExecutor** (v1.5.0+, Issue #253): Interface-based integration using `common_system::IExecutor`
+3. **thread_system** (legacy): Direct integration with `thread_system::thread_pool`
+
+## Integration Approaches
+
+### Recommended: IExecutor Interface (v1.5.0+)
+
+The `executor_integration` module provides IExecutor-based async processing without compile-time dependency on thread_system. This is the recommended approach for new projects.
+
+```cpp
+#include <kcenon/logger/integration/executor_integration.h>
+
+using namespace kcenon::logger::integration;
+
+// Option 1: Enable with default standalone executor
+executor_integration::enable();
+
+// Option 2: Enable with custom IExecutor (e.g., from thread_system)
+auto executor = create_thread_pool_executor();  // Your executor
+executor_integration::set_executor(executor);
+
+// Submit tasks
+executor_integration::submit_task([]() {
+    // async work
+});
+
+// Check status
+if (executor_integration::is_enabled()) {
+    std::cout << "Using " << executor_integration::get_executor_name() << "\n";
+}
+
+// Disable when done
+executor_integration::disable();
+```
+
+### Legacy: Direct thread_system Integration
+
+For projects already using thread_system directly, the `thread_system_integration` module is still available.
 
 ## Quick Start
 
@@ -347,12 +387,135 @@ if (pool) {
 }
 ```
 
+## IExecutor Integration API (v1.5.0+)
+
+### executor_integration
+
+Static class providing IExecutor-based integration management.
+
+```cpp
+namespace kcenon::logger::integration {
+
+class executor_integration {
+public:
+    // Enable async processing (creates default standalone executor if nullptr)
+    static void enable(std::shared_ptr<common::interfaces::IExecutor> executor = nullptr);
+
+    // Disable async processing
+    static void disable();
+
+    // Check if async processing is enabled
+    [[nodiscard]] static bool is_enabled() noexcept;
+
+    // Get current executor type
+    [[nodiscard]] static executor_type get_executor_type() noexcept;
+
+    // Set/get executor
+    static void set_executor(std::shared_ptr<common::interfaces::IExecutor> executor);
+    [[nodiscard]] static std::shared_ptr<common::interfaces::IExecutor> get_executor() noexcept;
+
+    // Submit task
+    [[nodiscard]] static bool submit_task(std::function<void()> task);
+    [[nodiscard]] static bool submit_task_delayed(std::function<void()> task,
+                                                   std::chrono::milliseconds delay);
+
+    // Metrics
+    [[nodiscard]] static std::string get_executor_name() noexcept;
+    [[nodiscard]] static size_t pending_tasks() noexcept;
+    [[nodiscard]] static size_t worker_count() noexcept;
+};
+
+} // namespace kcenon::logger::integration
+```
+
+### executor_type
+
+```cpp
+enum class executor_type {
+    none,       // No executor configured
+    standalone, // Built-in standalone executor
+    external    // User-provided IExecutor
+};
+```
+
+### standalone_executor
+
+Built-in IExecutor implementation using a single worker thread.
+
+```cpp
+namespace kcenon::logger::integration {
+
+class standalone_executor : public common::interfaces::IExecutor {
+public:
+    explicit standalone_executor(std::size_t queue_size = 8192,
+                                  std::string name = "standalone_executor");
+
+    void start();
+
+    // IExecutor interface
+    Result<std::future<void>> execute(std::unique_ptr<IJob>&& job) override;
+    Result<std::future<void>> execute_delayed(std::unique_ptr<IJob>&& job,
+                                               std::chrono::milliseconds delay) override;
+    size_t worker_count() const override;
+    bool is_running() const override;
+    size_t pending_tasks() const override;
+    void shutdown(bool wait_for_completion = true) override;
+};
+
+// Factory for creating standalone executors
+class standalone_executor_factory {
+public:
+    static std::shared_ptr<IExecutor> create(
+        std::size_t queue_size = 8192,
+        const std::string& name = "standalone_executor");
+};
+
+} // namespace kcenon::logger::integration
+```
+
+### Compile-time Detection
+
+```cpp
+// Check if IExecutor support is available
+constexpr bool has_executor_support() noexcept;
+
+// Check if IExecutor interface is detected
+constexpr bool has_iexecutor_interface() noexcept;
+
+// Usage
+if constexpr (has_executor_support()) {
+    executor_integration::enable();
+}
+```
+
+## Migration from thread_system_integration
+
+If you're currently using `thread_system_integration`, you can migrate to `executor_integration`:
+
+```cpp
+// Before (legacy)
+#include <kcenon/logger/integration/thread_system_integration.h>
+thread_system_integration::enable(pool);
+thread_system_integration::submit_task(task);
+
+// After (recommended)
+#include <kcenon/logger/integration/executor_integration.h>
+#include <kcenon/thread/adapters/common_executor_adapter.h>
+
+// Wrap thread_pool in IExecutor adapter
+auto executor = kcenon::thread::adapters::common_executor_factory::create_from_thread_pool(pool);
+executor_integration::set_executor(executor);
+executor_integration::submit_task(task);
+```
+
 ## Related Documentation
 
 - [async_worker](../internals/ASYNC_WORKER.md) - Standalone async implementation
 - [thread_system](https://github.com/kcenon/thread_system) - Thread pool library
+- [common_system IExecutor](https://github.com/kcenon/common_system) - Executor interface
 - [Issue #224](https://github.com/kcenon/logger_system/issues/224) - Optional integration feature request
 - [Issue #252](https://github.com/kcenon/logger_system/issues/252) - Bidirectional dependency resolution
+- [Issue #253](https://github.com/kcenon/logger_system/issues/253) - IExecutor migration
 
 ---
 
