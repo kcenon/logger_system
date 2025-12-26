@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['🤝_20도움_20및_20지원_0',['🤝 도움 및 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1895',1,'']]],
-  ['🤝_20help_20support_1',['🤝 Help &amp; Support',['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1880',1,'']]]
+  ['🚨_20recent_20issues_0',['🚨 Recent Issues',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md147',1,'']]]
 ];

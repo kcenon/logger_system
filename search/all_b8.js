@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['플래그_0',['기능 플래그',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1382',1,'']]],
-  ['플래그_20변경_20요약_1',['CMake 플래그 변경 요약',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1262',1,'']]],
-  ['플랫폼_2',['공식 지원 플랫폼',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1708',1,'']]],
-  ['플랫폼_20지원_3',['플랫폼 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1707',1,'']]]
+  ['풋프린트_0',['구성별 메모리 풋프린트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md768',1,'']]]
 ];

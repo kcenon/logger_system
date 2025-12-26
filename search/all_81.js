@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['원격_20작성자_0',['원격 작성자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md997',1,'']]],
-  ['원칙_1',['설계 원칙',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md985',1,'']]]
+  ['워크플로우_0',['전체 워크플로우',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1541',1,'']]],
+  ['워크플로우_20수정_1',['1.1 GitHub Actions 워크플로우 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1547',1,'']]],
+  ['워크플로우_20전체_20예시_2',['🔄 CI/CD 워크플로우 전체 예시',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1568',1,'']]]
 ];

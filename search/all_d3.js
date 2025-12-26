@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['🔄_20마이그레이션_20가이드_0',['🔄 마이그레이션 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md529',1,'']]],
-  ['🔄_20ci_20cd_20워크플로우_20전체_20예시_1',['🔄 CI/CD 워크플로우 전체 예시',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1558',1,'']]],
-  ['🔄_20ci_20cd_20pipeline_20health_2',['🔄 CI/CD Pipeline Health',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md152',1,'']]],
-  ['🔄_20dependency_20flow_20interface_20contracts_3',['🔄 Dependency Flow &amp; Interface Contracts',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md644',1,'']]],
-  ['🔄_20evolution_3a_20monolithic_20→_20modular_20→_20standalone_4',['🔄 Evolution: Monolithic → Modular → Standalone',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md658',1,'']]]
+  ['📚_20문서_20구조_0',['📚 문서 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1893',1,'']]],
+  ['📚_20참고_20자료_1',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1589',1,'']]],
+  ['📚_20documentation_20structure_2',['📚 documentation structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md668',1,'📚 Documentation Structure'],['..//home/runner/work/logger_system/logger_system/docs/README.md#autotoc_md1878',1,'📚 Documentation Structure']]],
+  ['📚_20learn_20more_3',['📚 Learn More',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md294',1,'']]]
 ];

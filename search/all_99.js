@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['찾을_20수_20없음_0',['문제 1: 네임스페이스를 찾을 수 없음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1276',1,'']]]
+  ['참고사항_0',['참고사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1027',1,'']]],
+  ['참고_20문서_1',['참고 문서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md1874',1,'']]],
+  ['참고_20자료_2',['📚 참고 자료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1589',1,'']]]
 ];
