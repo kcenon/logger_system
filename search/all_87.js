@@ -5,6 +5,6 @@ var searchData=
   ['인터페이스_20마이그레이션_2',['2. 인터페이스 마이그레이션',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1268',1,'']]],
   ['인터페이스_20변경_3',['인터페이스 변경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html#autotoc_md612',1,'']]],
   ['인터페이스_20타입_20불일치_4',['문제 2: 인터페이스 타입 불일치',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1277',1,'']]],
-  ['인프라_5',['빌드 &amp; 테스팅 인프라',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1682',1,'']]],
-  ['인프라_20구축_20예상_20소요_3a_202시간_6',['Phase 1: 인프라 구축 (예상 소요: 2시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1576',1,'']]]
+  ['인프라_5',['빌드 &amp; 테스팅 인프라',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1691',1,'']]],
+  ['인프라_20구축_20예상_20소요_3a_202시간_6',['Phase 1: 인프라 구축 (예상 소요: 2시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1585',1,'']]]
 ];

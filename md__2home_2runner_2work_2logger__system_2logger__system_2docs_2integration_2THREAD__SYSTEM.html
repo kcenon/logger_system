@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Logger System: thread_system Integration Guide</title>
+<title>Logger System: Async Integration Guide</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">thread_system Integration Guide</div></div>
+  <div class="headertitle"><div class="title">Async Integration Guide</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md1430"></a> </p><blockquote class="doxtable">
@@ -98,15 +98,51 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </blockquote>
 <h1><a class="anchor" id="autotoc_md1431"></a>
 Overview</h1>
-<p>This guide explains how to enable and use the optional <code>thread_system</code> integration for advanced async processing in logger_system.</p>
-<p>Since v3.1.0 (Issue #222), logger_system uses a standalone <code>std::jthread</code>-based async worker by default. For users who want to leverage <code>thread_system</code>'s advanced thread pool features, optional integration is available via the <code>thread_system_integration</code> module (Issue #224).</p>
+<p>This guide explains how to enable and use async processing integration in logger_system.</p>
+<p>Since v3.1.0 (Issue #222), logger_system uses a standalone <code>std::jthread</code>-based async worker by default. Multiple integration options are available:</p>
+<ol type="1">
+<li><b>Standalone</b> (default): Built-in async worker using <code>std::jthread</code></li>
+<li><b>IExecutor</b> (v1.5.0+, Issue #253): Interface-based integration using <code>common_system::IExecutor</code></li>
+<li><b>thread_system</b> (legacy): Direct integration with <code>thread_system::thread_pool</code></li>
+</ol>
 <h1><a class="anchor" id="autotoc_md1432"></a>
-Quick Start</h1>
+Integration Approaches</h1>
 <h2><a class="anchor" id="autotoc_md1433"></a>
+Recommended: IExecutor Interface (v1.5.0+)</h2>
+<p>The <code>executor_integration</code> module provides IExecutor-based async processing without compile-time dependency on thread_system. This is the recommended approach for new projects.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/executor_integration.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>kcenon::logger::integration;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Option 1: Enable with default standalone executor</span></div>
+<div class="line">executor_integration::enable();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Option 2: Enable with custom IExecutor (e.g., from thread_system)</span></div>
+<div class="line"><span class="keyword">auto</span> executor = create_thread_pool_executor();  <span class="comment">// Your executor</span></div>
+<div class="line">executor_integration::set_executor(executor);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Submit tasks</span></div>
+<div class="line">executor_integration::submit_task([]() {</div>
+<div class="line">    <span class="comment">// async work</span></div>
+<div class="line">});</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Check status</span></div>
+<div class="line"><span class="keywordflow">if</span> (executor_integration::is_enabled()) {</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Using &quot;</span> &lt;&lt; executor_integration::get_executor_name() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Disable when done</span></div>
+<div class="line">executor_integration::disable();</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1434"></a>
+Legacy: Direct thread_system Integration</h2>
+<p>For projects already using thread_system directly, the <code>thread_system_integration</code> module is still available.</p>
+<h1><a class="anchor" id="autotoc_md1435"></a>
+Quick Start</h1>
+<h2><a class="anchor" id="autotoc_md1436"></a>
 Enable at Build Time</h2>
 <div class="fragment"><div class="line">cmake -S . -B build -DLOGGER_USE_THREAD_SYSTEM=ON</div>
 <div class="line">cmake --build build</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1434"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1437"></a>
 Enable at Runtime</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/thread_system_integration.h&gt;</span></div>
 <div class="line"> </div>
@@ -127,9 +163,9 @@ Enable at Runtime</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Disable when done</span></div>
 <div class="line">thread_system_integration::disable();</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1435"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1438"></a>
 Configuration</h1>
-<h2><a class="anchor" id="autotoc_md1436"></a>
+<h2><a class="anchor" id="autotoc_md1439"></a>
 CMake Options</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -142,7 +178,7 @@ CMake Options</h2>
 <li>Define <code>LOGGER_HAS_THREAD_SYSTEM</code> compile definition</li>
 <li>Link LoggerSystem with thread_system</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1437"></a>
+<h2><a class="anchor" id="autotoc_md1440"></a>
 Compile Definitions</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -150,9 +186,9 @@ Compile Definitions</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>LOGGER_HAS_THREAD_SYSTEM</code>   </td><td class="markdownTableBodyNone"><code>LOGGER_USE_THREAD_SYSTEM=ON</code> and thread_system found   </td><td class="markdownTableBodyNone">Enables full integration API   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md1438"></a>
+<h1><a class="anchor" id="autotoc_md1441"></a>
 Dependency Configuration</h1>
-<h2><a class="anchor" id="autotoc_md1439"></a>
+<h2><a class="anchor" id="autotoc_md1442"></a>
 Bidirectional Dependency Risk (Issue #252)</h2>
 <p>Both <code>logger_system</code> and <code>thread_system</code> can optionally depend on each other:</p>
 <div class="fragment"><div class="line">       ┌──────────────────────┐</div>
@@ -172,7 +208,7 @@ Bidirectional Dependency Risk (Issue #252)</h2>
 <div class="line">       │  SYSTEM              │</div>
 <div class="line">       └──────────────────────┘</div>
 </div><!-- fragment --><p><b>WARNING</b>: Enabling both directions simultaneously creates circular dependency risk.</p>
-<h2><a class="anchor" id="autotoc_md1440"></a>
+<h2><a class="anchor" id="autotoc_md1443"></a>
 Recommended Configuration Matrix</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -186,7 +222,7 @@ Recommended Configuration Matrix</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Production   </td><td class="markdownTableBodyNone">OFF   </td><td class="markdownTableBodyNone"><b>ON</b>   </td><td class="markdownTableBodyNone"><code>LOGGER_USE_THREAD_SYSTEM=ON</code>   </td><td class="markdownTableBodyNone">Avoid reverse for production   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md1441"></a>
+<h2><a class="anchor" id="autotoc_md1444"></a>
 Safe Configuration Examples</h2>
 <p><b>Recommended: Logger uses thread_system (one-way)</b> </p><div class="fragment"><div class="line"># logger_system → thread_system only</div>
 <div class="line">cmake -B build \</div>
@@ -199,7 +235,7 @@ Safe Configuration Examples</h2>
 <div class="line">cmake -B build \</div>
 <div class="line">    -DLOGGER_USE_THREAD_SYSTEM=ON \</div>
 <div class="line">    -DBUILD_WITH_LOGGER_SYSTEM=ON  # Avoid this combination!</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1442"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1445"></a>
 CMake Conflict Detection</h2>
 <p>logger_system includes automatic detection for bidirectional dependency risk. When both directions are enabled, CMake will emit a warning:</p>
 <div class="fragment"><div class="line">=================================================================</div>
@@ -218,12 +254,12 @@ CMake Conflict Detection</h2>
 <div class="line">    LOGGER_USE_THREAD_SYSTEM=ON (for async I/O performance)</div>
 <div class="line">    BUILD_WITH_LOGGER_SYSTEM=OFF (disable reverse dependency)</div>
 <div class="line">=================================================================</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1443"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1446"></a>
 API Reference</h1>
-<h2><a class="anchor" id="autotoc_md1444"></a>
+<h2><a class="anchor" id="autotoc_md1447"></a>
 thread_system_integration</h2>
 <p>Static class providing thread_system integration management.</p>
-<h3><a class="anchor" id="autotoc_md1445"></a>
+<h3><a class="anchor" id="autotoc_md1448"></a>
 Methods</h3>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger::integration {</div>
 <div class="line"> </div>
@@ -253,13 +289,13 @@ Methods</h3>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">} <span class="comment">// namespace kcenon::logger::integration</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1446"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1449"></a>
 async_backend_type</h2>
 <div class="fragment"><div class="line"><span class="keyword">enum class</span> async_backend_type {</div>
 <div class="line">    standalone,   <span class="comment">// Default std::jthread-based worker</span></div>
 <div class="line">    thread_pool   <span class="comment">// thread_system&#39;s thread_pool</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1447"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1450"></a>
 Compile-time Detection</h2>
 <div class="fragment"><div class="line"><span class="comment">// Check if thread_system support is available</span></div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> has_thread_system_support() noexcept;</div>
@@ -270,9 +306,9 @@ Compile-time Detection</h2>
 <div class="line">} <span class="keywordflow">else</span> {</div>
 <div class="line">    <span class="comment">// Use standalone features only</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1448"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1451"></a>
 Usage Patterns</h1>
-<h2><a class="anchor" id="autotoc_md1449"></a>
+<h2><a class="anchor" id="autotoc_md1452"></a>
 Pattern 1: Application-wide Shared Pool</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/thread_system_integration.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
@@ -296,7 +332,7 @@ Pattern 1: Application-wide Shared Pool</h2>
 <div class="line">    thread_system_integration::disable();</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1450"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1453"></a>
 Pattern 2: Custom Pool Configuration</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/thread_system_integration.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/thread/core/thread_pool.h&gt;</span></div>
@@ -324,7 +360,7 @@ Pattern 2: Custom Pool Configuration</h2>
 <div class="line">    pool-&gt;stop();</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1451"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1454"></a>
 Pattern 3: Conditional Integration</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/thread_system_integration.h&gt;</span></div>
 <div class="line"> </div>
@@ -340,7 +376,7 @@ Pattern 3: Conditional Integration</h2>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Using standalone backend (thread_system not available)\n&quot;</span>;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1452"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1455"></a>
 Thread Safety</h1>
 <p>All <code>thread_system_integration</code> methods are thread-safe:</p>
 <ul>
@@ -348,9 +384,9 @@ Thread Safety</h1>
 <li>Pool access is protected by mutex</li>
 <li>Multiple threads can safely call <code>enable()</code>/<code>disable()</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1453"></a>
+<h1><a class="anchor" id="autotoc_md1456"></a>
 Performance Considerations</h1>
-<h2><a class="anchor" id="autotoc_md1454"></a>
+<h2><a class="anchor" id="autotoc_md1457"></a>
 When to Use thread_system Integration</h2>
 <p><b>Use thread_pool backend when:</b></p><ul>
 <li>Multiple loggers share the same thread pool</li>
@@ -364,7 +400,7 @@ When to Use thread_system Integration</h2>
 <li>Logging overhead should be minimal</li>
 <li>thread_system is not available</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1455"></a>
+<h2><a class="anchor" id="autotoc_md1458"></a>
 Overhead Comparison</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -374,14 +410,14 @@ Overhead Comparison</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">thread_pool   </td><td class="markdownTableBodyNone">~100ns   </td><td class="markdownTableBodyNone">Higher   </td><td class="markdownTableBodyNone">thread_system   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md1456"></a>
+<h1><a class="anchor" id="autotoc_md1459"></a>
 Troubleshooting</h1>
-<h2><a class="anchor" id="autotoc_md1457"></a>
+<h2><a class="anchor" id="autotoc_md1460"></a>
 thread_system not found</h2>
 <div class="fragment"><div class="line">-- Logger System: thread_system not found, using standalone mode</div>
 </div><!-- fragment --><p><b>Solution</b>: Ensure thread_system is installed or available via FetchContent: </p><div class="fragment"><div class="line">set(UNIFIED_USE_LOCAL ON)  # Use local sibling directories</div>
 <div class="line">cmake -DLOGGER_USE_THREAD_SYSTEM=ON ..</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1458"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1461"></a>
 Runtime detection not working</h2>
 <p>If <code>is_enabled()</code> returns false after <code>enable()</code>:</p>
 <ol type="1">
@@ -395,13 +431,118 @@ Runtime detection not working</h2>
 <div class="line">} <span class="keywordflow">else</span> {</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;No pool configured\n&quot;</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1459"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1462"></a>
+IExecutor Integration API (v1.5.0+)</h1>
+<h2><a class="anchor" id="autotoc_md1463"></a>
+executor_integration</h2>
+<p>Static class providing IExecutor-based integration management.</p>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger::integration {</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>executor_integration {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="comment">// Enable async processing (creates default standalone executor if nullptr)</span></div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> enable(std::shared_ptr&lt;common::interfaces::IExecutor&gt; executor = <span class="keyword">nullptr</span>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Disable async processing</span></div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> disable();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Check if async processing is enabled</span></div>
+<div class="line">    [[nodiscard]] <span class="keyword">static</span> <span class="keywordtype">bool</span> is_enabled() noexcept;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Get current executor type</span></div>
+<div class="line">    [[nodiscard]] static executor_type get_executor_type() noexcept;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set/get executor</span></div>
+<div class="line">    static <span class="keywordtype">void</span> set_executor(std::shared_ptr&lt;common::interfaces::IExecutor&gt; executor);</div>
+<div class="line">    [[nodiscard]] static std::shared_ptr&lt;common::interfaces::IExecutor&gt; get_executor() noexcept;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Submit task</span></div>
+<div class="line">    [[nodiscard]] static <span class="keywordtype">bool</span> submit_task(std::function&lt;<span class="keywordtype">void</span>()&gt; task);</div>
+<div class="line">    [[nodiscard]] static <span class="keywordtype">bool</span> submit_task_delayed(std::function&lt;<span class="keywordtype">void</span>()&gt; task,</div>
+<div class="line">                                                   std::chrono::milliseconds delay);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Metrics</span></div>
+<div class="line">    [[nodiscard]] static std::<span class="keywordtype">string</span> get_executor_name() noexcept;</div>
+<div class="line">    [[nodiscard]] static <span class="keywordtype">size_t</span> pending_tasks() noexcept;</div>
+<div class="line">    [[nodiscard]] static <span class="keywordtype">size_t</span> worker_count() noexcept;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// namespace kcenon::logger::integration</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1464"></a>
+executor_type</h2>
+<div class="fragment"><div class="line"><span class="keyword">enum class</span> executor_type {</div>
+<div class="line">    none,       <span class="comment">// No executor configured</span></div>
+<div class="line">    standalone, <span class="comment">// Built-in standalone executor</span></div>
+<div class="line">    external    <span class="comment">// User-provided IExecutor</span></div>
+<div class="line">};</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1465"></a>
+standalone_executor</h2>
+<p>Built-in IExecutor implementation using a single worker thread.</p>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger::integration {</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>standalone_executor : <span class="keyword">public</span> common::interfaces::IExecutor {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keyword">explicit</span> standalone_executor(std::size_t queue_size = 8192,</div>
+<div class="line">                                  std::string name = <span class="stringliteral">&quot;standalone_executor&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">void</span> start();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// IExecutor interface</span></div>
+<div class="line">    Result&lt;std::future&lt;void&gt;&gt; execute(std::unique_ptr&lt;IJob&gt;&amp;&amp; job) <span class="keyword">override</span>;</div>
+<div class="line">    Result&lt;std::future&lt;void&gt;&gt; execute_delayed(std::unique_ptr&lt;IJob&gt;&amp;&amp; job,</div>
+<div class="line">                                               std::chrono::milliseconds delay) <span class="keyword">override</span>;</div>
+<div class="line">    <span class="keywordtype">size_t</span> worker_count() <span class="keyword">const override</span>;</div>
+<div class="line">    <span class="keywordtype">bool</span> is_running() <span class="keyword">const override</span>;</div>
+<div class="line">    <span class="keywordtype">size_t</span> pending_tasks() <span class="keyword">const override</span>;</div>
+<div class="line">    <span class="keywordtype">void</span> shutdown(<span class="keywordtype">bool</span> wait_for_completion = <span class="keyword">true</span>) <span class="keyword">override</span>;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Factory for creating standalone executors</span></div>
+<div class="line"><span class="keyword">class </span>standalone_executor_factory {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keyword">static</span> std::shared_ptr&lt;IExecutor&gt; create(</div>
+<div class="line">        std::size_t queue_size = 8192,</div>
+<div class="line">        <span class="keyword">const</span> std::string&amp; name = <span class="stringliteral">&quot;standalone_executor&quot;</span>);</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// namespace kcenon::logger::integration</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1466"></a>
+Compile-time Detection</h2>
+<div class="fragment"><div class="line"><span class="comment">// Check if IExecutor support is available</span></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> has_executor_support() noexcept;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Check if IExecutor interface is detected</span></div>
+<div class="line">constexpr <span class="keywordtype">bool</span> has_iexecutor_interface() noexcept;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Usage</span></div>
+<div class="line">if constexpr (has_executor_support()) {</div>
+<div class="line">    executor_integration::enable();</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1467"></a>
+Migration from thread_system_integration</h1>
+<p>If you're currently using <code>thread_system_integration</code>, you can migrate to <code>executor_integration</code>:</p>
+<div class="fragment"><div class="line"><span class="comment">// Before (legacy)</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/thread_system_integration.h&gt;</span></div>
+<div class="line">thread_system_integration::enable(pool);</div>
+<div class="line">thread_system_integration::submit_task(task);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// After (recommended)</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/executor_integration.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/thread/adapters/common_executor_adapter.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Wrap thread_pool in IExecutor adapter</span></div>
+<div class="line"><span class="keyword">auto</span> executor = kcenon::thread::adapters::common_executor_factory::create_from_thread_pool(pool);</div>
+<div class="line">executor_integration::set_executor(executor);</div>
+<div class="line">executor_integration::submit_task(task);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1468"></a>
 Related Documentation</h1>
 <ul>
 <li>async_worker - Standalone async implementation</li>
 <li><a href="https://github.com/kcenon/thread_system">thread_system</a> - Thread pool library</li>
+<li><a href="https://github.com/kcenon/common_system">common_system IExecutor</a> - Executor interface</li>
 <li><a href="https://github.com/kcenon/logger_system/issues/224">Issue #224</a> - Optional integration feature request</li>
 <li><a href="https://github.com/kcenon/logger_system/issues/252">Issue #252</a> - Bidirectional dependency resolution</li>
+<li><a href="https://github.com/kcenon/logger_system/issues/253">Issue #253</a> - IExecutor migration</li>
 </ul>
 <hr  />
 <p><em>Last updated: 2025-12</em> </p>
@@ -411,7 +552,7 @@ Related Documentation</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 26 2025 13:38:04 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Dec 26 2025 14:10:14 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
