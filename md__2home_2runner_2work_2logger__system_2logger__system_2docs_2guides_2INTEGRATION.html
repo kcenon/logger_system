@@ -220,13 +220,13 @@ Result&lt;T&gt; Pattern Usage</h2>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> logger = std::move(result.value());</div>
-</div><!-- fragment --><p><b>Core Operations with Result&lt;T&gt;</b>: </p><div class="fragment"><div class="line"><span class="comment">// Configuration operations return result_void</span></div>
+</div><!-- fragment --><p><b>Core Operations with Result&lt;T&gt;</b>: </p><div class="fragment"><div class="line"><span class="comment">// Configuration operations return common::VoidResult</span></div>
 <div class="line"><span class="keyword">auto</span> add_result = logger-&gt;add_writer(<span class="stringliteral">&quot;file&quot;</span>,</div>
 <div class="line">    std::make_unique&lt;kcenon::logger::file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>));</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordflow">if</span> (!add_result) {</div>
+<div class="line"><span class="keywordflow">if</span> (add_result.is_err()) {</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed to add writer: &quot;</span></div>
-<div class="line">              &lt;&lt; add_result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">              &lt;&lt; add_result.error().message &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Hot path logging uses void for zero overhead</span></div>
@@ -786,7 +786,7 @@ References</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 26 2025 14:10:14 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Dec 27 2025 06:18:07 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -207,7 +207,7 @@ Native API (Backward Compatible)</h3>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md547"></a>
 Writer Management</h3>
 <div class="fragment"><div class="line"><span class="comment">// Add writer (unnamed)</span></div>
-<div class="line">result_void add_writer(std::unique_ptr&lt;base_writer&gt; writer);</div>
+<div class="line">common::VoidResult add_writer(std::unique_ptr&lt;base_writer&gt; writer);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Add writer with name</span></div>
 <div class="line"><span class="keywordtype">void</span> add_writer(<span class="keyword">const</span> std::string&amp; name, std::unique_ptr&lt;base_writer&gt; writer);</div>
@@ -219,28 +219,28 @@ Writer Management</h3>
 <div class="line">base_writer* get_writer(<span class="keyword">const</span> std::string&amp; name);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Remove all writers</span></div>
-<div class="line">result_void clear_writers();</div>
+<div class="line">common::VoidResult clear_writers();</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md548"></a>
 Lifecycle Management</h3>
 <div class="fragment"><div class="line"><span class="comment">// Start async processing</span></div>
-<div class="line">result_void start();</div>
+<div class="line">common::VoidResult start();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Stop async processing</span></div>
-<div class="line">result_void stop();</div>
+<div class="line">common::VoidResult stop();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Check if running</span></div>
 <div class="line"><span class="keywordtype">bool</span> is_running() <span class="keyword">const</span>;</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md549"></a>
 Metrics</h3>
 <div class="fragment"><div class="line"><span class="comment">// Enable/disable metrics</span></div>
-<div class="line">result_void enable_metrics_collection(<span class="keywordtype">bool</span> enable = <span class="keyword">true</span>);</div>
+<div class="line">common::VoidResult enable_metrics_collection(<span class="keywordtype">bool</span> enable = <span class="keyword">true</span>);</div>
 <div class="line"><span class="keywordtype">bool</span> is_metrics_collection_enabled() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Get metrics</span></div>
 <div class="line">result&lt;metrics::logger_performance_stats&gt; get_current_metrics() <span class="keyword">const</span>;</div>
 <div class="line">result&lt;std::unique_ptr&lt;metrics::logger_performance_stats&gt;&gt; get_metrics_history(</div>
 <div class="line">    std::chrono::seconds duration) <span class="keyword">const</span>;</div>
-<div class="line">result_void reset_metrics();</div>
+<div class="line">common::VoidResult reset_metrics();</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md550"></a>
 Filtering</h3>
 <div class="fragment"><div class="line"><span class="comment">// Set global filter</span></div>
@@ -255,15 +255,15 @@ Dependency Injection</h3>
 <div class="line"><span class="keywordtype">bool</span> has_di_container() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Add writer from DI</span></div>
-<div class="line">result_void add_writer_from_di(<span class="keyword">const</span> std::string&amp; name);</div>
+<div class="line">common::VoidResult add_writer_from_di(<span class="keyword">const</span> std::string&amp; name);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Register writer factory</span></div>
-<div class="line">result_void register_writer_factory(</div>
+<div class="line">common::VoidResult register_writer_factory(</div>
 <div class="line">    <span class="keyword">const</span> std::string&amp; name,</div>
 <div class="line">    std::function&lt;std::shared_ptr&lt;base_writer&gt;()&gt; factory);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Enable internal DI</span></div>
-<div class="line">result_void enable_di(di::di_container_factory::container_type type =</div>
+<div class="line">common::VoidResult enable_di(di::di_container_factory::container_type type =</div>
 <div class="line">                      di::di_container_factory::container_type::automatic);</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md552"></a>
 Emergency Flush (Signal Safety)</h3>
@@ -315,7 +315,7 @@ Configuration</h2>
 <div class="line">    std::chrono::milliseconds network_timeout{5000};</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Validation</span></div>
-<div class="line">    result_void validate() <span class="keyword">const</span>;</div>
+<div class="line">    common::VoidResult validate() <span class="keyword">const</span>;</div>
 <div class="line">};</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md555"></a>
 Static Factory Methods</h3>
@@ -388,7 +388,7 @@ Environment and Error Handling</h4>
 <div class="line">    std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> logger_error_code&amp;)&gt; handler);</div>
 </div><!-- fragment --><h4><a class="anchor" id="autotoc_md564"></a>
 Build</h4>
-<div class="fragment"><div class="line">result_void validate() <span class="keyword">const</span>;</div>
+<div class="fragment"><div class="line">common::VoidResult validate() <span class="keyword">const</span>;</div>
 <div class="line">result&lt;std::unique_ptr&lt;logger&gt;&gt; build();</div>
 <div class="line"><span class="keyword">const</span> logger_config&amp; get_config() <span class="keyword">const</span>;</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md565"></a>
@@ -438,8 +438,8 @@ Interfaces</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>log_writer_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    <span class="keyword">virtual</span> ~log_writer_interface() = <span class="keywordflow">default</span>;</div>
-<div class="line">    <span class="keyword">virtual</span> result_void write(<span class="keyword">const</span> log_entry&amp; entry) = 0;</div>
-<div class="line">    <span class="keyword">virtual</span> result_void flush() = 0;</div>
+<div class="line">    <span class="keyword">virtual</span> common::VoidResult write(<span class="keyword">const</span> log_entry&amp; entry) = 0;</div>
+<div class="line">    <span class="keyword">virtual</span> common::VoidResult flush() = 0;</div>
 <div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> is_healthy()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
 <div class="line">};</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md572"></a>
@@ -520,9 +520,9 @@ Result Types</h3>
 <div class="line">);</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md578"></a>
 Helper Functions</h3>
-<div class="fragment"><div class="line"><span class="comment">// Create error result</span></div>
-<div class="line">result_void make_error(logger_error_code code,</div>
-<div class="line">                       <span class="keyword">const</span> std::string&amp; message = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="fragment"><div class="line"><span class="comment">// Create void error result (for common::VoidResult)</span></div>
+<div class="line">common::VoidResult make_logger_void_result(logger_error_code code,</div>
+<div class="line">                                           <span class="keyword">const</span> std::string&amp; message = <span class="stringliteral">&quot;&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Create typed error result</span></div>
 <div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
@@ -545,8 +545,8 @@ Writers</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>file_writer : <span class="keyword">public</span> base_writer {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    file_writer(<span class="keyword">const</span> std::string&amp; filename);</div>
-<div class="line">    result_void open();</div>
-<div class="line">    result_void close();</div>
+<div class="line">    common::VoidResult open();</div>
+<div class="line">    common::VoidResult close();</div>
 <div class="line">};</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md582"></a>
 &lt;tt&gt;kcenon::logger::rotating_file_writer&lt;/tt&gt;</h3>
@@ -730,13 +730,13 @@ Configuration Strategies</h3>
 Custom Writer</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>custom_writer : <span class="keyword">public</span> kcenon::logger::log_writer_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    result_void write(<span class="keyword">const</span> kcenon::logger::log_entry&amp; entry)<span class="keyword"> override </span>{</div>
+<div class="line">    common::VoidResult write(<span class="keyword">const</span> kcenon::logger::log_entry&amp; entry)<span class="keyword"> override </span>{</div>
 <div class="line">        <span class="comment">// Custom implementation</span></div>
-<div class="line">        <span class="keywordflow">return</span> common::VoidResult{};</div>
+<div class="line">        <span class="keywordflow">return</span> common::ok();</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    result_void flush()<span class="keyword"> override </span>{</div>
-<div class="line">        <span class="keywordflow">return</span> common::VoidResult{};</div>
+<div class="line">    common::VoidResult flush()<span class="keyword"> override </span>{</div>
+<div class="line">        <span class="keywordflow">return</span> common::ok();</div>
 <div class="line">    }</div>
 <div class="line">};</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md604"></a>
@@ -777,7 +777,7 @@ Migration from v2.x</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 26 2025 14:10:14 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Dec 27 2025 06:18:06 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

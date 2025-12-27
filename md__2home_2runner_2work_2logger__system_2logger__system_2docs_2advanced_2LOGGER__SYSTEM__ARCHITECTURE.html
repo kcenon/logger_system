@@ -293,7 +293,7 @@ Logger Configuration with Validation</h4>
 <div class="line">    <span class="keywordtype">bool</span> enable_source_location = <span class="keyword">true</span>;  <span class="comment">// C++20 feature</span></div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Comprehensive validation</span></div>
-<div class="line">    result_void validate() <span class="keyword">const</span>;</div>
+<div class="line">    common::VoidResult validate() <span class="keyword">const</span>;</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger</span></div>
@@ -339,7 +339,7 @@ Configuration Templates</h4>
 <div class="line">                               std::unique_ptr&lt;base_writer&gt; writer);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Build</span></div>
-<div class="line">    result_void validate() <span class="keyword">const</span>;</div>
+<div class="line">    common::VoidResult validate() <span class="keyword">const</span>;</div>
 <div class="line">    result&lt;std::unique_ptr&lt;logger&gt;&gt; build();</div>
 <div class="line">};</div>
 <div class="line"> </div>
@@ -384,8 +384,8 @@ Writer Interface</h4>
 <div class="line"><span class="keyword">class </span>log_writer_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    <span class="keyword">virtual</span> ~log_writer_interface() = <span class="keywordflow">default</span>;</div>
-<div class="line">    <span class="keyword">virtual</span> result_void write(<span class="keyword">const</span> log_entry&amp; entry) = 0;</div>
-<div class="line">    <span class="keyword">virtual</span> result_void flush() = 0;</div>
+<div class="line">    <span class="keyword">virtual</span> common::VoidResult write(<span class="keyword">const</span> log_entry&amp; entry) = 0;</div>
+<div class="line">    <span class="keyword">virtual</span> common::VoidResult flush() = 0;</div>
 <div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> is_healthy()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
 <div class="line">};</div>
 <div class="line"> </div>
@@ -637,14 +637,14 @@ Extension Points</h2>
 Custom Writers</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>database_writer : <span class="keyword">public</span> kcenon::logger::log_writer_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    result_void write(<span class="keyword">const</span> kcenon::logger::log_entry&amp; entry)<span class="keyword"> override </span>{</div>
+<div class="line">    common::VoidResult write(<span class="keyword">const</span> kcenon::logger::log_entry&amp; entry)<span class="keyword"> override </span>{</div>
 <div class="line">        <span class="comment">// Database insert logic</span></div>
-<div class="line">        <span class="keywordflow">return</span> common::VoidResult{};</div>
+<div class="line">        <span class="keywordflow">return</span> common::ok();</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    result_void flush()<span class="keyword"> override </span>{</div>
+<div class="line">    common::VoidResult flush()<span class="keyword"> override </span>{</div>
 <div class="line">        <span class="comment">// Commit transaction</span></div>
-<div class="line">        <span class="keywordflow">return</span> common::VoidResult{};</div>
+<div class="line">        <span class="keywordflow">return</span> common::ok();</div>
 <div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"> </div>
@@ -738,7 +738,7 @@ Platform Notes</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 26 2025 14:10:14 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Dec 27 2025 06:18:06 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

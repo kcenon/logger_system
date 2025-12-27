@@ -396,7 +396,7 @@ How It Works</h2>
 </ul>
 <h3><a class="anchor" id="autotoc_md219"></a>
 2. Critical Write Flow</h3>
-<div class="fragment"><div class="line">result_void critical_writer::write(...) {</div>
+<div class="fragment"><div class="line">common::VoidResult critical_writer::write(...) {</div>
 <div class="line">    <span class="keywordflow">if</span> (is_critical_level(level)) {</div>
 <div class="line">        <span class="comment">// 1. Acquire exclusive lock</span></div>
 <div class="line">        std::lock_guard&lt;std::mutex&gt; lock(critical_mutex_);</div>
@@ -902,7 +902,7 @@ License</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 26 2025 14:10:14 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Dec 27 2025 06:18:06 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

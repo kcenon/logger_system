@@ -204,17 +204,17 @@ logger.h / logger.cpp</h2>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Writer 관리</span></div>
 <div class="line">    <span class="keyword">auto</span> add_writer(<span class="keyword">const</span> std::string&amp; name,</div>
-<div class="line">                    std::unique_ptr&lt;log_writer_interface&gt; writer) -&gt; result_void;</div>
-<div class="line">    <span class="keyword">auto</span> remove_writer(<span class="keyword">const</span> std::string&amp; name) -&gt; result_void;</div>
+<div class="line">                    std::unique_ptr&lt;log_writer_interface&gt; writer) -&gt; common::VoidResult;</div>
+<div class="line">    <span class="keyword">auto</span> remove_writer(<span class="keyword">const</span> std::string&amp; name) -&gt; common::VoidResult;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// 설정</span></div>
-<div class="line">    <span class="keyword">auto</span> set_filter(std::unique_ptr&lt;log_filter_interface&gt; filter) -&gt; result_void;</div>
+<div class="line">    <span class="keyword">auto</span> set_filter(std::unique_ptr&lt;log_filter_interface&gt; filter) -&gt; common::VoidResult;</div>
 <div class="line">    <span class="keyword">auto</span> set_min_level(log_level level) -&gt; void;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// 제어</span></div>
-<div class="line">    <span class="keyword">auto</span> start() -&gt; result_void;</div>
-<div class="line">    <span class="keyword">auto</span> stop() -&gt; result_void;</div>
-<div class="line">    <span class="keyword">auto</span> flush() -&gt; result_void;</div>
+<div class="line">    <span class="keyword">auto</span> start() -&gt; common::VoidResult;</div>
+<div class="line">    <span class="keyword">auto</span> stop() -&gt; common::VoidResult;</div>
+<div class="line">    <span class="keyword">auto</span> flush() -&gt; common::VoidResult;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// 메트릭</span></div>
 <div class="line">    <span class="keyword">auto</span> enable_metrics_collection(<span class="keywordtype">bool</span> enabled) -&gt; void;</div>
@@ -257,7 +257,7 @@ logger_builder.h / logger_builder.cpp</h2>
 <div class="line">    <span class="keyword">auto</span> build() -&gt; result&lt;std::unique_ptr&lt;logger&gt;&gt;;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
-<div class="line">    <span class="keyword">auto</span> validate() const -&gt; result_void;</div>
+<div class="line">    <span class="keyword">auto</span> validate() const -&gt; common::VoidResult;</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
 <h2><a class="anchor" id="autotoc_md1821"></a>
@@ -637,7 +637,7 @@ CMakeLists.txt (루트)</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 26 2025 14:10:14 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Dec 27 2025 06:18:07 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -513,14 +513,14 @@ Error Handling Grade: &lt;strong&gt;A&lt;/strong&gt; (90% Complete)</h2>
 <h2><a class="anchor" id="autotoc_md1651"></a>
 Result&lt;T&gt; Pattern</h2>
 <p><b>Usage Areas</b>:</p><ol type="1">
-<li><b>Core operations</b> (lifecycle, configuration): <div class="fragment"><div class="line"><span class="keyword">auto</span> result = logger-&gt;start();  <span class="comment">// result_void</span></div>
-<div class="line"><span class="keywordflow">if</span> (!result) {</div>
-<div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed to start: &quot;</span> &lt;&lt; result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<li><b>Core operations</b> (lifecycle, configuration): <div class="fragment"><div class="line"><span class="keyword">auto</span> result = logger-&gt;start();  <span class="comment">// common::VoidResult</span></div>
+<div class="line"><span class="keywordflow">if</span> (result.is_err()) {</div>
+<div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed to start: &quot;</span> &lt;&lt; result.error().message &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 <li><b>Writer management</b>: <div class="fragment"><div class="line"><span class="keyword">auto</span> result = logger-&gt;add_writer(<span class="stringliteral">&quot;file&quot;</span>, std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>));</div>
-<div class="line"><span class="keywordflow">if</span> (!result) {</div>
-<div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed to add writer: &quot;</span> &lt;&lt; result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="keywordflow">if</span> (result.is_err()) {</div>
+<div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed to add writer: &quot;</span> &lt;&lt; result.error().message &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 <li><b>Configuration validation</b>: <div class="fragment"><div class="line"><span class="keyword">auto</span> result = logger_builder()</div>
@@ -821,7 +821,7 @@ See Also</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 26 2025 14:10:14 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Dec 27 2025 06:18:07 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

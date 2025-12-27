@@ -253,6 +253,7 @@ Summary of Changes</h4>
 </div><!-- fragment --><h4><a class="anchor" id="autotoc_md1212"></a>
 2. Interface Migration</h4>
 <p><b>Old (v2.x):</b> </p><div class="fragment"><div class="line"><span class="keyword">class </span>logger : <span class="keyword">public</span> thread_module::logger_interface {</div>
+<div class="line">    <span class="comment">// Deprecated: result_void is replaced by common::VoidResult</span></div>
 <div class="line">    result_void log(thread_module::log_level level,</div>
 <div class="line">                    <span class="keyword">const</span> std::string&amp; message) <span class="keyword">override</span>;</div>
 <div class="line">};</div>
@@ -295,19 +296,25 @@ Summary of Changes</h4>
 </div><!-- fragment --><h4><a class="anchor" id="autotoc_md1214"></a>
 4. Result Type Migration</h4>
 <p><b>Old (v2.x):</b> </p><div class="fragment"><div class="line">result_void result = logger-&gt;log(level, message);</div>
-<div class="line"><span class="keywordflow">if</span> (!result) {</div>
+<div class="line"><span class="keywordflow">if</span> (!result) {  <span class="comment">// boolean conversion</span></div>
 <div class="line">    std::cerr &lt;&lt; result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>New (v3.0):</b> </p><div class="fragment"><div class="line">common::VoidResult result = logger-&gt;log(level, message);</div>
-<div class="line"><span class="keywordflow">if</span> (!result) {</div>
-<div class="line">    std::cerr &lt;&lt; result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="keywordflow">if</span> (result.is_err()) {  <span class="comment">// Use is_err() instead of boolean conversion</span></div>
+<div class="line">    std::cerr &lt;&lt; result.error().message &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;  <span class="comment">// Note: .message not .message()</span></div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Or using auto (simpler)</span></div>
-<div class="line"><span class="keyword">auto</span> result = logger-&gt;log(level, message);</div>
-<div class="line"><span class="keywordflow">if</span> (!result) {</div>
-<div class="line">    std::cerr &lt;&lt; result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="comment">// Or check for success</span></div>
+<div class="line"><span class="keywordflow">if</span> (result.is_ok()) {</div>
+<div class="line">    <span class="comment">// Operation succeeded</span></div>
 <div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Creating results:</span></div>
+<div class="line"><span class="comment">// Old: return result_void();            or return {};</span></div>
+<div class="line"><span class="comment">// New: return common::ok();</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Old: return result_void(code, msg);   or return make_logger_error(code, msg);</span></div>
+<div class="line"><span class="comment">// New: return make_logger_void_result(code, msg);</span></div>
 </div><!-- fragment --><h4><a class="anchor" id="autotoc_md1215"></a>
 5. thread_system Dependency Changes</h4>
 <p><b>Old (v2.x):</b> </p><div class="fragment"><div class="line"><span class="comment">// thread_system was required</span></div>
@@ -854,7 +861,7 @@ Support and Resources</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Dec 26 2025 14:10:14 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Dec 27 2025 06:18:07 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
