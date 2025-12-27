@@ -51,32 +51,32 @@ public:
      * @param factory Function that creates instances of T
      * @return Result indicating success or error
      */
-    virtual result_void register_factory(
+    virtual common::VoidResult register_factory(
         const std::string& name,
         std::function<std::shared_ptr<T>()> factory) = 0;
-    
+
     /**
      * @brief Register a singleton instance
      * @param name The name to register the instance under
      * @param instance The singleton instance to register
      * @return Result indicating success or error
      */
-    virtual result_void register_singleton(
+    virtual common::VoidResult register_singleton(
         const std::string& name,
         std::shared_ptr<T> instance) = 0;
-    
+
     /**
      * @brief Check if a component is registered
      * @param name The name to check
      * @return true if registered, false otherwise
      */
     virtual bool is_registered(const std::string& name) const = 0;
-    
+
     /**
      * @brief Clear all registrations
      * @return Result indicating success or error
      */
-    virtual result_void clear() = 0;
+    virtual common::VoidResult clear() = 0;
     
     /**
      * @brief Get the number of registered components

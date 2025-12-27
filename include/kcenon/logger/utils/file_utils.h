@@ -53,7 +53,7 @@ public:
      * @brief Validate log file path against path traversal attacks
      * @param path File path to validate
      * @param allowed_base Base directory where log files are allowed (optional)
-     * @return result_void Success if path is valid, error otherwise
+     * @return common::VoidResult Success if path is valid, error otherwise
      *
      * Security checks:
      * - Prevents path traversal (e.g., ../../../etc/passwd)
@@ -75,7 +75,7 @@ public:
      * }
      * @endcode
      */
-    static result_void validate_log_path(
+    static common::VoidResult validate_log_path(
         const std::filesystem::path& path,
         const std::filesystem::path& allowed_base = ""
     ) {
@@ -85,7 +85,7 @@ public:
 
             // Detect path traversal attempts
             if (path_str.find("..") != std::string::npos) {
-                return make_logger_error(
+                return make_logger_void_result(
                     logger_error_code::sanitization_failed,
                     "Path contains '..' (path traversal attempt)"
                 );
@@ -119,16 +119,16 @@ public:
                 );
 
                 if (base_end != canonical_base.end()) {
-                    return make_logger_error(
+                    return make_logger_void_result(
                         logger_error_code::sanitization_failed,
                         "Path is outside allowed directory: " + path_str
                     );
                 }
             }
 
-            return {};  // Valid path
+            return common::ok();  // Valid path
         } catch (const std::filesystem::filesystem_error& e) {
-            return make_logger_error(
+            return make_logger_void_result(
                 logger_error_code::file_permission_denied,
                 std::string("Path validation failed: ") + e.what()
             );
@@ -217,7 +217,7 @@ public:
      * @brief Set file permissions (Unix/POSIX systems)
      * @param file Path to file
      * @param perms Permissions to set (default: owner read/write only)
-     * @return result_void Success or error
+     * @return common::VoidResult Success or error
      *
      * Default permissions (0600):
      * - Owner: read + write
@@ -237,23 +237,23 @@ public:
      * );
      * @endcode
      */
-    static result_void set_file_permissions(
+    static common::VoidResult set_file_permissions(
         const std::filesystem::path& file,
         std::filesystem::perms perms = std::filesystem::perms::owner_read |
                                         std::filesystem::perms::owner_write
     ) {
         try {
             if (!std::filesystem::exists(file)) {
-                return make_logger_error(
+                return make_logger_void_result(
                     logger_error_code::file_open_failed,
                     "File does not exist: " + file.string()
                 );
             }
 
             std::filesystem::permissions(file, perms);
-            return {};
+            return common::ok();
         } catch (const std::filesystem::filesystem_error& e) {
-            return make_logger_error(
+            return make_logger_void_result(
                 logger_error_code::file_permission_denied,
                 std::string("Failed to set file permissions: ") + e.what()
             );

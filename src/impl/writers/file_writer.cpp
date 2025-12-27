@@ -25,22 +25,19 @@ file_writer::~file_writer() {
     close();
 }
 
-result_void file_writer::write(logger_system::log_level level,
-                               const std::string& message,
-                               const std::string& file,
-                               int line,
-                               const std::string& function,
-                               const std::chrono::system_clock::time_point& timestamp) {
+common::VoidResult file_writer::write(logger_system::log_level level,
+                                      const std::string& message,
+                                      const std::string& file,
+                                      int line,
+                                      const std::string& function,
+                                      const std::chrono::system_clock::time_point& timestamp) {
     std::lock_guard<std::mutex> lock(write_mutex_);
 
-    return utils::try_write_operation([&]() -> result_void {
+    return utils::try_write_operation([&]() -> common::VoidResult {
         // Check precondition
-        auto check = utils::check_condition(
-            file_stream_.is_open(),
-            logger_error_code::file_write_failed,
-            "File stream is not open"
-        );
-        if (!check) return check;
+        if (!file_stream_.is_open()) {
+            return make_logger_void_result(logger_error_code::file_write_failed, "File stream is not open");
+        }
 
         // Create log_entry for new API
         log_entry entry = (!file.empty() || line != 0 || !function.empty())
@@ -57,19 +54,19 @@ result_void file_writer::write(logger_system::log_level level,
     });
 }
 
-result_void file_writer::flush() {
+common::VoidResult file_writer::flush() {
     std::lock_guard<std::mutex> lock(write_mutex_);
 
-    return utils::try_write_operation([&]() -> result_void {
+    return utils::try_write_operation([&]() -> common::VoidResult {
         if (file_stream_.is_open()) {
             file_stream_.flush();
             return utils::check_stream_state(file_stream_, "flush");
         }
-        return {}; // Success - no-op if file is not open
+        return common::ok();
     }, logger_error_code::flush_timeout);
 }
 
-result_void file_writer::reopen() {
+common::VoidResult file_writer::reopen() {
     std::lock_guard<std::mutex> lock(write_mutex_);
     close();
     return open();
@@ -86,18 +83,17 @@ void file_writer::close() {
     }
 }
 
-result_void file_writer::open() {
+common::VoidResult file_writer::open() {
     // IMPORTANT: Caller must hold write_mutex_ before calling this method
     // This ensures thread safety with concurrent operations
-    // In debug builds, consider adding: assert(write_mutex_.try_lock() == false)
 
-    return utils::try_open_operation([&]() -> result_void {
+    return utils::try_open_operation([&]() -> common::VoidResult {
         // Create directory if it doesn't exist
         std::filesystem::path file_path(filename_);
         std::filesystem::path dir = file_path.parent_path();
 
         auto dir_result = utils::ensure_directory_exists(dir);
-        if (!dir_result) return dir_result;
+        if (dir_result.is_err()) return dir_result;
 
         // Open file
         auto mode = append_mode_ ? std::ios::app : std::ios::trunc;
@@ -109,7 +105,7 @@ result_void file_writer::open() {
             logger_error_code::file_open_failed,
             "Failed to open file: " + filename_
         );
-        if (!check) return check;
+        if (check.is_err()) return check;
 
         // Set buffer
         file_stream_.rdbuf()->pubsetbuf(buffer_.get(), buffer_size_);
@@ -122,7 +118,7 @@ result_void file_writer::open() {
             bytes_written_ = 0;
         }
 
-        return {}; // Success
+        return common::ok();
     });
 }
 

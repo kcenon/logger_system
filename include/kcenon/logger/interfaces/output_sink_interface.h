@@ -51,6 +51,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string_view>
 #include <memory>
 #include <functional>
+#include <kcenon/common/patterns/result.h>
 #include <kcenon/logger/core/error_codes.h>
 
 namespace kcenon::logger {
@@ -71,15 +72,15 @@ public:
     /**
      * @brief Write a pre-formatted message to the output destination
      * @param message Pre-formatted log message
-     * @return result_void Success or error code
+     * @return common::VoidResult Success or error code
      */
-    virtual result_void write_raw(std::string_view message) = 0;
+    virtual common::VoidResult write_raw(std::string_view message) = 0;
 
     /**
      * @brief Flush any buffered data
-     * @return result_void Success or error code
+     * @return common::VoidResult Success or error code
      */
-    virtual result_void flush() = 0;
+    virtual common::VoidResult flush() = 0;
 
     /**
      * @brief Check if the sink is healthy

@@ -299,15 +299,15 @@ class MockLogWriter : public kcenon::logger::log_writer_interface {
 public:
     MockLogWriter() = default;
 
-    kcenon::logger::result_void write(const kcenon::logger::log_entry& entry) override {
+    kcenon::common::VoidResult write(const kcenon::logger::log_entry& entry) override {
         write_count_.fetch_add(1);
         last_message_ = entry.message;
-        return kcenon::logger::result_void();
+        return kcenon::common::ok();
     }
 
-    kcenon::logger::result_void flush() override {
+    kcenon::common::VoidResult flush() override {
         flush_count_.fetch_add(1);
-        return kcenon::logger::result_void();
+        return kcenon::common::ok();
     }
 
     bool is_healthy() const override {

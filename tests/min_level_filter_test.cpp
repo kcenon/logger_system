@@ -55,21 +55,21 @@ public:
     };
 
     // Implement the legacy write interface required by base_writer
-    kcenon::logger::result_void write(logger_system::log_level level,
-                                      const std::string& message,
-                                      [[maybe_unused]] const std::string& file,
-                                      [[maybe_unused]] int line,
-                                      [[maybe_unused]] const std::string& function,
-                                      [[maybe_unused]] const std::chrono::system_clock::time_point& timestamp) override {
+    kcenon::common::VoidResult write(logger_system::log_level level,
+                                     const std::string& message,
+                                     [[maybe_unused]] const std::string& file,
+                                     [[maybe_unused]] int line,
+                                     [[maybe_unused]] const std::string& function,
+                                     [[maybe_unused]] const std::chrono::system_clock::time_point& timestamp) override {
         entry_record rec;
         rec.level = level;
         rec.message = message;
         records_.push_back(std::move(rec));
-        return {};
+        return kcenon::common::ok();
     }
 
-    kcenon::logger::result_void flush() override {
-        return {};
+    kcenon::common::VoidResult flush() override {
+        return kcenon::common::ok();
     }
 
     std::string get_name() const override {
@@ -94,7 +94,7 @@ TEST(LoggerMinLevelTest, DropsMessagesBelowConfiguredThreshold) {
     auto writer = std::make_unique<memory_writer>();
     auto* writer_ptr = writer.get();
 
-    ASSERT_TRUE(logger.add_writer(std::move(writer)));
+    ASSERT_TRUE(logger.add_writer(std::move(writer)).is_ok());
 
     logger.set_min_level(log_level::warning);
 

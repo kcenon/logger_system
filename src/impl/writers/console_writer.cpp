@@ -90,15 +90,15 @@ console_writer::~console_writer() {
     flush();
 }
 
-result_void console_writer::write(logger_system::log_level level,
-                                  const std::string& message,
-                                  const std::string& file,
-                                  int line,
-                                  const std::string& function,
-                                  const std::chrono::system_clock::time_point& timestamp) {
+common::VoidResult console_writer::write(logger_system::log_level level,
+                                         const std::string& message,
+                                         const std::string& file,
+                                         int line,
+                                         const std::string& function,
+                                         const std::chrono::system_clock::time_point& timestamp) {
     std::lock_guard<std::mutex> lock(write_mutex_);
 
-    return utils::try_write_operation([&]() -> result_void {
+    return utils::try_write_operation([&]() -> common::VoidResult {
         auto& stream = (use_stderr_ || level <= logger_system::log_level::error)
                        ? std::cerr : std::cout;
 
@@ -144,17 +144,19 @@ result_void console_writer::write(logger_system::log_level level,
     }, logger_error_code::processing_failed);
 }
 
-result_void console_writer::flush() {
+common::VoidResult console_writer::flush() {
     std::lock_guard<std::mutex> lock(write_mutex_);
-    std::cout.flush();
-    std::cerr.flush();
-    
-    if (std::cout.fail() || std::cerr.fail()) {
-        return make_logger_error(logger_error_code::flush_timeout,
-                                "Console flush failed");
-    }
-    
-    return {}; // Success
+
+    return utils::try_write_operation([&]() -> common::VoidResult {
+        std::cout.flush();
+        std::cerr.flush();
+
+        if (std::cout.fail() || std::cerr.fail()) {
+            return make_logger_void_result(logger_error_code::flush_timeout, "Console flush failed");
+        }
+
+        return common::ok();
+    }, logger_error_code::flush_timeout);
 }
 
 void console_writer::set_use_stderr(bool use_stderr) {

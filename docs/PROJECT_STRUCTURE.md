@@ -121,17 +121,17 @@ public:
 
     // Writer management
     auto add_writer(const std::string& name,
-                    std::unique_ptr<log_writer_interface> writer) -> result_void;
-    auto remove_writer(const std::string& name) -> result_void;
+                    std::unique_ptr<log_writer_interface> writer) -> common::VoidResult;
+    auto remove_writer(const std::string& name) -> common::VoidResult;
 
     // Configuration
-    auto set_filter(std::unique_ptr<log_filter_interface> filter) -> result_void;
+    auto set_filter(std::unique_ptr<log_filter_interface> filter) -> common::VoidResult;
     auto set_min_level(log_level level) -> void;
 
     // Control
-    auto start() -> result_void;
-    auto stop() -> result_void;
-    auto flush() -> result_void;
+    auto start() -> common::VoidResult;
+    auto stop() -> common::VoidResult;
+    auto flush() -> common::VoidResult;
 
     // Metrics
     auto enable_metrics_collection(bool enabled) -> void;
@@ -180,7 +180,7 @@ public:
     auto build() -> result<std::unique_ptr<logger>>;
 
 private:
-    auto validate() const -> result_void;
+    auto validate() const -> common::VoidResult;
 };
 ```
 
@@ -230,22 +230,19 @@ template<typename T>
 class result {
 public:
     bool is_ok() const;
-    bool is_error() const;
+    bool is_err() const;
     const T& value() const;
-    const error_info& get_error() const;
+    const error_info& error() const;
 
-    operator bool() const { return is_ok(); }
+    // Note: boolean conversion is removed in common::Result
 };
 
-// Result type for void operations
-class result_void {
-public:
-    bool is_ok() const;
-    bool is_error() const;
-    const error_info& get_error() const;
+// Result type for void operations (unified with common_system)
+using VoidResult = common::VoidResult;  // common::Result<std::monostate>
 
-    operator bool() const { return is_ok(); }
-};
+// For checking void results:
+if (result.is_ok()) { /* success */ }
+if (result.is_err()) { /* error: result.error() */ }
 
 // Error information
 struct error_info {

@@ -268,12 +268,12 @@ network_writer::~network_writer() {
 #endif
 }
 
-result_void network_writer::write(logger_system::log_level level,
-                                  const std::string& message,
-                                  const std::string& file,
-                                  int line,
-                                  const std::string& function,
-                                  const std::chrono::system_clock::time_point& timestamp) {
+common::VoidResult network_writer::write(logger_system::log_level level,
+                                         const std::string& message,
+                                         const std::string& file,
+                                         int line,
+                                         const std::string& function,
+                                         const std::chrono::system_clock::time_point& timestamp) {
 
     std::lock_guard<std::mutex> lock(buffer_mutex_);
 
@@ -293,10 +293,10 @@ result_void network_writer::write(logger_system::log_level level,
         send_worker_->notify_work();
     }
 
-    return {}; // Success
+    return common::ok();
 }
 
-result_void network_writer::flush() {
+common::VoidResult network_writer::flush() {
     std::unique_lock<std::mutex> lock(buffer_mutex_);
     auto start = std::chrono::steady_clock::now();
     auto timeout = std::chrono::seconds(5); // 5 second timeout
@@ -304,20 +304,20 @@ result_void network_writer::flush() {
     while (!buffer_.empty()) {
         if (buffer_cv_.wait_for(lock, timeout, [this] { return buffer_.empty() || !running_; })) {
             if (!buffer_.empty() && !running_) {
-                return make_logger_error(logger_error_code::flush_timeout,
-                                        "Network writer stopped before flush completed");
+                return make_logger_void_result(logger_error_code::flush_timeout,
+                                               "Network writer stopped before flush completed");
             }
         } else {
-            return make_logger_error(logger_error_code::flush_timeout,
-                                    "Network flush timeout");
+            return make_logger_void_result(logger_error_code::flush_timeout,
+                                           "Network flush timeout");
         }
 
         if (std::chrono::steady_clock::now() - start > timeout) {
-            return make_logger_error(logger_error_code::flush_timeout,
-                                    "Network flush exceeded timeout");
+            return make_logger_void_result(logger_error_code::flush_timeout,
+                                           "Network flush exceeded timeout");
         }
     }
-    return {}; // Success
+    return common::ok();
 }
 
 network_writer::connection_stats network_writer::get_stats() const {

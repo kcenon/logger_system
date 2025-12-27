@@ -37,17 +37,17 @@ public:
         --instance_count_;
     }
     
-    result_void write(thread_module::log_level level,
+    common::VoidResult write(thread_module::log_level level,
                       const std::string& message,
                       const std::string& file,
                       int line,
                       const std::string& function,
                       const std::chrono::system_clock::time_point& timestamp) override {
-        return {};
+        return common::ok();
     }
-    
-    result_void flush() override {
-        return {};
+
+    common::VoidResult flush() override {
+        return common::ok();
     }
     
     bool is_healthy() const override {

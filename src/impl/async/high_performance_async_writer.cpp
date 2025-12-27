@@ -63,7 +63,7 @@ void high_performance_async_writer::stop(bool flush_remaining) {
     }
 }
 
-result_void high_performance_async_writer::write(
+common::VoidResult high_performance_async_writer::write(
     logger_system::log_level level,
     const std::string& message,
     const std::string& file,
@@ -87,7 +87,7 @@ result_void high_performance_async_writer::write(
             const auto end_time = std::chrono::steady_clock::now();
             const auto latency = end_time - start_time;
             update_stats(true, latency);
-            return result_void{};
+            return common::ok();
         } else {
             stats_.dropped_writes.fetch_add(1, std::memory_order_relaxed);
             // Fall back to direct write
@@ -99,13 +99,13 @@ result_void high_performance_async_writer::write(
     return write_direct(level, message, file, line, function, timestamp);
 }
 
-result_void high_performance_async_writer::flush() {
+common::VoidResult high_performance_async_writer::flush() {
     if (batch_processor_) {
         batch_processor_->flush();
     } else if (wrapped_writer_) {
         return wrapped_writer_->flush();
     }
-    return result_void{};
+    return common::ok();
 }
 
 bool high_performance_async_writer::is_healthy() const {
@@ -147,7 +147,7 @@ const batch_processor::processing_stats* high_performance_async_writer::get_batc
     return nullptr;
 }
 
-result_void high_performance_async_writer::write_direct(
+common::VoidResult high_performance_async_writer::write_direct(
     logger_system::log_level level,
     const std::string& message,
     const std::string& file,
@@ -156,7 +156,7 @@ result_void high_performance_async_writer::write_direct(
     const std::chrono::system_clock::time_point& timestamp) {
 
     if (!wrapped_writer_) {
-        return make_logger_error(logger_error_code::writer_not_available, "No wrapped writer available");
+        return make_logger_void_result(logger_error_code::writer_not_available, "No wrapped writer available");
     }
 
     const auto start_time = std::chrono::steady_clock::now();
@@ -164,7 +164,7 @@ result_void high_performance_async_writer::write_direct(
     const auto end_time = std::chrono::steady_clock::now();
 
     const auto latency = end_time - start_time;
-    update_stats(static_cast<bool>(result), latency);
+    update_stats(result.is_ok(), latency);
 
     return result;
 }

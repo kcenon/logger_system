@@ -108,7 +108,7 @@ public:
     /**
      * @brief Write a pre-formatted message to console
      * @param message Pre-formatted message (must include newline if desired)
-     * @return result_void Success (console writes rarely fail)
+     * @return common::VoidResult Success (console writes rarely fail)
      *
      * @details Writes the message to stdout or stderr without modification.
      * The message should already be fully formatted with timestamps, colors, etc.
@@ -120,7 +120,7 @@ public:
      *
      * @since 1.3.0
      */
-    result_void write_raw(std::string_view message) override {
+    common::VoidResult write_raw(std::string_view message) override {
         std::lock_guard<std::mutex> lock(mutex_);
 
         if (use_stderr_) {
@@ -135,12 +135,12 @@ public:
             }
         }
 
-        return {}; // Success
+        return common::ok(); // Success
     }
 
     /**
      * @brief Flush buffered output to console
-     * @return result_void Success
+     * @return common::VoidResult Success
      *
      * @details Forces any buffered data to be written to the console immediately.
      *
@@ -148,7 +148,7 @@ public:
      *
      * @since 1.3.0
      */
-    result_void flush() override {
+    common::VoidResult flush() override {
         std::lock_guard<std::mutex> lock(mutex_);
 
         if (use_stderr_) {
@@ -157,7 +157,7 @@ public:
             std::cout.flush();
         }
 
-        return {}; // Success
+        return common::ok(); // Success
     }
 
     /**

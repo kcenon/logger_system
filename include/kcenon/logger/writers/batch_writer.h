@@ -92,20 +92,20 @@ public:
      * @param line Source line
      * @param function Function name
      * @param timestamp Time of log entry
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void write(logger_system::log_level level,
-                     const std::string& message,
-                     const std::string& file,
-                     int line,
-                     const std::string& function,
-                     const std::chrono::system_clock::time_point& timestamp) override;
-    
+    common::VoidResult write(logger_system::log_level level,
+                             const std::string& message,
+                             const std::string& file,
+                             int line,
+                             const std::string& function,
+                             const std::chrono::system_clock::time_point& timestamp) override;
+
     /**
      * @brief Flush the batch to the underlying writer
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void flush() override;
+    common::VoidResult flush() override;
     
     /**
      * @brief Get writer name
@@ -177,9 +177,9 @@ private:
     
     /**
      * @brief Flush batch without locking (caller must hold lock)
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void flush_batch_unsafe();
+    common::VoidResult flush_batch_unsafe();
     
     /**
      * @brief Check if batch should be flushed based on size

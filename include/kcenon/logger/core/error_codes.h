@@ -509,7 +509,23 @@ private:
     common::Result<T> value_;
 };
 
-class result_void {
+/**
+ * @brief Logger-specific void result wrapper
+ *
+ * @deprecated Use common::VoidResult directly instead.
+ *             This class will be removed in v4.0.0.
+ *
+ *             Migration guide:
+ *             - Replace `result_void` with `common::VoidResult`
+ *             - Replace `result_void()` with `common::ok()`
+ *             - Replace `result_void(code, msg)` with `make_logger_void_result(code, msg)`
+ *             - Replace `.error_code()` with `get_logger_error_code(result)`
+ *             - Replace `.error_message()` with `result.error().message`
+ *
+ * @see make_logger_void_result() for creating VoidResult with logger error codes
+ * @see get_logger_error_code() for extracting logger_error_code from VoidResult
+ */
+class [[deprecated("Use common::VoidResult directly. See error_codes.h for migration guide.")]] result_void {
 public:
     result_void()
         : value_(common::ok()) {}
@@ -547,6 +563,11 @@ public:
 
     const common::VoidResult& raw() const { return value_; }
 
+    /**
+     * @brief Implicit conversion to common::VoidResult for migration
+     */
+    operator common::VoidResult() const { return value_; }
+
 private:
     explicit result_void(common::VoidResult value)
         : value_(std::move(value)) {}
@@ -554,12 +575,105 @@ private:
     common::VoidResult value_;
 };
 
+// ============================================================================
+// Migration Helpers for common::VoidResult
+// ============================================================================
+
+/**
+ * @brief Create a VoidResult with logger-specific error information
+ *
+ * This is the recommended way to create error results after migrating from result_void.
+ *
+ * @param code The logger error code
+ * @param message Error message (optional, uses logger_error_to_string if empty)
+ * @return common::VoidResult containing the error
+ *
+ * @example
+ * // Before (deprecated):
+ * result_void error_result(logger_error_code::file_open_failed, "Could not open file");
+ *
+ * // After:
+ * auto error_result = make_logger_void_result(logger_error_code::file_open_failed, "Could not open file");
+ */
+inline common::VoidResult make_logger_void_result(logger_error_code code, const std::string& message = "") {
+    return common::VoidResult(common::error_info{
+        static_cast<int>(code),
+        message.empty() ? logger_error_to_string(code) : message,
+        "logger_system"
+    });
+}
+
+/**
+ * @brief Create a successful VoidResult
+ *
+ * @return common::VoidResult indicating success
+ *
+ * @example
+ * // Before (deprecated):
+ * return result_void();
+ *
+ * // After:
+ * return make_logger_void_success();
+ */
+inline common::VoidResult make_logger_void_success() {
+    return common::ok();
+}
+
+/**
+ * @brief Extract logger_error_code from a VoidResult
+ *
+ * @param result The VoidResult to extract error code from
+ * @return logger_error_code, or success if no error
+ *
+ * @example
+ * // Before (deprecated):
+ * auto code = result.error_code();
+ *
+ * // After:
+ * auto code = get_logger_error_code(result);
+ */
+inline logger_error_code get_logger_error_code(const common::VoidResult& result) {
+    if (!result.is_err()) {
+        return logger_error_code::success;
+    }
+    return static_cast<logger_error_code>(result.error().code);
+}
+
+/**
+ * @brief Check if a VoidResult contains an error
+ *
+ * @param result The VoidResult to check
+ * @return true if result contains an error
+ */
+inline bool has_logger_error(const common::VoidResult& result) {
+    return result.is_err();
+}
+
+/**
+ * @brief Get error message from a VoidResult
+ *
+ * @param result The VoidResult to get message from
+ * @return Error message, or empty string if no error
+ */
+inline std::string get_logger_error_message(const common::VoidResult& result) {
+    if (!result.is_err()) {
+        return "";
+    }
+    return result.error().message;
+}
+
+// ============================================================================
+// Deprecated make_logger_error functions (use make_logger_void_result instead)
+// ============================================================================
+
 /**
  * @brief Create a logger error result (void)
  * @param code The logger error code
  * @param message Error message (optional, uses error_to_string if empty)
  * @return result_void containing the error
+ * @deprecated Use make_logger_void_result() instead
  */
+[[deprecated("Use make_logger_void_result() instead")]]
 inline result_void make_logger_error(logger_error_code code, const std::string& message = "") {
     return result_void{code, message};
 }
@@ -570,7 +684,9 @@ inline result_void make_logger_error(logger_error_code code, const std::string& 
  * @param message Error message
  * @param details Additional error details
  * @return result_void containing the error with details
+ * @deprecated Use make_logger_void_result() instead
  */
+[[deprecated("Use make_logger_void_result() instead")]]
 inline result_void make_logger_error(logger_error_code code, const std::string& message, const std::string& details) {
     return result_void(common::error_info{
         static_cast<int>(code),
@@ -585,8 +701,10 @@ inline result_void make_logger_error(logger_error_code code, const std::string& 
  * @param code The logger error code
  * @param message Error message (optional, uses error_to_string if empty)
  * @return result<T> containing the error
+ * @deprecated Use common::Result<T> with error_info directly
  */
 template<typename T>
+[[deprecated("Use common::Result<T> with error_info directly")]]
 inline result<T> make_logger_error(logger_error_code code, const std::string& message = "") {
     return result<T>{code, message};
 }
@@ -597,8 +715,10 @@ inline result<T> make_logger_error(logger_error_code code, const std::string& me
  * @param message Error message
  * @param details Additional error details
  * @return result<T> containing the error with details
+ * @deprecated Use common::Result<T> with error_info directly
  */
 template<typename T>
+[[deprecated("Use common::Result<T> with error_info directly")]]
 inline result<T> make_logger_error(logger_error_code code, const std::string& message, const std::string& details) {
     return result<T>(common::error_info{
         static_cast<int>(code),

@@ -232,17 +232,17 @@ All heap blocks were freed -- no leaks are possible
 
 1. **Core 연산** (라이프사이클, 구성):
    ```cpp
-   auto result = logger->start();  // result_void
-   if (!result) {
-       std::cerr << "시작 실패: " << result.error().message() << "\n";
+   auto result = logger->start();  // common::VoidResult
+   if (result.is_err()) {
+       std::cerr << "시작 실패: " << result.error().message << "\n";
    }
    ```
 
 2. **Writer 관리**:
    ```cpp
    auto result = logger->add_writer("file", std::make_unique<file_writer>("app.log"));
-   if (!result) {
-       std::cerr << "Writer 추가 실패: " << result.error().message() << "\n";
+   if (result.is_err()) {
+       std::cerr << "Writer 추가 실패: " << result.error().message << "\n";
    }
    ```
 

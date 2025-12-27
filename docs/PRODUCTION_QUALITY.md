@@ -481,17 +481,17 @@ if (!result) {
 **Usage Areas**:
 1. **Core operations** (lifecycle, configuration):
    ```cpp
-   auto result = logger->start();  // result_void
-   if (!result) {
-       std::cerr << "Failed to start: " << result.error().message() << "\n";
+   auto result = logger->start();  // common::VoidResult
+   if (result.is_err()) {
+       std::cerr << "Failed to start: " << result.error().message << "\n";
    }
    ```
 
 2. **Writer management**:
    ```cpp
    auto result = logger->add_writer("file", std::make_unique<file_writer>("app.log"));
-   if (!result) {
-       std::cerr << "Failed to add writer: " << result.error().message() << "\n";
+   if (result.is_err()) {
+       std::cerr << "Failed to add writer: " << result.error().message << "\n";
    }
    ```
 

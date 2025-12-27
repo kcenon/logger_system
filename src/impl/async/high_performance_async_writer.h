@@ -136,20 +136,20 @@ public:
      * @param line Source line
      * @param function Function name
      * @param timestamp Timestamp
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void write(logger_system::log_level level,
-                     const std::string& message,
-                     const std::string& file,
-                     int line,
-                     const std::string& function,
-                     const std::chrono::system_clock::time_point& timestamp) override;
+    common::VoidResult write(logger_system::log_level level,
+                             const std::string& message,
+                             const std::string& file,
+                             int line,
+                             const std::string& function,
+                             const std::chrono::system_clock::time_point& timestamp) override;
 
     /**
      * @brief Flush all pending messages
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void flush() override;
+    common::VoidResult flush() override;
 
     /**
      * @brief Check if the writer is healthy
@@ -225,12 +225,12 @@ private:
     /**
      * @brief Write directly to the underlying writer (fallback mode)
      */
-    result_void write_direct(logger_system::log_level level,
-                           const std::string& message,
-                           const std::string& file,
-                           int line,
-                           const std::string& function,
-                           const std::chrono::system_clock::time_point& timestamp);
+    common::VoidResult write_direct(logger_system::log_level level,
+                                    const std::string& message,
+                                    const std::string& file,
+                                    int line,
+                                    const std::string& function,
+                                    const std::chrono::system_clock::time_point& timestamp);
 
     /**
      * @brief Update performance statistics

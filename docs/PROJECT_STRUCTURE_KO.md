@@ -123,17 +123,17 @@ public:
 
     // Writer 관리
     auto add_writer(const std::string& name,
-                    std::unique_ptr<log_writer_interface> writer) -> result_void;
-    auto remove_writer(const std::string& name) -> result_void;
+                    std::unique_ptr<log_writer_interface> writer) -> common::VoidResult;
+    auto remove_writer(const std::string& name) -> common::VoidResult;
 
     // 설정
-    auto set_filter(std::unique_ptr<log_filter_interface> filter) -> result_void;
+    auto set_filter(std::unique_ptr<log_filter_interface> filter) -> common::VoidResult;
     auto set_min_level(log_level level) -> void;
 
     // 제어
-    auto start() -> result_void;
-    auto stop() -> result_void;
-    auto flush() -> result_void;
+    auto start() -> common::VoidResult;
+    auto stop() -> common::VoidResult;
+    auto flush() -> common::VoidResult;
 
     // 메트릭
     auto enable_metrics_collection(bool enabled) -> void;
@@ -182,7 +182,7 @@ public:
     auto build() -> result<std::unique_ptr<logger>>;
 
 private:
-    auto validate() const -> result_void;
+    auto validate() const -> common::VoidResult;
 };
 ```
 

@@ -80,58 +80,58 @@ public:
     
     /**
      * @brief Register a factory function for creating components
-     * 
+     *
      * @param name The name to register the factory under
      * @param factory Function that creates instances of T
      * @return Result indicating success or error
      */
-    result_void register_factory(
+    common::VoidResult register_factory(
         const std::string& name,
         std::function<std::shared_ptr<T>()> factory) override {
-        
+
         if (name.empty()) {
-            return make_logger_error(error_code::invalid_argument, 
+            return make_logger_void_result(logger_error_code::invalid_argument,
                             "Factory name cannot be empty");
         }
-        
+
         if (!factory) {
-            return make_logger_error(error_code::invalid_argument,
+            return make_logger_void_result(logger_error_code::invalid_argument,
                             "Factory function cannot be null");
         }
-        
+
         std::lock_guard<std::mutex> lock(mutex_);
         factories_[name] = factory;
-        return {};
+        return common::ok();
     }
-    
+
     /**
      * @brief Register a singleton instance
-     * 
+     *
      * @param name The name to register the instance under
      * @param instance The singleton instance to register
      * @return Result indicating success or error
      */
-    result_void register_singleton(
+    common::VoidResult register_singleton(
         const std::string& name,
         std::shared_ptr<T> instance) override {
-        
+
         if (name.empty()) {
-            return make_logger_error(error_code::invalid_argument, 
+            return make_logger_void_result(logger_error_code::invalid_argument,
                             "Factory name cannot be empty");
         }
-        
+
         if (!instance) {
-            return error_code::invalid_argument;
+            return make_logger_void_result(logger_error_code::invalid_argument);
         }
-        
+
         std::lock_guard<std::mutex> lock(mutex_);
         singletons_[name] = instance;
-        return {};
+        return common::ok();
     }
-    
+
     /**
      * @brief Check if a component is registered
-     * 
+     *
      * @param name The name to check
      * @return true if registered, false otherwise
      */
@@ -139,17 +139,17 @@ public:
         std::lock_guard<std::mutex> lock(mutex_);
         return singletons_.count(name) > 0 || factories_.count(name) > 0;
     }
-    
+
     /**
      * @brief Clear all registrations
-     * 
+     *
      * @return Result indicating success or error
      */
-    result_void clear() override {
+    common::VoidResult clear() override {
         std::lock_guard<std::mutex> lock(mutex_);
         factories_.clear();
         singletons_.clear();
-        return {};
+        return common::ok();
     }
     
     /**
@@ -164,26 +164,26 @@ public:
     
     /**
      * @brief Register a component type with default constructor
-     * 
+     *
      * Convenience method for registering types that have default constructors.
-     * 
+     *
      * @tparam ComponentType The concrete type to register
      * @param name The name to register under
      * @return Result indicating success or error
      */
     template<typename ComponentType>
-    result_void register_type(const std::string& name) {
+    common::VoidResult register_type(const std::string& name) {
         static_assert(std::is_base_of_v<T, ComponentType>,
                       "ComponentType must derive from T");
-        
+
         return register_factory(name, []() {
             return std::make_shared<ComponentType>();
         });
     }
-    
+
     /**
      * @brief Register a component type with constructor arguments
-     * 
+     *
      * @tparam ComponentType The concrete type to register
      * @tparam Args Constructor argument types
      * @param name The name to register under
@@ -191,10 +191,10 @@ public:
      * @return Result indicating success or error
      */
     template<typename ComponentType, typename... Args>
-    result_void register_type_with_args(const std::string& name, Args... args) {
+    common::VoidResult register_type_with_args(const std::string& name, Args... args) {
         static_assert(std::is_base_of_v<T, ComponentType>,
                       "ComponentType must derive from T");
-        
+
         return register_factory(name, [args...]() {
             return std::make_shared<ComponentType>(args...);
         });

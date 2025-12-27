@@ -160,6 +160,7 @@ auto logger = logger_builder()
 **Old (v2.x):**
 ```cpp
 class logger : public thread_module::logger_interface {
+    // Deprecated: result_void is replaced by common::VoidResult
     result_void log(thread_module::log_level level,
                     const std::string& message) override;
 };
@@ -214,7 +215,7 @@ logger->log(log_level::error, "Error message");
 **Old (v2.x):**
 ```cpp
 result_void result = logger->log(level, message);
-if (!result) {
+if (!result) {  // boolean conversion
     std::cerr << result.error().message() << "\n";
 }
 ```
@@ -222,15 +223,21 @@ if (!result) {
 **New (v3.0):**
 ```cpp
 common::VoidResult result = logger->log(level, message);
-if (!result) {
-    std::cerr << result.error().message() << "\n";
+if (result.is_err()) {  // Use is_err() instead of boolean conversion
+    std::cerr << result.error().message << "\n";  // Note: .message not .message()
 }
 
-// Or using auto (simpler)
-auto result = logger->log(level, message);
-if (!result) {
-    std::cerr << result.error().message() << "\n";
+// Or check for success
+if (result.is_ok()) {
+    // Operation succeeded
 }
+
+// Creating results:
+// Old: return result_void();            or return {};
+// New: return common::ok();
+
+// Old: return result_void(code, msg);   or return make_logger_error(code, msg);
+// New: return make_logger_void_result(code, msg);
 ```
 
 #### 5. thread_system Dependency Changes

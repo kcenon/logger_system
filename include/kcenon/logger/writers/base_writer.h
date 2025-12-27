@@ -37,6 +37,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // Always use logger_system interface (Phase 3-4)
 #include <kcenon/logger/interfaces/logger_interface.h>
+#include <kcenon/common/patterns/result.h>
 #include <kcenon/logger/core/error_codes.h>
 #include "../interfaces/log_writer_interface.h"
 #include "../interfaces/log_entry.h"
@@ -65,28 +66,28 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @code
  * class custom_writer : public base_writer {
  * public:
- *     result_void write(logger_system::log_level level,
- *                      const std::string& message,
- *                      const std::string& file,
- *                      int line,
- *                      const std::string& function,
- *                      const std::chrono::system_clock::time_point& timestamp) override {
+ *     common::VoidResult write(logger_system::log_level level,
+ *                              const std::string& message,
+ *                              const std::string& file,
+ *                              int line,
+ *                              const std::string& function,
+ *                              const std::chrono::system_clock::time_point& timestamp) override {
  *         // Format the message
  *         std::string formatted = format_log_entry(level, message, file, line, function, timestamp);
- *         
+ *
  *         // Write to your custom destination
  *         if (!write_to_destination(formatted)) {
- *             return logger_error_code::write_failed;
+ *             return make_logger_void_result(logger_error_code::file_write_failed);
  *         }
- *         
- *         return {}; // Success
+ *
+ *         return common::ok(); // Success
  *     }
- *     
- *     result_void flush() override {
+ *
+ *     common::VoidResult flush() override {
  *         // Flush any buffered data
  *         return flush_destination();
  *     }
- *     
+ *
  *     std::string get_name() const override {
  *         return "custom_writer";
  *     }
@@ -140,25 +141,25 @@ public:
     /**
      * @brief Write a log entry using the new interface
      * @param entry The log entry to write
-     * @return result_void Success or error code
-     * 
+     * @return common::VoidResult Success or error code
+     *
      * @details This method provides compatibility with the modern log_entry structure.
      * The default implementation converts the entry to the legacy API format for
      * backward compatibility. Derived classes can override this for optimized handling.
-     * 
+     *
      * @note This method extracts source location information if present in the entry.
-     * 
+     *
      * @since 1.0.0
      */
-    virtual result_void write(const log_entry& entry) override {
+    common::VoidResult write(const log_entry& entry) override {
         // Convert to old API for backward compatibility
         std::string file = entry.location ? entry.location->file.to_string() : "";
         int line = entry.location ? entry.location->line : 0;
         std::string function = entry.location ? entry.location->function.to_string() : "";
-        
+
         return write(entry.level, entry.message.to_string(), file, line, function, entry.timestamp);
     }
-    
+
     /**
      * @brief Write a log entry (legacy API for backward compatibility)
      * @param level Log severity level
@@ -167,46 +168,46 @@ public:
      * @param line Source line number (0 if not available)
      * @param function Function name (empty if not available)
      * @param timestamp Time when the log entry was created
-     * @return result_void Success or error code
-     * 
+     * @return common::VoidResult Success or error code
+     *
      * @details This is the main method that derived classes must implement.
      * It receives all log information and is responsible for outputting it
      * to the writer's specific destination.
-     * 
+     *
      * @note Implementations should handle empty file/function strings gracefully.
-     * 
+     *
      * @warning This method may be called from multiple threads in async mode.
      * Implementations must be thread-safe.
-     * 
+     *
      * @since 1.0.0
      */
-    virtual result_void write(logger_system::log_level level,
-                              const std::string& message,
-                              const std::string& file,
-                              int line,
-                              const std::string& function,
-                              const std::chrono::system_clock::time_point& timestamp) = 0;
-    
+    virtual common::VoidResult write(logger_system::log_level level,
+                                     const std::string& message,
+                                     const std::string& file,
+                                     int line,
+                                     const std::string& function,
+                                     const std::chrono::system_clock::time_point& timestamp) = 0;
+
     /**
      * @brief Flush any buffered data to the destination
-     * @return result_void Success or error code
-     * 
+     * @return common::VoidResult Success or error code
+     *
      * @details Forces any buffered log messages to be written immediately.
      * This is important for ensuring data persistence before shutdown or
      * when immediate output is required.
-     * 
+     *
      * @note For unbuffered writers, this can be a no-op returning success.
-     * 
+     *
      * @example
      * @code
      * // Ensure all logs are written before critical operation
      * writer->flush();
      * perform_critical_operation();
      * @endcode
-     * 
+     *
      * @since 1.0.0
      */
-    virtual result_void flush() override = 0;
+    common::VoidResult flush() override = 0;
     
     /**
      * @brief Set whether to use color output (if supported)

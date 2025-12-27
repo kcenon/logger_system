@@ -128,41 +128,41 @@ public:
      * @param line Source line
      * @param function Function name
      * @param timestamp Timestamp
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void write(logger_system::log_level level,
-                     const std::string& message,
-                     const std::string& file,
-                     int line,
-                     const std::string& function,
-                     const std::chrono::system_clock::time_point& timestamp) override {
+    common::VoidResult write(logger_system::log_level level,
+                             const std::string& message,
+                             const std::string& file,
+                             int line,
+                             const std::string& function,
+                             const std::chrono::system_clock::time_point& timestamp) override {
         if (!running_) {
             // If not running, write directly
             return wrapped_writer_->write(level, message, file, line, function, timestamp);
         }
-        
+
         // Queue the message
         {
             std::lock_guard<std::mutex> lock(queue_mutex_);
-            
+
             // Check queue size
             if (message_queue_.size() >= max_queue_size_) {
                 // Queue is full, drop the message or handle overflow
-                return make_logger_error(logger_error_code::queue_full, "Async writer queue is full");
+                return make_logger_void_result(logger_error_code::queue_full, "Async writer queue is full");
             }
-            
+
             message_queue_.push({level, message, file, line, function, timestamp});
             queue_cv_.notify_one();
         }
-        
-        return result_void{};
+
+        return common::ok();
     }
-    
+
     /**
      * @brief Flush all pending messages
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void flush() override {
+    common::VoidResult flush() override {
         if (!running_) {
             return wrapped_writer_->flush();
         }
@@ -175,9 +175,9 @@ public:
 
         if (!flushed) {
             // Timeout occurred - worker thread may have exited or is blocked
-            return make_logger_error(logger_error_code::flush_timeout,
-                                    "Flush operation timed out after " +
-                                    std::to_string(flush_timeout_.count()) + " seconds");
+            return make_logger_void_result(logger_error_code::flush_timeout,
+                                           "Flush operation timed out after " +
+                                           std::to_string(flush_timeout_.count()) + " seconds");
         }
 
         // Flush the wrapped writer

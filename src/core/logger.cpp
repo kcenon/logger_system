@@ -139,7 +139,7 @@ logger::~logger() {
     }
 }
 
-result_void logger::start() {
+common::VoidResult logger::start() {
     if (pimpl_ && !pimpl_->running_) {
         pimpl_->running_ = true;
 
@@ -159,10 +159,10 @@ result_void logger::start() {
             pimpl_->collector_->start();
         }
     }
-    return result_void::success();
+    return common::ok();
 }
 
-result_void logger::stop() {
+common::VoidResult logger::stop() {
     if (pimpl_ && pimpl_->running_) {
         // Stop async collector if in async mode
         // The collector's stop() drains the queue and flushes writers automatically
@@ -175,14 +175,14 @@ result_void logger::stop() {
 
         pimpl_->running_ = false;
     }
-    return result_void::success();
+    return common::ok();
 }
 
 bool logger::is_running() const {
     return pimpl_ && pimpl_->running_;
 }
 
-result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
+common::VoidResult logger::add_writer(std::unique_ptr<base_writer> writer) {
     if (pimpl_ && writer) {
         std::shared_ptr<base_writer> shared_writer(std::move(writer));
 
@@ -196,7 +196,7 @@ result_void logger::add_writer(std::unique_ptr<base_writer> writer) {
             pimpl_->collector_->add_writer(shared_writer);
         }
     }
-    return result_void::success();
+    return common::ok();
 }
 
 void logger::add_writer(const std::string& /*name*/, std::unique_ptr<base_writer> writer) {
@@ -215,7 +215,7 @@ void logger::add_writer(const std::string& /*name*/, std::unique_ptr<base_writer
     }
 }
 
-result_void logger::clear_writers() {
+common::VoidResult logger::clear_writers() {
     if (pimpl_) {
         {
             std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
@@ -227,7 +227,7 @@ result_void logger::clear_writers() {
             pimpl_->collector_->clear_writers();
         }
     }
-    return result_void::success();
+    return common::ok();
 }
 
 void logger::set_min_level(log_level level) {
@@ -552,9 +552,9 @@ bool logger::is_enabled(log_level level) const {
     return pimpl_ && meets_threshold(level, pimpl_->min_level_.load());
 }
 
-result_void logger::enable_metrics_collection(bool enable) {
+common::VoidResult logger::enable_metrics_collection(bool enable) {
     if (!pimpl_) {
-        return make_logger_error(logger_error_code::invalid_argument, "Logger not initialized");
+        return make_logger_void_result(logger_error_code::invalid_argument, "Logger not initialized");
     }
 
     pimpl_->metrics_enabled_ = enable;
@@ -562,7 +562,7 @@ result_void logger::enable_metrics_collection(bool enable) {
         metrics::g_logger_stats.reset();
     }
 
-    return result_void::success();
+    return common::ok();
 }
 
 bool logger::is_metrics_collection_enabled() const {

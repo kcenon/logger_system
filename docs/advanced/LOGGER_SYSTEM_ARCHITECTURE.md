@@ -205,7 +205,7 @@ struct logger_config {
     bool enable_source_location = true;  // C++20 feature
 
     // Comprehensive validation
-    result_void validate() const;
+    common::VoidResult validate() const;
 };
 
 }  // namespace kcenon::logger
@@ -249,7 +249,7 @@ public:
                                std::unique_ptr<base_writer> writer);
 
     // Build
-    result_void validate() const;
+    common::VoidResult validate() const;
     result<std::unique_ptr<logger>> build();
 };
 
@@ -301,8 +301,8 @@ namespace kcenon::logger {
 class log_writer_interface {
 public:
     virtual ~log_writer_interface() = default;
-    virtual result_void write(const log_entry& entry) = 0;
-    virtual result_void flush() = 0;
+    virtual common::VoidResult write(const log_entry& entry) = 0;
+    virtual common::VoidResult flush() = 0;
     virtual bool is_healthy() const { return true; }
 };
 
@@ -571,14 +571,14 @@ auto logger = logger_builder()
 ```cpp
 class database_writer : public kcenon::logger::log_writer_interface {
 public:
-    result_void write(const kcenon::logger::log_entry& entry) override {
+    common::VoidResult write(const kcenon::logger::log_entry& entry) override {
         // Database insert logic
-        return common::VoidResult{};
+        return common::ok();
     }
 
-    result_void flush() override {
+    common::VoidResult flush() override {
         // Commit transaction
-        return common::VoidResult{};
+        return common::ok();
     }
 };
 

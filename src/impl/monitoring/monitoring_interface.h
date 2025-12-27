@@ -236,14 +236,14 @@ public:
      * @brief Reset all metrics
      * @return Result indicating success or error
      */
-    virtual result_void reset_metrics() = 0;
-    
+    virtual common::VoidResult reset_metrics() = 0;
+
     /**
      * @brief Enable or disable metric collection
      * @param enable true to enable, false to disable
      * @return Result indicating success or error
      */
-    virtual result_void set_enabled(bool enable) = 0;
+    virtual common::VoidResult set_enabled(bool enable) = 0;
     
     /**
      * @brief Check if monitoring is enabled

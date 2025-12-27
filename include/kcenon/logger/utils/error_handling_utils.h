@@ -160,22 +160,22 @@ inline void log_error_context(const error_context& context) {
  *
  * Usage example:
  * @code
- * result_void write(const log_entry& entry) {
- *     return try_write_operation([&]() -> result_void {
+ * common::VoidResult write(const log_entry& entry) {
+ *     return try_write_operation([&]() -> common::VoidResult {
  *         // Perform write operation
  *         file_stream_ << formatted << '\n';
- *         return {};
+ *         return common::ok();
  *     });
  * }
  * @endcode
  *
- * @tparam F Callable type that returns result_void
+ * @tparam F Callable type that returns common::VoidResult
  * @param operation The operation to execute
  * @param default_error_code Error code to use for unexpected exceptions (default: file_write_failed)
- * @return result_void Success or error result
+ * @return common::VoidResult Success or error result
  */
 template<typename F>
-result_void try_write_operation(
+common::VoidResult try_write_operation(
     F&& operation,
     logger_error_code default_error_code = logger_error_code::file_write_failed
 ) {
@@ -184,42 +184,42 @@ result_void try_write_operation(
     }
     catch (const std::filesystem::filesystem_error& e) {
         // Filesystem-specific errors (permission denied, disk full, etc.)
-        return make_logger_error(
+        return make_logger_void_result(
             logger_error_code::file_permission_denied,
             std::string("Filesystem error: ") + e.what()
         );
     }
     catch (const std::ios_base::failure& e) {
         // I/O operation failures (stream errors, write errors, etc.)
-        return make_logger_error(
+        return make_logger_void_result(
             logger_error_code::file_write_failed,
             std::string("I/O error: ") + e.what()
         );
     }
     catch (const std::system_error& e) {
         // System-level errors
-        return make_logger_error(
+        return make_logger_void_result(
             default_error_code,
             std::string("System error: ") + e.what()
         );
     }
     catch (const std::bad_alloc& e) {
         // Memory allocation failures
-        return make_logger_error(
+        return make_logger_void_result(
             logger_error_code::buffer_overflow,
             std::string("Memory allocation failed: ") + e.what()
         );
     }
     catch (const std::exception& e) {
         // Generic exception catch-all
-        return make_logger_error(
+        return make_logger_void_result(
             default_error_code,
             std::string("Unexpected error: ") + e.what()
         );
     }
     catch (...) {
         // Non-standard exception
-        return make_logger_error(
+        return make_logger_void_result(
             default_error_code,
             "Unknown error (non-standard exception)"
         );
@@ -232,12 +232,12 @@ result_void try_write_operation(
  * Specialized version of try_write_operation for file open operations.
  * Uses file_open_failed as the default error code.
  *
- * @tparam F Callable type that returns result_void
+ * @tparam F Callable type that returns common::VoidResult
  * @param operation The operation to execute
- * @return result_void Success or error result
+ * @return common::VoidResult Success or error result
  */
 template<typename F>
-result_void try_open_operation(F&& operation) {
+common::VoidResult try_open_operation(F&& operation) {
     return try_write_operation(
         std::forward<F>(operation),
         logger_error_code::file_open_failed
@@ -250,12 +250,12 @@ result_void try_open_operation(F&& operation) {
  * Specialized version of try_write_operation for network operations.
  * Uses network_send_failed as the default error code.
  *
- * @tparam F Callable type that returns result_void
+ * @tparam F Callable type that returns common::VoidResult
  * @param operation The operation to execute
- * @return result_void Success or error result
+ * @return common::VoidResult Success or error result
  */
 template<typename F>
-result_void try_network_operation(F&& operation) {
+common::VoidResult try_network_operation(F&& operation) {
     return try_write_operation(
         std::forward<F>(operation),
         logger_error_code::network_send_failed
@@ -268,12 +268,12 @@ result_void try_network_operation(F&& operation) {
  * Specialized version of try_write_operation for encryption operations.
  * Uses encryption_failed as the default error code.
  *
- * @tparam F Callable type that returns result_void
+ * @tparam F Callable type that returns common::VoidResult
  * @param operation The operation to execute
- * @return result_void Success or error result
+ * @return common::VoidResult Success or error result
  */
 template<typename F>
-result_void try_encryption_operation(F&& operation) {
+common::VoidResult try_encryption_operation(F&& operation) {
     return try_write_operation(
         std::forward<F>(operation),
         logger_error_code::encryption_failed
@@ -293,23 +293,23 @@ result_void try_encryption_operation(F&& operation) {
  *     logger_error_code::file_write_failed,
  *     "File stream is not open"
  * );
- * if (!check) return check;
+ * if (check.is_err()) return check;
  * @endcode
  *
  * @param condition The condition to check
  * @param error_code Error code to return if condition is false
  * @param message Error message
- * @return result_void Success if condition is true, error otherwise
+ * @return common::VoidResult Success if condition is true, error otherwise
  */
-inline result_void check_condition(
+inline common::VoidResult check_condition(
     bool condition,
     logger_error_code error_code,
     const std::string& message
 ) {
     if (!condition) {
-        return make_logger_error(error_code, message);
+        return make_logger_void_result(error_code, message);
     }
-    return {};
+    return common::ok();
 }
 
 /**
@@ -321,38 +321,38 @@ inline result_void check_condition(
  * @tparam Stream Stream type (e.g., std::ofstream, std::ifstream)
  * @param stream The stream to check
  * @param operation_name Name of the operation for error message (e.g., "write", "open")
- * @return result_void Success if stream is good, error otherwise
+ * @return common::VoidResult Success if stream is good, error otherwise
  */
 template<typename Stream>
-inline result_void check_stream_state(
+inline common::VoidResult check_stream_state(
     const Stream& stream,
     const std::string& operation_name = "operation"
 ) {
     if (!stream.good()) {
         if (stream.eof()) {
-            return make_logger_error(
+            return make_logger_void_result(
                 logger_error_code::file_write_failed,
                 "Stream error: Unexpected end of file during " + operation_name
             );
         }
         if (stream.fail()) {
-            return make_logger_error(
+            return make_logger_void_result(
                 logger_error_code::file_write_failed,
                 "Stream error: Logical error during " + operation_name
             );
         }
         if (stream.bad()) {
-            return make_logger_error(
+            return make_logger_void_result(
                 logger_error_code::file_write_failed,
                 "Stream error: Read/write error during " + operation_name
             );
         }
-        return make_logger_error(
+        return make_logger_void_result(
             logger_error_code::file_write_failed,
             "Stream is in an error state after " + operation_name
         );
     }
-    return {};
+    return common::ok();
 }
 
 /**
@@ -361,19 +361,19 @@ inline result_void check_stream_state(
  * Checks if a file exists at the given path.
  *
  * @param path The file path to check
- * @return result_void Success if file exists, error otherwise
+ * @return common::VoidResult Success if file exists, error otherwise
  */
-inline result_void check_file_exists(const std::filesystem::path& path) {
+inline common::VoidResult check_file_exists(const std::filesystem::path& path) {
     try {
         if (!std::filesystem::exists(path)) {
-            return make_logger_error(
+            return make_logger_void_result(
                 logger_error_code::file_open_failed,
                 "File does not exist: " + path.string()
             );
         }
-        return {};
+        return common::ok();
     } catch (const std::filesystem::filesystem_error& e) {
-        return make_logger_error(
+        return make_logger_void_result(
             logger_error_code::file_permission_denied,
             std::string("Cannot access file: ") + e.what()
         );
@@ -386,23 +386,23 @@ inline result_void check_file_exists(const std::filesystem::path& path) {
  * Creates a directory if it doesn't exist, with proper error handling.
  *
  * @param dir The directory path to create
- * @return result_void Success if directory exists or was created, error otherwise
+ * @return common::VoidResult Success if directory exists or was created, error otherwise
  */
-inline result_void ensure_directory_exists(const std::filesystem::path& dir) {
+inline common::VoidResult ensure_directory_exists(const std::filesystem::path& dir) {
     if (dir.empty()) {
-        return {}; // Empty path is valid (current directory)
+        return common::ok(); // Empty path is valid (current directory)
     }
 
-    return try_open_operation([&]() -> result_void {
+    return try_open_operation([&]() -> common::VoidResult {
         if (!std::filesystem::exists(dir)) {
             if (!std::filesystem::create_directories(dir)) {
-                return make_logger_error(
+                return make_logger_void_result(
                     logger_error_code::file_permission_denied,
                     "Failed to create directory: " + dir.string()
                 );
             }
         }
-        return {};
+        return common::ok();
     });
 }
 
@@ -457,10 +457,10 @@ inline void safe_destructor_operation(
 /**
  * @brief Safe operation with result for destructors
  *
- * Similar to safe_destructor_operation but for operations that return result_void.
+ * Similar to safe_destructor_operation but for operations that return common::VoidResult.
  * Logs both exceptions and result errors.
  *
- * @tparam F Callable type that returns result_void
+ * @tparam F Callable type that returns common::VoidResult
  * @param operation_name Name of the operation for logging
  * @param operation The operation to execute
  */
@@ -471,10 +471,10 @@ inline void safe_destructor_result_operation(
 ) noexcept {
     try {
         auto result = operation();
-        if (!result) {
+        if (result.is_err()) {
             error_context ctx(
-                result.error_code(),
-                result.error_message(),
+                get_logger_error_code(result),
+                result.error().message,
                 operation_name
             );
             log_error_context(ctx);

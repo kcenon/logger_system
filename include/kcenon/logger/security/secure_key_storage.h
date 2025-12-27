@@ -171,14 +171,14 @@ public:
      * @param allowed_base Base directory for key storage
      * @return Success or error
      */
-    static result_void save_key(
+    static common::VoidResult save_key(
         const secure_key& key,
         const std::filesystem::path& path,
         const std::filesystem::path& allowed_base = "/var/log/keys"
     ) {
         // 1. Validate path
         auto validation = validate_key_path(path, allowed_base);
-        if (!validation) {
+        if (validation.is_err()) {
             return validation;
         }
 
@@ -189,7 +189,7 @@ public:
                 std::filesystem::create_directories(parent);
             }
         } catch (const std::filesystem::filesystem_error& e) {
-            return make_logger_error(
+            return make_logger_void_result(
                 logger_error_code::file_write_failed,
                 std::string("Failed to create key directory: ") + e.what()
             );
@@ -198,7 +198,7 @@ public:
         // 3. Write key to file
         std::ofstream file(path, std::ios::binary | std::ios::trunc);
         if (!file) {
-            return make_logger_error(
+            return make_logger_void_result(
                 logger_error_code::file_write_failed,
                 "Failed to open key file for writing"
             );
@@ -210,7 +210,7 @@ public:
         );
 
         if (file.fail()) {
-            return make_logger_error(
+            return make_logger_void_result(
                 logger_error_code::file_write_failed,
                 "Failed to write key data"
             );
@@ -229,13 +229,13 @@ public:
         } catch (const std::filesystem::filesystem_error& e) {
             // Permission setting failed, delete the insecure file
             std::filesystem::remove(path);
-            return make_logger_error(
+            return make_logger_void_result(
                 logger_error_code::file_permission_denied,
                 std::string("Failed to set secure permissions: ") + e.what()
             );
         }
 
-        return result_void::success();
+        return common::ok();
     }
 
     /**
@@ -252,10 +252,10 @@ public:
     ) {
         // 1. Validate path
         auto validation = validate_key_path(path, allowed_base);
-        if (!validation) {
+        if (validation.is_err()) {
             return make_logger_error<secure_key>(
-                validation.error_code(),
-                validation.error_message()
+                get_logger_error_code(validation),
+                get_logger_error_message(validation)
             );
         }
 
@@ -337,7 +337,7 @@ private:
      * @param allowed_base Base directory that path must be within
      * @return Success or error
      */
-    static result_void validate_key_path(
+    static common::VoidResult validate_key_path(
         const std::filesystem::path& path,
         const std::filesystem::path& allowed_base
     ) {
@@ -353,16 +353,16 @@ private:
             );
 
             if (mismatch_iter != canonical_base.end()) {
-                return make_logger_error(
+                return make_logger_void_result(
                     logger_error_code::path_traversal_detected,
                     "Key path must be within allowed directory: " +
                     canonical_base.string()
                 );
             }
 
-            return result_void::success();
+            return common::ok();
         } catch (const std::filesystem::filesystem_error& e) {
-            return make_logger_error(
+            return make_logger_void_result(
                 logger_error_code::path_traversal_detected,
                 std::string("Path validation failed: ") + e.what()
             );
