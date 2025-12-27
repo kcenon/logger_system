@@ -55,39 +55,39 @@ public:
         }
     }
 
-    result_void write_raw(std::string_view message) override {
+    common::VoidResult write_raw(std::string_view message) override {
         std::lock_guard<std::mutex> lock(mutex_);
 
         if (!file_.is_open() || !file_.good()) {
             is_healthy_ = false;
-            return logger_error_code::write_failed;
+            return make_logger_void_result(logger_error_code::file_write_failed);
         }
 
         file_ << message;
 
         if (file_.fail()) {
             is_healthy_ = false;
-            return logger_error_code::write_failed;
+            return make_logger_void_result(logger_error_code::file_write_failed);
         }
 
-        return {};
+        return common::ok();
     }
 
-    result_void flush() override {
+    common::VoidResult flush() override {
         std::lock_guard<std::mutex> lock(mutex_);
 
         if (!file_.is_open()) {
-            return logger_error_code::write_failed;
+            return make_logger_void_result(logger_error_code::file_write_failed);
         }
 
         file_.flush();
 
         if (file_.fail()) {
             is_healthy_ = false;
-            return logger_error_code::write_failed;
+            return make_logger_void_result(logger_error_code::file_write_failed);
         }
 
-        return {};
+        return common::ok();
     }
 
     bool is_healthy() const override {

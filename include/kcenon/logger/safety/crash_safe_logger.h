@@ -226,14 +226,14 @@ public:
     /**
      * @brief Start the underlying logger
      */
-    result_void start() {
+    common::VoidResult start() {
         return logger_->start();
     }
 
     /**
      * @brief Stop the underlying logger
      */
-    result_void stop() {
+    common::VoidResult stop() {
         stop_auto_flush_thread();
         return logger_->stop();
     }

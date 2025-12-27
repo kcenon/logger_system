@@ -61,18 +61,18 @@ public:
     ~mock_writer() override = default;
 
     // base_writer interface implementation
-    result_void write(thread_module::log_level level,
+    common::VoidResult write(thread_module::log_level level,
                       const std::string& message,
                       const std::string& file,
                       int line,
                       const std::string& function,
                       const std::chrono::system_clock::time_point& timestamp) override {
         if (should_fail_.load()) {
-            return make_logger_error(failure_error_);
+            return make_logger_void_result(failure_error_);
         }
 
         if (!is_open_.load()) {
-            return make_logger_error(logger_error_code::writer_not_healthy);
+            return make_logger_void_result(logger_error_code::writer_not_healthy);
         }
 
         if (write_delay_.count() > 0) {
@@ -86,19 +86,19 @@ public:
             std::lock_guard<std::mutex> lock(mutex_);
             written_entries_.emplace_back(std::move(entry), std::chrono::steady_clock::now());
         }
-        
+
         write_count_.fetch_add(1);
-        return {};
+        return common::ok();
     }
-    
+
     // Legacy write method for compatibility
-    result_void write(const log_entry& entry) {
+    common::VoidResult write(const log_entry& entry) {
         if (should_fail_.load()) {
-            return make_logger_error(failure_error_);
+            return make_logger_void_result(failure_error_);
         }
 
         if (!is_open_.load()) {
-            return make_logger_error(logger_error_code::writer_not_healthy);
+            return make_logger_void_result(logger_error_code::writer_not_healthy);
         }
 
         if (write_delay_.count() > 0) {
@@ -114,28 +114,28 @@ public:
             }
             written_entries_.emplace_back(std::move(copy), std::chrono::steady_clock::now());
         }
-        
+
         write_count_.fetch_add(1);
-        return {};
+        return common::ok();
     }
 
-    result_void flush() override {
+    common::VoidResult flush() override {
         if (should_fail_.load()) {
-            return make_logger_error(failure_error_);
+            return make_logger_void_result(failure_error_);
         }
 
         flush_count_.fetch_add(1);
-        return {};
+        return common::ok();
     }
 
-    result_void open() {
+    common::VoidResult open() {
         is_open_.store(true);
-        return {};
+        return common::ok();
     }
 
-    result_void close() {
+    common::VoidResult close() {
         is_open_.store(false);
-        return {};
+        return common::ok();
     }
 
     bool is_thread_safe() const {

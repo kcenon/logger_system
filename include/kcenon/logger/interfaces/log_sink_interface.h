@@ -7,6 +7,7 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
+#include <kcenon/common/patterns/result.h>
 #include <kcenon/logger/core/error_codes.h>
 
 namespace kcenon::logger {
@@ -28,9 +29,9 @@ public:
     /**
      * @brief Process a log entry
      * @param entry The log entry to process
-     * @return result_void indicating success or failure
+     * @return common::VoidResult indicating success or failure
      */
-    virtual result_void process(const log_entry& entry) = 0;
+    virtual common::VoidResult process(const log_entry& entry) = 0;
     
     /**
      * @brief Check if this sink supports async processing

@@ -45,7 +45,7 @@ using namespace logger_module;
 // Mock writer for testing log collector
 class MockCollectorWriter : public base_writer {
 public:
-    result_void write(thread_module::log_level level, const std::string& message,
+    common::VoidResult write(thread_module::log_level level, const std::string& message,
                       const std::string& /* file */, int /* line */,
                       const std::string& /* function */,
                       const std::chrono::system_clock::time_point& /* timestamp */) override {
@@ -53,12 +53,12 @@ public:
         last_message_ = message;
         last_level_ = level;
         messages_.push_back(message);
-        return result_void{};
+        return common::ok();
     }
 
-    result_void flush() override {
+    common::VoidResult flush() override {
         flush_count_++;
-        return result_void{};
+        return common::ok();
     }
 
     std::string get_name() const override {

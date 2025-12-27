@@ -75,10 +75,10 @@ public:
         return health_.load();
     }
 
-    result_void record_event(const std::string& event_name, 
+    common::VoidResult record_event(const std::string& event_name,
                             const std::string& details) {
         if (should_fail_.load()) {
-            return make_logger_error(logger_error_code::operation_failed);
+            return make_logger_void_result(logger_error_code::operation_failed);
         }
 
         // Simply increment a counter for the event
@@ -90,7 +90,7 @@ public:
             metrics_[event_name] = 1.0;
         }
 
-        return {};
+        return common::ok();
     }
 
     // Mock control methods

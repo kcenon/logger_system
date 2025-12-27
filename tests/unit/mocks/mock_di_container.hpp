@@ -77,27 +77,27 @@ public:
         return instance;
     }
 
-    result_void register_factory(const std::string& name,
+    common::VoidResult register_factory(const std::string& name,
                                 std::function<std::shared_ptr<base_writer>()> factory) {
         if (should_fail_.load()) {
-            return make_logger_error(failure_error_);
+            return make_logger_void_result(failure_error_);
         }
 
         std::lock_guard<std::mutex> lock(mutex_);
         factories_[name] = factory;
-        return {};
+        return common::ok();
     }
 
     // Missing pure virtual methods from di_container_interface
-    result_void register_singleton(const std::string& name,
+    common::VoidResult register_singleton(const std::string& name,
                                   std::shared_ptr<base_writer> instance) override {
         if (should_fail_.load()) {
-            return make_logger_error(failure_error_);
+            return make_logger_void_result(failure_error_);
         }
-        
+
         std::lock_guard<std::mutex> lock(mutex_);
         singletons_[name] = instance;
-        return {};
+        return common::ok();
     }
     
     bool is_registered(const std::string& name) const override {
@@ -106,11 +106,11 @@ public:
                singletons_.find(name) != singletons_.end();
     }
     
-    result_void clear() override {
+    common::VoidResult clear() override {
         std::lock_guard<std::mutex> lock(mutex_);
         factories_.clear();
         singletons_.clear();
-        return {};
+        return common::ok();
     }
     
     size_t size() const override {
@@ -119,15 +119,15 @@ public:
     }
     
     // Mock-specific methods
-    result_void register_instance(const std::string& name,
+    common::VoidResult register_instance(const std::string& name,
                                  std::shared_ptr<base_writer> instance) {
         if (should_fail_.load()) {
-            return make_logger_error(failure_error_);
+            return make_logger_void_result(failure_error_);
         }
 
         std::lock_guard<std::mutex> lock(mutex_);
         singletons_[name] = instance;
-        return {};
+        return common::ok();
     }
 
     // Control methods

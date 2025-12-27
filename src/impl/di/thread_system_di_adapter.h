@@ -89,44 +89,44 @@ public:
      * @param factory Function that creates instances of T
      * @return Result indicating success or error
      */
-    result_void register_factory(
+    common::VoidResult register_factory(
         const std::string& name,
         std::function<std::shared_ptr<T>()> factory) override {
-        
+
         if (name.empty() || !factory) {
-            return error_code::invalid_argument;
+            return make_logger_void_result(logger_error_code::invalid_argument);
         }
-        
+
         try {
             container_->register_factory<T>(name, factory);
-            return {};
+            return common::ok();
         } catch (const std::exception& e) {
-            return error_code::registration_failed;
+            return make_logger_void_result(logger_error_code::registration_failed);
         }
     }
-    
+
     /**
      * @brief Register a singleton instance
      * @param name The name to register the instance under
      * @param instance The singleton instance to register
      * @return Result indicating success or error
      */
-    result_void register_singleton(
+    common::VoidResult register_singleton(
         const std::string& name,
         std::shared_ptr<T> instance) override {
-        
+
         if (name.empty() || !instance) {
-            return error_code::invalid_argument;
+            return make_logger_void_result(logger_error_code::invalid_argument);
         }
-        
+
         try {
             container_->register_singleton<T>(name, instance);
-            return {};
+            return common::ok();
         } catch (const std::exception& e) {
-            return error_code::registration_failed;
+            return make_logger_void_result(logger_error_code::registration_failed);
         }
     }
-    
+
     /**
      * @brief Check if a component is registered
      * @param name The name to check
@@ -139,17 +139,17 @@ public:
             return false;
         }
     }
-    
+
     /**
      * @brief Clear all registrations
      * @return Result indicating success or error
      */
-    result_void clear() override {
+    common::VoidResult clear() override {
         try {
             container_->clear<T>();
-            return {};
+            return common::ok();
         } catch (const std::exception& e) {
-            return error_code::operation_failed;
+            return make_logger_void_result(logger_error_code::operation_failed);
         }
     }
     

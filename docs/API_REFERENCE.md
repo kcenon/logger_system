@@ -135,7 +135,7 @@ log_level get_min_level() const;      // Deprecated: use get_level()
 
 ```cpp
 // Add writer (unnamed)
-result_void add_writer(std::unique_ptr<base_writer> writer);
+common::VoidResult add_writer(std::unique_ptr<base_writer> writer);
 
 // Add writer with name
 void add_writer(const std::string& name, std::unique_ptr<base_writer> writer);
@@ -147,17 +147,17 @@ bool remove_writer(const std::string& name);
 base_writer* get_writer(const std::string& name);
 
 // Remove all writers
-result_void clear_writers();
+common::VoidResult clear_writers();
 ```
 
 ### Lifecycle Management
 
 ```cpp
 // Start async processing
-result_void start();
+common::VoidResult start();
 
 // Stop async processing
-result_void stop();
+common::VoidResult stop();
 
 // Check if running
 bool is_running() const;
@@ -167,14 +167,14 @@ bool is_running() const;
 
 ```cpp
 // Enable/disable metrics
-result_void enable_metrics_collection(bool enable = true);
+common::VoidResult enable_metrics_collection(bool enable = true);
 bool is_metrics_collection_enabled() const;
 
 // Get metrics
 result<metrics::logger_performance_stats> get_current_metrics() const;
 result<std::unique_ptr<metrics::logger_performance_stats>> get_metrics_history(
     std::chrono::seconds duration) const;
-result_void reset_metrics();
+common::VoidResult reset_metrics();
 ```
 
 ### Filtering
@@ -195,15 +195,15 @@ void set_di_container(di::di_container_interface* container);
 bool has_di_container() const;
 
 // Add writer from DI
-result_void add_writer_from_di(const std::string& name);
+common::VoidResult add_writer_from_di(const std::string& name);
 
 // Register writer factory
-result_void register_writer_factory(
+common::VoidResult register_writer_factory(
     const std::string& name,
     std::function<std::shared_ptr<base_writer>()> factory);
 
 // Enable internal DI
-result_void enable_di(di::di_container_factory::container_type type =
+common::VoidResult enable_di(di::di_container_factory::container_type type =
                       di::di_container_factory::container_type::automatic);
 ```
 
@@ -262,7 +262,7 @@ struct logger_config {
     std::chrono::milliseconds network_timeout{5000};
 
     // Validation
-    result_void validate() const;
+    common::VoidResult validate() const;
 };
 ```
 
@@ -360,7 +360,7 @@ logger_builder& with_error_handler(
 #### Build
 
 ```cpp
-result_void validate() const;
+common::VoidResult validate() const;
 result<std::unique_ptr<logger>> build();
 const logger_config& get_config() const;
 ```
@@ -425,8 +425,8 @@ logger_builder& clear_strategies();
 class log_writer_interface {
 public:
     virtual ~log_writer_interface() = default;
-    virtual result_void write(const log_entry& entry) = 0;
-    virtual result_void flush() = 0;
+    virtual common::VoidResult write(const log_entry& entry) = 0;
+    virtual common::VoidResult flush() = 0;
     virtual bool is_healthy() const { return true; }
 };
 ```
@@ -526,9 +526,9 @@ return common::make_error<void>(
 ### Helper Functions
 
 ```cpp
-// Create error result
-result_void make_error(logger_error_code code,
-                       const std::string& message = "");
+// Create void error result (for common::VoidResult)
+common::VoidResult make_logger_void_result(logger_error_code code,
+                                           const std::string& message = "");
 
 // Create typed error result
 template<typename T>
@@ -557,8 +557,8 @@ public:
 class file_writer : public base_writer {
 public:
     file_writer(const std::string& filename);
-    result_void open();
-    result_void close();
+    common::VoidResult open();
+    common::VoidResult close();
 };
 ```
 
@@ -795,13 +795,13 @@ auto logger = logger_builder()
 ```cpp
 class custom_writer : public kcenon::logger::log_writer_interface {
 public:
-    result_void write(const kcenon::logger::log_entry& entry) override {
+    common::VoidResult write(const kcenon::logger::log_entry& entry) override {
         // Custom implementation
-        return common::VoidResult{};
+        return common::ok();
     }
 
-    result_void flush() override {
-        return common::VoidResult{};
+    common::VoidResult flush() override {
+        return common::ok();
     }
 };
 ```

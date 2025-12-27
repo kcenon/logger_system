@@ -139,13 +139,13 @@ auto logger = std::move(result.value());
 
 **Core Operations with Result&lt;T&gt;**:
 ```cpp
-// Configuration operations return result_void
+// Configuration operations return common::VoidResult
 auto add_result = logger->add_writer("file",
     std::make_unique<kcenon::logger::file_writer>("app.log"));
 
-if (!add_result) {
+if (add_result.is_err()) {
     std::cerr << "Failed to add writer: "
-              << add_result.error().message() << "\n";
+              << add_result.error().message << "\n";
 }
 
 // Hot path logging uses void for zero overhead

@@ -61,63 +61,63 @@ batch_writer::~batch_writer() {
     }
 }
 
-result_void batch_writer::write(logger_system::log_level level,
-                               const std::string& message,
-                               const std::string& file,
-                               int line,
-                               const std::string& function,
-                               const std::chrono::system_clock::time_point& timestamp) {
-    
+common::VoidResult batch_writer::write(logger_system::log_level level,
+                                       const std::string& message,
+                                       const std::string& file,
+                                       int line,
+                                       const std::string& function,
+                                       const std::chrono::system_clock::time_point& timestamp) {
+
     if (shutting_down_) {
-        return make_logger_error(logger_error_code::queue_stopped, "Batch writer is shutting down");
+        return make_logger_void_result(logger_error_code::queue_stopped, "Batch writer is shutting down");
     }
-    
+
     bool should_flush = false;
-    
+
     {
         std::lock_guard<std::mutex> lock(batch_mutex_);
-        
+
         // Add entry to batch
         batch_.emplace_back(level, message, file, line, function, timestamp);
         stats_.total_entries++;
-        
+
         // Check if we should flush
         should_flush = should_flush_by_size();
         if (should_flush) {
             stats_.flush_on_size++;
         }
     }
-    
+
     // Flush outside of lock to avoid blocking other writers
     if (should_flush) {
         return flush();
     }
-    
-    return result_void{};
+
+    return common::ok();
 }
 
-result_void batch_writer::flush() {
+common::VoidResult batch_writer::flush() {
     if (shutting_down_ && batch_.empty()) {
-        return result_void{};
+        return common::ok();
     }
-    
+
     std::lock_guard<std::mutex> lock(batch_mutex_);
-    
+
     if (!shutting_down_) {
         stats_.manual_flushes++;
     }
-    
+
     return flush_batch_unsafe();
 }
 
-result_void batch_writer::flush_batch_unsafe() {
+common::VoidResult batch_writer::flush_batch_unsafe() {
     if (batch_.empty()) {
-        return result_void{};
+        return common::ok();
     }
-    
+
     // Write all entries in the batch
-    result_void last_result;
-    
+    common::VoidResult last_result = common::ok();
+
     for (const auto& entry : batch_) {
         auto result = underlying_writer_->write(
             entry.level,
@@ -127,28 +127,28 @@ result_void batch_writer::flush_batch_unsafe() {
             entry.function,
             entry.timestamp
         );
-        
-        if (!result) {
+
+        if (result.is_err()) {
             last_result = result;
             stats_.dropped_entries++;
         }
     }
-    
+
     // Flush the underlying writer
     auto flush_result = underlying_writer_->flush();
-    if (!flush_result && !last_result) {
+    if (flush_result.is_err() && last_result.is_ok()) {
         last_result = flush_result;
     }
-    
+
     // Update statistics
     stats_.total_batches++;
-    
+
     // Clear the batch
     batch_.clear();
     last_flush_time_ = std::chrono::steady_clock::now();
-    
+
     // Return the last error if any
-    return last_result ? result_void{} : last_result;
+    return last_result;
 }
 
 std::string batch_writer::get_name() const {
