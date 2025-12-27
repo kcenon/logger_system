@@ -184,45 +184,45 @@ public:
      * @brief Reset all metrics
      * @return Result indicating success
      */
-    result_void reset_metrics() override {
-        result_void result;
-        
+    common::VoidResult reset_metrics() override {
+        common::VoidResult result = common::ok();
+
         // Reset thread_system metrics if available
         if (monitorable_) {
             try {
                 auto ts_result = monitorable_->reset_metrics();
-                if (!ts_result) {
-                    result = error_code::operation_failed;
+                if (ts_result.is_err()) {
+                    result = make_logger_void_result(logger_error_code::operation_failed);
                 }
             } catch (...) {
-                result = error_code::operation_failed;
+                result = make_logger_void_result(logger_error_code::operation_failed);
             }
         }
-        
+
         // Reset fallback monitor
         if (fallback_monitor_) {
             auto fb_result = fallback_monitor_->reset_metrics();
-            if (!fb_result && result) {
+            if (fb_result.is_err() && result.is_ok()) {
                 result = fb_result;
             }
         }
-        
+
         return result;
     }
-    
+
     /**
      * @brief Enable or disable monitoring
      * @param enable true to enable
      * @return Result indicating success
      */
-    result_void set_enabled(bool enable) override {
+    common::VoidResult set_enabled(bool enable) override {
         enabled_ = enable;
-        
+
         if (fallback_monitor_) {
             fallback_monitor_->set_enabled(enable);
         }
-        
-        return {};
+
+        return common::ok();
     }
     
     /**

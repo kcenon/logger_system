@@ -89,12 +89,12 @@ public:
     /**
      * @brief Write log entry with automatic rotation check
      */
-    result_void write(logger_system::log_level level,
-                     const std::string& message,
-                     const std::string& file,
-                     int line,
-                     const std::string& function,
-                     const std::chrono::system_clock::time_point& timestamp) override;
+    common::VoidResult write(logger_system::log_level level,
+                             const std::string& message,
+                             const std::string& file,
+                             int line,
+                             const std::string& function,
+                             const std::chrono::system_clock::time_point& timestamp) override;
 
     /**
      * @brief Get writer name

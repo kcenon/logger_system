@@ -265,21 +265,21 @@ public:
      * @brief Reset all metrics
      * @return Result indicating success
      */
-    result_void reset_metrics() override {
+    common::VoidResult reset_metrics() override {
         messages_logged_ = 0;
         messages_dropped_ = 0;
         errors_encountered_ = 0;
         writers_failed_ = 0;
-        
+
         total_processing_time_us_ = 0;
         max_processing_time_us_ = 0;
         min_processing_time_us_ = UINT64_MAX;
-        
+
         buffer_usage_bytes_ = 0;
         max_buffer_usage_bytes_ = 0;
         queue_size_ = 0;
         max_queue_size_ = 0;
-        
+
         {
             std::lock_guard<std::mutex> lock(mutex_);
             counters_.clear();
@@ -287,20 +287,20 @@ public:
             histograms_.clear();
             health_issues_.clear();
         }
-        
+
         start_time_ = std::chrono::system_clock::now();
-        
-        return {};
+
+        return common::ok();
     }
-    
+
     /**
      * @brief Enable or disable monitoring
      * @param enable true to enable
      * @return Result indicating success
      */
-    result_void set_enabled(bool enable) override {
+    common::VoidResult set_enabled(bool enable) override {
         enabled_ = enable;
-        return {};
+        return common::ok();
     }
     
     /**

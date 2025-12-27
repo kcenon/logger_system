@@ -811,7 +811,7 @@ public:
      * @brief Validate current configuration without building
      * @return Validation result
      */
-    result_void validate() const {
+    common::VoidResult validate() const {
         return config_.validate();
     }
     

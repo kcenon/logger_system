@@ -139,7 +139,7 @@ public:
     /**
      * @brief Write a log entry through the pipeline
      * @param entry The log entry to write
-     * @return result_void Success or error code
+     * @return common::VoidResult Success or error code
      *
      * @details Pipeline stages:
      * 1. Format: entry -> formatter->format(entry) -> formatted_string
@@ -149,7 +149,7 @@ public:
      *
      * @since 1.3.0
      */
-    result_void write(const log_entry& entry) override {
+    common::VoidResult write(const log_entry& entry) override {
         // Stage 1: Format the log entry
         std::string formatted = formatter_->format(entry);
 
@@ -159,13 +159,13 @@ public:
 
     /**
      * @brief Flush the sink
-     * @return result_void Success or error code
+     * @return common::VoidResult Success or error code
      *
      * @details Delegates flushing to the sink.
      *
      * @since 1.3.0
      */
-    result_void flush() override {
+    common::VoidResult flush() override {
         return sink_->flush();
     }
 

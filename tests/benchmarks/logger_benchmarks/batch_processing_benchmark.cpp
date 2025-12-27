@@ -52,7 +52,7 @@ private:
     std::atomic<size_t> write_count_{0};
     
 public:
-    result_void write(thread_module::log_level level,
+    common::VoidResult write(thread_module::log_level level,
                      const std::string& message,
                      const std::string& file,
                      int line,
@@ -60,11 +60,11 @@ public:
                      const std::chrono::system_clock::time_point& timestamp) override {
         write_count_++;
         benchmark::DoNotOptimize(message.size());
-        return result_void{};
+        return common::ok();
     }
-    
-    result_void flush() override {
-        return result_void{};
+
+    common::VoidResult flush() override {
+        return common::ok();
     }
     
     std::string get_name() const override {

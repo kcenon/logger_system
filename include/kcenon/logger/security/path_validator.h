@@ -54,7 +54,7 @@ public:
      * @param strict_filename Whether to enforce strict filename rules (default: true)
      * @return Success or error describing the security issue
      */
-    result_void validate(
+    common::VoidResult validate(
         const std::filesystem::path& path,
         bool allow_symlinks = false,
         bool strict_filename = true
@@ -71,7 +71,7 @@ public:
             // 2. Check for symbolic links (if not allowed)
             if (!allow_symlinks && std::filesystem::exists(path)) {
                 if (std::filesystem::is_symlink(path)) {
-                    return make_logger_error(
+                    return make_logger_void_result(
                         logger_error_code::path_traversal_detected,
                         "Symbolic links are not allowed for security reasons"
                     );
@@ -85,7 +85,7 @@ public:
             );
 
             if (base_end != allowed_base_.end()) {
-                return make_logger_error(
+                return make_logger_void_result(
                     logger_error_code::path_traversal_detected,
                     "Path must be within allowed directory: " + allowed_base_.string()
                 );
@@ -96,17 +96,17 @@ public:
                 auto filename = path.filename().string();
 
                 if (!is_safe_filename(filename)) {
-                    return make_logger_error(
+                    return make_logger_void_result(
                         logger_error_code::invalid_filename,
                         "Filename contains invalid or potentially dangerous characters"
                     );
                 }
             }
 
-            return result_void::success();
+            return common::ok();
 
         } catch (const std::filesystem::filesystem_error& e) {
-            return make_logger_error(
+            return make_logger_void_result(
                 logger_error_code::path_traversal_detected,
                 std::string("Path validation failed: ") + e.what()
             );

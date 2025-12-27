@@ -39,7 +39,7 @@ critical_writer::critical_writer(
 
     // Initialize write-ahead log if enabled
     if (config_.write_ahead_log) {
-        auto wal_result = utils::try_open_operation([&]() -> result_void {
+        auto wal_result = utils::try_open_operation([&]() -> common::VoidResult {
             wal_stream_ = std::make_unique<std::ofstream>(
                 config_.wal_path,
                 std::ios::app | std::ios::binary
@@ -51,17 +51,17 @@ critical_writer::critical_writer(
                 "Failed to open WAL: " + config_.wal_path
             );
 
-            if (!check) {
+            if (check.is_err()) {
                 wal_stream_.reset();
                 return check;
             }
 
-            return {};
+            return common::ok();
         });
 
-        if (!wal_result) {
+        if (wal_result.is_err()) {
             std::cerr << "[critical_writer] WAL initialization failed: "
-                      << wal_result.error_message() << std::endl;
+                      << wal_result.error().message << std::endl;
             wal_stream_.reset();
         }
     }
@@ -99,7 +99,7 @@ critical_writer::~critical_writer() {
     instance_.store(nullptr);
 }
 
-result_void critical_writer::write(
+common::VoidResult critical_writer::write(
     logger_system::log_level level,
     const std::string& message,
     const std::string& file,
@@ -115,7 +115,7 @@ result_void critical_writer::write(
         std::lock_guard<std::mutex> lock(critical_mutex_);
 
         auto result = wrapped_writer_->write(level, message, file, line, function, timestamp);
-        if (result) {
+        if (result.is_ok()) {
             wrapped_writer_->flush();
             stats_.total_flushes.fetch_add(1, std::memory_order_relaxed);
         }
@@ -131,21 +131,13 @@ result_void critical_writer::write(
 
         // Write to WAL first (if enabled)
         if (wal_stream_ && wal_stream_->is_open()) {
-            auto wal_result = utils::try_write_operation([&]() -> result_void {
-                write_to_wal(level, message, file, line, function, timestamp);
-                stats_.wal_writes.fetch_add(1, std::memory_order_relaxed);
-                return {};
-            });
-
-            if (!wal_result) {
-                std::cerr << "[critical_writer] WAL write failed: "
-                          << wal_result.error_message() << std::endl;
-            }
+            write_to_wal(level, message, file, line, function, timestamp);
+            stats_.wal_writes.fetch_add(1, std::memory_order_relaxed);
         }
 
         // Write to wrapped writer
         auto result = wrapped_writer_->write(level, message, file, line, function, timestamp);
-        if (!result) {
+        if (result.is_err()) {
             return result;
         }
 
@@ -155,16 +147,8 @@ result_void critical_writer::write(
 
         // Sync file descriptor if configured
         if (config_.sync_on_critical) {
-            auto sync_result = utils::try_write_operation([&]() -> result_void {
-                sync_file_descriptor();
-                stats_.sync_calls.fetch_add(1, std::memory_order_relaxed);
-                return {};
-            }, logger_error_code::flush_timeout);
-
-            if (!sync_result) {
-                std::cerr << "[critical_writer] fsync failed: "
-                          << sync_result.error_message() << std::endl;
-            }
+            sync_file_descriptor();
+            stats_.sync_calls.fetch_add(1, std::memory_order_relaxed);
         }
 
         stats_.total_critical_writes.fetch_add(1, std::memory_order_relaxed);
@@ -175,20 +159,12 @@ result_void critical_writer::write(
     return wrapped_writer_->write(level, message, file, line, function, timestamp);
 }
 
-result_void critical_writer::flush() {
+common::VoidResult critical_writer::flush() {
     std::lock_guard<std::mutex> lock(critical_mutex_);
 
     // Flush WAL
     if (wal_stream_ && wal_stream_->is_open()) {
-        auto wal_flush_result = utils::try_write_operation([&]() -> result_void {
-            wal_stream_->flush();
-            return utils::check_stream_state(*wal_stream_, "WAL flush");
-        }, logger_error_code::flush_timeout);
-
-        if (!wal_flush_result) {
-            std::cerr << "[critical_writer] WAL flush failed: "
-                      << wal_flush_result.error_message() << std::endl;
-        }
+        wal_stream_->flush();
     }
 
     // Flush wrapped writer
@@ -450,7 +426,7 @@ hybrid_writer::hybrid_writer(
 
 hybrid_writer::~hybrid_writer() = default;
 
-result_void hybrid_writer::write(
+common::VoidResult hybrid_writer::write(
     logger_system::log_level level,
     const std::string& message,
     const std::string& file,
@@ -463,7 +439,7 @@ result_void hybrid_writer::write(
     return critical_writer_->write(level, message, file, line, function, timestamp);
 }
 
-result_void hybrid_writer::flush() {
+common::VoidResult hybrid_writer::flush() {
     return critical_writer_->flush();
 }
 

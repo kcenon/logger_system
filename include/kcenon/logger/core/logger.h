@@ -364,39 +364,39 @@ public:
     /**
      * @brief Add a writer to output logs
      * @param writer Unique pointer to the writer to add
-     * @return result_void Success or error code
-     * 
+     * @return common::VoidResult Success or error code
+     *
      * @details Adds a new output destination for log messages. Multiple writers
      * can be added to send logs to different destinations simultaneously.
      * Ownership of the writer is transferred to the logger.
-     * 
+     *
      * @note Writers are processed in the order they were added.
-     * 
+     *
      * @example
      * @code
      * auto result = logger.add_writer(std::make_unique<file_writer>("app.log"));
-     * if (!result) {
-     *     std::cerr << "Failed to add writer: " << result.error_message() << std::endl;
+     * if (result.is_err()) {
+     *     std::cerr << "Failed to add writer: " << result.error().message << std::endl;
      * }
      * @endcode
-     * 
+     *
      * @since 1.0.0
      */
-    result_void add_writer(std::unique_ptr<base_writer> writer);
-    
+    common::VoidResult add_writer(std::unique_ptr<base_writer> writer);
+
     /**
      * @brief Remove all writers
-     * @return result_void Success or error code
-     * 
+     * @return common::VoidResult Success or error code
+     *
      * @details Removes all currently registered writers from the logger.
      * After this call, log messages will not be output anywhere until
      * new writers are added.
-     * 
+     *
      * @warning This operation cannot be undone. Removed writers are destroyed.
-     * 
+     *
      * @since 1.0.0
      */
-    result_void clear_writers();
+    common::VoidResult clear_writers();
     
     /**
      * @brief Set the minimum log level (legacy API)
@@ -425,44 +425,44 @@ public:
     
     /**
      * @brief Start the logger (for async mode)
-     * @return result_void Success or error code
-     * 
+     * @return common::VoidResult Success or error code
+     *
      * @details Starts the background processing thread for asynchronous logging.
      * This method must be called before logging in async mode. Has no effect
      * in synchronous mode.
-     * 
+     *
      * @note Calling start() on an already running logger is a no-op.
-     * 
+     *
      * @warning Not calling start() in async mode will cause log messages to queue
      * indefinitely without being processed.
-     * 
+     *
      * @example
      * @code
      * kcenon::logger::logger logger(true, 16384); // async mode
      * auto result = logger.start();
-     * if (!result) {
-     *     std::cerr << "Failed to start logger: " << result.error_message() << std::endl;
+     * if (result.is_err()) {
+     *     std::cerr << "Failed to start logger: " << result.error().message << std::endl;
      * }
      * @endcode
-     * 
+     *
      * @since 1.0.0
      */
-    result_void start();
-    
+    common::VoidResult start();
+
     /**
      * @brief Stop the logger
-     * @return result_void Success or error code
-     * 
+     * @return common::VoidResult Success or error code
+     *
      * @details Stops the background processing thread and flushes all pending messages.
      * This is a blocking operation that waits for all queued messages to be processed.
-     * 
+     *
      * @note After stopping, the logger can be restarted with start().
-     * 
+     *
      * @warning Stopping the logger may take time if there are many pending messages.
-     * 
+     *
      * @since 1.0.0
      */
-    result_void stop();
+    common::VoidResult stop();
     
     /**
      * @brief Check if logger is running
@@ -478,9 +478,9 @@ public:
     /**
      * @brief Enable or disable metrics collection
      * @param enable true to enable metrics collection
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void enable_metrics_collection(bool enable = true);
+    common::VoidResult enable_metrics_collection(bool enable = true);
     
     /**
      * @brief Check if metrics collection is enabled
@@ -503,9 +503,9 @@ public:
     
     /**
      * @brief Reset performance metrics
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void reset_metrics();
+    common::VoidResult reset_metrics();
     
     /**
      * @brief Get metrics collector for direct access
@@ -587,17 +587,17 @@ public:
     /**
      * @brief Add a writer from DI container
      * @param name Name of the writer registered in DI container
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void add_writer_from_di(const std::string& name);
-    
+    common::VoidResult add_writer_from_di(const std::string& name);
+
     /**
      * @brief Register a writer factory in the internal DI container
      * @param name Name to register the writer factory under
      * @param factory Factory function to create the writer
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void register_writer_factory(const std::string& name, std::function<std::shared_ptr<base_writer>()> factory);
+    common::VoidResult register_writer_factory(const std::string& name, std::function<std::shared_ptr<base_writer>()> factory);
     
     /**
      * @brief Get the DI strategy being used
@@ -608,10 +608,10 @@ public:
     /**
      * @brief Enable internal DI container
      * @param type Type of DI container to use
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void enable_di(di::di_container_factory::container_type type =
-                         di::di_container_factory::container_type::automatic);
+    common::VoidResult enable_di(di::di_container_factory::container_type type =
+                                 di::di_container_factory::container_type::automatic);
 
     // Emergency Flush Support (critical_logger_interface implementation)
 

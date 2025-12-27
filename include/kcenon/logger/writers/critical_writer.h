@@ -125,7 +125,7 @@ public:
      * @param line Source line
      * @param function Function name
      * @param timestamp Timestamp
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      *
      * @details For critical/fatal messages:
      * - Acquires exclusive lock
@@ -136,7 +136,7 @@ public:
      *
      * For non-critical messages, delegates to wrapped writer normally.
      */
-    result_void write(
+    common::VoidResult write(
         logger_system::log_level level,
         const std::string& message,
         const std::string& file,
@@ -147,9 +147,9 @@ public:
 
     /**
      * @brief Flush all pending messages
-     * @return result_void indicating success or error
+     * @return common::VoidResult indicating success or error
      */
-    result_void flush() override;
+    common::VoidResult flush() override;
 
     /**
      * @brief Check if the writer is healthy
@@ -303,7 +303,7 @@ public:
 
     ~hybrid_writer() override;
 
-    result_void write(
+    common::VoidResult write(
         logger_system::log_level level,
         const std::string& message,
         const std::string& file,
@@ -312,7 +312,7 @@ public:
         const std::chrono::system_clock::time_point& timestamp
     ) override;
 
-    result_void flush() override;
+    common::VoidResult flush() override;
     bool is_healthy() const override;
     std::string get_name() const override;
     void set_use_color(bool use_color) override;

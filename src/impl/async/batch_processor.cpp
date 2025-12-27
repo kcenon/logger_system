@@ -291,8 +291,9 @@ size_t batch_processor::process_batch(std::vector<batch_entry>& batch) {
 
     size_t processed = 0;
     for (const auto& entry : batch) {
-        if (auto result = writer_->write(entry.level, entry.message, entry.file,
-                                        entry.line, entry.function, entry.timestamp)) {
+        auto result = writer_->write(entry.level, entry.message, entry.file,
+                                     entry.line, entry.function, entry.timestamp);
+        if (result.is_ok()) {
             ++processed;
         }
     }
