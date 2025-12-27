@@ -290,7 +290,7 @@ Log level checks:
 ### 2. Critical Write Flow
 
 ```cpp
-result_void critical_writer::write(...) {
+common::VoidResult critical_writer::write(...) {
     if (is_critical_level(level)) {
         // 1. Acquire exclusive lock
         std::lock_guard<std::mutex> lock(critical_mutex_);
