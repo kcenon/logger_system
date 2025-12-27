@@ -94,15 +94,13 @@ public:
     }
 
     kcenon::common::VoidResult log(ci::log_level level,
-                           const std::string& message,
-                           const std::string& file,
-                           int line,
-                           const std::string& function) override {
+                           std::string_view message,
+                           const ci::source_location& loc) override {
         if (!logger_) {
             return make_adapter_error("Logger not initialized");
         }
         std::ostringstream oss;
-        oss << "[" << file << ':' << line << ':' << function << "] " << message;
+        oss << "[" << loc.file_name() << ':' << loc.line() << ':' << loc.function_name() << "] " << message;
         logger_->log(to_logger_level(level), oss.str());
         return kcenon::common::ok();
     }
