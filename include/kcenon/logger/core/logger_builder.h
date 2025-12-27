@@ -720,7 +720,7 @@ public:
         }
 
         // Validate configuration
-        if (auto validation = config_.validate(); !validation) {
+        if (auto validation = config_.validate(); validation.is_err()) {
             return make_logger_error<std::unique_ptr<logger>>(
                 logger_error_code::invalid_configuration,
                 "Configuration validation failed"

@@ -87,7 +87,7 @@ TEST_F(SecurityTest, SaveAndLoadKey) {
         key_path,
         test_dir_
     );
-    ASSERT_TRUE(save_result);
+    ASSERT_TRUE(save_result.is_ok());
 
     // Verify file exists
     EXPECT_TRUE(std::filesystem::exists(key_path));
@@ -168,7 +168,7 @@ TEST_F(SecurityTest, PathValidatorValidPath) {
     auto valid_path = test_dir_ / "logs" / "test.log";
     auto result = validator.validate(valid_path);
 
-    EXPECT_TRUE(result);
+    EXPECT_TRUE(result.is_ok());
 }
 
 TEST_F(SecurityTest, PathValidatorPathTraversal) {
@@ -178,8 +178,8 @@ TEST_F(SecurityTest, PathValidatorPathTraversal) {
     auto attack_path = test_dir_ / ".." / ".." / "etc" / "passwd";
     auto result = validator.validate(attack_path);
 
-    EXPECT_FALSE(result);
-    EXPECT_EQ(result.error_code(), logger_error_code::path_traversal_detected);
+    EXPECT_TRUE(result.is_err());
+    EXPECT_EQ(get_logger_error_code(result), logger_error_code::path_traversal_detected);
 }
 
 TEST_F(SecurityTest, PathValidatorSymlink) {
@@ -203,8 +203,8 @@ TEST_F(SecurityTest, PathValidatorSymlink) {
     // Validate with symlinks not allowed (default)
     auto result = validator.validate(symlink_path, false);
 
-    EXPECT_FALSE(result);
-    EXPECT_EQ(result.error_code(), logger_error_code::path_traversal_detected);
+    EXPECT_TRUE(result.is_err());
+    EXPECT_EQ(get_logger_error_code(result), logger_error_code::path_traversal_detected);
 
     // Clean up
     std::filesystem::remove(symlink_path);
@@ -218,8 +218,8 @@ TEST_F(SecurityTest, PathValidatorInvalidFilename) {
     auto invalid_path = test_dir_ / "test*.log";  // '*' is not allowed
     auto result = validator.validate(invalid_path, false, true);
 
-    EXPECT_FALSE(result);
-    EXPECT_EQ(result.error_code(), logger_error_code::invalid_filename);
+    EXPECT_TRUE(result.is_err());
+    EXPECT_EQ(get_logger_error_code(result), logger_error_code::invalid_filename);
 }
 
 TEST_F(SecurityTest, IsSafeFilename) {
@@ -384,14 +384,14 @@ TEST_F(SecurityTest, IntegrationSecureKeyWorkflow) {
     // 2. Save key with path validation
     path_validator validator(test_dir_);
     auto path_validation = validator.validate(key_path);
-    ASSERT_TRUE(path_validation);
+    ASSERT_TRUE(path_validation.is_ok());
 
     auto save_result = secure_key_storage::save_key(
         gen_result.value(),
         key_path,
         test_dir_
     );
-    ASSERT_TRUE(save_result);
+    ASSERT_TRUE(save_result.is_ok());
 
     // 3. Log audit event
     auto audit_file = test_dir_ / "integration_audit.log";

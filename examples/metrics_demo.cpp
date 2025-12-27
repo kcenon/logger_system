@@ -71,7 +71,7 @@ int main() {
     
     // Enable metrics collection
     auto enable_result = logger->enable_metrics_collection(true);
-    if (!enable_result) {
+    if (enable_result.is_err()) {
         std::cerr << "Failed to enable metrics collection" << std::endl;
     }
     

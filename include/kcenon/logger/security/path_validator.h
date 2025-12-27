@@ -210,10 +210,10 @@ public:
             path_validator validator(base);
             auto validation = validator.validate(joined);
 
-            if (!validation) {
+            if (validation.is_err()) {
                 return make_logger_error<std::filesystem::path>(
-                    validation.error_code(),
-                    validation.error_message()
+                    get_logger_error_code(validation),
+                    get_logger_error_message(validation)
                 );
             }
 

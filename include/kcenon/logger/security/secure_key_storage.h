@@ -178,7 +178,7 @@ public:
     ) {
         // 1. Validate path
         auto validation = validate_key_path(path, allowed_base);
-        if (!validation) {
+        if (validation.is_err()) {
             return validation;
         }
 
@@ -252,10 +252,10 @@ public:
     ) {
         // 1. Validate path
         auto validation = validate_key_path(path, allowed_base);
-        if (!validation) {
+        if (validation.is_err()) {
             return make_logger_error<secure_key>(
-                validation.error_code(),
-                validation.error_message()
+                get_logger_error_code(validation),
+                get_logger_error_message(validation)
             );
         }
 
