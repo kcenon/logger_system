@@ -59,11 +59,11 @@ TEST_F(LoggerLifecycleTest, StartAndStopLogger) {
     CreateLogger(true);
 
     auto result = logger_->start();
-    ASSERT_TRUE(result) << "Failed to start logger: " << result.error_message();
+    ASSERT_TRUE(result.is_ok()) << "Failed to start logger: " << result.error().message;
     EXPECT_TRUE(logger_->is_running());
 
     result = logger_->stop();
-    ASSERT_TRUE(result) << "Failed to stop logger: " << result.error_message();
+    ASSERT_TRUE(result.is_ok()) << "Failed to stop logger: " << result.error().message;
     EXPECT_FALSE(logger_->is_running());
 }
 
@@ -96,7 +96,7 @@ TEST_F(LoggerLifecycleTest, LogMessagesBeforeStart) {
 
     // Now start the logger
     auto result = logger_->start();
-    ASSERT_TRUE(result);
+    ASSERT_TRUE(result.is_ok());
 
     WaitForFlush();
 
@@ -110,7 +110,7 @@ TEST_F(LoggerLifecycleTest, MultipleStartStopCycles) {
 
     for (int cycle = 0; cycle < 3; ++cycle) {
         auto result = logger_->start();
-        ASSERT_TRUE(result) << "Failed to start in cycle " << cycle;
+        ASSERT_TRUE(result.is_ok()) << "Failed to start in cycle " << cycle;
 
         for (size_t i = 0; i < 20; ++i) {
             logger_->log(kcenon::logger::log_level::info, "Cycle " + std::to_string(cycle) + " message " + std::to_string(i));
@@ -119,7 +119,7 @@ TEST_F(LoggerLifecycleTest, MultipleStartStopCycles) {
         WaitForFlush();
 
         result = logger_->stop();
-        ASSERT_TRUE(result) << "Failed to stop in cycle " << cycle;
+        ASSERT_TRUE(result.is_ok()) << "Failed to stop in cycle " << cycle;
     }
 
     EXPECT_EQ(CountLogLines(log_file), 60);
@@ -179,7 +179,7 @@ TEST_F(LoggerLifecycleTest, RemoveAllWriters) {
     WaitForFlush();
 
     auto result = logger_->clear_writers();
-    ASSERT_TRUE(result);
+    ASSERT_TRUE(result.is_ok());
 
     // This message should not be written anywhere
     logger_->log(kcenon::logger::log_level::info, "After clear");

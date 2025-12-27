@@ -80,10 +80,10 @@ TEST_F(ErrorHandlingTest, StartStopMultipleTimes) {
     // Start and stop multiple times
     for (int i = 0; i < 5; ++i) {
         auto start_result = logger_->start();
-        EXPECT_TRUE(start_result);
+        EXPECT_TRUE(start_result.is_ok());
 
         auto stop_result = logger_->stop();
-        EXPECT_TRUE(stop_result);
+        EXPECT_TRUE(stop_result.is_ok());
     }
 }
 
@@ -91,7 +91,7 @@ TEST_F(ErrorHandlingTest, DoubleStart) {
     CreateLogger(true);
 
     auto result1 = logger_->start();
-    EXPECT_TRUE(result1);
+    EXPECT_TRUE(result1.is_ok());
 
     // Starting again should either succeed (idempotent) or return error
     auto result2 = logger_->start();
@@ -103,10 +103,10 @@ TEST_F(ErrorHandlingTest, DoubleStop) {
     CreateLogger(true);
 
     auto start_result = logger_->start();
-    EXPECT_TRUE(start_result);
+    EXPECT_TRUE(start_result.is_ok());
 
     auto stop_result1 = logger_->stop();
-    EXPECT_TRUE(stop_result1);
+    EXPECT_TRUE(stop_result1.is_ok());
 
     // Stopping again should either succeed (idempotent) or return error
     auto stop_result2 = logger_->stop();
@@ -167,7 +167,7 @@ TEST_F(ErrorHandlingTest, ClearWritersWhileRunning) {
 
     // Clear writers while logger is running
     auto result = logger_->clear_writers();
-    EXPECT_TRUE(result);
+    EXPECT_TRUE(result.is_ok());
 
     // Try logging after clearing
     logger_->log(kcenon::logger::log_level::info, "After clear");
