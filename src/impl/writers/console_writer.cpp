@@ -98,63 +98,65 @@ common::VoidResult console_writer::write(logger_system::log_level level,
                                          const std::chrono::system_clock::time_point& timestamp) {
     std::lock_guard<std::mutex> lock(write_mutex_);
 
-    auto& stream = (use_stderr_ || level <= logger_system::log_level::error)
-                   ? std::cerr : std::cout;
+    return utils::try_write_operation([&]() -> common::VoidResult {
+        auto& stream = (use_stderr_ || level <= logger_system::log_level::error)
+                       ? std::cerr : std::cout;
 
-    // Create log_entry for new API
-    log_entry entry = (!file.empty() || line != 0 || !function.empty())
-        ? log_entry(level, message, file, line, function, timestamp)
-        : log_entry(level, message, timestamp);
+        // Create log_entry for new API
+        log_entry entry = (!file.empty() || line != 0 || !function.empty())
+            ? log_entry(level, message, file, line, function, timestamp)
+            : log_entry(level, message, timestamp);
 
-    if (use_color()) {
-        // Simple color mapping based on level
-        switch (level) {
-            case logger_system::log_level::fatal:
-            case logger_system::log_level::error:
-                stream << "\033[31m"; // Red
-                break;
-            case logger_system::log_level::warning:
-                stream << "\033[33m"; // Yellow
-                break;
-            case logger_system::log_level::info:
-                stream << "\033[32m"; // Green
-                break;
-            case logger_system::log_level::debug:
-                stream << "\033[36m"; // Cyan
-                break;
-            case logger_system::log_level::trace:
-                stream << "\033[37m"; // White
-                break;
-            default:
-                break;
+        if (use_color()) {
+            // Simple color mapping based on level
+            switch (level) {
+                case logger_system::log_level::fatal:
+                case logger_system::log_level::error:
+                    stream << "\033[31m"; // Red
+                    break;
+                case logger_system::log_level::warning:
+                    stream << "\033[33m"; // Yellow
+                    break;
+                case logger_system::log_level::info:
+                    stream << "\033[32m"; // Green
+                    break;
+                case logger_system::log_level::debug:
+                    stream << "\033[36m"; // Cyan
+                    break;
+                case logger_system::log_level::trace:
+                    stream << "\033[37m"; // White
+                    break;
+                default:
+                    break;
+            }
         }
-    }
 
-    stream << format_log_entry(entry);
+        stream << format_log_entry(entry);
 
-    if (use_color()) {
-        stream << "\033[0m"; // Reset color
-    }
+        if (use_color()) {
+            stream << "\033[0m"; // Reset color
+        }
 
-    stream << '\n';
+        stream << '\n';
 
-    if (stream.fail()) {
-        return make_logger_void_result(logger_error_code::processing_failed, "Console write failed");
-    }
-
-    return common::ok();
+        // Verify stream state
+        return utils::check_stream_state(stream, "console write");
+    }, logger_error_code::processing_failed);
 }
 
 common::VoidResult console_writer::flush() {
     std::lock_guard<std::mutex> lock(write_mutex_);
-    std::cout.flush();
-    std::cerr.flush();
 
-    if (std::cout.fail() || std::cerr.fail()) {
-        return make_logger_void_result(logger_error_code::flush_timeout, "Console flush failed");
-    }
+    return utils::try_write_operation([&]() -> common::VoidResult {
+        std::cout.flush();
+        std::cerr.flush();
 
-    return common::ok();
+        if (std::cout.fail() || std::cerr.fail()) {
+            return make_logger_void_result(logger_error_code::flush_timeout, "Console flush failed");
+        }
+
+        return common::ok();
+    }, logger_error_code::flush_timeout);
 }
 
 void console_writer::set_use_stderr(bool use_stderr) {
