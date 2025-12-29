@@ -62,6 +62,17 @@ Need a quick reminder later? See the [Result Handling Cheatsheet](docs/guides/IN
 
 ### Installation
 
+**Using vcpkg**:
+```bash
+# Install with default features (fmt only)
+vcpkg install kcenon-logger-system
+
+# Install with benchmarks (includes spdlog for comparison)
+vcpkg install kcenon-logger-system[benchmarks]
+```
+
+> **Note**: Ecosystem dependencies (common_system, thread_system) are not yet registered in vcpkg. Until then, use the CMake build with local clones. See [Building with Dependencies](#building-with-dependencies).
+
 **Using CMake**:
 ```bash
 mkdir build && cd build
@@ -84,8 +95,10 @@ target_link_libraries(your_app PRIVATE LoggerSystem::logger)
 | CMake | 3.20+ | Yes | Build system |
 | [common_system](https://github.com/kcenon/common_system) | latest | Yes | Common interfaces (ILogger, Result<T>) |
 | [thread_system](https://github.com/kcenon/thread_system) | latest | Optional | Async logging with thread pool support |
+| [fmt](https://github.com/fmtlib/fmt) | 10.0+ | Yes | Modern formatting library |
 | vcpkg | latest | Optional | Package management |
-| fmt | latest | Optional | Formatting library (header-only mode available) |
+
+> **Note**: spdlog is **not** used internally by logger_system. It is only included as an optional dependency for benchmark comparisons. See [Benchmarks](docs/BENCHMARKS.md) for performance comparisons.
 
 #### Dependency Flow
 
