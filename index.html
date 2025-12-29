@@ -146,6 +146,14 @@ Basic Example</h3>
 </div><!-- fragment --><p>Need a quick reminder later? See the <a href="docs/guides/INTEGRATION.md#result-handling-cheatsheet">Result Handling Cheatsheet</a> for canonical snippets that can be reused across the ecosystem.</p>
 <h3><a class="anchor" id="autotoc_md5"></a>
 Installation</h3>
+<p><b>Using vcpkg</b>: </p><div class="fragment"><div class="line"># Install with default features (fmt only)</div>
+<div class="line">vcpkg install kcenon-logger-system</div>
+<div class="line"> </div>
+<div class="line"># Install with benchmarks (includes spdlog for comparison)</div>
+<div class="line">vcpkg install kcenon-logger-system[benchmarks]</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p>&zwj;<b>Note</b>: Ecosystem dependencies (common_system, thread_system) are not yet registered in vcpkg. Until then, use the CMake build with local clones. See Building with Dependencies. </p>
+</blockquote>
 <p><b>Using CMake</b>: </p><div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div>
 <div class="line">cmake ..</div>
 <div class="line">cmake --build .</div>
@@ -166,10 +174,13 @@ Requirements</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><a href="https://github.com/kcenon/thread_system">thread_system</a>   </td><td class="markdownTableBodyNone">latest   </td><td class="markdownTableBodyNone">Optional   </td><td class="markdownTableBodyNone">Async logging with thread pool support    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">vcpkg   </td><td class="markdownTableBodyNone">latest   </td><td class="markdownTableBodyNone">Optional   </td><td class="markdownTableBodyNone">Package management    </td></tr>
+<td class="markdownTableBodyNone"><a href="https://github.com/fmtlib/fmt">fmt</a>   </td><td class="markdownTableBodyNone">10.0+   </td><td class="markdownTableBodyNone">Yes   </td><td class="markdownTableBodyNone">Modern formatting library    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">fmt   </td><td class="markdownTableBodyNone">latest   </td><td class="markdownTableBodyNone">Optional   </td><td class="markdownTableBodyNone">Formatting library (header-only mode available)   </td></tr>
+<td class="markdownTableBodyNone">vcpkg   </td><td class="markdownTableBodyNone">latest   </td><td class="markdownTableBodyNone">Optional   </td><td class="markdownTableBodyNone">Package management   </td></tr>
 </table>
+<blockquote class="doxtable">
+<p>&zwj;<b>Note</b>: spdlog is <b>not</b> used internally by logger_system. It is only included as an optional dependency for benchmark comparisons. See <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html">Benchmarks</a> for performance comparisons. </p>
+</blockquote>
 <h4><a class="anchor" id="autotoc_md7"></a>
 Dependency Flow</h4>
 <div class="fragment"><div class="line">logger_system</div>
@@ -561,7 +572,7 @@ Acknowledgments</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Dec 27 2025 06:49:07 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Dec 29 2025 09:45:54 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
