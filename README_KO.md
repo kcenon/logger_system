@@ -66,6 +66,18 @@ return 0;
 
 ### 설치
 
+**vcpkg 사용** (권장):
+```bash
+# 기본 기능으로 설치
+vcpkg install kcenon-logger-system
+
+# 비동기 지원 포함 설치 (thread_system 필요)
+vcpkg install kcenon-logger-system[async]
+
+# 벤치마크 포함 설치 (비교용 spdlog 포함)
+vcpkg install kcenon-logger-system[benchmarks]
+```
+
 **CMake 사용**:
 ```bash
 mkdir build && cd build
@@ -88,8 +100,10 @@ target_link_libraries(your_app PRIVATE LoggerSystem::logger)
 | CMake | 3.20+ | 필수 | 빌드 시스템 |
 | [common_system](https://github.com/kcenon/common_system) | latest | 필수 | 공통 인터페이스 (ILogger, Result<T>) |
 | [thread_system](https://github.com/kcenon/thread_system) | latest | 선택 | 스레드 풀을 사용한 비동기 로깅 |
+| [fmt](https://github.com/fmtlib/fmt) | 10.0+ | 필수 | 현대적인 포맷팅 라이브러리 |
 | vcpkg | latest | 선택 | 패키지 관리 |
-| fmt | latest | 선택 | 포맷팅 라이브러리 (header-only 모드 가능) |
+
+> **참고**: spdlog는 logger_system 내부에서 **사용되지 않습니다**. 벤치마크 비교를 위한 선택적 의존성으로만 포함됩니다. 성능 비교는 [벤치마크](docs/BENCHMARKS_KO.md)를 참조하세요.
 
 #### 의존성 구조
 
