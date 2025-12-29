@@ -15,7 +15,7 @@
   ],
   "features": {
     "testing": {
-      "description": "Build unit tests",
+      "description": "Build unit tests (includes gmock)",
       "dependencies": [
         "gtest"
       ]
