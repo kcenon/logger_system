@@ -15,12 +15,9 @@
   ],
   "features": {
     "testing": {
-      "description": "Build unit tests",
+      "description": "Build unit tests (includes gmock)",
       "dependencies": [
-        {
-          "name": "gtest",
-          "features": ["gmock"]
-        }
+        "gtest"
       ]
     },
     "benchmarks": {
