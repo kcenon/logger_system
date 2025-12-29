@@ -8,19 +8,12 @@
   "license": "BSD-3-Clause",
   "supports": "!(uwp | xbox)",
   "dependencies": [
-    "kcenon-common-system",
     {
       "name": "fmt",
       "version>=": "10.0.0"
     }
   ],
   "features": {
-    "async": {
-      "description": "Enable async logging via thread_system integration",
-      "dependencies": [
-        "kcenon-thread-system"
-      ]
-    },
     "testing": {
       "description": "Build unit tests",
       "dependencies": [

@@ -62,17 +62,16 @@ Need a quick reminder later? See the [Result Handling Cheatsheet](docs/guides/IN
 
 ### Installation
 
-**Using vcpkg** (recommended):
+**Using vcpkg**:
 ```bash
-# Install with default features
+# Install with default features (fmt only)
 vcpkg install kcenon-logger-system
-
-# Install with async support (requires thread_system)
-vcpkg install kcenon-logger-system[async]
 
 # Install with benchmarks (includes spdlog for comparison)
 vcpkg install kcenon-logger-system[benchmarks]
 ```
+
+> **Note**: Ecosystem dependencies (common_system, thread_system) are not yet registered in vcpkg. Until then, use the CMake build with local clones. See [Building with Dependencies](#building-with-dependencies).
 
 **Using CMake**:
 ```bash
