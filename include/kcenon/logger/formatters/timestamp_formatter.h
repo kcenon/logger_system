@@ -39,8 +39,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <iomanip>
 #include <ctime>
 
-// Always use logger_system interface (Phase 3-4)
-#include <kcenon/logger/interfaces/logger_interface.h>
+// Use common_system's standard interface
+#include <kcenon/common/interfaces/logger_interface.h>
 
 /**
  * @file timestamp_formatter.h

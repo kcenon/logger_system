@@ -45,7 +45,6 @@
 #include <kcenon/common/utils/source_location.h>
 
 #include "../core/logger.h"
-#include "../interfaces/logger_interface.h"
 
 namespace kcenon::logger::adapters {
 

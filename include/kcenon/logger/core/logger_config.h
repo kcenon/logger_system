@@ -13,8 +13,8 @@ All rights reserved.
 #include <kcenon/logger/core/thread_integration_detector.h>
 #include <kcenon/logger/core/error_codes.h>
 
-// Always use logger_system's own interface
-#include <kcenon/logger/interfaces/logger_interface.h>
+// Use common_system's standard interface
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/logger/interfaces/logger_types.h>
 
 namespace kcenon::logger {
