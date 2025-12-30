@@ -9,6 +9,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.0.0] - 2025-12-31
+
+### Removed - Deprecated API Cleanup (Issue #268)
+
+This release removes deprecated API compatibility layers following the "Fewest Elements" Simple Design principle.
+
+#### Breaking Changes
+
+- **Removed `logger_interface.h` header** (`include/kcenon/logger/interfaces/logger_interface.h`)
+  - `logger_system::logger_interface` class removed - use `common::interfaces::ILogger` instead
+  - `logger_system::logger_registry` class removed
+  - `THREAD_LOG_*` macros removed - use `LOG_*` macros from common_system instead
+
+- **Removed `with_thread_system_backend()` method** from `logger_builder`
+  - Use `with_standalone_backend()` or `with_backend()` instead
+
+- **Removed deprecated `result_void` class** from `error_codes.h`
+  - Use `common::VoidResult` directly instead
+
+- **Removed deprecated `make_logger_error` functions**
+  - Use `result<T>{error_code, message}` construction directly instead
+
+#### Migration Guide
+
+```cpp
+// Before (deprecated):
+#include <kcenon/logger/interfaces/logger_interface.h>
+auto logger = logger_builder().with_thread_system_backend().build();
+result_void res = make_logger_error(code, "message");
+
+// After:
+#include <kcenon/common/interfaces/logger_interface.h>
+auto logger = logger_builder().with_standalone_backend().build();
+common::VoidResult res = make_logger_void_result(code, "message");
+```
+
+---
+
 ## [Unreleased]
 
 ### Use KCENON Feature Detection (Issue #250) - 2025-12-22
