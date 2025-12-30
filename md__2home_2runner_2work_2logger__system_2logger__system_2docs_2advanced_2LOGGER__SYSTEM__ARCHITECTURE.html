@@ -330,10 +330,6 @@ Configuration Templates</h4>
 <div class="line">    logger_builder&amp; with_standalone_backend();  <span class="comment">// Default</span></div>
 <div class="line">    logger_builder&amp; with_backend(std::unique_ptr&lt;backends::integration_backend&gt; backend);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// Deprecated: thread_system backend removed in v3.0</span></div>
-<div class="line">    [[deprecated(<span class="stringliteral">&quot;Use with_standalone_backend() instead&quot;</span>)]]</div>
-<div class="line">    logger_builder&amp; with_thread_system_backend();</div>
-<div class="line"> </div>
 <div class="line">    <span class="comment">// Writers</span></div>
 <div class="line">    logger_builder&amp; add_writer(<span class="keyword">const</span> std::string&amp; name,</div>
 <div class="line">                               std::unique_ptr&lt;base_writer&gt; writer);</div>
@@ -738,7 +734,7 @@ Platform Notes</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Dec 29 2025 10:09:35 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Dec 30 2025 23:51:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

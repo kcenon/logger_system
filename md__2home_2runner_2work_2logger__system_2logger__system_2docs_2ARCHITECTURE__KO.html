@@ -137,11 +137,6 @@ v3.0 주요 변경사항</h2>
 <div class="line">    .with_standalone_backend()  <span class="comment">// std::jthread 사용</span></div>
 <div class="line">    .add_writer(<span class="stringliteral">&quot;console&quot;</span>, std::make_unique&lt;console_writer&gt;())</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><p><b>통합 모드 (선택적):</b> </p><div class="fragment"><div class="line"><span class="comment">// thread_system 통합 (LOGGER_USE_THREAD_SYSTEM=ON 필요)</span></div>
-<div class="line"><span class="keyword">auto</span> logger = kcenon::logger::logger_builder()</div>
-<div class="line">    .with_thread_system_backend()</div>
-<div class="line">    .add_writer(<span class="stringliteral">&quot;console&quot;</span>, std::make_unique&lt;console_writer&gt;())</div>
-<div class="line">    .build();</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md684"></a>
 성능 비교</h3>
 <table class="markdownTable">
@@ -162,7 +157,7 @@ v3.0 주요 변경사항</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Dec 29 2025 10:09:35 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Dec 30 2025 23:51:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

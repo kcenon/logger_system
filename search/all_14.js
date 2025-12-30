@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['kcenon_20기능_20감지_20사용_20issue_20250_202025_2012_2022_0',['KCENON 기능 감지 사용 (Issue #250) - 2025-12-22',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md823',1,'']]],
-  ['kcenon_20feature_20detection_20issue_20250_202025_2012_2022_1',['Use KCENON Feature Detection (Issue #250) - 2025-12-22',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md777',1,'']]],
+  ['kcenon_20기능_20감지_20사용_20issue_20250_202025_2012_2022_0',['KCENON 기능 감지 사용 (Issue #250) - 2025-12-22',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md833',1,'']]],
+  ['kcenon_20feature_20detection_20issue_20250_202025_2012_2022_1',['Use KCENON Feature Detection (Issue #250) - 2025-12-22',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md782',1,'']]],
   ['kcenon_20logger_20tt_2',['kcenon logger tt',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md526',1,'🎯 Public API Layer (&lt;tt&gt;include/kcenon/logger/&lt;/tt&gt;)'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE.html#autotoc_md507',1,'Public API Layer (&lt;tt&gt;include/kcenon/logger/&lt;/tt&gt;)']]],
   ['kcenon_20logger_5fsystem_20actions_20github_20actions_20page_20a_20em_3',['&lt;em&gt;This dashboard is automatically updated by CI/CD workflows. For real-time data, check the &lt;a href=&quot;https://github.com/kcenon/logger_system/actions&quot; &gt;GitHub Actions page&lt;/a&gt;.&lt;/em&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD.html#autotoc_md160',1,'']]],
   ['kcenon_3a_3alogger_3a_3abatch_5fwriter_20tt_4',['&lt;tt&gt;kcenon::logger::batch_writer&lt;/tt&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md585',1,'']]],
@@ -26,13 +26,13 @@ var searchData=
   ['key_20components_23',['Key Components',['../index.html#autotoc_md22',1,'']]],
   ['key_20components_20overview_24',['Key Components Overview',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE.html#autotoc_md506',1,'']]],
   ['key_20components_3a_25',['key components:',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md624',1,'Key Components:'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md629',1,'Key Components:'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md634',1,'Key Components:'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md639',1,'Key Components:']]],
-  ['key_20concepts_26',['Key Concepts',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START.html#autotoc_md1330',1,'']]],
-  ['key_20features_27',['Key Features',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1515',1,'']]],
+  ['key_20concepts_26',['Key Concepts',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START.html#autotoc_md1340',1,'']]],
+  ['key_20features_27',['Key Features',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md1525',1,'']]],
   ['key_20features_20v3_200_28',['Key Features (v3.0)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md367',1,'']]],
   ['key_20features_3a_29',['Key Features:',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION.html#autotoc_md210',1,'']]],
   ['key_20highlights_30',['Key Highlights',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html#autotoc_md692',1,'']]],
   ['key_20points_31',['💡 Key Points',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md301',1,'']]],
-  ['key_20storage_32',['key storage',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1664',1,'1. Secure Key Storage'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES.html#autotoc_md964',1,'Secure Key Storage']]],
-  ['korean_20files_33',['Korean Files',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TRANSLATION__SUMMARY.html#autotoc_md915',1,'']]],
+  ['key_20storage_32',['key storage',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html#autotoc_md1674',1,'1. Secure Key Storage'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES.html#autotoc_md974',1,'Secure Key Storage']]],
+  ['korean_20files_33',['Korean Files',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TRANSLATION__SUMMARY.html#autotoc_md925',1,'']]],
   ['korean_20translation_20summary_34',['Korean Translation Summary',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TRANSLATION__SUMMARY.html',1,'']]]
 ];

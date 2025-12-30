@@ -118,23 +118,14 @@ Issues</h2>
 </ol>
 <h2><a class="anchor" id="autotoc_md168"></a>
 Example of Current Pattern</h2>
-<div class="fragment"><div class="line"><span class="comment">// logger.h (current)</span></div>
-<div class="line"><span class="preprocessor">#ifdef USE_THREAD_SYSTEM_INTEGRATION</span></div>
-<div class="line"><span class="preprocessor">    #include &lt;kcenon/thread/interfaces/logger_interface.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#else</span></div>
-<div class="line"><span class="preprocessor">    #include &lt;kcenon/logger/interfaces/logger_interface.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="fragment"><div class="line"><span class="comment">// logger.h (v3.0 - simplified)</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/common/interfaces/logger_interface.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/common/interfaces/monitoring_interface.h&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="preprocessor">#ifdef BUILD_WITH_COMMON_SYSTEM</span></div>
-<div class="line"><span class="preprocessor">    #include &lt;kcenon/common/interfaces/monitoring_interface.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#endif</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">class </span>logger</div>
-<div class="line">#ifdef BUILD_WITH_COMMON_SYSTEM</div>
-<div class="line">    : <span class="keyword">public</span> common::interfaces::IMonitorable</div>
-<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="keyword">class </span>logger : <span class="keyword">public</span> common::interfaces::ILogger,</div>
+<div class="line">               <span class="keyword">public</span> common::interfaces::IMonitorable</div>
 <div class="line">{</div>
-<div class="line">    <span class="comment">// Implementation varies by build mode</span></div>
+<div class="line">    <span class="comment">// Clean implementation without conditional compilation</span></div>
 <div class="line">};</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md169"></a>
 Proposed Solution: Adapter Pattern</h1>
@@ -503,7 +494,7 @@ References</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Dec 29 2025 10:09:35 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Dec 30 2025 23:51:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
