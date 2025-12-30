@@ -342,10 +342,6 @@ logger_builder& with_backend(std::unique_ptr<backends::integration_backend> back
 
 // Use standalone backend explicitly (default)
 logger_builder& with_standalone_backend();
-
-// Deprecated: thread_system backend removed in v3.0
-[[deprecated("Use with_standalone_backend() instead")]]
-logger_builder& with_thread_system_backend();
 ```
 
 #### Environment and Error Handling

@@ -377,10 +377,9 @@ public:
     result<logger_config> build() const {
         auto validation_result = config_.validate();
         if (!validation_result.is_ok()) {
-            return make_logger_error<logger_config>(
+            return result<logger_config>{
                 logger_error_code::invalid_configuration,
-                "Configuration validation failed: " + validation_result.error().message
-            );
+                "Configuration validation failed: " + validation_result.error().message};
         }
         return result<logger_config>(config_);
     }

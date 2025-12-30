@@ -44,7 +44,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/log_collector.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/log_entry.h>
-#include <kcenon/logger/interfaces/logger_interface.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 #include "../impl/async/jthread_compat.h"
 

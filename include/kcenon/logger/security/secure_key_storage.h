@@ -148,10 +148,9 @@ public:
 #ifdef HAS_OPENSSL
         // Use OpenSSL's cryptographically secure random generator
         if (RAND_bytes(key.mutable_data().data(), size) != 1) {
-            return make_logger_error<secure_key>(
+            return result<secure_key>{
                 logger_error_code::encryption_failed,
-                "Failed to generate secure random key"
-            );
+                "Failed to generate secure random key"};
         }
 #else
         // Fallback: use std::random_device (less secure on some platforms)
@@ -253,18 +252,16 @@ public:
         // 1. Validate path
         auto validation = validate_key_path(path, allowed_base);
         if (validation.is_err()) {
-            return make_logger_error<secure_key>(
+            return result<secure_key>{
                 get_logger_error_code(validation),
-                get_logger_error_message(validation)
-            );
+                get_logger_error_message(validation)};
         }
 
         // 2. Check if file exists
         if (!std::filesystem::exists(path)) {
-            return make_logger_error<secure_key>(
+            return result<secure_key>{
                 logger_error_code::file_open_failed,
-                "Key file does not exist"
-            );
+                "Key file does not exist"};
         }
 
         // 3. Verify file permissions (must not be readable by group/others)
@@ -274,16 +271,14 @@ public:
 
             if ((perms & std::filesystem::perms::group_read) != std::filesystem::perms::none ||
                 (perms & std::filesystem::perms::others_read) != std::filesystem::perms::none) {
-                return make_logger_error<secure_key>(
+                return result<secure_key>{
                     logger_error_code::insecure_permissions,
-                    "Key file permissions are too permissive (must be 0600 or stricter)"
-                );
+                    "Key file permissions are too permissive (must be 0600 or stricter)"};
             }
         } catch (const std::filesystem::filesystem_error& e) {
-            return make_logger_error<secure_key>(
+            return result<secure_key>{
                 logger_error_code::file_permission_denied,
-                std::string("Failed to check file permissions: ") + e.what()
-            );
+                std::string("Failed to check file permissions: ") + e.what()};
         }
 
         // 4. Verify file size
@@ -291,27 +286,24 @@ public:
         try {
             file_size = std::filesystem::file_size(path);
         } catch (const std::filesystem::filesystem_error& e) {
-            return make_logger_error<secure_key>(
+            return result<secure_key>{
                 logger_error_code::file_read_failed,
-                std::string("Failed to get file size: ") + e.what()
-            );
+                std::string("Failed to get file size: ") + e.what()};
         }
 
         if (file_size != expected_size) {
-            return make_logger_error<secure_key>(
+            return result<secure_key>{
                 logger_error_code::invalid_key_size,
                 "Invalid key file size (expected " + std::to_string(expected_size) +
-                " bytes, got " + std::to_string(file_size) + ")"
-            );
+                " bytes, got " + std::to_string(file_size) + ")"};
         }
 
         // 5. Read key from file
         std::ifstream file(path, std::ios::binary);
         if (!file) {
-            return make_logger_error<secure_key>(
+            return result<secure_key>{
                 logger_error_code::file_open_failed,
-                "Failed to open key file for reading"
-            );
+                "Failed to open key file for reading"};
         }
 
         secure_key key(expected_size);
@@ -321,10 +313,9 @@ public:
         );
 
         if (file.fail()) {
-            return make_logger_error<secure_key>(
+            return result<secure_key>{
                 logger_error_code::file_read_failed,
-                "Failed to read key data"
-            );
+                "Failed to read key data"};
         }
 
         return result<secure_key>(std::move(key));

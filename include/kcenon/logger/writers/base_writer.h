@@ -35,8 +35,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string>
 #include <chrono>
 
-// Always use logger_system interface (Phase 3-4)
-#include <kcenon/logger/interfaces/logger_interface.h>
+// Use common_system's standard interface
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/common/patterns/result.h>
 #include <kcenon/logger/core/error_codes.h>
 #include "../interfaces/log_writer_interface.h"

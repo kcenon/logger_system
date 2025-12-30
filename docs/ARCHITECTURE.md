@@ -288,15 +288,6 @@ auto logger = kcenon::logger::logger_builder()
     .build();
 ```
 
-**Integrated Mode (Optional):**
-```cpp
-// With thread_system integration (requires LOGGER_USE_THREAD_SYSTEM=ON)
-auto logger = kcenon::logger::logger_builder()
-    .with_thread_system_backend()  // Uses thread_system primitives
-    .add_writer("console", std::make_unique<console_writer>())
-    .build();
-```
-
 ## 🔧 Integration Patterns
 
 ### 1. Interface-Based Integration (v3.0)

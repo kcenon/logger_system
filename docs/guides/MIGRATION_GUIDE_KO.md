@@ -173,11 +173,6 @@ find_package(logger_system REQUIRED)
 auto logger = logger_builder()
     .with_standalone_backend()
     .build();
-
-// thread_system 통합 (LOGGER_USE_THREAD_SYSTEM=ON 필요)
-auto logger = logger_builder()
-    .with_thread_system_backend()  // deprecated
-    .build();
 ```
 
 ### 6. C++20 source_location (v3.0 신규)

@@ -571,15 +571,15 @@ bool logger::is_metrics_collection_enabled() const {
 
 result<logger_metrics> logger::get_current_metrics() const {
     if (!pimpl_) {
-        return make_logger_error<logger_metrics>(
+        return result<logger_metrics>{
             logger_error_code::invalid_argument,
-            "Logger not initialized");
+            "Logger not initialized"};
     }
 
     if (!pimpl_->metrics_enabled_) {
-        return make_logger_error<logger_metrics>(
+        return result<logger_metrics>{
             logger_error_code::invalid_argument,
-            "Metrics collection is not enabled");
+            "Metrics collection is not enabled"};
     }
 
     // Return a copy of the current global metrics (thread-safe because of copy constructor)

@@ -42,7 +42,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * cooperative cancellation, eliminating the need for external thread libraries.
  */
 
-#include <kcenon/logger/interfaces/logger_interface.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/logger/interfaces/logger_types.h>
 
 #include <atomic>

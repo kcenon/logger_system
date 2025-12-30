@@ -240,10 +240,6 @@ public:
     logger_builder& with_standalone_backend();  // Default
     logger_builder& with_backend(std::unique_ptr<backends::integration_backend> backend);
 
-    // Deprecated: thread_system backend removed in v3.0
-    [[deprecated("Use with_standalone_backend() instead")]]
-    logger_builder& with_thread_system_backend();
-
     // Writers
     logger_builder& add_writer(const std::string& name,
                                std::unique_ptr<base_writer> writer);
