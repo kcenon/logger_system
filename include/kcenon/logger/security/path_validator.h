@@ -197,10 +197,9 @@ public:
         try {
             // Ensure relative path doesn't contain absolute components
             if (relative.is_absolute()) {
-                return make_logger_error<std::filesystem::path>(
+                return result<std::filesystem::path>{
                     logger_error_code::path_traversal_detected,
-                    "Cannot join with absolute path"
-                );
+                    "Cannot join with absolute path"};
             }
 
             // Join paths
@@ -211,19 +210,17 @@ public:
             auto validation = validator.validate(joined);
 
             if (validation.is_err()) {
-                return make_logger_error<std::filesystem::path>(
+                return result<std::filesystem::path>{
                     get_logger_error_code(validation),
-                    get_logger_error_message(validation)
-                );
+                    get_logger_error_message(validation)};
             }
 
             return result<std::filesystem::path>(joined);
 
         } catch (const std::filesystem::filesystem_error& e) {
-            return make_logger_error<std::filesystem::path>(
+            return result<std::filesystem::path>{
                 logger_error_code::path_traversal_detected,
-                std::string("Path join failed: ") + e.what()
-            );
+                std::string("Path join failed: ") + e.what()};
         }
     }
 

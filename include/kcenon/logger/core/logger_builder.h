@@ -703,18 +703,16 @@ public:
 
         // Validate configuration
         if (auto validation = config_.validate(); validation.is_err()) {
-            return make_logger_error<std::unique_ptr<logger>>(
+            return result<std::unique_ptr<logger>>{
                 logger_error_code::invalid_configuration,
-                "Configuration validation failed"
-            );
+                "Configuration validation failed"};
         }
-        
+
         // Validate writer count
         if (!writers_.empty() && writers_.size() > config_.max_writers) {
-            return make_logger_error<std::unique_ptr<logger>>(
+            return result<std::unique_ptr<logger>>{
                 logger_error_code::invalid_configuration,
-                "Number of writers exceeds max_writers configuration"
-            );
+                "Number of writers exceeds max_writers configuration"};
         }
 
         // Auto-detect backend if not explicitly set
