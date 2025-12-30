@@ -274,11 +274,6 @@ auto logger = logger_builder()
     .with_standalone_backend()  // Uses std::jthread
     .build();
 
-// With thread_system integration (requires LOGGER_USE_THREAD_SYSTEM=ON)
-auto logger = logger_builder()
-    .with_thread_system_backend()  // Deprecated, falls back to standalone
-    .build();
-
 // Custom backend
 auto logger = logger_builder()
     .with_backend(std::make_unique<my_custom_backend>())

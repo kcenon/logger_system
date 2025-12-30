@@ -44,15 +44,6 @@ auto logger = kcenon::logger::logger_builder()
     .build();
 ```
 
-**통합 모드 (선택적):**
-```cpp
-// thread_system 통합 (LOGGER_USE_THREAD_SYSTEM=ON 필요)
-auto logger = kcenon::logger::logger_builder()
-    .with_thread_system_backend()
-    .add_writer("console", std::make_unique<console_writer>())
-    .build();
-```
-
 ### 성능 비교
 
 | 모드 | 지연 시간 | 처리량 | 메모리 |

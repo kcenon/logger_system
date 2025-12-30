@@ -617,24 +617,6 @@ public:
     }
 
     /**
-     * @brief Use thread_system backend explicitly (DEPRECATED)
-     * @return Reference to builder for chaining
-     *
-     * @deprecated thread_system backend has been removed in favor of standalone mode.
-     *             This method now falls back to standalone backend for backward compatibility.
-     *             Will be removed in v3.0.0.
-     *
-     * @since 1.2.0
-     * @note Since Issue #225, thread_system is optional and this method uses standalone backend.
-     */
-    [[deprecated("thread_system backend removed; use with_standalone_backend() instead")]]
-    logger_builder& with_thread_system_backend() {
-        // Fallback to standalone backend for backward compatibility
-        backend_ = std::make_unique<backends::standalone_backend>();
-        return *this;
-    }
-
-    /**
      * @brief Use standalone backend explicitly
      * @return Reference to builder for chaining
      *
