@@ -40,10 +40,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "thread_integration_detector.h"
 
-// Always use logger_system's own interface
-#include <kcenon/logger/interfaces/logger_interface.h>
-
-// Include common_system's ILogger interface for standardized logging
+// Use common_system's ILogger interface for standardized logging
 #include <kcenon/common/interfaces/logger_interface.h>
 
 #include "error_codes.h"

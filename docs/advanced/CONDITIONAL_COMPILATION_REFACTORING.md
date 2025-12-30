@@ -32,23 +32,14 @@ BUILD_WITH_COMMON_SYSTEM usage: 18 instances
 ### Example of Current Pattern
 
 ```cpp
-// logger.h (current)
-#ifdef USE_THREAD_SYSTEM_INTEGRATION
-    #include <kcenon/thread/interfaces/logger_interface.h>
-#else
-    #include <kcenon/logger/interfaces/logger_interface.h>
-#endif
+// logger.h (v3.0 - simplified)
+#include <kcenon/common/interfaces/logger_interface.h>
+#include <kcenon/common/interfaces/monitoring_interface.h>
 
-#ifdef BUILD_WITH_COMMON_SYSTEM
-    #include <kcenon/common/interfaces/monitoring_interface.h>
-#endif
-
-class logger
-#ifdef BUILD_WITH_COMMON_SYSTEM
-    : public common::interfaces::IMonitorable
-#endif
+class logger : public common::interfaces::ILogger,
+               public common::interfaces::IMonitorable
 {
-    // Implementation varies by build mode
+    // Clean implementation without conditional compilation
 };
 ```
 

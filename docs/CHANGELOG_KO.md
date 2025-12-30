@@ -9,6 +9,44 @@ Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문�
 
 ---
 
+## [3.0.0] - 2025-12-31
+
+### 제거됨 - Deprecated API 정리 (Issue #268)
+
+이 릴리스는 "Fewest Elements" Simple Design 원칙에 따라 deprecated API 호환성 레이어를 제거합니다.
+
+#### Breaking Changes
+
+- **`logger_interface.h` 헤더 제거** (`include/kcenon/logger/interfaces/logger_interface.h`)
+  - `logger_system::logger_interface` 클래스 제거 - `common::interfaces::ILogger` 사용
+  - `logger_system::logger_registry` 클래스 제거
+  - `THREAD_LOG_*` 매크로 제거 - common_system의 `LOG_*` 매크로 사용
+
+- **`with_thread_system_backend()` 메서드 제거** (`logger_builder`)
+  - `with_standalone_backend()` 또는 `with_backend()` 사용
+
+- **deprecated `result_void` 클래스 제거** (`error_codes.h`)
+  - `common::VoidResult` 직접 사용
+
+- **deprecated `make_logger_error` 함수 제거**
+  - `result<T>{error_code, message}` 생성자 직접 사용
+
+#### 마이그레이션 가이드
+
+```cpp
+// 이전 (deprecated):
+#include <kcenon/logger/interfaces/logger_interface.h>
+auto logger = logger_builder().with_thread_system_backend().build();
+result_void res = make_logger_error(code, "message");
+
+// 이후:
+#include <kcenon/common/interfaces/logger_interface.h>
+auto logger = logger_builder().with_standalone_backend().build();
+common::VoidResult res = make_logger_void_result(code, "message");
+```
+
+---
+
 ## [Unreleased]
 
 ### KCENON 기능 감지 사용 (Issue #250) - 2025-12-22

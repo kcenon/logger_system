@@ -46,8 +46,8 @@ All rights reserved.
 #include <optional>
 #include "../core/small_string.h"
 
-// Note: thread_system integration is handled via backend pattern
-#include <kcenon/logger/interfaces/logger_interface.h>
+// Use common_system's standard interface
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/logger/interfaces/logger_types.h>
 
 namespace kcenon::logger {
