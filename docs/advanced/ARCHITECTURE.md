@@ -258,7 +258,19 @@ public:
 #### Async Writer (`writers/async_writer.h`)
 - Wraps any writer for async operation
 - Independent worker thread
-- Backlog management
+- Configurable queue size and flush timeout
+- Backlog management with queue full handling
+
+> **Note:** Multiple async implementations exist for different use cases.
+> See [Async Writers Guide](ASYNC_WRITERS.md) for detailed comparison and selection guidance.
+
+**Async Implementation Variants:**
+
+| Implementation | Use Case | Location |
+|----------------|----------|----------|
+| `async_writer` | General async logging | Public API |
+| `async_worker` | Internal task processing | Internal |
+| `high_performance_async_writer` | High-throughput (>100K msg/s) | Internal |
 
 ---
 
