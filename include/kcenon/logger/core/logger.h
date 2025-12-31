@@ -512,10 +512,16 @@ public:
     
     /**
      * @brief Add a writer with a specific name
-     * @param name Name for the writer
+     * @param name Name for the writer (used for later retrieval/removal)
      * @param writer Unique pointer to the writer
+     * @return common::VoidResult Success or error code
+     *
+     * @details Adds a writer with an associated name for later lookup or removal.
+     * The writer is also added to the general writers list.
+     *
+     * @since 1.0.0
      */
-    void add_writer(const std::string& name, std::unique_ptr<base_writer> writer);
+    common::VoidResult add_writer(const std::string& name, std::unique_ptr<base_writer> writer);
     
     /**
      * @brief Remove a writer by name
