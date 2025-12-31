@@ -137,8 +137,8 @@ log_level get_min_level() const;      // Deprecated: use get_level()
 // Add writer (unnamed)
 common::VoidResult add_writer(std::unique_ptr<base_writer> writer);
 
-// Add writer with name
-void add_writer(const std::string& name, std::unique_ptr<base_writer> writer);
+// Add writer with name (stores for later retrieval/removal)
+common::VoidResult add_writer(const std::string& name, std::unique_ptr<base_writer> writer);
 
 // Remove writer by name
 bool remove_writer(const std::string& name);
