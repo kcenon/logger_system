@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['수락_20기준_0',['수락 기준',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1559',1,'']]],
-  ['수별_20처리량_1',['스레드 수별 처리량',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md754',1,'']]],
-  ['수정됨_2',['수정됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md839',1,'수정됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md845',1,'수정됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md889',1,'수정됨']]],
-  ['수정_3',['수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1576',1,'1.1 GitHub Actions 워크플로우 수정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1578',1,'1.3 API 변경에 따른 벤치마크 코드 수정']]],
-  ['수정_20issue_20228_202025_2012_2006_4',['#226 API 변경 후 손상된 예제 파일 수정 (Issue #228) - 2025-12-06',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md857',1,'']]],
-  ['수정_20issue_20270_202025_2012_2031_5',['중복 Writer 추가 로직 수정 (Issue #270) - 2025-12-31',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md838',1,'']]],
-  ['수_20없음_6',['문제 1: 네임스페이스를 찾을 수 없음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1296',1,'']]]
+  ['수락_20기준_0',['수락 기준',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1661',1,'']]],
+  ['수별_20처리량_1',['스레드 수별 처리량',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md856',1,'']]],
+  ['수정됨_2',['수정됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md941',1,'수정됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md947',1,'수정됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md991',1,'수정됨']]],
+  ['수정_3',['수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1678',1,'1.1 GitHub Actions 워크플로우 수정'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1680',1,'1.3 API 변경에 따른 벤치마크 코드 수정']]],
+  ['수정_20issue_20228_202025_2012_2006_4',['#226 API 변경 후 손상된 예제 파일 수정 (Issue #228) - 2025-12-06',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md959',1,'']]],
+  ['수정_20issue_20270_202025_2012_2031_5',['중복 Writer 추가 로직 수정 (Issue #270) - 2025-12-31',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md940',1,'']]],
+  ['수_20없음_6',['문제 1: 네임스페이스를 찾을 수 없음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1398',1,'']]]
 ];

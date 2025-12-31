@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['구조_0',['구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html',1,'Logger System 프로젝트 구조'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html',1,'Logger System - 프로젝트 구조']]]
+  ['가이드_0',['가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html',1,'비동기 Writer 구현체 가이드'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html',1,'빠른 시작 가이드'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html',1,'thread_system 통합 가이드']]]
 ];

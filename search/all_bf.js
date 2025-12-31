@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['핸들러_20안전성_0',['3. 시그널 핸들러 안전성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1742',1,'']]]
+  ['해결책_0',['일반적인 문제와 해결책',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1397',1,'']]],
+  ['해결_1',['해결',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1517',1,'문제 해결'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1618',1,'문제 해결']]]
 ];

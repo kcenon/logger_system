@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['해결책_0',['일반적인 문제와 해결책',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1295',1,'']]],
-  ['해결_1',['해결',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1415',1,'문제 해결'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1516',1,'문제 해결']]]
+  ['필요_20사항_0',['❌ 개선 필요 사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1669',1,'']]],
+  ['필터링_1',['필터링',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1128',1,'레벨 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1130',1,'조건부 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1129',1,'패턴 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1127',1,'필터링']]]
 ];

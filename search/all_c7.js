@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['후_20손상된_20예제_20파일_20수정_20issue_20228_202025_2012_2006_0',['#226 API 변경 후 손상된 예제 파일 수정 (Issue #228) - 2025-12-06',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md857',1,'']]]
+  ['활성화_0',['활성화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1596',1,'런타임에 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1508',1,'런타임 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1133',1,'비동기 모드 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1507',1,'빌드 시 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1595',1,'빌드 시 활성화']]]
 ];

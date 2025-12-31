@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['호환성_0',['하위 호환성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md867',1,'']]],
-  ['호환성_20issue_20244_202025_2012_2019_1',['thread_system v3.0 호환성 (Issue #244) - 2025-12-19',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md852',1,'']]]
+  ['헤더_20경로_20변경_0',['헤더 경로 변경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html#autotoc_md715',1,'']]],
+  ['헤더_20파일_1',['헤더 파일',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md2001',1,'']]]
 ];

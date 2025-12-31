@@ -96,13 +96,13 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS__KO.html">한국어</a> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md307"></a>
+<h1><a class="anchor" id="autotoc_md409"></a>
 Creating Custom Writers</h1>
 <p>This guide explains how to create custom writers for the Logger System to send logs to various destinations.</p>
-<h2><a class="anchor" id="autotoc_md308"></a>
+<h2><a class="anchor" id="autotoc_md410"></a>
 Overview</h2>
 <p>Writers are responsible for the actual output of log messages. The Logger System provides a flexible <code>base_writer</code> class that you can extend to create custom output destinations.</p>
-<h2><a class="anchor" id="autotoc_md309"></a>
+<h2><a class="anchor" id="autotoc_md411"></a>
 Base Writer Interface</h2>
 <p>All custom writers must inherit from <code>base_writer</code>:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>base_writer {</div>
@@ -130,9 +130,9 @@ Base Writer Interface</h2>
 <div class="line">    std::string level_to_string(thread_module::log_level level) <span class="keyword">const</span>;</div>
 <div class="line">    std::string level_to_color(thread_module::log_level level) <span class="keyword">const</span>;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md310"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md412"></a>
 Simple Examples</h2>
-<h3><a class="anchor" id="autotoc_md311"></a>
+<h3><a class="anchor" id="autotoc_md413"></a>
 1. File Writer</h3>
 <p>A basic file writer that appends logs to a file:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;logger_system/writers/base_writer.h&gt;</span></div>
@@ -183,7 +183,7 @@ Simple Examples</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Usage</span></div>
 <div class="line">logger-&gt;add_writer(std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;application.log&quot;</span>));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md312"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md414"></a>
 2. Rotating File Writer</h3>
 <p>A more advanced file writer with size-based rotation:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>rotating_file_writer : <span class="keyword">public</span> logger_module::base_writer {</div>
@@ -249,7 +249,7 @@ Simple Examples</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Usage: 10MB max file size</span></div>
 <div class="line">logger-&gt;add_writer(std::make_unique&lt;rotating_file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>, 10 * 1024 * 1024));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md313"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md415"></a>
 3. Network Writer</h3>
 <p>Send logs to a remote server:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/socket.h&gt;</span></div>
@@ -327,7 +327,7 @@ Simple Examples</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Usage</span></div>
 <div class="line">logger-&gt;add_writer(std::make_unique&lt;network_writer&gt;(<span class="stringliteral">&quot;192.168.1.100&quot;</span>, 5514));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md314"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md416"></a>
 4. Database Writer</h3>
 <p>Log to a database (using SQLite as example):</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sqlite3.h&gt;</span></div>
@@ -424,9 +424,9 @@ Simple Examples</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Usage</span></div>
 <div class="line">logger-&gt;add_writer(std::make_unique&lt;database_writer&gt;(<span class="stringliteral">&quot;logs.db&quot;</span>));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md315"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md417"></a>
 Advanced Patterns</h2>
-<h3><a class="anchor" id="autotoc_md316"></a>
+<h3><a class="anchor" id="autotoc_md418"></a>
 1. Filtering Writer</h3>
 <p>A writer that filters logs before outputting:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>filtering_writer : <span class="keyword">public</span> logger_module::base_writer {</div>
@@ -465,76 +465,25 @@ Advanced Patterns</h2>
 <div class="line">    }</div>
 <div class="line">);</div>
 <div class="line">logger-&gt;add_writer(std::move(filtered));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md317"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md419"></a>
 2. Async Writer Wrapper</h3>
-<p>Make any writer asynchronous:</p>
-<div class="fragment"><div class="line"><span class="keyword">class </span>async_writer : <span class="keyword">public</span> logger_module::base_writer {</div>
-<div class="line"><span class="keyword">private</span>:</div>
-<div class="line">    std::unique_ptr&lt;base_writer&gt; inner_writer_;</div>
-<div class="line">    std::queue&lt;std::function&lt;void()&gt;&gt; write_queue_;</div>
-<div class="line">    std::mutex queue_mutex_;</div>
-<div class="line">    std::condition_variable queue_cv_;</div>
-<div class="line">    std::thread worker_thread_;</div>
-<div class="line">    std::atomic&lt;bool&gt; running_;</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordtype">void</span> worker_loop() {</div>
-<div class="line">        <span class="keywordflow">while</span> (running_) {</div>
-<div class="line">            std::unique_lock&lt;std::mutex&gt; lock(queue_mutex_);</div>
-<div class="line">            queue_cv_.wait(lock, [<span class="keyword">this</span>] { </div>
-<div class="line">                <span class="keywordflow">return</span> !write_queue_.empty() || !running_; </div>
-<div class="line">            });</div>
-<div class="line">            </div>
-<div class="line">            <span class="keywordflow">while</span> (!write_queue_.empty()) {</div>
-<div class="line">                <span class="keyword">auto</span> task = std::move(write_queue_.front());</div>
-<div class="line">                write_queue_.pop();</div>
-<div class="line">                lock.unlock();</div>
-<div class="line">                </div>
-<div class="line">                task();</div>
-<div class="line">                </div>
-<div class="line">                lock.lock();</div>
-<div class="line">            }</div>
-<div class="line">        }</div>
-<div class="line">    }</div>
-<div class="line">    </div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">explicit</span> async_writer(std::unique_ptr&lt;base_writer&gt; inner)</div>
-<div class="line">        : inner_writer_(std::move(inner))</div>
-<div class="line">        , running_(true)</div>
-<div class="line">        , worker_thread_(&amp;async_writer::worker_loop, this) {}</div>
-<div class="line">    </div>
-<div class="line">    ~async_writer()<span class="keyword"> override </span>{</div>
-<div class="line">        running_ = <span class="keyword">false</span>;</div>
-<div class="line">        queue_cv_.notify_all();</div>
-<div class="line">        worker_thread_.join();</div>
-<div class="line">    }</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordtype">void</span> write(thread_module::log_level level,</div>
-<div class="line">               <span class="keyword">const</span> std::string&amp; message,</div>
-<div class="line">               <span class="keyword">const</span> std::string&amp; file,</div>
-<div class="line">               <span class="keywordtype">int</span> line,</div>
-<div class="line">               <span class="keyword">const</span> std::string&amp; function,</div>
-<div class="line">               <span class="keyword">const</span> std::chrono::system_clock::time_point&amp; timestamp)<span class="keyword"> override </span>{</div>
-<div class="line">        std::lock_guard&lt;std::mutex&gt; lock(queue_mutex_);</div>
-<div class="line">        write_queue_.emplace([=, <span class="keyword">this</span>]() {</div>
-<div class="line">            inner_writer_-&gt;write(level, message, file, line, function, timestamp);</div>
-<div class="line">        });</div>
-<div class="line">        queue_cv_.notify_one();</div>
-<div class="line">    }</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordtype">void</span> flush()<span class="keyword"> override </span>{</div>
-<div class="line">        <span class="comment">// Wait for queue to empty</span></div>
-<div class="line">        std::unique_lock&lt;std::mutex&gt; lock(queue_mutex_);</div>
-<div class="line">        queue_cv_.wait(lock, [<span class="keyword">this</span>] { <span class="keywordflow">return</span> write_queue_.empty(); });</div>
-<div class="line">        inner_writer_-&gt;flush();</div>
-<div class="line">    }</div>
-<div class="line">};</div>
+<p>The Logger System provides a built-in <code>async_writer</code> class that wraps any writer for asynchronous operation. For detailed documentation on async writers, including performance characteristics and usage patterns, see the <b><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS.html">Async Writers Guide</a></b>.</p>
+<p><b>Quick Example:</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/async_writer.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/file_writer.h&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Usage: Make file writing asynchronous</span></div>
-<div class="line"><span class="keyword">auto</span> async_file = std::make_unique&lt;async_writer&gt;(</div>
-<div class="line">    std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
+<div class="line"><span class="comment">// Wrap file writer for async operation</span></div>
+<div class="line"><span class="keyword">auto</span> file_writer = std::make_unique&lt;kcenon::logger::file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>);</div>
+<div class="line"><span class="keyword">auto</span> async = std::make_unique&lt;kcenon::logger::async_writer&gt;(</div>
+<div class="line">    std::move(file_writer),</div>
+<div class="line">    10000,  <span class="comment">// queue size</span></div>
+<div class="line">    std::chrono::seconds(5)  <span class="comment">// flush timeout</span></div>
 <div class="line">);</div>
-<div class="line">logger-&gt;add_writer(std::move(async_file));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md318"></a>
+<div class="line"> </div>
+<div class="line">async-&gt;start();</div>
+<div class="line">logger-&gt;add_writer(std::move(async));</div>
+</div><!-- fragment --><p>For high-throughput scenarios (&gt;100K msg/sec), advanced async implementations are available. See <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS.html">Async Writers Guide</a> for details.</p>
+<h2><a class="anchor" id="autotoc_md420"></a>
 Best Practices</h2>
 <ol type="1">
 <li><b>Thread Safety</b>: Always protect shared state with mutexes; writes are called sequentially by the logger, but custom async wrappers must be safe.</li>
@@ -545,7 +494,7 @@ Best Practices</h2>
 <li><b>Security</b>: Avoid writing secrets/PII; consider integrating <code>log_sanitizer</code> upstream. If encrypting, use a vetted crypto library rather than demo components.</li>
 <li><b>Windows Networking</b>: For socket-based writers, guard platform specifics (<code>#ifdef _WIN32</code>) and initialize WinSock.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md319"></a>
+<h2><a class="anchor" id="autotoc_md421"></a>
 Testing Custom Writers</h2>
 <div class="fragment"><div class="line"><span class="comment">// Test harness for custom writers</span></div>
 <div class="line"><span class="keyword">class </span>writer_test {</div>
@@ -596,7 +545,7 @@ Testing Custom Writers</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Dec 31 2025 01:26:16 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Dec 31 2025 01:35:34 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

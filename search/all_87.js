@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['인기_20있는_20c_20로거_0',['vs spdlog (가장 인기 있는 C++ 로거)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md757',1,'']]],
-  ['인터페이스_20구현_1',['1. ILogger 인터페이스 구현',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md421',1,'']]],
-  ['인터페이스_20마이그레이션_2',['2. 인터페이스 마이그레이션',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1288',1,'']]],
-  ['인터페이스_20변경_3',['인터페이스 변경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html#autotoc_md612',1,'']]],
-  ['인터페이스_20타입_20불일치_4',['문제 2: 인터페이스 타입 불일치',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1297',1,'']]],
-  ['인프라_5',['빌드 &amp; 테스팅 인프라',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1711',1,'']]],
-  ['인프라_20구축_20예상_20소요_3a_202시간_6',['Phase 1: 인프라 구축 (예상 소요: 2시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1605',1,'']]]
+  ['이력_20logger_20system_0',['변경 이력 - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html',1,'']]],
+  ['이슈_1',['이슈',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md963',1,'관련 이슈'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md971',1,'관련 이슈'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md978',1,'관련 이슈'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md984',1,'관련 이슈']]],
+  ['이전_2',['v2.x (이전)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1382',1,'']]],
+  ['이점_3',['이점',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md976',1,'이점'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md983',1,'이점']]]
 ];

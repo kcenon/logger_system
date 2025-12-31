@@ -1,17 +1,18 @@
 var searchData=
 [
-  ['기능_0',['기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1738',1,'보안 기능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html#autotoc_md614',1,'주요 기능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1006',1,'주요 기능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1038',1,'통합 기능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1004',1,'핵심 기능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1428',1,'현재 기능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html',1,'Logger System - 상세 기능']]],
-  ['기능_20감지_20사용_20issue_20250_202025_2012_2022_1',['KCENON 기능 감지 사용 (Issue #250) - 2025-12-22',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md843',1,'']]],
-  ['기능_20구현_20대기_2',['비활성화됨 (기능 구현 대기)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md860',1,'']]],
-  ['기능_20플래그_3',['기능 플래그',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1402',1,'']]],
-  ['기능_20v3_200_4',['주요 기능 (v3.0)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md418',1,'']]],
-  ['기본_20포맷_5',['기본 포맷',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1021',1,'']]],
-  ['기여자_6',['기여자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1929',1,'']]],
-  ['기여하기_7',['Logger System 기여하기',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2CONTRIBUTING__KO.html#autotoc_md922',1,'']]],
-  ['기존_20사용자_8',['기존 사용자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md1928',1,'']]],
-  ['기준선_20메트릭_9',['기준선 메트릭',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1736',1,'']]],
-  ['기준선_20비교_10',['Phase 2: 결과 파싱 및 기준선 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1580',1,'']]],
-  ['기준선_20비교_20스크립트_11',['2.2 기준선 비교 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1582',1,'']]],
-  ['기준_12',['기준',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md771',1,'성능 회귀 기준'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1559',1,'수락 기준']]],
-  ['기준_20메트릭_13',['Logger System - 성능 기준 메트릭',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html',1,'']]]
+  ['기능_0',['기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1840',1,'보안 기능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html#autotoc_md716',1,'주요 기능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1108',1,'주요 기능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1140',1,'통합 기능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1106',1,'핵심 기능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1530',1,'현재 기능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html',1,'Logger System - 상세 기능']]],
+  ['기능_20감지_20사용_20issue_20250_202025_2012_2022_1',['KCENON 기능 감지 사용 (Issue #250) - 2025-12-22',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md945',1,'']]],
+  ['기능_20구현_20대기_2',['비활성화됨 (기능 구현 대기)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md962',1,'']]],
+  ['기능_20플래그_3',['기능 플래그',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1504',1,'']]],
+  ['기능_20v3_200_4',['주요 기능 (v3.0)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md520',1,'']]],
+  ['기본_20포맷_5',['기본 포맷',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1123',1,'']]],
+  ['기본_20async_5fwriter_20사용_6',['예제 1: 기본 async_writer 사용',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html#autotoc_md216',1,'']]],
+  ['기여자_7',['기여자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md2031',1,'']]],
+  ['기여하기_8',['Logger System 기여하기',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2CONTRIBUTING__KO.html#autotoc_md1024',1,'']]],
+  ['기존_20사용자_9',['기존 사용자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md2030',1,'']]],
+  ['기준선_20메트릭_10',['기준선 메트릭',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1838',1,'']]],
+  ['기준선_20비교_11',['Phase 2: 결과 파싱 및 기준선 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1682',1,'']]],
+  ['기준선_20비교_20스크립트_12',['2.2 기준선 비교 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1684',1,'']]],
+  ['기준_13',['기준',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md873',1,'성능 회귀 기준'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1661',1,'수락 기준']]],
+  ['기준_20메트릭_14',['Logger System - 성능 기준 메트릭',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html',1,'']]]
 ];

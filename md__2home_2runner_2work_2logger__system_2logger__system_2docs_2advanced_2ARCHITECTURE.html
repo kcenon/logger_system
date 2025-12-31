@@ -349,8 +349,23 @@ Async Writer (&lt;tt&gt;writers/async_writer.h&lt;/tt&gt;)</h3>
 <ul>
 <li>Wraps any writer for async operation</li>
 <li>Independent worker thread</li>
-<li>Backlog management</li>
+<li>Configurable queue size and flush timeout</li>
+<li>Backlog management with queue full handling</li>
 </ul>
+<blockquote class="doxtable">
+<p>&zwj;<b>Note:</b> Multiple async implementations exist for different use cases. See <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS.html">Async Writers Guide</a> for detailed comparison and selection guidance. </p>
+</blockquote>
+<p><b>Async Implementation Variants:</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Implementation   </th><th class="markdownTableHeadNone">Use Case   </th><th class="markdownTableHeadNone">Location    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>async_writer</code>   </td><td class="markdownTableBodyNone">General async logging   </td><td class="markdownTableBodyNone">Public API    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>async_worker</code>   </td><td class="markdownTableBodyNone">Internal task processing   </td><td class="markdownTableBodyNone">Internal    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>high_performance_async_writer</code>   </td><td class="markdownTableBodyNone">High-throughput (&gt;100K msg/s)   </td><td class="markdownTableBodyNone">Internal   </td></tr>
+</table>
 <hr  />
 <h2><a class="anchor" id="autotoc_md84"></a>
 5. Formatters</h2>
@@ -709,7 +724,7 @@ References</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Dec 31 2025 01:26:16 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Dec 31 2025 01:35:34 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
