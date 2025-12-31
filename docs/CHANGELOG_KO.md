@@ -49,6 +49,27 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### 중복 Writer 추가 로직 수정 (Issue #270) - 2025-12-31
+
+#### 수정됨
+- **Named writer 저장소**: `add_writer(name, writer)`가 이제 이름으로 writer를 올바르게 저장함
+  - 이전에는 `name` 파라미터가 무시됨
+  - 이제 `get_writer(name)`로 조회하고 `remove_writer(name)`로 제거 가능
+
+#### 변경됨
+- **통일된 반환 타입**: `add_writer(name, writer)`가 이제 `void` 대신 `common::VoidResult` 반환
+  - 이름 없는 `add_writer(writer)` 오버로드와 일관성 유지
+  - null writer와 초기화되지 않은 logger에 대한 적절한 오류 처리
+
+#### 추가됨
+- **Named writer 구현**: Named writer 저장소의 완전한 구현
+  - `add_writer(name, writer)`가 일반 목록과 이름 맵 모두에 writer 저장
+  - `remove_writer(name)`가 두 저장소 모두에서 writer 제거
+  - `get_writer(name)`가 이름으로 writer 포인터 조회
+  - `clear_writers()`가 이제 named writer 저장소도 정리
+
+---
+
 ### KCENON 기능 감지 사용 (Issue #250) - 2025-12-22
 
 #### 변경됨

@@ -49,6 +49,27 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### Fix Duplicate Writer Add Logic (Issue #270) - 2025-12-31
+
+#### Fixed
+- **Named writer storage**: `add_writer(name, writer)` now properly stores writers by name
+  - Previously the `name` parameter was ignored
+  - Writers can now be retrieved via `get_writer(name)` and removed via `remove_writer(name)`
+
+#### Changed
+- **Unified return types**: `add_writer(name, writer)` now returns `common::VoidResult` instead of `void`
+  - Consistent with unnamed `add_writer(writer)` overload
+  - Proper error handling for null writers and uninitialized logger
+
+#### Added
+- **Named writer implementation**: Full implementation of named writer storage
+  - `add_writer(name, writer)` stores writer in both general list and named map
+  - `remove_writer(name)` removes writer from both storage locations
+  - `get_writer(name)` retrieves writer pointer by name
+  - `clear_writers()` now also clears named writer storage
+
+---
+
 ### Use KCENON Feature Detection (Issue #250) - 2025-12-22
 
 #### Changed

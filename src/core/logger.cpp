@@ -45,11 +45,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/common/patterns/result.h>
 
+#include <algorithm>
 #include <atomic>
 #include <chrono>
 #include <iostream>
 #include <shared_mutex>
 #include <type_traits>
+#include <unordered_map>
 #include <vector>
 
 namespace kcenon::logger {
@@ -86,7 +88,8 @@ public:
     bool metrics_enabled_;
     std::atomic<logger_system::log_level> min_level_;
     std::vector<std::shared_ptr<base_writer>> writers_;
-    std::shared_mutex writers_mutex_;  // Protects writers_ vector from concurrent modification
+    std::unordered_map<std::string, std::shared_ptr<base_writer>> named_writers_;  // Named writer storage
+    std::shared_mutex writers_mutex_;  // Protects writers_ and named_writers_ from concurrent modification
     std::unique_ptr<backends::integration_backend> backend_;  // Integration backend
     std::unique_ptr<log_collector> collector_;  // Async log collector for async mode
     std::unique_ptr<log_filter_interface> filter_;  // Global filter for log entries
@@ -199,20 +202,36 @@ common::VoidResult logger::add_writer(std::unique_ptr<base_writer> writer) {
     return common::ok();
 }
 
-void logger::add_writer(const std::string& /*name*/, std::unique_ptr<base_writer> writer) {
-    if (pimpl_ && writer) {
-        std::shared_ptr<base_writer> shared_writer(std::move(writer));
+common::VoidResult logger::add_writer(const std::string& name, std::unique_ptr<base_writer> writer) {
+    if (!pimpl_) {
+        return common::make_error<std::monostate>(
+            static_cast<int>(logger_error_code::invalid_configuration),
+            "Logger not initialized",
+            "logger_system");
+    }
+    if (!writer) {
+        return common::make_error<std::monostate>(
+            static_cast<int>(logger_error_code::invalid_argument),
+            "Writer cannot be null",
+            "logger_system");
+    }
 
-        {
-            std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
-            pimpl_->writers_.push_back(shared_writer);
-        }
+    std::shared_ptr<base_writer> shared_writer(std::move(writer));
 
-        // Register with collector if in async mode and running
-        if (pimpl_->async_mode_ && pimpl_->collector_ && pimpl_->running_) {
-            pimpl_->collector_->add_writer(shared_writer);
+    {
+        std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
+        pimpl_->writers_.push_back(shared_writer);
+        if (!name.empty()) {
+            pimpl_->named_writers_[name] = shared_writer;
         }
     }
+
+    // Register with collector if in async mode and running
+    if (pimpl_->async_mode_ && pimpl_->collector_ && pimpl_->running_) {
+        pimpl_->collector_->add_writer(shared_writer);
+    }
+
+    return common::ok();
 }
 
 common::VoidResult logger::clear_writers() {
@@ -220,6 +239,7 @@ common::VoidResult logger::clear_writers() {
         {
             std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
             pimpl_->writers_.clear();
+            pimpl_->named_writers_.clear();
         }
 
         // Clear collectors writers if in async mode
@@ -228,6 +248,50 @@ common::VoidResult logger::clear_writers() {
         }
     }
     return common::ok();
+}
+
+bool logger::remove_writer(const std::string& name) {
+    if (!pimpl_ || name.empty()) {
+        return false;
+    }
+
+    std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
+
+    auto it = pimpl_->named_writers_.find(name);
+    if (it == pimpl_->named_writers_.end()) {
+        return false;
+    }
+
+    auto writer_to_remove = it->second;
+
+    // Remove from named_writers_ map
+    pimpl_->named_writers_.erase(it);
+
+    // Remove from writers_ vector
+    auto vec_it = std::find(pimpl_->writers_.begin(), pimpl_->writers_.end(), writer_to_remove);
+    if (vec_it != pimpl_->writers_.end()) {
+        pimpl_->writers_.erase(vec_it);
+    }
+
+    // Note: Cannot remove from collector's writers list as it doesn't support removal
+    // The writer will be skipped during iteration if it's no longer valid
+
+    return true;
+}
+
+base_writer* logger::get_writer(const std::string& name) {
+    if (!pimpl_ || name.empty()) {
+        return nullptr;
+    }
+
+    std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
+
+    auto it = pimpl_->named_writers_.find(name);
+    if (it != pimpl_->named_writers_.end() && it->second) {
+        return it->second.get();
+    }
+
+    return nullptr;
 }
 
 void logger::set_min_level(log_level level) {
