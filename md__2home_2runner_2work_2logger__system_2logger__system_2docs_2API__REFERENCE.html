@@ -209,8 +209,8 @@ Writer Management</h3>
 <div class="fragment"><div class="line"><span class="comment">// Add writer (unnamed)</span></div>
 <div class="line">common::VoidResult add_writer(std::unique_ptr&lt;base_writer&gt; writer);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Add writer with name</span></div>
-<div class="line"><span class="keywordtype">void</span> add_writer(<span class="keyword">const</span> std::string&amp; name, std::unique_ptr&lt;base_writer&gt; writer);</div>
+<div class="line"><span class="comment">// Add writer with name (stores for later retrieval/removal)</span></div>
+<div class="line">common::VoidResult add_writer(<span class="keyword">const</span> std::string&amp; name, std::unique_ptr&lt;base_writer&gt; writer);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Remove writer by name</span></div>
 <div class="line"><span class="keywordtype">bool</span> remove_writer(<span class="keyword">const</span> std::string&amp; name);</div>
@@ -773,7 +773,7 @@ Migration from v2.x</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Dec 30 2025 23:51:40 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed Dec 31 2025 01:26:16 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
