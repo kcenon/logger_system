@@ -397,76 +397,27 @@ logger->add_writer(std::move(filtered));
 
 ### 2. Async Writer Wrapper
 
-Make any writer asynchronous:
+The Logger System provides a built-in `async_writer` class that wraps any writer for asynchronous operation. For detailed documentation on async writers, including performance characteristics and usage patterns, see the **[Async Writers Guide](ASYNC_WRITERS.md)**.
+
+**Quick Example:**
 
 ```cpp
-class async_writer : public logger_module::base_writer {
-private:
-    std::unique_ptr<base_writer> inner_writer_;
-    std::queue<std::function<void()>> write_queue_;
-    std::mutex queue_mutex_;
-    std::condition_variable queue_cv_;
-    std::thread worker_thread_;
-    std::atomic<bool> running_;
-    
-    void worker_loop() {
-        while (running_) {
-            std::unique_lock<std::mutex> lock(queue_mutex_);
-            queue_cv_.wait(lock, [this] { 
-                return !write_queue_.empty() || !running_; 
-            });
-            
-            while (!write_queue_.empty()) {
-                auto task = std::move(write_queue_.front());
-                write_queue_.pop();
-                lock.unlock();
-                
-                task();
-                
-                lock.lock();
-            }
-        }
-    }
-    
-public:
-    explicit async_writer(std::unique_ptr<base_writer> inner)
-        : inner_writer_(std::move(inner))
-        , running_(true)
-        , worker_thread_(&async_writer::worker_loop, this) {}
-    
-    ~async_writer() override {
-        running_ = false;
-        queue_cv_.notify_all();
-        worker_thread_.join();
-    }
-    
-    void write(thread_module::log_level level,
-               const std::string& message,
-               const std::string& file,
-               int line,
-               const std::string& function,
-               const std::chrono::system_clock::time_point& timestamp) override {
-        std::lock_guard<std::mutex> lock(queue_mutex_);
-        write_queue_.emplace([=, this]() {
-            inner_writer_->write(level, message, file, line, function, timestamp);
-        });
-        queue_cv_.notify_one();
-    }
-    
-    void flush() override {
-        // Wait for queue to empty
-        std::unique_lock<std::mutex> lock(queue_mutex_);
-        queue_cv_.wait(lock, [this] { return write_queue_.empty(); });
-        inner_writer_->flush();
-    }
-};
+#include <kcenon/logger/writers/async_writer.h>
+#include <kcenon/logger/writers/file_writer.h>
 
-// Usage: Make file writing asynchronous
-auto async_file = std::make_unique<async_writer>(
-    std::make_unique<file_writer>("app.log")
+// Wrap file writer for async operation
+auto file_writer = std::make_unique<kcenon::logger::file_writer>("app.log");
+auto async = std::make_unique<kcenon::logger::async_writer>(
+    std::move(file_writer),
+    10000,  // queue size
+    std::chrono::seconds(5)  // flush timeout
 );
-logger->add_writer(std::move(async_file));
+
+async->start();
+logger->add_writer(std::move(async));
 ```
+
+For high-throughput scenarios (>100K msg/sec), advanced async implementations are available. See [Async Writers Guide](ASYNC_WRITERS.md) for details.
 
 ## Best Practices
 
