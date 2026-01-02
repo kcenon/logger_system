@@ -187,26 +187,6 @@ void set_filter(std::unique_ptr<log_filter_interface> filter);
 bool has_filter() const;
 ```
 
-### Dependency Injection
-
-```cpp
-// Set external DI container
-void set_di_container(di::di_container_interface* container);
-bool has_di_container() const;
-
-// Add writer from DI
-common::VoidResult add_writer_from_di(const std::string& name);
-
-// Register writer factory
-common::VoidResult register_writer_factory(
-    const std::string& name,
-    std::function<std::shared_ptr<base_writer>()> factory);
-
-// Enable internal DI
-common::VoidResult enable_di(di::di_container_factory::container_type type =
-                      di::di_container_factory::container_type::automatic);
-```
-
 ### Emergency Flush (Signal Safety)
 
 ```cpp
