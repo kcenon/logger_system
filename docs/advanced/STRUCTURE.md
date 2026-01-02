@@ -412,7 +412,6 @@ monitoring_system (OPTIONAL)
 | **Configuration** | `core/logger_config.h` | Configuration management | `common_system` |
 | **Log Collector** | `core/log_collector.h` | Entry collection | `interfaces/log_entry.h` |
 | **Error Codes** | `core/error_codes.h` | Logger-specific errors | `common_system` |
-| **DI Container** | `core/di/di_container_interface.h` | Dependency injection | None |
 | **Metrics** | `core/metrics/logger_metrics.h` | Performance metrics | None |
 | **Monitoring** | `core/monitoring/monitoring_interface.h` | IMonitor integration | `common_system` |
 | **Writer Interface** | `interfaces/log_writer_interface.h` | Base writer contract | `common_system` |
