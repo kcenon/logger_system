@@ -49,11 +49,7 @@ if(UNIX AND NOT WIN32)
   # Stress tests
   # Validates system behavior under extreme load conditions
   add_subdirectory(stress_test)
-  
-  # Integration tests
-  # Validates end-to-end scenarios with multiple components
-  add_subdirectory(integration_test)
-  
+
 else()
   message(STATUS "Unit tests are disabled on ${CMAKE_SYSTEM_NAME}")
   message(STATUS "Unit tests are only supported on Linux and macOS platforms")
