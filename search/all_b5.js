@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['패턴_0',['패턴',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1610',1,'사용 패턴'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html#autotoc_md219',1,'예제 4: 정상 종료 패턴'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1510',1,'일반적인 패턴'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1834',1,'Result&lt;T&gt; 패턴']]],
-  ['패턴_20필터링_1',['패턴 필터링',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1129',1,'']]],
-  ['패턴_201_3a_20애플리케이션_20전체_20공유_20풀_2',['패턴 1: 애플리케이션 전체 공유 풀',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1611',1,'']]],
-  ['패턴_202_3a_20사용자_20정의_20풀_20설정_3',['패턴 2: 사용자 정의 풀 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1612',1,'']]],
-  ['패턴_203_3a_20조건부_20통합_4',['패턴 3: 조건부 통합',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1613',1,'']]]
+  ['패턴_0',['패턴',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1606',1,'사용 패턴'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html#autotoc_md219',1,'예제 4: 정상 종료 패턴'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1506',1,'일반적인 패턴'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1830',1,'Result&lt;T&gt; 패턴']]],
+  ['패턴_20필터링_1',['패턴 필터링',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1127',1,'']]],
+  ['패턴_201_3a_20애플리케이션_20전체_20공유_20풀_2',['패턴 1: 애플리케이션 전체 공유 풀',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1607',1,'']]],
+  ['패턴_202_3a_20사용자_20정의_20풀_20설정_3',['패턴 2: 사용자 정의 풀 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1608',1,'']]],
+  ['패턴_203_3a_20조건부_20통합_4',['패턴 3: 조건부 통합',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1609',1,'']]]
 ];

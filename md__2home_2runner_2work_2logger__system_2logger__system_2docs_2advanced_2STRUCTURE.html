@@ -116,15 +116,11 @@ Directory Layout</h1>
 <div class="line">│   │   ├── error_codes.h            # Logger-specific error codes</div>
 <div class="line">│   │   ├── small_string.h           # Optimized string storage</div>
 <div class="line">│   │   ├── thread_integration_detector.h  # Thread system detection</div>
-<div class="line">│   │   ├── 📁 di/                   # Dependency injection</div>
-<div class="line">│   │   │   ├── di_container_interface.h  # DI container interface</div>
-<div class="line">│   │   │   └── di_container_factory.h    # DI container factory</div>
 <div class="line">│   │   ├── 📁 metrics/              # Performance metrics</div>
 <div class="line">│   │   │   └── logger_metrics.h     # Metrics data structures</div>
 <div class="line">│   │   └── 📁 monitoring/           # Monitoring integration</div>
-<div class="line">│   │       ├── monitoring_interface.h           # IMonitor interface</div>
-<div class="line">│   │       ├── monitoring_interface_transition.h # Transition helpers</div>
-<div class="line">│   │       └── monitoring_factory.h             # Monitor factory</div>
+<div class="line">│   │       ├── monitoring_interface.h           # IMonitor interface (deprecated)</div>
+<div class="line">│   │       └── monitoring_interface_transition.h # Transition helpers</div>
 <div class="line">│   ├── 📁 interfaces/               # Abstract interface definitions</div>
 <div class="line">│   │   ├── logger_interface.h       # Base logger interface</div>
 <div class="line">│   │   ├── logger_types.h           # Common type definitions</div>
@@ -270,14 +266,10 @@ Primary Namespace Hierarchy</h2>
 <div class="line">│   ├── logger_builder                  <span class="comment">// Builder pattern</span></div>
 <div class="line">│   ├── logger_config                   <span class="comment">// Configuration</span></div>
 <div class="line">│   ├── log_collector                   <span class="comment">// Collection logic</span></div>
-<div class="line">│   ├── di                              <span class="comment">// Dependency injection</span></div>
-<div class="line">│   │   ├── di_container_interface      <span class="comment">// DI container</span></div>
-<div class="line">│   │   └── di_container_factory        <span class="comment">// DI factory</span></div>
 <div class="line">│   ├── metrics                         <span class="comment">// Performance metrics</span></div>
 <div class="line">│   │   └── logger_metrics              <span class="comment">// Metrics structures</span></div>
 <div class="line">│   └── monitoring                      <span class="comment">// Monitoring integration</span></div>
-<div class="line">│       ├── monitoring_interface        <span class="comment">// IMonitor interface</span></div>
-<div class="line">│       └── monitoring_factory          <span class="comment">// Monitor factory</span></div>
+<div class="line">│       └── monitoring_interface        <span class="comment">// IMonitor interface (deprecated)</span></div>
 <div class="line">├── interfaces                          <span class="comment">// Abstract interfaces</span></div>
 <div class="line">│   ├── logger_interface                <span class="comment">// Base logger</span></div>
 <div class="line">│   ├── log_entry                       <span class="comment">// Entry structure</span></div>
@@ -463,30 +455,18 @@ Adapters (&lt;tt&gt;adapters/&lt;/tt&gt;)</h3>
 <li><b>Dependencies</b>: <code>common_system</code>, <code>thread_system</code> (optional)</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md602"></a>
-Dependency Injection (&lt;tt&gt;core/di/&lt;/tt&gt;)</h2>
-<ul>
-<li><b>Purpose</b>: Runtime component injection</li>
-<li><b>Key Classes</b>:<ul>
-<li><code>di_container_interface</code>: DI container contract</li>
-<li><code>di_container_factory</code>: Factory for containers</li>
-</ul>
-</li>
-<li><b>Dependencies</b>: None (header-only)</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md603"></a>
 Monitoring (&lt;tt&gt;core/monitoring/&lt;/tt&gt;)</h2>
 <ul>
 <li><b>Purpose</b>: Integration with monitoring_system</li>
 <li><b>Key Classes</b>:<ul>
-<li><code>monitoring_interface</code>: IMonitor abstraction</li>
-<li><code>monitoring_factory</code>: Monitor creation</li>
+<li><code>monitoring_interface</code>: IMonitor abstraction (deprecated, use common_system)</li>
 </ul>
 </li>
 <li><b>Dependencies</b>: <code>common_system</code> (IMonitor)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md604"></a>
+<h1><a class="anchor" id="autotoc_md603"></a>
 Module Dependencies</h1>
-<h2><a class="anchor" id="autotoc_md605"></a>
+<h2><a class="anchor" id="autotoc_md604"></a>
 Internal Dependencies</h2>
 <div class="fragment"><div class="line">interfaces (no dependencies)</div>
 <div class="line">    │</div>
@@ -509,7 +489,7 @@ Internal Dependencies</h2>
 <div class="line">    │      └──&gt; server (depends on core, writers)</div>
 <div class="line">    │</div>
 <div class="line">    └──&gt; adapters (depends on interfaces, core)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md606"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md605"></a>
 External Dependencies</h2>
 <div class="fragment"><div class="line">common_system (REQUIRED)</div>
 <div class="line">    ├── interfaces/logger_interface.h   → Implemented by logger</div>
@@ -525,7 +505,7 @@ External Dependencies</h2>
 <div class="line">monitoring_system (OPTIONAL)</div>
 <div class="line">    ├── core/performance_monitor.h      → Metrics collection</div>
 <div class="line">    └── interfaces/monitor_interface.h  → Health checks</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md607"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md606"></a>
 Compilation Units</h2>
 <div class="fragment"><div class="line"><span class="comment">// Header-only components (no .cpp files)</span></div>
 <div class="line">- interfaces<span class="comment">/*</span></div>
@@ -543,9 +523,9 @@ Compilation Units</h2>
 <div class="line"><span class="comment">- structured/*</span></div>
 <div class="line"><span class="comment">- safety/*</span></div>
 <div class="line"><span class="comment">- server/*</span></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md608"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md607"></a>
 Key Components Overview</h1>
-<h2><a class="anchor" id="autotoc_md609"></a>
+<h2><a class="anchor" id="autotoc_md608"></a>
 Public API Layer (&lt;tt&gt;include/kcenon/logger/&lt;/tt&gt;)</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -561,47 +541,45 @@ Public API Layer (&lt;tt&gt;include/kcenon/logger/&lt;/tt&gt;)</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Error Codes</b>   </td><td class="markdownTableBodyNone"><code>core/error_codes.h</code>   </td><td class="markdownTableBodyNone">Logger-specific errors   </td><td class="markdownTableBodyNone"><code>common_system</code>    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>DI Container</b>   </td><td class="markdownTableBodyNone"><code>core/di/di_container_interface.h</code>   </td><td class="markdownTableBodyNone">Dependency injection   </td><td class="markdownTableBodyNone">None    </td></tr>
-<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Metrics</b>   </td><td class="markdownTableBodyNone"><code>core/metrics/logger_metrics.h</code>   </td><td class="markdownTableBodyNone">Performance metrics   </td><td class="markdownTableBodyNone">None    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Monitoring</b>   </td><td class="markdownTableBodyNone"><code>core/monitoring/monitoring_interface.h</code>   </td><td class="markdownTableBodyNone">IMonitor integration   </td><td class="markdownTableBodyNone"><code>common_system</code>    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Writer Interface</b>   </td><td class="markdownTableBodyNone"><code>interfaces/log_writer_interface.h</code>   </td><td class="markdownTableBodyNone">Base writer contract   </td><td class="markdownTableBodyNone"><code>common_system</code>    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Logger Interface</b>   </td><td class="markdownTableBodyNone"><code>interfaces/logger_interface.h</code>   </td><td class="markdownTableBodyNone">Base logger contract   </td><td class="markdownTableBodyNone"><code>common_system</code>    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Console Writer</b>   </td><td class="markdownTableBodyNone"><code>writers/console_writer.h</code>   </td><td class="markdownTableBodyNone">ANSI console output   </td><td class="markdownTableBodyNone"><code>interfaces/</code>    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>File Writer</b>   </td><td class="markdownTableBodyNone"><code>writers/file_writer.h</code>   </td><td class="markdownTableBodyNone">File output   </td><td class="markdownTableBodyNone"><code>interfaces/</code>    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Rotating Writer</b>   </td><td class="markdownTableBodyNone"><code>writers/rotating_file_writer.h</code>   </td><td class="markdownTableBodyNone">Log rotation   </td><td class="markdownTableBodyNone"><code>writers/file_writer.h</code>    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Network Writer</b>   </td><td class="markdownTableBodyNone"><code>writers/network_writer.h</code>   </td><td class="markdownTableBodyNone">TCP/UDP logging   </td><td class="markdownTableBodyNone"><code>interfaces/</code>    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Async Writer</b>   </td><td class="markdownTableBodyNone"><code>writers/async_writer.h</code>   </td><td class="markdownTableBodyNone">Async wrapper   </td><td class="markdownTableBodyNone"><code>interfaces/</code>    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Critical Writer</b>   </td><td class="markdownTableBodyNone"><code>writers/critical_writer.h</code>   </td><td class="markdownTableBodyNone">Sync critical logs   </td><td class="markdownTableBodyNone"><code>interfaces/</code>    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Encrypted Writer</b>   </td><td class="markdownTableBodyNone"><code>writers/encrypted_writer.h</code>   </td><td class="markdownTableBodyNone">Encrypted output   </td><td class="markdownTableBodyNone"><code>interfaces/</code>    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Base Formatter</b>   </td><td class="markdownTableBodyNone"><code>formatters/base_formatter.h</code>   </td><td class="markdownTableBodyNone">Formatting base   </td><td class="markdownTableBodyNone"><code>interfaces/</code>    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Log Filter</b>   </td><td class="markdownTableBodyNone"><code>filters/log_filter.h</code>   </td><td class="markdownTableBodyNone">Filtering logic   </td><td class="markdownTableBodyNone"><code>interfaces/</code>    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Log Router</b>   </td><td class="markdownTableBodyNone"><code>routing/log_router.h</code>   </td><td class="markdownTableBodyNone">Routing logic   </td><td class="markdownTableBodyNone"><code>interfaces/</code>, <code>writers/</code>    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Log Analyzer</b>   </td><td class="markdownTableBodyNone"><code>analysis/log_analyzer.h</code>   </td><td class="markdownTableBodyNone">Pattern analysis   </td><td class="markdownTableBodyNone"><code>interfaces/</code>    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Structured Logger</b>   </td><td class="markdownTableBodyNone"><code>structured/structured_logger.h</code>   </td><td class="markdownTableBodyNone">JSON logging   </td><td class="markdownTableBodyNone"><code>core/logger.h</code>    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Crash-Safe Logger</b>   </td><td class="markdownTableBodyNone"><code>safety/crash_safe_logger.h</code>   </td><td class="markdownTableBodyNone">Emergency flush   </td><td class="markdownTableBodyNone"><code>core/logger.h</code>    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Log Server</b>   </td><td class="markdownTableBodyNone"><code>server/log_server.h</code>   </td><td class="markdownTableBodyNone">Network receiver   </td><td class="markdownTableBodyNone"><code>core/</code>, <code>writers/</code>    </td></tr>
+<td class="markdownTableBodyNone"><b>Crash-Safe Logger</b>   </td><td class="markdownTableBodyNone"><code>safety/crash_safe_logger.h</code>   </td><td class="markdownTableBodyNone">Emergency flush   </td><td class="markdownTableBodyNone"><code>core/logger.h</code>    </td></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>Log Server</b>   </td><td class="markdownTableBodyNone"><code>server/log_server.h</code>   </td><td class="markdownTableBodyNone">Network receiver   </td><td class="markdownTableBodyNone"><code>core/</code>, <code>writers/</code>    </td></tr>
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Common Adapter</b>   </td><td class="markdownTableBodyNone"><code>adapters/common_logger_adapter.h</code>   </td><td class="markdownTableBodyNone">common_system bridge   </td><td class="markdownTableBodyNone"><code>common_system</code>   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md610"></a>
+<h2><a class="anchor" id="autotoc_md609"></a>
 Implementation Layer (&lt;tt&gt;src/&lt;/tt&gt;)</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -627,7 +605,7 @@ Implementation Layer (&lt;tt&gt;src/&lt;/tt&gt;)</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>adapters/</code>   </td><td class="markdownTableBodyNone">Adapter implementations   </td><td class="markdownTableBodyNone"><code>common_logger_adapter.cpp</code>   </td><td class="markdownTableBodyNone">Compiled   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md611"></a>
+<h2><a class="anchor" id="autotoc_md610"></a>
 Test Organization</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -641,39 +619,39 @@ Test Organization</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>benchmarks/</code>   </td><td class="markdownTableBodyNone">Throughput and latency benchmarks   </td><td class="markdownTableBodyNone">Google Benchmark   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md612"></a>
+<h1><a class="anchor" id="autotoc_md611"></a>
 Performance Characteristics</h1>
-<h2><a class="anchor" id="autotoc_md613"></a>
+<h2><a class="anchor" id="autotoc_md612"></a>
 Throughput</h2>
 <ul>
 <li><b>Peak</b>: 4.34M messages/second (single thread, async mode)</li>
 <li><b>Multi-threaded</b>: 1.07M messages/s (4 threads), 412K messages/s (8 threads)</li>
 <li><b>Latency</b>: 148ns average enqueue time</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md614"></a>
+<h2><a class="anchor" id="autotoc_md613"></a>
 Memory</h2>
 <ul>
 <li><b>Baseline</b>: &lt;2MB with adaptive buffer management</li>
 <li><b>Queue</b>: Configurable (default 20,000 entries)</li>
 <li><b>Buffer</b>: Configurable (default 16KB per writer)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md615"></a>
+<h2><a class="anchor" id="autotoc_md614"></a>
 Threading</h2>
 <ul>
 <li><b>Thread-Safe</b>: All components safe for concurrent access</li>
 <li><b>Lock-Free</b>: Async queue uses lock-free design where possible</li>
 <li><b>ThreadSanitizer</b>: Zero data races detected</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md616"></a>
+<h2><a class="anchor" id="autotoc_md615"></a>
 Resource Management</h2>
 <ul>
 <li><b>RAII</b>: Grade A compliance with smart pointers</li>
 <li><b>AddressSanitizer</b>: Zero memory leaks detected</li>
 <li><b>Exception Safety</b>: Strong exception safety guarantees</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md617"></a>
+<h1><a class="anchor" id="autotoc_md616"></a>
 Build Configuration</h1>
-<h2><a class="anchor" id="autotoc_md618"></a>
+<h2><a class="anchor" id="autotoc_md617"></a>
 CMake Targets</h2>
 <div class="fragment"><div class="line"># Main library</div>
 <div class="line">LoggerSystem::logger          # Header-only or compiled library</div>
@@ -682,7 +660,7 @@ CMake Targets</h2>
 <div class="line">LoggerSystem::core            # Core logger components</div>
 <div class="line">LoggerSystem::writers         # Writer implementations</div>
 <div class="line">LoggerSystem::formatters      # Formatter implementations</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md619"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md618"></a>
 Feature Flags</h2>
 <p>Configure via CMake options: </p><div class="fragment"><div class="line"># Core Features</div>
 <div class="line">-DLOGGER_USE_DI=ON                  # Enable dependency injection</div>
@@ -701,7 +679,7 @@ Feature Flags</h2>
 <div class="line"># Quality</div>
 <div class="line">-DLOGGER_ENABLE_SANITIZERS=ON       # Enable sanitizers</div>
 <div class="line">-DLOGGER_ENABLE_COVERAGE=ON         # Enable coverage</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md620"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md619"></a>
 References</h1>
 <ul>
 <li><a class="el" href="index.html#md__2home_2runner_2work_2logger__system_2logger__system_2README">README.md</a> - Project overview and features</li>
@@ -716,7 +694,7 @@ References</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Dec 31 2025 01:35:34 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Jan 3 2026 02:31:59 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
