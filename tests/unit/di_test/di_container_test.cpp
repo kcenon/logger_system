@@ -11,15 +11,14 @@ All rights reserved.
  */
 
 #include <gtest/gtest.h>
-#include "../../sources/logger/di/lightweight_di_container.h"
-#include "../../sources/logger/di/di_container_factory.h"
-#include "../../sources/logger/writers/base_writer.h"
+#include <kcenon/logger/writers/base_writer.h>
+#include "../../../src/impl/di/lightweight_di_container.h"
 #include <memory>
 #include <thread>
 #include <vector>
 #include <chrono>
 
-using namespace logger_module;
+using namespace kcenon::logger;
 
 // Mock writer for testing
 class mock_writer : public base_writer {
@@ -37,7 +36,7 @@ public:
         --instance_count_;
     }
     
-    common::VoidResult write(thread_module::log_level level,
+    common::VoidResult write(logger_system::log_level level,
                       const std::string& message,
                       const std::string& file,
                       int line,
@@ -230,67 +229,6 @@ TEST_F(di_container_test, lightweight_container_thread_safety) {
     
     // Container should still be consistent
     EXPECT_TRUE(container.is_registered("concurrent"));
-}
-
-// DI Factory Tests
-TEST_F(di_container_test, factory_create_lightweight) {
-    auto container = di_container_factory::create_container<base_writer>(
-        di_container_factory::container_type::lightweight
-    );
-    
-    ASSERT_NE(container, nullptr);
-    
-    // Should be able to use it
-    container->register_factory("test", []() {
-        return std::make_shared<mock_writer>();
-    });
-    
-    auto result = container->resolve("test");
-    ASSERT_TRUE(result);
-}
-
-TEST_F(di_container_test, factory_create_automatic) {
-    auto container = di_container_factory::create_container<base_writer>(
-        di_container_factory::container_type::automatic
-    );
-    
-    ASSERT_NE(container, nullptr);
-    
-    // Should work regardless of thread_system availability
-    container->register_factory("test", []() {
-        return std::make_shared<mock_writer>();
-    });
-    
-    auto result = container->resolve("test");
-    ASSERT_TRUE(result);
-}
-
-TEST_F(di_container_test, factory_create_best_available) {
-    auto container = di_container_factory::create_best_available<base_writer>();
-    
-    ASSERT_NE(container, nullptr);
-    
-    // Should work with best available implementation
-    container->register_factory("test", []() {
-        return std::make_shared<mock_writer>();
-    });
-    
-    auto result = container->resolve("test");
-    ASSERT_TRUE(result);
-}
-
-TEST_F(di_container_test, factory_type_check) {
-    // Check if we can determine available type
-    auto type = di_container_factory::get_available_type();
-    
-    // Should be either lightweight or thread_system
-    EXPECT_TRUE(type == di_container_factory::container_type::lightweight ||
-                type == di_container_factory::container_type::thread_system);
-    
-    // Get name should work
-    const char* name = di_container_factory::get_container_type_name(type);
-    EXPECT_NE(name, nullptr);
-    EXPECT_NE(std::string(name), "unknown");
 }
 
 // Template helper methods tests

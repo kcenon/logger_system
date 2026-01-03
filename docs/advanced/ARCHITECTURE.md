@@ -537,12 +537,11 @@ struct log_entry {
 ### 5. Dependency Injection
 - monitoring_interface injected at runtime
 - common_logger_adapter for ecosystem DI
-- di_container_factory for advanced scenarios
 
 ### 6. Factory Pattern
-- writer factory creates appropriate writers
-- formatter factory based on output type
-- monitoring_factory for IMonitor instances
+- writer_factory creates appropriate writers
+- formatter_factory based on output type
+- filter_factory for log filtering
 
 ---
 

@@ -25,15 +25,11 @@ logger_system/
 │   │   ├── error_codes.h            # Logger-specific error codes
 │   │   ├── small_string.h           # Optimized string storage
 │   │   ├── thread_integration_detector.h  # Thread system detection
-│   │   ├── 📁 di/                   # Dependency injection
-│   │   │   ├── di_container_interface.h  # DI container interface
-│   │   │   └── di_container_factory.h    # DI container factory
 │   │   ├── 📁 metrics/              # Performance metrics
 │   │   │   └── logger_metrics.h     # Metrics data structures
 │   │   └── 📁 monitoring/           # Monitoring integration
-│   │       ├── monitoring_interface.h           # IMonitor interface
-│   │       ├── monitoring_interface_transition.h # Transition helpers
-│   │       └── monitoring_factory.h             # Monitor factory
+│   │       ├── monitoring_interface.h           # IMonitor interface (deprecated)
+│   │       └── monitoring_interface_transition.h # Transition helpers
 │   ├── 📁 interfaces/               # Abstract interface definitions
 │   │   ├── logger_interface.h       # Base logger interface
 │   │   ├── logger_types.h           # Common type definitions
@@ -182,14 +178,10 @@ kcenon::logger                          // Root namespace
 │   ├── logger_builder                  // Builder pattern
 │   ├── logger_config                   // Configuration
 │   ├── log_collector                   // Collection logic
-│   ├── di                              // Dependency injection
-│   │   ├── di_container_interface      // DI container
-│   │   └── di_container_factory        // DI factory
 │   ├── metrics                         // Performance metrics
 │   │   └── logger_metrics              // Metrics structures
 │   └── monitoring                      // Monitoring integration
-│       ├── monitoring_interface        // IMonitor interface
-│       └── monitoring_factory          // Monitor factory
+│       └── monitoring_interface        // IMonitor interface (deprecated)
 ├── interfaces                          // Abstract interfaces
 │   ├── logger_interface                // Base logger
 │   ├── log_entry                       // Entry structure
@@ -335,18 +327,10 @@ auto adapted = make_common_logger_adapter(std::move(logger));
   - `logger_adapter`: Generic adapter pattern
 - **Dependencies**: `common_system`, `thread_system` (optional)
 
-### Dependency Injection (`core/di/`)
-- **Purpose**: Runtime component injection
-- **Key Classes**:
-  - `di_container_interface`: DI container contract
-  - `di_container_factory`: Factory for containers
-- **Dependencies**: None (header-only)
-
 ### Monitoring (`core/monitoring/`)
 - **Purpose**: Integration with monitoring_system
 - **Key Classes**:
-  - `monitoring_interface`: IMonitor abstraction
-  - `monitoring_factory`: Monitor creation
+  - `monitoring_interface`: IMonitor abstraction (deprecated, use common_system)
 - **Dependencies**: `common_system` (IMonitor)
 
 ## Module Dependencies
@@ -428,7 +412,6 @@ monitoring_system (OPTIONAL)
 | **Configuration** | `core/logger_config.h` | Configuration management | `common_system` |
 | **Log Collector** | `core/log_collector.h` | Entry collection | `interfaces/log_entry.h` |
 | **Error Codes** | `core/error_codes.h` | Logger-specific errors | `common_system` |
-| **DI Container** | `core/di/di_container_interface.h` | Dependency injection | None |
 | **Metrics** | `core/metrics/logger_metrics.h` | Performance metrics | None |
 | **Monitoring** | `core/monitoring/monitoring_interface.h` | IMonitor integration | `common_system` |
 | **Writer Interface** | `interfaces/log_writer_interface.h` | Base writer contract | `common_system` |

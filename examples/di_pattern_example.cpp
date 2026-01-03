@@ -95,7 +95,7 @@ public:
 
     kcenon::common::VoidResult log(ci::log_level level,
                            std::string_view message,
-                           const ci::source_location& loc) override {
+                           const kcenon::common::source_location& loc) override {
         if (!logger_) {
             return make_adapter_error("Logger not initialized");
         }

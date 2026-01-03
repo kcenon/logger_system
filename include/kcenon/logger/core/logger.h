@@ -45,8 +45,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "error_codes.h"
 #include "metrics/logger_metrics.h"
-#include "di/di_container_interface.h"
-#include "di/di_container_factory.h"
 #include "../backends/integration_backend.h"
 #include "log_context.h"
 #include <kcenon/logger/interfaces/logger_types.h>
@@ -115,9 +113,6 @@ using overflow_policy = logger_system::overflow_policy;
 using logger_metrics = metrics::logger_performance_stats;
 using performance_metrics = metrics::logger_performance_stats; // Alias for examples
 
-using di_container_interface = di::di_container_interface;
-using di_container_factory = di::di_container_factory;
-
 // Metric type enum
 enum class metric_type {
     gauge,
@@ -140,7 +135,6 @@ class log_filter_interface;  // Forward declaration for filtering system
  * - Asynchronous logging with configurable batching for optimal throughput
  * - Multiple writer support for outputting to different destinations simultaneously
  * - Real-time metrics collection and performance monitoring
- * - Dependency injection support for flexible writer management
  * - Configurable filtering and routing of log messages
  * - Integration with monitoring backends for production observability
  *
@@ -573,49 +567,6 @@ public:
     //  */
     // log_router& get_router();
     
-    // DI Support Methods
-    
-    /**
-     * @brief Set a DI container for writer resolution
-     * @param container Pointer to DI container (not owned)
-     */
-    void set_di_container(di::di_container_interface* container);
-    
-    /**
-     * @brief Check if DI container is available
-     * @return true if DI container is set
-     */
-    bool has_di_container() const;
-    
-    /**
-     * @brief Add a writer from DI container
-     * @param name Name of the writer registered in DI container
-     * @return common::VoidResult indicating success or error
-     */
-    common::VoidResult add_writer_from_di(const std::string& name);
-
-    /**
-     * @brief Register a writer factory in the internal DI container
-     * @param name Name to register the writer factory under
-     * @param factory Factory function to create the writer
-     * @return common::VoidResult indicating success or error
-     */
-    common::VoidResult register_writer_factory(const std::string& name, std::function<std::shared_ptr<base_writer>()> factory);
-    
-    /**
-     * @brief Get the DI strategy being used
-     * @return Current DI strategy
-     */
-    di::di_container_factory::container_type get_di_strategy() const;
-    
-    /**
-     * @brief Enable internal DI container
-     * @param type Type of DI container to use
-     * @return common::VoidResult indicating success or error
-     */
-    common::VoidResult enable_di(di::di_container_factory::container_type type =
-                                 di::di_container_factory::container_type::automatic);
-
     // Emergency Flush Support (critical_logger_interface implementation)
 
     /**
@@ -653,10 +604,6 @@ public:
 private:
     class impl;
     std::unique_ptr<impl> pimpl_;
-
-    // DI support members
-    di::di_container_interface* external_di_container_ = nullptr;
-    std::unique_ptr<di::di_container_interface> internal_di_container_;
 };
 
 } // namespace kcenon::logger
