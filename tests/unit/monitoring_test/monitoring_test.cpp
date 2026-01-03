@@ -11,12 +11,11 @@ All rights reserved.
  */
 
 #include <gtest/gtest.h>
-#include "../../sources/logger/monitoring/basic_monitor.h"
-#include "../../sources/logger/monitoring/monitoring_factory.h"
+#include "../../../src/impl/monitoring/basic_monitor.h"
 #include <thread>
 #include <chrono>
 
-using namespace logger_module;
+using namespace kcenon::logger;
 using namespace std::chrono_literals;
 
 // Test fixture for monitoring tests
@@ -263,47 +262,6 @@ TEST_F(monitoring_test, basic_monitor_core_metrics) {
                 << "Metric " << metric.name << " has unexpected value";
         }
     }
-}
-
-// Factory Tests
-TEST(monitoring_factory_test, create_basic_monitor) {
-    auto monitor = monitoring_factory::create_monitor(
-        monitoring_factory::monitor_type::basic
-    );
-    
-    ASSERT_NE(monitor, nullptr);
-    EXPECT_EQ(monitor->get_backend_name(), "basic");
-}
-
-TEST(monitoring_factory_test, create_automatic_monitor) {
-    auto monitor = monitoring_factory::create_monitor(
-        monitoring_factory::monitor_type::automatic
-    );
-    
-    ASSERT_NE(monitor, nullptr);
-    EXPECT_FALSE(monitor->get_backend_name().empty());
-}
-
-TEST(monitoring_factory_test, create_best_available) {
-    auto monitor = monitoring_factory::create_best_available();
-    
-    ASSERT_NE(monitor, nullptr);
-    EXPECT_TRUE(monitor->is_enabled());
-}
-
-TEST(monitoring_factory_test, get_monitor_type_name) {
-    EXPECT_STREQ(monitoring_factory::get_monitor_type_name(
-        monitoring_factory::monitor_type::basic), "basic");
-    EXPECT_STREQ(monitoring_factory::get_monitor_type_name(
-        monitoring_factory::monitor_type::automatic), "automatic");
-}
-
-TEST(monitoring_factory_test, get_available_type) {
-    auto type = monitoring_factory::get_available_type();
-    
-    // Should be either basic or thread_system
-    EXPECT_TRUE(type == monitoring_factory::monitor_type::basic ||
-                type == monitoring_factory::monitor_type::thread_system);
 }
 
 // Health Status Tests

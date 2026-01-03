@@ -198,32 +198,7 @@ auto logger = kcenon::logger::logger_builder()
 // Future: logger->set_executor(executor);
 ```
 
-### DI Container Adapter
-
-Integrate logger_system with thread_system's DI container:
-
-```cpp
-#include <kcenon/logger/core/logger.h>
-#include <kcenon/logger/core/di/di_container_interface.h>
-#include <kcenon/thread/interfaces/service_container.h>
-
-// Register logger in thread_system's service container
-auto logger = kcenon::logger::logger_builder()
-    .use_template("production")
-    .add_writer("file", std::make_unique<kcenon::logger::file_writer>("app.log"))
-    .build()
-    .value();
-
-// Register in thread_system DI container
-kcenon::thread::service_container::global()
-    .register_singleton<kcenon::thread::logger_interface>(logger);
-
-// Thread pool operations are now automatically logged
-auto pool = std::make_shared<kcenon::thread::thread_pool>("WorkerPool");
-pool->start();  // Logs via registered logger
-```
-
-### Cross-System DI Integration
+### Cross-System Integration
 
 Complete example of DI integration across systems:
 
@@ -528,55 +503,11 @@ int main() {
 }
 ```
 
-### Example 4: DI Container Integration
-
-```cpp
-#include <kcenon/logger/core/logger.h>
-#include <kcenon/logger/core/di/di_container_interface.h>
-
-// Register custom writer factory
-void setup_di_container() {
-    auto& container = kcenon::logger::di_container::global();
-
-    // Register logger instance
-    auto logger = kcenon::logger::logger_builder()
-        .use_template("production")
-        .build()
-        .value();
-
-    container.register_singleton<kcenon::logger::logger_interface>(logger);
-
-    // Register custom writer factory
-    container.register_factory<kcenon::logger::log_writer_interface>(
-        "database_writer",
-        []() -> std::shared_ptr<kcenon::logger::log_writer_interface> {
-            return std::make_shared<database_log_writer>(
-                "host=localhost;db=logs;user=app"
-            );
-        }
-    );
-}
-
-int main() {
-    setup_di_container();
-
-    // Resolve logger from DI container
-    auto& container = kcenon::logger::di_container::global();
-    auto logger = container.resolve<kcenon::logger::logger_interface>();
-
-    if (logger) {
-        logger->log(kcenon::logger::log_level::info, "Using DI container");
-    }
-
-    return 0;
-}
-```
-
 ## Result Handling Cheatsheet
 
 - Prefer `result.is_err()` / `result.error()` for every public API: legacy `.get_error()` is maintained only for backward compatibility.
 - Bubble up failures with `return Result<void>::err(result.error());` to avoid losing diagnostic context.
-- When DI containers orchestrate several operations, capture both `err.code` and `err.module` for log filtering.
+- When orchestrating several operations, capture both `err.code` and `err.module` for log filtering.
 
 ```cpp
 auto add_writer_result = logger->add_writer("network", std::move(writer));
