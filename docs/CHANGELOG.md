@@ -49,6 +49,39 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### C++20 Module Files (Issue #275) - 2026-01-03
+
+#### Added
+- **C++20 module files**: Created module interface for `kcenon.logger`
+  - `src/modules/logger.cppm`: Primary module interface
+  - `src/modules/core.cppm`: Core partition (Logger, LogContext, LogCollector)
+  - `src/modules/backends.cppm`: Backends partition (integration_backend, standalone_backend)
+  - `src/modules/analysis.cppm`: Analysis partition (log_analyzer, analysis_stats)
+
+- **CMake module support**: Added optional C++20 modules support
+  - Requires CMake 3.28+ for module scanning
+  - New option `LOGGER_USE_MODULES` to enable module build
+  - `LOGGER_HAS_MODULES` compile definition when modules are active
+  - Header-based build still works during transition period
+
+#### Module Structure
+```cpp
+export module kcenon.logger;
+
+import kcenon.common;           // Required dependency
+
+export import :core;            // Logger, LogContext, LogCollector
+export import :backends;        // Integration backends
+export import :analysis;        // Log analysis utilities
+```
+
+#### CMake Usage
+```cmake
+cmake -DLOGGER_USE_MODULES=ON ..  # Requires CMake 3.28+
+```
+
+---
+
 ### Fix Duplicate Writer Add Logic (Issue #270) - 2025-12-31
 
 #### Fixed

@@ -41,6 +41,11 @@ logger_system/
 │   └── 📁 server/                  # Network log server
 ├── 📁 src/                         # Implementation files (.cpp)
 │   ├── 📁 core/                    # Core implementations
+│   ├── 📁 modules/                 # C++20 module files (.cppm)
+│   │   ├── logger.cppm             # Primary module interface
+│   │   ├── core.cppm               # Core partition
+│   │   ├── backends.cppm           # Backends partition
+│   │   └── analysis.cppm           # Analysis partition
 │   ├── 📁 writers/                 # Writer implementations
 │   ├── 📁 filters/                 # Filter implementations
 │   ├── 📁 formatters/              # Formatter implementations
