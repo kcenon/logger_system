@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 3.16)
 
+# C++20 Modules require CMake 3.28+
+# Check if we can enable module support
+if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.28")
+    set(LOGGER_CAN_USE_MODULES ON)
+else()
+    set(LOGGER_CAN_USE_MODULES OFF)
+endif()
+
 ##################################################
 # Project configuration
 ##################################################
@@ -48,6 +56,18 @@ option(BUILD_SAMPLES "Build sample programs" ON)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(LOGGER_BUILD_INTEGRATION_TESTS "Build integration tests" ON)
 option(LOGGER_ENABLE_COVERAGE "Enable code coverage reporting" OFF)
+
+# C++20 Modules option (requires CMake 3.28+)
+if(LOGGER_CAN_USE_MODULES)
+    option(LOGGER_USE_MODULES "Build with C++20 modules support" OFF)
+else()
+    set(LOGGER_USE_MODULES OFF CACHE BOOL "Build with C++20 modules (requires CMake 3.28+)" FORCE)
+endif()
+
+if(LOGGER_USE_MODULES)
+    message(STATUS "Logger System: C++20 modules support enabled")
+    set(CMAKE_CXX_SCAN_FOR_MODULES ON)
+endif()
 
 # Map LOGGER_BUILD_* to BUILD_* for compatibility with CI/CD
 if(DEFINED LOGGER_BUILD_SAMPLES)
@@ -381,6 +401,52 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
         endif()
 
         set(USE_LEGACY_SOURCES FALSE)
+
+        ##################################################
+        # C++20 Modules support (optional, requires CMake 3.28+)
+        ##################################################
+        if(LOGGER_USE_MODULES AND LOGGER_CAN_USE_MODULES)
+            message(STATUS "Logger System: Configuring C++20 module files")
+
+            # Module source files
+            set(LOGGER_MODULE_FILES
+                ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/logger.cppm
+                ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/core.cppm
+                ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/backends.cppm
+                ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/analysis.cppm
+            )
+
+            # Check if module files exist
+            set(MODULES_AVAILABLE TRUE)
+            foreach(MODULE_FILE ${LOGGER_MODULE_FILES})
+                if(NOT EXISTS ${MODULE_FILE})
+                    message(WARNING "Module file not found: ${MODULE_FILE}")
+                    set(MODULES_AVAILABLE FALSE)
+                endif()
+            endforeach()
+
+            if(MODULES_AVAILABLE)
+                # Add module sources to the library using FILE_SET
+                target_sources(LoggerSystem
+                    PUBLIC
+                        FILE_SET CXX_MODULES
+                        FILES ${LOGGER_MODULE_FILES}
+                )
+
+                # Define macro to indicate modules are available
+                target_compile_definitions(LoggerSystem PUBLIC LOGGER_HAS_MODULES=1)
+
+                message(STATUS "Logger System: C++20 modules configured successfully")
+                message(STATUS "  Module files:")
+                foreach(MODULE_FILE ${LOGGER_MODULE_FILES})
+                    get_filename_component(MODULE_NAME ${MODULE_FILE} NAME)
+                    message(STATUS "    - ${MODULE_NAME}")
+                endforeach()
+            else()
+                message(STATUS "Logger System: Some module files missing, modules disabled")
+            endif()
+        endif()
+
     else()
         message(STATUS "Logger System: New structure incomplete, using legacy sources")
         set(USE_LEGACY_SOURCES TRUE)

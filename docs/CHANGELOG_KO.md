@@ -49,6 +49,39 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### C++20 모듈 파일 (Issue #275) - 2026-01-03
+
+#### 추가됨
+- **C++20 모듈 파일**: `kcenon.logger` 모듈 인터페이스 생성
+  - `src/modules/logger.cppm`: 기본 모듈 인터페이스
+  - `src/modules/core.cppm`: Core 파티션 (Logger, LogContext, LogCollector)
+  - `src/modules/backends.cppm`: Backends 파티션 (integration_backend, standalone_backend)
+  - `src/modules/analysis.cppm`: Analysis 파티션 (log_analyzer, analysis_stats)
+
+- **CMake 모듈 지원**: 선택적 C++20 모듈 지원 추가
+  - 모듈 스캔에 CMake 3.28 이상 필요
+  - 모듈 빌드 활성화를 위한 `LOGGER_USE_MODULES` 옵션 추가
+  - 모듈 활성 시 `LOGGER_HAS_MODULES` 컴파일 정의
+  - 전환 기간 동안 헤더 기반 빌드 계속 동작
+
+#### 모듈 구조
+```cpp
+export module kcenon.logger;
+
+import kcenon.common;           // 필수 의존성
+
+export import :core;            // Logger, LogContext, LogCollector
+export import :backends;        // Integration backends
+export import :analysis;        // Log analysis 유틸리티
+```
+
+#### CMake 사용법
+```cmake
+cmake -DLOGGER_USE_MODULES=ON ..  # CMake 3.28 이상 필요
+```
+
+---
+
 ### 중복 Writer 추가 로직 수정 (Issue #270) - 2025-12-31
 
 #### 수정됨
