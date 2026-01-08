@@ -57,6 +57,12 @@ common::VoidResult res = make_logger_void_result(code, "message");
   - Uses existing `running_` atomic flag for stop mechanism
   - Maintains same behavior and thread-safety guarantees
 
+- **Windows build fix**: Removed `write`/`fsync` macro pollution from `signal_manager.h`
+  - The `#define write _write` macro was leaking to other headers
+  - Caused `batch_writer.h` and `otlp_writer.h` `write()` method to be renamed to `_write()`
+  - Fixed by replacing macros with `detail::safe_write()` and `detail::safe_fsync()` inline functions
+  - These wrapper functions handle Windows POSIX compatibility internally
+
 ---
 
 ### C++20 Module Files (Issue #275) - 2026-01-03

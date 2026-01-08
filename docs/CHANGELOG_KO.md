@@ -57,6 +57,12 @@ common::VoidResult res = make_logger_void_result(code, "message");
   - 기존 `running_` atomic 플래그를 종료 메커니즘으로 사용
   - 동일한 동작 및 스레드 안전성 보장 유지
 
+- **Windows 빌드 수정**: `signal_manager.h`에서 `write`/`fsync` 매크로 오염 제거
+  - `#define write _write` 매크로가 다른 헤더로 누출되는 문제
+  - `batch_writer.h`와 `otlp_writer.h`의 `write()` 메서드가 `_write()`로 이름 변경되는 문제 발생
+  - 매크로를 `detail::safe_write()` 및 `detail::safe_fsync()` 인라인 함수로 대체하여 수정
+  - 래퍼 함수가 내부적으로 Windows POSIX 호환성 처리
+
 ---
 
 ### C++20 모듈 파일 (Issue #275) - 2026-01-03
