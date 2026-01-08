@@ -49,6 +49,16 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### OpenTelemetry 통합 수정 (Issue #283) - 2026-01-08
+
+#### 수정됨
+- **macOS 호환성**: `otlp_writer`에서 `std::jthread`를 `std::thread`로 교체
+  - Apple Clang의 libc++에서 `std::jthread`와 `std::stop_token`이 지원되지 않음
+  - 기존 `running_` atomic 플래그를 종료 메커니즘으로 사용
+  - 동일한 동작 및 스레드 안전성 보장 유지
+
+---
+
 ### C++20 모듈 파일 (Issue #275) - 2026-01-03
 
 #### 추가됨
