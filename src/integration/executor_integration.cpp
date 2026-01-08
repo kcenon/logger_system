@@ -62,7 +62,7 @@ void executor_integration::enable(std::shared_ptr<common::interfaces::IExecutor>
         }
     } else {
         // Re-enable existing executor
-        if (auto* standalone = dynamic_cast<standalone_executor*>(executor_.get())) {
+        if (dynamic_cast<standalone_executor*>(executor_.get()) != nullptr) {
             current_type_.store(executor_type::standalone, std::memory_order_release);
         } else {
             current_type_.store(executor_type::external, std::memory_order_release);
@@ -92,7 +92,7 @@ void executor_integration::set_executor(std::shared_ptr<common::interfaces::IExe
 
     if (executor) {
         executor_ = std::move(executor);
-        if (auto* standalone = dynamic_cast<standalone_executor*>(executor_.get())) {
+        if (dynamic_cast<standalone_executor*>(executor_.get()) != nullptr) {
             current_type_.store(executor_type::standalone, std::memory_order_release);
         } else {
             current_type_.store(executor_type::external, std::memory_order_release);

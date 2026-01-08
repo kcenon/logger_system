@@ -44,6 +44,9 @@ All rights reserved.
 #include <string>
 #include <chrono>
 #include <optional>
+#include <unordered_map>
+#include <variant>
+#include <cstdint>
 #include "../core/small_string.h"
 
 // Use common_system's standard interface
@@ -54,6 +57,23 @@ All rights reserved.
 #include <kcenon/logger/otlp/otel_context.h>
 
 namespace kcenon::logger {
+
+/**
+ * @brief Value type for structured logging fields
+ * @details Supports common types used in structured logging:
+ * - std::string for text values
+ * - int64_t for integer values (covers int, long, etc.)
+ * - double for floating-point values
+ * - bool for boolean values
+ * @since 3.1.0
+ */
+using log_value = std::variant<std::string, int64_t, double, bool>;
+
+/**
+ * @brief Type alias for structured fields map
+ * @since 3.1.0
+ */
+using log_fields = std::unordered_map<std::string, log_value>;
 
 /**
  * @struct source_location
@@ -183,6 +203,15 @@ struct log_entry {
      * @since 3.0.0
      */
     std::optional<otlp::otel_context> otel_ctx;
+
+    /**
+     * @brief Optional structured fields for key-value logging
+     * @details Allows adding arbitrary key-value pairs to log entries for
+     * structured logging support. These fields are output by formatters
+     * that support structured output (e.g., JSON formatter).
+     * @since 3.1.0
+     */
+    std::optional<log_fields> fields;
 
     /**
      * @brief Constructor for basic log entry
