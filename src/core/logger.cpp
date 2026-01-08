@@ -97,6 +97,10 @@ public:
     std::unique_ptr<log_router> router_;  // Log router for message routing
     mutable std::shared_mutex router_mutex_;  // Protects router_ from concurrent access
 
+    // Context fields for structured logging
+    log_fields context_fields_;  // Persistent context fields
+    mutable std::shared_mutex context_mutex_;  // Protects context_fields_
+
     // Emergency flush support (for signal handlers)
     static constexpr size_t emergency_buffer_size_ = 8192;
     mutable char emergency_buffer_[emergency_buffer_size_];  // Static buffer for emergency use
@@ -761,6 +765,146 @@ void logger::clear_otel_context() {
 
 bool logger::has_otel_context() const {
     return otlp::otel_context_storage::has_context();
+}
+
+// =========================================================================
+// Structured logging API implementation
+// =========================================================================
+
+structured_log_builder logger::log_structured(log_level level) {
+    const log_fields* ctx_ptr = nullptr;
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        if (!pimpl_->context_fields_.empty()) {
+            ctx_ptr = &pimpl_->context_fields_;
+        }
+    }
+
+    return structured_log_builder(
+        level,
+        [this, level](log_entry&& entry) {
+            if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
+                return;
+            }
+
+            // Apply filter if set
+            {
+                std::shared_lock<std::shared_mutex> filter_lock(pimpl_->filter_mutex_);
+                if (pimpl_->filter_) {
+                    if (!pimpl_->filter_->should_log(entry)) {
+                        return;
+                    }
+                }
+            }
+
+            // Dispatch to writers
+            std::string file_str;
+            int line = 0;
+            std::string func_str;
+            if (entry.location) {
+                file_str = entry.location->file.to_string();
+                line = entry.location->line;
+                func_str = entry.location->function.to_string();
+            }
+
+            pimpl_->dispatch_to_writers(
+                entry.level,
+                entry.message.to_string(),
+                file_str,
+                line,
+                func_str,
+                entry
+            );
+        },
+        ctx_ptr
+    );
+}
+
+structured_log_builder logger::trace_structured() {
+    return log_structured(log_level::trace);
+}
+
+structured_log_builder logger::debug_structured() {
+    return log_structured(log_level::debug);
+}
+
+structured_log_builder logger::info_structured() {
+    return log_structured(log_level::info);
+}
+
+structured_log_builder logger::warn_structured() {
+    return log_structured(log_level::warn);
+}
+
+structured_log_builder logger::error_structured() {
+    return log_structured(log_level::error);
+}
+
+structured_log_builder logger::fatal_structured() {
+    return log_structured(log_level::fatal);
+}
+
+// =========================================================================
+// Context fields management implementation
+// =========================================================================
+
+void logger::set_context(const std::string& key, const std::string& value) {
+    if (pimpl_) {
+        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
+        pimpl_->context_fields_[key] = value;
+    }
+}
+
+void logger::set_context(const std::string& key, int64_t value) {
+    if (pimpl_) {
+        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
+        pimpl_->context_fields_[key] = value;
+    }
+}
+
+void logger::set_context(const std::string& key, double value) {
+    if (pimpl_) {
+        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
+        pimpl_->context_fields_[key] = value;
+    }
+}
+
+void logger::set_context(const std::string& key, bool value) {
+    if (pimpl_) {
+        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
+        pimpl_->context_fields_[key] = value;
+    }
+}
+
+void logger::remove_context(const std::string& key) {
+    if (pimpl_) {
+        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
+        pimpl_->context_fields_.erase(key);
+    }
+}
+
+void logger::clear_context() {
+    if (pimpl_) {
+        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
+        pimpl_->context_fields_.clear();
+    }
+}
+
+bool logger::has_context() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        return !pimpl_->context_fields_.empty();
+    }
+    return false;
+}
+
+const log_fields& logger::get_context() const {
+    static const log_fields empty_fields;
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        return pimpl_->context_fields_;
+    }
+    return empty_fields;
 }
 
 } // namespace kcenon::logger

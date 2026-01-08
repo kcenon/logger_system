@@ -48,8 +48,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../backends/integration_backend.h"
 #include "log_context.h"
 #include <kcenon/logger/interfaces/logger_types.h>
+#include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/security/signal_manager.h>
 #include <kcenon/logger/otlp/otel_context.h>
+#include "structured_log_builder.h"
 
 /**
  * @file logger.h
@@ -679,6 +681,153 @@ public:
      * @since 3.0.0
      */
     [[nodiscard]] bool has_otel_context() const;
+
+    // =========================================================================
+    // Structured logging API
+    // =========================================================================
+
+    /**
+     * @brief Create a structured log builder at the specified level
+     * @param level Log level for the structured entry
+     * @return Builder for constructing the structured log entry
+     *
+     * @details Returns a builder that allows adding arbitrary fields to the
+     * log entry. The entry is logged when emit() is called on the builder.
+     * Context fields (set via set_context()) are automatically included.
+     *
+     * @example
+     * @code
+     * logger->log_structured(log_level::info)
+     *     .message("User login")
+     *     .field("user_id", 12345)
+     *     .field("ip_address", "192.168.1.1")
+     *     .emit();
+     * @endcode
+     *
+     * @since 3.1.0
+     */
+    [[nodiscard]] structured_log_builder log_structured(log_level level);
+
+    /**
+     * @brief Create a structured trace log builder
+     * @return Builder for constructing the structured log entry
+     * @since 3.1.0
+     */
+    [[nodiscard]] structured_log_builder trace_structured();
+
+    /**
+     * @brief Create a structured debug log builder
+     * @return Builder for constructing the structured log entry
+     * @since 3.1.0
+     */
+    [[nodiscard]] structured_log_builder debug_structured();
+
+    /**
+     * @brief Create a structured info log builder
+     * @return Builder for constructing the structured log entry
+     * @since 3.1.0
+     */
+    [[nodiscard]] structured_log_builder info_structured();
+
+    /**
+     * @brief Create a structured warning log builder
+     * @return Builder for constructing the structured log entry
+     * @since 3.1.0
+     */
+    [[nodiscard]] structured_log_builder warn_structured();
+
+    /**
+     * @brief Create a structured error log builder
+     * @return Builder for constructing the structured log entry
+     * @since 3.1.0
+     */
+    [[nodiscard]] structured_log_builder error_structured();
+
+    /**
+     * @brief Create a structured fatal log builder
+     * @return Builder for constructing the structured log entry
+     * @since 3.1.0
+     */
+    [[nodiscard]] structured_log_builder fatal_structured();
+
+    // =========================================================================
+    // Context fields management
+    // =========================================================================
+
+    /**
+     * @brief Set a context field that persists across log calls
+     * @param key Field name
+     * @param value Field value
+     *
+     * @details Context fields are automatically included in all structured
+     * log entries created via *_structured() methods. Useful for request IDs,
+     * trace IDs, or other per-request/per-session metadata.
+     *
+     * @example
+     * @code
+     * logger->set_context("request_id", "req-123");
+     * logger->set_context("trace_id", "trace-456");
+     *
+     * // All subsequent structured logs include request_id and trace_id
+     * logger->info_structured()
+     *     .message("Processing request")
+     *     .emit();
+     * @endcode
+     *
+     * @since 3.1.0
+     */
+    void set_context(const std::string& key, const std::string& value);
+
+    /**
+     * @brief Set a context field with integer value
+     * @param key Field name
+     * @param value Field value
+     * @since 3.1.0
+     */
+    void set_context(const std::string& key, int64_t value);
+
+    /**
+     * @brief Set a context field with double value
+     * @param key Field name
+     * @param value Field value
+     * @since 3.1.0
+     */
+    void set_context(const std::string& key, double value);
+
+    /**
+     * @brief Set a context field with boolean value
+     * @param key Field name
+     * @param value Field value
+     * @since 3.1.0
+     */
+    void set_context(const std::string& key, bool value);
+
+    /**
+     * @brief Remove a context field
+     * @param key Field name to remove
+     * @since 3.1.0
+     */
+    void remove_context(const std::string& key);
+
+    /**
+     * @brief Clear all context fields
+     * @since 3.1.0
+     */
+    void clear_context();
+
+    /**
+     * @brief Check if any context fields are set
+     * @return true if at least one context field is set
+     * @since 3.1.0
+     */
+    [[nodiscard]] bool has_context() const;
+
+    /**
+     * @brief Get the current context fields
+     * @return Const reference to context fields map
+     * @since 3.1.0
+     */
+    [[nodiscard]] const log_fields& get_context() const;
 
     // Emergency Flush Support (critical_logger_interface implementation)
 
