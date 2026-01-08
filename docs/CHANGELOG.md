@@ -49,6 +49,20 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### Coverage Build Fix (PR #291) - 2026-01-08
+
+#### Fixed
+- **Coverage linker errors**: Fixed gcov undefined reference errors in CI coverage builds
+  - Added explicit `gcov` library link for GCC when using static libraries with coverage instrumentation
+  - Added `logger_structured_logging_test` to coverage target registration list
+  - Fixes `undefined reference to '__gcov_init'`, `__gcov_exit'`, `__gcov_merge_add'` errors
+
+- **Compiler warnings**: Fixed unused variable warnings in `executor_integration.cpp`
+  - Replaced unused `auto* standalone` variable with direct `dynamic_cast` null check
+  - Eliminates `-Wunused-variable` warnings in `enable()` and `set_executor()` methods
+
+---
+
 ### CI Workflow Fix (PR #290) - 2026-01-08
 
 #### Fixed

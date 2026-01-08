@@ -49,6 +49,20 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### Coverage 빌드 수정 (PR #291) - 2026-01-08
+
+#### 수정됨
+- **Coverage 링커 오류**: CI coverage 빌드에서 gcov undefined reference 오류 수정
+  - coverage instrumentation이 적용된 정적 라이브러리 사용 시 GCC에서 명시적 `gcov` 라이브러리 링크 추가
+  - `logger_structured_logging_test`를 coverage 타겟 등록 목록에 추가
+  - `undefined reference to '__gcov_init'`, `__gcov_exit'`, `__gcov_merge_add'` 오류 해결
+
+- **컴파일러 경고**: `executor_integration.cpp`의 미사용 변수 경고 수정
+  - 미사용 `auto* standalone` 변수를 직접 `dynamic_cast` null 체크로 교체
+  - `enable()` 및 `set_executor()` 메서드에서 `-Wunused-variable` 경고 제거
+
+---
+
 ### CI 워크플로우 수정 (PR #290) - 2026-01-08
 
 #### 수정됨

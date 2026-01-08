@@ -68,13 +68,21 @@ function(logger_add_coverage target)
             -O0  # No optimization for accurate coverage
             -g   # Debug symbols
         )
-        
+
         target_link_options(${target} PRIVATE
             --coverage
             -fprofile-arcs
             -ftest-coverage
         )
-        
+
+        # GCC requires explicit gcov library link when using static libraries
+        # with coverage instrumentation. The --coverage flag adds gcov symbols
+        # to object files, but the gcov library must be explicitly linked
+        # to resolve these symbols in the final executable.
+        if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+            target_link_libraries(${target} PRIVATE gcov)
+        endif()
+
         message(STATUS "Enabled code coverage for ${target}")
         
     elseif(MSVC)
