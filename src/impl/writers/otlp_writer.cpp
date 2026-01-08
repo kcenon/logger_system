@@ -146,7 +146,7 @@ otlp_writer::otlp_writer(const config& cfg)
 
     // Start background export thread
     running_.store(true);
-    export_thread_ = std::make_unique<std::jthread>([this](std::stop_token st) {
+    export_thread_ = std::make_unique<std::thread>([this]() {
         export_thread_func();
     });
 }
@@ -163,7 +163,6 @@ otlp_writer::~otlp_writer() {
 
     // Wait for thread to finish
     if (export_thread_ && export_thread_->joinable()) {
-        export_thread_->request_stop();
         export_thread_->join();
     }
 

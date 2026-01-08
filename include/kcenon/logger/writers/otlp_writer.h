@@ -318,7 +318,7 @@ private:
     std::condition_variable queue_cv_;
 
     // Background thread
-    std::unique_ptr<std::jthread> export_thread_;
+    std::unique_ptr<std::thread> export_thread_;
     std::atomic<bool> running_{false};
     std::atomic<bool> healthy_{true};
 
