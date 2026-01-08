@@ -755,23 +755,57 @@ structured->info("User logged in")
 - Multiple target support
 - Route to specific writers
 - Stop propagation option
+- Exclusive routing mode (messages only go to matched routes)
+- Direct logger integration via `logger_builder`
 
-**Usage**:
+**Builder API (Recommended)**:
 ```cpp
-#include <kcenon/logger/routing/log_router.h>
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/writers/file_writer.h>
 
+// Configure routing during logger construction
+auto logger = kcenon::logger::logger_builder()
+    .add_writer("all", std::make_unique<file_writer>("app.log"))
+    .add_writer("errors", std::make_unique<file_writer>("errors.log"))
+    .add_writer("security", std::make_unique<file_writer>("security.log"))
+    // Route errors to dedicated file
+    .route_level(kcenon::logger::log_level::error, {"errors"})
+    // Route security-related messages by pattern
+    .route_pattern("[Ss]ecurity|[Aa]uth", {"security"})
+    // Enable exclusive routing (non-matching messages are dropped)
+    .with_exclusive_routing(true)
+    .build()
+    .value();
+```
+
+**Direct Router Access**:
+```cpp
+// Access router after logger creation
 auto& router = logger->get_router();
 
-// Route errors to a dedicated error file
-kcenon::logger::router_builder(router)
-    .when_level(kcenon::logger::log_level::error)
-    .route_to("error_file", true);  // Stop propagation
+// Configure routing dynamically
+router.set_exclusive_routes(true);
 
-// Route debug messages to both debug file and console
-kcenon::logger::router_builder(router)
-    .when_level(kcenon::logger::log_level::debug)
-    .route_to(std::vector<std::string>{"debug_file", "console"});
+// Add custom route with filter
+kcenon::logger::routing::route_config config;
+config.writer_names = {"errors"};
+config.filter = std::make_unique<kcenon::logger::filters::exact_level_filter>(
+    kcenon::logger::log_level::error
+);
+config.stop_propagation = false;
+router.add_route(std::move(config));
 ```
+
+**Available Filters**:
+- `level_filter`: Passes messages at or above minimum level
+- `exact_level_filter`: Passes only messages at exactly the specified level
+- `regex_filter`: Pattern matching on message content
+- `function_filter`: Custom predicate-based filtering
+- `composite_filter`: Combine multiple filters with AND/OR logic
+
+**Routing Modes**:
+- **Non-exclusive (default)**: All messages go to all writers
+- **Exclusive**: Only messages matching a route go to matched writers; unmatched messages are dropped
 
 ### Performance Metrics Collection
 

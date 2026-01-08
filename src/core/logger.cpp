@@ -94,6 +94,8 @@ public:
     std::unique_ptr<log_collector> collector_;  // Async log collector for async mode
     std::unique_ptr<log_filter_interface> filter_;  // Global filter for log entries
     mutable std::shared_mutex filter_mutex_;  // Protects filter_ from concurrent access
+    std::unique_ptr<log_router> router_;  // Log router for message routing
+    mutable std::shared_mutex router_mutex_;  // Protects router_ from concurrent access
 
     // Emergency flush support (for signal handlers)
     static constexpr size_t emergency_buffer_size_ = 8192;
@@ -103,7 +105,8 @@ public:
 
     impl(bool async, std::size_t buffer_size, std::unique_ptr<backends::integration_backend> backend)
         : async_mode_(async), buffer_size_(buffer_size), running_(false), metrics_enabled_(false),
-          min_level_(logger_system::log_level::info), backend_(std::move(backend)) {
+          min_level_(logger_system::log_level::info), backend_(std::move(backend)),
+          router_(std::make_unique<log_router>()) {
         // Reserve space to avoid reallocation during typical usage
         writers_.reserve(10);
 
@@ -127,6 +130,68 @@ public:
     ~impl() {
         if (backend_) {
             backend_->shutdown();
+        }
+    }
+
+    /**
+     * @brief Dispatch log to writers with routing support
+     * @param level Log level
+     * @param message Log message
+     * @param file Source file
+     * @param line Source line
+     * @param function Source function
+     * @param entry Log entry for routing check
+     */
+    void dispatch_to_writers(logger_system::log_level level,
+                            const std::string& message,
+                            const std::string& file,
+                            int line,
+                            const std::string& function,
+                            const log_entry& entry) {
+        // Check routing rules
+        std::vector<std::string> routed_writer_names;
+        bool is_exclusive = false;
+        {
+            std::shared_lock<std::shared_mutex> lock(router_mutex_);
+            if (router_) {
+                routed_writer_names = router_->get_writers_for_log(entry);
+                is_exclusive = router_->is_exclusive_routing();
+            }
+        }
+
+        auto now = std::chrono::system_clock::now();
+
+        if (is_exclusive) {
+            // Exclusive mode: only send to matched routes
+            // If no routes match, message is dropped (exclusive mode behavior)
+            if (!routed_writer_names.empty()) {
+                std::unordered_map<std::string, std::shared_ptr<base_writer>> local_named_writers;
+                {
+                    std::shared_lock<std::shared_mutex> lock(writers_mutex_);
+                    local_named_writers = named_writers_;
+                }
+
+                for (const auto& writer_name : routed_writer_names) {
+                    auto it = local_named_writers.find(writer_name);
+                    if (it != local_named_writers.end() && it->second) {
+                        it->second->write(level, message, file, line, function, now);
+                    }
+                }
+            }
+            // No matched routes in exclusive mode = drop message
+        } else {
+            // Non-exclusive mode: send to all writers
+            std::vector<std::shared_ptr<base_writer>> local_writers;
+            {
+                std::shared_lock<std::shared_mutex> lock(writers_mutex_);
+                local_writers = writers_;
+            }
+
+            for (auto& writer : local_writers) {
+                if (writer) {
+                    writer->write(level, message, file, line, function, now);
+                }
+            }
         }
     }
 };
@@ -319,11 +384,13 @@ common::VoidResult logger::log(common::interfaces::log_level level,
         return common::ok();
     }
 
+    // Create log entry for filtering and routing
+    log_entry entry(native_level, message);
+
     // Apply filter if set
     {
         std::shared_lock<std::shared_mutex> filter_lock(pimpl_->filter_mutex_);
         if (pimpl_->filter_) {
-            log_entry entry(native_level, message);
             if (!pimpl_->filter_->should_log(entry)) {
                 return common::ok();  // Message filtered out (not an error)
             }
@@ -333,23 +400,8 @@ common::VoidResult logger::log(common::interfaces::log_level level,
     // Record metrics if enabled
     auto start_time = std::chrono::high_resolution_clock::now();
 
-    // Convert level using backend
-    auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(native_level));
-
-    // Copy writer pointers under lock to minimize lock hold time
-    std::vector<std::shared_ptr<base_writer>> local_writers;
-    {
-        std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
-        local_writers = pimpl_->writers_;
-    }
-
-    // Write without holding lock to avoid I/O under lock
-    for (auto& writer : local_writers) {
-        if (writer) {
-            auto now = std::chrono::system_clock::now();
-            writer->write(converted_level, message, "", 0, "", now);
-        }
-    }
+    // Synchronous path: dispatch with routing support
+    pimpl_->dispatch_to_writers(native_level, message, "", 0, "", entry);
 
     // Update metrics after logging
     if (pimpl_->metrics_enabled_) {
@@ -379,11 +431,13 @@ common::VoidResult logger::log(common::interfaces::log_level level,
         return common::ok();
     }
 
+    // Create log entry for filtering and routing
+    log_entry entry(native_level, message, file, line, function);
+
     // Apply filter if set
     {
         std::shared_lock<std::shared_mutex> filter_lock(pimpl_->filter_mutex_);
         if (pimpl_->filter_) {
-            log_entry entry(native_level, message, file, line, function);
             if (!pimpl_->filter_->should_log(entry)) {
                 return common::ok();  // Message filtered out
             }
@@ -393,11 +447,10 @@ common::VoidResult logger::log(common::interfaces::log_level level,
     // Record metrics if enabled
     auto start_time = std::chrono::high_resolution_clock::now();
 
-    // Convert level using backend
-    auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(native_level));
-
     // Use async path if in async mode
     if (pimpl_->async_mode_ && pimpl_->collector_) {
+        // Convert level for collector (legacy interface uses int)
+        auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(native_level));
         // Enqueue to collector for background processing
         auto now = std::chrono::system_clock::now();
         pimpl_->collector_->enqueue(converted_level, message, file, line, function, now);
@@ -411,20 +464,8 @@ common::VoidResult logger::log(common::interfaces::log_level level,
         return common::ok();
     }
 
-    // Synchronous path: Copy writer pointers under lock to minimize lock hold time
-    std::vector<std::shared_ptr<base_writer>> local_writers;
-    {
-        std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
-        local_writers = pimpl_->writers_;
-    }
-
-    // Write without holding lock to avoid I/O under lock
-    for (auto& writer : local_writers) {
-        if (writer) {
-            auto now = std::chrono::system_clock::now();
-            writer->write(converted_level, message, file, line, function, now);
-        }
-    }
+    // Synchronous path: dispatch with routing support
+    pimpl_->dispatch_to_writers(native_level, message, file, line, function, entry);
 
     // Update metrics after logging
     if (pimpl_->metrics_enabled_) {
@@ -502,11 +543,13 @@ void logger::log(log_level level, const std::string& message) {
         return;
     }
 
+    // Create log entry for filtering and routing
+    log_entry entry(level, message);
+
     // Apply filter if set
     {
         std::shared_lock<std::shared_mutex> filter_lock(pimpl_->filter_mutex_);
         if (pimpl_->filter_) {
-            log_entry entry(level, message);
             if (!pimpl_->filter_->should_log(entry)) {
                 return;  // Message filtered out
             }
@@ -516,23 +559,8 @@ void logger::log(log_level level, const std::string& message) {
     // Record metrics if enabled
     auto start_time = std::chrono::high_resolution_clock::now();
 
-    // Convert level using backend
-    auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(level));
-
-    // Copy writer pointers under lock to minimize lock hold time
-    std::vector<std::shared_ptr<base_writer>> local_writers;
-    {
-        std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
-        local_writers = pimpl_->writers_;  // Copy shared_ptrs (cheap, just reference counting)
-    }
-
-    // Write without holding lock to avoid I/O under lock
-    for (auto& writer : local_writers) {
-        if (writer) {
-            auto now = std::chrono::system_clock::now();
-            writer->write(converted_level, message, "", 0, "", now);
-        }
-    }
+    // Synchronous path: dispatch with routing support
+    pimpl_->dispatch_to_writers(level, message, "", 0, "", entry);
 
     // Update metrics after logging
     if (pimpl_->metrics_enabled_) {
@@ -551,11 +579,13 @@ void logger::log(log_level level,
         return;
     }
 
+    // Create log entry for filtering and routing
+    log_entry entry(level, message, file, line, function);
+
     // Apply filter if set
     {
         std::shared_lock<std::shared_mutex> filter_lock(pimpl_->filter_mutex_);
         if (pimpl_->filter_) {
-            log_entry entry(level, message, file, line, function);
             if (!pimpl_->filter_->should_log(entry)) {
                 return;  // Message filtered out
             }
@@ -565,11 +595,10 @@ void logger::log(log_level level,
     // Record metrics if enabled
     auto start_time = std::chrono::high_resolution_clock::now();
 
-    // Convert level using backend
-    auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(level));
-
     // Use async path if in async mode
     if (pimpl_->async_mode_ && pimpl_->collector_) {
+        // Convert level for collector (legacy interface uses int)
+        auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(level));
         // Enqueue to collector for background processing
         auto now = std::chrono::system_clock::now();
         pimpl_->collector_->enqueue(converted_level, message, file, line, function, now);
@@ -583,20 +612,8 @@ void logger::log(log_level level,
         return;
     }
 
-    // Synchronous path: Copy writer pointers under lock to minimize lock hold time
-    std::vector<std::shared_ptr<base_writer>> local_writers;
-    {
-        std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
-        local_writers = pimpl_->writers_;  // Copy shared_ptrs (cheap, just reference counting)
-    }
-
-    // Write without holding lock to avoid I/O under lock
-    for (auto& writer : local_writers) {
-        if (writer) {
-            auto now = std::chrono::system_clock::now();
-            writer->write(converted_level, message, file, line, function, now);
-        }
-    }
+    // Synchronous path: dispatch with routing support
+    pimpl_->dispatch_to_writers(level, message, file, line, function, entry);
 
     // Update metrics after logging
     if (pimpl_->metrics_enabled_) {
@@ -689,6 +706,41 @@ bool logger::has_filter() const {
     }
     std::shared_lock<std::shared_mutex> lock(pimpl_->filter_mutex_);
     return pimpl_->filter_ != nullptr;
+}
+
+// Routing support implementation
+
+log_router& logger::get_router() {
+    if (!pimpl_) {
+        throw std::runtime_error("Logger not initialized");
+    }
+    std::shared_lock<std::shared_mutex> lock(pimpl_->router_mutex_);
+    return *pimpl_->router_;
+}
+
+const log_router& logger::get_router() const {
+    if (!pimpl_) {
+        throw std::runtime_error("Logger not initialized");
+    }
+    std::shared_lock<std::shared_mutex> lock(pimpl_->router_mutex_);
+    return *pimpl_->router_;
+}
+
+void logger::set_router(std::unique_ptr<log_router> router) {
+    if (pimpl_ && router) {
+        std::lock_guard<std::shared_mutex> lock(pimpl_->router_mutex_);
+        pimpl_->router_ = std::move(router);
+    }
+}
+
+bool logger::has_routing() const {
+    if (!pimpl_) {
+        return false;
+    }
+    std::shared_lock<std::shared_mutex> lock(pimpl_->router_mutex_);
+    // Check if router has any routes configured by checking if get_writers_for_log
+    // returns anything for a test entry
+    return pimpl_->router_ != nullptr;
 }
 
 } // namespace kcenon::logger

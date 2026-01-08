@@ -42,7 +42,9 @@
 namespace kcenon::logger::filters {
 
 /**
- * @brief Level-based log filter
+ * @brief Level-based log filter (minimum level threshold)
+ *
+ * Passes messages at or above the specified minimum level.
  */
 class level_filter : public log_filter_interface {
 private:
@@ -57,6 +59,27 @@ public:
 
     std::string get_name() const override {
         return "level_filter";
+    }
+};
+
+/**
+ * @brief Exact level filter (matches only the specified level)
+ *
+ * Passes only messages at exactly the specified level.
+ */
+class exact_level_filter : public log_filter_interface {
+private:
+    logger_system::log_level level_;
+
+public:
+    explicit exact_level_filter(logger_system::log_level level) : level_(level) {}
+
+    bool should_log(const log_entry& entry) const override {
+        return entry.level == level_;
+    }
+
+    std::string get_name() const override {
+        return "exact_level_filter";
     }
 };
 
