@@ -51,6 +51,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/security/signal_manager.h>
 #include <kcenon/logger/otlp/otel_context.h>
+#include <kcenon/logger/sampling/sampling_config.h>
 #include "structured_log_builder.h"
 
 /**
@@ -132,6 +133,10 @@ class log_filter_interface;  // Forward declaration for filtering system
 namespace analysis {
 class realtime_log_analyzer;
 }  // namespace analysis
+
+namespace sampling {
+class log_sampler;
+}  // namespace sampling
 
 } // namespace kcenon::logger
 
@@ -883,6 +888,69 @@ public:
      * @since 3.1.0
      */
     [[nodiscard]] log_fields get_context() const;
+
+    // =========================================================================
+    // Log sampling API
+    // =========================================================================
+
+    /**
+     * @brief Set the log sampler for volume reduction
+     * @param sampler The sampler instance to use
+     *
+     * @details Sets a sampler that determines which logs are passed through
+     * based on configured sampling strategies (random, rate limiting, adaptive,
+     * or hash-based). Critical levels can bypass sampling.
+     *
+     * @example
+     * @code
+     * auto sampler = std::make_unique<log_sampler>(
+     *     sampling_config::random_sampling(0.1)  // 10% sampling
+     * );
+     * logger->set_sampler(std::move(sampler));
+     * @endcode
+     *
+     * @since 3.3.0
+     */
+    void set_sampler(std::unique_ptr<sampling::log_sampler> sampler);
+
+    /**
+     * @brief Get the log sampler (if set)
+     * @return Pointer to sampler or nullptr if not set
+     *
+     * @since 3.3.0
+     */
+    [[nodiscard]] sampling::log_sampler* get_sampler();
+
+    /**
+     * @brief Get the log sampler (const version)
+     * @return Pointer to sampler or nullptr if not set
+     *
+     * @since 3.3.0
+     */
+    [[nodiscard]] const sampling::log_sampler* get_sampler() const;
+
+    /**
+     * @brief Check if sampling is enabled
+     * @return true if a sampler is set and enabled
+     *
+     * @since 3.3.0
+     */
+    [[nodiscard]] bool has_sampling() const;
+
+    /**
+     * @brief Get sampling statistics
+     * @return Sampling statistics including sampled/dropped counts
+     *
+     * @since 3.3.0
+     */
+    [[nodiscard]] sampling::sampling_stats get_sampling_stats() const;
+
+    /**
+     * @brief Reset sampling statistics
+     *
+     * @since 3.3.0
+     */
+    void reset_sampling_stats();
 
     // Emergency Flush Support (critical_logger_interface implementation)
 
