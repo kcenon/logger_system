@@ -13,6 +13,7 @@ All rights reserved.
 #include <filesystem>
 #include <fstream>
 #include <cstring>
+#include <random>
 
 // OpenSSL for secure memory cleanup (optional, fallback to manual zeroing)
 // Note: OPENSSL_cleanse() and RAND_bytes() are supported in both OpenSSL 1.1.x and 3.x

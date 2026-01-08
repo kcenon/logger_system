@@ -145,6 +145,7 @@ cmake --build build
 
 ### Security Features (v3.0.0)
 - **Secure Key Storage**: RAII-based encryption key management with automatic cleanup
+- **Encrypted Writer**: AES-256-GCM encrypted log storage with per-entry IV rotation
 - **Path Validation**: Protection against path traversal attacks
 - **Signal Handler Safety**: Emergency flush for crash scenarios
 - **Security Audit Logging**: Tamper-evident audit trail with HMAC-SHA256

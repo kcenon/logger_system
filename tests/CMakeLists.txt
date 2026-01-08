@@ -201,6 +201,40 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/thread_system_integration_module_tes
     message(STATUS "thread_system_integration module tests: Added (THREAD_SYSTEM_FOUND=${THREAD_SYSTEM_FOUND})")
 endif()
 
+# Encrypted writer tests (Issue #280)
+add_executable(logger_encrypted_writer_test encrypted_writer_test.cpp)
+
+if(TARGET GTest::gtest_main)
+    target_link_libraries(logger_encrypted_writer_test PRIVATE LoggerSystem GTest::gtest_main GTest::gtest)
+else()
+    target_link_libraries(logger_encrypted_writer_test PRIVATE LoggerSystem gtest_main gtest)
+endif()
+
+# Link OpenSSL if available
+find_package(OpenSSL 3.0 QUIET)
+if(OpenSSL_FOUND)
+    target_link_libraries(logger_encrypted_writer_test PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+    message(STATUS "Encrypted writer tests: OpenSSL 3.x linked (${OPENSSL_VERSION})")
+else()
+    find_package(OpenSSL QUIET)
+    if(OpenSSL_FOUND)
+        target_link_libraries(logger_encrypted_writer_test PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+        message(STATUS "Encrypted writer tests: OpenSSL linked (${OPENSSL_VERSION})")
+    else()
+        message(WARNING "Encrypted writer tests: OpenSSL not found, encryption tests will be skipped")
+    endif()
+endif()
+
+# Link standard C++ library explicitly on macOS
+if(APPLE)
+    target_link_libraries(logger_encrypted_writer_test PRIVATE c++)
+endif()
+
+add_test(NAME logger_encrypted_writer_test COMMAND logger_encrypted_writer_test)
+set_target_properties(logger_encrypted_writer_test PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # executor_integration module tests (Issue #253)
 # Tests for IExecutor-based async integration
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/executor_integration_test.cpp")
@@ -242,6 +276,7 @@ set(_LOGGER_TEST_TARGETS
     logger_min_level_threshold_test
     logger_thread_safety_test
     logger_routing_integration_test
+    logger_encrypted_writer_test
 )
 
 # Conditionally added targets

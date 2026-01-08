@@ -14,6 +14,12 @@
     }
   ],
   "features": {
+    "encryption": {
+      "description": "Enable encrypted log writer with AES-256-GCM",
+      "dependencies": [
+        "openssl"
+      ]
+    },
     "testing": {
       "description": "Build unit tests (includes gmock)",
       "dependencies": [
