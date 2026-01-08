@@ -35,6 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/thread_integration_detector.h>
 #include <kcenon/logger/core/level_converter.h>
 #include <kcenon/logger/backends/standalone_backend.h>
+#include <kcenon/logger/analysis/realtime_log_analyzer.h>
 
 // Note: thread_system_backend was removed in Issue #225
 // thread_system is now optional and standalone_backend is the default
@@ -97,6 +98,10 @@ public:
     std::unique_ptr<log_router> router_;  // Log router for message routing
     mutable std::shared_mutex router_mutex_;  // Protects router_ from concurrent access
 
+    // Real-time analysis
+    std::unique_ptr<analysis::realtime_log_analyzer> realtime_analyzer_;  // Real-time log analyzer
+    mutable std::shared_mutex analyzer_mutex_;  // Protects realtime_analyzer_
+
     // Context fields for structured logging
     log_fields context_fields_;  // Persistent context fields
     mutable std::shared_mutex context_mutex_;  // Protects context_fields_
@@ -152,6 +157,21 @@ public:
                             int line,
                             const std::string& function,
                             const log_entry& entry) {
+        // Real-time analysis if analyzer is set
+        {
+            std::shared_lock<std::shared_mutex> lock(analyzer_mutex_);
+            if (realtime_analyzer_) {
+                analysis::analyzed_log_entry analyzed_entry;
+                analyzed_entry.level = level;
+                analyzed_entry.message = message;
+                analyzed_entry.timestamp = entry.timestamp;
+                analyzed_entry.source_file = file;
+                analyzed_entry.source_line = line;
+                analyzed_entry.function_name = function;
+                realtime_analyzer_->analyze(analyzed_entry);
+            }
+        }
+
         // Check routing rules
         std::vector<std::string> routed_writer_names;
         bool is_exclusive = false;
@@ -904,6 +924,41 @@ log_fields logger::get_context() const {
         return pimpl_->context_fields_;
     }
     return {};
+}
+
+// =========================================================================
+// Real-time analysis implementation
+// =========================================================================
+
+void logger::set_realtime_analyzer(std::unique_ptr<analysis::realtime_log_analyzer> analyzer) {
+    if (pimpl_) {
+        std::lock_guard<std::shared_mutex> lock(pimpl_->analyzer_mutex_);
+        pimpl_->realtime_analyzer_ = std::move(analyzer);
+    }
+}
+
+analysis::realtime_log_analyzer* logger::get_realtime_analyzer() {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->analyzer_mutex_);
+        return pimpl_->realtime_analyzer_.get();
+    }
+    return nullptr;
+}
+
+const analysis::realtime_log_analyzer* logger::get_realtime_analyzer() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->analyzer_mutex_);
+        return pimpl_->realtime_analyzer_.get();
+    }
+    return nullptr;
+}
+
+bool logger::has_realtime_analysis() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->analyzer_mutex_);
+        return pimpl_->realtime_analyzer_ != nullptr;
+    }
+    return false;
 }
 
 } // namespace kcenon::logger
