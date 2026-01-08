@@ -174,6 +174,27 @@ cmake --build build
 
 [🔒 완전한 보안 가이드 →](docs/FEATURES.md#security-features)
 
+### 구조화 로깅 (v3.1.0)
+- **Fluent Builder API**: `.field("key", value).emit()`으로 필드 추가 체이닝
+- **타입 안전 필드**: string, int64, double, boolean 값 지원
+- **컨텍스트 필드**: 모든 로그에 자동으로 포함되는 영구 필드
+- **JSON 출력**: JSON 포맷터에서 구조화 필드 출력
+- **레벨별 메서드**: `info_structured()`, `error_structured()` 등
+
+```cpp
+// 영구 컨텍스트 필드 설정
+logger->set_context("service", "api-gateway");
+logger->set_context("version", "1.0.0");
+
+// 구조화 로그 항목 생성
+logger->info_structured()
+    .message("User login")
+    .field("user_id", 12345)
+    .field("ip_address", "192.168.1.1")
+    .field("success", true)
+    .emit();
+```
+
 ---
 
 ## 성능 하이라이트

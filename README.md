@@ -170,6 +170,27 @@ cmake --build build
 
 [🔒 Complete Security Guide →](docs/FEATURES.md#security-features)
 
+### Structured Logging (v3.1.0)
+- **Fluent Builder API**: Chain field additions with `.field("key", value).emit()`
+- **Type-safe Fields**: Support for string, int64, double, and boolean values
+- **Context Fields**: Persistent fields automatically included in all logs
+- **JSON Output**: Structured fields in JSON formatter output
+- **Level-specific Methods**: `info_structured()`, `error_structured()`, etc.
+
+```cpp
+// Set persistent context fields
+logger->set_context("service", "api-gateway");
+logger->set_context("version", "1.0.0");
+
+// Create structured log entries
+logger->info_structured()
+    .message("User login")
+    .field("user_id", 12345)
+    .field("ip_address", "192.168.1.1")
+    .field("success", true)
+    .emit();
+```
+
 ---
 
 ## Performance Highlights
