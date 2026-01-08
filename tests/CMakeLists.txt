@@ -304,6 +304,22 @@ set_target_properties(logger_structured_logging_test PROPERTIES
 
 message(STATUS "Structured logging tests: Added")
 
+# Real-time analyzer tests (Issue #281)
+add_executable(logger_realtime_analyzer_test realtime_analyzer_test.cpp)
+
+if(TARGET GTest::gtest_main)
+    target_link_libraries(logger_realtime_analyzer_test PRIVATE LoggerSystem GTest::gtest_main GTest::gtest)
+else()
+    target_link_libraries(logger_realtime_analyzer_test PRIVATE LoggerSystem gtest_main gtest)
+endif()
+
+add_test(NAME logger_realtime_analyzer_test COMMAND logger_realtime_analyzer_test)
+set_target_properties(logger_realtime_analyzer_test PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+message(STATUS "Real-time analyzer tests: Added")
+
 ##################################################
 # Automatic Coverage Registration
 #
@@ -321,6 +337,7 @@ set(_LOGGER_TEST_TARGETS
     logger_otlp_test
     logger_encrypted_writer_test
     logger_structured_logging_test
+    logger_realtime_analyzer_test
 )
 
 # Conditionally added targets
