@@ -320,6 +320,7 @@ set(_LOGGER_TEST_TARGETS
     logger_routing_integration_test
     logger_otlp_test
     logger_encrypted_writer_test
+    logger_structured_logging_test
 )
 
 # Conditionally added targets
