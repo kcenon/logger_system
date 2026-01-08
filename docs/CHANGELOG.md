@@ -58,6 +58,11 @@ common::VoidResult res = make_logger_void_result(code, "message");
   - Removed `LOGGER_USE_THREAD_SYSTEM=ON` from coverage job until thread_system fixes its CMake
   - Affected workflows: `integration-tests.yml`, `ci.yml`, `benchmarks.yml`, `sanitizers.yml`
 
+- **macOS Debug test timeout**: Fixed `MultipleStartStopCycles` test timing out on macOS Debug builds
+  - Replaced `CreateLoggerWithFileWriter()` with `CreateLogger()` to avoid redundant `start()` call
+  - Used simple `flush()` instead of `WaitForFlush()` to eliminate unnecessary stop/start cycles
+  - Test now completes in milliseconds instead of 20+ minutes timeout
+
 ---
 
 ### OpenTelemetry Integration Fix (Issue #283) - 2026-01-08

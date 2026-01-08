@@ -58,6 +58,11 @@ common::VoidResult res = make_logger_void_result(code, "message");
   - thread_system의 CMake 수정 전까지 coverage 작업에서 `LOGGER_USE_THREAD_SYSTEM=ON` 제거
   - 영향받은 워크플로우: `integration-tests.yml`, `ci.yml`, `benchmarks.yml`, `sanitizers.yml`
 
+- **macOS Debug 테스트 타임아웃**: macOS Debug 빌드에서 `MultipleStartStopCycles` 테스트 타임아웃 수정
+  - 중복 `start()` 호출 방지를 위해 `CreateLoggerWithFileWriter()`를 `CreateLogger()`로 교체
+  - 불필요한 stop/start 사이클 제거를 위해 `WaitForFlush()` 대신 단순 `flush()` 사용
+  - 테스트가 20분+ 타임아웃 대신 밀리초 내에 완료
+
 ---
 
 ### OpenTelemetry 통합 수정 (Issue #283) - 2026-01-08
