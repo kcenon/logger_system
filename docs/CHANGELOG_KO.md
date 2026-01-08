@@ -49,6 +49,38 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### CI 워크플로우 수정 (PR #290) - 2026-01-08
+
+#### 수정됨
+- **CI 링커 오류**: `EnhancedThreadPoolMetrics`에 대한 undefined reference 오류 수정
+  - `thread_system` checkout을 `feature/adopt-kcenon-feature-flags`에서 `main` 브랜치로 변경
+  - feature 브랜치에 main에 추가된 `EnhancedThreadPoolMetrics` 구현이 없었음
+  - thread_system의 CMake 수정 전까지 coverage 작업에서 `LOGGER_USE_THREAD_SYSTEM=ON` 제거
+  - 영향받은 워크플로우: `integration-tests.yml`, `ci.yml`, `benchmarks.yml`, `sanitizers.yml`
+
+- **macOS Debug 테스트 타임아웃**: macOS Debug 빌드에서 `MultipleStartStopCycles` 테스트 타임아웃 수정
+  - 중복 `start()` 호출 방지를 위해 `CreateLoggerWithFileWriter()`를 `CreateLogger()`로 교체
+  - 불필요한 stop/start 사이클 제거를 위해 `WaitForFlush()` 대신 단순 `flush()` 사용
+  - 테스트가 20분+ 타임아웃 대신 밀리초 내에 완료
+
+---
+
+### OpenTelemetry 통합 수정 (Issue #283) - 2026-01-08
+
+#### 수정됨
+- **macOS 호환성**: `otlp_writer`에서 `std::jthread`를 `std::thread`로 교체
+  - Apple Clang의 libc++에서 `std::jthread`와 `std::stop_token`이 지원되지 않음
+  - 기존 `running_` atomic 플래그를 종료 메커니즘으로 사용
+  - 동일한 동작 및 스레드 안전성 보장 유지
+
+- **Windows 빌드 수정**: `signal_manager.h`에서 `write`/`fsync` 매크로 오염 제거
+  - `#define write _write` 매크로가 다른 헤더로 누출되는 문제
+  - `batch_writer.h`와 `otlp_writer.h`의 `write()` 메서드가 `_write()`로 이름 변경되는 문제 발생
+  - 매크로를 `detail::safe_write()` 및 `detail::safe_fsync()` 인라인 함수로 대체하여 수정
+  - 래퍼 함수가 내부적으로 Windows POSIX 호환성 처리
+
+---
+
 ### C++20 모듈 파일 (Issue #275) - 2026-01-03
 
 #### 추가됨

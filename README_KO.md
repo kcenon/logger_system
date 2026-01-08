@@ -73,6 +73,12 @@ vcpkg install kcenon-logger-system
 
 # 벤치마크 포함 설치 (비교용 spdlog 포함)
 vcpkg install kcenon-logger-system[benchmarks]
+
+# OpenTelemetry 통합 설치
+vcpkg install kcenon-logger-system[otlp]
+
+# 암호화 지원 설치
+vcpkg install kcenon-logger-system[encryption]
 ```
 
 > **참고**: 생태계 의존성(common_system, thread_system)은 아직 vcpkg에 등록되지 않았습니다. 등록 전까지는 로컬 클론을 사용한 CMake 빌드를 사용하세요. [의존성과 함께 빌드하기](#의존성과-함께-빌드하기) 참조.
@@ -144,8 +150,19 @@ cmake --build build
 - **Network Writer**: TCP/UDP 원격 로깅
 - **Critical Writer**: 중요 메시지를 위한 동기식 로깅
 - **Hybrid Writer**: 로그 레벨에 따른 자동 비동기/동기 전환
+- **Encrypted Writer**: AES-256-GCM 암호화 로그 저장
+- **OTLP Writer**: 관측성을 위한 OpenTelemetry Protocol 내보내기 (v3.0.0)
 
 [📚 상세 Writer 문서 →](docs/FEATURES.md#writer-types)
+
+### OpenTelemetry 통합 (v3.0.0)
+- **트레이스 연관**: 로그에 자동 trace_id/span_id 포함
+- **OTLP 내보내기**: HTTP 및 gRPC 전송 프로토콜
+- **배치 내보내기**: 효율적인 네트워크 활용
+- **리소스 속성**: 서비스 이름, 버전, 커스텀 메타데이터
+- **컨텍스트 전파**: 스레드 로컬 트레이스 컨텍스트 저장
+
+[🔭 OpenTelemetry 가이드 →](docs/guides/OPENTELEMETRY.md)
 
 ### 보안 기능 (v3.0.0)
 - **안전한 키 저장소**: 자동 정리 기능을 갖춘 RAII 기반 암호화 키 관리

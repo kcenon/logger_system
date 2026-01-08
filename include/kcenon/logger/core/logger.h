@@ -49,6 +49,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "log_context.h"
 #include <kcenon/logger/interfaces/logger_types.h>
 #include <kcenon/logger/security/signal_manager.h>
+#include <kcenon/logger/otlp/otel_context.h>
 
 /**
  * @file logger.h
@@ -627,6 +628,58 @@ public:
      */
     bool has_routing() const;
     
+    // =========================================================================
+    // OpenTelemetry context management
+    // =========================================================================
+
+    /**
+     * @brief Set OpenTelemetry context for the current thread
+     * @param ctx Context to set (trace_id, span_id, etc.)
+     *
+     * @details Sets the OTEL context for trace correlation. All subsequent
+     * log messages on this thread will include the trace_id and span_id.
+     *
+     * @example
+     * @code
+     * logger->set_otel_context(otlp::otel_context{
+     *     .trace_id = extract_trace_id(request.headers),
+     *     .span_id = extract_span_id(request.headers)
+     * });
+     * @endcode
+     *
+     * @since 3.0.0
+     */
+    void set_otel_context(const otlp::otel_context& ctx);
+
+    /**
+     * @brief Get the current OpenTelemetry context for this thread
+     * @return Optional context, empty if not set
+     *
+     * @details Returns the OTEL context set for the current thread.
+     * Useful for propagating context to downstream services.
+     *
+     * @since 3.0.0
+     */
+    [[nodiscard]] std::optional<otlp::otel_context> get_otel_context() const;
+
+    /**
+     * @brief Clear the OpenTelemetry context for this thread
+     *
+     * @details Clears the OTEL context. Call this at the end of request
+     * processing to prevent context leakage.
+     *
+     * @since 3.0.0
+     */
+    void clear_otel_context();
+
+    /**
+     * @brief Check if OTEL context is set for this thread
+     * @return true if context is set
+     *
+     * @since 3.0.0
+     */
+    [[nodiscard]] bool has_otel_context() const;
+
     // Emergency Flush Support (critical_logger_interface implementation)
 
     /**

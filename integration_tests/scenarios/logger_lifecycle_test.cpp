@@ -106,7 +106,12 @@ TEST_F(LoggerLifecycleTest, LogMessagesBeforeStart) {
 }
 
 TEST_F(LoggerLifecycleTest, MultipleStartStopCycles) {
-    auto log_file = CreateLoggerWithFileWriter(true);
+    // Create logger without starting (avoid redundant start/stop cycles)
+    CreateLogger(true);
+
+    auto log_file = GetTempFilePath("test.log");
+    auto writer = std::make_unique<kcenon::logger::file_writer>(log_file);
+    logger_->add_writer(std::move(writer));
 
     for (int cycle = 0; cycle < 3; ++cycle) {
         auto result = logger_->start();
@@ -116,7 +121,9 @@ TEST_F(LoggerLifecycleTest, MultipleStartStopCycles) {
             logger_->log(kcenon::logger::log_level::info, "Cycle " + std::to_string(cycle) + " message " + std::to_string(i));
         }
 
-        WaitForFlush();
+        // Use simple flush instead of WaitForFlush() to avoid redundant stop/start
+        // which causes significant delay on macOS Debug builds
+        logger_->flush();
 
         result = logger_->stop();
         ASSERT_TRUE(result.is_ok()) << "Failed to stop in cycle " << cycle;
