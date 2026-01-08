@@ -74,11 +74,17 @@ TEST_F(RoutingIntegrationTest, GetRouterAccess) {
 
 // Test 2: Exclusive routing - errors only to specific file
 TEST_F(RoutingIntegrationTest, ExclusiveRoutingByLevel) {
+    // Use with_route() with exact_level_filter for precise level matching
+    routing::route_config error_route;
+    error_route.writer_names = {"errors"};
+    error_route.filter = std::make_unique<filters::exact_level_filter>(log_level::error);
+    error_route.stop_propagation = false;
+
     auto result = logger_builder()
         .with_async(false)
         .add_writer("all", std::make_unique<file_writer>("test_all.log"))
         .add_writer("errors", std::make_unique<file_writer>("test_errors.log"))
-        .route_level(log_level::error, {"errors"})
+        .with_route(std::move(error_route))
         .with_exclusive_routing(true)
         .build();
 
@@ -92,9 +98,9 @@ TEST_F(RoutingIntegrationTest, ExclusiveRoutingByLevel) {
 
     test_logger->flush();
 
-    // In exclusive mode with error route:
-    // - Error messages should go to "errors" writer
-    // - Other messages should not match any route, so they go nowhere (exclusive mode)
+    // In exclusive mode with exact error route:
+    // - Only error messages match and go to "errors" writer
+    // - Info/Warning don't match any route, so they are dropped (exclusive mode)
     EXPECT_TRUE(file_contains("test_errors.log", "Error message"));
     EXPECT_FALSE(file_contains("test_errors.log", "Info message"));
     EXPECT_FALSE(file_contains("test_errors.log", "Warning message"));
@@ -130,7 +136,7 @@ TEST_F(RoutingIntegrationTest, PatternBasedRouting) {
         .with_async(false)
         .add_writer("all", std::make_unique<file_writer>("test_all.log"))
         .add_writer("security", std::make_unique<file_writer>("test_security.log"))
-        .route_pattern("security|auth", {"security"})
+        .route_pattern("[Ss]ecurity|[Aa]uth", {"security"})  // Case-insensitive pattern
         .with_exclusive_routing(true)
         .build();
 
@@ -154,6 +160,7 @@ TEST_F(RoutingIntegrationTest, PatternBasedRouting) {
 TEST_F(RoutingIntegrationTest, DirectRouterConfiguration) {
     auto result = logger_builder()
         .with_async(false)
+        .with_min_level(log_level::debug)  // Enable debug level
         .add_writer("all", std::make_unique<file_writer>("test_all.log"))
         .add_writer("debug", std::make_unique<file_writer>("test_debug.log"))
         .build();
@@ -165,9 +172,10 @@ TEST_F(RoutingIntegrationTest, DirectRouterConfiguration) {
     auto& router = test_logger->get_router();
     router.set_exclusive_routes(true);
 
+    // Use exact_level_filter for precise level matching
     routing::route_config config;
     config.writer_names = {"debug"};
-    config.filter = std::make_unique<filters::level_filter>(log_level::debug);
+    config.filter = std::make_unique<filters::exact_level_filter>(log_level::debug);
     config.stop_propagation = false;
     router.add_route(std::move(config));
 
@@ -177,20 +185,32 @@ TEST_F(RoutingIntegrationTest, DirectRouterConfiguration) {
 
     test_logger->flush();
 
-    // Debug messages should go to debug file
+    // Only debug messages should go to debug file (exact match)
     EXPECT_TRUE(file_contains("test_debug.log", "Debug message"));
     EXPECT_FALSE(file_contains("test_debug.log", "Info message"));
 }
 
-// Test 6: Multiple routes
+// Test 6: Multiple routes with exact level matching
 TEST_F(RoutingIntegrationTest, MultipleRoutes) {
+    // Create routes with exact level filters
+    routing::route_config error_route;
+    error_route.writer_names = {"errors"};
+    error_route.filter = std::make_unique<filters::exact_level_filter>(log_level::error);
+    error_route.stop_propagation = false;
+
+    routing::route_config debug_route;
+    debug_route.writer_names = {"debug"};
+    debug_route.filter = std::make_unique<filters::exact_level_filter>(log_level::debug);
+    debug_route.stop_propagation = false;
+
     auto result = logger_builder()
         .with_async(false)
+        .with_min_level(log_level::debug)  // Enable debug level
         .add_writer("all", std::make_unique<file_writer>("test_all.log"))
         .add_writer("errors", std::make_unique<file_writer>("test_errors.log"))
         .add_writer("debug", std::make_unique<file_writer>("test_debug.log"))
-        .route_level(log_level::error, {"errors"})
-        .route_level(log_level::debug, {"debug"})
+        .with_route(std::move(error_route))
+        .with_route(std::move(debug_route))
         .with_exclusive_routing(true)
         .build();
 
@@ -199,17 +219,19 @@ TEST_F(RoutingIntegrationTest, MultipleRoutes) {
 
     // Log messages at different levels
     test_logger->log(log_level::debug, "Debug message");
-    test_logger->log(log_level::info, "Info message");
+    test_logger->log(log_level::info, "Info message");  // No route, dropped in exclusive mode
     test_logger->log(log_level::error, "Error message");
 
     test_logger->flush();
 
-    // Each level should go to appropriate file
+    // Each level should go to appropriate file only
     EXPECT_TRUE(file_contains("test_debug.log", "Debug message"));
     EXPECT_FALSE(file_contains("test_debug.log", "Error message"));
+    EXPECT_FALSE(file_contains("test_debug.log", "Info message"));
 
     EXPECT_TRUE(file_contains("test_errors.log", "Error message"));
     EXPECT_FALSE(file_contains("test_errors.log", "Debug message"));
+    EXPECT_FALSE(file_contains("test_errors.log", "Info message"));
 }
 
 // Test 7: has_routing() check

@@ -150,45 +150,43 @@ public:
                             const log_entry& entry) {
         // Check routing rules
         std::vector<std::string> routed_writer_names;
-        bool exclusive_routing = false;
+        bool is_exclusive = false;
         {
             std::shared_lock<std::shared_mutex> lock(router_mutex_);
             if (router_) {
                 routed_writer_names = router_->get_writers_for_log(entry);
-                exclusive_routing = router_->is_exclusive_routing() && !routed_writer_names.empty();
-            }
-        }
-
-        // Copy writer pointers under lock to minimize lock hold time
-        std::vector<std::shared_ptr<base_writer>> local_writers;
-        std::unordered_map<std::string, std::shared_ptr<base_writer>> local_named_writers;
-        {
-            std::shared_lock<std::shared_mutex> lock(writers_mutex_);
-            if (exclusive_routing) {
-                // Only need named writers for exclusive routing
-                local_named_writers = named_writers_;
-            } else if (!routed_writer_names.empty()) {
-                // Need both for non-exclusive with routing
-                local_writers = writers_;
-                local_named_writers = named_writers_;
-            } else {
-                // No routing, use all writers
-                local_writers = writers_;
+                is_exclusive = router_->is_exclusive_routing();
             }
         }
 
         auto now = std::chrono::system_clock::now();
 
-        if (exclusive_routing) {
-            // Exclusive mode: only send to routed writers
-            for (const auto& writer_name : routed_writer_names) {
-                auto it = local_named_writers.find(writer_name);
-                if (it != local_named_writers.end() && it->second) {
-                    it->second->write(level, message, file, line, function, now);
+        if (is_exclusive) {
+            // Exclusive mode: only send to matched routes
+            // If no routes match, message is dropped (exclusive mode behavior)
+            if (!routed_writer_names.empty()) {
+                std::unordered_map<std::string, std::shared_ptr<base_writer>> local_named_writers;
+                {
+                    std::shared_lock<std::shared_mutex> lock(writers_mutex_);
+                    local_named_writers = named_writers_;
+                }
+
+                for (const auto& writer_name : routed_writer_names) {
+                    auto it = local_named_writers.find(writer_name);
+                    if (it != local_named_writers.end() && it->second) {
+                        it->second->write(level, message, file, line, function, now);
+                    }
                 }
             }
+            // No matched routes in exclusive mode = drop message
         } else {
-            // Non-exclusive mode or no routing: send to all writers
+            // Non-exclusive mode: send to all writers
+            std::vector<std::shared_ptr<base_writer>> local_writers;
+            {
+                std::shared_lock<std::shared_mutex> lock(writers_mutex_);
+                local_writers = writers_;
+            }
+
             for (auto& writer : local_writers) {
                 if (writer) {
                     writer->write(level, message, file, line, function, now);
