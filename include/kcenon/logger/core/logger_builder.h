@@ -79,6 +79,7 @@ All rights reserved.
 #include "../filters/log_filter.h"
 #include "../interfaces/log_formatter_interface.h"
 #include "../routing/log_router.h"
+#include "../analysis/realtime_log_analyzer.h"
 
 // Use common_system interfaces (Phase 2.2.4)
 #include <kcenon/common/interfaces/monitoring_interface.h>
@@ -744,7 +745,91 @@ public:
         error_handler_ = handler;
         return *this;
     }
-    
+
+    // =========================================================================
+    // Real-time analysis configuration
+    // =========================================================================
+
+    /**
+     * @brief Set real-time log analyzer
+     * @param analyzer Pre-configured analyzer instance
+     * @return Reference to builder for chaining
+     *
+     * @details Sets a real-time analyzer that will be attached to the logger
+     * for anomaly detection during log processing.
+     *
+     * @example
+     * @code
+     * auto analyzer = std::make_unique<realtime_log_analyzer>();
+     * analyzer->set_error_spike_threshold(50);
+     * analyzer->add_pattern_alert("OutOfMemory", log_level::error);
+     *
+     * auto logger = logger_builder()
+     *     .with_realtime_analyzer(std::move(analyzer))
+     *     .build();
+     * @endcode
+     *
+     * @since 3.2.0
+     */
+    logger_builder& with_realtime_analyzer(
+        std::unique_ptr<analysis::realtime_log_analyzer> analyzer) {
+        realtime_analyzer_ = std::move(analyzer);
+        return *this;
+    }
+
+    /**
+     * @brief Configure real-time analysis with settings
+     * @param config Analysis configuration
+     * @param callback Optional anomaly callback
+     * @return Reference to builder for chaining
+     *
+     * @details Creates and configures a real-time analyzer with the provided
+     * settings. This is a convenience method for common use cases.
+     *
+     * @example
+     * @code
+     * auto logger = logger_builder()
+     *     .with_realtime_analysis(
+     *         analysis::realtime_analysis_config{
+     *             .error_spike_threshold = 100,
+     *             .track_new_errors = true
+     *         },
+     *         [](const analysis::anomaly_event& e) {
+     *             alert_team(e);
+     *         })
+     *     .build();
+     * @endcode
+     *
+     * @since 3.2.0
+     */
+    logger_builder& with_realtime_analysis(
+        const analysis::realtime_analysis_config& config,
+        analysis::realtime_log_analyzer::anomaly_callback callback = nullptr) {
+        realtime_analyzer_ = std::make_unique<analysis::realtime_log_analyzer>(config);
+        if (callback) {
+            realtime_analyzer_->set_anomaly_callback(std::move(callback));
+        }
+        return *this;
+    }
+
+    /**
+     * @brief Enable basic real-time analysis with default settings
+     * @param error_threshold Error spike threshold (errors per minute)
+     * @param callback Optional anomaly callback
+     * @return Reference to builder for chaining
+     *
+     * @details Creates a real-time analyzer with sensible defaults.
+     *
+     * @since 3.2.0
+     */
+    logger_builder& with_realtime_analysis(
+        size_t error_threshold = 50,
+        analysis::realtime_log_analyzer::anomaly_callback callback = nullptr) {
+        realtime_analyzer_ = analysis::realtime_analyzer_factory::create_production(
+            error_threshold, std::move(callback));
+        return *this;
+    }
+
     /**
      * @brief Use default pattern for logging
      * @return Reference to builder for chaining
@@ -882,6 +967,11 @@ public:
         }
         routes_.clear();  // Clear after moving
 
+        // Apply real-time analyzer if configured
+        if (realtime_analyzer_) {
+            logger_instance->set_realtime_analyzer(std::move(realtime_analyzer_));
+        }
+
         // Start logger if async
         if (config_.async) {
             logger_instance->start();
@@ -923,6 +1013,7 @@ private:
     std::shared_ptr<common::interfaces::IMonitor> monitor_;  // Phase 2.2.4
     std::chrono::milliseconds health_check_interval_{1000};
     std::function<void(const logger_error_code&)> error_handler_;
+    std::unique_ptr<analysis::realtime_log_analyzer> realtime_analyzer_;  // Real-time analyzer
 };
 
 } // namespace kcenon::logger

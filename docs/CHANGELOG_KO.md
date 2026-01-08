@@ -49,6 +49,45 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### 실시간 로그 분석 통합 (Issue #281)
+
+#### 추가됨
+- **새로운 `realtime_log_analyzer` 클래스** - 로깅 중 실시간 이상 감지
+  - 설정 가능한 임계값으로 에러 스파이크 감지
+  - 정규식 지원 패턴 기반 알림
+  - 로그 레이트 이상 감지 (높음/낮음 레이트 알림)
+  - 새로운 에러 유형 추적 및 분류
+  - 레이트 계산을 위한 스레드 안전 슬라이딩 윈도우
+  - 즉각적인 알림을 위한 이상 콜백
+
+- **Logger 통합**
+  - `logger::set_realtime_analyzer()` - 실시간 모니터링을 위한 분석기 설정
+  - `logger::get_realtime_analyzer()` - 설정된 분석기 접근
+  - `logger::has_realtime_analysis()` - 분석 활성화 여부 확인
+
+- **Builder 메서드**
+  - `with_realtime_analyzer()` - 사전 구성된 분석기 설정
+  - `with_realtime_analysis(config, callback)` - 설정으로 구성
+  - `with_realtime_analysis(threshold, callback)` - 기본값으로 활성화
+
+- **Factory 메서드**
+  - `realtime_analyzer_factory::create_basic()` - 기본 분석기
+  - `realtime_analyzer_factory::create(config)` - 사용자 정의 설정
+  - `realtime_analyzer_factory::create_production()` - 프로덕션 준비 기본값
+
+#### 예제
+```cpp
+auto logger = logger_builder()
+    .with_realtime_analysis(50, [](const anomaly_event& event) {
+        if (event.anomaly_type == anomaly_event::type::error_spike) {
+            alert_ops_team(event);
+        }
+    })
+    .build();
+```
+
+---
+
 ### Coverage 빌드 수정 (PR #291) - 2026-01-08
 
 #### 수정됨

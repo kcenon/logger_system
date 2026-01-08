@@ -49,6 +49,45 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### Real-time Log Analysis Integration (Issue #281)
+
+#### Added
+- **New `realtime_log_analyzer` class** for real-time anomaly detection during logging
+  - Error spike detection with configurable threshold
+  - Pattern-based alerting with regex support
+  - Rate anomaly detection (high/low rate alerts)
+  - New error type tracking and classification
+  - Thread-safe sliding window for rate calculations
+  - Anomaly callback for immediate notifications
+
+- **Logger integration**
+  - `logger::set_realtime_analyzer()` - Set analyzer for real-time monitoring
+  - `logger::get_realtime_analyzer()` - Access the configured analyzer
+  - `logger::has_realtime_analysis()` - Check if analysis is enabled
+
+- **Builder methods**
+  - `with_realtime_analyzer()` - Set pre-configured analyzer
+  - `with_realtime_analysis(config, callback)` - Configure with settings
+  - `with_realtime_analysis(threshold, callback)` - Enable with defaults
+
+- **Factory methods**
+  - `realtime_analyzer_factory::create_basic()` - Default analyzer
+  - `realtime_analyzer_factory::create(config)` - Custom configuration
+  - `realtime_analyzer_factory::create_production()` - Production-ready defaults
+
+#### Example
+```cpp
+auto logger = logger_builder()
+    .with_realtime_analysis(50, [](const anomaly_event& event) {
+        if (event.anomaly_type == anomaly_event::type::error_spike) {
+            alert_ops_team(event);
+        }
+    })
+    .build();
+```
+
+---
+
 ### Coverage Build Fix (PR #291) - 2026-01-08
 
 #### Fixed
