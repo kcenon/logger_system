@@ -898,13 +898,12 @@ bool logger::has_context() const {
     return false;
 }
 
-const log_fields& logger::get_context() const {
-    static const log_fields empty_fields;
+log_fields logger::get_context() const {
     if (pimpl_) {
         std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
         return pimpl_->context_fields_;
     }
-    return empty_fields;
+    return {};
 }
 
 } // namespace kcenon::logger

@@ -288,6 +288,22 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/executor_integration_test.cpp")
     message(STATUS "executor_integration module tests: Added")
 endif()
 
+# Structured logging tests (Issue #279)
+add_executable(logger_structured_logging_test structured_logging_test.cpp)
+
+if(TARGET GTest::gtest_main)
+    target_link_libraries(logger_structured_logging_test PRIVATE LoggerSystem GTest::gtest_main GTest::gtest)
+else()
+    target_link_libraries(logger_structured_logging_test PRIVATE LoggerSystem gtest_main gtest)
+endif()
+
+add_test(NAME logger_structured_logging_test COMMAND logger_structured_logging_test)
+set_target_properties(logger_structured_logging_test PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+message(STATUS "Structured logging tests: Added")
+
 ##################################################
 # Automatic Coverage Registration
 #

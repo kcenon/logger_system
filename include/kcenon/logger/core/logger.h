@@ -823,11 +823,12 @@ public:
     [[nodiscard]] bool has_context() const;
 
     /**
-     * @brief Get the current context fields
-     * @return Const reference to context fields map
+     * @brief Get a copy of the current context fields
+     * @return Copy of context fields map
+     * @note Returns a copy for thread safety
      * @since 3.1.0
      */
-    [[nodiscard]] const log_fields& get_context() const;
+    [[nodiscard]] log_fields get_context() const;
 
     // Emergency Flush Support (critical_logger_interface implementation)
 
