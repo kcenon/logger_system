@@ -129,6 +129,10 @@ class base_writer;
 class logger_metrics_collector;
 class log_filter_interface;  // Forward declaration for filtering system
 
+namespace analysis {
+class realtime_log_analyzer;
+}  // namespace analysis
+
 } // namespace kcenon::logger
 
 // Include routing header for log_router
@@ -629,7 +633,57 @@ public:
      * @since 2.0.0
      */
     bool has_routing() const;
-    
+
+    // =========================================================================
+    // Real-time analysis
+    // =========================================================================
+
+    /**
+     * @brief Set real-time log analyzer for anomaly detection
+     * @param analyzer The analyzer instance
+     *
+     * @details Sets a real-time analyzer that processes each log entry
+     * for anomaly detection. The analyzer is invoked synchronously during
+     * log processing.
+     *
+     * @example
+     * @code
+     * auto analyzer = std::make_unique<realtime_log_analyzer>();
+     * analyzer->set_error_spike_threshold(50);
+     * analyzer->set_anomaly_callback([](const anomaly_event& e) {
+     *     alert_ops_team(e);
+     * });
+     * logger->set_realtime_analyzer(std::move(analyzer));
+     * @endcode
+     *
+     * @since 3.2.0
+     */
+    void set_realtime_analyzer(std::unique_ptr<analysis::realtime_log_analyzer> analyzer);
+
+    /**
+     * @brief Get the real-time analyzer (if set)
+     * @return Pointer to analyzer or nullptr if not set
+     *
+     * @since 3.2.0
+     */
+    [[nodiscard]] analysis::realtime_log_analyzer* get_realtime_analyzer();
+
+    /**
+     * @brief Get the real-time analyzer (const version)
+     * @return Pointer to analyzer or nullptr if not set
+     *
+     * @since 3.2.0
+     */
+    [[nodiscard]] const analysis::realtime_log_analyzer* get_realtime_analyzer() const;
+
+    /**
+     * @brief Check if real-time analysis is enabled
+     * @return true if a realtime analyzer is set
+     *
+     * @since 3.2.0
+     */
+    [[nodiscard]] bool has_realtime_analysis() const;
+
     // =========================================================================
     // OpenTelemetry context management
     // =========================================================================
