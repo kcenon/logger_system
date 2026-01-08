@@ -400,6 +400,17 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
             message(STATUS "Logger System: Using standalone async implementation (no thread_system)")
         endif()
 
+        # Link OpenSSL if encryption is enabled
+        if(LOGGER_USE_ENCRYPTION)
+            find_package(OpenSSL QUIET)
+            if(OpenSSL_FOUND)
+                target_link_libraries(LoggerSystem PUBLIC OpenSSL::SSL OpenSSL::Crypto)
+                message(STATUS "Logger System: OpenSSL linked for encryption support (${OPENSSL_VERSION})")
+            else()
+                message(WARNING "Logger System: LOGGER_USE_ENCRYPTION=ON but OpenSSL not found")
+            endif()
+        endif()
+
         set(USE_LEGACY_SOURCES FALSE)
 
         ##################################################
