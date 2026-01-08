@@ -80,6 +80,7 @@ All rights reserved.
 #include "../interfaces/log_formatter_interface.h"
 #include "../routing/log_router.h"
 #include "../analysis/realtime_log_analyzer.h"
+#include "../sampling/log_sampler.h"
 
 // Use common_system interfaces (Phase 2.2.4)
 #include <kcenon/common/interfaces/monitoring_interface.h>
@@ -841,6 +842,141 @@ public:
         return *this;
     }
 
+    // =========================================================================
+    // Sampling configuration
+    // =========================================================================
+
+    /**
+     * @brief Set log sampler for volume reduction
+     * @param sampler Pre-configured sampler instance
+     * @return Reference to builder for chaining
+     *
+     * @details Sets a sampler that determines which logs are passed through
+     * based on configured sampling strategies.
+     *
+     * @example
+     * @code
+     * auto sampler = std::make_unique<sampling::log_sampler>(
+     *     sampling::sampling_config::random_sampling(0.1)
+     * );
+     * auto logger = logger_builder()
+     *     .with_sampler(std::move(sampler))
+     *     .build();
+     * @endcode
+     *
+     * @since 3.3.0
+     */
+    logger_builder& with_sampler(std::unique_ptr<sampling::log_sampler> sampler) {
+        sampler_ = std::move(sampler);
+        return *this;
+    }
+
+    /**
+     * @brief Configure sampling with a config struct
+     * @param config Sampling configuration
+     * @return Reference to builder for chaining
+     *
+     * @example
+     * @code
+     * auto logger = logger_builder()
+     *     .with_sampling(sampling::sampling_config{
+     *         .enabled = true,
+     *         .rate = 0.1,
+     *         .always_log_levels = {log_level::error, log_level::fatal}
+     *     })
+     *     .build();
+     * @endcode
+     *
+     * @since 3.3.0
+     */
+    logger_builder& with_sampling(const sampling::sampling_config& config) {
+        sampler_ = std::make_unique<sampling::log_sampler>(config);
+        return *this;
+    }
+
+    /**
+     * @brief Enable random sampling with specified rate
+     * @param rate Sampling rate (0.0 to 1.0)
+     * @param always_log_levels Levels that bypass sampling
+     * @return Reference to builder for chaining
+     *
+     * @example
+     * @code
+     * auto logger = logger_builder()
+     *     .with_random_sampling(0.1)  // 10% sampling
+     *     .build();
+     * @endcode
+     *
+     * @since 3.3.0
+     */
+    logger_builder& with_random_sampling(
+        double rate,
+        std::vector<logger_system::log_level> always_log_levels = {
+            logger_system::log_level::error,
+            logger_system::log_level::fatal
+        }) {
+        sampling::sampling_config config = sampling::sampling_config::random_sampling(rate);
+        config.always_log_levels = std::move(always_log_levels);
+        sampler_ = std::make_unique<sampling::log_sampler>(config);
+        return *this;
+    }
+
+    /**
+     * @brief Enable rate limiting sampling
+     * @param max_per_second Maximum logs per second
+     * @param always_log_levels Levels that bypass sampling
+     * @return Reference to builder for chaining
+     *
+     * @example
+     * @code
+     * auto logger = logger_builder()
+     *     .with_rate_limiting(1000)  // Max 1000 logs/sec
+     *     .build();
+     * @endcode
+     *
+     * @since 3.3.0
+     */
+    logger_builder& with_rate_limiting(
+        std::size_t max_per_second,
+        std::vector<logger_system::log_level> always_log_levels = {
+            logger_system::log_level::error,
+            logger_system::log_level::fatal
+        }) {
+        sampling::sampling_config config = sampling::sampling_config::rate_limited(max_per_second);
+        config.always_log_levels = std::move(always_log_levels);
+        sampler_ = std::make_unique<sampling::log_sampler>(config);
+        return *this;
+    }
+
+    /**
+     * @brief Enable adaptive sampling
+     * @param threshold Messages/second threshold to trigger adaptation
+     * @param min_rate Minimum sampling rate under load
+     * @param always_log_levels Levels that bypass sampling
+     * @return Reference to builder for chaining
+     *
+     * @example
+     * @code
+     * auto logger = logger_builder()
+     *     .with_adaptive_sampling(50000, 0.01)  // Adapt when >50k/sec
+     *     .build();
+     * @endcode
+     *
+     * @since 3.3.0
+     */
+    logger_builder& with_adaptive_sampling(
+        std::size_t threshold = 10000,
+        double min_rate = 0.01,
+        std::vector<logger_system::log_level> always_log_levels = {
+            logger_system::log_level::warn,
+            logger_system::log_level::error,
+            logger_system::log_level::fatal
+        }) {
+        sampling::sampling_config config = sampling::sampling_config::adaptive(threshold, min_rate);
+        config.always_log_levels = std::move(always_log_levels);
+        sampler_ = std::make_unique<sampling::log_sampler>(config);
+        return *this;
+    }
 
     /**
      * @brief Build the logger with validation
@@ -972,6 +1108,11 @@ public:
             logger_instance->set_realtime_analyzer(std::move(realtime_analyzer_));
         }
 
+        // Apply sampler if configured
+        if (sampler_) {
+            logger_instance->set_sampler(std::move(sampler_));
+        }
+
         // Start logger if async
         if (config_.async) {
             logger_instance->start();
@@ -1014,6 +1155,7 @@ private:
     std::chrono::milliseconds health_check_interval_{1000};
     std::function<void(const logger_error_code&)> error_handler_;
     std::unique_ptr<analysis::realtime_log_analyzer> realtime_analyzer_;  // Real-time analyzer
+    std::unique_ptr<sampling::log_sampler> sampler_;  // Log sampler for volume reduction
 };
 
 } // namespace kcenon::logger

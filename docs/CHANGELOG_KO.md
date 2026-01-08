@@ -88,6 +88,73 @@ auto logger = logger_builder()
 
 ---
 
+### 고용량 시나리오를 위한 로그 샘플링 (Issue #282)
+
+#### 추가됨
+- **새로운 `log_sampler` 클래스** - 고처리량 시나리오에서 로그 볼륨 감소
+  - 설정 가능한 비율(0.0~1.0)의 랜덤 샘플링
+  - Rate limiting (초당 최대 N개 로그)
+  - 부하에 따라 자동 조정되는 Adaptive 샘플링
+  - 디버깅을 위한 해시 기반 결정적 샘플링
+  - 중요 메시지의 레벨 기반 우회 (error, fatal은 항상 로깅)
+  - 카테고리별 샘플링 비율
+
+- **샘플링 설정**
+  - 일반적인 사용 사례를 위한 팩토리 메서드가 있는 `sampling_config` 구조체
+  - 샘플링/드롭된 메시지 수 모니터링을 위한 `sampling_stats`
+  - 정확한 메트릭을 위한 스레드 안전 카운터
+
+- **Logger 통합**
+  - `logger::set_sampler()` - 볼륨 감소를 위한 샘플러 설정
+  - `logger::get_sampler()` - 설정된 샘플러 접근
+  - `logger::has_sampling()` - 샘플링 활성화 여부 확인
+  - `logger::get_sampling_stats()` - 샘플링 메트릭 조회
+  - `logger::reset_sampling_stats()` - 메트릭 초기화
+
+- **Builder 메서드**
+  - `with_sampler()` - 사전 설정된 샘플러 설정
+  - `with_sampling(config)` - 설정으로 구성
+  - `with_random_sampling(rate)` - 랜덤 샘플링 단축
+  - `with_rate_limiting(max_per_second)` - Rate limiting 단축
+  - `with_adaptive_sampling(threshold, min_rate)` - Adaptive 샘플링
+
+- **Factory 메서드**
+  - `sampler_factory::create_disabled()` - 패스스루 샘플러
+  - `sampler_factory::create_random(rate)` - 랜덤 샘플러
+  - `sampler_factory::create_rate_limited(max)` - Rate limiter
+  - `sampler_factory::create_adaptive(threshold, min)` - Adaptive 샘플러
+  - `sampler_factory::create_production(rate, critical_levels)` - 프로덕션 기본값
+
+#### 예제
+```cpp
+// error/fatal 우회를 포함한 10% 랜덤 샘플링
+auto logger = logger_builder()
+    .with_random_sampling(0.1)
+    .build();
+
+// 초당 1000개 로그로 Rate limiting
+auto logger = logger_builder()
+    .with_rate_limiting(1000)
+    .build();
+
+// 고부하 시 Adaptive 샘플링
+auto logger = logger_builder()
+    .with_adaptive_sampling(50000, 0.01)  // 50k/초 초과 시 적응
+    .build();
+
+// 카테고리별 사용자 정의 비율
+sampling_config config;
+config.enabled = true;
+config.rate = 0.1;
+config.category_rates["database"] = 0.01;  // DB 로그의 1%만
+config.category_rates["security"] = 1.0;   // 모든 보안 로그
+auto logger = logger_builder()
+    .with_sampling(config)
+    .build();
+```
+
+---
+
 ### Coverage 빌드 수정 (PR #291) - 2026-01-08
 
 #### 수정됨
