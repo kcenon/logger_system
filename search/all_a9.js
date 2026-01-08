@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['크기_20선택_0',['1. 큐 크기 선택',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html#autotoc_md224',1,'']]],
-  ['크리티컬_20로그_20손실_20방지_20가이드_1',['크리티컬 로그 손실 방지 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION__KO.html#autotoc_md373',1,'']]],
-  ['크리티컬_20로깅_20빠른_20시작_2',['크리티컬 로깅 빠른 시작',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START__KO.html#autotoc_md408',1,'']]]
+  ['큐_20가득_20참_20마이그레이션_0',['큐 가득 참 마이그레이션',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html#autotoc_md232',1,'']]],
+  ['큐_20가득_20참_20처리_1',['예제 3: 큐 가득 참 처리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html#autotoc_md220',1,'']]],
+  ['큐_20크기_20선택_2',['1. 큐 크기 선택',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html#autotoc_md224',1,'']]]
 ];

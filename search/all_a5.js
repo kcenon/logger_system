@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['컴파일_20정의_0',['컴파일 정의',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1671',1,'']]],
-  ['컴파일_20타임_20감지_1',['컴파일 타임 감지',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1681',1,'']]],
-  ['컴포넌트_2',['컴포넌트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md2051',1,'보안 컴포넌트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE__KO.html#autotoc_md524',1,'핵심 컴포넌트']]],
-  ['컴포넌트_20개요_3',['🔧 주요 컴포넌트 개요',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md628',1,'']]],
-  ['컴플라이언스_20지원_4',['5. 컴플라이언스 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1918',1,'']]]
+  ['커밋_0',['4.2 GitHub Actions에서 자동 커밋',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1772',1,'']]],
+  ['커밋_20권한_20오류_1',['문제 3: Git 자동 커밋 권한 오류',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1797',1,'']]],
+  ['커버리지_20파이프라인_2',['4. 코드 커버리지 파이프라인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1898',1,'']]],
+  ['커스텀_20작성기_20생성_3',['커스텀 작성기 생성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS__KO.html#autotoc_md425',1,'']]],
+  ['커스텀_20작성자_4',['커스텀 작성자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1164',1,'']]],
+  ['커스텀_20포맷터_5',['커스텀 포맷터',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1169',1,'']]]
 ];

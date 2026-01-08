@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['표시되지_20않음_0',['문제 4: 배지가 README에 표시되지 않음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1790',1,'']]]
+  ['포맷터_0',['커스텀 포맷터',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1169',1,'']]],
+  ['포맷팅_1',['포맷팅',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1166',1,'']]],
+  ['포맷_2',['포맷',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1167',1,'기본 포맷'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1168',1,'JSON 포맷']]],
+  ['포인터_20사용_3',['스마트 포인터 사용',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1908',1,'']]]
 ];

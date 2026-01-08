@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['저장소_0',['1. 보안 키 저장소',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1914',1,'']]],
-  ['저장소_20클론_1',['1. 저장소 클론',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1556',1,'']]],
-  ['저장_2',['1.2 벤치마크 실행 및 JSON 저장',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1751',1,'']]]
+  ['재활성화_20및_20json_20출력_20설정_0',['Phase 1: 벤치마크 재활성화 및 JSON 출력 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1757',1,'']]]
 ];

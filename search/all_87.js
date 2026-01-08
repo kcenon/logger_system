@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['이력_20logger_20system_0',['변경 이력 - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html',1,'']]],
-  ['이슈_1',['이슈',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md999',1,'관련 이슈'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1007',1,'관련 이슈'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1014',1,'관련 이슈'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1020',1,'관련 이슈']]],
-  ['이전_2',['v2.x (이전)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1416',1,'']]],
-  ['이점_3',['이점',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1012',1,'이점'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1019',1,'이점']]]
+  ['의존성_0',['의존성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md2076',1,'모듈 의존성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md2078',1,'외부 의존성']]],
+  ['의존성_20구성_1',['의존성 구성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1680',1,'']]],
+  ['의존성_20구조_20변경_2',['의존성 구조 변경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE__KO.html#autotoc_md783',1,'']]],
+  ['의존성_20그래프_3',['의존성 그래프',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE__KO.html#autotoc_md2077',1,'']]],
+  ['의존성_20변경_4',['의존성 변경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1428',1,'의존성 변경'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1434',1,'4. thread_system 의존성 변경']]],
+  ['의존성_20설치_5',['2. 의존성 설치',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1565',1,'']]],
+  ['의존성_20위험_20issue_20252_6',['양방향 의존성 위험 (Issue #252)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1681',1,'']]]
 ];

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['있는_20c_20로거_0',['vs spdlog (가장 인기 있는 C++ 로거)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS__KO.html#autotoc_md859',1,'']]]
+  ['일반적인_20문제와_20해결책_0',['일반적인 문제와 해결책',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html#autotoc_md1439',1,'']]],
+  ['일반적인_20문제_1',['일반적인 문제',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1598',1,'']]],
+  ['일반적인_20패턴_2',['일반적인 패턴',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1590',1,'']]]
 ];

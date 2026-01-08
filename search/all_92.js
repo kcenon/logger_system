@@ -1,13 +1,10 @@
 var searchData=
 [
-  ['제거됨_0',['제거됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md996',1,'제거됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1018',1,'제거됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1026',1,'제거됨']]],
-  ['제거됨_20deprecated_20api_20정리_20issue_20268_1',['제거됨 - Deprecated API 정리 (Issue #268)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md953',1,'']]],
-  ['제거_202025_2012_2003_2',['CMake fmt Fallback 제거 - 2025-12-03',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1016',1,'']]],
-  ['제안서_3',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]],
-  ['제안_20디렉토리_20구조_4',['📁 제안 디렉토리 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1746',1,'']]],
-  ['제안_20솔루션_20아키텍처_5',['🎯 제안 솔루션 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1743',1,'']]],
-  ['제안_201_3a_20배지_20중심_20디자인_6',['제안 1: 배지 중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1767',1,'']]],
-  ['제안_202_3a_20테이블_20중심_20디자인_7',['제안 2: 테이블 중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1768',1,'']]],
-  ['제안_203_3a_20카드_20스타일_20디자인_8',['제안 3: 카드 스타일 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1769',1,'']]],
-  ['제한사항_9',['중요한 제한사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY__KO.html#autotoc_md1603',1,'']]]
+  ['정리_20issue_20268_0',['제거됨 - Deprecated API 정리 (Issue #268)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md957',1,'']]],
+  ['정보_1',['정보',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1726',1,'시스템 정보'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1038',1,'프로젝트 정보']]],
+  ['정상_20종료_2',['정상 종료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1593',1,'']]],
+  ['정상_20종료_20패턴_3',['예제 4: 정상 종료 패턴',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html#autotoc_md221',1,'']]],
+  ['정의_4',['정의',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES__KO.html#autotoc_md1155',1,'레벨 정의'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1679',1,'컴파일 정의']]],
+  ['정의_20풀_20설정_5',['패턴 2: 사용자 정의 풀 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1692',1,'']]],
+  ['정적_20분석_20파이프라인_6',['5. 정적 분석 파이프라인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY__KO.html#autotoc_md1899',1,'']]]
 ];

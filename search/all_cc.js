@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['🏗️_20ecosystem_20overview_0',['🏗️ Ecosystem Overview',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html#autotoc_md722',1,'']]],
-  ['🏗️_20namespace_20구조_1',['🏗️ Namespace 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md625',1,'']]]
+  ['🎯_20성공_20지표_0',['🎯 성공 지표',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1805',1,'']]],
+  ['🎯_20제안_20솔루션_20아키텍처_1',['🎯 제안 솔루션 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1751',1,'']]],
+  ['🎯_20goal_2',['🎯 Goal',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md379',1,'']]],
+  ['🎯_20high_20performance_20logging_3',['🎯 High-Performance Logging',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES.html#autotoc_md1093',1,'']]],
+  ['🎯_20public_20api_20layer_20tt_20include_20kcenon_20logger_20tt_4',['🎯 Public API Layer (&lt;tt&gt;include/kcenon/logger/&lt;/tt&gt;)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html#autotoc_md629',1,'']]]
 ];
