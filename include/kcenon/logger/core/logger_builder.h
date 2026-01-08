@@ -78,6 +78,7 @@ All rights reserved.
 #include "../writers/batch_writer.h"
 #include "../filters/log_filter.h"
 #include "../interfaces/log_formatter_interface.h"
+#include "../routing/log_router.h"
 
 // Use common_system interfaces (Phase 2.2.4)
 #include <kcenon/common/interfaces/monitoring_interface.h>
@@ -414,7 +415,112 @@ public:
         filters_.push_back(std::make_unique<filters::function_filter>(std::move(predicate)));
         return *this;
     }
-    
+
+    // =========================================================================
+    // Routing configuration
+    // =========================================================================
+
+    /**
+     * @brief Add a routing rule to the logger
+     * @param config Route configuration
+     * @return Reference to builder for chaining
+     *
+     * @details Routes determine which writers receive specific log messages
+     * based on configurable rules (level, pattern matching, etc.).
+     *
+     * @example
+     * @code
+     * auto logger = logger_builder()
+     *     .add_writer("console", std::make_unique<console_writer>())
+     *     .add_writer("errors", std::make_unique<file_writer>("errors.log"))
+     *     .with_route(routing::route_config{
+     *         .writer_names = {"errors"},
+     *         .filter = std::make_unique<filters::level_filter>(log_level::error),
+     *         .stop_propagation = false
+     *     })
+     *     .build();
+     * @endcode
+     *
+     * @since 2.0.0
+     */
+    logger_builder& with_route(routing::route_config config) {
+        routes_.push_back(std::move(config));
+        return *this;
+    }
+
+    /**
+     * @brief Set exclusive routing mode
+     * @param exclusive If true, only matched routes receive logs; otherwise all writers receive
+     * @return Reference to builder for chaining
+     *
+     * @details In exclusive mode, only writers matched by routing rules receive log messages.
+     * In non-exclusive mode (default), all writers receive messages regardless of routing.
+     *
+     * @since 2.0.0
+     */
+    logger_builder& with_exclusive_routing(bool exclusive = true) {
+        exclusive_routing_ = exclusive;
+        return *this;
+    }
+
+    /**
+     * @brief Add a level-based route (convenience method)
+     * @param level Target log level
+     * @param writer_names Writers to route to
+     * @param stop_propagation Stop further rule evaluation after match
+     * @return Reference to builder for chaining
+     *
+     * @example
+     * @code
+     * auto logger = logger_builder()
+     *     .add_writer("console", std::make_unique<console_writer>())
+     *     .add_writer("errors", std::make_unique<file_writer>("errors.log"))
+     *     .route_level(log_level::error, {"errors"})
+     *     .build();
+     * @endcode
+     *
+     * @since 2.0.0
+     */
+    logger_builder& route_level(logger_system::log_level level,
+                                const std::vector<std::string>& writer_names,
+                                bool stop_propagation = false) {
+        routing::route_config config;
+        config.writer_names = writer_names;
+        config.filter = std::make_unique<filters::level_filter>(level);
+        config.stop_propagation = stop_propagation;
+        routes_.push_back(std::move(config));
+        return *this;
+    }
+
+    /**
+     * @brief Add a pattern-based route (convenience method)
+     * @param pattern Regex pattern to match against log messages
+     * @param writer_names Writers to route to
+     * @param stop_propagation Stop further rule evaluation after match
+     * @return Reference to builder for chaining
+     *
+     * @example
+     * @code
+     * auto logger = logger_builder()
+     *     .add_writer("console", std::make_unique<console_writer>())
+     *     .add_writer("security", std::make_unique<file_writer>("security.log"))
+     *     .route_pattern("security|auth", {"security"})
+     *     .build();
+     * @endcode
+     *
+     * @since 2.0.0
+     */
+    logger_builder& route_pattern(const std::string& pattern,
+                                  const std::vector<std::string>& writer_names,
+                                  bool stop_propagation = false) {
+        routing::route_config config;
+        config.writer_names = writer_names;
+        config.filter = std::make_unique<filters::regex_filter>(pattern, true);
+        config.stop_propagation = stop_propagation;
+        routes_.push_back(std::move(config));
+        return *this;
+    }
+
     /**
      * @brief Set formatter for the logger
      * @param formatter Formatter instance
@@ -766,6 +872,16 @@ public:
         }
         filters_.clear();  // Clear after moving
 
+        // Apply routing configuration
+        if (!routes_.empty()) {
+            auto& router = logger_instance->get_router();
+            router.set_exclusive_routes(exclusive_routing_);
+            for (auto& route : routes_) {
+                router.add_route(std::move(route));
+            }
+        }
+        routes_.clear();  // Clear after moving
+
         // Start logger if async
         if (config_.async) {
             logger_instance->start();
@@ -798,6 +914,8 @@ private:
     logger_config config_;
     std::vector<std::pair<std::string, std::unique_ptr<base_writer>>> writers_;
     std::vector<std::unique_ptr<log_filter_interface>> filters_;
+    std::vector<routing::route_config> routes_;  // Routing configurations
+    bool exclusive_routing_ = false;  // Exclusive routing mode flag
     std::unique_ptr<log_formatter_interface> formatter_;
     std::unique_ptr<backends::integration_backend> backend_;  // Integration backend (Phase 3.2)
     std::vector<std::unique_ptr<config_strategy_interface>> strategies_;  // Configuration strategies

@@ -125,7 +125,18 @@ class log_collector;
 class base_writer;
 class logger_metrics_collector;
 class log_filter_interface;  // Forward declaration for filtering system
-// class log_router;  // TODO: Implement routing system
+
+} // namespace kcenon::logger
+
+// Include routing header for log_router
+#include "../routing/log_router.h"
+
+namespace kcenon::logger {
+
+// Routing type alias
+using routing::log_router;
+using routing::route_config;
+using routing::router_builder;
 
 /**
  * @class logger
@@ -560,12 +571,61 @@ public:
      */
     bool has_filter() const;
 
-    // TODO: Implement routing system
-    // /**
-    //  * @brief Get the log router for configuration
-    //  * @return Reference to the log router
-    //  */
-    // log_router& get_router();
+    // =========================================================================
+    // Routing system
+    // =========================================================================
+
+    /**
+     * @brief Get the log router for configuration
+     * @return Reference to the log router
+     *
+     * @details Returns the internal router for adding/modifying routing rules.
+     * The router determines which writers receive specific log messages
+     * based on configurable rules (level, pattern matching, etc.).
+     *
+     * @note Thread-safe: Multiple threads can read the router simultaneously,
+     * but modifications should be synchronized externally if done during logging.
+     *
+     * @example
+     * @code
+     * auto& router = logger.get_router();
+     * router.add_route(route_config{
+     *     .writer_names = {"errors"},
+     *     .filter = std::make_unique<level_filter>(log_level::error),
+     *     .stop_propagation = false
+     * });
+     * @endcode
+     *
+     * @since 2.0.0
+     */
+    log_router& get_router();
+
+    /**
+     * @brief Get the log router (const version)
+     * @return Const reference to the log router
+     *
+     * @since 2.0.0
+     */
+    const log_router& get_router() const;
+
+    /**
+     * @brief Set a new log router
+     * @param router Router to use
+     *
+     * @details Replaces the current router with the provided one.
+     * Useful for setting up a pre-configured router.
+     *
+     * @since 2.0.0
+     */
+    void set_router(std::unique_ptr<log_router> router);
+
+    /**
+     * @brief Check if routing is enabled
+     * @return true if router has any routes configured
+     *
+     * @since 2.0.0
+     */
+    bool has_routing() const;
     
     // Emergency Flush Support (critical_logger_interface implementation)
 
