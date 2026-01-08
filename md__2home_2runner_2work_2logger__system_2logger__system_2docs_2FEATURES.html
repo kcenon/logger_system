@@ -731,21 +731,51 @@ Log Routing</h2>
 <li>Multiple target support</li>
 <li>Route to specific writers</li>
 <li>Stop propagation option</li>
+<li>Exclusive routing mode (messages only go to matched routes)</li>
+<li>Direct logger integration via <code>logger_builder</code></li>
 </ul>
-<p><b>Usage</b>: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/routing/log_router.h&gt;</span></div>
+<p><b>Builder API (Recommended)</b>: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/file_writer.h&gt;</span></div>
 <div class="line"> </div>
+<div class="line"><span class="comment">// Configure routing during logger construction</span></div>
+<div class="line"><span class="keyword">auto</span> logger = kcenon::logger::logger_builder()</div>
+<div class="line">    .add_writer(<span class="stringliteral">&quot;all&quot;</span>, std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>))</div>
+<div class="line">    .add_writer(<span class="stringliteral">&quot;errors&quot;</span>, std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;errors.log&quot;</span>))</div>
+<div class="line">    .add_writer(<span class="stringliteral">&quot;security&quot;</span>, std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;security.log&quot;</span>))</div>
+<div class="line">    <span class="comment">// Route errors to dedicated file</span></div>
+<div class="line">    .route_level(kcenon::logger::log_level::error, {<span class="stringliteral">&quot;errors&quot;</span>})</div>
+<div class="line">    <span class="comment">// Route security-related messages by pattern</span></div>
+<div class="line">    .route_pattern(<span class="stringliteral">&quot;[Ss]ecurity|[Aa]uth&quot;</span>, {<span class="stringliteral">&quot;security&quot;</span>})</div>
+<div class="line">    <span class="comment">// Enable exclusive routing (non-matching messages are dropped)</span></div>
+<div class="line">    .with_exclusive_routing(<span class="keyword">true</span>)</div>
+<div class="line">    .build()</div>
+<div class="line">    .value();</div>
+</div><!-- fragment --><p><b>Direct Router Access</b>: </p><div class="fragment"><div class="line"><span class="comment">// Access router after logger creation</span></div>
 <div class="line"><span class="keyword">auto</span>&amp; router = logger-&gt;get_router();</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Route errors to a dedicated error file</span></div>
-<div class="line">kcenon::logger::router_builder(router)</div>
-<div class="line">    .when_level(kcenon::logger::log_level::error)</div>
-<div class="line">    .route_to(<span class="stringliteral">&quot;error_file&quot;</span>, <span class="keyword">true</span>);  <span class="comment">// Stop propagation</span></div>
+<div class="line"><span class="comment">// Configure routing dynamically</span></div>
+<div class="line">router.set_exclusive_routes(<span class="keyword">true</span>);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Route debug messages to both debug file and console</span></div>
-<div class="line">kcenon::logger::router_builder(router)</div>
-<div class="line">    .when_level(kcenon::logger::log_level::debug)</div>
-<div class="line">    .route_to(std::vector&lt;std::string&gt;{<span class="stringliteral">&quot;debug_file&quot;</span>, <span class="stringliteral">&quot;console&quot;</span>});</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1105"></a>
+<div class="line"><span class="comment">// Add custom route with filter</span></div>
+<div class="line">kcenon::logger::routing::route_config config;</div>
+<div class="line">config.writer_names = {<span class="stringliteral">&quot;errors&quot;</span>};</div>
+<div class="line">config.filter = std::make_unique&lt;kcenon::logger::filters::exact_level_filter&gt;(</div>
+<div class="line">    kcenon::logger::log_level::error</div>
+<div class="line">);</div>
+<div class="line">config.stop_propagation = <span class="keyword">false</span>;</div>
+<div class="line">router.add_route(std::move(config));</div>
+</div><!-- fragment --><p><b>Available Filters</b>:</p><ul>
+<li><code>level_filter</code>: Passes messages at or above minimum level</li>
+<li><code>exact_level_filter</code>: Passes only messages at exactly the specified level</li>
+<li><code>regex_filter</code>: Pattern matching on message content</li>
+<li><code>function_filter</code>: Custom predicate-based filtering</li>
+<li><code>composite_filter</code>: Combine multiple filters with AND/OR logic</li>
+</ul>
+<p><b>Routing Modes</b>:</p><ul>
+<li><b>Non-exclusive (default)</b>: All messages go to all writers</li>
+<li><b>Exclusive</b>: Only messages matching a route go to matched writers; unmatched messages are dropped</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md1105"></a>
 Performance Metrics Collection</h2>
 <p><b>Features</b>:</p><ul>
 <li>Built-in metrics collection</li>
@@ -842,7 +872,7 @@ See Also</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Jan 3 2026 08:09:11 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Jan 8 2026 09:36:42 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
