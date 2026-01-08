@@ -32,11 +32,14 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
+#include "../interfaces/log_entry.h"
 #include "../interfaces/log_formatter_interface.h"
 #include "../utils/time_utils.h"
 #include "../utils/string_utils.h"
 #include <sstream>
 #include <iomanip>
+#include <type_traits>
+#include <variant>
 
 // Use common_system's standard interface
 #include <kcenon/common/interfaces/logger_interface.h>
@@ -175,6 +178,22 @@ public:
             }
         }
 
+        // Category (if present)
+        if (entry.category) {
+            std::string cat = entry.category->to_string();
+            if (!cat.empty()) {
+                oss << "," << newline << indent << "\"category\":\"" << utils::string_utils::escape_json(cat) << "\"";
+            }
+        }
+
+        // Structured fields (if present)
+        if (entry.fields && !entry.fields->empty()) {
+            for (const auto& [key, value] : *entry.fields) {
+                oss << "," << newline << indent << "\"" << utils::string_utils::escape_json(key) << "\":";
+                format_value(oss, value);
+            }
+        }
+
         oss << newline << "}";
 
         return oss.str();
@@ -191,6 +210,28 @@ public:
     }
 
 private:
+    /**
+     * @brief Format a log_value to JSON
+     * @param oss Output stream
+     * @param value Value to format
+     */
+    static void format_value(std::ostringstream& oss, const log_value& value) {
+        std::visit([&oss](const auto& v) {
+            using T = std::decay_t<decltype(v)>;
+            if constexpr (std::is_same_v<T, std::string>) {
+                oss << "\"" << utils::string_utils::escape_json(v) << "\"";
+            } else if constexpr (std::is_same_v<T, bool>) {
+                oss << (v ? "true" : "false");
+            } else if constexpr (std::is_same_v<T, int64_t>) {
+                oss << v;
+            } else if constexpr (std::is_same_v<T, double>) {
+                oss << std::fixed << std::setprecision(6) << v;
+            } else {
+                oss << v;
+            }
+        }, value);
+    }
+
     // Note: Formatting functions moved to utils::time_utils and utils::string_utils (Phase 3.4)
     // This reduces code duplication and improves maintainability.
 };
