@@ -91,6 +91,20 @@ set_target_properties(logger_thread_safety_test PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+# Log sampling tests (Issue #282)
+add_executable(logger_sampling_test log_sampling_test.cpp)
+
+if(TARGET GTest::gtest_main)
+    target_link_libraries(logger_sampling_test PRIVATE LoggerSystem GTest::gtest_main)
+else()
+    target_link_libraries(logger_sampling_test PRIVATE LoggerSystem gtest_main)
+endif()
+
+add_test(NAME logger_sampling_test COMMAND logger_sampling_test)
+set_target_properties(logger_sampling_test PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # Routing integration tests (Issue #278)
 add_executable(logger_routing_integration_test routing_integration_test.cpp)
 

@@ -88,6 +88,73 @@ auto logger = logger_builder()
 
 ---
 
+### Log Sampling for High-Volume Scenarios (Issue #282)
+
+#### Added
+- **New `log_sampler` class** for reducing log volume in high-throughput scenarios
+  - Random sampling with configurable rate (0.0 to 1.0)
+  - Rate limiting (max N logs per second)
+  - Adaptive sampling that auto-adjusts based on load
+  - Hash-based deterministic sampling for debugging
+  - Level-based bypass for critical messages (error, fatal always logged)
+  - Per-category sampling rates
+
+- **Sampling configuration**
+  - `sampling_config` struct with factory methods for common use cases
+  - `sampling_stats` for monitoring sampled/dropped message counts
+  - Thread-safe counters for accurate metrics
+
+- **Logger integration**
+  - `logger::set_sampler()` - Set sampler for volume reduction
+  - `logger::get_sampler()` - Access the configured sampler
+  - `logger::has_sampling()` - Check if sampling is enabled
+  - `logger::get_sampling_stats()` - Get sampling metrics
+  - `logger::reset_sampling_stats()` - Reset metrics
+
+- **Builder methods**
+  - `with_sampler()` - Set pre-configured sampler
+  - `with_sampling(config)` - Configure with settings
+  - `with_random_sampling(rate)` - Random sampling shortcut
+  - `with_rate_limiting(max_per_second)` - Rate limiting shortcut
+  - `with_adaptive_sampling(threshold, min_rate)` - Adaptive sampling
+
+- **Factory methods**
+  - `sampler_factory::create_disabled()` - Pass-through sampler
+  - `sampler_factory::create_random(rate)` - Random sampler
+  - `sampler_factory::create_rate_limited(max)` - Rate limiter
+  - `sampler_factory::create_adaptive(threshold, min)` - Adaptive sampler
+  - `sampler_factory::create_production(rate, critical_levels)` - Production defaults
+
+#### Example
+```cpp
+// Random 10% sampling with error/fatal bypass
+auto logger = logger_builder()
+    .with_random_sampling(0.1)
+    .build();
+
+// Rate limiting to 1000 logs/sec
+auto logger = logger_builder()
+    .with_rate_limiting(1000)
+    .build();
+
+// Adaptive sampling under high load
+auto logger = logger_builder()
+    .with_adaptive_sampling(50000, 0.01)  // Adapt when >50k/sec
+    .build();
+
+// Custom per-category rates
+sampling_config config;
+config.enabled = true;
+config.rate = 0.1;
+config.category_rates["database"] = 0.01;  // Only 1% of DB logs
+config.category_rates["security"] = 1.0;   // All security logs
+auto logger = logger_builder()
+    .with_sampling(config)
+    .build();
+```
+
+---
+
 ### Coverage Build Fix (PR #291) - 2026-01-08
 
 #### Fixed

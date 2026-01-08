@@ -36,6 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/level_converter.h>
 #include <kcenon/logger/backends/standalone_backend.h>
 #include <kcenon/logger/analysis/realtime_log_analyzer.h>
+#include <kcenon/logger/sampling/log_sampler.h>
 
 // Note: thread_system_backend was removed in Issue #225
 // thread_system is now optional and standalone_backend is the default
@@ -105,6 +106,10 @@ public:
     // Context fields for structured logging
     log_fields context_fields_;  // Persistent context fields
     mutable std::shared_mutex context_mutex_;  // Protects context_fields_
+
+    // Log sampling
+    std::unique_ptr<sampling::log_sampler> sampler_;  // Log sampler for volume reduction
+    mutable std::shared_mutex sampler_mutex_;  // Protects sampler_
 
     // Emergency flush support (for signal handlers)
     static constexpr size_t emergency_buffer_size_ = 8192;
@@ -421,6 +426,16 @@ common::VoidResult logger::log(common::interfaces::log_level level,
         }
     }
 
+    // Apply sampling if set
+    {
+        std::shared_lock<std::shared_mutex> sampler_lock(pimpl_->sampler_mutex_);
+        if (pimpl_->sampler_ && pimpl_->sampler_->is_enabled()) {
+            if (!pimpl_->sampler_->should_sample(entry)) {
+                return common::ok();  // Message sampled out (not an error)
+            }
+        }
+    }
+
     // Record metrics if enabled
     auto start_time = std::chrono::high_resolution_clock::now();
 
@@ -464,6 +479,16 @@ common::VoidResult logger::log(common::interfaces::log_level level,
         if (pimpl_->filter_) {
             if (!pimpl_->filter_->should_log(entry)) {
                 return common::ok();  // Message filtered out
+            }
+        }
+    }
+
+    // Apply sampling if set
+    {
+        std::shared_lock<std::shared_mutex> sampler_lock(pimpl_->sampler_mutex_);
+        if (pimpl_->sampler_ && pimpl_->sampler_->is_enabled()) {
+            if (!pimpl_->sampler_->should_sample(entry)) {
+                return common::ok();  // Message sampled out
             }
         }
     }
@@ -580,6 +605,16 @@ void logger::log(log_level level, const std::string& message) {
         }
     }
 
+    // Apply sampling if set
+    {
+        std::shared_lock<std::shared_mutex> sampler_lock(pimpl_->sampler_mutex_);
+        if (pimpl_->sampler_ && pimpl_->sampler_->is_enabled()) {
+            if (!pimpl_->sampler_->should_sample(entry)) {
+                return;  // Message sampled out
+            }
+        }
+    }
+
     // Record metrics if enabled
     auto start_time = std::chrono::high_resolution_clock::now();
 
@@ -612,6 +647,16 @@ void logger::log(log_level level,
         if (pimpl_->filter_) {
             if (!pimpl_->filter_->should_log(entry)) {
                 return;  // Message filtered out
+            }
+        }
+    }
+
+    // Apply sampling if set
+    {
+        std::shared_lock<std::shared_mutex> sampler_lock(pimpl_->sampler_mutex_);
+        if (pimpl_->sampler_ && pimpl_->sampler_->is_enabled()) {
+            if (!pimpl_->sampler_->should_sample(entry)) {
+                return;  // Message sampled out
             }
         }
     }
@@ -959,6 +1004,60 @@ bool logger::has_realtime_analysis() const {
         return pimpl_->realtime_analyzer_ != nullptr;
     }
     return false;
+}
+
+// =========================================================================
+// Log sampling implementation
+// =========================================================================
+
+void logger::set_sampler(std::unique_ptr<sampling::log_sampler> sampler) {
+    if (pimpl_) {
+        std::lock_guard<std::shared_mutex> lock(pimpl_->sampler_mutex_);
+        pimpl_->sampler_ = std::move(sampler);
+    }
+}
+
+sampling::log_sampler* logger::get_sampler() {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->sampler_mutex_);
+        return pimpl_->sampler_.get();
+    }
+    return nullptr;
+}
+
+const sampling::log_sampler* logger::get_sampler() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->sampler_mutex_);
+        return pimpl_->sampler_.get();
+    }
+    return nullptr;
+}
+
+bool logger::has_sampling() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->sampler_mutex_);
+        return pimpl_->sampler_ != nullptr && pimpl_->sampler_->is_enabled();
+    }
+    return false;
+}
+
+sampling::sampling_stats logger::get_sampling_stats() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->sampler_mutex_);
+        if (pimpl_->sampler_) {
+            return pimpl_->sampler_->get_stats();
+        }
+    }
+    return sampling::sampling_stats{};
+}
+
+void logger::reset_sampling_stats() {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->sampler_mutex_);
+        if (pimpl_->sampler_) {
+            pimpl_->sampler_->reset_stats();
+        }
+    }
 }
 
 } // namespace kcenon::logger
