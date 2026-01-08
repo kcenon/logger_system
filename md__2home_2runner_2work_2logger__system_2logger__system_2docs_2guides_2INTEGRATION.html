@@ -93,9 +93,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System Integration Guide</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1292"></a> <b>English | 한국어</b></p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1299"></a> <b>English | 한국어</b></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1294"></a>
+<h1><a class="anchor" id="autotoc_md1301"></a>
 Table of Contents</h1>
 <ul>
 <li>Overview</li>
@@ -109,7 +109,7 @@ Table of Contents</h1>
 <li>Error Code Registry</li>
 <li>Troubleshooting</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1295"></a>
+<h1><a class="anchor" id="autotoc_md1302"></a>
 Overview</h1>
 <p>The Logger System is designed to integrate seamlessly with the ecosystem while maintaining the ability to operate independently. This document provides comprehensive guidance on integrating logger_system with other system modules.</p>
 <p><b>Integration Architecture</b>: </p><div class="fragment"><div class="line">common_system (interfaces) ← logger_system implements ILogger</div>
@@ -120,11 +120,11 @@ Overview</h1>
 <li><b>thread_system</b>: Provides async execution via adapters</li>
 <li><b>monitoring_system</b>: Provides metrics collection via <code>IMonitor</code> interface</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1296"></a>
+<h1><a class="anchor" id="autotoc_md1303"></a>
 System Dependencies</h1>
-<h2><a class="anchor" id="autotoc_md1297"></a>
+<h2><a class="anchor" id="autotoc_md1304"></a>
 Required Dependencies</h2>
-<h3><a class="anchor" id="autotoc_md1298"></a>
+<h3><a class="anchor" id="autotoc_md1305"></a>
 common_system (Header-only)</h3>
 <ul>
 <li><b>Version</b>: 1.0.0+</li>
@@ -139,9 +139,9 @@ common_system (Header-only)</h3>
 </ul>
 <p><b>CMake Configuration</b>: </p><div class="fragment"><div class="line">find_package(common_system CONFIG REQUIRED)</div>
 <div class="line">target_link_libraries(LoggerSystem PUBLIC kcenon::common_system)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1299"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1306"></a>
 Optional Dependencies</h2>
-<h3><a class="anchor" id="autotoc_md1300"></a>
+<h3><a class="anchor" id="autotoc_md1307"></a>
 thread_system</h3>
 <ul>
 <li><b>Version</b>: 1.0.0+</li>
@@ -153,7 +153,7 @@ thread_system</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1301"></a>
+<h3><a class="anchor" id="autotoc_md1308"></a>
 monitoring_system</h3>
 <ul>
 <li><b>Version</b>: 1.0.0+</li>
@@ -165,9 +165,9 @@ monitoring_system</h3>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1302"></a>
+<h1><a class="anchor" id="autotoc_md1309"></a>
 Integration with common_system</h1>
-<h2><a class="anchor" id="autotoc_md1303"></a>
+<h2><a class="anchor" id="autotoc_md1310"></a>
 ILogger Interface Implementation</h2>
 <p>The logger_system implements the <code>ILogger</code> interface defined in common_system:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/common/interfaces/logger_interface.h&gt;</span></div>
@@ -199,7 +199,7 @@ ILogger Interface Implementation</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Use through common interface</span></div>
 <div class="line">logger-&gt;log(common::log_level::info, <span class="stringliteral">&quot;Application started&quot;</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1304"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1311"></a>
 Result&lt;T&gt; Pattern Usage</h2>
 <p>Logger system uses <code>Result&lt;T&gt;</code> for comprehensive error handling:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/common/patterns/result.h&gt;</span></div>
@@ -231,7 +231,7 @@ Result&lt;T&gt; Pattern Usage</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Hot path logging uses void for zero overhead</span></div>
 <div class="line">logger-&gt;log(kcenon::logger::log_level::info, <span class="stringliteral">&quot;Performance-critical message&quot;</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1305"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1312"></a>
 Adapter Pattern</h2>
 <p>Use adapters to bridge between logger_system and common_system interfaces:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/adapters/common_logger_adapter.h&gt;</span></div>
@@ -248,9 +248,9 @@ Adapter Pattern</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Use as common::interfaces::ILogger</span></div>
 <div class="line">common_logger-&gt;log(common::log_level::info, <span class="stringliteral">&quot;Using adapter pattern&quot;</span>);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1306"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1313"></a>
 Integration with thread_system</h1>
-<h2><a class="anchor" id="autotoc_md1307"></a>
+<h2><a class="anchor" id="autotoc_md1314"></a>
 Asynchronous Logging with IExecutor</h2>
 <p>Logger system can use <code>IExecutor</code> from common_system for async operations:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/thread/core/thread_pool.h&gt;</span></div>
@@ -269,7 +269,7 @@ Asynchronous Logging with IExecutor</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Current implementation uses internal async queue</span></div>
 <div class="line"><span class="comment">// Future: logger-&gt;set_executor(executor);</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1308"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1315"></a>
 Cross-System Integration</h2>
 <p>Complete example of DI integration across systems:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
@@ -300,9 +300,9 @@ Cross-System Integration</h2>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1309"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1316"></a>
 Integration with monitoring_system</h1>
-<h2><a class="anchor" id="autotoc_md1310"></a>
+<h2><a class="anchor" id="autotoc_md1317"></a>
 IMonitor Interface Injection</h2>
 <p>Logger system supports runtime injection of <code>IMonitor</code> for metrics collection:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
@@ -329,7 +329,7 @@ IMonitor Interface Injection</h2>
 <div class="line"><span class="keyword">auto</span> metrics = monitor-&gt;collect_metrics();</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Total logs: &quot;</span> &lt;&lt; metrics[<span class="stringliteral">&quot;log_count&quot;</span>].value &lt;&lt; std::endl;</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Error logs: &quot;</span> &lt;&lt; metrics[<span class="stringliteral">&quot;error_count&quot;</span>].value &lt;&lt; std::endl;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1311"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1318"></a>
 Performance Metrics Collection</h2>
 <p>Logger system exposes built-in metrics:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
@@ -348,7 +348,7 @@ Performance Metrics Collection</h2>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Messages per second: &quot;</span> &lt;&lt; metrics.get_messages_per_second() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Average enqueue time: &quot;</span> &lt;&lt; metrics.get_avg_enqueue_time_ns() &lt;&lt; <span class="stringliteral">&quot; ns\n&quot;</span>;</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Queue utilization: &quot;</span> &lt;&lt; metrics.get_queue_utilization_percent() &lt;&lt; <span class="stringliteral">&quot;%\n&quot;</span>;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1312"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1319"></a>
 Health Monitoring Integration</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/monitoring/monitoring_interface.h&gt;</span></div>
 <div class="line"> </div>
@@ -365,11 +365,11 @@ Health Monitoring Integration</h2>
 <div class="line">} <span class="keywordflow">else</span> {</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Logger health check failed\n&quot;</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1313"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1320"></a>
 Build Configuration</h1>
-<h2><a class="anchor" id="autotoc_md1314"></a>
+<h2><a class="anchor" id="autotoc_md1321"></a>
 CMake Integration Examples</h2>
-<h3><a class="anchor" id="autotoc_md1315"></a>
+<h3><a class="anchor" id="autotoc_md1322"></a>
 Minimal Configuration (common_system only)</h3>
 <div class="fragment"><div class="line">cmake_minimum_required(VERSION 3.16)</div>
 <div class="line">project(MyApp)</div>
@@ -379,7 +379,7 @@ Minimal Configuration (common_system only)</h3>
 <div class="line"> </div>
 <div class="line">add_executable(myapp main.cpp)</div>
 <div class="line">target_link_libraries(myapp PRIVATE LoggerSystem::logger)</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1316"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1323"></a>
 Full Ecosystem Integration</h3>
 <div class="fragment"><div class="line">cmake_minimum_required(VERSION 3.16)</div>
 <div class="line">project(MyApp)</div>
@@ -404,7 +404,7 @@ Full Ecosystem Integration</h3>
 <div class="line">    target_link_libraries(myapp PRIVATE kcenon::monitoring_system)</div>
 <div class="line">    target_compile_definitions(myapp PRIVATE USE_MONITORING)</div>
 <div class="line">endif()</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1317"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1324"></a>
 Build Configuration Flags</h2>
 <p>Configure logger_system features via CMake options:</p>
 <div class="fragment"><div class="line"># Core Features</div>
@@ -426,7 +426,7 @@ Build Configuration Flags</h2>
 <div class="line">cmake -DLOGGER_ENABLE_SANITIZERS=ON       # Enable sanitizers</div>
 <div class="line">cmake -DLOGGER_ENABLE_COVERAGE=ON         # Enable code coverage</div>
 <div class="line">cmake -DLOGGER_WARNINGS_AS_ERRORS=ON      # Treat warnings as errors</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1318"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1325"></a>
 vcpkg Integration</h2>
 <p>Use vcpkg for dependency management:</p>
 <div class="fragment"><div class="line">{</div>
@@ -438,9 +438,9 @@ vcpkg Integration</h2>
 <div class="line">    &quot;logger-system&quot;</div>
 <div class="line">  ]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1319"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1326"></a>
 Code Examples</h1>
-<h2><a class="anchor" id="autotoc_md1320"></a>
+<h2><a class="anchor" id="autotoc_md1327"></a>
 Example 1: Basic Integration with common_system</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/console_writer.h&gt;</span></div>
@@ -465,7 +465,7 @@ Example 1: Basic Integration with common_system</h2>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1321"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1328"></a>
 Example 2: Full Stack Integration</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/thread/core/thread_pool.h&gt;</span></div>
@@ -500,7 +500,7 @@ Example 2: Full Stack Integration</h2>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1322"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1329"></a>
 Example 3: Error Handling with Result&lt;T&gt;</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/common/patterns/result.h&gt;</span></div>
@@ -538,7 +538,7 @@ Example 3: Error Handling with Result&lt;T&gt;</h2>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1323"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1330"></a>
 Result Handling Cheatsheet</h1>
 <ul>
 <li>Prefer <code>result.is_err()</code> / <code>result.error()</code> for every public API: legacy <code>.get_error()</code> is maintained only for backward compatibility.</li>
@@ -553,9 +553,9 @@ Result Handling Cheatsheet</h1>
 <div class="line">                          err.module, err.code, err.message));</div>
 <div class="line">    <span class="keywordflow">return</span> Result&lt;void&gt;::err(err);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1324"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1331"></a>
 Error Code Registry</h1>
-<h2><a class="anchor" id="autotoc_md1325"></a>
+<h2><a class="anchor" id="autotoc_md1332"></a>
 Allocated Error Code Range</h2>
 <p>Logger system uses error codes <b>-200 to -299</b> in the centralized error code registry:</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
@@ -591,7 +591,7 @@ Allocated Error Code Range</h2>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">} <span class="comment">// namespace kcenon::logger</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1326"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1333"></a>
 Error Message Mapping</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/error_codes.h&gt;</span></div>
 <div class="line"> </div>
@@ -609,9 +609,9 @@ Error Message Mapping</h2>
 <div class="line">            <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown error&quot;</span>;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1327"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1334"></a>
 Troubleshooting</h1>
-<h2><a class="anchor" id="autotoc_md1328"></a>
+<h2><a class="anchor" id="autotoc_md1335"></a>
 Build Fails with "common_system not found"</h2>
 <p><b>Problem</b>: CMake cannot find common_system</p>
 <p><b>Solution 1</b>: Ensure common_system is in a sibling directory </p><div class="fragment"><div class="line">/path/to/systems/</div>
@@ -624,7 +624,7 @@ Build Fails with "common_system not found"</h2>
 <div class="line">cmake -B build -DCMAKE_INSTALL_PREFIX=/usr/local</div>
 <div class="line">cmake --build build</div>
 <div class="line">sudo cmake --install build</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1329"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1336"></a>
 Linker Errors: Undefined References</h2>
 <p><b>Problem</b>: Linking fails with undefined symbol errors</p>
 <p><b>Solution</b>: Ensure proper link order </p><div class="fragment"><div class="line">target_link_libraries(MyApp PRIVATE</div>
@@ -633,7 +633,7 @@ Linker Errors: Undefined References</h2>
 <div class="line">    LoggerSystem::logger       # Service systems</div>
 <div class="line">    kcenon::monitoring_system  # Optional systems (last)</div>
 <div class="line">)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1330"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1337"></a>
 Runtime: Logger Not Outputting</h2>
 <p><b>Problem</b>: Logger created but no output visible</p>
 <p><b>Solution</b>: Check configuration and flush </p><div class="fragment"><div class="line"><span class="keyword">auto</span> logger = kcenon::logger::logger_builder()</div>
@@ -645,7 +645,7 @@ Runtime: Logger Not Outputting</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Ensure flush before exit</span></div>
 <div class="line">logger-&gt;flush();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1331"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1338"></a>
 Integration: IMonitor Not Injecting</h2>
 <p><b>Problem</b>: Monitoring metrics not being recorded</p>
 <p><b>Solution</b>: Verify monitoring is enabled and injected </p><div class="fragment"><div class="line"><span class="comment">// Enable monitoring at build time</span></div>
@@ -658,7 +658,7 @@ Integration: IMonitor Not Injecting</h2>
 <div class="line"><span class="keywordflow">if</span> (logger-&gt;has_monitor()) {</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Monitoring active\n&quot;</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1332"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1339"></a>
 Performance: High Latency</h2>
 <p><b>Problem</b>: Logging operations taking too long</p>
 <p><b>Solution</b>: Tune performance parameters </p><div class="fragment"><div class="line"># Increase batch size for throughput</div>
@@ -669,9 +669,9 @@ Performance: High Latency</h2>
 <div class="line"> </div>
 <div class="line"># Increase queue size to reduce drops</div>
 <div class="line">cmake -DLOGGER_DEFAULT_QUEUE_SIZE=50000</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1333"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1340"></a>
 Best Practices</h1>
-<h2><a class="anchor" id="autotoc_md1334"></a>
+<h2><a class="anchor" id="autotoc_md1341"></a>
 1. Use Result&lt;T&gt; for Error Handling</h2>
 <p>Always check <code>Result&lt;T&gt;</code> return values: </p><div class="fragment"><div class="line"><span class="comment">// Good: Check result</span></div>
 <div class="line"><span class="keyword">auto</span> result = logger_builder().build();</div>
@@ -682,14 +682,14 @@ Best Practices</h1>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Bad: Ignore result (may throw)</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder().build().value();  <span class="comment">// May throw if error</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1335"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1342"></a>
 2. Prefer Interface-Based Design</h2>
 <p>Use common interfaces for flexibility: </p><div class="fragment"><div class="line"><span class="comment">// Good: Use interface</span></div>
 <div class="line">std::shared_ptr&lt;common::interfaces::ILogger&gt; logger = create_logger();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Less flexible: Use concrete type</span></div>
 <div class="line">std::shared_ptr&lt;kcenon::logger::logger&gt; logger = create_logger();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1336"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1343"></a>
 3. Leverage DI for Testing</h2>
 <p>Use dependency injection for testability: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyService {</div>
 <div class="line">    std::shared_ptr&lt;common::interfaces::ILogger&gt; logger_;</div>
@@ -701,7 +701,7 @@ Best Practices</h1>
 <div class="line"><span class="comment">// Easy to test with mock logger</span></div>
 <div class="line"><span class="keyword">auto</span> mock_logger = std::make_shared&lt;MockLogger&gt;();</div>
 <div class="line">MyService service(mock_logger);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1337"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1344"></a>
 4. Monitor Performance in Production</h2>
 <p>Enable metrics in production builds: </p><div class="fragment"><div class="line">logger-&gt;enable_metrics_collection(<span class="keyword">true</span>);</div>
 <div class="line"> </div>
@@ -710,7 +710,7 @@ Best Practices</h1>
 <div class="line"><span class="keywordflow">if</span> (metrics.get_queue_utilization_percent() &gt; 80) {</div>
 <div class="line">    <span class="comment">// Queue is filling up, increase capacity or reduce log volume</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1338"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1345"></a>
 References</h1>
 <ul>
 <li><a class="el" href="index.html#md__2home_2runner_2work_2logger__system_2logger__system_2README">logger_system README.md</a> - Project overview</li>
@@ -724,7 +724,7 @@ References</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2026 13:11:46 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Jan 8 2026 14:31:20 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

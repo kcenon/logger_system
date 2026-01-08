@@ -96,16 +96,16 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE.html">English</a> | <b>한국어</b> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md519"></a>
+<h1><a class="anchor" id="autotoc_md520"></a>
 로거 시스템 아키텍처</h1>
 <p><b>버전</b>: 3.0.0 <b>최종 업데이트</b>: 2025-12-10</p>
 <blockquote class="doxtable">
 <p>&zwj;이 문서는 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE.html">LOGGER_SYSTEM_ARCHITECTURE.md</a>의 한국어 번역 버전입니다. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md520"></a>
+<h2><a class="anchor" id="autotoc_md521"></a>
 개요</h2>
 <p>Logger System (v3.0)은 common_system의 <code>common::interfaces::ILogger</code>를 구현하는 고성능 모듈러 로깅 프레임워크입니다. 기본적으로 <code>std::jthread</code>를 사용한 **독립 실행 모드**로 동작하며, thread_system과의 통합은 선택적입니다.</p>
-<h3><a class="anchor" id="autotoc_md521"></a>
+<h3><a class="anchor" id="autotoc_md522"></a>
 주요 기능 (v3.0)</h3>
 <ul>
 <li><b>ILogger 구현</b>: <code>common::interfaces::ILogger</code> 완전 구현</li>
@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li><b>C++20 지원</b>: Concepts와 <code>source_location</code> 활용</li>
 <li><b>포괄적 에러 처리</b>: Result 패턴 전면 적용</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md522"></a>
+<h2><a class="anchor" id="autotoc_md523"></a>
 아키텍처 다이어그램</h2>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                      클라이언트 애플리케이션                      │</div>
@@ -137,9 +137,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">│  │  (기본값)            │  │  (선택적, 링크 필요)              │  │</div>
 <div class="line">│  └──────────────────────┘  └─────────────────────────────────┘  │</div>
 <div class="line">└─────────────────────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md523"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md524"></a>
 핵심 컴포넌트</h2>
-<h3><a class="anchor" id="autotoc_md524"></a>
+<h3><a class="anchor" id="autotoc_md525"></a>
 1. ILogger 인터페이스 구현</h3>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
 <div class="line"> </div>
@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md525"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md526"></a>
 2. Dual API 설계</h3>
 <p>표준화된 인터페이스와 네이티브 API 모두 지원:</p>
 <div class="fragment"><div class="line"><span class="comment">// ILogger 인터페이스 (표준화, 권장)</span></div>
@@ -173,7 +173,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line"> </div>
 <div class="line"><span class="comment">// 네이티브 API (하위 호환)</span></div>
 <div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;네이티브 API 사용&quot;</span>);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md526"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md527"></a>
 3. 백엔드 추상화</h3>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger::backends {</div>
 <div class="line"> </div>
@@ -193,9 +193,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger::backends</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md527"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md528"></a>
 성능 특성</h2>
-<h3><a class="anchor" id="autotoc_md528"></a>
+<h3><a class="anchor" id="autotoc_md529"></a>
 벤치마크 (v3.0)</h3>
 <p><b>플랫폼</b>: Apple M1 (8코어) @ 3.2GHz, 16GB RAM, macOS Sonoma</p>
 <table class="markdownTable">
@@ -208,7 +208,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">동기   </td><td class="markdownTableBodyNone">직접 쓰기   </td><td class="markdownTableBodyNone">~100μs   </td><td class="markdownTableBodyNone">I/O 제한   </td><td class="markdownTableBodyNone">최소   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md529"></a>
+<h3><a class="anchor" id="autotoc_md530"></a>
 멀티스레드 성능</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -232,7 +232,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2026 13:11:46 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Jan 8 2026 14:31:20 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
