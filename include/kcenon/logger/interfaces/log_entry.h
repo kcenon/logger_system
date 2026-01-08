@@ -50,6 +50,9 @@ All rights reserved.
 #include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/logger/interfaces/logger_types.h>
 
+// OpenTelemetry context support
+#include <kcenon/logger/otlp/otel_context.h>
+
 namespace kcenon::logger {
 
 /**
@@ -173,7 +176,14 @@ struct log_entry {
      * @note Categories are stored efficiently using small_string_128
      */
     std::optional<small_string_128> category;
-    
+
+    /**
+     * @brief Optional OpenTelemetry context for trace correlation
+     * @details Contains trace_id and span_id for distributed tracing
+     * @since 3.0.0
+     */
+    std::optional<otlp::otel_context> otel_ctx;
+
     /**
      * @brief Constructor for basic log entry
      * @param lvl Log severity level
