@@ -69,6 +69,12 @@ vcpkg install kcenon-logger-system
 
 # Install with benchmarks (includes spdlog for comparison)
 vcpkg install kcenon-logger-system[benchmarks]
+
+# Install with OpenTelemetry integration
+vcpkg install kcenon-logger-system[otlp]
+
+# Install with encryption support
+vcpkg install kcenon-logger-system[encryption]
 ```
 
 > **Note**: Ecosystem dependencies (common_system, thread_system) are not yet registered in vcpkg. Until then, use the CMake build with local clones. See [Building with Dependencies](#building-with-dependencies).
@@ -140,8 +146,19 @@ cmake --build build
 - **Network Writer**: TCP/UDP remote logging
 - **Critical Writer**: Synchronous logging for critical messages
 - **Hybrid Writer**: Automatic async/sync switching based on log level
+- **Encrypted Writer**: AES-256-GCM encrypted log storage
+- **OTLP Writer**: OpenTelemetry Protocol export for observability (v3.0.0)
 
 [📚 Detailed Writer Documentation →](docs/FEATURES.md#writer-types)
+
+### OpenTelemetry Integration (v3.0.0)
+- **Trace Correlation**: Automatic trace_id/span_id in logs
+- **OTLP Export**: HTTP and gRPC transport protocols
+- **Batch Export**: Efficient network utilization
+- **Resource Attributes**: Service name, version, custom metadata
+- **Context Propagation**: Thread-local trace context storage
+
+[🔭 OpenTelemetry Guide →](docs/guides/OPENTELEMETRY.md)
 
 ### Security Features (v3.0.0)
 - **Secure Key Storage**: RAII-based encryption key management with automatic cleanup
