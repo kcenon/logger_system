@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['readme_5fko_0',['README_KO',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html',1,'']]],
-  ['refactoring_20strategy_1',['Conditional Compilation Refactoring Strategy',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CONDITIONAL__COMPILATION__REFACTORING.html',1,'']]]
+  ['quality_0',['Logger System Production Quality',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html',1,'']]],
+  ['questions_1',['Logger System - Frequently Asked Questions',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2FAQ.html',1,'']]],
+  ['quick_20start_20guide_2',['Quick Start Guide',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START.html',1,'']]]
 ];

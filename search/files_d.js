@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['readme_2emd_0',['readme.md',['../docs_2README_8md.html',1,'(Global Namespace)'],['../README_8md.html',1,'(Global Namespace)']]],
-  ['rotating_5ffile_5fwriter_2ecpp_1',['rotating_file_writer.cpp',['../rotating__file__writer_8cpp.html',1,'']]],
-  ['rotating_5ffile_5fwriter_2eh_2',['rotating_file_writer.h',['../rotating__file__writer_8h.html',1,'']]]
+  ['testing_5fguide_2emd_0',['TESTING_GUIDE.md',['../TESTING__GUIDE_8md.html',1,'']]],
+  ['thread_5fsystem_2emd_1',['THREAD_SYSTEM.md',['../THREAD__SYSTEM_8md.html',1,'']]],
+  ['thread_5fsystem_5fko_2emd_2',['THREAD_SYSTEM_KO.md',['../THREAD__SYSTEM__KO_8md.html',1,'']]],
+  ['translation_5fsummary_2emd_3',['TRANSLATION_SUMMARY.md',['../TRANSLATION__SUMMARY_8md.html',1,'']]]
 ];

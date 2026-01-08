@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Changelog - Logger System</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md874"></a> </p><blockquote class="doxtable">
+<div class="textblock"><p><a class="anchor" id="autotoc_md875"></a> </p><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html">한국어</a> </p>
 </blockquote>
 <p>All notable changes to the Logger System project will be documented in this file.</p>
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>, and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md876"></a>
+<h1><a class="anchor" id="autotoc_md877"></a>
 [3.0.0] - 2025-12-31</h1>
-<h2><a class="anchor" id="autotoc_md877"></a>
+<h2><a class="anchor" id="autotoc_md878"></a>
 Removed - Deprecated API Cleanup (Issue #268)</h2>
 <p>This release removes deprecated API compatibility layers following the "Fewest Elements" Simple Design principle.</p>
-<h3><a class="anchor" id="autotoc_md878"></a>
+<h3><a class="anchor" id="autotoc_md879"></a>
 Breaking Changes</h3>
 <ul>
 <li><b>Removed <code>logger_interface.h</code> header</b> (<code>include/kcenon/logger/interfaces/logger_interface.h</code>)<ul>
@@ -126,7 +126,7 @@ Breaking Changes</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md879"></a>
+<h3><a class="anchor" id="autotoc_md880"></a>
 Migration Guide</h3>
 <div class="fragment"><div class="line"><span class="comment">// Before (deprecated):</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/interfaces/logger_interface.h&gt;</span></div>
@@ -138,11 +138,51 @@ Migration Guide</h3>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder().with_standalone_backend().build();</div>
 <div class="line">common::VoidResult res = make_logger_void_result(code, <span class="stringliteral">&quot;message&quot;</span>);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md881"></a>
+<h1><a class="anchor" id="autotoc_md882"></a>
 [Unreleased]</h1>
-<h2><a class="anchor" id="autotoc_md882"></a>
+<h2><a class="anchor" id="autotoc_md883"></a>
+CI Workflow Fix (PR #290) - 2026-01-08</h2>
+<h3><a class="anchor" id="autotoc_md884"></a>
+Fixed</h3>
+<ul>
+<li><b>CI linker errors</b>: Fixed undefined reference errors for <code>EnhancedThreadPoolMetrics</code><ul>
+<li>Changed <code>thread_system</code> checkout from <code>feature/adopt-kcenon-feature-flags</code> to <code>main</code> branch</li>
+<li>The feature branch lacked <code>EnhancedThreadPoolMetrics</code> implementation that was added to main</li>
+<li>Removed <code>LOGGER_USE_THREAD_SYSTEM=ON</code> from coverage job until thread_system fixes its CMake</li>
+<li>Affected workflows: <code>integration-tests.yml</code>, <code>ci.yml</code>, <code>benchmarks.yml</code>, <code>sanitizers.yml</code></li>
+</ul>
+</li>
+<li><b>macOS Debug test timeout</b>: Fixed <code>MultipleStartStopCycles</code> test timing out on macOS Debug builds<ul>
+<li>Replaced <code>CreateLoggerWithFileWriter()</code> with <code>CreateLogger()</code> to avoid redundant <code>start()</code> call</li>
+<li>Used simple <code>flush()</code> instead of <code>WaitForFlush()</code> to eliminate unnecessary stop/start cycles</li>
+<li>Test now completes in milliseconds instead of 20+ minutes timeout</li>
+</ul>
+</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md886"></a>
+OpenTelemetry Integration Fix (Issue #283) - 2026-01-08</h2>
+<h3><a class="anchor" id="autotoc_md887"></a>
+Fixed</h3>
+<ul>
+<li><b>macOS compatibility</b>: Replaced <code>std::jthread</code> with <code>std::thread</code> in <code>otlp_writer</code><ul>
+<li><code>std::jthread</code> and <code>std::stop_token</code> are not supported in Apple Clang's libc++</li>
+<li>Uses existing <code>running_</code> atomic flag for stop mechanism</li>
+<li>Maintains same behavior and thread-safety guarantees</li>
+</ul>
+</li>
+<li><b>Windows build fix</b>: Removed <code>write</code>/<code>fsync</code> macro pollution from <code>signal_manager.h</code><ul>
+<li>The <code>#define write _write</code> macro was leaking to other headers</li>
+<li>Caused <code>batch_writer.h</code> and <code>otlp_writer.h</code> <code>write()</code> method to be renamed to <code>_write()</code></li>
+<li>Fixed by replacing macros with <code>detail::safe_write()</code> and <code>detail::safe_fsync()</code> inline functions</li>
+<li>These wrapper functions handle Windows POSIX compatibility internally</li>
+</ul>
+</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md889"></a>
 C++20 Module Files (Issue #275) - 2026-01-03</h2>
-<h3><a class="anchor" id="autotoc_md883"></a>
+<h3><a class="anchor" id="autotoc_md890"></a>
 Added</h3>
 <ul>
 <li><b>C++20 module files</b>: Created module interface for <code>kcenon.logger</code><ul>
@@ -160,7 +200,7 @@ Added</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md884"></a>
+<h3><a class="anchor" id="autotoc_md891"></a>
 Module Structure</h3>
 <div class="fragment"><div class="line"><span class="keyword">export</span> <span class="keyword">module</span> kcenon.logger;</div>
 <div class="line"> </div>
@@ -169,13 +209,13 @@ Module Structure</h3>
 <div class="line"><span class="keyword">export</span> <span class="keyword">import</span> :core;            <span class="comment">// Logger, LogContext, LogCollector</span></div>
 <div class="line"><span class="keyword">export</span> <span class="keyword">import</span> :backends;        <span class="comment">// Integration backends</span></div>
 <div class="line"><span class="keyword">export</span> <span class="keyword">import</span> :analysis;        <span class="comment">// Log analysis utilities</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md885"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md892"></a>
 CMake Usage</h3>
 <div class="fragment"><div class="line">cmake -DLOGGER_USE_MODULES=ON ..  # Requires CMake 3.28+</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md887"></a>
+<h2><a class="anchor" id="autotoc_md894"></a>
 Fix Duplicate Writer Add Logic (Issue #270) - 2025-12-31</h2>
-<h3><a class="anchor" id="autotoc_md888"></a>
+<h3><a class="anchor" id="autotoc_md895"></a>
 Fixed</h3>
 <ul>
 <li><b>Named writer storage</b>: <code>add_writer(name, writer)</code> now properly stores writers by name<ul>
@@ -184,7 +224,7 @@ Fixed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md889"></a>
+<h3><a class="anchor" id="autotoc_md896"></a>
 Changed</h3>
 <ul>
 <li><b>Unified return types</b>: <code>add_writer(name, writer)</code> now returns <code>common::VoidResult</code> instead of <code>void</code><ul>
@@ -193,7 +233,7 @@ Changed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md890"></a>
+<h3><a class="anchor" id="autotoc_md897"></a>
 Added</h3>
 <ul>
 <li><b>Named writer implementation</b>: Full implementation of named writer storage<ul>
@@ -205,9 +245,9 @@ Added</h3>
 </li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md892"></a>
+<h2><a class="anchor" id="autotoc_md899"></a>
 Use KCENON Feature Detection (Issue #250) - 2025-12-22</h2>
-<h3><a class="anchor" id="autotoc_md893"></a>
+<h3><a class="anchor" id="autotoc_md900"></a>
 Changed</h3>
 <ul>
 <li><b>error_handling_utils.h</b>: Use unified KCENON_HAS_SOURCE_LOCATION from common_system<ul>
@@ -223,7 +263,7 @@ Changed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md894"></a>
+<h3><a class="anchor" id="autotoc_md901"></a>
 Fixed</h3>
 <ul>
 <li><b>logger.h</b>: Fixed build error with common_system v3.0.0 compatibility<ul>
@@ -243,7 +283,7 @@ Fixed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md895"></a>
+<h3><a class="anchor" id="autotoc_md902"></a>
 Migration Guide</h3>
 <p>The LOGGER_HAS_* macros are now aliases to KCENON_HAS_* from common_system. For new code, use KCENON_HAS_* directly: </p><div class="fragment"><div class="line"><span class="comment">// Legacy (still works)</span></div>
 <div class="line"><span class="preprocessor">#if LOGGER_HAS_JTHREAD</span></div>
@@ -256,9 +296,9 @@ Migration Guide</h3>
 <div class="line">    std::jthread worker(...);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md897"></a>
+<h2><a class="anchor" id="autotoc_md904"></a>
 Migrate from Deprecated common_system APIs (Issue #248) - 2025-12-22</h2>
-<h3><a class="anchor" id="autotoc_md898"></a>
+<h3><a class="anchor" id="autotoc_md905"></a>
 Changed</h3>
 <ul>
 <li><b>common_system_adapter.h</b>: Added source_location-based logging API<ul>
@@ -274,7 +314,7 @@ Changed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md899"></a>
+<h3><a class="anchor" id="autotoc_md906"></a>
 Migration Guide</h3>
 <p>For new code, use the common_system's LOG_* macros directly: </p><div class="fragment"><div class="line"><span class="comment">// Deprecated (will be removed in v3.0.0)</span></div>
 <div class="line">THREAD_LOG_INFO(<span class="stringliteral">&quot;message&quot;</span>);</div>
@@ -290,9 +330,9 @@ Migration Guide</h3>
 <div class="line">VoidResult log(log_level level, std::string_view msg,</div>
 <div class="line">               <span class="keyword">const</span> source_location&amp; loc = source_location::current()) <span class="keyword">override</span>;</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md901"></a>
+<h2><a class="anchor" id="autotoc_md908"></a>
 thread_system v3.0 Compatibility (Issue #244) - 2025-12-19</h2>
-<h3><a class="anchor" id="autotoc_md902"></a>
+<h3><a class="anchor" id="autotoc_md909"></a>
 Breaking Changes</h3>
 <ul>
 <li><b>logger_adapter.h</b>: Removed <code>shared::ILogger</code> and <code>shared::IService</code> implementation<ul>
@@ -301,7 +341,7 @@ Breaking Changes</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md903"></a>
+<h3><a class="anchor" id="autotoc_md910"></a>
 Changed</h3>
 <ul>
 <li><b>thread_integration_detector.h</b>: Updated detection header<ul>
@@ -310,7 +350,7 @@ Changed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md904"></a>
+<h3><a class="anchor" id="autotoc_md911"></a>
 Migration Guide</h3>
 <p>For thread_system integration, replace: </p><div class="fragment"><div class="line"><span class="comment">// Old (v2.x)</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/adapters/logger_adapter.h&gt;</span></div>
@@ -320,9 +360,9 @@ Migration Guide</h3>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/adapters/common_logger_adapter.h&gt;</span></div>
 <div class="line"><span class="comment">// using kcenon::common::interfaces::ILogger</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md906"></a>
+<h2><a class="anchor" id="autotoc_md913"></a>
 Fix broken example files after #226 API changes (Issue #228) - 2025-12-06</h2>
-<h3><a class="anchor" id="autotoc_md907"></a>
+<h3><a class="anchor" id="autotoc_md914"></a>
 Removed</h3>
 <ul>
 <li><b>migration_example.cpp</b>: Removed example file demonstrating non-existent v1 API<ul>
@@ -333,7 +373,7 @@ Removed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md908"></a>
+<h3><a class="anchor" id="autotoc_md915"></a>
 Changed</h3>
 <ul>
 <li><b>advanced_features_demo.cpp</b>: Comprehensive rewrite to work with current API<ul>
@@ -345,7 +385,7 @@ Changed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md909"></a>
+<h3><a class="anchor" id="autotoc_md916"></a>
 Disabled (awaiting feature implementation)</h3>
 <ul>
 <li><b>distributed_logging_demo.cpp</b>: Commented out in CMakeLists.txt<ul>
@@ -357,15 +397,15 @@ Disabled (awaiting feature implementation)</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md910"></a>
+<h3><a class="anchor" id="autotoc_md917"></a>
 Related Issues</h3>
 <ul>
 <li>Fixes #228: fix(examples): broken example files after #226 API changes</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md912"></a>
+<h2><a class="anchor" id="autotoc_md919"></a>
 common::interfaces::ILogger Implementation - 2025-12-06</h2>
-<h3><a class="anchor" id="autotoc_md913"></a>
+<h3><a class="anchor" id="autotoc_md920"></a>
 Added</h3>
 <ul>
 <li><b>ILogger interface implementation (Issue #223)</b>: Logger now implements <code>common::interfaces::ILogger</code><ul>
@@ -397,7 +437,7 @@ Added</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md914"></a>
+<h3><a class="anchor" id="autotoc_md921"></a>
 Changed</h3>
 <ul>
 <li><b>logger class now inherits from both</b>:<ul>
@@ -412,7 +452,7 @@ Changed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md915"></a>
+<h3><a class="anchor" id="autotoc_md922"></a>
 Deprecated</h3>
 <ul>
 <li><b>logger_types.h</b>: Deprecated in favor of <code>kcenon/common/interfaces/logger_interface.h</code><ul>
@@ -426,7 +466,7 @@ Deprecated</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md916"></a>
+<h3><a class="anchor" id="autotoc_md923"></a>
 Backward Compatibility</h3>
 <ul>
 <li><b>All existing APIs preserved</b>: Native <code>logger_system::log_level</code> overloads still work<ul>
@@ -438,7 +478,7 @@ Backward Compatibility</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md917"></a>
+<h3><a class="anchor" id="autotoc_md924"></a>
 Migration Guide</h3>
 <p>Existing code continues to work without changes. To use the new ILogger interface:</p>
 <div class="fragment"><div class="line"><span class="comment">// Use logger through ILogger interface</span></div>
@@ -448,7 +488,7 @@ Migration Guide</h3>
 <div class="line"><span class="comment">// Or mix both styles</span></div>
 <div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;Native style&quot;</span>);  <span class="comment">// Still works</span></div>
 <div class="line">logger-&gt;log(ci::log_level::info, std::string(<span class="stringliteral">&quot;ILogger style&quot;</span>));  <span class="comment">// New</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md918"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md925"></a>
 Related Issues</h3>
 <ul>
 <li>Closes #223 (implement common::interfaces::ILogger)</li>
@@ -456,9 +496,9 @@ Related Issues</h3>
 <li>Prerequisite for #225 (thread_system_backend removal)</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md920"></a>
+<h2><a class="anchor" id="autotoc_md927"></a>
 Standalone async implementation (Issue #222) - 2025-12-06</h2>
-<h3><a class="anchor" id="autotoc_md921"></a>
+<h3><a class="anchor" id="autotoc_md928"></a>
 Changed</h3>
 <ul>
 <li><b>thread_system is now OPTIONAL</b>: Logger system can build and run standalone<ul>
@@ -475,7 +515,7 @@ Changed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md922"></a>
+<h3><a class="anchor" id="autotoc_md929"></a>
 Added</h3>
 <ul>
 <li><b>async_worker class</b>: New standalone async worker using std::jthread<ul>
@@ -486,7 +526,7 @@ Added</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md923"></a>
+<h3><a class="anchor" id="autotoc_md930"></a>
 Benefits</h3>
 <ul>
 <li><b>Resolves circular dependency</b>: thread_system can now use logger_system for logging</li>
@@ -494,7 +534,7 @@ Benefits</h3>
 <li><b>Better shutdown</b>: std::jthread provides cleaner RAII-based thread management</li>
 <li><b>Cooperative cancellation</b>: No more polling/busy-waiting in shutdown path</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md924"></a>
+<h3><a class="anchor" id="autotoc_md931"></a>
 Migration Guide</h3>
 <ul>
 <li><b>Default behavior</b>: logger_system now builds standalone (no thread_system)</li>
@@ -502,16 +542,16 @@ Migration Guide</h3>
 </div><!-- fragment --></li>
 <li>Existing functionality preserved when integration is enabled</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md925"></a>
+<h3><a class="anchor" id="autotoc_md932"></a>
 Related Issues</h3>
 <ul>
 <li>Closes #222: Implement async_worker class using std::jthread</li>
 <li>Prerequisite for #223, #224, #225</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md927"></a>
+<h2><a class="anchor" id="autotoc_md934"></a>
 CMake fmt Fallback Removal - 2025-12-03</h2>
-<h3><a class="anchor" id="autotoc_md928"></a>
+<h3><a class="anchor" id="autotoc_md935"></a>
 Changed</h3>
 <ul>
 <li><b>CMake configuration now requires std::format</b>: Removed all fmt library fallback logic<ul>
@@ -520,7 +560,7 @@ Changed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md929"></a>
+<h3><a class="anchor" id="autotoc_md936"></a>
 Removed</h3>
 <ul>
 <li><b>fmt library fallback in CMake</b>:<ul>
@@ -531,7 +571,7 @@ Removed</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md930"></a>
+<h3><a class="anchor" id="autotoc_md937"></a>
 Benefits</h3>
 <ul>
 <li><b>Cleaner CMake configuration</b>: Simplified feature detection without fallback complexity</li>
@@ -539,16 +579,16 @@ Benefits</h3>
 <li><b>Reduced dependencies</b>: No conditional fmt library linking</li>
 <li><b>Cross-project alignment</b>: Matches thread_system, container_system, network_system, database_system</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md931"></a>
+<h3><a class="anchor" id="autotoc_md938"></a>
 Related Issues</h3>
 <ul>
 <li>Part of cross-project standardization effort</li>
 <li>See: thread_system#219, container_system#168, network_system#257, database_system#203</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md933"></a>
+<h2><a class="anchor" id="autotoc_md940"></a>
 thread_system Required Dependency - 2025-12-03</h2>
-<h3><a class="anchor" id="autotoc_md934"></a>
+<h3><a class="anchor" id="autotoc_md941"></a>
 Changed</h3>
 <ul>
 <li><b>thread_system is now a required dependency</b>: Removed standalone mode<ul>
@@ -563,7 +603,7 @@ Changed</h3>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2026 10:00:58 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Jan 8 2026 13:11:46 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

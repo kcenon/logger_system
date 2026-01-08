@@ -93,9 +93,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System - Project Structure</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md582"></a> <b>English | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html">한국어</a></b></p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md583"></a> <b>English | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE__KO.html">한국어</a></b></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md584"></a>
+<h1><a class="anchor" id="autotoc_md585"></a>
 Table of Contents</h1>
 <ul>
 <li>Directory Layout</li>
@@ -104,7 +104,7 @@ Table of Contents</h1>
 <li>Module Dependencies</li>
 <li>Key Components Overview</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md585"></a>
+<h1><a class="anchor" id="autotoc_md586"></a>
 Directory Layout</h1>
 <div class="fragment"><div class="line">logger_system/</div>
 <div class="line">├── 📁 include/kcenon/logger/       # Public headers &amp; interfaces</div>
@@ -256,9 +256,9 @@ Directory Layout</h1>
 <div class="line">├── 📄 CHANGELOG.md                  # Version history</div>
 <div class="line">├── 📄 LICENSE                       # BSD 3-Clause License</div>
 <div class="line">└── 📄 .clang-format                 # Code formatting rules</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md586"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md587"></a>
 Namespace Organization</h1>
-<h2><a class="anchor" id="autotoc_md587"></a>
+<h2><a class="anchor" id="autotoc_md588"></a>
 Primary Namespace Hierarchy</h2>
 <div class="fragment"><div class="line">kcenon::logger                          <span class="comment">// Root namespace</span></div>
 <div class="line">├── core                                <span class="comment">// Core functionality</span></div>
@@ -304,7 +304,7 @@ Primary Namespace Hierarchy</h2>
 <div class="line">└── adapters                            <span class="comment">// System adapters</span></div>
 <div class="line">    ├── common_logger_adapter           <span class="comment">// common_system</span></div>
 <div class="line">    └── logger_adapter                  <span class="comment">// Generic adapter</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md588"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md589"></a>
 Namespace Usage Examples</h2>
 <div class="fragment"><div class="line"><span class="comment">// Core components</span></div>
 <div class="line"><span class="keyword">using namespace </span>kcenon::logger::core;</div>
@@ -325,11 +325,11 @@ Namespace Usage Examples</h2>
 <div class="line"><span class="comment">// Adapters</span></div>
 <div class="line"><span class="keyword">using namespace </span>kcenon::logger::adapters;</div>
 <div class="line"><span class="keyword">auto</span> adapted = make_common_logger_adapter(std::move(logger));</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md589"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md590"></a>
 Component Layout</h1>
-<h2><a class="anchor" id="autotoc_md590"></a>
+<h2><a class="anchor" id="autotoc_md591"></a>
 Core Components</h2>
-<h3><a class="anchor" id="autotoc_md591"></a>
+<h3><a class="anchor" id="autotoc_md592"></a>
 Logger Core (&lt;tt&gt;core/&lt;/tt&gt;)</h3>
 <ul>
 <li><b>Purpose</b>: Main logger implementation and configuration</li>
@@ -342,7 +342,7 @@ Logger Core (&lt;tt&gt;core/&lt;/tt&gt;)</h3>
 </li>
 <li><b>Dependencies</b>: <code>common_system</code> (ILogger, Result&lt;T&gt;)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md592"></a>
+<h3><a class="anchor" id="autotoc_md593"></a>
 Interfaces (&lt;tt&gt;interfaces/&lt;/tt&gt;)</h3>
 <ul>
 <li><b>Purpose</b>: Abstract base classes for extensibility</li>
@@ -356,7 +356,7 @@ Interfaces (&lt;tt&gt;interfaces/&lt;/tt&gt;)</h3>
 </li>
 <li><b>Dependencies</b>: None (pure interfaces)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md593"></a>
+<h3><a class="anchor" id="autotoc_md594"></a>
 Writers (&lt;tt&gt;writers/&lt;/tt&gt;)</h3>
 <ul>
 <li><b>Purpose</b>: Output destination implementations</li>
@@ -372,7 +372,7 @@ Writers (&lt;tt&gt;writers/&lt;/tt&gt;)</h3>
 </li>
 <li><b>Dependencies</b>: <code>interfaces/</code>, filesystem, networking</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md594"></a>
+<h3><a class="anchor" id="autotoc_md595"></a>
 Formatters (&lt;tt&gt;formatters/&lt;/tt&gt;)</h3>
 <ul>
 <li><b>Purpose</b>: Message formatting implementations</li>
@@ -383,7 +383,7 @@ Formatters (&lt;tt&gt;formatters/&lt;/tt&gt;)</h3>
 </li>
 <li><b>Dependencies</b>: <code>interfaces/</code></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md595"></a>
+<h3><a class="anchor" id="autotoc_md596"></a>
 Filters (&lt;tt&gt;filters/&lt;/tt&gt;)</h3>
 <ul>
 <li><b>Purpose</b>: Log filtering and routing logic</li>
@@ -393,7 +393,7 @@ Filters (&lt;tt&gt;filters/&lt;/tt&gt;)</h3>
 </li>
 <li><b>Dependencies</b>: <code>interfaces/</code>, regex</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md596"></a>
+<h3><a class="anchor" id="autotoc_md597"></a>
 Routing (&lt;tt&gt;routing/&lt;/tt&gt;)</h3>
 <ul>
 <li><b>Purpose</b>: Conditional log routing</li>
@@ -403,7 +403,7 @@ Routing (&lt;tt&gt;routing/&lt;/tt&gt;)</h3>
 </li>
 <li><b>Dependencies</b>: <code>interfaces/</code>, <code>writers/</code></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md597"></a>
+<h3><a class="anchor" id="autotoc_md598"></a>
 Analysis (&lt;tt&gt;analysis/&lt;/tt&gt;)</h3>
 <ul>
 <li><b>Purpose</b>: Real-time log analysis</li>
@@ -413,7 +413,7 @@ Analysis (&lt;tt&gt;analysis/&lt;/tt&gt;)</h3>
 </li>
 <li><b>Dependencies</b>: <code>interfaces/</code>, regex</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md598"></a>
+<h3><a class="anchor" id="autotoc_md599"></a>
 Structured Logging (&lt;tt&gt;structured/&lt;/tt&gt;)</h3>
 <ul>
 <li><b>Purpose</b>: JSON and structured output</li>
@@ -423,7 +423,7 @@ Structured Logging (&lt;tt&gt;structured/&lt;/tt&gt;)</h3>
 </li>
 <li><b>Dependencies</b>: <code>core/</code>, JSON library</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md599"></a>
+<h3><a class="anchor" id="autotoc_md600"></a>
 Safety (&lt;tt&gt;safety/&lt;/tt&gt;)</h3>
 <ul>
 <li><b>Purpose</b>: Crash-safe logging mechanisms</li>
@@ -433,7 +433,7 @@ Safety (&lt;tt&gt;safety/&lt;/tt&gt;)</h3>
 </li>
 <li><b>Dependencies</b>: <code>core/</code>, platform signal APIs</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md600"></a>
+<h3><a class="anchor" id="autotoc_md601"></a>
 Server (&lt;tt&gt;server/&lt;/tt&gt;)</h3>
 <ul>
 <li><b>Purpose</b>: Network log server</li>
@@ -443,7 +443,7 @@ Server (&lt;tt&gt;server/&lt;/tt&gt;)</h3>
 </li>
 <li><b>Dependencies</b>: <code>core/</code>, <code>writers/</code>, networking</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md601"></a>
+<h3><a class="anchor" id="autotoc_md602"></a>
 Adapters (&lt;tt&gt;adapters/&lt;/tt&gt;)</h3>
 <ul>
 <li><b>Purpose</b>: Integration with other systems</li>
@@ -454,7 +454,7 @@ Adapters (&lt;tt&gt;adapters/&lt;/tt&gt;)</h3>
 </li>
 <li><b>Dependencies</b>: <code>common_system</code>, <code>thread_system</code> (optional)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md602"></a>
+<h2><a class="anchor" id="autotoc_md603"></a>
 Monitoring (&lt;tt&gt;core/monitoring/&lt;/tt&gt;)</h2>
 <ul>
 <li><b>Purpose</b>: Integration with monitoring_system</li>
@@ -464,9 +464,9 @@ Monitoring (&lt;tt&gt;core/monitoring/&lt;/tt&gt;)</h2>
 </li>
 <li><b>Dependencies</b>: <code>common_system</code> (IMonitor)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md603"></a>
+<h1><a class="anchor" id="autotoc_md604"></a>
 Module Dependencies</h1>
-<h2><a class="anchor" id="autotoc_md604"></a>
+<h2><a class="anchor" id="autotoc_md605"></a>
 Internal Dependencies</h2>
 <div class="fragment"><div class="line">interfaces (no dependencies)</div>
 <div class="line">    │</div>
@@ -489,7 +489,7 @@ Internal Dependencies</h2>
 <div class="line">    │      └──&gt; server (depends on core, writers)</div>
 <div class="line">    │</div>
 <div class="line">    └──&gt; adapters (depends on interfaces, core)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md605"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md606"></a>
 External Dependencies</h2>
 <div class="fragment"><div class="line">common_system (REQUIRED)</div>
 <div class="line">    ├── interfaces/logger_interface.h   → Implemented by logger</div>
@@ -505,7 +505,7 @@ External Dependencies</h2>
 <div class="line">monitoring_system (OPTIONAL)</div>
 <div class="line">    ├── core/performance_monitor.h      → Metrics collection</div>
 <div class="line">    └── interfaces/monitor_interface.h  → Health checks</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md606"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md607"></a>
 Compilation Units</h2>
 <div class="fragment"><div class="line"><span class="comment">// Header-only components (no .cpp files)</span></div>
 <div class="line">- interfaces<span class="comment">/*</span></div>
@@ -523,9 +523,9 @@ Compilation Units</h2>
 <div class="line"><span class="comment">- structured/*</span></div>
 <div class="line"><span class="comment">- safety/*</span></div>
 <div class="line"><span class="comment">- server/*</span></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md607"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md608"></a>
 Key Components Overview</h1>
-<h2><a class="anchor" id="autotoc_md608"></a>
+<h2><a class="anchor" id="autotoc_md609"></a>
 Public API Layer (&lt;tt&gt;include/kcenon/logger/&lt;/tt&gt;)</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -579,7 +579,7 @@ Public API Layer (&lt;tt&gt;include/kcenon/logger/&lt;/tt&gt;)</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Common Adapter</b>   </td><td class="markdownTableBodyNone"><code>adapters/common_logger_adapter.h</code>   </td><td class="markdownTableBodyNone">common_system bridge   </td><td class="markdownTableBodyNone"><code>common_system</code>   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md609"></a>
+<h2><a class="anchor" id="autotoc_md610"></a>
 Implementation Layer (&lt;tt&gt;src/&lt;/tt&gt;)</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -605,7 +605,7 @@ Implementation Layer (&lt;tt&gt;src/&lt;/tt&gt;)</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>adapters/</code>   </td><td class="markdownTableBodyNone">Adapter implementations   </td><td class="markdownTableBodyNone"><code>common_logger_adapter.cpp</code>   </td><td class="markdownTableBodyNone">Compiled   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md610"></a>
+<h2><a class="anchor" id="autotoc_md611"></a>
 Test Organization</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -619,39 +619,39 @@ Test Organization</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>benchmarks/</code>   </td><td class="markdownTableBodyNone">Throughput and latency benchmarks   </td><td class="markdownTableBodyNone">Google Benchmark   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md611"></a>
+<h1><a class="anchor" id="autotoc_md612"></a>
 Performance Characteristics</h1>
-<h2><a class="anchor" id="autotoc_md612"></a>
+<h2><a class="anchor" id="autotoc_md613"></a>
 Throughput</h2>
 <ul>
 <li><b>Peak</b>: 4.34M messages/second (single thread, async mode)</li>
 <li><b>Multi-threaded</b>: 1.07M messages/s (4 threads), 412K messages/s (8 threads)</li>
 <li><b>Latency</b>: 148ns average enqueue time</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md613"></a>
+<h2><a class="anchor" id="autotoc_md614"></a>
 Memory</h2>
 <ul>
 <li><b>Baseline</b>: &lt;2MB with adaptive buffer management</li>
 <li><b>Queue</b>: Configurable (default 20,000 entries)</li>
 <li><b>Buffer</b>: Configurable (default 16KB per writer)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md614"></a>
+<h2><a class="anchor" id="autotoc_md615"></a>
 Threading</h2>
 <ul>
 <li><b>Thread-Safe</b>: All components safe for concurrent access</li>
 <li><b>Lock-Free</b>: Async queue uses lock-free design where possible</li>
 <li><b>ThreadSanitizer</b>: Zero data races detected</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md615"></a>
+<h2><a class="anchor" id="autotoc_md616"></a>
 Resource Management</h2>
 <ul>
 <li><b>RAII</b>: Grade A compliance with smart pointers</li>
 <li><b>AddressSanitizer</b>: Zero memory leaks detected</li>
 <li><b>Exception Safety</b>: Strong exception safety guarantees</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md616"></a>
+<h1><a class="anchor" id="autotoc_md617"></a>
 Build Configuration</h1>
-<h2><a class="anchor" id="autotoc_md617"></a>
+<h2><a class="anchor" id="autotoc_md618"></a>
 CMake Targets</h2>
 <div class="fragment"><div class="line"># Main library</div>
 <div class="line">LoggerSystem::logger          # Header-only or compiled library</div>
@@ -660,7 +660,7 @@ CMake Targets</h2>
 <div class="line">LoggerSystem::core            # Core logger components</div>
 <div class="line">LoggerSystem::writers         # Writer implementations</div>
 <div class="line">LoggerSystem::formatters      # Formatter implementations</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md618"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md619"></a>
 Feature Flags</h2>
 <p>Configure via CMake options: </p><div class="fragment"><div class="line"># Core Features</div>
 <div class="line">-DLOGGER_USE_DI=ON                  # Enable dependency injection</div>
@@ -679,7 +679,7 @@ Feature Flags</h2>
 <div class="line"># Quality</div>
 <div class="line">-DLOGGER_ENABLE_SANITIZERS=ON       # Enable sanitizers</div>
 <div class="line">-DLOGGER_ENABLE_COVERAGE=ON         # Enable coverage</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md619"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md620"></a>
 References</h1>
 <ul>
 <li><a class="el" href="index.html#md__2home_2runner_2work_2logger__system_2logger__system_2README">README.md</a> - Project overview and features</li>
@@ -694,7 +694,7 @@ References</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2026 10:00:58 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Jan 8 2026 13:11:46 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -96,15 +96,15 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html">English</a> | <b>한국어</b> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md779"></a>
+<h1><a class="anchor" id="autotoc_md780"></a>
 스레딩 생태계 아키텍처</h1>
 <p><b>버전</b>: 3.0.0 <b>최종 업데이트</b>: 2025-12-10</p>
 <blockquote class="doxtable">
 <p>&zwj;이 문서는 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html">ARCHITECTURE.md</a>의 한국어 번역 버전입니다. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md780"></a>
+<h2><a class="anchor" id="autotoc_md781"></a>
 v3.0 주요 변경사항</h2>
-<h3><a class="anchor" id="autotoc_md781"></a>
+<h3><a class="anchor" id="autotoc_md782"></a>
 의존성 구조 변경</h3>
 <div class="fragment"><div class="line">┌─────────────────┐</div>
 <div class="line">│  common_system  │ ← 기반 시스템 (필수)</div>
@@ -116,7 +116,7 @@ v3.0 주요 변경사항</h2>
 <div class="line">│  logger_system  │   │  thread_system  │</div>
 <div class="line">│     v3.0        │   │    (선택적)     │</div>
 <div class="line">└─────────────────┘   └─────────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md782"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md783"></a>
 핵심 변경사항</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -130,14 +130,14 @@ v3.0 주요 변경사항</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">인터페이스   </td><td class="markdownTableBodyNone"><code>thread_module::logger_interface</code>   </td><td class="markdownTableBodyNone"><code>common::interfaces::ILogger</code>   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md783"></a>
+<h3><a class="anchor" id="autotoc_md784"></a>
 독립 실행 모드 vs 통합 모드</h3>
 <p><b>독립 실행 모드 (v3.0 기본값):</b> </p><div class="fragment"><div class="line"><span class="comment">// thread_system 의존성 없음</span></div>
 <div class="line"><span class="keyword">auto</span> logger = kcenon::logger::logger_builder()</div>
 <div class="line">    .with_standalone_backend()  <span class="comment">// std::jthread 사용</span></div>
 <div class="line">    .add_writer(<span class="stringliteral">&quot;console&quot;</span>, std::make_unique&lt;console_writer&gt;())</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md784"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md785"></a>
 성능 비교</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -157,7 +157,7 @@ v3.0 주요 변경사항</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2026 10:00:58 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Jan 8 2026 13:11:46 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
