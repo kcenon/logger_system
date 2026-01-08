@@ -304,7 +304,7 @@ TEST_F(OtlpWriterTest, WriteLogsQueued) {
 
     // Stats should show no exports yet (batch not full, interval not reached)
     auto stats = writer.get_stats();
-    EXPECT_EQ(stats.logs_dropped.load(), 0);
+    EXPECT_EQ(stats.logs_dropped, 0);
 }
 
 TEST_F(OtlpWriterTest, FlushWritesImmediately) {
@@ -478,7 +478,7 @@ TEST_F(OtlpWriterTest, ConcurrentWrites) {
 
     // Should not have dropped any logs
     auto stats = writer.get_stats();
-    EXPECT_EQ(stats.logs_dropped.load(), 0);
+    EXPECT_EQ(stats.logs_dropped, 0);
 
     writer.flush();
 }

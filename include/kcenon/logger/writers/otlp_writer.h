@@ -190,9 +190,23 @@ public:
 
     /**
      * @struct export_stats
-     * @brief Statistics for OTLP export
+     * @brief Statistics snapshot for OTLP export (copyable)
      */
     struct export_stats {
+        uint64_t logs_exported{0};
+        uint64_t logs_dropped{0};
+        uint64_t export_success{0};
+        uint64_t export_failures{0};
+        uint64_t retries{0};
+        std::chrono::system_clock::time_point last_export;
+        std::chrono::system_clock::time_point last_error;
+    };
+
+    /**
+     * @struct internal_stats
+     * @brief Internal atomic statistics (non-copyable)
+     */
+    struct internal_stats {
         std::atomic<uint64_t> logs_exported{0};
         std::atomic<uint64_t> logs_dropped{0};
         std::atomic<uint64_t> export_success{0};
@@ -296,7 +310,7 @@ private:
 
 private:
     config config_;
-    export_stats stats_;
+    internal_stats stats_;
 
     // Queue management
     std::queue<buffered_log> queue_;

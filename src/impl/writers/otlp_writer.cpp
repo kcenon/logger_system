@@ -267,15 +267,15 @@ bool otlp_writer::is_healthy() const {
 }
 
 otlp_writer::export_stats otlp_writer::get_stats() const {
-    export_stats copy;
-    copy.logs_exported.store(stats_.logs_exported.load(std::memory_order_relaxed));
-    copy.logs_dropped.store(stats_.logs_dropped.load(std::memory_order_relaxed));
-    copy.export_success.store(stats_.export_success.load(std::memory_order_relaxed));
-    copy.export_failures.store(stats_.export_failures.load(std::memory_order_relaxed));
-    copy.retries.store(stats_.retries.load(std::memory_order_relaxed));
-    copy.last_export = stats_.last_export;
-    copy.last_error = stats_.last_error;
-    return copy;
+    return export_stats{
+        stats_.logs_exported.load(std::memory_order_relaxed),
+        stats_.logs_dropped.load(std::memory_order_relaxed),
+        stats_.export_success.load(std::memory_order_relaxed),
+        stats_.export_failures.load(std::memory_order_relaxed),
+        stats_.retries.load(std::memory_order_relaxed),
+        stats_.last_export,
+        stats_.last_error
+    };
 }
 
 void otlp_writer::force_export() {
