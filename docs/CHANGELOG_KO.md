@@ -49,6 +49,17 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### CI 워크플로우 수정 (PR #290) - 2026-01-08
+
+#### 수정됨
+- **CI 링커 오류**: `EnhancedThreadPoolMetrics`에 대한 undefined reference 오류 수정
+  - `thread_system` checkout을 `feature/adopt-kcenon-feature-flags`에서 `main` 브랜치로 변경
+  - feature 브랜치에 main에 추가된 `EnhancedThreadPoolMetrics` 구현이 없었음
+  - thread_system의 CMake 수정 전까지 coverage 작업에서 `LOGGER_USE_THREAD_SYSTEM=ON` 제거
+  - 영향받은 워크플로우: `integration-tests.yml`, `ci.yml`, `benchmarks.yml`, `sanitizers.yml`
+
+---
+
 ### OpenTelemetry 통합 수정 (Issue #283) - 2026-01-08
 
 #### 수정됨
