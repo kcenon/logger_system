@@ -35,6 +35,18 @@
         },
         "benchmark"
       ]
+    },
+    "otlp": {
+      "description": "Enable OpenTelemetry (OTLP) integration for observability",
+      "dependencies": [
+        {
+          "name": "opentelemetry-cpp",
+          "default-features": false,
+          "features": ["otlp-http", "otlp-grpc"]
+        },
+        "protobuf",
+        "grpc"
+      ]
     }
   }
 }

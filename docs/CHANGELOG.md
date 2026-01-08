@@ -49,6 +49,38 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### CI Workflow Fix (PR #290) - 2026-01-08
+
+#### Fixed
+- **CI linker errors**: Fixed undefined reference errors for `EnhancedThreadPoolMetrics`
+  - Changed `thread_system` checkout from `feature/adopt-kcenon-feature-flags` to `main` branch
+  - The feature branch lacked `EnhancedThreadPoolMetrics` implementation that was added to main
+  - Removed `LOGGER_USE_THREAD_SYSTEM=ON` from coverage job until thread_system fixes its CMake
+  - Affected workflows: `integration-tests.yml`, `ci.yml`, `benchmarks.yml`, `sanitizers.yml`
+
+- **macOS Debug test timeout**: Fixed `MultipleStartStopCycles` test timing out on macOS Debug builds
+  - Replaced `CreateLoggerWithFileWriter()` with `CreateLogger()` to avoid redundant `start()` call
+  - Used simple `flush()` instead of `WaitForFlush()` to eliminate unnecessary stop/start cycles
+  - Test now completes in milliseconds instead of 20+ minutes timeout
+
+---
+
+### OpenTelemetry Integration Fix (Issue #283) - 2026-01-08
+
+#### Fixed
+- **macOS compatibility**: Replaced `std::jthread` with `std::thread` in `otlp_writer`
+  - `std::jthread` and `std::stop_token` are not supported in Apple Clang's libc++
+  - Uses existing `running_` atomic flag for stop mechanism
+  - Maintains same behavior and thread-safety guarantees
+
+- **Windows build fix**: Removed `write`/`fsync` macro pollution from `signal_manager.h`
+  - The `#define write _write` macro was leaking to other headers
+  - Caused `batch_writer.h` and `otlp_writer.h` `write()` method to be renamed to `_write()`
+  - Fixed by replacing macros with `detail::safe_write()` and `detail::safe_fsync()` inline functions
+  - These wrapper functions handle Windows POSIX compatibility internally
+
+---
+
 ### C++20 Module Files (Issue #275) - 2026-01-03
 
 #### Added

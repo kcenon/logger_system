@@ -201,6 +201,32 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/thread_system_integration_module_tes
     message(STATUS "thread_system_integration module tests: Added (THREAD_SYSTEM_FOUND=${THREAD_SYSTEM_FOUND})")
 endif()
 
+# OpenTelemetry integration tests (Issue #283)
+add_executable(logger_otlp_test otlp_test.cpp)
+
+if(TARGET GTest::gtest_main)
+    target_link_libraries(logger_otlp_test PRIVATE LoggerSystem GTest::gtest_main GTest::gtest)
+else()
+    target_link_libraries(logger_otlp_test PRIVATE LoggerSystem gtest_main gtest)
+endif()
+
+# Link OpenTelemetry if available
+if(LOGGER_ENABLE_OTLP AND opentelemetry-cpp_FOUND)
+    target_link_libraries(logger_otlp_test PRIVATE
+        opentelemetry-cpp::logs
+        opentelemetry-cpp::otlp_http_log_record_exporter
+    )
+    target_compile_definitions(logger_otlp_test PRIVATE LOGGER_HAS_OTLP=1)
+    message(STATUS "OTLP tests: OpenTelemetry SDK linked")
+else()
+    message(STATUS "OTLP tests: Using fallback implementation (no OTLP SDK)")
+endif()
+
+add_test(NAME logger_otlp_test COMMAND logger_otlp_test)
+set_target_properties(logger_otlp_test PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # Encrypted writer tests (Issue #280)
 add_executable(logger_encrypted_writer_test encrypted_writer_test.cpp)
 
@@ -276,6 +302,7 @@ set(_LOGGER_TEST_TARGETS
     logger_min_level_threshold_test
     logger_thread_safety_test
     logger_routing_integration_test
+    logger_otlp_test
     logger_encrypted_writer_test
 )
 

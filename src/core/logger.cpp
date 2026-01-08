@@ -743,4 +743,24 @@ bool logger::has_routing() const {
     return pimpl_->router_ != nullptr;
 }
 
+// =========================================================================
+// OpenTelemetry context management implementation
+// =========================================================================
+
+void logger::set_otel_context(const otlp::otel_context& ctx) {
+    otlp::otel_context_storage::set(ctx);
+}
+
+std::optional<otlp::otel_context> logger::get_otel_context() const {
+    return otlp::otel_context_storage::get();
+}
+
+void logger::clear_otel_context() {
+    otlp::otel_context_storage::clear();
+}
+
+bool logger::has_otel_context() const {
+    return otlp::otel_context_storage::has_context();
+}
+
 } // namespace kcenon::logger

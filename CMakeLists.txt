@@ -56,6 +56,7 @@ option(BUILD_SAMPLES "Build sample programs" ON)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(LOGGER_BUILD_INTEGRATION_TESTS "Build integration tests" ON)
 option(LOGGER_ENABLE_COVERAGE "Enable code coverage reporting" OFF)
+option(LOGGER_ENABLE_OTLP "Enable OpenTelemetry (OTLP) integration for observability" OFF)
 
 # C++20 Modules option (requires CMake 3.28+)
 if(LOGGER_CAN_USE_MODULES)
@@ -408,6 +409,25 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 message(STATUS "Logger System: OpenSSL linked for encryption support (${OPENSSL_VERSION})")
             else()
                 message(WARNING "Logger System: LOGGER_USE_ENCRYPTION=ON but OpenSSL not found")
+            endif()
+        endif()
+
+        # Link OpenTelemetry if OTLP is enabled
+        if(LOGGER_ENABLE_OTLP)
+            find_package(opentelemetry-cpp CONFIG QUIET)
+            find_package(protobuf CONFIG QUIET)
+            find_package(gRPC CONFIG QUIET)
+            if(opentelemetry-cpp_FOUND)
+                target_link_libraries(LoggerSystem PUBLIC
+                    opentelemetry-cpp::logs
+                    opentelemetry-cpp::otlp_http_log_record_exporter
+                    opentelemetry-cpp::otlp_grpc_log_record_exporter
+                )
+                target_compile_definitions(LoggerSystem PUBLIC LOGGER_HAS_OTLP=1)
+                message(STATUS "Logger System: OpenTelemetry linked for OTLP support")
+            else()
+                message(WARNING "Logger System: LOGGER_ENABLE_OTLP=ON but opentelemetry-cpp not found")
+                message(WARNING "  Install with: vcpkg install kcenon-logger-system[otlp]")
             endif()
         endif()
 

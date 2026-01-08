@@ -16,15 +16,52 @@ All rights reserved.
 // Platform-specific headers and definitions
 #ifdef _WIN32
     #include <io.h>
-    #define STDERR_FILENO 2
-    #define write _write
-    #define fsync _commit
+    #ifndef STDERR_FILENO
+        #define STDERR_FILENO 2
+    #endif
     using ssize_t = intptr_t;
 #else
     #include <unistd.h>
 #endif
 
 namespace kcenon::logger::security {
+
+namespace detail {
+
+/**
+ * @brief Signal-safe write wrapper (cross-platform)
+ * @param fd File descriptor
+ * @param buf Buffer to write
+ * @param count Number of bytes to write
+ * @return Number of bytes written or -1 on error
+ *
+ * Note: Uses _write on Windows (POSIX write is deprecated on MSVC)
+ * This avoids macro pollution that would affect other headers.
+ */
+inline ssize_t safe_write(int fd, const void* buf, size_t count) {
+#ifdef _WIN32
+    return _write(fd, buf, static_cast<unsigned int>(count));
+#else
+    return ::write(fd, buf, count);
+#endif
+}
+
+/**
+ * @brief Signal-safe fsync wrapper (cross-platform)
+ * @param fd File descriptor
+ * @return 0 on success, -1 on error
+ *
+ * Note: Uses _commit on Windows (POSIX fsync is not available)
+ */
+inline int safe_fsync(int fd) {
+#ifdef _WIN32
+    return _commit(fd);
+#else
+    return ::fsync(fd);
+#endif
+}
+
+} // namespace detail
 
 /**
  * @class signal_manager
@@ -182,7 +219,7 @@ private:
         }
 
         // Write to stderr (signal-safe)
-        write(STDERR_FILENO, msg, msg_len);
+        detail::safe_write(STDERR_FILENO, msg, msg_len);
 
         // Emergency flush for all registered loggers
         // Note: We cannot safely lock mutex_ here (not signal-safe)
@@ -318,7 +355,7 @@ inline void signal_manager::emergency_flush(critical_logger_interface* log) {
         // Write using signal-safe write() syscall
         ssize_t written = 0;
         while (written < static_cast<ssize_t>(size)) {
-            ssize_t n = write(fd, buffer + written, size - written);
+            ssize_t n = detail::safe_write(fd, buffer + written, size - written);
             if (n <= 0) {
                 break;  // Error or would block
             }
@@ -326,7 +363,7 @@ inline void signal_manager::emergency_flush(critical_logger_interface* log) {
         }
 
         // Sync to disk (signal-safe)
-        fsync(fd);
+        detail::safe_fsync(fd);
     }
 }
 
