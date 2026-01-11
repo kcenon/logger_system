@@ -50,35 +50,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace kcenon::logger {
 
-// base_writer implementation
-
-base_writer::base_writer(std::unique_ptr<log_formatter_interface> formatter)
-    : formatter_(std::move(formatter)) {
-    if (!formatter_) {
-        // Default to timestamp_formatter if none provided
-        formatter_ = std::make_unique<timestamp_formatter>();
-    }
-
-    // Apply color setting from legacy API to formatter
-    auto opts = formatter_->get_options();
-    opts.use_colors = use_color_;
-    formatter_->set_options(opts);
-}
-
-log_formatter_interface* base_writer::get_formatter() const {
-    return formatter_.get();
-}
-
-std::string base_writer::format_log_entry(const log_entry& entry) const {
-    if (!formatter_) {
-        // Fallback if formatter is somehow null
-        return entry.message.to_string();
-    }
-    return formatter_->format(entry);
-}
-
-// Legacy formatting methods (for backward compatibility)
-
 console_writer::console_writer(bool use_stderr, bool auto_detect_color)
     : use_stderr_(use_stderr) {
     if (auto_detect_color) {
