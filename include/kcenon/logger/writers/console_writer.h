@@ -32,20 +32,22 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
-#include "base_writer.h"
-#include <mutex>
+#include "thread_safe_writer.h"
 
 namespace kcenon::logger {
 
 /**
  * @brief Console writer that outputs logs to stdout/stderr
- * 
+ *
  * Features:
  * - Color support for different log levels (if terminal supports it)
- * - Thread-safe console output
+ * - Thread-safe console output (via thread_safe_writer base class)
  * - Error levels go to stderr, others to stdout
+ *
+ * @since 1.0.0
+ * @since 1.3.0 Refactored to use thread_safe_writer base class
  */
-class console_writer : public base_writer {
+class console_writer : public thread_safe_writer {
 public:
     /**
      * @brief Constructor
@@ -60,35 +62,37 @@ public:
     ~console_writer() override;
     
     /**
-     * @brief Write log entry to console
-     */
-    common::VoidResult write(logger_system::log_level level,
-                             const std::string& message,
-                             const std::string& file,
-                             int line,
-                             const std::string& function,
-                             const std::chrono::system_clock::time_point& timestamp) override;
-
-    /**
-     * @brief Flush console output
-     */
-    common::VoidResult flush() override;
-    
-    /**
      * @brief Get writer name
      */
     std::string get_name() const override { return "console"; }
-    
+
     /**
      * @brief Set whether to use stderr for all output
      * @param use_stderr Enable/disable stderr usage
      */
     void set_use_stderr(bool use_stderr);
-    
+
+protected:
+    /**
+     * @brief Implementation of write operation
+     * @note Called by thread_safe_writer::write() while holding the mutex
+     */
+    common::VoidResult write_impl(logger_system::log_level level,
+                                  const std::string& message,
+                                  const std::string& file,
+                                  int line,
+                                  const std::string& function,
+                                  const std::chrono::system_clock::time_point& timestamp) override;
+
+    /**
+     * @brief Implementation of flush operation
+     * @note Called by thread_safe_writer::flush() while holding the mutex
+     */
+    common::VoidResult flush_impl() override;
+
 private:
     bool use_stderr_;
-    std::mutex write_mutex_;
-    
+
     /**
      * @brief Check if terminal supports color
      * @return true if color is supported
