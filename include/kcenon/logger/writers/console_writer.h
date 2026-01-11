@@ -33,6 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include "thread_safe_writer.h"
+#include "../interfaces/writer_category.h"
 
 namespace kcenon::logger {
 
@@ -44,10 +45,13 @@ namespace kcenon::logger {
  * - Thread-safe console output (via thread_safe_writer base class)
  * - Error levels go to stderr, others to stdout
  *
+ * Category: Synchronous (blocking I/O to console)
+ *
  * @since 1.0.0
  * @since 1.3.0 Refactored to use thread_safe_writer base class
+ * @since 1.4.0 Added sync_writer_tag for category classification
  */
-class console_writer : public thread_safe_writer {
+class console_writer : public thread_safe_writer, public sync_writer_tag {
 public:
     /**
      * @brief Constructor

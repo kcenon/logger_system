@@ -51,6 +51,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../interfaces/log_writer_interface.h"
 #include "../interfaces/log_formatter_interface.h"
 #include "../interfaces/output_sink_interface.h"
+#include "../interfaces/writer_category.h"
 
 namespace kcenon::logger {
 
@@ -70,6 +71,11 @@ namespace kcenon::logger {
  * - Dependency Injection: Components are injected via constructor
  * - Testability: Each component can be tested independently
  * - Flexibility: Mix and match any formatter with any sink
+ *
+ * Category: Composite (combines formatter and sink through Pipeline pattern)
+ *
+ * @note This class directly implements log_writer_interface (not base_writer)
+ * because it uses the Pipeline pattern which doesn't need legacy API compatibility.
  *
  * @example Creating a composite writer:
  * @code
@@ -94,8 +100,9 @@ namespace kcenon::logger {
  * are thread-safe (which they should be).
  *
  * @since 1.3.0
+ * @since 1.4.0 Added composite_writer_tag for category classification
  */
-class composite_writer : public log_writer_interface {
+class composite_writer : public log_writer_interface, public composite_writer_tag {
 public:
     /**
      * @brief Construct a composite writer

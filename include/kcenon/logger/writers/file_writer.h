@@ -8,6 +8,7 @@ All rights reserved.
 *****************************************************************************/
 
 #include "thread_safe_writer.h"
+#include "../interfaces/writer_category.h"
 #include <fstream>
 #include <atomic>
 #include <memory>
@@ -20,10 +21,13 @@ namespace kcenon::logger {
  *
  * Thread-safe file output with automatic mutex management via thread_safe_writer.
  *
+ * Category: Synchronous (blocking I/O to file)
+ *
  * @since 1.0.0
  * @since 1.3.0 Refactored to use thread_safe_writer base class
+ * @since 1.4.0 Added sync_writer_tag for category classification
  */
-class file_writer : public thread_safe_writer {
+class file_writer : public thread_safe_writer, public sync_writer_tag {
 public:
     /**
      * @brief Constructor

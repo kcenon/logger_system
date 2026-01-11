@@ -46,6 +46,7 @@ All rights reserved.
  */
 
 #include "base_writer.h"
+#include "../interfaces/writer_category.h"
 #include <atomic>
 #include <memory>
 #include <mutex>
@@ -98,8 +99,12 @@ struct critical_writer_config {
  *
  * Thread Safety: All methods are thread-safe. Critical writes are serialized
  * to ensure ordering and prevent interleaving.
+ *
+ * Category: Decorator (wraps another writer to add critical message handling)
+ *
+ * @since 1.4.0 Added decorator_writer_tag for category classification
  */
-class critical_writer : public base_writer {
+class critical_writer : public base_writer, public decorator_writer_tag {
 public:
     /**
      * @brief Constructor
@@ -284,6 +289,8 @@ private:
  * - async_writer for normal/debug/info/warn logs (high performance)
  * - Synchronous immediate flush for error/critical/fatal logs (no loss)
  *
+ * Category: Composite (combines async and critical behavior), Decorator
+ *
  * @example
  * @code
  * // Best of both worlds: performance + safety
@@ -292,8 +299,10 @@ private:
  * );
  * logger.add_writer(std::move(hybrid));
  * @endcode
+ *
+ * @since 1.4.0 Added composite_writer_tag and decorator_writer_tag for classification
  */
-class hybrid_writer : public base_writer {
+class hybrid_writer : public base_writer, public composite_writer_tag, public decorator_writer_tag {
 public:
     explicit hybrid_writer(
         std::unique_ptr<base_writer> wrapped_writer,
