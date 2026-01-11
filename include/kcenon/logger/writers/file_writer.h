@@ -7,9 +7,8 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-#include "base_writer.h"
+#include "thread_safe_writer.h"
 #include <fstream>
-#include <mutex>
 #include <atomic>
 #include <memory>
 
@@ -18,8 +17,13 @@ namespace kcenon::logger {
 /**
  * @class file_writer
  * @brief Basic file writer for logging to files
+ *
+ * Thread-safe file output with automatic mutex management via thread_safe_writer.
+ *
+ * @since 1.0.0
+ * @since 1.3.0 Refactored to use thread_safe_writer base class
  */
-class file_writer : public base_writer {
+class file_writer : public thread_safe_writer {
 public:
     /**
      * @brief Constructor
@@ -37,60 +41,63 @@ public:
     ~file_writer() override;
     
     /**
-     * @brief Write log entry to file
-     */
-    common::VoidResult write(logger_system::log_level level,
-                             const std::string& message,
-                             const std::string& file,
-                             int line,
-                             const std::string& function,
-                             const std::chrono::system_clock::time_point& timestamp) override;
-
-    /**
-     * @brief Flush file buffer
-     */
-    common::VoidResult flush() override;
-    
-    /**
      * @brief Get writer name
      */
     std::string get_name() const override { return "file"; }
-    
+
     /**
      * @brief Check if file is open
      */
     bool is_open() const { return file_stream_.is_open(); }
-    
+
     /**
      * @brief Get current file size
      */
     size_t get_file_size() const { return bytes_written_.load(); }
-    
+
     /**
-     * @brief Reopen the file
+     * @brief Reopen the file (thread-safe)
      */
     common::VoidResult reopen();
 
 protected:
     /**
+     * @brief Implementation of write operation
+     * @note Called by thread_safe_writer::write() while holding the mutex
+     */
+    common::VoidResult write_impl(logger_system::log_level level,
+                                  const std::string& message,
+                                  const std::string& file,
+                                  int line,
+                                  const std::string& function,
+                                  const std::chrono::system_clock::time_point& timestamp) override;
+
+    /**
+     * @brief Implementation of flush operation
+     * @note Called by thread_safe_writer::flush() while holding the mutex
+     */
+    common::VoidResult flush_impl() override;
+
+    /**
      * @brief Close the current file
+     * @note Caller must hold the mutex
      */
     void close();
 
     /**
      * @brief Open the file
+     * @note Caller must hold the mutex
      */
     common::VoidResult open();
-    
+
 protected:
     std::string filename_;
     bool append_mode_;
     size_t buffer_size_;
-    
+
     std::ofstream file_stream_;
     std::unique_ptr<char[]> buffer_;
-    mutable std::mutex write_mutex_;
-    
+
     std::atomic<size_t> bytes_written_{0};
 };
 

@@ -41,9 +41,10 @@ enum class rotation_type {
  *
  * Thread Safety:
  * - All public methods are thread-safe
- * - Uses mutex inherited from file_writer for write operations
+ * - Uses mutex from thread_safe_writer base class
  *
  * @since 1.0.0
+ * @since 1.3.0 Refactored to use thread_safe_writer via file_writer
  */
 class rotating_file_writer : public file_writer {
 public:
@@ -87,24 +88,26 @@ public:
                         size_t check_interval = 100);
 
     /**
-     * @brief Write log entry with automatic rotation check
-     */
-    common::VoidResult write(logger_system::log_level level,
-                             const std::string& message,
-                             const std::string& file,
-                             int line,
-                             const std::string& function,
-                             const std::chrono::system_clock::time_point& timestamp) override;
-
-    /**
      * @brief Get writer name
      */
     std::string get_name() const override { return "rotating_file"; }
 
     /**
-     * @brief Manually trigger log rotation
+     * @brief Manually trigger log rotation (thread-safe)
      */
     void rotate();
+
+protected:
+    /**
+     * @brief Implementation of write operation with automatic rotation check
+     * @note Called by thread_safe_writer::write() while holding the mutex
+     */
+    common::VoidResult write_impl(logger_system::log_level level,
+                                  const std::string& message,
+                                  const std::string& file,
+                                  int line,
+                                  const std::string& function,
+                                  const std::chrono::system_clock::time_point& timestamp) override;
 
 private:
     /**
@@ -114,7 +117,7 @@ private:
 
     /**
      * @brief Perform the actual rotation operation
-     * @note Caller must hold write_mutex_
+     * @note Caller must hold the mutex
      */
     void perform_rotation();
 
