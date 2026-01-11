@@ -155,6 +155,50 @@ auto logger = logger_builder()
 
 ---
 
+### Phase 3.3: Structured Logging Formatters (Issue #310) - 2026-01-11
+
+#### Added
+- **Template formatter** (`template_formatter.h`) for customizable log output
+  - User-defined template patterns with placeholders (e.g., `{timestamp} [{level}] {message}`)
+  - Supported placeholders: `{timestamp}`, `{timestamp_local}`, `{level}`, `{level_lower}`,
+    `{message}`, `{thread_id}`, `{file}`, `{filename}`, `{line}`, `{function}`,
+    `{category}`, `{trace_id}`, `{span_id}`, and custom structured fields
+  - Field width formatting (e.g., `{level:10}` for 10-character padding)
+  - ANSI color support for terminal output
+  - Dynamic template switching via `set_template()`
+
+- **Updated formatter factory** (`formatter_factory.h`)
+  - `format_type::logfmt` - Logfmt key=value format
+  - `format_type::templated` - Template-based custom format
+  - `create_logfmt()` - Create logfmt formatter
+  - `create_template()` - Create template formatter with custom pattern
+
+- **Comprehensive formatter tests**
+  - LogfmtFormatter: basic formatting, structured fields, special character escaping
+  - TemplateFormatter: basic formatting, timestamps, source location, structured fields,
+    lowercase level, field width, dynamic template switching
+
+#### Example
+```cpp
+// Template formatter with custom pattern
+auto formatter = std::make_unique<template_formatter>(
+    "[{timestamp}] [{level:8}] {message} ({filename}:{line})"
+);
+// Output: [2026-01-11T10:30:15.123Z] [INFO    ] User logged in (app.cpp:42)
+
+// Apache-style format
+auto apache_fmt = std::make_unique<template_formatter>(
+    "[{timestamp_local}] [{level_lower}] [{category}] {message}"
+);
+// Output: [2026-01-11 10:30:15.123] [info] [auth] User logged in
+
+// Using factory
+auto formatter = formatter_factory::create_logfmt();
+auto formatter = formatter_factory::create_template("{level}: {message}");
+```
+
+---
+
 ### Phase 3.1: Structured Logging API Design (Issue #308) - 2026-01-11
 
 #### Added
