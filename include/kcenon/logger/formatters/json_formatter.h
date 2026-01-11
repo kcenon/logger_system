@@ -186,6 +186,19 @@ public:
             }
         }
 
+        // OpenTelemetry context (if present)
+        if (entry.otel_ctx && entry.otel_ctx->is_valid()) {
+            if (!entry.otel_ctx->trace_id.empty()) {
+                oss << "," << newline << indent << "\"trace_id\":\"" << utils::string_utils::escape_json(entry.otel_ctx->trace_id) << "\"";
+            }
+            if (!entry.otel_ctx->span_id.empty()) {
+                oss << "," << newline << indent << "\"span_id\":\"" << utils::string_utils::escape_json(entry.otel_ctx->span_id) << "\"";
+            }
+            if (!entry.otel_ctx->trace_flags.empty()) {
+                oss << "," << newline << indent << "\"trace_flags\":\"" << utils::string_utils::escape_json(entry.otel_ctx->trace_flags) << "\"";
+            }
+        }
+
         // Structured fields (if present)
         if (entry.fields && !entry.fields->empty()) {
             for (const auto& [key, value] : *entry.fields) {
