@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['security_2emd_0',['SECURITY.md',['../SECURITY_8md.html',1,'']]],
-  ['small_5fstring_2eh_1',['small_string.h',['../small__string_8h.html',1,'']]],
-  ['structured_5flogger_2eh_2',['structured_logger.h',['../structured__logger_8h.html',1,'']]]
+  ['writer_5fhierarchy_2emd_0',['WRITER_HIERARCHY.md',['../WRITER__HIERARCHY_8md.html',1,'']]],
+  ['writer_5fselection_5fguide_2emd_1',['WRITER_SELECTION_GUIDE.md',['../WRITER__SELECTION__GUIDE_8md.html',1,'']]]
 ];

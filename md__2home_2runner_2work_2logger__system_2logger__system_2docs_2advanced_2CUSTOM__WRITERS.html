@@ -104,17 +104,28 @@ Overview</h2>
 <p>Writers are responsible for the actual output of log messages. The Logger System provides a flexible writer hierarchy that you can extend to create custom output destinations.</p>
 <h2><a class="anchor" id="autotoc_md413"></a>
 Writer Hierarchy</h2>
-<div class="fragment"><div class="line">base_writer (abstract)</div>
-<div class="line">├── thread_safe_writer (recommended for simple writers)</div>
-<div class="line">│   ├── console_writer</div>
-<div class="line">│   ├── file_writer</div>
-<div class="line">│   │   └── rotating_file_writer</div>
-<div class="line">│   └── your_custom_writer (Thread-safety handled automatically!)</div>
-<div class="line">├── async_writer (for async wrapper patterns)</div>
-<div class="line">├── batch_writer (for batched I/O)</div>
-<div class="line">├── critical_writer (for critical log handling)</div>
-<div class="line">└── network_writer (for network I/O with custom threading)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md414"></a>
+<div class="fragment"><div class="line">log_writer_interface (interface)</div>
+<div class="line">  │</div>
+<div class="line">  ├── base_writer (abstract)</div>
+<div class="line">  │     ├── thread_safe_writer [sync_writer_tag]</div>
+<div class="line">  │     │     ├── console_writer [sync_writer_tag]</div>
+<div class="line">  │     │     ├── file_writer [sync_writer_tag]</div>
+<div class="line">  │     │     │     └── rotating_file_writer</div>
+<div class="line">  │     │     └── your_custom_writer (Thread-safety handled automatically!)</div>
+<div class="line">  │     │</div>
+<div class="line">  │     ├── async_writer [async_writer_tag, decorator_writer_tag]</div>
+<div class="line">  │     ├── batch_writer [async_writer_tag, decorator_writer_tag]</div>
+<div class="line">  │     ├── critical_writer [decorator_writer_tag]</div>
+<div class="line">  │     ├── encrypted_writer [decorator_writer_tag]</div>
+<div class="line">  │     ├── network_writer [async_writer_tag]</div>
+<div class="line">  │     └── hybrid_writer [composite_writer_tag, decorator_writer_tag]</div>
+<div class="line">  │</div>
+<div class="line">  └── composite_writer [composite_writer_tag]</div>
+<div class="line">        (Pipeline Pattern: formatter + sink)</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p>&zwj;<b>Note:</b> Writers are categorized using type tags (v1.4.0+). See <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2WRITER__HIERARCHY.html">Writer Hierarchy</a> for details on categories and <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2WRITER__SELECTION__GUIDE.html">Writer Selection Guide</a> for choosing the right writer. </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md414"></a>
 Recommended: Using thread_safe_writer (Since v1.3.0)</h2>
 <p>For most custom writers, inherit from <code>thread_safe_writer</code> instead of <code>base_writer</code>. This provides:</p><ul>
 <li><b>Automatic thread-safety</b>: Mutex handling is done by the base class</li>
@@ -625,14 +636,14 @@ Testing Custom Writers</h2>
 <div class="line">    }</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<p><em>Last Updated: 2025-01-11</em> (Added thread_safe_writer documentation and examples) </p>
+<p><em>Last Updated: 2025-01-11</em> (v1.4.0: Added writer category tags and hierarchy documentation) </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Jan 11 2026 06:30:08 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Jan 11 2026 06:56:05 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

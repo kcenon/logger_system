@@ -96,10 +96,10 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE__KO.html">한국어</a> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md1368"></a>
+<h1><a class="anchor" id="autotoc_md1416"></a>
 Logger System Migration Guide</h1>
 <p><b>Version</b>: 3.0.0 <b>Last Updated</b>: 2025-12-14</p>
-<h2><a class="anchor" id="autotoc_md1369"></a>
+<h2><a class="anchor" id="autotoc_md1417"></a>
 Table of Contents</h2>
 <ol type="1">
 <li>Overview</li>
@@ -116,14 +116,14 @@ Table of Contents</h2>
 <li>Step-by-Step Migration</li>
 <li>Common Issues and Solutions</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1370"></a>
+<h2><a class="anchor" id="autotoc_md1418"></a>
 Overview</h2>
 <p>This guide helps you migrate to Logger System from:</p><ul>
 <li>Earlier versions of Logger System (v2.x to v3.0, v1.x to v2.x)</li>
 <li>Other popular logging libraries (spdlog, Boost.Log, glog, log4cpp)</li>
 <li>Custom logging solutions</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1371"></a>
+<h3><a class="anchor" id="autotoc_md1419"></a>
 Breaking Changes Summary</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -145,9 +145,9 @@ Breaking Changes Summary</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">v2.0   </td><td class="markdownTableBodyNone">Configuration   </td><td class="markdownTableBodyNone">Direct setters → Builder pattern   </td><td class="markdownTableBodyNone">Medium   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md1372"></a>
+<h2><a class="anchor" id="autotoc_md1420"></a>
 CMake Configuration Changes</h2>
-<h3><a class="anchor" id="autotoc_md1373"></a>
+<h3><a class="anchor" id="autotoc_md1421"></a>
 v2.x (Previous)</h3>
 <div class="fragment"><div class="line"># CMakeLists.txt for v2.x</div>
 <div class="line">find_package(thread_system REQUIRED)  # Was required</div>
@@ -159,7 +159,7 @@ v2.x (Previous)</h3>
 <div class="line">)</div>
 </div><!-- fragment --><div class="fragment"><div class="line"># Build flags for v2.x</div>
 <div class="line">cmake -DUSE_THREAD_SYSTEM=ON ..  # Old flag name</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1374"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1422"></a>
 v3.0 (Current)</h3>
 <div class="fragment"><div class="line"># CMakeLists.txt for v3.0</div>
 <div class="line">find_package(common_system REQUIRED)  # New required dependency</div>
@@ -174,7 +174,7 @@ v3.0 (Current)</h3>
 </div><!-- fragment --><div class="fragment"><div class="line"># Build flags for v3.0</div>
 <div class="line">cmake -DLOGGER_USE_THREAD_SYSTEM=ON ..   # New flag name (optional)</div>
 <div class="line">cmake -DLOGGER_STANDALONE_MODE=ON ..     # Standalone mode (default)</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1375"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1423"></a>
 CMake Flag Changes Summary</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -188,7 +188,7 @@ CMake Flag Changes Summary</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>BUILD_EXAMPLES=ON</code>   </td><td class="markdownTableBodyNone"><code>BUILD_EXAMPLES=ON</code>   </td><td class="markdownTableBodyNone"><code>ON</code>   </td><td class="markdownTableBodyNone">Build examples   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md1376"></a>
+<h3><a class="anchor" id="autotoc_md1424"></a>
 Target Name Changes</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -200,7 +200,7 @@ Target Name Changes</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">N/A   </td><td class="markdownTableBodyNone"><code>kcenon::common</code> (required)   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md1377"></a>
+<h3><a class="anchor" id="autotoc_md1425"></a>
 Dependency Changes</h3>
 <p><b>v2.x Dependency Tree:</b> </p><div class="fragment"><div class="line">logger_system</div>
 <div class="line">└── thread_system (required)</div>
@@ -208,11 +208,11 @@ Dependency Changes</h3>
 <div class="line">├── common_system (required)</div>
 <div class="line">└── thread_system (optional, for async logging with thread pool)</div>
 <div class="line">    └── common_system (required)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1378"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1426"></a>
 Version Migration</h2>
-<h3><a class="anchor" id="autotoc_md1379"></a>
+<h3><a class="anchor" id="autotoc_md1427"></a>
 From v2.x to v3.0</h3>
-<h4><a class="anchor" id="autotoc_md1380"></a>
+<h4><a class="anchor" id="autotoc_md1428"></a>
 Summary of Changes</h4>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -230,7 +230,7 @@ Summary of Changes</h4>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">C++ Standard   </td><td class="markdownTableBodyNone">C++17   </td><td class="markdownTableBodyNone">C++20   </td></tr>
 </table>
-<h4><a class="anchor" id="autotoc_md1381"></a>
+<h4><a class="anchor" id="autotoc_md1429"></a>
 1. Namespace Migration</h4>
 <p><b>Old (v2.x):</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;logger_system/logger.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;logger_system/logger_builder.h&gt;</span></div>
@@ -250,7 +250,7 @@ Summary of Changes</h4>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .use_template(<span class="stringliteral">&quot;production&quot;</span>)</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1382"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1430"></a>
 2. Interface Migration</h4>
 <p><b>Old (v2.x):</b> </p><div class="fragment"><div class="line"><span class="keyword">class </span>logger : <span class="keyword">public</span> thread_module::logger_interface {</div>
 <div class="line">    <span class="comment">// Deprecated: result_void is replaced by common::VoidResult</span></div>
@@ -270,7 +270,7 @@ Summary of Changes</h4>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Or with native API (backward compatible)</span></div>
 <div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;Message&quot;</span>);</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1383"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1431"></a>
 3. Dual API Support</h4>
 <p>v3.0 provides both ILogger interface and native API:</p>
 <div class="fragment"><div class="line"><span class="keyword">using namespace </span>kcenon::logger;</div>
@@ -293,7 +293,7 @@ Summary of Changes</h4>
 <div class="line"><span class="comment">// Note: Manual source location (__FILE__, __LINE__, __func__) is deprecated.</span></div>
 <div class="line"><span class="comment">// Source location is now auto-captured. This API will be removed in v3.0.0.</span></div>
 <div class="line">logger-&gt;log(log_level::error, <span class="stringliteral">&quot;Error message&quot;</span>);</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1384"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1432"></a>
 4. Result Type Migration</h4>
 <p><b>Old (v2.x):</b> </p><div class="fragment"><div class="line">result_void result = logger-&gt;log(level, message);</div>
 <div class="line"><span class="keywordflow">if</span> (!result) {  <span class="comment">// boolean conversion</span></div>
@@ -315,7 +315,7 @@ Summary of Changes</h4>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Old: return result_void(code, msg);   or return make_logger_error(code, msg);</span></div>
 <div class="line"><span class="comment">// New: return make_logger_void_result(code, msg);</span></div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1385"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1433"></a>
 5. thread_system Dependency Changes</h4>
 <p><b>Old (v2.x):</b> </p><div class="fragment"><div class="line"><span class="comment">// thread_system was required</span></div>
 <div class="line"><span class="comment">// CMakeLists.txt</span></div>
@@ -331,7 +331,7 @@ Summary of Changes</h4>
 <div class="line">    kcenon::common</div>
 <div class="line">    kcenon::logger</div>
 <div class="line">)</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1386"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1434"></a>
 6. Backend Selection (New in v3.0)</h4>
 <div class="fragment"><div class="line"><span class="keyword">using namespace </span>kcenon::logger;</div>
 <div class="line"> </div>
@@ -344,7 +344,7 @@ Summary of Changes</h4>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .with_backend(std::make_unique&lt;my_custom_backend&gt;())</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1387"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1435"></a>
 7. C++20 Source Location</h4>
 <p><b>New in v3.0:</b> </p><div class="fragment"><div class="line"><span class="comment">// Source location is automatically captured</span></div>
 <div class="line">logger-&gt;log(common::interfaces::log_level::info, <span class="stringliteral">&quot;Debug message&quot;</span>);</div>
@@ -353,7 +353,7 @@ Summary of Changes</h4>
 <div class="line"><span class="comment">// Explicit source location</span></div>
 <div class="line">logger-&gt;log(common::interfaces::log_level::info, <span class="stringliteral">&quot;Message&quot;</span>,</div>
 <div class="line">            common::source_location::current());</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1388"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1436"></a>
 8. Configuration Strategies (Enhanced in v3.0)</h4>
 <div class="fragment"><div class="line"><span class="keyword">using namespace </span>kcenon::logger;</div>
 <div class="line"> </div>
@@ -371,7 +371,7 @@ Summary of Changes</h4>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .auto_configure()  <span class="comment">// Reads LOG_* environment variables</span></div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1389"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1437"></a>
 9. Monitoring Integration (New in v3.0)</h4>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/monitoring/monitoring.h&gt;</span></div>
 <div class="line"> </div>
@@ -381,7 +381,7 @@ Summary of Changes</h4>
 <div class="line">    .with_monitoring(monitor)  <span class="comment">// New in v3.0</span></div>
 <div class="line">    .with_health_check_interval(std::chrono::seconds(30))</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1390"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1438"></a>
 Migration Script</h4>
 <p>For automated migration, use this script pattern:</p>
 <div class="fragment"><div class="line">#!/bin/bash</div>
@@ -407,9 +407,9 @@ Migration Script</h4>
 <div class="line">find . -name &quot;*.cpp&quot; -o -name &quot;*.h&quot; | xargs sed -i &#39;&#39; \</div>
 <div class="line">    -e &#39;s|result_void|common::VoidResult|g&#39;</div>
 </div><!-- fragment --><hr  />
-<h3><a class="anchor" id="autotoc_md1392"></a>
+<h3><a class="anchor" id="autotoc_md1440"></a>
 From v1.x to v2.x</h3>
-<h4><a class="anchor" id="autotoc_md1393"></a>
+<h4><a class="anchor" id="autotoc_md1441"></a>
 1. Error Handling Migration</h4>
 <p><b>Old (v1.x):</b> </p><div class="fragment"><div class="line"><span class="keywordflow">try</span> {</div>
 <div class="line">    logger-&gt;add_writer(<span class="keyword">new</span> file_writer(<span class="stringliteral">&quot;app.log&quot;</span>));</div>
@@ -420,7 +420,7 @@ From v1.x to v2.x</h3>
 <div class="line"><span class="keywordflow">if</span> (!result) {</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed: &quot;</span> &lt;&lt; result.error().message() &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1394"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1442"></a>
 2. Memory Management Migration</h4>
 <p><b>Old (v1.x):</b> </p><div class="fragment"><div class="line"><span class="comment">// Manual memory management</span></div>
 <div class="line">base_writer* writer = <span class="keyword">new</span> file_writer(<span class="stringliteral">&quot;app.log&quot;</span>);</div>
@@ -429,7 +429,7 @@ From v1.x to v2.x</h3>
 </div><!-- fragment --><p><b>New (v2.x):</b> </p><div class="fragment"><div class="line"><span class="comment">// RAII with unique_ptr</span></div>
 <div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>);</div>
 <div class="line">logger-&gt;add_writer(std::move(writer));  <span class="comment">// Explicit ownership transfer</span></div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1395"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1443"></a>
 3. Configuration Migration</h4>
 <p><b>Old (v1.x):</b> </p><div class="fragment"><div class="line">logger* log = <span class="keyword">new</span> logger();</div>
 <div class="line">log-&gt;set_min_level(log_level::info);</div>
@@ -444,15 +444,15 @@ From v1.x to v2.x</h3>
 <div class="line">    .with_console_writer()</div>
 <div class="line">    .with_file_writer(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1396"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md1444"></a>
 4. Logging API Migration</h4>
 <p><b>Old (v1.x):</b> </p><div class="fragment"><div class="line">LOG_INFO(logger, <span class="stringliteral">&quot;Message with %s&quot;</span>, param);</div>
 <div class="line">LOG_DEBUG_F(logger, <span class="stringliteral">&quot;Formatted: {}&quot;</span>, value);</div>
 </div><!-- fragment --><p><b>New (v2.x):</b> </p><div class="fragment"><div class="line">logger-&gt;info(<span class="stringliteral">&quot;Message with param&quot;</span>, {{<span class="stringliteral">&quot;param&quot;</span>, param}});</div>
 <div class="line">logger-&gt;debug(<span class="stringliteral">&quot;Message&quot;</span>, {{<span class="stringliteral">&quot;value&quot;</span>, value}});</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1397"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1445"></a>
 API Changes</h2>
-<h3><a class="anchor" id="autotoc_md1398"></a>
+<h3><a class="anchor" id="autotoc_md1446"></a>
 v3.0 API Changes Summary</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -480,7 +480,7 @@ v3.0 API Changes Summary</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">N/A   </td><td class="markdownTableBodyNone"><code>with_monitoring(monitor)</code>   </td><td class="markdownTableBodyNone">New monitoring integration   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md1399"></a>
+<h3><a class="anchor" id="autotoc_md1447"></a>
 Core Logger API</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -494,9 +494,9 @@ Core Logger API</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>flush()</code>   </td><td class="markdownTableBodyNone"><code>flush()</code> → result&lt;void&gt;   </td><td class="markdownTableBodyNone"><code>flush()</code> → VoidResult   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md1400"></a>
+<h2><a class="anchor" id="autotoc_md1448"></a>
 Configuration Migration</h2>
-<h3><a class="anchor" id="autotoc_md1401"></a>
+<h3><a class="anchor" id="autotoc_md1449"></a>
 From INI/XML Configuration</h3>
 <p><b>Old (config.ini):</b> </p><div class="fragment"><div class="line">[logger]</div>
 <div class="line">level = INFO</div>
@@ -529,7 +529,7 @@ From INI/XML Configuration</h3>
 <div class="line">            <span class="stringliteral">&quot;app.log&quot;</span>, 10 * 1024 * 1024, 5))</div>
 <div class="line">        .build();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1402"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1450"></a>
 Environment-based Configuration (v3.0)</h3>
 <div class="fragment"><div class="line"><span class="keyword">using namespace </span>kcenon::logger;</div>
 <div class="line"> </div>
@@ -548,9 +548,9 @@ Environment-based Configuration (v3.0)</h3>
 <div class="line"><span class="comment">// LOG_COLOR: true/false</span></div>
 <div class="line"><span class="comment">// LOG_METRICS: true/false</span></div>
 <div class="line"><span class="comment">// LOG_ENV: production/staging/development/testing</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1403"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1451"></a>
 Migration from Other Libraries</h2>
-<h3><a class="anchor" id="autotoc_md1404"></a>
+<h3><a class="anchor" id="autotoc_md1452"></a>
 From spdlog</h3>
 <div class="fragment"><div class="line"><span class="comment">// spdlog</span></div>
 <div class="line"><span class="preprocessor">#include &quot;spdlog/spdlog.h&quot;</span></div>
@@ -581,7 +581,7 @@ From spdlog</h3>
 <div class="line"><span class="comment">// Or using native API</span></div>
 <div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;Hello World&quot;</span>);</div>
 <div class="line">logger-&gt;log(log_level::error, <span class="stringliteral">&quot;Error code: 404&quot;</span>);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1405"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1453"></a>
 From Boost.Log</h3>
 <div class="fragment"><div class="line"><span class="comment">// Boost.Log</span></div>
 <div class="line"><span class="preprocessor">#include &lt;boost/log/trivial.hpp&gt;</span></div>
@@ -607,7 +607,7 @@ From Boost.Log</h3>
 <div class="line"> </div>
 <div class="line">logger-&gt;log(common::interfaces::log_level::info, <span class="stringliteral">&quot;An informational message&quot;</span>);</div>
 <div class="line">logger-&gt;log(common::interfaces::log_level::error, <span class="stringliteral">&quot;An error message&quot;</span>);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1406"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1454"></a>
 From Google glog</h3>
 <div class="fragment"><div class="line"><span class="comment">// glog</span></div>
 <div class="line"><span class="preprocessor">#include &lt;glog/logging.h&gt;</span></div>
@@ -636,9 +636,9 @@ From Google glog</h3>
 <div class="line">    logger-&gt;log(common::interfaces::log_level::fatal, <span class="stringliteral">&quot;Condition failed&quot;</span>);</div>
 <div class="line">    std::abort();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1407"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1455"></a>
 Compatibility Wrappers</h2>
-<h3><a class="anchor" id="autotoc_md1408"></a>
+<h3><a class="anchor" id="autotoc_md1456"></a>
 v2.x to v3.0 Compatibility Header</h3>
 <div class="fragment"><div class="line"><span class="comment">// compatibility/logger_v2_compat.h</span></div>
 <div class="line"><span class="preprocessor">#pragma once</span></div>
@@ -665,7 +665,7 @@ v2.x to v3.0 Compatibility Header</h3>
 <div class="line"><span class="comment">// 2. Existing v2.x code will compile with minimal changes</span></div>
 <div class="line"><span class="comment">// 3. Gradually update to new namespaces</span></div>
 <div class="line"><span class="comment">// 4. Remove this header when migration is complete</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1409"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1457"></a>
 Legacy API Wrapper (v1.x compatibility)</h3>
 <div class="fragment"><div class="line"><span class="comment">// compatibility/logger_v1_compat.h</span></div>
 <div class="line"><span class="preprocessor">#pragma once</span></div>
@@ -691,9 +691,9 @@ Legacy API Wrapper (v1.x compatibility)</h3>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1410"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1458"></a>
 Step-by-Step Migration</h2>
-<h3><a class="anchor" id="autotoc_md1411"></a>
+<h3><a class="anchor" id="autotoc_md1459"></a>
 Phase 1: Preparation</h3>
 <ol type="1">
 <li><b>Check C++ Standard</b> <div class="fragment"><div class="line"># Ensure C++20 is enabled</div>
@@ -710,7 +710,7 @@ Phase 1: Preparation</h3>
 <li><b>Create Migration Branch</b> <div class="fragment"><div class="line">git checkout -b migration/logger-v3.0</div>
 </div><!-- fragment --></li>
 </ol>
-<h3><a class="anchor" id="autotoc_md1412"></a>
+<h3><a class="anchor" id="autotoc_md1460"></a>
 Phase 2: Namespace Migration</h3>
 <ol type="1">
 <li><b>Update Include Paths</b> <div class="fragment"><div class="line"><span class="comment">// OLD</span></div>
@@ -726,7 +726,7 @@ Phase 2: Namespace Migration</h3>
 <div class="line"><span class="keyword">using namespace </span>kcenon::logger;</div>
 </div><!-- fragment --></li>
 </ol>
-<h3><a class="anchor" id="autotoc_md1413"></a>
+<h3><a class="anchor" id="autotoc_md1461"></a>
 Phase 3: Interface Migration</h3>
 <ol type="1">
 <li><b>Update Interface References</b> <div class="fragment"><div class="line"><span class="comment">// OLD</span></div>
@@ -744,7 +744,7 @@ Phase 3: Interface Migration</h3>
 <div class="line">kcenon::logger::log_level::info</div>
 </div><!-- fragment --></li>
 </ol>
-<h3><a class="anchor" id="autotoc_md1414"></a>
+<h3><a class="anchor" id="autotoc_md1462"></a>
 Phase 4: Validation</h3>
 <ol type="1">
 <li><b>Run Tests</b> <div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div>
@@ -756,9 +756,9 @@ Phase 4: Validation</h3>
 <div class="line">make &amp;&amp; ctest</div>
 </div><!-- fragment --></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1415"></a>
+<h2><a class="anchor" id="autotoc_md1463"></a>
 Common Issues and Solutions</h2>
-<h3><a class="anchor" id="autotoc_md1416"></a>
+<h3><a class="anchor" id="autotoc_md1464"></a>
 Issue 1: Namespace Not Found</h3>
 <p><b>Error:</b> </p><div class="fragment"><div class="line">error: &#39;logger_module&#39; is not a namespace-name</div>
 </div><!-- fragment --><p><b>Solution:</b> </p><div class="fragment"><div class="line"><span class="comment">// Change from</span></div>
@@ -766,7 +766,7 @@ Issue 1: Namespace Not Found</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// To</span></div>
 <div class="line"><span class="keyword">using namespace </span>kcenon::logger;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1417"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1465"></a>
 Issue 2: Interface Type Mismatch</h3>
 <p><b>Error:</b> </p><div class="fragment"><div class="line">error: &#39;thread_module::logger_interface&#39; is not a base of &#39;kcenon::logger::logger&#39;</div>
 </div><!-- fragment --><p><b>Solution:</b> </p><div class="fragment"><div class="line"><span class="comment">// Change from</span></div>
@@ -774,7 +774,7 @@ Issue 2: Interface Type Mismatch</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// To</span></div>
 <div class="line">common::interfaces::ILogger* logger = ...;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1418"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1466"></a>
 Issue 3: Result Type Mismatch</h3>
 <p><b>Error:</b> </p><div class="fragment"><div class="line">error: cannot convert &#39;common::VoidResult&#39; to &#39;result_void&#39;</div>
 </div><!-- fragment --><p><b>Solution:</b> </p><div class="fragment"><div class="line"><span class="comment">// Change from</span></div>
@@ -784,7 +784,7 @@ Issue 3: Result Type Mismatch</h3>
 <div class="line">common::VoidResult result = logger-&gt;log(...);</div>
 <div class="line"><span class="comment">// Or simply</span></div>
 <div class="line"><span class="keyword">auto</span> result = logger-&gt;log(...);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1419"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1467"></a>
 Issue 4: Missing thread_system</h3>
 <p><b>Error:</b> </p><div class="fragment"><div class="line">error: &#39;thread_module&#39; has not been declared</div>
 </div><!-- fragment --><p><b>Solution:</b> </p><div class="fragment"><div class="line"><span class="comment">// v3.0 doesn&#39;t require thread_system</span></div>
@@ -793,15 +793,15 @@ Issue 4: Missing thread_system</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// To</span></div>
 <div class="line"><span class="preprocessor">#include &lt;common/interfaces/logger_interface.h&gt;</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1420"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1468"></a>
 Issue 5: C++20 Not Enabled</h3>
 <p><b>Error:</b> </p><div class="fragment"><div class="line">error: &#39;source_location&#39; is not a member of &#39;std&#39;</div>
 </div><!-- fragment --><p><b>Solution:</b> </p><div class="fragment"><div class="line"># Ensure C++20 is enabled</div>
 <div class="line">set(CMAKE_CXX_STANDARD 20)</div>
 <div class="line">set(CMAKE_CXX_STANDARD_REQUIRED ON)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1421"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1469"></a>
 Migration Checklist</h2>
-<h3><a class="anchor" id="autotoc_md1422"></a>
+<h3><a class="anchor" id="autotoc_md1470"></a>
 v2.x to v3.0 Migration</h3>
 <ul>
 <li>[ ] Enable C++20 in build system</li>
@@ -817,7 +817,7 @@ v2.x to v3.0 Migration</h3>
 <li>[ ] Performance benchmarks</li>
 <li>[ ] Update documentation</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1423"></a>
+<h3><a class="anchor" id="autotoc_md1471"></a>
 v1.x to v2.x Migration</h3>
 <ul>
 <li>[ ] Backup current codebase</li>
@@ -836,7 +836,7 @@ v1.x to v2.x Migration</h3>
 <li>[ ] Code review</li>
 <li>[ ] Merge to main branch</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1424"></a>
+<h2><a class="anchor" id="autotoc_md1472"></a>
 Support and Resources</h2>
 <ul>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START.html">Quick Start Guide</a></li>
@@ -856,7 +856,7 @@ Support and Resources</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Jan 11 2026 06:30:08 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Jan 11 2026 06:56:05 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
