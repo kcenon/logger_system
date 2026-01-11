@@ -978,6 +978,9 @@ log_fields logger::get_context() const {
 namespace {
 const std::string CORRELATION_ID_KEY = "correlation_id";
 const std::string REQUEST_ID_KEY = "request_id";
+const std::string TRACE_ID_KEY = "trace_id";
+const std::string SPAN_ID_KEY = "span_id";
+const std::string PARENT_SPAN_ID_KEY = "parent_span_id";
 } // namespace
 
 void logger::set_correlation_id(const std::string& correlation_id) {
@@ -1034,6 +1037,97 @@ bool logger::has_request_id() const {
     if (pimpl_) {
         std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
         return pimpl_->context_fields_.find(REQUEST_ID_KEY) != pimpl_->context_fields_.end();
+    }
+    return false;
+}
+
+// =========================================================================
+// Trace ID / Span ID convenience API implementation
+// =========================================================================
+
+void logger::set_trace_id(const std::string& trace_id) {
+    set_context(TRACE_ID_KEY, trace_id);
+}
+
+std::string logger::get_trace_id() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        auto it = pimpl_->context_fields_.find(TRACE_ID_KEY);
+        if (it != pimpl_->context_fields_.end()) {
+            if (auto* str = std::get_if<std::string>(&it->second)) {
+                return *str;
+            }
+        }
+    }
+    return {};
+}
+
+void logger::clear_trace_id() {
+    remove_context(TRACE_ID_KEY);
+}
+
+bool logger::has_trace_id() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        return pimpl_->context_fields_.find(TRACE_ID_KEY) != pimpl_->context_fields_.end();
+    }
+    return false;
+}
+
+void logger::set_span_id(const std::string& span_id) {
+    set_context(SPAN_ID_KEY, span_id);
+}
+
+std::string logger::get_span_id() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        auto it = pimpl_->context_fields_.find(SPAN_ID_KEY);
+        if (it != pimpl_->context_fields_.end()) {
+            if (auto* str = std::get_if<std::string>(&it->second)) {
+                return *str;
+            }
+        }
+    }
+    return {};
+}
+
+void logger::clear_span_id() {
+    remove_context(SPAN_ID_KEY);
+}
+
+bool logger::has_span_id() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        return pimpl_->context_fields_.find(SPAN_ID_KEY) != pimpl_->context_fields_.end();
+    }
+    return false;
+}
+
+void logger::set_parent_span_id(const std::string& parent_span_id) {
+    set_context(PARENT_SPAN_ID_KEY, parent_span_id);
+}
+
+std::string logger::get_parent_span_id() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        auto it = pimpl_->context_fields_.find(PARENT_SPAN_ID_KEY);
+        if (it != pimpl_->context_fields_.end()) {
+            if (auto* str = std::get_if<std::string>(&it->second)) {
+                return *str;
+            }
+        }
+    }
+    return {};
+}
+
+void logger::clear_parent_span_id() {
+    remove_context(PARENT_SPAN_ID_KEY);
+}
+
+bool logger::has_parent_span_id() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        return pimpl_->context_fields_.find(PARENT_SPAN_ID_KEY) != pimpl_->context_fields_.end();
     }
     return false;
 }
