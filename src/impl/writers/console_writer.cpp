@@ -90,14 +90,13 @@ console_writer::~console_writer() {
     flush();
 }
 
-common::VoidResult console_writer::write(logger_system::log_level level,
-                                         const std::string& message,
-                                         const std::string& file,
-                                         int line,
-                                         const std::string& function,
-                                         const std::chrono::system_clock::time_point& timestamp) {
-    std::lock_guard<std::mutex> lock(write_mutex_);
-
+common::VoidResult console_writer::write_impl(logger_system::log_level level,
+                                              const std::string& message,
+                                              const std::string& file,
+                                              int line,
+                                              const std::string& function,
+                                              const std::chrono::system_clock::time_point& timestamp) {
+    // Note: Mutex is already held by thread_safe_writer::write()
     return utils::try_write_operation([&]() -> common::VoidResult {
         auto& stream = (use_stderr_ || level <= logger_system::log_level::error)
                        ? std::cerr : std::cout;
@@ -144,9 +143,8 @@ common::VoidResult console_writer::write(logger_system::log_level level,
     }, logger_error_code::processing_failed);
 }
 
-common::VoidResult console_writer::flush() {
-    std::lock_guard<std::mutex> lock(write_mutex_);
-
+common::VoidResult console_writer::flush_impl() {
+    // Note: Mutex is already held by thread_safe_writer::flush()
     return utils::try_write_operation([&]() -> common::VoidResult {
         std::cout.flush();
         std::cerr.flush();

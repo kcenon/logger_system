@@ -25,14 +25,13 @@ file_writer::~file_writer() {
     close();
 }
 
-common::VoidResult file_writer::write(logger_system::log_level level,
-                                      const std::string& message,
-                                      const std::string& file,
-                                      int line,
-                                      const std::string& function,
-                                      const std::chrono::system_clock::time_point& timestamp) {
-    std::lock_guard<std::mutex> lock(write_mutex_);
-
+common::VoidResult file_writer::write_impl(logger_system::log_level level,
+                                           const std::string& message,
+                                           const std::string& file,
+                                           int line,
+                                           const std::string& function,
+                                           const std::chrono::system_clock::time_point& timestamp) {
+    // Note: Mutex is already held by thread_safe_writer::write()
     return utils::try_write_operation([&]() -> common::VoidResult {
         // Check precondition
         if (!file_stream_.is_open()) {
@@ -54,9 +53,8 @@ common::VoidResult file_writer::write(logger_system::log_level level,
     });
 }
 
-common::VoidResult file_writer::flush() {
-    std::lock_guard<std::mutex> lock(write_mutex_);
-
+common::VoidResult file_writer::flush_impl() {
+    // Note: Mutex is already held by thread_safe_writer::flush()
     return utils::try_write_operation([&]() -> common::VoidResult {
         if (file_stream_.is_open()) {
             file_stream_.flush();
@@ -67,15 +65,14 @@ common::VoidResult file_writer::flush() {
 }
 
 common::VoidResult file_writer::reopen() {
-    std::lock_guard<std::mutex> lock(write_mutex_);
+    std::lock_guard<std::mutex> lock(get_mutex());
     close();
     return open();
 }
 
 void file_writer::close() {
-    // IMPORTANT: Caller must hold write_mutex_ before calling this method
+    // IMPORTANT: Caller must hold the mutex before calling this method
     // This ensures thread safety with concurrent write() operations
-    // In debug builds, consider adding: assert(write_mutex_.try_lock() == false)
 
     if (file_stream_.is_open()) {
         file_stream_.flush();
@@ -84,7 +81,7 @@ void file_writer::close() {
 }
 
 common::VoidResult file_writer::open() {
-    // IMPORTANT: Caller must hold write_mutex_ before calling this method
+    // IMPORTANT: Caller must hold the mutex before calling this method
     // This ensures thread safety with concurrent operations
 
     return utils::try_open_operation([&]() -> common::VoidResult {
