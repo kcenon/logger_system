@@ -101,89 +101,160 @@ Creating Custom Writers</h1>
 <p>This guide explains how to create custom writers for the Logger System to send logs to various destinations.</p>
 <h2><a class="anchor" id="autotoc_md412"></a>
 Overview</h2>
-<p>Writers are responsible for the actual output of log messages. The Logger System provides a flexible <code>base_writer</code> class that you can extend to create custom output destinations.</p>
+<p>Writers are responsible for the actual output of log messages. The Logger System provides a flexible writer hierarchy that you can extend to create custom output destinations.</p>
 <h2><a class="anchor" id="autotoc_md413"></a>
+Writer Hierarchy</h2>
+<div class="fragment"><div class="line">base_writer (abstract)</div>
+<div class="line">├── thread_safe_writer (recommended for simple writers)</div>
+<div class="line">│   ├── console_writer</div>
+<div class="line">│   ├── file_writer</div>
+<div class="line">│   │   └── rotating_file_writer</div>
+<div class="line">│   └── your_custom_writer (Thread-safety handled automatically!)</div>
+<div class="line">├── async_writer (for async wrapper patterns)</div>
+<div class="line">├── batch_writer (for batched I/O)</div>
+<div class="line">├── critical_writer (for critical log handling)</div>
+<div class="line">└── network_writer (for network I/O with custom threading)</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md414"></a>
+Recommended: Using thread_safe_writer (Since v1.3.0)</h2>
+<p>For most custom writers, inherit from <code>thread_safe_writer</code> instead of <code>base_writer</code>. This provides:</p><ul>
+<li><b>Automatic thread-safety</b>: Mutex handling is done by the base class</li>
+<li><b>Consistent locking</b>: All writers use the same synchronization strategy</li>
+<li><b>Less boilerplate</b>: No need to manage locks manually</li>
+<li><b>Template Method pattern</b>: Implement <code>*_impl()</code> methods, get thread-safety for free</li>
+</ul>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/thread_safe_writer.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>my_custom_writer : <span class="keyword">public</span> kcenon::logger::thread_safe_writer {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    my_custom_writer() : thread_safe_writer() {}</div>
+<div class="line"> </div>
+<div class="line">    std::string get_name()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;my_custom&quot;</span>; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    <span class="comment">// Implement these methods - NO MUTEX NEEDED!</span></div>
+<div class="line">    <span class="comment">// The base class handles all synchronization.</span></div>
+<div class="line"> </div>
+<div class="line">    common::VoidResult write_impl(</div>
+<div class="line">        logger_system::log_level level,</div>
+<div class="line">        <span class="keyword">const</span> std::string&amp; message,</div>
+<div class="line">        <span class="keyword">const</span> std::string&amp; file,</div>
+<div class="line">        <span class="keywordtype">int</span> line,</div>
+<div class="line">        <span class="keyword">const</span> std::string&amp; function,</div>
+<div class="line">        <span class="keyword">const</span> std::chrono::system_clock::time_point&amp; timestamp)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Your output logic here - already protected by mutex</span></div>
+<div class="line">        std::cout &lt;&lt; format_log_entry(log_entry(level, message, timestamp)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">        <span class="keywordflow">return</span> common::ok();</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    common::VoidResult flush_impl()<span class="keyword"> override </span>{</div>
+<div class="line">        <span class="comment">// Your flush logic here - already protected by mutex</span></div>
+<div class="line">        std::cout.flush();</div>
+<div class="line">        <span class="keywordflow">return</span> common::ok();</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md415"></a>
+Benefits of thread_safe_writer</h3>
+<ol type="1">
+<li><b>No mutex boilerplate</b>: Derived classes focus only on output logic</li>
+<li><b>Cannot accidentally forget locking</b>: Public methods are <code>final</code></li>
+<li><b>Deadlock prevention</b>: Clear contract about when mutex is held</li>
+<li><b>RAII guarantee</b>: Mutex is always released, even on exceptions</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md416"></a>
 Base Writer Interface</h2>
-<p>All custom writers must inherit from <code>base_writer</code>:</p>
+<p>For advanced use cases (async, batching, custom synchronization), inherit from <code>base_writer</code>:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>base_writer {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    <span class="keyword">virtual</span> ~base_writer() = <span class="keywordflow">default</span>;</div>
-<div class="line">    </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment">// Main write method - must be implemented</span></div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> write(thread_module::log_level level,</div>
-<div class="line">                      <span class="keyword">const</span> std::string&amp; message,</div>
-<div class="line">                      <span class="keyword">const</span> std::string&amp; file,</div>
-<div class="line">                      <span class="keywordtype">int</span> line,</div>
-<div class="line">                      <span class="keyword">const</span> std::string&amp; function,</div>
-<div class="line">                      <span class="keyword">const</span> std::chrono::system_clock::time_point&amp; timestamp) = 0;</div>
-<div class="line">    </div>
+<div class="line">    <span class="keyword">virtual</span> common::VoidResult write(</div>
+<div class="line">        logger_system::log_level level,</div>
+<div class="line">        <span class="keyword">const</span> std::string&amp; message,</div>
+<div class="line">        <span class="keyword">const</span> std::string&amp; file,</div>
+<div class="line">        <span class="keywordtype">int</span> line,</div>
+<div class="line">        <span class="keyword">const</span> std::string&amp; function,</div>
+<div class="line">        <span class="keyword">const</span> std::chrono::system_clock::time_point&amp; timestamp) = 0;</div>
+<div class="line"> </div>
 <div class="line">    <span class="comment">// Flush any buffered data - must be implemented</span></div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> flush() = 0;</div>
-<div class="line">    </div>
+<div class="line">    <span class="keyword">virtual</span> common::VoidResult flush() = 0;</div>
+<div class="line"> </div>
 <div class="line">    <span class="comment">// Optional: color support</span></div>
 <div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_use_color(<span class="keywordtype">bool</span> use_color);</div>
 <div class="line">    <span class="keywordtype">bool</span> use_color() <span class="keyword">const</span>;</div>
-<div class="line">    </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="comment">// Helper methods available to derived classes</span></div>
-<div class="line">    std::string format_log_entry(...);  <span class="comment">// Format log entry to string</span></div>
-<div class="line">    std::string level_to_string(thread_module::log_level level) <span class="keyword">const</span>;</div>
-<div class="line">    std::string level_to_color(thread_module::log_level level) <span class="keyword">const</span>;</div>
+<div class="line">    std::string format_log_entry(<span class="keyword">const</span> log_entry&amp; entry) <span class="keyword">const</span>;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md414"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md417"></a>
 Simple Examples</h2>
-<h3><a class="anchor" id="autotoc_md415"></a>
-1. File Writer</h3>
-<p>A basic file writer that appends logs to a file:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;logger_system/writers/base_writer.h&gt;</span></div>
+<h3><a class="anchor" id="autotoc_md418"></a>
+1. Simple File Writer (Using thread_safe_writer)</h3>
+<p>A basic file writer using the recommended <code>thread_safe_writer</code> base class:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/thread_safe_writer.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;mutex&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">class </span>file_writer : <span class="keyword">public</span> logger_module::base_writer {</div>
+<div class="line"><span class="keyword">class </span>simple_file_writer : <span class="keyword">public</span> kcenon::logger::thread_safe_writer {</div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">    std::ofstream file_;</div>
-<div class="line">    std::mutex mutex_;</div>
 <div class="line">    std::string filename_;</div>
-<div class="line">    </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">explicit</span> file_writer(<span class="keyword">const</span> std::string&amp; filename)</div>
+<div class="line">    <span class="keyword">explicit</span> simple_file_writer(<span class="keyword">const</span> std::string&amp; filename)</div>
 <div class="line">        : filename_(filename) {</div>
 <div class="line">        file_.open(filename_, std::ios::app);</div>
 <div class="line">        <span class="keywordflow">if</span> (!file_.is_open()) {</div>
 <div class="line">            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Failed to open log file: &quot;</span> + filename);</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
-<div class="line">    </div>
-<div class="line">    ~file_writer()<span class="keyword"> override </span>{</div>
+<div class="line"> </div>
+<div class="line">    ~simple_file_writer()<span class="keyword"> override </span>{</div>
+<div class="line">        <span class="comment">// flush() is called automatically by base class destructor</span></div>
 <div class="line">        <span class="keywordflow">if</span> (file_.is_open()) {</div>
 <div class="line">            file_.close();</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordtype">void</span> write(thread_module::log_level level,</div>
-<div class="line">               <span class="keyword">const</span> std::string&amp; message,</div>
-<div class="line">               <span class="keyword">const</span> std::string&amp; file,</div>
-<div class="line">               <span class="keywordtype">int</span> line,</div>
-<div class="line">               <span class="keyword">const</span> std::string&amp; function,</div>
-<div class="line">               <span class="keyword">const</span> std::chrono::system_clock::time_point&amp; timestamp)<span class="keyword"> override </span>{</div>
-<div class="line">        std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
-<div class="line">        </div>
-<div class="line">        <span class="comment">// Use the base class helper to format</span></div>
-<div class="line">        std::string formatted = format_log_entry(level, message, file, </div>
-<div class="line">                                                line, function, timestamp);</div>
-<div class="line">        </div>
-<div class="line">        file_ &lt;&lt; formatted &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">    std::string get_name()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;simple_file&quot;</span>; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    <span class="comment">// No mutex needed! thread_safe_writer handles synchronization</span></div>
+<div class="line">    common::VoidResult write_impl(</div>
+<div class="line">        logger_system::log_level level,</div>
+<div class="line">        <span class="keyword">const</span> std::string&amp; message,</div>
+<div class="line">        <span class="keyword">const</span> std::string&amp; file,</div>
+<div class="line">        <span class="keywordtype">int</span> line,</div>
+<div class="line">        <span class="keyword">const</span> std::string&amp; function,</div>
+<div class="line">        <span class="keyword">const</span> std::chrono::system_clock::time_point&amp; timestamp)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Create log entry and format</span></div>
+<div class="line">        log_entry entry = log_entry(level, message, file, line, function, timestamp);</div>
+<div class="line">        std::string formatted = format_log_entry(entry);</div>
+<div class="line"> </div>
+<div class="line">        file_ &lt;&lt; formatted &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (!file_.good()) {</div>
+<div class="line">            <span class="keywordflow">return</span> make_logger_void_result(</div>
+<div class="line">                logger_error_code::file_write_failed,</div>
+<div class="line">                <span class="stringliteral">&quot;Failed to write to file: &quot;</span> + filename_);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">return</span> common::ok();</div>
 <div class="line">    }</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordtype">void</span> flush()<span class="keyword"> override </span>{</div>
-<div class="line">        std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
+<div class="line"> </div>
+<div class="line">    common::VoidResult flush_impl()<span class="keyword"> override </span>{</div>
 <div class="line">        file_.flush();</div>
+<div class="line">        <span class="keywordflow">return</span> common::ok();</div>
 <div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Usage</span></div>
-<div class="line">logger-&gt;add_writer(std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;application.log&quot;</span>));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md416"></a>
+<div class="line">logger-&gt;add_writer(std::make_unique&lt;simple_file_writer&gt;(<span class="stringliteral">&quot;application.log&quot;</span>));</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p>&zwj;<b>Note</b>: Compare this with the built-in <code>file_writer</code> class which provides additional features like buffering and byte counting. </p>
+</blockquote>
+<h3><a class="anchor" id="autotoc_md419"></a>
 2. Rotating File Writer</h3>
 <p>A more advanced file writer with size-based rotation:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>rotating_file_writer : <span class="keyword">public</span> logger_module::base_writer {</div>
@@ -249,7 +320,7 @@ Simple Examples</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Usage: 10MB max file size</span></div>
 <div class="line">logger-&gt;add_writer(std::make_unique&lt;rotating_file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>, 10 * 1024 * 1024));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md417"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md420"></a>
 3. Network Writer</h3>
 <p>Send logs to a remote server:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/socket.h&gt;</span></div>
@@ -327,7 +398,7 @@ Simple Examples</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Usage</span></div>
 <div class="line">logger-&gt;add_writer(std::make_unique&lt;network_writer&gt;(<span class="stringliteral">&quot;192.168.1.100&quot;</span>, 5514));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md418"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md421"></a>
 4. Database Writer</h3>
 <p>Log to a database (using SQLite as example):</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sqlite3.h&gt;</span></div>
@@ -424,9 +495,9 @@ Simple Examples</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Usage</span></div>
 <div class="line">logger-&gt;add_writer(std::make_unique&lt;database_writer&gt;(<span class="stringliteral">&quot;logs.db&quot;</span>));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md419"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md422"></a>
 Advanced Patterns</h2>
-<h3><a class="anchor" id="autotoc_md420"></a>
+<h3><a class="anchor" id="autotoc_md423"></a>
 1. Filtering Writer</h3>
 <p>A writer that filters logs before outputting:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>filtering_writer : <span class="keyword">public</span> logger_module::base_writer {</div>
@@ -465,7 +536,7 @@ Advanced Patterns</h2>
 <div class="line">    }</div>
 <div class="line">);</div>
 <div class="line">logger-&gt;add_writer(std::move(filtered));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md421"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md424"></a>
 2. Async Writer Wrapper</h3>
 <p>The Logger System provides a built-in <code>async_writer</code> class that wraps any writer for asynchronous operation. For detailed documentation on async writers, including performance characteristics and usage patterns, see the <b><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS.html">Async Writers Guide</a></b>.</p>
 <p><b>Quick Example:</b></p>
@@ -483,10 +554,26 @@ Advanced Patterns</h2>
 <div class="line">async-&gt;start();</div>
 <div class="line">logger-&gt;add_writer(std::move(async));</div>
 </div><!-- fragment --><p>For high-throughput scenarios (&gt;100K msg/sec), advanced async implementations are available. See <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS.html">Async Writers Guide</a> for details.</p>
-<h2><a class="anchor" id="autotoc_md422"></a>
+<h2><a class="anchor" id="autotoc_md425"></a>
+Choosing the Right Base Class</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Base Class   </th><th class="markdownTableHeadNone">Use When    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>thread_safe_writer</code>   </td><td class="markdownTableBodyNone">Simple synchronous I/O (file, console, socket) - <b>recommended</b>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>base_writer</code>   </td><td class="markdownTableBodyNone">Custom synchronization, async patterns, or wrapper writers   </td></tr>
+</table>
+<h3><a class="anchor" id="autotoc_md426"></a>
+When to Use thread_safe_writer</h3>
+<p>✅ Simple output destinations (file, console, database) ✅ Standard mutex-based synchronization is sufficient ✅ Want to minimize boilerplate code</p>
+<h3><a class="anchor" id="autotoc_md427"></a>
+When to Use base_writer Directly</h3>
+<p>✅ Wrapper patterns (like <code>async_writer</code>, <code>batch_writer</code>) ✅ Writers with complex internal threading (like <code>network_writer</code>) ✅ Custom synchronization requirements (spinlock, RW-lock, lock-free)</p>
+<h2><a class="anchor" id="autotoc_md428"></a>
 Best Practices</h2>
 <ol type="1">
-<li><b>Thread Safety</b>: Always protect shared state with mutexes; writes are called sequentially by the logger, but custom async wrappers must be safe.</li>
+<li><b>Use thread_safe_writer</b>: For simple writers, inherit from <code>thread_safe_writer</code> to get automatic thread-safety without boilerplate.</li>
 <li><b>Error Handling</b>: Decide on failure behavior (throw, silent fail, retry/backoff) and expose counters for observability.</li>
 <li><b>Batching</b>: Prefer batching for I/O heavy writers to reduce syscalls and context switches.</li>
 <li><b>Resource Management</b>: Use RAII for file handles, sockets, and DB connections; ensure <code>flush()</code> is efficient and idempotent.</li>
@@ -494,7 +581,7 @@ Best Practices</h2>
 <li><b>Security</b>: Avoid writing secrets/PII; consider integrating <code>log_sanitizer</code> upstream. If encrypting, use a vetted crypto library rather than demo components.</li>
 <li><b>Windows Networking</b>: For socket-based writers, guard platform specifics (<code>#ifdef _WIN32</code>) and initialize WinSock.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md423"></a>
+<h2><a class="anchor" id="autotoc_md429"></a>
 Testing Custom Writers</h2>
 <div class="fragment"><div class="line"><span class="comment">// Test harness for custom writers</span></div>
 <div class="line"><span class="keyword">class </span>writer_test {</div>
@@ -538,14 +625,14 @@ Testing Custom Writers</h2>
 <div class="line">    }</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<p><em>Last Updated: 2025-10-20</em> </p>
+<p><em>Last Updated: 2025-01-11</em> (Added thread_safe_writer documentation and examples) </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Jan 11 2026 05:48:06 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Jan 11 2026 06:30:08 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Log Level Semantic Standard</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md428"></a> <b>Date</b>: 2025-11-08 <b>Status</b>: Approved for Implementation <b>Affects</b>: logger_system, thread_system</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md434"></a> <b>Date</b>: 2025-11-08 <b>Status</b>: Approved for Implementation <b>Affects</b>: logger_system, thread_system</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md430"></a>
+<h1><a class="anchor" id="autotoc_md436"></a>
 Problem Statement</h1>
 <p>Currently, there is an inconsistency in log level semantics between logger_system and thread_system:</p>
-<h2><a class="anchor" id="autotoc_md431"></a>
+<h2><a class="anchor" id="autotoc_md437"></a>
 logger_system (Ascending: Low → High)</h2>
 <div class="fragment"><div class="line"><span class="keyword">enum class</span> log_level {</div>
 <div class="line">    trace = 0,     <span class="comment">// Most verbose</span></div>
@@ -111,7 +111,7 @@ logger_system (Ascending: Low → High)</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Comparison: msg_level &gt;= min_level</span></div>
 <div class="line"><span class="comment">// Example: To log errors and above, set min_level = error (4)</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md432"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md438"></a>
 thread_system (Descending: High → Low)</h2>
 <div class="fragment"><div class="line"><span class="keyword">enum class</span> log_level {</div>
 <div class="line">    critical = 0,  <span class="comment">// Most critical, least verbose</span></div>
@@ -124,7 +124,7 @@ thread_system (Descending: High → Low)</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Comparison: msg_level &lt;= max_level</span></div>
 <div class="line"><span class="comment">// Example: To log errors and above, set max_level = error (1)</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md433"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md439"></a>
 Impact</h2>
 <ol type="1">
 <li><b>Confusing API</b>: Different comparison logic for same semantic meaning</li>
@@ -133,7 +133,7 @@ Impact</h2>
 <li><b>Maintenance Burden</b>: Duplicate documentation and examples</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md435"></a>
+<h1><a class="anchor" id="autotoc_md441"></a>
 Decision</h1>
 <p><b>We adopt the ASCENDING semantic (Low → High) as the standard across all systems.</b></p>
 <div class="fragment"><div class="line"><span class="comment">// Standard Log Level Enumeration</span></div>
@@ -146,7 +146,7 @@ Decision</h1>
 <div class="line">    fatal = 5,     <span class="comment">// Least verbose, most important</span></div>
 <div class="line">    off = 6        <span class="comment">// Logging disabled</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md436"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md442"></a>
 Rationale</h2>
 <ol type="1">
 <li><b>Industry Standard</b>: Most logging frameworks use ascending order<ul>
@@ -168,16 +168,16 @@ Rationale</h2>
 <li><b>Consistent with Syslog RFC 5424</b>: Standard severity levels</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md438"></a>
+<h1><a class="anchor" id="autotoc_md444"></a>
 Migration Plan</h1>
-<h2><a class="anchor" id="autotoc_md439"></a>
+<h2><a class="anchor" id="autotoc_md445"></a>
 Phase 1: Documentation (Sprint 1 - Current)</h2>
 <ul>
 <li>[x] Write this standard document</li>
 <li>[ ] Update logger_system documentation to emphasize standard</li>
 <li>[ ] Create thread_system migration guide</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md440"></a>
+<h2><a class="anchor" id="autotoc_md446"></a>
 Phase 2: thread_system Unification (Sprint 2)</h2>
 <ul>
 <li>[ ] Update thread_system <code>log_level</code> enum to ascending order</li>
@@ -185,7 +185,7 @@ Phase 2: thread_system Unification (Sprint 2)</h2>
 <li>[ ] Add compatibility layer for deprecation period</li>
 <li>[ ] Update thread_system tests</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md441"></a>
+<h2><a class="anchor" id="autotoc_md447"></a>
 Phase 3: Adapter Simplification (Sprint 3)</h2>
 <ul>
 <li>[ ] Remove value mapping from log level adapters</li>
@@ -193,9 +193,9 @@ Phase 3: Adapter Simplification (Sprint 3)</h2>
 <li>[ ] Verify all integration tests pass</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md443"></a>
+<h1><a class="anchor" id="autotoc_md449"></a>
 Implementation Details</h1>
-<h2><a class="anchor" id="autotoc_md444"></a>
+<h2><a class="anchor" id="autotoc_md450"></a>
 Standard Definition (logger_system - already compliant)</h2>
 <div class="fragment"><div class="line"><span class="comment">// include/kcenon/logger/types/logger_types.h</span></div>
 <div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
@@ -228,7 +228,7 @@ Standard Definition (logger_system - already compliant)</h2>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md445"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md451"></a>
 thread_system Changes (Sprint 2)</h2>
 <div class="fragment"><div class="line"><span class="comment">// include/kcenon/thread/core/logging.h (UPDATED)</span></div>
 <div class="line"><span class="keyword">namespace </span>kcenon::thread {</div>
@@ -259,7 +259,7 @@ thread_system Changes (Sprint 2)</h2>
 <div class="line">        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>log_level<span class="keyword">&gt;</span>(5 - <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(old_level));</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md446"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md452"></a>
 Adapter Simplification (Sprint 3)</h2>
 <div class="fragment"><div class="line"><span class="comment">// Before (complex mapping)</span></div>
 <div class="line"><span class="keyword">namespace </span>adapters {</div>
@@ -274,9 +274,9 @@ Adapter Simplification (Sprint 3)</h2>
 <div class="line">    <span class="keyword">using </span>log_level = logger::log_level;  <span class="comment">// Type alias, no conversion needed</span></div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md448"></a>
+<h1><a class="anchor" id="autotoc_md454"></a>
 Compatibility Considerations</h1>
-<h2><a class="anchor" id="autotoc_md449"></a>
+<h2><a class="anchor" id="autotoc_md455"></a>
 Breaking Change Assessment</h2>
 <ul>
 <li><b>logger_system</b>: No breaking changes (already compliant)</li>
@@ -287,7 +287,7 @@ Breaking Change Assessment</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md450"></a>
+<h2><a class="anchor" id="autotoc_md456"></a>
 Mitigation Strategy</h2>
 <ol type="1">
 <li><b>Deprecation Period</b>: Minimum 6 months</li>
@@ -296,36 +296,36 @@ Mitigation Strategy</h2>
 <li><b>Migration Tool</b>: Automated code scanner to find usages</li>
 <li><b>Documentation</b>: Clear migration guide with examples</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md451"></a>
+<h2><a class="anchor" id="autotoc_md457"></a>
 User Impact</h2>
 <p><b>Low Impact</b> - Most users interact via helper functions, not raw enums: </p><div class="fragment"><div class="line"><span class="comment">// Common usage pattern (unaffected by enum ordering)</span></div>
 <div class="line">logger-&gt;info(<span class="stringliteral">&quot;Message&quot;</span>);      <span class="comment">// Not: logger-&gt;log(log_level::info, &quot;Message&quot;);</span></div>
 <div class="line">logger-&gt;set_level(<span class="stringliteral">&quot;ERROR&quot;</span>);   <span class="comment">// Not: logger-&gt;set_level(log_level::error);</span></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md453"></a>
+<h1><a class="anchor" id="autotoc_md459"></a>
 Testing Requirements</h1>
-<h2><a class="anchor" id="autotoc_md454"></a>
+<h2><a class="anchor" id="autotoc_md460"></a>
 Unit Tests</h2>
 <ul>
 <li>[ ] Verify log level comparisons</li>
 <li>[ ] Test <code>should_log()</code> function correctness</li>
 <li>[ ] Validate string conversions</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md455"></a>
+<h2><a class="anchor" id="autotoc_md461"></a>
 Integration Tests</h2>
 <ul>
 <li>[ ] logger_system ↔ thread_system level mapping</li>
 <li>[ ] Serialization/deserialization consistency</li>
 <li>[ ] Configuration file parsing</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md456"></a>
+<h2><a class="anchor" id="autotoc_md462"></a>
 Regression Tests</h2>
 <ul>
 <li>[ ] Ensure existing behavior unchanged in logger_system</li>
 <li>[ ] Verify thread_system compatibility layer works</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md458"></a>
+<h1><a class="anchor" id="autotoc_md464"></a>
 Documentation Updates Required</h1>
 <ol type="1">
 <li><b>README.md</b> (both systems)<ul>
@@ -351,7 +351,7 @@ Documentation Updates Required</h1>
 </li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md460"></a>
+<h1><a class="anchor" id="autotoc_md466"></a>
 Success Criteria</h1>
 <ul>
 <li>[ ] Single log level semantic across all systems</li>
@@ -362,7 +362,7 @@ Success Criteria</h1>
 <li>[ ] Smooth migration path for thread_system users</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md462"></a>
+<h1><a class="anchor" id="autotoc_md468"></a>
 Timeline</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -379,7 +379,7 @@ Timeline</h1>
 <td class="markdownTableBodyNone"><b>Cleanup</b>   </td><td class="markdownTableBodyNone">Next major   </td><td class="markdownTableBodyNone">Remove deprecated enums and code   </td><td class="markdownTableBodyNone">Pending   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md464"></a>
+<h1><a class="anchor" id="autotoc_md470"></a>
 References</h1>
 <ul>
 <li><a href="https://tools.ietf.org/html/rfc5424">RFC 5424: The Syslog Protocol</a> - Section 6.2.1 Severity</li>
@@ -388,7 +388,7 @@ References</h1>
 <li><a href="../../thread_system/IMPROVEMENT_PLAN.md#5-log-level-enumeration-mismatch">thread_system IMPROVEMENT_PLAN.md</a></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md466"></a>
+<h1><a class="anchor" id="autotoc_md472"></a>
 Approval</h1>
 <p><b>Lead Architect</b>: [Approved - 2025-11-08] <b>logger_system Owner</b>: [Approved - 2025-11-08] <b>thread_system Owner</b>: [Pending Coordination]</p>
 <hr  />
@@ -399,7 +399,7 @@ Approval</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Jan 11 2026 05:48:06 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Jan 11 2026 06:30:08 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
