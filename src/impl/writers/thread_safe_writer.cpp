@@ -31,11 +31,17 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include <kcenon/logger/writers/thread_safe_writer.h>
+#include <kcenon/logger/interfaces/log_entry.h>
 
 namespace kcenon::logger {
 
 thread_safe_writer::thread_safe_writer(std::unique_ptr<log_formatter_interface> formatter)
     : base_writer(std::move(formatter)) {
+}
+
+common::VoidResult thread_safe_writer::write(const log_entry& entry) {
+    std::lock_guard<std::mutex> lock(write_mutex_);
+    return write_entry_impl(entry);
 }
 
 common::VoidResult thread_safe_writer::write(logger_system::log_level level,
@@ -46,6 +52,14 @@ common::VoidResult thread_safe_writer::write(logger_system::log_level level,
                                              const std::chrono::system_clock::time_point& timestamp) {
     std::lock_guard<std::mutex> lock(write_mutex_);
     return write_impl(level, message, file, line, function, timestamp);
+}
+
+common::VoidResult thread_safe_writer::write_entry_impl(const log_entry& entry) {
+    // Default implementation: delegate to legacy API for backward compatibility
+    std::string file = entry.location ? entry.location->file.to_string() : "";
+    int line = entry.location ? entry.location->line : 0;
+    std::string function = entry.location ? entry.location->function.to_string() : "";
+    return write_impl(entry.level, entry.message.to_string(), file, line, function, entry.timestamp);
 }
 
 common::VoidResult thread_safe_writer::flush() {
