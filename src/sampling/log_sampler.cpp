@@ -87,11 +87,71 @@ log_sampler& log_sampler::operator=(log_sampler&& other) noexcept {
 }
 
 bool log_sampler::should_sample(const log_entry& entry) {
-    std::optional<std::string> category;
-    if (entry.category.has_value()) {
-        category = entry.category->to_string();
+    // Increment total count
+    total_count_.fetch_add(1, std::memory_order_relaxed);
+
+    // Check if sampling is enabled
+    bool enabled = false;
+    sampling_strategy strategy = sampling_strategy::random;
+    double rate = 1.0;
+    {
+        std::shared_lock<std::shared_mutex> lock(config_mutex_);
+        enabled = config_.enabled;
+        strategy = config_.strategy;
+        rate = config_.rate;
     }
-    return should_sample(entry.level, entry.message.to_string(), category);
+
+    if (!enabled) {
+        sampled_count_.fetch_add(1, std::memory_order_relaxed);
+        return true;  // Pass through when disabled
+    }
+
+    // Check if level bypasses sampling
+    if (should_bypass_level(entry.level)) {
+        bypassed_count_.fetch_add(1, std::memory_order_relaxed);
+        return true;
+    }
+
+    // Check if any field bypasses sampling (Phase 3.4)
+    if (should_bypass_field(entry)) {
+        bypassed_count_.fetch_add(1, std::memory_order_relaxed);
+        return true;
+    }
+
+    // Try to get field-specific rate first (Phase 3.4)
+    double effective = get_field_rate(entry);
+    if (effective < 0) {
+        // No field-specific rate found, try category
+        effective = rate;
+        if (entry.category.has_value()) {
+            effective = get_category_rate(entry.category->to_string());
+        }
+    }
+
+    // Apply the configured strategy
+    bool sampled = false;
+    switch (strategy) {
+        case sampling_strategy::random:
+            sampled = random_sample(effective);
+            break;
+        case sampling_strategy::rate_limiting:
+            sampled = rate_limit_sample();
+            break;
+        case sampling_strategy::adaptive:
+            sampled = adaptive_sample();
+            break;
+        case sampling_strategy::hash_based:
+            sampled = hash_sample(entry.message.to_string(), effective);
+            break;
+    }
+
+    if (sampled) {
+        sampled_count_.fetch_add(1, std::memory_order_relaxed);
+    } else {
+        dropped_count_.fetch_add(1, std::memory_order_relaxed);
+    }
+
+    return sampled;
 }
 
 bool log_sampler::should_sample(logger_system::log_level level,
@@ -206,6 +266,59 @@ bool log_sampler::should_bypass_level(logger_system::log_level level) const {
     std::shared_lock<std::shared_mutex> lock(config_mutex_);
     const auto& levels = config_.always_log_levels;
     return std::find(levels.begin(), levels.end(), level) != levels.end();
+}
+
+bool log_sampler::should_bypass_field(const log_entry& entry) const {
+    if (!entry.fields.has_value()) {
+        return false;
+    }
+
+    std::shared_lock<std::shared_mutex> lock(config_mutex_);
+    const auto& bypass_fields = config_.always_log_fields;
+
+    for (const auto& field_name : bypass_fields) {
+        if (entry.fields->find(field_name) != entry.fields->end()) {
+            return true;  // Found a bypass field
+        }
+    }
+    return false;
+}
+
+double log_sampler::get_field_rate(const log_entry& entry) const {
+    if (!entry.fields.has_value()) {
+        return -1.0;  // No fields, use default rate
+    }
+
+    std::shared_lock<std::shared_mutex> lock(config_mutex_);
+    const auto& field_rates = config_.field_rates;
+
+    // Check each configured field
+    for (const auto& [field_name, value_rates] : field_rates) {
+        auto field_it = entry.fields->find(field_name);
+        if (field_it == entry.fields->end()) {
+            continue;
+        }
+
+        // Convert field value to string for lookup
+        std::string value_str;
+        if (std::holds_alternative<std::string>(field_it->second)) {
+            value_str = std::get<std::string>(field_it->second);
+        } else if (std::holds_alternative<int64_t>(field_it->second)) {
+            value_str = std::to_string(std::get<int64_t>(field_it->second));
+        } else if (std::holds_alternative<double>(field_it->second)) {
+            value_str = std::to_string(std::get<double>(field_it->second));
+        } else if (std::holds_alternative<bool>(field_it->second)) {
+            value_str = std::get<bool>(field_it->second) ? "true" : "false";
+        }
+
+        // Look up the rate for this value
+        auto rate_it = value_rates.find(value_str);
+        if (rate_it != value_rates.end()) {
+            return rate_it->second;
+        }
+    }
+
+    return -1.0;  // No matching field/value rate found
 }
 
 double log_sampler::get_category_rate(const std::string& category) const {

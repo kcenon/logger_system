@@ -216,6 +216,22 @@ private:
     [[nodiscard]] bool should_bypass_level(logger_system::log_level level) const;
 
     /**
+     * @brief Check if any field should bypass sampling
+     * @param entry Log entry to check
+     * @return true if any configured bypass field is present
+     * @since 3.4.0
+     */
+    [[nodiscard]] bool should_bypass_field(const log_entry& entry) const;
+
+    /**
+     * @brief Get the sampling rate based on structured fields
+     * @param entry Log entry with fields to check
+     * @return Sampling rate for the matching field value, or -1 if no match
+     * @since 3.4.0
+     */
+    [[nodiscard]] double get_field_rate(const log_entry& entry) const;
+
+    /**
      * @brief Get the sampling rate for a category
      * @param category Category name (empty for default rate)
      * @return Sampling rate for the category
