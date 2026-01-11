@@ -12,6 +12,8 @@ All rights reserved.
 #include <kcenon/logger/core/log_context_scope.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/formatters/json_formatter.h>
+#include <kcenon/logger/formatters/logfmt_formatter.h>
+#include <kcenon/logger/formatters/template_formatter.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/common/patterns/result.h>
 
@@ -574,4 +576,155 @@ TEST_F(StructuredLoggingTest, ThreadIsolation) {
     thread2.join();
 
     EXPECT_TRUE(test_passed);
+}
+
+// Test 19: LogfmtFormatter basic formatting
+TEST_F(StructuredLoggingTest, LogfmtFormatterBasic) {
+    logfmt_formatter formatter;
+
+    log_entry entry(log_level::info, "Server started");
+
+    std::string output = formatter.format(entry);
+
+    // Verify logfmt output contains expected key=value pairs
+    EXPECT_NE(output.find("level=info"), std::string::npos);
+    EXPECT_NE(output.find("msg="), std::string::npos);
+    EXPECT_NE(output.find("Server started"), std::string::npos);
+}
+
+// Test 20: LogfmtFormatter with structured fields
+TEST_F(StructuredLoggingTest, LogfmtFormatterWithFields) {
+    logfmt_formatter formatter;
+
+    log_entry entry(log_level::error, "Connection failed");
+    entry.fields = log_fields{
+        {"host", std::string("localhost")},
+        {"port", static_cast<int64_t>(5432)},
+        {"retry", true},
+        {"timeout_ms", 30.5}
+    };
+
+    std::string output = formatter.format(entry);
+
+    EXPECT_NE(output.find("host=localhost"), std::string::npos);
+    EXPECT_NE(output.find("port=5432"), std::string::npos);
+    EXPECT_NE(output.find("retry=true"), std::string::npos);
+    EXPECT_NE(output.find("timeout_ms="), std::string::npos);
+}
+
+// Test 21: LogfmtFormatter escapes special characters
+TEST_F(StructuredLoggingTest, LogfmtFormatterEscaping) {
+    logfmt_formatter formatter;
+
+    log_entry entry(log_level::info, "Message with spaces and \"quotes\"");
+
+    std::string output = formatter.format(entry);
+
+    // Message with special chars should be quoted
+    EXPECT_NE(output.find("msg=\""), std::string::npos);
+}
+
+// Test 22: TemplateFormatter basic formatting
+TEST_F(StructuredLoggingTest, TemplateFormatterBasic) {
+    template_formatter formatter("[{level}] {message}");
+
+    log_entry entry(log_level::info, "Test message");
+
+    std::string output = formatter.format(entry);
+
+    EXPECT_NE(output.find("[INFO]"), std::string::npos);
+    EXPECT_NE(output.find("Test message"), std::string::npos);
+}
+
+// Test 23: TemplateFormatter with timestamp
+TEST_F(StructuredLoggingTest, TemplateFormatterWithTimestamp) {
+    template_formatter formatter("{timestamp} [{level}] {message}");
+
+    log_entry entry(log_level::debug, "Debug info");
+
+    std::string output = formatter.format(entry);
+
+    // Check ISO 8601 format exists (year-month-day pattern)
+    EXPECT_NE(output.find("T"), std::string::npos);  // ISO 8601 separator
+    EXPECT_NE(output.find("[DEBUG]"), std::string::npos);
+    EXPECT_NE(output.find("Debug info"), std::string::npos);
+}
+
+// Test 24: TemplateFormatter with source location
+TEST_F(StructuredLoggingTest, TemplateFormatterWithLocation) {
+    template_formatter formatter("{message} ({filename}:{line})");
+
+    log_entry entry(log_level::error, "Error occurred",
+                    "/path/to/file.cpp", 42, "test_function");
+
+    std::string output = formatter.format(entry);
+
+    EXPECT_NE(output.find("Error occurred"), std::string::npos);
+    EXPECT_NE(output.find("file.cpp"), std::string::npos);
+    EXPECT_NE(output.find(":42"), std::string::npos);
+}
+
+// Test 25: TemplateFormatter with structured fields
+TEST_F(StructuredLoggingTest, TemplateFormatterWithFields) {
+    template_formatter formatter("{message} user_id={user_id}");
+
+    log_entry entry(log_level::info, "User action");
+    entry.fields = log_fields{
+        {"user_id", static_cast<int64_t>(12345)}
+    };
+
+    std::string output = formatter.format(entry);
+
+    EXPECT_NE(output.find("User action"), std::string::npos);
+    EXPECT_NE(output.find("user_id=12345"), std::string::npos);
+}
+
+// Test 26: TemplateFormatter lowercase level
+TEST_F(StructuredLoggingTest, TemplateFormatterLowercaseLevel) {
+    template_formatter formatter("{level_lower}: {message}");
+
+    log_entry entry(log_level::warn, "Warning message");
+
+    std::string output = formatter.format(entry);
+
+    EXPECT_NE(output.find("warning:"), std::string::npos);
+}
+
+// Test 27: TemplateFormatter field width
+TEST_F(StructuredLoggingTest, TemplateFormatterFieldWidth) {
+    template_formatter formatter("[{level:10}] {message}");
+
+    log_entry entry(log_level::info, "Test");
+
+    std::string output = formatter.format(entry);
+
+    // Level "INFO" padded to 10 characters
+    EXPECT_NE(output.find("[INFO      ]"), std::string::npos);
+}
+
+// Test 28: TemplateFormatter set_template
+TEST_F(StructuredLoggingTest, TemplateFormatterSetTemplate) {
+    template_formatter formatter("[{level}] {message}");
+
+    log_entry entry(log_level::info, "Test");
+
+    std::string output1 = formatter.format(entry);
+    EXPECT_NE(output1.find("[INFO]"), std::string::npos);
+
+    formatter.set_template("{level}: {message}");
+
+    std::string output2 = formatter.format(entry);
+    EXPECT_NE(output2.find("INFO:"), std::string::npos);
+}
+
+// Test 29: TemplateFormatter get_name
+TEST_F(StructuredLoggingTest, TemplateFormatterGetName) {
+    template_formatter formatter;
+    EXPECT_EQ(formatter.get_name(), "template_formatter");
+}
+
+// Test 30: LogfmtFormatter get_name
+TEST_F(StructuredLoggingTest, LogfmtFormatterGetName) {
+    logfmt_formatter formatter;
+    EXPECT_EQ(formatter.get_name(), "logfmt_formatter");
 }

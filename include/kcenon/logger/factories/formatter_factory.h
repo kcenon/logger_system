@@ -23,6 +23,8 @@ All rights reserved.
 
 #include "../interfaces/log_formatter_interface.h"
 #include "../formatters/json_formatter.h"
+#include "../formatters/logfmt_formatter.h"
+#include "../formatters/template_formatter.h"
 #include "../formatters/timestamp_formatter.h"
 
 namespace kcenon::logger {
@@ -34,6 +36,8 @@ namespace kcenon::logger {
 enum class format_type {
     plain,      ///< Plain text with timestamps
     json,       ///< JSON structured format
+    logfmt,     ///< Logfmt key=value format
+    templated,  ///< Template-based custom format
     compact     ///< Compact single-line format
 };
 
@@ -77,6 +81,32 @@ public:
     }
 
     /**
+     * @brief Create a logfmt formatter
+     * @param opts Format options
+     * @return Unique pointer to logfmt formatter
+     * @since 3.1.0
+     */
+    static std::unique_ptr<log_formatter_interface> create_logfmt(
+        const format_options& opts = format_options{}
+    ) {
+        return std::make_unique<logfmt_formatter>(opts);
+    }
+
+    /**
+     * @brief Create a template formatter with custom pattern
+     * @param template_pattern Template string with placeholders
+     * @param opts Format options
+     * @return Unique pointer to template formatter
+     * @since 3.1.0
+     */
+    static std::unique_ptr<log_formatter_interface> create_template(
+        const std::string& template_pattern = template_formatter::DEFAULT_TEMPLATE,
+        const format_options& opts = format_options{}
+    ) {
+        return std::make_unique<template_formatter>(template_pattern, opts);
+    }
+
+    /**
      * @brief Create a compact formatter
      * @return Unique pointer to compact formatter
      *
@@ -105,6 +135,10 @@ public:
         switch (type) {
         case format_type::json:
             return create_json(opts);
+        case format_type::logfmt:
+            return create_logfmt(opts);
+        case format_type::templated:
+            return create_template(template_formatter::DEFAULT_TEMPLATE, opts);
         case format_type::compact:
             return create_compact();
         case format_type::plain:
