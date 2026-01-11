@@ -6,96 +6,172 @@ This guide explains how to create custom writers for the Logger System to send l
 
 ## Overview
 
-Writers are responsible for the actual output of log messages. The Logger System provides a flexible `base_writer` class that you can extend to create custom output destinations.
+Writers are responsible for the actual output of log messages. The Logger System provides a flexible writer hierarchy that you can extend to create custom output destinations.
+
+## Writer Hierarchy
+
+```
+base_writer (abstract)
+├── thread_safe_writer (recommended for simple writers)
+│   ├── console_writer
+│   ├── file_writer
+│   │   └── rotating_file_writer
+│   └── your_custom_writer (Thread-safety handled automatically!)
+├── async_writer (for async wrapper patterns)
+├── batch_writer (for batched I/O)
+├── critical_writer (for critical log handling)
+└── network_writer (for network I/O with custom threading)
+```
+
+## Recommended: Using thread_safe_writer (Since v1.3.0)
+
+For most custom writers, inherit from `thread_safe_writer` instead of `base_writer`. This provides:
+- **Automatic thread-safety**: Mutex handling is done by the base class
+- **Consistent locking**: All writers use the same synchronization strategy
+- **Less boilerplate**: No need to manage locks manually
+- **Template Method pattern**: Implement `*_impl()` methods, get thread-safety for free
+
+```cpp
+#include <kcenon/logger/writers/thread_safe_writer.h>
+
+class my_custom_writer : public kcenon::logger::thread_safe_writer {
+public:
+    my_custom_writer() : thread_safe_writer() {}
+
+    std::string get_name() const override { return "my_custom"; }
+
+protected:
+    // Implement these methods - NO MUTEX NEEDED!
+    // The base class handles all synchronization.
+
+    common::VoidResult write_impl(
+        logger_system::log_level level,
+        const std::string& message,
+        const std::string& file,
+        int line,
+        const std::string& function,
+        const std::chrono::system_clock::time_point& timestamp) override
+    {
+        // Your output logic here - already protected by mutex
+        std::cout << format_log_entry(log_entry(level, message, timestamp)) << "\n";
+        return common::ok();
+    }
+
+    common::VoidResult flush_impl() override {
+        // Your flush logic here - already protected by mutex
+        std::cout.flush();
+        return common::ok();
+    }
+};
+```
+
+### Benefits of thread_safe_writer
+
+1. **No mutex boilerplate**: Derived classes focus only on output logic
+2. **Cannot accidentally forget locking**: Public methods are `final`
+3. **Deadlock prevention**: Clear contract about when mutex is held
+4. **RAII guarantee**: Mutex is always released, even on exceptions
 
 ## Base Writer Interface
 
-All custom writers must inherit from `base_writer`:
+For advanced use cases (async, batching, custom synchronization), inherit from `base_writer`:
 
 ```cpp
 class base_writer {
 public:
     virtual ~base_writer() = default;
-    
+
     // Main write method - must be implemented
-    virtual void write(thread_module::log_level level,
-                      const std::string& message,
-                      const std::string& file,
-                      int line,
-                      const std::string& function,
-                      const std::chrono::system_clock::time_point& timestamp) = 0;
-    
+    virtual common::VoidResult write(
+        logger_system::log_level level,
+        const std::string& message,
+        const std::string& file,
+        int line,
+        const std::string& function,
+        const std::chrono::system_clock::time_point& timestamp) = 0;
+
     // Flush any buffered data - must be implemented
-    virtual void flush() = 0;
-    
+    virtual common::VoidResult flush() = 0;
+
     // Optional: color support
     virtual void set_use_color(bool use_color);
     bool use_color() const;
-    
+
 protected:
     // Helper methods available to derived classes
-    std::string format_log_entry(...);  // Format log entry to string
-    std::string level_to_string(thread_module::log_level level) const;
-    std::string level_to_color(thread_module::log_level level) const;
+    std::string format_log_entry(const log_entry& entry) const;
 };
 ```
 
 ## Simple Examples
 
-### 1. File Writer
+### 1. Simple File Writer (Using thread_safe_writer)
 
-A basic file writer that appends logs to a file:
+A basic file writer using the recommended `thread_safe_writer` base class:
 
 ```cpp
-#include <logger_system/writers/base_writer.h>
+#include <kcenon/logger/writers/thread_safe_writer.h>
 #include <fstream>
-#include <mutex>
 
-class file_writer : public logger_module::base_writer {
+class simple_file_writer : public kcenon::logger::thread_safe_writer {
 private:
     std::ofstream file_;
-    std::mutex mutex_;
     std::string filename_;
-    
+
 public:
-    explicit file_writer(const std::string& filename)
+    explicit simple_file_writer(const std::string& filename)
         : filename_(filename) {
         file_.open(filename_, std::ios::app);
         if (!file_.is_open()) {
             throw std::runtime_error("Failed to open log file: " + filename);
         }
     }
-    
-    ~file_writer() override {
+
+    ~simple_file_writer() override {
+        // flush() is called automatically by base class destructor
         if (file_.is_open()) {
             file_.close();
         }
     }
-    
-    void write(thread_module::log_level level,
-               const std::string& message,
-               const std::string& file,
-               int line,
-               const std::string& function,
-               const std::chrono::system_clock::time_point& timestamp) override {
-        std::lock_guard<std::mutex> lock(mutex_);
-        
-        // Use the base class helper to format
-        std::string formatted = format_log_entry(level, message, file, 
-                                                line, function, timestamp);
-        
-        file_ << formatted << std::endl;
+
+    std::string get_name() const override { return "simple_file"; }
+
+protected:
+    // No mutex needed! thread_safe_writer handles synchronization
+    common::VoidResult write_impl(
+        logger_system::log_level level,
+        const std::string& message,
+        const std::string& file,
+        int line,
+        const std::string& function,
+        const std::chrono::system_clock::time_point& timestamp) override
+    {
+        // Create log entry and format
+        log_entry entry = log_entry(level, message, file, line, function, timestamp);
+        std::string formatted = format_log_entry(entry);
+
+        file_ << formatted << '\n';
+
+        if (!file_.good()) {
+            return make_logger_void_result(
+                logger_error_code::file_write_failed,
+                "Failed to write to file: " + filename_);
+        }
+        return common::ok();
     }
-    
-    void flush() override {
-        std::lock_guard<std::mutex> lock(mutex_);
+
+    common::VoidResult flush_impl() override {
         file_.flush();
+        return common::ok();
     }
 };
 
 // Usage
-logger->add_writer(std::make_unique<file_writer>("application.log"));
+logger->add_writer(std::make_unique<simple_file_writer>("application.log"));
 ```
+
+> **Note**: Compare this with the built-in `file_writer` class which provides
+> additional features like buffering and byte counting.
 
 ### 2. Rotating File Writer
 
@@ -419,9 +495,28 @@ logger->add_writer(std::move(async));
 
 For high-throughput scenarios (>100K msg/sec), advanced async implementations are available. See [Async Writers Guide](ASYNC_WRITERS.md) for details.
 
+## Choosing the Right Base Class
+
+| Base Class | Use When |
+|------------|----------|
+| `thread_safe_writer` | Simple synchronous I/O (file, console, socket) - **recommended** |
+| `base_writer` | Custom synchronization, async patterns, or wrapper writers |
+
+### When to Use thread_safe_writer
+
+✅ Simple output destinations (file, console, database)
+✅ Standard mutex-based synchronization is sufficient
+✅ Want to minimize boilerplate code
+
+### When to Use base_writer Directly
+
+✅ Wrapper patterns (like `async_writer`, `batch_writer`)
+✅ Writers with complex internal threading (like `network_writer`)
+✅ Custom synchronization requirements (spinlock, RW-lock, lock-free)
+
 ## Best Practices
 
-1. **Thread Safety**: Always protect shared state with mutexes; writes are called sequentially by the logger, but custom async wrappers must be safe.
+1. **Use thread_safe_writer**: For simple writers, inherit from `thread_safe_writer` to get automatic thread-safety without boilerplate.
 2. **Error Handling**: Decide on failure behavior (throw, silent fail, retry/backoff) and expose counters for observability.
 3. **Batching**: Prefer batching for I/O heavy writers to reduce syscalls and context switches.
 4. **Resource Management**: Use RAII for file handles, sockets, and DB connections; ensure `flush()` is efficient and idempotent.
@@ -477,4 +572,4 @@ public:
 
 ---
 
-*Last Updated: 2025-10-20*
+*Last Updated: 2025-01-11* (Added thread_safe_writer documentation and examples)

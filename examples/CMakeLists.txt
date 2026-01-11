@@ -16,6 +16,15 @@ if(BUILD_SAMPLES)
     )
 endif()
 
+# Custom writer example - demonstrates thread_safe_writer usage (Phase 1.4)
+if(BUILD_SAMPLES)
+    add_executable(custom_writer_example custom_writer_example.cpp)
+    target_link_libraries(custom_writer_example PRIVATE LoggerSystem)
+    set_target_properties(custom_writer_example PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
+
 # Phase 4 DI Pattern examples - available when common_system integration is enabled
 if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM)
     # DI Pattern example
