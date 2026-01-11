@@ -982,6 +982,144 @@ public:
     [[nodiscard]] bool has_request_id() const;
 
     // =========================================================================
+    // Trace ID / Span ID convenience API
+    // =========================================================================
+
+    /**
+     * @brief Set trace ID for distributed tracing
+     * @param trace_id Unique identifier for the trace (32 hex chars)
+     *
+     * @details Sets a trace ID that is automatically included in all
+     * structured log entries. This is stored as a context field and also
+     * updates the OTEL context if set.
+     *
+     * Trace IDs are essential for:
+     * - Correlating logs across microservices
+     * - Identifying all logs from a single request flow
+     * - Integration with distributed tracing systems
+     *
+     * @example
+     * @code
+     * // Set trace ID from incoming request header
+     * logger->set_trace_id(request.get_header("X-Trace-ID"));
+     *
+     * // All subsequent structured logs include the trace_id field
+     * logger->info_structured()
+     *     .message("Processing request")
+     *     .emit();
+     * @endcode
+     *
+     * @since 3.2.0
+     */
+    void set_trace_id(const std::string& trace_id);
+
+    /**
+     * @brief Get the current trace ID
+     * @return Current trace ID, or empty string if not set
+     *
+     * @since 3.2.0
+     */
+    [[nodiscard]] std::string get_trace_id() const;
+
+    /**
+     * @brief Clear the trace ID
+     *
+     * @details Call this at the end of request processing to prevent
+     * trace ID leakage to subsequent requests.
+     *
+     * @since 3.2.0
+     */
+    void clear_trace_id();
+
+    /**
+     * @brief Check if a trace ID is set
+     * @return true if trace ID is set
+     *
+     * @since 3.2.0
+     */
+    [[nodiscard]] bool has_trace_id() const;
+
+    /**
+     * @brief Set span ID for distributed tracing
+     * @param span_id Unique identifier for the span (16 hex chars)
+     *
+     * @details Sets a span ID that is automatically included in all
+     * structured log entries. Used to identify the current operation
+     * within a trace.
+     *
+     * @example
+     * @code
+     * // Set span ID for current operation
+     * logger->set_span_id(generate_span_id());
+     *
+     * // Logs include span_id for correlation
+     * logger->info_structured()
+     *     .message("Database query executed")
+     *     .emit();
+     * @endcode
+     *
+     * @since 3.2.0
+     */
+    void set_span_id(const std::string& span_id);
+
+    /**
+     * @brief Get the current span ID
+     * @return Current span ID, or empty string if not set
+     *
+     * @since 3.2.0
+     */
+    [[nodiscard]] std::string get_span_id() const;
+
+    /**
+     * @brief Clear the span ID
+     *
+     * @since 3.2.0
+     */
+    void clear_span_id();
+
+    /**
+     * @brief Check if a span ID is set
+     * @return true if span ID is set
+     *
+     * @since 3.2.0
+     */
+    [[nodiscard]] bool has_span_id() const;
+
+    /**
+     * @brief Set parent span ID for distributed tracing
+     * @param parent_span_id Span ID of the parent operation (16 hex chars)
+     *
+     * @details Sets the parent span ID for establishing parent-child
+     * relationships between spans in a trace.
+     *
+     * @since 3.2.0
+     */
+    void set_parent_span_id(const std::string& parent_span_id);
+
+    /**
+     * @brief Get the current parent span ID
+     * @return Current parent span ID, or empty string if not set
+     *
+     * @since 3.2.0
+     */
+    [[nodiscard]] std::string get_parent_span_id() const;
+
+    /**
+     * @brief Clear the parent span ID
+     *
+     * @since 3.2.0
+     */
+    void clear_parent_span_id();
+
+    /**
+     * @brief Check if a parent span ID is set
+     * @return true if parent span ID is set
+     *
+     * @since 3.2.0
+     */
+    [[nodiscard]] bool has_parent_span_id() const;
+
+    // =========================================================================
     // Log sampling API
     // =========================================================================
 
