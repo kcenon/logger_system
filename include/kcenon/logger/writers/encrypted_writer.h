@@ -70,6 +70,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "base_writer.h"
+#include "../interfaces/writer_category.h"
 #include "../security/secure_key_storage.h"
 #include "../core/error_codes.h"
 
@@ -207,9 +208,12 @@ struct encrypted_log_header {
  *
  * Thread safety: Thread-safe when inner_writer is thread-safe.
  *
+ * Category: Decorator (wraps another writer to add encryption)
+ *
  * @since 1.3.0
+ * @since 1.4.0 Added decorator_writer_tag for category classification
  */
-class encrypted_writer : public base_writer {
+class encrypted_writer : public base_writer, public decorator_writer_tag {
 public:
     /**
      * @brief Construct encrypted writer with output file path

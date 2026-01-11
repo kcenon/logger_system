@@ -16,6 +16,7 @@ All rights reserved.
  */
 
 #include "base_writer.h"
+#include "../interfaces/writer_category.h"
 #include <queue>
 #include <thread>
 #include <mutex>
@@ -30,11 +31,15 @@ namespace kcenon::logger {
 /**
  * @class async_writer
  * @brief Asynchronous wrapper for log writers
- * 
+ *
  * This class wraps any base_writer implementation and provides
  * asynchronous writing capabilities using a background thread.
+ *
+ * Category: Asynchronous (non-blocking), Decorator (wraps another writer)
+ *
+ * @since 1.4.0 Added async_writer_tag and decorator_writer_tag for classification
  */
-class async_writer : public base_writer {
+class async_writer : public base_writer, public async_writer_tag, public decorator_writer_tag {
 public:
     /**
      * @brief Constructor

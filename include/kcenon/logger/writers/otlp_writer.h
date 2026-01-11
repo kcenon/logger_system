@@ -59,6 +59,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "base_writer.h"
+#include "../interfaces/writer_category.h"
 #include "../otlp/otel_context.h"
 
 #include <atomic>
@@ -91,9 +92,12 @@ namespace kcenon::logger {
  * @warning Requires OpenTelemetry collector endpoint to be available.
  * Logs are dropped if collector is unavailable and queue is full.
  *
+ * Category: Asynchronous (batched network export with background thread)
+ *
  * @since 3.0.0
+ * @since 1.4.0 Added async_writer_tag for category classification
  */
-class otlp_writer : public base_writer {
+class otlp_writer : public base_writer, public async_writer_tag {
 public:
     /**
      * @enum protocol_type
