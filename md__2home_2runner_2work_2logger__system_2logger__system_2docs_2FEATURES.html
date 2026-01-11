@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System Features</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1154"></a> <b>Last Updated</b>: 2025-11-15 <b>Version</b>: 3.0.0</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1162"></a> <b>Last Updated</b>: 2025-11-15 <b>Version</b>: 3.0.0</p>
 <p>This document provides comprehensive details about all features available in the logger system.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1156"></a>
+<h1><a class="anchor" id="autotoc_md1164"></a>
 Table of Contents</h1>
 <ul>
 <li>Core Features</li>
@@ -108,11 +108,11 @@ Table of Contents</h1>
 <li>Advanced Capabilities</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1158"></a>
+<h1><a class="anchor" id="autotoc_md1166"></a>
 Core Features</h1>
-<h2><a class="anchor" id="autotoc_md1159"></a>
+<h2><a class="anchor" id="autotoc_md1167"></a>
 🎯 High-Performance Logging</h2>
-<h3><a class="anchor" id="autotoc_md1160"></a>
+<h3><a class="anchor" id="autotoc_md1168"></a>
 Asynchronous Processing</h3>
 <ul>
 <li><b>Non-blocking log operations</b>: Background thread processes log entries without blocking application threads</li>
@@ -126,7 +126,7 @@ Asynchronous Processing</h3>
 <li>Average enqueue time: 148 nanoseconds</li>
 <li>Memory efficiency: &lt;2MB baseline with adaptive buffer management</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1161"></a>
+<h3><a class="anchor" id="autotoc_md1169"></a>
 Thread-Safe Operations</h3>
 <ul>
 <li>**Concurrent logging**: Safe logging from multiple threads without locks on hot path</li>
@@ -134,7 +134,7 @@ Thread-Safe Operations</h3>
 <li>**ThreadSanitizer compliance**: Zero data races detected in CI/CD pipeline</li>
 <li>**Perfect RAII compliance**: 100% smart pointer usage, zero memory leaks</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1162"></a>
+<h3><a class="anchor" id="autotoc_md1170"></a>
 Configuration Validation</h3>
 <ul>
 <li>**Comprehensive validation**: Configuration validation with meaningful error messages</li>
@@ -142,9 +142,9 @@ Configuration Validation</h3>
 <li>**Template-based configurations**: Predefined configurations for common scenarios</li>
 <li>**Error handling**: Result pattern ensures no silent failures</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1163"></a>
+<h2><a class="anchor" id="autotoc_md1171"></a>
 🔧 Advanced Capabilities</h2>
-<h3><a class="anchor" id="autotoc_md1164"></a>
+<h3><a class="anchor" id="autotoc_md1172"></a>
 Result-Based Error Handling</h3>
 <ul>
 <li>**Result&lt;T&gt; pattern**: Type-safe error handling without exceptions</li>
@@ -152,7 +152,7 @@ Result-Based Error Handling</h3>
 <li><b>Meaningful error messages</b>: Comprehensive error context with validation details</li>
 <li><b>Dual API design</b>: Balance between comprehensive error reporting and high-performance logging</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1165"></a>
+<h3><a class="anchor" id="autotoc_md1173"></a>
 Builder Pattern API</h3>
 <ul>
 <li><b>Fluent interface</b>: Type-safe logger construction with method chaining</li>
@@ -160,7 +160,7 @@ Builder Pattern API</h3>
 <li><b>Template support</b>: Use predefined templates or customize all parameters</li>
 <li><b>Dependency injection</b>: Optional runtime component injection with fallback mechanisms</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1166"></a>
+<h3><a class="anchor" id="autotoc_md1174"></a>
 Configuration Strategies</h3>
 <ul>
 <li><b>Production template</b>: Optimized for production environments with balanced performance</li>
@@ -168,7 +168,7 @@ Configuration Strategies</h3>
 <li><b>High-performance template</b>: Maximized throughput for high-load scenarios</li>
 <li><b>Low-latency template</b>: Minimized latency for real-time systems</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1167"></a>
+<h3><a class="anchor" id="autotoc_md1175"></a>
 Monitoring Integration</h3>
 <ul>
 <li><b>Pluggable monitoring</b>: Optional IMonitor interface integration</li>
@@ -177,9 +177,9 @@ Monitoring Integration</h3>
 <li><b>Queue utilization</b>: Automatic optimization maintains high throughput</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1169"></a>
+<h1><a class="anchor" id="autotoc_md1177"></a>
 Writer Types</h1>
-<h2><a class="anchor" id="autotoc_md1170"></a>
+<h2><a class="anchor" id="autotoc_md1178"></a>
 Console Writer</h2>
 <p><b>Features</b>:</p><ul>
 <li>ANSI colored output for different log levels</li>
@@ -198,7 +198,7 @@ Console Writer</h2>
 <li>Custom color schemes for different log levels</li>
 <li>Stdout/stderr routing based on log level</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1171"></a>
+<h2><a class="anchor" id="autotoc_md1179"></a>
 File Writer</h2>
 <p><b>Features</b>:</p><ul>
 <li>Buffered file output for performance</li>
@@ -218,7 +218,7 @@ File Writer</h2>
 <li>File permissions (default: 0600 - owner read/write only)</li>
 <li>Append/overwrite mode</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1172"></a>
+<h2><a class="anchor" id="autotoc_md1180"></a>
 Rotating File Writer</h2>
 <p><b>Features</b>:</p><ul>
 <li><b>Size-based rotation</b>: Automatically rotate when file reaches configured size</li>
@@ -254,7 +254,7 @@ Rotating File Writer</h2>
 <li>Compression: none, gzip, bzip2</li>
 <li>Naming pattern for rotated files</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1173"></a>
+<h2><a class="anchor" id="autotoc_md1181"></a>
 Network Writer</h2>
 <p><b>Features</b>:</p><ul>
 <li>TCP/UDP protocol support</li>
@@ -288,7 +288,7 @@ Network Writer</h2>
 <li>Message batching size</li>
 <li>Compression</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1174"></a>
+<h2><a class="anchor" id="autotoc_md1182"></a>
 Critical Writer</h2>
 <p><b>Features</b>:</p><ul>
 <li><b>Synchronous logging</b>: Bypasses async queue for immediate writes</li>
@@ -319,7 +319,7 @@ Critical Writer</h2>
 <li>Pre-crash diagnostics</li>
 </ul>
 <p><b>⚠️ Performance Warning</b>: Critical writer blocks the calling thread until write completes. Use sparingly for truly critical messages only.</p>
-<h2><a class="anchor" id="autotoc_md1175"></a>
+<h2><a class="anchor" id="autotoc_md1183"></a>
 Hybrid Writer</h2>
 <p><b>Features</b>:</p><ul>
 <li><b>Adaptive behavior</b>: Automatically switches between async and sync based on log level</li>
@@ -366,9 +366,9 @@ Hybrid Writer</h2>
 <li>Underlying writer configuration</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1177"></a>
+<h1><a class="anchor" id="autotoc_md1185"></a>
 Formatting Options</h1>
-<h2><a class="anchor" id="autotoc_md1178"></a>
+<h2><a class="anchor" id="autotoc_md1186"></a>
 Plain Text Formatter</h2>
 <p><b>Features</b>:</p><ul>
 <li>Simple, human-readable format</li>
@@ -381,7 +381,7 @@ Plain Text Formatter</h2>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> formatter = std::make_unique&lt;kcenon::logger::plain_formatter&gt;();</div>
 <div class="line"><span class="comment">// Configure formatter...</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1179"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1187"></a>
 JSON Formatter</h2>
 <p><b>Features</b>:</p><ul>
 <li>Machine-parseable JSON output</li>
@@ -401,7 +401,7 @@ JSON Formatter</h2>
 </div><!-- fragment --><p><b>Usage</b>: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/formatters/json_formatter.h&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> formatter = std::make_unique&lt;kcenon::logger::json_formatter&gt;();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1180"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1188"></a>
 Logfmt Formatter</h2>
 <p><b>Features</b>:</p><ul>
 <li>Key-value pair format</li>
@@ -410,7 +410,7 @@ Logfmt Formatter</h2>
 <li>Compatible with Logstash and other log processors</li>
 </ul>
 <p><b>Format</b>: </p><div class="fragment"><div class="line">timestamp=&quot;2025-11-15T08:30:00.123Z&quot; level=INFO message=&quot;Application started&quot; thread_id=12345 file=main.cpp line=42 function=main</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1181"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1189"></a>
 Custom Formatter</h2>
 <p><b>Features</b>:</p><ul>
 <li>Implement your own formatting logic</li>
@@ -426,9 +426,9 @@ Custom Formatter</h2>
 <div class="line">    }</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1183"></a>
+<h1><a class="anchor" id="autotoc_md1191"></a>
 Filtering Capabilities</h1>
-<h2><a class="anchor" id="autotoc_md1184"></a>
+<h2><a class="anchor" id="autotoc_md1192"></a>
 Level-Based Filtering</h2>
 <p><b>Features</b>:</p><ul>
 <li>Filter by minimum log level</li>
@@ -442,7 +442,7 @@ Level-Based Filtering</h2>
 <div class="line">logger-&gt;set_filter(std::make_unique&lt;kcenon::logger::level_filter&gt;(</div>
 <div class="line">    kcenon::logger::log_level::warning</div>
 <div class="line">));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1185"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1193"></a>
 Regex-Based Filtering</h2>
 <p><b>Features</b>:</p><ul>
 <li>Pattern matching on log messages</li>
@@ -457,7 +457,7 @@ Regex-Based Filtering</h2>
 <div class="line">    <span class="stringliteral">&quot;password|secret|token&quot;</span>,</div>
 <div class="line">    <span class="keyword">false</span>  <span class="comment">// Exclude matching messages</span></div>
 <div class="line">));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1186"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1194"></a>
 Function-Based Filtering</h2>
 <p><b>Features</b>:</p><ul>
 <li>Custom filtering logic</li>
@@ -474,7 +474,7 @@ Function-Based Filtering</h2>
 <div class="line">    }</div>
 <div class="line">);</div>
 <div class="line">logger-&gt;set_filter(std::move(custom_filter));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1187"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1195"></a>
 Composite Filtering</h2>
 <p><b>Features</b>:</p><ul>
 <li>Combine multiple filters</li>
@@ -495,9 +495,9 @@ Composite Filtering</h2>
 <div class="line">));</div>
 <div class="line">logger-&gt;set_filter(std::move(composite));</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1189"></a>
+<h1><a class="anchor" id="autotoc_md1197"></a>
 Rotation Policies</h1>
-<h2><a class="anchor" id="autotoc_md1190"></a>
+<h2><a class="anchor" id="autotoc_md1198"></a>
 Size-Based Rotation</h2>
 <p><b>Features</b>:</p><ul>
 <li>Rotate when file reaches configured size</li>
@@ -516,7 +516,7 @@ Size-Based Rotation</h2>
 <li>...</li>
 <li><code>app.log.5</code> → Oldest backup (deleted when new rotation occurs)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1191"></a>
+<h2><a class="anchor" id="autotoc_md1199"></a>
 Time-Based Rotation</h2>
 <p><b>Features</b>:</p><ul>
 <li>Rotate at specific time intervals</li>
@@ -536,7 +536,7 @@ Time-Based Rotation</h2>
 <li><code>app-2025-11-14.log</code> → Two days ago</li>
 <li>...</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1192"></a>
+<h2><a class="anchor" id="autotoc_md1200"></a>
 Hybrid Rotation</h2>
 <p><b>Features</b>:</p><ul>
 <li>Combine size and time-based policies</li>
@@ -549,7 +549,7 @@ Hybrid Rotation</h2>
 <div class="line">config.max_size_bytes = 100 * 1024 * 1024;  <span class="comment">// 100MB OR</span></div>
 <div class="line">config.rotation_interval = std::chrono::hours(24);  <span class="comment">// 24 hours</span></div>
 <div class="line">config.max_files = 10;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1193"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1201"></a>
 Compression Support</h2>
 <p><b>Features</b>:</p><ul>
 <li>Automatic compression of rotated files</li>
@@ -561,9 +561,9 @@ Compression Support</h2>
 <div class="line">config.compression = kcenon::logger::compression_type::gzip;</div>
 <div class="line">config.compression_level = 6;  <span class="comment">// 1-9, higher = better compression</span></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1195"></a>
+<h1><a class="anchor" id="autotoc_md1203"></a>
 Security Features</h1>
-<h2><a class="anchor" id="autotoc_md1196"></a>
+<h2><a class="anchor" id="autotoc_md1204"></a>
 Secure Key Storage</h2>
 <p><b>Features</b>:</p><ul>
 <li>RAII-based encryption key management</li>
@@ -577,7 +577,7 @@ Secure Key Storage</h2>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> key_storage = kcenon::logger::secure_key_storage::create();</div>
 <div class="line"><span class="comment">// Key is automatically cleaned from memory when object is destroyed</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1197"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1205"></a>
 Path Validation</h2>
 <p><b>Features</b>:</p><ul>
 <li>Path traversal attack prevention</li>
@@ -598,7 +598,7 @@ Path Validation</h2>
 <div class="line"><span class="keywordflow">if</span> (!result) {</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Invalid path: &quot;</span> &lt;&lt; result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1198"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1206"></a>
 Signal Handler Safety</h2>
 <p><b>Features</b>:</p><ul>
 <li>Centralized signal handler management</li>
@@ -618,7 +618,7 @@ Signal Handler Safety</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Install signal handlers for crash detection</span></div>
 <div class="line">kcenon::logger::crash_safe_logger::install_signal_handlers();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1199"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1207"></a>
 Security Audit Logging</h2>
 <p><b>Features</b>:</p><ul>
 <li>Tamper-evident audit trail</li>
@@ -633,7 +633,7 @@ Security Audit Logging</h2>
 <div class="line">  &quot;action&quot;: &quot;Logger initialized&quot;,</div>
 <div class="line">  &quot;hmac&quot;: &quot;a3d5c8e2f1b4...&quot;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1200"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1208"></a>
 Sensitive Data Sanitization</h2>
 <p><b>Features</b>:</p><ul>
 <li>Automatic detection and masking of sensitive data</li>
@@ -657,7 +657,7 @@ Sensitive Data Sanitization</h2>
 <div class="line">    std::regex(<span class="stringliteral">&quot;Bearer\\s+[A-Za-z0-9\\-_]+\\.[A-Za-z0-9\\-_]+\\.[A-Za-z0-9\\-_]+&quot;</span>),</div>
 <div class="line">    [](<span class="keyword">const</span> std::smatch&amp; match) { <span class="keywordflow">return</span> <span class="stringliteral">&quot;Bearer [REDACTED]&quot;</span>; }</div>
 <div class="line">});</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1201"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1209"></a>
 Access Control</h2>
 <p><b>Features</b>:</p><ul>
 <li>Role-based access control for logging</li>
@@ -681,7 +681,7 @@ Access Control</h2>
 <div class="line">    kcenon::logger::permission_level::write_info);</div>
 <div class="line"> </div>
 <div class="line">logger-&gt;set_filter(std::move(access_filter));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1202"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1210"></a>
 Compliance Support</h2>
 <p><b>Standards</b>:</p><ul>
 <li><b>GDPR</b>: Data minimization, right to erasure, audit trails</li>
@@ -696,9 +696,9 @@ Compliance Support</h2>
 <li><b>A09 (Security Logging Failures)</b>: Comprehensive audit logging</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1204"></a>
+<h1><a class="anchor" id="autotoc_md1212"></a>
 Advanced Capabilities</h1>
-<h2><a class="anchor" id="autotoc_md1205"></a>
+<h2><a class="anchor" id="autotoc_md1213"></a>
 Structured Logging</h2>
 <p><b>Features</b>:</p><ul>
 <li>Key-value pair logging</li>
@@ -724,7 +724,7 @@ Structured Logging</h2>
 <div class="line"><span class="comment">// Output (JSON format):</span></div>
 <div class="line"><span class="comment">// {&quot;@timestamp&quot;:&quot;2025-11-15T08:30:00Z&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;User logged in&quot;,</span></div>
 <div class="line"><span class="comment">//  &quot;thread_id&quot;:&quot;12345&quot;,&quot;user_id&quot;:12345,&quot;ip_address&quot;:&quot;192.168.1.1&quot;,&quot;session_duration&quot;:3600}</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1206"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1214"></a>
 Log Routing</h2>
 <p><b>Features</b>:</p><ul>
 <li>Conditional routing based on log level, message content</li>
@@ -775,7 +775,7 @@ Log Routing</h2>
 <li><b>Non-exclusive (default)</b>: All messages go to all writers</li>
 <li><b>Exclusive</b>: Only messages matching a route go to matched writers; unmatched messages are dropped</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1207"></a>
+<h2><a class="anchor" id="autotoc_md1215"></a>
 Performance Metrics Collection</h2>
 <p><b>Features</b>:</p><ul>
 <li>Built-in metrics collection</li>
@@ -796,7 +796,7 @@ Performance Metrics Collection</h2>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Messages per second: &quot;</span> &lt;&lt; metrics.get_messages_per_second() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Average enqueue time: &quot;</span> &lt;&lt; metrics.get_avg_enqueue_time_ns() &lt;&lt; <span class="stringliteral">&quot; ns\n&quot;</span>;</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Queue utilization: &quot;</span> &lt;&lt; metrics.get_queue_utilization_percent() &lt;&lt; <span class="stringliteral">&quot;%\n&quot;</span>;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1208"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1216"></a>
 Real-time Log Analysis</h2>
 <p><b>Features</b>:</p><ul>
 <li>Pattern matching and detection</li>
@@ -831,7 +831,7 @@ Real-time Log Analysis</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Generate report</span></div>
 <div class="line">std::string report = analyzer-&gt;generate_report(std::chrono::minutes(10));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1209"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1217"></a>
 Distributed Logging</h2>
 <p><b>Features</b>:</p><ul>
 <li>Network-based log transmission</li>
@@ -857,7 +857,7 @@ Distributed Logging</h2>
 <div class="line">});</div>
 <div class="line">server-&gt;start();</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1211"></a>
+<h1><a class="anchor" id="autotoc_md1219"></a>
 See Also</h1>
 <ul>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html">Performance Benchmarks</a> - Detailed performance analysis</li>
@@ -872,7 +872,7 @@ See Also</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Jan 11 2026 09:06:10 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Jan 11 2026 10:05:13 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

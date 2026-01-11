@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">OpenTelemetry Integration Guide</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1512"></a> </p><blockquote class="doxtable">
+<div class="textblock"><p><a class="anchor" id="autotoc_md1520"></a> </p><blockquote class="doxtable">
 <p>&zwj;<b>Version</b>: 3.0.0+ <b>Status</b>: Stable </p>
 </blockquote>
 <p>This guide covers the OpenTelemetry (OTLP) integration in logger_system, enabling seamless correlation between logs, traces, and metrics for cloud-native observability.</p>
-<h1><a class="anchor" id="autotoc_md1513"></a>
+<h1><a class="anchor" id="autotoc_md1521"></a>
 Table of Contents</h1>
 <ul>
 <li>Overview</li>
@@ -110,7 +110,7 @@ Table of Contents</h1>
 <li>Best Practices</li>
 <li>Troubleshooting</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1514"></a>
+<h1><a class="anchor" id="autotoc_md1522"></a>
 Overview</h1>
 <p>OpenTelemetry is the CNCF standard for observability, providing unified APIs for traces, metrics, and logs. Logger System's OTLP integration enables:</p>
 <table class="markdownTable">
@@ -125,26 +125,26 @@ Overview</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Context Propagation</b>   </td><td class="markdownTableBodyNone">Automatic thread-local context handling   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md1515"></a>
+<h1><a class="anchor" id="autotoc_md1523"></a>
 Installation</h1>
-<h2><a class="anchor" id="autotoc_md1516"></a>
+<h2><a class="anchor" id="autotoc_md1524"></a>
 With vcpkg</h2>
 <div class="fragment"><div class="line"># Install with OTLP support</div>
 <div class="line">vcpkg install kcenon-logger-system[otlp]</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1517"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1525"></a>
 With CMake</h2>
 <div class="fragment"><div class="line">cmake -B build -DLOGGER_ENABLE_OTLP=ON</div>
 <div class="line">cmake --build build</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1518"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1526"></a>
 Dependencies</h2>
 <p>The OTLP feature requires:</p><ul>
 <li>opentelemetry-cpp</li>
 <li>protobuf</li>
 <li>grpc (for gRPC transport)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1519"></a>
+<h1><a class="anchor" id="autotoc_md1527"></a>
 Quick Start</h1>
-<h2><a class="anchor" id="autotoc_md1520"></a>
+<h2><a class="anchor" id="autotoc_md1528"></a>
 Basic OTLP Export</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/otlp_writer.h&gt;</span></div>
@@ -182,7 +182,7 @@ Basic OTLP Export</h2>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1521"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1529"></a>
 With Trace Correlation</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/otlp/otel_context.h&gt;</span></div>
 <div class="line"> </div>
@@ -205,7 +205,7 @@ With Trace Correlation</h2>
 <div class="line">    <span class="comment">// Clear context when done</span></div>
 <div class="line">    log-&gt;clear_otel_context();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1522"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1530"></a>
 Using RAII Scope Guard</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/otlp/otel_context.h&gt;</span></div>
 <div class="line"> </div>
@@ -221,9 +221,9 @@ Using RAII Scope Guard</h2>
 <div class="line">    <span class="comment">// All logs in this scope include trace context</span></div>
 <div class="line">    process_request(req);</div>
 <div class="line">} <span class="comment">// Context automatically cleared here</span></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1523"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1531"></a>
 Configuration</h1>
-<h2><a class="anchor" id="autotoc_md1524"></a>
+<h2><a class="anchor" id="autotoc_md1532"></a>
 OTLP Writer Configuration</h2>
 <div class="fragment"><div class="line">otlp_writer::config cfg{</div>
 <div class="line">    <span class="comment">// Endpoint URL</span></div>
@@ -269,7 +269,7 @@ OTLP Writer Configuration</h2>
 <div class="line">        {<span class="stringliteral">&quot;Authorization&quot;</span>, <span class="stringliteral">&quot;Bearer token123&quot;</span>}</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1525"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1533"></a>
 Protocol Selection</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -286,9 +286,9 @@ Protocol Selection</h2>
 <div class="line"><span class="comment">// gRPC endpoint</span></div>
 <div class="line">cfg.endpoint = <span class="stringliteral">&quot;collector:4317&quot;</span>;</div>
 <div class="line">cfg.protocol = otlp_writer::protocol_type::grpc;</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1526"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1534"></a>
 Trace Context</h1>
-<h2><a class="anchor" id="autotoc_md1527"></a>
+<h2><a class="anchor" id="autotoc_md1535"></a>
 otel_context Structure</h2>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>otel_context {</div>
 <div class="line">    std::string trace_id;      <span class="comment">// 32 hex chars (128 bits)</span></div>
@@ -299,7 +299,7 @@ otel_context Structure</h2>
 <div class="line">    <span class="keywordtype">bool</span> is_valid() <span class="keyword">const</span>;     <span class="comment">// Check format validity</span></div>
 <div class="line">    <span class="keywordtype">bool</span> is_sampled() <span class="keyword">const</span>;   <span class="comment">// Check if trace is sampled</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1528"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1536"></a>
 Thread-Local Storage</h2>
 <div class="fragment"><div class="line"><span class="comment">// Set context for current thread</span></div>
 <div class="line">otlp::otel_context_storage::set(ctx);</div>
@@ -317,7 +317,7 @@ Thread-Local Storage</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Clear context</span></div>
 <div class="line">otlp::otel_context_storage::clear();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1529"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1537"></a>
 Context in Log Entries</h2>
 <div class="fragment"><div class="line"><span class="comment">// log_entry automatically captures thread-local context</span></div>
 <div class="line">log_entry entry(log_level::info, <span class="stringliteral">&quot;Message&quot;</span>);</div>
@@ -328,9 +328,9 @@ Context in Log Entries</h2>
 <div class="line">    .trace_id = <span class="stringliteral">&quot;...&quot;</span>,</div>
 <div class="line">    .span_id = <span class="stringliteral">&quot;...&quot;</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1530"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1538"></a>
 OTLP Writer</h1>
-<h2><a class="anchor" id="autotoc_md1531"></a>
+<h2><a class="anchor" id="autotoc_md1539"></a>
 Statistics Monitoring</h2>
 <div class="fragment"><div class="line">otlp_writer writer(cfg);</div>
 <div class="line"> </div>
@@ -341,22 +341,22 @@ Statistics Monitoring</h2>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Export successes: &quot;</span> &lt;&lt; stats.export_success &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Export failures: &quot;</span> &lt;&lt; stats.export_failures &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Retries: &quot;</span> &lt;&lt; stats.retries &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1532"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1540"></a>
 Health Checking</h2>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (!writer.is_healthy()) {</div>
 <div class="line">    <span class="comment">// Collector may be unavailable</span></div>
 <div class="line">    <span class="comment">// Writer will retry automatically</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1533"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1541"></a>
 Force Flush</h2>
 <div class="fragment"><div class="line"><span class="comment">// Export all queued logs immediately</span></div>
 <div class="line">writer.force_export();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Or use flush()</span></div>
 <div class="line">writer.flush();</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1534"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1542"></a>
 Integration Examples</h1>
-<h2><a class="anchor" id="autotoc_md1535"></a>
+<h2><a class="anchor" id="autotoc_md1543"></a>
 With OpenTelemetry Collector</h2>
 <div class="fragment"><div class="line"># otel-collector-config.yaml</div>
 <div class="line">receivers:</div>
@@ -383,7 +383,7 @@ With OpenTelemetry Collector</h2>
 <div class="line">    traces:</div>
 <div class="line">      receivers: [otlp]</div>
 <div class="line">      exporters: [jaeger]</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1536"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1544"></a>
 Docker Compose Setup</h2>
 <div class="fragment"><div class="line">version: &#39;3.8&#39;</div>
 <div class="line">services:</div>
@@ -410,7 +410,7 @@ Docker Compose Setup</h2>
 <div class="line">    image: grafana/grafana:latest</div>
 <div class="line">    ports:</div>
 <div class="line">      - &quot;3000:3000&quot;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1537"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1545"></a>
 W3C Trace Context Parsing</h2>
 <div class="fragment"><div class="line"><span class="comment">// Parse W3C traceparent header</span></div>
 <div class="line"><span class="comment">// Format: version-trace_id-span_id-trace_flags</span></div>
@@ -427,13 +427,13 @@ W3C Trace Context Parsing</h2>
 <div class="line">        .trace_flags = header.substr(53, 2)</div>
 <div class="line">    };</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1538"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1546"></a>
 Best Practices</h1>
-<h2><a class="anchor" id="autotoc_md1539"></a>
+<h2><a class="anchor" id="autotoc_md1547"></a>
 1. Always Set Service Name</h2>
 <div class="fragment"><div class="line">cfg.service_name = <span class="stringliteral">&quot;api-gateway&quot;</span>;  <span class="comment">// Required for proper identification</span></div>
 <div class="line">cfg.service_version = <span class="stringliteral">&quot;1.2.3&quot;</span>;     <span class="comment">// Helps with debugging</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1540"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1548"></a>
 2. Use RAII Scope Guards</h2>
 <div class="fragment"><div class="line"><span class="comment">// Preferred: automatic cleanup</span></div>
 <div class="line">{</div>
@@ -445,7 +445,7 @@ Best Practices</h1>
 <div class="line">ctx_storage::set(ctx);</div>
 <div class="line"><span class="comment">// ... if exception thrown, context leaks ...</span></div>
 <div class="line">ctx_storage::clear();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1541"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1549"></a>
 3. Configure Appropriate Batch Sizes</h2>
 <div class="fragment"><div class="line"><span class="comment">// High-throughput service</span></div>
 <div class="line">cfg.max_batch_size = 1000;</div>
@@ -454,7 +454,7 @@ Best Practices</h1>
 <div class="line"><span class="comment">// Low-latency service</span></div>
 <div class="line">cfg.max_batch_size = 100;</div>
 <div class="line">cfg.flush_interval = std::chrono::milliseconds{500};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1542"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1550"></a>
 4. Handle Collector Unavailability</h2>
 <div class="fragment"><div class="line"><span class="comment">// Large queue for temporary outages</span></div>
 <div class="line">cfg.max_queue_size = 50000;</div>
@@ -464,7 +464,7 @@ Best Practices</h1>
 <div class="line"><span class="keywordflow">if</span> (!writer.is_healthy()) {</div>
 <div class="line">    <span class="comment">// Alert operations team</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1543"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1551"></a>
 5. Include Meaningful Resource Attributes</h2>
 <div class="fragment"><div class="line">cfg.resource_attributes = {</div>
 <div class="line">    {<span class="stringliteral">&quot;deployment.environment&quot;</span>, <span class="stringliteral">&quot;production&quot;</span>},</div>
@@ -474,9 +474,9 @@ Best Practices</h1>
 <div class="line">    {<span class="stringliteral">&quot;k8s.pod.name&quot;</span>, get_pod_name()},</div>
 <div class="line">    {<span class="stringliteral">&quot;k8s.namespace.name&quot;</span>, get_namespace()}</div>
 <div class="line">};</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1544"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1552"></a>
 Troubleshooting</h1>
-<h2><a class="anchor" id="autotoc_md1545"></a>
+<h2><a class="anchor" id="autotoc_md1553"></a>
 Logs Not Appearing in Collector</h2>
 <ol type="1">
 <li><b>Check endpoint URL</b>: Ensure correct port (4318 for HTTP, 4317 for gRPC)</li>
@@ -484,7 +484,7 @@ Logs Not Appearing in Collector</h2>
 <li><b>Check collector logs</b>: Look for parsing or connection errors</li>
 <li><b>Verify TLS settings</b>: Match use_tls with collector configuration</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1546"></a>
+<h2><a class="anchor" id="autotoc_md1554"></a>
 High Log Drop Rate</h2>
 <div class="fragment"><div class="line"><span class="comment">// Increase queue size</span></div>
 <div class="line">cfg.max_queue_size = 100000;</div>
@@ -497,7 +497,7 @@ High Log Drop Rate</h2>
 <div class="line"><span class="keywordflow">if</span> (stats.logs_dropped &gt; 0) {</div>
 <div class="line">    <span class="comment">// Queue overflow - increase size or reduce log volume</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1547"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1555"></a>
 Connection Timeouts</h2>
 <div class="fragment"><div class="line"><span class="comment">// Increase timeout for slow networks</span></div>
 <div class="line">cfg.timeout = std::chrono::seconds{30};</div>
@@ -505,7 +505,7 @@ Connection Timeouts</h2>
 <div class="line"><span class="comment">// Increase retry attempts</span></div>
 <div class="line">cfg.max_retries = 5;</div>
 <div class="line">cfg.retry_delay = std::chrono::seconds{1};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1548"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1556"></a>
 Missing Trace Context</h2>
 <ol type="1">
 <li><b>Verify context is set before logging</b>: <div class="fragment"><div class="line">log-&gt;set_otel_context(ctx);</div>
@@ -514,7 +514,7 @@ Missing Trace Context</h2>
 <li><b>Check thread isolation</b>: Context is thread-local</li>
 <li><b>Use scope guards</b> for automatic cleanup</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1549"></a>
+<h1><a class="anchor" id="autotoc_md1557"></a>
 Related Documentation</h1>
 <ul>
 <li><a href="../FEATURES.md#writer-types">Writer Types</a></li>
@@ -529,7 +529,7 @@ Related Documentation</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Jan 11 2026 09:06:10 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Jan 11 2026 10:05:13 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
