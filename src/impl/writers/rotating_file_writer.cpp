@@ -83,15 +83,13 @@ rotating_file_writer::rotating_file_writer(const std::string& filename,
     }
 }
 
-common::VoidResult rotating_file_writer::write(logger_system::log_level level,
-                                               const std::string& message,
-                                               const std::string& file,
-                                               int line,
-                                               const std::string& function,
-                                               const std::chrono::system_clock::time_point& timestamp) {
-    // Lock the mutex first to ensure atomic check-and-rotate operation
-    std::lock_guard<std::mutex> lock(write_mutex_);
-
+common::VoidResult rotating_file_writer::write_impl(logger_system::log_level level,
+                                                    const std::string& message,
+                                                    const std::string& file,
+                                                    int line,
+                                                    const std::string& function,
+                                                    const std::chrono::system_clock::time_point& timestamp) {
+    // Note: Mutex is already held by thread_safe_writer::write()
     // Check precondition
     if (!file_stream_.is_open()) {
         return make_logger_void_result(logger_error_code::file_write_failed, "File stream is not open");
@@ -127,7 +125,7 @@ common::VoidResult rotating_file_writer::write(logger_system::log_level level,
 
 void rotating_file_writer::rotate() {
     // Public API for manual rotation
-    std::lock_guard<std::mutex> lock(write_mutex_);
+    std::lock_guard<std::mutex> lock(get_mutex());
     perform_rotation();
 }
 
@@ -149,7 +147,7 @@ bool rotating_file_writer::should_rotate() const {
 }
 
 void rotating_file_writer::perform_rotation() {
-    // IMPORTANT: Caller must hold write_mutex_ before calling this method
+    // IMPORTANT: Caller must hold the mutex before calling this method
     // This ensures thread safety for all file operations and mutable state modifications
 
     // Close current file
@@ -360,7 +358,7 @@ bool rotating_file_writer::should_rotate_by_time() const {
 }
 
 std::size_t rotating_file_writer::get_file_size() const {
-    // IMPORTANT: This method should only be called while holding write_mutex_
+    // IMPORTANT: This method should only be called while holding the mutex
     // to avoid race conditions with concurrent writes and file rotation.
     //
     // Race condition example:
@@ -370,7 +368,7 @@ std::size_t rotating_file_writer::get_file_size() const {
     //
     // Better approach: Always use bytes_written_.load() which is atomic and
     // thread-safe. Only call filesystem functions during actual rotation when
-    // the caller already holds write_mutex_.
+    // the caller already holds the mutex.
 
     if (!file_stream_.is_open()) {
         return 0;
