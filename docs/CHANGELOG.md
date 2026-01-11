@@ -155,6 +155,48 @@ auto logger = logger_builder()
 
 ---
 
+### Phase 3.1: Structured Logging API Design (Issue #308) - 2026-01-11
+
+#### Added
+- **Logfmt formatter** (`logfmt_formatter.h`) for structured log output
+  - Key-value pair output format (Heroku/12-Factor style)
+  - ISO 8601 timestamps
+  - Full structured fields support
+  - OpenTelemetry context (trace_id, span_id) output
+  - Compatible with Prometheus, Grafana Loki, and logfmt parsers
+
+- **OpenTelemetry context output in JSON formatter**
+  - `trace_id`, `span_id`, `trace_flags` fields now included in JSON output
+  - Enables correlation with distributed tracing systems
+
+- **Correlation ID convenience API**
+  - `logger::set_correlation_id()` - Set correlation ID for request tracking
+  - `logger::get_correlation_id()` - Get current correlation ID
+  - `logger::clear_correlation_id()` - Clear correlation ID
+  - `logger::has_correlation_id()` - Check if correlation ID is set
+  - `logger::set_request_id()` / `get_request_id()` / `clear_request_id()` / `has_request_id()` - Alias for correlation ID
+
+#### Example
+```cpp
+// Using correlation ID for request tracking
+logger->set_correlation_id("req-abc-123");
+
+logger->info_structured()
+    .message("Processing request")
+    .field("user_id", 12345)
+    .emit();
+// Output includes: "correlation_id":"req-abc-123"
+
+logger->clear_correlation_id();
+
+// Using logfmt formatter
+auto formatter = std::make_unique<logfmt_formatter>();
+auto writer = std::make_unique<file_writer>("app.log", std::move(formatter));
+// Output: level=info ts=2026-01-11T10:30:15.123Z msg="Processing request" user_id=12345
+```
+
+---
+
 ### Coverage Build Fix (PR #291) - 2026-01-08
 
 #### Fixed
