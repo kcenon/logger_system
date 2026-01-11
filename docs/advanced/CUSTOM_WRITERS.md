@@ -11,17 +11,27 @@ Writers are responsible for the actual output of log messages. The Logger System
 ## Writer Hierarchy
 
 ```
-base_writer (abstract)
-├── thread_safe_writer (recommended for simple writers)
-│   ├── console_writer
-│   ├── file_writer
-│   │   └── rotating_file_writer
-│   └── your_custom_writer (Thread-safety handled automatically!)
-├── async_writer (for async wrapper patterns)
-├── batch_writer (for batched I/O)
-├── critical_writer (for critical log handling)
-└── network_writer (for network I/O with custom threading)
+log_writer_interface (interface)
+  │
+  ├── base_writer (abstract)
+  │     ├── thread_safe_writer [sync_writer_tag]
+  │     │     ├── console_writer [sync_writer_tag]
+  │     │     ├── file_writer [sync_writer_tag]
+  │     │     │     └── rotating_file_writer
+  │     │     └── your_custom_writer (Thread-safety handled automatically!)
+  │     │
+  │     ├── async_writer [async_writer_tag, decorator_writer_tag]
+  │     ├── batch_writer [async_writer_tag, decorator_writer_tag]
+  │     ├── critical_writer [decorator_writer_tag]
+  │     ├── encrypted_writer [decorator_writer_tag]
+  │     ├── network_writer [async_writer_tag]
+  │     └── hybrid_writer [composite_writer_tag, decorator_writer_tag]
+  │
+  └── composite_writer [composite_writer_tag]
+        (Pipeline Pattern: formatter + sink)
 ```
+
+> **Note:** Writers are categorized using type tags (v1.4.0+). See [Writer Hierarchy](WRITER_HIERARCHY.md) for details on categories and [Writer Selection Guide](WRITER_SELECTION_GUIDE.md) for choosing the right writer.
 
 ## Recommended: Using thread_safe_writer (Since v1.3.0)
 
@@ -572,4 +582,4 @@ public:
 
 ---
 
-*Last Updated: 2025-01-11* (Added thread_safe_writer documentation and examples)
+*Last Updated: 2025-01-11* (v1.4.0: Added writer category tags and hierarchy documentation)
