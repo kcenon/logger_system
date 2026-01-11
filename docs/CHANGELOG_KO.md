@@ -155,6 +155,54 @@ auto logger = logger_builder()
 
 ---
 
+### Phase 3.4: 구조화된 로깅 통합 (Issue #311) - 2026-01-11
+
+#### 추가됨
+- **모든 Writer에서 구조화된 출력 지원**
+  - `thread_safe_writer`에 구조화된 필드를 보존하는 새로운 `write(const log_entry&)` 메서드
+  - 파생 Writer를 위한 새로운 `write_entry_impl()` protected 메서드
+  - `console_writer`, `file_writer`, `rotating_file_writer`가 완전한 구조화 지원으로 업데이트
+  - 모든 log entry 데이터(fields, otel_ctx, category)가 write 파이프라인을 통해 보존됨
+
+- **필드 기반 필터 클래스** (`log_filter.h`)
+  - `field_exists_filter` - 필드 존재/부재로 필터링
+  - `field_value_filter` - 정확한 필드 값 일치로 필터링
+  - `field_range_filter` - 숫자 필드 범위로 필터링 (min/max)
+  - `field_regex_filter` - 문자열 필드 패턴 매칭으로 필터링
+  - `category_filter` - log entry 카테고리로 필터링
+
+- **필드 기반 샘플링** (`sampling_config.h`, `log_sampler.h`)
+  - 필드/값별 샘플링 비율을 위한 `field_rates` 설정
+  - 우회 필드(항상 로깅)를 위한 `always_log_fields` 설정
+  - 필드 우회 확인을 위한 `should_bypass_field()` 메서드
+  - 필드별 비율 조회를 위한 `get_field_rate()` 메서드
+
+#### 예제
+```cpp
+// 구조화된 필드 존재 여부로 로그 필터링
+auto filter = std::make_unique<field_exists_filter>("user_id");
+
+// 필드 값으로 필터링
+auto filter = std::make_unique<field_value_filter>(
+    "severity", std::string("high")
+);
+
+// 숫자 범위로 필터링 (latency > 100ms)
+auto filter = std::make_unique<field_range_filter>(
+    "latency_ms", 100.0, std::numeric_limits<double>::infinity()
+);
+
+// 필드 기반 샘플링
+sampling_config config;
+config.enabled = true;
+config.rate = 0.1;  // 기본 10%
+config.field_rates["severity"]["high"] = 1.0;     // 높은 심각도는 100%
+config.field_rates["endpoint"]["/health"] = 0.01; // 헬스체크는 1%
+config.always_log_fields = {"error_id", "transaction_id"};  // 항상 로깅
+```
+
+---
+
 ### Coverage 빌드 수정 (PR #291) - 2026-01-08
 
 #### 수정됨
