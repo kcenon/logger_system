@@ -8,6 +8,7 @@ All rights reserved.
 *****************************************************************************/
 
 #include "base_writer.h"
+#include "../interfaces/writer_category.h"
 #include <queue>
 #include <condition_variable>
 #include <atomic>
@@ -24,8 +25,12 @@ class network_reconnect_jthread_worker;
 /**
  * @class network_writer
  * @brief Sends logs over network (TCP/UDP)
+ *
+ * Category: Asynchronous (non-blocking network I/O with background threads)
+ *
+ * @since 1.4.0 Added async_writer_tag for category classification
  */
-class network_writer : public base_writer {
+class network_writer : public base_writer, public async_writer_tag {
 public:
     enum class protocol_type {
         tcp,

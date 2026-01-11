@@ -34,6 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "base_writer.h"
 #include "../interfaces/log_entry.h"
+#include "../interfaces/writer_category.h"
 #include <vector>
 #include <memory>
 #include <mutex>
@@ -44,18 +45,22 @@ namespace kcenon::logger {
 
 /**
  * @brief Batch writer that accumulates log entries and writes them in batches
- * 
+ *
  * This writer wraps another writer and accumulates log entries up to a
  * configurable batch size or timeout, then writes them all at once.
  * This reduces the number of I/O operations and improves performance.
- * 
+ *
  * Features:
  * - Configurable batch size
  * - Automatic flush on timeout
  * - Thread-safe batch accumulation
  * - Preserves original timestamps
+ *
+ * Category: Asynchronous (batched I/O), Decorator (wraps another writer)
+ *
+ * @since 1.4.0 Added async_writer_tag and decorator_writer_tag for classification
  */
-class batch_writer : public base_writer {
+class batch_writer : public base_writer, public async_writer_tag, public decorator_writer_tag {
 public:
     /**
      * @brief Configuration for batch writer
