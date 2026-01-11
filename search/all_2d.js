@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['고급_20주제_20tt_20docs_20advanced_20tt_0',['고급 주제 (&lt;tt&gt;docs/advanced/&lt;/tt&gt;)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md2161',1,'']]],
-  ['고려사항_1',['고려사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1749',1,'성능 고려사항'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html#autotoc_md228',1,'5. 스레드 안전성 고려사항']]],
-  ['고성능_2',['High Performance (고성능)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1634',1,'']]],
-  ['고용량_20시나리오를_20위한_20로그_20샘플링_20issue_20282_3',['고용량 시나리오를 위한 로그 샘플링 (Issue #282)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1020',1,'']]]
+  ['고급_20주제_20tt_20docs_20advanced_20tt_0',['고급 주제 (&lt;tt&gt;docs/advanced/&lt;/tt&gt;)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README__KO.html#autotoc_md2165',1,'']]],
+  ['고려사항_1',['고려사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM__KO.html#autotoc_md1753',1,'성능 고려사항'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html#autotoc_md228',1,'5. 스레드 안전성 고려사항']]],
+  ['고성능_2',['High Performance (고성능)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1638',1,'']]],
+  ['고용량_20시나리오를_20위한_20로그_20샘플링_20issue_20282_3',['고용량 시나리오를 위한 로그 샘플링 (Issue #282)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1024',1,'']]]
 ];
