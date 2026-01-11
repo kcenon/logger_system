@@ -890,6 +890,98 @@ public:
     [[nodiscard]] log_fields get_context() const;
 
     // =========================================================================
+    // Correlation ID convenience API
+    // =========================================================================
+
+    /**
+     * @brief Set correlation ID for request tracking
+     * @param correlation_id Unique identifier for the request/transaction
+     *
+     * @details Sets a correlation ID that is automatically included in all
+     * structured log entries. This is a convenience method equivalent to
+     * set_context("correlation_id", correlation_id).
+     *
+     * Correlation IDs are essential for:
+     * - Tracing requests across microservices
+     * - Grouping related log entries
+     * - Debugging distributed transactions
+     *
+     * @example
+     * @code
+     * // Set correlation ID from incoming request header
+     * logger->set_correlation_id(request.get_header("X-Correlation-ID"));
+     *
+     * // All subsequent structured logs include the correlation_id field
+     * logger->info_structured()
+     *     .message("Processing request")
+     *     .emit();
+     * @endcode
+     *
+     * @since 3.1.0
+     */
+    void set_correlation_id(const std::string& correlation_id);
+
+    /**
+     * @brief Get the current correlation ID
+     * @return Current correlation ID, or empty string if not set
+     *
+     * @since 3.1.0
+     */
+    [[nodiscard]] std::string get_correlation_id() const;
+
+    /**
+     * @brief Clear the correlation ID
+     *
+     * @details Call this at the end of request processing to prevent
+     * correlation ID leakage to subsequent requests.
+     *
+     * @since 3.1.0
+     */
+    void clear_correlation_id();
+
+    /**
+     * @brief Check if a correlation ID is set
+     * @return true if correlation ID is set
+     *
+     * @since 3.1.0
+     */
+    [[nodiscard]] bool has_correlation_id() const;
+
+    /**
+     * @brief Set request ID for request tracking
+     * @param request_id Unique identifier for the request
+     *
+     * @details Alias for correlation ID, commonly used in web applications.
+     * Equivalent to set_context("request_id", request_id).
+     *
+     * @since 3.1.0
+     */
+    void set_request_id(const std::string& request_id);
+
+    /**
+     * @brief Get the current request ID
+     * @return Current request ID, or empty string if not set
+     *
+     * @since 3.1.0
+     */
+    [[nodiscard]] std::string get_request_id() const;
+
+    /**
+     * @brief Clear the request ID
+     *
+     * @since 3.1.0
+     */
+    void clear_request_id();
+
+    /**
+     * @brief Check if a request ID is set
+     * @return true if request ID is set
+     *
+     * @since 3.1.0
+     */
+    [[nodiscard]] bool has_request_id() const;
+
+    // =========================================================================
     // Log sampling API
     // =========================================================================
 

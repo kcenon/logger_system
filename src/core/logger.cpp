@@ -972,6 +972,73 @@ log_fields logger::get_context() const {
 }
 
 // =========================================================================
+// Correlation ID convenience API implementation
+// =========================================================================
+
+namespace {
+const std::string CORRELATION_ID_KEY = "correlation_id";
+const std::string REQUEST_ID_KEY = "request_id";
+} // namespace
+
+void logger::set_correlation_id(const std::string& correlation_id) {
+    set_context(CORRELATION_ID_KEY, correlation_id);
+}
+
+std::string logger::get_correlation_id() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        auto it = pimpl_->context_fields_.find(CORRELATION_ID_KEY);
+        if (it != pimpl_->context_fields_.end()) {
+            if (auto* str = std::get_if<std::string>(&it->second)) {
+                return *str;
+            }
+        }
+    }
+    return {};
+}
+
+void logger::clear_correlation_id() {
+    remove_context(CORRELATION_ID_KEY);
+}
+
+bool logger::has_correlation_id() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        return pimpl_->context_fields_.find(CORRELATION_ID_KEY) != pimpl_->context_fields_.end();
+    }
+    return false;
+}
+
+void logger::set_request_id(const std::string& request_id) {
+    set_context(REQUEST_ID_KEY, request_id);
+}
+
+std::string logger::get_request_id() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        auto it = pimpl_->context_fields_.find(REQUEST_ID_KEY);
+        if (it != pimpl_->context_fields_.end()) {
+            if (auto* str = std::get_if<std::string>(&it->second)) {
+                return *str;
+            }
+        }
+    }
+    return {};
+}
+
+void logger::clear_request_id() {
+    remove_context(REQUEST_ID_KEY);
+}
+
+bool logger::has_request_id() const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        return pimpl_->context_fields_.find(REQUEST_ID_KEY) != pimpl_->context_fields_.end();
+    }
+    return false;
+}
+
+// =========================================================================
 // Real-time analysis implementation
 // =========================================================================
 
