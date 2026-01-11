@@ -61,25 +61,15 @@ console_writer::~console_writer() {
     flush();
 }
 
-common::VoidResult console_writer::write_impl(logger_system::log_level level,
-                                              const std::string& message,
-                                              const std::string& file,
-                                              int line,
-                                              const std::string& function,
-                                              const std::chrono::system_clock::time_point& timestamp) {
+common::VoidResult console_writer::write_entry_impl(const log_entry& entry) {
     // Note: Mutex is already held by thread_safe_writer::write()
     return utils::try_write_operation([&]() -> common::VoidResult {
-        auto& stream = (use_stderr_ || level <= logger_system::log_level::error)
+        auto& stream = (use_stderr_ || entry.level <= logger_system::log_level::error)
                        ? std::cerr : std::cout;
-
-        // Create log_entry for new API
-        log_entry entry = (!file.empty() || line != 0 || !function.empty())
-            ? log_entry(level, message, file, line, function, timestamp)
-            : log_entry(level, message, timestamp);
 
         if (use_color()) {
             // Simple color mapping based on level
-            switch (level) {
+            switch (entry.level) {
                 case logger_system::log_level::fatal:
                 case logger_system::log_level::error:
                     stream << "\033[31m"; // Red
@@ -101,6 +91,7 @@ common::VoidResult console_writer::write_impl(logger_system::log_level level,
             }
         }
 
+        // Use format_log_entry which preserves all structured fields
         stream << format_log_entry(entry);
 
         if (use_color()) {
@@ -112,6 +103,20 @@ common::VoidResult console_writer::write_impl(logger_system::log_level level,
         // Verify stream state
         return utils::check_stream_state(stream, "console write");
     }, logger_error_code::processing_failed);
+}
+
+common::VoidResult console_writer::write_impl(logger_system::log_level level,
+                                              const std::string& message,
+                                              const std::string& file,
+                                              int line,
+                                              const std::string& function,
+                                              const std::chrono::system_clock::time_point& timestamp) {
+    // Legacy API: create a log_entry and delegate to write_entry_impl
+    log_entry entry = (!file.empty() || line != 0 || !function.empty())
+        ? log_entry(level, message, file, line, function, timestamp)
+        : log_entry(level, message, timestamp);
+
+    return write_entry_impl(entry);
 }
 
 common::VoidResult console_writer::flush_impl() {

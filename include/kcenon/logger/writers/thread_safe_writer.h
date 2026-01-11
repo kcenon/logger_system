@@ -125,7 +125,23 @@ public:
     thread_safe_writer& operator=(thread_safe_writer&&) = delete;
 
     /**
-     * @brief Thread-safe write operation
+     * @brief Thread-safe write operation for structured log entries
+     * @param entry The log entry to write (includes structured fields)
+     * @return common::VoidResult Success or error code
+     *
+     * @details Acquires the mutex and delegates to write_entry_impl().
+     * This method preserves all log entry data including structured fields,
+     * OpenTelemetry context, and category information.
+     *
+     * @note This is the preferred method for writing logs as it preserves
+     * all structured logging information.
+     *
+     * @since 3.4.0
+     */
+    common::VoidResult write(const log_entry& entry) final;
+
+    /**
+     * @brief Thread-safe write operation (legacy API)
      * @param level Log severity level
      * @param message Log message text
      * @param file Source file path
@@ -136,6 +152,8 @@ public:
      *
      * @details Acquires the mutex and delegates to write_impl().
      * This method is final to ensure thread-safety is not bypassed.
+     *
+     * @note For structured logging, prefer using write(const log_entry&).
      *
      * @since 1.3.0
      */
@@ -159,7 +177,25 @@ public:
 
 protected:
     /**
-     * @brief Implementation of write operation (override in derived classes)
+     * @brief Implementation of structured write operation (override in derived classes)
+     * @param entry The log entry to write (includes structured fields)
+     * @return common::VoidResult Success or error code
+     *
+     * @details Called by write(const log_entry&) while holding the mutex.
+     * Derived classes should override this method to support structured logging.
+     * The default implementation calls the legacy write_impl() for backward
+     * compatibility, but derived classes should override this to preserve
+     * structured fields.
+     *
+     * @note The mutex is held when this method is called.
+     * @note Do not call public methods on 'this' (would cause deadlock).
+     *
+     * @since 3.4.0
+     */
+    virtual common::VoidResult write_entry_impl(const log_entry& entry);
+
+    /**
+     * @brief Implementation of write operation (legacy, override in derived classes)
      * @param level Log severity level
      * @param message Log message text
      * @param file Source file path
@@ -168,11 +204,12 @@ protected:
      * @param timestamp Time when the log entry was created
      * @return common::VoidResult Success or error code
      *
-     * @details Called by write() while holding the mutex.
+     * @details Called by legacy write() while holding the mutex.
      * Derived classes implement their output-specific logic here.
      *
      * @note The mutex is held when this method is called.
      * @note Do not call public methods on 'this' (would cause deadlock).
+     * @note For structured logging support, override write_entry_impl() instead.
      *
      * @since 1.3.0
      */

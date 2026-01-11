@@ -144,6 +144,40 @@ struct sampling_config {
      */
     std::unordered_map<std::string, double> category_rates;
 
+    /**
+     * @brief Per-field sampling rates for structured fields
+     * @details Allows different sampling rates based on field values.
+     * Each entry maps a field name to a map of value->rate.
+     * Fields/values not in this map use the base rate.
+     *
+     * @example
+     * @code
+     * // Sample 100% of high severity, 10% of low severity
+     * config.field_rates["severity"]["high"] = 1.0;
+     * config.field_rates["severity"]["low"] = 0.1;
+     *
+     * // Sample 1% of health checks
+     * config.field_rates["endpoint"]["/health"] = 0.01;
+     * @endcode
+     *
+     * @since 3.4.0
+     */
+    std::unordered_map<std::string, std::unordered_map<std::string, double>> field_rates;
+
+    /**
+     * @brief Fields whose presence bypasses sampling (always logged)
+     * @details Entries with any of these fields will bypass sampling entirely.
+     * Useful for ensuring logs with specific fields are never dropped.
+     *
+     * @example
+     * @code
+     * config.always_log_fields = {"error_id", "transaction_id"};
+     * @endcode
+     *
+     * @since 3.4.0
+     */
+    std::vector<std::string> always_log_fields;
+
     // Rate limiting specific settings
 
     /**

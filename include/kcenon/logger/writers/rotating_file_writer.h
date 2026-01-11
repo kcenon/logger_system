@@ -103,7 +103,15 @@ public:
 
 protected:
     /**
-     * @brief Implementation of write operation with automatic rotation check
+     * @brief Implementation of structured write operation with automatic rotation check
+     * @param entry The log entry to write (includes structured fields)
+     * @note Called by thread_safe_writer::write(const log_entry&) while holding the mutex
+     * @since 3.4.0
+     */
+    common::VoidResult write_entry_impl(const log_entry& entry) override;
+
+    /**
+     * @brief Implementation of write operation with automatic rotation check (legacy)
      * @note Called by thread_safe_writer::write() while holding the mutex
      */
     common::VoidResult write_impl(logger_system::log_level level,

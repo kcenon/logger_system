@@ -25,12 +25,7 @@ file_writer::~file_writer() {
     close();
 }
 
-common::VoidResult file_writer::write_impl(logger_system::log_level level,
-                                           const std::string& message,
-                                           const std::string& file,
-                                           int line,
-                                           const std::string& function,
-                                           const std::chrono::system_clock::time_point& timestamp) {
+common::VoidResult file_writer::write_entry_impl(const log_entry& entry) {
     // Note: Mutex is already held by thread_safe_writer::write()
     return utils::try_write_operation([&]() -> common::VoidResult {
         // Check precondition
@@ -38,12 +33,7 @@ common::VoidResult file_writer::write_impl(logger_system::log_level level,
             return make_logger_void_result(logger_error_code::file_write_failed, "File stream is not open");
         }
 
-        // Create log_entry for new API
-        log_entry entry = (!file.empty() || line != 0 || !function.empty())
-            ? log_entry(level, message, file, line, function, timestamp)
-            : log_entry(level, message, timestamp);
-
-        // Format and write
+        // Format and write - preserves all structured fields
         std::string formatted = format_log_entry(entry);
         file_stream_ << formatted << '\n';
         bytes_written_.fetch_add(formatted.size() + 1);  // +1 for newline
@@ -51,6 +41,20 @@ common::VoidResult file_writer::write_impl(logger_system::log_level level,
         // Verify stream state
         return utils::check_stream_state(file_stream_, "write");
     });
+}
+
+common::VoidResult file_writer::write_impl(logger_system::log_level level,
+                                           const std::string& message,
+                                           const std::string& file,
+                                           int line,
+                                           const std::string& function,
+                                           const std::chrono::system_clock::time_point& timestamp) {
+    // Legacy API: create a log_entry and delegate to write_entry_impl
+    log_entry entry = (!file.empty() || line != 0 || !function.empty())
+        ? log_entry(level, message, file, line, function, timestamp)
+        : log_entry(level, message, timestamp);
+
+    return write_entry_impl(entry);
 }
 
 common::VoidResult file_writer::flush_impl() {
