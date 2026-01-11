@@ -155,6 +155,54 @@ auto logger = logger_builder()
 
 ---
 
+### Phase 3.4: Structured Logging Integration (Issue #311) - 2026-01-11
+
+#### Added
+- **Structured output support in all writers**
+  - New `write(const log_entry&)` method in `thread_safe_writer` preserves structured fields
+  - New `write_entry_impl()` protected method for derived writers
+  - `console_writer`, `file_writer`, `rotating_file_writer` updated for full structured support
+  - All log entry data (fields, otel_ctx, category) now preserved through the write pipeline
+
+- **Field-based filter classes** (`log_filter.h`)
+  - `field_exists_filter` - Filter by field presence/absence
+  - `field_value_filter` - Filter by exact field value match
+  - `field_range_filter` - Filter by numeric field range (min/max)
+  - `field_regex_filter` - Filter by string field pattern matching
+  - `category_filter` - Filter by log entry category
+
+- **Field-based sampling** (`sampling_config.h`, `log_sampler.h`)
+  - `field_rates` configuration for per-field/value sampling rates
+  - `always_log_fields` configuration for bypass fields (always logged)
+  - `should_bypass_field()` method for field bypass checking
+  - `get_field_rate()` method for field-specific rate lookup
+
+#### Example
+```cpp
+// Filter logs by structured field presence
+auto filter = std::make_unique<field_exists_filter>("user_id");
+
+// Filter by field value
+auto filter = std::make_unique<field_value_filter>(
+    "severity", std::string("high")
+);
+
+// Filter by numeric range (latency > 100ms)
+auto filter = std::make_unique<field_range_filter>(
+    "latency_ms", 100.0, std::numeric_limits<double>::infinity()
+);
+
+// Field-based sampling
+sampling_config config;
+config.enabled = true;
+config.rate = 0.1;  // 10% default
+config.field_rates["severity"]["high"] = 1.0;     // 100% of high severity
+config.field_rates["endpoint"]["/health"] = 0.01; // 1% of health checks
+config.always_log_fields = {"error_id", "transaction_id"};  // Always log these
+```
+
+---
+
 ### Phase 3.3: Structured Logging Formatters (Issue #310) - 2026-01-11
 
 #### Added
