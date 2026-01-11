@@ -25,6 +25,15 @@ if(BUILD_SAMPLES)
     )
 endif()
 
+# Structured logging example - demonstrates Phase 3.0 features
+if(BUILD_SAMPLES)
+    add_executable(structured_logging_example structured_logging_example.cpp)
+    target_link_libraries(structured_logging_example PRIVATE LoggerSystem)
+    set_target_properties(structured_logging_example PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
+
 # Phase 4 DI Pattern examples - available when common_system integration is enabled
 if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM)
     # DI Pattern example
