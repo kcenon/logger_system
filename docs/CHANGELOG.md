@@ -197,6 +197,65 @@ auto writer = std::make_unique<file_writer>("app.log", std::move(formatter));
 
 ---
 
+### Phase 3.2: Structured Logging Core Implementation (Issue #309) - 2026-01-11
+
+#### Added
+- **Context scope management** (`log_context_scope.h`)
+  - `log_context_storage` for thread-local context field storage
+  - `log_context_scope` RAII class for automatic context cleanup
+  - `scoped_context` convenience class for single-field scopes
+  - Thread-safe context propagation across async boundaries
+
+- **Trace ID / Span ID convenience API**
+  - `logger::set_trace_id()` / `get_trace_id()` / `clear_trace_id()` / `has_trace_id()`
+  - `logger::set_span_id()` / `get_span_id()` / `clear_span_id()` / `has_span_id()`
+  - `logger::set_parent_span_id()` / `get_parent_span_id()` / `clear_parent_span_id()` / `has_parent_span_id()`
+
+#### Example
+```cpp
+// Thread-local context with automatic cleanup
+void handle_request(const Request& req) {
+    log_context_scope scope({
+        {"request_id", req.id()},
+        {"user_id", req.user_id()},
+        {"trace_id", req.trace_id()}
+    });
+
+    // All structured logs in this scope include these fields
+    logger->info_structured()
+        .message("Processing request")
+        .emit();
+} // Context automatically cleared here
+
+// Nested scopes
+{
+    log_context_scope outer({{"service", "api-gateway"}});
+    {
+        log_context_scope inner({{"operation", "db_query"}});
+        // Logs include: service, operation
+    }
+    // Logs include: service only
+}
+
+// Single-field convenience
+{
+    scoped_context ctx("order_id", 12345);
+    // Logs include: order_id
+} // order_id removed
+
+// Trace ID/Span ID for distributed tracing
+logger->set_trace_id("0af7651916cd43dd8448eb211c80319c");
+logger->set_span_id("b7ad6b7169203331");
+
+logger->info_structured()
+    .message("Database query")
+    .field("query_time_ms", 42.5)
+    .emit();
+// Output includes: trace_id, span_id
+```
+
+---
+
 ### Coverage Build Fix (PR #291) - 2026-01-08
 
 #### Fixed

@@ -9,11 +9,13 @@ All rights reserved.
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/core/logger_builder.h>
 #include <kcenon/logger/core/structured_log_builder.h>
+#include <kcenon/logger/core/log_context_scope.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/formatters/json_formatter.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/common/patterns/result.h>
 
+#include <atomic>
 #include <thread>
 #include <chrono>
 #include <vector>
@@ -359,4 +361,217 @@ TEST_F(StructuredLoggingTest, ContextThreadSafety) {
     EXPECT_TRUE(true);
 
     test_logger->stop();
+}
+
+// Test 11: Trace ID convenience API
+TEST_F(StructuredLoggingTest, TraceIdConvenienceAPI) {
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    // Initially no trace ID
+    EXPECT_FALSE(test_logger->has_trace_id());
+    EXPECT_EQ(test_logger->get_trace_id(), "");
+
+    // Set trace ID
+    test_logger->set_trace_id("0af7651916cd43dd8448eb211c80319c");
+    EXPECT_TRUE(test_logger->has_trace_id());
+    EXPECT_EQ(test_logger->get_trace_id(), "0af7651916cd43dd8448eb211c80319c");
+
+    // Clear trace ID
+    test_logger->clear_trace_id();
+    EXPECT_FALSE(test_logger->has_trace_id());
+    EXPECT_EQ(test_logger->get_trace_id(), "");
+
+    test_logger->stop();
+}
+
+// Test 12: Span ID convenience API
+TEST_F(StructuredLoggingTest, SpanIdConvenienceAPI) {
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    // Initially no span ID
+    EXPECT_FALSE(test_logger->has_span_id());
+    EXPECT_EQ(test_logger->get_span_id(), "");
+
+    // Set span ID
+    test_logger->set_span_id("b7ad6b7169203331");
+    EXPECT_TRUE(test_logger->has_span_id());
+    EXPECT_EQ(test_logger->get_span_id(), "b7ad6b7169203331");
+
+    // Clear span ID
+    test_logger->clear_span_id();
+    EXPECT_FALSE(test_logger->has_span_id());
+    EXPECT_EQ(test_logger->get_span_id(), "");
+
+    test_logger->stop();
+}
+
+// Test 13: Parent Span ID convenience API
+TEST_F(StructuredLoggingTest, ParentSpanIdConvenienceAPI) {
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    // Initially no parent span ID
+    EXPECT_FALSE(test_logger->has_parent_span_id());
+    EXPECT_EQ(test_logger->get_parent_span_id(), "");
+
+    // Set parent span ID
+    test_logger->set_parent_span_id("a1b2c3d4e5f67890");
+    EXPECT_TRUE(test_logger->has_parent_span_id());
+    EXPECT_EQ(test_logger->get_parent_span_id(), "a1b2c3d4e5f67890");
+
+    // Clear parent span ID
+    test_logger->clear_parent_span_id();
+    EXPECT_FALSE(test_logger->has_parent_span_id());
+    EXPECT_EQ(test_logger->get_parent_span_id(), "");
+
+    test_logger->stop();
+}
+
+// Test 14: Thread-local context storage
+TEST_F(StructuredLoggingTest, ThreadLocalContextStorage) {
+    // Set thread-local context
+    log_context_storage::set("thread_key", "thread_value");
+    EXPECT_TRUE(log_context_storage::has_context());
+
+    auto fields = log_context_storage::get();
+    EXPECT_EQ(fields.size(), 1);
+    EXPECT_EQ(std::get<std::string>(fields["thread_key"]), "thread_value");
+
+    // Add more fields
+    log_context_storage::set("int_key", static_cast<int64_t>(42));
+    log_context_storage::set("bool_key", true);
+
+    fields = log_context_storage::get();
+    EXPECT_EQ(fields.size(), 3);
+
+    // Get specific field
+    auto value = log_context_storage::get_field("int_key");
+    EXPECT_TRUE(value.has_value());
+    EXPECT_EQ(std::get<int64_t>(*value), 42);
+
+    // Remove a field
+    log_context_storage::remove("thread_key");
+    fields = log_context_storage::get();
+    EXPECT_EQ(fields.size(), 2);
+
+    // Clear all
+    log_context_storage::clear();
+    EXPECT_FALSE(log_context_storage::has_context());
+}
+
+// Test 15: Log context scope basic usage
+TEST_F(StructuredLoggingTest, LogContextScopeBasic) {
+    // Clear any existing context
+    log_context_storage::clear();
+    EXPECT_FALSE(log_context_storage::has_context());
+
+    {
+        log_context_scope scope({
+            {"request_id", std::string("req-123")},
+            {"user_id", static_cast<int64_t>(456)}
+        });
+
+        // Context should be set within scope
+        EXPECT_TRUE(log_context_storage::has_context());
+        auto fields = log_context_storage::get();
+        EXPECT_EQ(fields.size(), 2);
+        EXPECT_EQ(std::get<std::string>(fields["request_id"]), "req-123");
+        EXPECT_EQ(std::get<int64_t>(fields["user_id"]), 456);
+    }
+
+    // Context should be cleared after scope exits
+    EXPECT_FALSE(log_context_storage::has_context());
+}
+
+// Test 16: Nested log context scopes
+TEST_F(StructuredLoggingTest, NestedLogContextScopes) {
+    log_context_storage::clear();
+
+    {
+        log_context_scope outer({
+            {"outer_key", std::string("outer_value")}
+        });
+
+        EXPECT_EQ(log_context_storage::get().size(), 1);
+
+        {
+            log_context_scope inner({
+                {"inner_key", std::string("inner_value")}
+            });
+
+            // Both keys should be present
+            auto fields = log_context_storage::get();
+            EXPECT_EQ(fields.size(), 2);
+            EXPECT_EQ(std::get<std::string>(fields["outer_key"]), "outer_value");
+            EXPECT_EQ(std::get<std::string>(fields["inner_key"]), "inner_value");
+        }
+
+        // After inner scope exits, only outer key should remain
+        auto fields = log_context_storage::get();
+        EXPECT_EQ(fields.size(), 1);
+        EXPECT_EQ(std::get<std::string>(fields["outer_key"]), "outer_value");
+    }
+
+    // After outer scope exits, context should be empty
+    EXPECT_FALSE(log_context_storage::has_context());
+}
+
+// Test 17: Scoped context single field
+TEST_F(StructuredLoggingTest, ScopedContextSingleField) {
+    log_context_storage::clear();
+
+    {
+        scoped_context ctx("order_id", static_cast<int64_t>(12345));
+
+        EXPECT_TRUE(log_context_storage::has_context());
+        auto value = log_context_storage::get_field("order_id");
+        EXPECT_TRUE(value.has_value());
+        EXPECT_EQ(std::get<int64_t>(*value), 12345);
+    }
+
+    EXPECT_FALSE(log_context_storage::has_context());
+}
+
+// Test 18: Thread isolation of context
+TEST_F(StructuredLoggingTest, ThreadIsolation) {
+    log_context_storage::clear();
+
+    std::atomic<bool> thread1_done{false};
+    std::atomic<bool> thread2_done{false};
+    std::atomic<bool> test_passed{true};
+
+    std::thread thread1([&]() {
+        log_context_storage::set("thread_id", std::string("thread1"));
+        std::this_thread::sleep_for(10ms);
+
+        // Verify our context is still intact
+        auto value = log_context_storage::get_field("thread_id");
+        if (!value.has_value() || std::get<std::string>(*value) != "thread1") {
+            test_passed = false;
+        }
+
+        thread1_done = true;
+        log_context_storage::clear();
+    });
+
+    std::thread thread2([&]() {
+        log_context_storage::set("thread_id", std::string("thread2"));
+        std::this_thread::sleep_for(10ms);
+
+        // Verify our context is still intact
+        auto value = log_context_storage::get_field("thread_id");
+        if (!value.has_value() || std::get<std::string>(*value) != "thread2") {
+            test_passed = false;
+        }
+
+        thread2_done = true;
+        log_context_storage::clear();
+    });
+
+    thread1.join();
+    thread2.join();
+
+    EXPECT_TRUE(test_passed);
 }
