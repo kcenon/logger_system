@@ -746,20 +746,31 @@ public:
     // =========================================================================
 
     /**
-     * @brief Create a structured log builder at the specified level
+     * @brief Create a structured log builder at the specified level (canonical API)
      * @param level Log level for the structured entry
      * @return Builder for constructing the structured log entry
      *
-     * @details Returns a builder that allows adding arbitrary fields to the
-     * log entry. The entry is logged when emit() is called on the builder.
-     * Context fields (set via set_context()) are automatically included.
+     * @details This is the canonical API for structured logging. Returns a builder
+     * that allows adding arbitrary fields to the log entry. The entry is logged
+     * when emit() is called on the builder. Context fields (set via set_context())
+     * are automatically included.
+     *
+     * Level-specific convenience methods (trace_structured(), debug_structured(), etc.)
+     * are deprecated and will be removed in a future version.
      *
      * @example
      * @code
+     * // Recommended approach
      * logger->log_structured(log_level::info)
      *     .message("User login")
      *     .field("user_id", 12345)
      *     .field("ip_address", "192.168.1.1")
+     *     .emit();
+     *
+     * // Different log levels
+     * logger->log_structured(log_level::error)
+     *     .message("Database connection failed")
+     *     .field("retry_count", 3)
      *     .emit();
      * @endcode
      *
@@ -770,43 +781,61 @@ public:
     /**
      * @brief Create a structured trace log builder
      * @return Builder for constructing the structured log entry
+     *
+     * @deprecated Use log_structured(log_level::trace) instead
      * @since 3.1.0
      */
+    [[deprecated("Use log_structured(log_level::trace) instead")]]
     [[nodiscard]] structured_log_builder trace_structured();
 
     /**
      * @brief Create a structured debug log builder
      * @return Builder for constructing the structured log entry
+     *
+     * @deprecated Use log_structured(log_level::debug) instead
      * @since 3.1.0
      */
+    [[deprecated("Use log_structured(log_level::debug) instead")]]
     [[nodiscard]] structured_log_builder debug_structured();
 
     /**
      * @brief Create a structured info log builder
      * @return Builder for constructing the structured log entry
+     *
+     * @deprecated Use log_structured(log_level::info) instead
      * @since 3.1.0
      */
+    [[deprecated("Use log_structured(log_level::info) instead")]]
     [[nodiscard]] structured_log_builder info_structured();
 
     /**
      * @brief Create a structured warning log builder
      * @return Builder for constructing the structured log entry
+     *
+     * @deprecated Use log_structured(log_level::warning) instead
      * @since 3.1.0
      */
+    [[deprecated("Use log_structured(log_level::warning) instead")]]
     [[nodiscard]] structured_log_builder warn_structured();
 
     /**
      * @brief Create a structured error log builder
      * @return Builder for constructing the structured log entry
+     *
+     * @deprecated Use log_structured(log_level::error) instead
      * @since 3.1.0
      */
+    [[deprecated("Use log_structured(log_level::error) instead")]]
     [[nodiscard]] structured_log_builder error_structured();
 
     /**
      * @brief Create a structured fatal log builder
      * @return Builder for constructing the structured log entry
+     *
+     * @deprecated Use log_structured(log_level::fatal) instead
      * @since 3.1.0
      */
+    [[deprecated("Use log_structured(log_level::fatal) instead")]]
     [[nodiscard]] structured_log_builder fatal_structured();
 
     // =========================================================================
