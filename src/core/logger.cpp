@@ -972,7 +972,7 @@ log_fields logger::get_context() const {
 }
 
 // =========================================================================
-// Correlation ID convenience API implementation
+// Generic context ID API implementation
 // =========================================================================
 
 namespace {
@@ -981,7 +981,58 @@ const std::string REQUEST_ID_KEY = "request_id";
 const std::string TRACE_ID_KEY = "trace_id";
 const std::string SPAN_ID_KEY = "span_id";
 const std::string PARENT_SPAN_ID_KEY = "parent_span_id";
+
+// List of all known context ID keys for clear_all_context_ids()
+const std::vector<std::string> ALL_CONTEXT_ID_KEYS = {
+    CORRELATION_ID_KEY,
+    REQUEST_ID_KEY,
+    TRACE_ID_KEY,
+    SPAN_ID_KEY,
+    PARENT_SPAN_ID_KEY
+};
 } // namespace
+
+void logger::set_context_id(std::string_view key, std::string_view value) {
+    set_context(std::string(key), std::string(value));
+}
+
+std::string logger::get_context_id(std::string_view key) const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        auto it = pimpl_->context_fields_.find(std::string(key));
+        if (it != pimpl_->context_fields_.end()) {
+            if (auto* str = std::get_if<std::string>(&it->second)) {
+                return *str;
+            }
+        }
+    }
+    return {};
+}
+
+void logger::clear_context_id(std::string_view key) {
+    remove_context(std::string(key));
+}
+
+bool logger::has_context_id(std::string_view key) const {
+    if (pimpl_) {
+        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
+        return pimpl_->context_fields_.find(std::string(key)) != pimpl_->context_fields_.end();
+    }
+    return false;
+}
+
+void logger::clear_all_context_ids() {
+    if (pimpl_) {
+        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
+        for (const auto& key : ALL_CONTEXT_ID_KEYS) {
+            pimpl_->context_fields_.erase(key);
+        }
+    }
+}
+
+// =========================================================================
+// Correlation ID convenience API implementation (deprecated)
+// =========================================================================
 
 void logger::set_correlation_id(const std::string& correlation_id) {
     set_context(CORRELATION_ID_KEY, correlation_id);
