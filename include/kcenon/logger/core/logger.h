@@ -890,7 +890,77 @@ public:
     [[nodiscard]] log_fields get_context() const;
 
     // =========================================================================
-    // Correlation ID convenience API
+    // Generic context ID API
+    // =========================================================================
+
+    /**
+     * @brief Set a context ID value by key
+     * @param key The context ID key (e.g., "correlation_id", "trace_id")
+     * @param value The context ID value
+     *
+     * @details Sets a context ID that is automatically included in all
+     * structured log entries. This is the canonical API for managing
+     * context IDs.
+     *
+     * Common keys:
+     * - "correlation_id": Request/transaction tracking
+     * - "request_id": HTTP request identification
+     * - "trace_id": Distributed trace identification (32 hex chars)
+     * - "span_id": Operation span identification (16 hex chars)
+     * - "parent_span_id": Parent operation span (16 hex chars)
+     *
+     * @example
+     * @code
+     * logger->set_context_id("correlation_id", "abc-123");
+     * logger->set_context_id("trace_id", "0af7651916cd43dd8448eb211c80319c");
+     * @endcode
+     *
+     * @since 3.4.0
+     */
+    void set_context_id(std::string_view key, std::string_view value);
+
+    /**
+     * @brief Get a context ID value by key
+     * @param key The context ID key
+     * @return The context ID value, or empty string if not set
+     *
+     * @since 3.4.0
+     */
+    [[nodiscard]] std::string get_context_id(std::string_view key) const;
+
+    /**
+     * @brief Clear a context ID by key
+     * @param key The context ID key to clear
+     *
+     * @since 3.4.0
+     */
+    void clear_context_id(std::string_view key);
+
+    /**
+     * @brief Check if a context ID is set
+     * @param key The context ID key to check
+     * @return true if the context ID is set
+     *
+     * @since 3.4.0
+     */
+    [[nodiscard]] bool has_context_id(std::string_view key) const;
+
+    /**
+     * @brief Clear all context IDs
+     *
+     * @details Clears all context IDs (correlation_id, request_id, trace_id,
+     * span_id, parent_span_id). Use this at the end of request processing
+     * to prevent context leakage.
+     *
+     * @note This only clears known context ID keys, not other context fields
+     * set via set_context().
+     *
+     * @since 3.4.0
+     */
+    void clear_all_context_ids();
+
+    // =========================================================================
+    // Correlation ID convenience API (deprecated)
     // =========================================================================
 
     /**
@@ -917,16 +987,20 @@ public:
      *     .emit();
      * @endcode
      *
+     * @deprecated Use set_context_id("correlation_id", value) instead
      * @since 3.1.0
      */
+    [[deprecated("Use set_context_id(\"correlation_id\", value) instead")]]
     void set_correlation_id(const std::string& correlation_id);
 
     /**
      * @brief Get the current correlation ID
      * @return Current correlation ID, or empty string if not set
      *
+     * @deprecated Use get_context_id("correlation_id") instead
      * @since 3.1.0
      */
+    [[deprecated("Use get_context_id(\"correlation_id\") instead")]]
     [[nodiscard]] std::string get_correlation_id() const;
 
     /**
@@ -935,16 +1009,20 @@ public:
      * @details Call this at the end of request processing to prevent
      * correlation ID leakage to subsequent requests.
      *
+     * @deprecated Use clear_context_id("correlation_id") instead
      * @since 3.1.0
      */
+    [[deprecated("Use clear_context_id(\"correlation_id\") instead")]]
     void clear_correlation_id();
 
     /**
      * @brief Check if a correlation ID is set
      * @return true if correlation ID is set
      *
+     * @deprecated Use has_context_id("correlation_id") instead
      * @since 3.1.0
      */
+    [[deprecated("Use has_context_id(\"correlation_id\") instead")]]
     [[nodiscard]] bool has_correlation_id() const;
 
     /**
@@ -954,35 +1032,43 @@ public:
      * @details Alias for correlation ID, commonly used in web applications.
      * Equivalent to set_context("request_id", request_id).
      *
+     * @deprecated Use set_context_id("request_id", value) instead
      * @since 3.1.0
      */
+    [[deprecated("Use set_context_id(\"request_id\", value) instead")]]
     void set_request_id(const std::string& request_id);
 
     /**
      * @brief Get the current request ID
      * @return Current request ID, or empty string if not set
      *
+     * @deprecated Use get_context_id("request_id") instead
      * @since 3.1.0
      */
+    [[deprecated("Use get_context_id(\"request_id\") instead")]]
     [[nodiscard]] std::string get_request_id() const;
 
     /**
      * @brief Clear the request ID
      *
+     * @deprecated Use clear_context_id("request_id") instead
      * @since 3.1.0
      */
+    [[deprecated("Use clear_context_id(\"request_id\") instead")]]
     void clear_request_id();
 
     /**
      * @brief Check if a request ID is set
      * @return true if request ID is set
      *
+     * @deprecated Use has_context_id("request_id") instead
      * @since 3.1.0
      */
+    [[deprecated("Use has_context_id(\"request_id\") instead")]]
     [[nodiscard]] bool has_request_id() const;
 
     // =========================================================================
-    // Trace ID / Span ID convenience API
+    // Trace ID / Span ID convenience API (deprecated)
     // =========================================================================
 
     /**
@@ -1009,16 +1095,20 @@ public:
      *     .emit();
      * @endcode
      *
+     * @deprecated Use set_context_id("trace_id", value) instead
      * @since 3.2.0
      */
+    [[deprecated("Use set_context_id(\"trace_id\", value) instead")]]
     void set_trace_id(const std::string& trace_id);
 
     /**
      * @brief Get the current trace ID
      * @return Current trace ID, or empty string if not set
      *
+     * @deprecated Use get_context_id("trace_id") instead
      * @since 3.2.0
      */
+    [[deprecated("Use get_context_id(\"trace_id\") instead")]]
     [[nodiscard]] std::string get_trace_id() const;
 
     /**
@@ -1027,16 +1117,20 @@ public:
      * @details Call this at the end of request processing to prevent
      * trace ID leakage to subsequent requests.
      *
+     * @deprecated Use clear_context_id("trace_id") instead
      * @since 3.2.0
      */
+    [[deprecated("Use clear_context_id(\"trace_id\") instead")]]
     void clear_trace_id();
 
     /**
      * @brief Check if a trace ID is set
      * @return true if trace ID is set
      *
+     * @deprecated Use has_context_id("trace_id") instead
      * @since 3.2.0
      */
+    [[deprecated("Use has_context_id(\"trace_id\") instead")]]
     [[nodiscard]] bool has_trace_id() const;
 
     /**
@@ -1058,31 +1152,39 @@ public:
      *     .emit();
      * @endcode
      *
+     * @deprecated Use set_context_id("span_id", value) instead
      * @since 3.2.0
      */
+    [[deprecated("Use set_context_id(\"span_id\", value) instead")]]
     void set_span_id(const std::string& span_id);
 
     /**
      * @brief Get the current span ID
      * @return Current span ID, or empty string if not set
      *
+     * @deprecated Use get_context_id("span_id") instead
      * @since 3.2.0
      */
+    [[deprecated("Use get_context_id(\"span_id\") instead")]]
     [[nodiscard]] std::string get_span_id() const;
 
     /**
      * @brief Clear the span ID
      *
+     * @deprecated Use clear_context_id("span_id") instead
      * @since 3.2.0
      */
+    [[deprecated("Use clear_context_id(\"span_id\") instead")]]
     void clear_span_id();
 
     /**
      * @brief Check if a span ID is set
      * @return true if span ID is set
      *
+     * @deprecated Use has_context_id("span_id") instead
      * @since 3.2.0
      */
+    [[deprecated("Use has_context_id(\"span_id\") instead")]]
     [[nodiscard]] bool has_span_id() const;
 
     /**
@@ -1092,31 +1194,39 @@ public:
      * @details Sets the parent span ID for establishing parent-child
      * relationships between spans in a trace.
      *
+     * @deprecated Use set_context_id("parent_span_id", value) instead
      * @since 3.2.0
      */
+    [[deprecated("Use set_context_id(\"parent_span_id\", value) instead")]]
     void set_parent_span_id(const std::string& parent_span_id);
 
     /**
      * @brief Get the current parent span ID
      * @return Current parent span ID, or empty string if not set
      *
+     * @deprecated Use get_context_id("parent_span_id") instead
      * @since 3.2.0
      */
+    [[deprecated("Use get_context_id(\"parent_span_id\") instead")]]
     [[nodiscard]] std::string get_parent_span_id() const;
 
     /**
      * @brief Clear the parent span ID
      *
+     * @deprecated Use clear_context_id("parent_span_id") instead
      * @since 3.2.0
      */
+    [[deprecated("Use clear_context_id(\"parent_span_id\") instead")]]
     void clear_parent_span_id();
 
     /**
      * @brief Check if a parent span ID is set
      * @return true if parent span ID is set
      *
+     * @deprecated Use has_context_id("parent_span_id") instead
      * @since 3.2.0
      */
+    [[deprecated("Use has_context_id(\"parent_span_id\") instead")]]
     [[nodiscard]] bool has_parent_span_id() const;
 
     // =========================================================================

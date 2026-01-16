@@ -365,33 +365,99 @@ TEST_F(StructuredLoggingTest, ContextThreadSafety) {
     test_logger->stop();
 }
 
-// Test 11: Trace ID convenience API
+// Test 11: Generic context ID API
+TEST_F(StructuredLoggingTest, GenericContextIdAPI) {
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    // Initially no context IDs
+    EXPECT_FALSE(test_logger->has_context_id("correlation_id"));
+    EXPECT_FALSE(test_logger->has_context_id("trace_id"));
+    EXPECT_EQ(test_logger->get_context_id("correlation_id"), "");
+
+    // Set context IDs using generic API
+    test_logger->set_context_id("correlation_id", "abc-123");
+    test_logger->set_context_id("trace_id", "0af7651916cd43dd8448eb211c80319c");
+    test_logger->set_context_id("span_id", "b7ad6b7169203331");
+
+    EXPECT_TRUE(test_logger->has_context_id("correlation_id"));
+    EXPECT_TRUE(test_logger->has_context_id("trace_id"));
+    EXPECT_TRUE(test_logger->has_context_id("span_id"));
+
+    EXPECT_EQ(test_logger->get_context_id("correlation_id"), "abc-123");
+    EXPECT_EQ(test_logger->get_context_id("trace_id"), "0af7651916cd43dd8448eb211c80319c");
+    EXPECT_EQ(test_logger->get_context_id("span_id"), "b7ad6b7169203331");
+
+    // Clear single context ID
+    test_logger->clear_context_id("span_id");
+    EXPECT_FALSE(test_logger->has_context_id("span_id"));
+    EXPECT_TRUE(test_logger->has_context_id("correlation_id"));
+
+    // Clear all context IDs
+    test_logger->clear_all_context_ids();
+    EXPECT_FALSE(test_logger->has_context_id("correlation_id"));
+    EXPECT_FALSE(test_logger->has_context_id("trace_id"));
+
+    test_logger->stop();
+}
+
+// Test 11b: Custom context ID keys
+TEST_F(StructuredLoggingTest, CustomContextIdKeys) {
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    // Set custom context ID key
+    test_logger->set_context_id("custom_key", "custom_value");
+    EXPECT_TRUE(test_logger->has_context_id("custom_key"));
+    EXPECT_EQ(test_logger->get_context_id("custom_key"), "custom_value");
+
+    // clear_all_context_ids only clears known keys, not custom ones
+    test_logger->clear_all_context_ids();
+    EXPECT_TRUE(test_logger->has_context_id("custom_key"));
+
+    // Clear custom key manually
+    test_logger->clear_context_id("custom_key");
+    EXPECT_FALSE(test_logger->has_context_id("custom_key"));
+
+    test_logger->stop();
+}
+
+// Test 11c: Trace ID convenience API (deprecated but still working)
 TEST_F(StructuredLoggingTest, TraceIdConvenienceAPI) {
     auto test_logger = std::make_shared<logger>(false);
     test_logger->start();
 
     // Initially no trace ID
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     EXPECT_FALSE(test_logger->has_trace_id());
     EXPECT_EQ(test_logger->get_trace_id(), "");
 
-    // Set trace ID
+    // Set trace ID using deprecated API
     test_logger->set_trace_id("0af7651916cd43dd8448eb211c80319c");
     EXPECT_TRUE(test_logger->has_trace_id());
     EXPECT_EQ(test_logger->get_trace_id(), "0af7651916cd43dd8448eb211c80319c");
+
+    // Verify it's accessible via generic API too
+    EXPECT_TRUE(test_logger->has_context_id("trace_id"));
+    EXPECT_EQ(test_logger->get_context_id("trace_id"), "0af7651916cd43dd8448eb211c80319c");
 
     // Clear trace ID
     test_logger->clear_trace_id();
     EXPECT_FALSE(test_logger->has_trace_id());
     EXPECT_EQ(test_logger->get_trace_id(), "");
+#pragma GCC diagnostic pop
 
     test_logger->stop();
 }
 
-// Test 12: Span ID convenience API
+// Test 12: Span ID convenience API (deprecated but still working)
 TEST_F(StructuredLoggingTest, SpanIdConvenienceAPI) {
     auto test_logger = std::make_shared<logger>(false);
     test_logger->start();
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     // Initially no span ID
     EXPECT_FALSE(test_logger->has_span_id());
     EXPECT_EQ(test_logger->get_span_id(), "");
@@ -405,15 +471,18 @@ TEST_F(StructuredLoggingTest, SpanIdConvenienceAPI) {
     test_logger->clear_span_id();
     EXPECT_FALSE(test_logger->has_span_id());
     EXPECT_EQ(test_logger->get_span_id(), "");
+#pragma GCC diagnostic pop
 
     test_logger->stop();
 }
 
-// Test 13: Parent Span ID convenience API
+// Test 13: Parent Span ID convenience API (deprecated but still working)
 TEST_F(StructuredLoggingTest, ParentSpanIdConvenienceAPI) {
     auto test_logger = std::make_shared<logger>(false);
     test_logger->start();
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     // Initially no parent span ID
     EXPECT_FALSE(test_logger->has_parent_span_id());
     EXPECT_EQ(test_logger->get_parent_span_id(), "");
@@ -427,6 +496,7 @@ TEST_F(StructuredLoggingTest, ParentSpanIdConvenienceAPI) {
     test_logger->clear_parent_span_id();
     EXPECT_FALSE(test_logger->has_parent_span_id());
     EXPECT_EQ(test_logger->get_parent_span_id(), "");
+#pragma GCC diagnostic pop
 
     test_logger->stop();
 }
