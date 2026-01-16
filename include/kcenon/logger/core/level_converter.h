@@ -35,8 +35,11 @@ namespace kcenon::logger {
  * @note Both enumerations use identical numeric values, so this is essentially
  * a type-safe cast with no runtime overhead.
  *
+ * @deprecated Use common::interfaces::log_level directly instead of converting.
+ *             Will be removed in v3.0.0.
  * @since 2.0.0
  */
+[[deprecated("Use common::interfaces::log_level directly instead of converting. Will be removed in v3.0.0.")]]
 [[nodiscard]] constexpr logger_system::log_level
 to_logger_system_level(common::interfaces::log_level level) noexcept {
     switch (level) {
@@ -70,8 +73,11 @@ to_logger_system_level(common::interfaces::log_level level) noexcept {
  * @note logger_system::log_level has aliases (warn=warning=3, fatal=critical=5),
  * so we use the underlying integer value for conversion to avoid duplicate case errors.
  *
+ * @deprecated Use common::interfaces::log_level directly instead of converting.
+ *             Will be removed in v3.0.0.
  * @since 2.0.0
  */
+[[deprecated("Use common::interfaces::log_level directly instead of converting. Will be removed in v3.0.0.")]]
 [[nodiscard]] constexpr common::interfaces::log_level
 to_common_level(logger_system::log_level level) noexcept {
     // Use underlying integer to avoid duplicate case value errors

@@ -49,6 +49,44 @@ common::VoidResult res = make_logger_void_result(code, "message");
 
 ## [Unreleased]
 
+### Native log_level API Deprecation (Issue #320)
+
+#### Deprecated
+- **Native `logger_system::log_level` enum** - Use `common::interfaces::log_level` instead
+  - Marked with `[[deprecated]]` attribute for compiler warnings
+  - Will be removed in v3.0.0
+
+- **Native log_level methods in `logger` class**
+  - `log(log_level, const std::string&)` - Use ILogger interface methods instead
+  - `log(log_level, msg, file, line, func)` - Use `log(level, msg, source_location)` instead
+  - `log(log_level, msg, log_context)` - Use `log(level, msg, source_location)` instead
+  - `is_enabled(log_level)` - Use `is_enabled(common::interfaces::log_level)` instead
+  - `set_min_level(log_level)` - Use `set_level(common::interfaces::log_level)` instead
+  - `get_min_level()` - Use `get_level()` instead
+
+- **Utility functions in `logger_types.h`**
+  - `log_level_to_string()` - Use `common::interfaces::log_level_to_string()` instead
+  - `string_to_log_level()` - Use `common::interfaces::string_to_log_level()` instead
+
+- **Conversion functions in `level_converter.h`**
+  - `to_logger_system_level()` - Use `common::interfaces::log_level` directly
+  - `to_common_level()` - Use `common::interfaces::log_level` directly
+
+#### Migration
+```cpp
+// Before (deprecated):
+logger->log(log_level::info, "Message");
+logger->set_min_level(log_level::debug);
+
+// After (recommended):
+logger->log(common::interfaces::log_level::info, "Message");
+logger->set_level(common::interfaces::log_level::debug);
+```
+
+See [Migration Guide](guides/MIGRATION_GUIDE.md#deprecated-native-log_level-api-planned-for-removal-in-v300) for details.
+
+---
+
 ### Real-time Log Analysis Integration (Issue #281)
 
 #### Added
