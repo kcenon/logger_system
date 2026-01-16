@@ -177,7 +177,7 @@ TEST_F(StructuredLoggingTest, ContextFieldsIncluded) {
     EXPECT_EQ(std::get<std::string>(captured_fields["request_id"]), "req-123");
 }
 
-// Test 4: Logger structured logging methods
+// Test 4: Logger structured logging methods (deprecated convenience method)
 TEST_F(StructuredLoggingTest, LoggerStructuredMethods) {
     auto test_logger = std::make_shared<logger>(false);  // Synchronous mode
     test_logger->start();
@@ -186,11 +186,14 @@ TEST_F(StructuredLoggingTest, LoggerStructuredMethods) {
     auto* writer_ptr = writer.get();
     test_logger->add_writer("capture", std::move(writer));
 
-    // Test info_structured
+    // Test info_structured (deprecated)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     test_logger->info_structured()
         .message("User logged in")
         .field("user_id", 12345)
         .emit();
+#pragma GCC diagnostic pop
 
     test_logger->flush();
 
@@ -290,7 +293,7 @@ TEST_F(StructuredLoggingTest, JsonFormatterWithCategory) {
     EXPECT_NE(output.find("\"category\":\"database\""), std::string::npos);
 }
 
-// Test 8: Structured logging with all level methods
+// Test 8: Structured logging with all level methods (deprecated convenience methods)
 TEST_F(StructuredLoggingTest, AllStructuredLevelMethods) {
     auto test_logger = std::make_shared<logger>(false);
     test_logger->set_min_level(log_level::trace);
@@ -300,12 +303,15 @@ TEST_F(StructuredLoggingTest, AllStructuredLevelMethods) {
     auto* writer_ptr = writer.get();
     test_logger->add_writer("capture", std::move(writer));
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     test_logger->trace_structured().message("Trace").emit();
     test_logger->debug_structured().message("Debug").emit();
     test_logger->info_structured().message("Info").emit();
     test_logger->warn_structured().message("Warn").emit();
     test_logger->error_structured().message("Error").emit();
     test_logger->fatal_structured().message("Fatal").emit();
+#pragma GCC diagnostic pop
 
     test_logger->flush();
 
@@ -318,6 +324,67 @@ TEST_F(StructuredLoggingTest, AllStructuredLevelMethods) {
     EXPECT_EQ(entries[3].level, log_level::warn);
     EXPECT_EQ(entries[4].level, log_level::error);
     EXPECT_EQ(entries[5].level, log_level::fatal);
+
+    test_logger->stop();
+}
+
+// Test 8b: Structured logging with generic log_structured method (canonical API)
+TEST_F(StructuredLoggingTest, GenericLogStructuredMethod) {
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->set_min_level(log_level::trace);
+    test_logger->start();
+
+    auto writer = std::make_unique<capture_writer>();
+    auto* writer_ptr = writer.get();
+    test_logger->add_writer("capture", std::move(writer));
+
+    // Use the canonical log_structured(level) API
+    test_logger->log_structured(log_level::trace).message("Trace").emit();
+    test_logger->log_structured(log_level::debug).message("Debug").emit();
+    test_logger->log_structured(log_level::info).message("Info").emit();
+    test_logger->log_structured(log_level::warn).message("Warn").emit();
+    test_logger->log_structured(log_level::error).message("Error").emit();
+    test_logger->log_structured(log_level::fatal).message("Fatal").emit();
+
+    test_logger->flush();
+
+    auto entries = writer_ptr->get_entries();
+    ASSERT_EQ(entries.size(), 6);
+
+    EXPECT_EQ(entries[0].level, log_level::trace);
+    EXPECT_EQ(entries[1].level, log_level::debug);
+    EXPECT_EQ(entries[2].level, log_level::info);
+    EXPECT_EQ(entries[3].level, log_level::warn);
+    EXPECT_EQ(entries[4].level, log_level::error);
+    EXPECT_EQ(entries[5].level, log_level::fatal);
+
+    test_logger->stop();
+}
+
+// Test 8c: Structured logging with fields using generic API
+TEST_F(StructuredLoggingTest, GenericLogStructuredWithFields) {
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    auto writer = std::make_unique<capture_writer>();
+    auto* writer_ptr = writer.get();
+    test_logger->add_writer("capture", std::move(writer));
+
+    // Use the canonical log_structured(level) API with fields
+    test_logger->log_structured(log_level::info)
+        .message("User action completed")
+        .field("user_id", 12345)
+        .field("action", "purchase")
+        .field("amount", 99.99)
+        .field("success", true)
+        .emit();
+
+    test_logger->flush();
+
+    auto entries = writer_ptr->get_entries();
+    ASSERT_EQ(entries.size(), 1);
+    EXPECT_EQ(entries[0].level, log_level::info);
+    EXPECT_EQ(entries[0].message, "User action completed");
 
     test_logger->stop();
 }
