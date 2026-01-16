@@ -451,6 +451,52 @@ logger->debug("Message", {{"value", value}});
 | N/A | `with_performance_tuning(level)` | New configuration strategy |
 | N/A | `with_monitoring(monitor)` | New monitoring integration |
 
+### Deprecated Native log_level API (Planned for Removal in v3.0.0)
+
+The following native `logger_system::log_level` APIs are deprecated in favor of `common::interfaces::log_level`:
+
+| Deprecated API | Recommended Alternative | Status |
+|----------------|------------------------|--------|
+| `logger_system::log_level` enum | `common::interfaces::log_level` | Deprecated, will be removed in v3.0.0 |
+| `log(log_level, const std::string&)` | `log(common::interfaces::log_level, const std::string&)` | Deprecated |
+| `log(log_level, msg, file, line, func)` | `log(common::interfaces::log_level, std::string_view, source_location)` | Deprecated |
+| `log(log_level, msg, log_context)` | `log(common::interfaces::log_level, std::string_view, source_location)` | Deprecated |
+| `is_enabled(log_level)` | `is_enabled(common::interfaces::log_level)` | Deprecated |
+| `set_min_level(log_level)` | `set_level(common::interfaces::log_level)` | Deprecated |
+| `get_min_level()` | `get_level()` | Deprecated |
+| `log_level_to_string()` | `common::interfaces::log_level_to_string()` | Deprecated |
+| `string_to_log_level()` | `common::interfaces::string_to_log_level()` | Deprecated |
+| `to_logger_system_level()` | Use `common::interfaces::log_level` directly | Deprecated |
+| `to_common_level()` | Use `common::interfaces::log_level` directly | Deprecated |
+
+**Migration Example:**
+
+```cpp
+// OLD (deprecated)
+#include <kcenon/logger/interfaces/logger_types.h>
+using namespace kcenon::logger;
+
+logger->log(log_level::info, "Message");
+logger->set_min_level(log_level::debug);
+if (logger->is_enabled(log_level::trace)) { ... }
+
+// NEW (recommended)
+#include <kcenon/common/interfaces/logger_interface.h>
+using namespace kcenon::logger;
+
+logger->log(common::interfaces::log_level::info, "Message");
+logger->set_level(common::interfaces::log_level::debug);
+if (logger->is_enabled(common::interfaces::log_level::trace)) { ... }
+
+// Or with using directive for brevity
+using common::interfaces::log_level;
+logger->log(log_level::info, "Message");
+```
+
+**Timeline:**
+- **Current**: APIs marked with `[[deprecated]]` attribute - compiler warnings will be generated
+- **v3.0.0**: Deprecated APIs will be removed
+
 ### Core Logger API
 
 | v1.x Method | v2.x Equivalent | v3.0 Equivalent |

@@ -33,7 +33,7 @@ namespace logger_system {
  *             This enum is maintained for backward compatibility only.
  *             Will be removed in v3.0.0.
  */
-enum class log_level {
+enum class [[deprecated("Use common::interfaces::log_level instead. Will be removed in v3.0.0.")]] log_level {
     trace = 0,
     debug = 1,
     info = 2,
@@ -92,7 +92,9 @@ enum class logger_error_code {
 
 /**
  * @brief Convert log level to string
+ * @deprecated Use common::interfaces::log_level_to_string instead. Will be removed in v3.0.0.
  */
+[[deprecated("Use common::interfaces::log_level_to_string instead. Will be removed in v3.0.0.")]]
 inline const char* log_level_to_string(log_level level) {
     switch (level) {
         case log_level::trace: return "TRACE";
@@ -108,7 +110,9 @@ inline const char* log_level_to_string(log_level level) {
 
 /**
  * @brief Convert string to log level
+ * @deprecated Use common::interfaces::string_to_log_level instead. Will be removed in v3.0.0.
  */
+[[deprecated("Use common::interfaces::string_to_log_level instead. Will be removed in v3.0.0.")]]
 inline log_level string_to_log_level(const std::string& str) {
     if (str == "TRACE" || str == "trace") return log_level::trace;
     if (str == "DEBUG" || str == "debug") return log_level::debug;

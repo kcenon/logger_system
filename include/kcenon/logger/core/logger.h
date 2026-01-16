@@ -325,8 +325,11 @@ public:
      *
      * @note Messages below the minimum log level are discarded for performance.
      *
+     * @deprecated Use log(common::interfaces::log_level, const std::string&) instead.
+     *             Will be removed in v3.0.0.
      * @since 1.0.0
      */
+    [[deprecated("Use log(common::interfaces::log_level, const std::string&) instead. Will be removed in v3.0.0.")]]
     void log(log_level level, const std::string& message);
 
     /**
@@ -341,8 +344,11 @@ public:
      * This overload is useful for tracking the exact origin of log messages.
      * Internally converts to common::interfaces::log_level.
      *
+     * @deprecated Use log(common::interfaces::log_level, std::string_view, const source_location&) instead.
+     *             Will be removed in v3.0.0.
      * @since 1.0.0
      */
+    [[deprecated("Use log(common::interfaces::log_level, std::string_view, const source_location&) instead. Will be removed in v3.0.0.")]]
     void log(log_level level,
              const std::string& message,
              const std::string& file,
@@ -355,8 +361,11 @@ public:
      * @param message The message to log
      * @param context Source location context
      *
+     * @deprecated Use log(common::interfaces::log_level, std::string_view, const source_location&) instead.
+     *             Will be removed in v3.0.0.
      * @since 1.0.0
      */
+    [[deprecated("Use log(common::interfaces::log_level, std::string_view, const source_location&) instead. Will be removed in v3.0.0.")]]
     void log(log_level level,
              const std::string& message,
              const core::log_context& context);
@@ -369,8 +378,11 @@ public:
      * @details Use this method to avoid expensive message construction
      * for log levels that won't be output.
      *
+     * @deprecated Use is_enabled(common::interfaces::log_level) instead.
+     *             Will be removed in v3.0.0.
      * @since 1.0.0
      */
+    [[deprecated("Use is_enabled(common::interfaces::log_level) instead. Will be removed in v3.0.0.")]]
     bool is_enabled(log_level level) const;
     
     // Additional logger-specific methods
@@ -419,22 +431,26 @@ public:
      * @details Sets the threshold for message logging. Messages with a level
      * below this threshold are discarded for performance optimization.
      *
-     * @deprecated Use set_level(common::interfaces::log_level) instead
+     * @deprecated Use set_level(common::interfaces::log_level) instead.
+     *             Will be removed in v3.0.0.
      * @note This is a thread-safe operation that takes effect immediately.
      *
      * @since 1.0.0
      */
+    [[deprecated("Use set_level(common::interfaces::log_level) instead. Will be removed in v3.0.0.")]]
     void set_min_level(log_level level);
 
     /**
      * @brief Get the minimum log level (legacy API)
      * @return Current minimum log level using logger_system::log_level
      *
-     * @deprecated Use get_level() which returns common::interfaces::log_level instead
+     * @deprecated Use get_level() which returns common::interfaces::log_level instead.
+     *             Will be removed in v3.0.0.
      * @details Returns the current threshold level for message logging.
      *
      * @since 1.0.0
      */
+    [[deprecated("Use get_level() which returns common::interfaces::log_level instead. Will be removed in v3.0.0.")]]
     log_level get_min_level() const;
     
     /**
