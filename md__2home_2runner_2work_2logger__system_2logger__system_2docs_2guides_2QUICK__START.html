@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Quick Start Guide</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1594"></a> </p><blockquote class="doxtable">
+<div class="textblock"><p><a class="anchor" id="autotoc_md1599"></a> </p><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html">한국어</a> </p>
 </blockquote>
 <p>Get up and running with Logger System in 5 minutes.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1596"></a>
+<h1><a class="anchor" id="autotoc_md1601"></a>
 Prerequisites</h1>
 <ul>
 <li>CMake 3.20 or later</li>
@@ -107,9 +107,9 @@ Prerequisites</h1>
 <li><b><a href="https://github.com/kcenon/common_system">common_system</a></b> - Required dependency (must be cloned alongside logger_system)</li>
 <li><b><a href="https://github.com/kcenon/thread_system">thread_system</a></b> - Optional dependency (for advanced async logging with thread pool)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1597"></a>
+<h1><a class="anchor" id="autotoc_md1602"></a>
 Installation</h1>
-<h2><a class="anchor" id="autotoc_md1598"></a>
+<h2><a class="anchor" id="autotoc_md1603"></a>
 1. Clone the Repositories</h2>
 <div class="fragment"><div class="line"># Clone common_system first (required dependency)</div>
 <div class="line">git clone https://github.com/kcenon/common_system.git</div>
@@ -123,14 +123,14 @@ Installation</h1>
 </div><!-- fragment --><blockquote class="doxtable">
 <p>&zwj;<b>Note:</b> All repositories must be in the same parent directory for the build to work correctly. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md1599"></a>
+<h2><a class="anchor" id="autotoc_md1604"></a>
 2. Install Dependencies</h2>
 <div class="fragment"><div class="line"># Linux/macOS</div>
 <div class="line">./scripts/dependency.sh</div>
 <div class="line"> </div>
 <div class="line"># Windows</div>
 <div class="line">./scripts/dependency.bat</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1600"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1605"></a>
 3. Build</h2>
 <div class="fragment"><div class="line"># Linux/macOS</div>
 <div class="line">./scripts/build.sh</div>
@@ -145,12 +145,12 @@ Installation</h1>
 <div class="line"># With thread_system integration (optional)</div>
 <div class="line">cmake -S . -B build -DLOGGER_USE_THREAD_SYSTEM=ON -DCMAKE_BUILD_TYPE=Release</div>
 <div class="line">cmake --build build -j</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1601"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1606"></a>
 4. Verify Installation</h2>
 <div class="fragment"><div class="line"># Run the sample application</div>
 <div class="line">./build/bin/basic_logging</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1603"></a>
+<h1><a class="anchor" id="autotoc_md1608"></a>
 Your First Logger</h1>
 <p>Create a simple logging application:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
@@ -191,7 +191,7 @@ Your First Logger</h1>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Logging completed! Check app.log for file output.\n&quot;</span>;</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1604"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1609"></a>
 Building Your Application</h2>
 <p>Add to your <code>CMakeLists.txt</code>:</p>
 <div class="fragment"><div class="line">cmake_minimum_required(VERSION 3.20)</div>
@@ -225,9 +225,9 @@ Building Your Application</h2>
 <div class="line">add_executable(my_app main.cpp)</div>
 <div class="line">target_link_libraries(my_app PRIVATE kcenon::logger)</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1606"></a>
+<h1><a class="anchor" id="autotoc_md1611"></a>
 Key Concepts</h1>
-<h2><a class="anchor" id="autotoc_md1607"></a>
+<h2><a class="anchor" id="autotoc_md1612"></a>
 Logger Builder</h2>
 <p>The recommended way to create loggers with validation.</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
@@ -235,7 +235,7 @@ Logger Builder</h2>
 <div class="line">    .with_min_level(log_level::info)</div>
 <div class="line">    .build()</div>
 <div class="line">    .value();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1608"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1613"></a>
 Writers</h2>
 <p>Output destinations for log messages.</p>
 <div class="fragment"><div class="line"><span class="comment">// Console output with colors</span></div>
@@ -247,7 +247,7 @@ Writers</h2>
 <div class="line"><span class="comment">// Rotating file (10MB per file, keep 5 files)</span></div>
 <div class="line">.add_writer(<span class="stringliteral">&quot;rotating&quot;</span>, std::make_unique&lt;rotating_file_writer&gt;(</div>
 <div class="line">    <span class="stringliteral">&quot;app.log&quot;</span>, 10 * 1024 * 1024, 5))</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1609"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1614"></a>
 Log Levels</h2>
 <p>Standard severity levels.</p>
 <div class="fragment"><div class="line">logger-&gt;log(log_level::trace, <span class="stringliteral">&quot;Detailed trace info&quot;</span>);</div>
@@ -257,9 +257,9 @@ Log Levels</h2>
 <div class="line">logger-&gt;log(log_level::error, <span class="stringliteral">&quot;Error occurred&quot;</span>);</div>
 <div class="line">logger-&gt;log(log_level::fatal, <span class="stringliteral">&quot;Fatal error - system shutting down&quot;</span>);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1611"></a>
+<h1><a class="anchor" id="autotoc_md1616"></a>
 Configuration Templates</h1>
-<h2><a class="anchor" id="autotoc_md1612"></a>
+<h2><a class="anchor" id="autotoc_md1617"></a>
 Production</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .use_template(<span class="stringliteral">&quot;production&quot;</span>)</div>
@@ -270,7 +270,7 @@ Production</h2>
 <li>Batched processing</li>
 <li>Info level minimum</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1613"></a>
+<h2><a class="anchor" id="autotoc_md1618"></a>
 Debug</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .use_template(<span class="stringliteral">&quot;debug&quot;</span>)</div>
@@ -281,7 +281,7 @@ Debug</h2>
 <li>Debug level minimum</li>
 <li>Colored console output</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1614"></a>
+<h2><a class="anchor" id="autotoc_md1619"></a>
 High Performance</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .use_template(<span class="stringliteral">&quot;high_performance&quot;</span>)</div>
@@ -293,9 +293,9 @@ High Performance</h2>
 <li>Optimized for high message volume</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1616"></a>
+<h1><a class="anchor" id="autotoc_md1621"></a>
 CMake Configuration</h1>
-<h2><a class="anchor" id="autotoc_md1617"></a>
+<h2><a class="anchor" id="autotoc_md1622"></a>
 Core Build Options</h2>
 <div class="fragment"><div class="line"># Standalone mode (default, no thread_system required)</div>
 <div class="line">cmake -DLOGGER_STANDALONE_MODE=ON ..</div>
@@ -308,7 +308,7 @@ Core Build Options</h2>
 <div class="line"> </div>
 <div class="line"># Enable examples</div>
 <div class="line">cmake -DBUILD_EXAMPLES=ON ..</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1618"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1623"></a>
 Feature Flags</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -323,14 +323,14 @@ Feature Flags</h2>
 <td class="markdownTableBodyNone"><code>BUILD_EXAMPLES</code>   </td><td class="markdownTableBodyNone"><code>ON</code>   </td><td class="markdownTableBodyNone">Build example applications   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1620"></a>
+<h1><a class="anchor" id="autotoc_md1625"></a>
 thread_system Integration (Optional)</h1>
 <p>For advanced async logging with thread pool support:</p>
-<h2><a class="anchor" id="autotoc_md1621"></a>
+<h2><a class="anchor" id="autotoc_md1626"></a>
 Enable at Build Time</h2>
 <div class="fragment"><div class="line">cmake -DLOGGER_USE_THREAD_SYSTEM=ON ..</div>
 <div class="line">cmake --build .</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1622"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1627"></a>
 Enable at Runtime</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/thread_system_integration.h&gt;</span></div>
 <div class="line"> </div>
@@ -351,9 +351,9 @@ Enable at Runtime</h2>
 <div class="line">thread_system_integration::disable();</div>
 </div><!-- fragment --><p>See <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM.html">thread_system Integration Guide</a> for details.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1624"></a>
+<h1><a class="anchor" id="autotoc_md1629"></a>
 Common Patterns</h1>
-<h2><a class="anchor" id="autotoc_md1625"></a>
+<h2><a class="anchor" id="autotoc_md1630"></a>
 Error Handling</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> result = logger_builder()</div>
 <div class="line">    .use_template(<span class="stringliteral">&quot;production&quot;</span>)</div>
@@ -366,7 +366,7 @@ Error Handling</h2>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> logger = std::move(result.value());</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1626"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1631"></a>
 Multiple Writers</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .add_writer(<span class="stringliteral">&quot;console&quot;</span>, std::make_unique&lt;console_writer&gt;())</div>
@@ -374,14 +374,14 @@ Multiple Writers</h2>
 <div class="line">    .add_writer(<span class="stringliteral">&quot;errors&quot;</span>, std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;errors.log&quot;</span>))</div>
 <div class="line">    .build()</div>
 <div class="line">    .value();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1627"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1632"></a>
 Graceful Shutdown</h2>
 <div class="fragment"><div class="line"><span class="comment">// Ensure all pending logs are written</span></div>
 <div class="line">logger-&gt;flush();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Logger will be properly cleaned up when it goes out of scope</span></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1629"></a>
+<h1><a class="anchor" id="autotoc_md1634"></a>
 Next Steps</h1>
 <ul>
 <li><b><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html">Getting Started Guide</a></b> - Detailed setup instructions</li>
@@ -392,9 +392,9 @@ Next Steps</h1>
 <li><b><a href="../../examples/">Examples</a></b> - More sample applications</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1631"></a>
+<h1><a class="anchor" id="autotoc_md1636"></a>
 Troubleshooting</h1>
-<h2><a class="anchor" id="autotoc_md1632"></a>
+<h2><a class="anchor" id="autotoc_md1637"></a>
 Common Issues</h2>
 <p><b>Build fails with C++20 errors:</b> </p><div class="fragment"><div class="line"># Ensure you have a compatible compiler</div>
 <div class="line">g++ --version  # Should be 11+</div>
@@ -413,7 +413,7 @@ Common Issues</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Jan 16 2026 13:59:34 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Jan 16 2026 14:29:37 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
