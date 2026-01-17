@@ -118,9 +118,7 @@ Directory Layout</h1>
 <div class="line">│   │   ├── thread_integration_detector.h  # Thread system detection</div>
 <div class="line">│   │   ├── 📁 metrics/              # Performance metrics</div>
 <div class="line">│   │   │   └── logger_metrics.h     # Metrics data structures</div>
-<div class="line">│   │   └── 📁 monitoring/           # Monitoring integration</div>
-<div class="line">│   │       ├── monitoring_interface.h           # IMonitor interface (deprecated)</div>
-<div class="line">│   │       └── monitoring_interface_transition.h # Transition helpers</div>
+<div class="line">│   │   └── 📁 monitoring/           # Monitoring integration (empty - use common_system)</div>
 <div class="line">│   ├── 📁 interfaces/               # Abstract interface definitions</div>
 <div class="line">│   │   ├── logger_interface.h       # Base logger interface</div>
 <div class="line">│   │   ├── logger_types.h           # Common type definitions</div>
@@ -268,8 +266,7 @@ Primary Namespace Hierarchy</h2>
 <div class="line">│   ├── log_collector                   <span class="comment">// Collection logic</span></div>
 <div class="line">│   ├── metrics                         <span class="comment">// Performance metrics</span></div>
 <div class="line">│   │   └── logger_metrics              <span class="comment">// Metrics structures</span></div>
-<div class="line">│   └── monitoring                      <span class="comment">// Monitoring integration</span></div>
-<div class="line">│       └── monitoring_interface        <span class="comment">// IMonitor interface (deprecated)</span></div>
+<div class="line">│   └── monitoring                      <span class="comment">// Monitoring integration (use common_system)</span></div>
 <div class="line">├── interfaces                          <span class="comment">// Abstract interfaces</span></div>
 <div class="line">│   ├── logger_interface                <span class="comment">// Base logger</span></div>
 <div class="line">│   ├── log_entry                       <span class="comment">// Entry structure</span></div>
@@ -458,10 +455,7 @@ Adapters (&lt;tt&gt;adapters/&lt;/tt&gt;)</h3>
 Monitoring (&lt;tt&gt;core/monitoring/&lt;/tt&gt;)</h2>
 <ul>
 <li><b>Purpose</b>: Integration with monitoring_system</li>
-<li><b>Key Classes</b>:<ul>
-<li><code>monitoring_interface</code>: IMonitor abstraction (deprecated, use common_system)</li>
-</ul>
-</li>
+<li><b>Note</b>: Deprecated interfaces removed in v3.0.0. Use <code>common_system</code> IMonitor directly.</li>
 <li><b>Dependencies</b>: <code>common_system</code> (IMonitor)</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md611"></a>
@@ -543,7 +537,7 @@ Public API Layer (&lt;tt&gt;include/kcenon/logger/&lt;/tt&gt;)</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Metrics</b>   </td><td class="markdownTableBodyNone"><code>core/metrics/logger_metrics.h</code>   </td><td class="markdownTableBodyNone">Performance metrics   </td><td class="markdownTableBodyNone">None    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Monitoring</b>   </td><td class="markdownTableBodyNone"><code>core/monitoring/monitoring_interface.h</code>   </td><td class="markdownTableBodyNone">IMonitor integration   </td><td class="markdownTableBodyNone"><code>common_system</code>    </td></tr>
+<td class="markdownTableBodyNone"><b>Monitoring</b>   </td><td class="markdownTableBodyNone">Use <code>common_system</code> IMonitor directly   </td><td class="markdownTableBodyNone">IMonitor integration   </td><td class="markdownTableBodyNone"><code>common_system</code>    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Writer Interface</b>   </td><td class="markdownTableBodyNone"><code>interfaces/log_writer_interface.h</code>   </td><td class="markdownTableBodyNone">Base writer contract   </td><td class="markdownTableBodyNone"><code>common_system</code>    </td></tr>
 <tr class="markdownTableRowOdd">
@@ -694,7 +688,7 @@ References</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Jan 16 2026 14:29:37 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Jan 17 2026 14:03:00 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

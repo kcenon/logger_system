@@ -60,7 +60,7 @@ var searchData=
   ['removal_20in_20v3_200_200_57',['Deprecated Native log_level API (Planned for Removal in v3.0.0)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md1471',1,'']]],
   ['remove_20conditional_20compilation_202_20days_58',['Step 4: Remove Conditional Compilation (2 days)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CONDITIONAL__COMPILATION__REFACTORING.html#autotoc_md293',1,'']]],
   ['removed_59',['removed',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md1022',1,'Removed'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md1000',1,'Removed']]],
-  ['removed_20deprecated_20api_20cleanup_20issue_20268_60',['Removed - Deprecated API Cleanup (Issue #268)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md933',1,'']]],
+  ['removed_20deprecated_20api_20cleanup_20issues_20268_20324_60',['Removed - Deprecated API Cleanup (Issues #268, #324)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md933',1,'']]],
   ['repositories_61',['1. Clone the Repositories',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START.html#autotoc_md1603',1,'']]],
   ['request_20process_62',['Pull Request Process',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2CONTRIBUTING.html#autotoc_md1142',1,'']]],
   ['request_20response_20logging_63',['1. Request/Response Logging',['..//home/runner/work/logger_system/logger_system/docs/integration/README.md#autotoc_md1706',1,'']]],

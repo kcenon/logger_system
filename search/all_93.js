@@ -1,7 +1,7 @@
 var searchData=
 [
   ['제거됨_0',['제거됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1082',1,'제거됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1104',1,'제거됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1112',1,'제거됨']]],
-  ['제거됨_20deprecated_20api_20정리_20issue_20268_1',['제거됨 - Deprecated API 정리 (Issue #268)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1031',1,'']]],
+  ['제거됨_20deprecated_20api_20정리_20issues_20268_20324_1',['제거됨 - Deprecated API 정리 (Issues #268, #324)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1031',1,'']]],
   ['제거_202025_2012_2003_2',['CMake fmt Fallback 제거 - 2025-12-03',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1102',1,'']]],
   ['제안서_3',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]],
   ['제안_20디렉토리_20구조_4',['📁 제안 디렉토리 구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1833',1,'']]],

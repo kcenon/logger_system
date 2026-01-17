@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['정리_20issue_20268_0',['제거됨 - Deprecated API 정리 (Issue #268)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1031',1,'']]],
+  ['정리_20issues_20268_20324_0',['제거됨 - Deprecated API 정리 (Issues #268, #324)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1031',1,'']]],
   ['정보_1',['정보',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE__KO.html#autotoc_md1805',1,'시스템 정보'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG__KO.html#autotoc_md1116',1,'프로젝트 정보']]],
   ['정상_20종료_2',['정상 종료',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1672',1,'']]],
   ['정상_20종료_20패턴_3',['예제 4: 정상 종료 패턴',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html#autotoc_md221',1,'']]],

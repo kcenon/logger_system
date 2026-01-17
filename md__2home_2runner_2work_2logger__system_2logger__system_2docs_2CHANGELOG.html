@@ -102,11 +102,22 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <h1><a class="anchor" id="autotoc_md932"></a>
 [3.0.0] - 2025-12-31</h1>
 <h2><a class="anchor" id="autotoc_md933"></a>
-Removed - Deprecated API Cleanup (Issue #268)</h2>
+Removed - Deprecated API Cleanup (Issues #268, #324)</h2>
 <p>This release removes deprecated API compatibility layers following the "Fewest Elements" Simple Design principle.</p>
 <h3><a class="anchor" id="autotoc_md934"></a>
 Breaking Changes</h3>
 <ul>
+<li><b>Removed monitoring interface transition headers</b> (Issue #324)<ul>
+<li><code>include/kcenon/logger/core/monitoring/monitoring_interface.h</code> removed</li>
+<li><code>include/kcenon/logger/core/monitoring/monitoring_interface_transition.h</code> removed</li>
+<li>Use <code>common::interfaces::IMonitor</code> from <code>&lt;kcenon/common/interfaces/monitoring_interface.h&gt;</code> instead</li>
+</ul>
+</li>
+<li><b>Removed <code>has_thread_system_integration()</code> function</b> (Issue #324)<ul>
+<li>Use <code>has_iexecutor_interface()</code> instead</li>
+<li><code>has_any_executor_support()</code> now only checks IExecutor interface</li>
+</ul>
+</li>
 <li><b>Removed <code>logger_interface.h</code> header</b> (<code>include/kcenon/logger/interfaces/logger_interface.h</code>)<ul>
 <li><code>logger_system::logger_interface</code> class removed - use <code>common::interfaces::ILogger</code> instead</li>
 <li><code>logger_system::logger_registry</code> class removed</li>
@@ -978,7 +989,7 @@ Changed</h3>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Jan 16 2026 14:29:37 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Jan 17 2026 14:03:00 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -77,7 +77,7 @@ var searchData=
   ['class_74',['Choosing the Right Base Class',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS.html#autotoc_md425',1,'']]],
   ['class_20structure_75',['Class Structure',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION.html#autotoc_md312',1,'']]],
   ['classes_76',['Core Classes',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html#autotoc_md696',1,'']]],
-  ['cleanup_20issue_20268_77',['Removed - Deprecated API Cleanup (Issue #268)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md933',1,'']]],
+  ['cleanup_20issues_20268_20324_77',['Removed - Deprecated API Cleanup (Issues #268, #324)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html#autotoc_md933',1,'']]],
   ['clone_20the_20repositories_78',['1. Clone the Repositories',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START.html#autotoc_md1603',1,'']]],
   ['cmake_79',['With CMake',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2OPENTELEMETRY.html#autotoc_md1530',1,'']]],
   ['cmake_20구성_80',['CMake 구성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START__KO.html#autotoc_md1661',1,'']]],
