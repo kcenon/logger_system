@@ -381,7 +381,7 @@ thread_pool->set_logger(adapter);
 
 ```cpp
 // Optional monitoring backend injection
-#include <kcenon/logger/core/monitoring/monitoring_interface.h>
+#include <kcenon/common/interfaces/monitoring_interface.h>
 
 // Create logger with monitoring
 auto logger_instance = logger_builder()

@@ -27,9 +27,7 @@ logger_system/
 │   │   ├── thread_integration_detector.h  # Thread system detection
 │   │   ├── 📁 metrics/              # Performance metrics
 │   │   │   └── logger_metrics.h     # Metrics data structures
-│   │   └── 📁 monitoring/           # Monitoring integration
-│   │       ├── monitoring_interface.h           # IMonitor interface (deprecated)
-│   │       └── monitoring_interface_transition.h # Transition helpers
+│   │   └── 📁 monitoring/           # Monitoring integration (empty - use common_system)
 │   ├── 📁 interfaces/               # Abstract interface definitions
 │   │   ├── logger_interface.h       # Base logger interface
 │   │   ├── logger_types.h           # Common type definitions
@@ -180,8 +178,7 @@ kcenon::logger                          // Root namespace
 │   ├── log_collector                   // Collection logic
 │   ├── metrics                         // Performance metrics
 │   │   └── logger_metrics              // Metrics structures
-│   └── monitoring                      // Monitoring integration
-│       └── monitoring_interface        // IMonitor interface (deprecated)
+│   └── monitoring                      // Monitoring integration (use common_system)
 ├── interfaces                          // Abstract interfaces
 │   ├── logger_interface                // Base logger
 │   ├── log_entry                       // Entry structure
@@ -329,8 +326,7 @@ auto adapted = make_common_logger_adapter(std::move(logger));
 
 ### Monitoring (`core/monitoring/`)
 - **Purpose**: Integration with monitoring_system
-- **Key Classes**:
-  - `monitoring_interface`: IMonitor abstraction (deprecated, use common_system)
+- **Note**: Deprecated interfaces removed in v3.0.0. Use `common_system` IMonitor directly.
 - **Dependencies**: `common_system` (IMonitor)
 
 ## Module Dependencies
@@ -413,7 +409,7 @@ monitoring_system (OPTIONAL)
 | **Log Collector** | `core/log_collector.h` | Entry collection | `interfaces/log_entry.h` |
 | **Error Codes** | `core/error_codes.h` | Logger-specific errors | `common_system` |
 | **Metrics** | `core/metrics/logger_metrics.h` | Performance metrics | None |
-| **Monitoring** | `core/monitoring/monitoring_interface.h` | IMonitor integration | `common_system` |
+| **Monitoring** | Use `common_system` IMonitor directly | IMonitor integration | `common_system` |
 | **Writer Interface** | `interfaces/log_writer_interface.h` | Base writer contract | `common_system` |
 | **Logger Interface** | `interfaces/logger_interface.h` | Base logger contract | `common_system` |
 | **Console Writer** | `writers/console_writer.h` | ANSI console output | `interfaces/` |

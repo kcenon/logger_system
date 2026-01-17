@@ -11,11 +11,20 @@ Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문�
 
 ## [3.0.0] - 2025-12-31
 
-### 제거됨 - Deprecated API 정리 (Issue #268)
+### 제거됨 - Deprecated API 정리 (Issues #268, #324)
 
 이 릴리스는 "Fewest Elements" Simple Design 원칙에 따라 deprecated API 호환성 레이어를 제거합니다.
 
 #### Breaking Changes
+
+- **모니터링 인터페이스 전환 헤더 제거** (Issue #324)
+  - `include/kcenon/logger/core/monitoring/monitoring_interface.h` 제거
+  - `include/kcenon/logger/core/monitoring/monitoring_interface_transition.h` 제거
+  - `<kcenon/common/interfaces/monitoring_interface.h>`의 `common::interfaces::IMonitor` 사용
+
+- **`has_thread_system_integration()` 함수 제거** (Issue #324)
+  - `has_iexecutor_interface()` 사용
+  - `has_any_executor_support()`는 이제 IExecutor 인터페이스만 확인
 
 - **`logger_interface.h` 헤더 제거** (`include/kcenon/logger/interfaces/logger_interface.h`)
   - `logger_system::logger_interface` 클래스 제거 - `common::interfaces::ILogger` 사용
