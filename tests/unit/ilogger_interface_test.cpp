@@ -76,13 +76,13 @@ TEST_F(ILoggerInterfaceTest, LogWithCommonLogLevel) {
 
     // Should compile and work with common::interfaces::log_level
     auto result = ilogger->log(ci::log_level::info, std::string("Test message"));
-    EXPECT_TRUE(common::is_ok(result));
+    EXPECT_TRUE(result.is_ok());
 
     result = ilogger->log(ci::log_level::warning, std::string("Warning message"));
-    EXPECT_TRUE(common::is_ok(result));
+    EXPECT_TRUE(result.is_ok());
 
     result = ilogger->log(ci::log_level::error, std::string("Error message"));
-    EXPECT_TRUE(common::is_ok(result));
+    EXPECT_TRUE(result.is_ok());
 }
 
 /**
@@ -95,7 +95,7 @@ TEST_F(ILoggerInterfaceTest, LogWithSourceLocation) {
     auto result = ilogger->log(ci::log_level::info,
                                std::string_view("Message with location"),
                                common::source_location::current());
-    EXPECT_TRUE(common::is_ok(result));
+    EXPECT_TRUE(result.is_ok());
 }
 
 /**
@@ -124,7 +124,7 @@ TEST_F(ILoggerInterfaceTest, LogWithExplicitLocation) {
                                std::string("test_file.cpp"),
                                42,
                                std::string("test_function"));
-    EXPECT_TRUE(common::is_ok(result));
+    EXPECT_TRUE(result.is_ok());
 
 #if defined(_MSC_VER)
 #pragma warning(pop)
@@ -148,7 +148,7 @@ TEST_F(ILoggerInterfaceTest, LogWithLogEntry) {
     entry.function = "test_func";
 
     auto result = ilogger->log(entry);
-    EXPECT_TRUE(common::is_ok(result));
+    EXPECT_TRUE(result.is_ok());
 }
 
 /**
@@ -176,14 +176,14 @@ TEST_F(ILoggerInterfaceTest, SetAndGetLevel) {
 
     // Set level to warning
     auto result = ilogger->set_level(ci::log_level::warning);
-    EXPECT_TRUE(common::is_ok(result));
+    EXPECT_TRUE(result.is_ok());
 
     // Verify level was set
     EXPECT_EQ(ilogger->get_level(), ci::log_level::warning);
 
     // Set level to debug
     result = ilogger->set_level(ci::log_level::debug);
-    EXPECT_TRUE(common::is_ok(result));
+    EXPECT_TRUE(result.is_ok());
 
     EXPECT_EQ(ilogger->get_level(), ci::log_level::debug);
 }
@@ -200,7 +200,7 @@ TEST_F(ILoggerInterfaceTest, FlushReturnsVoidResult) {
 
     // Flush should succeed
     auto result = ilogger->flush();
-    EXPECT_TRUE(common::is_ok(result));
+    EXPECT_TRUE(result.is_ok());
 }
 
 /**
@@ -240,7 +240,7 @@ TEST_F(ILoggerInterfaceTest, PolymorphicUsage) {
 
     // Should work with our logger
     auto result = log_via_interface(*logger_, "Polymorphic message");
-    EXPECT_TRUE(common::is_ok(result));
+    EXPECT_TRUE(result.is_ok());
 }
 
 /**
@@ -253,12 +253,12 @@ TEST_F(ILoggerInterfaceTest, AllLogLevelsThroughInterface) {
     ilogger->set_level(ci::log_level::trace);
 
     // Test all levels
-    EXPECT_TRUE(common::is_ok(ilogger->log(ci::log_level::trace, std::string("Trace"))));
-    EXPECT_TRUE(common::is_ok(ilogger->log(ci::log_level::debug, std::string("Debug"))));
-    EXPECT_TRUE(common::is_ok(ilogger->log(ci::log_level::info, std::string("Info"))));
-    EXPECT_TRUE(common::is_ok(ilogger->log(ci::log_level::warning, std::string("Warning"))));
-    EXPECT_TRUE(common::is_ok(ilogger->log(ci::log_level::error, std::string("Error"))));
-    EXPECT_TRUE(common::is_ok(ilogger->log(ci::log_level::critical, std::string("Critical"))));
+    EXPECT_TRUE(ilogger->log(ci::log_level::trace, std::string("Trace")).is_ok());
+    EXPECT_TRUE(ilogger->log(ci::log_level::debug, std::string("Debug")).is_ok());
+    EXPECT_TRUE(ilogger->log(ci::log_level::info, std::string("Info")).is_ok());
+    EXPECT_TRUE(ilogger->log(ci::log_level::warning, std::string("Warning")).is_ok());
+    EXPECT_TRUE(ilogger->log(ci::log_level::error, std::string("Error")).is_ok());
+    EXPECT_TRUE(ilogger->log(ci::log_level::critical, std::string("Critical")).is_ok());
 }
 
 } // namespace kcenon::logger::test
