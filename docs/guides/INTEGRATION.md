@@ -292,7 +292,7 @@ std::cout << "Queue utilization: " << metrics.get_queue_utilization_percent() <<
 ### Health Monitoring Integration
 
 ```cpp
-#include <kcenon/logger/core/monitoring/monitoring_interface.h>
+#include <kcenon/common/interfaces/monitoring_interface.h>
 
 // Create logger with health monitoring
 auto logger = kcenon::logger::logger_builder()

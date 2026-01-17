@@ -108,25 +108,14 @@ constexpr bool has_iexecutor_interface() noexcept {
 }
 
 /**
- * @brief Compile-time constant indicating thread_system integration status
- * @return true if direct thread_system integration is available
- * @deprecated Prefer has_iexecutor_interface() for new code (Issue #253)
- */
-constexpr bool has_thread_system_integration() noexcept {
-#if defined(USE_THREAD_SYSTEM_INTEGRATION)
-    return true;
-#else
-    return false;
-#endif
-}
-
-/**
  * @brief Compile-time constant indicating any async executor is available
- * @return true if either IExecutor or thread_system is available
+ * @return true if IExecutor is available
  * @since 1.5.0
+ * @note has_thread_system_integration() was removed in v3.0.0.
+ *       Use has_iexecutor_interface() instead.
  */
 constexpr bool has_any_executor_support() noexcept {
-    return has_iexecutor_interface() || has_thread_system_integration();
+    return has_iexecutor_interface();
 }
 
 } // namespace kcenon::logger::detail

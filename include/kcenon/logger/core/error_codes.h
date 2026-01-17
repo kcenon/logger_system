@@ -57,10 +57,6 @@ using Result = ::kcenon::common::Result<T>;
 using VoidResult = ::kcenon::common::VoidResult;
 using ::kcenon::common::ok;
 using ::kcenon::common::make_error;
-using ::kcenon::common::is_ok;
-using ::kcenon::common::is_error;
-using ::kcenon::common::get_value;
-using ::kcenon::common::get_error;
 } // namespace logger
 } // namespace kcenon
 #endif // KCENON_COMMON_RESULT_SHIM_DEFINED
@@ -489,18 +485,18 @@ public:
         return res;
     }
 
-    bool has_value() const { return common::is_ok(value_); }
+    bool has_value() const { return value_.is_ok(); }
     explicit operator bool() const { return has_value(); }
 
-    T& value() { return common::get_value(value_); }
-    const T& value() const { return common::get_value(value_); }
+    T& value() { return value_.value(); }
+    const T& value() const { return value_.value(); }
 
     logger_error_code error_code() const {
-        return static_cast<logger_error_code>(common::get_error(value_).code);
+        return static_cast<logger_error_code>(value_.error().code);
     }
 
     const std::string& error_message() const {
-        return common::get_error(value_).message;
+        return value_.error().message;
     }
 
     const common::Result<T>& raw() const { return value_; }
