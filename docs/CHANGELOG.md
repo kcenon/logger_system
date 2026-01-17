@@ -11,11 +11,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.0.0] - 2025-12-31
 
-### Removed - Deprecated API Cleanup (Issue #268)
+### Removed - Deprecated API Cleanup (Issues #268, #324)
 
 This release removes deprecated API compatibility layers following the "Fewest Elements" Simple Design principle.
 
 #### Breaking Changes
+
+- **Removed monitoring interface transition headers** (Issue #324)
+  - `include/kcenon/logger/core/monitoring/monitoring_interface.h` removed
+  - `include/kcenon/logger/core/monitoring/monitoring_interface_transition.h` removed
+  - Use `common::interfaces::IMonitor` from `<kcenon/common/interfaces/monitoring_interface.h>` instead
+
+- **Removed `has_thread_system_integration()` function** (Issue #324)
+  - Use `has_iexecutor_interface()` instead
+  - `has_any_executor_support()` now only checks IExecutor interface
 
 - **Removed `logger_interface.h` header** (`include/kcenon/logger/interfaces/logger_interface.h`)
   - `logger_system::logger_interface` class removed - use `common::interfaces::ILogger` instead
