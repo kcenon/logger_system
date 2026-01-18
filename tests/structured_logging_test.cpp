@@ -187,14 +187,11 @@ TEST_F(StructuredLoggingTest, LoggerStructuredMethods) {
     auto* writer_ptr = writer.get();
     test_logger->add_writer("capture", std::move(writer));
 
-    // Test info_structured (deprecated)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-    test_logger->info_structured()
+    // Test log_structured with log_level::info (canonical API)
+    test_logger->log_structured(log_level::info)
         .message("User logged in")
         .field("user_id", 12345)
         .emit();
-#pragma GCC diagnostic pop
 
     test_logger->flush();
 
@@ -304,15 +301,12 @@ TEST_F(StructuredLoggingTest, AllStructuredLevelMethods) {
     auto* writer_ptr = writer.get();
     test_logger->add_writer("capture", std::move(writer));
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-    test_logger->trace_structured().message("Trace").emit();
-    test_logger->debug_structured().message("Debug").emit();
-    test_logger->info_structured().message("Info").emit();
-    test_logger->warn_structured().message("Warn").emit();
-    test_logger->error_structured().message("Error").emit();
-    test_logger->fatal_structured().message("Fatal").emit();
-#pragma GCC diagnostic pop
+    test_logger->log_structured(log_level::trace).message("Trace").emit();
+    test_logger->log_structured(log_level::debug).message("Debug").emit();
+    test_logger->log_structured(log_level::info).message("Info").emit();
+    test_logger->log_structured(log_level::warn).message("Warn").emit();
+    test_logger->log_structured(log_level::error).message("Error").emit();
+    test_logger->log_structured(log_level::fatal).message("Fatal").emit();
 
     test_logger->flush();
 

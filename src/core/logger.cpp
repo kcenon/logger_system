@@ -388,19 +388,6 @@ base_writer* logger::get_writer(const std::string& name) {
     return nullptr;
 }
 
-void logger::set_min_level(log_level level) {
-    if (pimpl_) {
-        pimpl_->min_level_.store(level);
-    }
-}
-
-log_level logger::get_min_level() const {
-    if (pimpl_) {
-        return pimpl_->min_level_.load();
-    }
-    return logger_system::log_level::info;
-}
-
 // =========================================================================
 // ILogger interface implementation (common::interfaces::ILogger)
 // =========================================================================
@@ -581,125 +568,6 @@ common::VoidResult logger::flush() {
     }
 
     return common::ok();
-}
-
-// =========================================================================
-// Backward-compatible API implementation (logger_system native types)
-// =========================================================================
-
-void logger::log(log_level level, const std::string& message) {
-    if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
-        return;
-    }
-
-    // Create log entry for filtering and routing
-    log_entry entry(level, message);
-
-    // Apply filter if set
-    {
-        std::shared_lock<std::shared_mutex> filter_lock(pimpl_->filter_mutex_);
-        if (pimpl_->filter_) {
-            if (!pimpl_->filter_->should_log(entry)) {
-                return;  // Message filtered out
-            }
-        }
-    }
-
-    // Apply sampling if set
-    {
-        std::shared_lock<std::shared_mutex> sampler_lock(pimpl_->sampler_mutex_);
-        if (pimpl_->sampler_ && pimpl_->sampler_->is_enabled()) {
-            if (!pimpl_->sampler_->should_sample(entry)) {
-                return;  // Message sampled out
-            }
-        }
-    }
-
-    // Record metrics if enabled
-    auto start_time = std::chrono::high_resolution_clock::now();
-
-    // Synchronous path: dispatch with routing support
-    pimpl_->dispatch_to_writers(level, message, "", 0, "", entry);
-
-    // Update metrics after logging
-    if (pimpl_->metrics_enabled_) {
-        auto end_time = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
-        metrics::record_message_logged(duration.count());
-    }
-}
-
-void logger::log(log_level level,
-                 const std::string& message,
-                 const std::string& file,
-                 int line,
-                 const std::string& function) {
-    if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
-        return;
-    }
-
-    // Create log entry for filtering and routing
-    log_entry entry(level, message, file, line, function);
-
-    // Apply filter if set
-    {
-        std::shared_lock<std::shared_mutex> filter_lock(pimpl_->filter_mutex_);
-        if (pimpl_->filter_) {
-            if (!pimpl_->filter_->should_log(entry)) {
-                return;  // Message filtered out
-            }
-        }
-    }
-
-    // Apply sampling if set
-    {
-        std::shared_lock<std::shared_mutex> sampler_lock(pimpl_->sampler_mutex_);
-        if (pimpl_->sampler_ && pimpl_->sampler_->is_enabled()) {
-            if (!pimpl_->sampler_->should_sample(entry)) {
-                return;  // Message sampled out
-            }
-        }
-    }
-
-    // Record metrics if enabled
-    auto start_time = std::chrono::high_resolution_clock::now();
-
-    // Use async path if in async mode
-    if (pimpl_->async_mode_ && pimpl_->collector_) {
-        // Convert level for collector (legacy interface uses int)
-        auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(level));
-        // Enqueue to collector for background processing
-        auto now = std::chrono::system_clock::now();
-        pimpl_->collector_->enqueue(converted_level, message, file, line, function, now);
-
-        // Update metrics if enabled (async path is much faster)
-        if (pimpl_->metrics_enabled_) {
-            auto end_time = std::chrono::high_resolution_clock::now();
-            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
-            metrics::record_message_logged(duration.count());
-        }
-        return;
-    }
-
-    // Synchronous path: dispatch with routing support
-    pimpl_->dispatch_to_writers(level, message, file, line, function, entry);
-
-    // Update metrics after logging
-    if (pimpl_->metrics_enabled_) {
-        auto end_time = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
-        metrics::record_message_logged(duration.count());
-    }
-}
-
-void logger::log(log_level level,
-                 const std::string& message,
-                 const core::log_context& context) {
-    log(level, message, std::string(context.file), context.line, std::string(context.function));
-}
-
-bool logger::is_enabled(log_level level) const {
-    return pimpl_ && meets_threshold(level, pimpl_->min_level_.load());
 }
 
 common::VoidResult logger::enable_metrics_collection(bool enable) {
@@ -883,30 +751,6 @@ structured_log_builder logger::log_structured(log_level level) {
         },
         ctx_ptr
     );
-}
-
-structured_log_builder logger::trace_structured() {
-    return log_structured(log_level::trace);
-}
-
-structured_log_builder logger::debug_structured() {
-    return log_structured(log_level::debug);
-}
-
-structured_log_builder logger::info_structured() {
-    return log_structured(log_level::info);
-}
-
-structured_log_builder logger::warn_structured() {
-    return log_structured(log_level::warn);
-}
-
-structured_log_builder logger::error_structured() {
-    return log_structured(log_level::error);
-}
-
-structured_log_builder logger::fatal_structured() {
-    return log_structured(log_level::fatal);
 }
 
 // =========================================================================

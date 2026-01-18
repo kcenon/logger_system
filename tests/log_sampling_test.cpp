@@ -34,12 +34,16 @@
 #include <kcenon/logger/core/logger_builder.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 #include <chrono>
 #include <memory>
 #include <string>
 #include <vector>
 
+// Use ILogger interface log_level for log() calls
+namespace ci = kcenon::common::interfaces;
+// Use native log_level for sampling config (always_log_levels)
 using log_level = logger_system::log_level;
 using namespace kcenon::logger;
 using namespace kcenon::logger::sampling;
@@ -534,13 +538,13 @@ TEST(LoggerSamplingTest, LoggerWithSampler) {
 
     // Info messages should be dropped
     for (int i = 0; i < 10; ++i) {
-        log.log(log_level::info, "info message " + std::to_string(i));
+        log.log(ci::log_level::info, std::string("info message ") + std::to_string(i));
     }
     EXPECT_EQ(writer_ptr->count(), 0U);
 
     // Error messages should pass (bypass level)
     for (int i = 0; i < 5; ++i) {
-        log.log(log_level::error, "error message " + std::to_string(i));
+        log.log(ci::log_level::error, std::string("error message ") + std::to_string(i));
     }
     EXPECT_EQ(writer_ptr->count(), 5U);
 }
@@ -565,7 +569,7 @@ TEST(LoggerSamplingTest, LoggerSamplingStats) {
     log.set_sampler(std::make_unique<log_sampler>(config));
 
     for (int i = 0; i < 100; ++i) {
-        log.log(log_level::info, "message " + std::to_string(i));
+        log.log(ci::log_level::info, std::string("message ") + std::to_string(i));
     }
 
     auto stats = log.get_sampling_stats();

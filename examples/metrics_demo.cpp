@@ -22,16 +22,26 @@ void generate_logs(logger* log, int thread_id, int count) {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> level_dist(0, 5);
     std::uniform_int_distribution<> message_size_dist(10, 200);
-    
+
+    // Map integer to log level using ILogger interface
+    static constexpr ci::log_level levels[] = {
+        ci::log_level::trace,
+        ci::log_level::debug,
+        ci::log_level::info,
+        ci::log_level::warning,
+        ci::log_level::error,
+        ci::log_level::critical
+    };
+
     for (int i = 0; i < count; ++i) {
-        auto level = static_cast<kcenon::logger::log_level>(level_dist(gen));
+        auto level = levels[level_dist(gen)];
 
         // Generate message of random size
         std::string message = "Thread " + std::to_string(thread_id) + " - Message " + std::to_string(i);
         message.append(message_size_dist(gen), 'x');
 
         log->log(level, message);
-        
+
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
 }
