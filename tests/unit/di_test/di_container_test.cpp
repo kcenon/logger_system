@@ -12,6 +12,7 @@ All rights reserved.
 
 #include <gtest/gtest.h>
 #include <kcenon/logger/writers/base_writer.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include "../../../src/impl/di/lightweight_di_container.h"
 #include <memory>
 #include <thread>
@@ -19,23 +20,26 @@ All rights reserved.
 #include <chrono>
 
 using namespace kcenon::logger;
+namespace ci = kcenon::common::interfaces;
+using log_level = ci::log_level;
 
 // Mock writer for testing
 class mock_writer : public base_writer {
 private:
     std::string name_;
     static int instance_count_;
-    
+
 public:
     explicit mock_writer(const std::string& name = "mock")
         : name_(name) {
         ++instance_count_;
     }
-    
+
     ~mock_writer() override {
         --instance_count_;
     }
-    
+
+    // Note: base_writer::write uses logger_system::log_level for backward compatibility
     common::VoidResult write(logger_system::log_level level,
                       const std::string& message,
                       const std::string& file,
@@ -48,19 +52,19 @@ public:
     common::VoidResult flush() override {
         return common::ok();
     }
-    
+
     bool is_healthy() const override {
         return true;
     }
-    
+
     std::string get_name() const override {
         return name_;
     }
-    
+
     static int get_instance_count() {
         return instance_count_;
     }
-    
+
     static void reset_instance_count() {
         instance_count_ = 0;
     }

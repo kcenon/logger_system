@@ -9,18 +9,22 @@ All rights reserved.
 #include "../../sources/logger/health/health_check_system.h"
 #include "../../sources/logger/writers/base_writer.h"
 #include "../../sources/logger/core/log_collector.h"
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <thread>
 #include <chrono>
 
 using namespace logger_module;
 using namespace std::chrono_literals;
+namespace ci = kcenon::common::interfaces;
+using log_level = ci::log_level;
 
 // Mock writer for testing
 class mock_writer : public base_writer {
 public:
     mock_writer() : fail_writes_(false), write_count_(0) {}
-    
-    common::VoidResult write(thread_module::log_level /* level */,
+
+    // Note: base_writer::write uses logger_system::log_level for backward compatibility
+    common::VoidResult write(logger_system::log_level /* level */,
                      const std::string& /* message */,
                      const std::string& /* file */,
                      int /* line */,
@@ -36,19 +40,19 @@ public:
     common::VoidResult flush() override {
         return common::ok();
     }
-    
+
     std::string get_name() const override {
         return "mock_writer";
     }
-    
+
     void set_fail_writes(bool fail) {
         fail_writes_ = fail;
     }
-    
+
     int get_write_count() const {
         return write_count_;
     }
-    
+
 private:
     bool fail_writes_;
     int write_count_;

@@ -26,6 +26,7 @@ All rights reserved.
 using namespace kcenon::logger;
 using namespace kcenon::common;
 using namespace std::chrono_literals;
+namespace ci = kcenon::common::interfaces;
 
 namespace {
 
@@ -296,7 +297,7 @@ TEST_F(StructuredLoggingTest, JsonFormatterWithCategory) {
 // Test 8: Structured logging with all level methods (deprecated convenience methods)
 TEST_F(StructuredLoggingTest, AllStructuredLevelMethods) {
     auto test_logger = std::make_shared<logger>(false);
-    test_logger->set_min_level(log_level::trace);
+    test_logger->set_level(ci::log_level::trace);
     test_logger->start();
 
     auto writer = std::make_unique<capture_writer>();
@@ -331,7 +332,7 @@ TEST_F(StructuredLoggingTest, AllStructuredLevelMethods) {
 // Test 8b: Structured logging with generic log_structured method (canonical API)
 TEST_F(StructuredLoggingTest, GenericLogStructuredMethod) {
     auto test_logger = std::make_shared<logger>(false);
-    test_logger->set_min_level(log_level::trace);
+    test_logger->set_level(ci::log_level::trace);
     test_logger->start();
 
     auto writer = std::make_unique<capture_writer>();
