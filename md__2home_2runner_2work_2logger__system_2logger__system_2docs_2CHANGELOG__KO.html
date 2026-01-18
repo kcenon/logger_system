@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">변경 이력 - Logger System</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1028"></a> </p><blockquote class="doxtable">
+<div class="textblock"><p><a class="anchor" id="autotoc_md1034"></a> </p><blockquote class="doxtable">
 <p>&zwj;<b>언어:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html">English</a> | <b>한국어</b> </p>
 </blockquote>
 <p>Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문서화됩니다.</p>
 <p>형식은 <a href="https://keepachangelog.com/ko/1.0.0/">Keep a Changelog</a>를 따르며, 이 프로젝트는 <a href="https://semver.org/lang/ko/spec/v2.0.0.html">Semantic Versioning</a>을 준수합니다.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1030"></a>
+<h1><a class="anchor" id="autotoc_md1036"></a>
 [3.0.0] - 2025-12-31</h1>
-<h2><a class="anchor" id="autotoc_md1031"></a>
+<h2><a class="anchor" id="autotoc_md1037"></a>
 제거됨 - Deprecated API 정리 (Issues #268, #324)</h2>
 <p>이 릴리스는 "Fewest Elements" Simple Design 원칙에 따라 deprecated API 호환성 레이어를 제거합니다.</p>
-<h3><a class="anchor" id="autotoc_md1032"></a>
+<h3><a class="anchor" id="autotoc_md1038"></a>
 Breaking Changes</h3>
 <ul>
 <li><b>모니터링 인터페이스 전환 헤더 제거</b> (Issue #324)<ul>
@@ -137,7 +137,7 @@ Breaking Changes</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1033"></a>
+<h3><a class="anchor" id="autotoc_md1039"></a>
 마이그레이션 가이드</h3>
 <div class="fragment"><div class="line"><span class="comment">// 이전 (deprecated):</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/interfaces/logger_interface.h&gt;</span></div>
@@ -149,11 +149,11 @@ Breaking Changes</h3>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder().with_standalone_backend().build();</div>
 <div class="line">common::VoidResult res = make_logger_void_result(code, <span class="stringliteral">&quot;message&quot;</span>);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1035"></a>
+<h1><a class="anchor" id="autotoc_md1041"></a>
 [Unreleased]</h1>
-<h2><a class="anchor" id="autotoc_md1036"></a>
+<h2><a class="anchor" id="autotoc_md1042"></a>
 실시간 로그 분석 통합 (Issue #281)</h2>
-<h3><a class="anchor" id="autotoc_md1037"></a>
+<h3><a class="anchor" id="autotoc_md1043"></a>
 추가됨</h3>
 <ul>
 <li><b>새로운 <code>realtime_log_analyzer</code> 클래스</b> - 로깅 중 실시간 이상 감지<ul>
@@ -184,7 +184,7 @@ Breaking Changes</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1038"></a>
+<h3><a class="anchor" id="autotoc_md1044"></a>
 예제</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .with_realtime_analysis(50, [](<span class="keyword">const</span> anomaly_event&amp; event) {</div>
@@ -194,9 +194,9 @@ Breaking Changes</h3>
 <div class="line">    })</div>
 <div class="line">    .build();</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1040"></a>
+<h2><a class="anchor" id="autotoc_md1046"></a>
 고용량 시나리오를 위한 로그 샘플링 (Issue #282)</h2>
-<h3><a class="anchor" id="autotoc_md1041"></a>
+<h3><a class="anchor" id="autotoc_md1047"></a>
 추가됨</h3>
 <ul>
 <li><b>새로운 <code>log_sampler</code> 클래스</b> - 고처리량 시나리오에서 로그 볼륨 감소<ul>
@@ -239,7 +239,7 @@ Breaking Changes</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1042"></a>
+<h3><a class="anchor" id="autotoc_md1048"></a>
 예제</h3>
 <div class="fragment"><div class="line"><span class="comment">// error/fatal 우회를 포함한 10% 랜덤 샘플링</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
@@ -266,9 +266,9 @@ Breaking Changes</h3>
 <div class="line">    .with_sampling(config)</div>
 <div class="line">    .build();</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1044"></a>
+<h2><a class="anchor" id="autotoc_md1050"></a>
 Phase 3.4: 구조화된 로깅 통합 (Issue #311) - 2026-01-11</h2>
-<h3><a class="anchor" id="autotoc_md1045"></a>
+<h3><a class="anchor" id="autotoc_md1051"></a>
 추가됨</h3>
 <ul>
 <li><b>모든 Writer에서 구조화된 출력 지원</b><ul>
@@ -294,7 +294,7 @@ Phase 3.4: 구조화된 로깅 통합 (Issue #311) - 2026-01-11</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1046"></a>
+<h3><a class="anchor" id="autotoc_md1052"></a>
 예제</h3>
 <div class="fragment"><div class="line"><span class="comment">// 구조화된 필드 존재 여부로 로그 필터링</span></div>
 <div class="line"><span class="keyword">auto</span> filter = std::make_unique&lt;field_exists_filter&gt;(<span class="stringliteral">&quot;user_id&quot;</span>);</div>
@@ -317,9 +317,9 @@ Phase 3.4: 구조화된 로깅 통합 (Issue #311) - 2026-01-11</h2>
 <div class="line">config.field_rates[<span class="stringliteral">&quot;endpoint&quot;</span>][<span class="stringliteral">&quot;/health&quot;</span>] = 0.01; <span class="comment">// 헬스체크는 1%</span></div>
 <div class="line">config.always_log_fields = {<span class="stringliteral">&quot;error_id&quot;</span>, <span class="stringliteral">&quot;transaction_id&quot;</span>};  <span class="comment">// 항상 로깅</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1048"></a>
+<h2><a class="anchor" id="autotoc_md1054"></a>
 Coverage 빌드 수정 (PR #291) - 2026-01-08</h2>
-<h3><a class="anchor" id="autotoc_md1049"></a>
+<h3><a class="anchor" id="autotoc_md1055"></a>
 수정됨</h3>
 <ul>
 <li><b>Coverage 링커 오류</b>: CI coverage 빌드에서 gcov undefined reference 오류 수정<ul>
@@ -335,9 +335,9 @@ Coverage 빌드 수정 (PR #291) - 2026-01-08</h2>
 </li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1051"></a>
+<h2><a class="anchor" id="autotoc_md1057"></a>
 CI 워크플로우 수정 (PR #290) - 2026-01-08</h2>
-<h3><a class="anchor" id="autotoc_md1052"></a>
+<h3><a class="anchor" id="autotoc_md1058"></a>
 수정됨</h3>
 <ul>
 <li><b>CI 링커 오류</b>: <code>EnhancedThreadPoolMetrics</code>에 대한 undefined reference 오류 수정<ul>
@@ -355,9 +355,9 @@ CI 워크플로우 수정 (PR #290) - 2026-01-08</h2>
 </li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1054"></a>
+<h2><a class="anchor" id="autotoc_md1060"></a>
 OpenTelemetry 통합 수정 (Issue #283) - 2026-01-08</h2>
-<h3><a class="anchor" id="autotoc_md1055"></a>
+<h3><a class="anchor" id="autotoc_md1061"></a>
 수정됨</h3>
 <ul>
 <li><b>macOS 호환성</b>: <code>otlp_writer</code>에서 <code>std::jthread</code>를 <code>std::thread</code>로 교체<ul>
@@ -375,9 +375,9 @@ OpenTelemetry 통합 수정 (Issue #283) - 2026-01-08</h2>
 </li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1057"></a>
+<h2><a class="anchor" id="autotoc_md1063"></a>
 C++20 모듈 파일 (Issue #275) - 2026-01-03</h2>
-<h3><a class="anchor" id="autotoc_md1058"></a>
+<h3><a class="anchor" id="autotoc_md1064"></a>
 추가됨</h3>
 <ul>
 <li><b>C++20 모듈 파일</b>: <code>kcenon.logger</code> 모듈 인터페이스 생성<ul>
@@ -395,7 +395,7 @@ C++20 모듈 파일 (Issue #275) - 2026-01-03</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1059"></a>
+<h3><a class="anchor" id="autotoc_md1065"></a>
 모듈 구조</h3>
 <div class="fragment"><div class="line"><span class="keyword">export</span> <span class="keyword">module</span> kcenon.logger;</div>
 <div class="line"> </div>
@@ -404,13 +404,13 @@ C++20 모듈 파일 (Issue #275) - 2026-01-03</h2>
 <div class="line"><span class="keyword">export</span> <span class="keyword">import</span> :core;            <span class="comment">// Logger, LogContext, LogCollector</span></div>
 <div class="line"><span class="keyword">export</span> <span class="keyword">import</span> :backends;        <span class="comment">// Integration backends</span></div>
 <div class="line"><span class="keyword">export</span> <span class="keyword">import</span> :analysis;        <span class="comment">// Log analysis 유틸리티</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1060"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1066"></a>
 CMake 사용법</h3>
 <div class="fragment"><div class="line">cmake -DLOGGER_USE_MODULES=ON ..  # CMake 3.28 이상 필요</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1062"></a>
+<h2><a class="anchor" id="autotoc_md1068"></a>
 중복 Writer 추가 로직 수정 (Issue #270) - 2025-12-31</h2>
-<h3><a class="anchor" id="autotoc_md1063"></a>
+<h3><a class="anchor" id="autotoc_md1069"></a>
 수정됨</h3>
 <ul>
 <li><b>Named writer 저장소</b>: <code>add_writer(name, writer)</code>가 이제 이름으로 writer를 올바르게 저장함<ul>
@@ -419,7 +419,7 @@ CMake 사용법</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1064"></a>
+<h3><a class="anchor" id="autotoc_md1070"></a>
 변경됨</h3>
 <ul>
 <li><b>통일된 반환 타입</b>: <code>add_writer(name, writer)</code>가 이제 <code>void</code> 대신 <code>common::VoidResult</code> 반환<ul>
@@ -428,7 +428,7 @@ CMake 사용법</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1065"></a>
+<h3><a class="anchor" id="autotoc_md1071"></a>
 추가됨</h3>
 <ul>
 <li><b>Named writer 구현</b>: Named writer 저장소의 완전한 구현<ul>
@@ -440,9 +440,9 @@ CMake 사용법</h3>
 </li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1067"></a>
+<h2><a class="anchor" id="autotoc_md1073"></a>
 KCENON 기능 감지 사용 (Issue #250) - 2025-12-22</h2>
-<h3><a class="anchor" id="autotoc_md1068"></a>
+<h3><a class="anchor" id="autotoc_md1074"></a>
 변경됨</h3>
 <ul>
 <li><b>error_handling_utils.h</b>: common_system의 통합된 KCENON_HAS_SOURCE_LOCATION 사용<ul>
@@ -458,7 +458,7 @@ KCENON 기능 감지 사용 (Issue #250) - 2025-12-22</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1069"></a>
+<h3><a class="anchor" id="autotoc_md1075"></a>
 수정됨</h3>
 <ul>
 <li><b>logger.h</b>: common_system v3.0.0 호환성 빌드 오류 수정<ul>
@@ -478,7 +478,7 @@ KCENON 기능 감지 사용 (Issue #250) - 2025-12-22</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1070"></a>
+<h3><a class="anchor" id="autotoc_md1076"></a>
 마이그레이션 가이드</h3>
 <p>LOGGER_HAS_* 매크로는 이제 common_system의 KCENON_HAS_*에 대한 별칭입니다. 새 코드에서는 KCENON_HAS_*를 직접 사용: </p><div class="fragment"><div class="line"><span class="comment">// 레거시 (계속 동작함)</span></div>
 <div class="line"><span class="preprocessor">#if LOGGER_HAS_JTHREAD</span></div>
@@ -491,9 +491,9 @@ KCENON 기능 감지 사용 (Issue #250) - 2025-12-22</h2>
 <div class="line">    std::jthread worker(...);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1072"></a>
+<h2><a class="anchor" id="autotoc_md1078"></a>
 Deprecated common_system API 마이그레이션 (Issue #248) - 2025-12-22</h2>
-<h3><a class="anchor" id="autotoc_md1073"></a>
+<h3><a class="anchor" id="autotoc_md1079"></a>
 변경됨</h3>
 <ul>
 <li><b>common_system_adapter.h</b>: source_location 기반 로깅 API 추가<ul>
@@ -509,7 +509,7 @@ Deprecated common_system API 마이그레이션 (Issue #248) - 2025-12-22</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1074"></a>
+<h3><a class="anchor" id="autotoc_md1080"></a>
 마이그레이션 가이드</h3>
 <p>새 코드에서는 common_system의 LOG_* 매크로를 직접 사용: </p><div class="fragment"><div class="line"><span class="comment">// Deprecated (v3.0.0에서 제거 예정)</span></div>
 <div class="line">THREAD_LOG_INFO(<span class="stringliteral">&quot;message&quot;</span>);</div>
@@ -525,9 +525,9 @@ Deprecated common_system API 마이그레이션 (Issue #248) - 2025-12-22</h2>
 <div class="line">VoidResult log(log_level level, std::string_view msg,</div>
 <div class="line">               <span class="keyword">const</span> source_location&amp; loc = source_location::current()) <span class="keyword">override</span>;</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1076"></a>
+<h2><a class="anchor" id="autotoc_md1082"></a>
 thread_system v3.0 호환성 (Issue #244) - 2025-12-19</h2>
-<h3><a class="anchor" id="autotoc_md1077"></a>
+<h3><a class="anchor" id="autotoc_md1083"></a>
 주요 변경 (Breaking Changes)</h3>
 <ul>
 <li><b>logger_adapter.h</b>: <code>shared::ILogger</code> 및 <code>shared::IService</code> 구현 제거<ul>
@@ -536,7 +536,7 @@ thread_system v3.0 호환성 (Issue #244) - 2025-12-19</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1078"></a>
+<h3><a class="anchor" id="autotoc_md1084"></a>
 변경됨</h3>
 <ul>
 <li><b>thread_integration_detector.h</b>: 탐지 헤더 업데이트<ul>
@@ -545,7 +545,7 @@ thread_system v3.0 호환성 (Issue #244) - 2025-12-19</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1079"></a>
+<h3><a class="anchor" id="autotoc_md1085"></a>
 마이그레이션 가이드</h3>
 <p>thread_system 통합 시 다음과 같이 변경: </p><div class="fragment"><div class="line"><span class="comment">// 이전 (v2.x)</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/adapters/logger_adapter.h&gt;</span></div>
@@ -555,9 +555,9 @@ thread_system v3.0 호환성 (Issue #244) - 2025-12-19</h2>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/adapters/common_logger_adapter.h&gt;</span></div>
 <div class="line"><span class="comment">// kcenon::common::interfaces::ILogger 사용</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md1081"></a>
+<h2><a class="anchor" id="autotoc_md1087"></a>
 #226 API 변경 후 손상된 예제 파일 수정 (Issue #228) - 2025-12-06</h2>
-<h3><a class="anchor" id="autotoc_md1082"></a>
+<h3><a class="anchor" id="autotoc_md1088"></a>
 제거됨</h3>
 <ul>
 <li><b>migration_example.cpp</b>: 존재하지 않는 v1 API를 시연하는 예제 파일 제거<ul>
@@ -568,7 +568,7 @@ thread_system v3.0 호환성 (Issue #244) - 2025-12-19</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1083"></a>
+<h3><a class="anchor" id="autotoc_md1089"></a>
 변경됨</h3>
 <ul>
 <li><b>advanced_features_demo.cpp</b>: 현재 API에 맞게 전체 재작성<ul>
@@ -580,7 +580,7 @@ thread_system v3.0 호환성 (Issue #244) - 2025-12-19</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1084"></a>
+<h3><a class="anchor" id="autotoc_md1090"></a>
 비활성화됨 (기능 구현 대기)</h3>
 <ul>
 <li><b>distributed_logging_demo.cpp</b>: CMakeLists.txt에서 주석 처리<ul>
@@ -592,15 +592,15 @@ thread_system v3.0 호환성 (Issue #244) - 2025-12-19</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1085"></a>
+<h3><a class="anchor" id="autotoc_md1091"></a>
 관련 이슈</h3>
 <ul>
 <li>#228 수정: fix(examples): #226 API 변경 후 손상된 예제 파일</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1087"></a>
+<h2><a class="anchor" id="autotoc_md1093"></a>
 common::interfaces::ILogger 구현 - 2025-12-06</h2>
-<h3><a class="anchor" id="autotoc_md1088"></a>
+<h3><a class="anchor" id="autotoc_md1094"></a>
 추가됨</h3>
 <ul>
 <li><b>ILogger 인터페이스 구현 (Issue #223)</b>: Logger가 이제 <code>common::interfaces::ILogger</code>를 구현<ul>
@@ -632,7 +632,7 @@ common::interfaces::ILogger 구현 - 2025-12-06</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1089"></a>
+<h3><a class="anchor" id="autotoc_md1095"></a>
 변경됨</h3>
 <ul>
 <li><b>logger 클래스가 이제 두 인터페이스 모두 상속</b>:<ul>
@@ -647,7 +647,7 @@ common::interfaces::ILogger 구현 - 2025-12-06</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1090"></a>
+<h3><a class="anchor" id="autotoc_md1096"></a>
 사용 중단됨</h3>
 <ul>
 <li><b>logger_types.h</b>: <code>kcenon/common/interfaces/logger_interface.h</code>를 사용하도록 권장<ul>
@@ -661,7 +661,7 @@ common::interfaces::ILogger 구현 - 2025-12-06</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1091"></a>
+<h3><a class="anchor" id="autotoc_md1097"></a>
 하위 호환성</h3>
 <ul>
 <li><b>모든 기존 API 유지</b>: 네이티브 <code>logger_system::log_level</code> 오버로드가 여전히 작동<ul>
@@ -673,7 +673,7 @@ common::interfaces::ILogger 구현 - 2025-12-06</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1092"></a>
+<h3><a class="anchor" id="autotoc_md1098"></a>
 마이그레이션 가이드</h3>
 <p>기존 코드는 변경 없이 계속 작동합니다. 새로운 ILogger 인터페이스를 사용하려면:</p>
 <div class="fragment"><div class="line"><span class="comment">// ILogger 인터페이스를 통해 logger 사용</span></div>
@@ -683,7 +683,7 @@ common::interfaces::ILogger 구현 - 2025-12-06</h2>
 <div class="line"><span class="comment">// 또는 두 스타일 혼합 사용</span></div>
 <div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;Native style&quot;</span>);  <span class="comment">// 여전히 작동</span></div>
 <div class="line">logger-&gt;log(ci::log_level::info, std::string(<span class="stringliteral">&quot;ILogger style&quot;</span>));  <span class="comment">// 새로운 방식</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1093"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1099"></a>
 관련 이슈</h3>
 <ul>
 <li>#223 종료 (common::interfaces::ILogger 구현)</li>
@@ -691,9 +691,9 @@ common::interfaces::ILogger 구현 - 2025-12-06</h2>
 <li>#225의 선행 작업 (thread_system_backend 제거)</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1095"></a>
+<h2><a class="anchor" id="autotoc_md1101"></a>
 독립형 비동기 구현 (Issue #222) - 2025-12-06</h2>
-<h3><a class="anchor" id="autotoc_md1096"></a>
+<h3><a class="anchor" id="autotoc_md1102"></a>
 변경됨</h3>
 <ul>
 <li><b>thread_system이 이제 선택 사항</b>: Logger 시스템은 독립적으로 빌드 및 실행 가능<ul>
@@ -710,7 +710,7 @@ common::interfaces::ILogger 구현 - 2025-12-06</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1097"></a>
+<h3><a class="anchor" id="autotoc_md1103"></a>
 추가됨</h3>
 <ul>
 <li><b>async_worker 클래스</b>: std::jthread를 사용하는 새로운 독립형 비동기 워커<ul>
@@ -721,7 +721,7 @@ common::interfaces::ILogger 구현 - 2025-12-06</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1098"></a>
+<h3><a class="anchor" id="autotoc_md1104"></a>
 이점</h3>
 <ul>
 <li><b>순환 의존성 해결</b>: thread_system에서 이제 logger_system을 로깅에 사용 가능</li>
@@ -729,7 +729,7 @@ common::interfaces::ILogger 구현 - 2025-12-06</h2>
 <li><b>더 나은 종료</b>: std::jthread가 더 깔끔한 RAII 기반 스레드 관리 제공</li>
 <li><b>협력적 취소</b>: 종료 경로에서 폴링/바쁜 대기 없음</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1099"></a>
+<h3><a class="anchor" id="autotoc_md1105"></a>
 마이그레이션 가이드</h3>
 <ul>
 <li><b>기본 동작</b>: logger_system이 이제 독립적으로 빌드됨 (thread_system 없음)</li>
@@ -737,16 +737,16 @@ common::interfaces::ILogger 구현 - 2025-12-06</h2>
 </div><!-- fragment --></li>
 <li>통합 활성화 시 기존 기능 유지</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1100"></a>
+<h3><a class="anchor" id="autotoc_md1106"></a>
 관련 이슈</h3>
 <ul>
 <li>#222 종료: std::jthread를 사용하는 async_worker 클래스 구현</li>
 <li>#223, #224, #225의 선행 작업</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md1102"></a>
+<h2><a class="anchor" id="autotoc_md1108"></a>
 CMake fmt Fallback 제거 - 2025-12-03</h2>
-<h3><a class="anchor" id="autotoc_md1103"></a>
+<h3><a class="anchor" id="autotoc_md1109"></a>
 변경됨</h3>
 <ul>
 <li><b>CMake 설정에서 std::format 필수</b>: 모든 fmt 라이브러리 fallback 로직 제거<ul>
@@ -755,7 +755,7 @@ CMake fmt Fallback 제거 - 2025-12-03</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1104"></a>
+<h3><a class="anchor" id="autotoc_md1110"></a>
 제거됨</h3>
 <ul>
 <li><b>CMake의 fmt 라이브러리 fallback</b>:<ul>
@@ -766,7 +766,7 @@ CMake fmt Fallback 제거 - 2025-12-03</h2>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1105"></a>
+<h3><a class="anchor" id="autotoc_md1111"></a>
 이점</h3>
 <ul>
 <li><b>깔끔한 CMake 설정</b>: fallback 복잡성 없이 단순화된 기능 감지</li>
@@ -774,16 +774,16 @@ CMake fmt Fallback 제거 - 2025-12-03</h2>
 <li><b>의존성 감소</b>: 조건부 fmt 라이브러리 링킹 없음</li>
 <li><b>프로젝트 간 정렬</b>: thread_system, container_system, network_system, database_system과 일치</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1106"></a>
+<h3><a class="anchor" id="autotoc_md1112"></a>
 관련 이슈</h3>
 <ul>
 <li>프로젝트 간 표준화 작업의 일부</li>
 <li>참고: thread_system#219, container_system#168, network_system#257, database_system#203</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1108"></a>
+<h1><a class="anchor" id="autotoc_md1114"></a>
 [1.0.0] - 2025-10-22</h1>
-<h2><a class="anchor" id="autotoc_md1109"></a>
+<h2><a class="anchor" id="autotoc_md1115"></a>
 추가됨</h2>
 <ul>
 <li><b>핵심 Logger System</b>: 고성능 C++20 비동기 로깅 프레임워크<ul>
@@ -854,38 +854,38 @@ CMake fmt Fallback 제거 - 2025-12-03</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1110"></a>
+<h2><a class="anchor" id="autotoc_md1116"></a>
 변경됨</h2>
 <ul>
 <li>해당 없음 (최초 릴리스)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1111"></a>
+<h2><a class="anchor" id="autotoc_md1117"></a>
 사용 중단됨</h2>
 <ul>
 <li>해당 없음 (최초 릴리스)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1112"></a>
+<h2><a class="anchor" id="autotoc_md1118"></a>
 제거됨</h2>
 <ul>
 <li>해당 없음 (최초 릴리스)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1113"></a>
+<h2><a class="anchor" id="autotoc_md1119"></a>
 수정됨</h2>
 <ul>
 <li>해당 없음 (최초 릴리스)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1114"></a>
+<h2><a class="anchor" id="autotoc_md1120"></a>
 보안</h2>
 <ul>
 <li>스레드 안전 작업으로 데이터 경쟁 없는 동시 로깅 보장</li>
 <li>민감한 로그 데이터를 위한 암호화 writer 지원</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1116"></a>
+<h1><a class="anchor" id="autotoc_md1122"></a>
 프로젝트 정보</h1>
 <p><b>저장소:</b> <a href="https://github.com/kcenon/logger_system">https://github.com/kcenon/logger_system</a> <b>문서:</b> <a href="docs/">docs/</a> <b>라이선스:</b> LICENSE 파일 참조 <b>관리자:</b> <a href="#" onclick="location.href='mai'+'lto:'+'kce'+'no'+'n@n'+'av'+'er.'+'co'+'m'; return false;">kceno<span class="obfuscator">.nosp@m.</span>n@na<span class="obfuscator">.nosp@m.</span>ver.c<span class="obfuscator">.nosp@m.</span>om</a></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1118"></a>
+<h1><a class="anchor" id="autotoc_md1124"></a>
 버전 지원 매트릭스</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -894,7 +894,7 @@ CMake fmt Fallback 제거 - 2025-12-03</h2>
 <td class="markdownTableBodyNone">1.0.0   </td><td class="markdownTableBodyNone">2025-10-22   </td><td class="markdownTableBodyNone">C++20   </td><td class="markdownTableBodyNone">3.16   </td><td class="markdownTableBodyNone">현재   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1120"></a>
+<h1><a class="anchor" id="autotoc_md1126"></a>
 마이그레이션 가이드</h1>
 <p>통합 thread_system 또는 독립형 logger 구현에서 마이그레이션하려면 <a class="el" href="MIGRATION_8md.html">MIGRATION.md</a>를 참조하십시오.</p>
 <hr  />
@@ -905,7 +905,7 @@ CMake fmt Fallback 제거 - 2025-12-03</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Jan 17 2026 14:03:00 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Jan 18 2026 04:49:05 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
