@@ -8,6 +8,7 @@ All rights reserved.
 #include "../../sources/logger/flow/overflow_policy.h"
 
 #include <gtest/gtest.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 #include <chrono>
 #include <random>
@@ -15,16 +16,17 @@ All rights reserved.
 #include <vector>
 
 using namespace std::chrono_literals;
+namespace ci = kcenon::common::interfaces;
 
 // Define log_entry in logger_module namespace to match the header
 namespace logger_module {
 struct log_entry {
-    thread_module::log_level level;
+    ci::log_level level;
     std::string message;
     std::chrono::system_clock::time_point timestamp;
 
-    log_entry() : level(thread_module::log_level::info) {}
-    log_entry(thread_module::log_level lvl, const std::string& msg)
+    log_entry() : level(ci::log_level::info) {}
+    log_entry(ci::log_level lvl, const std::string& msg)
         : level(lvl), message(msg), timestamp(std::chrono::system_clock::now()) {}
 };
 }  // namespace logger_module
@@ -40,7 +42,7 @@ protected:
 
     void FillQueue(size_t count) {
         for (size_t i = 0; i < count; ++i) {
-            queue_.push(log_entry(thread_module::log_level::info, "Message " + std::to_string(i)));
+            queue_.push(log_entry(ci::log_level::info, "Message " + std::to_string(i)));
         }
     }
 
@@ -55,7 +57,7 @@ TEST_F(OverflowPolicyTest, DropOldestPolicy) {
     FillQueue(max_size_);
 
     // Try to add new entry when full
-    log_entry new_entry(thread_module::log_level::warning, "New message");
+    log_entry new_entry(ci::log_level::warning, "New message");
     bool result = policy->handle_overflow(new_entry, queue_, max_size_);
 
     EXPECT_TRUE(result);                      // Should return true to allow adding
@@ -73,7 +75,7 @@ TEST_F(OverflowPolicyTest, DropNewestPolicy) {
     FillQueue(max_size_);
 
     // Try to add new entry when full
-    log_entry new_entry(thread_module::log_level::warning, "New message");
+    log_entry new_entry(ci::log_level::warning, "New message");
     bool result = policy->handle_overflow(new_entry, queue_, max_size_);
 
     EXPECT_FALSE(result);                 // Should return false to drop new entry
@@ -99,7 +101,7 @@ TEST_F(OverflowPolicyTest, BlockPolicy) {
     });
 
     // Try to add new entry when full (should block then succeed)
-    log_entry new_entry(thread_module::log_level::warning, "New message");
+    log_entry new_entry(ci::log_level::warning, "New message");
     auto start = std::chrono::steady_clock::now();
     bool result = policy->handle_overflow(new_entry, queue_, max_size_);
     auto duration = std::chrono::steady_clock::now() - start;
@@ -120,7 +122,7 @@ TEST_F(OverflowPolicyTest, BlockPolicyTimeout) {
     FillQueue(max_size_);
 
     // Try to add new entry when full (should timeout)
-    log_entry new_entry(thread_module::log_level::warning, "New message");
+    log_entry new_entry(ci::log_level::warning, "New message");
     auto start = std::chrono::steady_clock::now();
     bool result = policy->handle_overflow(new_entry, queue_, max_size_);
     auto duration = std::chrono::steady_clock::now() - start;
@@ -140,7 +142,7 @@ TEST_F(OverflowPolicyTest, GrowPolicy) {
     FillQueue(max_size_);
 
     // Try to add new entry when full
-    log_entry new_entry(thread_module::log_level::warning, "New message");
+    log_entry new_entry(ci::log_level::warning, "New message");
     bool result = policy->handle_overflow(new_entry, queue_, max_size_);
 
     EXPECT_TRUE(result);  // Should allow growth
@@ -158,7 +160,7 @@ TEST_F(OverflowPolicyTest, GrowPolicyMaxLimit) {
 
     // Try to grow multiple times
     for (int i = 0; i < 10; ++i) {
-        log_entry new_entry(thread_module::log_level::warning, "New message " + std::to_string(i));
+        log_entry new_entry(ci::log_level::warning, "New message " + std::to_string(i));
         policy->handle_overflow(new_entry, queue_, max_size_);
     }
 
@@ -188,7 +190,7 @@ TEST_F(OverflowPolicyTest, CustomPolicy) {
             return false;  // Always drop
         });
 
-    log_entry entry(thread_module::log_level::info, "Test");
+    log_entry entry(ci::log_level::info, "Test");
     bool result = custom->handle_overflow(entry, queue_, max_size_);
 
     EXPECT_FALSE(result);
@@ -205,7 +207,7 @@ TEST_F(OverflowPolicyTest, OverflowStatsCalculation) {
     // Simulate multiple operations
     for (int i = 0; i < 100; ++i) {
         FillQueue(max_size_);
-        log_entry entry(thread_module::log_level::info, "Test");
+        log_entry entry(ci::log_level::info, "Test");
         policy->handle_overflow(entry, queue_, max_size_);
         queue_ = std::queue<log_entry>();  // Clear for next iteration
     }
@@ -377,7 +379,7 @@ TEST_F(OverflowQueueTest, BasicOperations) {
     // Push items
     for (size_t i = 0; i < max_size_; ++i) {
         EXPECT_TRUE(
-            queue.push(log_entry(thread_module::log_level::info, "Message " + std::to_string(i))));
+            queue.push(log_entry(ci::log_level::info, "Message " + std::to_string(i))));
     }
 
     EXPECT_FALSE(queue.empty());
@@ -395,11 +397,11 @@ TEST_F(OverflowQueueTest, OverflowWithDropOldest) {
 
     // Fill queue
     for (size_t i = 0; i < max_size_; ++i) {
-        queue.push(log_entry(thread_module::log_level::info, "Message " + std::to_string(i)));
+        queue.push(log_entry(ci::log_level::info, "Message " + std::to_string(i)));
     }
 
     // Push when full (should drop oldest)
-    EXPECT_TRUE(queue.push(log_entry(thread_module::log_level::warning, "New")));
+    EXPECT_TRUE(queue.push(log_entry(ci::log_level::warning, "New")));
 
     auto stats = queue.get_stats();
     EXPECT_GT(stats.dropped_messages.load(), 0);
@@ -410,7 +412,7 @@ TEST_F(OverflowQueueTest, PolicyChange) {
 
     // Initially uses drop_oldest by default
     for (size_t i = 0; i < max_size_ + 2; ++i) {
-        queue.push(log_entry(thread_module::log_level::info, "Message " + std::to_string(i)));
+        queue.push(log_entry(ci::log_level::info, "Message " + std::to_string(i)));
     }
 
     auto stats1 = queue.get_stats();
@@ -421,7 +423,7 @@ TEST_F(OverflowQueueTest, PolicyChange) {
 
     // New messages should be dropped
     for (size_t i = 0; i < 5; ++i) {
-        queue.push(log_entry(thread_module::log_level::info, "Extra"));
+        queue.push(log_entry(ci::log_level::info, "Extra"));
     }
 
     EXPECT_LE(queue.size(), max_size_);
@@ -438,7 +440,7 @@ TEST_F(OverflowQueueTest, ConcurrentAccess) {
     for (int i = 0; i < 3; ++i) {
         producers.emplace_back([&queue, &push_count]() {
             for (int j = 0; j < 100; ++j) {
-                if (queue.push(log_entry(thread_module::log_level::info, "Test"))) {
+                if (queue.push(log_entry(ci::log_level::info, "Test"))) {
                     push_count++;
                 }
                 std::this_thread::yield();
@@ -475,7 +477,7 @@ TEST_F(OverflowQueueTest, StopQueue) {
     overflow_queue<log_entry> queue(max_size_);
 
     // Add some items
-    queue.push(log_entry(thread_module::log_level::info, "Test"));
+    queue.push(log_entry(ci::log_level::info, "Test"));
 
     // Stop the queue
     queue.stop();
@@ -485,7 +487,7 @@ TEST_F(OverflowQueueTest, StopQueue) {
     EXPECT_FALSE(queue.pop(item, 10ms));
 
     // Push should still work but pop won't
-    queue.push(log_entry(thread_module::log_level::info, "After stop"));
+    queue.push(log_entry(ci::log_level::info, "After stop"));
     EXPECT_FALSE(queue.pop(item, 10ms));
 }
 

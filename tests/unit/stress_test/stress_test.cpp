@@ -24,12 +24,14 @@
 #include "../../sources/logger/writers/console_writer.h"
 #include "../../sources/logger/writers/file_writer.h"
 #include "../mocks/mock_writer.hpp"
+#include <kcenon/common/interfaces/logger_interface.h>
 
 using namespace logger_system;
 using namespace logger_system::testing;
 using namespace logger_module;
 using namespace std::chrono_literals;
-using log_level = thread_module::log_level;
+namespace ci = kcenon::common::interfaces;
+using log_level = ci::log_level;
 
 class stress_test : public ::testing::Test {
 protected:
