@@ -33,8 +33,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../framework/system_fixture.h"
 #include "../framework/test_helpers.h"
 #include <gtest/gtest.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 using namespace integration_tests;
+
+// Use standard log_level from common_system
+using kcenon::common::interfaces::log_level;
+using namespace std::string_literals;
 
 /**
  * @brief Error handling tests for logger system
@@ -122,7 +127,7 @@ TEST_F(ErrorHandlingTest, LogWithoutStart) {
     logger_->add_writer(std::move(writer));
 
     // Log without starting (async mode)
-    logger_->log(kcenon::logger::log_level::info, "Message without start");
+    logger_->log(log_level::info, std::string{"Message without start"});
 
     // Messages might be queued but not processed
     // Verify no crash
@@ -132,13 +137,13 @@ TEST_F(ErrorHandlingTest, LogWithoutStart) {
 TEST_F(ErrorHandlingTest, LogAfterStop) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
-    logger_->log(kcenon::logger::log_level::info, "Before stop");
+    logger_->log(log_level::info, std::string{"Before stop"});
     WaitForFlush();
 
     logger_->stop();
 
     // Log after stopping
-    logger_->log(kcenon::logger::log_level::info, "After stop");
+    logger_->log(log_level::info, std::string{"After stop"});
 
     // Messages after stop might be dropped or queued
     // Verify no crash
@@ -148,7 +153,7 @@ TEST_F(ErrorHandlingTest, LogAfterStop) {
 TEST_F(ErrorHandlingTest, ExcessiveFlushCalls) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
-    logger_->log(kcenon::logger::log_level::info, "Test message");
+    logger_->log(log_level::info, std::string{"Test message"});
 
     // Call flush many times
     for (int i = 0; i < 100; ++i) {
@@ -162,7 +167,7 @@ TEST_F(ErrorHandlingTest, ExcessiveFlushCalls) {
 TEST_F(ErrorHandlingTest, ClearWritersWhileRunning) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
-    logger_->log(kcenon::logger::log_level::info, "Before clear");
+    logger_->log(log_level::info, std::string{"Before clear"});
     WaitForFlush();
 
     // Clear writers while logger is running
@@ -170,7 +175,7 @@ TEST_F(ErrorHandlingTest, ClearWritersWhileRunning) {
     EXPECT_TRUE(result.is_ok());
 
     // Try logging after clearing
-    logger_->log(kcenon::logger::log_level::info, "After clear");
+    logger_->log(log_level::info, std::string{"After clear"});
 
     // Should handle this gracefully
     SUCCEED();
@@ -179,7 +184,7 @@ TEST_F(ErrorHandlingTest, ClearWritersWhileRunning) {
 TEST_F(ErrorHandlingTest, AddWriterWhileRunning) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
-    logger_->log(kcenon::logger::log_level::info, "Initial message");
+    logger_->log(log_level::info, std::string{"Initial message"});
     WaitForFlush();
 
     // Add another writer while running
@@ -187,7 +192,7 @@ TEST_F(ErrorHandlingTest, AddWriterWhileRunning) {
     auto writer = std::make_unique<kcenon::logger::file_writer>(file2);
     auto result = logger_->add_writer(std::move(writer));
 
-    logger_->log(kcenon::logger::log_level::info, "After adding writer");
+    logger_->log(log_level::info, std::string{"After adding writer"});
     WaitForFlush();
 
     // New writer should also receive messages
@@ -202,7 +207,7 @@ TEST_F(ErrorHandlingTest, VeryLongMessage) {
     very_long_message += " END";
 
     // Should handle this without crashing
-    logger_->log(kcenon::logger::log_level::info, very_long_message);
+    logger_->log(log_level::info, very_long_message);
     WaitForFlush();
 
     // Verify it was handled (might be truncated or rejected)
@@ -215,15 +220,15 @@ TEST_F(ErrorHandlingTest, RapidLogLevelChanges) {
     // Rapidly change log levels while logging
     std::thread level_changer([this]() {
         for (int i = 0; i < 100; ++i) {
-            logger_->set_min_level(kcenon::logger::log_level::debug);
-            logger_->set_min_level(kcenon::logger::log_level::info);
-            logger_->set_min_level(kcenon::logger::log_level::warning);
+            logger_->set_level(log_level::debug);
+            logger_->set_level(log_level::info);
+            logger_->set_level(log_level::warning);
         }
     });
 
     // Log while levels are changing
     for (int i = 0; i < 1000; ++i) {
-        logger_->log(kcenon::logger::log_level::info, "Message during level changes");
+        logger_->log(log_level::info, std::string{"Message during level changes"});
     }
 
     level_changer.join();
@@ -257,7 +262,7 @@ TEST_F(ErrorHandlingTest, MultipleLoggerInstances) {
     for (size_t i = 0; i < logger_count; ++i) {
         threads.emplace_back([&loggers, i]() {
             for (int j = 0; j < 100; ++j) {
-                loggers[i]->log(kcenon::logger::log_level::info,
+                loggers[i]->log(log_level::info,
                               "Logger " + std::to_string(i) + " message " + std::to_string(j));
             }
         });
