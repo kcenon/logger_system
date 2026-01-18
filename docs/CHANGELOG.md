@@ -9,6 +9,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.0] - Unreleased
+
+### Removed - Deprecated Context ID Convenience Methods (Issue #326)
+
+This release removes deprecated context ID convenience methods following Kent Beck's "Fewest Elements" principle.
+
+#### Breaking Changes
+
+- **Removed context ID convenience methods** from `logger` class
+  - `set_correlation_id()` / `get_correlation_id()` / `clear_correlation_id()` / `has_correlation_id()`
+  - `set_request_id()` / `get_request_id()` / `clear_request_id()` / `has_request_id()`
+  - `set_trace_id()` / `get_trace_id()` / `clear_trace_id()` / `has_trace_id()`
+  - `set_span_id()` / `get_span_id()` / `clear_span_id()` / `has_span_id()`
+  - `set_parent_span_id()` / `get_parent_span_id()` / `clear_parent_span_id()` / `has_parent_span_id()`
+  - Use the generic `set_context_id()` / `get_context_id()` / `clear_context_id()` / `has_context_id()` API instead
+
+#### Migration Guide
+
+```cpp
+// Before (removed):
+logger->set_trace_id("0af7651916cd43dd");
+logger->set_span_id("b7ad6b7169203331");
+logger->set_correlation_id("req-123");
+logger->clear_trace_id();
+logger->clear_span_id();
+logger->clear_correlation_id();
+
+// After (recommended):
+logger->set_context_id("trace_id", "0af7651916cd43dd");
+logger->set_context_id("span_id", "b7ad6b7169203331");
+logger->set_context_id("correlation_id", "req-123");
+logger->clear_all_context_ids();  // Or clear individually with clear_context_id("key")
+```
+
+#### Benefits
+
+- **API Surface Reduction**: ~50 methods → ~5 methods for context ID management
+- **DRY Principle**: Eliminated redundant wrapper methods that just called the generic version
+- **Simplified Maintenance**: Single implementation path for all context ID operations
+- **Consistent Usage**: Users learn one API pattern instead of multiple specialized methods
+
+---
+
 ## [3.0.0] - 2025-12-31
 
 ### Removed - Deprecated API Cleanup (Issues #268, #324)

@@ -489,81 +489,68 @@ TEST_F(StructuredLoggingTest, CustomContextIdKeys) {
     test_logger->stop();
 }
 
-// Test 11c: Trace ID convenience API (deprecated but still working)
-TEST_F(StructuredLoggingTest, TraceIdConvenienceAPI) {
+// Test 11c: Trace ID using generic context API
+TEST_F(StructuredLoggingTest, TraceIdGenericAPI) {
     auto test_logger = std::make_shared<logger>(false);
     test_logger->start();
 
     // Initially no trace ID
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-    EXPECT_FALSE(test_logger->has_trace_id());
-    EXPECT_EQ(test_logger->get_trace_id(), "");
+    EXPECT_FALSE(test_logger->has_context_id("trace_id"));
+    EXPECT_EQ(test_logger->get_context_id("trace_id"), "");
 
-    // Set trace ID using deprecated API
-    test_logger->set_trace_id("0af7651916cd43dd8448eb211c80319c");
-    EXPECT_TRUE(test_logger->has_trace_id());
-    EXPECT_EQ(test_logger->get_trace_id(), "0af7651916cd43dd8448eb211c80319c");
-
-    // Verify it's accessible via generic API too
+    // Set trace ID using generic API
+    test_logger->set_context_id("trace_id", "0af7651916cd43dd8448eb211c80319c");
     EXPECT_TRUE(test_logger->has_context_id("trace_id"));
     EXPECT_EQ(test_logger->get_context_id("trace_id"), "0af7651916cd43dd8448eb211c80319c");
 
     // Clear trace ID
-    test_logger->clear_trace_id();
-    EXPECT_FALSE(test_logger->has_trace_id());
-    EXPECT_EQ(test_logger->get_trace_id(), "");
-#pragma GCC diagnostic pop
+    test_logger->clear_context_id("trace_id");
+    EXPECT_FALSE(test_logger->has_context_id("trace_id"));
+    EXPECT_EQ(test_logger->get_context_id("trace_id"), "");
 
     test_logger->stop();
 }
 
-// Test 12: Span ID convenience API (deprecated but still working)
-TEST_F(StructuredLoggingTest, SpanIdConvenienceAPI) {
+// Test 12: Span ID using generic context API
+TEST_F(StructuredLoggingTest, SpanIdGenericAPI) {
     auto test_logger = std::make_shared<logger>(false);
     test_logger->start();
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     // Initially no span ID
-    EXPECT_FALSE(test_logger->has_span_id());
-    EXPECT_EQ(test_logger->get_span_id(), "");
+    EXPECT_FALSE(test_logger->has_context_id("span_id"));
+    EXPECT_EQ(test_logger->get_context_id("span_id"), "");
 
-    // Set span ID
-    test_logger->set_span_id("b7ad6b7169203331");
-    EXPECT_TRUE(test_logger->has_span_id());
-    EXPECT_EQ(test_logger->get_span_id(), "b7ad6b7169203331");
+    // Set span ID using generic API
+    test_logger->set_context_id("span_id", "b7ad6b7169203331");
+    EXPECT_TRUE(test_logger->has_context_id("span_id"));
+    EXPECT_EQ(test_logger->get_context_id("span_id"), "b7ad6b7169203331");
 
     // Clear span ID
-    test_logger->clear_span_id();
-    EXPECT_FALSE(test_logger->has_span_id());
-    EXPECT_EQ(test_logger->get_span_id(), "");
-#pragma GCC diagnostic pop
+    test_logger->clear_context_id("span_id");
+    EXPECT_FALSE(test_logger->has_context_id("span_id"));
+    EXPECT_EQ(test_logger->get_context_id("span_id"), "");
 
     test_logger->stop();
 }
 
-// Test 13: Parent Span ID convenience API (deprecated but still working)
-TEST_F(StructuredLoggingTest, ParentSpanIdConvenienceAPI) {
+// Test 13: Parent Span ID using generic context API
+TEST_F(StructuredLoggingTest, ParentSpanIdGenericAPI) {
     auto test_logger = std::make_shared<logger>(false);
     test_logger->start();
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     // Initially no parent span ID
-    EXPECT_FALSE(test_logger->has_parent_span_id());
-    EXPECT_EQ(test_logger->get_parent_span_id(), "");
+    EXPECT_FALSE(test_logger->has_context_id("parent_span_id"));
+    EXPECT_EQ(test_logger->get_context_id("parent_span_id"), "");
 
-    // Set parent span ID
-    test_logger->set_parent_span_id("a1b2c3d4e5f67890");
-    EXPECT_TRUE(test_logger->has_parent_span_id());
-    EXPECT_EQ(test_logger->get_parent_span_id(), "a1b2c3d4e5f67890");
+    // Set parent span ID using generic API
+    test_logger->set_context_id("parent_span_id", "a1b2c3d4e5f67890");
+    EXPECT_TRUE(test_logger->has_context_id("parent_span_id"));
+    EXPECT_EQ(test_logger->get_context_id("parent_span_id"), "a1b2c3d4e5f67890");
 
     // Clear parent span ID
-    test_logger->clear_parent_span_id();
-    EXPECT_FALSE(test_logger->has_parent_span_id());
-    EXPECT_EQ(test_logger->get_parent_span_id(), "");
-#pragma GCC diagnostic pop
+    test_logger->clear_context_id("parent_span_id");
+    EXPECT_FALSE(test_logger->has_context_id("parent_span_id"));
+    EXPECT_EQ(test_logger->get_context_id("parent_span_id"), "");
 
     test_logger->stop();
 }

@@ -67,8 +67,8 @@ void basic_structured_logging() {
     logger_instance->add_writer(std::make_unique<console_writer>());
     logger_instance->start();
 
-    // Basic structured log with various field types
-    logger_instance->info_structured()
+    // Basic structured log with various field types using canonical API
+    logger_instance->log_structured(log_level::info)
         .message("User login successful")
         .field("user_id", 12345)
         .field("username", "john_doe")
@@ -78,7 +78,7 @@ void basic_structured_logging() {
         .emit();
 
     // Error with structured details
-    logger_instance->error_structured()
+    logger_instance->log_structured(log_level::error)
         .message("Database connection failed")
         .field("host", "db.example.com")
         .field("port", 5432)
@@ -87,7 +87,7 @@ void basic_structured_logging() {
         .emit();
 
     // Debug with technical details
-    logger_instance->debug_structured()
+    logger_instance->log_structured(log_level::debug)
         .message("Cache lookup performed")
         .field("cache_key", "user:12345:profile")
         .field("hit", false)
@@ -107,28 +107,26 @@ void context_propagation_example() {
     logger_instance->add_writer(std::make_unique<console_writer>());
     logger_instance->start();
 
-    // Set distributed tracing context
-    logger_instance->set_trace_id("0af7651916cd43dd8448eb211c80319c");
-    logger_instance->set_span_id("b7ad6b7169203331");
-    logger_instance->set_correlation_id("req-abc-123");
+    // Set distributed tracing context using generic API
+    logger_instance->set_context_id("trace_id", "0af7651916cd43dd8448eb211c80319c");
+    logger_instance->set_context_id("span_id", "b7ad6b7169203331");
+    logger_instance->set_context_id("correlation_id", "req-abc-123");
 
     // All subsequent logs will include trace context
-    logger_instance->info_structured()
+    logger_instance->log_structured(log_level::info)
         .message("Processing API request")
         .field("endpoint", "/api/v1/users")
         .field("method", "GET")
         .emit();
 
-    logger_instance->info_structured()
+    logger_instance->log_structured(log_level::info)
         .message("Database query executed")
         .field("query_type", "SELECT")
         .field("rows_returned", 42)
         .emit();
 
-    // Clear context when request is complete
-    logger_instance->clear_trace_id();
-    logger_instance->clear_span_id();
-    logger_instance->clear_correlation_id();
+    // Clear all context IDs when request is complete
+    logger_instance->clear_all_context_ids();
 
     logger_instance->stop();
 }
@@ -151,7 +149,7 @@ void context_scope_example() {
             {"tenant", std::string("acme-corp")}
         });
 
-        logger_instance->info_structured()
+        logger_instance->log_structured(log_level::info)
             .message("Request processing started")
             .emit();
 
@@ -162,14 +160,14 @@ void context_scope_example() {
                 {"database", std::string("users_db")}
             });
 
-            logger_instance->debug_structured()
+            logger_instance->log_structured(log_level::debug)
                 .message("Executing database query")
                 .field("query_time_ms", 15.3)
                 .emit();
         }
         // db_scope ended - "operation" and "database" removed
 
-        logger_instance->info_structured()
+        logger_instance->log_structured(log_level::info)
             .message("Request processing completed")
             .field("total_time_ms", 45.7)
             .emit();
@@ -193,7 +191,7 @@ void scoped_context_single_field() {
     {
         scoped_context order_ctx("order_id", static_cast<int64_t>(98765));
 
-        logger_instance->info_structured()
+        logger_instance->log_structured(log_level::info)
             .message("Processing order")
             .field("status", "pending")
             .emit();
@@ -201,13 +199,13 @@ void scoped_context_single_field() {
         {
             scoped_context item_ctx("item_id", static_cast<int64_t>(42));
 
-            logger_instance->debug_structured()
+            logger_instance->log_structured(log_level::debug)
                 .message("Validating item")
                 .field("quantity", 3)
                 .emit();
         }
 
-        logger_instance->info_structured()
+        logger_instance->log_structured(log_level::info)
             .message("Order completed")
             .field("status", "completed")
             .emit();
@@ -302,7 +300,7 @@ void multithreaded_context_example() {
         });
 
         for (int i = 0; i < 3; ++i) {
-            logger_instance->info_structured()
+            logger_instance->log_structured(log_level::info)
                 .message("Processing item")
                 .field("item_number", i)
                 .emit();
@@ -336,11 +334,11 @@ void logger_context_example() {
     logger_instance->set_context("environment", std::string("production"));
 
     // All logs will include service, version, and environment
-    logger_instance->info_structured()
+    logger_instance->log_structured(log_level::info)
         .message("Service started")
         .emit();
 
-    logger_instance->info_structured()
+    logger_instance->log_structured(log_level::info)
         .message("Processing request")
         .field("request_id", "req-001")
         .emit();
