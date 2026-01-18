@@ -43,6 +43,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifdef LOGGER_HAS_THREAD_SYSTEM
 
+#include <kcenon/thread/core/callback_job.h>
+
 namespace kcenon::logger::integration {
 
 // Static member initialization
@@ -115,7 +117,17 @@ bool thread_system_integration::submit_task(std::function<void()> task) {
         return false;
     }
 
-    return pool->submit_task(std::move(task));
+    // Create a callback_job that wraps the task
+    auto job = std::make_unique<kcenon::thread::callback_job>(
+        [task = std::move(task)]() -> kcenon::common::VoidResult {
+            task();
+            return kcenon::common::ok();
+        },
+        "logger_async_task"
+    );
+
+    auto result = pool->enqueue(std::move(job));
+    return result.is_ok();
 }
 
 std::string thread_system_integration::get_backend_name() noexcept {
