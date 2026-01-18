@@ -46,10 +46,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../framework/system_fixture.h"
 #include "../framework/test_helpers.h"
 #include <gtest/gtest.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 #include <kcenon/logger/integration/thread_system_integration.h>
 
 using namespace integration_tests;
+
+// Use standard log_level from common_system
+using kcenon::common::interfaces::log_level;
+using namespace std::string_literals;
 using namespace kcenon::logger::integration;
 
 /**
@@ -205,7 +210,7 @@ TEST_F(ThreadSystemIntegrationTest, LoggerWorksInStandaloneMode) {
 
     const size_t message_count = 50;
     for (size_t i = 0; i < message_count; ++i) {
-        logger_->log(kcenon::logger::log_level::info, "Standalone message " + std::to_string(i));
+        logger_->log(log_level::info, "Standalone message " + std::to_string(i));
     }
 
     WaitForFlush();
