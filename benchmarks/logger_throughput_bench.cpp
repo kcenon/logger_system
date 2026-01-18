@@ -44,11 +44,14 @@
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/writers/null_writer.h>
 #include <kcenon/logger/writers/file_writer.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <filesystem>
 #include <memory>
 #include <atomic>
 #include <thread>
 #include <chrono>
+
+namespace ci = kcenon::common::interfaces;
 
 namespace fs = std::filesystem;
 
@@ -237,7 +240,7 @@ static void BM_ThroughputWithFiltering(benchmark::State& state) {
     logger->add_writer(std::move(null_writer));
 
     // Set minimum log level to WARNING (filters out DEBUG and INFO)
-    logger->set_min_level(kcenon::logger::log_level::warning);
+    logger->set_level(ci::log_level::warning);
 
     size_t messages_logged = 0;
 
