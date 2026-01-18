@@ -48,11 +48,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/logger/formatters/json_formatter.h>
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <iostream>
 #include <vector>
 #include <map>
 
 using namespace kcenon::logger;
+namespace ci = kcenon::common::interfaces;
 
 /**
  * @class memory_writer
@@ -273,9 +275,9 @@ int main() {
         auto logger = std::move(result.value());
 
         // Log some messages
-        logger->log(logger_system::log_level::info, "First message");
-        logger->log(logger_system::log_level::warning, "Second message");
-        logger->log(logger_system::log_level::error, "Third message");
+        logger->log(ci::log_level::info, std::string("First message"));
+        logger->log(ci::log_level::warning, std::string("Second message"));
+        logger->log(ci::log_level::error, std::string("Third message"));
 
         std::cout << "Logged 3 messages to memory writer" << std::endl;
     }
@@ -301,11 +303,11 @@ int main() {
         auto logger = std::move(result.value());
 
         // Log messages at different levels
-        logger->log(logger_system::log_level::debug, "Debug message 1");
-        logger->log(logger_system::log_level::debug, "Debug message 2");
-        logger->log(logger_system::log_level::info, "Info message");
-        logger->log(logger_system::log_level::warning, "Warning message");
-        logger->log(logger_system::log_level::error, "Error message");
+        logger->log(ci::log_level::debug, std::string("Debug message 1"));
+        logger->log(ci::log_level::debug, std::string("Debug message 2"));
+        logger->log(ci::log_level::info, std::string("Info message"));
+        logger->log(ci::log_level::warning, std::string("Warning message"));
+        logger->log(ci::log_level::error, std::string("Error message"));
 
         // Print statistics
         counted_ptr->print_stats();

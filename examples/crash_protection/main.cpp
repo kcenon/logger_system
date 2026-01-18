@@ -50,9 +50,11 @@
 #include "logger/logger.h"
 #include "logger/writers/console_writer.h"
 #include "logger/writers/file_writer.h"
+#include <kcenon/common/interfaces/logger_interface.h>
 
 using namespace kcenon::logger;
 namespace logger_module = kcenon::logger;
+namespace ci = kcenon::common::interfaces;
 
 // Global state for demonstration
 std::atomic<bool> logging_active{true};
@@ -90,7 +92,7 @@ void normal_logging_task(int task_id, std::shared_ptr<logger> logger_instance) {
         std::string message = "Task " + std::to_string(task_id) + 
                              " - Log entry " + std::to_string(i);
         
-        logger_instance->log(log_level::info, message);
+        logger_instance->log(ci::log_level::info, message);
         logs_written.fetch_add(1);
         
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -107,11 +109,11 @@ void heavy_logging_task(int task_id, std::shared_ptr<logger> logger_instance) {
                                    " - Large log entry " + std::to_string(i) + 
                                    " with lots of data: " + std::string(100, 'X');
         
-        logger_instance->log(log_level::debug, large_message);
+        logger_instance->log(ci::log_level::debug, large_message);
         logs_written.fetch_add(1);
         
         if (i % 5 == 0) {
-            logger_instance->log(log_level::warning, 
+            logger_instance->log(ci::log_level::warning,
                 "Checkpoint " + std::to_string(i) + " for task " + std::to_string(task_id));
         }
         
@@ -132,7 +134,7 @@ void potentially_crashing_logging_task(int task_id, std::shared_ptr<logger> logg
         std::string message = "Risky Task " + std::to_string(task_id) + 
                              " - Entry " + std::to_string(i);
         
-        logger_instance->log(log_level::info, message);
+        logger_instance->log(ci::log_level::info, message);
         logs_written.fetch_add(1);
         
         // Random chance of causing issues
@@ -216,7 +218,7 @@ int main() {
     auto main_logger = std::make_shared<logger>(true); // async mode
     main_logger->add_writer(std::make_unique<console_writer>());
     main_logger->add_writer(std::make_unique<file_writer>("./logs/application.log"));
-    main_logger->set_min_level(log_level::debug);
+    main_logger->set_level(ci::log_level::debug);
     main_logger->start();
     
     // Register logger for crash protection
@@ -230,9 +232,9 @@ int main() {
         // Step 3: Test normal logging operations
         std::cout << "\n--- Step 3: Normal Logging Operations ---" << std::endl;
         
-        main_logger->log(log_level::info, "Logger crash protection demo started");
-        main_logger->log(log_level::debug, "Debug information available");
-        main_logger->log(log_level::warning, "This is a warning message");
+        main_logger->log(ci::log_level::info, std::string("Logger crash protection demo started"));
+        main_logger->log(ci::log_level::debug, std::string("Debug information available"));
+        main_logger->log(ci::log_level::warning, std::string("This is a warning message"));
         
         // Step 4: Multi-threaded logging stress test
         std::cout << "\n--- Step 4: Multi-threaded Logging Stress Test ---" << std::endl;
@@ -319,7 +321,7 @@ int main() {
         
         // Generate burst of logs to test overflow handling
         for (int i = 0; i < 1000; ++i) {
-            main_logger->log(log_level::debug, "Burst log " + std::to_string(i));
+            main_logger->log(ci::log_level::debug, "Burst log " + std::to_string(i));
         }
         
         // Force flush to test emergency procedures
@@ -355,7 +357,7 @@ int main() {
     // Step 11: Graceful shutdown
     std::cout << "\n--- Step 11: Graceful Shutdown ---" << std::endl;
     
-    main_logger->log(log_level::info, "Shutting down logger crash protection demo");
+    main_logger->log(ci::log_level::info, std::string("Shutting down logger crash protection demo"));
     main_logger->stop();
     
     std::cout << "\n=== Demo Completed Successfully ===" << std::endl;
