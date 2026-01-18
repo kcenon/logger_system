@@ -66,6 +66,7 @@ All rights reserved.
 
 #include "thread_integration_detector.h"
 #include "logger_config.h"
+#include "level_converter.h"
 #include "strategies/config_strategy_interface.h"
 #include "strategies/environment_strategy.h"
 #include "strategies/performance_strategy.h"
@@ -1051,7 +1052,11 @@ public:
         auto logger_instance = std::make_unique<logger>(config_.async, config_.buffer_size, std::move(backend_));
         
         // Apply configuration settings
-        logger_instance->set_min_level(config_.min_level);
+        // Suppress deprecation warning for internal conversion
+        #pragma GCC diagnostic push
+        #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+        logger_instance->set_level(to_common_level(config_.min_level));
+        #pragma GCC diagnostic pop
         
         if (config_.enable_metrics) {
             logger_instance->enable_metrics_collection(true);

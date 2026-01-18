@@ -46,7 +46,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "error_codes.h"
 #include "metrics/logger_metrics.h"
 #include "../backends/integration_backend.h"
-#include "log_context.h"
 #include <kcenon/logger/interfaces/logger_types.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/security/signal_manager.h>
@@ -309,82 +308,6 @@ public:
      */
     common::VoidResult flush() override;
 
-    // =========================================================================
-    // Backward-compatible API (logger_system native types)
-    // These methods allow seamless use of logger_system::log_level
-    // =========================================================================
-
-    /**
-     * @brief Log a simple message using native log_level
-     * @param level Severity level of the message using logger_system::log_level
-     * @param message The message to log
-     *
-     * @details Logs a message without source location information.
-     * The message is queued for asynchronous processing if async mode is enabled.
-     * Internally converts to common::interfaces::log_level.
-     *
-     * @note Messages below the minimum log level are discarded for performance.
-     *
-     * @deprecated Use log(common::interfaces::log_level, const std::string&) instead.
-     *             Will be removed in v3.0.0.
-     * @since 1.0.0
-     */
-    [[deprecated("Use log(common::interfaces::log_level, const std::string&) instead. Will be removed in v3.0.0.")]]
-    void log(log_level level, const std::string& message);
-
-    /**
-     * @brief Log a message with source location using native log_level
-     * @param level Severity level of the message using logger_system::log_level
-     * @param message The message to log
-     * @param file Source file name (typically __FILE__)
-     * @param line Line number in source file (typically __LINE__)
-     * @param function Function name (typically __FUNCTION__)
-     *
-     * @details Logs a message with complete source location information for debugging.
-     * This overload is useful for tracking the exact origin of log messages.
-     * Internally converts to common::interfaces::log_level.
-     *
-     * @deprecated Use log(common::interfaces::log_level, std::string_view, const source_location&) instead.
-     *             Will be removed in v3.0.0.
-     * @since 1.0.0
-     */
-    [[deprecated("Use log(common::interfaces::log_level, std::string_view, const source_location&) instead. Will be removed in v3.0.0.")]]
-    void log(log_level level,
-             const std::string& message,
-             const std::string& file,
-             int line,
-             const std::string& function);
-
-    /**
-     * @brief Log using a precomputed log_context
-     * @param level Severity level using logger_system::log_level
-     * @param message The message to log
-     * @param context Source location context
-     *
-     * @deprecated Use log(common::interfaces::log_level, std::string_view, const source_location&) instead.
-     *             Will be removed in v3.0.0.
-     * @since 1.0.0
-     */
-    [[deprecated("Use log(common::interfaces::log_level, std::string_view, const source_location&) instead. Will be removed in v3.0.0.")]]
-    void log(log_level level,
-             const std::string& message,
-             const core::log_context& context);
-
-    /**
-     * @brief Check if a log level is enabled using native log_level
-     * @param level The log level to check using logger_system::log_level
-     * @return true if messages at this level will be logged, false otherwise
-     *
-     * @details Use this method to avoid expensive message construction
-     * for log levels that won't be output.
-     *
-     * @deprecated Use is_enabled(common::interfaces::log_level) instead.
-     *             Will be removed in v3.0.0.
-     * @since 1.0.0
-     */
-    [[deprecated("Use is_enabled(common::interfaces::log_level) instead. Will be removed in v3.0.0.")]]
-    bool is_enabled(log_level level) const;
-    
     // Additional logger-specific methods
     
     /**
@@ -423,35 +346,6 @@ public:
      * @since 1.0.0
      */
     common::VoidResult clear_writers();
-    
-    /**
-     * @brief Set the minimum log level (legacy API)
-     * @param level Minimum level to log using logger_system::log_level
-     *
-     * @details Sets the threshold for message logging. Messages with a level
-     * below this threshold are discarded for performance optimization.
-     *
-     * @deprecated Use set_level(common::interfaces::log_level) instead.
-     *             Will be removed in v3.0.0.
-     * @note This is a thread-safe operation that takes effect immediately.
-     *
-     * @since 1.0.0
-     */
-    [[deprecated("Use set_level(common::interfaces::log_level) instead. Will be removed in v3.0.0.")]]
-    void set_min_level(log_level level);
-
-    /**
-     * @brief Get the minimum log level (legacy API)
-     * @return Current minimum log level using logger_system::log_level
-     *
-     * @deprecated Use get_level() which returns common::interfaces::log_level instead.
-     *             Will be removed in v3.0.0.
-     * @details Returns the current threshold level for message logging.
-     *
-     * @since 1.0.0
-     */
-    [[deprecated("Use get_level() which returns common::interfaces::log_level instead. Will be removed in v3.0.0.")]]
-    log_level get_min_level() const;
     
     /**
      * @brief Start the logger (for async mode)
@@ -794,66 +688,6 @@ public:
      */
     [[nodiscard]] structured_log_builder log_structured(log_level level);
 
-    /**
-     * @brief Create a structured trace log builder
-     * @return Builder for constructing the structured log entry
-     *
-     * @deprecated Use log_structured(log_level::trace) instead
-     * @since 3.1.0
-     */
-    [[deprecated("Use log_structured(log_level::trace) instead")]]
-    [[nodiscard]] structured_log_builder trace_structured();
-
-    /**
-     * @brief Create a structured debug log builder
-     * @return Builder for constructing the structured log entry
-     *
-     * @deprecated Use log_structured(log_level::debug) instead
-     * @since 3.1.0
-     */
-    [[deprecated("Use log_structured(log_level::debug) instead")]]
-    [[nodiscard]] structured_log_builder debug_structured();
-
-    /**
-     * @brief Create a structured info log builder
-     * @return Builder for constructing the structured log entry
-     *
-     * @deprecated Use log_structured(log_level::info) instead
-     * @since 3.1.0
-     */
-    [[deprecated("Use log_structured(log_level::info) instead")]]
-    [[nodiscard]] structured_log_builder info_structured();
-
-    /**
-     * @brief Create a structured warning log builder
-     * @return Builder for constructing the structured log entry
-     *
-     * @deprecated Use log_structured(log_level::warning) instead
-     * @since 3.1.0
-     */
-    [[deprecated("Use log_structured(log_level::warning) instead")]]
-    [[nodiscard]] structured_log_builder warn_structured();
-
-    /**
-     * @brief Create a structured error log builder
-     * @return Builder for constructing the structured log entry
-     *
-     * @deprecated Use log_structured(log_level::error) instead
-     * @since 3.1.0
-     */
-    [[deprecated("Use log_structured(log_level::error) instead")]]
-    [[nodiscard]] structured_log_builder error_structured();
-
-    /**
-     * @brief Create a structured fatal log builder
-     * @return Builder for constructing the structured log entry
-     *
-     * @deprecated Use log_structured(log_level::fatal) instead
-     * @since 3.1.0
-     */
-    [[deprecated("Use log_structured(log_level::fatal) instead")]]
-    [[nodiscard]] structured_log_builder fatal_structured();
-
     // =========================================================================
     // Context fields management
     // =========================================================================
@@ -864,7 +698,7 @@ public:
      * @param value Field value
      *
      * @details Context fields are automatically included in all structured
-     * log entries created via *_structured() methods. Useful for request IDs,
+     * log entries created via log_structured() method. Useful for request IDs,
      * trace IDs, or other per-request/per-session metadata.
      *
      * @example
@@ -873,7 +707,7 @@ public:
      * logger->set_context("trace_id", "trace-456");
      *
      * // All subsequent structured logs include request_id and trace_id
-     * logger->info_structured()
+     * logger->log_structured(log_level::info)
      *     .message("Processing request")
      *     .emit();
      * @endcode
