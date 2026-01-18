@@ -43,11 +43,13 @@
 #include <kcenon/logger/writers/rotating_file_writer.h>
 #include <kcenon/logger/writers/critical_writer.h>
 #include <kcenon/logger/writers/async_writer.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <iostream>
 #include <thread>
 #include <chrono>
 
 using namespace kcenon::logger;
+namespace ci = kcenon::common::interfaces;
 using namespace std::chrono_literals;
 
 /**
@@ -76,11 +78,11 @@ void example_basic_critical_writer() {
     log.add_writer(std::move(critical));
 
     // Normal logs (buffered)
-    log.log(log_level::info, "Application started");
-    log.log(log_level::debug, "Debug information");
+    log.log(ci::log_level::info, std::string("Application started"));
+    log.log(ci::log_level::debug, std::string("Debug information"));
 
     // Critical log (immediately flushed to disk)
-    log.log(log_level::critical, "Critical error occurred - guaranteed on disk");
+    log.log(ci::log_level::critical, std::string("Critical error occurred - guaranteed on disk"));
 
     // Even if the program crashes here, the critical log above is safe
     std::cout << "Critical log written and flushed immediately\n";
@@ -114,8 +116,8 @@ void example_write_ahead_logging() {
 
     log.add_writer(std::move(critical));
 
-    log.log(log_level::info, "Normal log");
-    log.log(log_level::critical, "Critical log - written to WAL first");
+    log.log(ci::log_level::info, std::string("Normal log"));
+    log.log(ci::log_level::critical, std::string("Critical log - written to WAL first"));
 
     std::cout << "Check logs/.critical.wal for write-ahead log entries\n";
 }
@@ -146,11 +148,11 @@ void example_hybrid_writer() {
 
     // These go through async queue (fast)
     for (int i = 0; i < 100; ++i) {
-        log.log(log_level::info, "High-frequency log " + std::to_string(i));
+        log.log(ci::log_level::info, "High-frequency log " + std::to_string(i));
     }
 
     // This bypasses the queue and flushes immediately (safe)
-    log.log(log_level::critical, "Critical error - no loss guaranteed");
+    log.log(ci::log_level::critical, std::string("Critical error - no loss guaranteed"));
 
     std::cout << "Hybrid writer provides both performance and safety\n";
 }
@@ -178,8 +180,8 @@ void example_signal_handler() {
     auto& stats = critical->get_stats();
     log.add_writer(std::move(critical));
 
-    log.log(log_level::info, "Before critical log");
-    log.log(log_level::critical, "Critical log before potential crash");
+    log.log(ci::log_level::info, std::string("Before critical log"));
+    log.log(ci::log_level::critical, std::string("Critical log before potential crash"));
 
     std::cout << "Try sending SIGTERM (Ctrl+C) to this process\n";
     std::cout << "The signal handler will ensure logs are flushed\n";
@@ -236,10 +238,10 @@ void example_production_setup() {
     log->start();
 
     // Production logging examples
-    log->log(log_level::info, "Service started");
-    log->log(log_level::warning, "Cache miss rate high");
-    log->log(log_level::error, "Database connection timeout");
-    log->log(log_level::critical, "Out of memory - terminating");
+    log->log(ci::log_level::info, std::string("Service started"));
+    log->log(ci::log_level::warning, std::string("Cache miss rate high"));
+    log->log(ci::log_level::error, std::string("Database connection timeout"));
+    log->log(ci::log_level::critical, std::string("Out of memory - terminating"));
 
     log->flush();
     log->stop();
@@ -278,12 +280,12 @@ void example_error_handling() {
     log.add_writer(std::move(critical));
 
     // Generate logs
-    log.log(log_level::info, "Info message");
-    log.log(log_level::warning, "Warning message");
-    log.log(log_level::error, "Error message");
-    log.log(log_level::critical, "Critical message 1");
-    log.log(log_level::critical, "Critical message 2");
-    log.log(log_level::critical, "Fatal message");
+    log.log(ci::log_level::info, std::string("Info message"));
+    log.log(ci::log_level::warning, std::string("Warning message"));
+    log.log(ci::log_level::error, std::string("Error message"));
+    log.log(ci::log_level::critical, std::string("Critical message 1"));
+    log.log(ci::log_level::critical, std::string("Critical message 2"));
+    log.log(ci::log_level::critical, std::string("Fatal message"));
 
     // Check statistics
     std::cout << "\nConfiguration:\n";

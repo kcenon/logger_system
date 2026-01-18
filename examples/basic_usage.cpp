@@ -32,8 +32,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/writers/console_writer.h>
-using log_level_type = logger_system::log_level;
-namespace log_levels = logger_system;
+#include <kcenon/common/interfaces/logger_interface.h>
+namespace ci = kcenon::common::interfaces;
+using log_level_type = ci::log_level;
 #include <thread>
 #include <vector>
 #include <iostream>
@@ -55,15 +56,15 @@ void basic_logging_example() {
     logger_instance->start();
     
     // Log messages at different levels
-    logger_instance->log(log_level_type::trace, "This is a trace message");
-    logger_instance->log(log_level_type::debug, "Debug information here");
-    logger_instance->log(log_level_type::info, "Application started successfully");
-    logger_instance->log(log_level_type::warning, "This is a warning");
-    logger_instance->log(log_level_type::error, "An error occurred!");
-    logger_instance->log(log_level_type::critical, "Critical system failure!");
+    logger_instance->log(log_level_type::trace, std::string("This is a trace message"));
+    logger_instance->log(log_level_type::debug, std::string("Debug information here"));
+    logger_instance->log(log_level_type::info, std::string("Application started successfully"));
+    logger_instance->log(log_level_type::warning, std::string("This is a warning"));
+    logger_instance->log(log_level_type::error, std::string("An error occurred!"));
+    logger_instance->log(log_level_type::critical, std::string("Critical system failure!"));
 
     // Log with simple message (source_location auto-captured internally)
-    logger_instance->log(log_level_type::info, "Message with auto-captured location");
+    logger_instance->log(log_level_type::info, std::string("Message with auto-captured location"));
     
     // Stop and flush
     logger_instance->stop();
@@ -106,16 +107,16 @@ void log_level_filtering_example() {
     logger_instance->start();
     
     // Set minimum level to INFO
-    logger_instance->set_min_level(log_level_type::info);
+    logger_instance->set_level(log_level_type::info);
     std::cout << "Minimum level set to INFO\n" << std::endl;
 
     // These won't be logged
-    logger_instance->log(log_level_type::trace, "This trace won't show");
-    logger_instance->log(log_level_type::debug, "This debug won't show");
+    logger_instance->log(log_level_type::trace, std::string("This trace won't show"));
+    logger_instance->log(log_level_type::debug, std::string("This debug won't show"));
 
     // These will be logged
-    logger_instance->log(log_level_type::info, "This info will show");
-    logger_instance->log(log_level_type::warning, "This warning will show");
+    logger_instance->log(log_level_type::info, std::string("This info will show"));
+    logger_instance->log(log_level_type::warning, std::string("This warning will show"));
     
     logger_instance->stop();
 }
