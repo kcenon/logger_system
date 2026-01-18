@@ -33,11 +33,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <gtest/gtest.h>
 #include <logger/writers/console_writer.h>
 #include <logger/writers/base_writer.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <memory>
 #include <chrono>
 #include <thread>
 
 using namespace logger_module;
+namespace ci = kcenon::common::interfaces;
+using log_level = ci::log_level;
 
 class ConsoleWriterTest : public ::testing::Test {
 protected:
@@ -65,7 +68,7 @@ TEST_F(ConsoleWriterTest, ConstructorTest) {
 // Test basic write functionality
 TEST_F(ConsoleWriterTest, BasicWrite) {
     EXPECT_NO_THROW(writer_->write(
-        thread_module::log_level::info,
+        log_level::info,
         "Test message",
         "",
         0,
@@ -79,7 +82,7 @@ TEST_F(ConsoleWriterTest, BasicWrite) {
 // Test write with source location
 TEST_F(ConsoleWriterTest, WriteWithSourceLocation) {
     EXPECT_NO_THROW(writer_->write(
-        thread_module::log_level::error,
+        log_level::error,
         "Error message with location",
         __FILE__,
         __LINE__,
@@ -92,12 +95,12 @@ TEST_F(ConsoleWriterTest, WriteWithSourceLocation) {
 
 // Test all log levels
 TEST_F(ConsoleWriterTest, AllLogLevels) {
-    EXPECT_NO_THROW(writer_->write(thread_module::log_level::trace, "Trace", "", 0, "", timestamp_));
-    EXPECT_NO_THROW(writer_->write(thread_module::log_level::debug, "Debug", "", 0, "", timestamp_));
-    EXPECT_NO_THROW(writer_->write(thread_module::log_level::info, "Info", "", 0, "", timestamp_));
-    EXPECT_NO_THROW(writer_->write(thread_module::log_level::warning, "Warning", "", 0, "", timestamp_));
-    EXPECT_NO_THROW(writer_->write(thread_module::log_level::error, "Error", "", 0, "", timestamp_));
-    EXPECT_NO_THROW(writer_->write(thread_module::log_level::critical, "Critical", "", 0, "", timestamp_));
+    EXPECT_NO_THROW(writer_->write(log_level::trace, "Trace", "", 0, "", timestamp_));
+    EXPECT_NO_THROW(writer_->write(log_level::debug, "Debug", "", 0, "", timestamp_));
+    EXPECT_NO_THROW(writer_->write(log_level::info, "Info", "", 0, "", timestamp_));
+    EXPECT_NO_THROW(writer_->write(log_level::warning, "Warning", "", 0, "", timestamp_));
+    EXPECT_NO_THROW(writer_->write(log_level::error, "Error", "", 0, "", timestamp_));
+    EXPECT_NO_THROW(writer_->write(log_level::critical, "Critical", "", 0, "", timestamp_));
     
     writer_->flush();
 }
@@ -109,7 +112,7 @@ TEST_F(ConsoleWriterTest, ColorFunctionality) {
     EXPECT_TRUE(writer_->use_color());
     
     EXPECT_NO_THROW(writer_->write(
-        thread_module::log_level::error,
+        log_level::error,
         "Colored error message",
         "",
         0,
@@ -122,7 +125,7 @@ TEST_F(ConsoleWriterTest, ColorFunctionality) {
     EXPECT_FALSE(writer_->use_color());
     
     EXPECT_NO_THROW(writer_->write(
-        thread_module::log_level::warning,
+        log_level::warning,
         "Non-colored warning message",
         "",
         0,
@@ -138,7 +141,7 @@ TEST_F(ConsoleWriterTest, StderrUsage) {
     auto stderr_writer = std::make_unique<console_writer>(true);
     
     EXPECT_NO_THROW(stderr_writer->write(
-        thread_module::log_level::critical,
+        log_level::critical,
         "Critical message to stderr",
         "",
         0,
@@ -153,7 +156,7 @@ TEST_F(ConsoleWriterTest, StderrUsage) {
 TEST_F(ConsoleWriterTest, SpecialMessages) {
     // Empty message
     EXPECT_NO_THROW(writer_->write(
-        thread_module::log_level::info,
+        log_level::info,
         "",
         "",
         0,
@@ -164,7 +167,7 @@ TEST_F(ConsoleWriterTest, SpecialMessages) {
     // Very long message
     std::string long_message(1000, 'X');
     EXPECT_NO_THROW(writer_->write(
-        thread_module::log_level::info,
+        log_level::info,
         long_message,
         "",
         0,
@@ -174,7 +177,7 @@ TEST_F(ConsoleWriterTest, SpecialMessages) {
     
     // Message with special characters
     EXPECT_NO_THROW(writer_->write(
-        thread_module::log_level::info,
+        log_level::info,
         "Message with special chars: \\n\\t\\r\\0",
         "",
         0,
@@ -195,7 +198,7 @@ TEST_F(ConsoleWriterTest, MultithreadedAccess) {
         threads.emplace_back([this, t]() {
             for (int i = 0; i < messages_per_thread; ++i) {
                 writer_->write(
-                    thread_module::log_level::info,
+                    log_level::info,
                     "Thread " + std::to_string(t) + " Message " + std::to_string(i),
                     "",
                     0,
@@ -218,7 +221,7 @@ TEST_F(ConsoleWriterTest, FlushFunctionality) {
     // Write several messages
     for (int i = 0; i < 5; ++i) {
         writer_->write(
-            thread_module::log_level::info,
+            log_level::info,
             "Message " + std::to_string(i),
             "",
             0,
@@ -238,14 +241,15 @@ TEST_F(ConsoleWriterTest, FlushFunctionality) {
 // Mock writer for testing base_writer functionality
 class MockWriter : public base_writer {
 public:
-    common::VoidResult write(thread_module::log_level level,
+    // Note: base_writer::write uses logger_system::log_level for backward compatibility
+    common::VoidResult write(logger_system::log_level level,
               const std::string& message,
               const std::string& file,
               int line,
               const std::string& function,
               const std::chrono::system_clock::time_point& timestamp) override {
         last_formatted_ = format_log_entry(level, message, file, line, function, timestamp);
-        last_level_ = level;
+        last_level_ = static_cast<log_level>(static_cast<int>(level));
         write_count_++;
         return common::ok();
     }
@@ -254,13 +258,13 @@ public:
         flush_count_++;
         return common::ok();
     }
-    
+
     std::string get_name() const override {
         return "mock";
     }
-    
+
     std::string last_formatted_;
-    thread_module::log_level last_level_ = thread_module::log_level::trace;
+    log_level last_level_ = log_level::trace;
     int write_count_ = 0;
     int flush_count_ = 0;
 };
@@ -279,7 +283,7 @@ protected:
 // Test base writer formatting
 TEST_F(BaseWriterTest, MessageFormatting) {
     mock_writer_->write(
-        thread_module::log_level::warning,
+        log_level::warning,
         "Test warning message",
         "/path/to/test.cpp",
         42,
@@ -288,7 +292,7 @@ TEST_F(BaseWriterTest, MessageFormatting) {
     );
     
     EXPECT_EQ(mock_writer_->write_count_, 1);
-    EXPECT_EQ(mock_writer_->last_level_, thread_module::log_level::warning);
+    EXPECT_EQ(mock_writer_->last_level_, log_level::warning);
     EXPECT_FALSE(mock_writer_->last_formatted_.empty());
     EXPECT_NE(mock_writer_->last_formatted_.find("WARNING"), std::string::npos);
     EXPECT_NE(mock_writer_->last_formatted_.find("Test warning message"), std::string::npos);

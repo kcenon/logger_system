@@ -13,6 +13,7 @@
 #include "../../sources/logger/writers/base_writer.h"
 #include "../../sources/logger/interfaces/log_entry.h"
 #include "../../sources/logger/error_codes.h"
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <atomic>
 #include <vector>
 #include <mutex>
@@ -22,6 +23,8 @@
 namespace logger_system::testing {
 
 using namespace logger_module;
+namespace ci = kcenon::common::interfaces;
+using log_level_type = ci::log_level;
 
 /**
  * @brief Mock writer for unit testing
@@ -32,14 +35,14 @@ using namespace logger_module;
 class mock_writer : public base_writer {
 public:
     struct write_record {
-        thread_module::log_level level;
+        log_level_type level;
         std::string message;
         std::optional<source_location> location;
         std::chrono::system_clock::time_point log_timestamp;
         std::chrono::steady_clock::time_point write_timestamp;
-        
+
         write_record(log_entry&& entry, std::chrono::steady_clock::time_point write_ts)
-            : level(entry.level)
+            : level(static_cast<log_level_type>(static_cast<int>(entry.level)))
             , message(entry.message.to_string())
             , location(std::move(entry.location))
             , log_timestamp(entry.timestamp)
@@ -61,7 +64,8 @@ public:
     ~mock_writer() override = default;
 
     // base_writer interface implementation
-    common::VoidResult write(thread_module::log_level level,
+    // Note: base_writer::write uses logger_system::log_level for backward compatibility
+    common::VoidResult write(logger_system::log_level level,
                       const std::string& message,
                       const std::string& file,
                       int line,

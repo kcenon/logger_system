@@ -41,20 +41,21 @@
 #include <string>
 #include <vector>
 
-// Always use logger_system::log_level (matches logger implementation)
-#include <kcenon/logger/interfaces/logger_types.h>
-using log_level = logger_system::log_level;
+// Use common::interfaces::log_level for ILogger interface
+#include <kcenon/common/interfaces/logger_interface.h>
+namespace ci = kcenon::common::interfaces;
 
 namespace {
 
 class memory_writer final : public kcenon::logger::base_writer {
 public:
     struct entry_record {
-        logger_system::log_level level;
+        ci::log_level level;
         std::string message;
     };
 
     // Implement the legacy write interface required by base_writer
+    // Note: base_writer::write uses logger_system::log_level for backward compatibility
     kcenon::common::VoidResult write(logger_system::log_level level,
                                      const std::string& message,
                                      [[maybe_unused]] const std::string& file,
@@ -62,7 +63,8 @@ public:
                                      [[maybe_unused]] const std::string& function,
                                      [[maybe_unused]] const std::chrono::system_clock::time_point& timestamp) override {
         entry_record rec;
-        rec.level = level;
+        // Convert to common::interfaces::log_level for storage
+        rec.level = static_cast<ci::log_level>(static_cast<int>(level));
         rec.message = message;
         records_.push_back(std::move(rec));
         return kcenon::common::ok();
@@ -96,21 +98,21 @@ TEST(LoggerMinLevelTest, DropsMessagesBelowConfiguredThreshold) {
 
     ASSERT_TRUE(logger.add_writer(std::move(writer)).is_ok());
 
-    logger.set_min_level(log_level::warning);
+    logger.set_level(ci::log_level::warning);
 
-    EXPECT_FALSE(logger.is_enabled(log_level::info));
-    EXPECT_TRUE(logger.is_enabled(log_level::warning));
+    EXPECT_FALSE(logger.is_enabled(ci::log_level::info));
+    EXPECT_TRUE(logger.is_enabled(ci::log_level::warning));
 
-    logger.log(log_level::info, "info message");
+    logger.log(ci::log_level::info, std::string("info message"));
     EXPECT_TRUE(writer_ptr->records().empty());
 
-    logger.log(log_level::warning, "warning message");
+    logger.log(ci::log_level::warning, std::string("warning message"));
     ASSERT_EQ(writer_ptr->records().size(), 1U);
-    EXPECT_EQ(writer_ptr->records().back().level, logger_system::log_level::warning);
+    EXPECT_EQ(writer_ptr->records().back().level, ci::log_level::warning);
     EXPECT_EQ(writer_ptr->records().back().message, "warning message");
 
-    logger.log(log_level::error, "error message");
+    logger.log(ci::log_level::error, std::string("error message"));
     ASSERT_EQ(writer_ptr->records().size(), 2U);
-    EXPECT_EQ(writer_ptr->records().back().level, logger_system::log_level::error);
+    EXPECT_EQ(writer_ptr->records().back().level, ci::log_level::error);
     EXPECT_EQ(writer_ptr->records().back().message, "error message");
 }

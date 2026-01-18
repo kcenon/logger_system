@@ -207,26 +207,26 @@ TEST_F(ILoggerInterfaceTest, FlushReturnsVoidResult) {
  * @brief Test level conversion between logger_system and common types
  */
 TEST_F(ILoggerInterfaceTest, LevelConversionConsistency) {
-    // Test using native log_level
-    logger_->set_min_level(log_level::warning);
+    // Test using ILogger interface set_level/get_level
+    logger_->set_level(ci::log_level::warning);
     EXPECT_EQ(logger_->get_level(), ci::log_level::warning);
 
     // Test using common log_level
     logger_->set_level(ci::log_level::debug);
-    EXPECT_EQ(logger_->get_min_level(), log_level::debug);
+    EXPECT_EQ(logger_->get_level(), ci::log_level::debug);
 }
 
 /**
- * @brief Test backward compatibility with logger_system::log_level
+ * @brief Test logging with common::interfaces::log_level
  */
-TEST_F(ILoggerInterfaceTest, BackwardCompatibilityWithNativeLogLevel) {
-    // These should still work with logger_system::log_level
-    logger_->log(log_level::info, "Native log level message");
+TEST_F(ILoggerInterfaceTest, LoggingWithCommonLogLevel) {
+    // Test logging with common::interfaces::log_level
+    logger_->log(ci::log_level::info, std::string("Common log level message"));
     // Using simple message (source_location auto-captured internally)
-    logger_->log(log_level::warning, "Native warning message");
+    logger_->log(ci::log_level::warning, std::string("Common warning message"));
 
-    EXPECT_TRUE(logger_->is_enabled(log_level::info));
-    EXPECT_TRUE(logger_->is_enabled(log_level::error));
+    EXPECT_TRUE(logger_->is_enabled(ci::log_level::info));
+    EXPECT_TRUE(logger_->is_enabled(ci::log_level::error));
 }
 
 /**

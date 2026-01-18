@@ -10,8 +10,11 @@ All rights reserved.
 #include <logger/config/logger_builder.h>
 #include <logger/writers/console_writer.h>
 #include <logger/filters/log_filter.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 using namespace logger_module;
+namespace ci = kcenon::common::interfaces;
+using log_level = ci::log_level;
 
 class ConfigTest : public ::testing::Test {
 protected:
@@ -35,7 +38,7 @@ TEST_F(ConfigTest, DefaultConfigValidation) {
     // Check default values
     EXPECT_TRUE(config.async);
     EXPECT_EQ(config.buffer_size, 8192);
-    EXPECT_EQ(config.min_level, thread_module::log_level::info);
+    EXPECT_EQ(config.min_level, log_level::info);
     EXPECT_EQ(config.batch_size, 100);
     EXPECT_EQ(config.flush_interval.count(), 1000);
     EXPECT_FALSE(config.use_lock_free);
@@ -214,7 +217,7 @@ TEST_F(ConfigTest, PredefinedConfigurations) {
     auto debug_config = logger_config::debug_config();
     EXPECT_TRUE(debug_config.validate());
     EXPECT_FALSE(debug_config.async);
-    EXPECT_EQ(debug_config.min_level, thread_module::log_level::trace);
+    EXPECT_EQ(debug_config.min_level, log_level::trace);
     
     // Production config
     auto prod_config = logger_config::production();
@@ -230,7 +233,7 @@ TEST_F(ConfigTest, LoggerBuilderBasic) {
     // Configure builder
     builder.with_async(true)
            .with_buffer_size(4096)
-           .with_min_level(thread_module::log_level::debug)
+           .with_min_level(log_level::debug)
            .with_metrics(true);
     
     // Validate configuration
@@ -260,7 +263,7 @@ TEST_F(ConfigTest, LoggerBuilderWithFilters) {
     logger_builder builder;
     
     // Add level filter
-    builder.add_filter(std::make_unique<level_filter>(thread_module::log_level::warning));
+    builder.add_filter(std::make_unique<level_filter>(log_level::warning));
     
     // Build logger
     auto result = builder.build();
@@ -310,7 +313,7 @@ TEST_F(ConfigTest, LoggerBuilderInvalidConfig) {
 TEST_F(ConfigTest, LoggerBuilderFluentInterface) {
     auto result = logger_builder()
         .use_template("production")
-        .with_min_level(thread_module::log_level::info)
+        .with_min_level(log_level::info)
         .with_buffer_size(16384)
         .with_metrics(true)
         .with_crash_handler(true)

@@ -33,6 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <gtest/gtest.h>
 #include <logger/logger.h>
 #include <logger/writers/console_writer.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 #include <chrono>
 #include <memory>
@@ -40,6 +41,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <thread>
 
 using namespace logger_module;
+namespace ci = kcenon::common::interfaces;
+using log_level = ci::log_level;
 
 class LoggerTest : public ::testing::Test {
 protected:
@@ -70,14 +73,14 @@ TEST_F(LoggerTest, ConstructorTest) {
 
 // Test log level filtering
 TEST_F(LoggerTest, LogLevelFiltering) {
-    sync_logger_->set_min_level(thread_module::log_level::warning);
+    sync_logger_->set_level(log_level::warning);
 
-    EXPECT_TRUE(sync_logger_->is_enabled(thread_module::log_level::critical));
-    EXPECT_TRUE(sync_logger_->is_enabled(thread_module::log_level::error));
-    EXPECT_TRUE(sync_logger_->is_enabled(thread_module::log_level::warning));
-    EXPECT_FALSE(sync_logger_->is_enabled(thread_module::log_level::info));
-    EXPECT_FALSE(sync_logger_->is_enabled(thread_module::log_level::debug));
-    EXPECT_FALSE(sync_logger_->is_enabled(thread_module::log_level::trace));
+    EXPECT_TRUE(sync_logger_->is_enabled(log_level::critical));
+    EXPECT_TRUE(sync_logger_->is_enabled(log_level::error));
+    EXPECT_TRUE(sync_logger_->is_enabled(log_level::warning));
+    EXPECT_FALSE(sync_logger_->is_enabled(log_level::info));
+    EXPECT_FALSE(sync_logger_->is_enabled(log_level::debug));
+    EXPECT_FALSE(sync_logger_->is_enabled(log_level::trace));
 }
 
 // Test writer management
@@ -86,13 +89,13 @@ TEST_F(LoggerTest, WriterManagement) {
     sync_logger_->add_writer(std::move(writer));
 
     // Test logging after adding writer
-    sync_logger_->log(thread_module::log_level::info, "Test message");
+    sync_logger_->log(log_level::info, "Test message");
 
     // Clear writers
     sync_logger_->clear_writers();
 
     // Should still work without writers (no crash)
-    sync_logger_->log(thread_module::log_level::info, "Test message after clear");
+    sync_logger_->log(log_level::info, "Test message after clear");
 }
 
 // Test synchronous logging
@@ -101,15 +104,15 @@ TEST_F(LoggerTest, SynchronousLogging) {
     sync_logger_->add_writer(std::move(writer));
 
     // Test all log levels
-    sync_logger_->log(thread_module::log_level::trace, "Trace message");
-    sync_logger_->log(thread_module::log_level::debug, "Debug message");
-    sync_logger_->log(thread_module::log_level::info, "Info message");
-    sync_logger_->log(thread_module::log_level::warning, "Warning message");
-    sync_logger_->log(thread_module::log_level::error, "Error message");
-    sync_logger_->log(thread_module::log_level::critical, "Critical message");
+    sync_logger_->log(log_level::trace, "Trace message");
+    sync_logger_->log(log_level::debug, "Debug message");
+    sync_logger_->log(log_level::info, "Info message");
+    sync_logger_->log(log_level::warning, "Warning message");
+    sync_logger_->log(log_level::error, "Error message");
+    sync_logger_->log(log_level::critical, "Critical message");
 
     // Test with simple message (source_location auto-captured internally)
-    sync_logger_->log(thread_module::log_level::info, "Message with auto-captured location");
+    sync_logger_->log(log_level::info, "Message with auto-captured location");
 }
 
 // Test asynchronous logging
@@ -121,7 +124,7 @@ TEST_F(LoggerTest, AsynchronousLogging) {
 
     // Test rapid logging
     for (int i = 0; i < 100; ++i) {
-        async_logger_->log(thread_module::log_level::info, "Async message " + std::to_string(i));
+        async_logger_->log(log_level::info, "Async message " + std::to_string(i));
     }
 
     // Allow async processing to progress using cooperative yielding
@@ -145,7 +148,7 @@ TEST_F(LoggerTest, MultithreadedLogging) {
     for (int t = 0; t < num_threads; ++t) {
         threads.emplace_back([this, t]() {
             for (int i = 0; i < 25; ++i) {
-                async_logger_->log(thread_module::log_level::info,
+                async_logger_->log(log_level::info,
                                    "Thread " + std::to_string(t) + " Message " + std::to_string(i));
             }
         });
@@ -170,16 +173,16 @@ TEST_F(LoggerTest, StateManagement) {
     EXPECT_FALSE(async_logger_->is_running());
 }
 
-// Test min level getter/setter
-TEST_F(LoggerTest, MinLevelGetterSetter) {
+// Test level getter/setter
+TEST_F(LoggerTest, LevelGetterSetter) {
     // Default should be trace (lowest level)
-    EXPECT_EQ(sync_logger_->get_min_level(), thread_module::log_level::trace);
+    EXPECT_EQ(sync_logger_->get_level(), log_level::trace);
 
-    sync_logger_->set_min_level(thread_module::log_level::warning);
-    EXPECT_EQ(sync_logger_->get_min_level(), thread_module::log_level::warning);
+    sync_logger_->set_level(log_level::warning);
+    EXPECT_EQ(sync_logger_->get_level(), log_level::warning);
 
-    sync_logger_->set_min_level(thread_module::log_level::error);
-    EXPECT_EQ(sync_logger_->get_min_level(), thread_module::log_level::error);
+    sync_logger_->set_level(log_level::error);
+    EXPECT_EQ(sync_logger_->get_level(), log_level::error);
 }
 
 // Test flush functionality
@@ -190,7 +193,7 @@ TEST_F(LoggerTest, FlushFunctionality) {
 
     // Log some messages
     for (int i = 0; i < 10; ++i) {
-        async_logger_->log(thread_module::log_level::info,
+        async_logger_->log(log_level::info,
                            "Flush test message " + std::to_string(i));
     }
 
@@ -203,14 +206,14 @@ TEST_F(LoggerTest, FlushFunctionality) {
 // Test error handling
 TEST_F(LoggerTest, ErrorHandling) {
     // Test logging without writers (should not crash)
-    EXPECT_NO_THROW(sync_logger_->log(thread_module::log_level::info, "No writer test"));
+    EXPECT_NO_THROW(sync_logger_->log(log_level::info, "No writer test"));
 
     // Test empty messages
-    EXPECT_NO_THROW(sync_logger_->log(thread_module::log_level::info, ""));
+    EXPECT_NO_THROW(sync_logger_->log(log_level::info, ""));
 
     // Test very long messages
     std::string long_message(10000, 'A');
-    EXPECT_NO_THROW(sync_logger_->log(thread_module::log_level::info, long_message));
+    EXPECT_NO_THROW(sync_logger_->log(log_level::info, long_message));
 }
 
 // Test buffer size configuration for async logger

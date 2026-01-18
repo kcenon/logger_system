@@ -15,10 +15,13 @@ All rights reserved.
 #include <kcenon/logger/factories/writer_factory.h>
 #include <kcenon/logger/factories/formatter_factory.h>
 #include <kcenon/logger/factories/filter_factory.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <chrono>
 #include <cstdlib>
 
 using namespace kcenon::logger;
+namespace ci = kcenon::common::interfaces;
+using log_level = ci::log_level;
 
 class ConfigStrategyTest : public ::testing::Test {
 protected:
@@ -133,7 +136,7 @@ TEST_F(ConfigStrategyTest, DeploymentStrategy_Development) {
 
     // Verify development settings
     EXPECT_FALSE(config.async);
-    EXPECT_EQ(config.min_level, logger_system::log_level::trace);
+    EXPECT_EQ(config.min_level, log_level::trace);
     EXPECT_TRUE(config.enable_color_output);
     EXPECT_TRUE(config.enable_source_location);
     EXPECT_EQ(config.batch_size, 1);
@@ -149,7 +152,7 @@ TEST_F(ConfigStrategyTest, DeploymentStrategy_Staging) {
 
     // Verify staging settings
     EXPECT_TRUE(config.async);
-    EXPECT_EQ(config.min_level, logger_system::log_level::info);
+    EXPECT_EQ(config.min_level, log_level::info);
     EXPECT_TRUE(config.enable_structured_logging);
     EXPECT_TRUE(config.enable_batch_writing);
 }
@@ -164,7 +167,7 @@ TEST_F(ConfigStrategyTest, DeploymentStrategy_Production) {
 
     // Verify production settings
     EXPECT_TRUE(config.async);
-    EXPECT_EQ(config.min_level, logger_system::log_level::warn);
+    EXPECT_EQ(config.min_level, log_level::warn);
     EXPECT_TRUE(config.enable_crash_handler);
     EXPECT_FALSE(config.enable_color_output);
     EXPECT_TRUE(config.enable_structured_logging);
@@ -181,7 +184,7 @@ TEST_F(ConfigStrategyTest, DeploymentStrategy_Testing) {
 
     // Verify testing settings
     EXPECT_FALSE(config.async);
-    EXPECT_EQ(config.min_level, logger_system::log_level::trace);
+    EXPECT_EQ(config.min_level, log_level::trace);
     EXPECT_FALSE(config.enable_crash_handler);
     EXPECT_TRUE(config.enable_source_location);
 }
@@ -200,7 +203,7 @@ TEST_F(ConfigStrategyTest, EnvironmentStrategy_LogLevel) {
     logger_config config;
     strategy.apply(config);
 
-    EXPECT_EQ(config.min_level, logger_system::log_level::error);
+    EXPECT_EQ(config.min_level, log_level::error);
 }
 
 TEST_F(ConfigStrategyTest, EnvironmentStrategy_MultipleVars) {
@@ -216,7 +219,7 @@ TEST_F(ConfigStrategyTest, EnvironmentStrategy_MultipleVars) {
     logger_config config;
     strategy.apply(config);
 
-    EXPECT_EQ(config.min_level, logger_system::log_level::debug);
+    EXPECT_EQ(config.min_level, log_level::debug);
     EXPECT_FALSE(config.async);
     EXPECT_EQ(config.buffer_size, 16384);
     EXPECT_TRUE(config.enable_color_output);
@@ -362,7 +365,7 @@ TEST_F(ConfigStrategyTest, FormatterFactory_Presets) {
 //============================================================================
 
 TEST_F(ConfigStrategyTest, FilterFactory_CreateLevel) {
-    auto filter = filter_factory::create_level(logger_system::log_level::warn);
+    auto filter = filter_factory::create_level(log_level::warn);
     ASSERT_NE(filter, nullptr);
     EXPECT_EQ(filter->get_name(), "level_filter");
 }
@@ -375,7 +378,7 @@ TEST_F(ConfigStrategyTest, FilterFactory_CreateRegex) {
 
 TEST_F(ConfigStrategyTest, FilterFactory_Builder) {
     auto filter = filter_factory::create_builder()
-        .with_min_level(logger_system::log_level::info)
+        .with_min_level(log_level::info)
         .exclude_pattern("password|secret")
         .build();
 

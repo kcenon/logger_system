@@ -33,6 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <gtest/gtest.h>
 #include <logger/core/log_collector.h>
 #include <logger/writers/base_writer.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 #include <atomic>
 #include <chrono>
@@ -41,17 +42,20 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <vector>
 
 using namespace logger_module;
+namespace ci = kcenon::common::interfaces;
+using log_level = ci::log_level;
 
 // Mock writer for testing log collector
 class MockCollectorWriter : public base_writer {
 public:
-    common::VoidResult write(thread_module::log_level level, const std::string& message,
+    // Note: base_writer::write uses logger_system::log_level for backward compatibility
+    common::VoidResult write(logger_system::log_level level, const std::string& message,
                       const std::string& /* file */, int /* line */,
                       const std::string& /* function */,
                       const std::chrono::system_clock::time_point& /* timestamp */) override {
         write_count_++;
         last_message_ = message;
-        last_level_ = level;
+        last_level_ = static_cast<log_level>(static_cast<int>(level));
         messages_.push_back(message);
         return common::ok();
     }
@@ -68,7 +72,7 @@ public:
     std::atomic<int> write_count_{0};
     std::atomic<int> flush_count_{0};
     std::string last_message_;
-    thread_module::log_level last_level_ = thread_module::log_level::trace;
+    log_level last_level_ = log_level::trace;
     std::vector<std::string> messages_;
     mutable std::mutex messages_mutex_;
 };
@@ -121,7 +125,7 @@ TEST_F(LogCollectorTest, BasicEnqueueAndProcessing) {
     collector_->start();
 
     // Enqueue a message
-    collector_->enqueue(thread_module::log_level::info, "Test message", "", 0, "", timestamp_);
+    collector_->enqueue(log_level::info, "Test message", "", 0, "", timestamp_);
 
     // Wait for processing with deterministic check
     auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(5);
@@ -145,7 +149,7 @@ TEST_F(LogCollectorTest, MultipleMessages) {
     const int num_messages = 10;
 
     for (int i = 0; i < num_messages; ++i) {
-        collector_->enqueue(thread_module::log_level::info, "Message " + std::to_string(i), "", 0,
+        collector_->enqueue(log_level::info, "Message " + std::to_string(i), "", 0,
                             "", timestamp_);
     }
 
@@ -175,7 +179,7 @@ TEST_F(LogCollectorTest, MultithreadedEnqueuing) {
     for (int t = 0; t < num_threads; ++t) {
         threads.emplace_back([this, t]() {
             for (int i = 0; i < messages_per_thread; ++i) {
-                collector_->enqueue(thread_module::log_level::info,
+                collector_->enqueue(log_level::info,
                                     "Thread " + std::to_string(t) + " Message " + std::to_string(i),
                                     "", 0, "", timestamp_);
             }
@@ -207,12 +211,12 @@ TEST_F(LogCollectorTest, DifferentLogLevels) {
     collector_->start();
 
     // Test all log levels
-    collector_->enqueue(thread_module::log_level::trace, "Trace", "", 0, "", timestamp_);
-    collector_->enqueue(thread_module::log_level::debug, "Debug", "", 0, "", timestamp_);
-    collector_->enqueue(thread_module::log_level::info, "Info", "", 0, "", timestamp_);
-    collector_->enqueue(thread_module::log_level::warning, "Warning", "", 0, "", timestamp_);
-    collector_->enqueue(thread_module::log_level::error, "Error", "", 0, "", timestamp_);
-    collector_->enqueue(thread_module::log_level::critical, "Critical", "", 0, "", timestamp_);
+    collector_->enqueue(log_level::trace, "Trace", "", 0, "", timestamp_);
+    collector_->enqueue(log_level::debug, "Debug", "", 0, "", timestamp_);
+    collector_->enqueue(log_level::info, "Info", "", 0, "", timestamp_);
+    collector_->enqueue(log_level::warning, "Warning", "", 0, "", timestamp_);
+    collector_->enqueue(log_level::error, "Error", "", 0, "", timestamp_);
+    collector_->enqueue(log_level::critical, "Critical", "", 0, "", timestamp_);
 
     // Wait for processing
     auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(5);
@@ -230,7 +234,7 @@ TEST_F(LogCollectorTest, WithSourceLocation) {
     collector_->add_writer(mock_writer_.get());
     collector_->start();
 
-    collector_->enqueue(thread_module::log_level::error, "Error with location", __FILE__, __LINE__,
+    collector_->enqueue(log_level::error, "Error with location", __FILE__, __LINE__,
                         __func__, timestamp_);
 
     // Wait for processing
@@ -243,7 +247,7 @@ TEST_F(LogCollectorTest, WithSourceLocation) {
 
     EXPECT_EQ(mock_writer_->write_count_.load(), 1);
     EXPECT_EQ(mock_writer_->last_message_, "Error with location");
-    EXPECT_EQ(mock_writer_->last_level_, thread_module::log_level::error);
+    EXPECT_EQ(mock_writer_->last_level_, log_level::error);
 }
 
 // Test flush functionality
@@ -253,7 +257,7 @@ TEST_F(LogCollectorTest, FlushFunctionality) {
 
     // Enqueue several messages
     for (int i = 0; i < 5; ++i) {
-        collector_->enqueue(thread_module::log_level::info, "Flush test " + std::to_string(i), "",
+        collector_->enqueue(log_level::info, "Flush test " + std::to_string(i), "",
                             0, "", timestamp_);
     }
 
@@ -272,7 +276,7 @@ TEST_F(LogCollectorTest, StopStartFunctionality) {
     // Start collector
     collector_->start();
 
-    collector_->enqueue(thread_module::log_level::info, "Before stop", "", 0, "", timestamp_);
+    collector_->enqueue(log_level::info, "Before stop", "", 0, "", timestamp_);
 
     // Wait for processing
     auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(5);
@@ -286,12 +290,12 @@ TEST_F(LogCollectorTest, StopStartFunctionality) {
     int count_after_stop = mock_writer_->write_count_.load();
 
     // Enqueue after stop (should still work but may not be processed immediately)
-    collector_->enqueue(thread_module::log_level::info, "After stop", "", 0, "", timestamp_);
+    collector_->enqueue(log_level::info, "After stop", "", 0, "", timestamp_);
 
     // Start again
     collector_->start();
 
-    collector_->enqueue(thread_module::log_level::info, "After restart", "", 0, "", timestamp_);
+    collector_->enqueue(log_level::info, "After restart", "", 0, "", timestamp_);
 
     // Wait for restart processing
     auto deadline2 = std::chrono::steady_clock::now() + std::chrono::seconds(5);
@@ -311,11 +315,11 @@ TEST_F(LogCollectorTest, EdgeCases) {
     collector_->start();
 
     // Empty message
-    collector_->enqueue(thread_module::log_level::info, "", "", 0, "", timestamp_);
+    collector_->enqueue(log_level::info, "", "", 0, "", timestamp_);
 
     // Very long message
     std::string long_message(5000, 'L');
-    collector_->enqueue(thread_module::log_level::info, long_message, "", 0, "", timestamp_);
+    collector_->enqueue(log_level::info, long_message, "", 0, "", timestamp_);
 
     // Wait for processing
     auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(5);
