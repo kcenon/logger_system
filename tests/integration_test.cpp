@@ -10,6 +10,7 @@ All rights reserved.
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/logger/writers/file_writer.h>
 #include <kcenon/logger/writers/rotating_file_writer.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 #include <thread>
 #include <chrono>
@@ -18,6 +19,7 @@ All rights reserved.
 
 using namespace kcenon::logger;
 using namespace std::chrono_literals;
+namespace ci = kcenon::common::interfaces;
 
 class IntegrationTest : public ::testing::Test {
 protected:
@@ -64,11 +66,14 @@ TEST_F(IntegrationTest, MultiWriterLogging) {
     // Log messages at various levels
     for (int i = 0; i < 50; ++i) {
         if (i % 10 == 0) {
-            test_logger->log(log_level::error, "Error message " + std::to_string(i));
+            std::string msg = "Error message " + std::to_string(i);
+            test_logger->log(ci::log_level::error, std::string_view(msg));
         } else if (i % 5 == 0) {
-            test_logger->log(log_level::warning, "Warning message " + std::to_string(i));
+            std::string msg = "Warning message " + std::to_string(i);
+            test_logger->log(ci::log_level::warning, std::string_view(msg));
         } else {
-            test_logger->log(log_level::info, "Info message " + std::to_string(i));
+            std::string msg = "Info message " + std::to_string(i);
+            test_logger->log(ci::log_level::info, std::string_view(msg));
         }
     }
 
@@ -98,7 +103,8 @@ TEST_F(IntegrationTest, MetricsCollection) {
 
     const int message_count = 100;
     for (int i = 0; i < message_count; ++i) {
-        test_logger->log(log_level::info, "Test message " + std::to_string(i));
+        std::string msg = "Test message " + std::to_string(i);
+        test_logger->log(ci::log_level::info, std::string_view(msg));
     }
 
     test_logger->flush();
@@ -125,9 +131,9 @@ TEST_F(IntegrationTest, FileRotation) {
 
     // Write enough messages to trigger rotation
     for (int i = 0; i < 100; ++i) {
-        test_logger->log(log_level::info,
-            "Long message to trigger file rotation - message number " + std::to_string(i) +
-            " with additional padding to increase file size quickly");
+        std::string msg = "Long message to trigger file rotation - message number " + std::to_string(i) +
+            " with additional padding to increase file size quickly";
+        test_logger->log(ci::log_level::info, std::string_view(msg));
     }
 
     test_logger->flush();
@@ -165,7 +171,7 @@ TEST_F(IntegrationTest, ConcurrentLogging) {
             for (int i = 0; i < messages_per_thread; ++i) {
                 std::string msg = "Thread " + std::to_string(t) +
                                  " message " + std::to_string(i);
-                test_logger->log(log_level::info, msg);
+                test_logger->log(ci::log_level::info, std::string_view(msg));
             }
         });
     }
@@ -211,7 +217,8 @@ TEST_F(IntegrationTest, StartStopLifecycle) {
     for (int cycle = 0; cycle < 5; ++cycle) {
         test_logger->start();
 
-        test_logger->log(log_level::info, "Cycle " + std::to_string(cycle) + " message");
+        std::string msg = "Cycle " + std::to_string(cycle) + " message";
+        test_logger->log(ci::log_level::info, std::string_view(msg));
 
         test_logger->flush();
         test_logger->stop();
