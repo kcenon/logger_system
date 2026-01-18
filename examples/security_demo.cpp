@@ -37,6 +37,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // #include <kcenon/logger/routing/log_router.h>  // TODO: Not implemented yet
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/logger/writers/file_writer.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 #include <iostream>
 #include <thread>
@@ -45,6 +46,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 using namespace kcenon::logger;
 namespace logger_module = kcenon::logger;
+namespace ci = kcenon::common::interfaces;
 using namespace std::chrono_literals;
 
 // Custom security filter that blocks sensitive logs
@@ -108,20 +110,20 @@ void demonstrate_security_logging() {
     std::cout << "\nLogging security events (sensitive data will be sanitized):" << std::endl;
     
     // This will be blocked by the security filter
-    logger->log(logger_system::log_level::warning,
-                "User login attempt with password=admin123");
-    
+    logger->log(ci::log_level::warning,
+                std::string("User login attempt with password=admin123"));
+
     // These will be logged but sanitized
-    logger->log(logger_system::log_level::warning,
+    logger->log(ci::log_level::warning,
                 sanitizer->sanitize("Suspicious activity from IP 192.168.1.100"));
-    
-    logger->log(logger_system::log_level::warning,
+
+    logger->log(ci::log_level::warning,
                 sanitizer->sanitize("Failed login for email user@example.com"));
-    
-    logger->log(logger_system::log_level::error,
+
+    logger->log(ci::log_level::error,
                 sanitizer->sanitize("Data breach detected: SSN 123-45-6789 exposed"));
-    
-    logger->log(logger_system::log_level::critical,
+
+    logger->log(ci::log_level::critical,
                 sanitizer->sanitize("API key compromised: key=EXAMPLE_KEY_12345"));
 }
 
@@ -133,11 +135,11 @@ void demonstrate_encryption() {
     // Add encrypted file writer
     logger->add_writer(std::make_unique<file_writer>("security_encrypted.log"));
     
-    logger->log(logger_system::log_level::info,
-                "This message will be written to an encrypted log file");
-    
-    logger->log(logger_system::log_level::warning,
-                "Sensitive operations are logged securely");
+    logger->log(ci::log_level::info,
+                std::string("This message will be written to an encrypted log file"));
+
+    logger->log(ci::log_level::warning,
+                std::string("Sensitive operations are logged securely"));
     
     std::cout << "Messages written to encrypted log file: security_encrypted.log" << std::endl;
 }
@@ -156,11 +158,11 @@ void demonstrate_audit_trail() {
     // Note: Router configuration would be done here if needed
     
     // Simulate various events
-    logger->log(logger_system::log_level::info, "Normal operation");
-    logger->log(logger_system::log_level::warning, "High CPU usage");
-    logger->log(logger_system::log_level::critical, "Security breach detected");
-    logger->log(logger_system::log_level::critical, "Unauthorized access attempt");
-    logger->log(logger_system::log_level::error, "Database connection failed");
+    logger->log(ci::log_level::info, std::string("Normal operation"));
+    logger->log(ci::log_level::warning, std::string("High CPU usage"));
+    logger->log(ci::log_level::critical, std::string("Security breach detected"));
+    logger->log(ci::log_level::critical, std::string("Unauthorized access attempt"));
+    logger->log(ci::log_level::error, std::string("Database connection failed"));
     
     std::cout << "Audit events written to: audit_trail.log" << std::endl;
 }
@@ -259,8 +261,8 @@ void demonstrate_security_metrics() {
             std::cout << "\nMessage rate: " << message_rate << " msgs/sec" << std::endl;
         
             if (message_rate > 1000.0) {
-                logger->log(logger_system::log_level::critical,
-                           "High message rate detected!");
+                logger->log(ci::log_level::critical,
+                           std::string("High message rate detected!"));
             }
         }
     } else {
@@ -275,7 +277,7 @@ int main() {
         
         // Create and configure logger
         auto logger = std::make_shared<logger_module::logger>();
-        logger->set_min_level(logger_system::log_level::debug);
+        logger->set_level(ci::log_level::debug);
         logger->start();
         
         // Add console output for demo

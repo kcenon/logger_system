@@ -245,7 +245,7 @@ void example_1_basic_integration() {
 
     // Perform logging operations
     for (int i = 0; i < 5; ++i) {
-        logger_instance->log(log_level::info,
+        logger_instance->log(ci::log_level::info,
             "Log message " + std::to_string(i + 1));
     }
 
@@ -296,9 +296,9 @@ void example_2_multiple_loggers() {
     std::cout << "[Note: logger IMonitorable integration pending Phase 2.2]" << std::endl;
 
     // Both loggers use the same monitor
-    logger1->log(log_level::info, "Message from logger 1");
-    logger2->log(log_level::warning, "Message from logger 2");
-    logger1->log(log_level::error, "Error from logger 1");
+    logger1->log(ci::log_level::info, std::string("Message from logger 1"));
+    logger2->log(ci::log_level::warning, std::string("Message from logger 2"));
+    logger1->log(ci::log_level::error, std::string("Error from logger 1"));
 
     std::cout << "\nMonitor tracks " << monitor->get_component_count()
               << " components" << std::endl;
@@ -334,8 +334,8 @@ void example_3_imonitorable_interface() {
                   << monitorable->get_component_name() << std::endl;
 
         // Perform operations
-        logger_instance->log(log_level::info, "Test message 1");
-        logger_instance->log(log_level::info, "Test message 2");
+        logger_instance->log(ci::log_level::info, std::string("Test message 1"));
+        logger_instance->log(ci::log_level::info, std::string("Test message 2"));
 
         // Get monitoring data directly from logger
         auto data = monitorable->get_monitoring_data();
@@ -378,7 +378,7 @@ void example_4_monitoring_system_simulation() {
 
     // Simulate application activity
     for (int i = 0; i < 10; ++i) {
-        logger_instance->log(log_level::info,
+        logger_instance->log(ci::log_level::info,
             "Application event " + std::to_string(i + 1));
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }

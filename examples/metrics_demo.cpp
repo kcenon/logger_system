@@ -8,12 +8,14 @@ All rights reserved.
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/logger/interfaces/logger_types.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <thread>
 #include <iostream>
 #include <random>
 
 using namespace kcenon::logger;
 namespace logger_module = kcenon::logger;
+namespace ci = kcenon::common::interfaces;
 
 void generate_logs(logger* log, int thread_id, int count) {
     std::random_device rd;
@@ -55,9 +57,9 @@ void test_structured_logging() {
     base_logger->start();
 
     // Test basic logging at different levels
-    base_logger->log(kcenon::logger::log_level::info, "User logged in - user_id: 12345, ip: 192.168.1.100");
-    base_logger->log(kcenon::logger::log_level::error, "Database connection failed - host: db.example.com, port: 5432");
-    base_logger->log(kcenon::logger::log_level::debug, "Retry attempt 3 of 5");
+    base_logger->log(ci::log_level::info, std::string("User logged in - user_id: 12345, ip: 192.168.1.100"));
+    base_logger->log(ci::log_level::error, std::string("Database connection failed - host: db.example.com, port: 5432"));
+    base_logger->log(ci::log_level::debug, std::string("Retry attempt 3 of 5"));
 
     base_logger->stop();
 }

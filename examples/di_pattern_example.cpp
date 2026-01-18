@@ -51,31 +51,6 @@ namespace ci = kcenon::common::interfaces;
 
 namespace {
 
-log_level to_logger_level(ci::log_level level) {
-    switch (level) {
-        case ci::log_level::trace: return log_level::trace;
-        case ci::log_level::debug: return log_level::debug;
-        case ci::log_level::info: return log_level::info;
-        case ci::log_level::warning: return log_level::warning;
-        case ci::log_level::error: return log_level::error;
-        case ci::log_level::critical: return log_level::critical;
-        case ci::log_level::off: return log_level::critical;
-        default: return log_level::info;
-    }
-}
-
-ci::log_level to_common_level(log_level level) {
-    switch (level) {
-        case log_level::trace: return ci::log_level::trace;
-        case log_level::debug: return ci::log_level::debug;
-        case log_level::info: return ci::log_level::info;
-        case log_level::warning: return ci::log_level::warning;
-        case log_level::error: return ci::log_level::error;
-        case log_level::critical: return ci::log_level::critical;
-        default: return ci::log_level::info;
-    }
-}
-
 kcenon::common::VoidResult make_adapter_error(const std::string& message) {
     return kcenon::common::VoidResult(kcenon::common::error_info{1, message, "logger_system"});
 }
@@ -89,8 +64,7 @@ public:
         if (!logger_) {
             return make_adapter_error("Logger not initialized");
         }
-        logger_->log(to_logger_level(level), message);
-        return kcenon::common::ok();
+        return logger_->log(level, message);
     }
 
     kcenon::common::VoidResult log(ci::log_level level,
@@ -99,42 +73,32 @@ public:
         if (!logger_) {
             return make_adapter_error("Logger not initialized");
         }
-        std::ostringstream oss;
-        oss << "[" << loc.file_name() << ':' << loc.line() << ':' << loc.function_name() << "] " << message;
-        logger_->log(to_logger_level(level), oss.str());
-        return kcenon::common::ok();
+        return logger_->log(level, message, loc);
     }
 
     kcenon::common::VoidResult log(const ci::log_entry& entry) override {
         if (!logger_) {
             return make_adapter_error("Logger not initialized");
         }
-        std::ostringstream oss;
-        if (!entry.file.empty()) {
-            oss << "[" << entry.file << ':' << entry.line << ':' << entry.function << "] ";
-        }
-        oss << entry.message;
-        logger_->log(to_logger_level(entry.level), oss.str());
-        return kcenon::common::ok();
+        return logger_->log(entry);
     }
 
     bool is_enabled(ci::log_level level) const override {
-        return logger_ && logger_->is_enabled(to_logger_level(level));
+        return logger_ && logger_->is_enabled(level);
     }
 
     kcenon::common::VoidResult set_level(ci::log_level level) override {
         if (!logger_) {
             return make_adapter_error("Logger not initialized");
         }
-        logger_->set_min_level(to_logger_level(level));
-        return kcenon::common::ok();
+        return logger_->set_level(level);
     }
 
     ci::log_level get_level() const override {
         if (!logger_) {
             return ci::log_level::off;
         }
-        return to_common_level(logger_->get_min_level());
+        return logger_->get_level();
     }
 
     kcenon::common::VoidResult flush() override {
@@ -252,7 +216,7 @@ void example_1_basic_di_pattern() {
     auto logger_result = logger_builder()
         .with_async(false)
         .with_monitoring(monitor)  // DI: Inject monitor interface
-        .with_min_level(log_level::debug)
+        .with_min_level(ci::log_level::debug)
         .build();
 
     if (!logger_result) {
@@ -264,9 +228,9 @@ void example_1_basic_di_pattern() {
     auto logger_instance = std::shared_ptr<logger>(std::move(logger_result.value()));
 
     // Step 3: Use logger - metrics are automatically recorded to monitor
-    logger_instance->log(log_level::info, "Application started");
-    logger_instance->log(log_level::debug, "Debug message");
-    logger_instance->log(log_level::warning, "Warning message");
+    logger_instance->log(ci::log_level::info, "Application started");
+    logger_instance->log(ci::log_level::debug, "Debug message");
+    logger_instance->log(ci::log_level::warning, "Warning message");
 
     // Step 4: Verify metrics were recorded
     std::cout << "\nMonitor collected " << monitor->get_metric_count()
@@ -291,7 +255,7 @@ void example_2_optional_monitor() {
     // Build logger without monitor - demonstrates optional dependency
     auto logger_result = logger_builder()
         .with_async(false)
-        .with_min_level(log_level::info)
+        .with_min_level(ci::log_level::info)
         .build();
 
     if (!logger_result) {
@@ -302,8 +266,8 @@ void example_2_optional_monitor() {
     auto logger_instance = std::shared_ptr<logger>(std::move(logger_result.value()));
 
     // Logger works fine without monitor
-    logger_instance->log(log_level::info, "Operating without monitor");
-    logger_instance->log(log_level::warning, "Warning without monitoring");
+    logger_instance->log(ci::log_level::info, "Operating without monitor");
+    logger_instance->log(ci::log_level::warning, "Warning without monitoring");
 
     std::cout << "Logger operates successfully without monitor (DI optional)" << std::endl;
 }
@@ -327,7 +291,7 @@ void example_3_runtime_monitor_injection() {
     auto logger_instance = std::shared_ptr<logger>(std::move(logger_result.value()));
 
     std::cout << "Phase 1: Operating without monitor" << std::endl;
-    logger_instance->log(log_level::info, "Message 1 - no monitoring");
+    logger_instance->log(ci::log_level::info, "Message 1 - no monitoring");
 
     // Inject monitor at runtime
     // TODO: Implement set_monitor() in logger class (Phase 2.2)
@@ -336,8 +300,8 @@ void example_3_runtime_monitor_injection() {
     // logger_instance->set_monitor(std::move(monitor));
 
     std::cout << "\nPhase 2: Monitor injected at runtime [set_monitor() not yet implemented]" << std::endl;
-    logger_instance->log(log_level::info, "Message 2 - with monitoring");
-    logger_instance->log(log_level::info, "Message 3 - with monitoring");
+    logger_instance->log(ci::log_level::info, "Message 2 - with monitoring");
+    logger_instance->log(ci::log_level::info, "Message 3 - with monitoring");
 
     std::cout << "\nMonitor recorded " << monitor_ref->get_metric_count()
               << " metrics (only from Phase 2)" << std::endl;
@@ -362,8 +326,8 @@ void example_4_monitor_swapping() {
     // logger_instance->set_monitor(std::move(monitor1));
 
     std::cout << "Using Monitor 1 [set_monitor() not yet implemented]" << std::endl;
-    logger_instance->log(log_level::info, "Message to Monitor 1");
-    logger_instance->log(log_level::info, "Another message to Monitor 1");
+    logger_instance->log(ci::log_level::info, "Message to Monitor 1");
+    logger_instance->log(ci::log_level::info, "Another message to Monitor 1");
 
     size_t monitor1_metrics = monitor1_ref->get_metric_count();
 
@@ -373,7 +337,7 @@ void example_4_monitor_swapping() {
     // logger_instance->set_monitor(std::move(monitor2));
 
     std::cout << "\nSwapped to Monitor 2 [set_monitor() not yet implemented]" << std::endl;
-    logger_instance->log(log_level::info, "Message to Monitor 2");
+    logger_instance->log(ci::log_level::info, "Message to Monitor 2");
 
     size_t monitor2_metrics = monitor2_ref->get_metric_count();
 
