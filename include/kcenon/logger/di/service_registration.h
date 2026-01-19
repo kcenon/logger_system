@@ -26,53 +26,10 @@
 
 namespace kcenon::logger::di {
 
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
+
 namespace detail {
-
-/**
- * @brief Convert log level from common_system to logger_system
- */
-inline logger_system::log_level from_common_level(common::interfaces::log_level level) {
-    switch (level) {
-        case common::interfaces::log_level::trace:
-            return logger_system::log_level::trace;
-        case common::interfaces::log_level::debug:
-            return logger_system::log_level::debug;
-        case common::interfaces::log_level::info:
-            return logger_system::log_level::info;
-        case common::interfaces::log_level::warning:
-            return logger_system::log_level::warn;
-        case common::interfaces::log_level::error:
-            return logger_system::log_level::error;
-        case common::interfaces::log_level::critical:
-            return logger_system::log_level::fatal;
-        case common::interfaces::log_level::off:
-        default:
-            return logger_system::log_level::off;
-    }
-}
-
-/**
- * @brief Convert log level from logger_system to common_system
- */
-inline common::interfaces::log_level to_common_level(logger_system::log_level level) {
-    switch (level) {
-        case logger_system::log_level::trace:
-            return common::interfaces::log_level::trace;
-        case logger_system::log_level::debug:
-            return common::interfaces::log_level::debug;
-        case logger_system::log_level::info:
-            return common::interfaces::log_level::info;
-        case logger_system::log_level::warn:
-            return common::interfaces::log_level::warning;
-        case logger_system::log_level::error:
-            return common::interfaces::log_level::error;
-        case logger_system::log_level::fatal:
-            return common::interfaces::log_level::critical;
-        case logger_system::log_level::off:
-        default:
-            return common::interfaces::log_level::off;
-    }
-}
 
 /**
  * @brief ILogger adapter that correctly implements common::interfaces::ILogger
@@ -85,17 +42,17 @@ public:
 
     ~ilogger_adapter() override = default;
 
-    common::VoidResult log(common::interfaces::log_level level,
+    common::VoidResult log(log_level level,
                            const std::string& message) override {
         if (!logger_) {
             return common::make_error<std::monostate>(
                 1, "Logger not initialized", "logger_system");
         }
-        logger_->log(from_common_level(level), message);
+        logger_->log(level, message);
         return common::VoidResult::ok({});
     }
 
-    common::VoidResult log(common::interfaces::log_level level,
+    common::VoidResult log(log_level level,
                            const std::string& message,
                            const std::string& file,
                            int line,
@@ -106,7 +63,7 @@ public:
         }
         // Format message with location info
         std::string formatted = "[" + file + ":" + std::to_string(line) + ":" + function + "] " + message;
-        logger_->log(from_common_level(level), formatted);
+        logger_->log(level, formatted);
         return common::VoidResult::ok({});
     }
 
@@ -118,26 +75,26 @@ public:
         if (!entry.file.empty()) {
             std::string formatted = "[" + entry.file + ":" + std::to_string(entry.line) +
                                     ":" + entry.function + "] " + entry.message;
-            logger_->log(from_common_level(entry.level), formatted);
+            logger_->log(entry.level, formatted);
         } else {
-            logger_->log(from_common_level(entry.level), entry.message);
+            logger_->log(entry.level, entry.message);
         }
         return common::VoidResult::ok({});
     }
 
-    bool is_enabled(common::interfaces::log_level level) const override {
+    bool is_enabled(log_level level) const override {
         return level >= level_;
     }
 
-    common::VoidResult set_level(common::interfaces::log_level level) override {
+    common::VoidResult set_level(log_level level) override {
         level_ = level;
         if (logger_) {
-            logger_->set_level(from_common_level(level));
+            logger_->set_level(level);
         }
         return common::VoidResult::ok({});
     }
 
-    common::interfaces::log_level get_level() const override {
+    log_level get_level() const override {
         return level_;
     }
 
@@ -150,7 +107,7 @@ public:
 
 private:
     std::shared_ptr<logger> logger_;
-    common::interfaces::log_level level_;
+    log_level level_;
 };
 
 } // namespace detail
@@ -163,7 +120,7 @@ struct logger_registration_config {
     std::string config_template = "default";
 
     /// Minimum log level
-    logger_system::log_level min_level = logger_system::log_level::info;
+    log_level min_level = log_level::info;
 
     /// Enable async mode
     bool async = true;
@@ -195,7 +152,7 @@ struct logger_registration_config {
  * // Or with custom configuration
  * logger_registration_config config;
  * config.config_template = "production";
- * config.min_level = logger_system::log_level::warn;
+ * config.min_level = log_level::warning;
  * auto result = register_logger_services(container, config);
  *
  * // Then resolve logger anywhere in the application

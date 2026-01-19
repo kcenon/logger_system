@@ -29,7 +29,7 @@ namespace kcenon::logger::backends {
  * @brief Integration backend for standalone logger operation
  *
  * @details This is the default backend when no external integration is required.
- * It assumes the external level values match the logger_system::log_level enumeration,
+ * It assumes the external level values match the common::interfaces::log_level enumeration,
  * providing a simple pass-through conversion.
  *
  * Usage:
@@ -55,16 +55,16 @@ public:
     /**
      * @brief Normalize external log level (pass-through)
      * @param external_level External log level as integer
-     * @return The same level cast to logger_system::log_level
+     * @return The same level cast to log_level
      *
      * @details In standalone mode, the external level is assumed to already
-     * be in logger_system::log_level format, so this is a simple cast.
+     * be in common::interfaces::log_level format, so this is a simple cast.
      *
      * @since 1.2.0
      */
-    logger_system::log_level normalize_level(int external_level) const override {
-        // Direct cast - assumes external level is already logger_system::log_level
-        return static_cast<logger_system::log_level>(external_level);
+    log_level normalize_level(int external_level) const override {
+        // Direct cast - assumes external level is already common::interfaces::log_level
+        return static_cast<log_level>(external_level);
     }
 
     /**
