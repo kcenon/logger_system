@@ -60,6 +60,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace kcenon::logger {
 
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
+
 /**
  * @brief Shared state for log processing - survives impl destruction
  *
@@ -261,13 +264,10 @@ private:
         int line = entry.location ? entry.location->line : 0;
         std::string function = entry.location ? entry.location->function.to_string() : "";
 
-        // Convert logger_system::log_level to common::interfaces::log_level
-        auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
-
         // Write to all writers without holding mutex
         for (auto& writer : writers_snapshot) {
             try {
-                writer->write(level, entry.message.to_string(), file,
+                writer->write(entry.level, entry.message.to_string(), file,
                              line, function, entry.timestamp);
             } catch (...) {
                 // Swallow exceptions to prevent thread termination
@@ -292,7 +292,7 @@ public:
         stop();
     }
 
-    bool enqueue(logger_system::log_level level,
+    bool enqueue(log_level level,
                  const std::string& message,
                  const std::string& file,
                  int line,
@@ -439,13 +439,10 @@ private:
         int line = entry.location ? entry.location->line : 0;
         std::string function = entry.location ? entry.location->function.to_string() : "";
 
-        // Convert logger_system::log_level to common::interfaces::log_level
-        auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
-
         // Write to all writers without holding mutex
         for (auto& writer : writers_snapshot) {
             try {
-                writer->write(level, entry.message.to_string(), file,
+                writer->write(entry.level, entry.message.to_string(), file,
                              line, function, entry.timestamp);
             } catch (...) {
                 // Swallow exceptions to prevent issues
@@ -467,7 +464,7 @@ log_collector::log_collector(std::size_t buffer_size, std::size_t batch_size)
 
 log_collector::~log_collector() = default;
 
-bool log_collector::enqueue(logger_system::log_level level,
+bool log_collector::enqueue(log_level level,
                            const std::string& message,
                            const std::string& file,
                            int line,

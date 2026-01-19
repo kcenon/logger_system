@@ -17,6 +17,7 @@ All rights reserved.
 
 #include <kcenon/logger/writers/network_writer.h>
 #include <kcenon/logger/utils/error_handling_utils.h>
+#include <kcenon/logger/utils/string_utils.h>
 #include "../async/jthread_compat.h"
 
 #ifdef _WIN32
@@ -459,9 +460,8 @@ std::string network_writer::format_for_network(const buffered_log& log) {
     oss << "\"@timestamp\":\"";
     oss << std::put_time(std::gmtime(&time_t), "%Y-%m-%dT%H:%M:%SZ") << "\",";
 
-    // Level - convert to logger_system::log_level for string conversion
-    auto legacy_level = static_cast<logger_system::log_level>(static_cast<int>(log.level));
-    oss << "\"level\":\"" << logger_system::log_level_to_string(legacy_level) << "\",";
+    // Level
+    oss << "\"level\":\"" << utils::string_utils::level_to_string(log.level) << "\",";
 
     // Message
     oss << "\"message\":\"" << escape_json(log.message) << "\"";

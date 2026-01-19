@@ -40,11 +40,11 @@ protected:
         analyzer_.reset();
     }
 
-    analyzed_log_entry make_entry(logger_system::log_level level,
+    analyzed_log_entry make_entry(log_level level,
                                    const std::string& message) {
         analyzed_log_entry entry;
-        // Convert common::interfaces::log_level to logger_system::log_level for analyzed_log_entry
-        entry.level = static_cast<logger_system::log_level>(static_cast<int>(level));
+        // Convert common::interfaces::log_level to log_level for analyzed_log_entry
+        entry.level = static_cast<log_level>(static_cast<int>(level));
         entry.message = message;
         entry.timestamp = std::chrono::system_clock::now();
         entry.source_file = "test.cpp";
@@ -67,7 +67,7 @@ TEST_F(RealtimeAnalyzerTest, DefaultConstruction) {
 }
 
 TEST_F(RealtimeAnalyzerTest, AnalyzeInfoLog) {
-    auto entry = make_entry(logger_system::log_level::info, "Test message");
+    auto entry = make_entry(log_level::info, "Test message");
     analyzer_->analyze(entry);
 
     auto stats = analyzer_->get_statistics();
@@ -76,7 +76,7 @@ TEST_F(RealtimeAnalyzerTest, AnalyzeInfoLog) {
 }
 
 TEST_F(RealtimeAnalyzerTest, AnalyzeErrorLog) {
-    auto entry = make_entry(logger_system::log_level::error, "Error message");
+    auto entry = make_entry(log_level::error, "Error message");
     analyzer_->analyze(entry);
 
     auto stats = analyzer_->get_statistics();
@@ -85,7 +85,7 @@ TEST_F(RealtimeAnalyzerTest, AnalyzeErrorLog) {
 }
 
 TEST_F(RealtimeAnalyzerTest, AnalyzeFatalLog) {
-    auto entry = make_entry(logger_system::log_level::fatal, "Fatal message");
+    auto entry = make_entry(log_level::fatal, "Fatal message");
     analyzer_->analyze(entry);
 
     auto stats = analyzer_->get_statistics();
@@ -102,7 +102,7 @@ TEST_F(RealtimeAnalyzerTest, PatternAlertDetection) {
     std::string detected_pattern;
     std::mutex mtx;
 
-    analyzer_->add_pattern_alert("OutOfMemory", logger_system::log_level::error);
+    analyzer_->add_pattern_alert("OutOfMemory", log_level::error);
     analyzer_->set_anomaly_callback([&](const anomaly_event& event) {
         callback_count++;
         std::lock_guard<std::mutex> lock(mtx);
@@ -112,11 +112,11 @@ TEST_F(RealtimeAnalyzerTest, PatternAlertDetection) {
     });
 
     // Should not trigger (info level)
-    auto info_entry = make_entry(logger_system::log_level::info, "OutOfMemory error");
+    auto info_entry = make_entry(log_level::info, "OutOfMemory error");
     analyzer_->analyze(info_entry);
 
     // Should trigger (error level with matching pattern)
-    auto error_entry = make_entry(logger_system::log_level::error, "OutOfMemory exception occurred");
+    auto error_entry = make_entry(log_level::error, "OutOfMemory exception occurred");
     analyzer_->analyze(error_entry);
 
     // Wait for callback
@@ -130,8 +130,8 @@ TEST_F(RealtimeAnalyzerTest, PatternAlertDetection) {
 }
 
 TEST_F(RealtimeAnalyzerTest, MultiplePatternAlerts) {
-    analyzer_->add_pattern_alert("Connection refused", logger_system::log_level::error);
-    analyzer_->add_pattern_alert("Timeout", logger_system::log_level::warn);
+    analyzer_->add_pattern_alert("Connection refused", log_level::error);
+    analyzer_->add_pattern_alert("Timeout", log_level::warn);
 
     std::atomic<int> match_count{0};
     analyzer_->set_anomaly_callback([&](const anomaly_event& event) {
@@ -140,8 +140,8 @@ TEST_F(RealtimeAnalyzerTest, MultiplePatternAlerts) {
         }
     });
 
-    analyzer_->analyze(make_entry(logger_system::log_level::error, "Connection refused"));
-    analyzer_->analyze(make_entry(logger_system::log_level::warn, "Timeout occurred"));
+    analyzer_->analyze(make_entry(log_level::error, "Connection refused"));
+    analyzer_->analyze(make_entry(log_level::warn, "Timeout occurred"));
 
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
@@ -149,15 +149,15 @@ TEST_F(RealtimeAnalyzerTest, MultiplePatternAlerts) {
 }
 
 TEST_F(RealtimeAnalyzerTest, RemovePatternAlert) {
-    analyzer_->add_pattern_alert("Test", logger_system::log_level::info);
+    analyzer_->add_pattern_alert("Test", log_level::info);
 
     EXPECT_TRUE(analyzer_->remove_pattern_alert("Test"));
     EXPECT_FALSE(analyzer_->remove_pattern_alert("NonExistent"));
 }
 
 TEST_F(RealtimeAnalyzerTest, ClearPatternAlerts) {
-    analyzer_->add_pattern_alert("Pattern1", logger_system::log_level::info);
-    analyzer_->add_pattern_alert("Pattern2", logger_system::log_level::info);
+    analyzer_->add_pattern_alert("Pattern1", log_level::info);
+    analyzer_->add_pattern_alert("Pattern2", log_level::info);
 
     std::atomic<int> match_count{0};
     analyzer_->set_anomaly_callback([&](const anomaly_event& event) {
@@ -168,8 +168,8 @@ TEST_F(RealtimeAnalyzerTest, ClearPatternAlerts) {
 
     analyzer_->clear_pattern_alerts();
 
-    analyzer_->analyze(make_entry(logger_system::log_level::info, "Pattern1 test"));
-    analyzer_->analyze(make_entry(logger_system::log_level::info, "Pattern2 test"));
+    analyzer_->analyze(make_entry(log_level::info, "Pattern1 test"));
+    analyzer_->analyze(make_entry(log_level::info, "Pattern2 test"));
 
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
@@ -196,7 +196,7 @@ TEST_F(RealtimeAnalyzerTest, ErrorSpikeDetection) {
 
     // Generate error spike
     for (int i = 0; i < 10; ++i) {
-        spike_analyzer->analyze(make_entry(logger_system::log_level::error, "Error " + std::to_string(i)));
+        spike_analyzer->analyze(make_entry(log_level::error, "Error " + std::to_string(i)));
     }
 
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -220,7 +220,7 @@ TEST_F(RealtimeAnalyzerTest, NoSpikeBelowThreshold) {
 
     // Generate few errors
     for (int i = 0; i < 5; ++i) {
-        spike_analyzer->analyze(make_entry(logger_system::log_level::error, "Error " + std::to_string(i)));
+        spike_analyzer->analyze(make_entry(log_level::error, "Error " + std::to_string(i)));
     }
 
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -246,13 +246,13 @@ TEST_F(RealtimeAnalyzerTest, NewErrorTypeDetection) {
     });
 
     // First occurrence
-    tracker_analyzer->analyze(make_entry(logger_system::log_level::error, "Database connection failed"));
+    tracker_analyzer->analyze(make_entry(log_level::error, "Database connection failed"));
 
     // Second occurrence of same type
-    tracker_analyzer->analyze(make_entry(logger_system::log_level::error, "Database connection failed"));
+    tracker_analyzer->analyze(make_entry(log_level::error, "Database connection failed"));
 
     // Different error type
-    tracker_analyzer->analyze(make_entry(logger_system::log_level::error, "Network timeout"));
+    tracker_analyzer->analyze(make_entry(log_level::error, "Network timeout"));
 
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
@@ -274,8 +274,8 @@ TEST_F(RealtimeAnalyzerTest, ErrorNormalization) {
     });
 
     // Same error type with different IDs
-    tracker_analyzer->analyze(make_entry(logger_system::log_level::error, "Failed to process request 12345"));
-    tracker_analyzer->analyze(make_entry(logger_system::log_level::error, "Failed to process request 67890"));
+    tracker_analyzer->analyze(make_entry(log_level::error, "Failed to process request 12345"));
+    tracker_analyzer->analyze(make_entry(log_level::error, "Failed to process request 67890"));
 
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
@@ -289,7 +289,7 @@ TEST_F(RealtimeAnalyzerTest, ErrorNormalization) {
 
 TEST_F(RealtimeAnalyzerTest, LogRateCalculation) {
     for (int i = 0; i < 100; ++i) {
-        analyzer_->analyze(make_entry(logger_system::log_level::info, "Log " + std::to_string(i)));
+        analyzer_->analyze(make_entry(log_level::info, "Log " + std::to_string(i)));
     }
 
     double rate = analyzer_->get_log_rate();
@@ -298,7 +298,7 @@ TEST_F(RealtimeAnalyzerTest, LogRateCalculation) {
 
 TEST_F(RealtimeAnalyzerTest, ErrorRateCalculation) {
     for (int i = 0; i < 50; ++i) {
-        analyzer_->analyze(make_entry(logger_system::log_level::error, "Error " + std::to_string(i)));
+        analyzer_->analyze(make_entry(log_level::error, "Error " + std::to_string(i)));
     }
 
     double error_rate = analyzer_->get_error_rate();
@@ -310,10 +310,10 @@ TEST_F(RealtimeAnalyzerTest, ErrorRateCalculation) {
 // =============================================================================
 
 TEST_F(RealtimeAnalyzerTest, StatisticsAccuracy) {
-    analyzer_->analyze(make_entry(logger_system::log_level::info, "Info"));
-    analyzer_->analyze(make_entry(logger_system::log_level::warn, "Warn"));
-    analyzer_->analyze(make_entry(logger_system::log_level::error, "Error"));
-    analyzer_->analyze(make_entry(logger_system::log_level::fatal, "Fatal"));
+    analyzer_->analyze(make_entry(log_level::info, "Info"));
+    analyzer_->analyze(make_entry(log_level::warn, "Warn"));
+    analyzer_->analyze(make_entry(log_level::error, "Error"));
+    analyzer_->analyze(make_entry(log_level::fatal, "Fatal"));
 
     auto stats = analyzer_->get_statistics();
     EXPECT_EQ(stats.total_analyzed, 4);
@@ -321,8 +321,8 @@ TEST_F(RealtimeAnalyzerTest, StatisticsAccuracy) {
 }
 
 TEST_F(RealtimeAnalyzerTest, ResetStatistics) {
-    analyzer_->analyze(make_entry(logger_system::log_level::info, "Test"));
-    analyzer_->analyze(make_entry(logger_system::log_level::error, "Error"));
+    analyzer_->analyze(make_entry(log_level::info, "Test"));
+    analyzer_->analyze(make_entry(log_level::error, "Error"));
 
     analyzer_->reset();
 
@@ -403,7 +403,7 @@ TEST_F(RealtimeAnalyzerTest, ConcurrentAnalysis) {
         threads.emplace_back([this, t]() {
             for (int i = 0; i < logs_per_thread; ++i) {
                 analyzer_->analyze(make_entry(
-                    logger_system::log_level::info,
+                    log_level::info,
                     "Thread " + std::to_string(t) + " log " + std::to_string(i)
                 ));
             }
@@ -423,13 +423,13 @@ TEST_F(RealtimeAnalyzerTest, ConcurrentPatternModification) {
 
     std::thread adder([this]() {
         for (int i = 0; i < iterations; ++i) {
-            analyzer_->add_pattern_alert("Pattern" + std::to_string(i), logger_system::log_level::info);
+            analyzer_->add_pattern_alert("Pattern" + std::to_string(i), log_level::info);
         }
     });
 
     std::thread analyzer_thread([this]() {
         for (int i = 0; i < iterations; ++i) {
-            analyzer_->analyze(make_entry(logger_system::log_level::info, "Test message"));
+            analyzer_->analyze(make_entry(log_level::info, "Test message"));
         }
     });
 
@@ -502,7 +502,7 @@ TEST_F(RealtimeAnalyzerTest, AnomalyEventFields) {
     config.enable_rate_anomaly_detection = false;
     auto test_analyzer = std::make_unique<realtime_log_analyzer>(config);
 
-    test_analyzer->add_pattern_alert("Critical", logger_system::log_level::error);
+    test_analyzer->add_pattern_alert("Critical", log_level::error);
 
     anomaly_event captured_event;
     std::mutex mtx;
@@ -512,7 +512,7 @@ TEST_F(RealtimeAnalyzerTest, AnomalyEventFields) {
         captured_event = event;
     });
 
-    test_analyzer->analyze(make_entry(logger_system::log_level::error, "Critical failure"));
+    test_analyzer->analyze(make_entry(log_level::error, "Critical failure"));
 
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
 

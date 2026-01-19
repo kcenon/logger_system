@@ -56,9 +56,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <cstddef>
 #include <cstdint>
 
-#include <kcenon/logger/interfaces/logger_types.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 namespace kcenon::logger::sampling {
+
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
 
 /**
  * @enum sampling_strategy
@@ -123,11 +126,11 @@ struct sampling_config {
     /**
      * @brief Log levels that are never sampled (always logged)
      * @details Critical levels should bypass sampling to ensure important
-     * messages are never dropped. Default includes error and fatal.
+     * messages are never dropped. Default includes error and critical.
      */
-    std::vector<logger_system::log_level> always_log_levels = {
-        logger_system::log_level::error,
-        logger_system::log_level::fatal
+    std::vector<log_level> always_log_levels = {
+        log_level::error,
+        log_level::critical
     };
 
     /**

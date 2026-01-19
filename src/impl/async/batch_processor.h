@@ -18,8 +18,8 @@ All rights reserved.
 #include "lockfree_queue.h"
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/writers/base_writer.h>
-#include <kcenon/logger/interfaces/logger_types.h>
 #include <kcenon/logger/core/error_codes.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <vector>
 #include <chrono>
 #include <atomic>

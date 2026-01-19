@@ -7,16 +7,18 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-// Use logger_system's log_level (thread_system is now optional)
-#include <kcenon/logger/interfaces/logger_types.h>
 #include <kcenon/logger/interfaces/log_filter_interface.h>
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <string>
 #include <regex>
 #include <memory>
 #include <functional>
 
 namespace kcenon::logger {
+
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
 
 /**
  * @class log_filter
@@ -51,7 +53,7 @@ public:
      * @param function Function name
      * @return true if the log should be processed
      */
-    virtual bool should_log(logger_system::log_level level,
+    virtual bool should_log(log_level level,
                            const std::string& message,
                            const std::string& file,
                            int line,
@@ -72,10 +74,10 @@ public:
  */
 class level_filter : public log_filter {
 public:
-    explicit level_filter(logger_system::log_level min_level)
+    explicit level_filter(log_level min_level)
         : min_level_(min_level) {}
 
-    bool should_log(logger_system::log_level level,
+    bool should_log(log_level level,
                    const std::string& message,
                    const std::string& file,
                    int line,
@@ -87,7 +89,7 @@ public:
         return static_cast<int>(level) >= static_cast<int>(min_level_);
     }
 
-    void set_min_level(logger_system::log_level level) {
+    void set_min_level(log_level level) {
         min_level_ = level;
     }
 
@@ -96,7 +98,7 @@ public:
     }
 
 private:
-    logger_system::log_level min_level_;
+    log_level min_level_;
 };
 
 /**
@@ -108,7 +110,7 @@ public:
     explicit regex_filter(const std::string& pattern, bool include = true)
         : pattern_(pattern), include_(include) {}
 
-    bool should_log(logger_system::log_level level,
+    bool should_log(log_level level,
                    const std::string& message,
                    const std::string& file,
                    int line,
@@ -136,7 +138,7 @@ private:
  */
 class function_filter : public log_filter {
 public:
-    using filter_function = std::function<bool(logger_system::log_level,
+    using filter_function = std::function<bool(log_level,
                                                const std::string&,
                                                const std::string&,
                                                int,
@@ -145,7 +147,7 @@ public:
     explicit function_filter(filter_function func)
         : filter_func_(std::move(func)) {}
 
-    bool should_log(logger_system::log_level level,
+    bool should_log(log_level level,
                    const std::string& message,
                    const std::string& file,
                    int line,
@@ -179,7 +181,7 @@ public:
         filters_.push_back(std::move(filter));
     }
 
-    bool should_log(logger_system::log_level level,
+    bool should_log(log_level level,
                    const std::string& message,
                    const std::string& file,
                    int line,

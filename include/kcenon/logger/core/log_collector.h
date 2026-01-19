@@ -43,7 +43,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include <kcenon/common/interfaces/logger_interface.h>
-#include <kcenon/logger/interfaces/logger_types.h>
 
 #include <atomic>
 #include <chrono>
@@ -85,7 +84,7 @@ public:
      * @param function Function name
      * @param timestamp Log timestamp
      */
-    bool enqueue(logger_system::log_level level,
+    bool enqueue(common::interfaces::log_level level,
                  const std::string& message,
                  const std::string& file,
                  int line,
