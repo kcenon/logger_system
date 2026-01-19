@@ -307,7 +307,7 @@ auto logger = logger_builder()
 thread_system_integration::disable();
 ```
 
-자세한 내용은 [thread_system 통합 가이드](../integration/THREAD_SYSTEM_KO.md)를 참조하세요.
+자세한 내용은 [thread_system 통합 가이드](../integration/THREAD_SYSTEM.kr.md)를 참조하세요.
 
 ---
 
@@ -355,7 +355,7 @@ logger->flush();
 
 - **[시작하기 가이드](GETTING_STARTED.md)** - 상세한 설정 지침
 - **[모범 사례](BEST_PRACTICES.md)** - 권장 패턴 및 사례
-- **[마이그레이션 가이드](MIGRATION_GUIDE_KO.md)** - 다른 로거 또는 이전 버전에서 마이그레이션
+- **[마이그레이션 가이드](MIGRATION_GUIDE.kr.md)** - 다른 로거 또는 이전 버전에서 마이그레이션
 - **[성능 가이드](PERFORMANCE.md)** - 최적화 팁 및 튜닝
 - **[API 레퍼런스](../API_REFERENCE.md)** - 전체 API 문서
 - **[예제](../../examples/)** - 더 많은 샘플 애플리케이션

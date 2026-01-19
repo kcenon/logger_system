@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](CRITICAL_LOG_PREVENTION_KO.md)
+> **Language:** **English** | [한국어](CRITICAL_LOG_PREVENTION.kr.md)
 
 ## Table of Contents
 

@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](MIGRATION_GUIDE_KO.md)
+> **Language:** **English** | [한국어](MIGRATION_GUIDE.kr.md)
 
 # Logger System Migration Guide
 

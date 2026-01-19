@@ -1,6 +1,6 @@
 # Async Integration Guide
 
-> **Language:** **English** | [한국어](THREAD_SYSTEM_KO.md)
+> **Language:** **English** | [한국어](THREAD_SYSTEM.kr.md)
 
 ## Overview
 

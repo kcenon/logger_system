@@ -1,6 +1,6 @@
 # Logger System - Performance Baseline Metrics
 
-**English | [한국어](BASELINE_KO.md)**
+**English | [한국어](BASELINE.kr.md)**
 
 > **📊 Developer Note**: For raw benchmark data and CI baseline thresholds used in automated testing,
 > see [`benchmarks/BASELINE.md`](../../benchmarks/BASELINE.md)

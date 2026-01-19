@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](PERFORMANCE_KO.md)
+> **Language:** **English** | [한국어](PERFORMANCE.kr.md)
 
 # Logger System Performance Guide
 

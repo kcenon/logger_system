@@ -1,6 +1,6 @@
 # Asynchronous Writer Implementations Guide
 
-> **Language:** **English** | [한국어](ASYNC_WRITERS_KO.md)
+> **Language:** **English** | [한국어](ASYNC_WRITERS.kr.md)
 
 ## Overview
 

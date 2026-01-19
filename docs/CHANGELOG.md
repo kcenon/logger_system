@@ -1,6 +1,6 @@
 # Changelog - Logger System
 
-> **Language:** **English** | [한국어](CHANGELOG_KO.md)
+> **Language:** **English** | [한국어](CHANGELOG.kr.md)
 
 All notable changes to the Logger System project will be documented in this file.
 

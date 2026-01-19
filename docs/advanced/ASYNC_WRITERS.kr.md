@@ -453,10 +453,10 @@ async->write(level, message, file, line, func, timestamp);
 
 ## 관련 문서
 
-- [커스텀 Writers 가이드](CUSTOM_WRITERS_KO.md) - 커스텀 writer 구현체 생성
-- [아키텍처 개요](ARCHITECTURE_KO.md) - 시스템 아키텍처 및 설계
-- [성능 벤치마크](../BENCHMARKS_KO.md) - 상세 성능 분석
-- [Thread System 통합](../integration/THREAD_SYSTEM_KO.md) - 스레드 시스템 통합
+- [커스텀 Writers 가이드](CUSTOM_WRITERS.kr.md) - 커스텀 writer 구현체 생성
+- [아키텍처 개요](ARCHITECTURE.kr.md) - 시스템 아키텍처 및 설계
+- [성능 벤치마크](../BENCHMARKS.kr.md) - 상세 성능 분석
+- [Thread System 통합](../integration/THREAD_SYSTEM.kr.md) - 스레드 시스템 통합
 
 ---
 
