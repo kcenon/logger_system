@@ -115,7 +115,7 @@ protected:
      *          as it would cause deadlock.
      */
     kcenon::common::VoidResult write_impl(
-        logger_system::log_level level,
+        kcenon::common::interfaces::log_level level,
         const std::string& message,
         const std::string& file,
         int line,
@@ -160,8 +160,8 @@ class counted_console_writer : public thread_safe_writer {
 public:
     counted_console_writer() {
         // Initialize counters for each log level
-        for (int i = 0; i <= static_cast<int>(logger_system::log_level::trace); ++i) {
-            counts_[static_cast<logger_system::log_level>(i)] = 0;
+        for (int i = 0; i <= static_cast<int>(kcenon::common::interfaces::log_level::trace); ++i) {
+            counts_[static_cast<kcenon::common::interfaces::log_level>(i)] = 0;
         }
     }
 
@@ -172,7 +172,7 @@ public:
     /**
      * @brief Get count for a specific log level
      */
-    size_t get_count(logger_system::log_level level) const {
+    size_t get_count(kcenon::common::interfaces::log_level level) const {
         std::lock_guard<std::mutex> lock(get_mutex());
         auto it = counts_.find(level);
         return (it != counts_.end()) ? it->second : 0;
@@ -196,17 +196,17 @@ public:
     void print_stats() const {
         std::lock_guard<std::mutex> lock(get_mutex());
         std::cout << "\n=== Log Statistics ===" << std::endl;
-        std::cout << "Fatal:   " << counts_.at(logger_system::log_level::fatal) << std::endl;
-        std::cout << "Error:   " << counts_.at(logger_system::log_level::error) << std::endl;
-        std::cout << "Warning: " << counts_.at(logger_system::log_level::warning) << std::endl;
-        std::cout << "Info:    " << counts_.at(logger_system::log_level::info) << std::endl;
-        std::cout << "Debug:   " << counts_.at(logger_system::log_level::debug) << std::endl;
-        std::cout << "Trace:   " << counts_.at(logger_system::log_level::trace) << std::endl;
+        std::cout << "Fatal:   " << counts_.at(kcenon::common::interfaces::log_level::fatal) << std::endl;
+        std::cout << "Error:   " << counts_.at(kcenon::common::interfaces::log_level::error) << std::endl;
+        std::cout << "Warning: " << counts_.at(kcenon::common::interfaces::log_level::warning) << std::endl;
+        std::cout << "Info:    " << counts_.at(kcenon::common::interfaces::log_level::info) << std::endl;
+        std::cout << "Debug:   " << counts_.at(kcenon::common::interfaces::log_level::debug) << std::endl;
+        std::cout << "Trace:   " << counts_.at(kcenon::common::interfaces::log_level::trace) << std::endl;
     }
 
 protected:
     kcenon::common::VoidResult write_impl(
-        logger_system::log_level level,
+        kcenon::common::interfaces::log_level level,
         const std::string& message,
         const std::string& file,
         int line,
@@ -223,11 +223,11 @@ protected:
         // Output to console with color based on level
         if (use_color()) {
             switch (level) {
-                case logger_system::log_level::fatal:
-                case logger_system::log_level::error:
+                case kcenon::common::interfaces::log_level::fatal:
+                case kcenon::common::interfaces::log_level::error:
                     std::cerr << "\033[31m" << formatted << "\033[0m" << std::endl;
                     break;
-                case logger_system::log_level::warning:
+                case kcenon::common::interfaces::log_level::warning:
                     std::cout << "\033[33m" << formatted << "\033[0m" << std::endl;
                     break;
                 default:
@@ -235,7 +235,7 @@ protected:
                     break;
             }
         } else {
-            if (level <= logger_system::log_level::error) {
+            if (level <= kcenon::common::interfaces::log_level::error) {
                 std::cerr << formatted << std::endl;
             } else {
                 std::cout << formatted << std::endl;
@@ -252,7 +252,7 @@ protected:
     }
 
 private:
-    mutable std::map<logger_system::log_level, size_t> counts_;
+    mutable std::map<kcenon::common::interfaces::log_level, size_t> counts_;
 };
 
 int main() {
@@ -263,7 +263,7 @@ int main() {
     std::cout << "--- Example 1: Memory Writer ---" << std::endl;
     {
         auto result = logger_builder()
-            .with_min_level(logger_system::log_level::info)
+            .with_min_level(kcenon::common::interfaces::log_level::info)
             .add_writer("memory", std::make_unique<memory_writer>())
             .build();
 
@@ -291,7 +291,7 @@ int main() {
         auto* counted_ptr = counted_writer.get();  // Keep reference for stats
 
         auto result = logger_builder()
-            .with_min_level(logger_system::log_level::debug)
+            .with_min_level(kcenon::common::interfaces::log_level::debug)
             .add_writer("counted", std::move(counted_writer))
             .build();
 

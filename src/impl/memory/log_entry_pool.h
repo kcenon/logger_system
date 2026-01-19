@@ -45,7 +45,7 @@ namespace kcenon::logger::memory::log_entry_pool {
  * @brief Pooled log entry structure optimized for reuse
  */
 struct pooled_log_entry {
-    logger_system::log_level level{logger_system::log_level::info};
+    common::interfaces::log_level level{common::interfaces::log_level::info};
     std::string message;
     std::string file_path;
     int line_number{0};
@@ -56,7 +56,7 @@ struct pooled_log_entry {
      * @brief Reset entry for reuse
      */
     void reset() {
-        level = logger_system::log_level::info;
+        level = common::interfaces::log_level::info;
         message.clear();
         file_path.clear();
         line_number = 0;
@@ -67,7 +67,7 @@ struct pooled_log_entry {
     /**
      * @brief Initialize with log data
      */
-    void initialize(logger_system::log_level lvl,
+    void initialize(common::interfaces::log_level lvl,
                    const std::string& msg,
                    const std::string& file,
                    int line,

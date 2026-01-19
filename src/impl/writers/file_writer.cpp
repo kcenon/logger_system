@@ -43,7 +43,7 @@ common::VoidResult file_writer::write_entry_impl(const log_entry& entry) {
     });
 }
 
-common::VoidResult file_writer::write_impl(logger_system::log_level level,
+common::VoidResult file_writer::write_impl(common::interfaces::log_level level,
                                            const std::string& message,
                                            const std::string& file,
                                            int line,

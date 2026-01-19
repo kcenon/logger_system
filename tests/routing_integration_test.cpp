@@ -79,7 +79,7 @@ TEST_F(RoutingIntegrationTest, ExclusiveRoutingByLevel) {
     // Use with_route() with exact_level_filter for precise level matching
     routing::route_config error_route;
     error_route.writer_names = {"errors"};
-    error_route.filter = std::make_unique<filters::exact_level_filter>(static_cast<logger_system::log_level>(ci::log_level::error));
+    error_route.filter = std::make_unique<filters::exact_level_filter>(static_cast<kcenon::common::interfaces::log_level>(ci::log_level::error));
     error_route.stop_propagation = false;
 
     auto result = logger_builder()
@@ -114,7 +114,7 @@ TEST_F(RoutingIntegrationTest, NonExclusiveRouting) {
         .with_async(false)
         .add_writer("all", std::make_unique<file_writer>("test_all.log"))
         .add_writer("errors", std::make_unique<file_writer>("test_errors.log"))
-        .route_level(static_cast<logger_system::log_level>(ci::log_level::error), {"errors"})
+        .route_level(static_cast<logger_system::log_level>(static_cast<int>(ci::log_level::error)), {"errors"})
         .with_exclusive_routing(false)  // Non-exclusive (default)
         .build();
 
@@ -162,7 +162,7 @@ TEST_F(RoutingIntegrationTest, PatternBasedRouting) {
 TEST_F(RoutingIntegrationTest, DirectRouterConfiguration) {
     auto result = logger_builder()
         .with_async(false)
-        .with_min_level(static_cast<logger_system::log_level>(ci::log_level::debug))  // Enable debug level
+        .with_min_level(static_cast<kcenon::common::interfaces::log_level>(ci::log_level::debug))  // Enable debug level
         .add_writer("all", std::make_unique<file_writer>("test_all.log"))
         .add_writer("debug", std::make_unique<file_writer>("test_debug.log"))
         .build();
@@ -177,7 +177,7 @@ TEST_F(RoutingIntegrationTest, DirectRouterConfiguration) {
     // Use exact_level_filter for precise level matching
     routing::route_config config;
     config.writer_names = {"debug"};
-    config.filter = std::make_unique<filters::exact_level_filter>(static_cast<logger_system::log_level>(ci::log_level::debug));
+    config.filter = std::make_unique<filters::exact_level_filter>(static_cast<kcenon::common::interfaces::log_level>(ci::log_level::debug));
     config.stop_propagation = false;
     router.add_route(std::move(config));
 
@@ -197,17 +197,17 @@ TEST_F(RoutingIntegrationTest, MultipleRoutes) {
     // Create routes with exact level filters
     routing::route_config error_route;
     error_route.writer_names = {"errors"};
-    error_route.filter = std::make_unique<filters::exact_level_filter>(static_cast<logger_system::log_level>(ci::log_level::error));
+    error_route.filter = std::make_unique<filters::exact_level_filter>(static_cast<kcenon::common::interfaces::log_level>(ci::log_level::error));
     error_route.stop_propagation = false;
 
     routing::route_config debug_route;
     debug_route.writer_names = {"debug"};
-    debug_route.filter = std::make_unique<filters::exact_level_filter>(static_cast<logger_system::log_level>(ci::log_level::debug));
+    debug_route.filter = std::make_unique<filters::exact_level_filter>(static_cast<kcenon::common::interfaces::log_level>(ci::log_level::debug));
     debug_route.stop_propagation = false;
 
     auto result = logger_builder()
         .with_async(false)
-        .with_min_level(static_cast<logger_system::log_level>(ci::log_level::debug))  // Enable debug level
+        .with_min_level(static_cast<kcenon::common::interfaces::log_level>(ci::log_level::debug))  // Enable debug level
         .add_writer("all", std::make_unique<file_writer>("test_all.log"))
         .add_writer("errors", std::make_unique<file_writer>("test_errors.log"))
         .add_writer("debug", std::make_unique<file_writer>("test_debug.log"))

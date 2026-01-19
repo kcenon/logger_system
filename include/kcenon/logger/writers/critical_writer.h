@@ -142,7 +142,7 @@ public:
      * For non-critical messages, delegates to wrapped writer normally.
      */
     common::VoidResult write(
-        logger_system::log_level level,
+        common::interfaces::log_level level,
         const std::string& message,
         const std::string& file,
         int line,
@@ -205,7 +205,7 @@ private:
      * @param level Log level to check
      * @return true if level requires immediate flush
      */
-    bool is_critical_level(logger_system::log_level level) const;
+    bool is_critical_level(common::interfaces::log_level level) const;
 
     /**
      * @brief Write to write-ahead log
@@ -217,7 +217,7 @@ private:
      * @param timestamp Timestamp
      */
     void write_to_wal(
-        logger_system::log_level level,
+        common::interfaces::log_level level,
         const std::string& message,
         const std::string& file,
         int line,
@@ -313,7 +313,7 @@ public:
     ~hybrid_writer() override;
 
     common::VoidResult write(
-        logger_system::log_level level,
+        common::interfaces::log_level level,
         const std::string& message,
         const std::string& file,
         int line,

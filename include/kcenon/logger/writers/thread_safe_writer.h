@@ -58,7 +58,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *     std::string get_name() const override { return "my_writer"; }
  *
  * protected:
- *     common::VoidResult write_impl(logger_system::log_level level,
+ *     common::VoidResult write_impl(common::interfaces::log_level level,
  *                                   const std::string& message,
  *                                   const std::string& file,
  *                                   int line,
@@ -157,7 +157,7 @@ public:
      *
      * @since 1.3.0
      */
-    common::VoidResult write(logger_system::log_level level,
+    common::VoidResult write(common::interfaces::log_level level,
                              const std::string& message,
                              const std::string& file,
                              int line,
@@ -213,7 +213,7 @@ protected:
      *
      * @since 1.3.0
      */
-    virtual common::VoidResult write_impl(logger_system::log_level level,
+    virtual common::VoidResult write_impl(common::interfaces::log_level level,
                                           const std::string& message,
                                           const std::string& file,
                                           int line,

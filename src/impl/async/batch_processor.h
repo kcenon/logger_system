@@ -65,7 +65,7 @@ public:
      * @brief Batch entry structure
      */
     struct batch_entry {
-        logger_system::log_level level;
+        common::interfaces::log_level level;
         std::string message;
         std::string file;
         int line;
@@ -74,7 +74,7 @@ public:
 
         batch_entry() = default;
 
-        batch_entry(logger_system::log_level lvl,
+        batch_entry(common::interfaces::log_level lvl,
                    std::string msg,
                    std::string f,
                    int l,
