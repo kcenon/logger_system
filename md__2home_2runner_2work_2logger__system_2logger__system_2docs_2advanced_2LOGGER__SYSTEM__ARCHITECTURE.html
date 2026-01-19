@@ -94,12 +94,12 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><blockquote class="doxtable">
-<p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE__KO.html">한국어</a> </p>
+<p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE_8kr.html">한국어</a> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md474"></a>
+<h1><a class="anchor" id="autotoc_md487"></a>
 Logger System Architecture</h1>
 <p><b>Version</b>: 3.0.0 <b>Last Updated</b>: 2025-12-10</p>
-<h2><a class="anchor" id="autotoc_md475"></a>
+<h2><a class="anchor" id="autotoc_md488"></a>
 Table of Contents</h2>
 <ul>
 <li>Overview</li>
@@ -131,10 +131,10 @@ Table of Contents</h2>
 <li>Best Practices</li>
 <li>Platform Notes</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md476"></a>
+<h2><a class="anchor" id="autotoc_md489"></a>
 Overview</h2>
 <p>The Logger System (v3.0) is a high-performance, modular logging framework that implements <code>common::interfaces::ILogger</code> from common_system. It operates in <b>standalone mode</b> by default using <code>std::jthread</code>, with optional integration with thread_system for enhanced threading capabilities.</p>
-<h3><a class="anchor" id="autotoc_md477"></a>
+<h3><a class="anchor" id="autotoc_md490"></a>
 Key Features (v3.0)</h3>
 <ul>
 <li><b>ILogger Implementation</b>: Full implementation of <code>common::interfaces::ILogger</code></li>
@@ -143,7 +143,7 @@ Key Features (v3.0)</h3>
 <li><b>C++20 Support</b>: Leverages Concepts and <code>source_location</code></li>
 <li><b>Comprehensive Error Handling</b>: Result pattern throughout</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md478"></a>
+<h2><a class="anchor" id="autotoc_md491"></a>
 Architecture Diagram</h2>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                      Client Application                          │</div>
@@ -207,9 +207,9 @@ Architecture Diagram</h2>
 <div class="line">│  │ writer     │ │ writer   │ │ writer       │                   │</div>
 <div class="line">│  └────────────┘ └──────────┘ └──────────────┘                   │</div>
 <div class="line">└─────────────────────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md479"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md492"></a>
 Core Components</h2>
-<h3><a class="anchor" id="autotoc_md480"></a>
+<h3><a class="anchor" id="autotoc_md493"></a>
 1. ILogger Interface Implementation</h3>
 <p>Since v2.0, the logger implements <code>common::interfaces::ILogger</code> for ecosystem standardization:</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
@@ -236,7 +236,7 @@ Core Components</h2>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md481"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md494"></a>
 2. Dual API Design</h3>
 <p>The logger supports both standardized and native APIs for flexibility and backward compatibility:</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
@@ -269,9 +269,9 @@ Core Components</h2>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md482"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md495"></a>
 3. Configuration Management</h3>
-<h4><a class="anchor" id="autotoc_md483"></a>
+<h4><a class="anchor" id="autotoc_md496"></a>
 Logger Configuration with Validation</h4>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
 <div class="line"> </div>
@@ -297,7 +297,7 @@ Logger Configuration with Validation</h4>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger</span></div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md484"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md497"></a>
 Configuration Templates</h4>
 <p>Predefined configurations for common scenarios:</p>
 <table class="markdownTable">
@@ -314,7 +314,7 @@ Configuration Templates</h4>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>low_latency</code>   </td><td class="markdownTableBodyNone">Real-time systems   </td><td class="markdownTableBodyNone">true   </td><td class="markdownTableBodyNone">10   </td><td class="markdownTableBodyNone">50ms   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md485"></a>
+<h3><a class="anchor" id="autotoc_md498"></a>
 4. Builder Pattern with Validation</h3>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
 <div class="line"> </div>
@@ -340,7 +340,7 @@ Configuration Templates</h4>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md486"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md499"></a>
 5. Backend Abstraction</h3>
 <p>The v3.0 architecture introduces a backend abstraction layer for flexible async processing:</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger::backends {</div>
@@ -370,10 +370,10 @@ Configuration Templates</h4>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger::backends</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md487"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md500"></a>
 6. Interface Segregation</h3>
 <p>Clean separation of concerns through dedicated interfaces:</p>
-<h4><a class="anchor" id="autotoc_md488"></a>
+<h4><a class="anchor" id="autotoc_md501"></a>
 Writer Interface</h4>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
 <div class="line"> </div>
@@ -386,7 +386,7 @@ Writer Interface</h4>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger</span></div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md489"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md502"></a>
 Filter Interface</h4>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
 <div class="line"> </div>
@@ -397,7 +397,7 @@ Filter Interface</h4>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger</span></div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md490"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md503"></a>
 Formatter Interface</h4>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
 <div class="line"> </div>
@@ -408,7 +408,7 @@ Formatter Interface</h4>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md491"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md504"></a>
 7. Log Entry Structure</h3>
 <p>Unified data structure for all logging operations:</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
@@ -425,9 +425,9 @@ Formatter Interface</h4>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md492"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md505"></a>
 Advanced Features</h2>
-<h3><a class="anchor" id="autotoc_md493"></a>
+<h3><a class="anchor" id="autotoc_md506"></a>
 1. Asynchronous Pipeline</h3>
 <p>The async mode (default) uses a sophisticated pipeline:</p>
 <div class="fragment"><div class="line">┌──────────────┐    ┌──────────────────┐    ┌──────────────┐</div>
@@ -444,7 +444,7 @@ Advanced Features</h2>
 <li><b>Queue Management</b>: Thread-safe queue with configurable overflow policies</li>
 <li><b>Batch Processing</b>: Intelligent batching for I/O efficiency</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md494"></a>
+<h3><a class="anchor" id="autotoc_md507"></a>
 2. Error Handling with Result Pattern</h3>
 <p>Uses <code>common::Result&lt;T&gt;</code> and <code>common::VoidResult</code> from common_system:</p>
 <div class="fragment"><div class="line"><span class="comment">// Success</span></div>
@@ -462,7 +462,7 @@ Advanced Features</h2>
 <div class="line"><span class="keywordflow">if</span> (!result) {</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Error: &quot;</span> &lt;&lt; result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md495"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md508"></a>
 3. C++20 Source Location</h3>
 <p>Automatic source location capture using <code>common::source_location</code>:</p>
 <div class="fragment"><div class="line"><span class="comment">// Source location captured automatically</span></div>
@@ -472,7 +472,7 @@ Advanced Features</h2>
 <div class="line"><span class="comment">// Explicit source location</span></div>
 <div class="line">logger-&gt;log(common::interfaces::log_level::info, <span class="stringliteral">&quot;Message&quot;</span>,</div>
 <div class="line">            common::source_location::current());</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md496"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md509"></a>
 4. Performance Monitoring</h3>
 <p>Built-in metrics collection:</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger::metrics {</div>
@@ -488,7 +488,7 @@ Advanced Features</h2>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace kcenon::logger::metrics</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md497"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md510"></a>
 5. Configuration Strategies</h3>
 <p>Flexible configuration management with strategy pattern:</p>
 <div class="fragment"><div class="line"><span class="comment">// Deployment strategy</span></div>
@@ -505,23 +505,23 @@ Advanced Features</h2>
 <div class="line">    .for_environment(deployment_env::production)</div>
 <div class="line">    .with_performance_tuning(performance_level::balanced)</div>
 <div class="line">    .auto_configure();  <span class="comment">// Override with env vars</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md498"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md511"></a>
 Threading Model</h2>
-<h3><a class="anchor" id="autotoc_md499"></a>
+<h3><a class="anchor" id="autotoc_md512"></a>
 Synchronous Mode</h3>
 <ul>
 <li><b>Execution</b>: Direct write to all registered writers</li>
 <li><b>Blocking</b>: Waits for I/O completion</li>
 <li><b>Use Cases</b>: Low-frequency logging, critical errors, simple applications</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md500"></a>
+<h3><a class="anchor" id="autotoc_md513"></a>
 Asynchronous Mode (Default)</h3>
 <ul>
 <li><b>Execution</b>: Non-blocking enqueue, background processing via <code>std::jthread</code></li>
 <li><b>Throughput</b>: High-volume logging capability (4.34M msg/s)</li>
 <li><b>Use Cases</b>: High-frequency logging, performance-critical applications</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md501"></a>
+<h3><a class="anchor" id="autotoc_md514"></a>
 Thread Safety Guarantees</h3>
 <ul>
 <li>All public methods are thread-safe</li>
@@ -529,9 +529,9 @@ Thread Safety Guarantees</h3>
 <li>Internal state protected by atomic operations</li>
 <li>PIMPL idiom provides ABI stability</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md502"></a>
+<h2><a class="anchor" id="autotoc_md515"></a>
 Memory Management</h2>
-<h3><a class="anchor" id="autotoc_md503"></a>
+<h3><a class="anchor" id="autotoc_md516"></a>
 Buffer Management</h3>
 <ul>
 <li>Configurable buffer sizes with validation</li>
@@ -539,7 +539,7 @@ Buffer Management</h3>
 <li>Pre-allocated buffers in async mode</li>
 <li>Smart overflow handling policies</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md504"></a>
+<h3><a class="anchor" id="autotoc_md517"></a>
 Object Lifetime</h3>
 <ul>
 <li>RAII principles throughout</li>
@@ -547,9 +547,9 @@ Object Lifetime</h3>
 <li>Shared ownership via <code>std::shared_ptr</code> where appropriate</li>
 <li>Clear ownership semantics</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md505"></a>
+<h2><a class="anchor" id="autotoc_md518"></a>
 Performance Characteristics</h2>
-<h3><a class="anchor" id="autotoc_md506"></a>
+<h3><a class="anchor" id="autotoc_md519"></a>
 Benchmarks (v3.0)</h3>
 <p><b>Platform</b>: Apple M1 (8-core) @ 3.2GHz, 16GB RAM, macOS Sonoma</p>
 <table class="markdownTable">
@@ -562,7 +562,7 @@ Benchmarks (v3.0)</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Sync   </td><td class="markdownTableBodyNone">Direct write   </td><td class="markdownTableBodyNone">~100μs   </td><td class="markdownTableBodyNone">I/O limited   </td><td class="markdownTableBodyNone">Minimal   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md507"></a>
+<h3><a class="anchor" id="autotoc_md520"></a>
 Multi-threaded Performance</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -576,7 +576,7 @@ Multi-threaded Performance</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">16   </td><td class="markdownTableBodyNone">390K msg/s   </td><td class="markdownTableBodyNone">420K msg/s   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md508"></a>
+<h3><a class="anchor" id="autotoc_md521"></a>
 Optimization Strategies</h3>
 <ol type="1">
 <li><b>String Operations</b>: Minimized allocations, move semantics</li>
@@ -584,9 +584,9 @@ Optimization Strategies</h3>
 <li><b>Lock Contention</b>: Minimized through careful design</li>
 <li><b>Cache Performance</b>: Data structure layout optimization</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md509"></a>
+<h2><a class="anchor" id="autotoc_md522"></a>
 Integration Patterns</h2>
-<h3><a class="anchor" id="autotoc_md510"></a>
+<h3><a class="anchor" id="autotoc_md523"></a>
 ILogger Interface Integration</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
@@ -603,7 +603,7 @@ ILogger Interface Integration</h3>
 <div class="line"><span class="comment">// Use through ILogger interface</span></div>
 <div class="line">common::interfaces::ILogger* ilogger = logger.get();</div>
 <div class="line">ilogger-&gt;log(common::interfaces::log_level::info, <span class="stringliteral">&quot;Application started&quot;</span>);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md511"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md524"></a>
 Dependency Injection</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>MyService {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -617,7 +617,7 @@ Dependency Injection</h3>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">    std::shared_ptr&lt;common::interfaces::ILogger&gt; logger_;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md512"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md525"></a>
 With Monitoring (Phase 2.2.4)</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> monitor = std::make_shared&lt;monitoring::monitoring&gt;();</div>
 <div class="line"> </div>
@@ -627,9 +627,9 @@ With Monitoring (Phase 2.2.4)</h3>
 <div class="line">    .with_health_check_interval(std::chrono::seconds(30))</div>
 <div class="line">    .build()</div>
 <div class="line">    .value();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md513"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md526"></a>
 Extension Points</h2>
-<h3><a class="anchor" id="autotoc_md514"></a>
+<h3><a class="anchor" id="autotoc_md527"></a>
 Custom Writers</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>database_writer : <span class="keyword">public</span> kcenon::logger::log_writer_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -648,7 +648,7 @@ Custom Writers</h3>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .add_writer(<span class="stringliteral">&quot;database&quot;</span>, std::make_unique&lt;database_writer&gt;(connection))</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md515"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md528"></a>
 Custom Filters</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>regex_filter : <span class="keyword">public</span> kcenon::logger::log_filter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -662,7 +662,7 @@ Custom Filters</h3>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">    std::regex pattern_;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md516"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md529"></a>
 Custom Formatters</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>xml_formatter : <span class="keyword">public</span> kcenon::logger::log_formatter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -671,16 +671,16 @@ Custom Formatters</h3>
 <div class="line">               + entry.message + <span class="stringliteral">&quot;&lt;/log&gt;&quot;</span>;</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md517"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md530"></a>
 Future Enhancements</h2>
-<h3><a class="anchor" id="autotoc_md518"></a>
+<h3><a class="anchor" id="autotoc_md531"></a>
 Performance Improvements</h3>
 <ol type="1">
 <li><b>Lock-free Queue</b>: True lock-free MPMC queue implementation</li>
 <li><b>SIMD Optimizations</b>: Vectorized string operations</li>
 <li><b>Memory Pool</b>: Custom allocators for frequent allocations</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md519"></a>
+<h3><a class="anchor" id="autotoc_md532"></a>
 Feature Additions</h3>
 <ol type="1">
 <li><b>Distributed Tracing</b>: Trace ID propagation</li>
@@ -688,16 +688,16 @@ Feature Additions</h3>
 <li><b>Compression</b>: Compressed network and file writers</li>
 <li><b>Encryption</b>: Secure audit logging</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md520"></a>
+<h3><a class="anchor" id="autotoc_md533"></a>
 Platform Extensions</h3>
 <ol type="1">
 <li><b>Windows Event Log</b>: Native Windows event log support</li>
 <li><b>syslog Integration</b>: RFC 5424 compliant syslog</li>
 <li><b>Cloud Logging</b>: AWS CloudWatch, GCP Logging adapters</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md521"></a>
+<h2><a class="anchor" id="autotoc_md534"></a>
 Best Practices</h2>
-<h3><a class="anchor" id="autotoc_md522"></a>
+<h3><a class="anchor" id="autotoc_md535"></a>
 For Library Users</h3>
 <ul>
 <li>Use async mode (default) for production systems</li>
@@ -707,7 +707,7 @@ For Library Users</h3>
 <li>Monitor metrics for performance tuning</li>
 <li>Use ILogger interface for dependency injection</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md523"></a>
+<h3><a class="anchor" id="autotoc_md536"></a>
 For Contributors</h3>
 <ul>
 <li>Maintain thread safety guarantees</li>
@@ -717,7 +717,7 @@ For Contributors</h3>
 <li>Write comprehensive tests for new features</li>
 <li>Ensure backward compatibility with native API</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md524"></a>
+<h2><a class="anchor" id="autotoc_md537"></a>
 Platform Notes</h2>
 <ul>
 <li><b>Linux/macOS</b>: Full support for all features</li>
@@ -734,7 +734,7 @@ Platform Notes</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jan 19 2026 11:20:41 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Jan 19 2026 11:38:06 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

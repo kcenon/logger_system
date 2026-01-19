@@ -93,15 +93,15 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Asynchronous Writer Implementations Guide</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md134"></a> </p><blockquote class="doxtable">
-<p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS__KO.html">한국어</a> </p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md185"></a> </p><blockquote class="doxtable">
+<p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html">한국어</a> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md135"></a>
+<h1><a class="anchor" id="autotoc_md186"></a>
 Overview</h1>
 <p>The Logger System provides multiple asynchronous writer implementations, each optimized for different use cases. This guide helps you understand the differences and choose the right implementation for your needs.</p>
 <p><b>Version:</b> 1.0.0 <b>Last Updated:</b> 2025-12-31</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md137"></a>
+<h1><a class="anchor" id="autotoc_md188"></a>
 Table of Contents</h1>
 <ul>
 <li>Quick Decision Guide</li>
@@ -118,7 +118,7 @@ Table of Contents</h1>
 <li>Migration Guide</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md139"></a>
+<h1><a class="anchor" id="autotoc_md190"></a>
 Quick Decision Guide</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -134,7 +134,7 @@ Quick Decision Guide</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Production applications</b>   </td><td class="markdownTableBodyNone"><code>async_writer</code> with appropriate queue size   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md140"></a>
+<h2><a class="anchor" id="autotoc_md191"></a>
 Decision Flowchart</h2>
 <div class="fragment"><div class="line">Start</div>
 <div class="line">  │</div>
@@ -147,7 +147,7 @@ Decision Flowchart</h2>
 <div class="line">  │</div>
 <div class="line">  └─ Building internal components? ────────────► async_worker (Internal API)</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md142"></a>
+<h1><a class="anchor" id="autotoc_md193"></a>
 Implementation Comparison</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -172,13 +172,13 @@ Implementation Comparison</h1>
 <td class="markdownTableBodyNone"><b>Recommended For</b>   </td><td class="markdownTableBodyNone">Most use cases   </td><td class="markdownTableBodyNone">Internal components   </td><td class="markdownTableBodyNone">High-volume logging   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md144"></a>
+<h1><a class="anchor" id="autotoc_md195"></a>
 Detailed Descriptions</h1>
-<h2><a class="anchor" id="autotoc_md145"></a>
+<h2><a class="anchor" id="autotoc_md196"></a>
 1. async_writer (Public API)</h2>
 <p><b>Location:</b> <code>include/kcenon/logger/writers/async_writer.h</code></p>
 <p>The <code>async_writer</code> is the <b>recommended choice for most applications</b>. It wraps any <code>base_writer</code> implementation and provides asynchronous writing capabilities using a background thread.</p>
-<h3><a class="anchor" id="autotoc_md146"></a>
+<h3><a class="anchor" id="autotoc_md197"></a>
 Key Features</h3>
 <ul>
 <li><b>Universal wrapper</b>: Works with any <code>base_writer</code> (console, file, network, etc.)</li>
@@ -187,7 +187,7 @@ Key Features</h3>
 <li><b>Graceful shutdown</b>: Processes remaining messages on stop</li>
 <li><b>Thread-safe</b>: Safe for concurrent writes from multiple threads</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md147"></a>
+<h3><a class="anchor" id="autotoc_md198"></a>
 Architecture</h3>
 <div class="fragment"><div class="line">┌─────────────┐     ┌──────────────┐     ┌────────────────┐</div>
 <div class="line">│ Application │────►│ async_writer │────►│ wrapped_writer │</div>
@@ -197,7 +197,7 @@ Architecture</h3>
 <div class="line">                    ┌──────┴───────┐</div>
 <div class="line">                    │ Worker Thread│</div>
 <div class="line">                    └──────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md148"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md199"></a>
 API Reference</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>async_writer : <span class="keyword">public</span> base_writer {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -217,7 +217,7 @@ API Reference</h3>
 <div class="line">    <span class="keywordtype">bool</span> is_healthy() <span class="keyword">const override</span>;</div>
 <div class="line">    std::string get_name() <span class="keyword">const override</span>;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md149"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md200"></a>
 When to Use</h3>
 <ul>
 <li>Standard async logging requirements</li>
@@ -226,11 +226,11 @@ When to Use</h3>
 <li>When simplicity is preferred over maximum performance</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md151"></a>
+<h2><a class="anchor" id="autotoc_md202"></a>
 2. async_worker (Internal)</h2>
 <p><b>Location:</b> <code>src/impl/async/async_worker.h</code></p>
 <p>The <code>async_worker</code> is a <b>low-level component</b> used internally for task-based asynchronous processing. It's designed for internal use and provides a foundation for building async components.</p>
-<h3><a class="anchor" id="autotoc_md152"></a>
+<h3><a class="anchor" id="autotoc_md203"></a>
 Key Features</h3>
 <ul>
 <li><b>Task-based processing</b>: Uses <code>std::function&lt;void()&gt;</code> for flexibility</li>
@@ -238,13 +238,13 @@ Key Features</h3>
 <li><b>Cooperative cancellation</b>: Graceful shutdown via stop tokens</li>
 <li><b>Dropped task tracking</b>: Monitors queue overflow</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md153"></a>
+<h3><a class="anchor" id="autotoc_md204"></a>
 Architecture</h3>
 <div class="fragment"><div class="line">┌──────────────┐     ┌──────────────┐</div>
 <div class="line">│ Task Sources │────►│ async_worker │────► Execute tasks</div>
 <div class="line">│  (internal)  │     │   (queue)    │      sequentially</div>
 <div class="line">└──────────────┘     └──────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md154"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md205"></a>
 When to Use</h3>
 <ul>
 <li>Building internal async components</li>
@@ -254,13 +254,13 @@ When to Use</h3>
 <blockquote class="doxtable">
 <p>&zwj;<b>Note:</b> This is an internal API and may change without notice. </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md155"></a>
+<h1><a class="anchor" id="autotoc_md206"></a>
 &lt;/blockquote&gt;</h1>
-<h2><a class="anchor" id="autotoc_md156"></a>
+<h2><a class="anchor" id="autotoc_md207"></a>
 3. high_performance_async_writer (Internal)</h2>
 <p><b>Location:</b> <code>src/impl/async/high_performance_async_writer.h</code></p>
 <p>The <code>high_performance_async_writer</code> is optimized for <b>maximum throughput</b> scenarios. It combines lock-free queues, memory pooling, and batch processing for high-volume logging.</p>
-<h3><a class="anchor" id="autotoc_md157"></a>
+<h3><a class="anchor" id="autotoc_md208"></a>
 Key Features</h3>
 <ul>
 <li><b>Lock-free queue</b>: Minimizes contention in high-concurrency scenarios</li>
@@ -269,7 +269,7 @@ Key Features</h3>
 <li><b>Back-pressure handling</b>: Configurable queue full behavior</li>
 <li><b>Performance statistics</b>: Detailed metrics (latency, throughput, success ratio)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md158"></a>
+<h3><a class="anchor" id="autotoc_md209"></a>
 Architecture</h3>
 <div class="fragment"><div class="line">┌─────────────┐     ┌─────────────────────────────────────┐</div>
 <div class="line">│ Application │     │  high_performance_async_writer      │</div>
@@ -281,7 +281,7 @@ Architecture</h3>
 <div class="line">                    │  │ Memory Pool │                   │</div>
 <div class="line">                    │  └─────────────┘                   │</div>
 <div class="line">                    └─────────────────────────────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md159"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md210"></a>
 Configuration</h3>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>config {</div>
 <div class="line">    <span class="comment">// Queue configuration</span></div>
@@ -307,7 +307,7 @@ Configuration</h3>
 <div class="line">    <span class="keywordtype">bool</span> enable_batch_processing{<span class="keyword">true</span>};</div>
 <div class="line">    std::chrono::microseconds flush_timeout{1000};</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md160"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md211"></a>
 When to Use</h3>
 <ul>
 <li>Logging &gt;100K messages per second</li>
@@ -318,11 +318,11 @@ When to Use</h3>
 <blockquote class="doxtable">
 <p>&zwj;<b>Note:</b> This is currently an internal API. Contact maintainers for production use guidance. </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md161"></a>
+<h1><a class="anchor" id="autotoc_md212"></a>
 &lt;/blockquote&gt;</h1>
-<h1><a class="anchor" id="autotoc_md162"></a>
+<h1><a class="anchor" id="autotoc_md213"></a>
 Performance Characteristics</h1>
-<h2><a class="anchor" id="autotoc_md163"></a>
+<h2><a class="anchor" id="autotoc_md214"></a>
 Benchmark Comparison</h2>
 <p><b>Test Environment:</b> Apple M1 (8-core), 16GB RAM, macOS</p>
 <table class="markdownTable">
@@ -339,7 +339,7 @@ Benchmark Comparison</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Queue full behavior</b>   </td><td class="markdownTableBodyNone">Returns error   </td><td class="markdownTableBodyNone">Back-pressure   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md164"></a>
+<h2><a class="anchor" id="autotoc_md215"></a>
 Latency Distribution</h2>
 <div class="fragment"><div class="line">async_writer:</div>
 <div class="line">  P50: 400 ns</div>
@@ -351,9 +351,9 @@ Latency Distribution</h2>
 <div class="line">  P99: 500 ns</div>
 <div class="line">  P99.9: 2 μs</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md166"></a>
+<h1><a class="anchor" id="autotoc_md217"></a>
 Usage Examples</h1>
-<h2><a class="anchor" id="autotoc_md167"></a>
+<h2><a class="anchor" id="autotoc_md218"></a>
 Example 1: Basic async_writer Usage</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/async_writer.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/file_writer.h&gt;</span></div>
@@ -376,7 +376,7 @@ Example 1: Basic async_writer Usage</h2>
 <div class="line"><span class="comment">// Flush and stop</span></div>
 <div class="line">async-&gt;flush();</div>
 <div class="line">async-&gt;stop();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md168"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md219"></a>
 Example 2: async_writer with Console Output</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/async_writer.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/console_writer.h&gt;</span></div>
@@ -391,7 +391,7 @@ Example 2: async_writer with Console Output</h2>
 <div class="line">async_console-&gt;start();</div>
 <div class="line"><span class="comment">// ... use async_console ...</span></div>
 <div class="line">async_console-&gt;stop(<span class="keyword">true</span>);  <span class="comment">// flush remaining messages</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md169"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md220"></a>
 Example 3: Queue Full Handling</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> async = std::make_unique&lt;kcenon::logger::async_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;kcenon::logger::file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>),</div>
@@ -410,7 +410,7 @@ Example 3: Queue Full Handling</h2>
 <div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;Async queue full, message dropped\n&quot;</span>;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md170"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md221"></a>
 Example 4: Graceful Shutdown Pattern</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>application {</div>
 <div class="line">    std::unique_ptr&lt;async_writer&gt; logger_;</div>
@@ -436,9 +436,9 @@ Example 4: Graceful Shutdown Pattern</h2>
 <div class="line">    }</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md172"></a>
+<h1><a class="anchor" id="autotoc_md223"></a>
 Best Practices</h1>
-<h2><a class="anchor" id="autotoc_md173"></a>
+<h2><a class="anchor" id="autotoc_md224"></a>
 1. Queue Size Selection</h2>
 <div class="fragment"><div class="line"><span class="comment">// Low volume (&lt;1K msg/sec): Small queue</span></div>
 <div class="line">async_writer(writer, 1000);</div>
@@ -448,7 +448,7 @@ Best Practices</h1>
 <div class="line"> </div>
 <div class="line"><span class="comment">// High volume (&gt;10K msg/sec): Large queue</span></div>
 <div class="line">async_writer(writer, 100000);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md174"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md225"></a>
 2. Flush Timeout Configuration</h2>
 <div class="fragment"><div class="line"><span class="comment">// Fast flush requirement (interactive apps)</span></div>
 <div class="line">async_writer(writer, 10000, std::chrono::seconds(1));</div>
@@ -458,21 +458,21 @@ Best Practices</h1>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Batch-oriented (background services)</span></div>
 <div class="line">async_writer(writer, 10000, std::chrono::seconds(30));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md175"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md226"></a>
 3. Error Handling</h2>
 <p>Always check the result of <code>write()</code> operations:</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> result = async-&gt;write(...);</div>
 <div class="line"><span class="keywordflow">if</span> (!result.is_ok()) {</div>
 <div class="line">    <span class="comment">// Fallback: write synchronously or drop</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md176"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md227"></a>
 4. Lifecycle Management</h2>
 <ul>
 <li>Call <code>start()</code> before any writes</li>
 <li>Call <code>flush()</code> before <code>stop()</code> if you need all messages written</li>
 <li>Use RAII patterns for automatic cleanup</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md177"></a>
+<h2><a class="anchor" id="autotoc_md228"></a>
 5. Thread Safety Considerations</h2>
 <ul>
 <li><code>async_writer</code> is thread-safe for writes</li>
@@ -480,9 +480,9 @@ Best Practices</h1>
 <li>Use external synchronization for configuration changes</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md179"></a>
+<h1><a class="anchor" id="autotoc_md230"></a>
 Migration Guide</h1>
-<h2><a class="anchor" id="autotoc_md180"></a>
+<h2><a class="anchor" id="autotoc_md231"></a>
 From Synchronous to async_writer</h2>
 <p><b>Before:</b> </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>);</div>
 <div class="line">writer-&gt;write(level, message, file, line, func, timestamp);</div>
@@ -491,7 +491,7 @@ From Synchronous to async_writer</h2>
 <div class="line">async-&gt;start();</div>
 <div class="line">async-&gt;write(level, message, file, line, func, timestamp);</div>
 <div class="line"><span class="comment">// Don&#39;t forget: async-&gt;stop() on shutdown</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md181"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md232"></a>
 Queue Full Migration</h2>
 <p>If experiencing queue full errors:</p>
 <ol type="1">
@@ -504,7 +504,7 @@ Queue Full Migration</h2>
 <li><b>Consider high_performance_async_writer</b> for extreme cases</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md183"></a>
+<h1><a class="anchor" id="autotoc_md234"></a>
 Related Documentation</h1>
 <ul>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS.html">Custom Writers Guide</a> - Creating custom writer implementations</li>
@@ -520,7 +520,7 @@ Related Documentation</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jan 19 2026 11:20:41 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Jan 19 2026 11:38:06 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -94,12 +94,12 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><blockquote class="doxtable">
-<p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE__KO.html">한국어</a> </p>
+<p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE_8kr.html">한국어</a> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md692"></a>
+<h1><a class="anchor" id="autotoc_md701"></a>
 API Reference</h1>
 <p><b>Version</b>: 3.0.0 <b>Last Updated</b>: 2025-12-10</p>
-<h2><a class="anchor" id="autotoc_md693"></a>
+<h2><a class="anchor" id="autotoc_md702"></a>
 Table of Contents</h2>
 <ul>
 <li>Overview</li>
@@ -116,7 +116,7 @@ Table of Contents</h2>
 <li>Backend Integration</li>
 <li>Monitoring Integration</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md694"></a>
+<h2><a class="anchor" id="autotoc_md703"></a>
 Overview</h2>
 <p>The Logger System (v3.0) provides a high-performance, thread-safe logging framework with:</p>
 <ul>
@@ -125,7 +125,7 @@ Overview</h2>
 <li><b>Optional Integration</b>: Thread_system integration is optional since v3.0</li>
 <li><b>C++20 Features</b>: Leverages Concepts and <code>source_location</code> for enhanced developer experience</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md695"></a>
+<h3><a class="anchor" id="autotoc_md704"></a>
 Namespace</h3>
 <p>All classes are in the <code>kcenon::logger</code> namespace:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
@@ -133,12 +133,12 @@ Namespace</h3>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/console_writer.h&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">using namespace </span>kcenon::logger;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md696"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md705"></a>
 Core Classes</h2>
-<h3><a class="anchor" id="autotoc_md697"></a>
+<h3><a class="anchor" id="autotoc_md706"></a>
 &lt;tt&gt;kcenon::logger::logger&lt;/tt&gt;</h3>
 <p>The main logger class that handles all logging operations. Implements both <code>common::interfaces::ILogger</code> for standardized interface and <code>security::critical_logger_interface</code> for crash-safe logging.</p>
-<h4><a class="anchor" id="autotoc_md698"></a>
+<h4><a class="anchor" id="autotoc_md707"></a>
 Constructor</h4>
 <div class="fragment"><div class="line"><span class="keyword">explicit</span> logger(<span class="keywordtype">bool</span> async = <span class="keyword">true</span>,</div>
 <div class="line">                std::size_t buffer_size = 8192,</div>
@@ -148,14 +148,14 @@ Constructor</h4>
 <li><code>buffer_size</code>: Size of the log buffer in bytes (default: 8192)</li>
 <li><code>backend</code>: Integration backend for async processing (default: auto-detected standalone backend)</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md699"></a>
+<h4><a class="anchor" id="autotoc_md708"></a>
 Destructor</h4>
 <div class="fragment"><div class="line">~logger();</div>
 </div><!-- fragment --><p>Ensures all buffered messages are flushed before destruction.</p>
-<h2><a class="anchor" id="autotoc_md700"></a>
+<h2><a class="anchor" id="autotoc_md709"></a>
 ILogger Interface (Phase 2.0)</h2>
 <p>Since v2.0, the logger implements <code>common::interfaces::ILogger</code> for standardized logging across the unified_system ecosystem.</p>
-<h3><a class="anchor" id="autotoc_md701"></a>
+<h3><a class="anchor" id="autotoc_md710"></a>
 Log Methods (ILogger Interface)</h3>
 <div class="fragment"><div class="line"><span class="comment">// Simple message logging</span></div>
 <div class="line">common::VoidResult log(common::interfaces::log_level level,</div>
@@ -175,7 +175,7 @@ Log Methods (ILogger Interface)</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Structured log entry</span></div>
 <div class="line">common::VoidResult log(<span class="keyword">const</span> common::interfaces::log_entry&amp; entry) <span class="keyword">override</span>;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md702"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md711"></a>
 Level Management (ILogger Interface)</h3>
 <div class="fragment"><div class="line"><span class="comment">// Check if level is enabled</span></div>
 <div class="line"><span class="keywordtype">bool</span> is_enabled(common::interfaces::log_level level) <span class="keyword">const override</span>;</div>
@@ -188,7 +188,7 @@ Level Management (ILogger Interface)</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Flush buffered messages</span></div>
 <div class="line">common::VoidResult flush() <span class="keyword">override</span>;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md703"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md712"></a>
 Native API (Backward Compatible)</h3>
 <p>For backward compatibility with logger_system native types:</p>
 <div class="fragment"><div class="line"><span class="comment">// Log with native log_level</span></div>
@@ -204,7 +204,7 @@ Native API (Backward Compatible)</h3>
 <div class="line"><span class="comment">// Set/get minimum level (legacy)</span></div>
 <div class="line"><span class="keywordtype">void</span> set_min_level(log_level level);  <span class="comment">// Deprecated: use set_level()</span></div>
 <div class="line">log_level get_min_level() <span class="keyword">const</span>;      <span class="comment">// Deprecated: use get_level()</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md704"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md713"></a>
 Writer Management</h3>
 <div class="fragment"><div class="line"><span class="comment">// Add writer (unnamed)</span></div>
 <div class="line">common::VoidResult add_writer(std::unique_ptr&lt;base_writer&gt; writer);</div>
@@ -220,7 +220,7 @@ Writer Management</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Remove all writers</span></div>
 <div class="line">common::VoidResult clear_writers();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md705"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md714"></a>
 Lifecycle Management</h3>
 <div class="fragment"><div class="line"><span class="comment">// Start async processing</span></div>
 <div class="line">common::VoidResult start();</div>
@@ -230,7 +230,7 @@ Lifecycle Management</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Check if running</span></div>
 <div class="line"><span class="keywordtype">bool</span> is_running() <span class="keyword">const</span>;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md706"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md715"></a>
 Metrics</h3>
 <div class="fragment"><div class="line"><span class="comment">// Enable/disable metrics</span></div>
 <div class="line">common::VoidResult enable_metrics_collection(<span class="keywordtype">bool</span> enable = <span class="keyword">true</span>);</div>
@@ -241,14 +241,14 @@ Metrics</h3>
 <div class="line">result&lt;std::unique_ptr&lt;metrics::logger_performance_stats&gt;&gt; get_metrics_history(</div>
 <div class="line">    std::chrono::seconds duration) <span class="keyword">const</span>;</div>
 <div class="line">common::VoidResult reset_metrics();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md707"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md716"></a>
 Filtering</h3>
 <div class="fragment"><div class="line"><span class="comment">// Set global filter</span></div>
 <div class="line"><span class="keywordtype">void</span> set_filter(std::unique_ptr&lt;log_filter_interface&gt; filter);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Check if filter is set</span></div>
 <div class="line"><span class="keywordtype">bool</span> has_filter() <span class="keyword">const</span>;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md708"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md717"></a>
 Emergency Flush (Signal Safety)</h3>
 <div class="fragment"><div class="line"><span class="comment">// Get file descriptor for emergency writing</span></div>
 <div class="line"><span class="keywordtype">int</span> get_emergency_fd() <span class="keyword">const override</span>;</div>
@@ -256,9 +256,9 @@ Emergency Flush (Signal Safety)</h3>
 <div class="line"><span class="comment">// Get emergency buffer</span></div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* get_emergency_buffer() <span class="keyword">const override</span>;</div>
 <div class="line"><span class="keywordtype">size_t</span> get_emergency_buffer_size() <span class="keyword">const override</span>;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md709"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md718"></a>
 Configuration</h2>
-<h3><a class="anchor" id="autotoc_md710"></a>
+<h3><a class="anchor" id="autotoc_md719"></a>
 &lt;tt&gt;kcenon::logger::logger_config&lt;/tt&gt;</h3>
 <p>Configuration structure with validation capabilities.</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>logger_config {</div>
@@ -300,19 +300,19 @@ Configuration</h2>
 <div class="line">    <span class="comment">// Validation</span></div>
 <div class="line">    common::VoidResult validate() <span class="keyword">const</span>;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md711"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md720"></a>
 Static Factory Methods</h3>
 <div class="fragment"><div class="line"><span class="keyword">static</span> logger_config default_config();</div>
 <div class="line"><span class="keyword">static</span> logger_config production();</div>
 <div class="line"><span class="keyword">static</span> logger_config debug_config();</div>
 <div class="line"><span class="keyword">static</span> logger_config high_performance();</div>
 <div class="line"><span class="keyword">static</span> logger_config low_latency();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md712"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md721"></a>
 Builder Pattern</h2>
-<h3><a class="anchor" id="autotoc_md713"></a>
+<h3><a class="anchor" id="autotoc_md722"></a>
 &lt;tt&gt;kcenon::logger::logger_builder&lt;/tt&gt;</h3>
 <p>Fluent interface for constructing logger instances with validation.</p>
-<h4><a class="anchor" id="autotoc_md714"></a>
+<h4><a class="anchor" id="autotoc_md723"></a>
 Basic Configuration</h4>
 <div class="fragment"><div class="line">logger_builder&amp; with_config(<span class="keyword">const</span> logger_config&amp; config);</div>
 <div class="line">logger_builder&amp; use_template(<span class="keyword">const</span> std::string&amp; template_name);</div>
@@ -323,7 +323,7 @@ Basic Configuration</h4>
 <div class="line">logger_builder&amp; with_batch_writing(<span class="keywordtype">bool</span> enable = <span class="keyword">true</span>);</div>
 <div class="line">logger_builder&amp; with_flush_interval(std::chrono::milliseconds interval);</div>
 <div class="line">logger_builder&amp; with_lock_free(<span class="keywordtype">bool</span> enable = <span class="keyword">true</span>);</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md715"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md724"></a>
 Feature Flags</h4>
 <div class="fragment"><div class="line">logger_builder&amp; with_metrics(<span class="keywordtype">bool</span> enable = <span class="keyword">true</span>);</div>
 <div class="line">logger_builder&amp; with_crash_handler(<span class="keywordtype">bool</span> enable = <span class="keyword">true</span>);</div>
@@ -331,7 +331,7 @@ Feature Flags</h4>
 <div class="line">logger_builder&amp; with_overflow_policy(logger_config::overflow_policy policy);</div>
 <div class="line">logger_builder&amp; with_max_queue_size(std::size_t size);</div>
 <div class="line">logger_builder&amp; with_default_pattern();</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md716"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md725"></a>
 Output Configuration</h4>
 <div class="fragment"><div class="line">logger_builder&amp; with_file_output(<span class="keyword">const</span> std::string&amp; directory,</div>
 <div class="line">                                 <span class="keyword">const</span> std::string&amp; prefix = <span class="stringliteral">&quot;app&quot;</span>,</div>
@@ -341,7 +341,7 @@ Output Configuration</h4>
 <div class="line">                                    uint16_t port,</div>
 <div class="line">                                    std::chrono::milliseconds timeout =</div>
 <div class="line">                                        std::chrono::milliseconds(5000));</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md717"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md726"></a>
 Writers and Filters</h4>
 <div class="fragment"><div class="line">logger_builder&amp; add_writer(<span class="keyword">const</span> std::string&amp; name,</div>
 <div class="line">                           std::unique_ptr&lt;base_writer&gt; writer);</div>
@@ -352,27 +352,27 @@ Writers and Filters</h4>
 <div class="line">logger_builder&amp; add_function_filter(</div>
 <div class="line">    std::function&lt;<span class="keywordtype">bool</span>(<span class="keyword">const</span> log_entry&amp;)&gt; predicate);</div>
 <div class="line">logger_builder&amp; with_formatter(std::unique_ptr&lt;log_formatter_interface&gt; formatter);</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md718"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md727"></a>
 Backend Selection</h4>
 <div class="fragment"><div class="line"><span class="comment">// Use custom backend</span></div>
 <div class="line">logger_builder&amp; with_backend(std::unique_ptr&lt;backends::integration_backend&gt; backend);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Use standalone backend explicitly (default)</span></div>
 <div class="line">logger_builder&amp; with_standalone_backend();</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md719"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md728"></a>
 Environment and Error Handling</h4>
 <div class="fragment"><div class="line">logger_builder&amp; detect_environment();</div>
 <div class="line">logger_builder&amp; auto_configure();</div>
 <div class="line">logger_builder&amp; with_error_handler(</div>
 <div class="line">    std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> logger_error_code&amp;)&gt; handler);</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md720"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md729"></a>
 Build</h4>
 <div class="fragment"><div class="line">common::VoidResult validate() <span class="keyword">const</span>;</div>
 <div class="line">result&lt;std::unique_ptr&lt;logger&gt;&gt; build();</div>
 <div class="line"><span class="keyword">const</span> logger_config&amp; get_config() <span class="keyword">const</span>;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md721"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md730"></a>
 Configuration Strategies</h2>
-<h3><a class="anchor" id="autotoc_md722"></a>
+<h3><a class="anchor" id="autotoc_md731"></a>
 Deployment Strategy</h3>
 <div class="fragment"><div class="line"><span class="keyword">enum class</span> deployment_env {</div>
 <div class="line">    development,</div>
@@ -382,7 +382,7 @@ Deployment Strategy</h3>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">logger_builder&amp; for_environment(deployment_env env);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md723"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md732"></a>
 Performance Strategy</h3>
 <div class="fragment"><div class="line"><span class="keyword">enum class</span> performance_level {</div>
 <div class="line">    low_latency,</div>
@@ -392,7 +392,7 @@ Performance Strategy</h3>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">logger_builder&amp; with_performance_tuning(performance_level level);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md724"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md733"></a>
 Environment Strategy</h3>
 <div class="fragment"><div class="line"><span class="comment">// Auto-configure from LOG_* environment variables</span></div>
 <div class="line">logger_builder&amp; auto_configure();</div>
@@ -406,13 +406,13 @@ Environment Strategy</h3>
 <li><code>LOG_METRICS</code>: true/false</li>
 <li><code>LOG_ENV</code>: production/staging/development/testing</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md725"></a>
+<h3><a class="anchor" id="autotoc_md734"></a>
 Composite Strategy</h3>
 <div class="fragment"><div class="line">logger_builder&amp; apply_strategy(std::unique_ptr&lt;config_strategy_interface&gt; strategy);</div>
 <div class="line">logger_builder&amp; clear_strategies();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md726"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md735"></a>
 Interfaces</h2>
-<h3><a class="anchor" id="autotoc_md727"></a>
+<h3><a class="anchor" id="autotoc_md736"></a>
 &lt;tt&gt;kcenon::logger::log_writer_interface&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>log_writer_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -421,21 +421,21 @@ Interfaces</h2>
 <div class="line">    <span class="keyword">virtual</span> common::VoidResult flush() = 0;</div>
 <div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> is_healthy()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md728"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md737"></a>
 &lt;tt&gt;kcenon::logger::log_filter_interface&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>log_filter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    <span class="keyword">virtual</span> ~log_filter_interface() = <span class="keywordflow">default</span>;</div>
 <div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> should_log(<span class="keyword">const</span> log_entry&amp; entry) <span class="keyword">const</span> = 0;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md729"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md738"></a>
 &lt;tt&gt;kcenon::logger::log_formatter_interface&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>log_formatter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    <span class="keyword">virtual</span> ~log_formatter_interface() = <span class="keywordflow">default</span>;</div>
 <div class="line">    <span class="keyword">virtual</span> std::string format(<span class="keyword">const</span> log_entry&amp; entry) <span class="keyword">const</span> = 0;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md730"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md739"></a>
 &lt;tt&gt;kcenon::logger::log_entry&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>log_entry {</div>
 <div class="line">    logger_system::log_level level;</div>
@@ -447,9 +447,9 @@ Interfaces</h2>
 <div class="line">    std::thread::id thread_id;</div>
 <div class="line">    std::unordered_map&lt;std::string, std::string&gt; context;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md731"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md740"></a>
 Error Handling</h2>
-<h3><a class="anchor" id="autotoc_md732"></a>
+<h3><a class="anchor" id="autotoc_md741"></a>
 Error Codes</h3>
 <div class="fragment"><div class="line"><span class="keyword">enum class</span> logger_error_code {</div>
 <div class="line">    <span class="comment">// General errors</span></div>
@@ -485,7 +485,7 @@ Error Codes</h3>
 <div class="line">    configuration_missing = 1401,</div>
 <div class="line">    configuration_conflict = 1402</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md733"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md742"></a>
 Result Types</h3>
 <p>The logger uses <code>common::Result&lt;T&gt;</code> and <code>common::VoidResult</code> from common_system:</p>
 <div class="fragment"><div class="line"><span class="comment">// Success</span></div>
@@ -497,7 +497,7 @@ Result Types</h3>
 <div class="line">    <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(logger_error_code::queue_full),</div>
 <div class="line">    <span class="stringliteral">&quot;Queue is full&quot;</span></div>
 <div class="line">);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md734"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md743"></a>
 Helper Functions</h3>
 <div class="fragment"><div class="line"><span class="comment">// Create void error result (for common::VoidResult)</span></div>
 <div class="line">common::VoidResult make_logger_void_result(logger_error_code code,</div>
@@ -510,16 +510,16 @@ Helper Functions</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Convert error code to string</span></div>
 <div class="line">std::string logger_error_to_string(logger_error_code code);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md735"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md744"></a>
 Writers</h2>
-<h3><a class="anchor" id="autotoc_md736"></a>
+<h3><a class="anchor" id="autotoc_md745"></a>
 &lt;tt&gt;kcenon::logger::console_writer&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>console_writer : <span class="keyword">public</span> base_writer {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    console_writer(<span class="keywordtype">bool</span> use_color = <span class="keyword">true</span>);</div>
 <div class="line">    <span class="keywordtype">void</span> set_use_color(<span class="keywordtype">bool</span> use_color);</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md737"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md746"></a>
 &lt;tt&gt;kcenon::logger::file_writer&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>file_writer : <span class="keyword">public</span> base_writer {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -527,7 +527,7 @@ Writers</h2>
 <div class="line">    common::VoidResult open();</div>
 <div class="line">    common::VoidResult close();</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md738"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md747"></a>
 &lt;tt&gt;kcenon::logger::rotating_file_writer&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>rotating_file_writer : <span class="keyword">public</span> base_writer {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -546,7 +546,7 @@ Writers</h2>
 <div class="line">                         rotation_type type,</div>
 <div class="line">                         std::size_t max_files);</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md739"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md748"></a>
 &lt;tt&gt;kcenon::logger::network_writer&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>network_writer : <span class="keyword">public</span> base_writer {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -556,14 +556,14 @@ Writers</h2>
 <div class="line">                   uint16_t port,</div>
 <div class="line">                   protocol_type protocol = protocol_type::tcp);</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md740"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md749"></a>
 &lt;tt&gt;kcenon::logger::critical_writer&lt;/tt&gt;</h3>
 <p>Synchronous writer for critical messages that bypass async queue:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>critical_writer : <span class="keyword">public</span> base_writer {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    critical_writer(std::unique_ptr&lt;base_writer&gt; underlying_writer);</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md741"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md750"></a>
 &lt;tt&gt;kcenon::logger::batch_writer&lt;/tt&gt;</h3>
 <p>Wraps another writer with batching support:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>batch_writer : <span class="keyword">public</span> base_writer {</div>
@@ -576,28 +576,28 @@ Writers</h2>
 <div class="line">    batch_writer(std::unique_ptr&lt;base_writer&gt; underlying_writer,</div>
 <div class="line">                 <span class="keyword">const</span> config&amp; cfg = {});</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md742"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md751"></a>
 Filters</h2>
-<h3><a class="anchor" id="autotoc_md743"></a>
+<h3><a class="anchor" id="autotoc_md752"></a>
 &lt;tt&gt;kcenon::logger::filters::level_filter&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>level_filter : <span class="keyword">public</span> log_filter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    level_filter(logger_system::log_level min_level);</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md744"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md753"></a>
 &lt;tt&gt;kcenon::logger::filters::regex_filter&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>regex_filter : <span class="keyword">public</span> log_filter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    regex_filter(<span class="keyword">const</span> std::string&amp; pattern, <span class="keywordtype">bool</span> include = <span class="keyword">true</span>);</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md745"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md754"></a>
 &lt;tt&gt;kcenon::logger::filters::function_filter&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>function_filter : <span class="keyword">public</span> log_filter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    <span class="keyword">using </span>filter_func = std::function&lt;bool(<span class="keyword">const</span> log_entry&amp;)&gt;;</div>
 <div class="line">    function_filter(filter_func func);</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md746"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md755"></a>
 &lt;tt&gt;kcenon::logger::filters::composite_filter&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>composite_filter : <span class="keyword">public</span> log_filter_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -606,24 +606,24 @@ Filters</h2>
 <div class="line">    composite_filter(logic_type logic = logic_type::AND);</div>
 <div class="line">    <span class="keywordtype">void</span> add_filter(std::unique_ptr&lt;log_filter_interface&gt; filter);</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md747"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md756"></a>
 Formatters</h2>
-<h3><a class="anchor" id="autotoc_md748"></a>
+<h3><a class="anchor" id="autotoc_md757"></a>
 &lt;tt&gt;kcenon::logger::plain_formatter&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>plain_formatter : <span class="keyword">public</span> base_formatter {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    std::string format(<span class="keyword">const</span> log_entry&amp; entry) <span class="keyword">const override</span>;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md749"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md758"></a>
 &lt;tt&gt;kcenon::logger::json_formatter&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>json_formatter : <span class="keyword">public</span> base_formatter {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    json_formatter(<span class="keywordtype">bool</span> pretty_print = <span class="keyword">false</span>);</div>
 <div class="line">    std::string format(<span class="keyword">const</span> log_entry&amp; entry) <span class="keyword">const override</span>;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md750"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md759"></a>
 Backend Integration</h2>
-<h3><a class="anchor" id="autotoc_md751"></a>
+<h3><a class="anchor" id="autotoc_md760"></a>
 Integration Backend Interface</h3>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>backends {</div>
 <div class="line"> </div>
@@ -639,7 +639,7 @@ Integration Backend Interface</h3>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace backends</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md752"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md761"></a>
 Standalone Backend (Default)</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>standalone_backend : <span class="keyword">public</span> integration_backend {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -647,16 +647,16 @@ Standalone Backend (Default)</h3>
 <div class="line">    <span class="comment">// Uses std::jthread for async processing</span></div>
 <div class="line">    <span class="comment">// No external dependencies</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md753"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md762"></a>
 Monitoring Integration</h2>
-<h3><a class="anchor" id="autotoc_md754"></a>
+<h3><a class="anchor" id="autotoc_md763"></a>
 IMonitor Integration (Phase 2.2.4)</h3>
 <div class="fragment"><div class="line">logger_builder&amp; with_monitoring(</div>
 <div class="line">    std::shared_ptr&lt;common::interfaces::IMonitor&gt; monitor);</div>
 <div class="line">logger_builder&amp; with_health_check_interval(std::chrono::milliseconds interval);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md755"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md764"></a>
 Usage Examples</h2>
-<h3><a class="anchor" id="autotoc_md756"></a>
+<h3><a class="anchor" id="autotoc_md765"></a>
 Basic Usage with ILogger Interface</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
@@ -687,7 +687,7 @@ Basic Usage with ILogger Interface</h3>
 <div class="line">    logger-&gt;flush();</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md757"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md766"></a>
 Native API (Backward Compatible)</h3>
 <div class="fragment"><div class="line"><span class="comment">// Using native logger_system types</span></div>
 <div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;Message with native types&quot;</span>);</div>
@@ -695,7 +695,7 @@ Native API (Backward Compatible)</h3>
 <div class="line"><span class="comment">// Note: The source location is auto-captured internally in v2.x+</span></div>
 <div class="line"><span class="comment">// The legacy API with __FILE__, __LINE__, __func__ is deprecated and will be removed in v3.0.0</span></div>
 <div class="line">logger-&gt;log(log_level::error, <span class="stringliteral">&quot;Error occurred&quot;</span>);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md758"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md767"></a>
 Configuration Strategies</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .for_environment(deployment_env::production)</div>
@@ -705,7 +705,7 @@ Configuration Strategies</h3>
 <div class="line">        <span class="stringliteral">&quot;logs/app.log&quot;</span>, 10 * 1024 * 1024, 5))</div>
 <div class="line">    .build()</div>
 <div class="line">    .value();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md759"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md768"></a>
 Custom Writer</h3>
 <div class="fragment"><div class="line"><span class="keyword">class </span>custom_writer : <span class="keyword">public</span> kcenon::logger::log_writer_interface {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -718,7 +718,7 @@ Custom Writer</h3>
 <div class="line">        <span class="keywordflow">return</span> common::ok();</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md760"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md769"></a>
 Filtering</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .add_level_filter(log_level::warning)</div>
@@ -727,10 +727,10 @@ Filtering</h3>
 <div class="line">        <span class="keywordflow">return</span> entry.file.find(<span class="stringliteral">&quot;debug&quot;</span>) == std::string::npos;</div>
 <div class="line">    })</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md761"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md770"></a>
 Thread Safety</h2>
 <p>All public methods of the logger class are thread-safe. Writers are called sequentially (no concurrent writes to the same writer).</p>
-<h2><a class="anchor" id="autotoc_md762"></a>
+<h2><a class="anchor" id="autotoc_md771"></a>
 Performance Considerations</h2>
 <ul>
 <li>Use asynchronous mode for better performance</li>
@@ -739,7 +739,7 @@ Performance Considerations</h2>
 <li>Use <code>is_enabled()</code> check before expensive message construction</li>
 <li>Consider <code>critical_writer</code> only for truly critical messages</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md763"></a>
+<h2><a class="anchor" id="autotoc_md772"></a>
 Migration from v2.x</h2>
 <p>See <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html">MIGRATION_GUIDE.md</a> for detailed migration instructions.</p>
 <p>Key changes in v3.0:</p><ul>
@@ -756,7 +756,7 @@ Migration from v2.x</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jan 19 2026 11:20:41 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Jan 19 2026 11:38:06 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
