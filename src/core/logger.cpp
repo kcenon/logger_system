@@ -713,10 +713,13 @@ structured_log_builder logger::log_structured(log_level level) {
         }
     }
 
+    // Convert common::interfaces::log_level to logger_system::log_level for internal use
+    auto native_level = static_cast<logger_system::log_level>(static_cast<int>(level));
+
     return structured_log_builder(
         level,
-        [this, level](log_entry&& entry) {
-            if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
+        [this, native_level](log_entry&& entry) {
+            if (!pimpl_ || !meets_threshold(native_level, pimpl_->min_level_.load())) {
                 return;
             }
 
@@ -751,6 +754,12 @@ structured_log_builder logger::log_structured(log_level level) {
         },
         ctx_ptr
     );
+}
+
+// Overload accepting logger_system::log_level for backward compatibility
+structured_log_builder logger::log_structured(logger_system::log_level level) {
+    // Convert to common::interfaces::log_level and delegate
+    return log_structured(static_cast<log_level>(static_cast<int>(level)));
 }
 
 // =========================================================================
