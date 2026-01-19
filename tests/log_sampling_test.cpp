@@ -43,10 +43,11 @@
 
 // Use ILogger interface log_level for log() calls
 namespace ci = kcenon::common::interfaces;
-// Use native log_level for sampling config (always_log_levels)
-using log_level = logger_system::log_level;
+// Use logger namespace for other types (but not log_level to avoid ambiguity)
 using namespace kcenon::logger;
 using namespace kcenon::logger::sampling;
+// Alias for sampling config which still uses logger_system::log_level internally
+namespace ls = logger_system;
 
 namespace {
 
@@ -147,11 +148,11 @@ TEST(SamplingConfigTest, AlwaysLogLevelsDefault) {
     EXPECT_EQ(config.always_log_levels.size(), 2U);
     EXPECT_NE(std::find(config.always_log_levels.begin(),
                         config.always_log_levels.end(),
-                        log_level::error),
+                        ls::log_level::error),
               config.always_log_levels.end());
     EXPECT_NE(std::find(config.always_log_levels.begin(),
                         config.always_log_levels.end(),
-                        log_level::fatal),
+                        ls::log_level::fatal),
               config.always_log_levels.end());
 }
 
@@ -206,7 +207,7 @@ TEST(LogSamplerTest, DisabledSamplerPassesAll) {
     log_sampler sampler(sampling_config::disabled());
 
     for (int i = 0; i < 100; ++i) {
-        EXPECT_TRUE(sampler.should_sample(log_level::info, "test message"));
+        EXPECT_TRUE(sampler.should_sample(ls::log_level::info, "test message"));
     }
 
     auto stats = sampler.get_stats();
@@ -220,7 +221,7 @@ TEST(LogSamplerTest, FullRatePassesAll) {
     log_sampler sampler(config);
 
     for (int i = 0; i < 100; ++i) {
-        EXPECT_TRUE(sampler.should_sample(log_level::info, "test message"));
+        EXPECT_TRUE(sampler.should_sample(ls::log_level::info, "test message"));
     }
 
     auto stats = sampler.get_stats();
@@ -234,7 +235,7 @@ TEST(LogSamplerTest, ZeroRateDropsAll) {
     log_sampler sampler(config);
 
     for (int i = 0; i < 100; ++i) {
-        EXPECT_FALSE(sampler.should_sample(log_level::info, "test message"));
+        EXPECT_FALSE(sampler.should_sample(ls::log_level::info, "test message"));
     }
 
     auto stats = sampler.get_stats();
@@ -244,17 +245,17 @@ TEST(LogSamplerTest, ZeroRateDropsAll) {
 
 TEST(LogSamplerTest, AlwaysLogLevelBypassesSampling) {
     auto config = sampling_config::random_sampling(0.0);  // Drop all
-    config.always_log_levels = {log_level::error, log_level::fatal};
+    config.always_log_levels = {ls::log_level::error, ls::log_level::fatal};
     log_sampler sampler(config);
 
     // Info should be dropped
-    EXPECT_FALSE(sampler.should_sample(log_level::info, "info message"));
+    EXPECT_FALSE(sampler.should_sample(ls::log_level::info, "info message"));
 
     // Error should bypass
-    EXPECT_TRUE(sampler.should_sample(log_level::error, "error message"));
+    EXPECT_TRUE(sampler.should_sample(ls::log_level::error, "error message"));
 
     // Fatal should bypass
-    EXPECT_TRUE(sampler.should_sample(log_level::fatal, "fatal message"));
+    EXPECT_TRUE(sampler.should_sample(ls::log_level::fatal, "fatal message"));
 
     auto stats = sampler.get_stats();
     EXPECT_EQ(stats.bypassed_count, 2U);
@@ -274,7 +275,7 @@ TEST(LogSamplerTest, RandomSamplingApproximatesRate) {
     int sampled = 0;
 
     for (int i = 0; i < iterations; ++i) {
-        if (sampler.should_sample(log_level::info, "test message " + std::to_string(i))) {
+        if (sampler.should_sample(ls::log_level::info, "test message " + std::to_string(i))) {
             ++sampled;
         }
     }
@@ -294,7 +295,7 @@ TEST(LogSamplerTest, RandomSamplingLowRate) {
     int sampled = 0;
 
     for (int i = 0; i < iterations; ++i) {
-        if (sampler.should_sample(log_level::info, "test message " + std::to_string(i))) {
+        if (sampler.should_sample(ls::log_level::info, "test message " + std::to_string(i))) {
             ++sampled;
         }
     }
@@ -315,7 +316,7 @@ TEST(LogSamplerTest, RateLimitingBasic) {
 
     int sampled = 0;
     for (int i = 0; i < 200; ++i) {
-        if (sampler.should_sample(log_level::info, "test message")) {
+        if (sampler.should_sample(ls::log_level::info, "test message")) {
             ++sampled;
         }
     }
@@ -334,9 +335,9 @@ TEST(LogSamplerTest, HashBasedSamplingIsDeterministic) {
     log_sampler sampler(config);
 
     // Same message should always get same result
-    bool result1 = sampler.should_sample(log_level::info, "specific message");
+    bool result1 = sampler.should_sample(ls::log_level::info, "specific message");
     sampler.reset_stats();
-    bool result2 = sampler.should_sample(log_level::info, "specific message");
+    bool result2 = sampler.should_sample(ls::log_level::info, "specific message");
 
     EXPECT_EQ(result1, result2);
 }
@@ -353,7 +354,7 @@ TEST(LogSamplerTest, HashBasedSamplingDifferentMessages) {
     for (int i = 0; i < iterations; ++i) {
         std::string msg = "log_event_" + std::to_string(i) + "_action_" +
                           std::to_string(i * 7 % 100);
-        if (sampler.should_sample(log_level::info, msg)) {
+        if (sampler.should_sample(ls::log_level::info, msg)) {
             ++sampled;
         }
     }
@@ -382,7 +383,7 @@ TEST(LogSamplerTest, CategorySpecificRates) {
     // Test security category - should all pass
     int security_passed = 0;
     for (int i = 0; i < 100; ++i) {
-        if (sampler.should_sample(log_level::info, "security event", std::string("security"))) {
+        if (sampler.should_sample(ls::log_level::info, "security event", std::string("security"))) {
             ++security_passed;
         }
     }
@@ -393,7 +394,7 @@ TEST(LogSamplerTest, CategorySpecificRates) {
     // Test database category - should have low pass rate
     int database_passed = 0;
     for (int i = 0; i < 1000; ++i) {
-        if (sampler.should_sample(log_level::info, "db query " + std::to_string(i), std::string("database"))) {
+        if (sampler.should_sample(ls::log_level::info, "db query " + std::to_string(i), std::string("database"))) {
             ++database_passed;
         }
     }
@@ -409,7 +410,7 @@ TEST(LogSamplerTest, ConfigCanBeUpdated) {
     log_sampler sampler(sampling_config::disabled());
 
     // Initially passes all
-    EXPECT_TRUE(sampler.should_sample(log_level::info, "test"));
+    EXPECT_TRUE(sampler.should_sample(ls::log_level::info, "test"));
 
     // Update to drop all
     auto new_config = sampling_config::random_sampling(0.0);
@@ -417,7 +418,7 @@ TEST(LogSamplerTest, ConfigCanBeUpdated) {
     sampler.set_config(new_config);
 
     // Now should drop
-    EXPECT_FALSE(sampler.should_sample(log_level::info, "test"));
+    EXPECT_FALSE(sampler.should_sample(ls::log_level::info, "test"));
 }
 
 TEST(LogSamplerTest, EnableDisableToggle) {
@@ -427,17 +428,17 @@ TEST(LogSamplerTest, EnableDisableToggle) {
 
     // Enabled by default via config
     EXPECT_TRUE(sampler.is_enabled());
-    EXPECT_FALSE(sampler.should_sample(log_level::info, "test"));
+    EXPECT_FALSE(sampler.should_sample(ls::log_level::info, "test"));
 
     // Disable
     sampler.set_enabled(false);
     EXPECT_FALSE(sampler.is_enabled());
-    EXPECT_TRUE(sampler.should_sample(log_level::info, "test"));  // Now passes
+    EXPECT_TRUE(sampler.should_sample(ls::log_level::info, "test"));  // Now passes
 
     // Re-enable
     sampler.set_enabled(true);
     EXPECT_TRUE(sampler.is_enabled());
-    EXPECT_FALSE(sampler.should_sample(log_level::info, "test"));  // Back to dropping
+    EXPECT_FALSE(sampler.should_sample(ls::log_level::info, "test"));  // Back to dropping
 }
 
 // =============================================================================
@@ -446,13 +447,13 @@ TEST(LogSamplerTest, EnableDisableToggle) {
 
 TEST(LogSamplerTest, StatsAreAccurate) {
     auto config = sampling_config::random_sampling(0.5);
-    config.always_log_levels = {log_level::error};
+    config.always_log_levels = {ls::log_level::error};
     log_sampler sampler(config);
 
     const int iterations = 1000;
     for (int i = 0; i < iterations; ++i) {
-        (void)sampler.should_sample(log_level::info, "info " + std::to_string(i));
-        (void)sampler.should_sample(log_level::error, "error " + std::to_string(i));  // Bypassed
+        (void)sampler.should_sample(ls::log_level::info, "info " + std::to_string(i));
+        (void)sampler.should_sample(ls::log_level::error, "error " + std::to_string(i));  // Bypassed
     }
 
     auto stats = sampler.get_stats();
@@ -472,7 +473,7 @@ TEST(LogSamplerTest, ResetStats) {
     log_sampler sampler(config);
 
     for (int i = 0; i < 100; ++i) {
-        (void)sampler.should_sample(log_level::info, "test");
+        (void)sampler.should_sample(ls::log_level::info, "test");
     }
 
     auto stats = sampler.get_stats();
@@ -533,7 +534,7 @@ TEST(LoggerSamplingTest, LoggerWithSampler) {
 
     // Set a sampler that drops all (rate=0)
     auto config = sampling_config::random_sampling(0.0);
-    config.always_log_levels = {log_level::error, log_level::fatal};
+    config.always_log_levels = {ls::log_level::error, ls::log_level::fatal};
     log.set_sampler(std::make_unique<log_sampler>(config));
 
     // Info messages should be dropped

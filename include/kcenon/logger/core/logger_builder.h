@@ -220,7 +220,13 @@ public:
         config_.min_level = level;
         return *this;
     }
-    
+
+    /// Overload accepting common::interfaces::log_level for compatibility with kcenon::logger::log_level
+    logger_builder& with_min_level(kcenon::common::interfaces::log_level level) {
+        config_.min_level = static_cast<logger_system::log_level>(static_cast<int>(level));
+        return *this;
+    }
+
     /**
      * @brief Set batch size for processing
      * @param size Batch size

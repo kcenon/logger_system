@@ -107,8 +107,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace kcenon::logger {
 
-// Type aliases - always use logger_system types
-using log_level = logger_system::log_level;
+// Type aliases - use common::interfaces types for standardization
+using log_level = common::interfaces::log_level;
 using health_status = logger_system::health_status;
 using overflow_policy = logger_system::overflow_policy;
 
@@ -687,6 +687,9 @@ public:
      * @since 3.1.0
      */
     [[nodiscard]] structured_log_builder log_structured(log_level level);
+
+    /// Overload accepting logger_system::log_level for backward compatibility
+    [[nodiscard]] structured_log_builder log_structured(logger_system::log_level level);
 
     // =========================================================================
     // Context fields management

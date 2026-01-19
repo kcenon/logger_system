@@ -36,6 +36,7 @@
 
 #include <kcenon/logger/interfaces/log_filter_interface.h>
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <algorithm>
 #include <regex>
 #include <functional>
@@ -53,6 +54,10 @@ private:
 
 public:
     explicit level_filter(logger_system::log_level min_level) : min_level_(min_level) {}
+
+    /// Constructor accepting common::interfaces::log_level for compatibility with kcenon::logger::log_level
+    explicit level_filter(kcenon::common::interfaces::log_level min_level)
+        : min_level_(static_cast<logger_system::log_level>(static_cast<int>(min_level))) {}
 
     bool should_log(const log_entry& entry) const override {
         return static_cast<int>(entry.level) >= static_cast<int>(min_level_);
@@ -74,6 +79,10 @@ private:
 
 public:
     explicit exact_level_filter(logger_system::log_level level) : level_(level) {}
+
+    /// Constructor accepting common::interfaces::log_level for compatibility with kcenon::logger::log_level
+    explicit exact_level_filter(kcenon::common::interfaces::log_level level)
+        : level_(static_cast<logger_system::log_level>(static_cast<int>(level))) {}
 
     bool should_log(const log_entry& entry) const override {
         return entry.level == level_;
