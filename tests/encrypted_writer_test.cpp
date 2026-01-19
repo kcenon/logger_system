@@ -107,7 +107,7 @@ TEST_F(EncryptedWriterTest, WriteAndDecryptSingleEntry) {
         encrypted_writer writer(log_path, std::move(config));
 
         auto result = writer.write(
-            logger_system::log_level::info,
+            kcenon::common::interfaces::log_level::info,
             "Test encrypted message",
             "test.cpp",
             42,
@@ -164,7 +164,7 @@ TEST_F(EncryptedWriterTest, WriteMultipleEntries) {
 
         for (int i = 0; i < num_entries; ++i) {
             auto result = writer.write(
-                logger_system::log_level::debug,
+                kcenon::common::interfaces::log_level::debug,
                 "Entry number " + std::to_string(i),
                 "", 0, "",
                 std::chrono::system_clock::now()
@@ -212,7 +212,7 @@ TEST_F(EncryptedWriterTest, KeyRotation) {
 
     // Write with first key
     writer.write(
-        logger_system::log_level::info,
+        kcenon::common::interfaces::log_level::info,
         "Before rotation",
         "", 0, "",
         std::chrono::system_clock::now()
@@ -235,7 +235,7 @@ TEST_F(EncryptedWriterTest, KeyRotation) {
 
     // Write with new key
     writer.write(
-        logger_system::log_level::info,
+        kcenon::common::interfaces::log_level::info,
         "After rotation",
         "", 0, "",
         std::chrono::system_clock::now()
@@ -276,7 +276,7 @@ TEST_F(EncryptedWriterTest, DecryptWithWrongKey) {
         encrypted_writer writer(log_path, std::move(config));
 
         writer.write(
-            logger_system::log_level::info,
+            kcenon::common::interfaces::log_level::info,
             "Secret message",
             "", 0, "",
             std::chrono::system_clock::now()
@@ -325,7 +325,7 @@ TEST_F(EncryptedWriterTest, ThreadSafety) {
         threads.emplace_back([writer_ptr, t]() {
             for (int i = 0; i < entries_per_thread; ++i) {
                 auto result = writer_ptr->write(
-                    logger_system::log_level::info,
+                    kcenon::common::interfaces::log_level::info,
                     "Thread " + std::to_string(t) + " Entry " + std::to_string(i),
                     "", 0, "",
                     std::chrono::system_clock::now()

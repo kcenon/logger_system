@@ -44,7 +44,7 @@ common::VoidResult thread_safe_writer::write(const log_entry& entry) {
     return write_entry_impl(entry);
 }
 
-common::VoidResult thread_safe_writer::write(logger_system::log_level level,
+common::VoidResult thread_safe_writer::write(common::interfaces::log_level level,
                                              const std::string& message,
                                              const std::string& file,
                                              int line,
@@ -59,7 +59,9 @@ common::VoidResult thread_safe_writer::write_entry_impl(const log_entry& entry) 
     std::string file = entry.location ? entry.location->file.to_string() : "";
     int line = entry.location ? entry.location->line : 0;
     std::string function = entry.location ? entry.location->function.to_string() : "";
-    return write_impl(entry.level, entry.message.to_string(), file, line, function, entry.timestamp);
+    // Convert logger_system::log_level to common::interfaces::log_level
+    auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+    return write_impl(level, entry.message.to_string(), file, line, function, entry.timestamp);
 }
 
 common::VoidResult thread_safe_writer::flush() {

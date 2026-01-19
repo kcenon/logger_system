@@ -39,8 +39,8 @@ public:
         --instance_count_;
     }
 
-    // Note: base_writer::write uses logger_system::log_level for backward compatibility
-    common::VoidResult write(logger_system::log_level level,
+    // Note: base_writer::write uses kcenon::common::interfaces::log_level for backward compatibility
+    common::VoidResult write(kcenon::common::interfaces::log_level level,
                       const std::string& message,
                       const std::string& file,
                       int line,

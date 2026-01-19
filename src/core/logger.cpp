@@ -200,10 +200,12 @@ public:
                     local_named_writers = named_writers_;
                 }
 
+                // Convert logger_system::log_level to common::interfaces::log_level
+                auto common_level = static_cast<common::interfaces::log_level>(static_cast<int>(level));
                 for (const auto& writer_name : routed_writer_names) {
                     auto it = local_named_writers.find(writer_name);
                     if (it != local_named_writers.end() && it->second) {
-                        it->second->write(level, message, file, line, function, now);
+                        it->second->write(common_level, message, file, line, function, now);
                     }
                 }
             }
@@ -216,9 +218,11 @@ public:
                 local_writers = writers_;
             }
 
+            // Convert logger_system::log_level to common::interfaces::log_level
+            auto common_level = static_cast<common::interfaces::log_level>(static_cast<int>(level));
             for (auto& writer : local_writers) {
                 if (writer) {
-                    writer->write(level, message, file, line, function, now);
+                    writer->write(common_level, message, file, line, function, now);
                 }
             }
         }

@@ -261,10 +261,13 @@ private:
         int line = entry.location ? entry.location->line : 0;
         std::string function = entry.location ? entry.location->function.to_string() : "";
 
+        // Convert logger_system::log_level to common::interfaces::log_level
+        auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+
         // Write to all writers without holding mutex
         for (auto& writer : writers_snapshot) {
             try {
-                writer->write(entry.level, entry.message.to_string(), file,
+                writer->write(level, entry.message.to_string(), file,
                              line, function, entry.timestamp);
             } catch (...) {
                 // Swallow exceptions to prevent thread termination
@@ -436,10 +439,13 @@ private:
         int line = entry.location ? entry.location->line : 0;
         std::string function = entry.location ? entry.location->function.to_string() : "";
 
+        // Convert logger_system::log_level to common::interfaces::log_level
+        auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+
         // Write to all writers without holding mutex
         for (auto& writer : writers_snapshot) {
             try {
-                writer->write(entry.level, entry.message.to_string(), file,
+                writer->write(level, entry.message.to_string(), file,
                              line, function, entry.timestamp);
             } catch (...) {
                 // Swallow exceptions to prevent issues

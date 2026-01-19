@@ -46,7 +46,7 @@ namespace ci = kcenon::common::interfaces;
 // Use logger namespace for other types (but not log_level to avoid ambiguity)
 using namespace kcenon::logger;
 using namespace kcenon::logger::sampling;
-// Alias for sampling config which still uses logger_system::log_level internally
+// Alias for sampling config which still uses kcenon::common::interfaces::log_level internally
 namespace ls = logger_system;
 
 namespace {
@@ -54,11 +54,11 @@ namespace {
 class memory_writer final : public base_writer {
 public:
     struct entry_record {
-        logger_system::log_level level = logger_system::log_level::info;
+        kcenon::common::interfaces::log_level level = kcenon::common::interfaces::log_level::info;
         std::string message;
     };
 
-    kcenon::common::VoidResult write(logger_system::log_level level,
+    kcenon::common::VoidResult write(kcenon::common::interfaces::log_level level,
                                      const std::string& message,
                                      [[maybe_unused]] const std::string& file,
                                      [[maybe_unused]] int line,

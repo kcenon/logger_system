@@ -64,26 +64,29 @@ console_writer::~console_writer() {
 common::VoidResult console_writer::write_entry_impl(const log_entry& entry) {
     // Note: Mutex is already held by thread_safe_writer::write()
     return utils::try_write_operation([&]() -> common::VoidResult {
-        auto& stream = (use_stderr_ || entry.level <= logger_system::log_level::error)
+        // Convert logger_system::log_level to common::interfaces::log_level for comparison
+        auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+
+        auto& stream = (use_stderr_ || level <= common::interfaces::log_level::error)
                        ? std::cerr : std::cout;
 
         if (use_color()) {
             // Simple color mapping based on level
-            switch (entry.level) {
-                case logger_system::log_level::fatal:
-                case logger_system::log_level::error:
+            switch (level) {
+                case common::interfaces::log_level::fatal:
+                case common::interfaces::log_level::error:
                     stream << "\033[31m"; // Red
                     break;
-                case logger_system::log_level::warning:
+                case common::interfaces::log_level::warning:
                     stream << "\033[33m"; // Yellow
                     break;
-                case logger_system::log_level::info:
+                case common::interfaces::log_level::info:
                     stream << "\033[32m"; // Green
                     break;
-                case logger_system::log_level::debug:
+                case common::interfaces::log_level::debug:
                     stream << "\033[36m"; // Cyan
                     break;
-                case logger_system::log_level::trace:
+                case common::interfaces::log_level::trace:
                     stream << "\033[37m"; // White
                     break;
                 default:
@@ -105,7 +108,7 @@ common::VoidResult console_writer::write_entry_impl(const log_entry& entry) {
     }, logger_error_code::processing_failed);
 }
 
-common::VoidResult console_writer::write_impl(logger_system::log_level level,
+common::VoidResult console_writer::write_impl(common::interfaces::log_level level,
                                               const std::string& message,
                                               const std::string& file,
                                               int line,

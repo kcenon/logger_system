@@ -43,7 +43,8 @@ protected:
     analyzed_log_entry make_entry(logger_system::log_level level,
                                    const std::string& message) {
         analyzed_log_entry entry;
-        entry.level = level;
+        // Convert common::interfaces::log_level to logger_system::log_level for analyzed_log_entry
+        entry.level = static_cast<logger_system::log_level>(static_cast<int>(level));
         entry.message = message;
         entry.timestamp = std::chrono::system_clock::now();
         entry.source_file = "test.cpp";

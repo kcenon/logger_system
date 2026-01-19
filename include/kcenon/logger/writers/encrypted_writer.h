@@ -267,7 +267,7 @@ public:
      * @return common::VoidResult Success or error code
      */
     common::VoidResult write(
-        logger_system::log_level level,
+        common::interfaces::log_level level,
         const std::string& message,
         const std::string& file,
         int line,

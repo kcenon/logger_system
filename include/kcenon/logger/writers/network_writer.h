@@ -59,7 +59,7 @@ public:
     /**
      * @brief Write log entry
      */
-    common::VoidResult write(logger_system::log_level level,
+    common::VoidResult write(common::interfaces::log_level level,
                              const std::string& message,
                              const std::string& file,
                              int line,
@@ -98,7 +98,7 @@ public:
 private:
     // Log entry for buffering
     struct buffered_log {
-        logger_system::log_level level;
+        common::interfaces::log_level level;
         std::string message;
         std::string file;
         int line;

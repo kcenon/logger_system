@@ -138,7 +138,7 @@ public:
      * @param timestamp Timestamp
      * @return common::VoidResult indicating success or error
      */
-    common::VoidResult write(logger_system::log_level level,
+    common::VoidResult write(common::interfaces::log_level level,
                              const std::string& message,
                              const std::string& file,
                              int line,
@@ -197,7 +197,7 @@ private:
      * @brief Log entry optimized for high-performance queuing
      */
     struct queued_log_entry {
-        logger_system::log_level level;
+        common::interfaces::log_level level;
         std::string message;
         std::string file;
         int line;
@@ -207,7 +207,7 @@ private:
 
         queued_log_entry() = default;
 
-        queued_log_entry(logger_system::log_level lvl,
+        queued_log_entry(common::interfaces::log_level lvl,
                         std::string msg,
                         std::string f,
                         int l,
@@ -225,7 +225,7 @@ private:
     /**
      * @brief Write directly to the underlying writer (fallback mode)
      */
-    common::VoidResult write_direct(logger_system::log_level level,
+    common::VoidResult write_direct(common::interfaces::log_level level,
                                     const std::string& message,
                                     const std::string& file,
                                     int line,
