@@ -54,6 +54,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/interfaces/logger_types.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 #include <string>
 #include <functional>
@@ -88,14 +89,26 @@ public:
 
     /**
      * @brief Constructor
-     * @param level Log level for the entry
+     * @param level Log level for the entry (using common::interfaces::log_level)
      * @param callback Callback to invoke when emit() is called
      * @param context_fields Context fields to include automatically
      */
+    structured_log_builder(common::interfaces::log_level level,
+                           emit_callback callback,
+                           const log_fields* context_fields = nullptr)
+        : level_(static_cast<logger_system::log_level>(static_cast<int>(level))),
+          callback_(std::move(callback)) {
+        if (context_fields && !context_fields->empty()) {
+            fields_ = *context_fields;
+        }
+    }
+
+    /// Constructor accepting logger_system::log_level for backward compatibility
     structured_log_builder(logger_system::log_level level,
                            emit_callback callback,
                            const log_fields* context_fields = nullptr)
-        : level_(level), callback_(std::move(callback)) {
+        : level_(level),
+          callback_(std::move(callback)) {
         if (context_fields && !context_fields->empty()) {
             fields_ = *context_fields;
         }

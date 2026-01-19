@@ -267,7 +267,45 @@ struct log_entry {
               std::chrono::system_clock::time_point ts = std::chrono::system_clock::now())
         : level(lvl), message(msg), timestamp(ts),
           location(source_location{file, line, function}) {}
-    
+
+    /**
+     * @brief Constructor accepting common::interfaces::log_level
+     * @param lvl Log severity level (common::interfaces::log_level)
+     * @param msg Log message
+     * @param ts Timestamp (default: current time)
+     *
+     * @details Enables seamless use with kcenon::logger::log_level alias.
+     * Internally converts to logger_system::log_level for storage.
+     *
+     * @since 3.0.0
+     */
+    log_entry(kcenon::common::interfaces::log_level lvl,
+              const std::string& msg,
+              std::chrono::system_clock::time_point ts = std::chrono::system_clock::now())
+        : level(static_cast<logger_system::log_level>(static_cast<int>(lvl))),
+          message(msg), timestamp(ts) {}
+
+    /**
+     * @brief Constructor with source location accepting common::interfaces::log_level
+     * @param lvl Log severity level (common::interfaces::log_level)
+     * @param msg Log message
+     * @param file Source file path
+     * @param line Line number in source file
+     * @param function Function name
+     * @param ts Timestamp (default: current time)
+     *
+     * @since 3.0.0
+     */
+    log_entry(kcenon::common::interfaces::log_level lvl,
+              const std::string& msg,
+              const std::string& file,
+              int line,
+              const std::string& function,
+              std::chrono::system_clock::time_point ts = std::chrono::system_clock::now())
+        : level(static_cast<logger_system::log_level>(static_cast<int>(lvl))),
+          message(msg), timestamp(ts),
+          location(source_location{file, line, function}) {}
+
     /**
      * @brief Move constructor
      * @details Enables efficient transfer of log entries without copying

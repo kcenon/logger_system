@@ -27,6 +27,8 @@ using namespace kcenon::logger;
 using namespace kcenon::common;
 using namespace std::chrono_literals;
 namespace ci = kcenon::common::interfaces;
+// Use logger_system::log_level for comparisons with captured entries (which store logger_system::log_level)
+namespace ls = logger_system;
 
 namespace {
 
@@ -89,7 +91,7 @@ TEST_F(StructuredLoggingTest, BasicStructuredLogBuilder) {
     log_entry* captured_entry = nullptr;
 
     structured_log_builder builder(
-        log_level::info,
+        ls::log_level::info,
         [&callback_invoked, &captured_entry](log_entry&& entry) {
             callback_invoked = true;
             // Store a copy of entry data for validation
@@ -110,7 +112,7 @@ TEST_F(StructuredLoggingTest, StructuredLogBuilderFieldTypes) {
     log_fields captured_fields;
 
     structured_log_builder builder(
-        log_level::info,
+        ls::log_level::info,
         [&captured_fields](log_entry&& entry) {
             if (entry.fields) {
                 captured_fields = *entry.fields;
@@ -159,7 +161,7 @@ TEST_F(StructuredLoggingTest, ContextFieldsIncluded) {
     log_fields captured_fields;
 
     structured_log_builder builder(
-        log_level::info,
+        ls::log_level::info,
         [&captured_fields](log_entry&& entry) {
             if (entry.fields) {
                 captured_fields = *entry.fields;
@@ -187,8 +189,8 @@ TEST_F(StructuredLoggingTest, LoggerStructuredMethods) {
     auto* writer_ptr = writer.get();
     test_logger->add_writer("capture", std::move(writer));
 
-    // Test log_structured with log_level::info (canonical API)
-    test_logger->log_structured(log_level::info)
+    // Test log_structured with ls::log_level::info (canonical API)
+    test_logger->log_structured(ls::log_level::info)
         .message("User logged in")
         .field("user_id", 12345)
         .emit();
@@ -197,7 +199,7 @@ TEST_F(StructuredLoggingTest, LoggerStructuredMethods) {
 
     auto entries = writer_ptr->get_entries();
     ASSERT_GE(entries.size(), 1);
-    EXPECT_EQ(entries[0].level, log_level::info);
+    EXPECT_EQ(entries[0].level, ls::log_level::info);
     EXPECT_EQ(entries[0].message, "User logged in");
 
     test_logger->stop();
@@ -261,7 +263,7 @@ TEST_F(StructuredLoggingTest, LoggerContextManagement) {
 TEST_F(StructuredLoggingTest, JsonFormatterStructuredFields) {
     json_formatter formatter;
 
-    log_entry entry(log_level::info, "Test message");
+    log_entry entry(ls::log_level::info, "Test message");
     entry.fields = log_fields{
         {"user_id", static_cast<int64_t>(12345)},
         {"action", std::string("login")},
@@ -283,7 +285,7 @@ TEST_F(StructuredLoggingTest, JsonFormatterStructuredFields) {
 TEST_F(StructuredLoggingTest, JsonFormatterWithCategory) {
     json_formatter formatter;
 
-    log_entry entry(log_level::info, "Database query");
+    log_entry entry(ls::log_level::info, "Database query");
     entry.category = small_string_128("database");
 
     std::string output = formatter.format(entry);
@@ -301,24 +303,24 @@ TEST_F(StructuredLoggingTest, AllStructuredLevelMethods) {
     auto* writer_ptr = writer.get();
     test_logger->add_writer("capture", std::move(writer));
 
-    test_logger->log_structured(log_level::trace).message("Trace").emit();
-    test_logger->log_structured(log_level::debug).message("Debug").emit();
-    test_logger->log_structured(log_level::info).message("Info").emit();
-    test_logger->log_structured(log_level::warn).message("Warn").emit();
-    test_logger->log_structured(log_level::error).message("Error").emit();
-    test_logger->log_structured(log_level::fatal).message("Fatal").emit();
+    test_logger->log_structured(ls::log_level::trace).message("Trace").emit();
+    test_logger->log_structured(ls::log_level::debug).message("Debug").emit();
+    test_logger->log_structured(ls::log_level::info).message("Info").emit();
+    test_logger->log_structured(ls::log_level::warn).message("Warn").emit();
+    test_logger->log_structured(ls::log_level::error).message("Error").emit();
+    test_logger->log_structured(ls::log_level::fatal).message("Fatal").emit();
 
     test_logger->flush();
 
     auto entries = writer_ptr->get_entries();
     ASSERT_EQ(entries.size(), 6);
 
-    EXPECT_EQ(entries[0].level, log_level::trace);
-    EXPECT_EQ(entries[1].level, log_level::debug);
-    EXPECT_EQ(entries[2].level, log_level::info);
-    EXPECT_EQ(entries[3].level, log_level::warn);
-    EXPECT_EQ(entries[4].level, log_level::error);
-    EXPECT_EQ(entries[5].level, log_level::fatal);
+    EXPECT_EQ(entries[0].level, ls::log_level::trace);
+    EXPECT_EQ(entries[1].level, ls::log_level::debug);
+    EXPECT_EQ(entries[2].level, ls::log_level::info);
+    EXPECT_EQ(entries[3].level, ls::log_level::warn);
+    EXPECT_EQ(entries[4].level, ls::log_level::error);
+    EXPECT_EQ(entries[5].level, ls::log_level::fatal);
 
     test_logger->stop();
 }
@@ -334,24 +336,24 @@ TEST_F(StructuredLoggingTest, GenericLogStructuredMethod) {
     test_logger->add_writer("capture", std::move(writer));
 
     // Use the canonical log_structured(level) API
-    test_logger->log_structured(log_level::trace).message("Trace").emit();
-    test_logger->log_structured(log_level::debug).message("Debug").emit();
-    test_logger->log_structured(log_level::info).message("Info").emit();
-    test_logger->log_structured(log_level::warn).message("Warn").emit();
-    test_logger->log_structured(log_level::error).message("Error").emit();
-    test_logger->log_structured(log_level::fatal).message("Fatal").emit();
+    test_logger->log_structured(ls::log_level::trace).message("Trace").emit();
+    test_logger->log_structured(ls::log_level::debug).message("Debug").emit();
+    test_logger->log_structured(ls::log_level::info).message("Info").emit();
+    test_logger->log_structured(ls::log_level::warn).message("Warn").emit();
+    test_logger->log_structured(ls::log_level::error).message("Error").emit();
+    test_logger->log_structured(ls::log_level::fatal).message("Fatal").emit();
 
     test_logger->flush();
 
     auto entries = writer_ptr->get_entries();
     ASSERT_EQ(entries.size(), 6);
 
-    EXPECT_EQ(entries[0].level, log_level::trace);
-    EXPECT_EQ(entries[1].level, log_level::debug);
-    EXPECT_EQ(entries[2].level, log_level::info);
-    EXPECT_EQ(entries[3].level, log_level::warn);
-    EXPECT_EQ(entries[4].level, log_level::error);
-    EXPECT_EQ(entries[5].level, log_level::fatal);
+    EXPECT_EQ(entries[0].level, ls::log_level::trace);
+    EXPECT_EQ(entries[1].level, ls::log_level::debug);
+    EXPECT_EQ(entries[2].level, ls::log_level::info);
+    EXPECT_EQ(entries[3].level, ls::log_level::warn);
+    EXPECT_EQ(entries[4].level, ls::log_level::error);
+    EXPECT_EQ(entries[5].level, ls::log_level::fatal);
 
     test_logger->stop();
 }
@@ -366,7 +368,7 @@ TEST_F(StructuredLoggingTest, GenericLogStructuredWithFields) {
     test_logger->add_writer("capture", std::move(writer));
 
     // Use the canonical log_structured(level) API with fields
-    test_logger->log_structured(log_level::info)
+    test_logger->log_structured(ls::log_level::info)
         .message("User action completed")
         .field("user_id", 12345)
         .field("action", "purchase")
@@ -378,7 +380,7 @@ TEST_F(StructuredLoggingTest, GenericLogStructuredWithFields) {
 
     auto entries = writer_ptr->get_entries();
     ASSERT_EQ(entries.size(), 1);
-    EXPECT_EQ(entries[0].level, log_level::info);
+    EXPECT_EQ(entries[0].level, ls::log_level::info);
     EXPECT_EQ(entries[0].message, "User action completed");
 
     test_logger->stop();
@@ -386,7 +388,7 @@ TEST_F(StructuredLoggingTest, GenericLogStructuredWithFields) {
 
 // Test 9: log_entry with fields
 TEST_F(StructuredLoggingTest, LogEntryWithFields) {
-    log_entry entry(log_level::info, "Test");
+    log_entry entry(ls::log_level::info, "Test");
 
     EXPECT_FALSE(entry.fields.has_value());
 
@@ -701,7 +703,7 @@ TEST_F(StructuredLoggingTest, ThreadIsolation) {
 TEST_F(StructuredLoggingTest, LogfmtFormatterBasic) {
     logfmt_formatter formatter;
 
-    log_entry entry(log_level::info, "Server started");
+    log_entry entry(ls::log_level::info, "Server started");
 
     std::string output = formatter.format(entry);
 
@@ -715,7 +717,7 @@ TEST_F(StructuredLoggingTest, LogfmtFormatterBasic) {
 TEST_F(StructuredLoggingTest, LogfmtFormatterWithFields) {
     logfmt_formatter formatter;
 
-    log_entry entry(log_level::error, "Connection failed");
+    log_entry entry(ls::log_level::error, "Connection failed");
     entry.fields = log_fields{
         {"host", std::string("localhost")},
         {"port", static_cast<int64_t>(5432)},
@@ -735,7 +737,7 @@ TEST_F(StructuredLoggingTest, LogfmtFormatterWithFields) {
 TEST_F(StructuredLoggingTest, LogfmtFormatterEscaping) {
     logfmt_formatter formatter;
 
-    log_entry entry(log_level::info, "Message with spaces and \"quotes\"");
+    log_entry entry(ls::log_level::info, "Message with spaces and \"quotes\"");
 
     std::string output = formatter.format(entry);
 
@@ -747,7 +749,7 @@ TEST_F(StructuredLoggingTest, LogfmtFormatterEscaping) {
 TEST_F(StructuredLoggingTest, TemplateFormatterBasic) {
     template_formatter formatter("[{level}] {message}");
 
-    log_entry entry(log_level::info, "Test message");
+    log_entry entry(ls::log_level::info, "Test message");
 
     std::string output = formatter.format(entry);
 
@@ -759,7 +761,7 @@ TEST_F(StructuredLoggingTest, TemplateFormatterBasic) {
 TEST_F(StructuredLoggingTest, TemplateFormatterWithTimestamp) {
     template_formatter formatter("{timestamp} [{level}] {message}");
 
-    log_entry entry(log_level::debug, "Debug info");
+    log_entry entry(ls::log_level::debug, "Debug info");
 
     std::string output = formatter.format(entry);
 
@@ -773,7 +775,7 @@ TEST_F(StructuredLoggingTest, TemplateFormatterWithTimestamp) {
 TEST_F(StructuredLoggingTest, TemplateFormatterWithLocation) {
     template_formatter formatter("{message} ({filename}:{line})");
 
-    log_entry entry(log_level::error, "Error occurred",
+    log_entry entry(ls::log_level::error, "Error occurred",
                     "/path/to/file.cpp", 42, "test_function");
 
     std::string output = formatter.format(entry);
@@ -787,7 +789,7 @@ TEST_F(StructuredLoggingTest, TemplateFormatterWithLocation) {
 TEST_F(StructuredLoggingTest, TemplateFormatterWithFields) {
     template_formatter formatter("{message} user_id={user_id}");
 
-    log_entry entry(log_level::info, "User action");
+    log_entry entry(ls::log_level::info, "User action");
     entry.fields = log_fields{
         {"user_id", static_cast<int64_t>(12345)}
     };
@@ -802,7 +804,7 @@ TEST_F(StructuredLoggingTest, TemplateFormatterWithFields) {
 TEST_F(StructuredLoggingTest, TemplateFormatterLowercaseLevel) {
     template_formatter formatter("{level_lower}: {message}");
 
-    log_entry entry(log_level::warn, "Warning message");
+    log_entry entry(ls::log_level::warn, "Warning message");
 
     std::string output = formatter.format(entry);
 
@@ -813,7 +815,7 @@ TEST_F(StructuredLoggingTest, TemplateFormatterLowercaseLevel) {
 TEST_F(StructuredLoggingTest, TemplateFormatterFieldWidth) {
     template_formatter formatter("[{level:10}] {message}");
 
-    log_entry entry(log_level::info, "Test");
+    log_entry entry(ls::log_level::info, "Test");
 
     std::string output = formatter.format(entry);
 
@@ -825,7 +827,7 @@ TEST_F(StructuredLoggingTest, TemplateFormatterFieldWidth) {
 TEST_F(StructuredLoggingTest, TemplateFormatterSetTemplate) {
     template_formatter formatter("[{level}] {message}");
 
-    log_entry entry(log_level::info, "Test");
+    log_entry entry(ls::log_level::info, "Test");
 
     std::string output1 = formatter.format(entry);
     EXPECT_NE(output1.find("[INFO]"), std::string::npos);

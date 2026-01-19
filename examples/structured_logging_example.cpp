@@ -55,7 +55,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <chrono>
 
 using namespace kcenon::logger;
-using log_level = logger_system::log_level;
 
 /**
  * @brief Demonstrates basic structured logging with key-value fields
