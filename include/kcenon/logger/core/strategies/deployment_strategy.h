@@ -84,7 +84,7 @@ private:
 
     static void apply_development(logger_config& config) {
         config.async = false;
-        config.min_level = logger_system::log_level::trace;
+        config.min_level = log_level::trace;
         config.enable_metrics = true;
         config.enable_crash_handler = true;
         config.enable_color_output = true;
@@ -96,7 +96,7 @@ private:
 
     static void apply_staging(logger_config& config) {
         config.async = true;
-        config.min_level = logger_system::log_level::info;
+        config.min_level = log_level::info;
         config.enable_metrics = true;
         config.enable_crash_handler = true;
         config.enable_color_output = false;
@@ -111,7 +111,7 @@ private:
 
     static void apply_production(logger_config& config) {
         config.async = true;
-        config.min_level = logger_system::log_level::warn;
+        config.min_level = log_level::warn;
         config.enable_metrics = true;
         config.enable_crash_handler = true;
         config.enable_color_output = false;
@@ -129,7 +129,7 @@ private:
 
     static void apply_testing(logger_config& config) {
         config.async = false;
-        config.min_level = logger_system::log_level::trace;
+        config.min_level = log_level::trace;
         config.enable_metrics = false;
         config.enable_crash_handler = false;
         config.enable_color_output = false;

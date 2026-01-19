@@ -8,6 +8,7 @@ All rights reserved.
 #include <kcenon/logger/writers/critical_writer.h>
 #include <kcenon/logger/core/error_codes.h>
 #include <kcenon/logger/utils/error_handling_utils.h>
+#include <kcenon/logger/utils/string_utils.h>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
@@ -229,13 +230,10 @@ void critical_writer::write_to_wal(
             timestamp.time_since_epoch()
         ).count() % 1000;
 
-        // Convert common::interfaces::log_level to logger_system::log_level for string conversion
-        auto legacy_level = static_cast<logger_system::log_level>(static_cast<int>(level));
-
         std::ostringstream oss;
         oss << "[" << std::put_time(std::localtime(&time_t), "%Y-%m-%d %H:%M:%S")
             << "." << std::setfill('0') << std::setw(3) << ms << "] "
-            << "[" << logger_system::log_level_to_string(legacy_level) << "] "
+            << "[" << utils::string_utils::level_to_string(level) << "] "
             << "[" << file << ":" << line << ":" << function << "] "
             << message << "\n";
 

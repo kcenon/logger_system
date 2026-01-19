@@ -114,7 +114,7 @@ TEST_F(RoutingIntegrationTest, NonExclusiveRouting) {
         .with_async(false)
         .add_writer("all", std::make_unique<file_writer>("test_all.log"))
         .add_writer("errors", std::make_unique<file_writer>("test_errors.log"))
-        .route_level(static_cast<logger_system::log_level>(static_cast<int>(ci::log_level::error)), {"errors"})
+        .route_level(static_cast<log_level>(static_cast<int>(ci::log_level::error)), {"errors"})
         .with_exclusive_routing(false)  // Non-exclusive (default)
         .build();
 

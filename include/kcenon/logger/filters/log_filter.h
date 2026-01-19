@@ -43,6 +43,9 @@
 
 namespace kcenon::logger::filters {
 
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
+
 /**
  * @brief Level-based log filter (minimum level threshold)
  *
@@ -50,14 +53,10 @@ namespace kcenon::logger::filters {
  */
 class level_filter : public log_filter_interface {
 private:
-    logger_system::log_level min_level_;
+    log_level min_level_;
 
 public:
-    explicit level_filter(logger_system::log_level min_level) : min_level_(min_level) {}
-
-    /// Constructor accepting common::interfaces::log_level for compatibility with kcenon::logger::log_level
-    explicit level_filter(kcenon::common::interfaces::log_level min_level)
-        : min_level_(static_cast<logger_system::log_level>(static_cast<int>(min_level))) {}
+    explicit level_filter(log_level min_level) : min_level_(min_level) {}
 
     bool should_log(const log_entry& entry) const override {
         return static_cast<int>(entry.level) >= static_cast<int>(min_level_);
@@ -75,14 +74,10 @@ public:
  */
 class exact_level_filter : public log_filter_interface {
 private:
-    logger_system::log_level level_;
+    log_level level_;
 
 public:
-    explicit exact_level_filter(logger_system::log_level level) : level_(level) {}
-
-    /// Constructor accepting common::interfaces::log_level for compatibility with kcenon::logger::log_level
-    explicit exact_level_filter(kcenon::common::interfaces::log_level level)
-        : level_(static_cast<logger_system::log_level>(static_cast<int>(level))) {}
+    explicit exact_level_filter(log_level level) : level_(level) {}
 
     bool should_log(const log_entry& entry) const override {
         return entry.level == level_;

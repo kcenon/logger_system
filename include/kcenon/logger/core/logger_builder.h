@@ -66,7 +66,6 @@ All rights reserved.
 
 #include "thread_integration_detector.h"
 #include "logger_config.h"
-#include "level_converter.h"
 #include "strategies/config_strategy_interface.h"
 #include "strategies/environment_strategy.h"
 #include "strategies/performance_strategy.h"
@@ -216,14 +215,8 @@ public:
      *
      * @since 1.0.0
      */
-    logger_builder& with_min_level(logger_system::log_level level) {
+    logger_builder& with_min_level(log_level level) {
         config_.min_level = level;
-        return *this;
-    }
-
-    /// Overload accepting common::interfaces::log_level for compatibility with kcenon::logger::log_level
-    logger_builder& with_min_level(kcenon::common::interfaces::log_level level) {
-        config_.min_level = static_cast<logger_system::log_level>(static_cast<int>(level));
         return *this;
     }
 
@@ -395,7 +388,7 @@ public:
      *
      * @since 2.0.0
      */
-    logger_builder& add_level_filter(logger_system::log_level min_level) {
+    logger_builder& add_level_filter(log_level min_level) {
         filters_.push_back(std::make_unique<filters::level_filter>(min_level));
         return *this;
     }
@@ -490,7 +483,7 @@ public:
      *
      * @since 2.0.0
      */
-    logger_builder& route_level(logger_system::log_level level,
+    logger_builder& route_level(log_level level,
                                 const std::vector<std::string>& writer_names,
                                 bool stop_propagation = false) {
         routing::route_config config;
@@ -682,12 +675,12 @@ public:
 
         if (level) {
             std::string level_str(level);
-            if (level_str == "trace") config_.min_level = logger_system::log_level::trace;
-            else if (level_str == "debug") config_.min_level = logger_system::log_level::debug;
-            else if (level_str == "info") config_.min_level = logger_system::log_level::info;
-            else if (level_str == "warn") config_.min_level = logger_system::log_level::warn;
-            else if (level_str == "error") config_.min_level = logger_system::log_level::error;
-            else if (level_str == "fatal") config_.min_level = logger_system::log_level::fatal;
+            if (level_str == "trace") config_.min_level = log_level::trace;
+            else if (level_str == "debug") config_.min_level = log_level::debug;
+            else if (level_str == "info") config_.min_level = log_level::info;
+            else if (level_str == "warn") config_.min_level = log_level::warning;
+            else if (level_str == "error") config_.min_level = log_level::error;
+            else if (level_str == "fatal") config_.min_level = log_level::critical;
         }
 
         return *this;
@@ -918,9 +911,9 @@ public:
      */
     logger_builder& with_random_sampling(
         double rate,
-        std::vector<logger_system::log_level> always_log_levels = {
-            logger_system::log_level::error,
-            logger_system::log_level::fatal
+        std::vector<log_level> always_log_levels = {
+            log_level::error,
+            log_level::critical
         }) {
         sampling::sampling_config config = sampling::sampling_config::random_sampling(rate);
         config.always_log_levels = std::move(always_log_levels);
@@ -945,9 +938,9 @@ public:
      */
     logger_builder& with_rate_limiting(
         std::size_t max_per_second,
-        std::vector<logger_system::log_level> always_log_levels = {
-            logger_system::log_level::error,
-            logger_system::log_level::fatal
+        std::vector<log_level> always_log_levels = {
+            log_level::error,
+            log_level::critical
         }) {
         sampling::sampling_config config = sampling::sampling_config::rate_limited(max_per_second);
         config.always_log_levels = std::move(always_log_levels);
@@ -974,10 +967,10 @@ public:
     logger_builder& with_adaptive_sampling(
         std::size_t threshold = 10000,
         double min_rate = 0.01,
-        std::vector<logger_system::log_level> always_log_levels = {
-            logger_system::log_level::warn,
-            logger_system::log_level::error,
-            logger_system::log_level::fatal
+        std::vector<log_level> always_log_levels = {
+            log_level::warning,
+            log_level::error,
+            log_level::critical
         }) {
         sampling::sampling_config config = sampling::sampling_config::adaptive(threshold, min_rate);
         config.always_log_levels = std::move(always_log_levels);
@@ -1056,13 +1049,9 @@ public:
 
         // Create logger with validated configuration
         auto logger_instance = std::make_unique<logger>(config_.async, config_.buffer_size, std::move(backend_));
-        
+
         // Apply configuration settings
-        // Suppress deprecation warning for internal conversion
-        #pragma GCC diagnostic push
-        #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-        logger_instance->set_level(to_common_level(config_.min_level));
-        #pragma GCC diagnostic pop
+        logger_instance->set_level(config_.min_level);
         
         if (config_.enable_metrics) {
             logger_instance->enable_metrics_collection(true);
