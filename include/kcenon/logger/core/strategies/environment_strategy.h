@@ -125,18 +125,18 @@ public:
     }
 
 private:
-    static logger_system::log_level parse_log_level(const char* str) {
-        std::string level(str);
-        std::transform(level.begin(), level.end(), level.begin(), ::tolower);
+    static log_level parse_log_level(const char* str) {
+        std::string level_str(str);
+        std::transform(level_str.begin(), level_str.end(), level_str.begin(), ::tolower);
 
-        if (level == "trace") return logger_system::log_level::trace;
-        if (level == "debug") return logger_system::log_level::debug;
-        if (level == "info") return logger_system::log_level::info;
-        if (level == "warn" || level == "warning") return logger_system::log_level::warn;
-        if (level == "error") return logger_system::log_level::error;
-        if (level == "fatal" || level == "critical") return logger_system::log_level::fatal;
+        if (level_str == "trace") return log_level::trace;
+        if (level_str == "debug") return log_level::debug;
+        if (level_str == "info") return log_level::info;
+        if (level_str == "warn" || level_str == "warning") return log_level::warning;
+        if (level_str == "error") return log_level::error;
+        if (level_str == "fatal" || level_str == "critical") return log_level::critical;
 
-        return logger_system::log_level::info;  // Default
+        return log_level::info;  // Default
     }
 
     static bool parse_bool(const char* str) {

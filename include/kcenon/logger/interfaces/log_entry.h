@@ -51,12 +51,14 @@ All rights reserved.
 
 // Use common_system's standard interface
 #include <kcenon/common/interfaces/logger_interface.h>
-#include <kcenon/logger/interfaces/logger_types.h>
 
 // OpenTelemetry context support
 #include <kcenon/logger/otlp/otel_context.h>
 
 namespace kcenon::logger {
+
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
 
 /**
  * @brief Value type for structured logging fields
@@ -155,12 +157,12 @@ struct source_location {
  */
 struct log_entry {
     // Required fields
-    
+
     /**
      * @brief Severity level of the log message
      * @details Determines the importance and routing of the message
      */
-    logger_system::log_level level;
+    log_level level;
     
     /**
      * @brief The actual log message
@@ -218,22 +220,22 @@ struct log_entry {
      * @param lvl Log severity level
      * @param msg Log message
      * @param ts Timestamp (default: current time)
-     * 
+     *
      * @details Creates a log entry with the minimum required information.
      * The timestamp defaults to the current system time if not specified.
-     * 
+     *
      * @example
      * @code
      * log_entry entry(log_level::info, "Server started on port 8080");
      * @endcode
-     * 
+     *
      * @since 1.0.0
      */
-    log_entry(logger_system::log_level lvl, 
+    log_entry(log_level lvl,
               const std::string& msg,
               std::chrono::system_clock::time_point ts = std::chrono::system_clock::now())
         : level(lvl), message(msg), timestamp(ts) {}
-    
+
     /**
      * @brief Constructor with source location information
      * @param lvl Log severity level
@@ -242,10 +244,10 @@ struct log_entry {
      * @param line Line number in source file
      * @param function Function name
      * @param ts Timestamp (default: current time)
-     * 
+     *
      * @details Creates a log entry with complete source location information.
      * This constructor is typically used with __FILE__, __LINE__, and __FUNCTION__ macros.
-     * 
+     *
      * @example
      * @code
      * log_entry entry(
@@ -256,54 +258,16 @@ struct log_entry {
      *     __FUNCTION__
      * );
      * @endcode
-     * 
+     *
      * @since 1.0.0
      */
-    log_entry(logger_system::log_level lvl,
+    log_entry(log_level lvl,
               const std::string& msg,
               const std::string& file,
               int line,
               const std::string& function,
               std::chrono::system_clock::time_point ts = std::chrono::system_clock::now())
         : level(lvl), message(msg), timestamp(ts),
-          location(source_location{file, line, function}) {}
-
-    /**
-     * @brief Constructor accepting common::interfaces::log_level
-     * @param lvl Log severity level (common::interfaces::log_level)
-     * @param msg Log message
-     * @param ts Timestamp (default: current time)
-     *
-     * @details Enables seamless use with kcenon::logger::log_level alias.
-     * Internally converts to logger_system::log_level for storage.
-     *
-     * @since 3.0.0
-     */
-    log_entry(kcenon::common::interfaces::log_level lvl,
-              const std::string& msg,
-              std::chrono::system_clock::time_point ts = std::chrono::system_clock::now())
-        : level(static_cast<logger_system::log_level>(static_cast<int>(lvl))),
-          message(msg), timestamp(ts) {}
-
-    /**
-     * @brief Constructor with source location accepting common::interfaces::log_level
-     * @param lvl Log severity level (common::interfaces::log_level)
-     * @param msg Log message
-     * @param file Source file path
-     * @param line Line number in source file
-     * @param function Function name
-     * @param ts Timestamp (default: current time)
-     *
-     * @since 3.0.0
-     */
-    log_entry(kcenon::common::interfaces::log_level lvl,
-              const std::string& msg,
-              const std::string& file,
-              int line,
-              const std::string& function,
-              std::chrono::system_clock::time_point ts = std::chrono::system_clock::now())
-        : level(static_cast<logger_system::log_level>(static_cast<int>(lvl))),
-          message(msg), timestamp(ts),
           location(source_location{file, line, function}) {}
 
     /**

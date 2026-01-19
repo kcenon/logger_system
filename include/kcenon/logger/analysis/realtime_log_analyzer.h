@@ -66,7 +66,7 @@
 
 #pragma once
 
-#include <kcenon/logger/interfaces/logger_types.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/logger/analysis/log_analyzer.h>
 
 #include <atomic>
@@ -83,6 +83,9 @@
 #include <vector>
 
 namespace kcenon::logger::analysis {
+
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
 
 /**
  * @brief Represents an anomaly event detected during real-time analysis
@@ -130,10 +133,10 @@ struct realtime_analysis_config {
  */
 struct pattern_alert {
     std::string pattern;                                     ///< Regex pattern to match
-    logger_system::log_level min_level;                      ///< Minimum log level to trigger
+    log_level min_level;                                     ///< Minimum log level to trigger
     std::regex compiled_pattern;                             ///< Pre-compiled regex for efficiency
 
-    pattern_alert(const std::string& p, logger_system::log_level level)
+    pattern_alert(const std::string& p, log_level level)
         : pattern(p), min_level(level), compiled_pattern(p, std::regex::optimize) {}
 };
 
@@ -204,8 +207,8 @@ public:
         add_to_window(entry, now);
 
         // Check for error spike
-        if (entry.level == logger_system::log_level::error ||
-            entry.level == logger_system::log_level::fatal) {
+        if (entry.level == log_level::error ||
+            entry.level == log_level::fatal) {
             check_error_spike(entry, now);
         }
 
@@ -219,8 +222,8 @@ public:
 
         // Track new error types
         if (config_.track_new_errors &&
-            (entry.level == logger_system::log_level::error ||
-             entry.level == logger_system::log_level::fatal)) {
+            (entry.level == log_level::error ||
+             entry.level == log_level::fatal)) {
             check_new_error_type(entry, now);
         }
     }
@@ -238,7 +241,7 @@ public:
      * @param pattern Regex pattern to match against log messages
      * @param min_level Minimum log level for this pattern to trigger
      */
-    void add_pattern_alert(const std::string& pattern, logger_system::log_level min_level) {
+    void add_pattern_alert(const std::string& pattern, log_level min_level) {
         std::unique_lock lock(patterns_mutex_);
         patterns_.emplace_back(pattern, min_level);
     }
@@ -394,8 +397,8 @@ private:
         log_window_.push_back({now, entry});
 
         // Add to error window if error/fatal
-        if (entry.level == logger_system::log_level::error ||
-            entry.level == logger_system::log_level::fatal) {
+        if (entry.level == log_level::error ||
+            entry.level == log_level::fatal) {
             error_window_.push_back({now, entry});
         }
 
@@ -406,8 +409,8 @@ private:
 
         // Update statistics
         total_analyzed_.fetch_add(1, std::memory_order_relaxed);
-        if (entry.level == logger_system::log_level::error ||
-            entry.level == logger_system::log_level::fatal) {
+        if (entry.level == log_level::error ||
+            entry.level == log_level::fatal) {
             total_errors_.fetch_add(1, std::memory_order_relaxed);
         }
     }

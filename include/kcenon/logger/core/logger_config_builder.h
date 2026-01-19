@@ -117,7 +117,7 @@ public:
      * @param level Minimum log level to output
      * @return Reference to builder for chaining
      */
-    logger_config_builder& set_min_level(logger_system::log_level level) {
+    logger_config_builder& set_min_level(log_level level) {
         config_.min_level = level;
         return *this;
     }

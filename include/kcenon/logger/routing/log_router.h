@@ -36,6 +36,7 @@
 
 #include <kcenon/logger/interfaces/log_filter_interface.h>
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -43,6 +44,9 @@
 #include <regex>
 
 namespace kcenon::logger::routing {
+
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
 
 /**
  * @brief Route configuration for log messages
@@ -124,7 +128,7 @@ private:
 public:
     explicit router_builder(log_router& router) : router_(router) {}
 
-    router_builder& when_level(logger_system::log_level level) {
+    router_builder& when_level(log_level level) {
         config_.filter = std::make_unique<class level_condition>(level);
         return *this;
     }
@@ -151,9 +155,9 @@ public:
 private:
     class level_condition : public log_filter_interface {
     private:
-        logger_system::log_level target_level_;
+        log_level target_level_;
     public:
-        explicit level_condition(logger_system::log_level level) : target_level_(level) {}
+        explicit level_condition(log_level level) : target_level_(level) {}
 
         bool should_log(const log_entry& entry) const override {
             return entry.level == target_level_;

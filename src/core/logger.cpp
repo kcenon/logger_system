@@ -33,7 +33,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/core/log_collector.h>
 #include <kcenon/logger/core/thread_integration_detector.h>
-#include <kcenon/logger/core/level_converter.h>
 #include <kcenon/logger/backends/standalone_backend.h>
 #include <kcenon/logger/analysis/realtime_log_analyzer.h>
 #include <kcenon/logger/sampling/log_sampler.h>
@@ -42,7 +41,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // thread_system is now optional and standalone_backend is the default
 
 #include <kcenon/logger/writers/base_writer.h>
-#include <kcenon/logger/interfaces/logger_types.h>
 #include <kcenon/logger/interfaces/log_filter_interface.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/common/patterns/result.h>
@@ -58,26 +56,26 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace kcenon::logger {
 
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
+
 namespace {
 /**
  * @brief Check if a log level meets the minimum threshold
  *
- * logger_system::log_level uses ascending severity:
- * trace(0) < debug(1) < info(2) < warn(3) < error(4) < fatal(5)
+ * log_level uses ascending severity:
+ * trace(0) < debug(1) < info(2) < warning(3) < error(4) < critical(5)
  * → Use >= comparison (higher number = more severe)
  *
  * @param level The log level to check
  * @param minimum The minimum threshold level
  * @return true if the message should be logged
  *
- * @example if minimum=warn(3), log warn(3), error(4), fatal(5)
+ * @example if minimum=warning(3), log warning(3), error(4), critical(5)
  *          but skip trace(0), debug(1), info(2)
  */
-template <typename Level>
-bool meets_threshold(Level level, Level minimum) {
-    using underlying_type = std::underlying_type_t<Level>;
-    // logger_system::log_level: ascending severity (0 = least severe)
-    return static_cast<underlying_type>(level) >= static_cast<underlying_type>(minimum);
+bool meets_threshold(log_level level, log_level minimum) {
+    return static_cast<int>(level) >= static_cast<int>(minimum);
 }
 } // namespace
 
@@ -88,7 +86,7 @@ public:
     std::size_t buffer_size_;
     bool running_;
     bool metrics_enabled_;
-    std::atomic<logger_system::log_level> min_level_;
+    std::atomic<log_level> min_level_;
     std::vector<std::shared_ptr<base_writer>> writers_;
     std::unordered_map<std::string, std::shared_ptr<base_writer>> named_writers_;  // Named writer storage
     std::shared_mutex writers_mutex_;  // Protects writers_ and named_writers_ from concurrent modification
@@ -119,7 +117,7 @@ public:
 
     impl(bool async, std::size_t buffer_size, std::unique_ptr<backends::integration_backend> backend)
         : async_mode_(async), buffer_size_(buffer_size), running_(false), metrics_enabled_(false),
-          min_level_(logger_system::log_level::info), backend_(std::move(backend)),
+          min_level_(log_level::info), backend_(std::move(backend)),
           router_(std::make_unique<log_router>()) {
         // Reserve space to avoid reallocation during typical usage
         writers_.reserve(10);
@@ -156,7 +154,7 @@ public:
      * @param function Source function
      * @param entry Log entry for routing check
      */
-    void dispatch_to_writers(logger_system::log_level level,
+    void dispatch_to_writers(log_level level,
                             const std::string& message,
                             const std::string& file,
                             int line,
@@ -200,12 +198,10 @@ public:
                     local_named_writers = named_writers_;
                 }
 
-                // Convert logger_system::log_level to common::interfaces::log_level
-                auto common_level = static_cast<common::interfaces::log_level>(static_cast<int>(level));
                 for (const auto& writer_name : routed_writer_names) {
                     auto it = local_named_writers.find(writer_name);
                     if (it != local_named_writers.end() && it->second) {
-                        it->second->write(common_level, message, file, line, function, now);
+                        it->second->write(level, message, file, line, function, now);
                     }
                 }
             }
@@ -218,11 +214,9 @@ public:
                 local_writers = writers_;
             }
 
-            // Convert logger_system::log_level to common::interfaces::log_level
-            auto common_level = static_cast<common::interfaces::log_level>(static_cast<int>(level));
             for (auto& writer : local_writers) {
                 if (writer) {
-                    writer->write(common_level, message, file, line, function, now);
+                    writer->write(level, message, file, line, function, now);
                 }
             }
         }
@@ -398,14 +392,12 @@ base_writer* logger::get_writer(const std::string& name) {
 
 common::VoidResult logger::log(common::interfaces::log_level level,
                                const std::string& message) {
-    auto native_level = to_logger_system_level(level);
-
-    if (!pimpl_ || !meets_threshold(native_level, pimpl_->min_level_.load())) {
+    if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
         return common::ok();
     }
 
     // Create log entry for filtering and routing
-    log_entry entry(native_level, message);
+    log_entry entry(level, message);
 
     // Apply filter if set
     {
@@ -431,7 +423,7 @@ common::VoidResult logger::log(common::interfaces::log_level level,
     auto start_time = std::chrono::high_resolution_clock::now();
 
     // Synchronous path: dispatch with routing support
-    pimpl_->dispatch_to_writers(native_level, message, "", 0, "", entry);
+    pimpl_->dispatch_to_writers(level, message, "", 0, "", entry);
 
     // Update metrics after logging
     if (pimpl_->metrics_enabled_) {
@@ -455,14 +447,12 @@ common::VoidResult logger::log(common::interfaces::log_level level,
                                const std::string& file,
                                int line,
                                const std::string& function) {
-    auto native_level = to_logger_system_level(level);
-
-    if (!pimpl_ || !meets_threshold(native_level, pimpl_->min_level_.load())) {
+    if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
         return common::ok();
     }
 
     // Create log entry for filtering and routing
-    log_entry entry(native_level, message, file, line, function);
+    log_entry entry(level, message, file, line, function);
 
     // Apply filter if set
     {
@@ -489,11 +479,9 @@ common::VoidResult logger::log(common::interfaces::log_level level,
 
     // Use async path if in async mode
     if (pimpl_->async_mode_ && pimpl_->collector_) {
-        // Convert level for collector (legacy interface uses int)
-        auto converted_level = pimpl_->backend_->normalize_level(static_cast<int>(native_level));
         // Enqueue to collector for background processing
         auto now = std::chrono::system_clock::now();
-        pimpl_->collector_->enqueue(converted_level, message, file, line, function, now);
+        pimpl_->collector_->enqueue(level, message, file, line, function, now);
 
         // Update metrics if enabled (async path is much faster)
         if (pimpl_->metrics_enabled_) {
@@ -505,7 +493,7 @@ common::VoidResult logger::log(common::interfaces::log_level level,
     }
 
     // Synchronous path: dispatch with routing support
-    pimpl_->dispatch_to_writers(native_level, message, file, line, function, entry);
+    pimpl_->dispatch_to_writers(level, message, file, line, function, entry);
 
     // Update metrics after logging
     if (pimpl_->metrics_enabled_) {
@@ -522,8 +510,7 @@ common::VoidResult logger::log(const common::interfaces::log_entry& entry) {
 }
 
 bool logger::is_enabled(common::interfaces::log_level level) const {
-    auto native_level = to_logger_system_level(level);
-    return pimpl_ && meets_threshold(native_level, pimpl_->min_level_.load());
+    return pimpl_ && meets_threshold(level, pimpl_->min_level_.load());
 }
 
 common::VoidResult logger::set_level(common::interfaces::log_level level) {
@@ -534,13 +521,13 @@ common::VoidResult logger::set_level(common::interfaces::log_level level) {
             "logger_system");
     }
 
-    pimpl_->min_level_.store(to_logger_system_level(level));
+    pimpl_->min_level_.store(level);
     return common::ok();
 }
 
 common::interfaces::log_level logger::get_level() const {
     if (pimpl_) {
-        return to_common_level(pimpl_->min_level_.load());
+        return pimpl_->min_level_.load();
     }
     return common::interfaces::log_level::info;
 }
@@ -717,13 +704,10 @@ structured_log_builder logger::log_structured(log_level level) {
         }
     }
 
-    // Convert common::interfaces::log_level to logger_system::log_level for internal use
-    auto native_level = static_cast<logger_system::log_level>(static_cast<int>(level));
-
     return structured_log_builder(
         level,
-        [this, native_level](log_entry&& entry) {
-            if (!pimpl_ || !meets_threshold(native_level, pimpl_->min_level_.load())) {
+        [this, level](log_entry&& entry) {
+            if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
                 return;
             }
 
@@ -758,12 +742,6 @@ structured_log_builder logger::log_structured(log_level level) {
         },
         ctx_ptr
     );
-}
-
-// Overload accepting logger_system::log_level for backward compatibility
-structured_log_builder logger::log_structured(logger_system::log_level level) {
-    // Convert to common::interfaces::log_level and delegate
-    return log_structured(static_cast<log_level>(static_cast<int>(level)));
 }
 
 // =========================================================================

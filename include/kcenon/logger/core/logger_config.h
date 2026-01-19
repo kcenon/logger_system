@@ -15,9 +15,11 @@ All rights reserved.
 
 // Use common_system's standard interface
 #include <kcenon/common/interfaces/logger_interface.h>
-#include <kcenon/logger/interfaces/logger_types.h>
 
 namespace kcenon::logger {
+
+// Type alias for log_level using common::interfaces::log_level as the canonical type
+using log_level = common::interfaces::log_level;
 
 /**
  * @struct logger_config
@@ -30,7 +32,7 @@ struct logger_config {
     // Basic settings
     bool async = true;
     std::size_t buffer_size = 8192;
-    logger_system::log_level min_level = logger_system::log_level::info;
+    log_level min_level = log_level::info;
     
     // Performance settings
     std::size_t batch_size = 100;
@@ -241,7 +243,7 @@ struct logger_config {
     static logger_config debug_config() {
         logger_config config;
         config.async = false;  // Synchronous for immediate output
-        config.min_level = logger_system::log_level::trace;
+        config.min_level = log_level::trace;
         config.enable_metrics = true;
         config.enable_crash_handler = true;
         config.enable_color_output = true;
@@ -258,7 +260,7 @@ struct logger_config {
         logger_config config;
         config.async = true;
         config.buffer_size = 16384;
-        config.min_level = logger_system::log_level::warn;
+        config.min_level = log_level::warning;
         config.enable_metrics = true;
         config.enable_crash_handler = true;
         config.enable_color_output = false;

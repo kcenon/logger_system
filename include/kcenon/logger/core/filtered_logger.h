@@ -7,16 +7,20 @@
 
 #include <kcenon/logger/core/log_context.h>
 #include <kcenon/logger/core/logger.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 namespace kcenon::logger::core {
 
-template<logger_system::log_level MinLevel = logger_system::log_level::info>
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
+
+template<log_level MinLevel = log_level::info>
 class filtered_logger {
 public:
     explicit filtered_logger(std::shared_ptr<kcenon::logger::logger> impl)
         : logger_(std::move(impl)) {}
 
-    void log(logger_system::log_level level,
+    void log(log_level level,
              const std::string& message,
              const log_context& context) const {
         if (!logger_) {
@@ -31,7 +35,7 @@ public:
                      std::string(context.function));
     }
 
-    template<logger_system::log_level Level>
+    template<log_level Level>
     void log(const std::string& message, const log_context& context) const {
         if constexpr (static_cast<int>(Level) >= static_cast<int>(MinLevel)) {
             if (logger_) {

@@ -61,6 +61,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "sampling_config.h"
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 #include <atomic>
 #include <chrono>
@@ -70,6 +71,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <optional>
 
 namespace kcenon::logger::sampling {
+
+// Type alias for log_level (may already be available from sampling_config.h, but explicit here for clarity)
+using log_level = common::interfaces::log_level;
 
 /**
  * @class log_sampler
@@ -146,7 +150,7 @@ public:
      * @param message Log message (used for hash-based sampling)
      * @return true if the entry should be logged
      */
-    [[nodiscard]] bool should_sample(logger_system::log_level level,
+    [[nodiscard]] bool should_sample(log_level level,
                                      const std::string& message);
 
     /**
@@ -156,7 +160,7 @@ public:
      * @param category Optional category for category-specific rates
      * @return true if the entry should be logged
      */
-    [[nodiscard]] bool should_sample(logger_system::log_level level,
+    [[nodiscard]] bool should_sample(log_level level,
                                      const std::string& message,
                                      const std::optional<std::string>& category);
 
@@ -213,7 +217,7 @@ private:
      * @param level Log level to check
      * @return true if the level should always be logged
      */
-    [[nodiscard]] bool should_bypass_level(logger_system::log_level level) const;
+    [[nodiscard]] bool should_bypass_level(log_level level) const;
 
     /**
      * @brief Check if any field should bypass sampling
@@ -354,10 +358,10 @@ public:
      */
     static std::unique_ptr<log_sampler> create_production(
         double base_rate = 0.1,
-        std::vector<logger_system::log_level> critical_levels = {
-            logger_system::log_level::warn,
-            logger_system::log_level::error,
-            logger_system::log_level::fatal
+        std::vector<log_level> critical_levels = {
+            log_level::warn,
+            log_level::error,
+            log_level::fatal
         });
 };
 

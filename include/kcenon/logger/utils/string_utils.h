@@ -41,6 +41,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace kcenon::logger::utils {
 
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
+
 /**
  * @brief String utility functions for log formatting and conversion
  *
@@ -58,15 +61,15 @@ public:
      *
      * @note Thread-safe and stateless.
      */
-    static std::string level_to_string(logger_system::log_level level) {
+    static std::string level_to_string(log_level level) {
         switch (level) {
-            case logger_system::log_level::fatal:   return "CRITICAL";
-            case logger_system::log_level::error:   return "ERROR";
-            case logger_system::log_level::warn:    return "WARNING";
-            case logger_system::log_level::info:    return "INFO";
-            case logger_system::log_level::debug:   return "DEBUG";
-            case logger_system::log_level::trace:   return "TRACE";
-            case logger_system::log_level::off:     return "OFF";
+            case log_level::critical:  return "CRITICAL";
+            case log_level::error:     return "ERROR";
+            case log_level::warning:   return "WARNING";
+            case log_level::info:      return "INFO";
+            case log_level::debug:     return "DEBUG";
+            case log_level::trace:     return "TRACE";
+            case log_level::off:       return "OFF";
         }
         return "UNKNOWN";
     }
@@ -88,19 +91,19 @@ public:
      * @note Use with "\033[0m" to reset color after output.
      * @note Thread-safe and stateless.
      */
-    static std::string level_to_color(logger_system::log_level level, bool use_colors = true) {
+    static std::string level_to_color(log_level level, bool use_colors = true) {
         if (!use_colors) {
             return "";
         }
 
         switch (level) {
-            case logger_system::log_level::fatal:   return "\033[1;35m"; // Bright Magenta
-            case logger_system::log_level::error:   return "\033[1;31m"; // Bright Red
-            case logger_system::log_level::warn:    return "\033[1;33m"; // Bright Yellow
-            case logger_system::log_level::info:    return "\033[1;32m"; // Bright Green
-            case logger_system::log_level::debug:   return "\033[1;36m"; // Bright Cyan
-            case logger_system::log_level::trace:   return "\033[37m";   // White
-            case logger_system::log_level::off:     return "\033[90m";   // Dark Gray
+            case log_level::critical:  return "\033[1;35m"; // Bright Magenta
+            case log_level::error:     return "\033[1;31m"; // Bright Red
+            case log_level::warning:   return "\033[1;33m"; // Bright Yellow
+            case log_level::info:      return "\033[1;32m"; // Bright Green
+            case log_level::debug:     return "\033[1;36m"; // Bright Cyan
+            case log_level::trace:     return "\033[37m";   // White
+            case log_level::off:       return "\033[90m";   // Dark Gray
         }
         return "";
     }

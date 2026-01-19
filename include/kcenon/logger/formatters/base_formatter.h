@@ -9,11 +9,15 @@ All rights reserved.
 
 #include "../interfaces/log_formatter_interface.h"
 #include "../interfaces/log_entry.h"
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <sstream>
 #include <iomanip>
 #include <thread>
 
 namespace kcenon::logger {
+
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
 
 /**
  * @class base_formatter
@@ -38,14 +42,14 @@ protected:
      * @param level Log level
      * @return String representation
      */
-    std::string level_to_string(logger_system::log_level level) const {
+    std::string level_to_string(log_level level) const {
         switch (level) {
-            case logger_system::log_level::fatal:  return "FATAL";
-            case logger_system::log_level::error:  return "ERROR";
-            case logger_system::log_level::warn:   return "WARNING";
-            case logger_system::log_level::info:   return "INFO";
-            case logger_system::log_level::debug:  return "DEBUG";
-            case logger_system::log_level::trace:  return "TRACE";
+            case log_level::critical:  return "CRITICAL";
+            case log_level::error:  return "ERROR";
+            case log_level::warning:   return "WARNING";
+            case log_level::info:   return "INFO";
+            case log_level::debug:  return "DEBUG";
+            case log_level::trace:  return "TRACE";
             default: return "UNKNOWN";
         }
     }

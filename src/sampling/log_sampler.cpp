@@ -154,12 +154,12 @@ bool log_sampler::should_sample(const log_entry& entry) {
     return sampled;
 }
 
-bool log_sampler::should_sample(logger_system::log_level level,
+bool log_sampler::should_sample(log_level level,
                                 const std::string& message) {
     return should_sample(level, message, std::nullopt);
 }
 
-bool log_sampler::should_sample(logger_system::log_level level,
+bool log_sampler::should_sample(log_level level,
                                 const std::string& message,
                                 const std::optional<std::string>& category) {
     // Increment total count
@@ -262,7 +262,7 @@ double log_sampler::get_effective_rate() const {
     return effective_rate_.load(std::memory_order_relaxed);
 }
 
-bool log_sampler::should_bypass_level(logger_system::log_level level) const {
+bool log_sampler::should_bypass_level(log_level level) const {
     std::shared_lock<std::shared_mutex> lock(config_mutex_);
     const auto& levels = config_.always_log_levels;
     return std::find(levels.begin(), levels.end(), level) != levels.end();
@@ -510,7 +510,7 @@ std::unique_ptr<log_sampler> sampler_factory::create_adaptive(
 
 std::unique_ptr<log_sampler> sampler_factory::create_production(
     double base_rate,
-    std::vector<logger_system::log_level> critical_levels) {
+    std::vector<log_level> critical_levels) {
     sampling_config config;
     config.enabled = true;
     config.rate = base_rate;

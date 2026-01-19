@@ -71,6 +71,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace kcenon::logger {
 
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
+
 /**
  * @class logfmt_formatter
  * @brief Formatter that outputs logfmt-structured log messages
@@ -221,15 +224,15 @@ private:
      * @param level Log level
      * @return Lowercase string representation
      */
-    static std::string level_to_lowercase(logger_system::log_level level) {
+    static std::string level_to_lowercase(log_level level) {
         switch (level) {
-            case logger_system::log_level::trace: return "trace";
-            case logger_system::log_level::debug: return "debug";
-            case logger_system::log_level::info: return "info";
-            case logger_system::log_level::warn: return "warn";
-            case logger_system::log_level::error: return "error";
-            case logger_system::log_level::fatal: return "fatal";
-            case logger_system::log_level::off: return "off";
+            case log_level::trace: return "trace";
+            case log_level::debug: return "debug";
+            case log_level::info: return "info";
+            case log_level::warning: return "warn";
+            case log_level::error: return "error";
+            case log_level::critical: return "critical";
+            case log_level::off: return "off";
             default: return "unknown";
         }
     }

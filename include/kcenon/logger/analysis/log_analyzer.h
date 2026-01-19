@@ -34,7 +34,7 @@
 
 #pragma once
 
-#include <kcenon/logger/interfaces/logger_types.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -43,11 +43,14 @@
 
 namespace kcenon::logger::analysis {
 
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
+
 /**
  * @brief Log entry for analysis
  */
 struct analyzed_log_entry {
-    logger_system::log_level level;
+    log_level level;
     std::string message;
     std::chrono::system_clock::time_point timestamp;
     std::string source_file;
@@ -60,7 +63,7 @@ struct analyzed_log_entry {
  */
 struct analysis_stats {
     size_t total_entries = 0;
-    std::unordered_map<logger_system::log_level, size_t> level_counts;
+    std::unordered_map<log_level, size_t> level_counts;
     std::chrono::system_clock::time_point earliest_timestamp;
     std::chrono::system_clock::time_point latest_timestamp;
     std::vector<std::string> most_frequent_messages;
@@ -116,7 +119,7 @@ public:
     /**
      * @brief Filter entries by log level
      */
-    std::vector<analyzed_log_entry> filter_by_level(logger_system::log_level level) const {
+    std::vector<analyzed_log_entry> filter_by_level(log_level level) const {
         std::vector<analyzed_log_entry> filtered;
         for (const auto& entry : entries_) {
             if (entry.level == level) {
@@ -168,8 +171,8 @@ public:
         for (const auto& entry : entries_) {
             if (entry.timestamp >= start_time) {
                 total_in_window++;
-                if (entry.level == logger_system::log_level::error ||
-                    entry.level == logger_system::log_level::fatal) {
+                if (entry.level == log_level::error ||
+                    entry.level == log_level::fatal) {
                     errors_in_window++;
                 }
             }
@@ -228,15 +231,15 @@ private:
         }
     }
 
-    std::string level_to_string(logger_system::log_level level) const {
+    std::string level_to_string(log_level level) const {
         switch (level) {
-            case logger_system::log_level::trace: return "TRACE";
-            case logger_system::log_level::debug: return "DEBUG";
-            case logger_system::log_level::info: return "INFO";
-            case logger_system::log_level::warn: return "WARN";
-            case logger_system::log_level::error: return "ERROR";
-            case logger_system::log_level::fatal: return "FATAL";
-            case logger_system::log_level::off: return "OFF";
+            case log_level::trace: return "TRACE";
+            case log_level::debug: return "DEBUG";
+            case log_level::info: return "INFO";
+            case log_level::warn: return "WARN";
+            case log_level::error: return "ERROR";
+            case log_level::fatal: return "FATAL";
+            case log_level::off: return "OFF";
             default: return "UNKNOWN";
         }
     }
