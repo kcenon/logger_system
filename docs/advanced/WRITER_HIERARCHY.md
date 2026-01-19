@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](WRITER_HIERARCHY_KO.md)
+> **Language:** **English** | [한국어](WRITER_HIERARCHY.kr.md)
 
 # Writer Hierarchy and Categories
 

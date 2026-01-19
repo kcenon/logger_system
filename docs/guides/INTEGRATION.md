@@ -1,6 +1,6 @@
 # Logger System Integration Guide
 
-**English | [한국어](INTEGRATION_KO.md)**
+**English | [한국어](INTEGRATION.kr.md)**
 
 ---
 

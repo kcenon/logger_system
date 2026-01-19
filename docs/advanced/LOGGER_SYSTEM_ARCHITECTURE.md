@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](LOGGER_SYSTEM_ARCHITECTURE_KO.md)
+> **Language:** **English** | [한국어](LOGGER_SYSTEM_ARCHITECTURE.kr.md)
 
 # Logger System Architecture
 

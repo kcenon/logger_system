@@ -98,7 +98,7 @@ logger_system/
 ├── 📄 vcpkg.json                   # 의존성 매니페스트
 ├── 📄 LICENSE                      # BSD 3-Clause 라이선스
 ├── 📄 README.md                    # 메인 문서
-└── 📄 README_KO.md                 # 한국어 문서
+└── 📄 README.kr.md                 # 한국어 문서
 ```
 
 ---
@@ -608,7 +608,7 @@ option(LOGGER_ENABLE_COVERAGE "코드 커버리지 활성화" OFF)
 - **벤치마크**: `*_benchmark.cpp` (예: `throughput_benchmark.cpp`)
 
 ### 문서 파일
-- **Markdown**: `*.md` (영어) 또는 `*_KO.md` (한국어)
+- **Markdown**: `*.md` (영어) 또는 `*.kr.md` (한국어)
 - **API 문서**: `API_REFERENCE.md`
 - **가이드**: `docs/guides/`의 `GUIDE_NAME.md`
 
@@ -616,7 +616,7 @@ option(LOGGER_ENABLE_COVERAGE "코드 커버리지 활성화" OFF)
 
 ## 참고 문서
 
-- [아키텍처 개요](01-architecture.md) / [아키텍처 (한국어)](ARCHITECTURE_KO.md) - 시스템 설계 및 아키텍처
+- [아키텍처 개요](01-architecture.md) / [아키텍처 (한국어)](ARCHITECTURE.kr.md) - 시스템 설계 및 아키텍처
 - [API 레퍼런스](02-API_REFERENCE.md) - 완전한 API 문서
 - [빌드 가이드](guides/BUILD_GUIDE.md) - 상세 빌드 지침
 - [기여 가이드](contributing/CONTRIBUTING.md) - 기여 가이드라인

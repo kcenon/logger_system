@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](CRITICAL_LOGGING_QUICK_START_KO.md)
+> **Language:** **English** | [한국어](CRITICAL_LOGGING_QUICK_START.kr.md)
 
 ## Table of Contents
 

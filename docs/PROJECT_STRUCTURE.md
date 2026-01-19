@@ -96,7 +96,7 @@ logger_system/
 ├── 📄 vcpkg.json                   # Dependencies manifest
 ├── 📄 LICENSE                      # BSD 3-Clause License
 ├── 📄 README.md                    # Main documentation
-└── 📄 README_KO.md                 # Korean documentation
+└── 📄 README.kr.md                 # Korean documentation
 ```
 
 ---
@@ -701,7 +701,7 @@ option(LOGGER_ENABLE_COVERAGE "Enable code coverage" OFF)
 - **Benchmarks**: `*_benchmark.cpp` (e.g., `throughput_benchmark.cpp`)
 
 ### Documentation Files
-- **Markdown**: `*.md` (English) or `*_KO.md` (Korean)
+- **Markdown**: `*.md` (English) or `*.kr.md` (Korean)
 - **API docs**: `API_REFERENCE.md`
 - **Guides**: `GUIDE_NAME.md` in `docs/guides/`
 

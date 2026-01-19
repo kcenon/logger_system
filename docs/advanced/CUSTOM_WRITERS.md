@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](CUSTOM_WRITERS_KO.md)
+> **Language:** **English** | [한국어](CUSTOM_WRITERS.kr.md)
 
 # Creating Custom Writers
 

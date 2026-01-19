@@ -17,41 +17,41 @@
 ## Files Created
 
 ### Root Directory (19 files)
-1. API_REFERENCE_KO.md
-2. ARCHITECTURE_ISSUES_KO.md
-3. BASELINE_KO.md
-4. CHANGELOG_KO.md
-5. CONTRIBUTING_KO.md
-6. CRITICAL_LOGGING_QUICK_START_KO.md
-7. CRITICAL_LOG_PREVENTION_KO.md
-8. CURRENT_STATE_KO.md
-9. LOGGER_SYSTEM_ARCHITECTURE_KO.md
-10. PHASE4_DI_MIGRATION_GUIDE_KO.md
-11. PHASE_0_BASELINE_KO.md
-12. PHASE_1_2_STATUS_KO.md
-13. PHASE_2_RESOURCE_MANAGEMENT_KO.md
-14. PHASE_3_PREPARATION_KO.md
-15. README_KO.md ✨ (Full translation)
-16. SANITIZER_BASELINE_KO.md
-17. SECURITY_KO.md ✨ (Full translation)
-18. STATIC_ANALYSIS_BASELINE_KO.md
-19. architecture_KO.md
+1. API_REFERENCE.kr.md
+2. ARCHITECTURE_ISSUES.kr.md
+3. BASELINE.kr.md
+4. CHANGELOG.kr.md
+5. CONTRIBUTING.kr.md
+6. CRITICAL_LOGGING_QUICK_START.kr.md
+7. CRITICAL_LOG_PREVENTION.kr.md
+8. CURRENT_STATE.kr.md
+9. LOGGER_SYSTEM_ARCHITECTURE.kr.md
+10. PHASE4_DI_MIGRATION_GUIDE.kr.md
+11. PHASE_0_BASELINE.kr.md
+12. PHASE_1_2_STATUS.kr.md
+13. PHASE_2_RESOURCE_MANAGEMENT.kr.md
+14. PHASE_3_PREPARATION.kr.md
+15. README.kr.md ✨ (Full translation)
+16. SANITIZER_BASELINE.kr.md
+17. SECURITY.kr.md ✨ (Full translation)
+18. STATIC_ANALYSIS_BASELINE.kr.md
+19. architecture.kr.md
 
 ### advanced/ Directory (2 files)
-1. CI_CD_DASHBOARD_KO.md
-2. CUSTOM_WRITERS_KO.md
+1. CI_CD_DASHBOARD.kr.md
+2. CUSTOM_WRITERS.kr.md
 
 ### guides/ Directory (4 files)
-1. BEST_PRACTICES_KO.md
-2. GETTING_STARTED_KO.md
-3. MIGRATION_GUIDE_KO.md
-4. PERFORMANCE_KO.md
+1. BEST_PRACTICES.kr.md
+2. GETTING_STARTED.kr.md
+3. MIGRATION_GUIDE.kr.md
+4. PERFORMANCE.kr.md
 
 ## Language Switcher Format
 
 ### English Files
 \`\`\`markdown
-> **Language:** **English** | [한국어](FILENAME_KO.md)
+> **Language:** **English** | [한국어](FILENAME.kr.md)
 \`\`\`
 
 ### Korean Files
@@ -61,7 +61,7 @@
 
 ## Translation Approach
 
-- **Full Translations**: README_KO.md and SECURITY_KO.md contain complete Korean translations
+- **Full Translations**: README.kr.md and SECURITY.kr.md contain complete Korean translations
 - **Placeholder Files**: Remaining files contain:
   - Language switcher
   - Korean title
@@ -74,13 +74,13 @@
 \`\`\`
 logger_system/docs/
 ├── [English].md (with language switcher)
-├── [English]_KO.md (Korean version)
+├── [English].kr.md (Korean version)
 ├── advanced/
 │   ├── [English].md (with language switcher)
-│   └── [English]_KO.md (Korean version)
+│   └── [English].kr.md (Korean version)
 └── guides/
     ├── [English].md (with language switcher)
-    └── [English]_KO.md (Korean version)
+    └── [English].kr.md (Korean version)
 \`\`\`
 
 ## Verification
@@ -88,7 +88,7 @@ logger_system/docs/
 Run the following command to verify all Korean files exist:
 \`\`\`bash
 cd /Users/dongcheolshin/Sources/logger_system/docs
-find . -name "*_KO.md" | sort
+find . -name "*.kr.md" | sort
 \`\`\`
 
 Expected output: 25 Korean files

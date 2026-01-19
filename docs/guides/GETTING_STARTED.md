@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](GETTING_STARTED_KO.md)
+> **Language:** **English** | [한국어](GETTING_STARTED.kr.md)
 
 # Getting Started with Logger System
 

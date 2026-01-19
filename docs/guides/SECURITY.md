@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](SECURITY_KO.md)
+> **Language:** **English** | [한국어](SECURITY.kr.md)
 
 # Security Guide
 

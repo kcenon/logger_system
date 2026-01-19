@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](CONTRIBUTING_KO.md)
+> **Language:** **English** | [한국어](CONTRIBUTING.kr.md)
 
 # Contributing to Logger System
 

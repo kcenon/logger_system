@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](WRITER_SELECTION_GUIDE_KO.md)
+> **Language:** **English** | [한국어](WRITER_SELECTION_GUIDE.kr.md)
 
 # Writer Selection Guide
 

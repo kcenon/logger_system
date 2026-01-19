@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](BEST_PRACTICES_KO.md)
+> **Language:** **English** | [한국어](BEST_PRACTICES.kr.md)
 
 # Logger System Best Practices Guide
 

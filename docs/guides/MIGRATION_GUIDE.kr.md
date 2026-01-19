@@ -249,11 +249,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ## 지원 및 리소스
 
-- [빠른 시작 가이드](QUICK_START_KO.md)
+- [빠른 시작 가이드](QUICK_START.kr.md)
 - [API 레퍼런스](../API_REFERENCE.md)
-- [아키텍처 문서](../advanced/LOGGER_SYSTEM_ARCHITECTURE_KO.md)
+- [아키텍처 문서](../advanced/LOGGER_SYSTEM_ARCHITECTURE.kr.md)
 - [모범 사례 가이드](BEST_PRACTICES.md)
-- [thread_system 통합](../integration/THREAD_SYSTEM_KO.md)
+- [thread_system 통합](../integration/THREAD_SYSTEM.kr.md)
 - [예제 코드](../../examples/)
 - [이슈 트래커](https://github.com/kcenon/logger_system/issues)
 

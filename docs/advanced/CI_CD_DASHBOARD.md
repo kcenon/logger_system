@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](CI_CD_DASHBOARD_KO.md)
+> **Language:** **English** | [한국어](CI_CD_DASHBOARD.kr.md)
 
 # Logger System CI/CD Dashboard
 

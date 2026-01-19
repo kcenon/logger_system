@@ -1,4 +1,4 @@
-> **Language:** **English** | [한국어](README_KO.md)
+> **Language:** **English** | [한국어](README.kr.md)
 
 # Logger System Documentation
 

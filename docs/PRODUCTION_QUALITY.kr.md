@@ -351,8 +351,8 @@ All heap blocks were freed -- no leaks are possible
 ---
 
 **참고 문서**:
-- [BENCHMARKS.md](BENCHMARKS.md) / [BENCHMARKS_KO.md](BENCHMARKS_KO.md) - 상세 성능 분석
-- [ARCHITECTURE.md](01-architecture.md) / [ARCHITECTURE_KO.md](ARCHITECTURE_KO.md) - 시스템 설계 및 내부
+- [BENCHMARKS.md](BENCHMARKS.md) / [BENCHMARKS.kr.md](BENCHMARKS.kr.md) - 상세 성능 분석
+- [ARCHITECTURE.md](01-architecture.md) / [ARCHITECTURE.kr.md](ARCHITECTURE.kr.md) - 시스템 설계 및 내부
 
 ---
 
