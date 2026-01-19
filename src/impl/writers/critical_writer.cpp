@@ -100,7 +100,7 @@ critical_writer::~critical_writer() {
 }
 
 common::VoidResult critical_writer::write(
-    logger_system::log_level level,
+    common::interfaces::log_level level,
     const std::string& message,
     const std::string& file,
     int line,
@@ -195,14 +195,14 @@ void critical_writer::set_force_flush_on_critical(bool enable) {
     config_.force_flush_on_critical = enable;
 }
 
-bool critical_writer::is_critical_level(logger_system::log_level level) const {
+bool critical_writer::is_critical_level(common::interfaces::log_level level) const {
     // Critical and fatal always require immediate flush
-    if (level >= logger_system::log_level::critical) {
+    if (level >= common::interfaces::log_level::critical) {
         return config_.force_flush_on_critical;
     }
 
     // Error level if configured
-    if (level == logger_system::log_level::error) {
+    if (level == common::interfaces::log_level::error) {
         return config_.force_flush_on_error;
     }
 
@@ -210,7 +210,7 @@ bool critical_writer::is_critical_level(logger_system::log_level level) const {
 }
 
 void critical_writer::write_to_wal(
-    logger_system::log_level level,
+    common::interfaces::log_level level,
     const std::string& message,
     const std::string& file,
     int line,
@@ -229,10 +229,13 @@ void critical_writer::write_to_wal(
             timestamp.time_since_epoch()
         ).count() % 1000;
 
+        // Convert common::interfaces::log_level to logger_system::log_level for string conversion
+        auto legacy_level = static_cast<logger_system::log_level>(static_cast<int>(level));
+
         std::ostringstream oss;
         oss << "[" << std::put_time(std::localtime(&time_t), "%Y-%m-%d %H:%M:%S")
             << "." << std::setfill('0') << std::setw(3) << ms << "] "
-            << "[" << logger_system::log_level_to_string(level) << "] "
+            << "[" << logger_system::log_level_to_string(legacy_level) << "] "
             << "[" << file << ":" << line << ":" << function << "] "
             << message << "\n";
 
@@ -427,7 +430,7 @@ hybrid_writer::hybrid_writer(
 hybrid_writer::~hybrid_writer() = default;
 
 common::VoidResult hybrid_writer::write(
-    logger_system::log_level level,
+    common::interfaces::log_level level,
     const std::string& message,
     const std::string& file,
     int line,

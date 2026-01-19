@@ -103,7 +103,9 @@ TEST_F(LoggerLifecycleTest, LogMessagesBeforeStart) {
     auto result = logger_->start();
     ASSERT_TRUE(result.is_ok());
 
-    WaitForFlush();
+    // Use simple flush instead of WaitForFlush() to avoid redundant stop/start
+    // which causes significant delay and potential deadlock on macOS Debug builds
+    logger_->flush();
 
     // Use longer timeout for sanitizer environments where operations are slower
     EXPECT_TRUE(WaitForLogLines(log_file, message_count, std::chrono::seconds(30)));

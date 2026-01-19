@@ -181,7 +181,7 @@ otlp_writer::~otlp_writer() {
     }
 }
 
-common::VoidResult otlp_writer::write(logger_system::log_level level,
+common::VoidResult otlp_writer::write(common::interfaces::log_level level,
                                        const std::string& message,
                                        const std::string& file,
                                        int line,
@@ -228,8 +228,11 @@ common::VoidResult otlp_writer::write(const log_entry& entry) {
         function = entry.location->function.to_string();
     }
 
+    // Convert logger_system::log_level to common::interfaces::log_level
+    auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+
     buffered_log log{
-        .level = entry.level,
+        .level = level,
         .message = entry.message.to_string(),
         .file = file,
         .line = line,
@@ -360,21 +363,21 @@ bool otlp_writer::export_batch(const std::vector<buffered_log>& batch) {
     return success;
 }
 
-int otlp_writer::to_otlp_severity(logger_system::log_level level) {
+int otlp_writer::to_otlp_severity(common::interfaces::log_level level) {
     // OTLP Severity Numbers (per OpenTelemetry specification)
     // https://opentelemetry.io/docs/specs/otel/logs/data-model/#field-severitynumber
     switch (level) {
-        case logger_system::log_level::trace:
+        case common::interfaces::log_level::trace:
             return 1;   // TRACE
-        case logger_system::log_level::debug:
+        case common::interfaces::log_level::debug:
             return 5;   // DEBUG
-        case logger_system::log_level::info:
+        case common::interfaces::log_level::info:
             return 9;   // INFO
-        case logger_system::log_level::warn:
+        case common::interfaces::log_level::warn:
             return 13;  // WARN
-        case logger_system::log_level::error:
+        case common::interfaces::log_level::error:
             return 17;  // ERROR
-        case logger_system::log_level::fatal:
+        case common::interfaces::log_level::fatal:
             return 21;  // FATAL
         default:
             return 9;   // INFO as default

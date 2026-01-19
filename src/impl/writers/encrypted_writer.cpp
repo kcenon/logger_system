@@ -151,7 +151,7 @@ encrypted_writer::~encrypted_writer() {
 }
 
 common::VoidResult encrypted_writer::write(
-    logger_system::log_level level,
+    common::interfaces::log_level level,
     const std::string& message,
     const std::string& file,
     int line,

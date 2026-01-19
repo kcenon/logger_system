@@ -292,7 +292,7 @@ TEST_F(OtlpWriterTest, WriteLogsQueued) {
     auto now = std::chrono::system_clock::now();
     for (int i = 0; i < 10; ++i) {
         auto result = writer.write(
-            logger_system::log_level::info,
+            kcenon::common::interfaces::log_level::info,
             "Test message " + std::to_string(i),
             __FILE__,
             __LINE__,
@@ -318,7 +318,7 @@ TEST_F(OtlpWriterTest, FlushWritesImmediately) {
     // Write and flush
     auto now = std::chrono::system_clock::now();
     writer.write(
-        logger_system::log_level::error,
+        kcenon::common::interfaces::log_level::error,
         "Error message",
         __FILE__,
         __LINE__,
@@ -349,7 +349,7 @@ TEST_F(OtlpWriterTest, WriteWithOtelContext) {
     // Write log - should pick up context
     auto now = std::chrono::system_clock::now();
     auto result = writer.write(
-        logger_system::log_level::info,
+        kcenon::common::interfaces::log_level::info,
         "Message with trace context",
         __FILE__,
         __LINE__,
@@ -370,7 +370,7 @@ TEST_F(OtlpWriterTest, WriteLogEntry) {
     otlp_writer writer(cfg);
 
     // Create log entry with OTEL context
-    log_entry entry(logger_system::log_level::warn, "Warning message");
+    log_entry entry(kcenon::common::interfaces::log_level::warn, "Warning message");
     entry.otel_ctx = otlp::otel_context{
         .trace_id = "11111111111111111111111111111111",
         .span_id = "1111111111111111"
@@ -421,7 +421,7 @@ TEST_F(LoggerOtelIntegrationTest, LoggerContextMethods) {
 
 TEST_F(LoggerOtelIntegrationTest, LogEntryHasOtelContext) {
     // When OTEL context is set, log_entry should be able to hold it
-    log_entry entry(logger_system::log_level::info, "Test message");
+    log_entry entry(kcenon::common::interfaces::log_level::info, "Test message");
 
     // Initially no OTEL context
     EXPECT_FALSE(entry.otel_ctx.has_value());
@@ -461,7 +461,7 @@ TEST_F(OtlpWriterTest, ConcurrentWrites) {
             auto now = std::chrono::system_clock::now();
             for (int i = 0; i < logs_per_thread; ++i) {
                 writer.write(
-                    logger_system::log_level::info,
+                    kcenon::common::interfaces::log_level::info,
                     "Thread " + std::to_string(t) + " message " + std::to_string(i),
                     __FILE__,
                     __LINE__,

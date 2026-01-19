@@ -69,12 +69,12 @@ TEST_F(ILoggerInterfaceTest, CanBeUsedAsILoggerSharedPtr) {
 }
 
 /**
- * @brief Test log method with common::interfaces::log_level
+ * @brief Test log method with kcenon::common::interfaces::log_level
  */
 TEST_F(ILoggerInterfaceTest, LogWithCommonLogLevel) {
     ci::ILogger* ilogger = logger_.get();
 
-    // Should compile and work with common::interfaces::log_level
+    // Should compile and work with kcenon::common::interfaces::log_level
     auto result = ilogger->log(ci::log_level::info, std::string("Test message"));
     EXPECT_TRUE(result.is_ok());
 
@@ -152,7 +152,7 @@ TEST_F(ILoggerInterfaceTest, LogWithLogEntry) {
 }
 
 /**
- * @brief Test is_enabled method with common::interfaces::log_level
+ * @brief Test is_enabled method with kcenon::common::interfaces::log_level
  */
 TEST_F(ILoggerInterfaceTest, IsEnabledWithCommonLogLevel) {
     ci::ILogger* ilogger = logger_.get();
@@ -217,10 +217,10 @@ TEST_F(ILoggerInterfaceTest, LevelConversionConsistency) {
 }
 
 /**
- * @brief Test logging with common::interfaces::log_level
+ * @brief Test logging with kcenon::common::interfaces::log_level
  */
 TEST_F(ILoggerInterfaceTest, LoggingWithCommonLogLevel) {
-    // Test logging with common::interfaces::log_level
+    // Test logging with kcenon::common::interfaces::log_level
     logger_->log(ci::log_level::info, std::string("Common log level message"));
     // Using simple message (source_location auto-captured internally)
     logger_->log(ci::log_level::warning, std::string("Common warning message"));

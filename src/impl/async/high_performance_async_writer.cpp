@@ -64,7 +64,7 @@ void high_performance_async_writer::stop(bool flush_remaining) {
 }
 
 common::VoidResult high_performance_async_writer::write(
-    logger_system::log_level level,
+    common::interfaces::log_level level,
     const std::string& message,
     const std::string& file,
     int line,
@@ -148,7 +148,7 @@ const batch_processor::processing_stats* high_performance_async_writer::get_batc
 }
 
 common::VoidResult high_performance_async_writer::write_direct(
-    logger_system::log_level level,
+    common::interfaces::log_level level,
     const std::string& message,
     const std::string& file,
     int line,

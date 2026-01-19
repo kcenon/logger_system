@@ -135,7 +135,7 @@ public:
      * @param timestamp Timestamp
      * @return common::VoidResult indicating success or error
      */
-    common::VoidResult write(logger_system::log_level level,
+    common::VoidResult write(common::interfaces::log_level level,
                              const std::string& message,
                              const std::string& file,
                              int line,
@@ -218,7 +218,7 @@ private:
      * @brief Message structure for queuing
      */
     struct queued_message {
-        logger_system::log_level level;
+        common::interfaces::log_level level;
         std::string message;
         std::string file;
         int line;

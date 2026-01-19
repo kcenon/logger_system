@@ -240,7 +240,7 @@ public:
     /**
      * @brief Write a log entry (base_writer interface)
      */
-    common::VoidResult write(logger_system::log_level level,
+    common::VoidResult write(common::interfaces::log_level level,
                              const std::string& message,
                              const std::string& file,
                              int line,
@@ -283,7 +283,7 @@ private:
      * @brief Internal log entry for batching
      */
     struct buffered_log {
-        logger_system::log_level level;
+        common::interfaces::log_level level;
         std::string message;
         std::string file;
         int line;
@@ -299,7 +299,7 @@ private:
     bool export_batch(const std::vector<buffered_log>& batch);
 
     // Convert log level to OTLP severity
-    static int to_otlp_severity(logger_system::log_level level);
+    static int to_otlp_severity(common::interfaces::log_level level);
 
 #ifdef LOGGER_HAS_OTLP
     // Export using OpenTelemetry SDK

@@ -268,7 +268,7 @@ network_writer::~network_writer() {
 #endif
 }
 
-common::VoidResult network_writer::write(logger_system::log_level level,
+common::VoidResult network_writer::write(common::interfaces::log_level level,
                                          const std::string& message,
                                          const std::string& file,
                                          int line,
@@ -459,8 +459,9 @@ std::string network_writer::format_for_network(const buffered_log& log) {
     oss << "\"@timestamp\":\"";
     oss << std::put_time(std::gmtime(&time_t), "%Y-%m-%dT%H:%M:%SZ") << "\",";
 
-    // Level
-    oss << "\"level\":\"" << logger_system::log_level_to_string(log.level) << "\",";
+    // Level - convert to logger_system::log_level for string conversion
+    auto legacy_level = static_cast<logger_system::log_level>(static_cast<int>(log.level));
+    oss << "\"level\":\"" << logger_system::log_level_to_string(legacy_level) << "\",";
 
     // Message
     oss << "\"message\":\"" << escape_json(log.message) << "\"";

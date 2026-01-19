@@ -113,7 +113,7 @@ common::VoidResult rotating_file_writer::write_entry_impl(const log_entry& entry
     return common::ok();
 }
 
-common::VoidResult rotating_file_writer::write_impl(logger_system::log_level level,
+common::VoidResult rotating_file_writer::write_impl(common::interfaces::log_level level,
                                                     const std::string& message,
                                                     const std::string& file,
                                                     int line,

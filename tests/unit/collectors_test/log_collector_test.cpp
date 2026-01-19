@@ -48,8 +48,8 @@ using log_level = ci::log_level;
 // Mock writer for testing log collector
 class MockCollectorWriter : public base_writer {
 public:
-    // Note: base_writer::write uses logger_system::log_level for backward compatibility
-    common::VoidResult write(logger_system::log_level level, const std::string& message,
+    // Note: base_writer::write uses kcenon::common::interfaces::log_level for backward compatibility
+    common::VoidResult write(kcenon::common::interfaces::log_level level, const std::string& message,
                       const std::string& /* file */, int /* line */,
                       const std::string& /* function */,
                       const std::chrono::system_clock::time_point& /* timestamp */) override {

@@ -27,15 +27,16 @@ using namespace kcenon::logger;
 using namespace kcenon::common;
 using namespace std::chrono_literals;
 namespace ci = kcenon::common::interfaces;
-// Use logger_system::log_level for comparisons with captured entries (which store logger_system::log_level)
-namespace ls = logger_system;
+// Use kcenon::common::interfaces::log_level for comparisons with captured entries (which store kcenon::common::interfaces::log_level)
+// Note: capture_writer stores common::interfaces::log_level, so use ci:: for comparisons
+namespace ls = kcenon::common::interfaces;
 
 namespace {
 
 // Test writer that captures log output
 class capture_writer : public base_writer {
 public:
-    VoidResult write(logger_system::log_level level,
+    VoidResult write(kcenon::common::interfaces::log_level level,
                const std::string& message,
                const std::string& file,
                int line,
@@ -51,7 +52,7 @@ public:
     std::string get_name() const override { return "capture_writer"; }
 
     struct entry {
-        logger_system::log_level level;
+        kcenon::common::interfaces::log_level level;
         std::string message;
         std::string file;
         int line;

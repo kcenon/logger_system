@@ -66,7 +66,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @code
  * class custom_writer : public base_writer {
  * public:
- *     common::VoidResult write(logger_system::log_level level,
+ *     common::VoidResult write(common::interfaces::log_level level,
  *                              const std::string& message,
  *                              const std::string& file,
  *                              int line,
@@ -157,7 +157,9 @@ public:
         int line = entry.location ? entry.location->line : 0;
         std::string function = entry.location ? entry.location->function.to_string() : "";
 
-        return write(entry.level, entry.message.to_string(), file, line, function, entry.timestamp);
+        // Convert logger_system::log_level to common::interfaces::log_level
+        auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+        return write(level, entry.message.to_string(), file, line, function, entry.timestamp);
     }
 
     /**
@@ -181,7 +183,7 @@ public:
      *
      * @since 1.0.0
      */
-    virtual common::VoidResult write(logger_system::log_level level,
+    virtual common::VoidResult write(common::interfaces::log_level level,
                                      const std::string& message,
                                      const std::string& file,
                                      int line,

@@ -61,7 +61,7 @@ batch_writer::~batch_writer() {
     }
 }
 
-common::VoidResult batch_writer::write(logger_system::log_level level,
+common::VoidResult batch_writer::write(common::interfaces::log_level level,
                                        const std::string& message,
                                        const std::string& file,
                                        int line,

@@ -114,7 +114,7 @@ protected:
      * @brief Implementation of write operation with automatic rotation check (legacy)
      * @note Called by thread_safe_writer::write() while holding the mutex
      */
-    common::VoidResult write_impl(logger_system::log_level level,
+    common::VoidResult write_impl(common::interfaces::log_level level,
                                   const std::string& message,
                                   const std::string& file,
                                   int line,
