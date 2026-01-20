@@ -69,7 +69,7 @@ export namespace kcenon::logger::analysis {
  * @details Contains all information about a log entry that can be analyzed.
  */
 struct analyzed_log_entry {
-    logger_system::log_level level;
+    common::interfaces::log_level level;
     std::string message;
     std::chrono::system_clock::time_point timestamp;
     std::string source_file;
@@ -84,7 +84,7 @@ struct analyzed_log_entry {
  */
 struct analysis_stats {
     size_t total_entries = 0;
-    std::unordered_map<logger_system::log_level, size_t> level_counts;
+    std::unordered_map<common::interfaces::log_level, size_t> level_counts;
     std::chrono::system_clock::time_point earliest_timestamp;
     std::chrono::system_clock::time_point latest_timestamp;
     std::vector<std::string> most_frequent_messages;
@@ -151,7 +151,7 @@ public:
      * @param level The level to filter for
      * @return Vector of matching entries
      */
-    std::vector<analyzed_log_entry> filter_by_level(logger_system::log_level level) const {
+    std::vector<analyzed_log_entry> filter_by_level(common::interfaces::log_level level) const {
         std::vector<analyzed_log_entry> filtered;
         for (const auto& entry : entries_) {
             if (entry.level == level) {
@@ -210,8 +210,8 @@ public:
         for (const auto& entry : entries_) {
             if (entry.timestamp >= start_time) {
                 total_in_window++;
-                if (entry.level == logger_system::log_level::error ||
-                    entry.level == logger_system::log_level::fatal) {
+                if (entry.level == common::interfaces::log_level::error ||
+                    entry.level == common::interfaces::log_level::critical) {
                     errors_in_window++;
                 }
             }
@@ -287,15 +287,18 @@ private:
         }
     }
 
-    std::string level_to_string(logger_system::log_level level) const {
-        switch (level) {
-            case logger_system::log_level::trace: return "TRACE";
-            case logger_system::log_level::debug: return "DEBUG";
-            case logger_system::log_level::info: return "INFO";
-            case logger_system::log_level::warn: return "WARN";
-            case logger_system::log_level::error: return "ERROR";
-            case logger_system::log_level::fatal: return "FATAL";
-            case logger_system::log_level::off: return "OFF";
+    std::string level_to_string(common::interfaces::log_level level) const {
+        // Use underlying integer to avoid duplicate case value errors
+        // (warn and warning both = 3, fatal and critical both = 5)
+        const int level_value = static_cast<int>(level);
+        switch (level_value) {
+            case 0: return "TRACE";
+            case 1: return "DEBUG";
+            case 2: return "INFO";
+            case 3: return "WARN";
+            case 4: return "ERROR";
+            case 5: return "FATAL";
+            case 6: return "OFF";
             default: return "UNKNOWN";
         }
     }

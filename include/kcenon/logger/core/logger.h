@@ -688,9 +688,6 @@ public:
      */
     [[nodiscard]] structured_log_builder log_structured(log_level level);
 
-    /// Overload accepting logger_system::log_level for backward compatibility
-    [[nodiscard]] structured_log_builder log_structured(logger_system::log_level level);
-
     // =========================================================================
     // Context fields management
     // =========================================================================
