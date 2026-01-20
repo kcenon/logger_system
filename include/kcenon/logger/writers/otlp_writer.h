@@ -238,17 +238,10 @@ public:
     otlp_writer& operator=(otlp_writer&&) = delete;
 
     /**
-     * @brief Write a log entry (base_writer interface)
-     */
-    common::VoidResult write(common::interfaces::log_level level,
-                             const std::string& message,
-                             const std::string& file,
-                             int line,
-                             const std::string& function,
-                             const std::chrono::system_clock::time_point& timestamp) override;
-
-    /**
      * @brief Write a log entry with OTEL context
+     * @param entry The log entry to write
+     * @return common::VoidResult indicating success or error
+     * @since 3.5.0 This is now the only write method (legacy API removed)
      */
     common::VoidResult write(const log_entry& entry) override;
 
@@ -278,35 +271,21 @@ public:
     void force_export();
 
 private:
-    /**
-     * @struct buffered_log
-     * @brief Internal log entry for batching
-     */
-    struct buffered_log {
-        common::interfaces::log_level level;
-        std::string message;
-        std::string file;
-        int line;
-        std::string function;
-        std::chrono::system_clock::time_point timestamp;
-        std::optional<otlp::otel_context> otel_ctx;
-    };
-
     // Background export thread
     void export_thread_func();
 
     // Export batch to collector
-    bool export_batch(const std::vector<buffered_log>& batch);
+    bool export_batch(const std::vector<log_entry>& batch);
 
     // Convert log level to OTLP severity
     static int to_otlp_severity(common::interfaces::log_level level);
 
 #ifdef LOGGER_HAS_OTLP
     // Export using OpenTelemetry SDK
-    bool export_with_otel_sdk(const std::vector<buffered_log>& batch);
+    bool export_with_otel_sdk(const std::vector<log_entry>& batch);
 #else
     // Fallback: Export using HTTP directly
-    bool export_with_http(const std::vector<buffered_log>& batch);
+    bool export_with_http(const std::vector<log_entry>& batch);
 
     // JSON string escaping helper
     static std::string escape_json(const std::string& str);
@@ -317,7 +296,7 @@ private:
     internal_stats stats_;
 
     // Queue management
-    std::queue<buffered_log> queue_;
+    std::queue<log_entry> queue_;
     mutable std::mutex queue_mutex_;
     std::condition_variable queue_cv_;
 

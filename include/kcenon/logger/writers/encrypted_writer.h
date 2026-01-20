@@ -258,22 +258,11 @@ public:
 
     /**
      * @brief Write encrypted log entry
-     * @param level Log severity level
-     * @param message Log message text
-     * @param file Source file path
-     * @param line Source line number
-     * @param function Function name
-     * @param timestamp Time when log was created
+     * @param entry The log entry to write
      * @return common::VoidResult Success or error code
+     * @since 3.5.0 Changed to use log_entry directly
      */
-    common::VoidResult write(
-        common::interfaces::log_level level,
-        const std::string& message,
-        const std::string& file,
-        int line,
-        const std::string& function,
-        const std::chrono::system_clock::time_point& timestamp
-    ) override;
+    common::VoidResult write(const log_entry& entry) override;
 
     /**
      * @brief Flush underlying writer

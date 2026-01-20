@@ -198,10 +198,13 @@ public:
                     local_named_writers = named_writers_;
                 }
 
+                // Create log_entry for routing
+                log_entry entry(level, message, file, line, function, now);
+
                 for (const auto& writer_name : routed_writer_names) {
                     auto it = local_named_writers.find(writer_name);
                     if (it != local_named_writers.end() && it->second) {
-                        it->second->write(level, message, file, line, function, now);
+                        it->second->write(entry);
                     }
                 }
             }
@@ -214,9 +217,12 @@ public:
                 local_writers = writers_;
             }
 
+            // Create log_entry once for all writers
+            log_entry entry(level, message, file, line, function, now);
+
             for (auto& writer : local_writers) {
                 if (writer) {
-                    writer->write(level, message, file, line, function, now);
+                    writer->write(entry);
                 }
             }
         }

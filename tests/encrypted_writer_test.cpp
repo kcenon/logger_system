@@ -106,14 +106,13 @@ TEST_F(EncryptedWriterTest, WriteAndDecryptSingleEntry) {
     {
         encrypted_writer writer(log_path, std::move(config));
 
-        auto result = writer.write(
-            kcenon::common::interfaces::log_level::info,
-            "Test encrypted message",
-            "test.cpp",
-            42,
-            "TestFunction",
-            std::chrono::system_clock::now()
-        );
+        log_entry entry(kcenon::common::interfaces::log_level::info,
+                        "Test encrypted message",
+                        "test.cpp",
+                        42,
+                        "TestFunction",
+                        std::chrono::system_clock::now());
+        auto result = writer.write(entry);
 
         EXPECT_TRUE(result.is_ok()) << "Write failed: " << get_logger_error_message(result);
         EXPECT_EQ(writer.get_entries_encrypted(), 1);
@@ -163,12 +162,10 @@ TEST_F(EncryptedWriterTest, WriteMultipleEntries) {
         encrypted_writer writer(log_path, std::move(config));
 
         for (int i = 0; i < num_entries; ++i) {
-            auto result = writer.write(
-                kcenon::common::interfaces::log_level::debug,
-                "Entry number " + std::to_string(i),
-                "", 0, "",
-                std::chrono::system_clock::now()
-            );
+            log_entry entry(kcenon::common::interfaces::log_level::debug,
+                           "Entry number " + std::to_string(i),
+                           std::chrono::system_clock::now());
+            auto result = writer.write(entry);
             EXPECT_TRUE(result.is_ok());
         }
 
@@ -211,12 +208,12 @@ TEST_F(EncryptedWriterTest, KeyRotation) {
     encrypted_writer writer(log_path, std::move(config));
 
     // Write with first key
-    writer.write(
-        kcenon::common::interfaces::log_level::info,
-        "Before rotation",
-        "", 0, "",
-        std::chrono::system_clock::now()
-    );
+    {
+        log_entry entry(kcenon::common::interfaces::log_level::info,
+                       "Before rotation",
+                       std::chrono::system_clock::now());
+        writer.write(entry);
+    }
 
     auto first_rotation_time = writer.get_last_key_rotation();
 
@@ -234,12 +231,12 @@ TEST_F(EncryptedWriterTest, KeyRotation) {
     EXPECT_GT(writer.get_last_key_rotation(), first_rotation_time);
 
     // Write with new key
-    writer.write(
-        kcenon::common::interfaces::log_level::info,
-        "After rotation",
-        "", 0, "",
-        std::chrono::system_clock::now()
-    );
+    {
+        log_entry entry(kcenon::common::interfaces::log_level::info,
+                       "After rotation",
+                       std::chrono::system_clock::now());
+        writer.write(entry);
+    }
 
     EXPECT_EQ(writer.get_entries_encrypted(), 2);
 }
@@ -275,12 +272,10 @@ TEST_F(EncryptedWriterTest, DecryptWithWrongKey) {
     {
         encrypted_writer writer(log_path, std::move(config));
 
-        writer.write(
-            kcenon::common::interfaces::log_level::info,
-            "Secret message",
-            "", 0, "",
-            std::chrono::system_clock::now()
-        );
+        log_entry entry(kcenon::common::interfaces::log_level::info,
+                       "Secret message",
+                       std::chrono::system_clock::now());
+        writer.write(entry);
         writer.flush();
     }
 
@@ -324,12 +319,10 @@ TEST_F(EncryptedWriterTest, ThreadSafety) {
     for (int t = 0; t < num_threads; ++t) {
         threads.emplace_back([writer_ptr, t]() {
             for (int i = 0; i < entries_per_thread; ++i) {
-                auto result = writer_ptr->write(
-                    kcenon::common::interfaces::log_level::info,
-                    "Thread " + std::to_string(t) + " Entry " + std::to_string(i),
-                    "", 0, "",
-                    std::chrono::system_clock::now()
-                );
+                log_entry entry(kcenon::common::interfaces::log_level::info,
+                               "Thread " + std::to_string(t) + " Entry " + std::to_string(i),
+                               std::chrono::system_clock::now());
+                auto result = writer_ptr->write(entry);
                 EXPECT_TRUE(result.is_ok());
             }
         });

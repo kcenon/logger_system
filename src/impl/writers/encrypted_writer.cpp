@@ -150,14 +150,7 @@ encrypted_writer::~encrypted_writer() {
     }
 }
 
-common::VoidResult encrypted_writer::write(
-    common::interfaces::log_level level,
-    const std::string& message,
-    const std::string& file,
-    int line,
-    const std::string& function,
-    const std::chrono::system_clock::time_point& timestamp
-) {
+common::VoidResult encrypted_writer::write(const log_entry& entry) {
     if (!is_initialized_.load()) {
         return make_logger_void_result(
             logger_error_code::encryption_failed,
@@ -178,7 +171,7 @@ common::VoidResult encrypted_writer::write(
 
     // Format the log entry first
     std::ostringstream oss;
-    auto time_t_val = std::chrono::system_clock::to_time_t(timestamp);
+    auto time_t_val = std::chrono::system_clock::to_time_t(entry.timestamp);
     std::tm tm_val;
 #ifdef _WIN32
     localtime_s(&tm_val, &time_t_val);
@@ -186,12 +179,19 @@ common::VoidResult encrypted_writer::write(
     localtime_r(&time_t_val, &tm_val);
 #endif
 
+    // Convert log_level from logger_system to common::interfaces
+    auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+
     oss << std::put_time(&tm_val, "%Y-%m-%dT%H:%M:%S")
         << " [" << static_cast<int>(level) << "] "
-        << message;
+        << entry.message.to_string();
 
-    if (!file.empty()) {
-        oss << " (" << file << ":" << line << " " << function << ")";
+    if (entry.location) {
+        std::string file = entry.location->file.to_string();
+        std::string function = entry.location->function.to_string();
+        if (!file.empty()) {
+            oss << " (" << file << ":" << entry.location->line << " " << function << ")";
+        }
     }
 
     std::string plaintext = oss.str();
@@ -228,9 +228,9 @@ common::VoidResult encrypted_writer::write(
             reinterpret_cast<const char*>(encrypted_data.data()),
             encrypted_data.size()
         );
-        log_entry entry(level, binary_data, timestamp);
+        log_entry encrypted_entry(level, binary_data, entry.timestamp);
 
-        auto write_result = inner_writer_->write(entry);
+        auto write_result = inner_writer_->write(encrypted_entry);
         if (write_result.is_ok()) {
             entries_encrypted_.fetch_add(1);
         }

@@ -54,18 +54,12 @@ public:
         std::string message;
     };
 
-    // Implement the legacy write interface required by base_writer
-    // Note: base_writer::write uses kcenon::common::interfaces::log_level for backward compatibility
-    kcenon::common::VoidResult write(kcenon::common::interfaces::log_level level,
-                                     const std::string& message,
-                                     [[maybe_unused]] const std::string& file,
-                                     [[maybe_unused]] int line,
-                                     [[maybe_unused]] const std::string& function,
-                                     [[maybe_unused]] const std::chrono::system_clock::time_point& timestamp) override {
+    // Implement the modern write interface required by base_writer
+    kcenon::common::VoidResult write(const kcenon::logger::log_entry& entry) override {
         entry_record rec;
         // Convert to kcenon::common::interfaces::log_level for storage
-        rec.level = static_cast<ci::log_level>(static_cast<int>(level));
-        rec.message = message;
+        rec.level = static_cast<ci::log_level>(static_cast<int>(entry.level));
+        rec.message = entry.message.to_string();
         records_.push_back(std::move(rec));
         return kcenon::common::ok();
     }

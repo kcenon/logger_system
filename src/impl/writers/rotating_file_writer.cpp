@@ -113,20 +113,6 @@ common::VoidResult rotating_file_writer::write_entry_impl(const log_entry& entry
     return common::ok();
 }
 
-common::VoidResult rotating_file_writer::write_impl(common::interfaces::log_level level,
-                                                    const std::string& message,
-                                                    const std::string& file,
-                                                    int line,
-                                                    const std::string& function,
-                                                    const std::chrono::system_clock::time_point& timestamp) {
-    // Legacy API: create a log_entry and delegate to write_entry_impl
-    log_entry entry = (!file.empty() || line != 0 || !function.empty())
-        ? log_entry(level, message, file, line, function, timestamp)
-        : log_entry(level, message, timestamp);
-
-    return write_entry_impl(entry);
-}
-
 void rotating_file_writer::rotate() {
     // Public API for manual rotation
     std::lock_guard<std::mutex> lock(get_mutex());

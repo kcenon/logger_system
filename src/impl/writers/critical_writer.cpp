@@ -100,22 +100,17 @@ critical_writer::~critical_writer() {
     instance_.store(nullptr);
 }
 
-common::VoidResult critical_writer::write(
-    common::interfaces::log_level level,
-    const std::string& message,
-    const std::string& file,
-    int line,
-    const std::string& function,
-    const std::chrono::system_clock::time_point& timestamp
-)
-{
+common::VoidResult critical_writer::write(const log_entry& entry) {
+    // Convert log_level from logger_system to common::interfaces
+    auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+
     // Check if we're in emergency shutdown (signal received)
     if (shutting_down_.load(std::memory_order_acquire)) {
         // In shutdown mode, all writes become critical to ensure they're flushed
         // before process termination
         std::lock_guard<std::mutex> lock(critical_mutex_);
 
-        auto result = wrapped_writer_->write(level, message, file, line, function, timestamp);
+        auto result = wrapped_writer_->write(entry);
         if (result.is_ok()) {
             wrapped_writer_->flush();
             stats_.total_flushes.fetch_add(1, std::memory_order_relaxed);
@@ -132,12 +127,12 @@ common::VoidResult critical_writer::write(
 
         // Write to WAL first (if enabled)
         if (wal_stream_ && wal_stream_->is_open()) {
-            write_to_wal(level, message, file, line, function, timestamp);
+            write_to_wal(entry);
             stats_.wal_writes.fetch_add(1, std::memory_order_relaxed);
         }
 
         // Write to wrapped writer
-        auto result = wrapped_writer_->write(level, message, file, line, function, timestamp);
+        auto result = wrapped_writer_->write(entry);
         if (result.is_err()) {
             return result;
         }
@@ -157,7 +152,7 @@ common::VoidResult critical_writer::write(
     }
 
     // Non-critical: delegate to wrapped writer normally
-    return wrapped_writer_->write(level, message, file, line, function, timestamp);
+    return wrapped_writer_->write(entry);
 }
 
 common::VoidResult critical_writer::flush() {
@@ -210,24 +205,24 @@ bool critical_writer::is_critical_level(common::interfaces::log_level level) con
     return false;
 }
 
-void critical_writer::write_to_wal(
-    common::interfaces::log_level level,
-    const std::string& message,
-    const std::string& file,
-    int line,
-    const std::string& function,
-    const std::chrono::system_clock::time_point& timestamp
-)
-{
+void critical_writer::write_to_wal(const log_entry& entry) {
     if (!wal_stream_ || !wal_stream_->is_open()) {
         return;
     }
 
     try {
+        // Convert log_level
+        auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+
+        // Extract source location
+        std::string file = entry.location ? entry.location->file.to_string() : "";
+        int line = entry.location ? entry.location->line : 0;
+        std::string function = entry.location ? entry.location->function.to_string() : "";
+
         // Format: [timestamp] [LEVEL] [file:line:function] message\n
-        auto time_t = std::chrono::system_clock::to_time_t(timestamp);
+        auto time_t = std::chrono::system_clock::to_time_t(entry.timestamp);
         auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
-            timestamp.time_since_epoch()
+            entry.timestamp.time_since_epoch()
         ).count() % 1000;
 
         std::ostringstream oss;
@@ -235,7 +230,7 @@ void critical_writer::write_to_wal(
             << "." << std::setfill('0') << std::setw(3) << ms << "] "
             << "[" << utils::string_utils::level_to_string(level) << "] "
             << "[" << file << ":" << line << ":" << function << "] "
-            << message << "\n";
+            << entry.message.to_string() << "\n";
 
         *wal_stream_ << oss.str();
         wal_stream_->flush();
@@ -427,17 +422,9 @@ hybrid_writer::hybrid_writer(
 
 hybrid_writer::~hybrid_writer() = default;
 
-common::VoidResult hybrid_writer::write(
-    common::interfaces::log_level level,
-    const std::string& message,
-    const std::string& file,
-    int line,
-    const std::string& function,
-    const std::chrono::system_clock::time_point& timestamp
-)
-{
+common::VoidResult hybrid_writer::write(const log_entry& entry) {
     // Critical writer handles both sync (for critical) and async (for normal)
-    return critical_writer_->write(level, message, file, line, function, timestamp);
+    return critical_writer_->write(entry);
 }
 
 common::VoidResult hybrid_writer::flush() {

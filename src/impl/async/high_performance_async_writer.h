@@ -20,6 +20,7 @@ All rights reserved.
 #include "../memory/object_pool.h"
 #include "../memory/log_entry_pool.h"
 #include <kcenon/logger/writers/base_writer.h>
+#include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/core/error_codes.h>
 #include <memory>
 #include <thread>
@@ -129,21 +130,12 @@ public:
     void stop(bool flush_remaining = true);
 
     /**
-     * @brief Write a log message asynchronously
-     * @param level Log level
-     * @param message Log message
-     * @param file Source file
-     * @param line Source line
-     * @param function Function name
-     * @param timestamp Timestamp
+     * @brief Write a log entry asynchronously
+     * @param entry The log entry to write
      * @return common::VoidResult indicating success or error
+     * @since 3.5.0 Changed to use log_entry directly
      */
-    common::VoidResult write(common::interfaces::log_level level,
-                             const std::string& message,
-                             const std::string& file,
-                             int line,
-                             const std::string& function,
-                             const std::chrono::system_clock::time_point& timestamp) override;
+    common::VoidResult write(const log_entry& entry) override;
 
     /**
      * @brief Flush all pending messages
@@ -225,12 +217,7 @@ private:
     /**
      * @brief Write directly to the underlying writer (fallback mode)
      */
-    common::VoidResult write_direct(common::interfaces::log_level level,
-                                    const std::string& message,
-                                    const std::string& file,
-                                    int line,
-                                    const std::string& function,
-                                    const std::chrono::system_clock::time_point& timestamp);
+    common::VoidResult write_direct(const log_entry& entry);
 
     /**
      * @brief Update performance statistics
