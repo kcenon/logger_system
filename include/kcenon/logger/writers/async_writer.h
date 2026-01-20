@@ -10,21 +10,15 @@ All rights reserved.
 /**
  * @file async_writer.h
  * @brief Asynchronous wrapper for log writers
- * 
+ *
  * This file provides an asynchronous wrapper that can be used with any
  * base_writer implementation to make it asynchronous.
  */
 
-#include "base_writer.h"
-#include "../interfaces/log_entry.h"
-#include "../interfaces/writer_category.h"
+#include "queued_writer_base.h"
 #include <queue>
 #include <thread>
-#include <mutex>
 #include <condition_variable>
-#include <atomic>
-#include <memory>
-#include <future>
 #include <iostream>
 
 namespace kcenon::logger {
@@ -35,12 +29,17 @@ namespace kcenon::logger {
  *
  * This class wraps any base_writer implementation and provides
  * asynchronous writing capabilities using a background thread.
+ * It extends queued_writer_base to share common queue management logic
+ * with batch_writer.
  *
  * Category: Asynchronous (non-blocking), Decorator (wraps another writer)
  *
  * @since 1.4.0 Added async_writer_tag and decorator_writer_tag for classification
+ * @since 4.0.0 Refactored to use queued_writer_base
  */
-class async_writer : public base_writer, public async_writer_tag, public decorator_writer_tag {
+class async_writer : public queued_writer_base<std::queue<log_entry>> {
+    using base_type = queued_writer_base<std::queue<log_entry>>;
+
 public:
     /**
      * @brief Constructor
@@ -51,22 +50,18 @@ public:
     explicit async_writer(std::unique_ptr<base_writer> wrapped_writer,
                          std::size_t queue_size = 10000,
                          std::chrono::seconds flush_timeout = std::chrono::seconds(5))
-        : wrapped_writer_(std::move(wrapped_writer))
-        , max_queue_size_(queue_size)
+        : base_type(std::move(wrapped_writer), queue_size)
         , flush_timeout_(flush_timeout)
         , running_(false) {
-        if (!wrapped_writer_) {
-            throw std::invalid_argument("Wrapped writer cannot be null");
-        }
     }
-    
+
     /**
      * @brief Destructor
      */
     ~async_writer() override {
         stop();
     }
-    
+
     /**
      * @brief Start the async writer thread
      */
@@ -88,7 +83,7 @@ public:
             throw; // Re-throw to notify caller
         }
     }
-    
+
     /**
      * @brief Stop the async writer thread
      * @param force_flush If true, process all remaining messages before stopping
@@ -101,7 +96,7 @@ public:
         // Process remaining messages if requested
         if (force_flush) {
             std::lock_guard<std::mutex> lock(queue_mutex_);
-            size_t remaining_count = message_queue_.size();
+            size_t remaining_count = queue_.size();
             if (remaining_count > 0) {
                 std::cerr << "[async_writer] Info: Processing " << remaining_count
                           << " remaining messages before shutdown.\n";
@@ -120,12 +115,12 @@ public:
         }
 
         // Verify all messages were processed
-        if (!message_queue_.empty()) {
-            std::cerr << "[async_writer] Warning: " << message_queue_.size()
+        if (!queue_.empty()) {
+            std::cerr << "[async_writer] Warning: " << queue_.size()
                       << " messages were not processed during shutdown.\n";
         }
     }
-    
+
     /**
      * @brief Write a log entry asynchronously
      * @param entry The log entry to write
@@ -138,33 +133,7 @@ public:
             return wrapped_writer_->write(entry);
         }
 
-        // Queue the message
-        {
-            std::lock_guard<std::mutex> lock(queue_mutex_);
-
-            // Check queue size
-            if (message_queue_.size() >= max_queue_size_) {
-                // Queue is full, drop the message or handle overflow
-                return make_logger_void_result(logger_error_code::queue_full, "Async writer queue is full");
-            }
-
-            // Create a copy of entry fields since log_entry is move-only
-            if (entry.location) {
-                message_queue_.emplace(entry.level,
-                                      entry.message.to_string(),
-                                      entry.location->file.to_string(),
-                                      entry.location->line,
-                                      entry.location->function.to_string(),
-                                      entry.timestamp);
-            } else {
-                message_queue_.emplace(entry.level,
-                                      entry.message.to_string(),
-                                      entry.timestamp);
-            }
-            queue_cv_.notify_one();
-        }
-
-        return common::ok();
+        return try_enqueue(entry);
     }
 
     /**
@@ -179,7 +148,7 @@ public:
         // Wait for the queue to be empty with a timeout to prevent indefinite blocking
         std::unique_lock<std::mutex> lock(queue_mutex_);
         bool flushed = flush_cv_.wait_for(lock, flush_timeout_, [this]() {
-            return message_queue_.empty();
+            return queue_.empty();
         });
 
         if (!flushed) {
@@ -192,7 +161,7 @@ public:
         // Flush the wrapped writer
         return wrapped_writer_->flush();
     }
-    
+
     /**
      * @brief Check if the writer is healthy
      * @return true if healthy, false otherwise
@@ -200,7 +169,7 @@ public:
     bool is_healthy() const override {
         return wrapped_writer_->is_healthy() && running_;
     }
-    
+
     /**
      * @brief Get the name of this writer
      * @return Writer name
@@ -208,15 +177,24 @@ public:
     std::string get_name() const override {
         return "async_" + wrapped_writer_->get_name();
     }
-    
+
+protected:
     /**
-     * @brief Set whether to use color output
-     * @param use_color Enable/disable color output
+     * @brief Handle queue overflow
+     * @param entry The entry that couldn't be enqueued
+     * @return Error result indicating queue full
      */
-    void set_use_color(bool use_color) override {
-        wrapped_writer_->set_use_color(use_color);
+    common::VoidResult handle_overflow(const log_entry& /*entry*/) override {
+        return make_logger_void_result(logger_error_code::queue_full, "Async writer queue is full");
     }
-    
+
+    /**
+     * @brief Called after entry is enqueued - notifies worker thread
+     */
+    void on_entry_enqueued() override {
+        queue_cv_.notify_one();
+    }
+
 private:
     /**
      * @brief Process messages from the queue
@@ -227,13 +205,13 @@ private:
 
             // Wait for messages or stop signal
             queue_cv_.wait(lock, [this]() {
-                return !message_queue_.empty() || !running_;
+                return !queue_.empty() || !running_;
             });
 
             // Process all available messages
-            while (!message_queue_.empty()) {
-                auto entry = std::move(message_queue_.front());
-                message_queue_.pop();
+            while (!queue_.empty()) {
+                auto entry = std::move(queue_.front());
+                queue_.pop();
 
                 // Unlock while writing
                 lock.unlock();
@@ -251,20 +229,16 @@ private:
      */
     void flush_remaining() {
         std::lock_guard<std::mutex> lock(queue_mutex_);
-        while (!message_queue_.empty()) {
-            auto entry = std::move(message_queue_.front());
-            message_queue_.pop();
+        while (!queue_.empty()) {
+            auto entry = std::move(queue_.front());
+            queue_.pop();
             wrapped_writer_->write(entry);
         }
         wrapped_writer_->flush();
     }
 
-    std::unique_ptr<base_writer> wrapped_writer_;
-    std::size_t max_queue_size_;
     std::chrono::seconds flush_timeout_;  // Configurable flush timeout
 
-    std::queue<log_entry> message_queue_;
-    mutable std::mutex queue_mutex_;
     std::condition_variable queue_cv_;
     std::condition_variable flush_cv_;
 

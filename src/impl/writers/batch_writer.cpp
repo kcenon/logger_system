@@ -38,23 +38,19 @@ namespace kcenon::logger {
 
 batch_writer::batch_writer(std::unique_ptr<base_writer> underlying_writer,
                           const config& cfg)
-    : config_(cfg)
-    , underlying_writer_(std::move(underlying_writer))
+    : base_type(std::move(underlying_writer), cfg.max_batch_size)
+    , config_(cfg)
     , last_flush_time_(std::chrono::steady_clock::now()) {
-    
-    if (!underlying_writer_) {
-        throw std::invalid_argument("Underlying writer cannot be null");
-    }
-    
+
     // Reserve space for batch to avoid reallocations
-    batch_.reserve(config_.max_batch_size);
+    queue_.reserve(config_.max_batch_size);
 }
 
 batch_writer::~batch_writer() {
     shutting_down_ = true;
 
     // Flush any remaining entries with proper error handling
-    if (!batch_.empty()) {
+    if (!queue_.empty()) {
         utils::safe_destructor_result_operation("final_batch_flush", [this]() {
             return flush();
         });
@@ -70,21 +66,10 @@ common::VoidResult batch_writer::write(const log_entry& entry) {
     bool should_flush = false;
 
     {
-        std::lock_guard<std::mutex> lock(batch_mutex_);
+        std::lock_guard<std::mutex> lock(queue_mutex_);
 
-        // Add entry to batch - create a copy since log_entry is move-only
-        if (entry.location) {
-            batch_.emplace_back(entry.level,
-                               entry.message.to_string(),
-                               entry.location->file.to_string(),
-                               entry.location->line,
-                               entry.location->function.to_string(),
-                               entry.timestamp);
-        } else {
-            batch_.emplace_back(entry.level,
-                               entry.message.to_string(),
-                               entry.timestamp);
-        }
+        // Add entry to batch using shared helper
+        queue_.push_back(copy_log_entry(entry));
         stats_.total_entries++;
 
         // Check if we should flush
@@ -103,11 +88,11 @@ common::VoidResult batch_writer::write(const log_entry& entry) {
 }
 
 common::VoidResult batch_writer::flush() {
-    if (shutting_down_ && batch_.empty()) {
+    if (shutting_down_ && queue_.empty()) {
         return common::ok();
     }
 
-    std::lock_guard<std::mutex> lock(batch_mutex_);
+    std::lock_guard<std::mutex> lock(queue_mutex_);
 
     if (!shutting_down_) {
         stats_.manual_flushes++;
@@ -117,15 +102,15 @@ common::VoidResult batch_writer::flush() {
 }
 
 common::VoidResult batch_writer::flush_batch_unsafe() {
-    if (batch_.empty()) {
+    if (queue_.empty()) {
         return common::ok();
     }
 
     // Write all entries in the batch
     common::VoidResult last_result = common::ok();
 
-    for (const auto& entry : batch_) {
-        auto result = underlying_writer_->write(entry);
+    for (const auto& entry : queue_) {
+        auto result = wrapped_writer_->write(entry);
 
         if (result.is_err()) {
             last_result = result;
@@ -134,7 +119,7 @@ common::VoidResult batch_writer::flush_batch_unsafe() {
     }
 
     // Flush the underlying writer
-    auto flush_result = underlying_writer_->flush();
+    auto flush_result = wrapped_writer_->flush();
     if (flush_result.is_err() && last_result.is_ok()) {
         last_result = flush_result;
     }
@@ -143,7 +128,7 @@ common::VoidResult batch_writer::flush_batch_unsafe() {
     stats_.total_batches++;
 
     // Clear the batch
-    batch_.clear();
+    queue_.clear();
     last_flush_time_ = std::chrono::steady_clock::now();
 
     // Return the last error if any
@@ -151,16 +136,16 @@ common::VoidResult batch_writer::flush_batch_unsafe() {
 }
 
 std::string batch_writer::get_name() const {
-    return "batch_writer[" + underlying_writer_->get_name() + "]";
+    return "batch_writer[" + wrapped_writer_->get_name() + "]";
 }
 
 bool batch_writer::is_healthy() const {
-    return !shutting_down_ && underlying_writer_->is_healthy();
+    return !shutting_down_ && wrapped_writer_->is_healthy();
 }
 
 size_t batch_writer::get_current_batch_size() const {
-    std::lock_guard<std::mutex> lock(batch_mutex_);
-    return batch_.size();
+    std::lock_guard<std::mutex> lock(queue_mutex_);
+    return queue_.size();
 }
 
 void batch_writer::reset_stats() {
@@ -173,7 +158,7 @@ void batch_writer::reset_stats() {
 }
 
 bool batch_writer::should_flush_by_size() const {
-    return batch_.size() >= config_.max_batch_size;
+    return queue_.size() >= config_.max_batch_size;
 }
 
 bool batch_writer::should_flush_by_time() const {

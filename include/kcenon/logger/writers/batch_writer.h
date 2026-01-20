@@ -32,14 +32,9 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
-#include "base_writer.h"
-#include "../interfaces/log_entry.h"
-#include "../interfaces/writer_category.h"
+#include "queued_writer_base.h"
 #include <vector>
-#include <memory>
-#include <mutex>
 #include <chrono>
-#include <atomic>
 
 namespace kcenon::logger {
 
@@ -49,6 +44,8 @@ namespace kcenon::logger {
  * This writer wraps another writer and accumulates log entries up to a
  * configurable batch size or timeout, then writes them all at once.
  * This reduces the number of I/O operations and improves performance.
+ * It extends queued_writer_base to share common queue management logic
+ * with async_writer.
  *
  * Features:
  * - Configurable batch size
@@ -59,8 +56,11 @@ namespace kcenon::logger {
  * Category: Asynchronous (batched I/O), Decorator (wraps another writer)
  *
  * @since 1.4.0 Added async_writer_tag and decorator_writer_tag for classification
+ * @since 4.0.0 Refactored to use queued_writer_base
  */
-class batch_writer : public base_writer, public async_writer_tag, public decorator_writer_tag {
+class batch_writer : public queued_writer_base<std::vector<log_entry>> {
+    using base_type = queued_writer_base<std::vector<log_entry>>;
+
 public:
     /**
      * @brief Configuration for batch writer
@@ -150,41 +150,33 @@ public:
     void reset_stats();
     
 private:
-    
+
     /**
      * @brief Flush batch without locking (caller must hold lock)
      * @return common::VoidResult indicating success or error
      */
     common::VoidResult flush_batch_unsafe();
-    
+
     /**
      * @brief Check if batch should be flushed based on size
      * @return true if batch is full
      */
     bool should_flush_by_size() const;
-    
+
     /**
      * @brief Check if batch should be flushed based on time
      * @return true if timeout has elapsed
      */
     bool should_flush_by_time() const;
-    
+
     // Configuration
     config config_;
-    
-    // Underlying writer
-    std::unique_ptr<base_writer> underlying_writer_;
-    
-    // Batch storage
-    mutable std::mutex batch_mutex_;
-    std::vector<log_entry> batch_;
+
+    // Timing
     std::chrono::steady_clock::time_point last_flush_time_;
-    
+
     // Statistics
     mutable batch_stats stats_;
-    
-    // State
-    std::atomic<bool> shutting_down_{false};
 };
 
 /**
