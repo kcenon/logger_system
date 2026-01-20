@@ -144,9 +144,51 @@ Benefits</h3>
 <h1><a class="anchor" id="autotoc_md1032"></a>
 [3.0.0] - 2025-12-31</h1>
 <h2><a class="anchor" id="autotoc_md1033"></a>
+Removed - Deprecated log_level Types and Converters (Issue #339)</h2>
+<p>This release removes the deprecated <code>logger_system::log_level</code> enum and related converter functions as part of the v3.0.0 cleanup.</p>
+<h3><a class="anchor" id="autotoc_md1034"></a>
+Breaking Changes</h3>
+<ul>
+<li><b>Removed <code>logger_system::log_level</code> enum</b> from <code>logger_types.h</code><ul>
+<li>Use <code>common::interfaces::log_level</code> instead</li>
+<li>The enum values are identical between both types</li>
+</ul>
+</li>
+<li><b>Removed <code>level_converter.h</code> file</b><ul>
+<li><code>to_logger_system_level()</code> function removed</li>
+<li><code>to_common_level()</code> function removed</li>
+<li>Use <code>common::interfaces::log_level</code> directly without conversion</li>
+</ul>
+</li>
+<li><b>Removed <code>log_level_to_string()</code> and <code>string_to_log_level()</code> functions</b><ul>
+<li>Use <code>common::interfaces::log_level_to_string()</code> instead</li>
+<li>Use <code>common::interfaces::string_to_log_level()</code> instead</li>
+</ul>
+</li>
+<li><b>Removed <code>log_structured(logger_system::log_level)</code> overload</b> from <code>logger</code> class<ul>
+<li>Use <code>log_structured(log_level)</code> with <code>common::interfaces::log_level</code></li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md1035"></a>
+Migration Guide</h3>
+<div class="fragment"><div class="line"><span class="comment">// Before (removed):</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/logger/interfaces/logger_types.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/level_converter.h&gt;</span></div>
+<div class="line">logger_system::log_level level = logger_system::log_level::info;</div>
+<div class="line"><span class="keyword">auto</span> common_level = kcenon::logger::to_common_level(level);</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* str = logger_system::log_level_to_string(level);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// After:</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/common/interfaces/logger_interface.h&gt;</span></div>
+<div class="line">common::interfaces::log_level level = common::interfaces::log_level::info;</div>
+<div class="line"><span class="comment">// Use common::interfaces::log_level directly - no conversion needed</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* str = common::interfaces::log_level_to_string(level);</div>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="autotoc_md1037"></a>
 Removed - Deprecated API Cleanup (Issues #268, #324)</h2>
 <p>This release removes deprecated API compatibility layers following the "Fewest Elements" Simple Design principle.</p>
-<h3><a class="anchor" id="autotoc_md1034"></a>
+<h3><a class="anchor" id="autotoc_md1038"></a>
 Breaking Changes</h3>
 <ul>
 <li><b>Removed monitoring interface transition headers</b> (Issue #324)<ul>
@@ -179,7 +221,7 @@ Breaking Changes</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1035"></a>
+<h3><a class="anchor" id="autotoc_md1039"></a>
 Migration Guide</h3>
 <div class="fragment"><div class="line"><span class="comment">// Before (deprecated):</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/interfaces/logger_interface.h&gt;</span></div>
@@ -191,49 +233,8 @@ Migration Guide</h3>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder().with_standalone_backend().build();</div>
 <div class="line">common::VoidResult res = make_logger_void_result(code, <span class="stringliteral">&quot;message&quot;</span>);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1037"></a>
+<h1><a class="anchor" id="autotoc_md1041"></a>
 [Unreleased]</h1>
-<h2><a class="anchor" id="autotoc_md1038"></a>
-Native log_level API Deprecation (Issue #320)</h2>
-<h3><a class="anchor" id="autotoc_md1039"></a>
-Deprecated</h3>
-<ul>
-<li><b>Native <code>logger_system::log_level</code> enum</b> - Use <code>common::interfaces::log_level</code> instead<ul>
-<li>Marked with <code>[[deprecated]]</code> attribute for compiler warnings</li>
-<li>Will be removed in v3.0.0</li>
-</ul>
-</li>
-<li><b>Native log_level methods in <code>logger</code> class</b><ul>
-<li><code>log(log_level, const std::string&amp;)</code> - Use ILogger interface methods instead</li>
-<li><code>log(log_level, msg, file, line, func)</code> - Use <code>log(level, msg, source_location)</code> instead</li>
-<li><code>log(log_level, msg, log_context)</code> - Use <code>log(level, msg, source_location)</code> instead</li>
-<li><code>is_enabled(log_level)</code> - Use <code>is_enabled(common::interfaces::log_level)</code> instead</li>
-<li><code>set_min_level(log_level)</code> - Use <code>set_level(common::interfaces::log_level)</code> instead</li>
-<li><code>get_min_level()</code> - Use <code>get_level()</code> instead</li>
-</ul>
-</li>
-<li><b>Utility functions in <code>logger_types.h</code></b><ul>
-<li><code>log_level_to_string()</code> - Use <code>common::interfaces::log_level_to_string()</code> instead</li>
-<li><code>string_to_log_level()</code> - Use <code>common::interfaces::string_to_log_level()</code> instead</li>
-</ul>
-</li>
-<li><b>Conversion functions in <code>level_converter.h</code></b><ul>
-<li><code>to_logger_system_level()</code> - Use <code>common::interfaces::log_level</code> directly</li>
-<li><code>to_common_level()</code> - Use <code>common::interfaces::log_level</code> directly</li>
-</ul>
-</li>
-</ul>
-<h3><a class="anchor" id="autotoc_md1040"></a>
-Migration</h3>
-<div class="fragment"><div class="line"><span class="comment">// Before (deprecated):</span></div>
-<div class="line">logger-&gt;log(log_level::info, <span class="stringliteral">&quot;Message&quot;</span>);</div>
-<div class="line">logger-&gt;set_min_level(log_level::debug);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// After (recommended):</span></div>
-<div class="line">logger-&gt;log(common::interfaces::log_level::info, <span class="stringliteral">&quot;Message&quot;</span>);</div>
-<div class="line">logger-&gt;set_level(common::interfaces::log_level::debug);</div>
-</div><!-- fragment --><p>See <a href="guides/MIGRATION_GUIDE.md#deprecated-native-log_level-api-planned-for-removal-in-v300">Migration Guide</a> for details.</p>
-<hr  />
 <h2><a class="anchor" id="autotoc_md1042"></a>
 Real-time Log Analysis Integration (Issue #281)</h2>
 <h3><a class="anchor" id="autotoc_md1043"></a>
@@ -1031,7 +1032,7 @@ Changed</h3>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jan 20 2026 00:41:56 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Jan 20 2026 01:17:37 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
