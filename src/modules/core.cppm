@@ -68,18 +68,6 @@ export {
 
     // Core types and enumerations
     namespace logger_system {
-        enum class log_level {
-            trace = 0,
-            debug = 1,
-            info = 2,
-            warn = 3,
-            warning = 3,  // Alias for warn
-            error = 4,
-            fatal = 5,
-            critical = 5, // Alias for fatal
-            off = 6
-        };
-
         enum class overflow_policy {
             block,
             drop_oldest,
@@ -115,25 +103,12 @@ export {
             writer_closed,
             unknown_error
         };
-
-        inline const char* log_level_to_string(log_level level) {
-            switch (level) {
-                case log_level::trace: return "TRACE";
-                case log_level::debug: return "DEBUG";
-                case log_level::info:  return "INFO";
-                case log_level::warn:  return "WARN";
-                case log_level::error: return "ERROR";
-                case log_level::fatal: return "FATAL";
-                case log_level::off:   return "OFF";
-                default: return "UNKNOWN";
-            }
-        }
     }
 
     // Core namespace exports
     namespace kcenon::logger {
-        // Type aliases from logger_system
-        using log_level = logger_system::log_level;
+        // Type aliases - use common::interfaces::log_level
+        using log_level = common::interfaces::log_level;
         using health_status = logger_system::health_status;
         using overflow_policy = logger_system::overflow_policy;
 

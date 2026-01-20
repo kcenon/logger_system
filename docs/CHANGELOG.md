@@ -54,6 +54,47 @@ logger->clear_all_context_ids();  // Or clear individually with clear_context_id
 
 ## [3.0.0] - 2025-12-31
 
+### Removed - Deprecated log_level Types and Converters (Issue #339)
+
+This release removes the deprecated `logger_system::log_level` enum and related converter functions as part of the v3.0.0 cleanup.
+
+#### Breaking Changes
+
+- **Removed `logger_system::log_level` enum** from `logger_types.h`
+  - Use `common::interfaces::log_level` instead
+  - The enum values are identical between both types
+
+- **Removed `level_converter.h` file**
+  - `to_logger_system_level()` function removed
+  - `to_common_level()` function removed
+  - Use `common::interfaces::log_level` directly without conversion
+
+- **Removed `log_level_to_string()` and `string_to_log_level()` functions**
+  - Use `common::interfaces::log_level_to_string()` instead
+  - Use `common::interfaces::string_to_log_level()` instead
+
+- **Removed `log_structured(logger_system::log_level)` overload** from `logger` class
+  - Use `log_structured(log_level)` with `common::interfaces::log_level`
+
+#### Migration Guide
+
+```cpp
+// Before (removed):
+#include <kcenon/logger/interfaces/logger_types.h>
+#include <kcenon/logger/core/level_converter.h>
+logger_system::log_level level = logger_system::log_level::info;
+auto common_level = kcenon::logger::to_common_level(level);
+const char* str = logger_system::log_level_to_string(level);
+
+// After:
+#include <kcenon/common/interfaces/logger_interface.h>
+common::interfaces::log_level level = common::interfaces::log_level::info;
+// Use common::interfaces::log_level directly - no conversion needed
+const char* str = common::interfaces::log_level_to_string(level);
+```
+
+---
+
 ### Removed - Deprecated API Cleanup (Issues #268, #324)
 
 This release removes deprecated API compatibility layers following the "Fewest Elements" Simple Design principle.
@@ -100,44 +141,6 @@ common::VoidResult res = make_logger_void_result(code, "message");
 ---
 
 ## [Unreleased]
-
-### Native log_level API Deprecation (Issue #320)
-
-#### Deprecated
-- **Native `logger_system::log_level` enum** - Use `common::interfaces::log_level` instead
-  - Marked with `[[deprecated]]` attribute for compiler warnings
-  - Will be removed in v3.0.0
-
-- **Native log_level methods in `logger` class**
-  - `log(log_level, const std::string&)` - Use ILogger interface methods instead
-  - `log(log_level, msg, file, line, func)` - Use `log(level, msg, source_location)` instead
-  - `log(log_level, msg, log_context)` - Use `log(level, msg, source_location)` instead
-  - `is_enabled(log_level)` - Use `is_enabled(common::interfaces::log_level)` instead
-  - `set_min_level(log_level)` - Use `set_level(common::interfaces::log_level)` instead
-  - `get_min_level()` - Use `get_level()` instead
-
-- **Utility functions in `logger_types.h`**
-  - `log_level_to_string()` - Use `common::interfaces::log_level_to_string()` instead
-  - `string_to_log_level()` - Use `common::interfaces::string_to_log_level()` instead
-
-- **Conversion functions in `level_converter.h`**
-  - `to_logger_system_level()` - Use `common::interfaces::log_level` directly
-  - `to_common_level()` - Use `common::interfaces::log_level` directly
-
-#### Migration
-```cpp
-// Before (deprecated):
-logger->log(log_level::info, "Message");
-logger->set_min_level(log_level::debug);
-
-// After (recommended):
-logger->log(common::interfaces::log_level::info, "Message");
-logger->set_level(common::interfaces::log_level::debug);
-```
-
-See [Migration Guide](guides/MIGRATION_GUIDE.md#deprecated-native-log_level-api-planned-for-removal-in-v300) for details.
-
----
 
 ### Real-time Log Analysis Integration (Issue #281)
 

@@ -89,12 +89,12 @@ public:
      * @param external_level External system's log level (as integer)
      * @return Normalized log_level for internal use
      *
-     * @details Converts log levels from external systems to the logger_system's
+     * @details Converts log levels from external systems to the common::interfaces
      * log_level enumeration. Different systems may use different level schemes.
      *
      * @since 1.2.0
      */
-    virtual logger_system::log_level normalize_level(int external_level) const = 0;
+    virtual common::interfaces::log_level normalize_level(int external_level) const = 0;
 
     /**
      * @brief Get the backend name
@@ -159,12 +159,12 @@ public:
     /**
      * @brief Normalize external log level (pass-through)
      * @param external_level External log level as integer
-     * @return The same level cast to logger_system::log_level
+     * @return The same level cast to common::interfaces::log_level
      *
      * @since 1.2.0
      */
-    logger_system::log_level normalize_level(int external_level) const override {
-        return static_cast<logger_system::log_level>(external_level);
+    common::interfaces::log_level normalize_level(int external_level) const override {
+        return static_cast<common::interfaces::log_level>(external_level);
     }
 
     /**
