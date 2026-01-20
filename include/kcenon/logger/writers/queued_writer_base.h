@@ -21,6 +21,8 @@ All rights reserved.
 #include <mutex>
 #include <memory>
 #include <atomic>
+#include <queue>
+#include <vector>
 
 namespace kcenon::logger {
 
