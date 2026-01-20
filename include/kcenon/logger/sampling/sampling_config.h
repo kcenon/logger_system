@@ -288,6 +288,37 @@ struct sampling_config {
         config.hash_seed = seed;
         return config;
     }
+
+    /**
+     * @brief Set log levels that bypass sampling (fluent interface)
+     * @param levels Log levels that should always be logged
+     * @return Modified configuration for chaining
+     *
+     * @example
+     * @code
+     * auto config = sampling_config::random_sampling(0.1)
+     *     .with_always_log({log_level::warning, log_level::error, log_level::critical});
+     * @endcode
+     *
+     * @since 3.4.0
+     */
+    sampling_config with_always_log(std::vector<log_level> levels) && {
+        always_log_levels = std::move(levels);
+        return std::move(*this);
+    }
+
+    /**
+     * @brief Set log levels that bypass sampling (fluent interface, lvalue overload)
+     * @param levels Log levels that should always be logged
+     * @return Modified configuration for chaining
+     *
+     * @since 3.4.0
+     */
+    sampling_config with_always_log(std::vector<log_level> levels) const & {
+        sampling_config copy = *this;
+        copy.always_log_levels = std::move(levels);
+        return copy;
+    }
 };
 
 /**
