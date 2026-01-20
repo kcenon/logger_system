@@ -36,14 +36,16 @@ namespace {
 // Test writer that captures log output
 class capture_writer : public base_writer {
 public:
-    VoidResult write(kcenon::common::interfaces::log_level level,
-               const std::string& message,
-               const std::string& file,
-               int line,
-               const std::string& function,
-               const std::chrono::system_clock::time_point& timestamp) override {
+    VoidResult write(const log_entry& log_ent) override {
         std::lock_guard<std::mutex> lock(mutex_);
-        entries_.push_back({level, message, file, line, function, timestamp});
+        entries_.push_back({
+            static_cast<kcenon::common::interfaces::log_level>(static_cast<int>(log_ent.level)),
+            log_ent.message.to_string(),
+            log_ent.location ? log_ent.location->file.to_string() : "",
+            log_ent.location ? static_cast<int>(log_ent.location->line) : 0,
+            log_ent.location ? log_ent.location->function.to_string() : "",
+            log_ent.timestamp
+        });
         return ok();
     }
 

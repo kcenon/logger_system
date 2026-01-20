@@ -114,19 +114,8 @@ protected:
      * @warning Do not call public methods on 'this' inside *_impl methods
      *          as it would cause deadlock.
      */
-    kcenon::common::VoidResult write_impl(
-        kcenon::common::interfaces::log_level level,
-        const std::string& message,
-        const std::string& file,
-        int line,
-        const std::string& function,
-        const std::chrono::system_clock::time_point& timestamp) override
+    kcenon::common::VoidResult write_entry_impl(const log_entry& entry) override
     {
-        // Create and format log entry
-        log_entry entry = (!file.empty() || line != 0 || !function.empty())
-            ? log_entry(level, message, file, line, function, timestamp)
-            : log_entry(level, message, timestamp);
-
         std::string formatted = format_log_entry(entry);
 
         // Store in memory - already protected by base class mutex
@@ -205,19 +194,15 @@ public:
     }
 
 protected:
-    kcenon::common::VoidResult write_impl(
-        kcenon::common::interfaces::log_level level,
-        const std::string& message,
-        const std::string& file,
-        int line,
-        const std::string& function,
-        const std::chrono::system_clock::time_point& timestamp) override
+    kcenon::common::VoidResult write_entry_impl(const log_entry& entry) override
     {
+        // Convert log_level from logger_system to common::interfaces
+        auto level = static_cast<kcenon::common::interfaces::log_level>(static_cast<int>(entry.level));
+
         // Increment counter for this level
         counts_[level]++;
 
-        // Create and format log entry
-        log_entry entry = log_entry(level, message, timestamp);
+        // Format log entry
         std::string formatted = format_log_entry(entry);
 
         // Output to console with color based on level

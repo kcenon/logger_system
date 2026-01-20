@@ -269,12 +269,7 @@ network_writer::~network_writer() {
 #endif
 }
 
-common::VoidResult network_writer::write(common::interfaces::log_level level,
-                                         const std::string& message,
-                                         const std::string& file,
-                                         int line,
-                                         const std::string& function,
-                                         const std::chrono::system_clock::time_point& timestamp) {
+common::VoidResult network_writer::write(const log_entry& entry) {
 
     std::lock_guard<std::mutex> lock(buffer_mutex_);
 
@@ -287,7 +282,19 @@ common::VoidResult network_writer::write(common::interfaces::log_level level,
         // Note: We still accept the new message after dropping the oldest
     }
 
-    buffer_.push({level, message, file, line, function, timestamp});
+    // Create a copy of the entry since log_entry is move-only
+    if (entry.location) {
+        buffer_.emplace(entry.level,
+                       entry.message.to_string(),
+                       entry.location->file.to_string(),
+                       entry.location->line,
+                       entry.location->function.to_string(),
+                       entry.timestamp);
+    } else {
+        buffer_.emplace(entry.level,
+                       entry.message.to_string(),
+                       entry.timestamp);
+    }
 
     // Notify send worker
     if (send_worker_) {
@@ -431,12 +438,12 @@ void network_writer::process_buffer() {
 
     // Process buffered logs
     while (!buffer_.empty() && running_) {
-        auto log = std::move(buffer_.front());
+        auto entry = std::move(buffer_.front());
         buffer_.pop();
         lock.unlock();
 
         // Format and send
-        std::string formatted = format_for_network(log);
+        std::string formatted = format_for_network(entry);
         send_data(formatted);
 
         lock.lock();
@@ -450,30 +457,36 @@ void network_writer::attempt_reconnect() {
     }
 }
 
-std::string network_writer::format_for_network(const buffered_log& log) {
+std::string network_writer::format_for_network(const log_entry& entry) {
     // Format as JSON for network transmission
     std::ostringstream oss;
     oss << "{";
 
     // Timestamp
-    auto time_t = std::chrono::system_clock::to_time_t(log.timestamp);
+    auto time_t = std::chrono::system_clock::to_time_t(entry.timestamp);
     oss << "\"@timestamp\":\"";
     oss << std::put_time(std::gmtime(&time_t), "%Y-%m-%dT%H:%M:%SZ") << "\",";
 
-    // Level
-    oss << "\"level\":\"" << utils::string_utils::level_to_string(log.level) << "\",";
+    // Level - convert logger_system::log_level to common::interfaces::log_level
+    auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+    oss << "\"level\":\"" << utils::string_utils::level_to_string(level) << "\",";
 
     // Message
-    oss << "\"message\":\"" << escape_json(log.message) << "\"";
+    oss << "\"message\":\"" << escape_json(entry.message.to_string()) << "\"";
 
-    // Optional fields
-    if (!log.file.empty()) {
-        oss << ",\"file\":\"" << escape_json(log.file) << "\"";
-        oss << ",\"line\":" << log.line;
-    }
+    // Optional fields from source_location
+    if (entry.location) {
+        std::string file = entry.location->file.to_string();
+        std::string function = entry.location->function.to_string();
 
-    if (!log.function.empty()) {
-        oss << ",\"function\":\"" << escape_json(log.function) << "\"";
+        if (!file.empty()) {
+            oss << ",\"file\":\"" << escape_json(file) << "\"";
+            oss << ",\"line\":" << entry.location->line;
+        }
+
+        if (!function.empty()) {
+            oss << ",\"function\":\"" << escape_json(function) << "\"";
+        }
     }
 
     // Add hostname

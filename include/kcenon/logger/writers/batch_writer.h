@@ -91,20 +91,11 @@ public:
     
     /**
      * @brief Write a log entry to the batch
-     * @param level Log level
-     * @param message Log message
-     * @param file Source file
-     * @param line Source line
-     * @param function Function name
-     * @param timestamp Time of log entry
+     * @param entry The log entry to write
      * @return common::VoidResult indicating success or error
+     * @since 3.5.0 Changed to use log_entry directly
      */
-    common::VoidResult write(common::interfaces::log_level level,
-                             const std::string& message,
-                             const std::string& file,
-                             int line,
-                             const std::string& function,
-                             const std::chrono::system_clock::time_point& timestamp) override;
+    common::VoidResult write(const log_entry& entry) override;
 
     /**
      * @brief Flush the batch to the underlying writer
@@ -159,26 +150,6 @@ public:
     void reset_stats();
     
 private:
-    /**
-     * @brief Internal structure to store batch entry
-     */
-    struct batch_entry {
-        common::interfaces::log_level level;
-        std::string message;
-        std::string file;
-        int line;
-        std::string function;
-        std::chrono::system_clock::time_point timestamp;
-        
-        batch_entry(common::interfaces::log_level lvl,
-                   const std::string& msg,
-                   const std::string& f,
-                   int l,
-                   const std::string& func,
-                   const std::chrono::system_clock::time_point& ts)
-            : level(lvl), message(msg), file(f), line(l), 
-              function(func), timestamp(ts) {}
-    };
     
     /**
      * @brief Flush batch without locking (caller must hold lock)
@@ -206,7 +177,7 @@ private:
     
     // Batch storage
     mutable std::mutex batch_mutex_;
-    std::vector<batch_entry> batch_;
+    std::vector<log_entry> batch_;
     std::chrono::steady_clock::time_point last_flush_time_;
     
     // Statistics

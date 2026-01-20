@@ -139,56 +139,24 @@ public:
     virtual ~base_writer() = default;
     
     /**
-     * @brief Write a log entry using the new interface
+     * @brief Write a log entry using the modern interface
      * @param entry The log entry to write
      * @return common::VoidResult Success or error code
      *
-     * @details This method provides compatibility with the modern log_entry structure.
-     * The default implementation converts the entry to the legacy API format for
-     * backward compatibility. Derived classes can override this for optimized handling.
+     * @details This is the primary method that derived classes must implement.
+     * It receives a complete log_entry structure with all log information
+     * including structured fields, OpenTelemetry context, and category info.
      *
-     * @note This method extracts source location information if present in the entry.
-     *
-     * @since 1.0.0
-     */
-    common::VoidResult write(const log_entry& entry) override {
-        // Convert to old API for backward compatibility
-        std::string file = entry.location ? entry.location->file.to_string() : "";
-        int line = entry.location ? entry.location->line : 0;
-        std::string function = entry.location ? entry.location->function.to_string() : "";
-
-        // Convert logger_system::log_level to common::interfaces::log_level
-        auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
-        return write(level, entry.message.to_string(), file, line, function, entry.timestamp);
-    }
-
-    /**
-     * @brief Write a log entry (legacy API for backward compatibility)
-     * @param level Log severity level
-     * @param message Log message text
-     * @param file Source file path (empty if not available)
-     * @param line Source line number (0 if not available)
-     * @param function Function name (empty if not available)
-     * @param timestamp Time when the log entry was created
-     * @return common::VoidResult Success or error code
-     *
-     * @details This is the main method that derived classes must implement.
-     * It receives all log information and is responsible for outputting it
-     * to the writer's specific destination.
-     *
-     * @note Implementations should handle empty file/function strings gracefully.
+     * @note Derived classes should implement this method directly for optimal
+     * performance. The log_entry structure provides all necessary information.
      *
      * @warning This method may be called from multiple threads in async mode.
      * Implementations must be thread-safe.
      *
      * @since 1.0.0
+     * @since 3.5.0 Changed to pure virtual - implementations must override this
      */
-    virtual common::VoidResult write(common::interfaces::log_level level,
-                                     const std::string& message,
-                                     const std::string& file,
-                                     int line,
-                                     const std::string& function,
-                                     const std::chrono::system_clock::time_point& timestamp) = 0;
+    common::VoidResult write(const log_entry& entry) override = 0;
 
     /**
      * @brief Flush any buffered data to the destination

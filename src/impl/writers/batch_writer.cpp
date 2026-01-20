@@ -61,12 +61,7 @@ batch_writer::~batch_writer() {
     }
 }
 
-common::VoidResult batch_writer::write(common::interfaces::log_level level,
-                                       const std::string& message,
-                                       const std::string& file,
-                                       int line,
-                                       const std::string& function,
-                                       const std::chrono::system_clock::time_point& timestamp) {
+common::VoidResult batch_writer::write(const log_entry& entry) {
 
     if (shutting_down_) {
         return make_logger_void_result(logger_error_code::queue_stopped, "Batch writer is shutting down");
@@ -77,8 +72,19 @@ common::VoidResult batch_writer::write(common::interfaces::log_level level,
     {
         std::lock_guard<std::mutex> lock(batch_mutex_);
 
-        // Add entry to batch
-        batch_.emplace_back(level, message, file, line, function, timestamp);
+        // Add entry to batch - create a copy since log_entry is move-only
+        if (entry.location) {
+            batch_.emplace_back(entry.level,
+                               entry.message.to_string(),
+                               entry.location->file.to_string(),
+                               entry.location->line,
+                               entry.location->function.to_string(),
+                               entry.timestamp);
+        } else {
+            batch_.emplace_back(entry.level,
+                               entry.message.to_string(),
+                               entry.timestamp);
+        }
         stats_.total_entries++;
 
         // Check if we should flush
@@ -119,14 +125,7 @@ common::VoidResult batch_writer::flush_batch_unsafe() {
     common::VoidResult last_result = common::ok();
 
     for (const auto& entry : batch_) {
-        auto result = underlying_writer_->write(
-            entry.level,
-            entry.message,
-            entry.file,
-            entry.line,
-            entry.function,
-            entry.timestamp
-        );
+        auto result = underlying_writer_->write(entry);
 
         if (result.is_err()) {
             last_result = result;

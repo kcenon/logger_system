@@ -8,6 +8,7 @@ All rights reserved.
 *****************************************************************************/
 
 #include "base_writer.h"
+#include "../interfaces/log_entry.h"
 #include "../interfaces/writer_category.h"
 #include <queue>
 #include <condition_variable>
@@ -58,13 +59,11 @@ public:
     
     /**
      * @brief Write log entry
+     * @param entry The log entry to write
+     * @return common::VoidResult indicating success or error
+     * @since 3.5.0 Changed to use log_entry directly
      */
-    common::VoidResult write(common::interfaces::log_level level,
-                             const std::string& message,
-                             const std::string& file,
-                             int line,
-                             const std::string& function,
-                             const std::chrono::system_clock::time_point& timestamp) override;
+    common::VoidResult write(const log_entry& entry) override;
 
     /**
      * @brief Flush pending logs
@@ -96,15 +95,6 @@ public:
     connection_stats get_stats() const;
     
 private:
-    // Log entry for buffering
-    struct buffered_log {
-        common::interfaces::log_level level;
-        std::string message;
-        std::string file;
-        int line;
-        std::string function;
-        std::chrono::system_clock::time_point timestamp;
-    };
     
     // Network operations
     bool connect();
@@ -114,7 +104,7 @@ private:
     void attempt_reconnect();
     
     // Format log for network transmission
-    std::string format_for_network(const buffered_log& log);
+    std::string format_for_network(const log_entry& entry);
     
 private:
     std::string host_;
@@ -129,7 +119,7 @@ private:
     std::atomic<bool> running_{false};
     
     // Buffering
-    std::queue<buffered_log> buffer_;
+    std::queue<log_entry> buffer_;
     mutable std::mutex buffer_mutex_;
     std::condition_variable buffer_cv_;
     

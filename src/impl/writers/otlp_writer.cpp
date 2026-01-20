@@ -167,7 +167,7 @@ otlp_writer::~otlp_writer() {
     }
 
     // Export remaining logs
-    std::vector<buffered_log> remaining;
+    std::vector<log_entry> remaining;
     {
         std::lock_guard<std::mutex> lock(queue_mutex_);
         while (!queue_.empty()) {
@@ -181,22 +181,7 @@ otlp_writer::~otlp_writer() {
     }
 }
 
-common::VoidResult otlp_writer::write(common::interfaces::log_level level,
-                                       const std::string& message,
-                                       const std::string& file,
-                                       int line,
-                                       const std::string& function,
-                                       const std::chrono::system_clock::time_point& timestamp) {
-    buffered_log log{
-        .level = level,
-        .message = message,
-        .file = file,
-        .line = line,
-        .function = function,
-        .timestamp = timestamp,
-        .otel_ctx = otlp::otel_context_storage::get()
-    };
-
+common::VoidResult otlp_writer::write(const log_entry& entry) {
     {
         std::lock_guard<std::mutex> lock(queue_mutex_);
 
@@ -206,51 +191,25 @@ common::VoidResult otlp_writer::write(common::interfaces::log_level level,
             return common::ok();  // Drop silently to avoid backpressure
         }
 
-        queue_.push(std::move(log));
+        // Create a copy of the entry since log_entry is move-only
+        if (entry.location) {
+            queue_.emplace(entry.level,
+                          entry.message.to_string(),
+                          entry.location->file.to_string(),
+                          entry.location->line,
+                          entry.location->function.to_string(),
+                          entry.timestamp);
+        } else {
+            queue_.emplace(entry.level,
+                          entry.message.to_string(),
+                          entry.timestamp);
+        }
+
+        // Copy OTEL context to the queued entry
+        auto& queued_entry = queue_.back();
+        queued_entry.otel_ctx = entry.otel_ctx.has_value() ? entry.otel_ctx : otlp::otel_context_storage::get();
 
         // Wake up export thread if batch size reached
-        if (queue_.size() >= config_.max_batch_size) {
-            queue_cv_.notify_one();
-        }
-    }
-
-    return common::ok();
-}
-
-common::VoidResult otlp_writer::write(const log_entry& entry) {
-    std::string file;
-    int line = 0;
-    std::string function;
-
-    if (entry.location) {
-        file = entry.location->file.to_string();
-        line = entry.location->line;
-        function = entry.location->function.to_string();
-    }
-
-    // Convert logger_system::log_level to common::interfaces::log_level
-    auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
-
-    buffered_log log{
-        .level = level,
-        .message = entry.message.to_string(),
-        .file = file,
-        .line = line,
-        .function = function,
-        .timestamp = entry.timestamp,
-        .otel_ctx = entry.otel_ctx.has_value() ? entry.otel_ctx : otlp::otel_context_storage::get()
-    };
-
-    {
-        std::lock_guard<std::mutex> lock(queue_mutex_);
-
-        if (queue_.size() >= config_.max_queue_size) {
-            stats_.logs_dropped.fetch_add(1, std::memory_order_relaxed);
-            return common::ok();
-        }
-
-        queue_.push(std::move(log));
-
         if (queue_.size() >= config_.max_batch_size) {
             queue_cv_.notify_one();
         }
@@ -281,7 +240,7 @@ otlp_writer::export_stats otlp_writer::get_stats() const {
 }
 
 void otlp_writer::force_export() {
-    std::vector<buffered_log> batch;
+    std::vector<log_entry> batch;
 
     {
         std::lock_guard<std::mutex> lock(queue_mutex_);
@@ -298,7 +257,7 @@ void otlp_writer::force_export() {
 
 void otlp_writer::export_thread_func() {
     while (running_.load(std::memory_order_acquire)) {
-        std::vector<buffered_log> batch;
+        std::vector<log_entry> batch;
 
         {
             std::unique_lock<std::mutex> lock(queue_mutex_);
@@ -327,7 +286,7 @@ void otlp_writer::export_thread_func() {
     }
 }
 
-bool otlp_writer::export_batch(const std::vector<buffered_log>& batch) {
+bool otlp_writer::export_batch(const std::vector<log_entry>& batch) {
     bool success = false;
     std::size_t retries = 0;
     auto delay = config_.retry_delay;
@@ -385,45 +344,53 @@ int otlp_writer::to_otlp_severity(common::interfaces::log_level level) {
 }
 
 #ifdef LOGGER_HAS_OTLP
-bool otlp_writer::export_with_otel_sdk(const std::vector<buffered_log>& batch) {
+bool otlp_writer::export_with_otel_sdk(const std::vector<log_entry>& batch) {
     if (!otel_impl_ || !otel_impl_->logger) {
         return false;
     }
 
     try {
-        for (const auto& log : batch) {
+        for (const auto& entry : batch) {
+            // Convert log_level from logger_system to common::interfaces
+            auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+
             // Create log record through OpenTelemetry SDK
             auto severity = static_cast<opentelemetry::logs::Severity>(
-                to_otlp_severity(log.level));
+                to_otlp_severity(level));
 
             // Build attributes
             std::map<std::string, opentelemetry::common::AttributeValue> attrs;
 
-            if (!log.file.empty()) {
-                attrs["code.filepath"] = log.file;
-            }
-            if (log.line > 0) {
-                attrs["code.lineno"] = static_cast<int64_t>(log.line);
-            }
-            if (!log.function.empty()) {
-                attrs["code.function"] = log.function;
+            if (entry.location) {
+                std::string file = entry.location->file.to_string();
+                std::string function = entry.location->function.to_string();
+
+                if (!file.empty()) {
+                    attrs["code.filepath"] = file;
+                }
+                if (entry.location->line > 0) {
+                    attrs["code.lineno"] = static_cast<int64_t>(entry.location->line);
+                }
+                if (!function.empty()) {
+                    attrs["code.function"] = function;
+                }
             }
 
             // Add OTEL context if present
-            if (log.otel_ctx) {
-                attrs["trace_id"] = log.otel_ctx->trace_id;
-                attrs["span_id"] = log.otel_ctx->span_id;
-                if (!log.otel_ctx->trace_flags.empty()) {
-                    attrs["trace_flags"] = log.otel_ctx->trace_flags;
+            if (entry.otel_ctx) {
+                attrs["trace_id"] = entry.otel_ctx->trace_id;
+                attrs["span_id"] = entry.otel_ctx->span_id;
+                if (!entry.otel_ctx->trace_flags.empty()) {
+                    attrs["trace_flags"] = entry.otel_ctx->trace_flags;
                 }
             }
 
             // Emit log record
             otel_impl_->logger->EmitLogRecord(
                 severity,
-                log.message,
+                entry.message.to_string(),
                 attrs,
-                log.timestamp
+                entry.timestamp
             );
         }
 
@@ -433,7 +400,7 @@ bool otlp_writer::export_with_otel_sdk(const std::vector<buffered_log>& batch) {
     }
 }
 #else
-bool otlp_writer::export_with_http(const std::vector<buffered_log>& batch) {
+bool otlp_writer::export_with_http(const std::vector<log_entry>& batch) {
     // Fallback implementation without OpenTelemetry SDK
     // This is a minimal HTTP export implementation for demonstration
     // In production, you would use a proper HTTP client library
@@ -449,43 +416,50 @@ bool otlp_writer::export_with_http(const std::vector<buffered_log>& batch) {
     json << R"("scopeLogs":[{"logRecords":[)";
 
     bool first = true;
-    for (const auto& log : batch) {
+    for (const auto& entry : batch) {
         if (!first) json << ",";
         first = false;
 
+        // Convert log_level from logger_system to common::interfaces
+        auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+
         // Convert timestamp to nanoseconds
         auto ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
-            log.timestamp.time_since_epoch()).count();
+            entry.timestamp.time_since_epoch()).count();
 
         json << R"({"timeUnixNano":")" << ns << R"(",)";
-        json << R"("severityNumber":)" << to_otlp_severity(log.level) << ",";
-        json << R"("body":{"stringValue":")" << escape_json(log.message) << R"("},)";
+        json << R"("severityNumber":)" << to_otlp_severity(level) << ",";
+        json << R"("body":{"stringValue":")" << escape_json(entry.message.to_string()) << R"("},)";
 
         // Add attributes
         json << R"("attributes":[)";
         bool first_attr = true;
 
-        if (!log.file.empty()) {
-            if (!first_attr) json << ",";
-            first_attr = false;
-            json << R"({"key":"code.filepath","value":{"stringValue":")"
-                 << escape_json(log.file) << R"("}})";
+        if (entry.location) {
+            std::string file = entry.location->file.to_string();
+
+            if (!file.empty()) {
+                if (!first_attr) json << ",";
+                first_attr = false;
+                json << R"({"key":"code.filepath","value":{"stringValue":")"
+                     << escape_json(file) << R"("}})";
+            }
+
+            if (entry.location->line > 0) {
+                if (!first_attr) json << ",";
+                first_attr = false;
+                json << R"({"key":"code.lineno","value":{"intValue":")"
+                     << entry.location->line << R"("}})";
+            }
         }
 
-        if (log.line > 0) {
-            if (!first_attr) json << ",";
-            first_attr = false;
-            json << R"({"key":"code.lineno","value":{"intValue":")"
-                 << log.line << R"("}})";
-        }
-
-        if (log.otel_ctx) {
+        if (entry.otel_ctx) {
             if (!first_attr) json << ",";
             first_attr = false;
             json << R"({"key":"trace_id","value":{"stringValue":")"
-                 << log.otel_ctx->trace_id << R"("}},)";
+                 << entry.otel_ctx->trace_id << R"("}},)";
             json << R"({"key":"span_id","value":{"stringValue":")"
-                 << log.otel_ctx->span_id << R"("}})";
+                 << entry.otel_ctx->span_id << R"("}})";
         }
 
         json << "]}";

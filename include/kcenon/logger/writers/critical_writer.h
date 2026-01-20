@@ -123,13 +123,8 @@ public:
     ~critical_writer() override;
 
     /**
-     * @brief Write a log message with critical handling
-     * @param level Log level
-     * @param message Log message
-     * @param file Source file
-     * @param line Source line
-     * @param function Function name
-     * @param timestamp Timestamp
+     * @brief Write a log entry with critical handling
+     * @param entry The log entry to write
      * @return common::VoidResult indicating success or error
      *
      * @details For critical/fatal messages:
@@ -140,15 +135,10 @@ public:
      * - Syncs file descriptor (if configured)
      *
      * For non-critical messages, delegates to wrapped writer normally.
+     *
+     * @since 3.5.0 Changed to use log_entry directly
      */
-    common::VoidResult write(
-        common::interfaces::log_level level,
-        const std::string& message,
-        const std::string& file,
-        int line,
-        const std::string& function,
-        const std::chrono::system_clock::time_point& timestamp
-    ) override;
+    common::VoidResult write(const log_entry& entry) override;
 
     /**
      * @brief Flush all pending messages
@@ -209,21 +199,9 @@ private:
 
     /**
      * @brief Write to write-ahead log
-     * @param level Log level
-     * @param message Message
-     * @param file Source file
-     * @param line Line number
-     * @param function Function name
-     * @param timestamp Timestamp
+     * @param entry Log entry to write to WAL
      */
-    void write_to_wal(
-        common::interfaces::log_level level,
-        const std::string& message,
-        const std::string& file,
-        int line,
-        const std::string& function,
-        const std::chrono::system_clock::time_point& timestamp
-    );
+    void write_to_wal(const log_entry& entry);
 
     /**
      * @brief Force sync of underlying file descriptor
@@ -312,14 +290,13 @@ public:
 
     ~hybrid_writer() override;
 
-    common::VoidResult write(
-        common::interfaces::log_level level,
-        const std::string& message,
-        const std::string& file,
-        int line,
-        const std::string& function,
-        const std::chrono::system_clock::time_point& timestamp
-    ) override;
+    /**
+     * @brief Write a log entry
+     * @param entry The log entry to write
+     * @return common::VoidResult indicating success or error
+     * @since 3.5.0 Changed to use log_entry directly
+     */
+    common::VoidResult write(const log_entry& entry) override;
 
     common::VoidResult flush() override;
     bool is_healthy() const override;

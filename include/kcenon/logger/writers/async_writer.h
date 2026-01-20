@@ -16,6 +16,7 @@ All rights reserved.
  */
 
 #include "base_writer.h"
+#include "../interfaces/log_entry.h"
 #include "../interfaces/writer_category.h"
 #include <queue>
 #include <thread>
@@ -126,24 +127,15 @@ public:
     }
     
     /**
-     * @brief Write a log message asynchronously
-     * @param level Log level
-     * @param message Log message
-     * @param file Source file
-     * @param line Source line
-     * @param function Function name
-     * @param timestamp Timestamp
+     * @brief Write a log entry asynchronously
+     * @param entry The log entry to write
      * @return common::VoidResult indicating success or error
+     * @since 3.5.0 Changed to use log_entry directly
      */
-    common::VoidResult write(common::interfaces::log_level level,
-                             const std::string& message,
-                             const std::string& file,
-                             int line,
-                             const std::string& function,
-                             const std::chrono::system_clock::time_point& timestamp) override {
+    common::VoidResult write(const log_entry& entry) override {
         if (!running_) {
             // If not running, write directly
-            return wrapped_writer_->write(level, message, file, line, function, timestamp);
+            return wrapped_writer_->write(entry);
         }
 
         // Queue the message
@@ -156,7 +148,19 @@ public:
                 return make_logger_void_result(logger_error_code::queue_full, "Async writer queue is full");
             }
 
-            message_queue_.push({level, message, file, line, function, timestamp});
+            // Create a copy of entry fields since log_entry is move-only
+            if (entry.location) {
+                message_queue_.emplace(entry.level,
+                                      entry.message.to_string(),
+                                      entry.location->file.to_string(),
+                                      entry.location->line,
+                                      entry.location->function.to_string(),
+                                      entry.timestamp);
+            } else {
+                message_queue_.emplace(entry.level,
+                                      entry.message.to_string(),
+                                      entry.timestamp);
+            }
             queue_cv_.notify_one();
         }
 
@@ -215,63 +219,51 @@ public:
     
 private:
     /**
-     * @brief Message structure for queuing
-     */
-    struct queued_message {
-        common::interfaces::log_level level;
-        std::string message;
-        std::string file;
-        int line;
-        std::string function;
-        std::chrono::system_clock::time_point timestamp;
-    };
-    
-    /**
      * @brief Process messages from the queue
      */
     void process_messages() {
         while (running_) {
             std::unique_lock<std::mutex> lock(queue_mutex_);
-            
+
             // Wait for messages or stop signal
             queue_cv_.wait(lock, [this]() {
                 return !message_queue_.empty() || !running_;
             });
-            
+
             // Process all available messages
             while (!message_queue_.empty()) {
-                auto msg = std::move(message_queue_.front());
+                auto entry = std::move(message_queue_.front());
                 message_queue_.pop();
-                
+
                 // Unlock while writing
                 lock.unlock();
-                wrapped_writer_->write(msg.level, msg.message, msg.file, msg.line, msg.function, msg.timestamp);
+                wrapped_writer_->write(entry);
                 lock.lock();
             }
-            
+
             // Notify flush waiters
             flush_cv_.notify_all();
         }
     }
-    
+
     /**
      * @brief Flush any remaining messages after stopping
      */
     void flush_remaining() {
         std::lock_guard<std::mutex> lock(queue_mutex_);
         while (!message_queue_.empty()) {
-            auto msg = std::move(message_queue_.front());
+            auto entry = std::move(message_queue_.front());
             message_queue_.pop();
-            wrapped_writer_->write(msg.level, msg.message, msg.file, msg.line, msg.function, msg.timestamp);
+            wrapped_writer_->write(entry);
         }
         wrapped_writer_->flush();
     }
-    
+
     std::unique_ptr<base_writer> wrapped_writer_;
     std::size_t max_queue_size_;
     std::chrono::seconds flush_timeout_;  // Configurable flush timeout
 
-    std::queue<queued_message> message_queue_;
+    std::queue<log_entry> message_queue_;
     mutable std::mutex queue_mutex_;
     std::condition_variable queue_cv_;
     std::condition_variable flush_cv_;

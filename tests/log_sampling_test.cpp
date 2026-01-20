@@ -58,15 +58,10 @@ public:
         std::string message;
     };
 
-    kcenon::common::VoidResult write(kcenon::common::interfaces::log_level level,
-                                     const std::string& message,
-                                     [[maybe_unused]] const std::string& file,
-                                     [[maybe_unused]] int line,
-                                     [[maybe_unused]] const std::string& function,
-                                     [[maybe_unused]] const std::chrono::system_clock::time_point& timestamp) override {
+    kcenon::common::VoidResult write(const log_entry& entry) override {
         entry_record rec;
-        rec.level = level;
-        rec.message = message;
+        rec.level = static_cast<kcenon::common::interfaces::log_level>(static_cast<int>(entry.level));
+        rec.message = entry.message.to_string();
         records_.push_back(std::move(rec));
         return kcenon::common::ok();
     }

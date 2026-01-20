@@ -259,16 +259,10 @@ private:
             }
         }
 
-        // Extract entry fields
-        std::string file = entry.location ? entry.location->file.to_string() : "";
-        int line = entry.location ? entry.location->line : 0;
-        std::string function = entry.location ? entry.location->function.to_string() : "";
-
         // Write to all writers without holding mutex
         for (auto& writer : writers_snapshot) {
             try {
-                writer->write(entry.level, entry.message.to_string(), file,
-                             line, function, entry.timestamp);
+                writer->write(entry);
             } catch (...) {
                 // Swallow exceptions to prevent thread termination
             }
@@ -434,16 +428,10 @@ private:
             }
         }
 
-        // Extract entry fields
-        std::string file = entry.location ? entry.location->file.to_string() : "";
-        int line = entry.location ? entry.location->line : 0;
-        std::string function = entry.location ? entry.location->function.to_string() : "";
-
         // Write to all writers without holding mutex
         for (auto& writer : writers_snapshot) {
             try {
-                writer->write(entry.level, entry.message.to_string(), file,
-                             line, function, entry.timestamp);
+                writer->write(entry);
             } catch (...) {
                 // Swallow exceptions to prevent issues
             }

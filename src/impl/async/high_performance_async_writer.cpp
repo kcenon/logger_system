@@ -63,27 +63,29 @@ void high_performance_async_writer::stop(bool flush_remaining) {
     }
 }
 
-common::VoidResult high_performance_async_writer::write(
-    common::interfaces::log_level level,
-    const std::string& message,
-    const std::string& file,
-    int line,
-    const std::string& function,
-    const std::chrono::system_clock::time_point& timestamp) {
+common::VoidResult high_performance_async_writer::write(const log_entry& entry) {
 
     const auto start_time = std::chrono::steady_clock::now();
 
     if (!running_.load(std::memory_order_relaxed)) {
-        return write_direct(level, message, file, line, function, timestamp);
+        return write_direct(entry);
     }
 
     stats_.total_writes.fetch_add(1, std::memory_order_relaxed);
 
     // Use batch processor if available
     if (batch_processor_) {
-        batch_processor::batch_entry entry(level, message, file, line, function, timestamp);
+        // Extract source location info
+        std::string file = entry.location ? entry.location->file.to_string() : "";
+        int line = entry.location ? entry.location->line : 0;
+        std::string function = entry.location ? entry.location->function.to_string() : "";
 
-        if (batch_processor_->add_entry(std::move(entry))) {
+        // Convert log_level from logger_system to common::interfaces
+        auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
+
+        batch_processor::batch_entry batch_entry(level, entry.message.to_string(), file, line, function, entry.timestamp);
+
+        if (batch_processor_->add_entry(std::move(batch_entry))) {
             const auto end_time = std::chrono::steady_clock::now();
             const auto latency = end_time - start_time;
             update_stats(true, latency);
@@ -91,12 +93,12 @@ common::VoidResult high_performance_async_writer::write(
         } else {
             stats_.dropped_writes.fetch_add(1, std::memory_order_relaxed);
             // Fall back to direct write
-            return write_direct(level, message, file, line, function, timestamp);
+            return write_direct(entry);
         }
     }
 
     // Direct async write (fallback mode)
-    return write_direct(level, message, file, line, function, timestamp);
+    return write_direct(entry);
 }
 
 common::VoidResult high_performance_async_writer::flush() {
@@ -147,20 +149,14 @@ const batch_processor::processing_stats* high_performance_async_writer::get_batc
     return nullptr;
 }
 
-common::VoidResult high_performance_async_writer::write_direct(
-    common::interfaces::log_level level,
-    const std::string& message,
-    const std::string& file,
-    int line,
-    const std::string& function,
-    const std::chrono::system_clock::time_point& timestamp) {
+common::VoidResult high_performance_async_writer::write_direct(const log_entry& entry) {
 
     if (!wrapped_writer_) {
         return make_logger_void_result(logger_error_code::writer_not_available, "No wrapped writer available");
     }
 
     const auto start_time = std::chrono::steady_clock::now();
-    auto result = wrapped_writer_->write(level, message, file, line, function, timestamp);
+    auto result = wrapped_writer_->write(entry);
     const auto end_time = std::chrono::steady_clock::now();
 
     const auto latency = end_time - start_time;

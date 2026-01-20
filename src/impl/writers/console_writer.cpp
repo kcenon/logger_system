@@ -108,20 +108,6 @@ common::VoidResult console_writer::write_entry_impl(const log_entry& entry) {
     }, logger_error_code::processing_failed);
 }
 
-common::VoidResult console_writer::write_impl(common::interfaces::log_level level,
-                                              const std::string& message,
-                                              const std::string& file,
-                                              int line,
-                                              const std::string& function,
-                                              const std::chrono::system_clock::time_point& timestamp) {
-    // Legacy API: create a log_entry and delegate to write_entry_impl
-    log_entry entry = (!file.empty() || line != 0 || !function.empty())
-        ? log_entry(level, message, file, line, function, timestamp)
-        : log_entry(level, message, timestamp);
-
-    return write_entry_impl(entry);
-}
-
 common::VoidResult console_writer::flush_impl() {
     // Note: Mutex is already held by thread_safe_writer::flush()
     return utils::try_write_operation([&]() -> common::VoidResult {

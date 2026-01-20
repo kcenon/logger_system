@@ -82,19 +82,9 @@ protected:
      * @param entry The log entry to write (includes structured fields)
      * @note Called by thread_safe_writer::write(const log_entry&) while holding the mutex
      * @since 3.4.0
+     * @since 3.5.0 This is now the only write implementation (legacy API removed)
      */
     common::VoidResult write_entry_impl(const log_entry& entry) override;
-
-    /**
-     * @brief Implementation of write operation (legacy)
-     * @note Called by thread_safe_writer::write() while holding the mutex
-     */
-    common::VoidResult write_impl(common::interfaces::log_level level,
-                                  const std::string& message,
-                                  const std::string& file,
-                                  int line,
-                                  const std::string& function,
-                                  const std::chrono::system_clock::time_point& timestamp) override;
 
     /**
      * @brief Implementation of flush operation
