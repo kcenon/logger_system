@@ -23,6 +23,7 @@ All rights reserved.
 
 #include "../interfaces/log_filter_interface.h"
 #include "../filters/log_filter.h"
+#include "../interfaces/log_entry.h"
 
 namespace kcenon::logger {
 
@@ -49,7 +50,7 @@ public:
      * @return Unique pointer to level filter
      */
     static std::unique_ptr<log_filter_interface> create_level(
-        logger_system::log_level min_level
+        log_level min_level
     ) {
         return std::make_unique<filters::level_filter>(min_level);
     }
@@ -107,7 +108,7 @@ public:
      * @return Filter that passes all messages (trace and above)
      */
     static std::unique_ptr<log_filter_interface> create_development() {
-        return create_level(logger_system::log_level::trace);
+        return create_level(log_level::trace);
     }
 
     /**
@@ -116,7 +117,7 @@ public:
      */
     static std::unique_ptr<log_filter_interface> create_production() {
         auto composite = create_composite_and();
-        composite->add_filter(create_level(logger_system::log_level::warn));
+        composite->add_filter(create_level(log_level::warning));
         composite->add_filter(create_regex("password|secret|token|api.?key", false));
         return composite;
     }
@@ -126,7 +127,7 @@ public:
      * @return Filter that only passes error and fatal messages
      */
     static std::unique_ptr<log_filter_interface> create_errors_only() {
-        return create_level(logger_system::log_level::error);
+        return create_level(log_level::error);
     }
 
     /**
@@ -163,7 +164,7 @@ public:
         /**
          * @brief Set minimum log level
          */
-        builder& with_min_level(logger_system::log_level level) {
+        builder& with_min_level(log_level level) {
             filters_.push_back(create_level(level));
             return *this;
         }

@@ -31,6 +31,7 @@
 
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/core/thread_integration_detector.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <memory>
 #include <sstream>
 #include <string_view>
@@ -39,6 +40,9 @@
 // adapters for kcenon::common::interfaces::ILogger
 
 namespace kcenon::logger::adapters {
+
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
 
 /**
  * @brief Standalone logger adapter
@@ -67,7 +71,7 @@ public:
      * @param level Log level
      * @param message Message to log
      */
-    void log(logger_system::log_level level, std::string_view message) {
+    void log(log_level level, std::string_view message) {
         if (!logger_) {
             return;
         }
@@ -124,7 +128,7 @@ public:
      * @brief Set minimum log level
      * @param level Minimum level to log
      */
-    void set_level(logger_system::log_level level) {
+    void set_level(log_level level) {
         if (logger_) {
             logger_->set_level(level);
         }

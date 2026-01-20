@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include <string>
-#include <kcenon/logger/interfaces/logger_types.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 
 /**
  * @file integration_backend.h
@@ -55,6 +55,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 namespace kcenon::logger::backends {
+
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
 
 /**
  * @class integration_backend
@@ -79,8 +82,8 @@ public:
      * @param external_level External system's log level (as integer)
      * @return Normalized log_level for internal use
      *
-     * @details Converts log levels from external systems to the logger_system's
-     * log_level enumeration. Different systems may use different level schemes
+     * @details Converts log levels from external systems to the common::interfaces::log_level
+     * enumeration. Different systems may use different level schemes
      * (ascending, descending, different naming), and this method handles the conversion.
      *
      * @note The external_level is passed as int to avoid compile-time dependencies
@@ -88,7 +91,7 @@ public:
      *
      * @since 1.2.0
      */
-    virtual logger_system::log_level normalize_level(int external_level) const = 0;
+    virtual log_level normalize_level(int external_level) const = 0;
 
     /**
      * @brief Get the backend name
