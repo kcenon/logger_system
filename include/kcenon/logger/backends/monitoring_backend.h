@@ -91,19 +91,19 @@ public:
     ~monitoring_backend() override = default;
 
     /**
-     * @brief Normalize monitoring_system log level to logger_system level
+     * @brief Normalize monitoring_system log level to internal level
      * @param external_level monitoring_system log level as integer
-     * @return Corresponding logger_system::log_level
+     * @return Corresponding log_level
      *
      * @details monitoring_system uses the same ascending level scheme as
-     * logger_system, so this is a direct cast. If the systems diverge in
-     * the future, conversion logic can be added here.
+     * common::interfaces::log_level, so this is a direct cast. If the systems
+     * diverge in the future, conversion logic can be added here.
      *
      * @since 1.2.0
      */
-    logger_system::log_level normalize_level(int external_level) const override {
-        // monitoring_system uses same level scheme as logger_system
-        return static_cast<logger_system::log_level>(external_level);
+    log_level normalize_level(int external_level) const override {
+        // monitoring_system uses same level scheme as common::interfaces::log_level
+        return static_cast<log_level>(external_level);
     }
 
     /**

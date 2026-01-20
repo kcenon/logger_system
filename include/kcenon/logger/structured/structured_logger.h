@@ -34,7 +34,7 @@
 
 #pragma once
 
-#include <kcenon/logger/interfaces/logger_types.h>
+#include <kcenon/common/interfaces/logger_interface.h>
 #include <string>
 #include <unordered_map>
 #include <variant>
@@ -47,6 +47,9 @@
 
 namespace kcenon::logger::structured {
 
+// Type alias for log_level
+using log_level = common::interfaces::log_level;
+
 /**
  * @brief Value type for structured logging
  */
@@ -56,7 +59,7 @@ using log_value = std::variant<std::string, int, double, bool>;
  * @brief Structured log entry
  */
 struct structured_log_entry {
-    logger_system::log_level level;
+    log_level level;
     std::string message;
     std::unordered_map<std::string, log_value> fields;
     std::chrono::system_clock::time_point timestamp;
@@ -79,7 +82,7 @@ public:
     /**
      * @brief Start building a structured log entry
      */
-    virtual class log_builder start_log(logger_system::log_level level) = 0;
+    virtual class log_builder start_log(log_level level) = 0;
 };
 
 /**
@@ -91,7 +94,7 @@ private:
     structured_logger_interface* logger_;
 
 public:
-    log_builder(logger_system::log_level level, structured_logger_interface* logger)
+    log_builder(log_level level, structured_logger_interface* logger)
         : logger_(logger) {
         entry_.level = level;
     }
@@ -144,7 +147,7 @@ enum class structured_format {
 /**
  * @brief Output callback type for structured logger
  */
-using structured_output_callback = std::function<void(logger_system::log_level, const std::string&)>;
+using structured_output_callback = std::function<void(log_level, const std::string&)>;
 
 /**
  * @brief Basic structured logger implementation
@@ -216,7 +219,7 @@ public:
         }
     }
 
-    log_builder start_log(logger_system::log_level level) override {
+    log_builder start_log(log_level level) override {
         return log_builder(level, this);
     }
 
@@ -253,15 +256,15 @@ private:
         return oss.str();
     }
 
-    static std::string level_to_string(logger_system::log_level level) {
+    static std::string level_to_string(log_level level) {
         switch (level) {
-            case logger_system::log_level::trace: return "trace";
-            case logger_system::log_level::debug: return "debug";
-            case logger_system::log_level::info: return "info";
-            case logger_system::log_level::warn: return "warn";
-            case logger_system::log_level::error: return "error";
-            case logger_system::log_level::fatal: return "fatal";
-            case logger_system::log_level::off: return "off";
+            case log_level::trace: return "trace";
+            case log_level::debug: return "debug";
+            case log_level::info: return "info";
+            case log_level::warning: return "warn";
+            case log_level::error: return "error";
+            case log_level::critical: return "fatal";
+            case log_level::off: return "off";
             default: return "unknown";
         }
     }
@@ -347,15 +350,15 @@ public:
     }
 
 private:
-    static std::string level_to_string(logger_system::log_level level) {
+    static std::string level_to_string(log_level level) {
         switch (level) {
-            case logger_system::log_level::trace: return "TRACE";
-            case logger_system::log_level::debug: return "DEBUG";
-            case logger_system::log_level::info: return "INFO";
-            case logger_system::log_level::warn: return "WARN";
-            case logger_system::log_level::error: return "ERROR";
-            case logger_system::log_level::fatal: return "FATAL";
-            case logger_system::log_level::off: return "OFF";
+            case log_level::trace: return "TRACE";
+            case log_level::debug: return "DEBUG";
+            case log_level::info: return "INFO";
+            case log_level::warning: return "WARN";
+            case log_level::error: return "ERROR";
+            case log_level::critical: return "FATAL";
+            case log_level::off: return "OFF";
             default: return "UNKNOWN";
         }
     }
