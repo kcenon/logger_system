@@ -60,7 +60,7 @@ int main() {
         auto writer = make_composite_writer(std::move(formatter), std::move(sink));
 
         log_entry entry;
-        entry.level = logger_system::log_level::info;
+        entry.level = log_level::info;
         entry.message = "Application started successfully";
         entry.timestamp = std::chrono::system_clock::now();
 
@@ -78,7 +78,7 @@ int main() {
         auto writer = make_composite_writer(std::move(formatter), std::move(sink));
 
         log_entry entry;
-        entry.level = logger_system::log_level::warning;
+        entry.level = log_level::warning;
         entry.message = "Configuration file not found, using defaults";
         entry.timestamp = std::chrono::system_clock::now();
 
@@ -108,13 +108,13 @@ int main() {
         );
 
         log_entry info_entry;
-        info_entry.level = logger_system::log_level::info;
+        info_entry.level = log_level::info;
         info_entry.message = "This goes to stdout";
         info_entry.timestamp = std::chrono::system_clock::now();
         console_writer->write(info_entry);
 
         log_entry error_entry;
-        error_entry.level = logger_system::log_level::error;
+        error_entry.level = log_level::error;
         error_entry.message = "This goes to stderr";
         error_entry.timestamp = std::chrono::system_clock::now();
         error_writer->write(error_entry);
