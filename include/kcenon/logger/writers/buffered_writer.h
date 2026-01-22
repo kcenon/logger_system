@@ -68,7 +68,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "decorator_writer_base.h"
 #include "../interfaces/log_entry.h"
 
+#include <atomic>
 #include <chrono>
+#include <cstdint>
 #include <mutex>
 #include <vector>
 
