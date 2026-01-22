@@ -52,6 +52,69 @@ logger->clear_all_context_ids();  // Or clear individually with clear_context_id
 
 ---
 
+### Added - Decorator Pattern Writer Architecture (Issue #356)
+
+This release introduces a decorator pattern-based writer architecture for composable, single-responsibility log writing.
+
+#### New Components
+
+- **`decorator_writer_base`** (#361) - Abstract base class for all decorator writers
+  - Eliminates code duplication across decorator implementations
+  - Provides default flush, name, and health check delegation
+  - Enables unlimited decorator stacking
+
+- **`filtered_writer`** (#358) - Filters log entries before writing
+  - Supports any `log_filter_interface` implementation
+  - Silently drops filtered entries (returns success)
+  - Works with composite filters for complex filtering logic
+
+- **`buffered_writer`** (#363) - Buffers log entries before writing
+  - Configurable buffer size and flush interval
+  - Automatic time-based flushing
+  - Statistics tracking for monitoring
+
+- **`formatted_writer`** (#365) - Applies formatting before writing
+  - Supports any `log_formatter_interface` implementation
+  - Transforms log entries before delegation
+
+#### Usage Examples
+
+```cpp
+// Compose decorators for customized behavior
+auto writer = std::make_unique<formatted_writer>(
+    std::make_unique<buffered_writer>(
+        std::make_unique<filtered_writer>(
+            std::make_unique<file_writer>("app.log"),
+            std::make_unique<level_filter>(log_level::info)
+        ),
+        buffered_writer::config{.max_buffer_size = 100}
+    ),
+    std::make_unique<json_formatter>()
+);
+
+// Or use logger_builder for automatic composition
+auto logger = logger_builder()
+    .add_writer("file", std::make_unique<file_writer>("app.log"))
+    .add_filter(std::make_unique<level_filter>(log_level::info))
+    .with_batch_writing(true)
+    .build();
+```
+
+#### Architecture Benefits
+
+| Aspect | Before (v3.x) | After (v4.0) |
+|--------|---------------|--------------|
+| **Code Duplication** | ~70% overlap across writers | Eliminated via decorators |
+| **Single Responsibility** | Writers had multiple concerns | Each class has one job |
+| **Composability** | Limited | Unlimited decorator stacking |
+| **Testability** | Complex integration tests | Simple unit tests per decorator |
+
+#### Custom Writer Migration
+
+For custom writer implementations, see [Decorator Migration Guide](guides/DECORATOR_MIGRATION.md).
+
+---
+
 ## [3.0.0] - 2025-12-31
 
 ### Removed - Deprecated log_level Types and Converters (Issue #339)
