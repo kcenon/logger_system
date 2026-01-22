@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['런타임에_20활성화_0',['런타임에 활성화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1721',1,'']]],
-  ['런타임_20감지_20미작동_1',['런타임 감지 미작동',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1745',1,'']]],
-  ['런타임_20활성화_2',['런타임 활성화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1633',1,'']]]
+  ['라이브러리_0',['라이브러리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1941',1,'도구 및 라이브러리'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md865',1,'vs glog (Google 로깅 라이브러리)']]],
+  ['라이터_1',['라이터',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1674',1,'']]],
+  ['라이터_20사용_2',['여러 라이터 사용',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1692',1,'']]]
 ];

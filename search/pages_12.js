@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['기능_0',['Logger System - 상세 기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html',1,'']]],
-  ['기준_20메트릭_1',['Logger System - 성능 기준 메트릭',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE_8kr.html',1,'']]]
+  ['구조_0',['구조',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE_8kr.html',1,'Logger System 프로젝트 구조'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE_8kr.html',1,'Logger System - 프로젝트 구조']]],
+  ['구현체_20가이드_1',['비동기 Writer 구현체 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html',1,'']]]
 ];

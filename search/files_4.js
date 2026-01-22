@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['getting_5fstarted_2ekr_2emd_0',['GETTING_STARTED.kr.md',['../GETTING__STARTED_8kr_8md.html',1,'']]],
-  ['getting_5fstarted_2emd_1',['GETTING_STARTED.md',['../GETTING__STARTED_8md.html',1,'']]]
+  ['faq_2emd_0',['FAQ.md',['../FAQ_8md.html',1,'']]],
+  ['features_2ekr_2emd_1',['FEATURES.kr.md',['../FEATURES_8kr_8md.html',1,'']]],
+  ['features_2emd_2',['FEATURES.md',['../FEATURES_8md.html',1,'']]]
 ];

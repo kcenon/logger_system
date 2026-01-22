@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['현재_0',['v3.0 (현재)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md1451',1,'']]],
-  ['현재_20기능_1',['현재 기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY_8kr.html#autotoc_md1687',1,'']]],
-  ['현재_20상태_20분석_2',['🔍 현재 상태 분석',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1832',1,'']]],
-  ['현재_20설정_20백업_3',['Step 1: 현재 설정 백업',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE_8kr.html#autotoc_md601',1,'']]]
+  ['헤더_20경로_20변경_0',['헤더 경로 변경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE_8kr.html#autotoc_md696',1,'']]],
+  ['헤더_20파일_1',['헤더 파일',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE_8kr.html#autotoc_md2143',1,'']]]
 ];

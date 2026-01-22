@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['도구_20및_20라이브러리_0',['도구 및 라이브러리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1886',1,'']]],
-  ['도움_20및_20지원_1',['🤝 도움 및 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README_8kr.html#autotoc_md2186',1,'']]]
+  ['대기_0',['비활성화됨 (기능 구현 대기)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md986',1,'']]],
+  ['대시보드_1',['Logger System CI/CD 대시보드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CI__CD__DASHBOARD_8kr.html#autotoc_md236',1,'']]]
 ];

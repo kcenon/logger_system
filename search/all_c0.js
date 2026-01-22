@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['해결책_0',['일반적인 문제와 해결책',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md1465',1,'']]],
-  ['해결_1',['해결',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1642',1,'문제 해결'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1743',1,'문제 해결']]]
+  ['하드웨어_20구성_0',['하드웨어 구성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md852',1,'하드웨어 구성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE_8kr.html#autotoc_md1847',1,'하드웨어 구성']]],
+  ['하위_20호환성_1',['하위 호환성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md993',1,'']]],
+  ['하이라이트_2',['핵심 하이라이트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md848',1,'']]]
 ];

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['security_2ekr_2emd_0',['SECURITY.kr.md',['../SECURITY_8kr_8md.html',1,'']]],
-  ['security_2emd_1',['SECURITY.md',['../SECURITY_8md.html',1,'']]],
-  ['structure_2ekr_2emd_2',['STRUCTURE.kr.md',['../STRUCTURE_8kr_8md.html',1,'']]],
-  ['structure_2emd_3',['STRUCTURE.md',['../STRUCTURE_8md.html',1,'']]]
+  ['readme_2ekr_2emd_0',['README.kr.md',['../README_8kr_8md.html',1,'']]],
+  ['readme_2emd_1',['readme.md',['../docs_2integration_2README_8md.html',1,'(Global Namespace)'],['../docs_2README_8md.html',1,'(Global Namespace)'],['../README_8md.html',1,'(Global Namespace)']]]
 ];

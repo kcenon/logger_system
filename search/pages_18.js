@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['상세_20기능_0',['Logger System - 상세 기능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html',1,'']]]
+  ['빠른_20시작_20가이드_0',['빠른 시작 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html',1,'']]]
 ];

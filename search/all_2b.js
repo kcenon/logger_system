@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['결과물_0',['📈 예상 결과물',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1866',1,'']]],
-  ['결과_1',['결과',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1207',1,'벤치마크 결과'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE_8kr.html#autotoc_md1800',1,'벤치마크 결과'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1867',1,'1. GitHub Actions 실행 결과']]],
-  ['결과_20파싱_20및_20기준선_20비교_2',['Phase 2: 결과 파싱 및 기준선 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1847',1,'']]],
-  ['결과_20파싱_20스크립트_3',['2.1 벤치마크 결과 파싱 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1848',1,'']]]
+  ['검증_0',['검증',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md1984',1,'2. 경로 검증'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE_8kr.html#autotoc_md1859',1,'Baseline 검증']]],
+  ['검증_20예상_20소요_3a_201_205시간_1',['Phase 5: 테스트 및 검증 (예상 소요: 1.5시간)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1931',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['비동기_20writer_20구현체_20가이드_0',['비동기 Writer 구현체 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html',1,'']]]
+  ['변경_20이력_20logger_20system_0',['변경 이력 - Logger System',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html',1,'']]]
 ];
