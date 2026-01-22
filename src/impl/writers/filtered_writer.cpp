@@ -40,48 +40,35 @@ namespace kcenon::logger {
 
 filtered_writer::filtered_writer(std::unique_ptr<log_writer_interface> wrapped,
                                  std::unique_ptr<log_filter_interface> filter)
-    : wrapped_(std::move(wrapped)), filter_(std::move(filter)) {
-    if (!wrapped_) {
-        throw std::invalid_argument("filtered_writer: wrapped writer cannot be nullptr");
-    }
+    : decorator_writer_base(std::move(wrapped), "filtered"), filter_(std::move(filter)) {
+    // Base class constructor handles nullptr check for wrapped writer
 }
 
 common::VoidResult filtered_writer::write(const log_entry& entry) {
     // If no filter, pass through all entries
     if (!filter_) {
-        return wrapped_->write(entry);
+        return wrapped().write(entry);
     }
 
     // Check if entry passes the filter
     if (filter_->should_log(entry)) {
-        return wrapped_->write(entry);
+        return wrapped().write(entry);
     }
 
     // Entry filtered out - return success (not an error)
     return common::ok();
 }
 
-common::VoidResult filtered_writer::flush() {
-    return wrapped_->flush();
-}
-
 std::string filtered_writer::get_name() const {
     if (filter_) {
-        return "filtered(" + filter_->get_name() + ")_" + wrapped_->get_name();
+        return "filtered(" + filter_->get_name() + ")_" + wrapped().get_name();
     }
-    return "filtered_" + wrapped_->get_name();
-}
-
-bool filtered_writer::is_healthy() const {
-    return wrapped_->is_healthy();
+    // Use base class default format when no filter
+    return decorator_writer_base::get_name();
 }
 
 const log_filter_interface* filtered_writer::get_filter() const {
     return filter_.get();
-}
-
-const log_writer_interface* filtered_writer::get_wrapped_writer() const {
-    return wrapped_.get();
 }
 
 // Factory function
