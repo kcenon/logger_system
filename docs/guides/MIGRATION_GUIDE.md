@@ -2,13 +2,14 @@
 
 # Logger System Migration Guide
 
-**Version**: 3.0.0
-**Last Updated**: 2025-12-14
+**Version**: 4.0.0
+**Last Updated**: 2026-01-22
 
 ## Table of Contents
 1. [Overview](#overview)
 2. [CMake Configuration Changes](#cmake-configuration-changes)
 3. [Version Migration](#version-migration)
+   - [From v3.x to v4.0](#from-v3x-to-v40)
    - [From v2.x to v3.0](#from-v2x-to-v30)
    - [From v1.x to v2.x](#from-v1x-to-v2x)
 4. [API Changes](#api-changes)
@@ -21,7 +22,7 @@
 ## Overview
 
 This guide helps you migrate to Logger System from:
-- Earlier versions of Logger System (v2.x to v3.0, v1.x to v2.x)
+- Earlier versions of Logger System (v3.x to v4.0, v2.x to v3.0, v1.x to v2.x)
 - Other popular logging libraries (spdlog, Boost.Log, glog, log4cpp)
 - Custom logging solutions
 
@@ -29,6 +30,8 @@ This guide helps you migrate to Logger System from:
 
 | Version | Component | Change | Impact |
 |---------|-----------|--------|--------|
+| **v4.0** | Writers | Decorator pattern architecture | **High** for custom writers |
+| **v4.0** | Context IDs | Convenience methods removed | Medium |
 | **v3.0** | Namespace | `logger_module` → `kcenon::logger` | **High** |
 | **v3.0** | Interface | Implements `common::interfaces::ILogger` | **High** |
 | **v3.0** | Dependencies | thread_system now optional | Medium |
@@ -37,6 +40,86 @@ This guide helps you migrate to Logger System from:
 | v2.0 | Error Handling | Exceptions → Result types | High |
 | v2.0 | Memory Management | Raw pointers → Smart pointers | High |
 | v2.0 | Configuration | Direct setters → Builder pattern | Medium |
+
+---
+
+## From v3.x to v4.0
+
+Version 4.0 introduces a decorator pattern-based writer architecture. This primarily affects users with **custom writer implementations**.
+
+### What Changed
+
+1. **Decorator Pattern Writers**: Cross-cutting concerns (filtering, buffering, formatting) are now separate decorator classes
+2. **Context ID API Simplification**: Specialized context ID methods removed in favor of generic API
+3. **New Writer Components**: `decorator_writer_base`, `filtered_writer`, `buffered_writer`, `formatted_writer`
+
+### Migration for Standard Users
+
+**No changes required** if you only use built-in writers via `logger_builder`:
+
+```cpp
+// This code works unchanged in v4.0
+auto logger = logger_builder()
+    .add_writer("console", std::make_unique<console_writer>())
+    .add_writer("file", std::make_unique<file_writer>("app.log"))
+    .with_min_level(log_level::info)
+    .build();
+```
+
+### Migration for Custom Writer Authors
+
+If you have custom writer implementations, see the detailed [Decorator Migration Guide](DECORATOR_MIGRATION.md).
+
+**Quick summary:**
+
+```cpp
+// v3.x: Monolithic custom writer
+class my_writer : public base_writer {
+    common::VoidResult write(const log_entry& entry) override {
+        if (!should_log(entry)) return {};  // Filtering (remove this)
+        auto formatted = format(entry);      // Formatting (remove this)
+        buffer_.push(formatted);             // Buffering (remove this)
+        return do_output(formatted);
+    }
+};
+
+// v4.0: Focused leaf writer + decorators
+class my_writer : public thread_safe_writer {
+protected:
+    common::VoidResult write_entry_impl(const log_entry& entry) override {
+        return do_output(entry);  // Only destination logic
+    }
+};
+
+// Compose with decorators
+auto writer = std::make_unique<formatted_writer>(
+    std::make_unique<buffered_writer>(
+        std::make_unique<filtered_writer>(
+            std::make_unique<my_writer>(),
+            std::make_unique<level_filter>(log_level::info)
+        ),
+        buffered_writer::config{}
+    ),
+    std::make_unique<json_formatter>()
+);
+```
+
+### Context ID API Changes
+
+```cpp
+// v3.x (removed):
+logger->set_trace_id("abc123");
+logger->set_span_id("def456");
+logger->clear_trace_id();
+
+// v4.0:
+logger->set_context_id("trace_id", "abc123");
+logger->set_context_id("span_id", "def456");
+logger->clear_context_id("trace_id");
+// Or clear all: logger->clear_all_context_ids();
+```
+
+---
 
 ## CMake Configuration Changes
 
