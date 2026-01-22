@@ -334,6 +334,36 @@ set_target_properties(logger_realtime_analyzer_test PROPERTIES
 
 message(STATUS "Real-time analyzer tests: Added")
 
+# Filtered writer decorator tests (Issue #358 - Decorator pattern refactoring)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/filtered_writer_test.cpp")
+    add_executable(logger_filtered_writer_test
+        unit/writers_test/filtered_writer_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main AND TARGET GTest::gmock)
+        target_link_libraries(logger_filtered_writer_test
+            PRIVATE LoggerSystem GTest::gtest_main GTest::gmock
+        )
+    elseif(TARGET GTest::gtest_main)
+        target_link_libraries(logger_filtered_writer_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_filtered_writer_test
+            PRIVATE LoggerSystem gtest_main gmock
+        )
+    endif()
+
+    add_test(NAME logger_filtered_writer_test
+        COMMAND logger_filtered_writer_test
+    )
+    set_target_properties(logger_filtered_writer_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Filtered writer decorator tests: Added")
+endif()
+
 ##################################################
 # Automatic Coverage Registration
 #
@@ -381,6 +411,10 @@ endif()
 
 if(TARGET logger_executor_integration_test)
     list(APPEND _LOGGER_TEST_TARGETS logger_executor_integration_test)
+endif()
+
+if(TARGET logger_filtered_writer_test)
+    list(APPEND _LOGGER_TEST_TARGETS logger_filtered_writer_test)
 endif()
 
 # Register all test targets for coverage instrumentation
