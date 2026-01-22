@@ -58,6 +58,10 @@ option(LOGGER_BUILD_INTEGRATION_TESTS "Build integration tests" ON)
 option(LOGGER_ENABLE_COVERAGE "Enable code coverage reporting" OFF)
 option(LOGGER_ENABLE_OTLP "Enable OpenTelemetry (OTLP) integration for observability" OFF)
 
+# Optional module options (Issue #357: SRP - separate server/analysis from core)
+option(LOGGER_WITH_SERVER "Include log server functionality" ON)
+option(LOGGER_WITH_ANALYSIS "Include log analysis functionality" ON)
+
 # C++20 Modules option (requires CMake 3.28+)
 if(LOGGER_CAN_USE_MODULES)
     option(LOGGER_USE_MODULES "Build with C++20 modules support" OFF)
@@ -333,6 +337,28 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
         ${LOGGER_SOURCE_DIR}/*.cpp
     )
 
+    ##################################################
+    # Optional Module Configuration (Issue #357: SRP)
+    ##################################################
+
+    # Filter out server module if disabled
+    if(NOT LOGGER_WITH_SERVER)
+        message(STATUS "Logger System: Server module disabled (LOGGER_WITH_SERVER=OFF)")
+        list(FILTER LOGGER_HEADERS EXCLUDE REGEX ".*/server/.*")
+        # Note: server is header-only, no cpp files to exclude
+    else()
+        message(STATUS "Logger System: Server module enabled")
+    endif()
+
+    # Filter out analysis module if disabled
+    if(NOT LOGGER_WITH_ANALYSIS)
+        message(STATUS "Logger System: Analysis module disabled (LOGGER_WITH_ANALYSIS=OFF)")
+        list(FILTER LOGGER_HEADERS EXCLUDE REGEX ".*/analysis/.*")
+        # Note: analysis is header-only in include/, but has cppm in modules/
+    else()
+        message(STATUS "Logger System: Analysis module enabled")
+    endif()
+
     # Check if we have enough sources in new structure
     list(LENGTH LOGGER_SOURCES SOURCE_COUNT)
     if(SOURCE_COUNT GREATER 5)
@@ -343,6 +369,15 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 $<BUILD_INTERFACE:${LOGGER_INCLUDE_DIR}>
                 $<INSTALL_INTERFACE:include>
         )
+
+        # Optional module compile definitions (Issue #357: SRP)
+        if(LOGGER_WITH_SERVER)
+            target_compile_definitions(LoggerSystem PUBLIC LOGGER_WITH_SERVER=1)
+        endif()
+
+        if(LOGGER_WITH_ANALYSIS)
+            target_compile_definitions(LoggerSystem PUBLIC LOGGER_WITH_ANALYSIS=1)
+        endif()
 
         # Suppress warnings inherited from parent project
         if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
@@ -439,13 +474,19 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
         if(LOGGER_USE_MODULES AND LOGGER_CAN_USE_MODULES)
             message(STATUS "Logger System: Configuring C++20 module files")
 
-            # Module source files
+            # Module source files (core modules always included)
             set(LOGGER_MODULE_FILES
                 ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/logger.cppm
                 ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/core.cppm
                 ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/backends.cppm
-                ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/analysis.cppm
             )
+
+            # Conditionally include analysis module (Issue #357: SRP)
+            if(LOGGER_WITH_ANALYSIS)
+                list(APPEND LOGGER_MODULE_FILES
+                    ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/analysis.cppm
+                )
+            endif()
 
             # Check if module files exist
             set(MODULES_AVAILABLE TRUE)

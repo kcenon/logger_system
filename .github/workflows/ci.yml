@@ -401,3 +401,75 @@ jobs:
           build/Testing/
           build/**/*.log
         retention-days: 7
+
+  # Core-only build test (Issue #357: SRP - ensure core compiles without optional modules)
+  core-only-build:
+    name: Core-Only Build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            compiler: gcc
+          - os: macos-14
+            compiler: clang
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        persist-credentials: true
+        clean: true
+        fetch-depth: 1
+
+    - name: Checkout common_system dependency
+      uses: actions/checkout@v4
+      with:
+        repository: kcenon/common_system
+        path: common_system
+
+    - name: Install dependencies (Ubuntu)
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt update
+        sudo apt install -y cmake build-essential ninja-build
+
+    - name: Install dependencies (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        brew install ninja
+
+    - name: Build core-only (without server/analysis modules)
+      run: |
+        mkdir -p build-core-only
+        cd build-core-only
+
+        C_COMPILER="${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }}"
+        CXX_COMPILER="${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}"
+
+        cmake .. \
+          -G Ninja \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DBUILD_TESTS=OFF \
+          -DBUILD_SAMPLES=OFF \
+          -DLOGGER_WITH_SERVER=OFF \
+          -DLOGGER_WITH_ANALYSIS=OFF \
+          -DUNIFIED_USE_LOCAL=ON \
+          -DCMAKE_C_COMPILER=$C_COMPILER \
+          -DCMAKE_CXX_COMPILER=$CXX_COMPILER
+
+        cmake --build . --parallel
+
+    - name: Verify library was built
+      run: |
+        if [ -f "build-core-only/lib/libLoggerSystem.a" ]; then
+          echo "Core-only build successful!"
+          ls -la build-core-only/lib/
+        else
+          echo "ERROR: libLoggerSystem.a not found"
+          exit 1
+        fi
