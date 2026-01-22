@@ -64,9 +64,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @endcode
  */
 
+#include "decorator_writer_base.h"
 #include "../interfaces/log_formatter_interface.h"
-#include "../interfaces/log_writer_interface.h"
-#include "../interfaces/writer_category.h"
 
 #include <memory>
 
@@ -93,8 +92,9 @@ namespace kcenon::logger {
  * @note If no formatter is provided, entries pass through unchanged.
  *
  * @since 4.0.0
+ * @since 4.1.0 Migrated to use decorator_writer_base for code reuse
  */
-class formatted_writer : public log_writer_interface, public decorator_writer_tag {
+class formatted_writer : public decorator_writer_base {
 public:
     /**
      * @brief Construct a formatted writer
@@ -141,32 +141,16 @@ public:
     common::VoidResult write(const log_entry& entry) override;
 
     /**
-     * @brief Flush the wrapped writer
-     *
-     * @return common::VoidResult Result from the wrapped writer's flush
-     *
-     * @since 4.0.0
-     */
-    common::VoidResult flush() override;
-
-    /**
      * @brief Get the name of this writer
      *
      * @return String in format "formatted_<wrapped_name>" or
      *         "formatted(<formatter_name>)_<wrapped_name>" if formatter has a name
      *
+     * @details Overrides base class to include formatter name when available.
+     *
      * @since 4.0.0
      */
     std::string get_name() const override;
-
-    /**
-     * @brief Check if the writer is healthy
-     *
-     * @return Health status of the wrapped writer
-     *
-     * @since 4.0.0
-     */
-    bool is_healthy() const override;
 
     /**
      * @brief Get the current formatter
@@ -177,17 +161,7 @@ public:
      */
     const log_formatter_interface* get_formatter() const;
 
-    /**
-     * @brief Get the wrapped writer
-     *
-     * @return Pointer to the wrapped writer
-     *
-     * @since 4.0.0
-     */
-    const log_writer_interface* get_wrapped_writer() const;
-
 private:
-    std::unique_ptr<log_writer_interface> wrapped_;
     std::unique_ptr<log_formatter_interface> formatter_;
 };
 
