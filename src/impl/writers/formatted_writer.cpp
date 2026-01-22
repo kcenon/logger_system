@@ -40,16 +40,14 @@ namespace kcenon::logger {
 
 formatted_writer::formatted_writer(std::unique_ptr<log_writer_interface> wrapped,
                                    std::unique_ptr<log_formatter_interface> formatter)
-    : wrapped_(std::move(wrapped)), formatter_(std::move(formatter)) {
-    if (!wrapped_) {
-        throw std::invalid_argument("formatted_writer: wrapped writer cannot be nullptr");
-    }
+    : decorator_writer_base(std::move(wrapped), "formatted"), formatter_(std::move(formatter)) {
+    // Base class constructor handles nullptr check for wrapped writer
 }
 
 common::VoidResult formatted_writer::write(const log_entry& entry) {
     // If no formatter, pass through all entries unchanged
     if (!formatter_) {
-        return wrapped_->write(entry);
+        return wrapped().write(entry);
     }
 
     // Apply formatter to get formatted message
@@ -66,30 +64,19 @@ common::VoidResult formatted_writer::write(const log_entry& entry) {
     formatted_entry.fields = entry.fields;
 
     // Delegate to wrapped writer
-    return wrapped_->write(formatted_entry);
-}
-
-common::VoidResult formatted_writer::flush() {
-    return wrapped_->flush();
+    return wrapped().write(formatted_entry);
 }
 
 std::string formatted_writer::get_name() const {
     if (formatter_) {
-        return "formatted(" + formatter_->get_name() + ")_" + wrapped_->get_name();
+        return "formatted(" + formatter_->get_name() + ")_" + wrapped().get_name();
     }
-    return "formatted_" + wrapped_->get_name();
-}
-
-bool formatted_writer::is_healthy() const {
-    return wrapped_->is_healthy();
+    // Use base class default format when no formatter
+    return decorator_writer_base::get_name();
 }
 
 const log_formatter_interface* formatted_writer::get_formatter() const {
     return formatter_.get();
-}
-
-const log_writer_interface* formatted_writer::get_wrapped_writer() const {
-    return wrapped_.get();
 }
 
 // Factory function
