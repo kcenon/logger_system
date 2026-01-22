@@ -129,9 +129,11 @@ class base_writer;
 class logger_metrics_collector;
 class log_filter_interface;  // Forward declaration for filtering system
 
+#ifdef LOGGER_WITH_ANALYSIS
 namespace analysis {
 class realtime_log_analyzer;
 }  // namespace analysis
+#endif  // LOGGER_WITH_ANALYSIS
 
 namespace sampling {
 class log_sampler;
@@ -550,9 +552,10 @@ public:
     bool has_routing() const;
 
     // =========================================================================
-    // Real-time analysis
+    // Real-time analysis (optional, requires LOGGER_WITH_ANALYSIS)
     // =========================================================================
 
+#ifdef LOGGER_WITH_ANALYSIS
     /**
      * @brief Set real-time log analyzer for anomaly detection
      * @param analyzer The analyzer instance
@@ -560,6 +563,8 @@ public:
      * @details Sets a real-time analyzer that processes each log entry
      * for anomaly detection. The analyzer is invoked synchronously during
      * log processing.
+     *
+     * @note This API is only available when LOGGER_WITH_ANALYSIS is defined.
      *
      * @example
      * @code
@@ -579,6 +584,8 @@ public:
      * @brief Get the real-time analyzer (if set)
      * @return Pointer to analyzer or nullptr if not set
      *
+     * @note This API is only available when LOGGER_WITH_ANALYSIS is defined.
+     *
      * @since 3.2.0
      */
     [[nodiscard]] analysis::realtime_log_analyzer* get_realtime_analyzer();
@@ -586,6 +593,8 @@ public:
     /**
      * @brief Get the real-time analyzer (const version)
      * @return Pointer to analyzer or nullptr if not set
+     *
+     * @note This API is only available when LOGGER_WITH_ANALYSIS is defined.
      *
      * @since 3.2.0
      */
@@ -595,9 +604,12 @@ public:
      * @brief Check if real-time analysis is enabled
      * @return true if a realtime analyzer is set
      *
+     * @note This API is only available when LOGGER_WITH_ANALYSIS is defined.
+     *
      * @since 3.2.0
      */
     [[nodiscard]] bool has_realtime_analysis() const;
+#endif  // LOGGER_WITH_ANALYSIS
 
     // =========================================================================
     // OpenTelemetry context management

@@ -34,8 +34,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/log_collector.h>
 #include <kcenon/logger/core/thread_integration_detector.h>
 #include <kcenon/logger/backends/standalone_backend.h>
-#include <kcenon/logger/analysis/realtime_log_analyzer.h>
 #include <kcenon/logger/sampling/log_sampler.h>
+
+#ifdef LOGGER_WITH_ANALYSIS
+#include <kcenon/logger/analysis/realtime_log_analyzer.h>
+#endif  // LOGGER_WITH_ANALYSIS
 
 // Note: thread_system_backend was removed in Issue #225
 // thread_system is now optional and standalone_backend is the default
@@ -97,9 +100,11 @@ public:
     std::unique_ptr<log_router> router_;  // Log router for message routing
     mutable std::shared_mutex router_mutex_;  // Protects router_ from concurrent access
 
+#ifdef LOGGER_WITH_ANALYSIS
     // Real-time analysis
     std::unique_ptr<analysis::realtime_log_analyzer> realtime_analyzer_;  // Real-time log analyzer
     mutable std::shared_mutex analyzer_mutex_;  // Protects realtime_analyzer_
+#endif  // LOGGER_WITH_ANALYSIS
 
     // Context fields for structured logging
     log_fields context_fields_;  // Persistent context fields
@@ -160,6 +165,7 @@ public:
                             int line,
                             const std::string& function,
                             const log_entry& entry) {
+#ifdef LOGGER_WITH_ANALYSIS
         // Real-time analysis if analyzer is set
         {
             std::shared_lock<std::shared_mutex> lock(analyzer_mutex_);
@@ -174,6 +180,7 @@ public:
                 realtime_analyzer_->analyze(analyzed_entry);
             }
         }
+#endif  // LOGGER_WITH_ANALYSIS
 
         // Check routing rules
         std::vector<std::string> routed_writer_names;
@@ -872,9 +879,10 @@ void logger::clear_all_context_ids() {
 }
 
 // =========================================================================
-// Real-time analysis implementation
+// Real-time analysis implementation (optional, requires LOGGER_WITH_ANALYSIS)
 // =========================================================================
 
+#ifdef LOGGER_WITH_ANALYSIS
 void logger::set_realtime_analyzer(std::unique_ptr<analysis::realtime_log_analyzer> analyzer) {
     if (pimpl_) {
         std::lock_guard<std::shared_mutex> lock(pimpl_->analyzer_mutex_);
@@ -905,6 +913,7 @@ bool logger::has_realtime_analysis() const {
     }
     return false;
 }
+#endif  // LOGGER_WITH_ANALYSIS
 
 // =========================================================================
 // Log sampling implementation
