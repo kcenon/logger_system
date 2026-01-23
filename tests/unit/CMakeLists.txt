@@ -50,6 +50,10 @@ if(UNIX AND NOT WIN32)
   # Validates system behavior under extreme load conditions
   add_subdirectory(stress_test)
 
+  # Core tests
+  # Validates core context and utility classes
+  add_subdirectory(core_test)
+
 else()
   message(STATUS "Unit tests are disabled on ${CMAKE_SYSTEM_NAME}")
   message(STATUS "Unit tests are only supported on Linux and macOS platforms")
