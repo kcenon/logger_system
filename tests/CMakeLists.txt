@@ -519,6 +519,32 @@ foreach(_test_target IN LISTS _LOGGER_TEST_TARGETS)
     endif()
 endforeach()
 
+# Unified log context tests (Issue #375)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/core_test/unified_log_context_test.cpp")
+    add_executable(logger_unified_log_context_test
+        unit/core_test/unified_log_context_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_unified_log_context_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_unified_log_context_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_unified_log_context_test
+        COMMAND logger_unified_log_context_test
+    )
+    set_target_properties(logger_unified_log_context_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Unified log context tests: Added")
+endif()
+
 # Cleanup
 unset(_LOGGER_TEST_TARGETS)
 unset(_test_target)
