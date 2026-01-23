@@ -748,9 +748,10 @@ public:
     }
 
     // =========================================================================
-    // Real-time analysis configuration
+    // Real-time analysis configuration (requires LOGGER_WITH_ANALYSIS)
     // =========================================================================
 
+#ifdef LOGGER_WITH_ANALYSIS
     /**
      * @brief Set real-time log analyzer
      * @param analyzer Pre-configured analyzer instance
@@ -758,6 +759,8 @@ public:
      *
      * @details Sets a real-time analyzer that will be attached to the logger
      * for anomaly detection during log processing.
+     *
+     * @note This API is only available when LOGGER_WITH_ANALYSIS is defined.
      *
      * @example
      * @code
@@ -786,6 +789,8 @@ public:
      *
      * @details Creates and configures a real-time analyzer with the provided
      * settings. This is a convenience method for common use cases.
+     *
+     * @note This API is only available when LOGGER_WITH_ANALYSIS is defined.
      *
      * @example
      * @code
@@ -821,6 +826,8 @@ public:
      *
      * @details Creates a real-time analyzer with sensible defaults.
      *
+     * @note This API is only available when LOGGER_WITH_ANALYSIS is defined.
+     *
      * @since 3.2.0
      */
     logger_builder& with_realtime_analysis(
@@ -830,6 +837,7 @@ public:
             error_threshold, std::move(callback));
         return *this;
     }
+#endif  // LOGGER_WITH_ANALYSIS
 
     /**
      * @brief Use default pattern for logging
@@ -1110,9 +1118,11 @@ public:
         routes_.clear();  // Clear after moving
 
         // Apply real-time analyzer if configured
+#ifdef LOGGER_WITH_ANALYSIS
         if (realtime_analyzer_) {
             logger_instance->set_realtime_analyzer(std::move(realtime_analyzer_));
         }
+#endif  // LOGGER_WITH_ANALYSIS
 
         // Apply sampler if configured
         if (sampler_) {
@@ -1160,7 +1170,9 @@ private:
     std::shared_ptr<common::interfaces::IMonitor> monitor_;  // Phase 2.2.4
     std::chrono::milliseconds health_check_interval_{1000};
     std::function<void(const logger_error_code&)> error_handler_;
+#ifdef LOGGER_WITH_ANALYSIS
     std::unique_ptr<analysis::realtime_log_analyzer> realtime_analyzer_;  // Real-time analyzer
+#endif  // LOGGER_WITH_ANALYSIS
     std::unique_ptr<sampling::log_sampler> sampler_;  // Log sampler for volume reduction
 };
 
