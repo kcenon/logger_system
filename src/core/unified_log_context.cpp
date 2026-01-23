@@ -8,6 +8,7 @@ All rights reserved.
 #include "kcenon/logger/core/unified_log_context.h"
 
 #include <algorithm>
+#include <mutex>
 
 namespace kcenon::logger {
 
