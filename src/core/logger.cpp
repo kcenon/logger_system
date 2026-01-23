@@ -33,6 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/core/log_collector.h>
 #include <kcenon/logger/core/thread_integration_detector.h>
+#include <kcenon/logger/core/unified_log_context.h>
 #include <kcenon/logger/backends/standalone_backend.h>
 #include <kcenon/logger/sampling/log_sampler.h>
 
@@ -106,9 +107,8 @@ public:
     mutable std::shared_mutex analyzer_mutex_;  // Protects realtime_analyzer_
 #endif  // LOGGER_WITH_ANALYSIS
 
-    // Context fields for structured logging
-    log_fields context_fields_;  // Persistent context fields
-    mutable std::shared_mutex context_mutex_;  // Protects context_fields_
+    // Unified context for structured logging (consolidates all context types)
+    unified_log_context context_;  // Unified context (thread-safe internally)
 
     // Log sampling
     std::unique_ptr<sampling::log_sampler> sampler_;  // Log sampler for volume reduction
@@ -709,14 +709,13 @@ bool logger::has_otel_context() const {
 // =========================================================================
 
 structured_log_builder logger::log_structured(log_level level) {
-    const log_fields* ctx_ptr = nullptr;
-    if (pimpl_) {
-        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
-        if (!pimpl_->context_fields_.empty()) {
-            ctx_ptr = &pimpl_->context_fields_;
-        }
+    // Get context fields from unified_log_context (thread-safe internally)
+    log_fields ctx_fields;
+    if (pimpl_ && !pimpl_->context_.empty()) {
+        ctx_fields = pimpl_->context_.to_fields();
     }
 
+    // Capture by value since we need the fields to outlive this scope
     return structured_log_builder(
         level,
         [this, level](log_entry&& entry) {
@@ -753,127 +752,121 @@ structured_log_builder logger::log_structured(log_level level) {
                 entry
             );
         },
-        ctx_ptr
+        ctx_fields.empty() ? nullptr : &ctx_fields
     );
 }
 
 // =========================================================================
-// Context fields management implementation
+// Unified Context API implementation
+// =========================================================================
+
+unified_log_context& logger::context() {
+    // unified_log_context is thread-safe internally, no external locking needed
+    return pimpl_->context_;
+}
+
+const unified_log_context& logger::context() const {
+    return pimpl_->context_;
+}
+
+// =========================================================================
+// Context fields management implementation (legacy API - delegates to unified context)
 // =========================================================================
 
 void logger::set_context(const std::string& key, const std::string& value) {
     if (pimpl_) {
-        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
-        pimpl_->context_fields_[key] = value;
+        pimpl_->context_.set(key, value, context_category::custom);
     }
 }
 
 void logger::set_context(const std::string& key, int64_t value) {
     if (pimpl_) {
-        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
-        pimpl_->context_fields_[key] = value;
+        pimpl_->context_.set(key, value, context_category::custom);
     }
 }
 
 void logger::set_context(const std::string& key, double value) {
     if (pimpl_) {
-        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
-        pimpl_->context_fields_[key] = value;
+        pimpl_->context_.set(key, value, context_category::custom);
     }
 }
 
 void logger::set_context(const std::string& key, bool value) {
     if (pimpl_) {
-        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
-        pimpl_->context_fields_[key] = value;
+        pimpl_->context_.set(key, value, context_category::custom);
     }
 }
 
 void logger::remove_context(const std::string& key) {
     if (pimpl_) {
-        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
-        pimpl_->context_fields_.erase(key);
+        pimpl_->context_.remove(key);
     }
 }
 
 void logger::clear_context() {
     if (pimpl_) {
-        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
-        pimpl_->context_fields_.clear();
+        pimpl_->context_.clear(context_category::custom);
     }
 }
 
 bool logger::has_context() const {
     if (pimpl_) {
-        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
-        return !pimpl_->context_fields_.empty();
+        return !pimpl_->context_.keys(context_category::custom).empty();
     }
     return false;
 }
 
 log_fields logger::get_context() const {
     if (pimpl_) {
-        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
-        return pimpl_->context_fields_;
+        return pimpl_->context_.to_fields();
     }
     return {};
 }
 
 // =========================================================================
-// Generic context ID API implementation
+// Generic context ID API implementation (legacy API - delegates to unified context)
 // =========================================================================
 
-namespace {
-const std::string CORRELATION_ID_KEY = "correlation_id";
-const std::string REQUEST_ID_KEY = "request_id";
-const std::string TRACE_ID_KEY = "trace_id";
-const std::string SPAN_ID_KEY = "span_id";
-const std::string PARENT_SPAN_ID_KEY = "parent_span_id";
-
-// List of all known context ID keys for clear_all_context_ids()
-const std::vector<std::string> ALL_CONTEXT_ID_KEYS = {
-    CORRELATION_ID_KEY,
-    REQUEST_ID_KEY,
-    TRACE_ID_KEY,
-    SPAN_ID_KEY,
-    PARENT_SPAN_ID_KEY
-};
-} // namespace
-
 void logger::set_context_id(std::string_view key, std::string_view value) {
-    set_context(std::string(key), std::string(value));
+    if (pimpl_) {
+        // Use trace category for context IDs (trace_id, span_id, correlation_id, etc.)
+        pimpl_->context_.set(std::string(key), std::string(value), context_category::trace);
+    }
 }
 
 std::string logger::get_context_id(std::string_view key) const {
     if (pimpl_) {
-        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
-        auto it = pimpl_->context_fields_.find(std::string(key));
-        if (it != pimpl_->context_fields_.end()) {
-            if (auto* str = std::get_if<std::string>(&it->second)) {
-                return *str;
-            }
-        }
+        return pimpl_->context_.get_string(key);
     }
     return {};
 }
 
 void logger::clear_context_id(std::string_view key) {
-    remove_context(std::string(key));
+    if (pimpl_) {
+        pimpl_->context_.remove(key);
+    }
 }
 
 bool logger::has_context_id(std::string_view key) const {
     if (pimpl_) {
-        std::shared_lock<std::shared_mutex> lock(pimpl_->context_mutex_);
-        return pimpl_->context_fields_.find(std::string(key)) != pimpl_->context_fields_.end();
+        return pimpl_->context_.has(key);
     }
     return false;
 }
 
 void logger::clear_all_context_ids() {
     if (pimpl_) {
-        std::lock_guard<std::shared_mutex> lock(pimpl_->context_mutex_);
-        for (const auto& key : ALL_CONTEXT_ID_KEYS) {
-            pimpl_->context_fields_.erase(key);
+        // Clear only the known context ID keys for backward compatibility
+        // Custom keys set via set_context_id() are NOT cleared by this method
+        static const std::vector<std::string_view> KNOWN_CONTEXT_ID_KEYS = {
+            "correlation_id",
+            "request_id",
+            "trace_id",
+            "span_id",
+            "parent_span_id"
+        };
+        for (const auto& key : KNOWN_CONTEXT_ID_KEYS) {
+            pimpl_->context_.remove(key);
         }
     }
 }

@@ -52,6 +52,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/otlp/otel_context.h>
 #include <kcenon/logger/sampling/sampling_config.h>
 #include "structured_log_builder.h"
+#include "unified_log_context.h"
 
 /**
  * @file logger.h
@@ -701,7 +702,48 @@ public:
     [[nodiscard]] structured_log_builder log_structured(log_level level);
 
     // =========================================================================
-    // Context fields management
+    // Unified Context API (NEW)
+    // =========================================================================
+
+    /**
+     * @brief Get the unified context for this logger
+     * @return Reference to the unified log context
+     *
+     * @details Provides access to the unified context management system that
+     * consolidates all context types (custom fields, trace IDs, request IDs,
+     * and OpenTelemetry context) into a single interface.
+     *
+     * @example
+     * @code
+     * // Set various context types
+     * logger->context()
+     *     .set("user_id", int64_t{12345})
+     *     .set_trace("trace-abc", "span-123")
+     *     .set_request("req-456");
+     *
+     * // All structured logs include the context
+     * logger->log_structured(log_level::info)
+     *     .message("Processing request")
+     *     .emit();
+     *
+     * // Clear specific category
+     * logger->context().clear(context_category::trace);
+     * @endcode
+     *
+     * @since 3.5.0
+     */
+    [[nodiscard]] unified_log_context& context();
+
+    /**
+     * @brief Get the unified context for this logger (const version)
+     * @return Const reference to the unified log context
+     *
+     * @since 3.5.0
+     */
+    [[nodiscard]] const unified_log_context& context() const;
+
+    // =========================================================================
+    // Context fields management (legacy API - use context() instead)
     // =========================================================================
 
     /**
