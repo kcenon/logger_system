@@ -632,7 +632,9 @@ public:
      * @endcode
      *
      * @since 3.0.0
+     * @deprecated Use context().set_otel(ctx) instead
      */
+    [[deprecated("Use context().set_otel(ctx) instead")]]
     void set_otel_context(const otlp::otel_context& ctx);
 
     /**
@@ -643,7 +645,9 @@ public:
      * Useful for propagating context to downstream services.
      *
      * @since 3.0.0
+     * @deprecated Query individual fields via context().get_string("trace_id") etc.
      */
+    [[deprecated("Query individual fields via context().get_string(\"trace_id\") etc.")]]
     [[nodiscard]] std::optional<otlp::otel_context> get_otel_context() const;
 
     /**
@@ -653,7 +657,9 @@ public:
      * processing to prevent context leakage.
      *
      * @since 3.0.0
+     * @deprecated Use context().clear(context_category::otel) instead
      */
+    [[deprecated("Use context().clear(context_category::otel) instead")]]
     void clear_otel_context();
 
     /**
@@ -661,7 +667,9 @@ public:
      * @return true if context is set
      *
      * @since 3.0.0
+     * @deprecated Use context().has("trace_id") instead
      */
+    [[deprecated("Use context().has(\"trace_id\") instead")]]
     [[nodiscard]] bool has_otel_context() const;
 
     // =========================================================================
@@ -767,7 +775,9 @@ public:
      * @endcode
      *
      * @since 3.1.0
+     * @deprecated Use context().set(key, value) instead
      */
+    [[deprecated("Use context().set(key, value) instead")]]
     void set_context(const std::string& key, const std::string& value);
 
     /**
@@ -775,7 +785,9 @@ public:
      * @param key Field name
      * @param value Field value
      * @since 3.1.0
+     * @deprecated Use context().set(key, value) instead
      */
+    [[deprecated("Use context().set(key, value) instead")]]
     void set_context(const std::string& key, int64_t value);
 
     /**
@@ -783,7 +795,9 @@ public:
      * @param key Field name
      * @param value Field value
      * @since 3.1.0
+     * @deprecated Use context().set(key, value) instead
      */
+    [[deprecated("Use context().set(key, value) instead")]]
     void set_context(const std::string& key, double value);
 
     /**
@@ -791,27 +805,35 @@ public:
      * @param key Field name
      * @param value Field value
      * @since 3.1.0
+     * @deprecated Use context().set(key, value) instead
      */
+    [[deprecated("Use context().set(key, value) instead")]]
     void set_context(const std::string& key, bool value);
 
     /**
      * @brief Remove a context field
      * @param key Field name to remove
      * @since 3.1.0
+     * @deprecated Use context().remove(key) instead
      */
+    [[deprecated("Use context().remove(key) instead")]]
     void remove_context(const std::string& key);
 
     /**
      * @brief Clear all context fields
      * @since 3.1.0
+     * @deprecated Use context().clear() instead
      */
+    [[deprecated("Use context().clear() instead")]]
     void clear_context();
 
     /**
      * @brief Check if any context fields are set
      * @return true if at least one context field is set
      * @since 3.1.0
+     * @deprecated Use !context().empty() instead
      */
+    [[deprecated("Use !context().empty() instead")]]
     [[nodiscard]] bool has_context() const;
 
     /**
@@ -819,7 +841,9 @@ public:
      * @return Copy of context fields map
      * @note Returns a copy for thread safety
      * @since 3.1.0
+     * @deprecated Use context().to_fields() instead
      */
+    [[deprecated("Use context().to_fields() instead")]]
     [[nodiscard]] log_fields get_context() const;
 
     // =========================================================================
@@ -849,7 +873,9 @@ public:
      * @endcode
      *
      * @since 3.4.0
+     * @deprecated Use context().set(key, value, context_category::trace) instead
      */
+    [[deprecated("Use context().set(key, value, context_category::trace) instead")]]
     void set_context_id(std::string_view key, std::string_view value);
 
     /**
@@ -858,7 +884,9 @@ public:
      * @return The context ID value, or empty string if not set
      *
      * @since 3.4.0
+     * @deprecated Use context().get_string(key) instead
      */
+    [[deprecated("Use context().get_string(key) instead")]]
     [[nodiscard]] std::string get_context_id(std::string_view key) const;
 
     /**
@@ -866,7 +894,9 @@ public:
      * @param key The context ID key to clear
      *
      * @since 3.4.0
+     * @deprecated Use context().remove(key) instead
      */
+    [[deprecated("Use context().remove(key) instead")]]
     void clear_context_id(std::string_view key);
 
     /**
@@ -875,7 +905,9 @@ public:
      * @return true if the context ID is set
      *
      * @since 3.4.0
+     * @deprecated Use context().has(key) instead
      */
+    [[deprecated("Use context().has(key) instead")]]
     [[nodiscard]] bool has_context_id(std::string_view key) const;
 
     /**
@@ -889,7 +921,9 @@ public:
      * set via set_context().
      *
      * @since 3.4.0
+     * @deprecated Use context().clear(context_category::trace) instead
      */
+    [[deprecated("Use context().clear(context_category::trace) instead")]]
     void clear_all_context_ids();
 
     // =========================================================================
