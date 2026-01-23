@@ -65,7 +65,9 @@ jobs:
     - name: Run tests
       run: |
         cd build
-        ctest -C Debug --output-on-failure --verbose || true
+        # Set timeout to 300 seconds (5 minutes) per test to prevent hanging
+        # Coverage instrumentation can slow down tests significantly
+        ctest -C Debug --output-on-failure --verbose --timeout 300 || true
 
     - name: Generate coverage report
       run: |

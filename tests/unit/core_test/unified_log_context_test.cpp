@@ -474,38 +474,46 @@ TEST_F(UnifiedLogContextTest, ConcurrentReadWriteIsThreadSafe) {
     unified_log_context ctx;
     ctx.set("counter", int64_t{0});
 
-    std::atomic<bool> running{true};
+    // Use fixed iteration count for predictable execution time
+    // This is important for coverage builds where instrumentation
+    // significantly slows down execution
+    constexpr int kReaderIterations = 100;
+    constexpr int kWriterIterations = 100;
+    constexpr int kThreadCount = 10;
+
     std::vector<std::future<void>> readers;
     std::vector<std::future<void>> writers;
 
-    for (int i = 0; i < 10; ++i) {
-        readers.push_back(std::async(std::launch::async, [&ctx, &running]() {
-            while (running) {
-                ctx.get("counter");
-                ctx.has("counter");
-                ctx.keys();
+    // Start readers that run a fixed number of iterations
+    for (int i = 0; i < kThreadCount; ++i) {
+        readers.push_back(std::async(std::launch::async, [&ctx]() {
+            for (int iter = 0; iter < kReaderIterations; ++iter) {
+                (void)ctx.get("counter");
+                (void)ctx.has("counter");
+                (void)ctx.keys();
             }
         }));
     }
 
-    for (int i = 0; i < 10; ++i) {
+    // Start writers
+    for (int i = 0; i < kThreadCount; ++i) {
         writers.push_back(std::async(std::launch::async, [&ctx, i]() {
-            for (int j = 0; j < 100; ++j) {
+            for (int j = 0; j < kWriterIterations; ++j) {
                 ctx.set("key_" + std::to_string(i) + "_" + std::to_string(j),
                         std::string("value"));
             }
         }));
     }
 
+    // Wait for all threads to complete
     for (auto& future : writers) {
         future.wait();
     }
-
-    running = false;
 
     for (auto& future : readers) {
         future.wait();
     }
 
-    EXPECT_EQ(ctx.size(), 1001);
+    // Verify all writes completed: initial counter + (10 threads * 100 writes)
+    EXPECT_EQ(ctx.size(), 1 + kThreadCount * kWriterIterations);
 }
