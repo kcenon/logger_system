@@ -10,6 +10,8 @@ All rights reserved.
 #include <kcenon/logger/core/logger_builder.h>
 #include <kcenon/logger/core/structured_log_builder.h>
 #include <kcenon/logger/core/log_context_scope.h>
+#include <kcenon/logger/core/unified_log_context.h>
+#include <kcenon/logger/core/scoped_context_guard.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/formatters/json_formatter.h>
 #include <kcenon/logger/formatters/logfmt_formatter.h>
@@ -851,4 +853,181 @@ TEST_F(StructuredLoggingTest, TemplateFormatterGetName) {
 TEST_F(StructuredLoggingTest, LogfmtFormatterGetName) {
     logfmt_formatter formatter;
     EXPECT_EQ(formatter.get_name(), "logfmt_formatter");
+}
+
+// Test 31: Unified context integration with log_structured
+TEST_F(StructuredLoggingTest, UnifiedContextIntegrationWithLogStructured) {
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    auto writer = std::make_unique<capture_writer>();
+    auto* writer_ptr = writer.get();
+    test_logger->add_writer("capture", std::move(writer));
+
+    // Set unified context fields using the new unified API
+    test_logger->context().set("service", "api-gateway");
+    test_logger->context().set("version", "3.1.0");
+    test_logger->context().set_trace("trace-abc123", "span-def456");
+    test_logger->context().set_request("req-789");
+
+    // Verify context is set using new unified API
+    EXPECT_FALSE(test_logger->context().empty());
+    auto ctx = test_logger->context().to_fields();
+    EXPECT_GE(ctx.size(), 4);  // At least 4 fields (service, version, trace_id, span_id, request_id)
+
+    // Log structured message - context fields should be automatically included
+    test_logger->log_structured(ls::log_level::info)
+        .message("Processing user request")
+        .field("user_id", 12345)
+        .field("endpoint", "/api/users")
+        .emit();
+
+    test_logger->flush();
+
+    auto entries = writer_ptr->get_entries();
+    ASSERT_GE(entries.size(), 1);
+    EXPECT_EQ(entries[0].level, ls::log_level::info);
+    EXPECT_EQ(entries[0].message, "Processing user request");
+
+    // Verify that json_formatter includes all context fields
+    json_formatter formatter;
+    log_entry entry(ls::log_level::info, "Test");
+    entry.fields = ctx;
+    std::string json_output = formatter.format(entry);
+
+    EXPECT_NE(json_output.find("\"service\":\"api-gateway\""), std::string::npos);
+    EXPECT_NE(json_output.find("\"version\":\"3.1.0\""), std::string::npos);
+    EXPECT_NE(json_output.find("\"trace_id\":\"trace-abc123\""), std::string::npos);
+    EXPECT_NE(json_output.find("\"span_id\":\"span-def456\""), std::string::npos);
+    EXPECT_NE(json_output.find("\"request_id\":\"req-789\""), std::string::npos);
+
+    test_logger->stop();
+}
+
+// Test 32: Unified context categories integration
+TEST_F(StructuredLoggingTest, UnifiedContextCategoriesIntegration) {
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    // Set different context categories
+    test_logger->context().set("app_name", "logger_test", context_category::custom);
+    test_logger->context().set("trace_id", "trace-xyz", context_category::trace);
+    test_logger->context().set("request_id", "req-123", context_category::request);
+
+    EXPECT_FALSE(test_logger->context().empty());
+    auto ctx = test_logger->context().to_fields();
+    EXPECT_EQ(ctx.size(), 3);
+
+    EXPECT_EQ(std::get<std::string>(ctx["app_name"]), "logger_test");
+    EXPECT_EQ(std::get<std::string>(ctx["trace_id"]), "trace-xyz");
+    EXPECT_EQ(std::get<std::string>(ctx["request_id"]), "req-123");
+
+    // Clear only trace category
+    test_logger->context().clear(context_category::trace);
+    ctx = test_logger->context().to_fields();
+    EXPECT_EQ(ctx.size(), 2);
+    EXPECT_EQ(ctx.count("trace_id"), 0);
+    EXPECT_EQ(ctx.count("app_name"), 1);
+    EXPECT_EQ(ctx.count("request_id"), 1);
+
+    test_logger->stop();
+}
+
+// Test 33: Scoped context guard integration with unified context
+TEST_F(StructuredLoggingTest, ScopedContextGuardIntegrationWithUnifiedContext) {
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    // Set base context
+    test_logger->context().set("service", "auth-service");
+    EXPECT_FALSE(test_logger->context().empty());
+    EXPECT_EQ(test_logger->context().to_fields().size(), 1);
+
+    {
+        // Create scoped context guard
+        scoped_context_guard guard(*test_logger);
+        guard.set("request_id", "scoped-req-456")
+             .set("user_id", static_cast<int64_t>(789));
+
+        // Within scope, both base and scoped context should exist
+        auto ctx = test_logger->context().to_fields();
+        EXPECT_GE(ctx.size(), 3);  // service + request_id + user_id
+        EXPECT_EQ(std::get<std::string>(ctx["service"]), "auth-service");
+        EXPECT_EQ(std::get<std::string>(ctx["request_id"]), "scoped-req-456");
+        EXPECT_EQ(std::get<int64_t>(ctx["user_id"]), 789);
+    }
+
+    // After scope exits, scoped context should be restored
+    auto ctx = test_logger->context().to_fields();
+    EXPECT_EQ(ctx.size(), 1);
+    EXPECT_EQ(std::get<std::string>(ctx["service"]), "auth-service");
+    EXPECT_EQ(ctx.count("request_id"), 0);
+    EXPECT_EQ(ctx.count("user_id"), 0);
+
+    test_logger->stop();
+}
+
+// Test 34: Unified context merge functionality
+TEST_F(StructuredLoggingTest, UnifiedContextMergeFunctionality) {
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    // Create first context
+    unified_log_context ctx1;
+    ctx1.set("field1", "value1");
+    ctx1.set("field2", static_cast<int64_t>(100));
+
+    // Create second context
+    unified_log_context ctx2;
+    ctx2.set("field2", static_cast<int64_t>(200));  // Duplicate key
+    ctx2.set("field3", true);
+
+    // Merge without overwrite (default)
+    ctx1.merge(ctx2, false);
+    auto fields = ctx1.to_fields();
+    EXPECT_EQ(fields.size(), 3);
+    EXPECT_EQ(std::get<int64_t>(fields["field2"]), 100);  // Original value preserved
+
+    // Reset and merge with overwrite
+    unified_log_context ctx3;
+    ctx3.set("field1", "value1");
+    ctx3.set("field2", static_cast<int64_t>(100));
+
+    unified_log_context ctx4;
+    ctx4.set("field2", static_cast<int64_t>(200));
+    ctx4.set("field3", true);
+
+    ctx3.merge(ctx4, true);  // Overwrite duplicates
+    fields = ctx3.to_fields();
+    EXPECT_EQ(fields.size(), 3);
+    EXPECT_EQ(std::get<int64_t>(fields["field2"]), 200);  // Overwritten
+
+    test_logger->stop();
+}
+
+// Test 35: Unified context with all value types
+TEST_F(StructuredLoggingTest, UnifiedContextWithAllValueTypes) {
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    // Set all supported value types
+    test_logger->context().set("string_val", "hello");
+    test_logger->context().set("int_val", static_cast<int64_t>(42));
+    test_logger->context().set("double_val", 3.14159);
+    test_logger->context().set("bool_val", true);
+
+    auto ctx = test_logger->context().to_fields();
+    EXPECT_EQ(ctx.size(), 4);
+
+    // Verify each type
+    EXPECT_EQ(std::get<std::string>(ctx["string_val"]), "hello");
+    EXPECT_EQ(std::get<int64_t>(ctx["int_val"]), 42);
+    EXPECT_NEAR(std::get<double>(ctx["double_val"]), 3.14159, 0.00001);
+    EXPECT_EQ(std::get<bool>(ctx["bool_val"]), true);
+
+    // Verify to_fields() conversion
+    auto fields = test_logger->context().to_fields();
+    EXPECT_EQ(fields.size(), 4);
+
+    test_logger->stop();
 }
