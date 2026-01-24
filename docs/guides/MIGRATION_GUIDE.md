@@ -3,7 +3,7 @@
 # Logger System Migration Guide
 
 **Version**: 4.0.0
-**Last Updated**: 2026-01-22
+**Last Updated**: 2026-01-23
 
 ## Table of Contents
 1. [Overview](#overview)
@@ -13,6 +13,7 @@
    - [From v2.x to v3.0](#from-v2x-to-v30)
    - [From v1.x to v2.x](#from-v1x-to-v2x)
 4. [API Changes](#api-changes)
+   - [Unified Context API](#unified-context-api-new-in-v40)
 5. [Configuration Migration](#configuration-migration)
 6. [Migration from Other Libraries](#migration-from-other-libraries)
 7. [Compatibility Wrappers](#compatibility-wrappers)
@@ -32,6 +33,7 @@ This guide helps you migrate to Logger System from:
 |---------|-----------|--------|--------|
 | **v4.0** | Writers | Decorator pattern architecture | **High** for custom writers |
 | **v4.0** | Context IDs | Convenience methods removed | Medium |
+| **v4.0** | Context API | Unified `context()` method replaces 3 separate APIs | Medium |
 | **v3.0** | Namespace | `logger_module` → `kcenon::logger` | **High** |
 | **v3.0** | Interface | Implements `common::interfaces::ILogger` | **High** |
 | **v3.0** | Dependencies | thread_system now optional | Medium |
@@ -118,6 +120,194 @@ logger->set_context_id("span_id", "def456");
 logger->clear_context_id("trace_id");
 // Or clear all: logger->clear_all_context_ids();
 ```
+
+### Unified Context API (New in v4.0)
+
+Version 4.0 introduces the `unified_log_context` class that consolidates all context management into a single, type-safe API. The previous three overlapping APIs (`set_context()`, `set_context_id()`, `set_otel_context()`) are now deprecated in favor of the new `context()` method.
+
+#### Why This Change?
+
+| Issue | Impact |
+|-------|--------|
+| **Confusion**: When to use which API? | Developer friction |
+| **Duplication**: `trace_id` settable via all 3 APIs | Inconsistent state |
+| **Maintenance**: 3 storage mechanisms | Code complexity |
+| **Testing**: Must test all 3 paths | Test burden |
+
+#### Migration Table
+
+| Deprecated API | New API | Notes |
+|----------------|---------|-------|
+| `set_context(key, value)` | `context().set(key, value)` | For custom fields |
+| `remove_context(key)` | `context().remove(key)` | |
+| `clear_context()` | `context().clear()` | Clears all categories |
+| `has_context()` | `!context().empty()` | |
+| `get_context()` | `context().to_fields()` | Returns `log_fields` |
+| `set_context_id(key, value)` | `context().set(key, value, context_category::trace)` | For trace/request IDs |
+| `get_context_id(key)` | `context().get_string(key)` | |
+| `clear_context_id(key)` | `context().remove(key)` | |
+| `has_context_id(key)` | `context().has(key)` | |
+| `clear_all_context_ids()` | `context().clear(context_category::trace)` | Clears only trace category |
+| `set_otel_context(ctx)` | `context().set_otel(ctx)` | OpenTelemetry context |
+| `get_otel_context()` | Query individual fields via `context().get_string()` | |
+| `clear_otel_context()` | `context().clear(context_category::otel)` | |
+| `has_otel_context()` | `context().has("otel_trace_id")` | |
+
+#### Context Categories
+
+The unified API organizes context into categories:
+
+```cpp
+enum class context_category {
+    custom,   // User-defined fields (default)
+    trace,    // Distributed tracing (trace_id, span_id, parent_span_id)
+    request,  // Request metadata (request_id, correlation_id)
+    otel      // OpenTelemetry specific (otel_trace_id, otel_span_id, etc.)
+};
+```
+
+#### Code Examples
+
+**Setting Custom Context:**
+
+```cpp
+// OLD (deprecated)
+logger->set_context("user_id", int64_t{12345});
+logger->set_context("session_active", true);
+
+// NEW
+logger->context().set("user_id", int64_t{12345});
+logger->context().set("session_active", true);
+```
+
+**Setting Trace Context:**
+
+```cpp
+// OLD (deprecated)
+logger->set_context_id("trace_id", "0af7651916cd43dd8448eb211c80319c");
+logger->set_context_id("span_id", "b7ad6b7169203331");
+
+// NEW (recommended)
+logger->context().set_trace("0af7651916cd43dd8448eb211c80319c", "b7ad6b7169203331");
+
+// Or with parent span
+logger->context().set_trace("trace_id", "span_id", "parent_span_id");
+```
+
+**Setting Request Context:**
+
+```cpp
+// OLD (deprecated)
+logger->set_context_id("request_id", "req-123");
+logger->set_context_id("correlation_id", "corr-456");
+
+// NEW (recommended)
+logger->context().set_request("req-123", "corr-456");
+```
+
+**Setting OpenTelemetry Context:**
+
+```cpp
+// OLD (deprecated)
+otlp::otel_context otel_ctx{
+    .trace_id = "0af7651916cd43dd8448eb211c80319c",
+    .span_id = "b7ad6b7169203331",
+    .trace_flags = "01"
+};
+logger->set_otel_context(otel_ctx);
+
+// NEW (recommended)
+logger->context().set_otel(otel_ctx);
+```
+
+**Clearing Context:**
+
+```cpp
+// OLD (deprecated)
+logger->clear_context();           // Clear all custom fields
+logger->clear_all_context_ids();   // Clear all trace IDs
+logger->clear_otel_context();      // Clear OTEL context
+
+// NEW (recommended)
+logger->context().clear();                          // Clear everything
+logger->context().clear(context_category::custom);  // Clear only custom fields
+logger->context().clear(context_category::trace);   // Clear only trace context
+logger->context().clear(context_category::otel);    // Clear only OTEL context
+```
+
+**Querying Context:**
+
+```cpp
+// OLD (deprecated)
+std::string trace_id = logger->get_context_id("trace_id");
+bool has_trace = logger->has_context_id("trace_id");
+
+// NEW (recommended)
+std::string trace_id = logger->context().get_string("trace_id");
+bool has_trace = logger->context().has("trace_id");
+
+// Type-safe access
+auto user_id = logger->context().get_as<int64_t>("user_id");
+if (user_id) {
+    // Use *user_id
+}
+```
+
+**Method Chaining:**
+
+```cpp
+// The new API supports fluent chaining
+logger->context()
+    .set("user_id", int64_t{12345})
+    .set_trace("trace-abc", "span-123")
+    .set_request("req-456", "corr-789");
+
+// All subsequent logs include the context
+logger->log_structured(log_level::info)
+    .message("Processing request")
+    .emit();
+```
+
+#### Thread Safety
+
+The `unified_log_context` class is thread-safe internally:
+- Read operations use shared locks
+- Write operations use exclusive locks
+- No external synchronization required
+
+#### Migration Script
+
+```bash
+#!/bin/bash
+# migrate_context_api.sh
+
+# Migrate set_context to context().set
+find . -name "*.cpp" -o -name "*.h" | xargs sed -i '' \
+    -e 's/->set_context(\([^,]*\), /->context().set(\1, /g' \
+    -e 's/->remove_context(/->context().remove(/g' \
+    -e 's/->clear_context()/->context().clear()/g' \
+    -e 's/->has_context()/!context().empty()/g' \
+    -e 's/->get_context()/->context().to_fields()/g'
+
+# Migrate set_context_id to context().set with category
+find . -name "*.cpp" -o -name "*.h" | xargs sed -i '' \
+    -e 's/->set_context_id(\([^,]*\), \([^)]*\))/->context().set(\1, \2, context_category::trace)/g' \
+    -e 's/->get_context_id(/->context().get_string(/g' \
+    -e 's/->clear_context_id(/->context().remove(/g' \
+    -e 's/->has_context_id(/->context().has(/g' \
+    -e 's/->clear_all_context_ids()/->context().clear(context_category::trace)/g'
+
+# Migrate OTEL context
+find . -name "*.cpp" -o -name "*.h" | xargs sed -i '' \
+    -e 's/->set_otel_context(/->context().set_otel(/g' \
+    -e 's/->clear_otel_context()/->context().clear(context_category::otel)/g' \
+    -e 's/->has_otel_context()/->context().has("otel_trace_id")/g'
+```
+
+#### Deprecation Timeline
+
+- **v4.0 (Current)**: Old APIs marked with `[[deprecated]]` - compiler warnings generated
+- **v5.0 (Future)**: Deprecated APIs will be removed
 
 ---
 
@@ -1028,4 +1218,4 @@ For migration assistance, please file an issue with the `migration` label.
 
 ---
 
-*Last Updated: 2025-12-14*
+*Last Updated: 2026-01-23*
