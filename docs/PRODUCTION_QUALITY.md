@@ -144,7 +144,7 @@ UBSanitizer:
 4. **Scalability benchmarks**: Thread scaling (1, 4, 8, 16 threads)
 
 **Regression Detection**:
-- **Baseline file**: `benchmarks/BASELINE.md`
+- **Baseline file**: [`docs/performance/BASELINE.md`](performance/BASELINE.md)
 - **Thresholds**:
   - Throughput: ±5% tolerance
   - Latency: ±10% tolerance
@@ -607,7 +607,7 @@ void logger::log(log_level level, const std::string& message) {
 
 ### Performance Baselines (CI/CD)
 
-**Baseline File**: `benchmarks/BASELINE.md`
+**Baseline File**: [`docs/performance/BASELINE.md`](performance/BASELINE.md)
 
 **Regression Detection**:
 ```yaml

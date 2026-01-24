@@ -630,7 +630,7 @@ See `core/error_codes.h` for complete error code listing.
 - [README.md](README.md) - Project overview and quick start
 - [CHANGELOG.md](CHANGELOG.md) - Version history
 - [MIGRATION.md](MIGRATION.md) - Migration from integrated thread_system
-- [BASELINE.md](BASELINE.md) - Build requirements and baseline
+- [BASELINE.md](../performance/BASELINE.md) - Performance baselines
 - [common_system Integration](https://github.com/kcenon/common_system)
 - [thread_system Integration](https://github.com/kcenon/thread_system)
 - [monitoring_system Integration](https://github.com/kcenon/monitoring_system)

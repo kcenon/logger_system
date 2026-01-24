@@ -159,7 +159,7 @@ logger_system/
 ├── 📄 README.md                     # Project overview
 ├── 📄 INTEGRATION.md                # Integration guide (this doc)
 ├── 📄 STRUCTURE.md                  # Structure documentation
-├── 📄 BASELINE.md                   # Performance baselines
+├── 📄 docs/performance/BASELINE.md  # Performance baselines
 ├── 📄 CHANGELOG.md                  # Version history
 ├── 📄 LICENSE                       # BSD 3-Clause License
 └── 📄 .clang-format                 # Code formatting rules
@@ -515,6 +515,6 @@ Configure via CMake options:
 
 - [README.md](README.md) - Project overview and features
 - [INTEGRATION.md](INTEGRATION.md) - Integration guide with other systems
-- [BASELINE.md](BASELINE.md) - Performance baselines and benchmarks
+- [BASELINE.md](../performance/BASELINE.md) - Performance baselines and benchmarks
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) - Detailed architecture documentation
 - [docs/API_REFERENCE.md](docs/API_REFERENCE.md) - Complete API reference

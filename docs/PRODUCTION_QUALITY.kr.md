@@ -91,7 +91,7 @@ UBSanitizer: Total: 0 errors
 4. **확장성 벤치마크**: 스레드 스케일링 (1, 4, 8, 16 스레드)
 
 **회귀 탐지**:
-- **기준선 파일**: `benchmarks/BASELINE.md`
+- **기준선 파일**: [`docs/performance/BASELINE.md`](performance/BASELINE.md)
 - **임계값**:
   - 처리량: ±5% 허용
   - 지연시간: ±10% 허용
