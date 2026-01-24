@@ -545,6 +545,32 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/core_test/unified_log_context_test.c
     message(STATUS "Unified log context tests: Added")
 endif()
 
+# Scoped context guard tests (Issue #387)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/core_test/scoped_context_guard_test.cpp")
+    add_executable(logger_scoped_context_guard_test
+        unit/core_test/scoped_context_guard_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_scoped_context_guard_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_scoped_context_guard_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_scoped_context_guard_test
+        COMMAND logger_scoped_context_guard_test
+    )
+    set_target_properties(logger_scoped_context_guard_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Scoped context guard tests: Added")
+endif()
+
 # Cleanup
 unset(_LOGGER_TEST_TARGETS)
 unset(_test_target)
