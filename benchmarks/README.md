@@ -170,7 +170,7 @@ Measures asynchronous logging performance:
 
 ## Baseline Results
 
-**To be measured**: Run benchmarks and record results in `docs/BASELINE.md`
+**To be measured**: Run benchmarks and record results in [`docs/performance/BASELINE.md`](../docs/performance/BASELINE.md)
 
 Expected baseline ranges (to be confirmed):
 
