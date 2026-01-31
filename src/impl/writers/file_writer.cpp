@@ -22,7 +22,7 @@ file_writer::file_writer(const std::string& filename, bool append, size_t buffer
 }
 
 file_writer::~file_writer() {
-    close();
+    close_internal();
 }
 
 common::VoidResult file_writer::write_entry_impl(const log_entry& entry) {
@@ -56,11 +56,11 @@ common::VoidResult file_writer::flush_impl() {
 
 common::VoidResult file_writer::reopen() {
     std::lock_guard<std::mutex> lock(get_mutex());
-    close();
+    close_internal();
     return open();
 }
 
-void file_writer::close() {
+void file_writer::close_internal() {
     // IMPORTANT: Caller must hold the mutex before calling this method
     // This ensures thread safety with concurrent write() operations
 

@@ -571,6 +571,32 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/core_test/scoped_context_guard_test.
     message(STATUS "Scoped context guard tests: Added")
 endif()
 
+# Log entry structure tests (Issue #392)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/interfaces_test/log_entry_test.cpp")
+    add_executable(logger_log_entry_test
+        unit/interfaces_test/log_entry_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_log_entry_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_log_entry_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_log_entry_test
+        COMMAND logger_log_entry_test
+    )
+    set_target_properties(logger_log_entry_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Log entry structure tests: Added")
+endif()
+
 # Cleanup
 unset(_LOGGER_TEST_TARGETS)
 unset(_test_target)

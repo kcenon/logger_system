@@ -52,7 +52,7 @@ public:
     /**
      * @brief Check if file is open
      */
-    bool is_open() const { return file_stream_.is_open(); }
+    bool is_open() const override { return file_stream_.is_open(); }
 
     /**
      * @brief Get current file size
@@ -81,10 +81,10 @@ protected:
     common::VoidResult flush_impl() override;
 
     /**
-     * @brief Close the current file
+     * @brief Close the current file (internal)
      * @note Caller must hold the mutex
      */
-    void close();
+    void close_internal();
 
     /**
      * @brief Open the file
