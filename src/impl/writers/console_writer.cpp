@@ -31,9 +31,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/formatters/timestamp_formatter.h>
 #include <kcenon/logger/core/small_string.h>
-#include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/utils/error_handling_utils.h>
 #include <iostream>
 #include <iomanip>
@@ -53,10 +53,15 @@ namespace kcenon::logger {
 console_writer::console_writer(bool use_stderr,
                                bool auto_detect_color,
                                std::unique_ptr<log_formatter_interface> formatter)
-    : base_writer(std::move(formatter))
-    , use_stderr_(use_stderr) {
+    : use_stderr_(use_stderr)
+    , formatter_(formatter ? std::move(formatter) : std::make_unique<timestamp_formatter>()) {
     if (auto_detect_color) {
         set_use_color(is_color_supported());
+    } else {
+        // Apply color setting to formatter
+        auto opts = formatter_->get_options();
+        opts.use_colors = use_color_;
+        formatter_->set_options(opts);
     }
 }
 
@@ -133,8 +138,25 @@ void console_writer::set_use_stderr(bool use_stderr) {
     use_stderr_ = use_stderr;
 }
 
+void console_writer::set_use_color(bool use_color) {
+    use_color_ = use_color;
+    if (formatter_) {
+        auto opts = formatter_->get_options();
+        opts.use_colors = use_color_;
+        formatter_->set_options(opts);
+    }
+}
+
+bool console_writer::use_color() const {
+    return use_color_;
+}
+
 std::string console_writer::format_entry(const log_entry& entry) const {
-    return format_log_entry(entry);
+    if (!formatter_) {
+        // Fallback if formatter is somehow null
+        return entry.message.to_string();
+    }
+    return formatter_->format(entry);
 }
 
 bool console_writer::is_color_supported() const {

@@ -28,7 +28,7 @@ namespace kcenon::logger {
 std::atomic<critical_writer*> critical_writer::instance_{nullptr};
 
 critical_writer::critical_writer(
-    std::unique_ptr<base_writer> wrapped_writer,
+    log_writer_ptr wrapped_writer,
     critical_writer_config config
 )
     : config_(std::move(config))
@@ -184,7 +184,9 @@ std::string critical_writer::get_name() const {
 }
 
 void critical_writer::set_use_color(bool use_color) {
-    wrapped_writer_->set_use_color(use_color);
+    // Color setting is now handled by formatter, not writer interface
+    // This method is kept for backward compatibility but is deprecated
+    (void)use_color;  // Suppress unused parameter warning
 }
 
 void critical_writer::set_force_flush_on_critical(bool enable) {
@@ -407,7 +409,7 @@ void critical_writer::signal_handler(int signal) {
 // ============================================================================
 
 hybrid_writer::hybrid_writer(
-    std::unique_ptr<base_writer> wrapped_writer,
+    log_writer_ptr wrapped_writer,
     critical_writer_config critical_config,
     std::size_t async_queue_size
 )
@@ -440,7 +442,9 @@ std::string hybrid_writer::get_name() const {
 }
 
 void hybrid_writer::set_use_color(bool use_color) {
-    critical_writer_->set_use_color(use_color);
+    // Color setting is now handled by formatter, not writer interface
+    // This method is kept for backward compatibility but is deprecated
+    (void)use_color;  // Suppress unused parameter warning
 }
 
 } // namespace kcenon::logger

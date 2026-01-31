@@ -48,6 +48,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../backends/integration_backend.h"
 #include <kcenon/logger/interfaces/logger_types.h>
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/logger/interfaces/log_writer_interface.h>
 #include <kcenon/logger/security/signal_manager.h>
 #include <kcenon/logger/otlp/otel_context.h>
 #include <kcenon/logger/sampling/sampling_config.h>
@@ -334,7 +335,7 @@ public:
      *
      * @since 1.0.0
      */
-    common::VoidResult add_writer(std::unique_ptr<base_writer> writer);
+    common::VoidResult add_writer(log_writer_ptr writer);
 
     /**
      * @brief Remove all writers
@@ -451,7 +452,7 @@ public:
      *
      * @since 1.0.0
      */
-    common::VoidResult add_writer(const std::string& name, std::unique_ptr<base_writer> writer);
+    common::VoidResult add_writer(const std::string& name, log_writer_ptr writer);
     
     /**
      * @brief Remove a writer by name
@@ -465,7 +466,7 @@ public:
      * @param name Name of the writer
      * @return Pointer to writer or nullptr if not found
      */
-    base_writer* get_writer(const std::string& name);
+    log_writer_interface* get_writer(const std::string& name);
     
     /**
      * @brief Set global filter for log entries
