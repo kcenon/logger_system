@@ -401,6 +401,64 @@ auto logger = kcenon::logger::logger_builder()
 
 [📚 Complete Configuration Guide →](docs/guides/CONFIGURATION.md)
 
+### Writer Builder (v4.0.0)
+
+The `writer_builder` provides a fluent API for composing log writers with decorators:
+
+```cpp
+#include <kcenon/logger/builders/writer_builder.h>
+
+// Simple file writer
+auto writer = kcenon::logger::writer_builder()
+    .file("app.log")
+    .build();
+
+// Production setup with buffering and async processing
+auto writer = kcenon::logger::writer_builder()
+    .file("app.log")
+    .buffered(500)              // Buffer up to 500 entries
+    .async(10000)               // Async queue size: 10000
+    .build();
+
+// Secure logging with encryption
+auto key_result = kcenon::logger::security::secure_key_storage::generate_key(32);
+auto writer = kcenon::logger::writer_builder()
+    .file("secure.log.enc")
+    .encrypted(kcenon::logger::encryption_config{
+        .algorithm = kcenon::logger::encryption_algorithm::aes_256_gcm,
+        .key = std::move(key_result.value())
+    })
+    .buffered(100)
+    .async()
+    .build();
+
+// Use with logger
+auto logger = kcenon::logger::logger_builder()
+    .add_writer("main", std::move(writer))
+    .build()
+    .value();
+```
+
+**Benefits**:
+- **Readable**: Self-documenting method chaining
+- **Type-safe**: Compile-time validation
+- **Flexible**: Easy to add/remove decorators
+- **Composable**: Supports unlimited decorator stacking
+
+**Available Core Writers**:
+- `file()` - File output
+- `console()` - Console output (stdout/stderr)
+- `rotating_file()` - Size or time-based rotation
+- `network()` - TCP/UDP network logging
+- `otlp()` - OpenTelemetry Protocol export
+
+**Available Decorators**:
+- `buffered()` - Entry buffering with auto-flush
+- `async()` - Asynchronous background processing
+- `encrypted()` - AES-256-GCM encryption
+- `filtered()` - Custom filtering logic
+- `thread_safe()` - Mutex-based synchronization
+
 ---
 
 ## Build Configuration

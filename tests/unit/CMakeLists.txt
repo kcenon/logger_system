@@ -17,7 +17,11 @@ if(UNIX AND NOT WIN32)
   # Writers tests
   # Validates console writer, file writer, and base writer functionality
   add_subdirectory(writers_test)
-  
+
+  # Builder tests
+  # Validates writer_builder fluent API for decorator composition
+  add_subdirectory(builders)
+
   # Log collectors tests
   # Validates async log collection, buffering, and thread safety
   add_subdirectory(collectors_test)

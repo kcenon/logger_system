@@ -600,3 +600,8 @@ endif()
 # Cleanup
 unset(_LOGGER_TEST_TARGETS)
 unset(_test_target)
+
+# Add unit tests subdirectory
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/CMakeLists.txt")
+    add_subdirectory(unit)
+endif()
