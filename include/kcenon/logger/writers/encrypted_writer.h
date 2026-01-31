@@ -35,12 +35,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file encrypted_writer.h
  * @brief Encryption wrapper for log writers providing AES-256-GCM encryption
- * @author 🍀☀🌕🌥 🌊
+ * @author kcenon
  * @since 1.3.0
+ * @since 4.0.0 Refactored to use decorator_writer_base
  *
  * @details This file provides an encrypted_writer class that wraps any existing
- * writer and encrypts log data before writing. Essential for compliance with
- * GDPR, HIPAA, PCI DSS, and SOC 2 regulations.
+ * log_writer_interface and encrypts log data before writing. Essential for compliance
+ * with GDPR, HIPAA, PCI DSS, and SOC 2 regulations.
  *
  * Security features:
  * - AES-256-GCM authenticated encryption
@@ -58,19 +59,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *         .key = std::move(key_result.value())
  *     };
  *
- *     auto logger = logger_builder()
- *         .add_writer("encrypted_file",
- *             std::make_unique<encrypted_writer>(
- *                 std::make_unique<file_writer>("secure.log.enc"),
- *                 std::move(config)
- *             ))
- *         .build();
+ *     auto writer = std::make_unique<encrypted_writer>(
+ *         std::make_unique<file_writer>("secure.log.enc"),
+ *         std::move(config)
+ *     );
  * }
  * @endcode
  */
 
-#include "base_writer.h"
-#include "../interfaces/writer_category.h"
+#include "decorator_writer_base.h"
 #include "../security/secure_key_storage.h"
 #include "../core/error_codes.h"
 
@@ -199,49 +196,43 @@ struct encrypted_log_header {
  * @class encrypted_writer
  * @brief Decorator that encrypts log data before writing
  *
- * @details Wraps any base_writer and transparently encrypts all log data
- * using AES-256-GCM before passing to the inner writer. Provides:
+ * @details Wraps any log_writer_interface and transparently encrypts all log data
+ * using AES-256-GCM before passing to the wrapped writer. Provides:
  * - Per-entry IV rotation for semantic security
  * - Authenticated encryption to prevent tampering
  * - Optional key rotation
  * - Secure key cleanup on destruction
  *
- * Thread safety: Thread-safe when inner_writer is thread-safe.
+ * Thread safety: Thread-safe when wrapped writer is thread-safe.
  *
  * Category: Decorator (wraps another writer to add encryption)
  *
  * @since 1.3.0
  * @since 1.4.0 Added decorator_writer_tag for category classification
+ * @since 4.0.0 Refactored to use decorator_writer_base
  */
-class encrypted_writer : public base_writer, public decorator_writer_tag {
+class encrypted_writer : public decorator_writer_base {
 public:
     /**
-     * @brief Construct encrypted writer with output file path
-     * @param output_path Path to encrypted log file (binary output)
+     * @brief Construct encrypted writer with wrapped writer
+     * @param wrapped Writer to wrap (encrypts before delegating)
      * @param config Encryption configuration (moved)
-     * @throws std::invalid_argument if key is invalid
-     * @throws std::runtime_error if file cannot be opened
+     * @throws std::invalid_argument if wrapped is null or key is invalid
+     * @throws std::runtime_error if initialization fails
      *
-     * @note This constructor writes encrypted binary data directly to file.
-     * This is the recommended constructor for encrypted logging.
-     */
-    encrypted_writer(
-        const std::filesystem::path& output_path,
-        encryption_config config
-    );
-
-    /**
-     * @brief Construct encrypted writer with inner writer and config
-     * @param inner_writer Writer to wrap (encrypts before passing data)
-     * @param config Encryption configuration (moved)
-     * @throws std::invalid_argument if inner_writer is null or key is invalid
+     * @note The wrapped writer receives log entries with encrypted message field.
+     * For binary file output, wrap a file_writer:
+     * @code
+     * auto writer = std::make_unique<encrypted_writer>(
+     *     std::make_unique<file_writer>("secure.log.enc"),
+     *     std::move(config)
+     * );
+     * @endcode
      *
-     * @warning When using this constructor, the inner_writer receives
-     * formatted log entries with encrypted binary data in the message field.
-     * For proper binary output, use the file path constructor instead.
+     * @since 4.0.0
      */
-    encrypted_writer(
-        std::unique_ptr<base_writer> inner_writer,
+    explicit encrypted_writer(
+        std::unique_ptr<log_writer_interface> wrapped,
         encryption_config config
     );
 
@@ -263,24 +254,6 @@ public:
      * @since 3.5.0 Changed to use log_entry directly
      */
     common::VoidResult write(const log_entry& entry) override;
-
-    /**
-     * @brief Flush underlying writer
-     * @return common::VoidResult Success or error code
-     */
-    common::VoidResult flush() override;
-
-    /**
-     * @brief Get writer name
-     * @return "encrypted" + inner writer name
-     */
-    std::string get_name() const override;
-
-    /**
-     * @brief Check if writer is healthy
-     * @return true if encryption context and inner writer are operational
-     */
-    bool is_healthy() const override;
 
     /**
      * @brief Rotate encryption key
@@ -365,9 +338,6 @@ private:
     void cleanup_cipher_context();
 #endif
 
-    std::unique_ptr<base_writer> inner_writer_;
-    std::unique_ptr<std::ofstream> output_file_;
-    std::filesystem::path output_path_;
     encryption_config config_;
     mutable std::mutex write_mutex_;
 

@@ -96,7 +96,7 @@ TEST_F(EncryptedWriterTest, ThrowsOnInvalidKeySize) {
 TEST_F(EncryptedWriterTest, WriteAndDecryptSingleEntry) {
     auto log_path = test_dir_ / "single.log.enc";
 
-    // Create writer using direct file mode
+    // Create writer using decorator pattern (wrapping file_writer)
     security::secure_key key_copy(test_key_->data());
     encryption_config config(
         encryption_algorithm::aes_256_gcm,
@@ -104,7 +104,10 @@ TEST_F(EncryptedWriterTest, WriteAndDecryptSingleEntry) {
     );
 
     {
-        encrypted_writer writer(log_path, std::move(config));
+        encrypted_writer writer(
+            std::make_unique<file_writer>(log_path.string()),
+            std::move(config)
+        );
 
         log_entry entry(kcenon::common::interfaces::log_level::info,
                         "Test encrypted message",
@@ -159,7 +162,10 @@ TEST_F(EncryptedWriterTest, WriteMultipleEntries) {
     );
 
     {
-        encrypted_writer writer(log_path, std::move(config));
+        encrypted_writer writer(
+            std::make_unique<file_writer>(log_path.string()),
+            std::move(config)
+        );
 
         for (int i = 0; i < num_entries; ++i) {
             log_entry entry(kcenon::common::interfaces::log_level::debug,
@@ -205,7 +211,10 @@ TEST_F(EncryptedWriterTest, KeyRotation) {
         std::move(key_copy)
     );
 
-    encrypted_writer writer(log_path, std::move(config));
+    encrypted_writer writer(
+        std::make_unique<file_writer>(log_path.string()),
+        std::move(config)
+    );
 
     // Write with first key
     {
@@ -250,7 +259,10 @@ TEST_F(EncryptedWriterTest, InvalidKeyRotation) {
         std::move(key_copy)
     );
 
-    encrypted_writer writer(log_path, std::move(config));
+    encrypted_writer writer(
+        std::make_unique<file_writer>(log_path.string()),
+        std::move(config)
+    );
 
     // Try to rotate with invalid key size
     security::secure_key invalid_key(16);  // Should be 32
@@ -270,7 +282,10 @@ TEST_F(EncryptedWriterTest, DecryptWithWrongKey) {
     );
 
     {
-        encrypted_writer writer(log_path, std::move(config));
+        encrypted_writer writer(
+            std::make_unique<file_writer>(log_path.string()),
+            std::move(config)
+        );
 
         log_entry entry(kcenon::common::interfaces::log_level::info,
                        "Secret message",
@@ -307,8 +322,11 @@ TEST_F(EncryptedWriterTest, ThreadSafety) {
         std::move(key_copy)
     );
 
-    // Note: encrypted_writer is non-movable, so we use a raw pointer managed by unique_ptr
-    auto writer = std::make_unique<encrypted_writer>(log_path, std::move(config));
+    // Create writer with decorator pattern
+    auto writer = std::make_unique<encrypted_writer>(
+        std::make_unique<file_writer>(log_path.string()),
+        std::move(config)
+    );
     auto* writer_ptr = writer.get();
 
     constexpr int num_threads = 4;
