@@ -24,10 +24,30 @@ endif()
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE 
-    logger
-    GTest::gtest
-    GTest::gtest_main
+# Resolve GoogleTest targets (supports FetchContent and system installs)
+set(_LOGGER_GTEST_TARGET "")
+set(_LOGGER_GTEST_MAIN_TARGET "")
+
+foreach(_candidate IN ITEMS GTest::gtest GTest::GTest gtest)
+    if(NOT _LOGGER_GTEST_TARGET AND TARGET ${_candidate})
+        set(_LOGGER_GTEST_TARGET ${_candidate})
+    endif()
+endforeach()
+
+foreach(_candidate IN ITEMS GTest::gtest_main GTest::Main gtest_main)
+    if(NOT _LOGGER_GTEST_MAIN_TARGET AND TARGET ${_candidate})
+        set(_LOGGER_GTEST_MAIN_TARGET ${_candidate})
+    endif()
+endforeach()
+
+if(NOT _LOGGER_GTEST_TARGET OR NOT _LOGGER_GTEST_MAIN_TARGET)
+    message(FATAL_ERROR "GoogleTest targets not available. Ensure logger_find_test_dependencies() ran before configuring logger_unit.")
+endif()
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    LoggerSystem
+    ${_LOGGER_GTEST_TARGET}
+    ${_LOGGER_GTEST_MAIN_TARGET}
     Threads::Threads
 )
 
