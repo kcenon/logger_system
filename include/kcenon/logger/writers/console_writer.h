@@ -32,17 +32,23 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
-#include "thread_safe_writer.h"
+#include "base_writer.h"
 #include "../interfaces/writer_category.h"
+#include <atomic>
+#include <mutex>
 
 namespace kcenon::logger {
 
 /**
- * @brief Console writer that outputs logs to stdout/stderr
+ * @class console_writer
+ * @brief Core console writer for logging to stdout/stderr
+ *
+ * Pure console I/O implementation with direct mutex management.
+ * Designed to serve as the base layer in Decorator pattern compositions.
  *
  * Features:
  * - Color support for different log levels (if terminal supports it)
- * - Thread-safe console output (via thread_safe_writer base class)
+ * - Thread-safe console output with internal mutex synchronization
  * - Error levels go to stderr, others to stdout
  *
  * Category: Synchronous (blocking I/O to console)
@@ -50,25 +56,53 @@ namespace kcenon::logger {
  * @since 1.0.0
  * @since 1.3.0 Refactored to use thread_safe_writer base class
  * @since 1.4.0 Added sync_writer_tag for category classification
+ * @since 4.0.0 Refactored for Decorator pattern with simplified inheritance
  */
-class console_writer : public thread_safe_writer, public sync_writer_tag {
+class console_writer : public base_writer, public sync_writer_tag {
 public:
     /**
      * @brief Constructor
      * @param use_stderr If true, all output goes to stderr (default: false)
      * @param auto_detect_color Auto-detect terminal color support (default: true)
+     * @param formatter Custom log formatter (default: timestamp formatter)
      */
-    explicit console_writer(bool use_stderr = false, bool auto_detect_color = true);
-    
+    explicit console_writer(bool use_stderr = false,
+                           bool auto_detect_color = true,
+                           std::unique_ptr<log_formatter_interface> formatter = nullptr);
+
     /**
      * @brief Destructor
      */
     ~console_writer() override;
-    
+
+    // Non-copyable and non-movable
+    console_writer(const console_writer&) = delete;
+    console_writer& operator=(const console_writer&) = delete;
+    console_writer(console_writer&&) = delete;
+    console_writer& operator=(console_writer&&) = delete;
+
+    /**
+     * @brief Write a log entry to console
+     * @param entry The log entry to write
+     * @return common::VoidResult Success or error code
+     */
+    common::VoidResult write(const log_entry& entry) override;
+
+    /**
+     * @brief Flush console streams
+     * @return common::VoidResult Success or error code
+     */
+    common::VoidResult flush() override;
+
     /**
      * @brief Get writer name
      */
     std::string get_name() const override { return "console"; }
+
+    /**
+     * @brief Check if writer is healthy
+     */
+    bool is_healthy() const override;
 
     /**
      * @brief Set whether to use stderr for all output
@@ -78,28 +112,26 @@ public:
 
 protected:
     /**
-     * @brief Implementation of structured write operation
-     * @param entry The log entry to write (includes structured fields)
-     * @note Called by thread_safe_writer::write(const log_entry&) while holding the mutex
-     * @since 3.4.0
-     * @since 3.5.0 This is now the only write implementation (legacy API removed)
+     * @brief Format a log entry using the current formatter
      */
-    common::VoidResult write_entry_impl(const log_entry& entry) override;
+    std::string format_entry(const log_entry& entry) const;
 
     /**
-     * @brief Implementation of flush operation
-     * @note Called by thread_safe_writer::flush() while holding the mutex
+     * @brief Access the writer mutex for extended operations
+     * @return Reference to the internal mutex
      */
-    common::VoidResult flush_impl() override;
+    std::mutex& get_mutex() const { return mutex_; }
 
 private:
-    bool use_stderr_;
-
     /**
      * @brief Check if terminal supports color
      * @return true if color is supported
      */
     bool is_color_supported() const;
+
+private:
+    bool use_stderr_;
+    mutable std::mutex mutex_;
 };
 
 } // namespace kcenon::logger

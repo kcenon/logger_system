@@ -50,8 +50,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace kcenon::logger {
 
-console_writer::console_writer(bool use_stderr, bool auto_detect_color)
-    : use_stderr_(use_stderr) {
+console_writer::console_writer(bool use_stderr,
+                               bool auto_detect_color,
+                               std::unique_ptr<log_formatter_interface> formatter)
+    : base_writer(std::move(formatter))
+    , use_stderr_(use_stderr) {
     if (auto_detect_color) {
         set_use_color(is_color_supported());
     }
@@ -61,8 +64,8 @@ console_writer::~console_writer() {
     flush();
 }
 
-common::VoidResult console_writer::write_entry_impl(const log_entry& entry) {
-    // Note: Mutex is already held by thread_safe_writer::write()
+common::VoidResult console_writer::write(const log_entry& entry) {
+    std::lock_guard<std::mutex> lock(mutex_);
     return utils::try_write_operation([&]() -> common::VoidResult {
         // Convert logger_system::log_level to common::interfaces::log_level for comparison
         auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
@@ -94,8 +97,7 @@ common::VoidResult console_writer::write_entry_impl(const log_entry& entry) {
             }
         }
 
-        // Use format_log_entry which preserves all structured fields
-        stream << format_log_entry(entry);
+        stream << format_entry(entry);
 
         if (use_color()) {
             stream << "\033[0m"; // Reset color
@@ -108,8 +110,8 @@ common::VoidResult console_writer::write_entry_impl(const log_entry& entry) {
     }, logger_error_code::processing_failed);
 }
 
-common::VoidResult console_writer::flush_impl() {
-    // Note: Mutex is already held by thread_safe_writer::flush()
+common::VoidResult console_writer::flush() {
+    std::lock_guard<std::mutex> lock(mutex_);
     return utils::try_write_operation([&]() -> common::VoidResult {
         std::cout.flush();
         std::cerr.flush();
@@ -122,8 +124,17 @@ common::VoidResult console_writer::flush_impl() {
     }, logger_error_code::flush_timeout);
 }
 
+bool console_writer::is_healthy() const {
+    return std::cout.good() && std::cerr.good();
+}
+
 void console_writer::set_use_stderr(bool use_stderr) {
+    std::lock_guard<std::mutex> lock(mutex_);
     use_stderr_ = use_stderr;
+}
+
+std::string console_writer::format_entry(const log_entry& entry) const {
+    return format_log_entry(entry);
 }
 
 bool console_writer::is_color_supported() const {
