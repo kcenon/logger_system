@@ -40,7 +40,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <sstream>
 #include <thread>
 
-using namespace logger_module;
+using namespace kcenon::logger;
 namespace ci = kcenon::common::interfaces;
 using log_level = ci::log_level;
 
