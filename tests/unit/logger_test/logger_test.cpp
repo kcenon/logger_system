@@ -31,8 +31,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include <gtest/gtest.h>
-#include <logger/logger.h>
-#include <logger/writers/console_writer.h>
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/common/interfaces/logger_interface.h>
 
 #include <chrono>
