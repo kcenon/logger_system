@@ -64,12 +64,28 @@ template <typename Container>
 class queued_writer_base : public base_writer, public async_writer_tag, public decorator_writer_tag {
 public:
     /**
-     * @brief Constructor
+     * @brief Constructor accepting base_writer (legacy compatibility)
      * @param wrapped_writer The underlying writer to delegate writes to
      * @param max_queue_size Maximum number of entries in the queue
      * @throw std::invalid_argument if wrapped_writer is null
      */
     explicit queued_writer_base(std::unique_ptr<base_writer> wrapped_writer,
+                                std::size_t max_queue_size)
+        : wrapped_writer_(static_cast<std::unique_ptr<log_writer_interface>>(std::move(wrapped_writer)))
+        , max_queue_size_(max_queue_size)
+        , shutting_down_(false) {
+        if (!wrapped_writer_) {
+            throw std::invalid_argument("Wrapped writer cannot be null");
+        }
+    }
+
+    /**
+     * @brief Constructor accepting log_writer_interface (Decorator pattern)
+     * @param wrapped_writer The underlying writer to delegate writes to
+     * @param max_queue_size Maximum number of entries in the queue
+     * @throw std::invalid_argument if wrapped_writer is null
+     */
+    explicit queued_writer_base(std::unique_ptr<log_writer_interface> wrapped_writer,
                                 std::size_t max_queue_size)
         : wrapped_writer_(std::move(wrapped_writer))
         , max_queue_size_(max_queue_size)
@@ -97,7 +113,10 @@ public:
      * @param use_color Enable/disable color output
      */
     void set_use_color(bool use_color) override {
-        wrapped_writer_->set_use_color(use_color);
+        // Only call if wrapped_writer is a base_writer
+        if (auto* base = dynamic_cast<base_writer*>(wrapped_writer_.get())) {
+            base->set_use_color(use_color);
+        }
     }
 
     /**
@@ -183,7 +202,7 @@ protected:
         container.push_back(copy_log_entry(entry));
     }
 
-    std::unique_ptr<base_writer> wrapped_writer_;
+    std::unique_ptr<log_writer_interface> wrapped_writer_;
     std::size_t max_queue_size_;
 
     mutable std::mutex queue_mutex_;

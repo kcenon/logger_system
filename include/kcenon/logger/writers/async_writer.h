@@ -42,12 +42,26 @@ class async_writer : public queued_writer_base<std::queue<log_entry>> {
 
 public:
     /**
-     * @brief Constructor
+     * @brief Constructor accepting base_writer (legacy compatibility)
      * @param wrapped_writer The writer to wrap with async functionality
      * @param queue_size Maximum queue size for pending messages
      * @param flush_timeout Maximum time to wait for flush operation (in seconds)
      */
     explicit async_writer(std::unique_ptr<base_writer> wrapped_writer,
+                         std::size_t queue_size = 10000,
+                         std::chrono::seconds flush_timeout = std::chrono::seconds(5))
+        : base_type(static_cast<std::unique_ptr<log_writer_interface>>(std::move(wrapped_writer)), queue_size)
+        , flush_timeout_(flush_timeout)
+        , running_(false) {
+    }
+
+    /**
+     * @brief Constructor accepting log_writer_interface (Decorator pattern)
+     * @param wrapped_writer The writer to wrap with async functionality
+     * @param queue_size Maximum queue size for pending messages
+     * @param flush_timeout Maximum time to wait for flush operation (in seconds)
+     */
+    explicit async_writer(std::unique_ptr<log_writer_interface> wrapped_writer,
                          std::size_t queue_size = 10000,
                          std::chrono::seconds flush_timeout = std::chrono::seconds(5))
         : base_type(std::move(wrapped_writer), queue_size)
