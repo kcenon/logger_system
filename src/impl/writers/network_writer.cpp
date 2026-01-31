@@ -350,7 +350,7 @@ bool network_writer::connect() {
     struct hostent* server = gethostbyname(host_.c_str());
     if (!server) {
         std::cerr << "Failed to resolve host: " << host_ << std::endl;
-        close(socket_fd_);
+        ::close(socket_fd_);
         socket_fd_ = -1;
         return false;
     }
@@ -366,7 +366,7 @@ bool network_writer::connect() {
         if (::connect(socket_fd_, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
             std::cerr << "Failed to connect to " << host_ << ":" << port_
                      << " - " << strerror(errno) << std::endl;
-            close(socket_fd_);
+            ::close(socket_fd_);
             socket_fd_ = -1;
 
             std::lock_guard<std::mutex> lock(stats_mutex_);
@@ -378,7 +378,7 @@ bool network_writer::connect() {
         // For UDP, just save the server address
         if (::connect(socket_fd_, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
             std::cerr << "Failed to set UDP destination: " << strerror(errno) << std::endl;
-            close(socket_fd_);
+            ::close(socket_fd_);
             socket_fd_ = -1;
             return false;
         }
@@ -397,7 +397,7 @@ bool network_writer::connect() {
 
 void network_writer::disconnect() {
     if (socket_fd_ >= 0) {
-        close(socket_fd_);
+        ::close(socket_fd_);
         socket_fd_ = -1;
     }
     connected_ = false;
