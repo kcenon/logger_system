@@ -105,7 +105,7 @@ private:
 #endif
 };
 
-batch_processor::batch_processor(std::unique_ptr<base_writer> writer, const config& cfg)
+batch_processor::batch_processor(log_writer_ptr writer, const config& cfg)
     : config_(cfg)
     , writer_(std::move(writer))
     , queue_(std::make_unique<lockfree_spsc_queue<batch_entry, queue_size>>())
@@ -389,7 +389,7 @@ void batch_processor::update_stats(size_t batch_size,
 }
 
 std::unique_ptr<batch_processor> make_batch_processor(
-    std::unique_ptr<base_writer> writer,
+    log_writer_ptr writer,
     const batch_processor::config& cfg) {
     return std::make_unique<batch_processor>(std::move(writer), cfg);
 }

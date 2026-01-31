@@ -36,9 +36,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace kcenon::logger {
 
-batch_writer::batch_writer(std::unique_ptr<base_writer> underlying_writer,
+batch_writer::batch_writer(log_writer_ptr underlying_writer,
                           const config& cfg)
-    : base_type(std::move(underlying_writer), cfg.max_batch_size)
+    : base_type(std::move(underlying_writer), cfg.max_batch_size, "batch")
     , config_(cfg)
     , last_flush_time_(std::chrono::steady_clock::now()) {
 
@@ -110,7 +110,7 @@ common::VoidResult batch_writer::flush_batch_unsafe() {
     common::VoidResult last_result = common::ok();
 
     for (const auto& entry : queue_) {
-        auto result = wrapped_writer_->write(entry);
+        auto result = wrapped().write(entry);
 
         if (result.is_err()) {
             last_result = result;
@@ -119,7 +119,7 @@ common::VoidResult batch_writer::flush_batch_unsafe() {
     }
 
     // Flush the underlying writer
-    auto flush_result = wrapped_writer_->flush();
+    auto flush_result = wrapped().flush();
     if (flush_result.is_err() && last_result.is_ok()) {
         last_result = flush_result;
     }
@@ -136,11 +136,11 @@ common::VoidResult batch_writer::flush_batch_unsafe() {
 }
 
 std::string batch_writer::get_name() const {
-    return "batch_writer[" + wrapped_writer_->get_name() + "]";
+    return "batch_writer[" + wrapped().get_name() + "]";
 }
 
 bool batch_writer::is_healthy() const {
-    return !shutting_down_ && wrapped_writer_->is_healthy();
+    return !shutting_down_ && wrapped().is_healthy();
 }
 
 size_t batch_writer::get_current_batch_size() const {
@@ -171,7 +171,7 @@ bool batch_writer::should_flush_by_time() const {
 
 // Factory function implementation
 std::unique_ptr<batch_writer> make_batch_writer(
-    std::unique_ptr<base_writer> writer,
+    log_writer_ptr writer,
     size_t batch_size,
     std::chrono::milliseconds flush_interval) {
     

@@ -44,7 +44,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // Note: thread_system_backend was removed in Issue #225
 // thread_system is now optional and standalone_backend is the default
 
-#include <kcenon/logger/writers/base_writer.h>
+#include <kcenon/logger/interfaces/log_writer_interface.h>
 #include <kcenon/logger/interfaces/log_filter_interface.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/common/patterns/result.h>
@@ -91,8 +91,8 @@ public:
     bool running_;
     bool metrics_enabled_;
     std::atomic<log_level> min_level_;
-    std::vector<std::shared_ptr<base_writer>> writers_;
-    std::unordered_map<std::string, std::shared_ptr<base_writer>> named_writers_;  // Named writer storage
+    std::vector<std::shared_ptr<log_writer_interface>> writers_;
+    std::unordered_map<std::string, std::shared_ptr<log_writer_interface>> named_writers_;  // Named writer storage
     std::shared_mutex writers_mutex_;  // Protects writers_ and named_writers_ from concurrent modification
     std::unique_ptr<backends::integration_backend> backend_;  // Integration backend
     std::unique_ptr<log_collector> collector_;  // Async log collector for async mode
@@ -199,7 +199,7 @@ public:
             // Exclusive mode: only send to matched routes
             // If no routes match, message is dropped (exclusive mode behavior)
             if (!routed_writer_names.empty()) {
-                std::unordered_map<std::string, std::shared_ptr<base_writer>> local_named_writers;
+                std::unordered_map<std::string, std::shared_ptr<log_writer_interface>> local_named_writers;
                 {
                     std::shared_lock<std::shared_mutex> lock(writers_mutex_);
                     local_named_writers = named_writers_;
@@ -218,7 +218,7 @@ public:
             // No matched routes in exclusive mode = drop message
         } else {
             // Non-exclusive mode: send to all writers
-            std::vector<std::shared_ptr<base_writer>> local_writers;
+            std::vector<std::shared_ptr<log_writer_interface>> local_writers;
             {
                 std::shared_lock<std::shared_mutex> lock(writers_mutex_);
                 local_writers = writers_;
@@ -290,9 +290,9 @@ bool logger::is_running() const {
     return pimpl_ && pimpl_->running_;
 }
 
-common::VoidResult logger::add_writer(std::unique_ptr<base_writer> writer) {
+common::VoidResult logger::add_writer(log_writer_ptr writer) {
     if (pimpl_ && writer) {
-        std::shared_ptr<base_writer> shared_writer(std::move(writer));
+        std::shared_ptr<log_writer_interface> shared_writer(std::move(writer));
 
         {
             std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
@@ -307,7 +307,7 @@ common::VoidResult logger::add_writer(std::unique_ptr<base_writer> writer) {
     return common::ok();
 }
 
-common::VoidResult logger::add_writer(const std::string& name, std::unique_ptr<base_writer> writer) {
+common::VoidResult logger::add_writer(const std::string& name, log_writer_ptr writer) {
     if (!pimpl_) {
         return common::make_error<std::monostate>(
             static_cast<int>(logger_error_code::invalid_configuration),
@@ -321,7 +321,7 @@ common::VoidResult logger::add_writer(const std::string& name, std::unique_ptr<b
             "logger_system");
     }
 
-    std::shared_ptr<base_writer> shared_writer(std::move(writer));
+    std::shared_ptr<log_writer_interface> shared_writer(std::move(writer));
 
     {
         std::lock_guard<std::shared_mutex> lock(pimpl_->writers_mutex_);
@@ -384,7 +384,7 @@ bool logger::remove_writer(const std::string& name) {
     return true;
 }
 
-base_writer* logger::get_writer(const std::string& name) {
+log_writer_interface* logger::get_writer(const std::string& name) {
     if (!pimpl_ || name.empty()) {
         return nullptr;
     }
@@ -558,7 +558,7 @@ common::VoidResult logger::flush() {
         pimpl_->collector_->flush();
     } else {
         // Synchronous mode: manually flush writers
-        std::vector<std::shared_ptr<base_writer>> local_writers;
+        std::vector<std::shared_ptr<log_writer_interface>> local_writers;
         {
             std::shared_lock<std::shared_mutex> lock(pimpl_->writers_mutex_);
             local_writers = pimpl_->writers_;

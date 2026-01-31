@@ -74,8 +74,9 @@ All rights reserved.
 #include "logger.h"
 #include "../backends/integration_backend.h"
 #include "../backends/standalone_backend.h"
-#include "../writers/base_writer.h"
+#include "../interfaces/log_writer_interface.h"
 #include "../writers/batch_writer.h"
+#include "../writers/console_writer.h"
 #include "../filters/log_filter.h"
 #include "../interfaces/log_formatter_interface.h"
 #include "../routing/log_router.h"
@@ -351,7 +352,7 @@ public:
      * @param writer Writer instance
      * @return Reference to builder for chaining
      */
-    logger_builder& add_writer(const std::string& name, std::unique_ptr<base_writer> writer) {
+    logger_builder& add_writer(const std::string& name, log_writer_ptr writer) {
         writers_.push_back({name, std::move(writer)});
         return *this;
     }
@@ -1074,7 +1075,10 @@ public:
         // Add writers (apply batch writing if enabled)
         for (auto& [name, writer] : writers_) {
             if (writer) {
-                writer->set_use_color(config_.enable_color_output);
+                // Set color output if the writer supports it (console_writer)
+                if (auto* console = dynamic_cast<console_writer*>(writer.get())) {
+                    console->set_use_color(config_.enable_color_output);
+                }
                 
                 // Wrap with batch writer if enabled and async mode
                 if (config_.enable_batch_writing && config_.async) {
@@ -1159,7 +1163,7 @@ public:
     
 private:
     logger_config config_;
-    std::vector<std::pair<std::string, std::unique_ptr<base_writer>>> writers_;
+    std::vector<std::pair<std::string, log_writer_ptr>> writers_;
     std::vector<std::unique_ptr<log_filter_interface>> filters_;
     std::vector<routing::route_config> routes_;  // Routing configurations
     bool exclusive_routing_ = false;  // Exclusive routing mode flag

@@ -124,7 +124,7 @@ public:
      * @param writer Target writer for batch output
      * @param cfg Configuration
      */
-    explicit batch_processor(std::unique_ptr<base_writer> writer,
+    explicit batch_processor(log_writer_ptr writer,
                            const config& cfg = config{});
 
     /**
@@ -250,7 +250,7 @@ private:
     config config_;
 
     // Writer
-    std::unique_ptr<base_writer> writer_;
+    log_writer_ptr writer_;
 
     // Queue
     static constexpr size_t queue_size = 8192;  // Must be power of 2
@@ -281,7 +281,7 @@ private:
  * @return Unique pointer to batch processor
  */
 std::unique_ptr<batch_processor> make_batch_processor(
-    std::unique_ptr<base_writer> writer,
+    log_writer_ptr writer,
     const batch_processor::config& cfg = batch_processor::config{});
 
 } // namespace kcenon::logger::async

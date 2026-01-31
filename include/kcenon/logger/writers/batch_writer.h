@@ -81,7 +81,7 @@ public:
      * @param underlying_writer The actual writer to batch writes for
      * @param cfg Batch configuration
      */
-    explicit batch_writer(std::unique_ptr<base_writer> underlying_writer,
+    explicit batch_writer(log_writer_ptr underlying_writer,
                           const config& cfg = config{});
     
     /**
@@ -187,7 +187,7 @@ private:
  * @return Unique pointer to the batch writer
  */
 std::unique_ptr<batch_writer> make_batch_writer(
-    std::unique_ptr<base_writer> writer,
+    log_writer_ptr writer,
     size_t batch_size = 100,
     std::chrono::milliseconds flush_interval = std::chrono::milliseconds{1000});
 

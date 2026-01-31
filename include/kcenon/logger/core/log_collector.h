@@ -43,6 +43,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include <kcenon/common/interfaces/logger_interface.h>
+#include <kcenon/logger/interfaces/log_writer_interface.h>
 
 #include <atomic>
 #include <chrono>
@@ -50,8 +51,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <vector>
 
 namespace kcenon::logger {
-
-class base_writer;
 
 /**
  * @brief Asynchronous log collector for high-performance logging
@@ -98,7 +97,7 @@ public:
      * The collector stores a weak reference to prevent circular dependencies
      * and ensure safe access even if the writer is destroyed.
      */
-    void add_writer(std::shared_ptr<base_writer> writer);
+    void add_writer(std::shared_ptr<log_writer_interface> writer);
     
     /**
      * @brief Clear all writers

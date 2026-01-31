@@ -113,7 +113,7 @@ public:
      * @throws std::invalid_argument if wrapped_writer is null
      */
     explicit critical_writer(
-        std::unique_ptr<base_writer> wrapped_writer,
+        log_writer_ptr wrapped_writer,
         critical_writer_config config = {}
     );
 
@@ -228,7 +228,7 @@ private:
     critical_writer_config config_;
 
     /// Wrapped writer
-    std::unique_ptr<base_writer> wrapped_writer_;
+    log_writer_ptr wrapped_writer_;
 
     /// Mutex for critical section
     mutable std::mutex critical_mutex_;
@@ -283,7 +283,7 @@ private:
 class hybrid_writer : public base_writer, public composite_writer_tag, public decorator_writer_tag {
 public:
     explicit hybrid_writer(
-        std::unique_ptr<base_writer> wrapped_writer,
+        log_writer_ptr wrapped_writer,
         critical_writer_config critical_config = {},
         std::size_t async_queue_size = 10000
     );
@@ -304,7 +304,7 @@ public:
     void set_use_color(bool use_color) override;
 
 private:
-    std::unique_ptr<base_writer> critical_writer_;
+    log_writer_ptr critical_writer_;
     std::size_t async_queue_size_;
 };
 

@@ -6,6 +6,7 @@ All rights reserved.
 *****************************************************************************/
 
 #include <kcenon/logger/writers/file_writer.h>
+#include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/formatters/timestamp_formatter.h>
 #include <kcenon/logger/utils/error_handling_utils.h>
 #include <filesystem>
@@ -16,9 +17,9 @@ namespace kcenon::logger {
 file_writer::file_writer(const std::string& filename,
                         bool append,
                         std::unique_ptr<log_formatter_interface> formatter)
-    : base_writer(formatter ? std::move(formatter) : std::make_unique<timestamp_formatter>())
-    , filename_(filename)
-    , append_mode_(append) {
+    : filename_(filename)
+    , append_mode_(append)
+    , formatter_(formatter ? std::move(formatter) : std::make_unique<timestamp_formatter>()) {
     std::lock_guard<std::mutex> lock(mutex_);
     open_internal();
 }
@@ -70,7 +71,11 @@ bool file_writer::is_healthy() const {
 }
 
 std::string file_writer::format_entry(const log_entry& entry) const {
-    return format_log_entry(entry);
+    if (!formatter_) {
+        // Fallback if formatter is somehow null
+        return entry.message.to_string();
+    }
+    return formatter_->format(entry);
 }
 
 common::VoidResult file_writer::open_internal() {

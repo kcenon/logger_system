@@ -42,20 +42,6 @@ class async_writer : public queued_writer_base<std::queue<log_entry>> {
 
 public:
     /**
-     * @brief Constructor accepting base_writer (legacy compatibility)
-     * @param wrapped_writer The writer to wrap with async functionality
-     * @param queue_size Maximum queue size for pending messages
-     * @param flush_timeout Maximum time to wait for flush operation (in seconds)
-     */
-    explicit async_writer(std::unique_ptr<base_writer> wrapped_writer,
-                         std::size_t queue_size = 10000,
-                         std::chrono::seconds flush_timeout = std::chrono::seconds(5))
-        : base_type(static_cast<std::unique_ptr<log_writer_interface>>(std::move(wrapped_writer)), queue_size)
-        , flush_timeout_(flush_timeout)
-        , running_(false) {
-    }
-
-    /**
      * @brief Constructor accepting log_writer_interface (Decorator pattern)
      * @param wrapped_writer The writer to wrap with async functionality
      * @param queue_size Maximum queue size for pending messages
@@ -64,7 +50,7 @@ public:
     explicit async_writer(std::unique_ptr<log_writer_interface> wrapped_writer,
                          std::size_t queue_size = 10000,
                          std::chrono::seconds flush_timeout = std::chrono::seconds(5))
-        : base_type(std::move(wrapped_writer), queue_size)
+        : base_type(std::move(wrapped_writer), queue_size, "async")
         , flush_timeout_(flush_timeout)
         , running_(false) {
     }
@@ -144,7 +130,7 @@ public:
     common::VoidResult write(const log_entry& entry) override {
         if (!running_) {
             // If not running, write directly
-            return wrapped_writer_->write(entry);
+            return wrapped().write(entry);
         }
 
         return try_enqueue(entry);
@@ -156,7 +142,7 @@ public:
      */
     common::VoidResult flush() override {
         if (!running_) {
-            return wrapped_writer_->flush();
+            return wrapped().flush();
         }
 
         // Wait for the queue to be empty with a timeout to prevent indefinite blocking
@@ -173,7 +159,7 @@ public:
         }
 
         // Flush the wrapped writer
-        return wrapped_writer_->flush();
+        return wrapped().flush();
     }
 
     /**
@@ -181,7 +167,7 @@ public:
      * @return true if healthy, false otherwise
      */
     bool is_healthy() const override {
-        return wrapped_writer_->is_healthy() && running_;
+        return wrapped().is_healthy() && running_;
     }
 
     /**
@@ -189,7 +175,7 @@ public:
      * @return Writer name
      */
     std::string get_name() const override {
-        return "async_" + wrapped_writer_->get_name();
+        return "async_" + wrapped().get_name();
     }
 
 protected:
@@ -229,7 +215,7 @@ private:
 
                 // Unlock while writing
                 lock.unlock();
-                wrapped_writer_->write(entry);
+                wrapped().write(entry);
                 lock.lock();
             }
 
@@ -246,9 +232,9 @@ private:
         while (!queue_.empty()) {
             auto entry = std::move(queue_.front());
             queue_.pop();
-            wrapped_writer_->write(entry);
+            wrapped().write(entry);
         }
-        wrapped_writer_->flush();
+        wrapped().flush();
     }
 
     std::chrono::seconds flush_timeout_;  // Configurable flush timeout

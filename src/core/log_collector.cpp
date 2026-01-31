@@ -78,7 +78,7 @@ struct log_collector_shared_state {
 #else
     std::condition_variable queue_cv;       // Standard condition variable
 #endif
-    std::vector<std::weak_ptr<base_writer>> writers;
+    std::vector<std::weak_ptr<log_writer_interface>> writers;
     std::mutex writers_mutex;
     const std::size_t batch_size;
     const std::size_t buffer_size;
@@ -248,7 +248,7 @@ private:
         }
 
         // Snapshot writers under lock
-        std::vector<std::shared_ptr<base_writer>> writers_snapshot;
+        std::vector<std::shared_ptr<log_writer_interface>> writers_snapshot;
         {
             std::lock_guard<std::mutex> lock(state->writers_mutex);
             writers_snapshot.reserve(state->writers.size());
@@ -324,7 +324,7 @@ public:
         return true;
     }
 
-    void add_writer(std::shared_ptr<base_writer> writer) {
+    void add_writer(std::shared_ptr<log_writer_interface> writer) {
         if (!writer) {
             return;
         }
@@ -395,7 +395,7 @@ private:
     }
 
     void flush_writers() {
-        std::vector<std::shared_ptr<base_writer>> writers_snapshot;
+        std::vector<std::shared_ptr<log_writer_interface>> writers_snapshot;
         {
             std::lock_guard<std::mutex> lock(state_->writers_mutex);
             writers_snapshot.reserve(state_->writers.size());
@@ -417,7 +417,7 @@ private:
 
     void write_to_all(const log_entry& entry) {
         // Snapshot writers under lock
-        std::vector<std::shared_ptr<base_writer>> writers_snapshot;
+        std::vector<std::shared_ptr<log_writer_interface>> writers_snapshot;
         {
             std::lock_guard<std::mutex> lock(state_->writers_mutex);
             writers_snapshot.reserve(state_->writers.size());
@@ -461,7 +461,7 @@ bool log_collector::enqueue(log_level level,
     return pimpl_->enqueue(level, message, file, line, function, timestamp);
 }
 
-void log_collector::add_writer(std::shared_ptr<base_writer> writer) {
+void log_collector::add_writer(std::shared_ptr<log_writer_interface> writer) {
     pimpl_->add_writer(writer);
 }
 

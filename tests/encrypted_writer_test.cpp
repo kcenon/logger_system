@@ -9,6 +9,7 @@ All rights reserved.
 #include <kcenon/logger/writers/encrypted_writer.h>
 #include <kcenon/logger/writers/file_writer.h>
 #include <kcenon/logger/security/secure_key_storage.h>
+#include <kcenon/logger/interfaces/log_entry.h>
 
 #include <filesystem>
 #include <fstream>

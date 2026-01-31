@@ -11,7 +11,7 @@ All rights reserved.
 namespace kcenon::logger::async {
 
 high_performance_async_writer::high_performance_async_writer(
-    std::unique_ptr<base_writer> wrapped_writer,
+    log_writer_ptr wrapped_writer,
     const config& cfg)
     : config_(cfg)
     , wrapped_writer_(std::move(wrapped_writer)) {
@@ -29,7 +29,7 @@ high_performance_async_writer::high_performance_async_writer(
     // Initialize batch processor if enabled
     if (config_.enable_batch_processing) {
         batch_processor_ = make_batch_processor(
-            std::unique_ptr<base_writer>(wrapped_writer_.release()),
+            log_writer_ptr(wrapped_writer_.release()),
             config_.batch_config);
     }
 }
@@ -128,9 +128,9 @@ std::string high_performance_async_writer::get_name() const {
 }
 
 void high_performance_async_writer::set_use_color(bool use_color) {
-    if (wrapped_writer_) {
-        wrapped_writer_->set_use_color(use_color);
-    }
+    // Color setting is now handled by formatter, not writer interface
+    // This method is kept for backward compatibility but is deprecated
+    (void)use_color;  // Suppress unused parameter warning
 }
 
 double high_performance_async_writer::get_queue_utilization() const {
@@ -199,7 +199,7 @@ batch_processor::batch_entry high_performance_async_writer::to_batch_entry(
 }
 
 std::unique_ptr<high_performance_async_writer> make_high_performance_async_writer(
-    std::unique_ptr<base_writer> writer,
+    log_writer_ptr writer,
     const high_performance_async_writer::config& cfg) {
     return std::make_unique<high_performance_async_writer>(std::move(writer), cfg);
 }
