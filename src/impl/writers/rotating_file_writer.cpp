@@ -83,15 +83,16 @@ rotating_file_writer::rotating_file_writer(const std::string& filename,
     }
 }
 
-common::VoidResult rotating_file_writer::write_entry_impl(const log_entry& entry) {
-    // Note: Mutex is already held by thread_safe_writer::write()
+common::VoidResult rotating_file_writer::write(const log_entry& entry) {
+    std::lock_guard<std::mutex> lock(get_mutex());
+
     // Check precondition
     if (!file_stream_.is_open()) {
         return make_logger_void_result(logger_error_code::file_write_failed, "File stream is not open");
     }
 
     // Format and write - preserves all structured fields
-    std::string formatted = format_log_entry(entry);
+    std::string formatted = format_entry(entry);
     file_stream_ << formatted << '\n';
     bytes_written_.fetch_add(formatted.size() + 1);
 
@@ -176,7 +177,6 @@ void rotating_file_writer::perform_rotation() {
         file_stream_.open(filename_, std::ios::out | mode);
 
         if (file_stream_.is_open()) {
-            file_stream_.rdbuf()->pubsetbuf(buffer_.get(), buffer_size_);
             bytes_written_ = 0;
         }
 
