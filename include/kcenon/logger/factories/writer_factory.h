@@ -42,7 +42,7 @@ namespace kcenon::logger {
  */
 class writer_factory {
 public:
-    using creator_fn = std::function<std::unique_ptr<base_writer>()>;
+    using creator_fn = std::function<log_writer_ptr()>;
 
     //========================================================================
     // Static Factory Methods
@@ -54,7 +54,7 @@ public:
      * @param auto_detect_color Auto-detect terminal color support
      * @return Unique pointer to console writer
      */
-    static std::unique_ptr<base_writer> create_console(
+    static log_writer_ptr create_console(
         bool use_stderr = false,
         bool auto_detect_color = true
     ) {
@@ -68,7 +68,7 @@ public:
      * @param buffer_size Output buffer size
      * @return Unique pointer to file writer
      */
-    static std::unique_ptr<base_writer> create_file(
+    static log_writer_ptr create_file(
         const std::string& filename,
         bool append = true,
         std::size_t buffer_size = 8192
@@ -84,7 +84,7 @@ public:
      * @param check_interval Writes between rotation checks
      * @return Unique pointer to rotating file writer
      */
-    static std::unique_ptr<base_writer> create_rotating_file(
+    static log_writer_ptr create_rotating_file(
         const std::string& filename,
         std::size_t max_size,
         std::size_t max_files,
@@ -103,7 +103,7 @@ public:
      * @param check_interval Writes between rotation checks
      * @return Unique pointer to rotating file writer
      */
-    static std::unique_ptr<base_writer> create_rotating_file(
+    static log_writer_ptr create_rotating_file(
         const std::string& filename,
         rotation_type type,
         std::size_t max_files,
@@ -123,7 +123,7 @@ public:
      * @param reconnect_interval Reconnection interval
      * @return Unique pointer to network writer
      */
-    static std::unique_ptr<base_writer> create_network(
+    static log_writer_ptr create_network(
         const std::string& host,
         uint16_t port,
         network_writer::protocol_type protocol = network_writer::protocol_type::tcp,
@@ -142,8 +142,8 @@ public:
      * @param flush_interval Auto-flush interval
      * @return Unique pointer to batch writer
      */
-    static std::unique_ptr<base_writer> create_batch(
-        std::unique_ptr<base_writer> writer,
+    static log_writer_ptr create_batch(
+        log_writer_ptr writer,
         std::size_t batch_size = 100,
         std::chrono::milliseconds flush_interval = std::chrono::milliseconds(1000)
     ) {
@@ -161,7 +161,7 @@ public:
      * @brief Create a development preset writer
      * @return Console writer with colors enabled
      */
-    static std::unique_ptr<base_writer> create_development() {
+    static log_writer_ptr create_development() {
         return create_console(false, true);
     }
 
@@ -171,7 +171,7 @@ public:
      * @param filename Log file name
      * @return Batched rotating file writer
      */
-    static std::unique_ptr<base_writer> create_production(
+    static log_writer_ptr create_production(
         const std::string& log_directory = "./logs",
         const std::string& filename = "app.log"
     ) {
@@ -189,7 +189,7 @@ public:
      * @param filename Log file path
      * @return Batched file writer with large buffers
      */
-    static std::unique_ptr<base_writer> create_high_performance(
+    static log_writer_ptr create_high_performance(
         const std::string& filename = "./logs/app.log"
     ) {
         auto file = std::make_unique<file_writer>(filename, true, 65536);
@@ -214,7 +214,7 @@ public:
      * @param name Registered type name
      * @return Unique pointer to writer, or nullptr if not found
      */
-    static std::unique_ptr<base_writer> create(const std::string& name) {
+    static log_writer_ptr create(const std::string& name) {
         auto it = registry().find(name);
         if (it == registry().end()) {
             return nullptr;

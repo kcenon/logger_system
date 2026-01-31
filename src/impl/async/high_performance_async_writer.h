@@ -109,7 +109,7 @@ public:
      * @param cfg Configuration
      */
     explicit high_performance_async_writer(
-        std::unique_ptr<base_writer> wrapped_writer,
+        log_writer_ptr wrapped_writer,
         const config& cfg = config{});
 
     /**
@@ -233,7 +233,7 @@ private:
     config config_;
 
     // Underlying writer
-    std::unique_ptr<base_writer> wrapped_writer_;
+    log_writer_ptr wrapped_writer_;
 
     // High-performance components
     std::unique_ptr<batch_processor> batch_processor_;
@@ -253,7 +253,7 @@ private:
  * @return Unique pointer to the writer
  */
 std::unique_ptr<high_performance_async_writer> make_high_performance_async_writer(
-    std::unique_ptr<base_writer> writer,
+    log_writer_ptr writer,
     const high_performance_async_writer::config& cfg = high_performance_async_writer::config{});
 
 } // namespace kcenon::logger::async

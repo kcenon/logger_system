@@ -7,7 +7,8 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-#include "base_writer.h"
+#include "../interfaces/log_writer_interface.h"
+#include "../interfaces/log_formatter_interface.h"
 #include "../interfaces/writer_category.h"
 #include <fstream>
 #include <atomic>
@@ -31,8 +32,9 @@ namespace kcenon::logger {
  * @since 1.3.0 Refactored to use thread_safe_writer base class
  * @since 1.4.0 Added sync_writer_tag for category classification
  * @since 4.0.0 Refactored for Decorator pattern with simplified inheritance
+ * @since 4.1.0 Directly implements log_writer_interface as core writer
  */
-class file_writer : public base_writer, public sync_writer_tag {
+class file_writer : public log_writer_interface, public sync_writer_tag {
 public:
     /**
      * @brief Constructor
@@ -124,6 +126,7 @@ protected:
     std::atomic<bool> is_open_{false};
     std::atomic<size_t> bytes_written_{0};
 
+    std::unique_ptr<log_formatter_interface> formatter_;
     mutable std::mutex mutex_;
 };
 
