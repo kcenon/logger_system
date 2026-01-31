@@ -101,15 +101,15 @@ public:
      */
     void rotate();
 
-protected:
+public:
     /**
-     * @brief Implementation of structured write operation with automatic rotation check
+     * @brief Write operation with automatic rotation check
      * @param entry The log entry to write (includes structured fields)
-     * @note Called by thread_safe_writer::write(const log_entry&) while holding the mutex
      * @since 3.4.0
      * @since 3.5.0 This is now the only write implementation (legacy API removed)
+     * @since 4.0.0 Changed to override write() directly after Decorator pattern refactoring
      */
-    common::VoidResult write_entry_impl(const log_entry& entry) override;
+    common::VoidResult write(const log_entry& entry) override;
 
 private:
     /**

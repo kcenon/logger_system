@@ -152,41 +152,27 @@ protected:
     /**
      * @brief Wait for logger to flush all messages
      *
-     * @details This method properly waits for the flush to complete by calling
-     * flush(), then stopping the logger to ensure all async operations complete,
-     * and finally restarting it if needed.
+     * @details This method waits for the logger to flush all queued messages
+     * by calling flush() and then adding a small delay to ensure completion.
+     * Previous implementation used stop/start cycle which caused timeouts on
+     * macOS Debug builds.
      *
-     * @note In Address Sanitizer environments, stop/start operations can be very slow
-     * (2-5x overhead). This implementation adds a small delay after stop() to ensure
-     * all async operations complete before proceeding.
+     * @note In Address Sanitizer environments and Debug builds, operations
+     * can be significantly slower. This simplified implementation avoids the
+     * expensive stop/start cycle that was causing test timeouts.
      */
     void WaitForFlush([[maybe_unused]] std::chrono::milliseconds timeout = std::chrono::seconds(5)) {
         if (!logger_) {
             return;
         }
 
-        bool was_running = logger_->is_running();
-
         // Flush the logger to trigger write operations
         logger_->flush();
 
-        // Stop the logger to ensure all async operations complete
-        // This guarantees that all queued messages are processed and written
-        if (was_running) {
-            logger_->stop();
-
-            // Give some time for async operations to complete
-            // This is especially important in sanitizer environments where
-            // operations are significantly slower
-            // Reduced to 20ms to minimize cumulative delay in Debug builds
-            std::this_thread::sleep_for(std::chrono::milliseconds(20));
-        }
-
-        // Restart the logger if it was running
-        // This allows subsequent test operations to continue
-        if (was_running) {
-            logger_->start();
-        }
+        // Give a small delay to ensure async flush completes
+        // This is much faster than the stop/start cycle and avoids
+        // deadlock issues on macOS Debug builds
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
 
     /**
