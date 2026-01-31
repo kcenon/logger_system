@@ -7,6 +7,8 @@ All rights reserved.
 
 #include "kcenon/logger/core/logger_registry.h"
 #include <algorithm>
+#include <mutex>
+#include <shared_mutex>
 
 namespace kcenon::logger::core {
 
