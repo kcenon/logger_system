@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include <kcenon/logger/writers/encrypted_writer.h>
+#include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/security/audit_logger.h>
 #include <kcenon/logger/formatters/timestamp_formatter.h>
 
@@ -46,62 +47,12 @@ namespace kcenon::logger {
 // ============================================================================
 
 encrypted_writer::encrypted_writer(
-    const std::filesystem::path& output_path,
+    std::unique_ptr<log_writer_interface> wrapped,
     encryption_config config
-) : output_path_(output_path),
+) : decorator_writer_base(std::move(wrapped), "encrypted"),
     config_(std::move(config)),
     last_key_rotation_(std::chrono::system_clock::now())
 {
-    // Validate key size (AES-256 requires 32 bytes)
-    if (config_.key.size() != 32) {
-        throw std::invalid_argument(
-            "Invalid key size: expected 32 bytes, got " +
-            std::to_string(config_.key.size())
-        );
-    }
-
-    // Open output file in binary mode
-    output_file_ = std::make_unique<std::ofstream>(
-        output_path, std::ios::binary | std::ios::trunc
-    );
-    if (!output_file_ || !output_file_->is_open()) {
-        throw std::runtime_error(
-            "Failed to open output file: " + output_path.string()
-        );
-    }
-
-#ifdef LOGGER_HAS_OPENSSL_CRYPTO
-    auto init_result = init_cipher_context();
-    if (init_result.is_err()) {
-        throw std::runtime_error(
-            "Failed to initialize cipher context: " +
-            get_logger_error_message(init_result)
-        );
-    }
-#endif
-
-    is_initialized_.store(true);
-
-    // Log initialization to audit log
-    security::audit_logger::log_audit_event(
-        security::audit_logger::audit_event::encryption_key_loaded,
-        "encrypted_writer initialized (direct file mode)",
-        {{"algorithm", std::to_string(static_cast<int>(config_.algorithm))},
-         {"output_path", output_path.string()}}
-    );
-}
-
-encrypted_writer::encrypted_writer(
-    std::unique_ptr<base_writer> inner_writer,
-    encryption_config config
-) : inner_writer_(std::move(inner_writer)),
-    config_(std::move(config)),
-    last_key_rotation_(std::chrono::system_clock::now())
-{
-    if (!inner_writer_) {
-        throw std::invalid_argument("inner_writer cannot be null");
-    }
-
     // Validate key size (AES-256 requires 32 bytes)
     if (config_.key.size() != 32) {
         throw std::invalid_argument(
@@ -125,9 +76,9 @@ encrypted_writer::encrypted_writer(
     // Log initialization to audit log
     security::audit_logger::log_audit_event(
         security::audit_logger::audit_event::encryption_key_loaded,
-        "encrypted_writer initialized (decorator mode)",
+        "encrypted_writer initialized",
         {{"algorithm", std::to_string(static_cast<int>(config_.algorithm))},
-         {"inner_writer", inner_writer_->get_name()}}
+         {"wrapped_writer", this->wrapped().get_name()}}
     );
 }
 
@@ -138,16 +89,8 @@ encrypted_writer::~encrypted_writer() {
     cleanup_cipher_context();
 #endif
 
-    // Flush and close output file if using direct mode
-    if (output_file_ && output_file_->is_open()) {
-        output_file_->flush();
-        output_file_->close();
-    }
-
-    // Flush inner writer if using decorator mode
-    if (inner_writer_) {
-        inner_writer_->flush();
-    }
+    // Flush wrapped writer
+    wrapped().flush();
 }
 
 common::VoidResult encrypted_writer::write(const log_entry& entry) {
@@ -204,96 +147,23 @@ common::VoidResult encrypted_writer::write(const log_entry& entry) {
         if (encrypt_result.is_err()) {
             return encrypt_result;
         }
-
-        // Write to direct file output if available
-        if (output_file_ && output_file_->is_open()) {
-            output_file_->write(
-                reinterpret_cast<const char*>(encrypted_data.data()),
-                static_cast<std::streamsize>(encrypted_data.size())
-            );
-            if (!output_file_->good()) {
-                return make_logger_void_result(
-                    logger_error_code::file_write_failed,
-                    "Failed to write encrypted data to file"
-                );
-            }
-            entries_encrypted_.fetch_add(1);
-            return common::ok();
-        }
     }
 
-    // Fallback to inner writer (decorator mode)
-    if (inner_writer_) {
-        std::string binary_data(
-            reinterpret_cast<const char*>(encrypted_data.data()),
-            encrypted_data.size()
-        );
-        log_entry encrypted_entry(level, binary_data, entry.timestamp);
-
-        auto write_result = inner_writer_->write(encrypted_entry);
-        if (write_result.is_ok()) {
-            entries_encrypted_.fetch_add(1);
-        }
-        return write_result;
-    }
-
-    return make_logger_void_result(
-        logger_error_code::writer_not_available,
-        "No output target available"
+    // Create encrypted log entry with binary data in message field
+    std::string binary_data(
+        reinterpret_cast<const char*>(encrypted_data.data()),
+        encrypted_data.size()
     );
+    log_entry encrypted_entry(level, binary_data, entry.timestamp);
+
+    // Delegate to wrapped writer
+    auto write_result = wrapped().write(encrypted_entry);
+    if (write_result.is_ok()) {
+        entries_encrypted_.fetch_add(1);
+    }
+    return write_result;
 }
 
-common::VoidResult encrypted_writer::flush() {
-    std::lock_guard lock(write_mutex_);
-
-    if (output_file_ && output_file_->is_open()) {
-        output_file_->flush();
-        if (!output_file_->good()) {
-            return make_logger_void_result(
-                logger_error_code::file_write_failed,
-                "Failed to flush encrypted file"
-            );
-        }
-        return common::ok();
-    }
-
-    if (inner_writer_) {
-        return inner_writer_->flush();
-    }
-
-    return make_logger_void_result(
-        logger_error_code::writer_not_available,
-        "No output target available"
-    );
-}
-
-std::string encrypted_writer::get_name() const {
-    if (!output_path_.empty()) {
-        return "encrypted_file(" + output_path_.filename().string() + ")";
-    }
-    if (inner_writer_) {
-        return "encrypted_" + inner_writer_->get_name();
-    }
-    return "encrypted_writer";
-}
-
-bool encrypted_writer::is_healthy() const {
-    if (!is_initialized_.load()) {
-        return false;
-    }
-
-    // Direct file mode
-    if (output_file_) {
-        return output_file_->is_open() && output_file_->good();
-    }
-
-    // Decorator mode
-    if (inner_writer_) {
-        return inner_writer_->is_healthy();
-    }
-
-    return false;
-}
 
 common::VoidResult encrypted_writer::rotate_key(security::secure_key new_key) {
     // Validate new key
@@ -307,9 +177,7 @@ common::VoidResult encrypted_writer::rotate_key(security::secure_key new_key) {
     std::lock_guard lock(write_mutex_);
 
     // Flush pending writes with old key
-    if (inner_writer_) {
-        inner_writer_->flush();
-    }
+    wrapped().flush();
 
     // Swap keys (old key is securely cleared by secure_key destructor)
     config_.key = std::move(new_key);
