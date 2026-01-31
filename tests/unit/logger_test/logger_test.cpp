@@ -89,13 +89,13 @@ TEST_F(LoggerTest, WriterManagement) {
     sync_logger_->add_writer(std::move(writer));
 
     // Test logging after adding writer
-    sync_logger_->log(log_level::info, "Test message");
+    sync_logger_->log(log_level::info, std::string("Test message"));
 
     // Clear writers
     sync_logger_->clear_writers();
 
     // Should still work without writers (no crash)
-    sync_logger_->log(log_level::info, "Test message after clear");
+    sync_logger_->log(log_level::info, std::string("Test message after clear"));
 }
 
 // Test synchronous logging
@@ -104,15 +104,15 @@ TEST_F(LoggerTest, SynchronousLogging) {
     sync_logger_->add_writer(std::move(writer));
 
     // Test all log levels
-    sync_logger_->log(log_level::trace, "Trace message");
-    sync_logger_->log(log_level::debug, "Debug message");
-    sync_logger_->log(log_level::info, "Info message");
-    sync_logger_->log(log_level::warning, "Warning message");
-    sync_logger_->log(log_level::error, "Error message");
-    sync_logger_->log(log_level::critical, "Critical message");
+    sync_logger_->log(log_level::trace, std::string("Trace message"));
+    sync_logger_->log(log_level::debug, std::string("Debug message"));
+    sync_logger_->log(log_level::info, std::string("Info message"));
+    sync_logger_->log(log_level::warning, std::string("Warning message"));
+    sync_logger_->log(log_level::error, std::string("Error message"));
+    sync_logger_->log(log_level::critical, std::string("Critical message"));
 
     // Test with simple message (source_location auto-captured internally)
-    sync_logger_->log(log_level::info, "Message with auto-captured location");
+    sync_logger_->log(log_level::info, std::string("Message with auto-captured location"));
 }
 
 // Test asynchronous logging
@@ -206,10 +206,10 @@ TEST_F(LoggerTest, FlushFunctionality) {
 // Test error handling
 TEST_F(LoggerTest, ErrorHandling) {
     // Test logging without writers (should not crash)
-    EXPECT_NO_THROW(sync_logger_->log(log_level::info, "No writer test"));
+    EXPECT_NO_THROW(sync_logger_->log(log_level::info, std::string("No writer test")));
 
     // Test empty messages
-    EXPECT_NO_THROW(sync_logger_->log(log_level::info, ""));
+    EXPECT_NO_THROW(sync_logger_->log(log_level::info, std::string("")));
 
     // Test very long messages
     std::string long_message(10000, 'A');
