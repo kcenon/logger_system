@@ -46,6 +46,8 @@ using namespace kcenon::logger;
 namespace common = kcenon::common;
 using log_level = common::interfaces::log_level;
 
+namespace {
+
 /**
  * @brief Mock writer to track write operations
  */
@@ -102,6 +104,8 @@ public:
 
     mutable int format_count_ = 0;
 };
+
+}  // namespace
 
 /**
  * @brief Test fixture for formatted_writer tests

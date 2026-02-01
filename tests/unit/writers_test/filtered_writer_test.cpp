@@ -46,6 +46,8 @@ using namespace kcenon::logger::filters;
 namespace common = kcenon::common;
 using log_level = common::interfaces::log_level;
 
+namespace {
+
 /**
  * @brief Mock writer to track write operations
  */
@@ -84,6 +86,8 @@ private:
     int flush_count_ = 0;
     bool healthy_ = true;
 };
+
+}  // namespace
 
 /**
  * @brief Test fixture for filtered_writer tests
