@@ -110,6 +110,8 @@ auto error_writer = kcenon::logger::writer_builder()
 
 See [examples/writer_builder_example.cpp](examples/writer_builder_example.cpp) for more usage patterns including encryption, filtering, and multi-writer setups.
 
+> **Migration Notice**: If you're upgrading from earlier versions that use manual decorator nesting, see the [Decorator Pattern Migration Guide](docs/guides/DECORATOR_MIGRATION.md#deprecation-timeline-and-legacy-patterns) for migration scenarios. Manual nesting is deprecated in favor of `writer_builder` and will be discouraged in v5.0.0.
+
 ### Installation
 
 **Using vcpkg**:
