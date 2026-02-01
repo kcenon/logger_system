@@ -43,6 +43,15 @@ if(BUILD_SAMPLES)
     )
 endif()
 
+# Decorator usage example - comprehensive decorator pattern guide
+if(BUILD_SAMPLES)
+    add_executable(decorator_usage decorator_usage.cpp)
+    target_link_libraries(decorator_usage PRIVATE LoggerSystem)
+    set_target_properties(decorator_usage PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
+
 # Phase 4 DI Pattern examples - available when common_system integration is enabled
 if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM)
     # DI Pattern example
