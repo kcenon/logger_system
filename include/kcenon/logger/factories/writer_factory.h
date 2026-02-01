@@ -65,15 +65,13 @@ public:
      * @brief Create a file writer
      * @param filename Path to log file
      * @param append Append to existing file (default: true)
-     * @param buffer_size Output buffer size
      * @return Unique pointer to file writer
      */
     static log_writer_ptr create_file(
         const std::string& filename,
-        bool append = true,
-        std::size_t buffer_size = 8192
+        bool append = true
     ) {
-        return std::make_unique<file_writer>(filename, append, buffer_size);
+        return std::make_unique<file_writer>(filename, append);
     }
 
     /**
@@ -98,20 +96,19 @@ public:
     /**
      * @brief Create a rotating file writer (time-based)
      * @param filename Path to log file
-     * @param type Rotation type (daily/hourly)
+     * @param type Rotation type (daily/hourly). Note: size_and_time requires using
+     *             the other overload with explicit max_size parameter.
      * @param max_files Maximum number of backup files
-     * @param check_interval Writes between rotation checks
      * @return Unique pointer to rotating file writer
      */
     static log_writer_ptr create_rotating_file(
         const std::string& filename,
         rotation_type type,
-        std::size_t max_files,
-        std::size_t check_interval = 100
+        std::size_t max_files
     ) {
-        return std::make_unique<rotating_file_writer>(
-            filename, type, max_files, check_interval
-        );
+        // Call the time-based constructor directly
+        // Note: We don't pass check_interval to avoid ambiguity with the combined constructor
+        return log_writer_ptr(new rotating_file_writer(filename, type, max_files));
     }
 
     /**
@@ -192,7 +189,7 @@ public:
     static log_writer_ptr create_high_performance(
         const std::string& filename = "./logs/app.log"
     ) {
-        auto file = std::make_unique<file_writer>(filename, true, 65536);
+        auto file = std::make_unique<file_writer>(filename, true);
         return create_batch(std::move(file), 500, std::chrono::milliseconds(5000));
     }
 

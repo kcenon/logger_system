@@ -168,7 +168,17 @@ protected:
  * formatters dynamically.
  *
  * @since 1.2.0
+ * @since 4.2.0 Renamed from formatter_factory to formatter_creator_fn to avoid
+ *              conflict with formatter_factory class in factories/formatter_factory.h
  */
-using formatter_factory = std::function<std::unique_ptr<log_formatter_interface>()>;
+using formatter_creator_fn = std::function<std::unique_ptr<log_formatter_interface>()>;
+
+/**
+ * @deprecated Use formatter_creator_fn instead
+ * @since 1.2.0
+ * @since 4.2.0 Deprecated in favor of formatter_creator_fn
+ */
+// Note: The old 'formatter_factory' type alias is removed to avoid conflict with
+// the formatter_factory class. Use formatter_creator_fn for factory functions.
 
 } // namespace kcenon::logger
