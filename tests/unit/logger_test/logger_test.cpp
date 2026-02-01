@@ -175,14 +175,18 @@ TEST_F(LoggerTest, StateManagement) {
 
 // Test level getter/setter
 TEST_F(LoggerTest, LevelGetterSetter) {
-    // Default should be trace (lowest level)
-    EXPECT_EQ(sync_logger_->get_level(), log_level::trace);
+    // Default should be info (safe default level)
+    EXPECT_EQ(sync_logger_->get_level(), log_level::info);
 
     sync_logger_->set_level(log_level::warning);
     EXPECT_EQ(sync_logger_->get_level(), log_level::warning);
 
     sync_logger_->set_level(log_level::error);
     EXPECT_EQ(sync_logger_->get_level(), log_level::error);
+
+    // Test setting to trace
+    sync_logger_->set_level(log_level::trace);
+    EXPECT_EQ(sync_logger_->get_level(), log_level::trace);
 }
 
 // Test flush functionality
