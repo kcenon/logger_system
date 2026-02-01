@@ -8,7 +8,7 @@ All rights reserved.
 #include <gtest/gtest.h>
 #include <kcenon/logger/core/logger_config.h>
 #include <kcenon/logger/core/logger_builder.h>
-#include <kcenon/logger/impl/writers/console_writer.h>
+#include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/logger/filters/log_filter.h>
 #include <kcenon/common/interfaces/logger_interface.h>
 
