@@ -96,10 +96,10 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | 한국어 </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md666"></a>
+<h1><a class="anchor" id="autotoc_md668"></a>
 Writer Selection Guide</h1>
 <p>This guide helps you choose the right writer for your logging needs.</p>
-<h2><a class="anchor" id="autotoc_md667"></a>
+<h2><a class="anchor" id="autotoc_md669"></a>
 Quick Selection Flowchart</h2>
 <div class="fragment"><div class="line">                  ┌─────────────────────────────┐</div>
 <div class="line">                  │  What is your output        │</div>
@@ -165,21 +165,21 @@ Quick Selection Flowchart</h2>
 <div class="line">            └────────────────┘│</div>
 <div class="line">                              ▼</div>
 <div class="line">                          (Done!)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md668"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md670"></a>
 Writer Selection by Use Case</h2>
-<h3><a class="anchor" id="autotoc_md669"></a>
+<h3><a class="anchor" id="autotoc_md671"></a>
 1. Simple Console Logging</h3>
 <p><b>Use:</b> <code>console_writer</code></p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;console_writer&gt;();</div>
 </div><!-- fragment --><p><b>Best for:</b> Development, debugging, CLI applications</p>
 <hr  />
-<h3><a class="anchor" id="autotoc_md671"></a>
+<h3><a class="anchor" id="autotoc_md673"></a>
 2. Basic File Logging</h3>
 <p><b>Use:</b> <code>file_writer</code></p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>);</div>
 </div><!-- fragment --><p><b>Best for:</b> Small applications, simple logging needs</p>
 <hr  />
-<h3><a class="anchor" id="autotoc_md673"></a>
+<h3><a class="anchor" id="autotoc_md675"></a>
 3. Production File Logging with Rotation</h3>
 <p><b>Use:</b> <code>rotating_file_writer</code></p>
 <div class="fragment"><div class="line"><span class="comment">// Size-based rotation: 10MB max, keep 5 backups</span></div>
@@ -197,7 +197,7 @@ Writer Selection by Use Case</h2>
 <div class="line">);</div>
 </div><!-- fragment --><p><b>Best for:</b> Production applications with log management needs</p>
 <hr  />
-<h3><a class="anchor" id="autotoc_md675"></a>
+<h3><a class="anchor" id="autotoc_md677"></a>
 4. High-Throughput Logging (&gt;10K msg/sec)</h3>
 <p><b>Use:</b> <code>async_writer</code> or <code>batch_writer</code></p>
 <div class="fragment"><div class="line"><span class="comment">// Option 1: async_writer - queue-based async</span></div>
@@ -217,7 +217,7 @@ Writer Selection by Use Case</h2>
 <div class="line"><span class="keyword">auto</span> batch = std::make_unique&lt;batch_writer&gt;(std::move(file), cfg);</div>
 </div><!-- fragment --><p><b>Best for:</b> High-volume applications, microservices, data processing</p>
 <hr  />
-<h3><a class="anchor" id="autotoc_md677"></a>
+<h3><a class="anchor" id="autotoc_md679"></a>
 5. Network/Remote Logging</h3>
 <p><b>Use:</b> <code>network_writer</code> or <code>otlp_writer</code></p>
 <div class="fragment"><div class="line"><span class="comment">// TCP/UDP logging</span></div>
@@ -234,7 +234,7 @@ Writer Selection by Use Case</h2>
 <div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;otlp_writer&gt;(cfg);</div>
 </div><!-- fragment --><p><b>Best for:</b> Centralized logging, observability, microservices</p>
 <hr  />
-<h3><a class="anchor" id="autotoc_md679"></a>
+<h3><a class="anchor" id="autotoc_md681"></a>
 6. Encrypted/Secure Logging</h3>
 <p><b>Use:</b> <code>encrypted_writer</code></p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> key_result = secure_key_storage::generate_key(32);</div>
@@ -249,7 +249,7 @@ Writer Selection by Use Case</h2>
 <div class="line">);</div>
 </div><!-- fragment --><p><b>Best for:</b> HIPAA, GDPR, PCI DSS compliance, sensitive data</p>
 <hr  />
-<h3><a class="anchor" id="autotoc_md681"></a>
+<h3><a class="anchor" id="autotoc_md683"></a>
 7. Critical/Safety-Critical Logging</h3>
 <p><b>Use:</b> <code>critical_writer</code> or <code>hybrid_writer</code></p>
 <div class="fragment"><div class="line"><span class="comment">// Option 1: critical_writer - ensures critical logs are never lost</span></div>
@@ -265,7 +265,7 @@ Writer Selection by Use Case</h2>
 <div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;hybrid_writer&gt;(std::move(file));</div>
 </div><!-- fragment --><p><b>Best for:</b> Financial systems, safety-critical applications, audit logging</p>
 <hr  />
-<h3><a class="anchor" id="autotoc_md683"></a>
+<h3><a class="anchor" id="autotoc_md685"></a>
 8. Custom Pipeline (Formatter + Sink)</h3>
 <p><b>Use:</b> <code>composite_writer</code></p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> writer = make_composite_writer(</div>
@@ -274,10 +274,10 @@ Writer Selection by Use Case</h2>
 <div class="line">);</div>
 </div><!-- fragment --><p><b>Best for:</b> Custom output formats, structured logging</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md685"></a>
+<h2><a class="anchor" id="autotoc_md687"></a>
 Decorator Stacking Patterns</h2>
 <p>Writers can be combined by stacking decorators:</p>
-<h3><a class="anchor" id="autotoc_md686"></a>
+<h3><a class="anchor" id="autotoc_md688"></a>
 Pattern 1: Async + Encrypted</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> file = std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;secure.log&quot;</span>);</div>
 <div class="line"><span class="keyword">auto</span> encrypted = std::make_unique&lt;encrypted_writer&gt;(</div>
@@ -285,20 +285,20 @@ Pattern 1: Async + Encrypted</h3>
 <div class="line">);</div>
 <div class="line"><span class="keyword">auto</span> async = std::make_unique&lt;async_writer&gt;(std::move(encrypted));</div>
 <div class="line">async-&gt;start();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md687"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md689"></a>
 Pattern 2: Critical + Async + Rotating</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> rotating = std::make_unique&lt;rotating_file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>, 10_MB, 5);</div>
 <div class="line"><span class="keyword">auto</span> async = std::make_unique&lt;async_writer&gt;(std::move(rotating));</div>
 <div class="line">async-&gt;start();</div>
 <div class="line"><span class="keyword">auto</span> critical = std::make_unique&lt;critical_writer&gt;(std::move(async));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md688"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md690"></a>
 Pattern 3: Batch + Network</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> network = std::make_unique&lt;network_writer&gt;(<span class="stringliteral">&quot;log-server&quot;</span>, 5514);</div>
 <div class="line"><span class="keyword">auto</span> batch = std::make_unique&lt;batch_writer&gt;(</div>
 <div class="line">    std::move(network),</div>
 <div class="line">    batch_writer::config{.max_batch_size = 50}</div>
 <div class="line">);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md689"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md691"></a>
 Performance Comparison</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -320,7 +320,7 @@ Performance Comparison</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>hybrid_writer</code>   </td><td class="markdownTableBodyNone">High (normal), Low (critical)   </td><td class="markdownTableBodyNone">Variable   </td><td class="markdownTableBodyNone">High   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md690"></a>
+<h2><a class="anchor" id="autotoc_md692"></a>
 Decision Matrix</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -344,7 +344,7 @@ Decision Matrix</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">OpenTelemetry   </td><td class="markdownTableBodyNone"><code>otlp_writer</code>   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md691"></a>
+<h2><a class="anchor" id="autotoc_md693"></a>
 Related Documentation</h2>
 <ul>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2WRITER__HIERARCHY.html">Writer Hierarchy</a> - Detailed hierarchy and category system</li>
@@ -360,7 +360,7 @@ Related Documentation</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 1 2026 10:13:18 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 1 2026 12:01:52 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

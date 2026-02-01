@@ -169,13 +169,55 @@ Composing Writers with Decorator Pattern</h3>
 <li><code>.filtered(filter)</code> - Log filtering based on level or custom criteria</li>
 <li><code>.formatted(formatter)</code> - Custom formatting before writing</li>
 <li><code>.encrypted(key)</code> - AES-256 encryption for sensitive logs (requires encryption feature)</li>
+<li><code>.thread_safe()</code> - Thread-safe wrapper for concurrent access</li>
 </ul>
-<p><b>Production Setup Example</b>: </p><div class="fragment"><div class="line"><span class="comment">// Main log: all messages with async+buffered for high performance</span></div>
+<h4><a class="anchor" id="autotoc_md6"></a>
+Decorator Application Order</h4>
+<p>For optimal performance, decorators should be applied in this order (innermost to outermost):</p>
+<div class="fragment"><div class="line">Core Writer → Filtering → Buffering → Encryption → Thread-Safety → Async</div>
+</div><!-- fragment --><p><b>Rationale</b>:</p><ol type="1">
+<li><b>Filtering first</b> - Reduces work for downstream decorators</li>
+<li><b>Buffering</b> - Amortizes I/O and processing costs</li>
+<li><b>Encryption</b> - Encrypts batches efficiently</li>
+<li><b>Thread-safety</b> - Ensures consistency before async processing</li>
+<li><b>Async last</b> - Maximizes non-blocking benefits</li>
+</ol>
+<h4><a class="anchor" id="autotoc_md7"></a>
+Common Usage Patterns</h4>
+<p><b>High-Throughput Pattern</b> (4M+ messages/second): </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = kcenon::logger::writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
+<div class="line">    .buffered(1000)      <span class="comment">// Large buffer</span></div>
+<div class="line">    .async(50000)        <span class="comment">// Large queue</span></div>
+<div class="line">    .build();</div>
+</div><!-- fragment --><p><b>Secure Logging Pattern</b> (Compliance): </p><div class="fragment"><div class="line"><span class="preprocessor">#ifdef LOGGER_WITH_ENCRYPTION</span></div>
+<div class="line"><span class="keyword">auto</span> writer = kcenon::logger::writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;audit.log.enc&quot;</span>)</div>
+<div class="line">    .buffered(200)                      <span class="comment">// Buffer before encryption</span></div>
+<div class="line">    .encrypted(std::move(encryption_key))</div>
+<div class="line">    .async(10000)</div>
+<div class="line">    .build();</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --><p><b>Filtered Error Log</b> (Separate error tracking): </p><div class="fragment"><div class="line"><span class="keyword">auto</span> error_filter = std::make_unique&lt;level_filter&gt;(log_level::error);</div>
+<div class="line"><span class="keyword">auto</span> error_writer = kcenon::logger::writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;errors.log&quot;</span>)</div>
+<div class="line">    .filtered(std::move(error_filter))  <span class="comment">// Filter first</span></div>
+<div class="line">    .buffered(100)</div>
+<div class="line">    .async()</div>
+<div class="line">    .build();</div>
+</div><!-- fragment --><p><b>Production Multi-Writer Setup</b>: </p><div class="fragment"><div class="line">logger log;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Main log: all messages with async+buffered for high performance</span></div>
 <div class="line"><span class="keyword">auto</span> main_writer = kcenon::logger::writer_builder()</div>
 <div class="line">    .file(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
 <div class="line">    .buffered(500)</div>
 <div class="line">    .async(20000)</div>
 <div class="line">    .build();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Start async writer before adding to logger</span></div>
+<div class="line"><span class="keywordflow">if</span> (<span class="keyword">auto</span>* async_w = <span class="keyword">dynamic_cast&lt;</span>async_writer*<span class="keyword">&gt;</span>(main_writer.get())) {</div>
+<div class="line">    async_w-&gt;start();</div>
+<div class="line">}</div>
+<div class="line">log.add_writer(<span class="stringliteral">&quot;main&quot;</span>, std::move(main_writer));</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Error log: only errors, separate file</span></div>
 <div class="line"><span class="keyword">auto</span> error_filter = std::make_unique&lt;level_filter&gt;(log_level::error);</div>
@@ -184,11 +226,22 @@ Composing Writers with Decorator Pattern</h3>
 <div class="line">    .filtered(std::move(error_filter))</div>
 <div class="line">    .async()</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><p>See <a href="examples/writer_builder_example.cpp">examples/writer_builder_example.cpp</a> for more usage patterns including encryption, filtering, and multi-writer setups.</p>
+<div class="line"> </div>
+<div class="line"><span class="keywordflow">if</span> (<span class="keyword">auto</span>* async_w = <span class="keyword">dynamic_cast&lt;</span>async_writer*<span class="keyword">&gt;</span>(error_writer.get())) {</div>
+<div class="line">    async_w-&gt;start();</div>
+<div class="line">}</div>
+<div class="line">log.add_writer(<span class="stringliteral">&quot;errors&quot;</span>, std::move(error_writer));</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Console for development</span></div>
+<div class="line">log.add_writer(<span class="stringliteral">&quot;console&quot;</span>, writer_builder().console().build());</div>
+</div><!-- fragment --><p>For comprehensive examples including all decorators, performance patterns, and real-world scenarios, see:</p><ul>
+<li><a href="examples/decorator_usage.cpp">examples/decorator_usage.cpp</a> - Complete decorator pattern guide</li>
+<li><a href="examples/writer_builder_example.cpp">examples/writer_builder_example.cpp</a> - Builder pattern examples</li>
+</ul>
 <blockquote class="doxtable">
 <p>&zwj;<b>Migration Notice</b>: If you're upgrading from earlier versions that use manual decorator nesting, see the <a href="docs/guides/DECORATOR_MIGRATION.md#deprecation-timeline-and-legacy-patterns">Decorator Pattern Migration Guide</a> for migration scenarios. Manual nesting is deprecated in favor of <code>writer_builder</code> and will be discouraged in v5.0.0. </p>
 </blockquote>
-<h3><a class="anchor" id="autotoc_md6"></a>
+<h3><a class="anchor" id="autotoc_md8"></a>
 Installation</h3>
 <p><b>Using vcpkg</b>: </p><div class="fragment"><div class="line"># Install with default features (fmt only)</div>
 <div class="line">vcpkg install kcenon-logger-system</div>
@@ -210,7 +263,7 @@ Installation</h3>
 <div class="line">cmake --build . --target install</div>
 </div><!-- fragment --><p><b>Using in Your Project</b>: </p><div class="fragment"><div class="line">find_package(LoggerSystem REQUIRED)</div>
 <div class="line">target_link_libraries(your_app PRIVATE LoggerSystem::logger)</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md7"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md9"></a>
 Requirements</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -231,13 +284,13 @@ Requirements</h3>
 <blockquote class="doxtable">
 <p>&zwj;<b>Note</b>: spdlog is <b>not</b> used internally by logger_system. It is only included as an optional dependency for benchmark comparisons. See <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html">Benchmarks</a> for performance comparisons. </p>
 </blockquote>
-<h4><a class="anchor" id="autotoc_md8"></a>
+<h4><a class="anchor" id="autotoc_md10"></a>
 Dependency Flow</h4>
 <div class="fragment"><div class="line">logger_system</div>
 <div class="line">├── common_system (required)</div>
 <div class="line">└── thread_system (optional, for async logging with thread pool)</div>
 <div class="line">    └── common_system (required)</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md9"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md11"></a>
 Building with Dependencies</h4>
 <div class="fragment"><div class="line"># Clone dependencies</div>
 <div class="line">git clone https://github.com/kcenon/common_system.git</div>
@@ -249,9 +302,9 @@ Building with Dependencies</h4>
 <div class="line">cmake -B build -DLOGGER_USE_THREAD_SYSTEM=ON  # Enable thread_system integration</div>
 <div class="line">cmake --build build</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md11"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Core Features</h2>
-<h3><a class="anchor" id="autotoc_md12"></a>
+<h3><a class="anchor" id="autotoc_md14"></a>
 Asynchronous Logging</h3>
 <ul>
 <li><b>Non-blocking operations</b>: Background thread handles I/O without blocking</li>
@@ -259,7 +312,7 @@ Asynchronous Logging</h3>
 <li><b>Adaptive batching</b>: Intelligent optimization based on queue utilization</li>
 <li><b>Zero-copy design</b>: Minimal allocations and overhead</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md13"></a>
+<h3><a class="anchor" id="autotoc_md15"></a>
 Multiple Writer Types</h3>
 <ul>
 <li><b>Console Writer</b>: ANSI colored output for different log levels</li>
@@ -272,7 +325,7 @@ Multiple Writer Types</h3>
 <li><b>OTLP Writer</b>: OpenTelemetry Protocol export for observability (v3.0.0)</li>
 </ul>
 <p><a href="docs/FEATURES.md#writer-types">📚 Detailed Writer Documentation →</a></p>
-<h3><a class="anchor" id="autotoc_md14"></a>
+<h3><a class="anchor" id="autotoc_md16"></a>
 OpenTelemetry Integration (v3.0.0)</h3>
 <ul>
 <li><b>Trace Correlation</b>: Automatic trace_id/span_id in logs</li>
@@ -282,7 +335,7 @@ OpenTelemetry Integration (v3.0.0)</h3>
 <li><b>Context Propagation</b>: Thread-local trace context storage</li>
 </ul>
 <p><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2OPENTELEMETRY.html">🔭 OpenTelemetry Guide →</a></p>
-<h3><a class="anchor" id="autotoc_md15"></a>
+<h3><a class="anchor" id="autotoc_md17"></a>
 Security Features (v3.0.0)</h3>
 <ul>
 <li><b>Secure Key Storage</b>: RAII-based encryption key management with automatic cleanup</li>
@@ -293,7 +346,7 @@ Security Features (v3.0.0)</h3>
 <li><b>Compliance Support</b>: GDPR, PCI DSS, ISO 27001, SOC 2</li>
 </ul>
 <p><a href="docs/FEATURES.md#security-features">🔒 Complete Security Guide →</a></p>
-<h3><a class="anchor" id="autotoc_md16"></a>
+<h3><a class="anchor" id="autotoc_md18"></a>
 Structured Logging (v3.1.0)</h3>
 <ul>
 <li><b>Fluent Builder API</b>: Chain field additions with <code>.field("key", value).emit()</code></li>
@@ -314,10 +367,10 @@ Structured Logging (v3.1.0)</h3>
 <div class="line">    .field(<span class="stringliteral">&quot;success&quot;</span>, <span class="keyword">true</span>)</div>
 <div class="line">    .emit();</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md18"></a>
+<h2><a class="anchor" id="autotoc_md20"></a>
 Performance Highlights</h2>
 <p><em>Benchmarked on Apple M1 (8-core) @ 3.2GHz, 16GB, macOS Sonoma</em></p>
-<h3><a class="anchor" id="autotoc_md19"></a>
+<h3><a class="anchor" id="autotoc_md21"></a>
 Throughput</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -331,7 +384,7 @@ Throughput</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>16 threads</b>   </td><td class="markdownTableBodyNone"><b>390K msg/s</b>   </td><td class="markdownTableBodyNone"><b>+117%</b>   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md20"></a>
+<h3><a class="anchor" id="autotoc_md22"></a>
 Latency</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -343,7 +396,7 @@ Latency</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>p99.9</b>   </td><td class="markdownTableBodyNone"><b>487 ns</b>   </td><td class="markdownTableBodyNone">~7,000 ns   </td><td class="markdownTableBodyNone"><b>14.4x faster</b>   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md21"></a>
+<h3><a class="anchor" id="autotoc_md23"></a>
 Memory Efficiency</h3>
 <ul>
 <li><b>Baseline</b>: 1.8 MB (vs spdlog: 4.2 MB, <b>57% less</b>)</li>
@@ -357,9 +410,9 @@ Memory Efficiency</h3>
 </ul>
 <p><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html">⚡ Full Benchmarks &amp; Methodology →</a></p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md23"></a>
+<h2><a class="anchor" id="autotoc_md25"></a>
 Architecture Overview</h2>
-<h3><a class="anchor" id="autotoc_md24"></a>
+<h3><a class="anchor" id="autotoc_md26"></a>
 Modular Design</h3>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                      Logger Core                            │</div>
@@ -381,7 +434,7 @@ Modular Design</h3>
 <div class="line">│ • Critical   │ │              │ │              │</div>
 <div class="line">│ • Hybrid     │ │              │ │              │</div>
 <div class="line">└──────────────┘ └──────────────┘ └──────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md25"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md27"></a>
 Key Components</h3>
 <ul>
 <li><b>Logger Core</b>: Main async processing engine with builder pattern</li>
@@ -392,10 +445,10 @@ Key Components</h3>
 </ul>
 <p>🏛️ Detailed Architecture Guide →</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md27"></a>
+<h2><a class="anchor" id="autotoc_md29"></a>
 Ecosystem Integration</h2>
 <p>Part of a modular C++ ecosystem with clean interface boundaries:</p>
-<h3><a class="anchor" id="autotoc_md28"></a>
+<h3><a class="anchor" id="autotoc_md30"></a>
 Dependencies</h3>
 <p><b>Required</b>:</p><ul>
 <li><b><a href="https://github.com/kcenon/common_system">common_system</a></b>: Core interfaces (ILogger, IMonitor, Result&lt;T&gt;) with C++20 Concepts support</li>
@@ -407,7 +460,7 @@ Dependencies</h3>
 <blockquote class="doxtable">
 <p>&zwj;<b>Note</b>: Since v3.1.0, <code>thread_system</code> is optional. The logger system uses a standalone std::jthread implementation by default. For advanced async processing, enable thread_system integration with <code>-DLOGGER_USE_THREAD_SYSTEM=ON</code> (see Issue #224). </p>
 </blockquote>
-<h3><a class="anchor" id="autotoc_md29"></a>
+<h3><a class="anchor" id="autotoc_md31"></a>
 Integration Pattern</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
@@ -437,16 +490,16 @@ Integration Pattern</h3>
 </ul>
 <p><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2INTEGRATION.html">🔗 Ecosystem Integration Guide →</a></p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md31"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 Documentation</h2>
-<h3><a class="anchor" id="autotoc_md32"></a>
+<h3><a class="anchor" id="autotoc_md34"></a>
 Getting Started</h3>
 <ul>
 <li>📖 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html">Getting Started Guide</a> - Step-by-step setup and basic usage</li>
 <li>🚀 <a href="examples/basic_logging/">Quick Start Examples</a> - Hands-on examples</li>
 <li>🔧 Build Guide - Detailed build instructions</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md33"></a>
+<h3><a class="anchor" id="autotoc_md35"></a>
 Core Documentation</h3>
 <ul>
 <li>📘 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES.html">Features</a> - Comprehensive feature documentation</li>
@@ -455,7 +508,7 @@ Core Documentation</h3>
 <li>📋 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html">Project Structure</a> - Directory organization and files</li>
 <li>🔧 API Reference - Complete API documentation</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md34"></a>
+<h3><a class="anchor" id="autotoc_md36"></a>
 Advanced Topics</h3>
 <ul>
 <li>⚡ <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html">Performance Guide</a> - Optimization tips and tuning</li>
@@ -464,7 +517,7 @@ Advanced Topics</h3>
 <li>🎨 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS.html">Custom Writers</a> - Creating custom log writers</li>
 <li>🔄 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2INTEGRATION.html">Integration Guide</a> - Ecosystem integration patterns</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md35"></a>
+<h3><a class="anchor" id="autotoc_md37"></a>
 Development</h3>
 <ul>
 <li>🤝 Contributing Guide - How to contribute</li>
@@ -473,7 +526,7 @@ Development</h3>
 <li>📝 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG.html">Changelog</a> - Release history and changes</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md37"></a>
+<h2><a class="anchor" id="autotoc_md39"></a>
 Configuration Templates</h2>
 <p>The logger system provides predefined templates for common scenarios:</p>
 <div class="fragment"><div class="line"><span class="comment">// Production: Optimized for production environments</span></div>
@@ -499,7 +552,7 @@ Configuration Templates</h2>
 <div class="line">    .use_template(<span class="stringliteral">&quot;low_latency&quot;</span>)</div>
 <div class="line">    .build()</div>
 <div class="line">    .value();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md38"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md40"></a>
 Advanced Configuration</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = kcenon::logger::logger_builder()</div>
 <div class="line">    <span class="comment">// Core settings</span></div>
@@ -521,9 +574,9 @@ Advanced Configuration</h3>
 <div class="line">    .value();</div>
 </div><!-- fragment --><p>📚 Complete Configuration Guide →</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md40"></a>
+<h2><a class="anchor" id="autotoc_md42"></a>
 Build Configuration</h2>
-<h3><a class="anchor" id="autotoc_md41"></a>
+<h3><a class="anchor" id="autotoc_md43"></a>
 CMake Feature Flags</h3>
 <div class="fragment"><div class="line"># Core Features</div>
 <div class="line">cmake -DLOGGER_USE_DI=ON              # Dependency injection (default: ON)</div>
@@ -547,9 +600,9 @@ CMake Feature Flags</h3>
 <div class="line">cmake -DLOGGER_WARNINGS_AS_ERRORS=ON  # Treat warnings as errors</div>
 </div><!-- fragment --><p>🔧 Complete Build Options →</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md43"></a>
+<h2><a class="anchor" id="autotoc_md45"></a>
 Platform Support</h2>
-<h3><a class="anchor" id="autotoc_md44"></a>
+<h3><a class="anchor" id="autotoc_md46"></a>
 Officially Supported</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -568,10 +621,10 @@ Officially Supported</h3>
 </ul>
 <p><a href="docs/PRODUCTION_QUALITY.md#platform-support">🖥️ Platform Details →</a></p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md46"></a>
+<h2><a class="anchor" id="autotoc_md48"></a>
 Testing</h2>
 <p>The logger system includes comprehensive testing infrastructure:</p>
-<h3><a class="anchor" id="autotoc_md47"></a>
+<h3><a class="anchor" id="autotoc_md49"></a>
 Test Coverage</h3>
 <ul>
 <li><b>Unit Tests</b>: 150+ test cases (GTest)</li>
@@ -579,7 +632,7 @@ Test Coverage</h3>
 <li><b>Benchmarks</b>: 20+ performance tests</li>
 <li><b>Coverage</b>: ~65% (growing)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md48"></a>
+<h3><a class="anchor" id="autotoc_md50"></a>
 Running Tests</h3>
 <div class="fragment"><div class="line"># Build with tests</div>
 <div class="line">cmake -DBUILD_TESTS=ON ..</div>
@@ -594,7 +647,7 @@ Running Tests</h3>
 <div class="line"> </div>
 <div class="line"># Run benchmarks</div>
 <div class="line">./build/bin/benchmarks</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md49"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md51"></a>
 CI/CD Status</h3>
 <p>All pipelines green:</p><ul>
 <li>✅ Multi-platform builds (Ubuntu, macOS, Windows)</li>
@@ -605,10 +658,10 @@ CI/CD Status</h3>
 </ul>
 <p><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY.html">✅ Production Quality Metrics →</a></p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md51"></a>
+<h2><a class="anchor" id="autotoc_md53"></a>
 Contributing</h2>
 <p>We welcome contributions! Please see our Contributing Guide for details.</p>
-<h3><a class="anchor" id="autotoc_md52"></a>
+<h3><a class="anchor" id="autotoc_md54"></a>
 Development Workflow</h3>
 <ol type="1">
 <li>Fork the repository</li>
@@ -617,7 +670,7 @@ Development Workflow</h3>
 <li><code>Push to the branch:</code>git push origin feature/amazing-feature`</li>
 <li>Open a Pull Request</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md53"></a>
+<h3><a class="anchor" id="autotoc_md55"></a>
 Code Standards</h3>
 <ul>
 <li>Follow modern C++ best practices</li>
@@ -628,7 +681,7 @@ Code Standards</h3>
 </ul>
 <p>🤝 Contributing Guidelines →</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md55"></a>
+<h2><a class="anchor" id="autotoc_md57"></a>
 Support</h2>
 <ul>
 <li><b>Issues</b>: <a href="https://github.com/kcenon/logger_system/issues">GitHub Issues</a></li>
@@ -636,11 +689,11 @@ Support</h2>
 <li><b>Email</b>: <a href="#" onclick="location.href='mai'+'lto:'+'kce'+'no'+'n@n'+'av'+'er.'+'co'+'m'; return false;">kceno<span class="obfuscator">.nosp@m.</span>n@na<span class="obfuscator">.nosp@m.</span>ver.c<span class="obfuscator">.nosp@m.</span>om</a></li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md57"></a>
+<h2><a class="anchor" id="autotoc_md59"></a>
 License</h2>
 <p>This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICENSE) file for details.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md59"></a>
+<h2><a class="anchor" id="autotoc_md61"></a>
 Acknowledgments</h2>
 <ul>
 <li>Inspired by modern logging frameworks (spdlog, Boost.Log, glog)</li>
@@ -655,7 +708,7 @@ Acknowledgments</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 1 2026 10:13:18 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 1 2026 12:01:52 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

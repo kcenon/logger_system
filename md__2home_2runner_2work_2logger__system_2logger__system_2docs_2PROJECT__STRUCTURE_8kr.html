@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System 프로젝트 구조</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2107"></a> <b>언어:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html">English</a> | <b>한국어</b></p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2109"></a> <b>언어:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html">English</a> | <b>한국어</b></p>
 <p><b>최종 업데이트</b>: 2025-11-28 <b>버전</b>: 3.0.0</p>
 <p>이 문서는 logger system의 디렉토리 구조, 주요 파일 및 모듈 의존성에 대한 상세 설명을 제공합니다.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2109"></a>
+<h1><a class="anchor" id="autotoc_md2111"></a>
 목차</h1>
 <ul>
 <li>디렉토리 개요</li>
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li>모듈 의존성</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2111"></a>
+<h1><a class="anchor" id="autotoc_md2113"></a>
 디렉토리 개요</h1>
 <div class="fragment"><div class="line">logger_system/</div>
 <div class="line">├── 📁 include/kcenon/logger/       # 공개 헤더 (API)</div>
@@ -187,9 +187,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">├── 📄 README.md                    # 메인 문서</div>
 <div class="line">└── 📄 README.kr.md                 # 한국어 문서</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md2113"></a>
+<h1><a class="anchor" id="autotoc_md2115"></a>
 코어 모듈 파일</h1>
-<h2><a class="anchor" id="autotoc_md2114"></a>
+<h2><a class="anchor" id="autotoc_md2116"></a>
 logger.h / logger.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/core/</code> | <code>src/core/</code></p>
 <p><b>목적</b>: 비동기 처리를 지원하는 메인 로거 클래스</p>
@@ -232,7 +232,7 @@ logger.h / logger.cpp</h2>
 <li>Thread 시스템 큐 (선택적)</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2116"></a>
+<h2><a class="anchor" id="autotoc_md2118"></a>
 logger_builder.h / logger_builder.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/core/</code> | <code>src/core/</code></p>
 <p><b>목적</b>: 검증이 포함된 로거 설정을 위한 빌더 패턴</p>
@@ -265,7 +265,7 @@ logger_builder.h / logger_builder.cpp</h2>
 <div class="line">    <span class="keyword">auto</span> validate() const -&gt; common::VoidResult;</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2118"></a>
+<h2><a class="anchor" id="autotoc_md2120"></a>
 log_entry.h</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/core/</code></p>
 <p><b>목적</b>: 메타데이터가 포함된 로그 엔트리 데이터 구조</p>
@@ -286,7 +286,7 @@ log_entry.h</h2>
 <li>스레드 안전한 설계</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2120"></a>
+<h2><a class="anchor" id="autotoc_md2122"></a>
 result_types.h</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/core/</code></p>
 <p><b>목적</b>: 오류 처리 타입 및 유틸리티</p>
@@ -297,9 +297,9 @@ result_types.h</h2>
 <li>I/O 연산: -230 ~ -239</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2122"></a>
+<h1><a class="anchor" id="autotoc_md2124"></a>
 Writer 구현</h1>
-<h2><a class="anchor" id="autotoc_md2123"></a>
+<h2><a class="anchor" id="autotoc_md2125"></a>
 console_writer.h / console_writer.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
 <p><b>목적</b>: ANSI 지원 컬러 콘솔 출력</p>
@@ -310,7 +310,7 @@ console_writer.h / console_writer.cpp</h2>
 <li>스레드 안전 출력</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2125"></a>
+<h2><a class="anchor" id="autotoc_md2127"></a>
 file_writer.h / file_writer.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
 <p><b>목적</b>: 버퍼링이 포함된 기본 파일 쓰기</p>
@@ -328,7 +328,7 @@ file_writer.h / file_writer.cpp</h2>
 <div class="line">    std::chrono::milliseconds flush_interval = std::chrono::milliseconds(100);</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2127"></a>
+<h2><a class="anchor" id="autotoc_md2129"></a>
 rotating_file_writer.h / rotating_file_writer.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
 <p><b>목적</b>: 크기 및 시간 기반 파일 로테이션</p>
@@ -354,7 +354,7 @@ rotating_file_writer.h / rotating_file_writer.cpp</h2>
 <div class="line">    <span class="keywordtype">int</span> rotation_hour = 0;                      <span class="comment">// 시간 기반 로테이션용</span></div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2129"></a>
+<h2><a class="anchor" id="autotoc_md2131"></a>
 network_writer.h / network_writer.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
 <p><b>목적</b>: TCP/UDP 네트워크 로깅</p>
@@ -365,7 +365,7 @@ network_writer.h / network_writer.cpp</h2>
 <li>메시지 배칭</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2131"></a>
+<h2><a class="anchor" id="autotoc_md2133"></a>
 critical_writer.h / critical_writer.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
 <p><b>목적</b>: 중요 메시지를 위한 동기식 로깅</p>
@@ -379,7 +379,7 @@ critical_writer.h / critical_writer.cpp</h2>
 <div class="line">    std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;critical.log&quot;</span>)</div>
 <div class="line">);</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2133"></a>
+<h2><a class="anchor" id="autotoc_md2135"></a>
 hybrid_writer.h / hybrid_writer.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
 <p><b>목적</b>: 로그 레벨에 따른 적응형 async/sync</p>
@@ -390,14 +390,14 @@ hybrid_writer.h / hybrid_writer.cpp</h2>
 <li>성능 + 신뢰성</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2135"></a>
+<h1><a class="anchor" id="autotoc_md2137"></a>
 Filter 구현</h1>
-<h2><a class="anchor" id="autotoc_md2136"></a>
+<h2><a class="anchor" id="autotoc_md2138"></a>
 level_filter.h / level_filter.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/filters/</code> | <code>src/filters/</code></p>
 <p><b>목적</b>: 최소 로그 레벨로 필터링</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2138"></a>
+<h2><a class="anchor" id="autotoc_md2140"></a>
 regex_filter.h / regex_filter.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/filters/</code> | <code>src/filters/</code></p>
 <p><b>목적</b>: 로그 메시지에 대한 패턴 매칭</p>
@@ -407,28 +407,28 @@ regex_filter.h / regex_filter.cpp</h2>
 <li>다중 패턴 지원</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2140"></a>
+<h2><a class="anchor" id="autotoc_md2142"></a>
 function_filter.h / function_filter.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/filters/</code> | <code>src/filters/</code></p>
 <p><b>목적</b>: 람다/함수를 통한 커스텀 필터링 로직</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2142"></a>
+<h1><a class="anchor" id="autotoc_md2144"></a>
 Formatter 구현</h1>
-<h2><a class="anchor" id="autotoc_md2143"></a>
+<h2><a class="anchor" id="autotoc_md2145"></a>
 plain_formatter.h / plain_formatter.cpp</h2>
 <p><b>목적</b>: 간단하고 사람이 읽을 수 있는 텍스트 형식</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2145"></a>
+<h2><a class="anchor" id="autotoc_md2147"></a>
 json_formatter.h / json_formatter.cpp</h2>
 <p><b>목적</b>: 기계가 파싱 가능한 JSON 출력</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2147"></a>
+<h2><a class="anchor" id="autotoc_md2149"></a>
 custom_formatter.h / custom_formatter.cpp</h2>
 <p><b>목적</b>: 커스텀 포매팅 로직을 위한 베이스 클래스</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2149"></a>
+<h1><a class="anchor" id="autotoc_md2151"></a>
 설정 시스템</h1>
-<h2><a class="anchor" id="autotoc_md2150"></a>
+<h2><a class="anchor" id="autotoc_md2152"></a>
 config_templates.h / config_templates.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/config/</code> | <code>src/config/</code></p>
 <p><b>목적</b>: 사전 정의된 설정</p>
@@ -439,7 +439,7 @@ config_templates.h / config_templates.cpp</h2>
 <li><code>low_latency</code>: 최소 지연시간</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2152"></a>
+<h2><a class="anchor" id="autotoc_md2154"></a>
 config_validator.h / config_validator.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/config/</code> | <code>src/config/</code></p>
 <p><b>목적</b>: 포괄적인 검증 프레임워크</p>
@@ -450,9 +450,9 @@ config_validator.h / config_validator.cpp</h2>
 <li>Filter 설정</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2154"></a>
+<h1><a class="anchor" id="autotoc_md2156"></a>
 보안 컴포넌트</h1>
-<h2><a class="anchor" id="autotoc_md2155"></a>
+<h2><a class="anchor" id="autotoc_md2157"></a>
 secure_key_storage.h / secure_key_storage.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/security/</code> | <code>src/security/</code></p>
 <p><b>목적</b>: RAII 기반 암호화 키 관리</p>
@@ -462,7 +462,7 @@ secure_key_storage.h / secure_key_storage.cpp</h2>
 <li>암호학적으로 안전한 키 생성</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2157"></a>
+<h2><a class="anchor" id="autotoc_md2159"></a>
 path_validator.h / path_validator.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/security/</code> | <code>src/security/</code></p>
 <p><b>목적</b>: 경로 검증 및 보안</p>
@@ -473,7 +473,7 @@ path_validator.h / path_validator.cpp</h2>
 <li>파일명 문자 제한</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2159"></a>
+<h2><a class="anchor" id="autotoc_md2161"></a>
 log_sanitizer.h / log_sanitizer.cpp</h2>
 <p><b>위치</b>: <code>include/kcenon/logger/security/</code> | <code>src/security/</code></p>
 <p><b>목적</b>: 민감한 데이터 새니타이징</p>
@@ -484,9 +484,9 @@ log_sanitizer.h / log_sanitizer.cpp</h2>
 <li>커스텀 패턴 지원</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2161"></a>
+<h1><a class="anchor" id="autotoc_md2163"></a>
 테스팅 구성</h1>
-<h2><a class="anchor" id="autotoc_md2162"></a>
+<h2><a class="anchor" id="autotoc_md2164"></a>
 유닛 테스트</h2>
 <p><b>위치</b>: <code>tests/unit/</code></p>
 <p><b>구조</b>: </p><div class="fragment"><div class="line">tests/unit/</div>
@@ -508,7 +508,7 @@ log_sanitizer.h / log_sanitizer.cpp</h2>
 <div class="line">    └── config_templates_test.cpp</div>
 </div><!-- fragment --><p><b>테스팅 프레임워크</b>: Google Test (GTest) <b>커버리지 목표</b>: 80%+</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2164"></a>
+<h2><a class="anchor" id="autotoc_md2166"></a>
 통합 테스트</h2>
 <p><b>위치</b>: <code>tests/integration/</code></p>
 <p><b>중점 영역</b>:</p><ul>
@@ -518,7 +518,7 @@ log_sanitizer.h / log_sanitizer.cpp</h2>
 <li>멀티 writer 시나리오</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2166"></a>
+<h2><a class="anchor" id="autotoc_md2168"></a>
 벤치마크</h2>
 <p><b>위치</b>: <code>tests/benchmarks/</code></p>
 <p><b>벤치마크 유형</b>:</p><ul>
@@ -527,9 +527,9 @@ log_sanitizer.h / log_sanitizer.cpp</h2>
 <li>메모리 벤치마크 (풋프린트, 할당 패턴)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2168"></a>
+<h1><a class="anchor" id="autotoc_md2170"></a>
 빌드 시스템</h1>
-<h2><a class="anchor" id="autotoc_md2169"></a>
+<h2><a class="anchor" id="autotoc_md2171"></a>
 CMakeLists.txt (루트)</h2>
 <p><b>위치</b>: <code>CMakeLists.txt</code></p>
 <p><b>주요 옵션</b>: </p><div class="fragment"><div class="line"># 코어 기능</div>
@@ -556,9 +556,9 @@ CMakeLists.txt (루트)</h2>
 <div class="line">option(LOGGER_WARNINGS_AS_ERRORS &quot;경고를 오류로 처리&quot; OFF)</div>
 <div class="line">option(LOGGER_ENABLE_COVERAGE &quot;코드 커버리지 활성화&quot; OFF)</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md2171"></a>
+<h1><a class="anchor" id="autotoc_md2173"></a>
 모듈 의존성</h1>
-<h2><a class="anchor" id="autotoc_md2172"></a>
+<h2><a class="anchor" id="autotoc_md2174"></a>
 의존성 그래프</h2>
 <div class="fragment"><div class="line">┌─────────────────┐</div>
 <div class="line">│  config 모듈    │  (의존성 없음)</div>
@@ -584,7 +584,7 @@ CMakeLists.txt (루트)</h2>
 <div class="line">         │  - thread_system             │</div>
 <div class="line">         │  - monitoring_system         │</div>
 <div class="line">         └──────────────────────────────┘</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2173"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2175"></a>
 외부 의존성</h2>
 <p><b>필수</b>:</p><ul>
 <li><b>fmt</b>: 문자열 포매팅 라이브러리 (헤더 전용 모드 가능)</li>
@@ -600,23 +600,23 @@ CMakeLists.txt (루트)</h2>
 </li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2175"></a>
+<h1><a class="anchor" id="autotoc_md2177"></a>
 파일 명명 규칙</h1>
-<h2><a class="anchor" id="autotoc_md2176"></a>
+<h2><a class="anchor" id="autotoc_md2178"></a>
 헤더 파일</h2>
 <ul>
 <li><b>인터페이스 헤더</b>: <code>*_interface.h</code> (예: <code>log_writer_interface.h</code>)</li>
 <li><b>구현 헤더</b>: <code>*.h</code> (예: <code>logger.h</code>, <code>file_writer.h</code>)</li>
 <li><b>설정 헤더</b>: <code>config_*.h</code> (예: <code>config_validator.h</code>)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2177"></a>
+<h2><a class="anchor" id="autotoc_md2179"></a>
 소스 파일</h2>
 <ul>
 <li><b>구현</b>: <code>*.cpp</code> (헤더 이름과 일치)</li>
 <li><b>테스트</b>: <code>*_test.cpp</code> (예: <code>logger_test.cpp</code>)</li>
 <li><b>벤치마크</b>: <code>*_benchmark.cpp</code> (예: <code>throughput_benchmark.cpp</code>)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2178"></a>
+<h2><a class="anchor" id="autotoc_md2180"></a>
 문서 파일</h2>
 <ul>
 <li><b>Markdown</b>: <code>*.md</code> (영어) 또는 <code>*.kr.md</code> (한국어)</li>
@@ -624,7 +624,7 @@ CMakeLists.txt (루트)</h2>
 <li><b>가이드</b>: <code>docs/guides/</code>의 <code>GUIDE_NAME.md</code></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2180"></a>
+<h1><a class="anchor" id="autotoc_md2182"></a>
 참고 문서</h1>
 <ul>
 <li>아키텍처 개요 / <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE_8kr.html">아키텍처 (한국어)</a> - 시스템 설계 및 아키텍처</li>
@@ -642,7 +642,7 @@ CMakeLists.txt (루트)</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 1 2026 10:13:18 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 1 2026 12:01:52 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

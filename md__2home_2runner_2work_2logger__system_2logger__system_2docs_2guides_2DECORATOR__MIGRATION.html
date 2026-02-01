@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Decorator Pattern Writer Migration Guide</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1340"></a> <b>Version</b>: 4.0.0 <b>Last Updated</b>: 2026-01-22</p>
-<h1><a class="anchor" id="autotoc_md1341"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1342"></a> <b>Version</b>: 4.0.0 <b>Last Updated</b>: 2026-01-22</p>
+<h1><a class="anchor" id="autotoc_md1343"></a>
 Table of Contents</h1>
 <ol type="1">
 <li>Overview</li>
@@ -107,10 +107,10 @@ Table of Contents</h1>
 <li>Troubleshooting</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1343"></a>
+<h1><a class="anchor" id="autotoc_md1345"></a>
 Overview</h1>
 <p>Version 4.0.0 introduces a decorator pattern-based writer architecture that separates cross-cutting concerns (filtering, buffering, formatting) from destination-specific logic (console, file, network output).</p>
-<h2><a class="anchor" id="autotoc_md1344"></a>
+<h2><a class="anchor" id="autotoc_md1346"></a>
 Why Decorator Pattern?</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -124,7 +124,7 @@ Why Decorator Pattern?</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Tight coupling between concerns   </td><td class="markdownTableBodyNone">Loose coupling via composition   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md1345"></a>
+<h2><a class="anchor" id="autotoc_md1347"></a>
 Key Components</h2>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                    Decorator Writers                         │</div>
@@ -140,11 +140,11 @@ Key Components</h2>
 <div class="line">│  └─────────────┘  └─────────────┘  └─────────────┘          │</div>
 <div class="line">└─────────────────────────────────────────────────────────────┘</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1347"></a>
+<h1><a class="anchor" id="autotoc_md1349"></a>
 New Architecture</h1>
-<h2><a class="anchor" id="autotoc_md1348"></a>
+<h2><a class="anchor" id="autotoc_md1350"></a>
 Base Classes</h2>
-<h3><a class="anchor" id="autotoc_md1349"></a>
+<h3><a class="anchor" id="autotoc_md1351"></a>
 &lt;tt&gt;log_writer_interface&lt;/tt&gt;</h3>
 <p>The core interface that all writers must implement:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>log_writer_interface {</div>
@@ -155,7 +155,7 @@ Base Classes</h2>
 <div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> is_healthy() <span class="keyword">const</span> = 0;</div>
 <div class="line">    <span class="keyword">virtual</span> ~log_writer_interface() = <span class="keywordflow">default</span>;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1350"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1352"></a>
 &lt;tt&gt;decorator_writer_base&lt;/tt&gt;</h3>
 <p>Abstract base class for decorators that eliminates boilerplate:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>decorator_writer_base : <span class="keyword">public</span> log_writer_interface, <span class="keyword">public</span> decorator_writer_tag {</div>
@@ -176,9 +176,9 @@ Base Classes</h2>
 <div class="line">    const log_writer_interface&amp; wrapped() const noexcept;</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1352"></a>
+<h1><a class="anchor" id="autotoc_md1354"></a>
 Built-in Decorators</h1>
-<h2><a class="anchor" id="autotoc_md1353"></a>
+<h2><a class="anchor" id="autotoc_md1355"></a>
 &lt;tt&gt;filtered_writer&lt;/tt&gt;</h2>
 <p>Filters log entries before passing to the wrapped writer:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/filtered_writer.h&gt;</span></div>
@@ -201,7 +201,7 @@ Built-in Decorators</h1>
 <div class="line">    std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;security.log&quot;</span>),</div>
 <div class="line">    std::move(composite)</div>
 <div class="line">);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1354"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1356"></a>
 &lt;tt&gt;buffered_writer&lt;/tt&gt;</h2>
 <p>Buffers log entries before writing to improve performance:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/buffered_writer.h&gt;</span></div>
@@ -214,7 +214,7 @@ Built-in Decorators</h1>
 <div class="line">    std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>),</div>
 <div class="line">    config</div>
 <div class="line">);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1355"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1357"></a>
 &lt;tt&gt;formatted_writer&lt;/tt&gt;</h2>
 <p>Applies formatting before writing:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/formatted_writer.h&gt;</span></div>
@@ -225,9 +225,9 @@ Built-in Decorators</h1>
 <div class="line">    std::make_unique&lt;json_formatter&gt;()</div>
 <div class="line">);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1357"></a>
+<h1><a class="anchor" id="autotoc_md1359"></a>
 Migrating Custom Writers</h1>
-<h2><a class="anchor" id="autotoc_md1358"></a>
+<h2><a class="anchor" id="autotoc_md1360"></a>
 Before (v3.x): Monolithic Writer</h2>
 <div class="fragment"><div class="line"><span class="comment">// Old approach: everything in one class</span></div>
 <div class="line"><span class="keyword">class </span>my_custom_writer : <span class="keyword">public</span> base_writer {</div>
@@ -254,7 +254,7 @@ Before (v3.x): Monolithic Writer</h2>
 <div class="line">    std::vector&lt;std::string&gt; buffer_;</div>
 <div class="line">    <span class="keywordtype">size_t</span> buffer_size_;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1359"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1361"></a>
 After (v4.0): Focused Leaf Writer</h2>
 <div class="fragment"><div class="line"><span class="comment">// New approach: only destination-specific logic</span></div>
 <div class="line"><span class="keyword">class </span>my_custom_writer : <span class="keyword">public</span> thread_safe_writer, <span class="keyword">public</span> sync_writer_tag {</div>
@@ -289,7 +289,7 @@ After (v4.0): Focused Leaf Writer</h2>
 <div class="line">    ),</div>
 <div class="line">    std::make_unique&lt;json_formatter&gt;()</div>
 <div class="line">);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1360"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1362"></a>
 Creating a Custom Decorator</h2>
 <p>If you need custom cross-cutting behavior, extend <code>decorator_writer_base</code>:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>rate_limiting_writer : <span class="keyword">public</span> decorator_writer_base {</div>
@@ -323,9 +323,9 @@ Creating a Custom Decorator</h2>
 <div class="line">    std::chrono::steady_clock::time_point window_start_;</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1362"></a>
+<h1><a class="anchor" id="autotoc_md1364"></a>
 Composing Decorators</h1>
-<h2><a class="anchor" id="autotoc_md1363"></a>
+<h2><a class="anchor" id="autotoc_md1365"></a>
 Order Matters</h2>
 <p>Decorators are applied in reverse order of construction (innermost first):</p>
 <div class="fragment"><div class="line"><span class="comment">// Execution order: filter → buffer → format → file</span></div>
@@ -339,7 +339,7 @@ Order Matters</h2>
 <div class="line">    ),</div>
 <div class="line">    std::make_unique&lt;json_formatter&gt;()</div>
 <div class="line">);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1364"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1366"></a>
 Recommended Order</h2>
 <ol type="1">
 <li><b>Filtering</b> (earliest) - Drop unwanted entries before any processing</li>
@@ -347,7 +347,7 @@ Recommended Order</h2>
 <li><b>Formatting</b> - Transform entries just before output</li>
 <li><b>Output</b> (leaf writer) - Write to destination</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1365"></a>
+<h2><a class="anchor" id="autotoc_md1367"></a>
 Using &lt;tt&gt;writer_builder&lt;/tt&gt; (Recommended)</h2>
 <p><b>Since v4.1.0</b>, the <code>writer_builder</code> provides a fluent API for composing writers with decorators:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/builders/writer_builder.h&gt;</span></div>
@@ -386,7 +386,7 @@ Using &lt;tt&gt;writer_builder&lt;/tt&gt; (Recommended)</h2>
 <li><b>Error-proof</b>: No manual nesting required</li>
 </ul>
 <p>See <a href="../../examples/writer_builder_example.cpp">writer_builder_example.cpp</a> for complete examples.</p>
-<h2><a class="anchor" id="autotoc_md1366"></a>
+<h2><a class="anchor" id="autotoc_md1368"></a>
 Using &lt;tt&gt;logger_builder&lt;/tt&gt;</h2>
 <p>The logger builder accepts writers created by <code>writer_builder</code>:</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
@@ -396,9 +396,9 @@ Using &lt;tt&gt;logger_builder&lt;/tt&gt;</h2>
 <div class="line">    .with_formatter(std::make_unique&lt;json_formatter&gt;())  <span class="comment">// Adds formatted_writer</span></div>
 <div class="line">    .build();</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1368"></a>
+<h1><a class="anchor" id="autotoc_md1370"></a>
 Deprecation Timeline and Legacy Patterns</h1>
-<h2><a class="anchor" id="autotoc_md1369"></a>
+<h2><a class="anchor" id="autotoc_md1371"></a>
 Deprecated Writer Patterns</h2>
 <p>The following legacy writer patterns are <b>deprecated</b> as of v4.1.0:</p>
 <table class="markdownTable">
@@ -411,7 +411,7 @@ Deprecated Writer Patterns</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Combined writer classes   </td><td class="markdownTableBodyNone">Deprecated (v4.1)   </td><td class="markdownTableBodyNone"><code>writer_builder()</code> with decorator chain   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md1370"></a>
+<h2><a class="anchor" id="autotoc_md1372"></a>
 Timeline</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -425,13 +425,13 @@ Timeline</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>5.0.0</b>   </td><td class="markdownTableBodyNone">Legacy classes removed   </td><td class="markdownTableBodyNone"><b>Required</b>: Must use decorator pattern   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md1371"></a>
+<h2><a class="anchor" id="autotoc_md1373"></a>
 Migration Paths</h2>
-<h3><a class="anchor" id="autotoc_md1372"></a>
+<h3><a class="anchor" id="autotoc_md1374"></a>
 Scenario 1: Simple File Writer</h3>
 <p><b>Before (Deprecated)</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>);</div>
 </div><!-- fragment --><p><b>After (Recommended)</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = writer_builder().file(<span class="stringliteral">&quot;app.log&quot;</span>).build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1373"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1375"></a>
 Scenario 2: Rotating File Writer</h3>
 <p><b>Before (Deprecated)</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;rotating_file_writer&gt;(</div>
 <div class="line">    <span class="stringliteral">&quot;app.log&quot;</span>,</div>
@@ -444,7 +444,7 @@ Scenario 2: Rotating File Writer</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Alternative: Use external log rotation tools (logrotate, etc.)</span></div>
 <div class="line"><span class="keyword">auto</span> writer = writer_builder().file(<span class="stringliteral">&quot;app.log&quot;</span>).build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1374"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1376"></a>
 Scenario 3: Async + Encrypted Writer</h3>
 <p><b>Before (Manual Nesting)</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;async_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;encrypted_writer&gt;(</div>
@@ -458,7 +458,7 @@ Scenario 3: Async + Encrypted Writer</h3>
 <div class="line">    .encrypted(key)</div>
 <div class="line">    .async(10000)</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1375"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1377"></a>
 Scenario 4: Buffered + Filtered Writer</h3>
 <p><b>Before (Manual Nesting)</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;buffered_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;filtered_writer&gt;(</div>
@@ -472,7 +472,7 @@ Scenario 4: Buffered + Filtered Writer</h3>
 <div class="line">    .filtered(std::make_unique&lt;level_filter&gt;(log_level::warning))</div>
 <div class="line">    .buffered(100)</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1376"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1378"></a>
 Scenario 5: Multiple Decorators (Production Setup)</h3>
 <p><b>Before (Complex Nesting)</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;formatted_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;async_writer&gt;(</div>
@@ -494,7 +494,7 @@ Scenario 5: Multiple Decorators (Production Setup)</h3>
 <div class="line">    .formatted(std::make_unique&lt;json_formatter&gt;())</div>
 <div class="line">    .async(20000)</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1377"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1379"></a>
 Scenario 6: Custom Writer Integration</h3>
 <p><b>Before (Inheritance)</b>: </p><div class="fragment"><div class="line"><span class="keyword">class </span>my_combined_writer : <span class="keyword">public</span> base_writer {</div>
 <div class="line">    <span class="comment">// 100+ lines of filtering, buffering, formatting logic</span></div>
@@ -515,7 +515,7 @@ Scenario 6: Custom Writer Integration</h3>
 <div class="line">    .buffered(100)</div>
 <div class="line">    .async()</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1378"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1380"></a>
 Support Policy</h2>
 <ul>
 <li><b>v4.x series</b>: Full backward compatibility, deprecation warnings only</li>
@@ -523,9 +523,9 @@ Support Policy</h2>
 <li><b>Migration support</b>: See <a href="../../examples/writer_builder_example.cpp">examples/writer_builder_example.cpp</a></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1380"></a>
+<h1><a class="anchor" id="autotoc_md1382"></a>
 Best Practices</h1>
-<h2><a class="anchor" id="autotoc_md1381"></a>
+<h2><a class="anchor" id="autotoc_md1383"></a>
 1. Keep Leaf Writers Simple</h2>
 <p>Leaf writers should only handle destination-specific I/O:</p>
 <div class="fragment"><div class="line"><span class="comment">// Good: Focused on one thing</span></div>
@@ -546,13 +546,13 @@ Best Practices</h1>
 <div class="line">        <span class="comment">// ...</span></div>
 <div class="line">    }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1382"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1384"></a>
 2. Use Category Tags</h2>
 <p>Mark your writers with appropriate category tags:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>my_sync_writer : <span class="keyword">public</span> thread_safe_writer, <span class="keyword">public</span> sync_writer_tag { ... };</div>
 <div class="line"><span class="keyword">class </span>my_async_writer : <span class="keyword">public</span> queued_writer_base, <span class="keyword">public</span> async_writer_tag { ... };</div>
 <div class="line"><span class="keyword">class </span>my_decorator : <span class="keyword">public</span> decorator_writer_base, <span class="keyword">public</span> decorator_writer_tag { ... };</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1383"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1385"></a>
 3. Handle Errors Gracefully</h2>
 <p>Decorators should propagate errors from wrapped writers:</p>
 <div class="fragment"><div class="line">common::VoidResult write(<span class="keyword">const</span> log_entry&amp; entry)<span class="keyword"> override </span>{</div>
@@ -564,7 +564,7 @@ Best Practices</h1>
 <div class="line">    <span class="comment">// Do post-processing</span></div>
 <div class="line">    <span class="keywordflow">return</span> {};</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1384"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1386"></a>
 4. Ensure Thread Safety</h2>
 <p>If your decorator maintains state, protect it:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>stateful_decorator : <span class="keyword">public</span> decorator_writer_base {</div>
@@ -578,11 +578,11 @@ Best Practices</h1>
 <div class="line">    <span class="comment">// mutable state...</span></div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1386"></a>
+<h1><a class="anchor" id="autotoc_md1388"></a>
 Troubleshooting</h1>
-<h2><a class="anchor" id="autotoc_md1387"></a>
+<h2><a class="anchor" id="autotoc_md1389"></a>
 Common Issues</h2>
-<h3><a class="anchor" id="autotoc_md1388"></a>
+<h3><a class="anchor" id="autotoc_md1390"></a>
 "Writer not receiving entries"</h3>
 <p>Check decorator composition order. Filters should be innermost:</p>
 <div class="fragment"><div class="line"><span class="comment">// Wrong: Filter after buffer means filtered entries still buffered</span></div>
@@ -596,7 +596,7 @@ Common Issues</h2>
 <div class="line">    std::make_unique&lt;filtered_writer&gt;(..., filter),</div>
 <div class="line">    config</div>
 <div class="line">);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1389"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1391"></a>
 "Entries not being formatted"</h3>
 <p>Ensure <code>formatted_writer</code> wraps the leaf writer:</p>
 <div class="fragment"><div class="line"><span class="comment">// Wrong: Formatting lost because it&#39;s wrapped by buffer</span></div>
@@ -610,7 +610,7 @@ Common Issues</h2>
 <div class="line">    std::make_unique&lt;buffered_writer&gt;(..., config),</div>
 <div class="line">    formatter</div>
 <div class="line">);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1390"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1392"></a>
 "Flush not working"</h3>
 <p>Call <code>flush()</code> on the outermost decorator:</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> outermost = std::make_unique&lt;formatted_writer&gt;(</div>
@@ -620,7 +620,7 @@ Common Issues</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// This flushes all layers</span></div>
 <div class="line">outermost-&gt;flush();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1391"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1393"></a>
 Migration Checklist</h2>
 <ul>
 <li>[ ] Identify cross-cutting concerns in existing writers</li>
@@ -632,7 +632,7 @@ Migration Checklist</h2>
 <li>[ ] Benchmark to ensure no performance regression</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1393"></a>
+<h1><a class="anchor" id="autotoc_md1395"></a>
 Related Documentation</h1>
 <ul>
 <li><a href="../../examples/writer_builder_example.cpp">writer_builder Example</a> - Complete usage examples</li>
@@ -649,7 +649,7 @@ Related Documentation</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 1 2026 10:13:18 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 1 2026 12:01:52 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
