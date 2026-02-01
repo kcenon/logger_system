@@ -185,6 +185,9 @@ Composing Writers with Decorator Pattern</h3>
 <div class="line">    .async()</div>
 <div class="line">    .build();</div>
 </div><!-- fragment --><p>See <a href="examples/writer_builder_example.cpp">examples/writer_builder_example.cpp</a> for more usage patterns including encryption, filtering, and multi-writer setups.</p>
+<blockquote class="doxtable">
+<p>&zwj;<b>Migration Notice</b>: If you're upgrading from earlier versions that use manual decorator nesting, see the <a href="docs/guides/DECORATOR_MIGRATION.md#deprecation-timeline-and-legacy-patterns">Decorator Pattern Migration Guide</a> for migration scenarios. Manual nesting is deprecated in favor of <code>writer_builder</code> and will be discouraged in v5.0.0. </p>
+</blockquote>
 <h3><a class="anchor" id="autotoc_md6"></a>
 Installation</h3>
 <p><b>Using vcpkg</b>: </p><div class="fragment"><div class="line"># Install with default features (fmt only)</div>
@@ -652,7 +655,7 @@ Acknowledgments</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 1 2026 09:54:10 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 1 2026 10:13:18 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
