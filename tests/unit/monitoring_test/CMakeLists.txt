@@ -15,7 +15,7 @@ target_include_directories(monitoring_test PRIVATE
 
 # Link with required libraries
 target_link_libraries(monitoring_test PRIVATE
-    logger
+    LoggerSystem
     GTest::gtest
     GTest::gtest_main
     Threads::Threads

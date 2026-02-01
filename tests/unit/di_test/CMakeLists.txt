@@ -15,7 +15,7 @@ target_include_directories(di_container_test PRIVATE
 
 # Link with required libraries
 target_link_libraries(di_container_test PRIVATE
-    logger
+    LoggerSystem
     GTest::gtest
     GTest::gtest_main
     Threads::Threads
