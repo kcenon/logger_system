@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['옵션_0',['옵션',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1691',1,'핵심 빌드 옵션'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1786',1,'CMake 옵션']]]
+  ['옵션_0',['옵션',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1692',1,'핵심 빌드 옵션'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1787',1,'CMake 옵션']]]
 ];

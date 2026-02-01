@@ -96,15 +96,15 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | 한국어 </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md644"></a>
+<h1><a class="anchor" id="autotoc_md645"></a>
 Writer Hierarchy and Categories</h1>
 <p>This document describes the logger system's writer hierarchy and category classification system introduced in v1.4.0.</p>
-<h2><a class="anchor" id="autotoc_md645"></a>
+<h2><a class="anchor" id="autotoc_md646"></a>
 Overview</h2>
 <p>Writers are categorized based on their operational characteristics using a type-safe tag system. This helps users understand writer behavior and make informed decisions about which writer to use.</p>
-<h2><a class="anchor" id="autotoc_md646"></a>
+<h2><a class="anchor" id="autotoc_md647"></a>
 Category System</h2>
-<h3><a class="anchor" id="autotoc_md647"></a>
+<h3><a class="anchor" id="autotoc_md648"></a>
 Writer Categories</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -118,7 +118,7 @@ Writer Categories</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Composite</b>   </td><td class="markdownTableBodyNone">Combines multiple outputs or pipeline stages   </td><td class="markdownTableBodyNone"><code>composite_writer</code>, <code>hybrid_writer</code>   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md648"></a>
+<h3><a class="anchor" id="autotoc_md649"></a>
 Category Tags</h3>
 <p>Each writer inherits from one or more category tags to indicate its behavior:</p>
 <div class="fragment"><div class="line"><span class="comment">// Category tags defined in writer_category.h</span></div>
@@ -126,7 +126,7 @@ Category Tags</h3>
 <div class="line"><span class="keyword">struct </span>async_writer_tag { ... };</div>
 <div class="line"><span class="keyword">struct </span>decorator_writer_tag { ... };</div>
 <div class="line"><span class="keyword">struct </span>composite_writer_tag { ... };</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md649"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md650"></a>
 Complete Writer Hierarchy</h2>
 <div class="fragment"><div class="line">log_writer_interface (interface)</div>
 <div class="line">  │</div>
@@ -147,9 +147,9 @@ Complete Writer Hierarchy</h2>
 <div class="line">  │</div>
 <div class="line">  └── composite_writer [composite_writer_tag]</div>
 <div class="line">        (Pipeline Pattern: formatter + sink)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md650"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md651"></a>
 Category Characteristics</h2>
-<h3><a class="anchor" id="autotoc_md651"></a>
+<h3><a class="anchor" id="autotoc_md652"></a>
 Synchronous Writers (sync_writer_tag)</h3>
 <p><b>Characteristics:</b></p><ul>
 <li>Immediate, guaranteed output when <code>write()</code> returns</li>
@@ -162,7 +162,7 @@ Synchronous Writers (sync_writer_tag)</h3>
 <li>Applications where latency is not critical</li>
 </ul>
 <p><b>Writers:</b> <code>console_writer</code>, <code>file_writer</code>, <code>rotating_file_writer</code></p>
-<h3><a class="anchor" id="autotoc_md652"></a>
+<h3><a class="anchor" id="autotoc_md653"></a>
 Asynchronous Writers (async_writer_tag)</h3>
 <p><b>Characteristics:</b></p><ul>
 <li>Non-blocking operation (returns immediately)</li>
@@ -176,7 +176,7 @@ Asynchronous Writers (async_writer_tag)</h3>
 <li>Network destinations with variable latency</li>
 </ul>
 <p><b>Writers:</b> <code>async_writer</code>, <code>batch_writer</code>, <code>network_writer</code>, <code>otlp_writer</code></p>
-<h3><a class="anchor" id="autotoc_md653"></a>
+<h3><a class="anchor" id="autotoc_md654"></a>
 Decorator Writers (decorator_writer_tag)</h3>
 <p><b>Characteristics:</b></p><ul>
 <li>Wraps another writer to add functionality</li>
@@ -191,7 +191,7 @@ Decorator Writers (decorator_writer_tag)</h3>
 <li>Batching writes for performance</li>
 </ul>
 <p><b>Writers:</b> <code>async_writer</code>, <code>batch_writer</code>, <code>critical_writer</code>, <code>encrypted_writer</code>, <code>hybrid_writer</code></p>
-<h3><a class="anchor" id="autotoc_md654"></a>
+<h3><a class="anchor" id="autotoc_md655"></a>
 Composite Writers (composite_writer_tag)</h3>
 <p><b>Characteristics:</b></p><ul>
 <li>Combines multiple components</li>
@@ -204,9 +204,9 @@ Composite Writers (composite_writer_tag)</h3>
 <li>Complex logging pipelines</li>
 </ul>
 <p><b>Writers:</b> <code>composite_writer</code>, <code>hybrid_writer</code></p>
-<h2><a class="anchor" id="autotoc_md655"></a>
+<h2><a class="anchor" id="autotoc_md656"></a>
 Using Category Information</h2>
-<h3><a class="anchor" id="autotoc_md656"></a>
+<h3><a class="anchor" id="autotoc_md657"></a>
 Compile-Time Type Traits</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/interfaces/writer_category.h&gt;</span></div>
 <div class="line"> </div>
@@ -220,7 +220,7 @@ Compile-Time Type Traits</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Check if a writer is composite</span></div>
 <div class="line"><span class="keyword">static_assert</span>(is_composite_writer_v&lt;composite_writer&gt;);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md657"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md658"></a>
 C++20 Concepts</h3>
 <div class="fragment"><div class="line"><span class="comment">// Function that only accepts sync writers</span></div>
 <div class="line"><span class="keyword">template</span>&lt;SyncWriter W&gt;</div>
@@ -229,7 +229,7 @@ C++20 Concepts</h3>
 <div class="line"><span class="comment">// Function that only accepts async writers</span></div>
 <div class="line"><span class="keyword">template</span>&lt;AsyncWriter W&gt;</div>
 <div class="line"><span class="keywordtype">void</span> add_async_writer(std::unique_ptr&lt;W&gt; writer);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md658"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md659"></a>
 Runtime Category Query</h3>
 <div class="fragment"><div class="line"><span class="comment">// Get the primary category of a writer type</span></div>
 <div class="line"><span class="keyword">constexpr</span> writer_category cat = get_writer_category&lt;async_writer&gt;();</div>
@@ -238,9 +238,9 @@ Runtime Category Query</h3>
 <div class="line"><span class="comment">// Convert category to string</span></div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* name = to_string(writer_category::synchronous);</div>
 <div class="line"><span class="comment">// name == &quot;synchronous&quot;</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md659"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md660"></a>
 Design Patterns Used</h2>
-<h3><a class="anchor" id="autotoc_md660"></a>
+<h3><a class="anchor" id="autotoc_md661"></a>
 Template Method Pattern (thread_safe_writer)</h3>
 <p><code>thread_safe_writer</code> uses the Template Method pattern to provide automatic thread-safety:</p>
 <div class="fragment"><div class="line"><span class="comment">// Public method handles locking</span></div>
@@ -251,14 +251,14 @@ Template Method Pattern (thread_safe_writer)</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Derived classes implement this</span></div>
 <div class="line"><span class="keyword">virtual</span> common::VoidResult write_impl(...) = 0;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md661"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md662"></a>
 Decorator Pattern</h3>
 <p>Decorator writers wrap other writers to add functionality:</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> file = std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>);</div>
 <div class="line"><span class="keyword">auto</span> async = std::make_unique&lt;async_writer&gt;(std::move(file));</div>
 <div class="line"><span class="keyword">auto</span> critical = std::make_unique&lt;critical_writer&gt;(std::move(async));</div>
 <div class="line"><span class="comment">// Result: critical -&gt; async -&gt; file</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md662"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md663"></a>
 Pipeline Pattern (composite_writer)</h3>
 <p><code>composite_writer</code> composes a formatter and sink:</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> writer = make_composite_writer(</div>
@@ -266,7 +266,7 @@ Pipeline Pattern (composite_writer)</h3>
 <div class="line">    std::make_unique&lt;file_sink&gt;(<span class="stringliteral">&quot;app.json&quot;</span>)</div>
 <div class="line">);</div>
 <div class="line"><span class="comment">// entry -&gt; formatter.format() -&gt; sink.write_raw()</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md663"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md664"></a>
 Related Documentation</h2>
 <ul>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2WRITER__SELECTION__GUIDE.html">Writer Selection Guide</a> - How to choose the right writer</li>
@@ -281,7 +281,7 @@ Related Documentation</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 1 2026 09:26:30 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 1 2026 09:54:10 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -96,11 +96,11 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <b>English</b> | <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE_8kr.html">한국어</a> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md782"></a>
+<h1><a class="anchor" id="autotoc_md783"></a>
 Threading Ecosystem Architecture</h1>
 <p><b>Version</b>: 3.0.0 <b>Last Updated</b>: 2025-12-10</p>
 <p>A comprehensive overview of the modular threading ecosystem and inter-project relationships.</p>
-<h2><a class="anchor" id="autotoc_md783"></a>
+<h2><a class="anchor" id="autotoc_md784"></a>
 Table of Contents</h2>
 <ul>
 <li>Ecosystem Overview</li>
@@ -113,7 +113,7 @@ Table of Contents</h2>
 <li>Documentation Structure</li>
 <li>Future Roadmap</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md784"></a>
+<h2><a class="anchor" id="autotoc_md785"></a>
 🏗️ Ecosystem Overview</h2>
 <p>The unified_system ecosystem consists of five interconnected projects designed to provide a complete, high-performance concurrent programming solution:</p>
 <div class="fragment"><div class="line">                    ┌─────────────────────────────┐</div>
@@ -155,12 +155,12 @@ Table of Contents</h2>
 <div class="line">                    │ • Result&lt;T&gt;       │</div>
 <div class="line">                    │ • C++20 Concepts  │</div>
 <div class="line">                    └───────────────────┘</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md785"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md786"></a>
 📋 Project Roles &amp; Responsibilities</h2>
-<h3><a class="anchor" id="autotoc_md786"></a>
+<h3><a class="anchor" id="autotoc_md787"></a>
 1. common_system (Foundation) - &lt;strong&gt;Required&lt;/strong&gt;</h3>
 <p><b>Repository</b>: <a href="https://github.com/kcenon/common_system">https://github.com/kcenon/common_system</a> <b>Role</b>: Core interfaces and utilities for the ecosystem</p>
-<h4><a class="anchor" id="autotoc_md787"></a>
+<h4><a class="anchor" id="autotoc_md788"></a>
 Responsibilities:</h4>
 <ul>
 <li><b>Interface Definitions</b>: <code>ILogger</code>, <code>IMonitor</code>, <code>IExecutor</code> interfaces</li>
@@ -168,7 +168,7 @@ Responsibilities:</h4>
 <li><b>C++20 Concepts</b>: Type constraints for interface implementations</li>
 <li><b>Common Utilities</b>: <code>source_location</code>, error codes, type traits</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md788"></a>
+<h4><a class="anchor" id="autotoc_md789"></a>
 Key Components:</h4>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>common::interfaces {</div>
 <div class="line">    <span class="comment">// Core logging interface</span></div>
@@ -204,17 +204,17 @@ Key Components:</h4>
 <div class="line">    <span class="comment">// C++20 source location wrapper</span></div>
 <div class="line">    <span class="keyword">struct </span>source_location;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md789"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md790"></a>
 Dependencies:</h4>
 <ul>
 <li><b>External</b>: None (standalone foundation)</li>
 <li><b>Internal</b>: Self-contained</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md791"></a>
+<h3><a class="anchor" id="autotoc_md792"></a>
 2. logger_system (Logging) - &lt;strong&gt;Standalone Capable&lt;/strong&gt;</h3>
 <p><b>Repository</b>: <a href="https://github.com/kcenon/logger_system">https://github.com/kcenon/logger_system</a> <b>Role</b>: High-performance asynchronous logging implementation</p>
-<h4><a class="anchor" id="autotoc_md792"></a>
+<h4><a class="anchor" id="autotoc_md793"></a>
 Responsibilities:</h4>
 <ul>
 <li><b>Interface Implementation</b>: Implements <code>common::interfaces::ILogger</code></li>
@@ -223,7 +223,7 @@ Responsibilities:</h4>
 <li><b>Multiple Writers</b>: Console, file, network, and custom output targets</li>
 <li><b>Thread Safety</b>: Safe concurrent access from multiple threads</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md793"></a>
+<h4><a class="anchor" id="autotoc_md794"></a>
 Key Components:</h4>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
 <div class="line">    <span class="comment">// Main logger implementation (v3.0)</span></div>
@@ -252,7 +252,7 @@ Key Components:</h4>
 <div class="line">    <span class="keyword">class </span>critical_writer;</div>
 <div class="line">    <span class="keyword">class </span>batch_writer;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md794"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md795"></a>
 Dependencies:</h4>
 <ul>
 <li><b>Required</b>: common_system (for <code>ILogger</code> interface and <code>Result&lt;T&gt;</code>)</li>
@@ -260,13 +260,13 @@ Dependencies:</h4>
 <li><b>Internal</b>: Standalone async processing using <code>std::jthread</code></li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md796"></a>
+<h3><a class="anchor" id="autotoc_md797"></a>
 3. thread_system (Threading) - &lt;strong&gt;Optional&lt;/strong&gt;</h3>
 <p><b>Repository</b>: <a href="https://github.com/kcenon/thread_system">https://github.com/kcenon/thread_system</a> <b>Role</b>: Enhanced threading primitives and worker pools</p>
 <blockquote class="doxtable">
 <p>&zwj;<b>Note</b>: Since logger_system v3.0, thread_system is <b>optional</b>. The logger operates in standalone mode by default using <code>std::jthread</code>. </p>
 </blockquote>
-<h4><a class="anchor" id="autotoc_md797"></a>
+<h4><a class="anchor" id="autotoc_md798"></a>
 Responsibilities:</h4>
 <ul>
 <li><b>Thread Pools</b>: Worker pool management</li>
@@ -274,7 +274,7 @@ Responsibilities:</h4>
 <li><b>Advanced Scheduling</b>: Priority-based and adaptive scheduling</li>
 <li><b>Cross-Platform Threading</b>: Consistent API across platforms</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md798"></a>
+<h4><a class="anchor" id="autotoc_md799"></a>
 Key Components:</h4>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>thread_module {</div>
 <div class="line">    <span class="keyword">class </span>thread_pool;</div>
@@ -282,17 +282,17 @@ Key Components:</h4>
 <div class="line">    <span class="keyword">class </span>job_queue;</div>
 <div class="line">    <span class="keyword">class </span>callback_job;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md799"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md800"></a>
 Dependencies:</h4>
 <ul>
 <li><b>Required</b>: common_system</li>
 <li><b>Internal</b>: Self-contained threading logic</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md801"></a>
+<h3><a class="anchor" id="autotoc_md802"></a>
 4. monitoring_system (Metrics)</h3>
 <p><b>Repository</b>: <a href="https://github.com/kcenon/monitoring_system">https://github.com/kcenon/monitoring_system</a> <b>Role</b>: Real-time performance monitoring and metrics collection</p>
-<h4><a class="anchor" id="autotoc_md802"></a>
+<h4><a class="anchor" id="autotoc_md803"></a>
 Responsibilities:</h4>
 <ul>
 <li><b>Interface Implementation</b>: Implements <code>common::interfaces::IMonitor</code></li>
@@ -300,7 +300,7 @@ Responsibilities:</h4>
 <li><b>Historical Storage</b>: Ring buffer for time-series data</li>
 <li><b>Performance Tracking</b>: Low-overhead metrics collection</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md803"></a>
+<h4><a class="anchor" id="autotoc_md804"></a>
 Key Components:</h4>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::monitoring {</div>
 <div class="line">    <span class="keyword">class </span>monitoring : <span class="keyword">public</span> common::interfaces::IMonitor;</div>
@@ -310,24 +310,24 @@ Key Components:</h4>
 <div class="line"> </div>
 <div class="line">    class metrics_collector;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md804"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md805"></a>
 Dependencies:</h4>
 <ul>
 <li><b>Required</b>: common_system (for <code>IMonitor</code> interface)</li>
 <li><b>Optional</b>: thread_system, logger_system</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md806"></a>
+<h3><a class="anchor" id="autotoc_md807"></a>
 5. integrated_thread_system (Integration Hub)</h3>
 <p><b>Repository</b>: <a href="https://github.com/kcenon/integrated_thread_system">https://github.com/kcenon/integrated_thread_system</a> <b>Role</b>: Complete integration examples and testing framework</p>
-<h4><a class="anchor" id="autotoc_md807"></a>
+<h4><a class="anchor" id="autotoc_md808"></a>
 Dependencies:</h4>
 <ul>
 <li><b>Required</b>: common_system, thread_system, logger_system, monitoring_system</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md808"></a>
+<h2><a class="anchor" id="autotoc_md809"></a>
 🔄 Dependency Flow &amp; Interface Contracts</h2>
-<h3><a class="anchor" id="autotoc_md809"></a>
+<h3><a class="anchor" id="autotoc_md810"></a>
 Interface Hierarchy (v3.0)</h3>
 <div class="fragment"><div class="line">common::interfaces::ILogger</div>
 <div class="line">    ↑ implements</div>
@@ -336,7 +336,7 @@ Interface Hierarchy (v3.0)</h3>
 <div class="line">common::interfaces::IMonitor</div>
 <div class="line">    ↑ implements</div>
 <div class="line">kcenon::monitoring::monitoring</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md810"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md811"></a>
 Dependency Graph (v3.0)</h3>
 <div class="fragment"><div class="line">┌─────────────────┐</div>
 <div class="line">│  common_system  │ ← Foundation (REQUIRED for all)</div>
@@ -356,7 +356,7 @@ Dependency Graph (v3.0)</h3>
 <div class="line">│   (OPTIONAL)    │  │                 │  │                 │  │ - monitoring_   │</div>
 <div class="line">└─────────────────┘  └─────────────────┘  └─────────────────┘  │   system        │</div>
 <div class="line">                                                               └─────────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md811"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md812"></a>
 Build Order Requirements</h3>
 <ol type="1">
 <li><b>common_system</b> (build first - foundation)</li>
@@ -364,16 +364,16 @@ Build Order Requirements</h3>
 <li><b>logger_system</b> &amp; <b>monitoring_system</b> (parallel - both depend on common_system)</li>
 <li><b>integrated_thread_system</b> (build last - depends on all others)</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md812"></a>
+<h3><a class="anchor" id="autotoc_md813"></a>
 Standalone vs Integrated Mode</h3>
 <p><b>Standalone Mode (Default since v3.0):</b> </p><div class="fragment"><div class="line"><span class="comment">// No thread_system dependency</span></div>
 <div class="line"><span class="keyword">auto</span> logger = kcenon::logger::logger_builder()</div>
 <div class="line">    .with_standalone_backend()  <span class="comment">// Uses std::jthread</span></div>
 <div class="line">    .add_writer(<span class="stringliteral">&quot;console&quot;</span>, std::make_unique&lt;console_writer&gt;())</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md813"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md814"></a>
 🔧 Integration Patterns</h2>
-<h3><a class="anchor" id="autotoc_md814"></a>
+<h3><a class="anchor" id="autotoc_md815"></a>
 1. Interface-Based Integration (v3.0)</h3>
 <div class="fragment"><div class="line"><span class="comment">// common_system provides interfaces</span></div>
 <div class="line"><span class="keyword">namespace </span>common::interfaces {</div>
@@ -394,7 +394,7 @@ Standalone vs Integrated Mode</h3>
 <div class="line">        <span class="comment">// Works standalone or with thread_system integration</span></div>
 <div class="line">    };</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md815"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md816"></a>
 2. Dependency Injection Pattern</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
@@ -412,7 +412,7 @@ Standalone vs Integrated Mode</h3>
 <div class="line"><span class="comment">// Use through ILogger interface</span></div>
 <div class="line">common::interfaces::ILogger* ilogger = logger.get();</div>
 <div class="line">ilogger-&gt;log(common::interfaces::log_level::info, <span class="stringliteral">&quot;Application started&quot;</span>);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md816"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md817"></a>
 3. Configuration Management</h3>
 <div class="fragment"><div class="line"><span class="comment">// Using configuration strategies</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
@@ -420,7 +420,7 @@ Standalone vs Integrated Mode</h3>
 <div class="line">    .with_performance_tuning(performance_level::high_throughput)</div>
 <div class="line">    .auto_configure()  <span class="comment">// Read LOG_* environment variables</span></div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md817"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md818"></a>
 4. Backend Selection Pattern</h3>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger::backends {</div>
 <div class="line">    <span class="comment">// Abstract backend interface</span></div>
@@ -438,9 +438,9 @@ Standalone vs Integrated Mode</h3>
 <div class="line">    <span class="comment">// Thread system backend (optional) - uses thread_system primitives</span></div>
 <div class="line">    <span class="comment">// Requires LOGGER_USE_THREAD_SYSTEM=ON at build time</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md818"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md819"></a>
 📊 Performance Characteristics</h2>
-<h3><a class="anchor" id="autotoc_md819"></a>
+<h3><a class="anchor" id="autotoc_md820"></a>
 Design Principles</h3>
 <ul>
 <li><b>Zero-Overhead Abstractions</b>: Interface costs are compile-time only</li>
@@ -448,7 +448,7 @@ Design Principles</h3>
 <li><b>Cache-Friendly Data Structures</b>: Optimize for modern CPU architectures</li>
 <li><b>Adaptive Algorithms</b>: Self-tuning based on workload characteristics</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md820"></a>
+<h3><a class="anchor" id="autotoc_md821"></a>
 Performance Metrics (v3.0)</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -462,7 +462,7 @@ Performance Metrics (v3.0)</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">monitoring_system   </td><td class="markdownTableBodyNone">N/A   </td><td class="markdownTableBodyNone">&lt; 10ns update   </td><td class="markdownTableBodyNone">&gt; 100M/s   </td><td class="markdownTableBodyNone">&lt; 10MB   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md821"></a>
+<h3><a class="anchor" id="autotoc_md822"></a>
 Standalone vs Thread System Performance</h3>
 <p>The standalone backend using <code>std::jthread</code> provides comparable performance to the thread_system integration for most use cases:</p>
 <table class="markdownTable">
@@ -477,22 +477,22 @@ Standalone vs Thread System Performance</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Memory baseline   </td><td class="markdownTableBodyNone">1.8MB   </td><td class="markdownTableBodyNone">2.1MB   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md822"></a>
+<h2><a class="anchor" id="autotoc_md823"></a>
 🔄 Evolution: Monolithic → Modular → Standalone</h2>
-<h3><a class="anchor" id="autotoc_md823"></a>
+<h3><a class="anchor" id="autotoc_md824"></a>
 Phase 1: Monolithic (v1.x)</h3>
 <ul>
 <li>All components in single repository</li>
 <li>Tight coupling between logging, threading, monitoring</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md824"></a>
+<h3><a class="anchor" id="autotoc_md825"></a>
 Phase 2: Modular (v2.x)</h3>
 <ul>
 <li>Separated into individual repositories</li>
 <li>thread_system as required dependency for logger_system</li>
 <li>Interface-based integration</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md825"></a>
+<h3><a class="anchor" id="autotoc_md826"></a>
 Phase 3: Standalone (v3.0) - Current</h3>
 <ul>
 <li>common_system as foundation</li>
@@ -513,7 +513,7 @@ Phase 3: Standalone (v3.0) - Current</h3>
 <div class="line">│ • Utilities     │    │ • Optional      │    │                 │</div>
 <div class="line">│                 │    │   thread_system │    │                 │</div>
 <div class="line">└─────────────────┘    └─────────────────┘    └─────────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md826"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md827"></a>
 Migration Benefits (v3.0)</h3>
 <ul>
 <li><b>Reduced Dependencies</b>: logger_system works without thread_system</li>
@@ -522,9 +522,9 @@ Migration Benefits (v3.0)</h3>
 <li><b>C++20 Features</b>: Modern language features</li>
 <li><b>Backward Compatibility</b>: Native API still supported</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md827"></a>
+<h2><a class="anchor" id="autotoc_md828"></a>
 🚀 Getting Started</h2>
-<h3><a class="anchor" id="autotoc_md828"></a>
+<h3><a class="anchor" id="autotoc_md829"></a>
 1. Minimal Setup (Standalone)</h3>
 <div class="fragment"><div class="line"># Clone required repositories</div>
 <div class="line">git clone https://github.com/kcenon/common_system.git</div>
@@ -538,7 +538,7 @@ Migration Benefits (v3.0)</h3>
 <div class="line"># Build logger_system (standalone mode)</div>
 <div class="line">cd logger_system &amp;&amp; mkdir build &amp;&amp; cd build</div>
 <div class="line">cmake .. &amp;&amp; make -j$(nproc)</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md829"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md830"></a>
 2. Full Ecosystem Setup</h3>
 <div class="fragment"><div class="line"># Create workspace directory</div>
 <div class="line">mkdir unified_system &amp;&amp; cd unified_system</div>
@@ -549,7 +549,7 @@ Migration Benefits (v3.0)</h3>
 <div class="line">git clone https://github.com/kcenon/logger_system.git</div>
 <div class="line">git clone https://github.com/kcenon/monitoring_system.git</div>
 <div class="line">git clone https://github.com/kcenon/integrated_thread_system.git</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md830"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md831"></a>
 3. Build Order</h3>
 <div class="fragment"><div class="line"># 1. Build foundation (required)</div>
 <div class="line">cd common_system &amp;&amp; ./build.sh --clean &amp;&amp; cd ..</div>
@@ -562,7 +562,7 @@ Migration Benefits (v3.0)</h3>
 <div class="line"> </div>
 <div class="line"># 3. Build integration (optional)</div>
 <div class="line">cd integrated_thread_system &amp;&amp; ./build.sh --clean --local</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md831"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md832"></a>
 4. CMake Integration</h3>
 <div class="fragment"><div class="line"># Minimal (standalone logger)</div>
 <div class="line">find_package(common_system REQUIRED)</div>
@@ -580,16 +580,16 @@ Migration Benefits (v3.0)</h3>
 <div class="line">    kcenon::logger</div>
 <div class="line">    kcenon::thread</div>
 <div class="line">)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md832"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md833"></a>
 📚 Documentation Structure</h2>
-<h3><a class="anchor" id="autotoc_md833"></a>
+<h3><a class="anchor" id="autotoc_md834"></a>
 common_system</h3>
 <ul>
 <li><b>API Reference</b>: Interface documentation</li>
 <li><b>Error Handling</b>: Result pattern guide</li>
 <li><b>C++20 Features</b>: Concepts and utilities</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md834"></a>
+<h3><a class="anchor" id="autotoc_md835"></a>
 logger_system</h3>
 <ul>
 <li><b><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE.html">API Reference</a></b>: Complete API documentation</li>
@@ -597,21 +597,21 @@ logger_system</h3>
 <li><b><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html">Migration Guide</a></b>: Version migration</li>
 <li><b><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html">Best Practices</a></b>: Usage patterns</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md835"></a>
+<h3><a class="anchor" id="autotoc_md836"></a>
 thread_system</h3>
 <ul>
 <li><b>API Reference</b>: Thread pool and worker documentation</li>
 <li><b>Threading Guide</b>: Concurrent programming patterns</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md836"></a>
+<h3><a class="anchor" id="autotoc_md837"></a>
 monitoring_system</h3>
 <ul>
 <li><b>Metrics Guide</b>: Available metrics</li>
 <li><b>Custom Collectors</b>: Extension patterns</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md837"></a>
+<h2><a class="anchor" id="autotoc_md838"></a>
 🔮 Future Roadmap</h2>
-<h3><a class="anchor" id="autotoc_md838"></a>
+<h3><a class="anchor" id="autotoc_md839"></a>
 Phase 3.1: Enhancement (Current)</h3>
 <ul>
 <li>✅ common_system with C++20 Concepts</li>
@@ -620,14 +620,14 @@ Phase 3.1: Enhancement (Current)</h3>
 <li>🔄 Lock-free queue implementation</li>
 <li>🔄 Enhanced monitoring integration</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md839"></a>
+<h3><a class="anchor" id="autotoc_md840"></a>
 Phase 3.2: Optimization</h3>
 <ul>
 <li>📋 SIMD-optimized string operations</li>
 <li>📋 Memory pool allocators</li>
 <li>📋 Zero-copy message passing</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md840"></a>
+<h3><a class="anchor" id="autotoc_md841"></a>
 Phase 4: Ecosystem Expansion</h3>
 <ul>
 <li>📋 HTTP server integration</li>
@@ -645,7 +645,7 @@ Phase 4: Ecosystem Expansion</h3>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 1 2026 09:26:30 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 1 2026 09:54:10 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['멀티스레드_20비교_204_20스레드_0',['멀티스레드 비교 (4 스레드)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md863',1,'']]],
-  ['멀티스레드_20성능_1',['멀티스레드 성능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE_8kr.html#autotoc_md484',1,'멀티스레드 성능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md857',1,'멀티스레드 성능']]]
+  ['멀티스레드_20비교_204_20스레드_0',['멀티스레드 비교 (4 스레드)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md864',1,'']]],
+  ['멀티스레드_20성능_1',['멀티스레드 성능',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE_8kr.html#autotoc_md485',1,'멀티스레드 성능'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md858',1,'멀티스레드 성능']]]
 ];
