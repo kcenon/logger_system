@@ -1,10 +1,10 @@
 var searchData=
 [
   ['시간_20분포_0',['지연 시간 분포',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md167',1,'']]],
-  ['시그널_20핸들러_20안전성_1',['3. 시그널 핸들러 안전성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2023',1,'']]],
+  ['시그널_20핸들러_20안전성_1',['3. 시그널 핸들러 안전성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2056',1,'']]],
   ['시기_2',['시기',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md152',1,'사용 시기'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md157',1,'사용 시기'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md163',1,'사용 시기'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1834',1,'thread_system 통합 사용 시기']]],
   ['시나리오를_20위한_20로그_20샘플링_20issue_20282_3',['고용량 시나리오를 위한 로그 샘플링 (Issue #282)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md945',1,'']]],
-  ['시스템_4',['시스템',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE_8kr.html#autotoc_md2173',1,'빌드 시스템'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE_8kr.html#autotoc_md2154',1,'설정 시스템']]],
+  ['시스템_4',['시스템',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE_8kr.html#autotoc_md2206',1,'빌드 시스템'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE_8kr.html#autotoc_md2187',1,'설정 시스템']]],
   ['시스템_20마이그레이션_20가이드_5',['로거 시스템 마이그레이션 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md1524',1,'']]],
   ['시스템_20아키텍처_6',['로거 시스템 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE_8kr.html#autotoc_md477',1,'']]],
   ['시스템_20정보_7',['시스템 정보',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE_8kr.html#autotoc_md1884',1,'']]],
