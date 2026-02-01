@@ -89,15 +89,73 @@ logger->add_writer("main", std::move(writer));
 - `.filtered(filter)` - Log filtering based on level or custom criteria
 - `.formatted(formatter)` - Custom formatting before writing
 - `.encrypted(key)` - AES-256 encryption for sensitive logs (requires encryption feature)
+- `.thread_safe()` - Thread-safe wrapper for concurrent access
 
-**Production Setup Example**:
+#### Decorator Application Order
+
+For optimal performance, decorators should be applied in this order (innermost to outermost):
+
+```
+Core Writer → Filtering → Buffering → Encryption → Thread-Safety → Async
+```
+
+**Rationale**:
+1. **Filtering first** - Reduces work for downstream decorators
+2. **Buffering** - Amortizes I/O and processing costs
+3. **Encryption** - Encrypts batches efficiently
+4. **Thread-safety** - Ensures consistency before async processing
+5. **Async last** - Maximizes non-blocking benefits
+
+#### Common Usage Patterns
+
+**High-Throughput Pattern** (4M+ messages/second):
 ```cpp
+auto writer = kcenon::logger::writer_builder()
+    .file("app.log")
+    .buffered(1000)      // Large buffer
+    .async(50000)        // Large queue
+    .build();
+```
+
+**Secure Logging Pattern** (Compliance):
+```cpp
+#ifdef LOGGER_WITH_ENCRYPTION
+auto writer = kcenon::logger::writer_builder()
+    .file("audit.log.enc")
+    .buffered(200)                      // Buffer before encryption
+    .encrypted(std::move(encryption_key))
+    .async(10000)
+    .build();
+#endif
+```
+
+**Filtered Error Log** (Separate error tracking):
+```cpp
+auto error_filter = std::make_unique<level_filter>(log_level::error);
+auto error_writer = kcenon::logger::writer_builder()
+    .file("errors.log")
+    .filtered(std::move(error_filter))  // Filter first
+    .buffered(100)
+    .async()
+    .build();
+```
+
+**Production Multi-Writer Setup**:
+```cpp
+logger log;
+
 // Main log: all messages with async+buffered for high performance
 auto main_writer = kcenon::logger::writer_builder()
     .file("app.log")
     .buffered(500)
     .async(20000)
     .build();
+
+// Start async writer before adding to logger
+if (auto* async_w = dynamic_cast<async_writer*>(main_writer.get())) {
+    async_w->start();
+}
+log.add_writer("main", std::move(main_writer));
 
 // Error log: only errors, separate file
 auto error_filter = std::make_unique<level_filter>(log_level::error);
@@ -106,9 +164,19 @@ auto error_writer = kcenon::logger::writer_builder()
     .filtered(std::move(error_filter))
     .async()
     .build();
+
+if (auto* async_w = dynamic_cast<async_writer*>(error_writer.get())) {
+    async_w->start();
+}
+log.add_writer("errors", std::move(error_writer));
+
+// Console for development
+log.add_writer("console", writer_builder().console().build());
 ```
 
-See [examples/writer_builder_example.cpp](examples/writer_builder_example.cpp) for more usage patterns including encryption, filtering, and multi-writer setups.
+For comprehensive examples including all decorators, performance patterns, and real-world scenarios, see:
+- [examples/decorator_usage.cpp](examples/decorator_usage.cpp) - Complete decorator pattern guide
+- [examples/writer_builder_example.cpp](examples/writer_builder_example.cpp) - Builder pattern examples
 
 > **Migration Notice**: If you're upgrading from earlier versions that use manual decorator nesting, see the [Decorator Pattern Migration Guide](docs/guides/DECORATOR_MIGRATION.md#deprecation-timeline-and-legacy-patterns) for migration scenarios. Manual nesting is deprecated in favor of `writer_builder` and will be discouraged in v5.0.0.
 
