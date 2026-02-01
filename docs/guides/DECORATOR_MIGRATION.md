@@ -9,8 +9,9 @@
 3. [Built-in Decorators](#built-in-decorators)
 4. [Migrating Custom Writers](#migrating-custom-writers)
 5. [Composing Decorators](#composing-decorators)
-6. [Best Practices](#best-practices)
-7. [Troubleshooting](#troubleshooting)
+6. [Deprecation Timeline and Legacy Patterns](#deprecation-timeline-and-legacy-patterns)
+7. [Best Practices](#best-practices)
+8. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -290,18 +291,229 @@ auto writer = std::make_unique<formatted_writer>(      // 4. Format output
 3. **Formatting** - Transform entries just before output
 4. **Output** (leaf writer) - Write to destination
 
+### Using `writer_builder` (Recommended)
+
+**Since v4.1.0**, the `writer_builder` provides a fluent API for composing writers with decorators:
+
+```cpp
+#include <kcenon/logger/builders/writer_builder.h>
+
+// Simple file writer
+auto writer = writer_builder()
+    .file("app.log")
+    .build();
+
+// Production setup: async + buffered
+auto production_writer = writer_builder()
+    .file("app.log")
+    .buffered(500)       // Buffer 500 entries
+    .async(20000)        // Queue size 20000
+    .build();
+
+// Filtered console (warnings and above)
+auto console_writer = writer_builder()
+    .console()
+    .filtered(std::make_unique<level_filter>(log_level::warning))
+    .build();
+
+// Encrypted logging with buffering
+#ifdef LOGGER_WITH_ENCRYPTION
+auto secure_writer = writer_builder()
+    .file("secure.log.enc")
+    .encrypted(key)
+    .buffered(100)
+    .async()
+    .build();
+#endif
+```
+
+**Benefits of `writer_builder`:**
+- **Readable**: Fluent API is self-documenting
+- **Type-safe**: Compile-time validation
+- **Consistent order**: Decorators applied in optimal order
+- **Error-proof**: No manual nesting required
+
+See [writer_builder_example.cpp](../../examples/writer_builder_example.cpp) for complete examples.
+
 ### Using `logger_builder`
 
-The builder automatically applies common decorators:
+The logger builder accepts writers created by `writer_builder`:
 
 ```cpp
 auto logger = logger_builder()
-    .add_writer("file", std::make_unique<file_writer>("app.log"))
+    .add_writer("file", writer_builder().file("app.log").build())
     .add_level_filter(log_level::info)   // Adds filtered_writer
     .with_batch_writing(true)             // Wraps with batch_writer
     .with_formatter(std::make_unique<json_formatter>())  // Adds formatted_writer
     .build();
 ```
+
+---
+
+## Deprecation Timeline and Legacy Patterns
+
+### Deprecated Writer Patterns
+
+The following legacy writer patterns are **deprecated** as of v4.1.0:
+
+| Legacy Pattern | Status | Replacement |
+|----------------|--------|-------------|
+| `rotating_file_writer` | Deprecated (v4.1) | `writer_builder().file().buffered()` |
+| `async_file_writer` | Deprecated (v4.1) | `writer_builder().file().async()` |
+| Combined writer classes | Deprecated (v4.1) | `writer_builder()` with decorator chain |
+
+### Timeline
+
+| Version | Status | Action Required |
+|---------|--------|-----------------|
+| **4.0.0** | Decorator pattern introduced | Optional: Begin planning migration |
+| **4.1.0** | `writer_builder` available | **Recommended**: Migrate to builder API |
+| **4.1.0** | Deprecation warnings added | Legacy classes emit compile warnings |
+| **5.0.0** | Legacy classes removed | **Required**: Must use decorator pattern |
+
+### Migration Paths
+
+#### Scenario 1: Simple File Writer
+
+**Before (Deprecated)**:
+```cpp
+auto writer = std::make_unique<file_writer>("app.log");
+```
+
+**After (Recommended)**:
+```cpp
+auto writer = writer_builder().file("app.log").build();
+```
+
+#### Scenario 2: Rotating File Writer
+
+**Before (Deprecated)**:
+```cpp
+auto writer = std::make_unique<rotating_file_writer>(
+    "app.log",
+    10 * 1024 * 1024,  // 10MB max size
+    5                   // 5 backup files
+);
+```
+
+**After (Recommended)**:
+```cpp
+// Note: rotating_file_writer is specialized, not yet fully replaced by decorators
+// For now, continue using rotating_file_writer but expect future decorator-based replacement
+auto writer = std::make_unique<rotating_file_writer>("app.log", 10 * 1024 * 1024, 5);
+
+// Alternative: Use external log rotation tools (logrotate, etc.)
+auto writer = writer_builder().file("app.log").build();
+```
+
+#### Scenario 3: Async + Encrypted Writer
+
+**Before (Manual Nesting)**:
+```cpp
+auto writer = std::make_unique<async_writer>(
+    std::make_unique<encrypted_writer>(
+        std::make_unique<file_writer>("secure.log.enc"),
+        key
+    ),
+    10000  // queue size
+);
+```
+
+**After (Builder API)**:
+```cpp
+auto writer = writer_builder()
+    .file("secure.log.enc")
+    .encrypted(key)
+    .async(10000)
+    .build();
+```
+
+#### Scenario 4: Buffered + Filtered Writer
+
+**Before (Manual Nesting)**:
+```cpp
+auto writer = std::make_unique<buffered_writer>(
+    std::make_unique<filtered_writer>(
+        std::make_unique<console_writer>(),
+        std::make_unique<level_filter>(log_level::warning)
+    ),
+    buffered_writer::config{.max_buffer_size = 100}
+);
+```
+
+**After (Builder API)**:
+```cpp
+auto writer = writer_builder()
+    .console()
+    .filtered(std::make_unique<level_filter>(log_level::warning))
+    .buffered(100)
+    .build();
+```
+
+#### Scenario 5: Multiple Decorators (Production Setup)
+
+**Before (Complex Nesting)**:
+```cpp
+auto writer = std::make_unique<formatted_writer>(
+    std::make_unique<async_writer>(
+        std::make_unique<buffered_writer>(
+            std::make_unique<filtered_writer>(
+                std::make_unique<file_writer>("production.log"),
+                std::make_unique<level_filter>(log_level::info)
+            ),
+            buffered_writer::config{.max_buffer_size = 500}
+        ),
+        20000
+    ),
+    std::make_unique<json_formatter>()
+);
+```
+
+**After (Fluent Builder)**:
+```cpp
+auto writer = writer_builder()
+    .file("production.log")
+    .filtered(std::make_unique<level_filter>(log_level::info))
+    .buffered(500)
+    .formatted(std::make_unique<json_formatter>())
+    .async(20000)
+    .build();
+```
+
+#### Scenario 6: Custom Writer Integration
+
+**Before (Inheritance)**:
+```cpp
+class my_combined_writer : public base_writer {
+    // 100+ lines of filtering, buffering, formatting logic
+    // Mixed with custom destination logic
+};
+```
+
+**After (Composition)**:
+```cpp
+// 1. Create simple leaf writer (20-30 lines)
+class my_destination_writer : public thread_safe_writer {
+protected:
+    common::VoidResult write_entry_impl(const log_entry& entry) override {
+        return send_to_my_destination(entry);
+    }
+};
+
+// 2. Compose with decorators
+auto writer = writer_builder()
+    .custom(std::make_unique<my_destination_writer>())
+    .filtered(filter)
+    .buffered(100)
+    .async()
+    .build();
+```
+
+### Support Policy
+
+- **v4.x series**: Full backward compatibility, deprecation warnings only
+- **v5.0.0**: Legacy classes removed, builder API required
+- **Migration support**: See [examples/writer_builder_example.cpp](../../examples/writer_builder_example.cpp)
 
 ---
 
@@ -445,11 +657,13 @@ outermost->flush();
 
 ## Related Documentation
 
+- [writer_builder Example](../../examples/writer_builder_example.cpp) - Complete usage examples
 - [API Reference - Writers](../API_REFERENCE.md#writers)
 - [Architecture Overview](../ARCHITECTURE.md)
-- [Changelog v4.0.0](../CHANGELOG.md#400---unreleased)
+- [Changelog](../CHANGELOG.md) - Version history and breaking changes
 - [Best Practices](BEST_PRACTICES.md)
 
 ---
 
-*Part of Logger System v4.0.0 documentation*
+*Part of Logger System v4.1+ documentation*
+*Last updated: 2026-02-01 for v4.1.0 deprecation timeline*
