@@ -60,6 +60,56 @@ return 0;
 
 Need a quick reminder later? See the [Result Handling Cheatsheet](docs/guides/INTEGRATION.md#result-handling-cheatsheet) for canonical snippets that can be reused across the ecosystem.
 
+### Composing Writers with Decorator Pattern
+
+The `writer_builder` provides a fluent API for composing multiple writer behaviors using the Decorator pattern:
+
+```cpp
+#include <kcenon/logger/builders/writer_builder.h>
+
+// Create a file writer with async and buffered decorators
+auto writer = kcenon::logger::writer_builder()
+    .file("app.log")
+    .buffered(500)           // Buffer up to 500 entries
+    .async(20000)            // Async queue size 20000
+    .build();
+
+// Add to logger
+logger->add_writer("main", std::move(writer));
+```
+
+**Available Core Writers**:
+- `.file(path)` - Write to file
+- `.console()` - Write to console (stdout/stderr)
+- `.custom(writer)` - Use custom writer implementation
+
+**Available Decorators**:
+- `.async(queue_size)` - Asynchronous writing with background thread
+- `.buffered(max_entries)` - Batch buffering to reduce I/O operations
+- `.filtered(filter)` - Log filtering based on level or custom criteria
+- `.formatted(formatter)` - Custom formatting before writing
+- `.encrypted(key)` - AES-256 encryption for sensitive logs (requires encryption feature)
+
+**Production Setup Example**:
+```cpp
+// Main log: all messages with async+buffered for high performance
+auto main_writer = kcenon::logger::writer_builder()
+    .file("app.log")
+    .buffered(500)
+    .async(20000)
+    .build();
+
+// Error log: only errors, separate file
+auto error_filter = std::make_unique<level_filter>(log_level::error);
+auto error_writer = kcenon::logger::writer_builder()
+    .file("errors.log")
+    .filtered(std::move(error_filter))
+    .async()
+    .build();
+```
+
+See [examples/writer_builder_example.cpp](examples/writer_builder_example.cpp) for more usage patterns including encryption, filtering, and multi-writer setups.
+
 ### Installation
 
 **Using vcpkg**:
