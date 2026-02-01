@@ -9,7 +9,7 @@ add_executable(config_unit
 # Link with logger library and test framework
 target_link_libraries(config_unit
     PRIVATE
-        logger
+        LoggerSystem
         GTest::gtest
         GTest::gtest_main
 )
