@@ -2,7 +2,7 @@ add_executable(crash_safety_test crash_safety_test.cpp)
 
 target_link_libraries(crash_safety_test
     PRIVATE
-        logger
+        LoggerSystem
         GTest::gtest
         GTest::gtest_main
         Threads::Threads

@@ -172,7 +172,7 @@ public:
      */
     void set_min_level(log_level level) {
         min_level_.store(level, std::memory_order_release);
-        logger_->set_min_level(level);
+        logger_->set_level(level);
     }
 
     /**
