@@ -597,6 +597,32 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/interfaces_test/log_entry_test.cpp")
     message(STATUS "Log entry structure tests: Added")
 endif()
 
+# Writer builder tests (Issue #413 - Fluent builder for decorator composition)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/writer_builder_test.cpp")
+    add_executable(logger_writer_builder_test
+        unit/writers_test/writer_builder_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_writer_builder_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_writer_builder_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_writer_builder_test
+        COMMAND logger_writer_builder_test
+    )
+    set_target_properties(logger_writer_builder_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Writer builder tests: Added")
+endif()
+
 # Cleanup
 unset(_LOGGER_TEST_TARGETS)
 unset(_test_target)
