@@ -34,6 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/common/interfaces/logger_interface.h>
+#include <kcenon/common/patterns/result.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <memory>
 #include <chrono>
@@ -41,6 +42,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 using namespace kcenon::logger;
 namespace ci = kcenon::common::interfaces;
+namespace common = kcenon::common;
 using log_level = ci::log_level;
 
 class ConsoleWriterTest : public ::testing::Test {

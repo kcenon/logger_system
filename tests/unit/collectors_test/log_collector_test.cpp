@@ -35,6 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/writers/base_writer.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/common/interfaces/logger_interface.h>
+#include <kcenon/common/patterns/result.h>
 
 #include <atomic>
 #include <chrono>
@@ -44,6 +45,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 using namespace kcenon::logger;
 namespace ci = kcenon::common::interfaces;
+namespace common = kcenon::common;
 using log_level = ci::log_level;
 
 // Mock writer for testing log collector
@@ -107,7 +109,7 @@ TEST_F(LogCollectorTest, ConstructorTest) {
 
 // Test writer management
 TEST_F(LogCollectorTest, WriterManagement) {
-    collector_->add_writer(mock_writer_.get());
+    collector_->add_writer(mock_writer_);
 
     // Clear writers
     collector_->clear_writers();
@@ -118,7 +120,7 @@ TEST_F(LogCollectorTest, WriterManagement) {
 
 // Test basic enqueue and processing
 TEST_F(LogCollectorTest, BasicEnqueueAndProcessing) {
-    collector_->add_writer(mock_writer_.get());
+    collector_->add_writer(mock_writer_);
     collector_->start();
 
     // Enqueue a message
@@ -140,7 +142,7 @@ TEST_F(LogCollectorTest, BasicEnqueueAndProcessing) {
 
 // Test multiple messages
 TEST_F(LogCollectorTest, MultipleMessages) {
-    collector_->add_writer(mock_writer_.get());
+    collector_->add_writer(mock_writer_);
     collector_->start();
 
     const int num_messages = 10;
@@ -166,7 +168,7 @@ TEST_F(LogCollectorTest, MultipleMessages) {
 
 // Test multithreaded enqueuing
 TEST_F(LogCollectorTest, MultithreadedEnqueuing) {
-    collector_->add_writer(mock_writer_.get());
+    collector_->add_writer(mock_writer_);
     collector_->start();
 
     std::vector<std::thread> threads;
@@ -204,7 +206,7 @@ TEST_F(LogCollectorTest, MultithreadedEnqueuing) {
 
 // Test different log levels
 TEST_F(LogCollectorTest, DifferentLogLevels) {
-    collector_->add_writer(mock_writer_.get());
+    collector_->add_writer(mock_writer_);
     collector_->start();
 
     // Test all log levels
@@ -228,7 +230,7 @@ TEST_F(LogCollectorTest, DifferentLogLevels) {
 
 // Test with source location
 TEST_F(LogCollectorTest, WithSourceLocation) {
-    collector_->add_writer(mock_writer_.get());
+    collector_->add_writer(mock_writer_);
     collector_->start();
 
     collector_->enqueue(log_level::error, "Error with location", __FILE__, __LINE__,
@@ -249,7 +251,7 @@ TEST_F(LogCollectorTest, WithSourceLocation) {
 
 // Test flush functionality
 TEST_F(LogCollectorTest, FlushFunctionality) {
-    collector_->add_writer(mock_writer_.get());
+    collector_->add_writer(mock_writer_);
     collector_->start();
 
     // Enqueue several messages
@@ -268,7 +270,7 @@ TEST_F(LogCollectorTest, FlushFunctionality) {
 
 // Test stop and start functionality
 TEST_F(LogCollectorTest, StopStartFunctionality) {
-    collector_->add_writer(mock_writer_.get());
+    collector_->add_writer(mock_writer_);
 
     // Start collector
     collector_->start();
@@ -308,7 +310,7 @@ TEST_F(LogCollectorTest, StopStartFunctionality) {
 
 // Test edge cases
 TEST_F(LogCollectorTest, EdgeCases) {
-    collector_->add_writer(mock_writer_.get());
+    collector_->add_writer(mock_writer_);
     collector_->start();
 
     // Empty message
