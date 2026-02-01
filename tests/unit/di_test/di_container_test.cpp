@@ -21,6 +21,7 @@ All rights reserved.
 
 using namespace kcenon::logger;
 namespace ci = kcenon::common::interfaces;
+namespace common = kcenon::common;
 using log_level = ci::log_level;
 
 // Mock writer for testing

@@ -13,6 +13,7 @@ All rights reserved.
 #include <kcenon/common/interfaces/logger_interface.h>
 
 using namespace kcenon::logger;
+using namespace kcenon::logger::filters;
 namespace ci = kcenon::common::interfaces;
 using log_level = ci::log_level;
 
@@ -33,7 +34,7 @@ TEST_F(ConfigTest, DefaultConfigValidation) {
     
     // Default config should be valid
     auto result = config.validate();
-    EXPECT_TRUE(result);
+    EXPECT_TRUE(result.is_ok());
     
     // Check default values
     EXPECT_TRUE(config.async);
@@ -51,12 +52,12 @@ TEST_F(ConfigTest, InvalidBufferSize) {
     // Zero buffer size
     config.buffer_size = 0;
     auto result = config.validate();
-    EXPECT_FALSE(result);
-    
+    EXPECT_TRUE(result.is_err());
+
     // Extremely large buffer size
     config.buffer_size = std::numeric_limits<std::size_t>::max();
     result = config.validate();
-    EXPECT_FALSE(result);
+    EXPECT_TRUE(result.is_err());
 }
 
 // Test invalid batch size
@@ -66,13 +67,13 @@ TEST_F(ConfigTest, InvalidBatchSize) {
     // Zero batch size
     config.batch_size = 0;
     auto result = config.validate();
-    EXPECT_FALSE(result);
-    
+    EXPECT_TRUE(result.is_err());
+
     // Batch size larger than buffer
     config.batch_size = 100;
     config.buffer_size = 50;
     result = config.validate();
-    EXPECT_FALSE(result);
+    EXPECT_TRUE(result.is_err());
 }
 
 // Test invalid flush interval
@@ -82,12 +83,12 @@ TEST_F(ConfigTest, InvalidFlushInterval) {
     // Negative flush interval
     config.flush_interval = std::chrono::milliseconds(-100);
     auto result = config.validate();
-    EXPECT_FALSE(result);
-    
+    EXPECT_TRUE(result.is_err());
+
     // Very large flush interval
     config.flush_interval = std::chrono::milliseconds(7200000);  // 2 hours
     result = config.validate();
-    EXPECT_FALSE(result);
+    EXPECT_TRUE(result.is_err());
 }
 
 // Test invalid queue settings
@@ -97,13 +98,13 @@ TEST_F(ConfigTest, InvalidQueueSettings) {
     // Zero queue size
     config.max_queue_size = 0;
     auto result = config.validate();
-    EXPECT_FALSE(result);
-    
+    EXPECT_TRUE(result.is_err());
+
     // Queue size smaller than batch size
     config.max_queue_size = 50;
     config.batch_size = 100;
     result = config.validate();
-    EXPECT_FALSE(result);
+    EXPECT_TRUE(result.is_err());
 }
 
 // Test invalid file settings
@@ -113,18 +114,18 @@ TEST_F(ConfigTest, InvalidFileSettings) {
     // Too small file size
     config.max_file_size = 512;  // Less than 1KB
     auto result = config.validate();
-    EXPECT_FALSE(result);
-    
+    EXPECT_TRUE(result.is_err());
+
     // Zero file count
     config.max_file_size = 1024 * 1024;
     config.max_file_count = 0;
     result = config.validate();
-    EXPECT_FALSE(result);
-    
+    EXPECT_TRUE(result.is_err());
+
     // Too many files
     config.max_file_count = 1001;
     result = config.validate();
-    EXPECT_FALSE(result);
+    EXPECT_TRUE(result.is_err());
 }
 
 // Test invalid network settings
@@ -135,19 +136,19 @@ TEST_F(ConfigTest, InvalidNetworkSettings) {
     config.remote_host = "localhost";
     config.remote_port = 0;
     auto result = config.validate();
-    EXPECT_FALSE(result);
-    
+    EXPECT_TRUE(result.is_err());
+
     // Invalid timeout
     config.remote_port = 8080;
     config.network_timeout = std::chrono::milliseconds(0);
     result = config.validate();
-    EXPECT_FALSE(result);
-    
+    EXPECT_TRUE(result.is_err());
+
     // Too many retries
     config.network_timeout = std::chrono::milliseconds(1000);
     config.network_retry_count = 101;
     result = config.validate();
-    EXPECT_FALSE(result);
+    EXPECT_TRUE(result.is_err());
 }
 
 // Test invalid writer settings
@@ -157,12 +158,12 @@ TEST_F(ConfigTest, InvalidWriterSettings) {
     // Zero writers
     config.max_writers = 0;
     auto result = config.validate();
-    EXPECT_FALSE(result);
-    
+    EXPECT_TRUE(result.is_err());
+
     // Too many writers
     config.max_writers = 101;
     result = config.validate();
-    EXPECT_FALSE(result);
+    EXPECT_TRUE(result.is_err());
 }
 
 // Test invalid thread count
@@ -172,12 +173,12 @@ TEST_F(ConfigTest, InvalidThreadCount) {
     // Zero threads
     config.writer_thread_count = 0;
     auto result = config.validate();
-    EXPECT_FALSE(result);
-    
+    EXPECT_TRUE(result.is_err());
+
     // Too many threads
     config.writer_thread_count = 33;
     result = config.validate();
-    EXPECT_FALSE(result);
+    EXPECT_TRUE(result.is_err());
 }
 
 // Test invalid feature combinations
@@ -188,40 +189,40 @@ TEST_F(ConfigTest, InvalidFeatureCombinations) {
     config.use_lock_free = true;
     config.queue_overflow_policy = logger_config::overflow_policy::grow;
     auto result = config.validate();
-    EXPECT_FALSE(result);
-    
+    EXPECT_TRUE(result.is_err());
+
     // Sync mode with batch processing
     config.use_lock_free = false;
     config.queue_overflow_policy = logger_config::overflow_policy::drop_newest;
     config.async = false;
     config.batch_size = 10;
     result = config.validate();
-    EXPECT_FALSE(result);
+    EXPECT_TRUE(result.is_err());
 }
 
 // Test predefined configurations
 TEST_F(ConfigTest, PredefinedConfigurations) {
     // High performance config
     auto hp_config = logger_config::high_performance();
-    EXPECT_TRUE(hp_config.validate());
+    EXPECT_TRUE(hp_config.validate().is_ok());
     EXPECT_TRUE(hp_config.use_lock_free);
     EXPECT_EQ(hp_config.buffer_size, 65536);
-    
+
     // Low latency config
     auto ll_config = logger_config::low_latency();
-    EXPECT_TRUE(ll_config.validate());
+    EXPECT_TRUE(ll_config.validate().is_ok());
     EXPECT_TRUE(ll_config.use_lock_free);
     EXPECT_EQ(ll_config.batch_size, 10);
-    
+
     // Debug config
     auto debug_config = logger_config::debug_config();
-    EXPECT_TRUE(debug_config.validate());
+    EXPECT_TRUE(debug_config.validate().is_ok());
     EXPECT_FALSE(debug_config.async);
     EXPECT_EQ(debug_config.min_level, log_level::trace);
-    
+
     // Production config
     auto prod_config = logger_config::production();
-    EXPECT_TRUE(prod_config.validate());
+    EXPECT_TRUE(prod_config.validate().is_ok());
     EXPECT_TRUE(prod_config.enable_metrics);
     EXPECT_TRUE(prod_config.enable_crash_handler);
 }
@@ -238,11 +239,11 @@ TEST_F(ConfigTest, LoggerBuilderBasic) {
     
     // Validate configuration
     auto validation = builder.validate();
-    EXPECT_TRUE(validation);
-    
+    EXPECT_TRUE(validation.is_ok());
+
     // Build logger
     auto result = builder.build();
-    EXPECT_TRUE(result);
+    EXPECT_TRUE(result.is_ok());
     EXPECT_NE(result.value(), nullptr);
 }
 
@@ -252,10 +253,10 @@ TEST_F(ConfigTest, LoggerBuilderWithWriters) {
     
     // Add console writer
     builder.add_writer("console", std::make_unique<console_writer>());
-    
+
     // Build logger
     auto result = builder.build();
-    EXPECT_TRUE(result);
+    EXPECT_TRUE(result.is_ok());
 }
 
 // Test logger builder with filters
@@ -264,10 +265,10 @@ TEST_F(ConfigTest, LoggerBuilderWithFilters) {
     
     // Add level filter
     builder.add_filter(std::make_unique<level_filter>(log_level::warning));
-    
+
     // Build logger
     auto result = builder.build();
-    EXPECT_TRUE(result);
+    EXPECT_TRUE(result.is_ok());
 }
 
 // Test logger builder templates
@@ -286,10 +287,10 @@ TEST_F(ConfigTest, LoggerBuilderTemplates) {
     for (const auto& tmpl : templates) {
         builder.use_template(tmpl);
         auto validation = builder.validate();
-        EXPECT_TRUE(validation) << "Template " << tmpl << " failed validation";
-        
+        EXPECT_TRUE(validation.is_ok()) << "Template " << tmpl << " failed validation";
+
         auto result = builder.build();
-        EXPECT_TRUE(result) << "Template " << tmpl << " failed to build";
+        EXPECT_TRUE(result.is_ok()) << "Template " << tmpl << " failed to build";
     }
 }
 
@@ -299,14 +300,14 @@ TEST_F(ConfigTest, LoggerBuilderInvalidConfig) {
     
     // Set invalid configuration
     builder.with_buffer_size(0);
-    
+
     // Validation should fail
     auto validation = builder.validate();
-    EXPECT_FALSE(validation);
-    
+    EXPECT_TRUE(validation.is_err());
+
     // Build should fail
     auto result = builder.build();
-    EXPECT_FALSE(result);
+    EXPECT_TRUE(result.is_err());
 }
 
 // Test logger builder fluent interface
@@ -319,8 +320,8 @@ TEST_F(ConfigTest, LoggerBuilderFluentInterface) {
         .with_crash_handler(true)
         .add_writer("console", std::make_unique<console_writer>())
         .build();
-    
-    EXPECT_TRUE(result);
+
+    EXPECT_TRUE(result.is_ok());
     EXPECT_NE(result.value(), nullptr);
 }
 
@@ -329,19 +330,19 @@ TEST_F(ConfigTest, ConfigModificationTracking) {
     logger_config config;
     
     // Initial validation should pass
-    EXPECT_TRUE(config.validate());
-    
+    EXPECT_TRUE(config.validate().is_ok());
+
     // Modify to invalid state
     config.buffer_size = 0;
-    
+
     // Validation should now fail
-    EXPECT_FALSE(config.validate());
-    
+    EXPECT_TRUE(config.validate().is_err());
+
     // Fix the issue
     config.buffer_size = 8192;
-    
+
     // Validation should pass again
-    EXPECT_TRUE(config.validate());
+    EXPECT_TRUE(config.validate().is_ok());
 }
 
 int main(int argc, char** argv) {
