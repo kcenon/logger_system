@@ -427,11 +427,20 @@ Timeline</h2>
 </table>
 <h2><a class="anchor" id="autotoc_md1373"></a>
 Migration Paths</h2>
+<blockquote class="doxtable">
+<p>&zwj;<b>Note</b>: All scenarios below show complete working examples. If you encounter issues during migration, see Troubleshooting. </p>
+</blockquote>
 <h3><a class="anchor" id="autotoc_md1374"></a>
 Scenario 1: Simple File Writer</h3>
 <p><b>Before (Deprecated)</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>);</div>
 </div><!-- fragment --><p><b>After (Recommended)</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = writer_builder().file(<span class="stringliteral">&quot;app.log&quot;</span>).build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1375"></a>
+</div><!-- fragment --><p><b>Migration Steps</b>:</p><ol type="1">
+<li>Replace <code>std::make_unique&lt;file_writer&gt;()</code> with <code>writer_builder().file()</code></li>
+<li>Add <code>.build()</code> at the end</li>
+<li>Test that logs are written correctly</li>
+<li><b>Common Issue</b>: If entries aren't being written, ensure writer is added to logger with <code>add_writer()</code></li>
+</ol>
+<h3><a class="anchor" id="autotoc_md1375"></a>
 Scenario 2: Rotating File Writer</h3>
 <p><b>Before (Deprecated)</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;rotating_file_writer&gt;(</div>
 <div class="line">    <span class="stringliteral">&quot;app.log&quot;</span>,</div>
@@ -444,7 +453,13 @@ Scenario 2: Rotating File Writer</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Alternative: Use external log rotation tools (logrotate, etc.)</span></div>
 <div class="line"><span class="keyword">auto</span> writer = writer_builder().file(<span class="stringliteral">&quot;app.log&quot;</span>).build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1376"></a>
+</div><!-- fragment --><p><b>Migration Steps</b>:</p><ol type="1">
+<li>If file rotation is critical, continue using <code>rotating_file_writer</code> (not deprecated yet)</li>
+<li>Consider external rotation tools (logrotate on Linux, log management services)</li>
+<li>Plan for future migration when decorator-based rotation becomes available</li>
+<li><b>Common Issue</b>: See Flush not working if rotation timing is incorrect</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md1376"></a>
 Scenario 3: Async + Encrypted Writer</h3>
 <p><b>Before (Manual Nesting)</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;async_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;encrypted_writer&gt;(</div>
@@ -458,7 +473,18 @@ Scenario 3: Async + Encrypted Writer</h3>
 <div class="line">    .encrypted(key)</div>
 <div class="line">    .async(10000)</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1377"></a>
+</div><!-- fragment --><p><b>Migration Steps</b>:</p><ol type="1">
+<li>Replace innermost nesting (file_writer) with <code>.file()</code></li>
+<li>Add <code>.encrypted()</code> for encryption decorator</li>
+<li>Add <code>.async()</code> for async decorator (outermost)</li>
+<li>Call <code>.build()</code> to construct the writer chain</li>
+<li><b>Important</b>: Must call <code>start()</code> on async writer before use: <div class="fragment"><div class="line"><span class="keywordflow">if</span> (<span class="keyword">auto</span>* async_w = <span class="keyword">dynamic_cast&lt;</span>async_writer*<span class="keyword">&gt;</span>(writer.get())) {</div>
+<div class="line">    async_w-&gt;start();</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+<li><b>Common Issue</b>: If logs don't appear, check async writer is started. See Troubleshooting</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md1377"></a>
 Scenario 4: Buffered + Filtered Writer</h3>
 <p><b>Before (Manual Nesting)</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;buffered_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;filtered_writer&gt;(</div>
@@ -472,7 +498,15 @@ Scenario 4: Buffered + Filtered Writer</h3>
 <div class="line">    .filtered(std::make_unique&lt;level_filter&gt;(log_level::warning))</div>
 <div class="line">    .buffered(100)</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1378"></a>
+</div><!-- fragment --><p><b>Migration Steps</b>:</p><ol type="1">
+<li>Start with core writer: <code>.console()</code></li>
+<li>Add filter decorator: <code>.filtered(filter)</code> (applied first)</li>
+<li>Add buffer decorator: <code>.buffered(size)</code> (applied after filter)</li>
+<li>Build the chain: <code>.build()</code></li>
+<li><b>Order Matters</b>: Filter → Buffer → Output (see Composing Decorators)</li>
+<li><b>Common Issue</b>: Wrong decorator order. See Writer not receiving entries</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md1378"></a>
 Scenario 5: Multiple Decorators (Production Setup)</h3>
 <p><b>Before (Complex Nesting)</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> writer = std::make_unique&lt;formatted_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;async_writer&gt;(</div>
@@ -494,7 +528,17 @@ Scenario 5: Multiple Decorators (Production Setup)</h3>
 <div class="line">    .formatted(std::make_unique&lt;json_formatter&gt;())</div>
 <div class="line">    .async(20000)</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1379"></a>
+</div><!-- fragment --><p><b>Migration Steps</b>:</p><ol type="1">
+<li>Identify all nested decorators (4 layers in this example)</li>
+<li>Reverse the nesting order when using builder (innermost → outermost)</li>
+<li>Core writer first: <code>.file()</code></li>
+<li>Add decorators in order: filter → buffer → format → async</li>
+<li>Start async writer after building (if using async)</li>
+<li>Test thoroughly with actual log messages</li>
+<li><b>Performance Tip</b>: This pattern provides ~4M msg/s throughput. See <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2PERFORMANCE.html">Performance Guide</a></li>
+<li><b>Common Issue</b>: If formatting fails, ensure formatter is compatible. See Entries not being formatted</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md1379"></a>
 Scenario 6: Custom Writer Integration</h3>
 <p><b>Before (Inheritance)</b>: </p><div class="fragment"><div class="line"><span class="keyword">class </span>my_combined_writer : <span class="keyword">public</span> base_writer {</div>
 <div class="line">    <span class="comment">// 100+ lines of filtering, buffering, formatting logic</span></div>
@@ -502,9 +546,16 @@ Scenario 6: Custom Writer Integration</h3>
 <div class="line">};</div>
 </div><!-- fragment --><p><b>After (Composition)</b>: </p><div class="fragment"><div class="line"><span class="comment">// 1. Create simple leaf writer (20-30 lines)</span></div>
 <div class="line"><span class="keyword">class </span>my_destination_writer : <span class="keyword">public</span> thread_safe_writer {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    std::string get_name()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;my_destination&quot;</span>; }</div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    common::VoidResult write_entry_impl(<span class="keyword">const</span> log_entry&amp; entry)<span class="keyword"> override </span>{</div>
 <div class="line">        <span class="keywordflow">return</span> send_to_my_destination(entry);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    common::VoidResult flush_impl()<span class="keyword"> override </span>{</div>
+<div class="line">        <span class="keywordflow">return</span> flush_my_destination();</div>
 <div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"> </div>
@@ -515,7 +566,16 @@ Scenario 6: Custom Writer Integration</h3>
 <div class="line">    .buffered(100)</div>
 <div class="line">    .async()</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1380"></a>
+</div><!-- fragment --><p><b>Migration Steps</b>:</p><ol type="1">
+<li><b>Separate concerns</b>: Extract destination-specific I/O from cross-cutting logic</li>
+<li><b>Create leaf writer</b>: Inherit from <code>thread_safe_writer</code> or <code>sync_writer_tag</code></li>
+<li><b>Implement only I/O methods</b>: <code>write_entry_impl()</code>, <code>flush_impl()</code>, <code>get_name()</code></li>
+<li><b>Remove duplicated logic</b>: Delete filtering, buffering, formatting from custom class</li>
+<li><b>Use decorators</b>: Compose with <code>.filtered()</code>, <code>.buffered()</code>, <code>.async()</code> as needed</li>
+<li><b>Benefits</b>: 70% less code, independently testable, reusable</li>
+<li><b>Common Issue</b>: If custom writer doesn't compile, ensure it implements <code>log_writer_interface</code>. See Best Practices</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md1380"></a>
 Support Policy</h2>
 <ul>
 <li><b>v4.x series</b>: Full backward compatibility, deprecation warnings only</li>
@@ -584,7 +644,11 @@ Troubleshooting</h1>
 Common Issues</h2>
 <h3><a class="anchor" id="autotoc_md1390"></a>
 "Writer not receiving entries"</h3>
-<p>Check decorator composition order. Filters should be innermost:</p>
+<p><b>Symptom</b>: Log entries not appearing in output file or console.</p>
+<p><b>Possible Causes</b>:</p>
+<ol type="1">
+<li><b>Decorator order is wrong</b> - Filters should be innermost:</li>
+</ol>
 <div class="fragment"><div class="line"><span class="comment">// Wrong: Filter after buffer means filtered entries still buffered</span></div>
 <div class="line"><span class="keyword">auto</span> wrong = std::make_unique&lt;filtered_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;buffered_writer&gt;(...),</div>
@@ -596,9 +660,48 @@ Common Issues</h2>
 <div class="line">    std::make_unique&lt;filtered_writer&gt;(..., filter),</div>
 <div class="line">    config</div>
 <div class="line">);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Using builder (automatic correct order):</span></div>
+<div class="line"><span class="keyword">auto</span> correct = writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
+<div class="line">    .filtered(filter)  <span class="comment">// Applied first</span></div>
+<div class="line">    .buffered(100)     <span class="comment">// Applied second</span></div>
+<div class="line">    .build();</div>
+</div><!-- fragment --><ol type="1">
+<li><b>Writer not added to logger</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> writer = writer_builder().file(<span class="stringliteral">&quot;app.log&quot;</span>).build();</div>
+<div class="line"><span class="comment">// Must add to logger!</span></div>
+<div class="line">logger.add_writer(<span class="stringliteral">&quot;main&quot;</span>, std::move(writer));</div>
+</div><!-- fragment --><ol type="1">
+<li><b>Async writer not started</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> writer = writer_builder().file(<span class="stringliteral">&quot;app.log&quot;</span>).async().build();</div>
+<div class="line"><span class="comment">// Must start async writer!</span></div>
+<div class="line"><span class="keywordflow">if</span> (<span class="keyword">auto</span>* async_w = <span class="keyword">dynamic_cast&lt;</span>async_writer*<span class="keyword">&gt;</span>(writer.get())) {</div>
+<div class="line">    async_w-&gt;start();</div>
+<div class="line">}</div>
+<div class="line">logger.add_writer(<span class="stringliteral">&quot;main&quot;</span>, std::move(writer));</div>
+</div><!-- fragment --><ol type="1">
+<li><b>Filter is too restrictive</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="comment">// This filter blocks everything below ERROR level</span></div>
+<div class="line"><span class="keyword">auto</span> filter = std::make_unique&lt;level_filter&gt;(log_level::error);</div>
+<div class="line"><span class="keyword">auto</span> writer = writer_builder()</div>
+<div class="line">    .console()</div>
+<div class="line">    .filtered(std::move(filter))</div>
+<div class="line">    .build();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// INFO and DEBUG messages won&#39;t appear!</span></div>
+<div class="line">logger.log(log_level::info, <span class="stringliteral">&quot;This won&#39;t show&quot;</span>);  <span class="comment">// Filtered out</span></div>
+<div class="line">logger.log(log_level::error, <span class="stringliteral">&quot;This will show&quot;</span>);  <span class="comment">// Passes filter</span></div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md1391"></a>
 "Entries not being formatted"</h3>
-<p>Ensure <code>formatted_writer</code> wraps the leaf writer:</p>
+<p><b>Symptom</b>: Log entries appear in plain text instead of JSON/custom format.</p>
+<p><b>Possible Causes</b>:</p>
+<ol type="1">
+<li><b>Formatter applied in wrong order</b>:</li>
+</ol>
 <div class="fragment"><div class="line"><span class="comment">// Wrong: Formatting lost because it&#39;s wrapped by buffer</span></div>
 <div class="line"><span class="keyword">auto</span> wrong = std::make_unique&lt;buffered_writer&gt;(</div>
 <div class="line">    std::make_unique&lt;formatted_writer&gt;(...),</div>
@@ -610,29 +713,234 @@ Common Issues</h2>
 <div class="line">    std::make_unique&lt;buffered_writer&gt;(..., config),</div>
 <div class="line">    formatter</div>
 <div class="line">);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Using builder (handles order automatically):</span></div>
+<div class="line"><span class="keyword">auto</span> correct = writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;app.json&quot;</span>)</div>
+<div class="line">    .buffered(100)</div>
+<div class="line">    .formatted(std::make_unique&lt;json_formatter&gt;())</div>
+<div class="line">    .build();</div>
+</div><!-- fragment --><ol type="1">
+<li><b>Formatter not provided</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="comment">// Missing formatter - will use default plain text</span></div>
+<div class="line"><span class="keyword">auto</span> writer = writer_builder().file(<span class="stringliteral">&quot;app.json&quot;</span>).build();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Add formatter for JSON output</span></div>
+<div class="line"><span class="keyword">auto</span> writer = writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;app.json&quot;</span>)</div>
+<div class="line">    .formatted(std::make_unique&lt;json_formatter&gt;())</div>
+<div class="line">    .build();</div>
+</div><!-- fragment --><ol type="1">
+<li><b>Incompatible formatter for writer type</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="comment">// Some formatters may not support all entry types</span></div>
+<div class="line"><span class="comment">// Check formatter documentation for compatibility</span></div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md1392"></a>
 "Flush not working"</h3>
-<p>Call <code>flush()</code> on the outermost decorator:</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> outermost = std::make_unique&lt;formatted_writer&gt;(</div>
-<div class="line">    std::make_unique&lt;buffered_writer&gt;(inner, config),</div>
-<div class="line">    formatter</div>
-<div class="line">);</div>
+<p><b>Symptom</b>: Logs not appearing immediately, delayed until program exit.</p>
+<p><b>Possible Causes</b>:</p>
+<ol type="1">
+<li><b>Flushing wrong writer</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> inner = std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;app.log&quot;</span>);</div>
+<div class="line"><span class="keyword">auto</span> buffered = std::make_unique&lt;buffered_writer&gt;(std::move(inner), config);</div>
+<div class="line"><span class="keyword">auto</span> outermost = std::make_unique&lt;formatted_writer&gt;(std::move(buffered), formatter);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// This flushes all layers</span></div>
+<div class="line"><span class="comment">// Wrong: Flushing reference to moved writer (undefined behavior)</span></div>
+<div class="line"><span class="comment">// inner-&gt;flush();  // Don&#39;t do this!</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Right: Flush the outermost decorator</span></div>
 <div class="line">outermost-&gt;flush();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1393"></a>
+</div><!-- fragment --><ol type="1">
+<li><b>Not calling flush() at all</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> writer = writer_builder().file(<span class="stringliteral">&quot;app.log&quot;</span>).buffered(100).build();</div>
+<div class="line">logger.add_writer(<span class="stringliteral">&quot;main&quot;</span>, std::move(writer));</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Logs buffered but not flushed</span></div>
+<div class="line">logger.log(log_level::info, <span class="stringliteral">&quot;Message&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Must flush before exit!</span></div>
+<div class="line">logger.flush();  <span class="comment">// This flushes all writers</span></div>
+</div><!-- fragment --><ol type="1">
+<li><b>Async writer not stopped properly</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> writer = writer_builder().file(<span class="stringliteral">&quot;app.log&quot;</span>).async().build();</div>
+<div class="line"><span class="keywordflow">if</span> (<span class="keyword">auto</span>* async_w = <span class="keyword">dynamic_cast&lt;</span>async_writer*<span class="keyword">&gt;</span>(writer.get())) {</div>
+<div class="line">    async_w-&gt;start();</div>
+<div class="line">}</div>
+<div class="line">logger.add_writer(<span class="stringliteral">&quot;main&quot;</span>, std::move(writer));</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Before program exit:</span></div>
+<div class="line">logger.flush();  <span class="comment">// Flush buffered entries</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Get async writer reference and stop it</span></div>
+<div class="line"><span class="keyword">auto</span>&amp; writer_ref = logger.get_writer(<span class="stringliteral">&quot;main&quot;</span>);</div>
+<div class="line"><span class="keywordflow">if</span> (<span class="keyword">auto</span>* async_w = <span class="keyword">dynamic_cast&lt;</span>async_writer*<span class="keyword">&gt;</span>(&amp;writer_ref)) {</div>
+<div class="line">    async_w-&gt;stop();  <span class="comment">// Processes remaining queue</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><ol type="1">
+<li><b>Buffer size too large</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="comment">// Very large buffer - may never fill up in short-running programs</span></div>
+<div class="line"><span class="keyword">auto</span> writer = writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
+<div class="line">    .buffered(10000)  <span class="comment">// Too large for a few log messages</span></div>
+<div class="line">    .build();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Solution: Use smaller buffer or explicit flush</span></div>
+<div class="line"><span class="keyword">auto</span> writer = writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
+<div class="line">    .buffered(100)  <span class="comment">// More reasonable</span></div>
+<div class="line">    .build();</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1393"></a>
+"Compilation errors with custom writers"</h3>
+<p><b>Symptom</b>: Custom writer doesn't compile after migration to decorator pattern.</p>
+<p><b>Possible Causes</b>:</p>
+<ol type="1">
+<li><b>Missing interface methods</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="comment">// Error: abstract class cannot be instantiated</span></div>
+<div class="line"><span class="keyword">class </span>my_writer : <span class="keyword">public</span> thread_safe_writer {</div>
+<div class="line">    <span class="comment">// Missing required methods!</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Solution: Implement all required methods</span></div>
+<div class="line"><span class="keyword">class </span>my_writer : <span class="keyword">public</span> thread_safe_writer {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    std::string get_name()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;my_writer&quot;</span>; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    common::VoidResult write_entry_impl(<span class="keyword">const</span> log_entry&amp; entry)<span class="keyword"> override </span>{</div>
+<div class="line">        <span class="comment">// Implementation</span></div>
+<div class="line">        <span class="keywordflow">return</span> {};</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    common::VoidResult flush_impl()<span class="keyword"> override </span>{</div>
+<div class="line">        <span class="comment">// Implementation</span></div>
+<div class="line">        <span class="keywordflow">return</span> {};</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+</div><!-- fragment --><ol type="1">
+<li><b>Wrong base class</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="comment">// Wrong: Using old base_writer class</span></div>
+<div class="line"><span class="keyword">class </span>my_writer : <span class="keyword">public</span> base_writer { ... };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Right: Use thread_safe_writer or implement log_writer_interface</span></div>
+<div class="line"><span class="keyword">class </span>my_writer : <span class="keyword">public</span> thread_safe_writer { ... };</div>
+</div><!-- fragment --><ol type="1">
+<li><b>Incorrect method signatures</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="comment">// Wrong: Missing const qualifier</span></div>
+<div class="line">std::string get_name() { <span class="keywordflow">return</span> <span class="stringliteral">&quot;my_writer&quot;</span>; }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Right: Match interface exactly</span></div>
+<div class="line">std::string get_name()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;my_writer&quot;</span>; }</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1394"></a>
+"Performance regression after migration"</h3>
+<p><b>Symptom</b>: Logging is slower after switching to decorator pattern.</p>
+<p><b>Possible Causes</b>:</p>
+<ol type="1">
+<li><b>Too many decorator layers</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="comment">// Avoid excessive nesting</span></div>
+<div class="line"><span class="keyword">auto</span> writer = writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
+<div class="line">    .filtered(filter1)</div>
+<div class="line">    .filtered(filter2)  <span class="comment">// Each filter adds overhead</span></div>
+<div class="line">    .filtered(filter3)</div>
+<div class="line">    .buffered(100)</div>
+<div class="line">    .buffered(50)       <span class="comment">// Multiple buffers inefficient</span></div>
+<div class="line">    .async()</div>
+<div class="line">    .build();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Better: Use composite filter and single buffer</span></div>
+<div class="line"><span class="keyword">auto</span> composite_filter = std::make_unique&lt;composite_filter&gt;(logic_type::AND);</div>
+<div class="line">composite_filter-&gt;add_filter(std::move(filter1));</div>
+<div class="line">composite_filter-&gt;add_filter(std::move(filter2));</div>
+<div class="line">composite_filter-&gt;add_filter(std::move(filter3));</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">auto</span> writer = writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
+<div class="line">    .filtered(std::move(composite_filter))</div>
+<div class="line">    .buffered(100)</div>
+<div class="line">    .async()</div>
+<div class="line">    .build();</div>
+</div><!-- fragment --><ol type="1">
+<li><b>Wrong decorator order</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="comment">// Inefficient: Buffering before filtering</span></div>
+<div class="line"><span class="keyword">auto</span> slow = writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
+<div class="line">    .buffered(100)      <span class="comment">// Buffers everything</span></div>
+<div class="line">    .filtered(filter)   <span class="comment">// Then filters (wasted buffer space)</span></div>
+<div class="line">    .build();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Efficient: Filtering before buffering</span></div>
+<div class="line"><span class="keyword">auto</span> fast = writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
+<div class="line">    .filtered(filter)   <span class="comment">// Filter first</span></div>
+<div class="line">    .buffered(100)      <span class="comment">// Only buffer passing entries</span></div>
+<div class="line">    .build();</div>
+</div><!-- fragment --><ol type="1">
+<li><b>Async not used for high-throughput scenarios</b>:</li>
+</ol>
+<div class="fragment"><div class="line"><span class="comment">// Synchronous writing blocks caller</span></div>
+<div class="line"><span class="keyword">auto</span> slow = writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
+<div class="line">    .buffered(100)</div>
+<div class="line">    .build();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Async writing is non-blocking</span></div>
+<div class="line"><span class="keyword">auto</span> fast = writer_builder()</div>
+<div class="line">    .file(<span class="stringliteral">&quot;app.log&quot;</span>)</div>
+<div class="line">    .buffered(100)</div>
+<div class="line">    .async(20000)</div>
+<div class="line">    .build();</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1395"></a>
 Migration Checklist</h2>
-<ul>
+<p>Before starting migration:</p><ul>
+<li>[ ] Read this entire migration guide</li>
+<li>[ ] Review <a href="../../examples/decorator_usage.cpp">decorator_usage.cpp</a> examples</li>
+<li>[ ] Identify all existing writer usage in codebase</li>
+</ul>
+<p>During migration:</p><ul>
 <li>[ ] Identify cross-cutting concerns in existing writers</li>
 <li>[ ] Separate destination logic from filtering/buffering/formatting</li>
 <li>[ ] Create simple leaf writers inheriting from <code>thread_safe_writer</code></li>
+<li>[ ] Replace manual nesting with <code>writer_builder()</code></li>
 <li>[ ] Use built-in decorators for common functionality</li>
 <li>[ ] Create custom decorators only for unique cross-cutting needs</li>
-<li>[ ] Update tests to verify decorator composition</li>
-<li>[ ] Benchmark to ensure no performance regression</li>
+<li>[ ] Start async writers with <code>.start()</code> where applicable</li>
 </ul>
+<p>After migration:</p><ul>
+<li>[ ] Update tests to verify decorator composition</li>
+<li>[ ] Test with actual log messages (info, warning, error levels)</li>
+<li>[ ] Verify flush() works correctly before program exit</li>
+<li>[ ] Benchmark to ensure no performance regression</li>
+<li>[ ] Update documentation for your project</li>
+<li>[ ] Remove deprecated code once validated</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md1396"></a>
+Getting Help</h2>
+<p>If you encounter issues not covered in this guide:</p>
+<ol type="1">
+<li>Check <a href="../../examples/decorator_usage.cpp">examples/decorator_usage.cpp</a> for comprehensive examples</li>
+<li>Review <a href="../../examples/writer_builder_example.cpp">writer_builder_example.cpp</a> for builder API patterns</li>
+<li>See <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html">Best Practices</a> for general guidance</li>
+<li>Check <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2FAQ.html">FAQ</a> for common questions</li>
+<li>File an issue on <a href="https://github.com/kcenon/logger_system/issues">GitHub</a> with:<ul>
+<li>Current code (manual nesting)</li>
+<li>Expected behavior</li>
+<li>Error messages or compilation errors</li>
+<li>Platform and compiler version</li>
+</ul>
+</li>
+</ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1395"></a>
+<h1><a class="anchor" id="autotoc_md1398"></a>
 Related Documentation</h1>
 <ul>
 <li><a href="../../examples/writer_builder_example.cpp">writer_builder Example</a> - Complete usage examples</li>
@@ -649,7 +957,7 @@ Related Documentation</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 1 2026 12:01:52 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 1 2026 12:36:51 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
