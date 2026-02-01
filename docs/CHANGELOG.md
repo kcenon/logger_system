@@ -9,6 +9,109 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.1.0] - Unreleased
+
+### Added - Writer Builder for Fluent Decorator Composition (Issue #413, #415, #416)
+
+This release introduces `writer_builder` - a fluent API for composing log writers with decorators, significantly improving usability over manual decorator nesting.
+
+#### New Components
+
+- **`writer_builder`** (#413, #415) - Fluent builder for writer composition
+  - Provides chainable methods for core writers (file, console, network, otlp)
+  - Supports all decorator types (async, buffered, encrypted, filtered, formatted)
+  - Applies decorators in optimal order automatically
+  - Type-safe composition with compile-time validation
+
+#### Usage Examples
+
+```cpp
+#include <kcenon/logger/builders/writer_builder.h>
+
+// Simple file writer
+auto writer = writer_builder()
+    .file("app.log")
+    .build();
+
+// Production setup: async + buffered for high performance
+auto production_writer = writer_builder()
+    .file("app.log")
+    .buffered(500)       // Buffer 500 entries
+    .async(20000)        // Queue size 20000
+    .build();
+
+// Filtered console (warnings and above)
+auto console_writer = writer_builder()
+    .console()
+    .filtered(std::make_unique<level_filter>(log_level::warning))
+    .build();
+
+// Encrypted logging with buffering
+#ifdef LOGGER_WITH_ENCRYPTION
+auto secure_writer = writer_builder()
+    .file("secure.log.enc")
+    .encrypted(key)
+    .buffered(100)
+    .async()
+    .build();
+#endif
+```
+
+#### Benefits
+
+- **Improved Readability**: Fluent API is self-documenting
+- **Reduced Errors**: No manual decorator nesting required
+- **Consistent Order**: Decorators applied in optimal sequence
+- **Better DX**: IntelliSense/autocomplete guides usage
+
+#### Documentation
+
+- Complete examples: [examples/writer_builder_example.cpp](../examples/writer_builder_example.cpp)
+- Migration guide: [docs/guides/DECORATOR_MIGRATION.md](guides/DECORATOR_MIGRATION.md)
+
+### Deprecated - Legacy Writer Patterns (Issue #418)
+
+The following legacy writer patterns are **deprecated** and will be removed in v5.0.0:
+
+#### Deprecated Classes and Patterns
+
+- **Manual decorator nesting** - Use `writer_builder` instead
+  ```cpp
+  // Deprecated: Manual nesting
+  auto old = std::make_unique<async_writer>(
+      std::make_unique<buffered_writer>(
+          std::make_unique<file_writer>("app.log"),
+          config
+      ),
+      queue_size
+  );
+
+  // Recommended: Use builder
+  auto new_writer = writer_builder()
+      .file("app.log")
+      .buffered(config.max_buffer_size)
+      .async(queue_size)
+      .build();
+  ```
+
+- **Combined writer classes** (future deprecation) - Specialized writers like `rotating_file_writer` will eventually be replaced by decorator-based alternatives
+
+#### Deprecation Timeline
+
+| Version | Status | Action |
+|---------|--------|--------|
+| **4.1.0** | Deprecation warnings added | Plan migration to `writer_builder` |
+| **4.2.0** | Additional deprecation notices | Active migration recommended |
+| **5.0.0** | Legacy patterns removed | **Must use `writer_builder`** |
+
+#### Migration Support
+
+- See [Deprecation Timeline and Legacy Patterns](guides/DECORATOR_MIGRATION.md#deprecation-timeline-and-legacy-patterns) for detailed migration scenarios
+- 6+ common migration patterns documented with before/after code
+- Full backward compatibility maintained in v4.x series
+
+---
+
 ## [4.0.0] - Unreleased
 
 ### Removed - Deprecated Context ID Convenience Methods (Issue #326)
