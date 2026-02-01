@@ -373,6 +373,8 @@ The following legacy writer patterns are **deprecated** as of v4.1.0:
 
 ### Migration Paths
 
+> **Note**: All scenarios below show complete working examples. If you encounter issues during migration, see [Troubleshooting](#troubleshooting).
+
 #### Scenario 1: Simple File Writer
 
 **Before (Deprecated)**:
@@ -384,6 +386,12 @@ auto writer = std::make_unique<file_writer>("app.log");
 ```cpp
 auto writer = writer_builder().file("app.log").build();
 ```
+
+**Migration Steps**:
+1. Replace `std::make_unique<file_writer>()` with `writer_builder().file()`
+2. Add `.build()` at the end
+3. Test that logs are written correctly
+4. **Common Issue**: If entries aren't being written, ensure writer is added to logger with `add_writer()`
 
 #### Scenario 2: Rotating File Writer
 
@@ -405,6 +413,12 @@ auto writer = std::make_unique<rotating_file_writer>("app.log", 10 * 1024 * 1024
 // Alternative: Use external log rotation tools (logrotate, etc.)
 auto writer = writer_builder().file("app.log").build();
 ```
+
+**Migration Steps**:
+1. If file rotation is critical, continue using `rotating_file_writer` (not deprecated yet)
+2. Consider external rotation tools (logrotate on Linux, log management services)
+3. Plan for future migration when decorator-based rotation becomes available
+4. **Common Issue**: See [Flush not working](#flush-not-working) if rotation timing is incorrect
 
 #### Scenario 3: Async + Encrypted Writer
 
@@ -428,6 +442,19 @@ auto writer = writer_builder()
     .build();
 ```
 
+**Migration Steps**:
+1. Replace innermost nesting (file_writer) with `.file()`
+2. Add `.encrypted()` for encryption decorator
+3. Add `.async()` for async decorator (outermost)
+4. Call `.build()` to construct the writer chain
+5. **Important**: Must call `start()` on async writer before use:
+   ```cpp
+   if (auto* async_w = dynamic_cast<async_writer*>(writer.get())) {
+       async_w->start();
+   }
+   ```
+6. **Common Issue**: If logs don't appear, check async writer is started. See [Troubleshooting](#common-issues)
+
 #### Scenario 4: Buffered + Filtered Writer
 
 **Before (Manual Nesting)**:
@@ -449,6 +476,14 @@ auto writer = writer_builder()
     .buffered(100)
     .build();
 ```
+
+**Migration Steps**:
+1. Start with core writer: `.console()`
+2. Add filter decorator: `.filtered(filter)` (applied first)
+3. Add buffer decorator: `.buffered(size)` (applied after filter)
+4. Build the chain: `.build()`
+5. **Order Matters**: Filter → Buffer → Output (see [Composing Decorators](#composing-decorators))
+6. **Common Issue**: Wrong decorator order. See [Writer not receiving entries](#writer-not-receiving-entries)
 
 #### Scenario 5: Multiple Decorators (Production Setup)
 
@@ -480,6 +515,16 @@ auto writer = writer_builder()
     .build();
 ```
 
+**Migration Steps**:
+1. Identify all nested decorators (4 layers in this example)
+2. Reverse the nesting order when using builder (innermost → outermost)
+3. Core writer first: `.file()`
+4. Add decorators in order: filter → buffer → format → async
+5. Start async writer after building (if using async)
+6. Test thoroughly with actual log messages
+7. **Performance Tip**: This pattern provides ~4M msg/s throughput. See [Performance Guide](PERFORMANCE.md)
+8. **Common Issue**: If formatting fails, ensure formatter is compatible. See [Entries not being formatted](#entries-not-being-formatted)
+
 #### Scenario 6: Custom Writer Integration
 
 **Before (Inheritance)**:
@@ -494,9 +539,16 @@ class my_combined_writer : public base_writer {
 ```cpp
 // 1. Create simple leaf writer (20-30 lines)
 class my_destination_writer : public thread_safe_writer {
+public:
+    std::string get_name() const override { return "my_destination"; }
+
 protected:
     common::VoidResult write_entry_impl(const log_entry& entry) override {
         return send_to_my_destination(entry);
+    }
+
+    common::VoidResult flush_impl() override {
+        return flush_my_destination();
     }
 };
 
@@ -508,6 +560,15 @@ auto writer = writer_builder()
     .async()
     .build();
 ```
+
+**Migration Steps**:
+1. **Separate concerns**: Extract destination-specific I/O from cross-cutting logic
+2. **Create leaf writer**: Inherit from `thread_safe_writer` or `sync_writer_tag`
+3. **Implement only I/O methods**: `write_entry_impl()`, `flush_impl()`, `get_name()`
+4. **Remove duplicated logic**: Delete filtering, buffering, formatting from custom class
+5. **Use decorators**: Compose with `.filtered()`, `.buffered()`, `.async()` as needed
+6. **Benefits**: 70% less code, independently testable, reusable
+7. **Common Issue**: If custom writer doesn't compile, ensure it implements `log_writer_interface`. See [Best Practices](#1-keep-leaf-writers-simple)
 
 ### Support Policy
 
@@ -595,7 +656,11 @@ private:
 
 #### "Writer not receiving entries"
 
-Check decorator composition order. Filters should be innermost:
+**Symptom**: Log entries not appearing in output file or console.
+
+**Possible Causes**:
+
+1. **Decorator order is wrong** - Filters should be innermost:
 
 ```cpp
 // Wrong: Filter after buffer means filtered entries still buffered
@@ -609,11 +674,56 @@ auto right = std::make_unique<buffered_writer>(
     std::make_unique<filtered_writer>(..., filter),
     config
 );
+
+// Using builder (automatic correct order):
+auto correct = writer_builder()
+    .file("app.log")
+    .filtered(filter)  // Applied first
+    .buffered(100)     // Applied second
+    .build();
+```
+
+2. **Writer not added to logger**:
+
+```cpp
+auto writer = writer_builder().file("app.log").build();
+// Must add to logger!
+logger.add_writer("main", std::move(writer));
+```
+
+3. **Async writer not started**:
+
+```cpp
+auto writer = writer_builder().file("app.log").async().build();
+// Must start async writer!
+if (auto* async_w = dynamic_cast<async_writer*>(writer.get())) {
+    async_w->start();
+}
+logger.add_writer("main", std::move(writer));
+```
+
+4. **Filter is too restrictive**:
+
+```cpp
+// This filter blocks everything below ERROR level
+auto filter = std::make_unique<level_filter>(log_level::error);
+auto writer = writer_builder()
+    .console()
+    .filtered(std::move(filter))
+    .build();
+
+// INFO and DEBUG messages won't appear!
+logger.log(log_level::info, "This won't show");  // Filtered out
+logger.log(log_level::error, "This will show");  // Passes filter
 ```
 
 #### "Entries not being formatted"
 
-Ensure `formatted_writer` wraps the leaf writer:
+**Symptom**: Log entries appear in plain text instead of JSON/custom format.
+
+**Possible Causes**:
+
+1. **Formatter applied in wrong order**:
 
 ```cpp
 // Wrong: Formatting lost because it's wrapped by buffer
@@ -627,31 +737,261 @@ auto right = std::make_unique<formatted_writer>(
     std::make_unique<buffered_writer>(..., config),
     formatter
 );
+
+// Using builder (handles order automatically):
+auto correct = writer_builder()
+    .file("app.json")
+    .buffered(100)
+    .formatted(std::make_unique<json_formatter>())
+    .build();
+```
+
+2. **Formatter not provided**:
+
+```cpp
+// Missing formatter - will use default plain text
+auto writer = writer_builder().file("app.json").build();
+
+// Add formatter for JSON output
+auto writer = writer_builder()
+    .file("app.json")
+    .formatted(std::make_unique<json_formatter>())
+    .build();
+```
+
+3. **Incompatible formatter for writer type**:
+
+```cpp
+// Some formatters may not support all entry types
+// Check formatter documentation for compatibility
 ```
 
 #### "Flush not working"
 
-Call `flush()` on the outermost decorator:
+**Symptom**: Logs not appearing immediately, delayed until program exit.
+
+**Possible Causes**:
+
+1. **Flushing wrong writer**:
 
 ```cpp
-auto outermost = std::make_unique<formatted_writer>(
-    std::make_unique<buffered_writer>(inner, config),
-    formatter
-);
+auto inner = std::make_unique<file_writer>("app.log");
+auto buffered = std::make_unique<buffered_writer>(std::move(inner), config);
+auto outermost = std::make_unique<formatted_writer>(std::move(buffered), formatter);
 
-// This flushes all layers
+// Wrong: Flushing reference to moved writer (undefined behavior)
+// inner->flush();  // Don't do this!
+
+// Right: Flush the outermost decorator
 outermost->flush();
+```
+
+2. **Not calling flush() at all**:
+
+```cpp
+auto writer = writer_builder().file("app.log").buffered(100).build();
+logger.add_writer("main", std::move(writer));
+
+// Logs buffered but not flushed
+logger.log(log_level::info, "Message");
+
+// Must flush before exit!
+logger.flush();  // This flushes all writers
+```
+
+3. **Async writer not stopped properly**:
+
+```cpp
+auto writer = writer_builder().file("app.log").async().build();
+if (auto* async_w = dynamic_cast<async_writer*>(writer.get())) {
+    async_w->start();
+}
+logger.add_writer("main", std::move(writer));
+
+// Before program exit:
+logger.flush();  // Flush buffered entries
+
+// Get async writer reference and stop it
+auto& writer_ref = logger.get_writer("main");
+if (auto* async_w = dynamic_cast<async_writer*>(&writer_ref)) {
+    async_w->stop();  // Processes remaining queue
+}
+```
+
+4. **Buffer size too large**:
+
+```cpp
+// Very large buffer - may never fill up in short-running programs
+auto writer = writer_builder()
+    .file("app.log")
+    .buffered(10000)  // Too large for a few log messages
+    .build();
+
+// Solution: Use smaller buffer or explicit flush
+auto writer = writer_builder()
+    .file("app.log")
+    .buffered(100)  // More reasonable
+    .build();
+```
+
+#### "Compilation errors with custom writers"
+
+**Symptom**: Custom writer doesn't compile after migration to decorator pattern.
+
+**Possible Causes**:
+
+1. **Missing interface methods**:
+
+```cpp
+// Error: abstract class cannot be instantiated
+class my_writer : public thread_safe_writer {
+    // Missing required methods!
+};
+
+// Solution: Implement all required methods
+class my_writer : public thread_safe_writer {
+public:
+    std::string get_name() const override { return "my_writer"; }
+
+protected:
+    common::VoidResult write_entry_impl(const log_entry& entry) override {
+        // Implementation
+        return {};
+    }
+
+    common::VoidResult flush_impl() override {
+        // Implementation
+        return {};
+    }
+};
+```
+
+2. **Wrong base class**:
+
+```cpp
+// Wrong: Using old base_writer class
+class my_writer : public base_writer { ... };
+
+// Right: Use thread_safe_writer or implement log_writer_interface
+class my_writer : public thread_safe_writer { ... };
+```
+
+3. **Incorrect method signatures**:
+
+```cpp
+// Wrong: Missing const qualifier
+std::string get_name() { return "my_writer"; }
+
+// Right: Match interface exactly
+std::string get_name() const override { return "my_writer"; }
+```
+
+#### "Performance regression after migration"
+
+**Symptom**: Logging is slower after switching to decorator pattern.
+
+**Possible Causes**:
+
+1. **Too many decorator layers**:
+
+```cpp
+// Avoid excessive nesting
+auto writer = writer_builder()
+    .file("app.log")
+    .filtered(filter1)
+    .filtered(filter2)  // Each filter adds overhead
+    .filtered(filter3)
+    .buffered(100)
+    .buffered(50)       // Multiple buffers inefficient
+    .async()
+    .build();
+
+// Better: Use composite filter and single buffer
+auto composite_filter = std::make_unique<composite_filter>(logic_type::AND);
+composite_filter->add_filter(std::move(filter1));
+composite_filter->add_filter(std::move(filter2));
+composite_filter->add_filter(std::move(filter3));
+
+auto writer = writer_builder()
+    .file("app.log")
+    .filtered(std::move(composite_filter))
+    .buffered(100)
+    .async()
+    .build();
+```
+
+2. **Wrong decorator order**:
+
+```cpp
+// Inefficient: Buffering before filtering
+auto slow = writer_builder()
+    .file("app.log")
+    .buffered(100)      // Buffers everything
+    .filtered(filter)   // Then filters (wasted buffer space)
+    .build();
+
+// Efficient: Filtering before buffering
+auto fast = writer_builder()
+    .file("app.log")
+    .filtered(filter)   // Filter first
+    .buffered(100)      // Only buffer passing entries
+    .build();
+```
+
+3. **Async not used for high-throughput scenarios**:
+
+```cpp
+// Synchronous writing blocks caller
+auto slow = writer_builder()
+    .file("app.log")
+    .buffered(100)
+    .build();
+
+// Async writing is non-blocking
+auto fast = writer_builder()
+    .file("app.log")
+    .buffered(100)
+    .async(20000)
+    .build();
 ```
 
 ### Migration Checklist
 
+Before starting migration:
+- [ ] Read this entire migration guide
+- [ ] Review [decorator_usage.cpp](../../examples/decorator_usage.cpp) examples
+- [ ] Identify all existing writer usage in codebase
+
+During migration:
 - [ ] Identify cross-cutting concerns in existing writers
 - [ ] Separate destination logic from filtering/buffering/formatting
 - [ ] Create simple leaf writers inheriting from `thread_safe_writer`
+- [ ] Replace manual nesting with `writer_builder()`
 - [ ] Use built-in decorators for common functionality
 - [ ] Create custom decorators only for unique cross-cutting needs
+- [ ] Start async writers with `.start()` where applicable
+
+After migration:
 - [ ] Update tests to verify decorator composition
+- [ ] Test with actual log messages (info, warning, error levels)
+- [ ] Verify flush() works correctly before program exit
 - [ ] Benchmark to ensure no performance regression
+- [ ] Update documentation for your project
+- [ ] Remove deprecated code once validated
+
+### Getting Help
+
+If you encounter issues not covered in this guide:
+
+1. Check [examples/decorator_usage.cpp](../../examples/decorator_usage.cpp) for comprehensive examples
+2. Review [writer_builder_example.cpp](../../examples/writer_builder_example.cpp) for builder API patterns
+3. See [Best Practices](BEST_PRACTICES.md) for general guidance
+4. Check [FAQ](FAQ.md) for common questions
+5. File an issue on [GitHub](https://github.com/kcenon/logger_system/issues) with:
+   - Current code (manual nesting)
+   - Expected behavior
+   - Error messages or compilation errors
+   - Platform and compiler version
 
 ---
 
