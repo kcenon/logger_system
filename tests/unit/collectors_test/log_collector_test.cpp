@@ -31,8 +31,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include <gtest/gtest.h>
-#include <logger/core/log_collector.h>
-#include <logger/writers/base_writer.h>
+#include <kcenon/logger/core/log_collector.h>
+#include <kcenon/logger/writers/base_writer.h>
+#include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/common/interfaces/logger_interface.h>
 
 #include <atomic>
@@ -41,22 +42,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <thread>
 #include <vector>
 
-using namespace logger_module;
+using namespace kcenon::logger;
 namespace ci = kcenon::common::interfaces;
 using log_level = ci::log_level;
 
 // Mock writer for testing log collector
 class MockCollectorWriter : public base_writer {
 public:
-    // Note: base_writer::write uses kcenon::common::interfaces::log_level for backward compatibility
-    common::VoidResult write(kcenon::common::interfaces::log_level level, const std::string& message,
-                      const std::string& /* file */, int /* line */,
-                      const std::string& /* function */,
-                      const std::chrono::system_clock::time_point& /* timestamp */) override {
+    common::VoidResult write(const log_entry& entry) override {
         write_count_++;
-        last_message_ = message;
-        last_level_ = static_cast<log_level>(static_cast<int>(level));
-        messages_.push_back(message);
+        last_message_ = std::string(entry.message.data());
+        last_level_ = entry.level;
+        messages_.push_back(last_message_);
         return common::ok();
     }
 
