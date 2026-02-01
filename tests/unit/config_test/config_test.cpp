@@ -6,13 +6,13 @@ All rights reserved.
 *****************************************************************************/
 
 #include <gtest/gtest.h>
-#include <logger/config/logger_config.h>
-#include <logger/config/logger_builder.h>
-#include <logger/writers/console_writer.h>
-#include <logger/filters/log_filter.h>
+#include <kcenon/logger/core/logger_config.h>
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/impl/writers/console_writer.h>
+#include <kcenon/logger/filters/log_filter.h>
 #include <kcenon/common/interfaces/logger_interface.h>
 
-using namespace logger_module;
+using namespace kcenon::logger;
 namespace ci = kcenon::common::interfaces;
 using log_level = ci::log_level;
 
