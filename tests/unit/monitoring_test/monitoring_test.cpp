@@ -44,12 +44,12 @@ TEST_F(monitoring_test, basic_monitor_enable_disable) {
     
     // Disable
     auto result = monitor_->set_enabled(false);
-    ASSERT_TRUE(result);
+    ASSERT_TRUE(result.is_ok());
     EXPECT_FALSE(monitor_->is_enabled());
-    
+
     // Re-enable
     result = monitor_->set_enabled(true);
-    ASSERT_TRUE(result);
+    ASSERT_TRUE(result.is_ok());
     EXPECT_TRUE(monitor_->is_enabled());
 }
 
@@ -202,7 +202,7 @@ TEST_F(monitoring_test, basic_monitor_reset_metrics) {
     
     // Reset
     auto result = monitor_->reset_metrics();
-    ASSERT_TRUE(result);
+    ASSERT_TRUE(result.is_ok());
     
     // Collect metrics - should be reset
     auto metrics_result = monitor_->collect_metrics();

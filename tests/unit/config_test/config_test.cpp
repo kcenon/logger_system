@@ -243,7 +243,7 @@ TEST_F(ConfigTest, LoggerBuilderBasic) {
 
     // Build logger
     auto result = builder.build();
-    EXPECT_TRUE(result.is_ok());
+    EXPECT_TRUE(result.has_value());
     EXPECT_NE(result.value(), nullptr);
 }
 
@@ -256,7 +256,7 @@ TEST_F(ConfigTest, LoggerBuilderWithWriters) {
 
     // Build logger
     auto result = builder.build();
-    EXPECT_TRUE(result.is_ok());
+    EXPECT_TRUE(result.has_value());
 }
 
 // Test logger builder with filters
@@ -268,7 +268,7 @@ TEST_F(ConfigTest, LoggerBuilderWithFilters) {
 
     // Build logger
     auto result = builder.build();
-    EXPECT_TRUE(result.is_ok());
+    EXPECT_TRUE(result.has_value());
 }
 
 // Test logger builder templates
@@ -290,7 +290,7 @@ TEST_F(ConfigTest, LoggerBuilderTemplates) {
         EXPECT_TRUE(validation.is_ok()) << "Template " << tmpl << " failed validation";
 
         auto result = builder.build();
-        EXPECT_TRUE(result.is_ok()) << "Template " << tmpl << " failed to build";
+        EXPECT_TRUE(result.has_value()) << "Template " << tmpl << " failed to build";
     }
 }
 
@@ -307,7 +307,7 @@ TEST_F(ConfigTest, LoggerBuilderInvalidConfig) {
 
     // Build should fail
     auto result = builder.build();
-    EXPECT_TRUE(result.is_err());
+    EXPECT_FALSE(result.has_value());
 }
 
 // Test logger builder fluent interface
@@ -321,7 +321,7 @@ TEST_F(ConfigTest, LoggerBuilderFluentInterface) {
         .add_writer("console", std::make_unique<console_writer>())
         .build();
 
-    EXPECT_TRUE(result.is_ok());
+    EXPECT_TRUE(result.has_value());
     EXPECT_NE(result.value(), nullptr);
 }
 
