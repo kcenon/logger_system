@@ -34,6 +34,15 @@ if(BUILD_SAMPLES)
     )
 endif()
 
+# Writer builder example - demonstrates Decorator pattern with writer_builder
+if(BUILD_SAMPLES)
+    add_executable(writer_builder_example writer_builder_example.cpp)
+    target_link_libraries(writer_builder_example PRIVATE LoggerSystem)
+    set_target_properties(writer_builder_example PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
+
 # Phase 4 DI Pattern examples - available when common_system integration is enabled
 if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM)
     # DI Pattern example
