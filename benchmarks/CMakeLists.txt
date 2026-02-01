@@ -28,6 +28,11 @@ if(benchmark_FOUND OR BENCHMARK_FOUND)
         main_bench.cpp
     )
 
+    # Decorator pattern performance benchmark
+    add_executable(decorator_benchmark
+        decorator_performance.cpp
+    )
+
     target_link_libraries(logger_benchmarks
         PRIVATE
             LoggerSystem
@@ -42,6 +47,21 @@ if(benchmark_FOUND OR BENCHMARK_FOUND)
 
     target_compile_features(logger_benchmarks PRIVATE cxx_std_20)
 
+    # Decorator benchmark configuration
+    target_link_libraries(decorator_benchmark
+        PRIVATE
+            LoggerSystem
+            benchmark::benchmark
+            benchmark::benchmark_main
+    )
+
+    target_include_directories(decorator_benchmark
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/../include
+    )
+
+    target_compile_features(decorator_benchmark PRIVATE cxx_std_20)
+
     # Set compiler warnings
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         target_compile_options(logger_benchmarks PRIVATE
@@ -49,8 +69,18 @@ if(benchmark_FOUND OR BENCHMARK_FOUND)
             -O3  # Maximum optimization for accurate benchmarks
             -DNDEBUG  # Disable asserts
         )
+
+        target_compile_options(decorator_benchmark PRIVATE
+            -Wall -Wextra -Wpedantic
+            -O3  # Maximum optimization for accurate benchmarks
+            -DNDEBUG  # Disable asserts
+        )
     elseif(MSVC)
         target_compile_options(logger_benchmarks PRIVATE
+            /W4 /O2 /DNDEBUG
+        )
+
+        target_compile_options(decorator_benchmark PRIVATE
             /W4 /O2 /DNDEBUG
         )
     endif()
@@ -64,8 +94,17 @@ if(benchmark_FOUND OR BENCHMARK_FOUND)
         COMMENT "Running logger_system performance benchmarks"
     )
 
+    # Add custom target to run decorator benchmarks
+    add_custom_target(run_decorator_benchmarks
+        COMMAND decorator_benchmark --benchmark_format=json --benchmark_out=decorator_results.json
+        COMMAND decorator_benchmark --benchmark_format=console
+        DEPENDS decorator_benchmark
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Running decorator pattern performance benchmarks"
+    )
+
     # Installation
-    install(TARGETS logger_benchmarks
+    install(TARGETS logger_benchmarks decorator_benchmark
         RUNTIME DESTINATION bin/benchmarks
     )
 
