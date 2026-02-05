@@ -343,7 +343,7 @@ int main() {
 - 🔄 [Integration Guide](docs/guides/INTEGRATION.md) - 생태계 통합 패턴
 
 ### 개발
-- 🤝 [Contributing Guide](docs/CONTRIBUTING.md) - 기여 방법
+- 🤝 [Contributing Guide](docs/contributing/CONTRIBUTING.md) - 기여 방법
 - 📋 [FAQ](docs/guides/FAQ.md) - 자주 묻는 질문
 - 🔍 [Troubleshooting](docs/guides/TROUBLESHOOTING.md) - 일반적인 문제 및 해결방법
 - 📝 [Changelog](docs/CHANGELOG.md) - 릴리스 히스토리 및 변경사항
@@ -501,7 +501,7 @@ ctest --output-on-failure
 
 ## 기여하기
 
-기여를 환영합니다! 자세한 내용은 [Contributing Guide](docs/CONTRIBUTING.md)를 참조하세요.
+기여를 환영합니다! 자세한 내용은 [Contributing Guide](docs/contributing/CONTRIBUTING.md)를 참조하세요.
 
 ### 개발 워크플로우
 
@@ -519,7 +519,7 @@ ctest --output-on-failure
 - 일관된 포매팅 유지 (clang-format)
 - Public API 문서화
 
-[🤝 Contributing 가이드라인 →](docs/CONTRIBUTING.md)
+[🤝 Contributing 가이드라인 →](docs/contributing/CONTRIBUTING.md)
 
 ---
 
