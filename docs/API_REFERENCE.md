@@ -2,7 +2,7 @@
 
 # API Reference
 
-**Version**: 3.0.0
+**Version**: 0.3.0.0
 **Last Updated**: 2025-12-10
 
 ## Table of Contents

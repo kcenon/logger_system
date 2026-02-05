@@ -1,6 +1,6 @@
 # OpenTelemetry Integration Guide
 
-> **Version**: 3.0.0+
+> **Version**: 0.3.0.0+
 > **Status**: Stable
 
 This guide covers the OpenTelemetry (OTLP) integration in logger_system, enabling seamless correlation between logs, traces, and metrics for cloud-native observability.

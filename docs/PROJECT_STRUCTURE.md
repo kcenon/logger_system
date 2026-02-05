@@ -1,7 +1,7 @@
 # Logger System Project Structure
 
 **Last Updated**: 2025-11-15
-**Version**: 3.0.0
+**Version**: 0.3.0.0
 
 This document provides detailed descriptions of the logger system's directory structure, key files, and module dependencies.
 

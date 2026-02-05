@@ -2,7 +2,7 @@
 
 # Threading Ecosystem Architecture
 
-**Version**: 3.0.0
+**Version**: 0.3.0.0
 **Last Updated**: 2025-12-10
 
 A comprehensive overview of the modular threading ecosystem and inter-project relationships.
