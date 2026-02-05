@@ -38,7 +38,7 @@ common_system (interfaces) ← logger_system implements ILogger
 ### Required Dependencies
 
 #### common_system (Header-only)
-- **Version**: 1.0.0+
+- **Version**: 0.1.0.0+
 - **Purpose**: Core interfaces and error handling patterns
 - **Components Used**:
   - `ILogger` interface implementation
@@ -55,7 +55,7 @@ target_link_libraries(LoggerSystem PUBLIC kcenon::common_system)
 ### Optional Dependencies
 
 #### thread_system
-- **Version**: 1.0.0+
+- **Version**: 0.1.0.0+
 - **Purpose**: Asynchronous logging operations
 - **Components Used**:
   - `IExecutor` for async task submission
@@ -63,7 +63,7 @@ target_link_libraries(LoggerSystem PUBLIC kcenon::common_system)
   - DI adapter for service integration
 
 #### monitoring_system
-- **Version**: 1.0.0+
+- **Version**: 0.1.0.0+
 - **Purpose**: Performance metrics and health monitoring
 - **Components Used**:
   - `IMonitor` interface for metrics injection

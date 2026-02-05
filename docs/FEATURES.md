@@ -1,7 +1,7 @@
 # Logger System Features
 
 **Last Updated**: 2025-11-15
-**Version**: 3.0.0
+**Version**: 0.3.0.0
 
 This document provides comprehensive details about all features available in the logger system.
 

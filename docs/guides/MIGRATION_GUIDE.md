@@ -2,7 +2,7 @@
 
 # Logger System Migration Guide
 
-**Version**: 4.0.0
+**Version**: 0.4.0.0
 **Last Updated**: 2026-01-23
 
 ## Table of Contents
