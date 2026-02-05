@@ -617,7 +617,7 @@ All pipelines green:
 
 ## Contributing
 
-We welcome contributions! Please see our [Contributing Guide](docs/CONTRIBUTING.md) for details.
+We welcome contributions! Please see our [Contributing Guide](docs/contributing/CONTRIBUTING.md) for details.
 
 ### Development Workflow
 
@@ -635,7 +635,7 @@ We welcome contributions! Please see our [Contributing Guide](docs/CONTRIBUTING.
 - Maintain consistent formatting (clang-format)
 - Document public APIs
 
-[🤝 Contributing Guidelines →](docs/CONTRIBUTING.md)
+[🤝 Contributing Guidelines →](docs/contributing/CONTRIBUTING.md)
 
 ---
 
