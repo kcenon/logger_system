@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['다음_20단계_0',['다음 단계',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1733',1,'다음 단계'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1985',1,'📝 다음 단계']]],
-  ['다이어그램_1',['아키텍처 다이어그램',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE_8kr.html#autotoc_md480',1,'']]]
+  ['누수_20탐지_0',['메모리 누수 탐지',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2150',1,'']]]
 ];

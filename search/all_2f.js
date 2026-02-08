@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['공개_20api_0',['1. async_writer (공개 API)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md148',1,'']]],
-  ['공식_20지원_20플랫폼_1',['공식 지원 플랫폼',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2061',1,'']]],
-  ['공유_20풀_2',['패턴 1: 애플리케이션 전체 공유 풀',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1829',1,'']]]
+  ['고급_20주제_20tt_20docs_20advanced_20tt_0',['고급 주제 (&lt;tt&gt;docs/advanced/&lt;/tt&gt;)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README_8kr.html#autotoc_md2420',1,'']]],
+  ['고려사항_1',['고려사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1942',1,'성능 고려사항'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md180',1,'5. 스레드 안전성 고려사항']]],
+  ['고성능_2',['High Performance (고성능)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1827',1,'']]],
+  ['고용량_20시나리오를_20위한_20로그_20샘플링_20issue_20282_3',['고용량 시나리오를 위한 로그 샘플링 (Issue #282)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md1019',1,'']]]
 ];

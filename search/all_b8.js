@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['포맷터_0',['커스텀 포맷터',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1215',1,'']]],
-  ['포맷팅_1',['포맷팅',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1212',1,'']]],
-  ['포맷_2',['포맷',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1213',1,'기본 포맷'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1214',1,'JSON 포맷']]],
-  ['포인터_20사용_3',['스마트 포인터 사용',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2040',1,'']]]
+  ['패턴_0',['패턴',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1937',1,'사용 패턴'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md173',1,'예제 4: 정상 종료 패턴'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1837',1,'일반적인 패턴'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2155',1,'Result&lt;T&gt; 패턴']]],
+  ['패턴_20필터링_1',['패턴 필터링',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1293',1,'']]],
+  ['패턴_201_3a_20애플리케이션_20전체_20공유_20풀_2',['패턴 1: 애플리케이션 전체 공유 풀',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1938',1,'']]],
+  ['패턴_202_3a_20사용자_20정의_20풀_20설정_3',['패턴 2: 사용자 정의 풀 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1939',1,'']]],
+  ['패턴_203_3a_20조건부_20통합_4',['패턴 3: 조건부 통합',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1940',1,'']]]
 ];

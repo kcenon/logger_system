@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['하드웨어_20구성_0',['하드웨어 구성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md855',1,'하드웨어 구성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE_8kr.html#autotoc_md1885',1,'하드웨어 구성']]],
-  ['하위_20호환성_1',['하위 호환성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md996',1,'']]],
-  ['하이라이트_2',['핵심 하이라이트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md851',1,'']]]
+  ['필요_20사항_0',['❌ 개선 필요 사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2036',1,'']]],
+  ['필터링_1',['필터링',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1292',1,'레벨 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1294',1,'조건부 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1293',1,'패턴 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1291',1,'필터링']]]
 ];

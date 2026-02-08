@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System Performance Benchmarks</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md881"></a> <b>Last Updated</b>: 2025-11-15 <b>Version</b>: 0.3.0.0</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md955"></a> <b>Last Updated</b>: 2025-11-15 <b>Version</b>: 0.3.0.0</p>
 <p>This document provides comprehensive performance benchmark results and comparisons with industry-standard logging libraries.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md883"></a>
+<h1><a class="anchor" id="autotoc_md957"></a>
 Table of Contents</h1>
 <ul>
 <li>Executive Summary</li>
@@ -109,10 +109,10 @@ Table of Contents</h1>
 <li>Benchmark Methodology</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md885"></a>
+<h1><a class="anchor" id="autotoc_md959"></a>
 Executive Summary</h1>
 <p>The logger system delivers exceptional performance across all testing scenarios:</p>
-<h2><a class="anchor" id="autotoc_md886"></a>
+<h2><a class="anchor" id="autotoc_md960"></a>
 Key Highlights</h2>
 <ul>
 <li><b>Peak Throughput</b>: 4.34M messages/second (single thread, async mode)</li>
@@ -121,7 +121,7 @@ Key Highlights</h2>
 <li><b>Memory Efficiency</b>: &lt;2MB baseline memory footprint</li>
 <li>**Adaptive Scaling**: Intelligent batching maintains performance under high contention</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md887"></a>
+<h2><a class="anchor" id="autotoc_md961"></a>
 Competitive Advantages</h2>
 <ol type="1">
 <li>**15.7x lower latency** than spdlog async mode</li>
@@ -130,9 +130,9 @@ Competitive Advantages</h2>
 <li>**Zero-copy design** minimizes allocations and overhead</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md889"></a>
+<h1><a class="anchor" id="autotoc_md963"></a>
 Test Environment</h1>
-<h2><a class="anchor" id="autotoc_md890"></a>
+<h2><a class="anchor" id="autotoc_md964"></a>
 Hardware Configuration</h2>
 <p><b>Platform</b>: Apple M1 (8-core) @ 3.2GHz</p><ul>
 <li><b>CPU</b>: Apple M1 (8-core: 4 performance + 4 efficiency)</li>
@@ -144,7 +144,7 @@ Hardware Configuration</h2>
 <li><b>Linux</b>: Ubuntu 22.04 LTS, AMD Ryzen 9 5950X, 32GB DDR4</li>
 <li><b>Windows</b>: Windows 11, Intel Core i9-12900K, 32GB DDR5</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md891"></a>
+<h2><a class="anchor" id="autotoc_md965"></a>
 Software Configuration</h2>
 <p><b>Compiler</b>:</p><ul>
 <li>Clang 15.0 (macOS)</li>
@@ -162,9 +162,9 @@ Software Configuration</h2>
 <li>PGO (Profile-Guided Optimization) for critical paths</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md893"></a>
+<h1><a class="anchor" id="autotoc_md967"></a>
 Core Performance Metrics</h1>
-<h2><a class="anchor" id="autotoc_md894"></a>
+<h2><a class="anchor" id="autotoc_md968"></a>
 Single-Threaded Performance</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -181,9 +181,9 @@ Single-Threaded Performance</h2>
 <li><b>13x lower latency</b> compared to direct file I/O</li>
 <li>Minimal memory overhead for massive performance gain</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md895"></a>
+<h2><a class="anchor" id="autotoc_md969"></a>
 Multi-Threaded Performance</h2>
-<h3><a class="anchor" id="autotoc_md896"></a>
+<h3><a class="anchor" id="autotoc_md970"></a>
 Throughput by Thread Count</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -204,7 +204,7 @@ Throughput by Thread Count</h3>
 <li><b>8 threads</b>: 78% improvement with adaptive batching</li>
 <li><b>16 threads</b>: 117% boost in high-contention scenarios</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md897"></a>
+<h3><a class="anchor" id="autotoc_md971"></a>
 Performance Scaling Graph</h3>
 <div class="fragment"><div class="line">Throughput (msg/s)</div>
 <div class="line">│</div>
@@ -225,11 +225,11 @@ Performance Scaling Graph</h3>
 <div class="line">      1    4    8    16</div>
 <div class="line">          Thread Count</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md899"></a>
+<h1><a class="anchor" id="autotoc_md973"></a>
 Industry Comparisons</h1>
-<h2><a class="anchor" id="autotoc_md900"></a>
+<h2><a class="anchor" id="autotoc_md974"></a>
 vs spdlog (Most Popular C++ Logger)</h2>
-<h3><a class="anchor" id="autotoc_md901"></a>
+<h3><a class="anchor" id="autotoc_md975"></a>
 Single-Threaded Comparison</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -244,7 +244,7 @@ Single-Threaded Comparison</h3>
 <td class="markdownTableBodyNone"><b>Memory</b>   </td><td class="markdownTableBodyNone">1.8 MB   </td><td class="markdownTableBodyNone">4.2 MB   </td><td class="markdownTableBodyNone"><b>logger_system (-57%)</b>   </td></tr>
 </table>
 <p><b>Verdict</b>: logger_system trades 23% throughput for <b>15.7x lower latency</b> and <b>57% less memory</b></p>
-<h3><a class="anchor" id="autotoc_md902"></a>
+<h3><a class="anchor" id="autotoc_md976"></a>
 Multi-Threaded Comparison (4 Threads)</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -259,7 +259,7 @@ Multi-Threaded Comparison (4 Threads)</h3>
 <td class="markdownTableBodyNone"><b>CPU Efficiency</b>   </td><td class="markdownTableBodyNone">67% util   </td><td class="markdownTableBodyNone">89% util   </td><td class="markdownTableBodyNone"><b>logger_system</b>   </td></tr>
 </table>
 <p><b>Verdict</b>: logger_system excels in multi-threaded scenarios with <b>36% higher throughput</b> and <b>16.8x lower latency</b></p>
-<h2><a class="anchor" id="autotoc_md903"></a>
+<h2><a class="anchor" id="autotoc_md977"></a>
 vs Boost.Log</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -276,7 +276,7 @@ vs Boost.Log</h2>
 <td class="markdownTableBodyNone"><b>Compilation Time</b>   </td><td class="markdownTableBodyNone">15 sec   </td><td class="markdownTableBodyNone">127 sec   </td><td class="markdownTableBodyNone"><b>8.5x faster</b>   </td></tr>
 </table>
 <p><b>Verdict</b>: logger_system is <b>dramatically faster</b> and <b>significantly lighter</b> than Boost.Log</p>
-<h2><a class="anchor" id="autotoc_md904"></a>
+<h2><a class="anchor" id="autotoc_md978"></a>
 vs glog (Google's Logging Library)</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -291,7 +291,7 @@ vs glog (Google's Logging Library)</h2>
 <td class="markdownTableBodyNone"><b>Configuration</b>   </td><td class="markdownTableBodyNone">Runtime   </td><td class="markdownTableBodyNone">Compile-time flags   </td><td class="markdownTableBodyNone">More flexible   </td></tr>
 </table>
 <p><b>Verdict</b>: logger_system provides <b>4.9x higher throughput</b> with more flexible runtime configuration</p>
-<h2><a class="anchor" id="autotoc_md905"></a>
+<h2><a class="anchor" id="autotoc_md979"></a>
 vs log4cxx</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -307,9 +307,9 @@ vs log4cxx</h2>
 </table>
 <p><b>Verdict</b>: logger_system is <b>7x faster</b> with <b>85% less memory</b> and minimal dependencies</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md907"></a>
+<h1><a class="anchor" id="autotoc_md981"></a>
 Scalability Analysis</h1>
-<h2><a class="anchor" id="autotoc_md908"></a>
+<h2><a class="anchor" id="autotoc_md982"></a>
 Thread Scaling Efficiency</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -331,7 +331,7 @@ Thread Scaling Efficiency</h2>
 <li>Performance remains <b>stable</b> from 8 to 16 threads</li>
 <li>Real-world workloads benefit from <b>consistent performance</b> under load</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md909"></a>
+<h2><a class="anchor" id="autotoc_md983"></a>
 Queue Utilization vs Thread Count</h2>
 <div class="fragment"><div class="line">Queue Utilization (%)</div>
 <div class="line">│</div>
@@ -352,7 +352,7 @@ Queue Utilization vs Thread Count</h2>
 <li>Automatic optimization maintains high throughput</li>
 <li>Adaptive batching prevents queue overflow</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md910"></a>
+<h2><a class="anchor" id="autotoc_md984"></a>
 CPU Utilization Efficiency</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -368,9 +368,9 @@ CPU Utilization Efficiency</h2>
 </table>
 <p><b>Verdict</b>: Best efficiency at <b>1-4 threads</b> for most workloads</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md912"></a>
+<h1><a class="anchor" id="autotoc_md986"></a>
 Latency Benchmarks</h1>
-<h2><a class="anchor" id="autotoc_md913"></a>
+<h2><a class="anchor" id="autotoc_md987"></a>
 Latency Distribution (Single Thread, Async)</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -395,7 +395,7 @@ Latency Distribution (Single Thread, Async)</h2>
 <li><b>Predictable performance</b> with minimal outliers</li>
 <li><b>Ideal for real-time systems</b> requiring consistent latency</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md914"></a>
+<h2><a class="anchor" id="autotoc_md988"></a>
 Latency Comparison (p99)</h2>
 <div class="fragment"><div class="line">Latency p99 (nanoseconds)</div>
 <div class="line">│</div>
@@ -412,7 +412,7 @@ Latency Comparison (p99)</h2>
 <div class="line"> 312ns ┤● logger_system</div>
 <div class="line">       └──────────────────</div>
 </div><!-- fragment --><p><b>Verdict</b>: logger_system has the <b>lowest p99 latency</b> among all tested loggers</p>
-<h2><a class="anchor" id="autotoc_md915"></a>
+<h2><a class="anchor" id="autotoc_md989"></a>
 Latency Under Load</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -430,9 +430,9 @@ Latency Under Load</h2>
 </table>
 <p><b>Key Insight</b>: Latency remains <b>remarkably stable</b> even at peak throughput</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md917"></a>
+<h1><a class="anchor" id="autotoc_md991"></a>
 Memory Profiling</h1>
-<h2><a class="anchor" id="autotoc_md918"></a>
+<h2><a class="anchor" id="autotoc_md992"></a>
 Memory Footprint by Configuration</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -448,7 +448,7 @@ Memory Footprint by Configuration</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Structured logging</b>   </td><td class="markdownTableBodyNone">2.3 MB   </td><td class="markdownTableBodyNone">3.9 MB   </td><td class="markdownTableBodyNone">3.0 MB   </td><td class="markdownTableBodyNone">JSON output   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md919"></a>
+<h2><a class="anchor" id="autotoc_md993"></a>
 Memory Comparison with Competitors</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -465,7 +465,7 @@ Memory Comparison with Competitors</h2>
 <td class="markdownTableBodyNone">log4cxx   </td><td class="markdownTableBodyNone">15.7 MB   </td><td class="markdownTableBodyNone">24.3 MB   </td><td class="markdownTableBodyNone">3.12   </td></tr>
 </table>
 <p><b>Verdict</b>: logger_system has the <b>lowest memory footprint</b> with <b>minimal allocations</b></p>
-<h2><a class="anchor" id="autotoc_md920"></a>
+<h2><a class="anchor" id="autotoc_md994"></a>
 Memory Allocation Patterns</h2>
 <p><b>Zero-Copy Design</b>:</p><ul>
 <li><b>0.12 allocations per message</b> on average</li>
@@ -478,11 +478,11 @@ Memory Allocation Patterns</h2>
 <div class="line"># Total: 0 leaks</div>
 <div class="line"># Indirect leaks: 0 bytes in 0 blocks</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md922"></a>
+<h1><a class="anchor" id="autotoc_md996"></a>
 Benchmark Methodology</h1>
-<h2><a class="anchor" id="autotoc_md923"></a>
+<h2><a class="anchor" id="autotoc_md997"></a>
 Test Scenarios</h2>
-<h3><a class="anchor" id="autotoc_md924"></a>
+<h3><a class="anchor" id="autotoc_md998"></a>
 1. Single-Threaded Throughput Test</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = create_async_logger(<span class="stringliteral">&quot;benchmark.log&quot;</span>);</div>
 <div class="line"><span class="keyword">auto</span> start = std::chrono::high_resolution_clock::now();</div>
@@ -494,7 +494,7 @@ Test Scenarios</h2>
 <div class="line"><span class="keyword">auto</span> end = std::chrono::high_resolution_clock::now();</div>
 <div class="line"><span class="keyword">auto</span> duration = std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(end - start);</div>
 <div class="line"><span class="keyword">auto</span> throughput = (10&#39;000&#39;000.0 / duration.count()) * 1&#39;000&#39;000;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md925"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md999"></a>
 2. Multi-Threaded Contention Test</h3>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = create_async_logger(<span class="stringliteral">&quot;benchmark.log&quot;</span>);</div>
 <div class="line">std::vector&lt;std::thread&gt; threads;</div>
@@ -510,7 +510,7 @@ Test Scenarios</h2>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; thread : threads) {</div>
 <div class="line">    thread.join();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md926"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1000"></a>
 3. Latency Measurement Test</h3>
 <div class="fragment"><div class="line">std::vector&lt;std::chrono::nanoseconds&gt; latencies;</div>
 <div class="line">latencies.reserve(10&#39;000);</div>
@@ -526,7 +526,7 @@ Test Scenarios</h2>
 <div class="line">std::sort(latencies.begin(), latencies.end());</div>
 <div class="line"><span class="keyword">auto</span> p50 = latencies[latencies.size() * 0.50];</div>
 <div class="line"><span class="keyword">auto</span> p99 = latencies[latencies.size() * 0.99];</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md927"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1001"></a>
 Measurement Tools</h2>
 <p><b>Performance Counters</b>:</p><ul>
 <li><code>std::chrono::high_resolution_clock</code> for timing</li>
@@ -545,7 +545,7 @@ Measurement Tools</h2>
 <li>Isolated test environment (no background processes)</li>
 <li>Results validated across multiple platforms</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md928"></a>
+<h2><a class="anchor" id="autotoc_md1002"></a>
 Benchmark Caveats</h2>
 <p><b>Important Considerations</b>:</p><ol type="1">
 <li><b>Platform-specific results</b>: Performance varies by CPU architecture, OS, compiler</li>
@@ -561,7 +561,7 @@ Benchmark Caveats</h2>
 <li>Measure both <b>throughput and latency</b> for your use case</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md930"></a>
+<h1><a class="anchor" id="autotoc_md1004"></a>
 Performance Regression Baselines</h1>
 <p>For continuous performance monitoring, see:</p><ul>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html">BASELINE.md</a> - CI/CD performance baselines</li>
@@ -573,7 +573,7 @@ Performance Regression Baselines</h1>
 <li><b>Memory</b>: ±2% tolerance</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md932"></a>
+<h1><a class="anchor" id="autotoc_md1006"></a>
 See Also</h1>
 <ul>
 <li>Architecture Overview - System design and internals</li>
@@ -587,7 +587,7 @@ See Also</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 8 2026 04:33:13 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 8 2026 05:03:58 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

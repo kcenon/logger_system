@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System Features</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1244"></a> <b>Last Updated</b>: 2025-11-15 <b>Version</b>: 0.3.0.0</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1335"></a> <b>Last Updated</b>: 2026-02-08 <b>Version</b>: 0.4.0.0</p>
 <p>This document provides comprehensive details about all features available in the logger system.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1246"></a>
+<h1><a class="anchor" id="autotoc_md1337"></a>
 Table of Contents</h1>
 <ul>
 <li>Core Features</li>
@@ -106,13 +106,15 @@ Table of Contents</h1>
 <li>Rotation Policies</li>
 <li>Security Features</li>
 <li>Advanced Capabilities</li>
+<li>OTLP Integration</li>
+<li>Log Sampling</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1248"></a>
+<h1><a class="anchor" id="autotoc_md1339"></a>
 Core Features</h1>
-<h2><a class="anchor" id="autotoc_md1249"></a>
+<h2><a class="anchor" id="autotoc_md1340"></a>
 🎯 High-Performance Logging</h2>
-<h3><a class="anchor" id="autotoc_md1250"></a>
+<h3><a class="anchor" id="autotoc_md1341"></a>
 Asynchronous Processing</h3>
 <ul>
 <li><b>Non-blocking log operations</b>: Background thread processes log entries without blocking application threads</li>
@@ -126,7 +128,7 @@ Asynchronous Processing</h3>
 <li>Average enqueue time: 148 nanoseconds</li>
 <li>Memory efficiency: &lt;2MB baseline with adaptive buffer management</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1251"></a>
+<h3><a class="anchor" id="autotoc_md1342"></a>
 Thread-Safe Operations</h3>
 <ul>
 <li>**Concurrent logging**: Safe logging from multiple threads without locks on hot path</li>
@@ -134,7 +136,7 @@ Thread-Safe Operations</h3>
 <li>**ThreadSanitizer compliance**: Zero data races detected in CI/CD pipeline</li>
 <li>**Perfect RAII compliance**: 100% smart pointer usage, zero memory leaks</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1252"></a>
+<h3><a class="anchor" id="autotoc_md1343"></a>
 Configuration Validation</h3>
 <ul>
 <li>**Comprehensive validation**: Configuration validation with meaningful error messages</li>
@@ -142,9 +144,9 @@ Configuration Validation</h3>
 <li>**Template-based configurations**: Predefined configurations for common scenarios</li>
 <li>**Error handling**: Result pattern ensures no silent failures</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1253"></a>
+<h2><a class="anchor" id="autotoc_md1344"></a>
 🔧 Advanced Capabilities</h2>
-<h3><a class="anchor" id="autotoc_md1254"></a>
+<h3><a class="anchor" id="autotoc_md1345"></a>
 Result-Based Error Handling</h3>
 <ul>
 <li>**Result&lt;T&gt; pattern**: Type-safe error handling without exceptions</li>
@@ -152,7 +154,7 @@ Result-Based Error Handling</h3>
 <li><b>Meaningful error messages</b>: Comprehensive error context with validation details</li>
 <li><b>Dual API design</b>: Balance between comprehensive error reporting and high-performance logging</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1255"></a>
+<h3><a class="anchor" id="autotoc_md1346"></a>
 Builder Pattern API</h3>
 <ul>
 <li><b>Fluent interface</b>: Type-safe logger construction with method chaining</li>
@@ -160,7 +162,7 @@ Builder Pattern API</h3>
 <li><b>Template support</b>: Use predefined templates or customize all parameters</li>
 <li><b>Dependency injection</b>: Optional runtime component injection with fallback mechanisms</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1256"></a>
+<h3><a class="anchor" id="autotoc_md1347"></a>
 Configuration Strategies</h3>
 <ul>
 <li><b>Production template</b>: Optimized for production environments with balanced performance</li>
@@ -168,7 +170,7 @@ Configuration Strategies</h3>
 <li><b>High-performance template</b>: Maximized throughput for high-load scenarios</li>
 <li><b>Low-latency template</b>: Minimized latency for real-time systems</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1257"></a>
+<h3><a class="anchor" id="autotoc_md1348"></a>
 Monitoring Integration</h3>
 <ul>
 <li><b>Pluggable monitoring</b>: Optional IMonitor interface integration</li>
@@ -177,9 +179,9 @@ Monitoring Integration</h3>
 <li><b>Queue utilization</b>: Automatic optimization maintains high throughput</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1259"></a>
+<h1><a class="anchor" id="autotoc_md1350"></a>
 Writer Types</h1>
-<h2><a class="anchor" id="autotoc_md1260"></a>
+<h2><a class="anchor" id="autotoc_md1351"></a>
 Console Writer</h2>
 <p><b>Features</b>:</p><ul>
 <li>ANSI colored output for different log levels</li>
@@ -198,7 +200,7 @@ Console Writer</h2>
 <li>Custom color schemes for different log levels</li>
 <li>Stdout/stderr routing based on log level</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1261"></a>
+<h2><a class="anchor" id="autotoc_md1352"></a>
 File Writer</h2>
 <p><b>Features</b>:</p><ul>
 <li>Buffered file output for performance</li>
@@ -218,7 +220,7 @@ File Writer</h2>
 <li>File permissions (default: 0600 - owner read/write only)</li>
 <li>Append/overwrite mode</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1262"></a>
+<h2><a class="anchor" id="autotoc_md1353"></a>
 Rotating File Writer</h2>
 <p><b>Features</b>:</p><ul>
 <li><b>Size-based rotation</b>: Automatically rotate when file reaches configured size</li>
@@ -254,7 +256,7 @@ Rotating File Writer</h2>
 <li>Compression: none, gzip, bzip2</li>
 <li>Naming pattern for rotated files</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1263"></a>
+<h2><a class="anchor" id="autotoc_md1354"></a>
 Network Writer</h2>
 <p><b>Features</b>:</p><ul>
 <li>TCP/UDP protocol support</li>
@@ -288,7 +290,7 @@ Network Writer</h2>
 <li>Message batching size</li>
 <li>Compression</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1264"></a>
+<h2><a class="anchor" id="autotoc_md1355"></a>
 Critical Writer</h2>
 <p><b>Features</b>:</p><ul>
 <li><b>Synchronous logging</b>: Bypasses async queue for immediate writes</li>
@@ -319,7 +321,7 @@ Critical Writer</h2>
 <li>Pre-crash diagnostics</li>
 </ul>
 <p><b>⚠️ Performance Warning</b>: Critical writer blocks the calling thread until write completes. Use sparingly for truly critical messages only.</p>
-<h2><a class="anchor" id="autotoc_md1265"></a>
+<h2><a class="anchor" id="autotoc_md1356"></a>
 Hybrid Writer</h2>
 <p><b>Features</b>:</p><ul>
 <li><b>Adaptive behavior</b>: Automatically switches between async and sync based on log level</li>
@@ -366,9 +368,9 @@ Hybrid Writer</h2>
 <li>Underlying writer configuration</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1267"></a>
+<h1><a class="anchor" id="autotoc_md1358"></a>
 Formatting Options</h1>
-<h2><a class="anchor" id="autotoc_md1268"></a>
+<h2><a class="anchor" id="autotoc_md1359"></a>
 Plain Text Formatter</h2>
 <p><b>Features</b>:</p><ul>
 <li>Simple, human-readable format</li>
@@ -381,7 +383,7 @@ Plain Text Formatter</h2>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> formatter = std::make_unique&lt;kcenon::logger::plain_formatter&gt;();</div>
 <div class="line"><span class="comment">// Configure formatter...</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1269"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1360"></a>
 JSON Formatter</h2>
 <p><b>Features</b>:</p><ul>
 <li>Machine-parseable JSON output</li>
@@ -401,7 +403,7 @@ JSON Formatter</h2>
 </div><!-- fragment --><p><b>Usage</b>: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/formatters/json_formatter.h&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> formatter = std::make_unique&lt;kcenon::logger::json_formatter&gt;();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1270"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1361"></a>
 Logfmt Formatter</h2>
 <p><b>Features</b>:</p><ul>
 <li>Key-value pair format</li>
@@ -410,7 +412,7 @@ Logfmt Formatter</h2>
 <li>Compatible with Logstash and other log processors</li>
 </ul>
 <p><b>Format</b>: </p><div class="fragment"><div class="line">timestamp=&quot;2025-11-15T08:30:00.123Z&quot; level=INFO message=&quot;Application started&quot; thread_id=12345 file=main.cpp line=42 function=main</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1271"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1362"></a>
 Custom Formatter</h2>
 <p><b>Features</b>:</p><ul>
 <li>Implement your own formatting logic</li>
@@ -426,9 +428,9 @@ Custom Formatter</h2>
 <div class="line">    }</div>
 <div class="line">};</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1273"></a>
+<h1><a class="anchor" id="autotoc_md1364"></a>
 Filtering Capabilities</h1>
-<h2><a class="anchor" id="autotoc_md1274"></a>
+<h2><a class="anchor" id="autotoc_md1365"></a>
 Level-Based Filtering</h2>
 <p><b>Features</b>:</p><ul>
 <li>Filter by minimum log level</li>
@@ -442,7 +444,7 @@ Level-Based Filtering</h2>
 <div class="line">logger-&gt;set_filter(std::make_unique&lt;kcenon::logger::level_filter&gt;(</div>
 <div class="line">    kcenon::logger::log_level::warning</div>
 <div class="line">));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1275"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1366"></a>
 Regex-Based Filtering</h2>
 <p><b>Features</b>:</p><ul>
 <li>Pattern matching on log messages</li>
@@ -457,7 +459,7 @@ Regex-Based Filtering</h2>
 <div class="line">    <span class="stringliteral">&quot;password|secret|token&quot;</span>,</div>
 <div class="line">    <span class="keyword">false</span>  <span class="comment">// Exclude matching messages</span></div>
 <div class="line">));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1276"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1367"></a>
 Function-Based Filtering</h2>
 <p><b>Features</b>:</p><ul>
 <li>Custom filtering logic</li>
@@ -474,7 +476,7 @@ Function-Based Filtering</h2>
 <div class="line">    }</div>
 <div class="line">);</div>
 <div class="line">logger-&gt;set_filter(std::move(custom_filter));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1277"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1368"></a>
 Composite Filtering</h2>
 <p><b>Features</b>:</p><ul>
 <li>Combine multiple filters</li>
@@ -495,9 +497,9 @@ Composite Filtering</h2>
 <div class="line">));</div>
 <div class="line">logger-&gt;set_filter(std::move(composite));</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1279"></a>
+<h1><a class="anchor" id="autotoc_md1370"></a>
 Rotation Policies</h1>
-<h2><a class="anchor" id="autotoc_md1280"></a>
+<h2><a class="anchor" id="autotoc_md1371"></a>
 Size-Based Rotation</h2>
 <p><b>Features</b>:</p><ul>
 <li>Rotate when file reaches configured size</li>
@@ -516,7 +518,7 @@ Size-Based Rotation</h2>
 <li>...</li>
 <li><code>app.log.5</code> → Oldest backup (deleted when new rotation occurs)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1281"></a>
+<h2><a class="anchor" id="autotoc_md1372"></a>
 Time-Based Rotation</h2>
 <p><b>Features</b>:</p><ul>
 <li>Rotate at specific time intervals</li>
@@ -536,7 +538,7 @@ Time-Based Rotation</h2>
 <li><code>app-2025-11-14.log</code> → Two days ago</li>
 <li>...</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1282"></a>
+<h2><a class="anchor" id="autotoc_md1373"></a>
 Hybrid Rotation</h2>
 <p><b>Features</b>:</p><ul>
 <li>Combine size and time-based policies</li>
@@ -549,7 +551,7 @@ Hybrid Rotation</h2>
 <div class="line">config.max_size_bytes = 100 * 1024 * 1024;  <span class="comment">// 100MB OR</span></div>
 <div class="line">config.rotation_interval = std::chrono::hours(24);  <span class="comment">// 24 hours</span></div>
 <div class="line">config.max_files = 10;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1283"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1374"></a>
 Compression Support</h2>
 <p><b>Features</b>:</p><ul>
 <li>Automatic compression of rotated files</li>
@@ -561,9 +563,9 @@ Compression Support</h2>
 <div class="line">config.compression = kcenon::logger::compression_type::gzip;</div>
 <div class="line">config.compression_level = 6;  <span class="comment">// 1-9, higher = better compression</span></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1285"></a>
+<h1><a class="anchor" id="autotoc_md1376"></a>
 Security Features</h1>
-<h2><a class="anchor" id="autotoc_md1286"></a>
+<h2><a class="anchor" id="autotoc_md1377"></a>
 Secure Key Storage</h2>
 <p><b>Features</b>:</p><ul>
 <li>RAII-based encryption key management</li>
@@ -577,7 +579,7 @@ Secure Key Storage</h2>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> key_storage = kcenon::logger::secure_key_storage::create();</div>
 <div class="line"><span class="comment">// Key is automatically cleaned from memory when object is destroyed</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1287"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1378"></a>
 Path Validation</h2>
 <p><b>Features</b>:</p><ul>
 <li>Path traversal attack prevention</li>
@@ -598,7 +600,7 @@ Path Validation</h2>
 <div class="line"><span class="keywordflow">if</span> (!result) {</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Invalid path: &quot;</span> &lt;&lt; result.error().message() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1288"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1379"></a>
 Signal Handler Safety</h2>
 <p><b>Features</b>:</p><ul>
 <li>Centralized signal handler management</li>
@@ -618,7 +620,7 @@ Signal Handler Safety</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Install signal handlers for crash detection</span></div>
 <div class="line">kcenon::logger::crash_safe_logger::install_signal_handlers();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1289"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1380"></a>
 Security Audit Logging</h2>
 <p><b>Features</b>:</p><ul>
 <li>Tamper-evident audit trail</li>
@@ -633,7 +635,7 @@ Security Audit Logging</h2>
 <div class="line">  &quot;action&quot;: &quot;Logger initialized&quot;,</div>
 <div class="line">  &quot;hmac&quot;: &quot;a3d5c8e2f1b4...&quot;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1290"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1381"></a>
 Sensitive Data Sanitization</h2>
 <p><b>Features</b>:</p><ul>
 <li>Automatic detection and masking of sensitive data</li>
@@ -657,7 +659,7 @@ Sensitive Data Sanitization</h2>
 <div class="line">    std::regex(<span class="stringliteral">&quot;Bearer\\s+[A-Za-z0-9\\-_]+\\.[A-Za-z0-9\\-_]+\\.[A-Za-z0-9\\-_]+&quot;</span>),</div>
 <div class="line">    [](<span class="keyword">const</span> std::smatch&amp; match) { <span class="keywordflow">return</span> <span class="stringliteral">&quot;Bearer [REDACTED]&quot;</span>; }</div>
 <div class="line">});</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1291"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1382"></a>
 Access Control</h2>
 <p><b>Features</b>:</p><ul>
 <li>Role-based access control for logging</li>
@@ -681,7 +683,7 @@ Access Control</h2>
 <div class="line">    kcenon::logger::permission_level::write_info);</div>
 <div class="line"> </div>
 <div class="line">logger-&gt;set_filter(std::move(access_filter));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1292"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1383"></a>
 Compliance Support</h2>
 <p><b>Standards</b>:</p><ul>
 <li><b>GDPR</b>: Data minimization, right to erasure, audit trails</li>
@@ -696,9 +698,9 @@ Compliance Support</h2>
 <li><b>A09 (Security Logging Failures)</b>: Comprehensive audit logging</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1294"></a>
+<h1><a class="anchor" id="autotoc_md1385"></a>
 Advanced Capabilities</h1>
-<h2><a class="anchor" id="autotoc_md1295"></a>
+<h2><a class="anchor" id="autotoc_md1386"></a>
 Structured Logging</h2>
 <p><b>Features</b>:</p><ul>
 <li>Key-value pair logging</li>
@@ -724,7 +726,7 @@ Structured Logging</h2>
 <div class="line"><span class="comment">// Output (JSON format):</span></div>
 <div class="line"><span class="comment">// {&quot;@timestamp&quot;:&quot;2025-11-15T08:30:00Z&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;User logged in&quot;,</span></div>
 <div class="line"><span class="comment">//  &quot;thread_id&quot;:&quot;12345&quot;,&quot;user_id&quot;:12345,&quot;ip_address&quot;:&quot;192.168.1.1&quot;,&quot;session_duration&quot;:3600}</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1296"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1387"></a>
 Log Routing</h2>
 <p><b>Features</b>:</p><ul>
 <li>Conditional routing based on log level, message content</li>
@@ -775,7 +777,7 @@ Log Routing</h2>
 <li><b>Non-exclusive (default)</b>: All messages go to all writers</li>
 <li><b>Exclusive</b>: Only messages matching a route go to matched writers; unmatched messages are dropped</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1297"></a>
+<h2><a class="anchor" id="autotoc_md1388"></a>
 Performance Metrics Collection</h2>
 <p><b>Features</b>:</p><ul>
 <li>Built-in metrics collection</li>
@@ -796,42 +798,65 @@ Performance Metrics Collection</h2>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Messages per second: &quot;</span> &lt;&lt; metrics.get_messages_per_second() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Average enqueue time: &quot;</span> &lt;&lt; metrics.get_avg_enqueue_time_ns() &lt;&lt; <span class="stringliteral">&quot; ns\n&quot;</span>;</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Queue utilization: &quot;</span> &lt;&lt; metrics.get_queue_utilization_percent() &lt;&lt; <span class="stringliteral">&quot;%\n&quot;</span>;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1298"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1389"></a>
 Real-time Log Analysis</h2>
 <p><b>Features</b>:</p><ul>
 <li>Pattern matching and detection</li>
 <li>Statistical analysis</li>
 <li>Alert rules</li>
 <li>Report generation</li>
+<li>Real-time anomaly detection (error spikes, rate anomalies, new error types)</li>
 </ul>
-<p><b>Usage</b>: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/analysis/log_analyzer.h&gt;</span></div>
+<h3><a class="anchor" id="autotoc_md1390"></a>
+Post-hoc Analysis (log_analyzer)</h3>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/analysis/log_analyzer.h&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Create analyzer with 60-second windows</span></div>
-<div class="line"><span class="keyword">auto</span> analyzer = std::make_unique&lt;kcenon::logger::log_analyzer&gt;(</div>
-<div class="line">    std::chrono::seconds(60),</div>
-<div class="line">    60  <span class="comment">// Keep 1 hour of history</span></div>
+<div class="line"><span class="comment">// Create analyzer</span></div>
+<div class="line"><span class="keyword">auto</span> analyzer = kcenon::logger::analysis::analyzer_factory::create_basic();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Add entries and analyze</span></div>
+<div class="line">analyzer-&gt;add_entry(entry);</div>
+<div class="line"><span class="keyword">auto</span> stats = analyzer-&gt;get_stats();</div>
+<div class="line"><span class="keyword">auto</span> errors = analyzer-&gt;filter_by_level(log_level::error);</div>
+<div class="line"><span class="keywordtype">double</span> error_rate = analyzer-&gt;get_error_rate(std::chrono::minutes(5));</div>
+<div class="line">std::string report = analyzer-&gt;generate_summary_report();</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1391"></a>
+Real-time Anomaly Detection (realtime_log_analyzer)</h3>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/analysis/realtime_log_analyzer.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create with production defaults</span></div>
+<div class="line"><span class="keyword">auto</span> rt_analyzer = kcenon::logger::analysis::realtime_analyzer_factory::create_production(</div>
+<div class="line">    50,  <span class="comment">// Error spike: 50 errors/minute</span></div>
+<div class="line">    [](<span class="keyword">const</span> kcenon::logger::analysis::anomaly_event&amp; event) {</div>
+<div class="line">        <span class="comment">// Handle anomaly: error_spike, pattern_match, rate_anomaly, new_error_type</span></div>
+<div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;Anomaly detected: &quot;</span> &lt;&lt; <span class="keyword">event</span>.description &lt;&lt; std::endl;</div>
+<div class="line">    }</div>
 <div class="line">);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Track patterns</span></div>
-<div class="line">analyzer-&gt;add_pattern(<span class="stringliteral">&quot;errors&quot;</span>, <span class="stringliteral">&quot;error|fail|exception&quot;</span>);</div>
-<div class="line">analyzer-&gt;add_pattern(<span class="stringliteral">&quot;slow_queries&quot;</span>, <span class="stringliteral">&quot;query took \\d{4,} ms&quot;</span>);</div>
+<div class="line"><span class="comment">// Add pattern alerts</span></div>
+<div class="line">rt_analyzer-&gt;add_pattern_alert(<span class="stringliteral">&quot;OutOfMemory|OOM&quot;</span>, log_level::error);</div>
+<div class="line">rt_analyzer-&gt;add_pattern_alert(<span class="stringliteral">&quot;deadlock|timeout&quot;</span>, log_level::warning);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Add alert rules</span></div>
-<div class="line">analyzer-&gt;add_alert_rule({</div>
-<div class="line">    <span class="stringliteral">&quot;high_error_rate&quot;</span>,</div>
-<div class="line">    [](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; stats) {</div>
-<div class="line">        <span class="keyword">auto</span> errors = stats.level_counts.count(kcenon::logger::log_level::error) ?</div>
-<div class="line">                     stats.level_counts.at(kcenon::logger::log_level::error) : 0;</div>
-<div class="line">        <span class="keywordflow">return</span> errors &gt; 100;  <span class="comment">// Alert if &gt;100 errors per minute</span></div>
-<div class="line">    },</div>
-<div class="line">    [](<span class="keyword">const</span> std::string&amp; rule, <span class="keyword">const</span> <span class="keyword">auto</span>&amp; stats) {</div>
-<div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;ALERT: High error rate detected!&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line">    }</div>
-<div class="line">});</div>
+<div class="line"><span class="comment">// Integrate with logger</span></div>
+<div class="line">logger-&gt;set_realtime_analyzer(std::move(rt_analyzer));</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Generate report</span></div>
-<div class="line">std::string report = analyzer-&gt;generate_report(std::chrono::minutes(10));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1299"></a>
+<div class="line"><span class="comment">// Query metrics</span></div>
+<div class="line"><span class="keyword">auto</span> stats = logger-&gt;get_realtime_analyzer()-&gt;get_statistics();</div>
+<div class="line"><span class="comment">// stats.total_analyzed, anomalies_detected, current_error_rate, current_log_rate</span></div>
+</div><!-- fragment --><p><b>Anomaly Types</b>:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Type   </th><th class="markdownTableHeadNone">Description   </th><th class="markdownTableHeadNone">Trigger    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>error_spike</code>   </td><td class="markdownTableBodyNone">Sudden increase in errors   </td><td class="markdownTableBodyNone">Error count exceeds threshold per window    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>pattern_match</code>   </td><td class="markdownTableBodyNone">Regex pattern detected   </td><td class="markdownTableBodyNone">Log message matches configured pattern    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>rate_anomaly</code>   </td><td class="markdownTableBodyNone">Abnormal log rate   </td><td class="markdownTableBodyNone">Rate deviates significantly from baseline    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>new_error_type</code>   </td><td class="markdownTableBodyNone">Previously unseen error   </td><td class="markdownTableBodyNone">Error message not seen before   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md1392"></a>
 Distributed Logging</h2>
 <p><b>Features</b>:</p><ul>
 <li>Network-based log transmission</li>
@@ -857,7 +882,161 @@ Distributed Logging</h2>
 <div class="line">});</div>
 <div class="line">server-&gt;start();</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1301"></a>
+<h1><a class="anchor" id="autotoc_md1394"></a>
+OTLP Integration</h1>
+<p>OpenTelemetry Protocol (OTLP) support for exporting logs to observability backends.</p>
+<h2><a class="anchor" id="autotoc_md1395"></a>
+Overview</h2>
+<p>The OTLP writer exports log entries to OpenTelemetry-compatible collectors (e.g., Jaeger, Zipkin, Grafana Tempo) with full W3C Trace Context support for distributed tracing correlation.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/otlp_writer.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/logger/otlp/otel_context.h&gt;</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1396"></a>
+OTLP Writer Configuration</h2>
+<div class="fragment"><div class="line">kcenon::logger::writers::otlp_writer::config cfg;</div>
+<div class="line">cfg.endpoint = <span class="stringliteral">&quot;http://localhost:4318/v1/logs&quot;</span>;</div>
+<div class="line">cfg.protocol = kcenon::logger::writers::otlp_writer::protocol_type::http;</div>
+<div class="line">cfg.service_name = <span class="stringliteral">&quot;my-service&quot;</span>;</div>
+<div class="line">cfg.service_version = <span class="stringliteral">&quot;1.0.0&quot;</span>;</div>
+<div class="line">cfg.timeout = std::chrono::milliseconds{5000};</div>
+<div class="line">cfg.use_tls = <span class="keyword">false</span>;</div>
+<div class="line">cfg.max_batch_size = 512;</div>
+<div class="line">cfg.flush_interval = std::chrono::milliseconds{5000};</div>
+<div class="line">cfg.max_queue_size = 10000;</div>
+<div class="line">cfg.max_retries = 3;</div>
+<div class="line">cfg.retry_delay = std::chrono::milliseconds{100};  <span class="comment">// Exponential backoff</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">auto</span> otlp = std::make_unique&lt;kcenon::logger::writers::otlp_writer&gt;(cfg);</div>
+<div class="line">logger-&gt;add_writer(<span class="stringliteral">&quot;otlp&quot;</span>, std::move(otlp));</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1397"></a>
+Trace Context Propagation</h2>
+<div class="fragment"><div class="line"><span class="keyword">using namespace </span>kcenon::logger::otlp;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Set trace context for current thread</span></div>
+<div class="line">otel_context ctx;</div>
+<div class="line">ctx.trace_id = <span class="stringliteral">&quot;0af7651916cd43dd8448eb211c80319c&quot;</span>;</div>
+<div class="line">ctx.span_id = <span class="stringliteral">&quot;b7ad6b7169203331&quot;</span>;</div>
+<div class="line">ctx.trace_flags = <span class="stringliteral">&quot;01&quot;</span>;  <span class="comment">// Sampled</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// RAII scope - automatically restores previous context on destruction</span></div>
+<div class="line">{</div>
+<div class="line">    otel_context_scope scope(ctx);</div>
+<div class="line">    logger-&gt;log(log_level::info, <span class="stringliteral">&quot;Processing request&quot;</span>);</div>
+<div class="line">    <span class="comment">// Log entry automatically includes trace_id and span_id</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Thread-local storage API</span></div>
+<div class="line">otel_context_storage::set(ctx);</div>
+<div class="line"><span class="keyword">auto</span> current = otel_context_storage::get();  <span class="comment">// std::optional&lt;otel_context&gt;</span></div>
+<div class="line">otel_context_storage::clear();</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1398"></a>
+Protocol Support</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Protocol   </th><th class="markdownTableHeadNone">Default Port   </th><th class="markdownTableHeadNone">Use Case    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>http</code>   </td><td class="markdownTableBodyNone">4318   </td><td class="markdownTableBodyNone">Standard OTLP/HTTP, firewall-friendly    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>grpc</code>   </td><td class="markdownTableBodyNone">4317   </td><td class="markdownTableBodyNone">High-throughput, streaming   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md1399"></a>
+Export Statistics</h2>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> stats = otlp_writer-&gt;get_stats();</div>
+<div class="line"><span class="comment">// stats.logs_exported, logs_dropped, export_success, export_failures, retries</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1400"></a>
+Features</h2>
+<ul>
+<li><b>W3C Trace Context</b>: Full trace_id, span_id, trace_flags propagation</li>
+<li><b>Batched Export</b>: Configurable batch size and flush interval</li>
+<li><b>Retry with Backoff</b>: Exponential backoff on export failures</li>
+<li><b>Resource Attributes</b>: Service name, version, namespace, custom attributes</li>
+<li><b>Health Monitoring</b>: <code>is_healthy()</code> check for writer status</li>
+<li><b>Dual Protocol</b>: HTTP and gRPC support</li>
+<li><b>TLS Support</b>: Secure transport for production deployments</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1402"></a>
+Log Sampling</h1>
+<p>Adaptive log sampling to control volume while preserving important messages.</p>
+<h2><a class="anchor" id="autotoc_md1403"></a>
+Overview</h2>
+<p>The sampling system reduces log volume in high-throughput scenarios while ensuring critical messages are never dropped. Multiple strategies are available for different use cases.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/sampling/log_sampler.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kcenon/logger/sampling/sampling_config.h&gt;</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1404"></a>
+Sampling Strategies</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Strategy   </th><th class="markdownTableHeadNone">Description   </th><th class="markdownTableHeadNone">Best For    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>random</code>   </td><td class="markdownTableBodyNone">Probabilistic sampling based on rate   </td><td class="markdownTableBodyNone">General volume reduction    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>rate_limiting</code>   </td><td class="markdownTableBodyNone">N logs per time window   </td><td class="markdownTableBodyNone">Strict rate control    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>adaptive</code>   </td><td class="markdownTableBodyNone">Adjusts rate based on volume   </td><td class="markdownTableBodyNone">Variable traffic patterns    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>hash_based</code>   </td><td class="markdownTableBodyNone">Deterministic per message content   </td><td class="markdownTableBodyNone">Reproducible sampling   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md1405"></a>
+Quick Setup</h2>
+<div class="fragment"><div class="line"><span class="keyword">using namespace </span>kcenon::logger::sampling;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Factory methods for common configurations</span></div>
+<div class="line"><span class="keyword">auto</span> sampler = sampler_factory::create_random(0.1);          <span class="comment">// 10% sampling</span></div>
+<div class="line"><span class="keyword">auto</span> sampler = sampler_factory::create_rate_limited(1000);   <span class="comment">// 1000/sec max</span></div>
+<div class="line"><span class="keyword">auto</span> sampler = sampler_factory::create_adaptive(10000, 0.01); <span class="comment">// Adapt at 10K/s</span></div>
+<div class="line"><span class="keyword">auto</span> sampler = sampler_factory::create_production(0.1,</div>
+<div class="line">    {log_level::error, log_level::critical});                <span class="comment">// Production preset</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Integrate with logger</span></div>
+<div class="line">logger-&gt;set_sampler(std::move(sampler));</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1406"></a>
+Configuration</h2>
+<div class="fragment"><div class="line">sampling_config config;</div>
+<div class="line">config.enabled = <span class="keyword">true</span>;</div>
+<div class="line">config.rate = 0.1;  <span class="comment">// 10% base rate</span></div>
+<div class="line">config.strategy = sampling_strategy::adaptive;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Critical messages always logged</span></div>
+<div class="line">config.always_log_levels = {log_level::error, log_level::critical};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Per-category rate overrides</span></div>
+<div class="line">config.category_rates = {</div>
+<div class="line">    {<span class="stringliteral">&quot;security&quot;</span>, 1.0},    <span class="comment">// Always log security events</span></div>
+<div class="line">    {<span class="stringliteral">&quot;debug&quot;</span>, 0.01},      <span class="comment">// 1% of debug messages</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Adaptive settings</span></div>
+<div class="line">config.adaptive_enabled = <span class="keyword">true</span>;</div>
+<div class="line">config.adaptive_threshold = 10000;  <span class="comment">// Trigger at 10K msgs/sec</span></div>
+<div class="line">config.adaptive_min_rate = 0.01;    <span class="comment">// Floor at 1%</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">auto</span> sampler = std::make_unique&lt;log_sampler&gt;(config);</div>
+<div class="line">logger-&gt;set_sampler(std::move(sampler));</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1407"></a>
+Runtime Control</h2>
+<div class="fragment"><div class="line"><span class="keyword">auto</span>* sampler = logger-&gt;get_sampler();</div>
+<div class="line">sampler-&gt;set_enabled(<span class="keyword">true</span>);</div>
+<div class="line"><span class="keywordtype">double</span> effective_rate = sampler-&gt;get_effective_rate();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Statistics</span></div>
+<div class="line"><span class="keyword">auto</span> stats = logger-&gt;get_sampling_stats();</div>
+<div class="line"><span class="comment">// stats.total_count, sampled_count, dropped_count, bypassed_count</span></div>
+<div class="line"><span class="comment">// stats.effective_rate, is_throttling, actual_ratio()</span></div>
+<div class="line"> </div>
+<div class="line">logger-&gt;reset_sampling_stats();</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1408"></a>
+Features</h2>
+<ul>
+<li><b>Always-Log Levels</b>: Critical messages bypass sampling entirely</li>
+<li><b>Per-Category Rates</b>: Different sampling rates for different log categories</li>
+<li><b>Per-Field Rates</b>: Sampling based on structured field values</li>
+<li><b>Adaptive Throttling</b>: Automatic rate reduction under high load</li>
+<li><b>Runtime Reconfiguration</b>: Change sampling config without restart</li>
+<li><b>Detailed Statistics</b>: Track sampling effectiveness with atomic counters</li>
+<li><b>High Performance</b>: Fast xorshift64 PRNG, FNV-1a hashing</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1410"></a>
 See Also</h1>
 <ul>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html">Performance Benchmarks</a> - Detailed performance analysis</li>
@@ -872,7 +1051,7 @@ See Also</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 8 2026 04:33:14 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 8 2026 05:03:58 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

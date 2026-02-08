@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['개념_0',['핵심 개념',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1710',1,'']]],
-  ['개발_20상태_3a_20✅_20strong_20개발_20중_20strong_1',['개발 상태: ✅ &lt;strong&gt;개발 중&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2023',1,'']]],
-  ['개발_20설정_2',['개발 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1237',1,'']]],
-  ['개선_20필요_20사항_3',['❌ 개선 필요 사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1927',1,'']]],
-  ['개요_4',['개요',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md138',1,'개요'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE_8kr.html#autotoc_md478',1,'개요'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md1526',1,'개요'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1811',1,'개요'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE_8kr.html#autotoc_md2149',1,'디렉토리 개요'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE_8kr.html#autotoc_md599',1,'🔧 주요 컴포넌트 개요']]]
+  ['감사_20로깅_0',['4. 보안 감사 로깅',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2166',1,'']]],
+  ['감지_1',['감지',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1936',1,'컴파일 타임 감지'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1931',1,'CMake 충돌 감지']]],
+  ['감지_20미작동_2',['런타임 감지 미작동',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1947',1,'']]],
+  ['감지_20사용_20issue_20250_202025_2012_2022_3',['KCENON 기능 감지 사용 (Issue #250) - 2025-12-22',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md1046',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['에러_20처리_0',['3. 에러 처리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md178',1,'']]]
+  ['없음_0',['문제 1: 네임스페이스를 찾을 수 없음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md1653',1,'']]]
 ];

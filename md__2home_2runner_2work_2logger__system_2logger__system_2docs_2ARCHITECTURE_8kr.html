@@ -96,15 +96,58 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="textblock"><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html">English</a> | <b>한국어</b> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md777"></a>
-스레딩 생태계 아키텍처</h1>
-<p><b>버전</b>: 3.0.0 <b>최종 업데이트</b>: 2025-12-10</p>
+<h1><a class="anchor" id="autotoc_md834"></a>
+Logger System 아키텍처</h1>
+<p><b>버전</b>: 0.4.0 <b>최종 업데이트</b>: 2026-02-08</p>
 <blockquote class="doxtable">
-<p>&zwj;이 문서는 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html">ARCHITECTURE.md</a>의 한국어 번역 버전입니다. </p>
+<p>&zwj;이 문서는 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html">ARCHITECTURE.md</a>의 한국어 요약 버전입니다. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md778"></a>
+<h2><a class="anchor" id="autotoc_md835"></a>
+Logger 파이프라인 아키텍처</h2>
+<p>Logger 시스템은 애플리케이션 코드에서 출력 대상까지 로그 항목을 처리하는 다단계 비동기 파이프라인을 구현합니다.</p>
+<h3><a class="anchor" id="autotoc_md836"></a>
+파이프라인 흐름</h3>
+<div class="fragment"><div class="line">애플리케이션 코드</div>
+<div class="line">    │</div>
+<div class="line">    ▼</div>
+<div class="line">┌─────────────────────────────────────────┐</div>
+<div class="line">│  logger (PIMPL)                         │</div>
+<div class="line">│                                         │</div>
+<div class="line">│  Sampler → Filter → Async Queue        │</div>
+<div class="line">│                         │               │</div>
+<div class="line">│  처리 스레드 (std::jthread / thread_pool) │</div>
+<div class="line">│     │                                   │</div>
+<div class="line">│     ├── Router → Formatter → Writers    │</div>
+<div class="line">│     ├── Realtime Analyzer (이상 감지)     │</div>
+<div class="line">│     └── Metrics Collector (성능 통계)     │</div>
+<div class="line">└─────────────────────────────────────────┘</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md837"></a>
+핵심 아키텍처 결정</h3>
+<ol type="1">
+<li><b>PIMPL 패턴</b>: ABI 안정성과 컴파일 방화벽</li>
+<li><b>Move-Only log_entry</b>: <code>small_string_256</code>으로 힙 할당 최소화</li>
+<li><b>선택적 컴포넌트</b>: Sampler, Filter, Router, Analyzer는 비활성화 시 제로 오버헤드</li>
+<li><b>데코레이터 패턴</b>: Writer를 감싸서(encrypted, buffered, async) 조합 가능</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md838"></a>
+OTLP 관찰성 파이프라인</h3>
+<ul>
+<li>OTLP writer로 OpenTelemetry 컬렉터에 로그 내보내기</li>
+<li>W3C Trace Context (trace_id, span_id) 자동 전파</li>
+<li>HTTP/gRPC 이중 프로토콜 지원</li>
+<li>지수 백오프 재시도 엔진</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md839"></a>
+샘플링 및 분석 파이프라인</h3>
+<ul>
+<li>샘플링은 큐 삽입 <b>전</b> 수행 (큐 압력 감소)</li>
+<li>분석은 큐 추출 <b>후</b> 수행 (생산자 비차단)</li>
+<li><code>always_log_levels</code>는 샘플링을 완전 우회 (error/critical 미삭제)</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md841"></a>
 v3.0 주요 변경사항</h2>
-<h3><a class="anchor" id="autotoc_md779"></a>
+<h3><a class="anchor" id="autotoc_md842"></a>
 의존성 구조 변경</h3>
 <div class="fragment"><div class="line">┌─────────────────┐</div>
 <div class="line">│  common_system  │ ← 기반 시스템 (필수)</div>
@@ -116,7 +159,7 @@ v3.0 주요 변경사항</h2>
 <div class="line">│  logger_system  │   │  thread_system  │</div>
 <div class="line">│     v3.0        │   │    (선택적)     │</div>
 <div class="line">└─────────────────┘   └─────────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md780"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md843"></a>
 핵심 변경사항</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -130,14 +173,14 @@ v3.0 주요 변경사항</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">인터페이스   </td><td class="markdownTableBodyNone"><code>thread_module::logger_interface</code>   </td><td class="markdownTableBodyNone"><code>common::interfaces::ILogger</code>   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md781"></a>
+<h3><a class="anchor" id="autotoc_md844"></a>
 독립 실행 모드 vs 통합 모드</h3>
 <p><b>독립 실행 모드 (v3.0 기본값):</b> </p><div class="fragment"><div class="line"><span class="comment">// thread_system 의존성 없음</span></div>
 <div class="line"><span class="keyword">auto</span> logger = kcenon::logger::logger_builder()</div>
 <div class="line">    .with_standalone_backend()  <span class="comment">// std::jthread 사용</span></div>
 <div class="line">    .add_writer(<span class="stringliteral">&quot;console&quot;</span>, std::make_unique&lt;console_writer&gt;())</div>
 <div class="line">    .build();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md782"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md845"></a>
 성능 비교</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -150,14 +193,14 @@ v3.0 주요 변경사항</h2>
 <hr  />
 <p><em>자세한 내용은 영문 버전 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE.html">ARCHITECTURE.md</a>를 참조하세요.</em></p>
 <hr  />
-<p><em>Last Updated: 2025-12-10</em> </p>
+<p><em>Last Updated: 2026-02-08</em> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 8 2026 04:33:13 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 8 2026 05:03:58 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

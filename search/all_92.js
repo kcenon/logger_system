@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['전략_0',['오류 처리 전략',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2044',1,'']]],
-  ['전체_20공유_20풀_1',['패턴 1: 애플리케이션 전체 공유 풀',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1829',1,'']]],
-  ['전체_20예시_2',['🔄 CI/CD 워크플로우 전체 예시',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1957',1,'']]],
-  ['전체_20워크플로우_3',['전체 워크플로우',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1930',1,'']]]
+  ['저장소_0',['1. 보안 키 저장소',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2163',1,'']]],
+  ['저장소_20클론_1',['1. 저장소 클론',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1811',1,'']]],
+  ['저장_2',['1.2 벤치마크 실행 및 JSON 저장',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2046',1,'']]]
 ];

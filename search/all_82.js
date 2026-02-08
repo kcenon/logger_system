@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['요구사항_0',['요구사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1700',1,'사전 요구사항'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2062',1,'최소 요구사항'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE_8kr.html#autotoc_md1898',1,'Phase 0 요구사항']]],
-  ['요약_1',['요약',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md850',1,'요약'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2022',1,'요약'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md1534',1,'주요 변경사항 요약'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md1530',1,'CMake 플래그 변경 요약']]]
+  ['외부_20리소스_0',['📖 외부 리소스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README_8kr.html#autotoc_md2428',1,'']]],
+  ['외부_20의존성_1',['외부 의존성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE_8kr.html#autotoc_md2320',1,'']]]
 ];

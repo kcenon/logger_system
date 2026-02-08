@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System 성능 벤치마크</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md846"></a> <b>언어:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html">English</a> | <b>한국어</b></p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md920"></a> <b>언어:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS.html">English</a> | <b>한국어</b></p>
 <p><b>최종 업데이트</b>: 2025-11-28 <b>버전</b>: 3.0.0</p>
 <p>이 문서는 포괄적인 성능 벤치마크 결과와 업계 표준 로깅 라이브러리와의 비교를 제공합니다.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md848"></a>
+<h1><a class="anchor" id="autotoc_md922"></a>
 목차</h1>
 <ul>
 <li>요약</li>
@@ -108,10 +108,10 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li>메모리 프로파일링</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md850"></a>
+<h1><a class="anchor" id="autotoc_md924"></a>
 요약</h1>
 <p>logger system은 모든 테스트 시나리오에서 뛰어난 성능을 제공합니다:</p>
-<h2><a class="anchor" id="autotoc_md851"></a>
+<h2><a class="anchor" id="autotoc_md925"></a>
 핵심 하이라이트</h2>
 <ul>
 <li><b>최고 처리량</b>: 4.34M 메시지/초 (단일 스레드, 비동기 모드)</li>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li><b>메모리 효율</b>: &lt;2MB 기본 메모리 풋프린트</li>
 <li>**적응형 스케일링**: 지능형 배칭이 높은 경합 하에서 성능 유지</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md852"></a>
+<h2><a class="anchor" id="autotoc_md926"></a>
 경쟁 우위</h2>
 <ol type="1">
 <li>**spdlog 비동기 모드보다 15.7배 낮은 지연시간**</li>
@@ -129,9 +129,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li>**제로 카피 설계**로 할당 및 오버헤드 최소화</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md854"></a>
+<h1><a class="anchor" id="autotoc_md928"></a>
 테스트 환경</h1>
-<h2><a class="anchor" id="autotoc_md855"></a>
+<h2><a class="anchor" id="autotoc_md929"></a>
 하드웨어 구성</h2>
 <p><b>플랫폼</b>: Apple M1 (8코어) @ 3.2GHz</p><ul>
 <li><b>CPU</b>: Apple M1 (8코어: 4 성능 + 4 효율)</li>
@@ -139,14 +139,14 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li><b>스토리지</b>: 512GB NVMe SSD</li>
 <li><b>OS</b>: macOS Sonoma 14.x</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md856"></a>
+<h2><a class="anchor" id="autotoc_md930"></a>
 소프트웨어 구성</h2>
 <p><b>컴파일러</b>: Clang 15.0 (macOS)</p>
 <p><b>최적화 플래그</b>: <code>-O3 -march=native -DNDEBUG</code>, LTO, PGO 활성화</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md858"></a>
+<h1><a class="anchor" id="autotoc_md932"></a>
 핵심 성능 메트릭</h1>
-<h2><a class="anchor" id="autotoc_md859"></a>
+<h2><a class="anchor" id="autotoc_md933"></a>
 단일 스레드 성능</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -162,9 +162,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li>비동기 모드는 동기 모드보다 <b>8.4배 높은 처리량</b> 제공</li>
 <li>직접 파일 I/O 대비 <b>13배 낮은 지연시간</b></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md860"></a>
+<h2><a class="anchor" id="autotoc_md934"></a>
 멀티스레드 성능</h2>
-<h3><a class="anchor" id="autotoc_md861"></a>
+<h3><a class="anchor" id="autotoc_md935"></a>
 스레드 수별 처리량</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -185,11 +185,11 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li><b>16 스레드</b>: 높은 경합 시나리오에서 117% 향상</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md863"></a>
+<h1><a class="anchor" id="autotoc_md937"></a>
 업계 비교</h1>
-<h2><a class="anchor" id="autotoc_md864"></a>
+<h2><a class="anchor" id="autotoc_md938"></a>
 vs spdlog (가장 인기 있는 C++ 로거)</h2>
-<h3><a class="anchor" id="autotoc_md865"></a>
+<h3><a class="anchor" id="autotoc_md939"></a>
 단일 스레드 비교</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -204,7 +204,7 @@ vs spdlog (가장 인기 있는 C++ 로거)</h2>
 <td class="markdownTableBodyNone"><b>메모리</b>   </td><td class="markdownTableBodyNone">1.8 MB   </td><td class="markdownTableBodyNone">4.2 MB   </td><td class="markdownTableBodyNone"><b>logger_system (-57%)</b>   </td></tr>
 </table>
 <p><b>결론</b>: logger_system은 23% 처리량을 희생하여 <b>15.7배 낮은 지연시간**과 **57% 적은 메모리</b> 획득</p>
-<h3><a class="anchor" id="autotoc_md866"></a>
+<h3><a class="anchor" id="autotoc_md940"></a>
 멀티스레드 비교 (4 스레드)</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -216,7 +216,7 @@ vs spdlog (가장 인기 있는 C++ 로거)</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>경합 처리</b>   </td><td class="markdownTableBodyNone">적응형 배칭   </td><td class="markdownTableBodyNone">락 기반 큐   </td><td class="markdownTableBodyNone"><b>logger_system</b>   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md867"></a>
+<h2><a class="anchor" id="autotoc_md941"></a>
 vs Boost.Log</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -232,7 +232,7 @@ vs Boost.Log</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>컴파일 시간</b>   </td><td class="markdownTableBodyNone">15 sec   </td><td class="markdownTableBodyNone">127 sec   </td><td class="markdownTableBodyNone"><b>8.5x 빠름</b>   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md868"></a>
+<h2><a class="anchor" id="autotoc_md942"></a>
 vs glog (Google 로깅 라이브러리)</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -245,9 +245,9 @@ vs glog (Google 로깅 라이브러리)</h2>
 <td class="markdownTableBodyNone"><b>스레드 안전성</b>   </td><td class="markdownTableBodyNone">락프리 핫 패스   </td><td class="markdownTableBodyNone">뮤텍스 기반   </td><td class="markdownTableBodyNone">우수   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md870"></a>
+<h1><a class="anchor" id="autotoc_md944"></a>
 지연시간 벤치마크</h1>
-<h2><a class="anchor" id="autotoc_md871"></a>
+<h2><a class="anchor" id="autotoc_md945"></a>
 지연시간 분포 (단일 스레드, 비동기)</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -272,7 +272,7 @@ vs glog (Google 로깅 라이브러리)</h2>
 <li><b>예측 가능한 성능</b>, 아웃라이어 최소</li>
 <li>일관된 지연시간이 필요한 <b>실시간 시스템에 이상적</b></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md872"></a>
+<h2><a class="anchor" id="autotoc_md946"></a>
 부하 시 지연시간</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -290,9 +290,9 @@ vs glog (Google 로깅 라이브러리)</h2>
 </table>
 <p><b>핵심 인사이트</b>: 최고 처리량에서도 지연시간이 **매우 안정적**으로 유지됨</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md874"></a>
+<h1><a class="anchor" id="autotoc_md948"></a>
 메모리 프로파일링</h1>
-<h2><a class="anchor" id="autotoc_md875"></a>
+<h2><a class="anchor" id="autotoc_md949"></a>
 구성별 메모리 풋프린트</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -306,7 +306,7 @@ vs glog (Google 로깅 라이브러리)</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>고성능</b>   </td><td class="markdownTableBodyNone">4.2 MB   </td><td class="markdownTableBodyNone">6.8 MB   </td><td class="markdownTableBodyNone">5.3 MB   </td><td class="markdownTableBodyNone">최대 처리량   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md876"></a>
+<h2><a class="anchor" id="autotoc_md950"></a>
 경쟁사와 메모리 비교</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -324,7 +324,7 @@ vs glog (Google 로깅 라이브러리)</h2>
 </table>
 <p><b>결론</b>: logger_system은 **가장 낮은 메모리 풋프린트**와 **최소 할당**을 가짐</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md878"></a>
+<h1><a class="anchor" id="autotoc_md952"></a>
 성능 회귀 기준</h1>
 <p><b>회귀 임계값</b>:</p><ul>
 <li><b>처리량</b>: ±5% 허용</li>
@@ -341,7 +341,7 @@ vs glog (Google 로깅 라이브러리)</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 8 2026 04:33:13 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 8 2026 05:03:58 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

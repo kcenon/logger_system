@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System - 상세 기능</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1192"></a> <b>언어:</b> <a class="el" href="index.html#md__2home_2runner_2work_2logger__system_2logger__system_2README">English</a> | <b>한국어</b></p>
-<p><b>최종 업데이트</b>: 2025-11-28 <b>버전</b>: 0.2.0</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1266"></a> <b>언어:</b> <a class="el" href="index.html#md__2home_2runner_2work_2logger__system_2logger__system_2README">English</a> | <b>한국어</b></p>
+<p><b>최종 업데이트</b>: 2026-02-08 <b>버전</b>: 0.4.0</p>
 <p>이 문서는 Logger System의 모든 기능에 대한 포괄적인 세부 정보를 제공합니다.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1194"></a>
+<h1><a class="anchor" id="autotoc_md1268"></a>
 목차</h1>
 <ul>
 <li>핵심 기능</li>
@@ -108,11 +108,14 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li>비동기 로깅</li>
 <li>성능 특성</li>
 <li>통합 기능</li>
+<li>OTLP 통합</li>
+<li>로그 샘플링</li>
+<li>실시간 로그 분석</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1196"></a>
+<h1><a class="anchor" id="autotoc_md1270"></a>
 핵심 기능</h1>
-<h2><a class="anchor" id="autotoc_md1197"></a>
+<h2><a class="anchor" id="autotoc_md1271"></a>
 설계 원칙</h2>
 <p>Logger System은 다음 원칙을 따라 설계되었습니다:</p>
 <ul>
@@ -122,7 +125,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li><b>확장성</b>: 커스텀 작성자 및 포맷터 지원</li>
 <li><b>통합 용이성</b>: 에코시스템 컴포넌트와 원활한 통합</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1198"></a>
+<h2><a class="anchor" id="autotoc_md1272"></a>
 주요 기능</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -141,9 +144,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <td class="markdownTableBodyNone"><b>조건부 로깅</b>   </td><td class="markdownTableBodyNone">런타임 레벨 조정   </td><td class="markdownTableBodyNone">✅   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1200"></a>
+<h1><a class="anchor" id="autotoc_md1274"></a>
 로그 레벨</h1>
-<h2><a class="anchor" id="autotoc_md1201"></a>
+<h2><a class="anchor" id="autotoc_md1275"></a>
 레벨 정의</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kcenon::logger {</div>
 <div class="line">    <span class="keyword">enum class</span> log_level {</div>
@@ -155,7 +158,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">        critical = 5  <span class="comment">// 치명적 오류 (시스템 위험)</span></div>
 <div class="line">    };</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1202"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1276"></a>
 레벨별 사용 지침</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -173,7 +176,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>CRITICAL</b>   </td><td class="markdownTableBodyNone">시스템 위험 상황   </td><td class="markdownTableBodyNone">메모리 부족, 데이터 손상   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md1203"></a>
+<h2><a class="anchor" id="autotoc_md1277"></a>
 사용 예시</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/logger.h&gt;</span></div>
 <div class="line"> </div>
@@ -189,9 +192,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">logger-&gt;error(<span class="stringliteral">&quot;데이터베이스 연결 실패: {}&quot;</span>, error_msg);</div>
 <div class="line">logger-&gt;critical(<span class="stringliteral">&quot;메모리 할당 실패, 시스템 종료 중&quot;</span>);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1205"></a>
+<h1><a class="anchor" id="autotoc_md1279"></a>
 로그 작성자</h1>
-<h2><a class="anchor" id="autotoc_md1206"></a>
+<h2><a class="anchor" id="autotoc_md1280"></a>
 콘솔 작성자</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/console_writer.h&gt;</span></div>
 <div class="line"> </div>
@@ -203,7 +206,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line"> </div>
 <div class="line"><span class="comment">// 로거에 추가</span></div>
 <div class="line">logger-&gt;add_writer(console);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1207"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1281"></a>
 파일 작성자</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/file_writer.h&gt;</span></div>
 <div class="line"> </div>
@@ -216,7 +219,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line"> </div>
 <div class="line"><span class="comment">// 로거에 추가</span></div>
 <div class="line">logger-&gt;add_writer(file);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1208"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1282"></a>
 회전 파일 작성자</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/rotating_file_writer.h&gt;</span></div>
 <div class="line"> </div>
@@ -234,7 +237,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">);</div>
 <div class="line"> </div>
 <div class="line">logger-&gt;add_writer(daily);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1209"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1283"></a>
 원격 작성자</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/remote_writer.h&gt;</span></div>
 <div class="line"> </div>
@@ -249,7 +252,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">remote-&gt;enable_tls(<span class="keyword">true</span>);</div>
 <div class="line"> </div>
 <div class="line">logger-&gt;add_writer(remote);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1210"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1284"></a>
 커스텀 작성자</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>custom_writer : <span class="keyword">public</span> log_writer {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -266,9 +269,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line"><span class="keyword">auto</span> custom = std::make_shared&lt;custom_writer&gt;();</div>
 <div class="line">logger-&gt;add_writer(custom);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1212"></a>
+<h1><a class="anchor" id="autotoc_md1286"></a>
 포맷팅</h1>
-<h2><a class="anchor" id="autotoc_md1213"></a>
+<h2><a class="anchor" id="autotoc_md1287"></a>
 기본 포맷</h2>
 <div class="fragment"><div class="line"><span class="comment">// 기본 포맷 설정</span></div>
 <div class="line">logger-&gt;set_pattern(<span class="stringliteral">&quot;[%Y-%m-%d %H:%M:%S.%e] [%l] [%n] %v&quot;</span>);</div>
@@ -287,7 +290,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line"><span class="comment">// %t - 스레드 ID</span></div>
 <div class="line"><span class="comment">// %P - 프로세스 ID</span></div>
 <div class="line"><span class="comment">// %@ - 소스 위치 (파일:라인)</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1214"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1288"></a>
 JSON 포맷</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/formatters/json_formatter.h&gt;</span></div>
 <div class="line"> </div>
@@ -296,7 +299,7 @@ JSON 포맷</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 출력 예시:</span></div>
 <div class="line"><span class="comment">// {&quot;timestamp&quot;:&quot;2025-11-28T10:30:00.123Z&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;logger&quot;:&quot;my_app&quot;,&quot;message&quot;:&quot;서버 시작됨&quot;,&quot;thread&quot;:12345}</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1215"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1289"></a>
 커스텀 포맷터</h2>
 <div class="fragment"><div class="line"><span class="keyword">class </span>custom_formatter : <span class="keyword">public</span> log_formatter {</div>
 <div class="line"><span class="keyword">public</span>:</div>
@@ -311,9 +314,9 @@ JSON 포맷</h2>
 <div class="line"><span class="keyword">auto</span> custom = std::make_shared&lt;custom_formatter&gt;();</div>
 <div class="line">logger-&gt;set_formatter(custom);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1217"></a>
+<h1><a class="anchor" id="autotoc_md1291"></a>
 필터링</h1>
-<h2><a class="anchor" id="autotoc_md1218"></a>
+<h2><a class="anchor" id="autotoc_md1292"></a>
 레벨 필터링</h2>
 <div class="fragment"><div class="line"><span class="comment">// 전역 최소 레벨 설정</span></div>
 <div class="line">logger-&gt;set_level(log_level::info);  <span class="comment">// INFO 이상만 로깅</span></div>
@@ -321,7 +324,7 @@ JSON 포맷</h2>
 <div class="line"><span class="comment">// 작성자별 레벨 설정</span></div>
 <div class="line">console_writer-&gt;set_level(log_level::debug);  <span class="comment">// 콘솔은 DEBUG 이상</span></div>
 <div class="line">file_writer-&gt;set_level(log_level::warning);   <span class="comment">// 파일은 WARNING 이상</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1219"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1293"></a>
 패턴 필터링</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/filters/pattern_filter.h&gt;</span></div>
 <div class="line"> </div>
@@ -331,7 +334,7 @@ JSON 포맷</h2>
 <div class="line">filter-&gt;exclude_pattern(<span class="stringliteral">&quot;.*password.*&quot;</span>);   <span class="comment">// password 포함 메시지 제외</span></div>
 <div class="line"> </div>
 <div class="line">logger-&gt;add_filter(filter);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1220"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1294"></a>
 조건부 필터링</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/filters/conditional_filter.h&gt;</span></div>
 <div class="line"> </div>
@@ -347,9 +350,9 @@ JSON 포맷</h2>
 <div class="line"> </div>
 <div class="line">logger-&gt;add_filter(filter);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1222"></a>
+<h1><a class="anchor" id="autotoc_md1296"></a>
 비동기 로깅</h1>
-<h2><a class="anchor" id="autotoc_md1223"></a>
+<h2><a class="anchor" id="autotoc_md1297"></a>
 비동기 모드 활성화</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/async_logger.h&gt;</span></div>
 <div class="line"> </div>
@@ -364,7 +367,7 @@ JSON 포맷</h2>
 <div class="line"><span class="comment">// - block: 큐가 빌 때까지 대기</span></div>
 <div class="line"><span class="comment">// - drop_oldest: 가장 오래된 로그 삭제</span></div>
 <div class="line"><span class="comment">// - drop_newest: 새 로그 삭제</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1224"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1298"></a>
 성능 비교</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -377,9 +380,9 @@ JSON 포맷</h2>
 <td class="markdownTableBodyNone">비동기 (drop)   </td><td class="markdownTableBodyNone">2M logs/s   </td><td class="markdownTableBodyNone">500ns   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1226"></a>
+<h1><a class="anchor" id="autotoc_md1300"></a>
 성능 특성</h1>
-<h2><a class="anchor" id="autotoc_md1227"></a>
+<h2><a class="anchor" id="autotoc_md1301"></a>
 벤치마크 결과</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -393,7 +396,7 @@ JSON 포맷</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">JSON 포맷   </td><td class="markdownTableBodyNone">100K/s   </td><td class="markdownTableBodyNone">3μs   </td><td class="markdownTableBodyNone">15μs   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md1228"></a>
+<h2><a class="anchor" id="autotoc_md1302"></a>
 최적화 팁</h2>
 <ol type="1">
 <li><b>비동기 로깅 사용</b>: 고처리량 애플리케이션에 필수</li>
@@ -402,9 +405,9 @@ JSON 포맷</h2>
 <li><b>필터 최소화</b>: 필터가 많을수록 성능 저하</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1230"></a>
+<h1><a class="anchor" id="autotoc_md1304"></a>
 통합 기능</h1>
-<h2><a class="anchor" id="autotoc_md1231"></a>
+<h2><a class="anchor" id="autotoc_md1305"></a>
 thread_system 통합</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/thread_logger.h&gt;</span></div>
 <div class="line"> </div>
@@ -416,7 +419,7 @@ thread_system 통합</h2>
 <div class="line">pool-&gt;enqueue([logger]() {</div>
 <div class="line">    logger-&gt;info(<span class="stringliteral">&quot;작업 시작&quot;</span>);  <span class="comment">// 스레드 ID 자동 포함</span></div>
 <div class="line">});</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1232"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1306"></a>
 monitoring_system 통합</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/metrics_logger.h&gt;</span></div>
 <div class="line"> </div>
@@ -428,7 +431,7 @@ monitoring_system 통합</h2>
 <div class="line"><span class="comment">// - 레벨별 로그 수</span></div>
 <div class="line"><span class="comment">// - 로그 처리 지연시간</span></div>
 <div class="line"><span class="comment">// - 큐 사용률</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1233"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1307"></a>
 common_system 통합</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/result_logger.h&gt;</span></div>
 <div class="line"> </div>
@@ -438,9 +441,9 @@ common_system 통합</h2>
 <div class="line">    logger-&gt;log_error(result.error());  <span class="comment">// ErrorInfo 자동 포맷</span></div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1235"></a>
+<h1><a class="anchor" id="autotoc_md1309"></a>
 구성 예시</h1>
-<h2><a class="anchor" id="autotoc_md1236"></a>
+<h2><a class="anchor" id="autotoc_md1310"></a>
 프로덕션 설정</h2>
 <div class="fragment"><div class="line"><span class="comment">// 프로덕션 권장 설정</span></div>
 <div class="line"><span class="keyword">auto</span> logger = create_async_logger(<span class="stringliteral">&quot;production_app&quot;</span>, {</div>
@@ -465,7 +468,7 @@ common_system 통합</h2>
 <div class="line"><span class="keyword">auto</span> error_file = std::make_shared&lt;file_writer&gt;(<span class="stringliteral">&quot;/var/log/app/error.log&quot;</span>);</div>
 <div class="line">error_file-&gt;set_level(log_level::error);</div>
 <div class="line">logger-&gt;add_writer(error_file);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1237"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1311"></a>
 개발 설정</h2>
 <div class="fragment"><div class="line"><span class="comment">// 개발 환경 설정</span></div>
 <div class="line"><span class="keyword">auto</span> logger = create_logger(<span class="stringliteral">&quot;dev_app&quot;</span>);</div>
@@ -480,16 +483,173 @@ common_system 통합</h2>
 <div class="line"><span class="comment">// 상세 포맷</span></div>
 <div class="line">logger-&gt;set_pattern(<span class="stringliteral">&quot;[%Y-%m-%d %H:%M:%S.%e] [%l] [%t] [%@] %v&quot;</span>);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1239"></a>
+<h1><a class="anchor" id="autotoc_md1313"></a>
+OTLP 통합</h1>
+<p>관찰성 백엔드로 로그를 내보내기 위한 OpenTelemetry Protocol (OTLP) 지원입니다.</p>
+<h2><a class="anchor" id="autotoc_md1314"></a>
+개요</h2>
+<p>OTLP writer는 분산 추적 상관관계를 위한 W3C Trace Context 지원과 함께 OpenTelemetry 호환 컬렉터(Jaeger, Zipkin, Grafana Tempo 등)로 로그 항목을 내보냅니다.</p>
+<h2><a class="anchor" id="autotoc_md1315"></a>
+OTLP Writer 설정</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/writers/otlp_writer.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line">kcenon::logger::writers::otlp_writer::config cfg;</div>
+<div class="line">cfg.endpoint = <span class="stringliteral">&quot;http://localhost:4318/v1/logs&quot;</span>;</div>
+<div class="line">cfg.protocol = kcenon::logger::writers::otlp_writer::protocol_type::http;</div>
+<div class="line">cfg.service_name = <span class="stringliteral">&quot;my-service&quot;</span>;</div>
+<div class="line">cfg.service_version = <span class="stringliteral">&quot;1.0.0&quot;</span>;</div>
+<div class="line">cfg.max_batch_size = 512;</div>
+<div class="line">cfg.flush_interval = std::chrono::milliseconds{5000};</div>
+<div class="line">cfg.max_retries = 3;</div>
+<div class="line">cfg.retry_delay = std::chrono::milliseconds{100};  <span class="comment">// 지수 백오프</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">auto</span> otlp = std::make_unique&lt;kcenon::logger::writers::otlp_writer&gt;(cfg);</div>
+<div class="line">logger-&gt;add_writer(<span class="stringliteral">&quot;otlp&quot;</span>, std::move(otlp));</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1316"></a>
+Trace Context 전파</h2>
+<div class="fragment"><div class="line"><span class="keyword">using namespace </span>kcenon::logger::otlp;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 현재 스레드에 trace context 설정</span></div>
+<div class="line">otel_context ctx;</div>
+<div class="line">ctx.trace_id = <span class="stringliteral">&quot;0af7651916cd43dd8448eb211c80319c&quot;</span>;</div>
+<div class="line">ctx.span_id = <span class="stringliteral">&quot;b7ad6b7169203331&quot;</span>;</div>
+<div class="line">ctx.trace_flags = <span class="stringliteral">&quot;01&quot;</span>;  <span class="comment">// Sampled</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// RAII 스코프 - 소멸 시 이전 context 자동 복원</span></div>
+<div class="line">{</div>
+<div class="line">    otel_context_scope scope(ctx);</div>
+<div class="line">    logger-&gt;log(log_level::info, <span class="stringliteral">&quot;Processing request&quot;</span>);</div>
+<div class="line">    <span class="comment">// 로그 항목에 trace_id와 span_id 자동 포함</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1317"></a>
+프로토콜 지원</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">프로토콜   </th><th class="markdownTableHeadNone">기본 포트   </th><th class="markdownTableHeadNone">사용 사례    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>http</code>   </td><td class="markdownTableBodyNone">4318   </td><td class="markdownTableBodyNone">표준 OTLP/HTTP, 방화벽 친화적    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>grpc</code>   </td><td class="markdownTableBodyNone">4317   </td><td class="markdownTableBodyNone">고처리량, 스트리밍   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md1318"></a>
+기능</h2>
+<ul>
+<li><b>W3C Trace Context</b>: trace_id, span_id, trace_flags 전파</li>
+<li><b>배치 내보내기</b>: 구성 가능한 배치 크기 및 플러시 간격</li>
+<li><b>지수 백오프 재시도</b>: 내보내기 실패 시 자동 재시도</li>
+<li><b>리소스 속성</b>: 서비스명, 버전, 네임스페이스, 커스텀 속성</li>
+<li><b>이중 프로토콜</b>: HTTP 및 gRPC 지원</li>
+<li><b>TLS 지원</b>: 프로덕션 배포를 위한 보안 전송</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1320"></a>
+로그 샘플링</h1>
+<p>중요한 메시지를 보존하면서 볼륨을 제어하는 적응형 로그 샘플링입니다.</p>
+<h2><a class="anchor" id="autotoc_md1321"></a>
+샘플링 전략</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">전략   </th><th class="markdownTableHeadNone">설명   </th><th class="markdownTableHeadNone">적합한 용도    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>random</code>   </td><td class="markdownTableBodyNone">비율 기반 확률적 샘플링   </td><td class="markdownTableBodyNone">일반 볼륨 감소    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>rate_limiting</code>   </td><td class="markdownTableBodyNone">시간 윈도우당 N개 로그   </td><td class="markdownTableBodyNone">엄격한 비율 제어    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>adaptive</code>   </td><td class="markdownTableBodyNone">볼륨 기반 비율 자동 조절   </td><td class="markdownTableBodyNone">가변 트래픽 패턴    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>hash_based</code>   </td><td class="markdownTableBodyNone">메시지 내용 기반 결정적 샘플링   </td><td class="markdownTableBodyNone">재현 가능한 샘플링   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md1322"></a>
+빠른 설정</h2>
+<div class="fragment"><div class="line"><span class="keyword">using namespace </span>kcenon::logger::sampling;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 일반적인 설정을 위한 팩토리 메서드</span></div>
+<div class="line"><span class="keyword">auto</span> sampler = sampler_factory::create_random(0.1);          <span class="comment">// 10% 샘플링</span></div>
+<div class="line"><span class="keyword">auto</span> sampler = sampler_factory::create_rate_limited(1000);   <span class="comment">// 초당 최대 1000개</span></div>
+<div class="line"><span class="keyword">auto</span> sampler = sampler_factory::create_adaptive(10000, 0.01); <span class="comment">// 10K/s에서 적응</span></div>
+<div class="line"><span class="keyword">auto</span> sampler = sampler_factory::create_production(0.1,</div>
+<div class="line">    {log_level::error, log_level::critical});                <span class="comment">// 프로덕션 프리셋</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 로거와 통합</span></div>
+<div class="line">logger-&gt;set_sampler(std::move(sampler));</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1323"></a>
+설정</h2>
+<div class="fragment"><div class="line">sampling_config config;</div>
+<div class="line">config.enabled = <span class="keyword">true</span>;</div>
+<div class="line">config.rate = 0.1;  <span class="comment">// 10% 기본 비율</span></div>
+<div class="line">config.strategy = sampling_strategy::adaptive;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 중요 메시지는 항상 로깅</span></div>
+<div class="line">config.always_log_levels = {log_level::error, log_level::critical};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 카테고리별 비율 오버라이드</span></div>
+<div class="line">config.category_rates = {</div>
+<div class="line">    {<span class="stringliteral">&quot;security&quot;</span>, 1.0},    <span class="comment">// 보안 이벤트는 항상 로깅</span></div>
+<div class="line">    {<span class="stringliteral">&quot;debug&quot;</span>, 0.01},      <span class="comment">// 디버그 메시지의 1%</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 적응형 설정</span></div>
+<div class="line">config.adaptive_enabled = <span class="keyword">true</span>;</div>
+<div class="line">config.adaptive_threshold = 10000;  <span class="comment">// 10K msgs/sec에서 트리거</span></div>
+<div class="line">config.adaptive_min_rate = 0.01;    <span class="comment">// 최소 1%</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">auto</span> sampler = std::make_unique&lt;log_sampler&gt;(config);</div>
+<div class="line">logger-&gt;set_sampler(std::move(sampler));</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1324"></a>
+기능</h2>
+<ul>
+<li><b>항상 로깅 레벨</b>: 중요 메시지는 샘플링을 완전히 우회</li>
+<li><b>카테고리별 비율</b>: 로그 카테고리별 다른 샘플링 비율</li>
+<li><b>적응형 스로틀링</b>: 고부하 시 자동 비율 감소</li>
+<li><b>런타임 재설정</b>: 재시작 없이 샘플링 설정 변경</li>
+<li><b>고성능</b>: 빠른 xorshift64 PRNG, FNV-1a 해싱</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1326"></a>
+실시간 로그 분석</h1>
+<p>실시간 이상 감지 및 패턴 기반 알림 시스템입니다.</p>
+<h2><a class="anchor" id="autotoc_md1327"></a>
+이상 유형</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">유형   </th><th class="markdownTableHeadNone">설명   </th><th class="markdownTableHeadNone">트리거    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>error_spike</code>   </td><td class="markdownTableBodyNone">갑작스러운 오류 증가   </td><td class="markdownTableBodyNone">윈도우당 오류 수 임계값 초과    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>pattern_match</code>   </td><td class="markdownTableBodyNone">Regex 패턴 감지   </td><td class="markdownTableBodyNone">로그 메시지가 설정된 패턴과 일치    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>rate_anomaly</code>   </td><td class="markdownTableBodyNone">비정상 로그 비율   </td><td class="markdownTableBodyNone">비율이 기준선에서 크게 벗어남    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>new_error_type</code>   </td><td class="markdownTableBodyNone">이전에 없던 오류   </td><td class="markdownTableBodyNone">처음 보는 오류 메시지   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md1328"></a>
+사용법</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/analysis/realtime_log_analyzer.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 프로덕션 기본값으로 생성</span></div>
+<div class="line"><span class="keyword">auto</span> analyzer = kcenon::logger::analysis::realtime_analyzer_factory::create_production(</div>
+<div class="line">    50,  <span class="comment">// 에러 스파이크: 분당 50개 오류</span></div>
+<div class="line">    [](<span class="keyword">const</span> kcenon::logger::analysis::anomaly_event&amp; event) {</div>
+<div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;이상 감지: &quot;</span> &lt;&lt; <span class="keyword">event</span>.description &lt;&lt; std::endl;</div>
+<div class="line">    }</div>
+<div class="line">);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 패턴 알림 추가</span></div>
+<div class="line">analyzer-&gt;add_pattern_alert(<span class="stringliteral">&quot;OutOfMemory|OOM&quot;</span>, log_level::error);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 로거와 통합</span></div>
+<div class="line">logger-&gt;set_realtime_analyzer(std::move(analyzer));</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md1330"></a>
 참고사항</h1>
-<h2><a class="anchor" id="autotoc_md1240"></a>
+<h2><a class="anchor" id="autotoc_md1331"></a>
 스레드 안전성</h2>
 <ul>
 <li><b>로거</b>: 스레드 안전 (내부 동기화)</li>
 <li><b>작성자</b>: 대부분 스레드 안전 (구현에 따름)</li>
 <li><b>포맷터</b>: 상태 없음, 스레드 안전</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1241"></a>
+<h2><a class="anchor" id="autotoc_md1332"></a>
 주의사항</h2>
 <ul>
 <li>로거 생성은 비용이 있음 - 한 번 생성 후 재사용</li>
@@ -497,7 +657,7 @@ common_system 통합</h2>
 <li>로그 레벨을 낮게 설정하면 성능 저하 가능</li>
 </ul>
 <hr  />
-<p><b>최종 업데이트</b>: 2025-11-28 <b>버전</b>: 0.2.0</p>
+<p><b>최종 업데이트</b>: 2026-02-08 <b>버전</b>: 0.4.0</p>
 <hr  />
 <p>Made with ❤️ by 🍀☀🌕🌥 🌊 </p>
 </div></div><!-- contents -->
@@ -506,7 +666,7 @@ common_system 통합</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 8 2026 04:33:13 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 8 2026 05:03:58 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

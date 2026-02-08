@@ -93,57 +93,80 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Logger System Project Structure</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2221"></a> <b>Last Updated</b>: 2025-11-15 <b>Version</b>: 0.3.0.0</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2330"></a> <b>Last Updated</b>: 2026-02-08 <b>Version</b>: 0.4.0.0</p>
 <p>This document provides detailed descriptions of the logger system's directory structure, key files, and module dependencies.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2223"></a>
+<h1><a class="anchor" id="autotoc_md2332"></a>
 Table of Contents</h1>
 <ul>
 <li>Directory Overview</li>
 <li>Core Module Files</li>
+<li>Builder Components</li>
 <li>Writer Implementations</li>
 <li>Filter Implementations</li>
 <li>Formatter Implementations</li>
-<li>Configuration System</li>
+<li>Factory Components</li>
+<li>Adapter Components</li>
+<li>Backend Components</li>
+<li>Sink Components</li>
+<li>Integration Components</li>
+<li>Sampling Components</li>
+<li>Utility Components</li>
 <li>Security Components</li>
+<li>Additional Components</li>
 <li>Testing Organization</li>
 <li>Build System</li>
 <li>Module Dependencies</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2225"></a>
+<h1><a class="anchor" id="autotoc_md2334"></a>
 Directory Overview</h1>
+<p><b>Header files</b>: 93 | <b>Source files</b>: 32 (.cpp) + 4 (.cppm)</p>
 <div class="fragment"><div class="line">logger_system/</div>
-<div class="line">├── 📁 include/kcenon/logger/       # Public headers (API)</div>
-<div class="line">│   ├── 📁 core/                    # Core logging components</div>
-<div class="line">│   ├── 📁 interfaces/              # Abstract interfaces</div>
-<div class="line">│   ├── 📁 writers/                 # Log writer implementations</div>
-<div class="line">│   ├── 📁 filters/                 # Log filter implementations</div>
-<div class="line">│   ├── 📁 formatters/              # Log formatter implementations</div>
-<div class="line">│   ├── 📁 config/                  # Configuration and templates</div>
-<div class="line">│   ├── 📁 security/                # Security features</div>
-<div class="line">│   ├── 📁 safety/                  # Crash safety mechanisms</div>
-<div class="line">│   ├── 📁 structured/              # Structured logging</div>
-<div class="line">│   ├── 📁 routing/                 # Log routing system</div>
-<div class="line">│   ├── 📁 analysis/                # Real-time log analysis</div>
-<div class="line">│   └── 📁 server/                  # Network log server</div>
-<div class="line">├── 📁 src/                         # Implementation files (.cpp)</div>
-<div class="line">│   ├── 📁 core/                    # Core implementations</div>
+<div class="line">├── 📁 include/kcenon/logger/       # Public headers (API) — 93 headers</div>
+<div class="line">│   ├── 📄 compatibility.h          # Backward compatibility support</div>
+<div class="line">│   ├── 📄 forward.h                # Forward declarations</div>
+<div class="line">│   ├── 📁 adapters/                # System adapter layers (3 headers)</div>
+<div class="line">│   ├── 📁 analysis/                # Real-time log analysis (2 headers)</div>
+<div class="line">│   ├── 📁 backends/                # Backend implementations (3 headers)</div>
+<div class="line">│   ├── 📁 builders/                # Builder pattern classes (1 header)</div>
+<div class="line">│   ├── 📁 core/                    # Core logging components (18 headers)</div>
+<div class="line">│   │   ├── 📁 metrics/             # Logger metrics (1 header)</div>
+<div class="line">│   │   └── 📁 strategies/          # Configuration strategies (5 headers)</div>
+<div class="line">│   ├── 📁 di/                      # Dependency injection (1 header)</div>
+<div class="line">│   ├── 📁 factories/               # Factory classes (3 headers)</div>
+<div class="line">│   ├── 📁 filters/                 # Log filter implementations (1 header)</div>
+<div class="line">│   ├── 📁 formatters/              # Log formatter implementations (5 headers)</div>
+<div class="line">│   ├── 📁 integration/             # Thread system integration (3 headers)</div>
+<div class="line">│   ├── 📁 interfaces/              # Abstract interfaces (8 headers)</div>
+<div class="line">│   ├── 📁 otlp/                    # OpenTelemetry support (1 header)</div>
+<div class="line">│   ├── 📁 routing/                 # Log routing system (1 header)</div>
+<div class="line">│   ├── 📁 safety/                  # Crash safety mechanisms (1 header)</div>
+<div class="line">│   ├── 📁 sampling/                # Log sampling (2 headers)</div>
+<div class="line">│   ├── 📁 security/                # Security features (6 headers)</div>
+<div class="line">│   ├── 📁 server/                  # Network log server (1 header)</div>
+<div class="line">│   ├── 📁 sinks/                   # Output sink implementations (2 headers)</div>
+<div class="line">│   ├── 📁 structured/              # Structured logging (1 header)</div>
+<div class="line">│   ├── 📁 utils/                   # Utility functions (4 headers)</div>
+<div class="line">│   └── 📁 writers/                 # Log writer implementations (18 headers)</div>
+<div class="line">├── 📁 src/                         # Implementation files — 32 .cpp + 4 .cppm</div>
+<div class="line">│   ├── 📁 core/                    # Core implementations (9 .cpp)</div>
+<div class="line">│   ├── 📁 impl/                    # Internal implementation details</div>
+<div class="line">│   │   ├── 📁 async/               # Async processing (3 .cpp + internal .h)</div>
+<div class="line">│   │   ├── 📁 builders/            # Builder implementations (1 .cpp)</div>
+<div class="line">│   │   ├── 📁 di/                  # DI container internals (internal .h)</div>
+<div class="line">│   │   ├── 📁 filters/             # Filter internals (internal .h)</div>
+<div class="line">│   │   ├── 📁 memory/              # Memory pool internals (internal .h)</div>
+<div class="line">│   │   ├── 📁 monitoring/          # Monitoring internals (internal .h)</div>
+<div class="line">│   │   └── 📁 writers/             # Writer implementations (14 .cpp)</div>
+<div class="line">│   ├── 📁 integration/             # Integration implementations (3 .cpp)</div>
 <div class="line">│   ├── 📁 modules/                 # C++20 module files (.cppm)</div>
 <div class="line">│   │   ├── logger.cppm             # Primary module interface</div>
 <div class="line">│   │   ├── core.cppm               # Core partition</div>
 <div class="line">│   │   ├── backends.cppm           # Backends partition</div>
 <div class="line">│   │   └── analysis.cppm           # Analysis partition</div>
-<div class="line">│   ├── 📁 writers/                 # Writer implementations</div>
-<div class="line">│   ├── 📁 filters/                 # Filter implementations</div>
-<div class="line">│   ├── 📁 formatters/              # Formatter implementations</div>
-<div class="line">│   ├── 📁 config/                  # Configuration implementations</div>
-<div class="line">│   ├── 📁 security/                # Security implementations</div>
-<div class="line">│   ├── 📁 safety/                  # Safety implementations</div>
-<div class="line">│   ├── 📁 structured/              # Structured logging impl</div>
-<div class="line">│   ├── 📁 routing/                 # Routing implementations</div>
-<div class="line">│   ├── 📁 analysis/                # Analysis implementations</div>
-<div class="line">│   └── 📁 server/                  # Server implementations</div>
+<div class="line">│   ├── 📁 sampling/                # Sampling implementations (1 .cpp)</div>
+<div class="line">│   └── 📁 security/                # Security implementations (1 .cpp)</div>
 <div class="line">├── 📁 examples/                    # Example applications</div>
 <div class="line">│   ├── 📁 basic_logging/           # Basic usage examples</div>
 <div class="line">│   ├── 📁 advanced_features/       # Advanced feature demos</div>
@@ -186,368 +209,499 @@ Directory Overview</h1>
 <div class="line">├── 📄 README.md                    # Main documentation</div>
 <div class="line">└── 📄 README.kr.md                 # Korean documentation</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md2227"></a>
+<h1><a class="anchor" id="autotoc_md2336"></a>
 Core Module Files</h1>
-<h2><a class="anchor" id="autotoc_md2228"></a>
-logger.h / logger.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/core/</code> | <code>src/core/</code></p>
-<p><b>Purpose</b>: Main logger class with asynchronous processing</p>
-<p><b>Key Components</b>:</p><ul>
-<li><code>logger</code> class: Primary logging interface</li>
-<li>Asynchronous queue management</li>
-<li>Writer coordination</li>
-<li>Filter application</li>
-<li>Metrics collection</li>
-</ul>
-<p><b>Public API</b>: </p><div class="fragment"><div class="line"><span class="keyword">class </span>logger {</div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="comment">// Logging operations</span></div>
-<div class="line">    <span class="keyword">auto</span> log(log_level level, <span class="keyword">const</span> std::string&amp; message) -&gt; void;</div>
-<div class="line">    <span class="keyword">auto</span> log(log_level level, <span class="keyword">const</span> std::string&amp; message,</div>
-<div class="line">             <span class="keyword">const</span> std::string&amp; file, <span class="keywordtype">int</span> line, <span class="keyword">const</span> std::string&amp; func) -&gt; void;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Writer management</span></div>
-<div class="line">    <span class="keyword">auto</span> add_writer(<span class="keyword">const</span> std::string&amp; name,</div>
-<div class="line">                    std::unique_ptr&lt;log_writer_interface&gt; writer) -&gt; common::VoidResult;</div>
-<div class="line">    <span class="keyword">auto</span> remove_writer(<span class="keyword">const</span> std::string&amp; name) -&gt; common::VoidResult;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Configuration</span></div>
-<div class="line">    <span class="keyword">auto</span> set_filter(std::unique_ptr&lt;log_filter_interface&gt; filter) -&gt; common::VoidResult;</div>
-<div class="line">    <span class="keyword">auto</span> set_min_level(log_level level) -&gt; void;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Control</span></div>
-<div class="line">    <span class="keyword">auto</span> start() -&gt; common::VoidResult;</div>
-<div class="line">    <span class="keyword">auto</span> stop() -&gt; common::VoidResult;</div>
-<div class="line">    <span class="keyword">auto</span> flush() -&gt; common::VoidResult;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Metrics</span></div>
-<div class="line">    <span class="keyword">auto</span> enable_metrics_collection(<span class="keywordtype">bool</span> enabled) -&gt; void;</div>
-<div class="line">    <span class="keyword">auto</span> get_current_metrics() const -&gt; metrics_data;</div>
-<div class="line">};</div>
-</div><!-- fragment --><p><b>Dependencies</b>:</p><ul>
-<li><code>log_entry.h</code> - Log entry data structure</li>
-<li><code>log_writer_interface.h</code> - Writer abstraction</li>
-<li><code>log_filter_interface.h</code> - Filter abstraction</li>
-<li>Thread system queue (optional)</li>
+<p>The <code>core/</code> directory contains 18 headers and 9 source files, plus 2 subdirectories (<code>metrics/</code> and <code>strategies/</code>).</p>
+<h2><a class="anchor" id="autotoc_md2337"></a>
+Header Files (&lt;tt&gt;include/kcenon/logger/core/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>logger.h</code>   </td><td class="markdownTableBodyNone">Main logger class with asynchronous processing    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>logger_builder.h</code>   </td><td class="markdownTableBodyNone">Builder pattern for logger configuration with validation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>logger_config.h</code>   </td><td class="markdownTableBodyNone">Logger configuration data structures    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>logger_config_builder.h</code>   </td><td class="markdownTableBodyNone">Builder for logger configuration objects    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>logger_context.h</code>   </td><td class="markdownTableBodyNone">Logger context management    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>logger_registry.h</code>   </td><td class="markdownTableBodyNone">Global logger registry for named loggers    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>log_collector.h</code>   </td><td class="markdownTableBodyNone">Log collection and aggregation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>log_context.h</code>   </td><td class="markdownTableBodyNone">Logging context data    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>log_context_scope.h</code>   </td><td class="markdownTableBodyNone">Scoped context management (RAII)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>error_codes.h</code>   </td><td class="markdownTableBodyNone">Error code definitions and error handling types    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>filtered_logger.h</code>   </td><td class="markdownTableBodyNone">Logger with built-in filtering    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>monitoring_integration_detector.h</code>   </td><td class="markdownTableBodyNone">Auto-detection of monitoring system availability    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>thread_integration_detector.h</code>   </td><td class="markdownTableBodyNone">Auto-detection of thread system availability    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>scoped_context_guard.h</code>   </td><td class="markdownTableBodyNone">RAII guard for context scope    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>signal_manager_context.h</code>   </td><td class="markdownTableBodyNone">Signal manager context for crash handling    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>small_string.h</code>   </td><td class="markdownTableBodyNone">Small string optimization    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>structured_log_builder.h</code>   </td><td class="markdownTableBodyNone">Builder for structured log entries    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>unified_log_context.h</code>   </td><td class="markdownTableBodyNone">Unified log context across subsystems   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2338"></a>
+Core Subdirectories</h2>
+<p>**<code>core/metrics/</code>** (1 header): </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>logger_metrics.h</code>   </td><td class="markdownTableBodyNone">Metrics collection and reporting   </td></tr>
+</table>
+<p>**<code>core/strategies/</code>** (5 headers): </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>config_strategy_interface.h</code>   </td><td class="markdownTableBodyNone">Abstract interface for configuration strategies    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>composite_strategy.h</code>   </td><td class="markdownTableBodyNone">Composite pattern for combining strategies    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>deployment_strategy.h</code>   </td><td class="markdownTableBodyNone">Deployment-specific configuration    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>environment_strategy.h</code>   </td><td class="markdownTableBodyNone">Environment-based configuration    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>performance_strategy.h</code>   </td><td class="markdownTableBodyNone">Performance-tuned configuration   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2339"></a>
+Source Files (&lt;tt&gt;src/core/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>logger.cpp</code>   </td><td class="markdownTableBodyNone">Logger core implementation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>logger_context.cpp</code>   </td><td class="markdownTableBodyNone">Logger context implementation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>logger_metrics.cpp</code>   </td><td class="markdownTableBodyNone">Metrics collection implementation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>logger_registry.cpp</code>   </td><td class="markdownTableBodyNone">Logger registry implementation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>log_collector.cpp</code>   </td><td class="markdownTableBodyNone">Log collector implementation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>log_context_scope.cpp</code>   </td><td class="markdownTableBodyNone">Context scope implementation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>scoped_context_guard.cpp</code>   </td><td class="markdownTableBodyNone">Scoped guard implementation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>signal_manager_context.cpp</code>   </td><td class="markdownTableBodyNone">Signal manager context implementation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>unified_log_context.cpp</code>   </td><td class="markdownTableBodyNone">Unified log context implementation   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2340"></a>
+Interfaces (&lt;tt&gt;include/kcenon/logger/interfaces/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>log_entry.h</code>   </td><td class="markdownTableBodyNone">Log entry data structure with metadata    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>log_filter_interface.h</code>   </td><td class="markdownTableBodyNone">Abstract filter interface    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>log_formatter_interface.h</code>   </td><td class="markdownTableBodyNone">Abstract formatter interface    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>log_sink_interface.h</code>   </td><td class="markdownTableBodyNone">Abstract sink interface    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>log_writer_interface.h</code>   </td><td class="markdownTableBodyNone">Abstract writer interface    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>logger_types.h</code>   </td><td class="markdownTableBodyNone">Common logger type definitions    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>output_sink_interface.h</code>   </td><td class="markdownTableBodyNone">Abstract output sink interface    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>writer_category.h</code>   </td><td class="markdownTableBodyNone">Writer categorization definitions   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2341"></a>
+Root-Level Headers (&lt;tt&gt;include/kcenon/logger/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>compatibility.h</code>   </td><td class="markdownTableBodyNone">Backward compatibility support    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>forward.h</code>   </td><td class="markdownTableBodyNone">Forward declarations   </td></tr>
+</table>
+<hr  />
+<h1><a class="anchor" id="autotoc_md2343"></a>
+Builder Components</h1>
+<h2><a class="anchor" id="autotoc_md2344"></a>
+writer_builder.h / writer_builder.cpp</h2>
+<p><b>Location</b>: <code>include/kcenon/logger/builders/</code> | <code>src/impl/builders/</code></p>
+<p><b>Purpose</b>: Fluent builder for constructing writer pipelines</p>
+<p><b>Features</b>:</p><ul>
+<li>Fluent API for composing writers with decorators</li>
+<li>Chainable methods for adding formatting, filtering, buffering</li>
+<li>Automatic writer pipeline assembly</li>
+<li>Type-safe builder pattern</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2230"></a>
-logger_builder.h / logger_builder.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/core/</code> | <code>src/core/</code></p>
-<p><b>Purpose</b>: Builder pattern for logger configuration with validation</p>
-<p><b>Key Features</b>:</p><ul>
-<li>Fluent API design</li>
-<li>Automatic validation</li>
-<li>Template support (production, debug, high_performance, low_latency)</li>
-<li>Error handling with Result&lt;T&gt;</li>
-</ul>
-<p><b>Public API</b>: </p><div class="fragment"><div class="line"><span class="keyword">class </span>logger_builder {</div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="comment">// Template configuration</span></div>
-<div class="line">    <span class="keyword">auto</span> use_template(<span class="keyword">const</span> std::string&amp; template_name) -&gt; logger_builder&amp;;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Basic configuration</span></div>
-<div class="line">    <span class="keyword">auto</span> with_min_level(log_level level) -&gt; logger_builder&amp;;</div>
-<div class="line">    <span class="keyword">auto</span> with_buffer_size(<span class="keywordtype">size_t</span> size) -&gt; logger_builder&amp;;</div>
-<div class="line">    <span class="keyword">auto</span> with_batch_size(<span class="keywordtype">size_t</span> size) -&gt; logger_builder&amp;;</div>
-<div class="line">    <span class="keyword">auto</span> with_queue_size(<span class="keywordtype">size_t</span> size) -&gt; logger_builder&amp;;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Component addition</span></div>
-<div class="line">    <span class="keyword">auto</span> add_writer(<span class="keyword">const</span> std::string&amp; name,</div>
-<div class="line">                    std::unique_ptr&lt;log_writer_interface&gt; writer) -&gt; logger_builder&amp;;</div>
-<div class="line">    <span class="keyword">auto</span> add_filter(std::unique_ptr&lt;log_filter_interface&gt; filter) -&gt; logger_builder&amp;;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Build</span></div>
-<div class="line">    <span class="keyword">auto</span> build() -&gt; result&lt;std::unique_ptr&lt;logger&gt;&gt;;</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">private</span>:</div>
-<div class="line">    <span class="keyword">auto</span> validate() const -&gt; common::VoidResult;</div>
-<div class="line">};</div>
-</div><!-- fragment --><p><b>Dependencies</b>:</p><ul>
-<li><code>logger.h</code> - Logger class</li>
-<li><code>config_validator.h</code> - Configuration validation</li>
-<li><code>config_templates.h</code> - Predefined templates</li>
-</ul>
-<hr  />
-<h2><a class="anchor" id="autotoc_md2232"></a>
-log_entry.h</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/core/</code></p>
-<p><b>Purpose</b>: Data structure for log entries with metadata</p>
-<p><b>Structure</b>: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>log_entry {</div>
-<div class="line">    log_level level;                                    <span class="comment">// Log severity level</span></div>
-<div class="line">    std::string message;                                <span class="comment">// Log message</span></div>
-<div class="line">    std::chrono::system_clock::time_point timestamp;    <span class="comment">// When logged</span></div>
-<div class="line">    std::string file;                                   <span class="comment">// Source file</span></div>
-<div class="line">    <span class="keywordtype">int</span> line;                                           <span class="comment">// Line number</span></div>
-<div class="line">    std::string function;                               <span class="comment">// Function name</span></div>
-<div class="line">    std::thread::id thread_id;                          <span class="comment">// Thread ID</span></div>
-<div class="line">    std::map&lt;std::string, std::string&gt; context;         <span class="comment">// Additional context</span></div>
-<div class="line">};</div>
-</div><!-- fragment --><p><b>Features</b>:</p><ul>
-<li>Lightweight and copyable</li>
-<li>Complete metadata capture</li>
-<li>Extensible context fields</li>
-<li>Thread-safe by design</li>
-</ul>
-<hr  />
-<h2><a class="anchor" id="autotoc_md2234"></a>
-result_types.h</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/core/</code></p>
-<p><b>Purpose</b>: Error handling types and utilities</p>
-<p><b>Key Types</b>: </p><div class="fragment"><div class="line"><span class="comment">// Result type for operations returning values</span></div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><span class="keyword">class </span>result {</div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keywordtype">bool</span> is_ok() <span class="keyword">const</span>;</div>
-<div class="line">    <span class="keywordtype">bool</span> is_err() <span class="keyword">const</span>;</div>
-<div class="line">    <span class="keyword">const</span> T&amp; value() <span class="keyword">const</span>;</div>
-<div class="line">    <span class="keyword">const</span> error_info&amp; error() <span class="keyword">const</span>;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Note: boolean conversion is removed in common::Result</span></div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Result type for void operations (unified with common_system)</span></div>
-<div class="line"><span class="keyword">using </span>VoidResult = common::VoidResult;  <span class="comment">// common::Result&lt;std::monostate&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// For checking void results:</span></div>
-<div class="line"><span class="keywordflow">if</span> (result.is_ok()) { <span class="comment">/* success */</span> }</div>
-<div class="line"><span class="keywordflow">if</span> (result.is_err()) { <span class="comment">/* error: result.error() */</span> }</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Error information</span></div>
-<div class="line"><span class="keyword">struct </span>error_info {</div>
-<div class="line">    error_code code;</div>
-<div class="line">    std::string message;</div>
-<div class="line">    std::string context;</div>
-<div class="line">};</div>
-</div><!-- fragment --><p><b>Error Codes</b> (Range: -200 to -299):</p><ul>
-<li>System lifecycle: -200 to -209</li>
-<li>Writer management: -210 to -219</li>
-<li>Configuration: -220 to -229</li>
-<li>I/O operations: -230 to -239</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md2236"></a>
+<h1><a class="anchor" id="autotoc_md2346"></a>
 Writer Implementations</h1>
-<h2><a class="anchor" id="autotoc_md2237"></a>
-console_writer.h / console_writer.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
-<p><b>Purpose</b>: Colored console output with ANSI support</p>
-<p><b>Features</b>:</p><ul>
-<li>ANSI color codes for different log levels</li>
-<li>Cross-platform support (Windows, Linux, macOS)</li>
-<li>Configurable color schemes</li>
-<li>Thread-safe output</li>
-</ul>
-<p><b>Configuration</b>: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>console_writer_config {</div>
-<div class="line">    <span class="keywordtype">bool</span> colors_enabled = <span class="keyword">true</span>;</div>
-<div class="line">    <span class="keywordtype">bool</span> stderr_for_errors = <span class="keyword">true</span>;</div>
-<div class="line">    std::map&lt;log_level, std::string&gt; color_map;</div>
-<div class="line">};</div>
-</div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2239"></a>
-file_writer.h / file_writer.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
-<p><b>Purpose</b>: Basic file writing with buffering</p>
-<p><b>Features</b>:</p><ul>
-<li>Buffered I/O for performance</li>
-<li>Automatic directory creation</li>
-<li>Configurable file permissions (default: 0600)</li>
-<li>Thread-safe file access</li>
-</ul>
-<p><b>Configuration</b>: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>file_writer_config {</div>
-<div class="line">    std::string filename;</div>
-<div class="line">    <span class="keywordtype">size_t</span> buffer_size = 8192;           <span class="comment">// 8KB default</span></div>
-<div class="line">    <span class="keywordtype">bool</span> append = <span class="keyword">true</span>;</div>
-<div class="line">    mode_t file_permissions = 0600;      <span class="comment">// Owner read/write only</span></div>
-<div class="line">    std::chrono::milliseconds flush_interval = std::chrono::milliseconds(100);</div>
-<div class="line">};</div>
-</div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2241"></a>
-rotating_file_writer.h / rotating_file_writer.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
-<p><b>Purpose</b>: Size and time-based file rotation</p>
-<p><b>Features</b>:</p><ul>
-<li>Size-based rotation</li>
-<li>Time-based rotation (daily, hourly, weekly)</li>
-<li>Backup file management</li>
-<li>Optional compression (gzip, bzip2)</li>
-</ul>
-<p><b>Configuration</b>: </p><div class="fragment"><div class="line"><span class="keyword">enum class</span> rotation_type {</div>
-<div class="line">    size,       <span class="comment">// Rotate based on file size</span></div>
-<div class="line">    daily,      <span class="comment">// Rotate daily</span></div>
-<div class="line">    hourly,     <span class="comment">// Rotate hourly</span></div>
-<div class="line">    weekly      <span class="comment">// Rotate weekly</span></div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">struct </span>rotating_file_writer_config {</div>
-<div class="line">    std::string base_filename;</div>
-<div class="line">    rotation_type type = rotation_type::size;</div>
-<div class="line">    <span class="keywordtype">size_t</span> max_size_bytes = 10 * 1024 * 1024;  <span class="comment">// 10MB</span></div>
-<div class="line">    <span class="keywordtype">size_t</span> max_files = 5;                       <span class="comment">// Keep 5 backups</span></div>
-<div class="line">    compression_type compression = compression_type::none;</div>
-<div class="line">    <span class="keywordtype">int</span> rotation_hour = 0;                      <span class="comment">// For time-based rotation</span></div>
-<div class="line">};</div>
-</div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2243"></a>
-network_writer.h / network_writer.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
-<p><b>Purpose</b>: TCP/UDP network logging</p>
-<p><b>Features</b>:</p><ul>
-<li>TCP and UDP protocol support</li>
-<li>Automatic reconnection</li>
-<li>Configurable retry strategies</li>
-<li>Message batching</li>
-</ul>
-<p><b>Configuration</b>: </p><div class="fragment"><div class="line"><span class="keyword">enum class</span> protocol_type {</div>
-<div class="line">    tcp,</div>
-<div class="line">    udp</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">struct </span>network_writer_config {</div>
-<div class="line">    std::string host;</div>
-<div class="line">    uint16_t port;</div>
-<div class="line">    protocol_type protocol = protocol_type::tcp;</div>
-<div class="line">    std::chrono::seconds connection_timeout = std::chrono::seconds(5);</div>
-<div class="line">    <span class="keywordtype">int</span> max_retry_attempts = 3;</div>
-<div class="line">    std::chrono::milliseconds retry_backoff = std::chrono::milliseconds(100);</div>
-<div class="line">    <span class="keywordtype">size_t</span> batch_size = 100;</div>
-<div class="line">};</div>
-</div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2245"></a>
-critical_writer.h / critical_writer.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
-<p><b>Purpose</b>: Synchronous logging for critical messages</p>
-<p><b>Features</b>:</p><ul>
-<li>Bypasses async queue</li>
-<li>Immediate write guarantee</li>
-<li>Wrapper pattern (wraps any writer)</li>
-<li>Crash-safe</li>
-</ul>
-<p><b>Usage Pattern</b>: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> critical = std::make_unique&lt;critical_writer&gt;(</div>
-<div class="line">    std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;critical.log&quot;</span>)</div>
-<div class="line">);</div>
-</div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2247"></a>
-hybrid_writer.h / hybrid_writer.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/writers/</code> | <code>src/writers/</code></p>
-<p><b>Purpose</b>: Adaptive async/sync based on log level</p>
-<p><b>Features</b>:</p><ul>
-<li>Automatic mode switching</li>
-<li>Configurable threshold level</li>
-<li>Separate async queue</li>
-<li>Performance + reliability</li>
-</ul>
-<p><b>Configuration</b>: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>hybrid_writer_config {</div>
-<div class="line">    log_level sync_level = log_level::error;  <span class="comment">// Errors and above sync</span></div>
-<div class="line">    <span class="keywordtype">size_t</span> async_queue_size = 10000;</div>
-<div class="line">    std::chrono::milliseconds flush_interval = std::chrono::milliseconds(100);</div>
-<div class="line">};</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md2249"></a>
+<p>The <code>writers/</code> directory contains 18 headers with implementations in <code>src/impl/writers/</code> (14 .cpp files).</p>
+<h2><a class="anchor" id="autotoc_md2347"></a>
+Header Files (&lt;tt&gt;include/kcenon/logger/writers/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>base_writer.h</code>   </td><td class="markdownTableBodyNone">Base class for all writer implementations    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>console_writer.h</code>   </td><td class="markdownTableBodyNone">Colored console output with ANSI support    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>file_writer.h</code>   </td><td class="markdownTableBodyNone">Basic file writing with buffering    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>rotating_file_writer.h</code>   </td><td class="markdownTableBodyNone">Size and time-based file rotation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>network_writer.h</code>   </td><td class="markdownTableBodyNone">TCP/UDP network logging    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>critical_writer.h</code>   </td><td class="markdownTableBodyNone">Synchronous logging for critical messages    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>async_writer.h</code>   </td><td class="markdownTableBodyNone">Asynchronous writer with queue-based processing    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>batch_writer.h</code>   </td><td class="markdownTableBodyNone">Batched write operations for throughput    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>buffered_writer.h</code>   </td><td class="markdownTableBodyNone">Buffered I/O writer    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>composite_writer.h</code>   </td><td class="markdownTableBodyNone">Fan-out writer dispatching to multiple writers    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>decorator_writer_base.h</code>   </td><td class="markdownTableBodyNone">Base class for writer decorators    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>encrypted_writer.h</code>   </td><td class="markdownTableBodyNone">Encrypted log output    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>filtered_writer.h</code>   </td><td class="markdownTableBodyNone">Writer with built-in log filtering    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>formatted_writer.h</code>   </td><td class="markdownTableBodyNone">Writer with built-in log formatting    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>legacy_writer_adapter.h</code>   </td><td class="markdownTableBodyNone">Adapter for legacy writer interfaces    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>otlp_writer.h</code>   </td><td class="markdownTableBodyNone">OpenTelemetry Protocol (OTLP) log export    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>queued_writer_base.h</code>   </td><td class="markdownTableBodyNone">Base class for queue-backed writers    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>thread_safe_writer.h</code>   </td><td class="markdownTableBodyNone">Thread-safe writer wrapper   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2348"></a>
+Source Files (&lt;tt&gt;src/impl/writers/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>base_writer.cpp</code>   </td><td class="markdownTableBodyNone">Base writer implementation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>batch_writer.cpp</code>   </td><td class="markdownTableBodyNone">Batch writer implementation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>buffered_writer.cpp</code>   </td><td class="markdownTableBodyNone">Buffered writer implementation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>console_writer.cpp</code>   </td><td class="markdownTableBodyNone">Console writer implementation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>critical_writer.cpp</code>   </td><td class="markdownTableBodyNone">Critical writer implementation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>decorator_writer_base.cpp</code>   </td><td class="markdownTableBodyNone">Decorator base implementation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>encrypted_writer.cpp</code>   </td><td class="markdownTableBodyNone">Encrypted writer implementation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>file_writer.cpp</code>   </td><td class="markdownTableBodyNone">File writer implementation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>filtered_writer.cpp</code>   </td><td class="markdownTableBodyNone">Filtered writer implementation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>formatted_writer.cpp</code>   </td><td class="markdownTableBodyNone">Formatted writer implementation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>network_writer.cpp</code>   </td><td class="markdownTableBodyNone">Network writer implementation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>otlp_writer.cpp</code>   </td><td class="markdownTableBodyNone">OTLP writer implementation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>rotating_file_writer.cpp</code>   </td><td class="markdownTableBodyNone">Rotating file writer implementation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>thread_safe_writer.cpp</code>   </td><td class="markdownTableBodyNone">Thread-safe writer implementation   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2349"></a>
+Async Processing (&lt;tt&gt;src/impl/async/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>async_worker.h</code> / <code>.cpp</code>   </td><td class="markdownTableBodyNone">Async worker thread management    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>batch_processor.h</code> / <code>.cpp</code>   </td><td class="markdownTableBodyNone">Batch processing engine    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>high_performance_async_writer.h</code> / <code>.cpp</code>   </td><td class="markdownTableBodyNone">High-performance async writer    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>jthread_compat.h</code>   </td><td class="markdownTableBodyNone">jthread compatibility layer    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>lockfree_queue.h</code>   </td><td class="markdownTableBodyNone">Lock-free queue for async operations   </td></tr>
+</table>
+<hr  />
+<h1><a class="anchor" id="autotoc_md2351"></a>
 Filter Implementations</h1>
-<h2><a class="anchor" id="autotoc_md2250"></a>
-level_filter.h / level_filter.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/filters/</code> | <code>src/filters/</code></p>
-<p><b>Purpose</b>: Filter by minimum log level</p>
+<h2><a class="anchor" id="autotoc_md2352"></a>
+log_filter.h</h2>
+<p><b>Location</b>: <code>include/kcenon/logger/filters/</code></p>
+<p><b>Purpose</b>: Unified log filter implementation supporting level-based, regex, and custom function filtering</p>
+<p><b>Internal Implementation</b>: <code>src/impl/filters/log_filter.h</code></p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2252"></a>
-regex_filter.h / regex_filter.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/filters/</code> | <code>src/filters/</code></p>
-<p><b>Purpose</b>: Pattern matching on log messages</p>
-<p><b>Features</b>:</p><ul>
-<li>Include or exclude patterns</li>
-<li>Case-sensitive or insensitive</li>
-<li>Multiple pattern support</li>
-</ul>
-<hr  />
-<h2><a class="anchor" id="autotoc_md2254"></a>
-function_filter.h / function_filter.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/filters/</code> | <code>src/filters/</code></p>
-<p><b>Purpose</b>: Custom filtering logic via lambda/function</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md2256"></a>
+<h1><a class="anchor" id="autotoc_md2354"></a>
 Formatter Implementations</h1>
-<h2><a class="anchor" id="autotoc_md2257"></a>
-plain_formatter.h / plain_formatter.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/formatters/</code> | <code>src/formatters/</code></p>
-<p><b>Purpose</b>: Simple, human-readable text format</p>
+<h2><a class="anchor" id="autotoc_md2355"></a>
+Header Files (&lt;tt&gt;include/kcenon/logger/formatters/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>base_formatter.h</code>   </td><td class="markdownTableBodyNone">Base class for all formatters    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>json_formatter.h</code>   </td><td class="markdownTableBodyNone">Machine-parseable JSON output    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>logfmt_formatter.h</code>   </td><td class="markdownTableBodyNone">Logfmt-style key=value output    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>template_formatter.h</code>   </td><td class="markdownTableBodyNone">Template-based custom formatting    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>timestamp_formatter.h</code>   </td><td class="markdownTableBodyNone">Timestamp formatting utilities   </td></tr>
+</table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2259"></a>
-json_formatter.h / json_formatter.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/formatters/</code> | <code>src/formatters/</code></p>
-<p><b>Purpose</b>: Machine-parseable JSON output</p>
+<h1><a class="anchor" id="autotoc_md2357"></a>
+Factory Components</h1>
+<h2><a class="anchor" id="autotoc_md2358"></a>
+Header Files (&lt;tt&gt;include/kcenon/logger/factories/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>writer_factory.h</code>   </td><td class="markdownTableBodyNone">Factory for creating writer instances    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>filter_factory.h</code>   </td><td class="markdownTableBodyNone">Factory for creating filter instances    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>formatter_factory.h</code>   </td><td class="markdownTableBodyNone">Factory for creating formatter instances   </td></tr>
+</table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2261"></a>
-custom_formatter.h / custom_formatter.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/formatters/</code> | <code>src/formatters/</code></p>
-<p><b>Purpose</b>: Base class for custom formatting logic</p>
+<h1><a class="anchor" id="autotoc_md2360"></a>
+Adapter Components</h1>
+<h2><a class="anchor" id="autotoc_md2361"></a>
+Header Files (&lt;tt&gt;include/kcenon/logger/adapters/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>common_logger_adapter.h</code>   </td><td class="markdownTableBodyNone">Adapter for common_system logger interface    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>common_system_adapter.h</code>   </td><td class="markdownTableBodyNone">Adapter for common_system integration    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>logger_adapter.h</code>   </td><td class="markdownTableBodyNone">Generic logger adapter interface   </td></tr>
+</table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2263"></a>
-Configuration System</h1>
-<h2><a class="anchor" id="autotoc_md2264"></a>
-config_templates.h / config_templates.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/config/</code> | <code>src/config/</code></p>
-<p><b>Purpose</b>: Predefined configurations</p>
-<p><b>Templates</b>:</p><ul>
-<li><code>production</code>: Optimized for production environments</li>
-<li><code>debug</code>: Immediate output for development</li>
-<li><code>high_performance</code>: Maximized throughput</li>
-<li><code>low_latency</code>: Minimized latency</li>
-</ul>
+<h1><a class="anchor" id="autotoc_md2363"></a>
+Backend Components</h1>
+<h2><a class="anchor" id="autotoc_md2364"></a>
+Header Files (&lt;tt&gt;include/kcenon/logger/backends/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>integration_backend.h</code>   </td><td class="markdownTableBodyNone">Backend for thread_system integration mode    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>monitoring_backend.h</code>   </td><td class="markdownTableBodyNone">Backend for monitoring_system integration    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>standalone_backend.h</code>   </td><td class="markdownTableBodyNone">Backend for standalone operation mode   </td></tr>
+</table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2266"></a>
-config_validator.h / config_validator.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/config/</code> | <code>src/config/</code></p>
-<p><b>Purpose</b>: Comprehensive validation framework</p>
-<p><b>Validations</b>:</p><ul>
-<li>Buffer size ranges</li>
-<li>Queue size limits</li>
-<li>Writer configuration</li>
-<li>Filter configuration</li>
-</ul>
+<h1><a class="anchor" id="autotoc_md2366"></a>
+Sink Components</h1>
+<h2><a class="anchor" id="autotoc_md2367"></a>
+Header Files (&lt;tt&gt;include/kcenon/logger/sinks/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>console_sink.h</code>   </td><td class="markdownTableBodyNone">Console output sink    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>file_sink.h</code>   </td><td class="markdownTableBodyNone">File output sink   </td></tr>
+</table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2268"></a>
-config_strategy.h / config_strategy.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/config/</code> | <code>src/config/</code></p>
-<p><b>Purpose</b>: Strategy pattern for flexible configuration</p>
+<h1><a class="anchor" id="autotoc_md2369"></a>
+Integration Components</h1>
+<h2><a class="anchor" id="autotoc_md2370"></a>
+Header Files (&lt;tt&gt;include/kcenon/logger/integration/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>executor_integration.h</code>   </td><td class="markdownTableBodyNone">Executor-based integration    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>standalone_executor.h</code>   </td><td class="markdownTableBodyNone">Standalone executor for independent operation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>thread_system_integration.h</code>   </td><td class="markdownTableBodyNone">Thread system integration layer   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2371"></a>
+Source Files (&lt;tt&gt;src/integration/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>executor_integration.cpp</code>   </td><td class="markdownTableBodyNone">Executor integration implementation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>standalone_executor.cpp</code>   </td><td class="markdownTableBodyNone">Standalone executor implementation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>thread_system_integration.cpp</code>   </td><td class="markdownTableBodyNone">Thread system integration implementation   </td></tr>
+</table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2270"></a>
+<h1><a class="anchor" id="autotoc_md2373"></a>
+Sampling Components</h1>
+<h2><a class="anchor" id="autotoc_md2374"></a>
+Header Files (&lt;tt&gt;include/kcenon/logger/sampling/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>log_sampler.h</code>   </td><td class="markdownTableBodyNone">Log sampling engine    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>sampling_config.h</code>   </td><td class="markdownTableBodyNone">Sampling configuration and policies   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2375"></a>
+Source Files (&lt;tt&gt;src/sampling/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>log_sampler.cpp</code>   </td><td class="markdownTableBodyNone">Log sampler implementation   </td></tr>
+</table>
+<hr  />
+<h1><a class="anchor" id="autotoc_md2377"></a>
+Utility Components</h1>
+<h2><a class="anchor" id="autotoc_md2378"></a>
+Header Files (&lt;tt&gt;include/kcenon/logger/utils/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>error_handling_utils.h</code>   </td><td class="markdownTableBodyNone">Error handling helper functions    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>file_utils.h</code>   </td><td class="markdownTableBodyNone">File system utility functions    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>string_utils.h</code>   </td><td class="markdownTableBodyNone">String manipulation utilities    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>time_utils.h</code>   </td><td class="markdownTableBodyNone">Time and timestamp utilities   </td></tr>
+</table>
+<hr  />
+<h1><a class="anchor" id="autotoc_md2380"></a>
 Security Components</h1>
-<h2><a class="anchor" id="autotoc_md2271"></a>
-secure_key_storage.h / secure_key_storage.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/security/</code> | <code>src/security/</code></p>
-<p><b>Purpose</b>: RAII-based encryption key management</p>
-<p><b>Features</b>:</p><ul>
-<li>OpenSSL <code>OPENSSL_cleanse()</code> for secure erasure</li>
-<li>File permission enforcement (0600)</li>
-<li>Cryptographically secure key generation</li>
-</ul>
+<h2><a class="anchor" id="autotoc_md2381"></a>
+Header Files (&lt;tt&gt;include/kcenon/logger/security/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>secure_key_storage.h</code>   </td><td class="markdownTableBodyNone">RAII-based encryption key management (OpenSSL)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>path_validator.h</code>   </td><td class="markdownTableBodyNone">Path validation and traversal prevention    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>log_sanitizer.h</code>   </td><td class="markdownTableBodyNone">Sensitive data sanitization (PII masking)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>audit_logger.h</code>   </td><td class="markdownTableBodyNone">Audit trail logging for compliance    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>signal_manager_interface.h</code>   </td><td class="markdownTableBodyNone">Abstract signal manager interface    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>signal_manager.h</code>   </td><td class="markdownTableBodyNone">Signal and crash handler management   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2382"></a>
+Source Files (&lt;tt&gt;src/security/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>signal_manager.cpp</code>   </td><td class="markdownTableBodyNone">Signal manager implementation   </td></tr>
+</table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2273"></a>
-path_validator.h / path_validator.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/security/</code> | <code>src/security/</code></p>
-<p><b>Purpose</b>: Path validation and security</p>
-<p><b>Protections</b>:</p><ul>
-<li>Path traversal prevention</li>
-<li>Symlink validation</li>
-<li>Base directory enforcement</li>
-<li>Filename character restrictions</li>
+<h1><a class="anchor" id="autotoc_md2384"></a>
+Additional Components</h1>
+<h2><a class="anchor" id="autotoc_md2385"></a>
+Dependency Injection (&lt;tt&gt;include/kcenon/logger/di/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>service_registration.h</code>   </td><td class="markdownTableBodyNone">DI service registration utilities   </td></tr>
+</table>
+<p><b>Internal DI Implementation</b> (<code>src/impl/di/</code>):</p><ul>
+<li><code>di_container_interface.h</code> - Container interface</li>
+<li><code>lightweight_container.h</code> - Lightweight DI container</li>
+<li><code>lightweight_di_container.h</code> - Extended DI container</li>
+<li><code>thread_system_di_adapter.h</code> - Thread system DI adapter</li>
 </ul>
+<h2><a class="anchor" id="autotoc_md2386"></a>
+OpenTelemetry (&lt;tt&gt;include/kcenon/logger/otlp/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>otel_context.h</code>   </td><td class="markdownTableBodyNone">OpenTelemetry context integration   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2387"></a>
+Routing (&lt;tt&gt;include/kcenon/logger/routing/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>log_router.h</code>   </td><td class="markdownTableBodyNone">Log routing and dispatching   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2388"></a>
+Safety (&lt;tt&gt;include/kcenon/logger/safety/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>crash_safe_logger.h</code>   </td><td class="markdownTableBodyNone">Crash-safe logging mechanisms   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2389"></a>
+Analysis (&lt;tt&gt;include/kcenon/logger/analysis/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>log_analyzer.h</code>   </td><td class="markdownTableBodyNone">Log analysis engine    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>realtime_log_analyzer.h</code>   </td><td class="markdownTableBodyNone">Real-time log analysis   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2390"></a>
+Structured Logging (&lt;tt&gt;include/kcenon/logger/structured/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>structured_logger.h</code>   </td><td class="markdownTableBodyNone">Structured (JSON-based) logging   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2391"></a>
+Server (&lt;tt&gt;include/kcenon/logger/server/&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>log_server.h</code>   </td><td class="markdownTableBodyNone">Network log server   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2392"></a>
+Internal Implementation Details (&lt;tt&gt;src/impl/&lt;/tt&gt;)</h2>
+<p>The <code>src/impl/</code> directory contains internal headers and implementations not part of the public API:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Subdirectory   </th><th class="markdownTableHeadNone">Contents    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>memory/</code>   </td><td class="markdownTableBodyNone"><code>object_pool.h</code>, <code>log_entry_pool.h</code> - Memory pool implementations    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>monitoring/</code>   </td><td class="markdownTableBodyNone"><code>basic_monitor.h</code>, <code>monitoring_interface.h</code>, <code>thread_system_monitor_adapter.h</code>   </td></tr>
+</table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2275"></a>
-log_sanitizer.h / log_sanitizer.cpp</h2>
-<p><b>Location</b>: <code>include/kcenon/logger/security/</code> | <code>src/security/</code></p>
-<p><b>Purpose</b>: Sensitive data sanitization</p>
-<p><b>Features</b>:</p><ul>
-<li>Email masking</li>
-<li>Credit card masking</li>
-<li>Token redaction</li>
-<li>Custom pattern support</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md2277"></a>
+<h1><a class="anchor" id="autotoc_md2394"></a>
 Testing Organization</h1>
-<h2><a class="anchor" id="autotoc_md2278"></a>
+<h2><a class="anchor" id="autotoc_md2395"></a>
 Unit Tests</h2>
 <p><b>Location</b>: <code>tests/unit/</code></p>
 <p><b>Structure</b>: </p><div class="fragment"><div class="line">tests/unit/</div>
@@ -569,7 +723,7 @@ Unit Tests</h2>
 <div class="line">    └── config_templates_test.cpp</div>
 </div><!-- fragment --><p><b>Testing Framework</b>: Google Test (GTest) <b>Coverage Target</b>: 80%+</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2280"></a>
+<h2><a class="anchor" id="autotoc_md2397"></a>
 Integration Tests</h2>
 <p><b>Location</b>: <code>tests/integration/</code></p>
 <p><b>Focus Areas</b>:</p><ul>
@@ -579,7 +733,7 @@ Integration Tests</h2>
 <li>Multi-writer scenarios</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2282"></a>
+<h2><a class="anchor" id="autotoc_md2399"></a>
 Benchmarks</h2>
 <p><b>Location</b>: <code>tests/benchmarks/</code></p>
 <p><b>Benchmark Types</b>:</p><ul>
@@ -588,9 +742,9 @@ Benchmarks</h2>
 <li>Memory benchmarks (footprint, allocation patterns)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2284"></a>
+<h1><a class="anchor" id="autotoc_md2401"></a>
 Build System</h1>
-<h2><a class="anchor" id="autotoc_md2285"></a>
+<h2><a class="anchor" id="autotoc_md2402"></a>
 CMakeLists.txt (Root)</h2>
 <p><b>Location</b>: <code>CMakeLists.txt</code></p>
 <p><b>Key Options</b>: </p><div class="fragment"><div class="line"># Core Features</div>
@@ -617,7 +771,7 @@ CMakeLists.txt (Root)</h2>
 <div class="line">option(LOGGER_WARNINGS_AS_ERRORS &quot;Treat warnings as errors&quot; OFF)</div>
 <div class="line">option(LOGGER_ENABLE_COVERAGE &quot;Enable code coverage&quot; OFF)</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2287"></a>
+<h2><a class="anchor" id="autotoc_md2404"></a>
 CMake Modules</h2>
 <p><b>Location</b>: <code>cmake/</code></p>
 <p><b>Key Files</b>:</p><ul>
@@ -628,35 +782,46 @@ CMake Modules</h2>
 <li><code>CodeCoverage.cmake</code>: Coverage reporting</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2289"></a>
+<h1><a class="anchor" id="autotoc_md2406"></a>
 Module Dependencies</h1>
-<h2><a class="anchor" id="autotoc_md2290"></a>
+<h2><a class="anchor" id="autotoc_md2407"></a>
 Dependency Graph</h2>
-<div class="fragment"><div class="line">┌─────────────────┐</div>
-<div class="line">│  config module  │  (No dependencies)</div>
-<div class="line">└────────┬────────┘</div>
-<div class="line">         │</div>
-<div class="line">         ▼</div>
-<div class="line">┌─────────────────┐</div>
-<div class="line">│   core module   │</div>
-<div class="line">└────────┬────────┘</div>
-<div class="line">         │</div>
-<div class="line">         ├──────────────┬──────────────┐</div>
-<div class="line">         │              │              │</div>
-<div class="line">         ▼              ▼              ▼</div>
-<div class="line">┌──────────────┐ ┌──────────────┐ ┌──────────────┐</div>
-<div class="line">│   writers    │ │   filters    │ │  formatters  │</div>
-<div class="line">└──────────────┘ └──────────────┘ └──────────────┘</div>
-<div class="line">         │              │              │</div>
-<div class="line">         └──────────────┴──────────────┘</div>
-<div class="line">                        │</div>
-<div class="line">                        ▼</div>
-<div class="line">         ┌──────────────────────────────┐</div>
-<div class="line">         │  integration (optional)      │</div>
-<div class="line">         │  - thread_system             │</div>
-<div class="line">         │  - monitoring_system         │</div>
-<div class="line">         └──────────────────────────────┘</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2291"></a>
+<div class="fragment"><div class="line">┌─────────────────────┐</div>
+<div class="line">│   interfaces        │  (No dependencies)</div>
+<div class="line">└─────────┬───────────┘</div>
+<div class="line">          │</div>
+<div class="line">          ▼</div>
+<div class="line">┌─────────────────────┐</div>
+<div class="line">│   core module       │</div>
+<div class="line">│ (strategies,metrics)│</div>
+<div class="line">└─────────┬───────────┘</div>
+<div class="line">          │</div>
+<div class="line">  ┌───────┼──────────┬──────────────┐</div>
+<div class="line">  │       │          │              │</div>
+<div class="line">  ▼       ▼          ▼              ▼</div>
+<div class="line">┌──────┐┌──────┐┌──────────┐┌──────────┐</div>
+<div class="line">│write-││filte-││formatters││ builders │</div>
+<div class="line">│ rs   ││ rs   ││          ││          │</div>
+<div class="line">└──┬───┘└──┬───┘└─────┬────┘└────┬─────┘</div>
+<div class="line">   │       │          │          │</div>
+<div class="line">   └───────┴──────────┴──────────┘</div>
+<div class="line">                  │</div>
+<div class="line">      ┌───────────┼───────────┐</div>
+<div class="line">      │           │           │</div>
+<div class="line">      ▼           ▼           ▼</div>
+<div class="line">┌──────────┐┌──────────┐┌──────────┐</div>
+<div class="line">│ backends ││ adapters ││factories │</div>
+<div class="line">└────┬─────┘└────┬─────┘└──────────┘</div>
+<div class="line">     │           │</div>
+<div class="line">     └─────┬─────┘</div>
+<div class="line">           ▼</div>
+<div class="line">┌──────────────────────────────┐</div>
+<div class="line">│  integration (optional)      │</div>
+<div class="line">│  - thread_system             │</div>
+<div class="line">│  - monitoring_system         │</div>
+<div class="line">│  - common_system             │</div>
+<div class="line">└──────────────────────────────┘</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2408"></a>
 External Dependencies</h2>
 <p><b>Required</b>:</p><ul>
 <li><b>fmt</b>: String formatting library (header-only mode available)</li>
@@ -672,23 +837,27 @@ External Dependencies</h2>
 </li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2293"></a>
+<h1><a class="anchor" id="autotoc_md2410"></a>
 File Naming Conventions</h1>
-<h2><a class="anchor" id="autotoc_md2294"></a>
+<h2><a class="anchor" id="autotoc_md2411"></a>
 Header Files</h2>
 <ul>
 <li><b>Interface headers</b>: <code>*_interface.h</code> (e.g., <code>log_writer_interface.h</code>)</li>
 <li><b>Implementation headers</b>: <code>*.h</code> (e.g., <code>logger.h</code>, <code>file_writer.h</code>)</li>
-<li><b>Configuration headers</b>: <code>config_*.h</code> (e.g., <code>config_validator.h</code>)</li>
+<li><b>Builder headers</b>: <code>*_builder.h</code> (e.g., <code>writer_builder.h</code>, <code>logger_builder.h</code>)</li>
+<li><b>Factory headers</b>: <code>*_factory.h</code> (e.g., <code>writer_factory.h</code>)</li>
+<li><b>Adapter headers</b>: <code>*_adapter.h</code> (e.g., <code>logger_adapter.h</code>)</li>
+<li><b>Strategy headers</b>: <code>*_strategy.h</code> (e.g., <code>deployment_strategy.h</code>)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2295"></a>
+<h2><a class="anchor" id="autotoc_md2412"></a>
 Source Files</h2>
 <ul>
-<li><b>Implementation</b>: <code>*.cpp</code> (matches header name)</li>
+<li><b>Public implementation</b>: <code>src/core/*.cpp</code> (core logic)</li>
+<li><b>Internal implementation</b>: <code>src/impl/**/*.cpp</code> (private implementation details)</li>
 <li><b>Tests</b>: <code>*_test.cpp</code> (e.g., <code>logger_test.cpp</code>)</li>
 <li><b>Benchmarks</b>: <code>*_benchmark.cpp</code> (e.g., <code>throughput_benchmark.cpp</code>)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2296"></a>
+<h2><a class="anchor" id="autotoc_md2413"></a>
 Documentation Files</h2>
 <ul>
 <li><b>Markdown</b>: <code>*.md</code> (English) or <code>*.kr.md</code> (Korean)</li>
@@ -696,7 +865,7 @@ Documentation Files</h2>
 <li><b>Guides</b>: <code>GUIDE_NAME.md</code> in <code>docs/guides/</code></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2298"></a>
+<h1><a class="anchor" id="autotoc_md2415"></a>
 See Also</h1>
 <ul>
 <li>Architecture Overview - System design and architecture</li>
@@ -710,7 +879,7 @@ See Also</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 8 2026 04:33:14 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Feb 8 2026 05:03:58 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

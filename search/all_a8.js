@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['코드_20레지스트리_0',['오류 코드 레지스트리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2047',1,'']]],
-  ['코드_20수정_1',['1.3 API 변경에 따른 벤치마크 코드 수정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1938',1,'']]],
-  ['코드_20커버리지_20파이프라인_2',['4. 코드 커버리지 파이프라인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2030',1,'']]],
-  ['코멘트_3',['2. PR 자동 코멘트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1961',1,'']]],
-  ['코어_20모듈_20파일_4',['코어 모듈 파일',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE_8kr.html#autotoc_md2151',1,'']]]
+  ['컴파일_20정의_0',['컴파일 정의',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1926',1,'']]],
+  ['컴파일_20타임_20감지_1',['컴파일 타임 감지',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1936',1,'']]],
+  ['컴포넌트_2',['컴포넌트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE_8kr.html#autotoc_md2301',1,'보안 컴포넌트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE_8kr.html#autotoc_md481',1,'핵심 컴포넌트']]],
+  ['컴포넌트_20개요_3',['🔧 주요 컴포넌트 개요',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE_8kr.html#autotoc_md599',1,'']]],
+  ['컴플라이언스_20지원_4',['5. 컴플라이언스 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2167',1,'']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['풀_0',['패턴 1: 애플리케이션 전체 공유 풀',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1829',1,'']]],
-  ['풀_20설정_1',['패턴 2: 사용자 정의 풀 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1830',1,'']]]
+  ['표시되지_20않음_0',['문제 4: 배지가 README에 표시되지 않음',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2085',1,'']]]
 ];

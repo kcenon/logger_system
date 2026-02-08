@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['필요_20사항_0',['❌ 개선 필요 사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1927',1,'']]],
-  ['필터링_1',['필터링',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1218',1,'레벨 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1220',1,'조건부 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1219',1,'패턴 필터링'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1217',1,'필터링']]]
+  ['플래그_0',['기능 플래그',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1831',1,'']]],
+  ['플래그_20변경_20요약_1',['CMake 플래그 변경 요약',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md1639',1,'']]],
+  ['플랫폼_2',['공식 지원 플랫폼',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2170',1,'']]],
+  ['플랫폼_20지원_3',['플랫폼 지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2169',1,'']]],
+  ['플러시_20타임아웃_20설정_4',['2. 플러시 타임아웃 설정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md177',1,'']]],
+  ['플로우차트_5',['선택 플로우차트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md143',1,'']]]
 ];

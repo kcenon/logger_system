@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['경로_20검증_0',['2. 경로 검증',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2055',1,'']]],
-  ['경로_20변경_1',['헤더 경로 변경',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2API__REFERENCE_8kr.html#autotoc_md699',1,'']]],
-  ['경로_20업데이트_2',['Step 2: Include 경로 업데이트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE_8kr.html#autotoc_md605',1,'']]],
-  ['경쟁사와_20메모리_20비교_3',['경쟁사와 메모리 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md876',1,'']]],
-  ['경쟁_20우위_4',['경쟁 우위',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md852',1,'']]]
+  ['결과물_0',['📈 예상 결과물',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2068',1,'']]],
+  ['결과_1',['결과',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1301',1,'벤치마크 결과'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE_8kr.html#autotoc_md2002',1,'벤치마크 결과'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2069',1,'1. GitHub Actions 실행 결과']]],
+  ['결과_20파싱_20및_20기준선_20비교_2',['Phase 2: 결과 파싱 및 기준선 비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2049',1,'']]],
+  ['결과_20파싱_20스크립트_3',['2.1 벤치마크 결과 파싱 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2050',1,'']]],
+  ['결정_4',['핵심 아키텍처 결정',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE_8kr.html#autotoc_md837',1,'']]]
 ];

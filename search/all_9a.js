@@ -1,15 +1,8 @@
 var searchData=
 [
-  ['지속적_20통합_20파이프라인_0',['지속적 통합 파이프라인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2026',1,'']]],
-  ['지연시간_1',['부하 시 지연시간',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md872',1,'']]],
-  ['지연시간_20벤치마크_2',['지연시간 벤치마크',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md870',1,'']]],
-  ['지연시간_20분포_20단일_20스레드_20비동기_3',['지연시간 분포 (단일 스레드, 비동기)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md871',1,'']]],
-  ['지연_20시간_20분포_4',['지연 시간 분포',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md167',1,'']]],
-  ['지원_5',['지원',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2060',1,'플랫폼 지원'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README_8kr.html#autotoc_md2312',1,'🤝 도움 및 지원'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2058',1,'5. 컴플라이언스 지원']]],
-  ['지원_20매트릭스_6',['버전 지원 매트릭스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md1023',1,'']]],
-  ['지원_20및_20리소스_7',['지원 및 리소스',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md1547',1,'']]],
-  ['지원_20플랫폼_8',['공식 지원 플랫폼',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2061',1,'']]],
-  ['지침_9',['레벨별 사용 지침',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1202',1,'']]],
-  ['지표_10',['🎯 성공 지표',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1983',1,'']]],
-  ['지표_20자동화_20제안서_11',['CI/CD 성능 지표 자동화 제안서',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html',1,'']]]
+  ['중단됨_0',['중단됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md1069',1,'사용 중단됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md1090',1,'사용 중단됨']]],
+  ['중복_20writer_20추가_20로직_20수정_20issue_20270_202025_2012_2031_1',['중복 Writer 추가 로직 수정 (Issue #270) - 2025-12-31',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md1041',1,'']]],
+  ['중심_20디자인_2',['중심 디자인',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2062',1,'제안 1: 배지 중심 디자인'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2063',1,'제안 2: 테이블 중심 디자인']]],
+  ['중요한_20제한사항_3',['중요한 제한사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2SECURITY_8kr.html#autotoc_md1890',1,'']]],
+  ['중_20strong_4',['개발 상태: ✅ &lt;strong&gt;개발 중&lt;/strong&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2132',1,'']]]
 ];

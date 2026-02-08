@@ -1,11 +1,13 @@
 var searchData=
 [
-  ['빌더_0',['로거 빌더',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1711',1,'']]],
-  ['빌드_1',['빌드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1708',1,'애플리케이션 빌드'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1704',1,'3. 빌드']]],
-  ['빌드_20수정_20pr_20291_202026_2001_2008_2',['Coverage 빌드 수정 (PR #291) - 2026-01-08',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md953',1,'']]],
-  ['빌드_20시스템_3',['빌드 시스템',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE_8kr.html#autotoc_md2206',1,'']]],
-  ['빌드_20시_20활성화_4',['빌드 시 활성화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1725',1,'빌드 시 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1813',1,'빌드 시 활성화']]],
-  ['빌드_20실패_5',['문제 1: 벤치마크 빌드 실패',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md1973',1,'']]],
-  ['빌드_20옵션_6',['핵심 빌드 옵션',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1721',1,'']]],
-  ['빌드_20테스팅_20인프라_7',['빌드 &amp; 테스팅 인프라',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2025',1,'']]]
+  ['비교_0',['비교',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md950',1,'경쟁사와 메모리 비교'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md145',1,'구현체 비교'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md939',1,'단일 스레드 비교'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md166',1,'벤치마크 비교'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE_8kr.html#autotoc_md845',1,'성능 비교'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1298',1,'성능 비교'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md937',1,'업계 비교'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1944',1,'오버헤드 비교'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2049',1,'Phase 2: 결과 파싱 및 기준선 비교']]],
+  ['비교_20스크립트_1',['2.2 기준선 비교 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2051',1,'']]],
+  ['비교_204_20스레드_2',['멀티스레드 비교 (4 스레드)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md940',1,'']]],
+  ['비동기_3',['지연시간 분포 (단일 스레드, 비동기)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md945',1,'']]],
+  ['비동기_20구현_20issue_20222_202025_2012_2006_4',['독립형 비동기 구현 (Issue #222) - 2025-12-06',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md1074',1,'']]],
+  ['비동기_20로깅_5',['비동기 로깅',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1296',1,'']]],
+  ['비동기_20모드_20활성화_6',['비동기 모드 활성화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1297',1,'']]],
+  ['비동기_20처리_20아키텍처_7',['비동기 처리 아키텍처',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2145',1,'']]],
+  ['비동기_20writer_20구현체_20가이드_8',['비동기 Writer 구현체 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html',1,'']]],
+  ['비활성화됨_20기능_20구현_20대기_9',['비활성화됨 (기능 구현 대기)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md1063',1,'']]]
 ];

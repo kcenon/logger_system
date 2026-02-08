@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['회귀_20기준_0',['성능 회귀 기준',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2BENCHMARKS_8kr.html#autotoc_md878',1,'']]],
-  ['회전_20파일_20작성자_1',['회전 파일 작성자',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1208',1,'']]]
+  ['활성화_0',['활성화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1923',1,'런타임에 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1835',1,'런타임 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1297',1,'비동기 모드 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1834',1,'빌드 시 활성화'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md1922',1,'빌드 시 활성화']]]
 ];

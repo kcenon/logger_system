@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['선택_0',['1. 큐 크기 선택',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md176',1,'']]],
-  ['선택_20가이드_1',['빠른 선택 가이드',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md142',1,'']]],
-  ['선택_20사항_2',['thread_system 통합 (선택 사항)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1724',1,'']]],
-  ['선택_20플로우차트_3',['선택 플로우차트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md143',1,'']]],
-  ['선택_20v3_200_20신규_4',['5. 백엔드 선택 (v3.0 신규)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md1539',1,'']]]
+  ['생명주기_20관리_0',['4. 생명주기 관리',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md179',1,'']]],
+  ['생성_1',['생성',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS_8kr.html#autotoc_md414',1,'커스텀 작성기 생성'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2053',1,'Phase 3: 배지 및 차트 생성']]],
+  ['생성_20스크립트_2',['생성 스크립트',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2054',1,'3.1 성능 배지 생성 스크립트'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2CI__CD__PERFORMANCE__PROPOSAL.html#autotoc_md2055',1,'3.2 트렌드 차트 생성 스크립트']]]
 ];

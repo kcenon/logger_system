@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['추가됨_0',['추가됨',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md942',1,'추가됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md946',1,'추가됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md950',1,'추가됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md963',1,'추가됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md970',1,'추가됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md993',1,'추가됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md1002',1,'추가됨'],['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md1014',1,'추가됨']]],
-  ['추가_20로직_20수정_20issue_20270_202025_2012_2031_1',['중복 Writer 추가 로직 수정 (Issue #270) - 2025-12-31',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CHANGELOG_8kr.html#autotoc_md967',1,'']]],
-  ['추상화_2',['3. 백엔드 추상화',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE_8kr.html#autotoc_md484',1,'']]]
+  ['최근_20변경사항_0',['최근 변경사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README_8kr.html#autotoc_md2427',1,'']]],
+  ['최소_20요구사항_1',['최소 요구사항',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2171',1,'']]],
+  ['최적화_20팁_2',['최적화 팁',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES_8kr.html#autotoc_md1302',1,'']]]
 ];
