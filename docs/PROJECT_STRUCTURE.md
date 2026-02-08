@@ -1,7 +1,7 @@
 # Logger System Project Structure
 
-**Last Updated**: 2025-11-15
-**Version**: 0.3.0.0
+**Last Updated**: 2026-02-08
+**Version**: 0.4.0.0
 
 This document provides detailed descriptions of the logger system's directory structure, key files, and module dependencies.
 
@@ -11,11 +11,19 @@ This document provides detailed descriptions of the logger system's directory st
 
 - [Directory Overview](#directory-overview)
 - [Core Module Files](#core-module-files)
+- [Builder Components](#builder-components)
 - [Writer Implementations](#writer-implementations)
 - [Filter Implementations](#filter-implementations)
 - [Formatter Implementations](#formatter-implementations)
-- [Configuration System](#configuration-system)
+- [Factory Components](#factory-components)
+- [Adapter Components](#adapter-components)
+- [Backend Components](#backend-components)
+- [Sink Components](#sink-components)
+- [Integration Components](#integration-components)
+- [Sampling Components](#sampling-components)
+- [Utility Components](#utility-components)
 - [Security Components](#security-components)
+- [Additional Components](#additional-components)
 - [Testing Organization](#testing-organization)
 - [Build System](#build-system)
 - [Module Dependencies](#module-dependencies)
@@ -24,38 +32,54 @@ This document provides detailed descriptions of the logger system's directory st
 
 ## Directory Overview
 
+**Header files**: 93 | **Source files**: 32 (.cpp) + 4 (.cppm)
+
 ```
 logger_system/
-├── 📁 include/kcenon/logger/       # Public headers (API)
-│   ├── 📁 core/                    # Core logging components
-│   ├── 📁 interfaces/              # Abstract interfaces
-│   ├── 📁 writers/                 # Log writer implementations
-│   ├── 📁 filters/                 # Log filter implementations
-│   ├── 📁 formatters/              # Log formatter implementations
-│   ├── 📁 config/                  # Configuration and templates
-│   ├── 📁 security/                # Security features
-│   ├── 📁 safety/                  # Crash safety mechanisms
-│   ├── 📁 structured/              # Structured logging
-│   ├── 📁 routing/                 # Log routing system
-│   ├── 📁 analysis/                # Real-time log analysis
-│   └── 📁 server/                  # Network log server
-├── 📁 src/                         # Implementation files (.cpp)
-│   ├── 📁 core/                    # Core implementations
+├── 📁 include/kcenon/logger/       # Public headers (API) — 93 headers
+│   ├── 📄 compatibility.h          # Backward compatibility support
+│   ├── 📄 forward.h                # Forward declarations
+│   ├── 📁 adapters/                # System adapter layers (3 headers)
+│   ├── 📁 analysis/                # Real-time log analysis (2 headers)
+│   ├── 📁 backends/                # Backend implementations (3 headers)
+│   ├── 📁 builders/                # Builder pattern classes (1 header)
+│   ├── 📁 core/                    # Core logging components (18 headers)
+│   │   ├── 📁 metrics/             # Logger metrics (1 header)
+│   │   └── 📁 strategies/          # Configuration strategies (5 headers)
+│   ├── 📁 di/                      # Dependency injection (1 header)
+│   ├── 📁 factories/               # Factory classes (3 headers)
+│   ├── 📁 filters/                 # Log filter implementations (1 header)
+│   ├── 📁 formatters/              # Log formatter implementations (5 headers)
+│   ├── 📁 integration/             # Thread system integration (3 headers)
+│   ├── 📁 interfaces/              # Abstract interfaces (8 headers)
+│   ├── 📁 otlp/                    # OpenTelemetry support (1 header)
+│   ├── 📁 routing/                 # Log routing system (1 header)
+│   ├── 📁 safety/                  # Crash safety mechanisms (1 header)
+│   ├── 📁 sampling/                # Log sampling (2 headers)
+│   ├── 📁 security/                # Security features (6 headers)
+│   ├── 📁 server/                  # Network log server (1 header)
+│   ├── 📁 sinks/                   # Output sink implementations (2 headers)
+│   ├── 📁 structured/              # Structured logging (1 header)
+│   ├── 📁 utils/                   # Utility functions (4 headers)
+│   └── 📁 writers/                 # Log writer implementations (18 headers)
+├── 📁 src/                         # Implementation files — 32 .cpp + 4 .cppm
+│   ├── 📁 core/                    # Core implementations (9 .cpp)
+│   ├── 📁 impl/                    # Internal implementation details
+│   │   ├── 📁 async/               # Async processing (3 .cpp + internal .h)
+│   │   ├── 📁 builders/            # Builder implementations (1 .cpp)
+│   │   ├── 📁 di/                  # DI container internals (internal .h)
+│   │   ├── 📁 filters/             # Filter internals (internal .h)
+│   │   ├── 📁 memory/              # Memory pool internals (internal .h)
+│   │   ├── 📁 monitoring/          # Monitoring internals (internal .h)
+│   │   └── 📁 writers/             # Writer implementations (14 .cpp)
+│   ├── 📁 integration/             # Integration implementations (3 .cpp)
 │   ├── 📁 modules/                 # C++20 module files (.cppm)
 │   │   ├── logger.cppm             # Primary module interface
 │   │   ├── core.cppm               # Core partition
 │   │   ├── backends.cppm           # Backends partition
 │   │   └── analysis.cppm           # Analysis partition
-│   ├── 📁 writers/                 # Writer implementations
-│   ├── 📁 filters/                 # Filter implementations
-│   ├── 📁 formatters/              # Formatter implementations
-│   ├── 📁 config/                  # Configuration implementations
-│   ├── 📁 security/                # Security implementations
-│   ├── 📁 safety/                  # Safety implementations
-│   ├── 📁 structured/              # Structured logging impl
-│   ├── 📁 routing/                 # Routing implementations
-│   ├── 📁 analysis/                # Analysis implementations
-│   └── 📁 server/                  # Server implementations
+│   ├── 📁 sampling/                # Sampling implementations (1 .cpp)
+│   └── 📁 security/                # Security implementations (1 .cpp)
 ├── 📁 examples/                    # Example applications
 │   ├── 📁 basic_logging/           # Basic usage examples
 │   ├── 📁 advanced_features/       # Advanced feature demos
@@ -103,444 +127,358 @@ logger_system/
 
 ## Core Module Files
 
-### logger.h / logger.cpp
-**Location**: `include/kcenon/logger/core/` | `src/core/`
+The `core/` directory contains 18 headers and 9 source files, plus 2 subdirectories (`metrics/` and `strategies/`).
 
-**Purpose**: Main logger class with asynchronous processing
+### Header Files (`include/kcenon/logger/core/`)
 
-**Key Components**:
-- `logger` class: Primary logging interface
-- Asynchronous queue management
-- Writer coordination
-- Filter application
-- Metrics collection
+| File | Purpose |
+|------|---------|
+| `logger.h` | Main logger class with asynchronous processing |
+| `logger_builder.h` | Builder pattern for logger configuration with validation |
+| `logger_config.h` | Logger configuration data structures |
+| `logger_config_builder.h` | Builder for logger configuration objects |
+| `logger_context.h` | Logger context management |
+| `logger_registry.h` | Global logger registry for named loggers |
+| `log_collector.h` | Log collection and aggregation |
+| `log_context.h` | Logging context data |
+| `log_context_scope.h` | Scoped context management (RAII) |
+| `error_codes.h` | Error code definitions and error handling types |
+| `filtered_logger.h` | Logger with built-in filtering |
+| `monitoring_integration_detector.h` | Auto-detection of monitoring system availability |
+| `thread_integration_detector.h` | Auto-detection of thread system availability |
+| `scoped_context_guard.h` | RAII guard for context scope |
+| `signal_manager_context.h` | Signal manager context for crash handling |
+| `small_string.h` | Small string optimization |
+| `structured_log_builder.h` | Builder for structured log entries |
+| `unified_log_context.h` | Unified log context across subsystems |
 
-**Public API**:
-```cpp
-class logger {
-public:
-    // Logging operations
-    auto log(log_level level, const std::string& message) -> void;
-    auto log(log_level level, const std::string& message,
-             const std::string& file, int line, const std::string& func) -> void;
+### Core Subdirectories
 
-    // Writer management
-    auto add_writer(const std::string& name,
-                    std::unique_ptr<log_writer_interface> writer) -> common::VoidResult;
-    auto remove_writer(const std::string& name) -> common::VoidResult;
+**`core/metrics/`** (1 header):
+| File | Purpose |
+|------|---------|
+| `logger_metrics.h` | Metrics collection and reporting |
 
-    // Configuration
-    auto set_filter(std::unique_ptr<log_filter_interface> filter) -> common::VoidResult;
-    auto set_min_level(log_level level) -> void;
+**`core/strategies/`** (5 headers):
+| File | Purpose |
+|------|---------|
+| `config_strategy_interface.h` | Abstract interface for configuration strategies |
+| `composite_strategy.h` | Composite pattern for combining strategies |
+| `deployment_strategy.h` | Deployment-specific configuration |
+| `environment_strategy.h` | Environment-based configuration |
+| `performance_strategy.h` | Performance-tuned configuration |
 
-    // Control
-    auto start() -> common::VoidResult;
-    auto stop() -> common::VoidResult;
-    auto flush() -> common::VoidResult;
+### Source Files (`src/core/`)
 
-    // Metrics
-    auto enable_metrics_collection(bool enabled) -> void;
-    auto get_current_metrics() const -> metrics_data;
-};
-```
+| File | Purpose |
+|------|---------|
+| `logger.cpp` | Logger core implementation |
+| `logger_context.cpp` | Logger context implementation |
+| `logger_metrics.cpp` | Metrics collection implementation |
+| `logger_registry.cpp` | Logger registry implementation |
+| `log_collector.cpp` | Log collector implementation |
+| `log_context_scope.cpp` | Context scope implementation |
+| `scoped_context_guard.cpp` | Scoped guard implementation |
+| `signal_manager_context.cpp` | Signal manager context implementation |
+| `unified_log_context.cpp` | Unified log context implementation |
 
-**Dependencies**:
-- `log_entry.h` - Log entry data structure
-- `log_writer_interface.h` - Writer abstraction
-- `log_filter_interface.h` - Filter abstraction
-- Thread system queue (optional)
+### Interfaces (`include/kcenon/logger/interfaces/`)
 
----
+| File | Purpose |
+|------|---------|
+| `log_entry.h` | Log entry data structure with metadata |
+| `log_filter_interface.h` | Abstract filter interface |
+| `log_formatter_interface.h` | Abstract formatter interface |
+| `log_sink_interface.h` | Abstract sink interface |
+| `log_writer_interface.h` | Abstract writer interface |
+| `logger_types.h` | Common logger type definitions |
+| `output_sink_interface.h` | Abstract output sink interface |
+| `writer_category.h` | Writer categorization definitions |
 
-### logger_builder.h / logger_builder.cpp
-**Location**: `include/kcenon/logger/core/` | `src/core/`
+### Root-Level Headers (`include/kcenon/logger/`)
 
-**Purpose**: Builder pattern for logger configuration with validation
-
-**Key Features**:
-- Fluent API design
-- Automatic validation
-- Template support (production, debug, high_performance, low_latency)
-- Error handling with Result<T>
-
-**Public API**:
-```cpp
-class logger_builder {
-public:
-    // Template configuration
-    auto use_template(const std::string& template_name) -> logger_builder&;
-
-    // Basic configuration
-    auto with_min_level(log_level level) -> logger_builder&;
-    auto with_buffer_size(size_t size) -> logger_builder&;
-    auto with_batch_size(size_t size) -> logger_builder&;
-    auto with_queue_size(size_t size) -> logger_builder&;
-
-    // Component addition
-    auto add_writer(const std::string& name,
-                    std::unique_ptr<log_writer_interface> writer) -> logger_builder&;
-    auto add_filter(std::unique_ptr<log_filter_interface> filter) -> logger_builder&;
-
-    // Build
-    auto build() -> result<std::unique_ptr<logger>>;
-
-private:
-    auto validate() const -> common::VoidResult;
-};
-```
-
-**Dependencies**:
-- `logger.h` - Logger class
-- `config_validator.h` - Configuration validation
-- `config_templates.h` - Predefined templates
+| File | Purpose |
+|------|---------|
+| `compatibility.h` | Backward compatibility support |
+| `forward.h` | Forward declarations |
 
 ---
 
-### log_entry.h
-**Location**: `include/kcenon/logger/core/`
+## Builder Components
 
-**Purpose**: Data structure for log entries with metadata
+### writer_builder.h / writer_builder.cpp
+**Location**: `include/kcenon/logger/builders/` | `src/impl/builders/`
 
-**Structure**:
-```cpp
-struct log_entry {
-    log_level level;                                    // Log severity level
-    std::string message;                                // Log message
-    std::chrono::system_clock::time_point timestamp;    // When logged
-    std::string file;                                   // Source file
-    int line;                                           // Line number
-    std::string function;                               // Function name
-    std::thread::id thread_id;                          // Thread ID
-    std::map<std::string, std::string> context;         // Additional context
-};
-```
+**Purpose**: Fluent builder for constructing writer pipelines
 
 **Features**:
-- Lightweight and copyable
-- Complete metadata capture
-- Extensible context fields
-- Thread-safe by design
-
----
-
-### result_types.h
-**Location**: `include/kcenon/logger/core/`
-
-**Purpose**: Error handling types and utilities
-
-**Key Types**:
-```cpp
-// Result type for operations returning values
-template<typename T>
-class result {
-public:
-    bool is_ok() const;
-    bool is_err() const;
-    const T& value() const;
-    const error_info& error() const;
-
-    // Note: boolean conversion is removed in common::Result
-};
-
-// Result type for void operations (unified with common_system)
-using VoidResult = common::VoidResult;  // common::Result<std::monostate>
-
-// For checking void results:
-if (result.is_ok()) { /* success */ }
-if (result.is_err()) { /* error: result.error() */ }
-
-// Error information
-struct error_info {
-    error_code code;
-    std::string message;
-    std::string context;
-};
-```
-
-**Error Codes** (Range: -200 to -299):
-- System lifecycle: -200 to -209
-- Writer management: -210 to -219
-- Configuration: -220 to -229
-- I/O operations: -230 to -239
+- Fluent API for composing writers with decorators
+- Chainable methods for adding formatting, filtering, buffering
+- Automatic writer pipeline assembly
+- Type-safe builder pattern
 
 ---
 
 ## Writer Implementations
 
-### console_writer.h / console_writer.cpp
-**Location**: `include/kcenon/logger/writers/` | `src/writers/`
+The `writers/` directory contains 18 headers with implementations in `src/impl/writers/` (14 .cpp files).
 
-**Purpose**: Colored console output with ANSI support
+### Header Files (`include/kcenon/logger/writers/`)
 
-**Features**:
-- ANSI color codes for different log levels
-- Cross-platform support (Windows, Linux, macOS)
-- Configurable color schemes
-- Thread-safe output
+| File | Purpose |
+|------|---------|
+| `base_writer.h` | Base class for all writer implementations |
+| `console_writer.h` | Colored console output with ANSI support |
+| `file_writer.h` | Basic file writing with buffering |
+| `rotating_file_writer.h` | Size and time-based file rotation |
+| `network_writer.h` | TCP/UDP network logging |
+| `critical_writer.h` | Synchronous logging for critical messages |
+| `async_writer.h` | Asynchronous writer with queue-based processing |
+| `batch_writer.h` | Batched write operations for throughput |
+| `buffered_writer.h` | Buffered I/O writer |
+| `composite_writer.h` | Fan-out writer dispatching to multiple writers |
+| `decorator_writer_base.h` | Base class for writer decorators |
+| `encrypted_writer.h` | Encrypted log output |
+| `filtered_writer.h` | Writer with built-in log filtering |
+| `formatted_writer.h` | Writer with built-in log formatting |
+| `legacy_writer_adapter.h` | Adapter for legacy writer interfaces |
+| `otlp_writer.h` | OpenTelemetry Protocol (OTLP) log export |
+| `queued_writer_base.h` | Base class for queue-backed writers |
+| `thread_safe_writer.h` | Thread-safe writer wrapper |
 
-**Configuration**:
-```cpp
-struct console_writer_config {
-    bool colors_enabled = true;
-    bool stderr_for_errors = true;
-    std::map<log_level, std::string> color_map;
-};
-```
+### Source Files (`src/impl/writers/`)
 
----
+| File | Purpose |
+|------|---------|
+| `base_writer.cpp` | Base writer implementation |
+| `batch_writer.cpp` | Batch writer implementation |
+| `buffered_writer.cpp` | Buffered writer implementation |
+| `console_writer.cpp` | Console writer implementation |
+| `critical_writer.cpp` | Critical writer implementation |
+| `decorator_writer_base.cpp` | Decorator base implementation |
+| `encrypted_writer.cpp` | Encrypted writer implementation |
+| `file_writer.cpp` | File writer implementation |
+| `filtered_writer.cpp` | Filtered writer implementation |
+| `formatted_writer.cpp` | Formatted writer implementation |
+| `network_writer.cpp` | Network writer implementation |
+| `otlp_writer.cpp` | OTLP writer implementation |
+| `rotating_file_writer.cpp` | Rotating file writer implementation |
+| `thread_safe_writer.cpp` | Thread-safe writer implementation |
 
-### file_writer.h / file_writer.cpp
-**Location**: `include/kcenon/logger/writers/` | `src/writers/`
+### Async Processing (`src/impl/async/`)
 
-**Purpose**: Basic file writing with buffering
-
-**Features**:
-- Buffered I/O for performance
-- Automatic directory creation
-- Configurable file permissions (default: 0600)
-- Thread-safe file access
-
-**Configuration**:
-```cpp
-struct file_writer_config {
-    std::string filename;
-    size_t buffer_size = 8192;           // 8KB default
-    bool append = true;
-    mode_t file_permissions = 0600;      // Owner read/write only
-    std::chrono::milliseconds flush_interval = std::chrono::milliseconds(100);
-};
-```
-
----
-
-### rotating_file_writer.h / rotating_file_writer.cpp
-**Location**: `include/kcenon/logger/writers/` | `src/writers/`
-
-**Purpose**: Size and time-based file rotation
-
-**Features**:
-- Size-based rotation
-- Time-based rotation (daily, hourly, weekly)
-- Backup file management
-- Optional compression (gzip, bzip2)
-
-**Configuration**:
-```cpp
-enum class rotation_type {
-    size,       // Rotate based on file size
-    daily,      // Rotate daily
-    hourly,     // Rotate hourly
-    weekly      // Rotate weekly
-};
-
-struct rotating_file_writer_config {
-    std::string base_filename;
-    rotation_type type = rotation_type::size;
-    size_t max_size_bytes = 10 * 1024 * 1024;  // 10MB
-    size_t max_files = 5;                       // Keep 5 backups
-    compression_type compression = compression_type::none;
-    int rotation_hour = 0;                      // For time-based rotation
-};
-```
-
----
-
-### network_writer.h / network_writer.cpp
-**Location**: `include/kcenon/logger/writers/` | `src/writers/`
-
-**Purpose**: TCP/UDP network logging
-
-**Features**:
-- TCP and UDP protocol support
-- Automatic reconnection
-- Configurable retry strategies
-- Message batching
-
-**Configuration**:
-```cpp
-enum class protocol_type {
-    tcp,
-    udp
-};
-
-struct network_writer_config {
-    std::string host;
-    uint16_t port;
-    protocol_type protocol = protocol_type::tcp;
-    std::chrono::seconds connection_timeout = std::chrono::seconds(5);
-    int max_retry_attempts = 3;
-    std::chrono::milliseconds retry_backoff = std::chrono::milliseconds(100);
-    size_t batch_size = 100;
-};
-```
-
----
-
-### critical_writer.h / critical_writer.cpp
-**Location**: `include/kcenon/logger/writers/` | `src/writers/`
-
-**Purpose**: Synchronous logging for critical messages
-
-**Features**:
-- Bypasses async queue
-- Immediate write guarantee
-- Wrapper pattern (wraps any writer)
-- Crash-safe
-
-**Usage Pattern**:
-```cpp
-auto critical = std::make_unique<critical_writer>(
-    std::make_unique<file_writer>("critical.log")
-);
-```
-
----
-
-### hybrid_writer.h / hybrid_writer.cpp
-**Location**: `include/kcenon/logger/writers/` | `src/writers/`
-
-**Purpose**: Adaptive async/sync based on log level
-
-**Features**:
-- Automatic mode switching
-- Configurable threshold level
-- Separate async queue
-- Performance + reliability
-
-**Configuration**:
-```cpp
-struct hybrid_writer_config {
-    log_level sync_level = log_level::error;  // Errors and above sync
-    size_t async_queue_size = 10000;
-    std::chrono::milliseconds flush_interval = std::chrono::milliseconds(100);
-};
-```
+| File | Purpose |
+|------|---------|
+| `async_worker.h` / `.cpp` | Async worker thread management |
+| `batch_processor.h` / `.cpp` | Batch processing engine |
+| `high_performance_async_writer.h` / `.cpp` | High-performance async writer |
+| `jthread_compat.h` | jthread compatibility layer |
+| `lockfree_queue.h` | Lock-free queue for async operations |
 
 ---
 
 ## Filter Implementations
 
-### level_filter.h / level_filter.cpp
-**Location**: `include/kcenon/logger/filters/` | `src/filters/`
+### log_filter.h
+**Location**: `include/kcenon/logger/filters/`
 
-**Purpose**: Filter by minimum log level
+**Purpose**: Unified log filter implementation supporting level-based, regex, and custom function filtering
 
----
-
-### regex_filter.h / regex_filter.cpp
-**Location**: `include/kcenon/logger/filters/` | `src/filters/`
-
-**Purpose**: Pattern matching on log messages
-
-**Features**:
-- Include or exclude patterns
-- Case-sensitive or insensitive
-- Multiple pattern support
-
----
-
-### function_filter.h / function_filter.cpp
-**Location**: `include/kcenon/logger/filters/` | `src/filters/`
-
-**Purpose**: Custom filtering logic via lambda/function
+**Internal Implementation**: `src/impl/filters/log_filter.h`
 
 ---
 
 ## Formatter Implementations
 
-### plain_formatter.h / plain_formatter.cpp
-**Location**: `include/kcenon/logger/formatters/` | `src/formatters/`
+### Header Files (`include/kcenon/logger/formatters/`)
 
-**Purpose**: Simple, human-readable text format
-
----
-
-### json_formatter.h / json_formatter.cpp
-**Location**: `include/kcenon/logger/formatters/` | `src/formatters/`
-
-**Purpose**: Machine-parseable JSON output
+| File | Purpose |
+|------|---------|
+| `base_formatter.h` | Base class for all formatters |
+| `json_formatter.h` | Machine-parseable JSON output |
+| `logfmt_formatter.h` | Logfmt-style key=value output |
+| `template_formatter.h` | Template-based custom formatting |
+| `timestamp_formatter.h` | Timestamp formatting utilities |
 
 ---
 
-### custom_formatter.h / custom_formatter.cpp
-**Location**: `include/kcenon/logger/formatters/` | `src/formatters/`
+## Factory Components
 
-**Purpose**: Base class for custom formatting logic
+### Header Files (`include/kcenon/logger/factories/`)
 
----
-
-## Configuration System
-
-### config_templates.h / config_templates.cpp
-**Location**: `include/kcenon/logger/config/` | `src/config/`
-
-**Purpose**: Predefined configurations
-
-**Templates**:
-- `production`: Optimized for production environments
-- `debug`: Immediate output for development
-- `high_performance`: Maximized throughput
-- `low_latency`: Minimized latency
+| File | Purpose |
+|------|---------|
+| `writer_factory.h` | Factory for creating writer instances |
+| `filter_factory.h` | Factory for creating filter instances |
+| `formatter_factory.h` | Factory for creating formatter instances |
 
 ---
 
-### config_validator.h / config_validator.cpp
-**Location**: `include/kcenon/logger/config/` | `src/config/`
+## Adapter Components
 
-**Purpose**: Comprehensive validation framework
+### Header Files (`include/kcenon/logger/adapters/`)
 
-**Validations**:
-- Buffer size ranges
-- Queue size limits
-- Writer configuration
-- Filter configuration
+| File | Purpose |
+|------|---------|
+| `common_logger_adapter.h` | Adapter for common_system logger interface |
+| `common_system_adapter.h` | Adapter for common_system integration |
+| `logger_adapter.h` | Generic logger adapter interface |
 
 ---
 
-### config_strategy.h / config_strategy.cpp
-**Location**: `include/kcenon/logger/config/` | `src/config/`
+## Backend Components
 
-**Purpose**: Strategy pattern for flexible configuration
+### Header Files (`include/kcenon/logger/backends/`)
+
+| File | Purpose |
+|------|---------|
+| `integration_backend.h` | Backend for thread_system integration mode |
+| `monitoring_backend.h` | Backend for monitoring_system integration |
+| `standalone_backend.h` | Backend for standalone operation mode |
+
+---
+
+## Sink Components
+
+### Header Files (`include/kcenon/logger/sinks/`)
+
+| File | Purpose |
+|------|---------|
+| `console_sink.h` | Console output sink |
+| `file_sink.h` | File output sink |
+
+---
+
+## Integration Components
+
+### Header Files (`include/kcenon/logger/integration/`)
+
+| File | Purpose |
+|------|---------|
+| `executor_integration.h` | Executor-based integration |
+| `standalone_executor.h` | Standalone executor for independent operation |
+| `thread_system_integration.h` | Thread system integration layer |
+
+### Source Files (`src/integration/`)
+
+| File | Purpose |
+|------|---------|
+| `executor_integration.cpp` | Executor integration implementation |
+| `standalone_executor.cpp` | Standalone executor implementation |
+| `thread_system_integration.cpp` | Thread system integration implementation |
+
+---
+
+## Sampling Components
+
+### Header Files (`include/kcenon/logger/sampling/`)
+
+| File | Purpose |
+|------|---------|
+| `log_sampler.h` | Log sampling engine |
+| `sampling_config.h` | Sampling configuration and policies |
+
+### Source Files (`src/sampling/`)
+
+| File | Purpose |
+|------|---------|
+| `log_sampler.cpp` | Log sampler implementation |
+
+---
+
+## Utility Components
+
+### Header Files (`include/kcenon/logger/utils/`)
+
+| File | Purpose |
+|------|---------|
+| `error_handling_utils.h` | Error handling helper functions |
+| `file_utils.h` | File system utility functions |
+| `string_utils.h` | String manipulation utilities |
+| `time_utils.h` | Time and timestamp utilities |
 
 ---
 
 ## Security Components
 
-### secure_key_storage.h / secure_key_storage.cpp
-**Location**: `include/kcenon/logger/security/` | `src/security/`
+### Header Files (`include/kcenon/logger/security/`)
 
-**Purpose**: RAII-based encryption key management
+| File | Purpose |
+|------|---------|
+| `secure_key_storage.h` | RAII-based encryption key management (OpenSSL) |
+| `path_validator.h` | Path validation and traversal prevention |
+| `log_sanitizer.h` | Sensitive data sanitization (PII masking) |
+| `audit_logger.h` | Audit trail logging for compliance |
+| `signal_manager_interface.h` | Abstract signal manager interface |
+| `signal_manager.h` | Signal and crash handler management |
 
-**Features**:
-- OpenSSL `OPENSSL_cleanse()` for secure erasure
-- File permission enforcement (0600)
-- Cryptographically secure key generation
+### Source Files (`src/security/`)
 
----
-
-### path_validator.h / path_validator.cpp
-**Location**: `include/kcenon/logger/security/` | `src/security/`
-
-**Purpose**: Path validation and security
-
-**Protections**:
-- Path traversal prevention
-- Symlink validation
-- Base directory enforcement
-- Filename character restrictions
+| File | Purpose |
+|------|---------|
+| `signal_manager.cpp` | Signal manager implementation |
 
 ---
 
-### log_sanitizer.h / log_sanitizer.cpp
-**Location**: `include/kcenon/logger/security/` | `src/security/`
+## Additional Components
 
-**Purpose**: Sensitive data sanitization
+### Dependency Injection (`include/kcenon/logger/di/`)
 
-**Features**:
-- Email masking
-- Credit card masking
-- Token redaction
-- Custom pattern support
+| File | Purpose |
+|------|---------|
+| `service_registration.h` | DI service registration utilities |
+
+**Internal DI Implementation** (`src/impl/di/`):
+- `di_container_interface.h` - Container interface
+- `lightweight_container.h` - Lightweight DI container
+- `lightweight_di_container.h` - Extended DI container
+- `thread_system_di_adapter.h` - Thread system DI adapter
+
+### OpenTelemetry (`include/kcenon/logger/otlp/`)
+
+| File | Purpose |
+|------|---------|
+| `otel_context.h` | OpenTelemetry context integration |
+
+### Routing (`include/kcenon/logger/routing/`)
+
+| File | Purpose |
+|------|---------|
+| `log_router.h` | Log routing and dispatching |
+
+### Safety (`include/kcenon/logger/safety/`)
+
+| File | Purpose |
+|------|---------|
+| `crash_safe_logger.h` | Crash-safe logging mechanisms |
+
+### Analysis (`include/kcenon/logger/analysis/`)
+
+| File | Purpose |
+|------|---------|
+| `log_analyzer.h` | Log analysis engine |
+| `realtime_log_analyzer.h` | Real-time log analysis |
+
+### Structured Logging (`include/kcenon/logger/structured/`)
+
+| File | Purpose |
+|------|---------|
+| `structured_logger.h` | Structured (JSON-based) logging |
+
+### Server (`include/kcenon/logger/server/`)
+
+| File | Purpose |
+|------|---------|
+| `log_server.h` | Network log server |
+
+### Internal Implementation Details (`src/impl/`)
+
+The `src/impl/` directory contains internal headers and implementations not part of the public API:
+
+| Subdirectory | Contents |
+|-------------|----------|
+| `memory/` | `object_pool.h`, `log_entry_pool.h` - Memory pool implementations |
+| `monitoring/` | `basic_monitor.h`, `monitoring_interface.h`, `thread_system_monitor_adapter.h` |
 
 ---
 
@@ -647,30 +585,41 @@ option(LOGGER_ENABLE_COVERAGE "Enable code coverage" OFF)
 ### Dependency Graph
 
 ```
-┌─────────────────┐
-│  config module  │  (No dependencies)
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│   core module   │
-└────────┬────────┘
-         │
-         ├──────────────┬──────────────┐
-         │              │              │
-         ▼              ▼              ▼
-┌──────────────┐ ┌──────────────┐ ┌──────────────┐
-│   writers    │ │   filters    │ │  formatters  │
-└──────────────┘ └──────────────┘ └──────────────┘
-         │              │              │
-         └──────────────┴──────────────┘
-                        │
-                        ▼
-         ┌──────────────────────────────┐
-         │  integration (optional)      │
-         │  - thread_system             │
-         │  - monitoring_system         │
-         └──────────────────────────────┘
+┌─────────────────────┐
+│   interfaces        │  (No dependencies)
+└─────────┬───────────┘
+          │
+          ▼
+┌─────────────────────┐
+│   core module       │
+│ (strategies,metrics)│
+└─────────┬───────────┘
+          │
+  ┌───────┼──────────┬──────────────┐
+  │       │          │              │
+  ▼       ▼          ▼              ▼
+┌──────┐┌──────┐┌──────────┐┌──────────┐
+│write-││filte-││formatters││ builders │
+│ rs   ││ rs   ││          ││          │
+└──┬───┘└──┬───┘└─────┬────┘└────┬─────┘
+   │       │          │          │
+   └───────┴──────────┴──────────┘
+                  │
+      ┌───────────┼───────────┐
+      │           │           │
+      ▼           ▼           ▼
+┌──────────┐┌──────────┐┌──────────┐
+│ backends ││ adapters ││factories │
+└────┬─────┘└────┬─────┘└──────────┘
+     │           │
+     └─────┬─────┘
+           ▼
+┌──────────────────────────────┐
+│  integration (optional)      │
+│  - thread_system             │
+│  - monitoring_system         │
+│  - common_system             │
+└──────────────────────────────┘
 ```
 
 ### External Dependencies
@@ -693,10 +642,14 @@ option(LOGGER_ENABLE_COVERAGE "Enable code coverage" OFF)
 ### Header Files
 - **Interface headers**: `*_interface.h` (e.g., `log_writer_interface.h`)
 - **Implementation headers**: `*.h` (e.g., `logger.h`, `file_writer.h`)
-- **Configuration headers**: `config_*.h` (e.g., `config_validator.h`)
+- **Builder headers**: `*_builder.h` (e.g., `writer_builder.h`, `logger_builder.h`)
+- **Factory headers**: `*_factory.h` (e.g., `writer_factory.h`)
+- **Adapter headers**: `*_adapter.h` (e.g., `logger_adapter.h`)
+- **Strategy headers**: `*_strategy.h` (e.g., `deployment_strategy.h`)
 
 ### Source Files
-- **Implementation**: `*.cpp` (matches header name)
+- **Public implementation**: `src/core/*.cpp` (core logic)
+- **Internal implementation**: `src/impl/**/*.cpp` (private implementation details)
 - **Tests**: `*_test.cpp` (e.g., `logger_test.cpp`)
 - **Benchmarks**: `*_benchmark.cpp` (e.g., `throughput_benchmark.cpp`)
 
