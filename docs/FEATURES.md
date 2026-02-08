@@ -1,7 +1,7 @@
 # Logger System Features
 
-**Last Updated**: 2025-11-15
-**Version**: 0.3.0.0
+**Last Updated**: 2026-02-08
+**Version**: 0.4.0.0
 
 This document provides comprehensive details about all features available in the logger system.
 
@@ -16,6 +16,8 @@ This document provides comprehensive details about all features available in the
 - [Rotation Policies](#rotation-policies)
 - [Security Features](#security-features)
 - [Advanced Capabilities](#advanced-capabilities)
+- [OTLP Integration](#otlp-integration)
+- [Log Sampling](#log-sampling)
 
 ---
 
@@ -839,37 +841,58 @@ std::cout << "Queue utilization: " << metrics.get_queue_utilization_percent() <<
 - Statistical analysis
 - Alert rules
 - Report generation
+- Real-time anomaly detection (error spikes, rate anomalies, new error types)
 
-**Usage**:
+#### Post-hoc Analysis (log_analyzer)
+
 ```cpp
 #include <kcenon/logger/analysis/log_analyzer.h>
 
-// Create analyzer with 60-second windows
-auto analyzer = std::make_unique<kcenon::logger::log_analyzer>(
-    std::chrono::seconds(60),
-    60  // Keep 1 hour of history
+// Create analyzer
+auto analyzer = kcenon::logger::analysis::analyzer_factory::create_basic();
+
+// Add entries and analyze
+analyzer->add_entry(entry);
+auto stats = analyzer->get_stats();
+auto errors = analyzer->filter_by_level(log_level::error);
+double error_rate = analyzer->get_error_rate(std::chrono::minutes(5));
+std::string report = analyzer->generate_summary_report();
+```
+
+#### Real-time Anomaly Detection (realtime_log_analyzer)
+
+```cpp
+#include <kcenon/logger/analysis/realtime_log_analyzer.h>
+
+// Create with production defaults
+auto rt_analyzer = kcenon::logger::analysis::realtime_analyzer_factory::create_production(
+    50,  // Error spike: 50 errors/minute
+    [](const kcenon::logger::analysis::anomaly_event& event) {
+        // Handle anomaly: error_spike, pattern_match, rate_anomaly, new_error_type
+        std::cerr << "Anomaly detected: " << event.description << std::endl;
+    }
 );
 
-// Track patterns
-analyzer->add_pattern("errors", "error|fail|exception");
-analyzer->add_pattern("slow_queries", "query took \\d{4,} ms");
+// Add pattern alerts
+rt_analyzer->add_pattern_alert("OutOfMemory|OOM", log_level::error);
+rt_analyzer->add_pattern_alert("deadlock|timeout", log_level::warning);
 
-// Add alert rules
-analyzer->add_alert_rule({
-    "high_error_rate",
-    [](const auto& stats) {
-        auto errors = stats.level_counts.count(kcenon::logger::log_level::error) ?
-                     stats.level_counts.at(kcenon::logger::log_level::error) : 0;
-        return errors > 100;  // Alert if >100 errors per minute
-    },
-    [](const std::string& rule, const auto& stats) {
-        std::cout << "ALERT: High error rate detected!" << std::endl;
-    }
-});
+// Integrate with logger
+logger->set_realtime_analyzer(std::move(rt_analyzer));
 
-// Generate report
-std::string report = analyzer->generate_report(std::chrono::minutes(10));
+// Query metrics
+auto stats = logger->get_realtime_analyzer()->get_statistics();
+// stats.total_analyzed, anomalies_detected, current_error_rate, current_log_rate
 ```
+
+**Anomaly Types**:
+
+| Type | Description | Trigger |
+|------|-------------|---------|
+| `error_spike` | Sudden increase in errors | Error count exceeds threshold per window |
+| `pattern_match` | Regex pattern detected | Log message matches configured pattern |
+| `rate_anomaly` | Abnormal log rate | Rate deviates significantly from baseline |
+| `new_error_type` | Previously unseen error | Error message not seen before |
 
 ### Distributed Logging
 
@@ -903,6 +926,180 @@ server->add_handler([](const kcenon::logger::log_server::network_log_entry& entr
 });
 server->start();
 ```
+
+---
+
+## OTLP Integration
+
+OpenTelemetry Protocol (OTLP) support for exporting logs to observability backends.
+
+### Overview
+
+The OTLP writer exports log entries to OpenTelemetry-compatible collectors (e.g., Jaeger, Zipkin, Grafana Tempo) with full W3C Trace Context support for distributed tracing correlation.
+
+```cpp
+#include <kcenon/logger/writers/otlp_writer.h>
+#include <kcenon/logger/otlp/otel_context.h>
+```
+
+### OTLP Writer Configuration
+
+```cpp
+kcenon::logger::writers::otlp_writer::config cfg;
+cfg.endpoint = "http://localhost:4318/v1/logs";
+cfg.protocol = kcenon::logger::writers::otlp_writer::protocol_type::http;
+cfg.service_name = "my-service";
+cfg.service_version = "1.0.0";
+cfg.timeout = std::chrono::milliseconds{5000};
+cfg.use_tls = false;
+cfg.max_batch_size = 512;
+cfg.flush_interval = std::chrono::milliseconds{5000};
+cfg.max_queue_size = 10000;
+cfg.max_retries = 3;
+cfg.retry_delay = std::chrono::milliseconds{100};  // Exponential backoff
+
+auto otlp = std::make_unique<kcenon::logger::writers::otlp_writer>(cfg);
+logger->add_writer("otlp", std::move(otlp));
+```
+
+### Trace Context Propagation
+
+```cpp
+using namespace kcenon::logger::otlp;
+
+// Set trace context for current thread
+otel_context ctx;
+ctx.trace_id = "0af7651916cd43dd8448eb211c80319c";
+ctx.span_id = "b7ad6b7169203331";
+ctx.trace_flags = "01";  // Sampled
+
+// RAII scope - automatically restores previous context on destruction
+{
+    otel_context_scope scope(ctx);
+    logger->log(log_level::info, "Processing request");
+    // Log entry automatically includes trace_id and span_id
+}
+
+// Thread-local storage API
+otel_context_storage::set(ctx);
+auto current = otel_context_storage::get();  // std::optional<otel_context>
+otel_context_storage::clear();
+```
+
+### Protocol Support
+
+| Protocol | Default Port | Use Case |
+|----------|-------------|----------|
+| `http` | 4318 | Standard OTLP/HTTP, firewall-friendly |
+| `grpc` | 4317 | High-throughput, streaming |
+
+### Export Statistics
+
+```cpp
+auto stats = otlp_writer->get_stats();
+// stats.logs_exported, logs_dropped, export_success, export_failures, retries
+```
+
+### Features
+
+- **W3C Trace Context**: Full trace_id, span_id, trace_flags propagation
+- **Batched Export**: Configurable batch size and flush interval
+- **Retry with Backoff**: Exponential backoff on export failures
+- **Resource Attributes**: Service name, version, namespace, custom attributes
+- **Health Monitoring**: `is_healthy()` check for writer status
+- **Dual Protocol**: HTTP and gRPC support
+- **TLS Support**: Secure transport for production deployments
+
+---
+
+## Log Sampling
+
+Adaptive log sampling to control volume while preserving important messages.
+
+### Overview
+
+The sampling system reduces log volume in high-throughput scenarios while ensuring critical messages are never dropped. Multiple strategies are available for different use cases.
+
+```cpp
+#include <kcenon/logger/sampling/log_sampler.h>
+#include <kcenon/logger/sampling/sampling_config.h>
+```
+
+### Sampling Strategies
+
+| Strategy | Description | Best For |
+|----------|-------------|----------|
+| `random` | Probabilistic sampling based on rate | General volume reduction |
+| `rate_limiting` | N logs per time window | Strict rate control |
+| `adaptive` | Adjusts rate based on volume | Variable traffic patterns |
+| `hash_based` | Deterministic per message content | Reproducible sampling |
+
+### Quick Setup
+
+```cpp
+using namespace kcenon::logger::sampling;
+
+// Factory methods for common configurations
+auto sampler = sampler_factory::create_random(0.1);          // 10% sampling
+auto sampler = sampler_factory::create_rate_limited(1000);   // 1000/sec max
+auto sampler = sampler_factory::create_adaptive(10000, 0.01); // Adapt at 10K/s
+auto sampler = sampler_factory::create_production(0.1,
+    {log_level::error, log_level::critical});                // Production preset
+
+// Integrate with logger
+logger->set_sampler(std::move(sampler));
+```
+
+### Configuration
+
+```cpp
+sampling_config config;
+config.enabled = true;
+config.rate = 0.1;  // 10% base rate
+config.strategy = sampling_strategy::adaptive;
+
+// Critical messages always logged
+config.always_log_levels = {log_level::error, log_level::critical};
+
+// Per-category rate overrides
+config.category_rates = {
+    {"security", 1.0},    // Always log security events
+    {"debug", 0.01},      // 1% of debug messages
+};
+
+// Adaptive settings
+config.adaptive_enabled = true;
+config.adaptive_threshold = 10000;  // Trigger at 10K msgs/sec
+config.adaptive_min_rate = 0.01;    // Floor at 1%
+
+auto sampler = std::make_unique<log_sampler>(config);
+logger->set_sampler(std::move(sampler));
+```
+
+### Runtime Control
+
+```cpp
+auto* sampler = logger->get_sampler();
+sampler->set_enabled(true);
+double effective_rate = sampler->get_effective_rate();
+
+// Statistics
+auto stats = logger->get_sampling_stats();
+// stats.total_count, sampled_count, dropped_count, bypassed_count
+// stats.effective_rate, is_throttling, actual_ratio()
+
+logger->reset_sampling_stats();
+```
+
+### Features
+
+- **Always-Log Levels**: Critical messages bypass sampling entirely
+- **Per-Category Rates**: Different sampling rates for different log categories
+- **Per-Field Rates**: Sampling based on structured field values
+- **Adaptive Throttling**: Automatic rate reduction under high load
+- **Runtime Reconfiguration**: Change sampling config without restart
+- **Detailed Statistics**: Track sampling effectiveness with atomic counters
+- **High Performance**: Fast xorshift64 PRNG, FNV-1a hashing
 
 ---
 

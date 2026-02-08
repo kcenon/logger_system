@@ -2,8 +2,8 @@
 
 **언어:** [English](README.md) | **한국어**
 
-**최종 업데이트**: 2025-11-28
-**버전**: 0.2.0
+**최종 업데이트**: 2026-02-08
+**버전**: 0.4.0
 
 이 문서는 Logger System의 모든 기능에 대한 포괄적인 세부 정보를 제공합니다.
 
@@ -19,6 +19,9 @@
 - [비동기 로깅](#비동기-로깅)
 - [성능 특성](#성능-특성)
 - [통합 기능](#통합-기능)
+- [OTLP 통합](#otlp-통합)
+- [로그 샘플링](#로그-샘플링)
+- [실시간 로그 분석](#실시간-로그-분석)
 
 ---
 
@@ -434,6 +437,170 @@ logger->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [%l] [%t] [%@] %v");
 
 ---
 
+## OTLP 통합
+
+관찰성 백엔드로 로그를 내보내기 위한 OpenTelemetry Protocol (OTLP) 지원입니다.
+
+### 개요
+
+OTLP writer는 분산 추적 상관관계를 위한 W3C Trace Context 지원과 함께 OpenTelemetry 호환 컬렉터(Jaeger, Zipkin, Grafana Tempo 등)로 로그 항목을 내보냅니다.
+
+### OTLP Writer 설정
+
+```cpp
+#include <kcenon/logger/writers/otlp_writer.h>
+
+kcenon::logger::writers::otlp_writer::config cfg;
+cfg.endpoint = "http://localhost:4318/v1/logs";
+cfg.protocol = kcenon::logger::writers::otlp_writer::protocol_type::http;
+cfg.service_name = "my-service";
+cfg.service_version = "1.0.0";
+cfg.max_batch_size = 512;
+cfg.flush_interval = std::chrono::milliseconds{5000};
+cfg.max_retries = 3;
+cfg.retry_delay = std::chrono::milliseconds{100};  // 지수 백오프
+
+auto otlp = std::make_unique<kcenon::logger::writers::otlp_writer>(cfg);
+logger->add_writer("otlp", std::move(otlp));
+```
+
+### Trace Context 전파
+
+```cpp
+using namespace kcenon::logger::otlp;
+
+// 현재 스레드에 trace context 설정
+otel_context ctx;
+ctx.trace_id = "0af7651916cd43dd8448eb211c80319c";
+ctx.span_id = "b7ad6b7169203331";
+ctx.trace_flags = "01";  // Sampled
+
+// RAII 스코프 - 소멸 시 이전 context 자동 복원
+{
+    otel_context_scope scope(ctx);
+    logger->log(log_level::info, "Processing request");
+    // 로그 항목에 trace_id와 span_id 자동 포함
+}
+```
+
+### 프로토콜 지원
+
+| 프로토콜 | 기본 포트 | 사용 사례 |
+|----------|----------|----------|
+| `http` | 4318 | 표준 OTLP/HTTP, 방화벽 친화적 |
+| `grpc` | 4317 | 고처리량, 스트리밍 |
+
+### 기능
+
+- **W3C Trace Context**: trace_id, span_id, trace_flags 전파
+- **배치 내보내기**: 구성 가능한 배치 크기 및 플러시 간격
+- **지수 백오프 재시도**: 내보내기 실패 시 자동 재시도
+- **리소스 속성**: 서비스명, 버전, 네임스페이스, 커스텀 속성
+- **이중 프로토콜**: HTTP 및 gRPC 지원
+- **TLS 지원**: 프로덕션 배포를 위한 보안 전송
+
+---
+
+## 로그 샘플링
+
+중요한 메시지를 보존하면서 볼륨을 제어하는 적응형 로그 샘플링입니다.
+
+### 샘플링 전략
+
+| 전략 | 설명 | 적합한 용도 |
+|------|------|-------------|
+| `random` | 비율 기반 확률적 샘플링 | 일반 볼륨 감소 |
+| `rate_limiting` | 시간 윈도우당 N개 로그 | 엄격한 비율 제어 |
+| `adaptive` | 볼륨 기반 비율 자동 조절 | 가변 트래픽 패턴 |
+| `hash_based` | 메시지 내용 기반 결정적 샘플링 | 재현 가능한 샘플링 |
+
+### 빠른 설정
+
+```cpp
+using namespace kcenon::logger::sampling;
+
+// 일반적인 설정을 위한 팩토리 메서드
+auto sampler = sampler_factory::create_random(0.1);          // 10% 샘플링
+auto sampler = sampler_factory::create_rate_limited(1000);   // 초당 최대 1000개
+auto sampler = sampler_factory::create_adaptive(10000, 0.01); // 10K/s에서 적응
+auto sampler = sampler_factory::create_production(0.1,
+    {log_level::error, log_level::critical});                // 프로덕션 프리셋
+
+// 로거와 통합
+logger->set_sampler(std::move(sampler));
+```
+
+### 설정
+
+```cpp
+sampling_config config;
+config.enabled = true;
+config.rate = 0.1;  // 10% 기본 비율
+config.strategy = sampling_strategy::adaptive;
+
+// 중요 메시지는 항상 로깅
+config.always_log_levels = {log_level::error, log_level::critical};
+
+// 카테고리별 비율 오버라이드
+config.category_rates = {
+    {"security", 1.0},    // 보안 이벤트는 항상 로깅
+    {"debug", 0.01},      // 디버그 메시지의 1%
+};
+
+// 적응형 설정
+config.adaptive_enabled = true;
+config.adaptive_threshold = 10000;  // 10K msgs/sec에서 트리거
+config.adaptive_min_rate = 0.01;    // 최소 1%
+
+auto sampler = std::make_unique<log_sampler>(config);
+logger->set_sampler(std::move(sampler));
+```
+
+### 기능
+
+- **항상 로깅 레벨**: 중요 메시지는 샘플링을 완전히 우회
+- **카테고리별 비율**: 로그 카테고리별 다른 샘플링 비율
+- **적응형 스로틀링**: 고부하 시 자동 비율 감소
+- **런타임 재설정**: 재시작 없이 샘플링 설정 변경
+- **고성능**: 빠른 xorshift64 PRNG, FNV-1a 해싱
+
+---
+
+## 실시간 로그 분석
+
+실시간 이상 감지 및 패턴 기반 알림 시스템입니다.
+
+### 이상 유형
+
+| 유형 | 설명 | 트리거 |
+|------|------|--------|
+| `error_spike` | 갑작스러운 오류 증가 | 윈도우당 오류 수 임계값 초과 |
+| `pattern_match` | Regex 패턴 감지 | 로그 메시지가 설정된 패턴과 일치 |
+| `rate_anomaly` | 비정상 로그 비율 | 비율이 기준선에서 크게 벗어남 |
+| `new_error_type` | 이전에 없던 오류 | 처음 보는 오류 메시지 |
+
+### 사용법
+
+```cpp
+#include <kcenon/logger/analysis/realtime_log_analyzer.h>
+
+// 프로덕션 기본값으로 생성
+auto analyzer = kcenon::logger::analysis::realtime_analyzer_factory::create_production(
+    50,  // 에러 스파이크: 분당 50개 오류
+    [](const kcenon::logger::analysis::anomaly_event& event) {
+        std::cerr << "이상 감지: " << event.description << std::endl;
+    }
+);
+
+// 패턴 알림 추가
+analyzer->add_pattern_alert("OutOfMemory|OOM", log_level::error);
+
+// 로거와 통합
+logger->set_realtime_analyzer(std::move(analyzer));
+```
+
+---
+
 ## 참고사항
 
 ### 스레드 안전성
@@ -450,8 +617,8 @@ logger->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [%l] [%t] [%@] %v");
 
 ---
 
-**최종 업데이트**: 2025-11-28
-**버전**: 0.2.0
+**최종 업데이트**: 2026-02-08
+**버전**: 0.4.0
 
 ---
 

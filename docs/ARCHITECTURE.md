@@ -1,14 +1,18 @@
 > **Language:** **English** | [한국어](ARCHITECTURE.kr.md)
 
-# Threading Ecosystem Architecture
+# Logger System Architecture
 
-**Version**: 0.3.0.0
-**Last Updated**: 2025-12-10
+**Version**: 0.4.0.0
+**Last Updated**: 2026-02-08
 
-A comprehensive overview of the modular threading ecosystem and inter-project relationships.
+Logger system internal architecture and ecosystem integration overview.
 
 ## Table of Contents
 
+- [Logger Pipeline Architecture](#-logger-pipeline-architecture)
+- [Writer Architecture](#-writer-architecture)
+- [OTLP & Observability Pipeline](#-otlp--observability-pipeline)
+- [Sampling & Analysis Pipeline](#-sampling--analysis-pipeline)
 - [Ecosystem Overview](#-ecosystem-overview)
 - [Project Roles & Responsibilities](#-project-roles--responsibilities)
 - [Dependency Flow & Interface Contracts](#-dependency-flow--interface-contracts)
@@ -18,6 +22,164 @@ A comprehensive overview of the modular threading ecosystem and inter-project re
 - [Getting Started](#-getting-started)
 - [Documentation Structure](#-documentation-structure)
 - [Future Roadmap](#-future-roadmap)
+
+## 🔧 Logger Pipeline Architecture
+
+The logger system implements a multi-stage asynchronous pipeline for processing log entries from application code to output destinations.
+
+### Pipeline Flow
+
+```
+Application Code
+    │
+    ▼
+┌──────────────────────────────────────────────────────────┐
+│  logger (PIMPL)                                          │
+│  ┌─────────┐   ┌──────────┐   ┌─────────────────────┐   │
+│  │ Sampler  │──▶│  Filter  │──▶│  Async Queue        │   │
+│  │(optional)│   │(optional)│   │  (lock-free/mutex)  │   │
+│  └─────────┘   └──────────┘   └──────────┬──────────┘   │
+│                                           │              │
+│  ┌────────────────────────────────────────▼──────────┐   │
+│  │  Processing Thread (std::jthread or thread_pool)  │   │
+│  │                                                    │   │
+│  │  ┌─────────┐   ┌───────────┐   ┌──────────────┐  │   │
+│  │  │ Router  │──▶│ Formatter │──▶│   Writers     │  │   │
+│  │  │(optional)│   │           │   │              │  │   │
+│  │  └─────────┘   └───────────┘   │ ┌──────────┐ │  │   │
+│  │                                 │ │ console  │ │  │   │
+│  │  ┌──────────────────────┐       │ │ file     │ │  │   │
+│  │  │ Realtime Analyzer    │       │ │ rotating │ │  │   │
+│  │  │ (anomaly detection)  │       │ │ network  │ │  │   │
+│  │  └──────────────────────┘       │ │ otlp     │ │  │   │
+│  │                                 │ │ batch    │ │  │   │
+│  │  ┌──────────────────────┐       │ │ critical │ │  │   │
+│  │  │ Metrics Collector    │       │ └──────────┘ │  │   │
+│  │  │ (performance stats)  │       └──────────────┘  │   │
+│  │  └──────────────────────┘                          │   │
+│  └────────────────────────────────────────────────────┘   │
+└──────────────────────────────────────────────────────────┘
+```
+
+### Backend Selection Strategy
+
+```
+                     ┌────────────────┐
+                     │ logger_builder │
+                     └───────┬────────┘
+                             │
+              ┌──────────────┴──────────────┐
+              ▼                             ▼
+    ┌──────────────────┐          ┌──────────────────┐
+    │standalone_backend│          │thread_pool_backend│
+    │  (Default v3.0)  │          │   (Optional)      │
+    │                  │          │                    │
+    │ • std::jthread   │          │ • thread_pool      │
+    │ • Self-contained │          │ • Work-stealing    │
+    │ • No dependencies│          │ • Requires         │
+    └──────────────────┘          │   thread_system    │
+                                  └──────────────────┘
+```
+
+### Key Architectural Decisions
+
+1. **PIMPL Pattern**: Logger uses PIMPL for ABI stability and compilation firewall
+2. **Move-Only log_entry**: Uses `small_string_256` to minimize heap allocations
+3. **Optional Components**: Sampler, filter, router, and analyzer are all optional with zero overhead when disabled
+4. **Decorator Pattern**: Writers can be wrapped (encrypted, buffered, async, formatted) for composable behavior
+
+---
+
+## ✍️ Writer Architecture
+
+Writers follow a decorator/composite pattern for flexible composition:
+
+```
+log_writer_interface (abstract)
+    │
+    ├── base_writer (formatter support)
+    │   ├── console_writer      (stdout/stderr)
+    │   ├── file_writer          (single file)
+    │   ├── rotating_file_writer (size/time rotation)
+    │   ├── network_writer       (TCP/UDP transport)
+    │   └── otlp_writer          (OTLP/HTTP/gRPC export)
+    │
+    ├── Decorator Writers
+    │   ├── async_writer         (async wrapping)
+    │   ├── buffered_writer      (output buffering)
+    │   ├── batch_writer         (batched output)
+    │   ├── filtered_writer      (per-writer filtering)
+    │   ├── formatted_writer     (per-writer formatting)
+    │   └── encrypted_writer     (encryption layer)
+    │
+    ├── critical_writer          (signal-safe path)
+    └── composite_writer         (fan-out to multiple writers)
+```
+
+**Writer Categories**:
+- `sync_writer_tag`: Synchronous write, blocks caller
+- `async_writer_tag`: Asynchronous write, uses internal queue (otlp_writer, network_writer)
+
+---
+
+## 🔭 OTLP & Observability Pipeline
+
+```
+log_entry + otel_context
+    │
+    ▼
+┌─────────────────────────────────────────────┐
+│  otlp_writer                                │
+│  ┌──────────────┐   ┌──────────────────┐    │
+│  │ Batch Queue  │──▶│ HTTP/gRPC Export │    │
+│  │ (max 10K)    │   │ (configurable)   │    │
+│  └──────────────┘   └────────┬─────────┘    │
+│                              │              │
+│  ┌──────────────────────────▼──────────┐    │
+│  │ Retry Engine (exponential backoff)  │    │
+│  │ max_retries × retry_delay × 2^n    │    │
+│  └─────────────────────────────────────┘    │
+└─────────────────────────────────────────────┘
+    │
+    ▼
+OpenTelemetry Collector → Jaeger / Zipkin / Grafana Tempo
+```
+
+**Trace Context Flow**:
+- `otel_context_storage` provides thread-local trace context
+- `otel_context_scope` (RAII) manages context lifecycle
+- Log entries automatically include trace_id/span_id when context is set
+
+---
+
+## 📊 Sampling & Analysis Pipeline
+
+```
+log_entry
+    │
+    ├──▶ log_sampler (pre-filter)
+    │    ├── random (xorshift64 PRNG)
+    │    ├── rate_limiting (token bucket)
+    │    ├── adaptive (volume-based adjustment)
+    │    └── hash_based (FNV-1a, deterministic)
+    │
+    └──▶ realtime_log_analyzer (post-process)
+         ├── Error spike detection (sliding window)
+         ├── Pattern matching (compiled regex)
+         ├── Rate anomaly detection (baseline comparison)
+         └── New error type tracking (message normalization)
+             │
+             ▼
+         anomaly_callback → alerting system
+```
+
+**Design Principles**:
+- Sampling occurs BEFORE enqueueing (reduces queue pressure)
+- Analysis occurs AFTER dequeuing (non-blocking for producers)
+- `always_log_levels` bypass sampling entirely (error/critical never dropped)
+- Adaptive sampling adjusts rate based on observed throughput
+
+---
 
 ## 🏗️ Ecosystem Overview
 
@@ -528,22 +690,25 @@ target_link_libraries(your_app PRIVATE
 
 ## 🔮 Future Roadmap
 
-### Phase 3.1: Enhancement (Current)
+### Phase 3.1: Enhancement
 - ✅ common_system with C++20 Concepts
 - ✅ Standalone logger_system (no thread_system required)
 - ✅ ILogger interface implementation
+- ✅ OTLP writer with HTTP/gRPC support
+- ✅ Log sampling (random, rate_limiting, adaptive, hash_based)
+- ✅ Real-time log analysis with anomaly detection
 - 🔄 Lock-free queue implementation
 - 🔄 Enhanced monitoring integration
 
-### Phase 3.2: Optimization
+### Phase 3.2: Optimization (Current)
 - 📋 SIMD-optimized string operations
 - 📋 Memory pool allocators
 - 📋 Zero-copy message passing
 
 ### Phase 4: Ecosystem Expansion
+- ✅ Distributed tracing support (OTLP integration)
 - 📋 HTTP server integration
 - 📋 Database connection pooling
-- 📋 Distributed tracing support
 - 📋 Cloud-native features
 
 ---
@@ -552,4 +717,4 @@ target_link_libraries(your_app PRIVATE
 
 ---
 
-*Last Updated: 2025-12-10*
+*Last Updated: 2026-02-08*
