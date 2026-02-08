@@ -144,4 +144,4 @@ request_logger->info("Processing request");  // Includes context
 ## Additional Resources
 
 - [Logger System API Reference](../API_REFERENCE.md)
-- [Ecosystem Integration Guide](../../../ECOSYSTEM_INTEGRATION.md)
+- [Ecosystem Integration Guide](../../../ECOSYSTEM.md)
