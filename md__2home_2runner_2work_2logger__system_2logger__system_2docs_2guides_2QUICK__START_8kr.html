@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">빠른 시작 가이드</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1807"></a> </p><blockquote class="doxtable">
+<div class="textblock"><p><a class="anchor" id="autotoc_md1886"></a> </p><blockquote class="doxtable">
 <p>&zwj;<b>Language:</b> <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START.html">English</a> | <b>한국어</b> </p>
 </blockquote>
 <p>Logger System을 5분 만에 시작하세요.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1809"></a>
+<h1><a class="anchor" id="autotoc_md1888"></a>
 사전 요구사항</h1>
 <ul>
 <li>CMake 3.20 이상</li>
@@ -107,9 +107,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <li><b><a href="https://github.com/kcenon/common_system">common_system</a></b> - 필수 의존성 (logger_system과 같은 위치에 클론 필요)</li>
 <li><b><a href="https://github.com/kcenon/thread_system">thread_system</a></b> - 선택적 의존성 (스레드 풀을 사용한 고급 비동기 로깅용)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1810"></a>
+<h1><a class="anchor" id="autotoc_md1889"></a>
 설치</h1>
-<h2><a class="anchor" id="autotoc_md1811"></a>
+<h2><a class="anchor" id="autotoc_md1890"></a>
 1. 저장소 클론</h2>
 <div class="fragment"><div class="line"># common_system을 먼저 클론 (필수 의존성)</div>
 <div class="line">git clone https://github.com/kcenon/common_system.git</div>
@@ -123,14 +123,14 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 </div><!-- fragment --><blockquote class="doxtable">
 <p>&zwj;<b>참고:</b> 빌드가 올바르게 작동하려면 모든 저장소가 같은 상위 디렉토리에 있어야 합니다. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md1812"></a>
+<h2><a class="anchor" id="autotoc_md1891"></a>
 2. 의존성 설치</h2>
 <div class="fragment"><div class="line"># Linux/macOS</div>
 <div class="line">./scripts/dependency.sh</div>
 <div class="line"> </div>
 <div class="line"># Windows</div>
 <div class="line">./scripts/dependency.bat</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1813"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1892"></a>
 3. 빌드</h2>
 <div class="fragment"><div class="line"># Linux/macOS</div>
 <div class="line">./scripts/build.sh</div>
@@ -145,12 +145,12 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line"># thread_system 통합 사용 시 (선택 사항)</div>
 <div class="line">cmake -S . -B build -DLOGGER_USE_THREAD_SYSTEM=ON -DCMAKE_BUILD_TYPE=Release</div>
 <div class="line">cmake --build build -j</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1814"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1893"></a>
 4. 설치 확인</h2>
 <div class="fragment"><div class="line"># 샘플 애플리케이션 실행</div>
 <div class="line">./build/bin/basic_logging</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1816"></a>
+<h1><a class="anchor" id="autotoc_md1895"></a>
 첫 번째 로거 만들기</h1>
 <p>간단한 로깅 애플리케이션을 만들어 봅시다:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/core/logger_builder.h&gt;</span></div>
@@ -191,7 +191,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;로깅 완료! 파일 출력은 app.log를 확인하세요.\n&quot;</span>;</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1817"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1896"></a>
 애플리케이션 빌드</h2>
 <p><code>CMakeLists.txt</code>에 추가:</p>
 <div class="fragment"><div class="line">cmake_minimum_required(VERSION 3.20)</div>
@@ -225,9 +225,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">add_executable(my_app main.cpp)</div>
 <div class="line">target_link_libraries(my_app PRIVATE kcenon::logger)</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1819"></a>
+<h1><a class="anchor" id="autotoc_md1898"></a>
 핵심 개념</h1>
-<h2><a class="anchor" id="autotoc_md1820"></a>
+<h2><a class="anchor" id="autotoc_md1899"></a>
 로거 빌더</h2>
 <p>검증이 포함된 로거 생성의 권장 방식입니다.</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
@@ -235,7 +235,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">    .with_min_level(log_level::info)</div>
 <div class="line">    .build()</div>
 <div class="line">    .value();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1821"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1900"></a>
 라이터</h2>
 <p>로그 메시지의 출력 대상입니다.</p>
 <div class="fragment"><div class="line"><span class="comment">// 컬러 콘솔 출력</span></div>
@@ -247,7 +247,7 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line"><span class="comment">// 로테이팅 파일 (파일당 10MB, 5개 파일 유지)</span></div>
 <div class="line">.add_writer(<span class="stringliteral">&quot;rotating&quot;</span>, std::make_unique&lt;rotating_file_writer&gt;(</div>
 <div class="line">    <span class="stringliteral">&quot;app.log&quot;</span>, 10 * 1024 * 1024, 5))</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1822"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1901"></a>
 로그 레벨</h2>
 <p>표준 심각도 레벨입니다.</p>
 <div class="fragment"><div class="line">logger-&gt;log(log_level::trace, <span class="stringliteral">&quot;상세 추적 정보&quot;</span>);</div>
@@ -257,9 +257,9 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
 <div class="line">logger-&gt;log(log_level::error, <span class="stringliteral">&quot;오류 발생&quot;</span>);</div>
 <div class="line">logger-&gt;log(log_level::fatal, <span class="stringliteral">&quot;치명적 오류 - 시스템 종료 중&quot;</span>);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1824"></a>
+<h1><a class="anchor" id="autotoc_md1903"></a>
 구성 템플릿</h1>
-<h2><a class="anchor" id="autotoc_md1825"></a>
+<h2><a class="anchor" id="autotoc_md1904"></a>
 Production (프로덕션)</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .use_template(<span class="stringliteral">&quot;production&quot;</span>)</div>
@@ -270,7 +270,7 @@ Production (프로덕션)</h2>
 <li>배치 처리</li>
 <li>최소 레벨 Info</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1826"></a>
+<h2><a class="anchor" id="autotoc_md1905"></a>
 Debug (디버그)</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .use_template(<span class="stringliteral">&quot;debug&quot;</span>)</div>
@@ -281,7 +281,7 @@ Debug (디버그)</h2>
 <li>최소 레벨 Debug</li>
 <li>컬러 콘솔 출력</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1827"></a>
+<h2><a class="anchor" id="autotoc_md1906"></a>
 High Performance (고성능)</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .use_template(<span class="stringliteral">&quot;high_performance&quot;</span>)</div>
@@ -293,9 +293,9 @@ High Performance (고성능)</h2>
 <li>대량 메시지에 최적화</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1829"></a>
+<h1><a class="anchor" id="autotoc_md1908"></a>
 CMake 구성</h1>
-<h2><a class="anchor" id="autotoc_md1830"></a>
+<h2><a class="anchor" id="autotoc_md1909"></a>
 핵심 빌드 옵션</h2>
 <div class="fragment"><div class="line"># 독립 실행 모드 (기본값, thread_system 불필요)</div>
 <div class="line">cmake -DLOGGER_STANDALONE_MODE=ON ..</div>
@@ -308,7 +308,7 @@ CMake 구성</h1>
 <div class="line"> </div>
 <div class="line"># 예제 활성화</div>
 <div class="line">cmake -DBUILD_EXAMPLES=ON ..</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1831"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1910"></a>
 기능 플래그</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -323,14 +323,14 @@ CMake 구성</h1>
 <td class="markdownTableBodyNone"><code>BUILD_EXAMPLES</code>   </td><td class="markdownTableBodyNone"><code>ON</code>   </td><td class="markdownTableBodyNone">예제 애플리케이션 빌드   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1833"></a>
+<h1><a class="anchor" id="autotoc_md1912"></a>
 thread_system 통합 (선택 사항)</h1>
 <p>스레드 풀 지원을 통한 고급 비동기 로깅:</p>
-<h2><a class="anchor" id="autotoc_md1834"></a>
+<h2><a class="anchor" id="autotoc_md1913"></a>
 빌드 시 활성화</h2>
 <div class="fragment"><div class="line">cmake -DLOGGER_USE_THREAD_SYSTEM=ON ..</div>
 <div class="line">cmake --build .</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1835"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1914"></a>
 런타임 활성화</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kcenon/logger/integration/thread_system_integration.h&gt;</span></div>
 <div class="line"> </div>
@@ -351,9 +351,9 @@ thread_system 통합 (선택 사항)</h1>
 <div class="line">thread_system_integration::disable();</div>
 </div><!-- fragment --><p>자세한 내용은 <a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM_8kr.html">thread_system 통합 가이드</a>를 참조하세요.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1837"></a>
+<h1><a class="anchor" id="autotoc_md1916"></a>
 일반적인 패턴</h1>
-<h2><a class="anchor" id="autotoc_md1838"></a>
+<h2><a class="anchor" id="autotoc_md1917"></a>
 오류 처리</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> result = logger_builder()</div>
 <div class="line">    .use_template(<span class="stringliteral">&quot;production&quot;</span>)</div>
@@ -366,7 +366,7 @@ thread_system 통합 (선택 사항)</h1>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> logger = std::move(result.value());</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1839"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1918"></a>
 여러 라이터 사용</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder()</div>
 <div class="line">    .add_writer(<span class="stringliteral">&quot;console&quot;</span>, std::make_unique&lt;console_writer&gt;())</div>
@@ -374,14 +374,14 @@ thread_system 통합 (선택 사항)</h1>
 <div class="line">    .add_writer(<span class="stringliteral">&quot;errors&quot;</span>, std::make_unique&lt;file_writer&gt;(<span class="stringliteral">&quot;errors.log&quot;</span>))</div>
 <div class="line">    .build()</div>
 <div class="line">    .value();</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1840"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1919"></a>
 정상 종료</h2>
 <div class="fragment"><div class="line"><span class="comment">// 대기 중인 모든 로그가 기록되도록 보장</span></div>
 <div class="line">logger-&gt;flush();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 로거는 스코프를 벗어날 때 적절히 정리됨</span></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1842"></a>
+<h1><a class="anchor" id="autotoc_md1921"></a>
 다음 단계</h1>
 <ul>
 <li><b><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html">시작하기 가이드</a></b> - 상세한 설정 지침</li>
@@ -392,9 +392,9 @@ thread_system 통합 (선택 사항)</h1>
 <li><b><a href="../../examples/">예제</a></b> - 더 많은 샘플 애플리케이션</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1844"></a>
+<h1><a class="anchor" id="autotoc_md1923"></a>
 문제 해결</h1>
-<h2><a class="anchor" id="autotoc_md1845"></a>
+<h2><a class="anchor" id="autotoc_md1924"></a>
 일반적인 문제</h2>
 <p><b>C++20 오류로 빌드 실패:</b> </p><div class="fragment"><div class="line"># 호환되는 컴파일러가 있는지 확인</div>
 <div class="line">g++ --version  # 11+ 이어야 함</div>
@@ -413,7 +413,7 @@ thread_system 통합 (선택 사항)</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Feb 9 2026 00:49:52 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Feb 9 2026 01:35:54 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
