@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Writer Composition and Decorator Guide</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2636"></a> <b>logger_system Writer Framework</b> (<code>include/kcenon/logger/writers/</code>)</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2723"></a> <b>logger_system Writer Framework</b> (<code>include/kcenon/logger/writers/</code>)</p>
 <p>The writer framework in logger_system uses the <b>Decorator Pattern</b> to enable flexible, composable log processing pipelines. With 18 writer types (5 base writers + 13 processing decorators), you can build high-performance logging configurations achieving <b>4.34M msg/sec throughput</b> and <b>148ns latency</b>.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2638"></a>
+<h1><a class="anchor" id="autotoc_md2725"></a>
 Table of Contents</h1>
 <ol type="1">
 <li>Architecture Overview</li>
@@ -112,9 +112,9 @@ Table of Contents</h1>
 <li>Best Practices</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2640"></a>
+<h1><a class="anchor" id="autotoc_md2727"></a>
 Architecture Overview</h1>
-<h2><a class="anchor" id="autotoc_md2641"></a>
+<h2><a class="anchor" id="autotoc_md2728"></a>
 Decorator Pattern</h2>
 <p>Writers in logger_system follow the <b>Decorator Pattern</b> (Gang of Four), allowing dynamic addition of responsibilities to objects:</p>
 <div class="fragment"><div class="line">┌──────────────────────────────────────────────────┐</div>
@@ -147,7 +147,7 @@ Decorator Pattern</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Interface</b>   </td><td class="markdownTableBodyNone">All writers implement <code>log_writer_interface</code>   </td><td class="markdownTableBodyNone">Enables unlimited composition   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md2642"></a>
+<h2><a class="anchor" id="autotoc_md2729"></a>
 Inheritance Chain</h2>
 <p><b>Base Writers:</b> </p><div class="fragment"><div class="line"><span class="keyword">class </span>console_writer : <span class="keyword">public</span> log_writer_interface, <span class="keyword">public</span> sync_writer_tag {</div>
 <div class="line">    <span class="comment">// Direct implementation - no wrapped writer</span></div>
@@ -171,7 +171,7 @@ Inheritance Chain</h2>
 <div class="line">    std::unique_ptr&lt;log_writer_interface&gt; wrapped_;</div>
 <div class="line">    std::<span class="keywordtype">string</span> decorator_name_;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2643"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2730"></a>
 Stack Visualization</h2>
 <p>Example stack: <b>Production File Logging</b></p>
 <div class="fragment"><div class="line">[Application Code]</div>
@@ -202,12 +202,12 @@ Stack Visualization</h2>
 <li>Rotating file writer writes to disk, rotates if needed</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2645"></a>
+<h1><a class="anchor" id="autotoc_md2732"></a>
 Writer Catalog</h1>
-<h2><a class="anchor" id="autotoc_md2646"></a>
+<h2><a class="anchor" id="autotoc_md2733"></a>
 Base Writers</h2>
 <p>Base writers are concrete implementations that write to actual destinations. They implement <code>log_writer_interface</code> directly.</p>
-<h3><a class="anchor" id="autotoc_md2647"></a>
+<h3><a class="anchor" id="autotoc_md2734"></a>
 1. &lt;tt&gt;console_writer&lt;/tt&gt;</h3>
 <p><b>Output:</b> <code>stdout</code> (info/debug/trace) or <code>stderr</code> (warn/error/fatal)</p>
 <p><b>Description:</b> Thread-safe console output with optional ANSI coloring.</p>
@@ -229,7 +229,7 @@ Base Writers</h2>
 <div class="line">    <span class="keyword">true</span>    <span class="comment">// auto-detect color</span></div>
 <div class="line">);</div>
 </div><!-- fragment --><hr  />
-<h3><a class="anchor" id="autotoc_md2649"></a>
+<h3><a class="anchor" id="autotoc_md2736"></a>
 2. &lt;tt&gt;file_writer&lt;/tt&gt;</h3>
 <p><b>Output:</b> Single file</p>
 <p><b>Description:</b> Writes to a single log file with optional append mode.</p>
@@ -252,7 +252,7 @@ Base Writers</h2>
 <div class="line">    <span class="keyword">true</span>  <span class="comment">// append mode</span></div>
 <div class="line">);</div>
 </div><!-- fragment --><hr  />
-<h3><a class="anchor" id="autotoc_md2651"></a>
+<h3><a class="anchor" id="autotoc_md2738"></a>
 3. &lt;tt&gt;rotating_file_writer&lt;/tt&gt;</h3>
 <p><b>Output:</b> Multiple files with rotation</p>
 <p><b>Description:</b> Writes to files that rotate based on size or time.</p>
@@ -277,7 +277,7 @@ Base Writers</h2>
 <div class="line">    5                   <span class="comment">// keep 5 files</span></div>
 <div class="line">);</div>
 </div><!-- fragment --><hr  />
-<h3><a class="anchor" id="autotoc_md2653"></a>
+<h3><a class="anchor" id="autotoc_md2740"></a>
 4. &lt;tt&gt;network_writer&lt;/tt&gt;</h3>
 <p><b>Output:</b> Remote log server (TCP/UDP)</p>
 <p><b>Description:</b> Sends logs to a remote server over network.</p>
@@ -302,7 +302,7 @@ Base Writers</h2>
 <div class="line">    network_writer::protocol::tcp</div>
 <div class="line">);</div>
 </div><!-- fragment --><hr  />
-<h3><a class="anchor" id="autotoc_md2655"></a>
+<h3><a class="anchor" id="autotoc_md2742"></a>
 5. &lt;tt&gt;otlp_writer&lt;/tt&gt;</h3>
 <p><b>Output:</b> OpenTelemetry Protocol (OTLP) endpoint</p>
 <p><b>Description:</b> Exports logs to OTLP-compatible backends (OpenTelemetry Collector, Jaeger, etc.).</p>
@@ -325,10 +325,10 @@ Base Writers</h2>
 <div class="line">    otlp_writer::otlp_protocol::grpc</div>
 <div class="line">);</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2657"></a>
+<h2><a class="anchor" id="autotoc_md2744"></a>
 Decorator Writers</h2>
 <p>Decorator writers wrap other writers to add processing capabilities. They inherit from <code>decorator_writer_base</code>.</p>
-<h3><a class="anchor" id="autotoc_md2658"></a>
+<h3><a class="anchor" id="autotoc_md2745"></a>
 6. &lt;tt&gt;async_writer&lt;/tt&gt;</h3>
 <p><b>Function:</b> Asynchronous (non-blocking) writes</p>
 <p><b>Description:</b> Wraps any writer and makes it asynchronous using a background thread and queue.</p>
@@ -357,7 +357,7 @@ Decorator Writers</h2>
 <li><b>Memory:</b> Queue size × log entry size (~100-500 bytes each)</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md2660"></a>
+<h3><a class="anchor" id="autotoc_md2747"></a>
 7. &lt;tt&gt;batch_writer&lt;/tt&gt;</h3>
 <p><b>Function:</b> Batching (accumulate N messages before flush)</p>
 <p><b>Description:</b> Accumulates log entries and writes them in batches to reduce syscall overhead.</p>
@@ -385,7 +385,7 @@ Decorator Writers</h2>
 <li><b>Memory:</b> Batch size × log entry size</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md2662"></a>
+<h3><a class="anchor" id="autotoc_md2749"></a>
 8. &lt;tt&gt;buffered_writer&lt;/tt&gt;</h3>
 <p><b>Function:</b> Buffering (memory buffer before write)</p>
 <p><b>Description:</b> Buffers log messages in memory before flushing to the wrapped writer.</p>
@@ -411,7 +411,7 @@ Decorator Writers</h2>
 <li><b>Memory:</b> Buffer size (e.g., 64KB)</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md2664"></a>
+<h3><a class="anchor" id="autotoc_md2751"></a>
 9. &lt;tt&gt;filtered_writer&lt;/tt&gt;</h3>
 <p><b>Function:</b> Filtering (level/category-based)</p>
 <p><b>Description:</b> Filters log entries based on level or custom predicate before writing.</p>
@@ -438,7 +438,7 @@ Decorator Writers</h2>
 <li><b>Memory:</b> Negligible</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md2666"></a>
+<h3><a class="anchor" id="autotoc_md2753"></a>
 10. &lt;tt&gt;formatted_writer&lt;/tt&gt;</h3>
 <p><b>Function:</b> Formatting (message templating)</p>
 <p><b>Description:</b> Applies a formatter to log entries before writing.</p>
@@ -464,7 +464,7 @@ Decorator Writers</h2>
 <li><b>Memory:</b> Formatted string allocation</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md2668"></a>
+<h3><a class="anchor" id="autotoc_md2755"></a>
 11. &lt;tt&gt;thread_safe_writer&lt;/tt&gt;</h3>
 <p><b>Function:</b> Thread safety (mutex-protected)</p>
 <p><b>Description:</b> Wraps any writer with mutex protection for thread safety.</p>
@@ -488,7 +488,7 @@ Decorator Writers</h2>
 <li><b>Memory:</b> Mutex overhead (~64 bytes)</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md2670"></a>
+<h3><a class="anchor" id="autotoc_md2757"></a>
 12. &lt;tt&gt;encrypted_writer&lt;/tt&gt;</h3>
 <p><b>Function:</b> Encryption (encrypt log content)</p>
 <p><b>Description:</b> Encrypts log messages before writing (AES-256-GCM).</p>
@@ -516,7 +516,7 @@ Decorator Writers</h2>
 <li><b>Memory:</b> Key storage (~32 bytes)</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md2672"></a>
+<h3><a class="anchor" id="autotoc_md2759"></a>
 13. &lt;tt&gt;critical_writer&lt;/tt&gt;</h3>
 <p><b>Function:</b> Priority (immediate flush for critical logs)</p>
 <p><b>Description:</b> Immediately flushes wrapped writer when critical/fatal logs are received.</p>
@@ -542,7 +542,7 @@ Decorator Writers</h2>
 <li><b>Memory:</b> Negligible</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md2674"></a>
+<h3><a class="anchor" id="autotoc_md2761"></a>
 14. &lt;tt&gt;composite_writer&lt;/tt&gt;</h3>
 <p><b>Function:</b> Fan-out (write to multiple destinations)</p>
 <p><b>Description:</b> Writes to multiple wrapped writers simultaneously.</p>
@@ -567,7 +567,7 @@ Decorator Writers</h2>
 <li><b>Memory:</b> N × wrapped writer memory</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md2676"></a>
+<h3><a class="anchor" id="autotoc_md2763"></a>
 15. &lt;tt&gt;queued_writer_base&lt;/tt&gt;</h3>
 <p><b>Function:</b> Queuing (base for queue-based writers)</p>
 <p><b>Description:</b> Abstract base class for queue-based writers (shared by <code>async_writer</code>, <code>batch_writer</code>).</p>
@@ -582,7 +582,7 @@ Decorator Writers</h2>
 </ul>
 <p><b>Note:</b> Not typically instantiated directly; used as a base class.</p>
 <hr  />
-<h3><a class="anchor" id="autotoc_md2678"></a>
+<h3><a class="anchor" id="autotoc_md2765"></a>
 16. &lt;tt&gt;legacy_writer_adapter&lt;/tt&gt;</h3>
 <p><b>Function:</b> Compatibility (adapter for legacy writer interface)</p>
 <p><b>Description:</b> Adapts legacy writer API to modern <code>log_writer_interface</code>.</p>
@@ -601,9 +601,9 @@ Decorator Writers</h2>
 <div class="line">    std::make_unique&lt;my_old_writer&gt;()</div>
 <div class="line">);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md2680"></a>
+<h1><a class="anchor" id="autotoc_md2767"></a>
 Composition Patterns</h1>
-<h2><a class="anchor" id="autotoc_md2681"></a>
+<h2><a class="anchor" id="autotoc_md2768"></a>
 Pattern 1: Simple Console (Development)</h2>
 <p><b>Stack:</b> </p><div class="fragment"><div class="line">console_writer</div>
 </div><!-- fragment --><p><b>Use Case:</b> Local development, quick debugging</p>
@@ -616,7 +616,7 @@ Pattern 1: Simple Console (Development)</h2>
 <li><b>Memory:</b> Minimal (~1KB)</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2683"></a>
+<h2><a class="anchor" id="autotoc_md2770"></a>
 Pattern 2: Async Console (Development + Performance)</h2>
 <p><b>Stack:</b> </p><div class="fragment"><div class="line">async_writer</div>
 <div class="line">  └─ console_writer</div>
@@ -632,7 +632,7 @@ Pattern 2: Async Console (Development + Performance)</h2>
 <li><b>Memory:</b> Queue (10K entries × ~200B = 2MB)</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2685"></a>
+<h2><a class="anchor" id="autotoc_md2772"></a>
 Pattern 3: Filtered Formatted File (Production)</h2>
 <p><b>Stack:</b> </p><div class="fragment"><div class="line">filtered_writer (WARN+)</div>
 <div class="line">  └─ formatted_writer (timestamp + level)</div>
@@ -657,7 +657,7 @@ Pattern 3: Filtered Formatted File (Production)</h2>
 <li><b>Memory:</b> Minimal (~2KB)</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2687"></a>
+<h2><a class="anchor" id="autotoc_md2774"></a>
 Pattern 4: High-Throughput Production</h2>
 <p><b>Stack:</b> </p><div class="fragment"><div class="line">filtered_writer (INFO+)</div>
 <div class="line">  └─ formatted_writer (JSON)</div>
@@ -694,7 +694,7 @@ Pattern 4: High-Throughput Production</h2>
 <li><b>Memory:</b> Queue (50K × 200B = 10MB) + Buffer (64KB) = ~10MB</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2689"></a>
+<h2><a class="anchor" id="autotoc_md2776"></a>
 Pattern 5: Encrypted Compliance Logging</h2>
 <p><b>Stack:</b> </p><div class="fragment"><div class="line">filtered_writer (WARN+)</div>
 <div class="line">  └─ formatted_writer (JSON + timestamp)</div>
@@ -723,7 +723,7 @@ Pattern 5: Encrypted Compliance Logging</h2>
 <li><b>Memory:</b> Minimal (~3KB + key)</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2691"></a>
+<h2><a class="anchor" id="autotoc_md2778"></a>
 Pattern 6: Multi-Destination (File + Network)</h2>
 <p><b>Stack:</b> </p><div class="fragment"><div class="line">composite_writer</div>
 <div class="line">  ├─ filtered(INFO+) → formatted(JSON) → rotating_file_writer</div>
@@ -760,9 +760,9 @@ Pattern 6: Multi-Destination (File + Network)</h2>
 <li><b>Memory:</b> ~12MB (network queue)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2693"></a>
+<h1><a class="anchor" id="autotoc_md2780"></a>
 Recommended Stacks</h1>
-<h2><a class="anchor" id="autotoc_md2694"></a>
+<h2><a class="anchor" id="autotoc_md2781"></a>
 Development</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -774,7 +774,7 @@ Development</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Formatted console</b>   </td><td class="markdownTableBodyNone"><code>formatted</code> → <code>console</code>   </td><td class="markdownTableBodyNone">300K msg/s   </td><td class="markdownTableBodyNone">3µs   </td><td class="markdownTableBodyNone">1KB   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md2695"></a>
+<h2><a class="anchor" id="autotoc_md2782"></a>
 Production File Logging</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -788,7 +788,7 @@ Production File Logging</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>JSON logs</b>   </td><td class="markdownTableBodyNone"><code>rotating_file</code> → <code>formatted(JSON)</code>   </td><td class="markdownTableBodyNone">200K msg/s   </td><td class="markdownTableBodyNone">5µs   </td><td class="markdownTableBodyNone">2KB   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md2696"></a>
+<h2><a class="anchor" id="autotoc_md2783"></a>
 Compliance &amp; Security</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -800,7 +800,7 @@ Compliance &amp; Security</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Tamper-evident</b>   </td><td class="markdownTableBodyNone"><code>rotating_file</code> → <code>encrypted</code> → <code>batch</code> → <code>async</code> → <code>formatted</code>   </td><td class="markdownTableBodyNone">1M msg/s   </td><td class="markdownTableBodyNone">500ns   </td><td class="markdownTableBodyNone">12MB   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md2697"></a>
+<h2><a class="anchor" id="autotoc_md2784"></a>
 Distributed Systems</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -812,7 +812,7 @@ Distributed Systems</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Multi-destination</b>   </td><td class="markdownTableBodyNone"><code>composite(file + network)</code> → <code>async</code> → <code>formatted</code>   </td><td class="markdownTableBodyNone">1.5M msg/s   </td><td class="markdownTableBodyNone">200ns   </td><td class="markdownTableBodyNone">12MB   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md2698"></a>
+<h2><a class="anchor" id="autotoc_md2785"></a>
 Resource-Constrained</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -825,15 +825,15 @@ Resource-Constrained</h2>
 <td class="markdownTableBodyNone"><b>Embedded</b>   </td><td class="markdownTableBodyNone"><code>file</code> → <code>filtered</code> (no formatting)   </td><td class="markdownTableBodyNone">400K msg/s   </td><td class="markdownTableBodyNone">2.5µs   </td><td class="markdownTableBodyNone">1.5KB   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2700"></a>
+<h1><a class="anchor" id="autotoc_md2787"></a>
 Code Examples</h1>
-<h2><a class="anchor" id="autotoc_md2701"></a>
+<h2><a class="anchor" id="autotoc_md2788"></a>
 Example 1: Development Setup (3 lines)</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder::create()</div>
 <div class="line">    .with_console_writer()</div>
 <div class="line">    .build();</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2703"></a>
+<h2><a class="anchor" id="autotoc_md2790"></a>
 Example 2: Production File Logging</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> logger = logger_builder::create()</div>
 <div class="line">    .with_writer(std::make_unique&lt;async_writer&gt;(</div>
@@ -855,7 +855,7 @@ Example 2: Production File Logging</h2>
 <div class="line"> </div>
 <div class="line">logger-&gt;info(<span class="stringliteral">&quot;Application started&quot;</span>);</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2705"></a>
+<h2><a class="anchor" id="autotoc_md2792"></a>
 Example 3: Encrypted Compliance Logging</h2>
 <div class="fragment"><div class="line"><span class="comment">// Generate or load encryption key</span></div>
 <div class="line"><span class="keyword">auto</span> key_result = secure_key_storage::load_key(</div>
@@ -888,7 +888,7 @@ Example 3: Encrypted Compliance Logging</h2>
 <div class="line"> </div>
 <div class="line">logger-&gt;warn(<span class="stringliteral">&quot;User authentication failed&quot;</span>, {{<span class="stringliteral">&quot;user_id&quot;</span>, <span class="stringliteral">&quot;12345&quot;</span>}});</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2707"></a>
+<h2><a class="anchor" id="autotoc_md2794"></a>
 Example 4: Multi-Destination Setup</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> composite = std::make_unique&lt;composite_writer&gt;();</div>
 <div class="line"> </div>
@@ -925,7 +925,7 @@ Example 4: Multi-Destination Setup</h2>
 <div class="line">logger-&gt;error(<span class="stringliteral">&quot;Database connection failed&quot;</span>, {{<span class="stringliteral">&quot;db&quot;</span>, <span class="stringliteral">&quot;primary&quot;</span>}});</div>
 <div class="line"><span class="comment">// → Written to: file, network, OTLP</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md2709"></a>
+<h2><a class="anchor" id="autotoc_md2796"></a>
 Example 5: Custom Stack Order</h2>
 <div class="fragment"><div class="line"><span class="comment">// Optimal stack order: filter → format → async → batch → buffer → file</span></div>
 <div class="line"><span class="keyword">auto</span> logger = logger_builder::create()</div>
@@ -948,9 +948,9 @@ Example 5: Custom Stack Order</h2>
 <div class="line">    )</div>
 <div class="line">    .build();</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md2711"></a>
+<h1><a class="anchor" id="autotoc_md2798"></a>
 Performance Impact</h1>
-<h2><a class="anchor" id="autotoc_md2712"></a>
+<h2><a class="anchor" id="autotoc_md2799"></a>
 Throughput per Configuration</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -972,7 +972,7 @@ Throughput per Configuration</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">+ network (TCP)   </td><td class="markdownTableBodyNone">1.2M msg/s   </td><td class="markdownTableBodyNone">240% (network I/O)   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md2713"></a>
+<h2><a class="anchor" id="autotoc_md2800"></a>
 Latency per Decorator</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -995,7 +995,7 @@ Latency per Decorator</h2>
 <td class="markdownTableBodyNone">+ encrypted   </td><td class="markdownTableBodyNone">+300ns   </td><td class="markdownTableBodyNone">563ns   </td></tr>
 </table>
 <p><b>Note:</b> <code>async_writer</code> makes subsequent latencies invisible to the caller (background processing).</p>
-<h2><a class="anchor" id="autotoc_md2714"></a>
+<h2><a class="anchor" id="autotoc_md2801"></a>
 Memory Usage per Decorator</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -1021,28 +1021,28 @@ Memory Usage per Decorator</h2>
 </table>
 <p><b>Example:</b> High-throughput stack memory: </p><div class="fragment"><div class="line">async (2MB) + batch (20KB) + buffered (64KB) + base (2KB) = ~2.1MB</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md2716"></a>
+<h1><a class="anchor" id="autotoc_md2803"></a>
 Best Practices</h1>
-<h2><a class="anchor" id="autotoc_md2717"></a>
+<h2><a class="anchor" id="autotoc_md2804"></a>
 1. Filter Early, Format Late</h2>
 <p>✅ <b>Good:</b> </p><div class="fragment"><div class="line">filtered → formatted → async → file</div>
 </div><!-- fragment --><p>❌ <b>Bad:</b> </p><div class="fragment"><div class="line">async → formatted → filtered → file  <span class="comment">// Wastes formatting on filtered messages</span></div>
 </div><!-- fragment --><p><b>Rationale:</b> Filtering is cheap (5ns), formatting is expensive (50-100ns). Drop messages before formatting.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2719"></a>
+<h2><a class="anchor" id="autotoc_md2806"></a>
 2. Use Async for I/O-Heavy Writers</h2>
 <p>✅ <b>Good:</b> </p><div class="fragment"><div class="line">async → file  <span class="comment">// File I/O is slow (3µs)</span></div>
 <div class="line">async → network  <span class="comment">// Network I/O is slow (1-10ms)</span></div>
 </div><!-- fragment --><p>❌ <b>Bad:</b> </p><div class="fragment"><div class="line">console  <span class="comment">// Blocking I/O without async</span></div>
 </div><!-- fragment --><p><b>Rationale:</b> I/O operations block the caller. Use <code>async_writer</code> to make writes non-blocking.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2721"></a>
+<h2><a class="anchor" id="autotoc_md2808"></a>
 3. Batch + Buffer for Maximum Throughput</h2>
 <p>✅ <b>Good:</b> </p><div class="fragment"><div class="line">async → batch → buffered → file  <span class="comment">// Reduces syscalls</span></div>
 </div><!-- fragment --><p>❌ <b>Bad:</b> </p><div class="fragment"><div class="line">async → file  <span class="comment">// Many small writes (syscall overhead)</span></div>
 </div><!-- fragment --><p><b>Rationale:</b> Batching reduces syscall count, buffering reduces disk I/O. Combine both for maximum throughput.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2723"></a>
+<h2><a class="anchor" id="autotoc_md2810"></a>
 4. Encrypt Only What's Necessary</h2>
 <p>✅ <b>Good:</b> </p><div class="fragment"><div class="line">composite {</div>
 <div class="line">    file (all logs, unencrypted),</div>
@@ -1051,7 +1051,7 @@ Best Practices</h1>
 </div><!-- fragment --><p>❌ <b>Bad:</b> </p><div class="fragment"><div class="line">encrypted → file (all logs)  <span class="comment">// Wastes CPU on non-sensitive logs</span></div>
 </div><!-- fragment --><p><b>Rationale:</b> Encryption is expensive (30-40% throughput reduction). Encrypt only sensitive logs.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2725"></a>
+<h2><a class="anchor" id="autotoc_md2812"></a>
 5. Use &lt;tt&gt;composite_writer&lt;/tt&gt; for Multi-Destination</h2>
 <p>✅ <b>Good:</b> </p><div class="fragment"><div class="line">composite { file, network }</div>
 </div><!-- fragment --><p>❌ <b>Bad:</b> </p><div class="fragment"><div class="line"><span class="comment">// Create two separate loggers</span></div>
@@ -1059,20 +1059,20 @@ Best Practices</h1>
 <div class="line">logger2-&gt;write(...);  <span class="comment">// network</span></div>
 </div><!-- fragment --><p><b>Rationale:</b> <code>composite_writer</code> writes to all destinations in a single call, ensuring consistency.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2727"></a>
+<h2><a class="anchor" id="autotoc_md2814"></a>
 6. Flush on Critical Logs</h2>
 <p>✅ <b>Good:</b> </p><div class="fragment"><div class="line">critical_writer(file, log_level::fatal)  <span class="comment">// Immediate flush on FATAL</span></div>
 </div><!-- fragment --><p>❌ <b>Bad:</b> </p><div class="fragment"><div class="line">async → batch → file  <span class="comment">// Critical logs may be lost in queue/batch on crash</span></div>
 </div><!-- fragment --><p><b>Rationale:</b> Critical logs must be persisted immediately. Use <code>critical_writer</code> to force flush.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2729"></a>
+<h2><a class="anchor" id="autotoc_md2816"></a>
 7. Thread-Safety Only When Needed</h2>
 <p>✅ <b>Good:</b> </p><div class="fragment"><div class="line"><span class="comment">// Logger is thread-safe internally, no need for thread_safe_writer</span></div>
 <div class="line">async → file</div>
 </div><!-- fragment --><p>❌ <b>Bad:</b> </p><div class="fragment"><div class="line">thread_safe → async → file  <span class="comment">// Redundant: async already thread-safe</span></div>
 </div><!-- fragment --><p><b>Rationale:</b> Most decorators are already thread-safe. Only use <code>thread_safe_writer</code> for custom non-thread-safe writers.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md2731"></a>
+<h2><a class="anchor" id="autotoc_md2818"></a>
 8. Start Async Writers Explicitly</h2>
 <p>✅ <b>Good:</b> </p><div class="fragment"><div class="line"><span class="keyword">auto</span> async = std::make_unique&lt;async_writer&gt;(...);</div>
 <div class="line">async-&gt;start();  <span class="comment">// Start background thread</span></div>
@@ -1083,7 +1083,7 @@ Best Practices</h1>
 <div class="line"><span class="comment">// Forgot to call start()!</span></div>
 </div><!-- fragment --><p><b>Rationale:</b> <code>async_writer</code> requires explicit <code>start()</code> to begin processing.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2733"></a>
+<h1><a class="anchor" id="autotoc_md2820"></a>
 Summary</h1>
 <p>The <b>logger_system writer framework</b> provides:</p>
 <ul>
@@ -1121,7 +1121,7 @@ Summary</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Feb 9 2026 02:11:09 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Feb 9 2026 02:57:26 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

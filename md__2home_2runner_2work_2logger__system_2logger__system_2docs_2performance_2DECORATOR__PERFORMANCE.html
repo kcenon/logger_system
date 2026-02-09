@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md__2home_2runner_2work_2logger__syste
   <div class="headertitle"><div class="title">Decorator Pattern Performance Characteristics</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2175"></a> </p>
-<h1><a class="anchor" id="autotoc_md2176"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2262"></a> </p>
+<h1><a class="anchor" id="autotoc_md2263"></a>
 Overview</h1>
 <p>This document describes the performance characteristics of the decorator pattern implementation in the logger system, specifically the <code>writer_builder</code> API compared to manual decorator nesting.</p>
 <p><b>Related</b>: Issue #423, EPIC #391 (Decorator pattern refactoring)</p>
-<h1><a class="anchor" id="autotoc_md2177"></a>
+<h1><a class="anchor" id="autotoc_md2264"></a>
 Executive Summary</h1>
 <p>The decorator pattern implementation using <code>writer_builder</code> achieves <b>zero-overhead abstraction</b> compared to manual nesting:</p>
 <ul>
@@ -107,9 +107,9 @@ Executive Summary</h1>
 <li><b>Memory overhead</b>: Negligible (same object graph as manual nesting)</li>
 <li><b>Recommendation</b>: Use <code>writer_builder</code> for all new code</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2178"></a>
+<h1><a class="anchor" id="autotoc_md2265"></a>
 Benchmark Methodology</h1>
-<h2><a class="anchor" id="autotoc_md2179"></a>
+<h2><a class="anchor" id="autotoc_md2266"></a>
 Test Environment</h2>
 <p>Benchmarks are performed using Google Benchmark with:</p><ul>
 <li>Compiler optimization: <code>-O3 -DNDEBUG</code></li>
@@ -117,7 +117,7 @@ Test Environment</h2>
 <li>Single-threaded benchmarking (async writer uses background thread)</li>
 <li>File I/O to local filesystem</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2180"></a>
+<h2><a class="anchor" id="autotoc_md2267"></a>
 Measured Configurations</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -133,16 +133,16 @@ Measured Configurations</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Manual Nesting</b>   </td><td class="markdownTableBodyNone">Old pattern using direct <code>std::make_unique</code> nesting   </td><td class="markdownTableBodyNone">Legacy comparison   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md2181"></a>
+<h2><a class="anchor" id="autotoc_md2268"></a>
 Metrics</h2>
 <ul>
 <li><b>Throughput</b>: Messages per second (items/sec)</li>
 <li><b>Latency</b>: Time per write operation (ns/op)</li>
 <li><b>Memory</b>: Heap allocations and object overhead</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2182"></a>
+<h1><a class="anchor" id="autotoc_md2269"></a>
 Performance Results</h1>
-<h2><a class="anchor" id="autotoc_md2183"></a>
+<h2><a class="anchor" id="autotoc_md2270"></a>
 Throughput Comparison</h2>
 <p>Based on benchmark runs on a typical development machine:</p>
 <table class="markdownTable">
@@ -164,7 +164,7 @@ Throughput Comparison</h2>
 <li>Async decorator adds ~5% overhead (expected for queue operations)</li>
 <li>Buffering adds ~2% additional overhead</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2184"></a>
+<h2><a class="anchor" id="autotoc_md2271"></a>
 Latency Analysis</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -183,7 +183,7 @@ Latency Analysis</h2>
 <li>Buffering adds ~5ns latency (vector append)</li>
 <li>p99 latency remains &lt; 300ns for all configurations</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2185"></a>
+<h2><a class="anchor" id="autotoc_md2272"></a>
 Memory Overhead</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -202,13 +202,13 @@ Memory Overhead</h2>
 <li>Queue and buffer storage are amortized over many writes</li>
 <li>Total overhead is negligible for typical applications</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2186"></a>
+<h1><a class="anchor" id="autotoc_md2273"></a>
 Detailed Benchmark Results</h1>
-<h2><a class="anchor" id="autotoc_md2187"></a>
+<h2><a class="anchor" id="autotoc_md2274"></a>
 Baseline: Direct File Writer</h2>
 <div class="fragment"><div class="line">BM_DirectFileWriter          1000000 ns       100 ns/op   10000000 items/s</div>
 </div><!-- fragment --><p><b>Analysis</b>: Represents the theoretical minimum latency for file I/O. All decorators are measured against this baseline.</p>
-<h2><a class="anchor" id="autotoc_md2188"></a>
+<h2><a class="anchor" id="autotoc_md2275"></a>
 Single Decorator: Async</h2>
 <div class="fragment"><div class="line">BM_AsyncDecorator            1000000 ns       120 ns/op   8333333 items/s</div>
 <div class="line">BM_ManualNesting_Async       1000000 ns       120 ns/op   8333333 items/s</div>
@@ -216,7 +216,7 @@ Single Decorator: Async</h2>
 <li>Builder and manual nesting have identical performance</li>
 <li>20ns overhead is from queue operations, not the abstraction layer</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2189"></a>
+<h2><a class="anchor" id="autotoc_md2276"></a>
 Double Decorator: Buffered + Async</h2>
 <div class="fragment"><div class="line">BM_BufferedAsyncDecorator           1000000 ns  130 ns/op  7692308 items/s</div>
 <div class="line">BM_ManualNesting_BufferedAsync      1000000 ns  130 ns/op  7692308 items/s</div>
@@ -224,7 +224,7 @@ Double Decorator: Buffered + Async</h2>
 <li>Zero overhead abstraction confirmed</li>
 <li>Combined decorator overhead is additive: ~30ns total</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2190"></a>
+<h2><a class="anchor" id="autotoc_md2277"></a>
 Message Size Impact</h2>
 <div class="fragment"><div class="line">BM_Throughput_SmallMessages   1000000 ns  130 ns/op  7692308 items/s  100 MB/s</div>
 <div class="line">BM_Throughput_LargeMessages   1000000 ns  145 ns/op  6896552 items/s  6.5 GB/s</div>
@@ -233,9 +233,9 @@ Message Size Impact</h2>
 <li>Large messages (1KB+): Dominated by I/O time</li>
 <li>Decorator overhead becomes negligible for large payloads</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2191"></a>
+<h1><a class="anchor" id="autotoc_md2278"></a>
 Performance Recommendations</h1>
-<h2><a class="anchor" id="autotoc_md2192"></a>
+<h2><a class="anchor" id="autotoc_md2279"></a>
 Production Guidelines</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -249,7 +249,7 @@ Production Guidelines</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Encrypted logs</b>   </td><td class="markdownTableBodyNone"><code>file().encrypted(key).buffered().async()</code>   </td><td class="markdownTableBodyNone">Encryption is expensive, buffer/async to amortize   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md2193"></a>
+<h2><a class="anchor" id="autotoc_md2280"></a>
 Decorator Ordering</h2>
 <p><b>Best Practice</b>: Apply decorators in this order:</p>
 <ol type="1">
@@ -264,7 +264,7 @@ Decorator Ordering</h2>
 <li>Encryption/formatting/filtering should happen before buffering to avoid redundant work</li>
 <li>Async should be outermost to avoid blocking the caller</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2194"></a>
+<h2><a class="anchor" id="autotoc_md2281"></a>
 Configuration Tuning</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -276,9 +276,9 @@ Configuration Tuning</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Flush interval</b>   </td><td class="markdownTableBodyNone">5s   </td><td class="markdownTableBodyNone">100ms   </td><td class="markdownTableBodyNone">30s   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md2195"></a>
+<h1><a class="anchor" id="autotoc_md2282"></a>
 Running Benchmarks</h1>
-<h2><a class="anchor" id="autotoc_md2196"></a>
+<h2><a class="anchor" id="autotoc_md2283"></a>
 Build and Execute</h2>
 <div class="fragment"><div class="line"># Configure with benchmarks enabled</div>
 <div class="line">cmake -B build -DBUILD_BENCHMARKS=ON</div>
@@ -291,7 +291,7 @@ Build and Execute</h2>
 <div class="line"> </div>
 <div class="line"># Run benchmarks (JSON output for analysis)</div>
 <div class="line">./build/benchmarks/decorator_benchmark --benchmark_format=json &gt; results.json</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2197"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2284"></a>
 Using CMake Targets</h2>
 <div class="fragment"><div class="line"># Run decorator benchmarks via CMake</div>
 <div class="line">cmake --build build --target run_decorator_benchmarks</div>
@@ -300,7 +300,7 @@ Using CMake Targets</h2>
 <li>Run benchmarks with JSON output (<code>decorator_results.json</code>)</li>
 <li>Display console output with formatted results</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md2198"></a>
+<h2><a class="anchor" id="autotoc_md2285"></a>
 Comparing Results</h2>
 <p>To compare builder vs manual nesting:</p>
 <div class="fragment"><div class="line"># Run benchmark with filter</div>
@@ -309,9 +309,9 @@ Comparing Results</h2>
 <div class="line"># Output:</div>
 <div class="line"># BM_AsyncDecorator                    120 ns/op</div>
 <div class="line"># BM_ManualNesting_Async               120 ns/op</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2199"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2286"></a>
 Regression Testing</h1>
-<h2><a class="anchor" id="autotoc_md2200"></a>
+<h2><a class="anchor" id="autotoc_md2287"></a>
 CI Integration (Optional)</h2>
 <p>To detect performance regressions, add this to CI:</p>
 <div class="fragment"><div class="line">name: Performance Benchmarks</div>
@@ -339,7 +339,7 @@ CI Integration (Optional)</h2>
 <div class="line">          # Compare builder vs manual nesting</div>
 <div class="line">          # Fail if builder &gt; 105% of manual nesting throughput</div>
 <div class="line">          python scripts/check_benchmark_regression.py results.json</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2201"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2288"></a>
 Regression Criteria</h2>
 <p>Performance regression is detected if:</p>
 <table class="markdownTable">
@@ -352,9 +352,9 @@ Regression Criteria</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Buffering overhead</b>   </td><td class="markdownTableBodyNone">&gt; 5%   </td><td class="markdownTableBodyNone">Investigate buffer management   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md2202"></a>
+<h1><a class="anchor" id="autotoc_md2289"></a>
 Known Limitations</h1>
-<h2><a class="anchor" id="autotoc_md2203"></a>
+<h2><a class="anchor" id="autotoc_md2290"></a>
 Benchmark Accuracy</h2>
 <ul>
 <li><b>Filesystem caching</b>: Repeated benchmarks may hit OS page cache</li>
@@ -362,7 +362,7 @@ Benchmark Accuracy</h2>
 <li><b>CPU frequency scaling</b>: Turbo boost affects absolute numbers</li>
 </ul>
 <p><b>Mitigation</b>: Run benchmarks multiple times, use <code>--benchmark_repetitions=10</code></p>
-<h2><a class="anchor" id="autotoc_md2204"></a>
+<h2><a class="anchor" id="autotoc_md2291"></a>
 Excluded Scenarios</h2>
 <p>These scenarios are <b>not</b> benchmarked (yet):</p>
 <ul>
@@ -371,7 +371,7 @@ Excluded Scenarios</h2>
 <li><b>Filtered writer</b>: Performance depends on filter complexity</li>
 <li><b>Triple+ decorators</b>: Uncommon in practice</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2205"></a>
+<h1><a class="anchor" id="autotoc_md2292"></a>
 Conclusions</h1>
 <ol type="1">
 <li><b>Zero-overhead abstraction confirmed</b>: <code>writer_builder</code> has identical performance to manual nesting</li>
@@ -379,14 +379,14 @@ Conclusions</h1>
 <li><b>Scalability</b>: Performance scales linearly with decorator count (no exponential degradation)</li>
 <li><b>Recommendation</b>: Use <code>writer_builder</code> for all new code - it's equally fast and more maintainable</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2206"></a>
+<h1><a class="anchor" id="autotoc_md2293"></a>
 Related Documentation</h1>
 <ul>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2DECORATOR__MIGRATION.html">Migration Guide</a> - How to migrate from old patterns</li>
 <li>Writer Builder Documentation - API usage examples</li>
 <li><a class="el" href="md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html">Benchmark Baseline</a> - Overall system performance baselines</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2207"></a>
+<h1><a class="anchor" id="autotoc_md2294"></a>
 Version History</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -400,7 +400,7 @@ Version History</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Feb 9 2026 02:11:09 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Feb 9 2026 02:57:26 for Logger System by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -13,10 +13,11 @@ var searchData=
   ['contributing_10',['CONTRIBUTING',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2CONTRIBUTING.html',1,'']]],
   ['contributing_20kr_11',['CONTRIBUTING.kr',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2CONTRIBUTING_8kr.html',1,'']]],
   ['coverage_12',['Test Coverage',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2contributing_2TESTING__GUIDE.html',1,'']]],
-  ['critical_5flog_5fprevention_13',['CRITICAL_LOG_PREVENTION',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION.html',1,'']]],
-  ['critical_5flog_5fprevention_20kr_14',['CRITICAL_LOG_PREVENTION.kr',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION_8kr.html',1,'']]],
-  ['critical_5flogging_5fquick_5fstart_15',['CRITICAL_LOGGING_QUICK_START',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html',1,'']]],
-  ['critical_5flogging_5fquick_5fstart_20kr_16',['CRITICAL_LOGGING_QUICK_START.kr',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START_8kr.html',1,'']]],
-  ['custom_5fwriters_17',['CUSTOM_WRITERS',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS.html',1,'']]],
-  ['custom_5fwriters_20kr_18',['CUSTOM_WRITERS.kr',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS_8kr.html',1,'']]]
+  ['crash_20safe_20logger_13',['Log Server and Crash-Safe Logger',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2LOG__SERVER__AND__CRASH__SAFETY.html',1,'']]],
+  ['critical_5flog_5fprevention_14',['CRITICAL_LOG_PREVENTION',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION.html',1,'']]],
+  ['critical_5flog_5fprevention_20kr_15',['CRITICAL_LOG_PREVENTION.kr',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION_8kr.html',1,'']]],
+  ['critical_5flogging_5fquick_5fstart_16',['CRITICAL_LOGGING_QUICK_START',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html',1,'']]],
+  ['critical_5flogging_5fquick_5fstart_20kr_17',['CRITICAL_LOGGING_QUICK_START.kr',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START_8kr.html',1,'']]],
+  ['custom_5fwriters_18',['CUSTOM_WRITERS',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS.html',1,'']]],
+  ['custom_5fwriters_20kr_19',['CUSTOM_WRITERS.kr',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CUSTOM__WRITERS_8kr.html',1,'']]]
 ];

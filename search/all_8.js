@@ -2,7 +2,7 @@ var searchData=
 [
   ['8_20configuration_20strategies_20enhanced_20in_20v3_200_0',['8. Configuration Strategies (Enhanced in v3.0)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md1773',1,'']]],
   ['8_20custom_20pipeline_20formatter_20sink_1',['8. Custom Pipeline (Formatter + Sink)',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2WRITER__SELECTION__GUIDE.html#autotoc_md685',1,'']]],
-  ['8_20start_20async_20writers_20explicitly_2',['8. Start Async Writers Explicitly',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2731',1,'']]],
-  ['8_20tt_20buffered_5fwriter_20tt_3',['8. &lt;tt&gt;buffered_writer&lt;/tt&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2662',1,'']]],
+  ['8_20start_20async_20writers_20explicitly_2',['8. Start Async Writers Explicitly',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2818',1,'']]],
+  ['8_20tt_20buffered_5fwriter_20tt_3',['8. &lt;tt&gt;buffered_writer&lt;/tt&gt;',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2749',1,'']]],
   ['8_20what_20writers_20are_20available_4',['8. What writers are available?',['../md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2FAQ.html#autotoc_md1610',1,'']]]
 ];
