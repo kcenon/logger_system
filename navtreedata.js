@@ -2771,6 +2771,74 @@ var NAVTREE =
         [ "Q: How do I handle signal manager cleanup?", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2632", null ]
       ] ],
       [ "Summary", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2634", null ]
+    ] ],
+    [ "Writer Composition and Decorator Guide", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html", [
+      [ "Table of Contents", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2638", null ],
+      [ "Architecture Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2640", [
+        [ "Decorator Pattern", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2641", null ],
+        [ "Inheritance Chain", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2642", null ],
+        [ "Stack Visualization", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2643", null ]
+      ] ],
+      [ "Writer Catalog", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2645", [
+        [ "Base Writers", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2646", [
+          [ "1. <tt>console_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2647", null ],
+          [ "2. <tt>file_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2649", null ],
+          [ "3. <tt>rotating_file_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2651", null ],
+          [ "4. <tt>network_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2653", null ],
+          [ "5. <tt>otlp_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2655", null ]
+        ] ],
+        [ "Decorator Writers", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2657", [
+          [ "6. <tt>async_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2658", null ],
+          [ "7. <tt>batch_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2660", null ],
+          [ "8. <tt>buffered_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2662", null ],
+          [ "9. <tt>filtered_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2664", null ],
+          [ "10. <tt>formatted_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2666", null ],
+          [ "11. <tt>thread_safe_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2668", null ],
+          [ "12. <tt>encrypted_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2670", null ],
+          [ "13. <tt>critical_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2672", null ],
+          [ "14. <tt>composite_writer</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2674", null ],
+          [ "15. <tt>queued_writer_base</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2676", null ],
+          [ "16. <tt>legacy_writer_adapter</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2678", null ]
+        ] ]
+      ] ],
+      [ "Composition Patterns", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2680", [
+        [ "Pattern 1: Simple Console (Development)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2681", null ],
+        [ "Pattern 2: Async Console (Development + Performance)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2683", null ],
+        [ "Pattern 3: Filtered Formatted File (Production)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2685", null ],
+        [ "Pattern 4: High-Throughput Production", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2687", null ],
+        [ "Pattern 5: Encrypted Compliance Logging", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2689", null ],
+        [ "Pattern 6: Multi-Destination (File + Network)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2691", null ]
+      ] ],
+      [ "Recommended Stacks", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2693", [
+        [ "Development", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2694", null ],
+        [ "Production File Logging", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2695", null ],
+        [ "Compliance & Security", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2696", null ],
+        [ "Distributed Systems", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2697", null ],
+        [ "Resource-Constrained", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2698", null ]
+      ] ],
+      [ "Code Examples", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2700", [
+        [ "Example 1: Development Setup (3 lines)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2701", null ],
+        [ "Example 2: Production File Logging", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2703", null ],
+        [ "Example 3: Encrypted Compliance Logging", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2705", null ],
+        [ "Example 4: Multi-Destination Setup", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2707", null ],
+        [ "Example 5: Custom Stack Order", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2709", null ]
+      ] ],
+      [ "Performance Impact", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2711", [
+        [ "Throughput per Configuration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2712", null ],
+        [ "Latency per Decorator", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2713", null ],
+        [ "Memory Usage per Decorator", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2714", null ]
+      ] ],
+      [ "Best Practices", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2716", [
+        [ "1. Filter Early, Format Late", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2717", null ],
+        [ "2. Use Async for I/O-Heavy Writers", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2719", null ],
+        [ "3. Batch + Buffer for Maximum Throughput", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2721", null ],
+        [ "4. Encrypt Only What's Necessary", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2723", null ],
+        [ "5. Use <tt>composite_writer</tt> for Multi-Destination", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2725", null ],
+        [ "6. Flush on Critical Logs", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2727", null ],
+        [ "7. Thread-Safety Only When Needed", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2729", null ],
+        [ "8. Start Async Writers Explicitly", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2731", null ]
+      ] ],
+      [ "Summary", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2733", null ]
     ] ]
   ] ]
 ];
@@ -2781,11 +2849,11 @@ var NAVTREEINDEX =
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE_8kr.html#autotoc_md839",
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2CONFIGURATION__STRATEGIES.html#autotoc_md1234",
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PRODUCTION__QUALITY_8kr.html#autotoc_md2238",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ARCHITECTURE.html#autotoc_md126",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOG__PREVENTION.html#autotoc_md359",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2WRITER__SELECTION__GUIDE.html#autotoc_md679",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE.html#autotoc_md1746",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2integration_2THREAD__SYSTEM.html#autotoc_md2042"
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2WRITER__GUIDE.html#autotoc_md2674",
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CRITICAL__LOGGING__QUICK__START.html#autotoc_md395",
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2STRUCTURE.html#autotoc_md633",
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2GETTING__STARTED.html#autotoc_md1662",
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START_8kr.html#autotoc_md1888"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
