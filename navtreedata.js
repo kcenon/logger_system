@@ -2574,6 +2574,121 @@ var NAVTREE =
         [ "📖 외부 리소스", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README_8kr.html#autotoc_md2428", null ],
         [ "🤝 도움 및 지원", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2README_8kr.html#autotoc_md2429", null ]
       ] ]
+    ] ],
+    [ "Security Module Guide", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html", [
+      [ "Table of Contents", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2449", null ],
+      [ "Overview", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2451", [
+        [ "Purpose", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2452", null ],
+        [ "Components", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2453", null ]
+      ] ],
+      [ "Threat Model", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2455", [
+        [ "Threats Defended Against", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2456", null ],
+        [ "Security Assumptions", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2457", null ],
+        [ "Out of Scope", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2458", null ]
+      ] ],
+      [ "Architecture", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2460", [
+        [ "Component Integration", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2461", null ],
+        [ "Dependency Graph", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2462", null ]
+      ] ],
+      [ "Audit Logger", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2464", [
+        [ "Purpose", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2465", null ],
+        [ "Key Features", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2466", null ],
+        [ "Audit Event Types", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2467", null ],
+        [ "API", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2468", [
+          [ "Initialize Audit Logger", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2469", null ],
+          [ "Log an Audit Event", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2470", null ],
+          [ "Verify Entry Integrity", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2471", null ]
+        ] ],
+        [ "Example Usage", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2472", null ],
+        [ "Compliance Considerations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2473", null ]
+      ] ],
+      [ "Log Sanitizer", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2475", [
+        [ "Purpose", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2476", null ],
+        [ "Key Features", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2477", null ],
+        [ "Sensitive Data Types", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2478", null ],
+        [ "API", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2479", [
+          [ "Add Built-in Pattern", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2480", null ],
+          [ "Add Custom Pattern", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2481", null ],
+          [ "Remove Pattern", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2482", null ],
+          [ "Sanitize a String", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2483", null ],
+          [ "Check for Sensitive Data", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2484", null ],
+          [ "Get Active Patterns", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2485", null ],
+          [ "Add All Common Patterns", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2486", null ]
+        ] ],
+        [ "Example Usage", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2487", null ],
+        [ "Performance Impact", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2488", null ],
+        [ "Integration with Logger", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2489", null ]
+      ] ],
+      [ "Path Validator", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2491", [
+        [ "Purpose", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2492", null ],
+        [ "Key Features", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2493", null ],
+        [ "Security Checks", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2494", null ],
+        [ "API", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2495", [
+          [ "Constructor", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2496", null ],
+          [ "Validate Path", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2497", null ],
+          [ "Static: Check Filename Safety", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2498", null ],
+          [ "Static: Sanitize Filename", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2499", null ],
+          [ "Static: Safe Path Join", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2500", null ]
+        ] ],
+        [ "Example Usage", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2501", null ],
+        [ "Integration with Writers", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2502", null ]
+      ] ],
+      [ "Secure Key Storage", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2504", [
+        [ "Purpose", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2505", null ],
+        [ "Key Features", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2506", null ],
+        [ "Classes", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2507", [
+          [ "<tt>secure_key</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2508", null ],
+          [ "<tt>secure_key_storage</tt>", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2509", null ]
+        ] ],
+        [ "API", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2510", [
+          [ "Generate Secure Random Key", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2511", null ],
+          [ "Save Key to File", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2512", null ],
+          [ "Load Key from File", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2513", null ]
+        ] ],
+        [ "Example Usage", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2514", null ],
+        [ "Key Rotation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2515", null ],
+        [ "Platform-Specific Considerations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2516", [
+          [ "Linux/macOS", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2517", null ],
+          [ "Windows", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2518", null ]
+        ] ]
+      ] ],
+      [ "Signal Manager", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2520", [
+        [ "Purpose", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2521", null ],
+        [ "Key Features", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2522", null ],
+        [ "Handled Signals", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2523", null ],
+        [ "Signal-Safe Guarantees", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2524", null ],
+        [ "API", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2525", [
+          [ "Register Logger", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2526", null ],
+          [ "Unregister Logger", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2527", null ],
+          [ "Check Handler Installation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2528", null ],
+          [ "Get Logger Count", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2529", null ]
+        ] ],
+        [ "Critical Logger Interface", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2530", null ],
+        [ "Example Usage", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2531", null ],
+        [ "Emergency Flush Implementation", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2532", null ],
+        [ "Testing Considerations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2533", null ]
+      ] ],
+      [ "Configuration Examples", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2535", [
+        [ "Minimal Security Setup", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2536", null ],
+        [ "High-Security Setup (Compliance)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2537", null ],
+        [ "Custom Security Layer", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2538", null ]
+      ] ],
+      [ "Compliance Considerations", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2540", [
+        [ "SOX (Sarbanes-Oxley)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2541", null ],
+        [ "HIPAA (Health Insurance Portability and Accountability Act)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2542", null ],
+        [ "GDPR (General Data Protection Regulation)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2543", null ],
+        [ "PCI-DSS (Payment Card Industry Data Security Standard)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2544", null ],
+        [ "ISO 27001 (Information Security Management)", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2545", null ]
+      ] ],
+      [ "Frequently Asked Questions", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2547", [
+        [ "Q: Can I use the security module without OpenSSL?", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2548", null ],
+        [ "Q: How do I rotate encryption keys?", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2549", null ],
+        [ "Q: What's the performance overhead of log sanitization?", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2550", null ],
+        [ "Q: How do I verify audit log integrity?", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2551", null ],
+        [ "Q: Can I use multiple loggers with one signal manager?", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2552", null ],
+        [ "Q: How do I handle signal manager cleanup?", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2553", null ]
+      ] ],
+      [ "Summary", "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2SECURITY__GUIDE.html#autotoc_md2555", null ]
     ] ]
   ] ]
 ];
@@ -2584,11 +2699,11 @@ var NAVTREEINDEX =
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2ARCHITECTURE_8kr.html#autotoc_md839",
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2FEATURES.html#autotoc_md1345",
 "md__2home_2runner_2work_2logger__system_2logger__system_2docs_2PROJECT__STRUCTURE.html#autotoc_md2406",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2CONDITIONAL__COMPILATION__REFACTORING.html#autotoc_md286",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2MIGRATION.html#autotoc_md580",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2FAQ.html#autotoc_md1542",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2QUICK__START.html",
-"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2DECORATOR__PERFORMANCE.html#autotoc_md2126"
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2ASYNC__WRITERS.html#autotoc_md227",
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2advanced_2LOGGER__SYSTEM__ARCHITECTURE.html#autotoc_md516",
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2BEST__PRACTICES.html#autotoc_md1424",
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md1634",
+"md__2home_2runner_2work_2logger__system_2logger__system_2docs_2performance_2BASELINE.html#autotoc_md2024"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
