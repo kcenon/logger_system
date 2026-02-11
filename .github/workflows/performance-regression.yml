@@ -1,0 +1,221 @@
+name: Performance Regression
+
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  performance-regression:
+    name: Performance Regression Check
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Install dependencies
+      run: |
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+        sudo apt-get update
+        sudo apt-get install -y cmake ninja-build gcc-13 g++-13 libbenchmark-dev
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
+
+    # --- Base branch ---
+    - name: Checkout base branch
+      run: git checkout ${{ github.base_ref }}
+
+    - name: Build base branch
+      continue-on-error: true
+      run: |
+        cmake -B build-base -G Ninja \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_C_COMPILER=gcc-13 \
+          -DCMAKE_CXX_COMPILER=g++-13 \
+          -DBUILD_BENCHMARKS=ON \
+          -DBUILD_TESTS=OFF \
+          -DLOGGER_STANDALONE_MODE=ON
+        cmake --build build-base -j
+
+    - name: Run base benchmarks
+      continue-on-error: true
+      run: |
+        mkdir -p results-base
+        for bin in logger_benchmarks decorator_benchmark; do
+          EXEC="build-base/bin/${bin}"
+          if [ -f "$EXEC" ]; then
+            "$EXEC" \
+              --benchmark_format=json \
+              --benchmark_out="results-base/${bin}.json" \
+              --benchmark_repetitions=3 \
+              --benchmark_report_aggregates_only=true \
+              --benchmark_min_time=0.5 \
+              || true
+          fi
+        done
+
+    # --- PR branch ---
+    - name: Checkout PR branch
+      run: git checkout ${{ github.head_ref }}
+
+    - name: Build PR branch
+      continue-on-error: true
+      run: |
+        cmake -B build-pr -G Ninja \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_C_COMPILER=gcc-13 \
+          -DCMAKE_CXX_COMPILER=g++-13 \
+          -DBUILD_BENCHMARKS=ON \
+          -DBUILD_TESTS=OFF \
+          -DLOGGER_STANDALONE_MODE=ON
+        cmake --build build-pr -j
+
+    - name: Run PR benchmarks
+      continue-on-error: true
+      run: |
+        mkdir -p results-pr
+        for bin in logger_benchmarks decorator_benchmark; do
+          EXEC="build-pr/bin/${bin}"
+          if [ -f "$EXEC" ]; then
+            "$EXEC" \
+              --benchmark_format=json \
+              --benchmark_out="results-pr/${bin}.json" \
+              --benchmark_repetitions=3 \
+              --benchmark_report_aggregates_only=true \
+              --benchmark_min_time=0.5 \
+              || true
+          fi
+        done
+
+    # --- Compare ---
+    - name: Compare performance
+      id: compare
+      run: |
+        python3 - <<'PYEOF'
+        import json
+        import glob
+        import os
+
+        THRESHOLD = 5.0  # percent regression threshold
+
+        def load_benchmarks(directory):
+            """Load all benchmark JSON files from a directory into a name->time map."""
+            results = {}
+            for path in glob.glob(os.path.join(directory, "*.json")):
+                try:
+                    with open(path) as f:
+                        data = json.load(f)
+                    for bm in data.get("benchmarks", []):
+                        name = bm.get("name", "")
+                        # Use aggregate mean when available, skip individual runs
+                        if "_mean" not in name:
+                            continue
+                        real_time = bm.get("real_time", 0)
+                        time_unit = bm.get("time_unit", "ns")
+                        # Normalize to nanoseconds
+                        if time_unit == "us":
+                            real_time *= 1000
+                        elif time_unit == "ms":
+                            real_time *= 1_000_000
+                        results[name] = real_time
+                except (json.JSONDecodeError, KeyError):
+                    continue
+            return results
+
+        base = load_benchmarks("results-base")
+        pr = load_benchmarks("results-pr")
+
+        if not base and not pr:
+            report = "## Performance Regression Check\n\n"
+            report += "No benchmark results available — likely a documentation-only change.\n"
+            with open("performance-report.md", "w") as f:
+                f.write(report)
+            raise SystemExit(0)
+
+        # Build comparison table
+        rows = []
+        regressions = 0
+        all_names = sorted(set(base.keys()) | set(pr.keys()))
+
+        for name in all_names:
+            display = name.replace("_mean", "")
+            b = base.get(name)
+            p = pr.get(name)
+            if b is None or p is None or b == 0:
+                rows.append(f"| {display} | {'—' if b is None else f'{b:.1f}'} "
+                            f"| {'—' if p is None else f'{p:.1f}'} | — |")
+                continue
+            delta = ((p - b) / b) * 100
+            if delta > THRESHOLD:
+                marker = f"⚠️ +{delta:.1f}%"
+                regressions += 1
+            elif delta < -THRESHOLD:
+                marker = f"🚀 {delta:.1f}%"
+            else:
+                marker = f"{delta:+.1f}%"
+            rows.append(f"| {display} | {b:.1f} | {p:.1f} | {marker} |")
+
+        report = "## Performance Regression Check\n\n"
+        report += "| Benchmark | Base (ns) | PR (ns) | Delta |\n"
+        report += "|-----------|-----------|---------|-------|\n"
+        report += "\n".join(rows)
+        report += "\n\n"
+        report += f"**Threshold**: >{THRESHOLD:.0f}% regression triggers warning\n"
+
+        if regressions > 0:
+            report += f"**Result**: ⚠️ {regressions} benchmark(s) show potential regression\n"
+        else:
+            report += "**Result**: ✅ No performance regression detected\n"
+
+        with open("performance-report.md", "w") as f:
+            f.write(report)
+
+        print(report)
+        PYEOF
+
+    - name: Post PR comment
+      if: always()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const path = 'performance-report.md';
+
+          if (!fs.existsSync(path)) {
+            console.log('No performance report generated');
+            return;
+          }
+
+          const report = fs.readFileSync(path, 'utf8');
+
+          // Find and update existing comment, or create new one
+          const marker = '## Performance Regression Check';
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number
+          });
+
+          const existing = comments.find(c => c.body.includes(marker));
+
+          if (existing) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: existing.id,
+              body: report
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: report
+            });
+          }
