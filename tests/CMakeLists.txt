@@ -776,6 +776,132 @@ foreach(_test_target IN ITEMS logger_log_server_test logger_log_analyzer_test lo
     endif()
 endforeach()
 
+# Signal manager tests (Issue #442)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/security_test/signal_manager_test.cpp")
+    add_executable(logger_signal_manager_test
+        unit/security_test/signal_manager_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_signal_manager_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_signal_manager_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_signal_manager_test
+        COMMAND logger_signal_manager_test
+    )
+    set_target_properties(logger_signal_manager_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Signal manager tests: Added")
+endif()
+
+# Queued writer base tests (Issue #442)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/queued_writer_base_test.cpp")
+    add_executable(logger_queued_writer_base_test
+        unit/writers_test/queued_writer_base_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_queued_writer_base_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_queued_writer_base_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_queued_writer_base_test
+        COMMAND logger_queued_writer_base_test
+    )
+    set_target_properties(logger_queued_writer_base_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Queued writer base tests: Added")
+endif()
+
+# Encrypted writer extended tests (Issue #442)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/encrypted_writer_extended_test.cpp")
+    add_executable(logger_encrypted_writer_extended_test
+        unit/writers_test/encrypted_writer_extended_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_encrypted_writer_extended_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_encrypted_writer_extended_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    # Link OpenSSL if available
+    find_package(OpenSSL 3.0 QUIET)
+    if(OpenSSL_FOUND)
+        target_link_libraries(logger_encrypted_writer_extended_test PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+    else()
+        find_package(OpenSSL QUIET)
+        if(OpenSSL_FOUND)
+            target_link_libraries(logger_encrypted_writer_extended_test PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+        endif()
+    endif()
+
+    if(APPLE)
+        target_link_libraries(logger_encrypted_writer_extended_test PRIVATE c++)
+    endif()
+
+    add_test(NAME logger_encrypted_writer_extended_test
+        COMMAND logger_encrypted_writer_extended_test
+    )
+    set_target_properties(logger_encrypted_writer_extended_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Encrypted writer extended tests: Added")
+endif()
+
+# Network writer tests (Issue #442 - network_writer stats validation)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/network_writer_test.cpp")
+    add_executable(logger_network_writer_test
+        unit/writers_test/network_writer_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_network_writer_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_network_writer_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_network_writer_test
+        COMMAND logger_network_writer_test
+    )
+    set_target_properties(logger_network_writer_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Network writer tests: Added")
+endif()
+
+# Coverage registration for Issue #442 test targets
+foreach(_test_target IN ITEMS logger_signal_manager_test logger_queued_writer_base_test logger_encrypted_writer_extended_test logger_network_writer_test)
+    if(TARGET ${_test_target} AND COMMAND logger_register_coverage_target)
+        logger_register_coverage_target(${_test_target})
+    endif()
+endforeach()
+
 # Cleanup
 unset(_LOGGER_TEST_TARGETS)
 unset(_test_target)

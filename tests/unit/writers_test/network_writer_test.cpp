@@ -72,7 +72,7 @@ TEST(NetworkWriterTest, ConstructionWithUdp) {
 
 TEST(NetworkWriterTest, ConstructionWithCustomParams) {
     auto writer = std::make_unique<network_writer>(
-        "192.168.1.100", 5140,
+        "127.0.0.1", 5140,
         network_writer::protocol_type::tcp,
         16384,  // buffer_size
         std::chrono::seconds(10));  // reconnect_interval
@@ -101,13 +101,15 @@ TEST(NetworkWriterTest, NotConnectedInitially) {
 // Statistics tests
 // =============================================================================
 
-TEST(NetworkWriterTest, InitialStatsAreZero) {
-    network_writer writer("localhost", 9514);
+TEST(NetworkWriterTest, InitialStatsNoMessagesSent) {
+    // The constructor may attempt background connection, so
+    // connection_failures can be > 0. However, no messages
+    // should have been sent or failed yet.
+    network_writer writer("127.0.0.1", 19994);
     auto stats = writer.get_stats();
 
     EXPECT_EQ(stats.messages_sent, 0u);
     EXPECT_EQ(stats.bytes_sent, 0u);
-    EXPECT_EQ(stats.connection_failures, 0u);
     EXPECT_EQ(stats.send_failures, 0u);
 }
 
@@ -148,4 +150,100 @@ TEST(NetworkWriterTest, HasAsyncWriterTag) {
     network_writer writer("localhost", 9514);
     auto* tag = dynamic_cast<async_writer_tag*>(&writer);
     EXPECT_NE(tag, nullptr);
+}
+
+// =============================================================================
+// Stats after write attempts (Issue #442)
+// =============================================================================
+
+TEST(NetworkWriterTest, StatsAfterWriteWithoutConnection) {
+    // Use a non-routable address to avoid actual connection attempts blocking
+    network_writer writer("127.0.0.1", 19998,
+        network_writer::protocol_type::tcp);
+
+    log_entry entry(log_level::info, "stats test message");
+    writer.write(entry);
+
+    auto stats = writer.get_stats();
+    // Without a connection, messages_sent should remain 0
+    EXPECT_EQ(stats.messages_sent, 0u);
+    EXPECT_EQ(stats.bytes_sent, 0u);
+}
+
+TEST(NetworkWriterTest, StatsAfterMultipleWritesWithoutConnection) {
+    network_writer writer("127.0.0.1", 19997,
+        network_writer::protocol_type::tcp);
+
+    for (int i = 0; i < 5; ++i) {
+        log_entry entry(log_level::warn, "message " + std::to_string(i));
+        writer.write(entry);
+    }
+
+    auto stats = writer.get_stats();
+    // No connection means no successful sends
+    EXPECT_EQ(stats.messages_sent, 0u);
+    EXPECT_EQ(stats.bytes_sent, 0u);
+}
+
+TEST(NetworkWriterTest, StatsStructDefaultInitialization) {
+    // Verify connection_stats fields are value-initialized
+    network_writer::connection_stats stats{};
+    EXPECT_EQ(stats.messages_sent, 0u);
+    EXPECT_EQ(stats.bytes_sent, 0u);
+    EXPECT_EQ(stats.connection_failures, 0u);
+    EXPECT_EQ(stats.send_failures, 0u);
+}
+
+// =============================================================================
+// Buffer size configuration (Issue #442)
+// =============================================================================
+
+TEST(NetworkWriterTest, CustomBufferSizeConstruction) {
+    // Verify various buffer sizes construct without errors
+    auto writer_small = std::make_unique<network_writer>(
+        "localhost", 9514,
+        network_writer::protocol_type::tcp,
+        1024);  // Small buffer
+    EXPECT_NE(writer_small, nullptr);
+
+    auto writer_large = std::make_unique<network_writer>(
+        "localhost", 9514,
+        network_writer::protocol_type::tcp,
+        65536);  // Large buffer
+    EXPECT_NE(writer_large, nullptr);
+}
+
+// =============================================================================
+// Reconnect interval configuration (Issue #442)
+// =============================================================================
+
+TEST(NetworkWriterTest, CustomReconnectInterval) {
+    auto writer = std::make_unique<network_writer>(
+        "localhost", 9514,
+        network_writer::protocol_type::tcp,
+        8192,
+        std::chrono::seconds(30));
+    EXPECT_NE(writer, nullptr);
+    EXPECT_EQ(writer->get_name(), "network");
+}
+
+// =============================================================================
+// UDP write behavior (Issue #442)
+// =============================================================================
+
+TEST(NetworkWriterTest, UdpWriteWithoutConnectionDoesNotCrash) {
+    network_writer writer("127.0.0.1", 19996,
+        network_writer::protocol_type::udp);
+
+    log_entry entry(log_level::error, "udp test message");
+    EXPECT_NO_THROW(writer.write(entry));
+
+    auto stats = writer.get_stats();
+    EXPECT_EQ(stats.messages_sent, 0u);
+}
+
+TEST(NetworkWriterTest, UdpFlushWithoutConnection) {
+    network_writer writer("127.0.0.1", 19995,
+        network_writer::protocol_type::udp);
+    EXPECT_NO_THROW(writer.flush());
 }
