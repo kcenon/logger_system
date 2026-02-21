@@ -279,7 +279,7 @@ private:
         // Matches password=xxx, pwd=xxx, passwd=xxx patterns
         rules_.emplace_back(
             "password",
-            R"((password|passwd|pwd|secret|credential)[\s]*[=:]\s*)([^\s&]+))",
+            R"(((?:password|passwd|pwd|secret|credential)[\s]*[=:]\s*)([^\s&]+))",
             "$1[REDACTED]",
             false);
     }

@@ -1,0 +1,7 @@
+version: 2
+
+secret:
+  ignored-paths:
+    # Log sanitizer test contains intentional fake secrets
+    # (API keys, passwords, bearer tokens) for testing sensitive data detection
+    - "tests/unit/security_test/log_sanitizer_test.cpp"
