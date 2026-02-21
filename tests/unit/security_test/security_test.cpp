@@ -422,7 +422,3 @@ TEST_F(SecurityTest, IntegrationSecureKeyWorkflow) {
     EXPECT_NE(content.find("encryption_key_loaded"), std::string::npos);
 }
 
-int main(int argc, char** argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}

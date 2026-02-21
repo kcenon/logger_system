@@ -137,7 +137,10 @@ endif()
 
 # Security tests (Phase 4 - Task 4.1-4.4)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/security_test/security_test.cpp")
-    add_executable(logger_security_test unit/security_test/security_test.cpp)
+    add_executable(logger_security_test
+        unit/security_test/security_test.cpp
+        unit/security_test/log_sanitizer_test.cpp
+    )
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_security_test PRIVATE LoggerSystem GTest::gtest_main GTest::gtest)
@@ -621,6 +624,58 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/writer_builder_test.cpp
     )
 
     message(STATUS "Writer builder tests: Added")
+endif()
+
+# Batch writer tests (Issue #440 - batch_writer unit tests)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/batch_writer_test.cpp")
+    add_executable(logger_batch_writer_test
+        unit/writers_test/batch_writer_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_batch_writer_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_batch_writer_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_batch_writer_test
+        COMMAND logger_batch_writer_test
+    )
+    set_target_properties(logger_batch_writer_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Batch writer tests: Added")
+endif()
+
+# Thread-safe writer tests (Issue #440 - thread_safe_writer unit tests)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/thread_safe_writer_test.cpp")
+    add_executable(logger_thread_safe_writer_test
+        unit/writers_test/thread_safe_writer_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_thread_safe_writer_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_thread_safe_writer_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_thread_safe_writer_test
+        COMMAND logger_thread_safe_writer_test
+    )
+    set_target_properties(logger_thread_safe_writer_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Thread-safe writer tests: Added")
 endif()
 
 # Cleanup
