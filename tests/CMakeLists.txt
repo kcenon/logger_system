@@ -678,6 +678,104 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/thread_safe_writer_test
     message(STATUS "Thread-safe writer tests: Added")
 endif()
 
+# Log server tests (Issue #441 - log_server unit tests)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/server_test/log_server_test.cpp")
+    add_executable(logger_log_server_test
+        unit/server_test/log_server_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_log_server_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_log_server_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_log_server_test
+        COMMAND logger_log_server_test
+    )
+    set_target_properties(logger_log_server_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Log server tests: Added")
+endif()
+
+# Log analyzer tests (Issue #441 - log_analyzer unit tests)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/analysis_test/log_analyzer_test.cpp")
+    add_executable(logger_log_analyzer_test
+        unit/analysis_test/log_analyzer_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_log_analyzer_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_log_analyzer_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_log_analyzer_test
+        COMMAND logger_log_analyzer_test
+    )
+    set_target_properties(logger_log_analyzer_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Log analyzer tests: Added")
+endif()
+
+# Rotating file writer tests (Issue #441 - rotation logic unit tests)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/rotating_file_writer_test.cpp")
+    add_executable(logger_rotating_file_writer_test
+        unit/writers_test/rotating_file_writer_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_rotating_file_writer_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_rotating_file_writer_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_rotating_file_writer_test
+        COMMAND logger_rotating_file_writer_test
+    )
+    set_target_properties(logger_rotating_file_writer_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Rotating file writer tests: Added")
+endif()
+
+# Coverage registration for Issue #441 test targets
+if(TARGET logger_log_server_test)
+    list(APPEND _LOGGER_TEST_TARGETS logger_log_server_test)
+endif()
+
+if(TARGET logger_log_analyzer_test)
+    list(APPEND _LOGGER_TEST_TARGETS logger_log_analyzer_test)
+endif()
+
+if(TARGET logger_rotating_file_writer_test)
+    list(APPEND _LOGGER_TEST_TARGETS logger_rotating_file_writer_test)
+endif()
+
+# Register Issue #441 targets for coverage
+foreach(_test_target IN ITEMS logger_log_server_test logger_log_analyzer_test logger_rotating_file_writer_test)
+    if(TARGET ${_test_target} AND COMMAND logger_register_coverage_target)
+        logger_register_coverage_target(${_test_target})
+    endif()
+endforeach()
+
 # Cleanup
 unset(_LOGGER_TEST_TARGETS)
 unset(_test_target)
