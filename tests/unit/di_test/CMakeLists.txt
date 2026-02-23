@@ -1,5 +1,8 @@
 ##################################################
 # DI Container Tests CMakeLists.txt
+#
+# Tests validating logger_system integration with
+# common_system's service_container for DI.
 ##################################################
 
 # Define the test executable
@@ -7,15 +10,10 @@ add_executable(di_container_test
     di_container_test.cpp
 )
 
-# Include directories
-target_include_directories(di_container_test PRIVATE
-    ${CMAKE_SOURCE_DIR}/sources
-    ${CMAKE_SOURCE_DIR}/sources/logger
-)
-
 # Link with required libraries
+# LoggerSystem provides common_system transitively (PUBLIC link)
 target_link_libraries(di_container_test PRIVATE
-    logger
+    LoggerSystem
     GTest::gtest
     GTest::gtest_main
     Threads::Threads
