@@ -902,6 +902,40 @@ foreach(_test_target IN ITEMS logger_signal_manager_test logger_queued_writer_ba
     endif()
 endforeach()
 
+# DI container integration tests (Issue #367 - service_container migration)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/di_test/di_container_test.cpp")
+    add_executable(di_container_test
+        unit/di_test/di_container_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(di_container_test
+            PRIVATE LoggerSystem GTest::gtest_main Threads::Threads
+        )
+    else()
+        target_link_libraries(di_container_test
+            PRIVATE LoggerSystem gtest_main Threads::Threads
+        )
+    endif()
+
+    target_compile_features(di_container_test PRIVATE cxx_std_20)
+
+    add_test(NAME di_container_test COMMAND di_container_test)
+    set_target_properties(di_container_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+        TIMEOUT 30
+    )
+    set_tests_properties(di_container_test PROPERTIES
+        LABELS "unit;di"
+    )
+
+    if(TARGET di_container_test AND COMMAND logger_register_coverage_target)
+        logger_register_coverage_target(di_container_test)
+    endif()
+
+    message(STATUS "DI container integration tests: Added")
+endif()
+
 # Cleanup
 unset(_LOGGER_TEST_TARGETS)
 unset(_test_target)
