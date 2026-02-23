@@ -428,11 +428,8 @@ The `writers/` directory contains 18 headers with implementations in `src/impl/w
 |------|---------|
 | `service_registration.h` | DI service registration utilities |
 
-**Internal DI Implementation** (`src/impl/di/`):
-- `di_container_interface.h` - Container interface
-- `lightweight_container.h` - Lightweight DI container
-- `lightweight_di_container.h` - Extended DI container
-- `thread_system_di_adapter.h` - Thread system DI adapter
+**DI Integration**: Uses `common_system::di::service_container` for dependency
+injection. See `service_registration.h` for logger service registration utilities.
 
 ### OpenTelemetry (`include/kcenon/logger/otlp/`)
 

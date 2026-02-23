@@ -1,300 +1,380 @@
-/*****************************************************************************
-BSD 3-Clause License
-
-Copyright (c) 2025, 🍀☀🌕🌥 🌊
-All rights reserved.
-*****************************************************************************/
+// BSD 3-Clause License
+// Copyright (c) 2025, kcenon
+// See the LICENSE file in the project root for full license information.
 
 /**
  * @file di_container_test.cpp
- * @brief Unit tests for DI container implementations
+ * @brief Unit tests validating logger_system integration with common_system's
+ *        service_container for dependency injection.
+ *
+ * These tests verify that logger types (base_writer, log_writer_interface)
+ * can be registered and resolved through the unified service_container,
+ * replacing the legacy lightweight_di_container.
  */
 
 #include <gtest/gtest.h>
+
+#include <kcenon/common/di/service_container.h>
+#include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/logger/interfaces/log_writer_interface.h>
 #include <kcenon/logger/writers/base_writer.h>
-#include <kcenon/common/interfaces/logger_interface.h>
-#include "../../../src/impl/di/lightweight_di_container.h"
+
+#include <atomic>
 #include <memory>
 #include <thread>
 #include <vector>
-#include <chrono>
 
+using namespace kcenon::common::di;
 using namespace kcenon::logger;
-namespace ci = kcenon::common::interfaces;
-using log_level = ci::log_level;
 
-// Mock writer for testing
+// Mock writer for testing service_container with logger types
 class mock_writer : public base_writer {
 private:
     std::string name_;
-    static int instance_count_;
+    static std::atomic<int> instance_count_;
 
 public:
-    explicit mock_writer(const std::string& name = "mock")
-        : name_(name) {
+    explicit mock_writer(const std::string& name = "mock") : name_(name)
+    {
         ++instance_count_;
     }
 
-    ~mock_writer() override {
-        --instance_count_;
+    ~mock_writer() override { --instance_count_; }
+
+    kcenon::common::VoidResult write(const log_entry& /*entry*/) override
+    {
+        return kcenon::common::ok();
     }
 
-    // Note: base_writer::write uses kcenon::common::interfaces::log_level for backward compatibility
-    common::VoidResult write(kcenon::common::interfaces::log_level level,
-                      const std::string& message,
-                      const std::string& file,
-                      int line,
-                      const std::string& function,
-                      const std::chrono::system_clock::time_point& timestamp) override {
-        return common::ok();
-    }
+    kcenon::common::VoidResult flush() override { return kcenon::common::ok(); }
 
-    common::VoidResult flush() override {
-        return common::ok();
-    }
+    bool is_healthy() const override { return true; }
 
-    bool is_healthy() const override {
-        return true;
-    }
+    std::string get_name() const override { return name_; }
 
-    std::string get_name() const override {
-        return name_;
-    }
+    static int get_instance_count() { return instance_count_.load(); }
 
-    static int get_instance_count() {
-        return instance_count_;
-    }
-
-    static void reset_instance_count() {
-        instance_count_ = 0;
-    }
+    static void reset_instance_count() { instance_count_.store(0); }
 };
 
-int mock_writer::instance_count_ = 0;
+std::atomic<int> mock_writer::instance_count_{0};
 
-// Test fixture for DI container tests
+// Second mock for multi-type registration tests
+class another_mock_writer : public base_writer {
+public:
+    kcenon::common::VoidResult write(const log_entry& /*entry*/) override
+    {
+        return kcenon::common::ok();
+    }
+
+    kcenon::common::VoidResult flush() override { return kcenon::common::ok(); }
+    bool is_healthy() const override { return true; }
+    std::string get_name() const override { return "another"; }
+};
+
+// Test fixture
 class di_container_test : public ::testing::Test {
 protected:
-    void SetUp() override {
-        mock_writer::reset_instance_count();
-    }
-    
-    void TearDown() override {
+    service_container container_;
+
+    void SetUp() override { mock_writer::reset_instance_count(); }
+
+    void TearDown() override
+    {
+        container_.clear();
         mock_writer::reset_instance_count();
     }
 };
 
-// Lightweight Container Tests
-TEST_F(di_container_test, lightweight_container_factory_registration) {
-    lightweight_di_container<base_writer> container;
-    
-    // Register a factory
-    auto result = container.register_factory("test_writer", []() {
-        return std::make_shared<mock_writer>("test");
-    });
-    
-    ASSERT_TRUE(result);
-    EXPECT_TRUE(container.is_registered("test_writer"));
-    EXPECT_EQ(container.size(), 1);
+// --- Registration Tests ---
+
+TEST_F(di_container_test, RegisterSimpleFactory_Singleton_Succeeds)
+{
+    auto result = container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>("singleton"); },
+        service_lifetime::singleton);
+
+    EXPECT_TRUE(result.is_ok());
+    EXPECT_TRUE(container_.is_registered<base_writer>());
 }
 
-TEST_F(di_container_test, lightweight_container_resolve_factory) {
-    lightweight_di_container<base_writer> container;
-    
-    // Register a factory
-    container.register_factory("test_writer", []() {
-        return std::make_shared<mock_writer>("factory_created");
-    });
-    
-    // Resolve should create a new instance
-    auto result1 = container.resolve("test_writer");
-    ASSERT_TRUE(result1);
-    
-    auto writer1 = std::dynamic_pointer_cast<mock_writer>(result1.value());
-    ASSERT_NE(writer1, nullptr);
-    EXPECT_EQ(writer1->get_name(), "factory_created");
-    
-    // Resolve again should create another instance
-    auto result2 = container.resolve("test_writer");
-    ASSERT_TRUE(result2);
-    
-    auto writer2 = std::dynamic_pointer_cast<mock_writer>(result2.value());
-    ASSERT_NE(writer2, nullptr);
-    EXPECT_NE(writer1, writer2);  // Different instances
+TEST_F(di_container_test, RegisterSimpleFactory_Transient_Succeeds)
+{
+    auto result = container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>("transient"); },
+        service_lifetime::transient);
+
+    EXPECT_TRUE(result.is_ok());
+    EXPECT_TRUE(container_.is_registered<base_writer>());
 }
 
-TEST_F(di_container_test, lightweight_container_singleton_registration) {
-    lightweight_di_container<base_writer> container;
-    
-    auto singleton = std::make_shared<mock_writer>("singleton");
-    
-    // Register a singleton
-    auto result = container.register_singleton("singleton_writer", singleton);
-    
-    ASSERT_TRUE(result);
-    EXPECT_TRUE(container.is_registered("singleton_writer"));
+TEST_F(di_container_test, RegisterInstance_Succeeds)
+{
+    auto instance = std::make_shared<mock_writer>("singleton_instance");
+
+    auto result = container_.register_instance<base_writer>(instance);
+
+    EXPECT_TRUE(result.is_ok());
+    EXPECT_TRUE(container_.is_registered<base_writer>());
 }
 
-TEST_F(di_container_test, lightweight_container_resolve_singleton) {
-    lightweight_di_container<base_writer> container;
-    
-    auto singleton = std::make_shared<mock_writer>("singleton");
-    container.register_singleton("singleton_writer", singleton);
-    
-    // Resolve should return the same instance
-    auto result1 = container.resolve("singleton_writer");
-    ASSERT_TRUE(result1);
-    
-    auto result2 = container.resolve("singleton_writer");
-    ASSERT_TRUE(result2);
-    
-    EXPECT_EQ(result1.value(), result2.value());  // Same instance
-    EXPECT_EQ(result1.value(), singleton);  // Same as registered
+TEST_F(di_container_test, RegisterFactory_WithContainerAccess_Succeeds)
+{
+    auto result = container_.register_factory<base_writer>(
+        [](IServiceContainer&) { return std::make_shared<mock_writer>("factory"); },
+        service_lifetime::transient);
+
+    EXPECT_TRUE(result.is_ok());
+    EXPECT_TRUE(container_.is_registered<base_writer>());
 }
 
-TEST_F(di_container_test, lightweight_container_resolve_not_found) {
-    lightweight_di_container<base_writer> container;
-    
-    auto result = container.resolve("non_existent");
-    ASSERT_FALSE(result);
-    EXPECT_EQ(result.error_code(), error_code::component_not_found);
+TEST_F(di_container_test, RegisterDuplicate_Fails)
+{
+    container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>(); },
+        service_lifetime::singleton);
+
+    auto result = container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>(); },
+        service_lifetime::singleton);
+
+    EXPECT_TRUE(result.is_err());
 }
 
-TEST_F(di_container_test, lightweight_container_invalid_registration) {
-    lightweight_di_container<base_writer> container;
-    
-    // Empty name
-    auto result1 = container.register_factory("", []() {
-        return std::make_shared<mock_writer>();
-    });
-    ASSERT_FALSE(result1);
-    EXPECT_EQ(result1.error_code(), error_code::invalid_argument);
-    
-    // Null factory
-    std::function<std::shared_ptr<base_writer>()> null_factory;
-    auto result2 = container.register_factory("test", null_factory);
-    ASSERT_FALSE(result2);
-    EXPECT_EQ(result2.error_code(), error_code::invalid_argument);
-    
-    // Null singleton
-    std::shared_ptr<base_writer> null_singleton;
-    auto result3 = container.register_singleton("test", null_singleton);
-    ASSERT_FALSE(result3);
-    EXPECT_EQ(result3.error_code(), error_code::invalid_argument);
+// --- Resolution Tests ---
+
+TEST_F(di_container_test, Resolve_Singleton_ReturnsSameInstance)
+{
+    container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>("singleton"); },
+        service_lifetime::singleton);
+
+    auto result1 = container_.resolve<base_writer>();
+    auto result2 = container_.resolve<base_writer>();
+
+    ASSERT_TRUE(result1.is_ok());
+    ASSERT_TRUE(result2.is_ok());
+    EXPECT_EQ(result1.value(), result2.value());
 }
 
-TEST_F(di_container_test, lightweight_container_clear) {
-    lightweight_di_container<base_writer> container;
-    
-    // Register multiple items
-    container.register_factory("factory1", []() {
-        return std::make_shared<mock_writer>("f1");
-    });
-    container.register_singleton("singleton1", 
-        std::make_shared<mock_writer>("s1"));
-    
-    EXPECT_EQ(container.size(), 2);
-    
-    // Clear all
-    auto result = container.clear();
-    ASSERT_TRUE(result);
-    
-    EXPECT_EQ(container.size(), 0);
-    EXPECT_FALSE(container.is_registered("factory1"));
-    EXPECT_FALSE(container.is_registered("singleton1"));
+TEST_F(di_container_test, Resolve_Transient_ReturnsDifferentInstances)
+{
+    container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>("transient"); },
+        service_lifetime::transient);
+
+    auto result1 = container_.resolve<base_writer>();
+    auto result2 = container_.resolve<base_writer>();
+
+    ASSERT_TRUE(result1.is_ok());
+    ASSERT_TRUE(result2.is_ok());
+    EXPECT_NE(result1.value(), result2.value());
 }
 
-TEST_F(di_container_test, lightweight_container_thread_safety) {
-    lightweight_di_container<base_writer> container;
-    
-    const int num_threads = 10;
-    const int operations_per_thread = 100;
+TEST_F(di_container_test, Resolve_Instance_ReturnsSameObject)
+{
+    auto instance = std::make_shared<mock_writer>("registered");
+    container_.register_instance<base_writer>(instance);
+
+    auto result = container_.resolve<base_writer>();
+
+    ASSERT_TRUE(result.is_ok());
+    EXPECT_EQ(result.value(), instance);
+
+    auto writer = std::dynamic_pointer_cast<mock_writer>(result.value());
+    ASSERT_NE(writer, nullptr);
+    EXPECT_EQ(writer->get_name(), "registered");
+}
+
+TEST_F(di_container_test, Resolve_Unregistered_Fails)
+{
+    auto result = container_.resolve<base_writer>();
+
+    EXPECT_TRUE(result.is_err());
+}
+
+TEST_F(di_container_test, ResolveOrNull_Unregistered_ReturnsNull)
+{
+    auto ptr = container_.resolve_or_null<base_writer>();
+
+    EXPECT_EQ(ptr, nullptr);
+}
+
+TEST_F(di_container_test, ResolveOrNull_Registered_ReturnsInstance)
+{
+    container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>(); },
+        service_lifetime::singleton);
+
+    auto ptr = container_.resolve_or_null<base_writer>();
+
+    EXPECT_NE(ptr, nullptr);
+}
+
+// --- Factory Resolution Tests ---
+
+TEST_F(di_container_test, Resolve_FactoryWithContainer_CreatesInstance)
+{
+    container_.register_factory<base_writer>(
+        [](IServiceContainer&) { return std::make_shared<mock_writer>("from_factory"); },
+        service_lifetime::transient);
+
+    auto result = container_.resolve<base_writer>();
+
+    ASSERT_TRUE(result.is_ok());
+    auto writer = std::dynamic_pointer_cast<mock_writer>(result.value());
+    ASSERT_NE(writer, nullptr);
+    EXPECT_EQ(writer->get_name(), "from_factory");
+}
+
+TEST_F(di_container_test, Resolve_SimpleFactory_CreatesInstance)
+{
+    container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>("simple"); },
+        service_lifetime::transient);
+
+    auto result = container_.resolve<base_writer>();
+
+    ASSERT_TRUE(result.is_ok());
+    auto writer = std::dynamic_pointer_cast<mock_writer>(result.value());
+    ASSERT_NE(writer, nullptr);
+    EXPECT_EQ(writer->get_name(), "simple");
+}
+
+// --- Clear and Unregister Tests ---
+
+TEST_F(di_container_test, Clear_RemovesAllRegistrations)
+{
+    container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>(); },
+        service_lifetime::singleton);
+
+    EXPECT_TRUE(container_.is_registered<base_writer>());
+
+    container_.clear();
+
+    EXPECT_FALSE(container_.is_registered<base_writer>());
+}
+
+TEST_F(di_container_test, Unregister_RemovesSpecificType)
+{
+    container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>(); },
+        service_lifetime::singleton);
+
+    EXPECT_TRUE(container_.is_registered<base_writer>());
+
+    auto result = container_.unregister<base_writer>();
+    EXPECT_TRUE(result.is_ok());
+    EXPECT_FALSE(container_.is_registered<base_writer>());
+}
+
+// --- Thread Safety Tests ---
+
+TEST_F(di_container_test, ConcurrentResolve_Singleton_ThreadSafe)
+{
+    container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>("singleton"); },
+        service_lifetime::singleton);
+
+    const int num_threads = 8;
+    const int ops_per_thread = 100;
     std::vector<std::thread> threads;
-    
-    // Register a factory
-    container.register_factory("concurrent", []() {
-        return std::make_shared<mock_writer>("concurrent");
-    });
-    
-    // Spawn threads that resolve concurrently
+    std::vector<std::shared_ptr<base_writer>> results(num_threads);
+
     for (int i = 0; i < num_threads; ++i) {
-        threads.emplace_back([&container, operations_per_thread]() {
-            for (int j = 0; j < operations_per_thread; ++j) {
-                auto result = container.resolve("concurrent");
-                EXPECT_TRUE(result);
-            }
-        });
+        threads.emplace_back(
+            [this, &results, i, ops_per_thread]()
+            {
+                for (int j = 0; j < ops_per_thread; ++j) {
+                    auto result = container_.resolve<base_writer>();
+                    EXPECT_TRUE(result.is_ok());
+                    if (j == 0) {
+                        results[i] = result.value();
+                    }
+                }
+            });
     }
-    
-    // Wait for all threads
+
     for (auto& t : threads) {
         t.join();
     }
-    
-    // Container should still be consistent
-    EXPECT_TRUE(container.is_registered("concurrent"));
+
+    // All threads should get the same singleton instance
+    for (int i = 1; i < num_threads; ++i) {
+        EXPECT_EQ(results[0], results[i]);
+    }
 }
 
-// Template helper methods tests
-TEST_F(di_container_test, lightweight_container_register_type) {
-    lightweight_di_container<base_writer> container;
-    
-    // Register type with default constructor
-    auto result = container.register_type<mock_writer>("typed_writer");
-    ASSERT_TRUE(result);
-    
-    // Resolve should work
-    auto resolved = container.resolve("typed_writer");
-    ASSERT_TRUE(resolved);
-    
-    auto writer = std::dynamic_pointer_cast<mock_writer>(resolved.value());
-    ASSERT_NE(writer, nullptr);
+TEST_F(di_container_test, ConcurrentResolve_Transient_ThreadSafe)
+{
+    container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>("transient"); },
+        service_lifetime::transient);
+
+    const int num_threads = 8;
+    const int ops_per_thread = 50;
+    std::vector<std::thread> threads;
+    std::atomic<int> success_count{0};
+
+    for (int i = 0; i < num_threads; ++i) {
+        threads.emplace_back(
+            [this, &success_count, ops_per_thread]()
+            {
+                for (int j = 0; j < ops_per_thread; ++j) {
+                    auto result = container_.resolve<base_writer>();
+                    if (result.is_ok()) {
+                        ++success_count;
+                    }
+                }
+            });
+    }
+
+    for (auto& t : threads) {
+        t.join();
+    }
+
+    EXPECT_EQ(success_count.load(), num_threads * ops_per_thread);
 }
 
-TEST_F(di_container_test, lightweight_container_register_type_with_args) {
-    lightweight_di_container<base_writer> container;
-    
-    // Register type with constructor arguments
-    auto result = container.register_type_with_args<mock_writer>(
-        "typed_writer_args", "custom_name"
-    );
-    ASSERT_TRUE(result);
-    
-    // Resolve should work
-    auto resolved = container.resolve("typed_writer_args");
-    ASSERT_TRUE(resolved);
-    
-    auto writer = std::dynamic_pointer_cast<mock_writer>(resolved.value());
-    ASSERT_NE(writer, nullptr);
-    EXPECT_EQ(writer->get_name(), "custom_name");
+// --- Service Descriptor Tests ---
+
+TEST_F(di_container_test, RegisteredServices_ReturnsDescriptors)
+{
+    container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>(); },
+        service_lifetime::singleton);
+
+    auto services = container_.registered_services();
+
+    EXPECT_GE(services.size(), 1u);
 }
 
-// Factory returning null test
-TEST_F(di_container_test, lightweight_container_factory_returns_null) {
-    lightweight_di_container<base_writer> container;
-    
-    // Register a factory that returns null
-    container.register_factory("null_factory", []() {
-        return std::shared_ptr<base_writer>(nullptr);
-    });
-    
-    // Resolve should fail
-    auto result = container.resolve("null_factory");
-    ASSERT_FALSE(result);
-    EXPECT_EQ(result.error_code(), error_code::creation_failed);
+// --- Freeze Tests ---
+
+TEST_F(di_container_test, Freeze_PreventsNewRegistrations)
+{
+    container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>(); },
+        service_lifetime::singleton);
+    container_.freeze();
+
+    EXPECT_TRUE(container_.is_frozen());
+
+    auto result = container_.register_simple_factory<log_writer_interface>(
+        []() { return std::make_shared<another_mock_writer>(); },
+        service_lifetime::singleton);
+
+    EXPECT_TRUE(result.is_err());
 }
 
-// Factory throwing exception test
-TEST_F(di_container_test, lightweight_container_factory_throws) {
-    lightweight_di_container<base_writer> container;
-    
-    // Register a factory that throws
-    container.register_factory("throwing_factory", []() -> std::shared_ptr<base_writer> {
-        throw std::runtime_error("Factory error");
-    });
-    
-    // Resolve should fail gracefully
-    auto result = container.resolve("throwing_factory");
-    ASSERT_FALSE(result);
-    EXPECT_EQ(result.error_code(), error_code::creation_failed);
+TEST_F(di_container_test, Freeze_AllowsResolution)
+{
+    container_.register_simple_factory<base_writer>(
+        []() { return std::make_shared<mock_writer>(); },
+        service_lifetime::singleton);
+    container_.freeze();
+
+    auto result = container_.resolve<base_writer>();
+    EXPECT_TRUE(result.is_ok());
 }
