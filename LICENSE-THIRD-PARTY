@@ -1,0 +1,80 @@
+# Third-Party License Compliance
+
+This file documents third-party dependencies and their license compatibility
+with the project's BSD-3-Clause license.
+
+## fmt
+
+| Item               | Value                                          |
+|--------------------|--------------------------------------------- --|
+| Component          | {fmt} formatting library                       |
+| License            | MIT                                            |
+| Minimum Version    | 10.0.0                                         |
+| Usage              | String formatting                              |
+| BSD-3 Compatible   | Yes                                            |
+
+## OpenSSL (Optional — encryption feature)
+
+| Item               | Value                                          |
+|--------------------|--------------------------------------------- --|
+| Component          | OpenSSL                                        |
+| License            | Apache-2.0                                     |
+| Usage              | AES-256-GCM encrypted log writer               |
+| Linking            | Dynamic (shared library)                       |
+| BSD-3 Compatible   | Yes                                            |
+
+## spdlog (Optional — benchmarks feature)
+
+| Item               | Value                                          |
+|--------------------|--------------------------------------------- --|
+| Component          | spdlog                                         |
+| License            | MIT                                            |
+| Minimum Version    | 1.13.0                                         |
+| Usage              | Benchmark comparison logging library           |
+| BSD-3 Compatible   | Yes                                            |
+
+## OpenTelemetry C++ SDK (Optional — otlp feature)
+
+| Item               | Value                                          |
+|--------------------|--------------------------------------------- --|
+| Component          | OpenTelemetry C++ SDK                          |
+| License            | Apache-2.0                                     |
+| Minimum Version    | 1.14.0                                         |
+| Usage              | Distributed tracing and metrics via OTLP       |
+| Linking            | Dynamic                                        |
+| BSD-3 Compatible   | Yes                                            |
+
+## protobuf (Optional — otlp feature)
+
+| Item               | Value                                          |
+|--------------------|--------------------------------------------- --|
+| Component          | Protocol Buffers                               |
+| License            | BSD-3-Clause                                   |
+| Minimum Version    | 3.21.0                                         |
+| Usage              | Serialization for gRPC/OTLP                    |
+| Linking            | Dynamic                                        |
+| BSD-3 Compatible   | Yes                                            |
+
+## gRPC (Optional — otlp feature)
+
+| Item               | Value                                          |
+|--------------------|--------------------------------------------- --|
+| Component          | gRPC C++                                       |
+| License            | Apache-2.0                                     |
+| Minimum Version    | 1.51.1                                         |
+| Usage              | OTLP gRPC transport                            |
+| Linking            | Dynamic                                        |
+| BSD-3 Compatible   | Yes                                            |
+
+## All Dependencies (License Summary)
+
+| Dependency          | License        | Type     | BSD-3 Compatible |
+|---------------------|----------------|----------|------------------|
+| fmt                 | MIT            | Core     | Yes              |
+| OpenSSL             | Apache-2.0     | Optional | Yes              |
+| spdlog              | MIT            | Optional | Yes              |
+| opentelemetry-cpp   | Apache-2.0     | Optional | Yes              |
+| protobuf            | BSD-3-Clause   | Optional | Yes              |
+| gRPC                | Apache-2.0     | Optional | Yes              |
+| GTest               | BSD-3-Clause   | Testing  | Yes              |
+| Google Benchmark    | Apache-2.0     | Testing  | Yes              |
