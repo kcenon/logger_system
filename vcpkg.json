@@ -41,11 +41,18 @@
       "dependencies": [
         {
           "name": "opentelemetry-cpp",
+          "version>=": "1.14.0",
           "default-features": false,
           "features": ["otlp-http", "otlp-grpc"]
         },
-        "protobuf",
-        "grpc"
+        {
+          "name": "protobuf",
+          "version>=": "3.21.0"
+        },
+        {
+          "name": "grpc",
+          "version>=": "1.51.1"
+        }
       ]
     }
   }
