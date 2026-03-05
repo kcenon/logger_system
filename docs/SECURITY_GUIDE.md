@@ -138,7 +138,7 @@ Creates tamper-evident audit logs with HMAC signatures for compliance and forens
 - **HMAC signatures** — Cryptographic integrity verification (SHA-256)
 - **Thread-safe logging** — Safe for concurrent access
 - **ISO 8601 timestamps** — Standardized time representation
-- **OpenSSL 3.x and 1.1.x support** — Adapts to available OpenSSL version
+- **OpenSSL 3.x required** — Uses EVP_MAC API for HMAC operations
 
 ### Audit Event Types
 

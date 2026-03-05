@@ -643,8 +643,7 @@ Memory Baseline:
 - OpenSSL `OPENSSL_cleanse()` for secure memory erasure
 - File permission enforcement (0600)
 - Cryptographically secure random key generation
-- OpenSSL 3.x compatible (EVP_MAC API for HMAC operations)
-- Backward compatible with OpenSSL 1.1.x (deprecated, EOL September 2023)
+- OpenSSL 3.x EVP_MAC API for HMAC operations
 
 ### 2. Path Validation
 - Path traversal attack prevention

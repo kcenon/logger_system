@@ -17,19 +17,13 @@ All rights reserved.
 #include <iomanip>
 #include <ctime>
 
-// OpenSSL for HMAC (optional, fallback to simple hash)
+// OpenSSL 3.x+ for HMAC via EVP_MAC API (optional, fallback to simple hash)
 #if __has_include(<openssl/hmac.h>)
 #include <openssl/hmac.h>
 #include <openssl/evp.h>
-#include <openssl/opensslv.h>
-#define HAS_OPENSSL_HMAC 1
-
-// OpenSSL 3.x uses EVP_MAC API instead of deprecated HMAC()
-#if OPENSSL_VERSION_NUMBER >= 0x30000000L
 #include <openssl/core_names.h>
 #include <openssl/params.h>
-#define USE_OPENSSL_3X_API 1
-#endif
+#define HAS_OPENSSL_HMAC 1
 #endif
 
 namespace kcenon::logger::security {
@@ -279,8 +273,7 @@ private:
         unsigned char digest[EVP_MAX_MD_SIZE];
         size_t digest_len = 0;
 
-#ifdef USE_OPENSSL_3X_API
-        // OpenSSL 3.x: Use EVP_MAC API (HMAC() is deprecated)
+        // OpenSSL 3.x EVP_MAC API
         EVP_MAC* mac = EVP_MAC_fetch(nullptr, "HMAC", nullptr);
         if (!mac) {
             return "";
@@ -292,7 +285,6 @@ private:
             return "";
         }
 
-        // Set HMAC parameters (digest algorithm)
         OSSL_PARAM params[] = {
             OSSL_PARAM_construct_utf8_string(
                 OSSL_MAC_PARAM_DIGEST,
@@ -324,15 +316,6 @@ private:
 
         EVP_MAC_CTX_free(ctx);
         EVP_MAC_free(mac);
-#else
-        // OpenSSL 1.1.x: Use legacy HMAC() function
-        unsigned int hmac_len = 0;
-        HMAC(EVP_sha256(),
-             key.data().data(), static_cast<int>(key.size()),
-             reinterpret_cast<const unsigned char*>(message.data()), message.size(),
-             digest, &hmac_len);
-        digest_len = hmac_len;
-#endif
 
         // Convert to hex string
         std::ostringstream hex;
