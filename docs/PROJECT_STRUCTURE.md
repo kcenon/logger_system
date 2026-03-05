@@ -629,8 +629,7 @@ option(LOGGER_ENABLE_COVERAGE "Enable code coverage" OFF)
 - **thread_system**: Threading primitives and logger interface
 - **common_system**: Core interfaces (ILogger, IMonitor, Result<T>)
 - **monitoring_system**: Metrics collection and health monitoring
-- **OpenSSL 3.x** (recommended): For secure key storage and encryption support
-  - OpenSSL 1.1.x is supported but deprecated (EOL September 2023)
+- **OpenSSL 3.0+** (required for encryption): Secure key storage and encryption support
 
 ---
 
