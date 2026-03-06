@@ -422,11 +422,13 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
             elseif(TARGET thread_system)
                 target_link_libraries(LoggerSystem PRIVATE thread_system)
             else()
+                # Fallback: header-only access when aggregate targets are unavailable.
+                # Do NOT link internal sub-targets (thread_base, interfaces, utilities)
+                # as they are not part of LoggerSystem's export set.
                 target_include_directories(LoggerSystem
                     PUBLIC
                         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
                 )
-                target_link_libraries(LoggerSystem PRIVATE thread_base interfaces utilities)
             endif()
         else()
             message(STATUS "Logger System: Using standalone async implementation (no thread_system)")
