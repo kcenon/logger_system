@@ -623,14 +623,13 @@ install(DIRECTORY sources/
     FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
 )
 
-# Temporarily disabled to avoid export dependency issues
-# if(INSTALL_TARGETS)
-#     install(EXPORT LoggerSystemTargets
-#         FILE LoggerSystemTargets.cmake
-#         NAMESPACE LoggerSystem::
-#         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/LoggerSystem
-#     )
-# endif()
+if(INSTALL_TARGETS)
+    install(EXPORT LoggerSystemTargets
+        FILE LoggerSystemTargets.cmake
+        NAMESPACE LoggerSystem::
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/LoggerSystem
+    )
+endif()
 
 configure_package_config_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/LoggerSystemConfig.cmake.in
