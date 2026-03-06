@@ -416,9 +416,17 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
         if(THREAD_SYSTEM_FOUND)
             message(STATUS "Logger System: thread_system found, optional backend available")
             if(TARGET ThreadSystem)
+                get_target_property(_ts_imported ThreadSystem IMPORTED)
                 target_link_libraries(LoggerSystem PRIVATE ThreadSystem)
+                if(NOT _ts_imported)
+                    set(_LOGGER_HAS_LOCAL_THREAD_SYSTEM TRUE)
+                endif()
             elseif(TARGET thread_system)
+                get_target_property(_ts_imported thread_system IMPORTED)
                 target_link_libraries(LoggerSystem PRIVATE thread_system)
+                if(NOT _ts_imported)
+                    set(_LOGGER_HAS_LOCAL_THREAD_SYSTEM TRUE)
+                endif()
             else()
                 # Fallback: header-only access when aggregate targets are unavailable.
                 # Do NOT link internal sub-targets (thread_base, interfaces, utilities)
@@ -624,11 +632,19 @@ install(DIRECTORY sources/
 )
 
 if(INSTALL_TARGETS)
-    install(EXPORT LoggerSystemTargets
-        FILE LoggerSystemTargets.cmake
-        NAMESPACE LoggerSystem::
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/LoggerSystem
-    )
+    if(_LOGGER_HAS_LOCAL_THREAD_SYSTEM)
+        # When thread_system is a local (non-IMPORTED) target (e.g., submodule build),
+        # its internal sub-targets (thread_base, etc.) are not in any export set.
+        # Skip install(EXPORT) to avoid CMake errors. Consumers building from source
+        # already have both logger_system and thread_system available.
+        message(STATUS "Logger System: Skipping install(EXPORT) — local thread_system linked (not IMPORTED)")
+    else()
+        install(EXPORT LoggerSystemTargets
+            FILE LoggerSystemTargets.cmake
+            NAMESPACE LoggerSystem::
+            DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/LoggerSystem
+        )
+    endif()
 endif()
 
 configure_package_config_file(
