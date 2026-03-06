@@ -50,6 +50,7 @@ docs/latex/
 # Temporary files
 *.tmp
 *.temp
+*.bak
 .cache/
 
 # Benchmark results

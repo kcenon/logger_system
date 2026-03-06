@@ -71,10 +71,8 @@ ALPHABETICAL_INDEX     = YES
 COLS_IN_ALPHA_INDEX    = 5
 
 INPUT                  = README.md ARCHITECTURE.md SECURITY.md \
-                         sources/logger \
-                         sources/logger/config \
-                         sources/logger/interfaces \
-                         sources/logger/writers \
+                         include/kcenon/logger \
+                         src \
                          docs
 FILE_PATTERNS          = *.h *.hpp *.cpp *.md
 EXCLUDE_PATTERNS       = */tests/* */unittest/* */benchmarks/*

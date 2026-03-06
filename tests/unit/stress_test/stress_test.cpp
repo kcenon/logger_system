@@ -18,11 +18,11 @@
 #include <thread>
 #include <vector>
 
-#include "../../sources/logger/config/logger_builder.h"
-#include "../../sources/logger/logger.h"
-#include "../../sources/logger/writers/async_writer.h"
-#include "../../sources/logger/writers/console_writer.h"
-#include "../../sources/logger/writers/file_writer.h"
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/writers/async_writer.h>
+#include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/logger/writers/file_writer.h>
 #include "../mocks/mock_writer.hpp"
 #include <kcenon/common/interfaces/logger_interface.h>
 

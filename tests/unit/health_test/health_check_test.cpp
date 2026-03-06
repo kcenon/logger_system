@@ -6,9 +6,10 @@ All rights reserved.
 *****************************************************************************/
 
 #include <gtest/gtest.h>
-#include "../../sources/logger/health/health_check_system.h"
-#include "../../sources/logger/writers/base_writer.h"
-#include "../../sources/logger/core/log_collector.h"
+// TODO: health_check_system.h not yet migrated to new structure
+// #include <kcenon/logger/health/health_check_system.h>
+#include <kcenon/logger/writers/base_writer.h>
+#include <kcenon/logger/core/log_collector.h>
 #include <kcenon/common/interfaces/logger_interface.h>
 #include <thread>
 #include <chrono>

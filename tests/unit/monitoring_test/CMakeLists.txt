@@ -9,8 +9,7 @@ add_executable(monitoring_test
 
 # Include directories
 target_include_directories(monitoring_test PRIVATE
-    ${CMAKE_SOURCE_DIR}/sources
-    ${CMAKE_SOURCE_DIR}/sources/logger
+    ${CMAKE_SOURCE_DIR}/include
 )
 
 # Link with required libraries
