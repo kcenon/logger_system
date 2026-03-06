@@ -22,7 +22,7 @@ target_link_libraries(stress_test
 # Include directories
 target_include_directories(stress_test
     PRIVATE
-        ${CMAKE_SOURCE_DIR}/sources
+        ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}/unittest
 )
 

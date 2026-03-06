@@ -13,7 +13,6 @@
     <paths>
         <dir name="include/"/>
         <dir name="src/"/>
-        <dir name="sources/"/>
     </paths>
 
     <!-- Excluded paths -->

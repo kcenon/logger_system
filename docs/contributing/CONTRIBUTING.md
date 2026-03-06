@@ -113,7 +113,7 @@ Use clang-format with the provided `.clang-format` file:
 
 ```bash
 # Format a file
-clang-format -i sources/logger/logger.cpp
+clang-format -i src/core/logger.cpp
 
 # Format all files
 find . -name "*.cpp" -o -name "*.h" | xargs clang-format -i

@@ -10,8 +10,9 @@
 
 #pragma once
 
-#include "../../sources/logger/monitoring/monitoring_interface.h"
-#include "../../sources/logger/error_codes.h"
+// TODO: monitoring_interface.h not yet migrated to new structure
+// #include <kcenon/logger/monitoring/monitoring_interface.h>
+#include <kcenon/logger/core/error_codes.h>
 #include <atomic>
 #include <map>
 #include <mutex>
