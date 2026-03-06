@@ -274,16 +274,14 @@ if(LOGGER_USE_THREAD_SYSTEM)
         # - src/integration/thread_system_integration.cpp
         add_compile_definitions(LOGGER_HAS_THREAD_SYSTEM)
 
-        # Create a unified thread_system target if needed
+        # Create a unified thread_system target if needed (header-only).
+        # Do NOT link internal sub-targets (thread_base, interfaces, utilities)
+        # as they are not in LoggerSystem's export set and cause install(EXPORT) failures.
         if(NOT TARGET thread_system AND NOT TARGET ThreadSystem)
             add_library(thread_system INTERFACE)
-            if(TARGET utilities AND TARGET interfaces AND TARGET thread_base)
-                target_link_libraries(thread_system INTERFACE
-                    utilities
-                    interfaces
-                    thread_base
-                )
-            endif()
+            target_include_directories(thread_system INTERFACE
+                $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
+            )
         endif()
     else()
         message(STATUS "Logger System: thread_system not found, using standalone mode")
