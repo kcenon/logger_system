@@ -13,6 +13,16 @@
       "version>=": "10.0.0"
     }
   ],
+  "overrides": [
+    { "name": "fmt", "version": "10.2.1" },
+    { "name": "openssl", "version": "3.3.0" },
+    { "name": "spdlog", "version": "1.13.0" },
+    { "name": "opentelemetry-cpp", "version": "1.14.2" },
+    { "name": "protobuf", "version": "3.21.12" },
+    { "name": "grpc", "version": "1.51.1" },
+    { "name": "gtest", "version": "1.14.0" },
+    { "name": "benchmark", "version": "1.8.3" }
+  ],
   "features": {
     "encryption": {
       "description": "Enable encrypted log writer with AES-256-GCM",
