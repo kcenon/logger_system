@@ -102,9 +102,15 @@ When enabled, CMake will:
 
 ## Dependency Configuration
 
-### Bidirectional Dependency Risk (Issue #252)
+### Bidirectional Dependency Risk (Issue #252 — Resolved)
 
-Both `logger_system` and `thread_system` can optionally depend on each other:
+> **Resolved**: The bidirectional dependency risk has been resolved. thread_system's
+> `BUILD_WITH_LOGGER_SYSTEM` is deprecated (thread_system#336) and scheduled for removal
+> in v0.5.0.0. thread_system now uses `ILogger` dependency injection from common_system
+> instead. See [docs/DEPENDENCY_ARCHITECTURE.md](../DEPENDENCY_ARCHITECTURE.md) for the
+> resolved dependency graph.
+
+Previously, both `logger_system` and `thread_system` could optionally depend on each other:
 
 ```
            ┌──────────────────────┐

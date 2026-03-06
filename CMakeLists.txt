@@ -206,47 +206,42 @@ endif()
 option(LOGGER_USE_THREAD_SYSTEM "Enable optional thread_system integration" OFF)
 
 ##################################################
-# Bidirectional Dependency Check (Issue #252)
+# Bidirectional Dependency Guard (Issue #252 — Resolved)
 ##################################################
-# WARNING: Circular dependency risk exists between logger_system and thread_system
+# The bidirectional dependency risk between logger_system and thread_system has been
+# resolved. thread_system's BUILD_WITH_LOGGER_SYSTEM is deprecated (thread_system#336)
+# and scheduled for removal in v0.5.0.0.
 #
-# Possible configurations:
-# - logger_system → thread_system (LOGGER_USE_THREAD_SYSTEM=ON): Uses thread_pool for async I/O
-# - thread_system → logger_system (BUILD_WITH_LOGGER_SYSTEM=ON): Uses logger for debug output
+# This guard remains as a safety check during the transition period.
+# Direction: logger_system → thread_system (optional, unidirectional)
+# Removed:  thread_system → logger_system (deprecated, uses ILogger DI instead)
 #
-# RECOMMENDATION: Enable only ONE direction in production:
-# - Preferred: logger_system → thread_system (for async performance)
-# - Avoid: Bidirectional dependency (may cause build order issues)
-#
-# See: docs/integration/THREAD_SYSTEM.md for recommended configurations
+# See: docs/DEPENDENCY_ARCHITECTURE.md for the resolved dependency graph
+# See: docs/integration/THREAD_SYSTEM.md for integration options
 
-function(check_bidirectional_dependency_risk)
+function(check_bidirectional_dependency_guard)
     # Check if we're enabling logger → thread direction
     if(LOGGER_USE_THREAD_SYSTEM)
-        # Check if thread_system has reverse dependency (thread → logger)
+        # Check if thread_system still has deprecated reverse dependency (thread → logger)
         if(DEFINED BUILD_WITH_LOGGER_SYSTEM AND BUILD_WITH_LOGGER_SYSTEM)
             message(WARNING
                 "=================================================================\n"
-                "BIDIRECTIONAL DEPENDENCY RISK DETECTED (Issue #252)\n"
+                "DEPRECATED CONFIGURATION DETECTED (Issue #252)\n"
                 "=================================================================\n"
                 "  logger_system → thread_system (LOGGER_USE_THREAD_SYSTEM=ON)\n"
                 "  thread_system → logger_system (BUILD_WITH_LOGGER_SYSTEM=ON)\n"
                 "\n"
-                "This configuration may cause:\n"
-                "  - Build order issues in unified builds\n"
-                "  - Circular header include problems\n"
-                "  - Initialization order complications\n"
+                "BUILD_WITH_LOGGER_SYSTEM is deprecated in thread_system (see\n"
+                "thread_system#336) and scheduled for removal in v0.5.0.0.\n"
+                "thread_system now uses ILogger dependency injection instead.\n"
                 "\n"
-                "RECOMMENDATION:\n"
-                "  Enable only ONE direction. Preferred configuration:\n"
-                "    LOGGER_USE_THREAD_SYSTEM=ON (for async I/O performance)\n"
-                "    BUILD_WITH_LOGGER_SYSTEM=OFF (disable reverse dependency)\n"
-                "\n"
-                "See: docs/integration/THREAD_SYSTEM.md#dependency-configuration\n"
+                "ACTION:\n"
+                "  Set BUILD_WITH_LOGGER_SYSTEM=OFF and use ILogger DI approach.\n"
+                "  See: docs/DEPENDENCY_ARCHITECTURE.md\n"
                 "=================================================================")
         endif()
 
-        # Additional check: Inspect thread_system target for reverse dependency
+        # Additional check: Inspect thread_system target for deprecated reverse dependency
         if(TARGET thread_system::thread_system)
             get_target_property(THREAD_DEFS thread_system::thread_system
                                INTERFACE_COMPILE_DEFINITIONS)
@@ -254,17 +249,17 @@ function(check_bidirectional_dependency_risk)
                 string(FIND "${THREAD_DEFS}" "BUILD_WITH_LOGGER_SYSTEM" _bidep_pos)
                 if(NOT _bidep_pos EQUAL -1)
                     message(WARNING
-                        "Bidirectional dependency detected: thread_system target has "
+                        "Deprecated configuration detected: thread_system target has "
                         "BUILD_WITH_LOGGER_SYSTEM in compile definitions. "
-                        "Consider disabling one direction.")
+                        "This is deprecated (thread_system#336) and will be removed in v0.5.0.0.")
                 endif()
             endif()
         endif()
     endif()
 endfunction()
 
-# Perform dependency check
-check_bidirectional_dependency_risk()
+# Perform dependency guard check
+check_bidirectional_dependency_guard()
 
 if(LOGGER_USE_THREAD_SYSTEM)
     unified_find_dependency(thread_system QUIET)
