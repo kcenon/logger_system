@@ -126,12 +126,11 @@ jobs:
       run: |
         echo "# Sanitizer Test Results" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "## Phase 0: Baseline Establishment" >> $GITHUB_STEP_SUMMARY
+        echo "## Phase 1: Sanitizer Failures Block Merges" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "Sanitizer tests are configured and running." >> $GITHUB_STEP_SUMMARY
-        echo "Current phase allows warnings - focus is on establishing baseline." >> $GITHUB_STEP_SUMMARY
+        echo "Sanitizer tests are configured and enforced." >> $GITHUB_STEP_SUMMARY
+        echo "Sanitizer failures now block merges to ensure code quality." >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
-        echo "- Document baseline sanitizer warnings" >> $GITHUB_STEP_SUMMARY
-        echo "- Phase 1 will address thread safety issues" >> $GITHUB_STEP_SUMMARY
+        echo "- Fix any remaining sanitizer warnings" >> $GITHUB_STEP_SUMMARY
         echo "- Phase 2 will address memory management issues" >> $GITHUB_STEP_SUMMARY

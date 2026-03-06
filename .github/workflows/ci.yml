@@ -303,11 +303,10 @@ jobs:
         path: build/Testing/
         retention-days: 7
 
-  # Phase 0: Allow failures, just collect data
+  # Phase 1: Sanitizer failures block merges
   sanitizers:
     name: Sanitizers (${{ matrix.sanitizer }})
     runs-on: ubuntu-24.04
-    continue-on-error: true
     timeout-minutes: 60
 
     strategy:
@@ -389,7 +388,7 @@ jobs:
         cd build
         export ${{ matrix.sanitizer.env }}
         if [ -f "bin/logger_unit" ]; then
-          ./bin/logger_unit || echo "${{ matrix.sanitizer.name }} detected issues (expected in Phase 0)"
+          ./bin/logger_unit
         fi
 
     - name: Upload sanitizer logs
