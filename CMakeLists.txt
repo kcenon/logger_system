@@ -535,19 +535,10 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
         endif()
 
     else()
-        message(STATUS "Logger System: New structure incomplete, using legacy sources")
-        set(USE_LEGACY_SOURCES TRUE)
+        message(FATAL_ERROR "Logger System: New structure incomplete (src/ has fewer than 6 .cpp files)")
     endif()
 else()
-    message(STATUS "Logger System: Using legacy directory structure")
-    set(USE_LEGACY_SOURCES TRUE)
-endif()
-
-# Use legacy sources if needed
-if(USE_LEGACY_SOURCES)
-    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/sources)
-        add_subdirectory(sources)
-    endif()
+    message(FATAL_ERROR "Logger System: Required directories missing: include/kcenon/logger and src/")
 endif()
 
 if (BUILD_SAMPLES)
@@ -636,7 +627,7 @@ if(INSTALL_TARGETS)
     endif()
 endif()
 
-install(DIRECTORY sources/
+install(DIRECTORY include/kcenon/logger/
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/logger_system
     FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
 )

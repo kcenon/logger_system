@@ -12,7 +12,9 @@ All rights reserved.
 #include <fstream>
 #include <thread>
 
-#include "../../sources/interfaces/logger_crash_safety.h"
+// TODO: logger_crash_safety.h not yet migrated to new structure
+// See include/kcenon/logger/safety/crash_safe_logger.h for replacement
+#include <kcenon/logger/safety/crash_safe_logger.h>
 
 using namespace logger_module;
 

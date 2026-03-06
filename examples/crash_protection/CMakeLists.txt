@@ -21,10 +21,7 @@ set_target_properties(${SAMPLE_NAME} PROPERTIES
 
 # Include directories
 target_include_directories(${SAMPLE_NAME} PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../sources
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/interfaces
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/logger
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/logger/writers
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../include
 )
 
 # Link libraries

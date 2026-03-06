@@ -5,7 +5,8 @@ Copyright (c) 2025, 🍀☀🌕🌥 🌊
 All rights reserved.
 *****************************************************************************/
 
-#include "../../sources/logger/flow/overflow_policy.h"
+// TODO: overflow_policy.h not yet migrated to new structure
+// #include <kcenon/logger/flow/overflow_policy.h>
 
 #include <gtest/gtest.h>
 #include <kcenon/common/interfaces/logger_interface.h>

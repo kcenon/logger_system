@@ -13,7 +13,7 @@ target_link_libraries(overflow_policy_test
 
 target_include_directories(overflow_policy_test
     PRIVATE
-        ${CMAKE_SOURCE_DIR}/sources
+        ${CMAKE_SOURCE_DIR}/include
 )
 
 # Add test

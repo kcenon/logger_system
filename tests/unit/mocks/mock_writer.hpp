@@ -10,9 +10,9 @@
 
 #pragma once
 
-#include "../../sources/logger/writers/base_writer.h"
-#include "../../sources/logger/interfaces/log_entry.h"
-#include "../../sources/logger/error_codes.h"
+#include <kcenon/logger/writers/base_writer.h>
+#include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/logger/core/error_codes.h>
 #include <kcenon/common/interfaces/logger_interface.h>
 #include <atomic>
 #include <vector>

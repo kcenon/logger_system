@@ -110,7 +110,7 @@ function(logger_setup_coverage_target)
             COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage
             COMMAND ${GCOVR_EXECUTABLE}
                 --root ${CMAKE_SOURCE_DIR}
-                --filter ${CMAKE_SOURCE_DIR}/sources/
+                --filter ${CMAKE_SOURCE_DIR}/src/
                 --exclude ${CMAKE_SOURCE_DIR}/unittest/
                 --exclude ${CMAKE_SOURCE_DIR}/tests/
                 --html --html-details
