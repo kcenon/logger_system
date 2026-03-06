@@ -11,6 +11,12 @@ include(CMakeFindDependencyMacro)
 # Find required dependencies
 find_dependency(Threads REQUIRED)
 
+# common_system is required for Result<T>, ILogger, and shared interfaces
+set(LoggerSystem_BUILD_WITH_COMMON_SYSTEM @BUILD_WITH_COMMON_SYSTEM@)
+if(LoggerSystem_BUILD_WITH_COMMON_SYSTEM)
+    find_dependency(common_system REQUIRED)
+endif()
+
 # thread_system is optional (Issue #222: standalone std::jthread implementation)
 set(LoggerSystem_USE_THREAD_SYSTEM @LOGGER_USE_THREAD_SYSTEM@)
 if(LoggerSystem_USE_THREAD_SYSTEM)

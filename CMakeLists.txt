@@ -274,16 +274,14 @@ if(LOGGER_USE_THREAD_SYSTEM)
         # - src/integration/thread_system_integration.cpp
         add_compile_definitions(LOGGER_HAS_THREAD_SYSTEM)
 
-        # Create a unified thread_system target if needed
+        # Create a unified thread_system target if needed (header-only).
+        # Do NOT link internal sub-targets (thread_base, interfaces, utilities)
+        # as they are not in LoggerSystem's export set and cause install(EXPORT) failures.
         if(NOT TARGET thread_system AND NOT TARGET ThreadSystem)
             add_library(thread_system INTERFACE)
-            if(TARGET utilities AND TARGET interfaces AND TARGET thread_base)
-                target_link_libraries(thread_system INTERFACE
-                    utilities
-                    interfaces
-                    thread_base
-                )
-            endif()
+            target_include_directories(thread_system INTERFACE
+                $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
+            )
         endif()
     else()
         message(STATUS "Logger System: thread_system not found, using standalone mode")
@@ -418,15 +416,25 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
         if(THREAD_SYSTEM_FOUND)
             message(STATUS "Logger System: thread_system found, optional backend available")
             if(TARGET ThreadSystem)
+                get_target_property(_ts_imported ThreadSystem IMPORTED)
                 target_link_libraries(LoggerSystem PRIVATE ThreadSystem)
+                if(NOT _ts_imported)
+                    set(_LOGGER_HAS_LOCAL_THREAD_SYSTEM TRUE)
+                endif()
             elseif(TARGET thread_system)
+                get_target_property(_ts_imported thread_system IMPORTED)
                 target_link_libraries(LoggerSystem PRIVATE thread_system)
+                if(NOT _ts_imported)
+                    set(_LOGGER_HAS_LOCAL_THREAD_SYSTEM TRUE)
+                endif()
             else()
+                # Fallback: header-only access when aggregate targets are unavailable.
+                # Do NOT link internal sub-targets (thread_base, interfaces, utilities)
+                # as they are not part of LoggerSystem's export set.
                 target_include_directories(LoggerSystem
                     PUBLIC
                         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
                 )
-                target_link_libraries(LoggerSystem PRIVATE thread_base interfaces utilities)
             endif()
         else()
             message(STATUS "Logger System: Using standalone async implementation (no thread_system)")
@@ -609,13 +617,23 @@ endif()
 # Note: thread_system is an external dependency and should not be installed as part of LoggerSystem
 
 if(INSTALL_TARGETS)
-    install(TARGETS ${INSTALL_TARGETS}
-        EXPORT LoggerSystemTargets
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    )
+    if(_LOGGER_HAS_LOCAL_THREAD_SYSTEM)
+        # Local thread_system targets cannot be exported — install without EXPORT
+        install(TARGETS ${INSTALL_TARGETS}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        )
+    else()
+        install(TARGETS ${INSTALL_TARGETS}
+            EXPORT LoggerSystemTargets
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        )
+    endif()
 endif()
 
 install(DIRECTORY sources/
@@ -623,14 +641,21 @@ install(DIRECTORY sources/
     FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
 )
 
-# Temporarily disabled to avoid export dependency issues
-# if(INSTALL_TARGETS)
-#     install(EXPORT LoggerSystemTargets
-#         FILE LoggerSystemTargets.cmake
-#         NAMESPACE LoggerSystem::
-#         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/LoggerSystem
-#     )
-# endif()
+if(INSTALL_TARGETS)
+    if(_LOGGER_HAS_LOCAL_THREAD_SYSTEM)
+        # When thread_system is a local (non-IMPORTED) target (e.g., submodule build),
+        # its internal sub-targets (thread_base, etc.) are not in any export set.
+        # Skip install(EXPORT) to avoid CMake errors. Consumers building from source
+        # already have both logger_system and thread_system available.
+        message(STATUS "Logger System: Skipping install(EXPORT) — local thread_system linked (not IMPORTED)")
+    else()
+        install(EXPORT LoggerSystemTargets
+            FILE LoggerSystemTargets.cmake
+            NAMESPACE LoggerSystem::
+            DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/LoggerSystem
+        )
+    endif()
+endif()
 
 configure_package_config_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/LoggerSystemConfig.cmake.in
