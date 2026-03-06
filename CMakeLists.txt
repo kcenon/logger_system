@@ -617,13 +617,23 @@ endif()
 # Note: thread_system is an external dependency and should not be installed as part of LoggerSystem
 
 if(INSTALL_TARGETS)
-    install(TARGETS ${INSTALL_TARGETS}
-        EXPORT LoggerSystemTargets
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    )
+    if(_LOGGER_HAS_LOCAL_THREAD_SYSTEM)
+        # Local thread_system targets cannot be exported — install without EXPORT
+        install(TARGETS ${INSTALL_TARGETS}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        )
+    else()
+        install(TARGETS ${INSTALL_TARGETS}
+            EXPORT LoggerSystemTargets
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        )
+    endif()
 endif()
 
 install(DIRECTORY sources/
