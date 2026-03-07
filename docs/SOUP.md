@@ -8,45 +8,30 @@
 | Document | Version |
 |----------|---------|
 | IEC 62304 Reference | &sect;8.1.2 Software items from SOUP |
-| Last Reviewed | 2026-03-06 |
-| logger_system Version | 1.0.0 |
-
----
-
-## Internal Ecosystem Dependencies
-
-| ID | Name | Manufacturer | Version | License | Usage | Safety Class | Known Anomalies |
-|----|------|-------------|---------|---------|-------|-------------|-----------------|
-| INT-001 | [common_system](https://github.com/kcenon/common_system) | kcenon | Latest (embedded) | BSD-3-Clause | Result&lt;T&gt; pattern, error handling primitives | B | None |
-| INT-002 | [thread_system](https://github.com/kcenon/thread_system) | kcenon | Latest (embedded) | BSD-3-Clause | Thread pool, async task scheduling for log writers | B | None |
-
-> **Note**: common_system and thread_system are embedded as source-level dependencies within the logger_system repository.
+| Last Reviewed | 2026-03-07 |
+| logger_system Version | 0.1.0 |
 
 ---
 
 ## Production SOUP
 
-| ID | Name | Manufacturer | Version | License | Usage | Safety Class | Known Anomalies |
-|----|------|-------------|---------|---------|-------|-------------|-----------------|
-| SOUP-001 | [fmt](https://github.com/fmtlib/fmt) | Victor Zverovich | 10.2.1 | MIT | String formatting library for log message formatting | A | None |
+logger_system has no required production SOUP in its default configuration. All production dependencies are behind optional features.
+
+| ID | Name | Manufacturer | Version | License | Usage | Safety Class | Linking | Known Anomalies |
+|----|------|-------------|---------|---------|-------|-------------|---------|-----------------|
+| &mdash; | *(none in default build)* | | | | | | | |
 
 ---
 
 ## Optional SOUP
 
-### Encryption Feature (`encryption`)
-
-| ID | Name | Manufacturer | Version | License | Usage | Safety Class | Known Anomalies |
-|----|------|-------------|---------|---------|-------|-------------|-----------------|
-| SOUP-002 | [OpenSSL](https://www.openssl.org/) | OpenSSL Project | 3.3.0 | Apache-2.0 | AES-256-GCM encrypted log writer | C | CVE tracking via vendor advisories required |
-
-### OTLP Feature (`otlp`)
-
-| ID | Name | Manufacturer | Version | License | Usage | Safety Class | Known Anomalies |
-|----|------|-------------|---------|---------|-------|-------------|-----------------|
-| SOUP-003 | [opentelemetry-cpp](https://github.com/open-telemetry/opentelemetry-cpp) | OpenTelemetry Authors (CNCF) | 1.14.2 | Apache-2.0 | OTLP log export for observability integration | A | None |
-| SOUP-004 | [Protocol Buffers](https://github.com/protocolbuffers/protobuf) | Google | 3.21.12 | BSD-3-Clause | Serialization for OTLP transport | A | None |
-| SOUP-005 | [gRPC](https://github.com/grpc/grpc) | Google | 1.51.1 | Apache-2.0 | RPC transport for OTLP export | A | None |
+| ID | Name | Manufacturer | Version | License | Usage | Safety Class | Linking | Known Anomalies |
+|----|------|-------------|---------|---------|-------|-------------|---------|-----------------|
+| SOUP-001 | [OpenSSL](https://www.openssl.org/) | OpenSSL Software Foundation | 3.3.0 | Apache-2.0 | AES-256-GCM encrypted log writer (`encryption` feature) | C | Dynamic | None known at pinned version |
+| SOUP-002 | [OpenTelemetry C++ SDK](https://github.com/open-telemetry/opentelemetry-cpp) | CNCF / OpenTelemetry | 1.14.2 | Apache-2.0 | Distributed tracing and metrics export via OTLP (`otlp` feature) | B | Dynamic | None |
+| SOUP-003 | [gRPC](https://grpc.io/) | Google / CNCF | 1.51.1 | Apache-2.0 | High-performance RPC for OTLP telemetry export (`otlp` feature) | B | Dynamic | None |
+| SOUP-004 | [Protocol Buffers](https://protobuf.dev/) | Google | 3.21.12 | BSD-3-Clause | Serialization format for gRPC and telemetry (`otlp` feature) | B | Dynamic | None |
+| SOUP-005 | [spdlog](https://github.com/gabime/spdlog) | Gabi Melman | 1.13.0 | MIT | Fast C++ logging library for benchmark comparison (`benchmarks` feature) | A | Header-only or shared | None |
 
 ---
 
@@ -54,9 +39,8 @@
 
 | ID | Name | Manufacturer | Version | License | Usage | Qualification |
 |----|------|-------------|---------|---------|-------|--------------|
-| SOUP-T01 | [Google Test](https://github.com/google/googletest) | Google | 1.14.0 | BSD-3-Clause | Unit testing framework | Required |
+| SOUP-T01 | [Google Test](https://github.com/google/googletest) | Google | 1.14.0 | BSD-3-Clause | Unit testing framework (includes GMock) | Required |
 | SOUP-T02 | [Google Benchmark](https://github.com/google/benchmark) | Google | 1.8.3 | Apache-2.0 | Performance benchmarking framework | Not required |
-| SOUP-T03 | [spdlog](https://github.com/gabime/spdlog) | Gabi Melman | 1.13.0 | MIT | Benchmark comparison baseline (not used in production) | Not required |
 
 ---
 
@@ -64,8 +48,8 @@
 
 | Class | Definition | Example |
 |-------|-----------|---------|
-| **A** | No contribution to hazardous situation | Logging, formatting, test frameworks |
-| **B** | Non-serious injury possible | Data processing, network communication |
+| **A** | No contribution to hazardous situation | Logging, formatting, benchmarking |
+| **B** | Non-serious injury possible | Telemetry export, data serialization |
 | **C** | Death or serious injury possible | Encryption, access control |
 
 ---
@@ -77,7 +61,6 @@ All SOUP versions are pinned in `vcpkg.json` via the `overrides` field:
 ```json
 {
   "overrides": [
-    { "name": "fmt", "version": "10.2.1" },
     { "name": "openssl", "version": "3.3.0" },
     { "name": "spdlog", "version": "1.13.0" },
     { "name": "opentelemetry-cpp", "version": "1.14.2" },
@@ -99,7 +82,7 @@ When updating any SOUP dependency:
 
 1. Update the version in `vcpkg.json` (overrides section)
 2. Update the corresponding row in this document
-3. Verify no new known anomalies (check CVE databases, especially for OpenSSL)
+3. Verify no new known anomalies (check CVE databases)
 4. Run full CI/CD pipeline to confirm compatibility
 5. Document the change in the PR description
 
@@ -109,8 +92,8 @@ When updating any SOUP dependency:
 
 | License | Count | Copyleft | Obligation |
 |---------|-------|----------|------------|
-| MIT | 2 | No | Include copyright notice |
-| Apache-2.0 | 3 | No | Include license + NOTICE file |
+| Apache-2.0 | 4 | No | Include license + NOTICE file |
 | BSD-3-Clause | 2 | No | Include copyright + no-endorsement clause |
+| MIT | 1 | No | Include copyright notice |
 
-> **GPL contamination**: None detected. All dependencies are permissively licensed.
+> **No LGPL or copyleft dependencies** in logger_system. All licenses are permissive and BSD-3-Clause compatible.
