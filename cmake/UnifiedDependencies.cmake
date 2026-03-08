@@ -223,9 +223,21 @@ endmacro()
 macro(unified_find_dependency DEP_NAME)
     cmake_parse_arguments(_UFD "REQUIRED;OPTIONAL" "VERSION;GIT_TAG" "" ${ARGN})
 
-    # Default to main branch if no tag specified
+    # Default to the latest release tag if no tag specified.
+    # Using "main" is a moving target and breaks build reproducibility
+    # and SOUP version traceability (IEC 62304 §8.1.2).
+    # See: https://github.com/kcenon/common_system/issues/402
     if(NOT _UFD_GIT_TAG)
-        set(_UFD_GIT_TAG "main")
+        set(_UFD_GIT_TAG "v0.1.0")
+    endif()
+
+    if("${_UFD_GIT_TAG}" STREQUAL "main")
+        message(WARNING
+            "[UnifiedDependencies] GIT_TAG 'main' used for ${DEP_NAME}.\n"
+            "This breaks build reproducibility and SOUP version traceability (IEC 62304 §8.1.2).\n"
+            "Pass a specific release tag to unified_find_dependency(), e.g.:\n"
+            "  unified_find_dependency(${DEP_NAME} GIT_TAG v0.1.0)"
+        )
     endif()
 
     # Check if already loaded
