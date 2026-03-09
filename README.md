@@ -184,7 +184,7 @@ For comprehensive examples including all decorators, performance patterns, and r
 
 **Using vcpkg**:
 ```bash
-# Install with default features (fmt only)
+# Install with the default feature set (no optional third-party dependencies)
 vcpkg install kcenon-logger-system
 
 # Install with benchmarks (includes spdlog for comparison)
@@ -221,10 +221,25 @@ target_link_libraries(your_app PRIVATE LoggerSystem::logger)
 | CMake | 3.20+ | Yes | Build system |
 | [common_system](https://github.com/kcenon/common_system) | latest | Yes | Common interfaces (ILogger, Result<T>) |
 | [thread_system](https://github.com/kcenon/thread_system) | latest | Optional | Async logging with thread pool support |
-| [fmt](https://github.com/fmtlib/fmt) | 10.0+ | Yes | Modern formatting library |
+| Third-party production packages | None in the default vcpkg manifest | No | Optional features add OpenSSL, OTLP, or benchmark-comparison dependencies only when enabled |
 | vcpkg | latest | Optional | Package management |
 
-> **Note**: spdlog is **not** used internally by logger_system. It is only included as an optional dependency for benchmark comparisons. See [Benchmarks](docs/BENCHMARKS.md) for performance comparisons.
+> **Note**: The default vcpkg package has no required third-party production dependencies. Optional features add OpenSSL (`encryption`), OpenTelemetry/gRPC/Protocol Buffers (`otlp`), or spdlog (`benchmarks`) only when explicitly enabled. See [docs/SOUP.md](docs/SOUP.md) and [LICENSE-THIRD-PARTY](LICENSE-THIRD-PARTY) for the authoritative dependency inventory.
+
+#### Optional Feature Dependencies
+
+| Feature | Third-Party Dependencies | Purpose |
+|---------|--------------------------|---------|
+| `encryption` | OpenSSL | AES-256-GCM encrypted log writer |
+| `otlp` | OpenTelemetry C++ SDK, gRPC, Protocol Buffers | OTLP telemetry export |
+| `benchmarks` | spdlog | Benchmark comparison against another logging library |
+
+#### Development and Benchmark Dependencies
+
+| Category | Dependencies | Purpose |
+|----------|--------------|---------|
+| Test-only | Google Test | Unit tests and mocks |
+| Benchmark-only | Google Benchmark | Performance benchmarks |
 
 #### Dependency Flow
 
@@ -567,7 +582,7 @@ cmake -DLOGGER_WARNINGS_AS_ERRORS=ON  # Treat warnings as errors
 **Minimum Requirements**:
 - C++20 compiler
 - CMake 3.20+
-- fmt library
+- No required third-party production packages in the default build
 
 [🖥️ Platform Details →](docs/PRODUCTION_QUALITY.md#platform-support)
 
