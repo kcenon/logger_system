@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         submodules: recursive
 
@@ -41,13 +41,13 @@ jobs:
         cmake --version | head -1
 
     - name: Checkout common_system (required dependency)
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/common_system
         path: common_system
 
     - name: Checkout thread_system (required dependency)
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/thread_system
         ref: main
@@ -124,7 +124,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         submodules: recursive
 
@@ -134,13 +134,13 @@ jobs:
         # GTest is now fetched via CMake FetchContent - no system package needed
 
     - name: Checkout common_system (required dependency)
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/common_system
         path: common_system
 
     - name: Checkout thread_system (required dependency)
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/thread_system
         ref: main
@@ -203,18 +203,18 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         submodules: recursive
 
     - name: Checkout common_system (required dependency)
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/common_system
         path: common_system
 
     - name: Checkout thread_system (required dependency)
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/thread_system
         ref: main
@@ -260,7 +260,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         submodules: recursive
 
@@ -296,13 +296,13 @@ jobs:
         # GTest is now fetched via CMake FetchContent - no system package needed
 
     - name: Checkout common_system (required dependency)
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/common_system
         path: common_system
 
     - name: Checkout thread_system (required dependency)
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/thread_system
         ref: main
@@ -433,7 +433,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         submodules: recursive
 
@@ -468,13 +468,13 @@ jobs:
         # GTest is now fetched via CMake FetchContent - no system package needed
 
     - name: Checkout common_system (required dependency)
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/common_system
         path: common_system
 
     - name: Checkout thread_system (required dependency)
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/thread_system
         ref: main
@@ -537,7 +537,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         submodules: recursive
 

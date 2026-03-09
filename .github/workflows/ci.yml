@@ -35,7 +35,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         submodules: recursive
         persist-credentials: true
@@ -44,14 +44,14 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Checkout common_system dependency
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/common_system
         path: common_system
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Checkout thread_system dependency
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/thread_system
         ref: main
@@ -325,7 +325,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         submodules: recursive
         persist-credentials: true
@@ -334,14 +334,14 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Checkout common_system dependency
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/common_system
         path: common_system
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Checkout thread_system dependency
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/thread_system
         ref: main
@@ -418,7 +418,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         submodules: recursive
         persist-credentials: true
@@ -426,7 +426,7 @@ jobs:
         fetch-depth: 1
 
     - name: Checkout common_system dependency
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/common_system
         path: common_system
