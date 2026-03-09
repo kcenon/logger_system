@@ -23,20 +23,20 @@ jobs:
 
     steps:
     - name: Checkout logger_system
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         fetch-depth: 0
         path: logger_system
 
     - name: Checkout common_system
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/common_system
         path: common_system
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Checkout thread_system
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: kcenon/thread_system
         ref: main
