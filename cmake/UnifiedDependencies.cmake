@@ -115,7 +115,7 @@ set(_UNIFIED_FETCH_NAME_database_system "DatabaseSystem")
 set(_UNIFIED_FETCH_NAME_network_system "NetworkSystem")
 
 # find_package names
-set(_UNIFIED_PACKAGE_NAME_common_system "CommonSystem")
+set(_UNIFIED_PACKAGE_NAME_common_system "common_system")
 set(_UNIFIED_PACKAGE_NAME_thread_system "ThreadSystem")
 set(_UNIFIED_PACKAGE_NAME_logger_system "LoggerSystem")
 set(_UNIFIED_PACKAGE_NAME_monitoring_system "MonitoringSystem")
