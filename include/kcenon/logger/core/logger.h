@@ -118,11 +118,14 @@ using overflow_policy = logger_system::overflow_policy;
 using logger_metrics = metrics::logger_performance_stats;
 using performance_metrics = metrics::logger_performance_stats; // Alias for examples
 
-// Metric type enum
+/**
+ * @enum metric_type
+ * @brief Types of metrics that can be recorded by the logger.
+ */
 enum class metric_type {
-    gauge,
-    counter,
-    histogram
+    gauge,      ///< A metric that can go up or down (e.g., queue depth).
+    counter,    ///< A monotonically increasing metric (e.g., total messages).
+    histogram   ///< A distribution of values (e.g., processing latency).
 };
 
 // Forward declarations

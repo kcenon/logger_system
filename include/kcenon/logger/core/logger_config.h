@@ -29,51 +29,68 @@ using log_level = common::interfaces::log_level;
  * and provides validation to ensure configuration correctness.
  */
 struct logger_config {
-    // Basic settings
-    bool async = true;
-    std::size_t buffer_size = 8192;
-    log_level min_level = log_level::info;
-    
-    // Performance settings
-    std::size_t batch_size = 100;
-    std::chrono::milliseconds flush_interval{1000};
-    bool use_lock_free = false;
-    std::size_t max_writers = 10;
-    bool enable_batch_writing = false;
-    
-    // Feature flags
-    bool enable_metrics = false;
-    bool enable_crash_handler = false;
-    bool enable_structured_logging = false;
-    bool enable_color_output = true;
-    bool enable_timestamp = true;
-    bool enable_source_location = false;
-    
-    // Queue settings
-    std::size_t max_queue_size = 10000;
+    /// @name Basic settings
+    /// @{
+    bool async = true;                              ///< Enable asynchronous logging.
+    std::size_t buffer_size = 8192;                 ///< Internal buffer size in bytes.
+    log_level min_level = log_level::info;           ///< Minimum log level to process.
+    /// @}
+
+    /// @name Performance settings
+    /// @{
+    std::size_t batch_size = 100;                   ///< Number of messages per batch write.
+    std::chrono::milliseconds flush_interval{1000}; ///< Interval between automatic flushes.
+    bool use_lock_free = false;                     ///< Use lock-free queue implementation.
+    std::size_t max_writers = 10;                   ///< Maximum number of concurrent writers.
+    bool enable_batch_writing = false;              ///< Enable batch writing mode.
+    /// @}
+
+    /// @name Feature flags
+    /// @{
+    bool enable_metrics = false;                    ///< Enable performance metrics collection.
+    bool enable_crash_handler = false;              ///< Enable crash signal handler.
+    bool enable_structured_logging = false;         ///< Enable structured (JSON) log output.
+    bool enable_color_output = true;                ///< Enable ANSI color output.
+    bool enable_timestamp = true;                   ///< Include timestamp in log entries.
+    bool enable_source_location = false;            ///< Include source file/line in log entries.
+    /// @}
+
+    /// @name Queue settings
+    /// @{
+    std::size_t max_queue_size = 10000;             ///< Maximum number of queued messages.
+    /**
+     * @enum overflow_policy
+     * @brief Policy for handling queue overflow when max_queue_size is reached.
+     */
     enum class overflow_policy {
-        drop_oldest,    // Drop oldest messages when queue is full
-        drop_newest,    // Drop new messages when queue is full (default)
-        block,          // Block until space is available
-        grow            // Dynamically grow the queue (use with caution)
+        drop_oldest,    ///< Drop oldest messages when queue is full.
+        drop_newest,    ///< Drop new messages when queue is full (default).
+        block,          ///< Block until space is available.
+        grow            ///< Dynamically grow the queue (use with caution).
     };
-    overflow_policy queue_overflow_policy = overflow_policy::drop_newest;
-    
-    // File output settings
-    std::size_t max_file_size = 100 * 1024 * 1024;  // 100MB default
-    std::size_t max_file_count = 5;                  // For rotating files
-    std::string log_directory = "./logs";
-    std::string log_file_prefix = "app";
-    
-    // Network settings
-    std::string remote_host = "";
-    uint16_t remote_port = 0;
-    std::chrono::milliseconds network_timeout{5000};
-    std::size_t network_retry_count = 3;
-    
-    // Performance tuning
-    std::size_t writer_thread_count = 1;
-    bool enable_compression = false;
+    overflow_policy queue_overflow_policy = overflow_policy::drop_newest; ///< Active overflow policy.
+    /// @}
+
+    /// @name File output settings
+    /// @{
+    std::size_t max_file_size = 100 * 1024 * 1024;  ///< Maximum file size in bytes (default: 100MB).
+    std::size_t max_file_count = 5;                  ///< Maximum number of rotating log files.
+    std::string log_directory = "./logs";             ///< Directory for log file output.
+    std::string log_file_prefix = "app";             ///< Prefix for log file names.
+    /// @}
+
+    /// @name Network settings
+    /// @{
+    std::string remote_host = "";                    ///< Remote log collector hostname.
+    uint16_t remote_port = 0;                        ///< Remote log collector port.
+    std::chrono::milliseconds network_timeout{5000}; ///< Network operation timeout.
+    std::size_t network_retry_count = 3;             ///< Number of network retry attempts.
+    /// @}
+
+    /// @name Performance tuning
+    /// @{
+    std::size_t writer_thread_count = 1;             ///< Number of dedicated writer threads.
+    bool enable_compression = false;                 ///< Enable log compression.
     
     /**
      * @brief Validate the configuration
