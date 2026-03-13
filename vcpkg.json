@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "kcenon-logger-system",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "port-version": 0,
   "description": "High-performance C++20 async logging library with file rotation and console output",
   "homepage": "https://github.com/kcenon/logger_system",
