@@ -39,6 +39,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/common/patterns/result.h>
 #include <kcenon/logger/core/error_codes.h>
+#include <kcenon/logger/logger_export.h>
 #include "../interfaces/log_writer_interface.h"
 #include "../interfaces/log_entry.h"
 #include "../interfaces/log_formatter_interface.h"
@@ -119,7 +120,7 @@ namespace kcenon::logger {
  *
  * @since 1.0.0
  */
-class base_writer : public log_writer_interface {
+class LOGGER_SYSTEM_API base_writer : public log_writer_interface {
 public:
     /**
      * @brief Constructor with optional formatter

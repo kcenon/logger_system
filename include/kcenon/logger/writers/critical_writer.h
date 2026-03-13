@@ -47,6 +47,9 @@ All rights reserved.
 
 #include "base_writer.h"
 #include "../interfaces/writer_category.h"
+
+#include <kcenon/logger/logger_export.h>
+
 #include <atomic>
 #include <memory>
 #include <mutex>
@@ -104,7 +107,7 @@ struct critical_writer_config {
  *
  * @since 1.4.0 Added decorator_writer_tag for category classification
  */
-class critical_writer : public base_writer, public decorator_writer_tag {
+class LOGGER_SYSTEM_API critical_writer : public base_writer, public decorator_writer_tag {
 public:
     /**
      * @brief Constructor

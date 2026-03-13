@@ -9,6 +9,9 @@ All rights reserved.
 
 #include "file_writer.h"
 #include "../interfaces/writer_category.h"
+
+#include <kcenon/logger/logger_export.h>
+
 #include <chrono>
 #include <vector>
 #include <sstream>
@@ -50,7 +53,7 @@ enum class rotation_type {
  * @since 1.3.0 Refactored to use thread_safe_writer via file_writer
  * @since 1.4.0 Inherits sync_writer_tag from file_writer
  */
-class rotating_file_writer : public file_writer {
+class LOGGER_SYSTEM_API rotating_file_writer : public file_writer {
 public:
     /**
      * @brief Construct with size-based rotation

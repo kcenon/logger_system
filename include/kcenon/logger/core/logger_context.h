@@ -8,9 +8,10 @@ All rights reserved.
 *****************************************************************************/
 
 #include <memory>
-#include <kcenon/logger/security/signal_manager_interface.h>
-#include <kcenon/logger/core/signal_manager_context.h>
 #include <kcenon/logger/core/logger_registry.h>
+#include <kcenon/logger/core/signal_manager_context.h>
+#include <kcenon/logger/logger_export.h>
+#include <kcenon/logger/security/signal_manager_interface.h>
 
 /**
  * @file logger_context.h
@@ -75,7 +76,7 @@ namespace core {
  * Thread Safety: All methods are thread-safe. Each component provides its own
  * thread safety guarantees.
  */
-class logger_context {
+class LOGGER_SYSTEM_API logger_context {
 public:
     /**
      * @brief Default constructor - creates default implementations

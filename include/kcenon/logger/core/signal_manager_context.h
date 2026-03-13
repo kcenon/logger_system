@@ -9,6 +9,7 @@ All rights reserved.
 
 #include <memory>
 #include <mutex>
+#include <kcenon/logger/logger_export.h>
 #include <kcenon/logger/security/signal_manager_interface.h>
 
 /**
@@ -32,7 +33,7 @@ namespace kcenon::logger::core {
  *
  * Thread Safety: All methods are thread-safe.
  */
-class signal_manager_context {
+class LOGGER_SYSTEM_API signal_manager_context {
 public:
     /**
      * @brief Default constructor - creates null signal manager

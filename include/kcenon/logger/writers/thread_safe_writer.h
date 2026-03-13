@@ -33,6 +33,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include "base_writer.h"
+
+#include <kcenon/logger/logger_export.h>
+
 #include <mutex>
 
 /**
@@ -103,7 +106,7 @@ namespace kcenon::logger {
  *
  * @since 1.3.0
  */
-class thread_safe_writer : public base_writer {
+class LOGGER_SYSTEM_API thread_safe_writer : public base_writer {
 public:
     /**
      * @brief Constructor with optional formatter

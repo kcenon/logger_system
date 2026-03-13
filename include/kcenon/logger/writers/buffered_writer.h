@@ -68,6 +68,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "decorator_writer_base.h"
 #include "../interfaces/log_entry.h"
 
+#include <kcenon/logger/logger_export.h>
+
 #include <atomic>
 #include <chrono>
 #include <cstdint>
@@ -104,7 +106,7 @@ namespace kcenon::logger {
  *
  * @since 4.0.0
  */
-class buffered_writer : public decorator_writer_base {
+class LOGGER_SYSTEM_API buffered_writer : public decorator_writer_base {
 public:
     /**
      * @brief Default buffer size (number of entries)

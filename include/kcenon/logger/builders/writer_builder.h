@@ -74,6 +74,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../interfaces/log_writer_interface.h"
 #include "../interfaces/log_filter_interface.h"
 #include "../interfaces/log_formatter_interface.h"
+#include <kcenon/logger/logger_export.h>
 
 #include <chrono>
 #include <cstddef>
@@ -114,7 +115,7 @@ class secure_key;
  *
  * @since 4.1.0
  */
-class writer_builder {
+class LOGGER_SYSTEM_API writer_builder {
 public:
     /**
      * @brief Default constructor

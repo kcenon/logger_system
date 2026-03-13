@@ -267,22 +267,7 @@ if(LOGGER_USE_THREAD_SYSTEM)
         set(THREAD_SYSTEM_FOUND TRUE)
         message(STATUS "Logger System: thread_system integration enabled")
         message(STATUS "  Direction: logger_system → thread_system (using thread_pool for async I/O)")
-
-        # Define LOGGER_HAS_THREAD_SYSTEM for conditional compilation
-        # This macro is used in:
-        # - include/kcenon/logger/integration/thread_system_integration.h
-        # - src/integration/thread_system_integration.cpp
-        add_compile_definitions(LOGGER_HAS_THREAD_SYSTEM)
-
-        # Create a unified thread_system target if needed (header-only).
-        # Do NOT link internal sub-targets (thread_base, interfaces, utilities)
-        # as they are not in LoggerSystem's export set and cause install(EXPORT) failures.
-        if(NOT TARGET thread_system AND NOT TARGET ThreadSystem)
-            add_library(thread_system INTERFACE)
-            target_include_directories(thread_system INTERFACE
-                $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
-            )
-        endif()
+        # LOGGER_HAS_THREAD_SYSTEM is set per-target below (in thread_system linking section)
     else()
         message(STATUS "Logger System: thread_system not found, using standalone mode")
         set(THREAD_SYSTEM_FOUND FALSE)
@@ -358,11 +343,19 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
     if(SOURCE_COUNT GREATER 5)
         # Create library with new structure
         add_library(LoggerSystem ${LOGGER_SOURCES} ${LOGGER_HEADERS})
+        set_target_properties(LoggerSystem PROPERTIES EXPORT_NAME logger)
         target_include_directories(LoggerSystem
             PUBLIC
                 $<BUILD_INTERFACE:${LOGGER_INCLUDE_DIR}>
                 $<INSTALL_INTERFACE:include>
         )
+
+        # DLL export support
+        if(BUILD_SHARED_LIBS)
+            target_compile_definitions(LoggerSystem PRIVATE LOGGER_SYSTEM_BUILDING)
+        else()
+            target_compile_definitions(LoggerSystem PUBLIC LOGGER_SYSTEM_STATIC)
+        endif()
 
         # Optional module compile definitions (Issue #357: SRP)
         if(LOGGER_WITH_SERVER)
@@ -415,26 +408,42 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
         # thread_system integration (optional, for advanced features)
         if(THREAD_SYSTEM_FOUND)
             message(STATUS "Logger System: thread_system found, optional backend available")
-            if(TARGET ThreadSystem)
+
+            # Use the resolved target from UnifiedDependencies
+            if(thread_system_TARGET AND TARGET ${thread_system_TARGET})
+                get_target_property(_ts_imported ${thread_system_TARGET} IMPORTED)
+                if(_ts_imported)
+                    # IMPORTED target (vcpkg / find_package): safe to export
+                    target_link_libraries(LoggerSystem PUBLIC ${thread_system_TARGET})
+                    target_compile_definitions(LoggerSystem PUBLIC LOGGER_HAS_THREAD_SYSTEM)
+                else()
+                    # Local (submodule) target: cannot be in our export set
+                    target_link_libraries(LoggerSystem PRIVATE ${thread_system_TARGET})
+                    target_compile_definitions(LoggerSystem PRIVATE LOGGER_HAS_THREAD_SYSTEM)
+                    set(_LOGGER_HAS_LOCAL_THREAD_SYSTEM TRUE)
+                endif()
+            elseif(TARGET ThreadSystem)
                 get_target_property(_ts_imported ThreadSystem IMPORTED)
-                target_link_libraries(LoggerSystem PRIVATE ThreadSystem)
+                target_link_libraries(LoggerSystem PUBLIC ThreadSystem)
+                target_compile_definitions(LoggerSystem PUBLIC LOGGER_HAS_THREAD_SYSTEM)
                 if(NOT _ts_imported)
                     set(_LOGGER_HAS_LOCAL_THREAD_SYSTEM TRUE)
                 endif()
             elseif(TARGET thread_system)
                 get_target_property(_ts_imported thread_system IMPORTED)
-                target_link_libraries(LoggerSystem PRIVATE thread_system)
+                target_link_libraries(LoggerSystem PUBLIC thread_system)
+                target_compile_definitions(LoggerSystem PUBLIC LOGGER_HAS_THREAD_SYSTEM)
                 if(NOT _ts_imported)
                     set(_LOGGER_HAS_LOCAL_THREAD_SYSTEM TRUE)
                 endif()
             else()
                 # Fallback: header-only access when aggregate targets are unavailable.
-                # Do NOT link internal sub-targets (thread_base, interfaces, utilities)
-                # as they are not part of LoggerSystem's export set.
                 target_include_directories(LoggerSystem
                     PUBLIC
                         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
                 )
+                target_compile_definitions(LoggerSystem PRIVATE LOGGER_HAS_THREAD_SYSTEM)
+                set(_LOGGER_HAS_LOCAL_THREAD_SYSTEM TRUE)
             endif()
         else()
             message(STATUS "Logger System: Using standalone async implementation (no thread_system)")
@@ -627,8 +636,8 @@ if(INSTALL_TARGETS)
     endif()
 endif()
 
-install(DIRECTORY include/kcenon/logger/
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/logger_system
+install(DIRECTORY include/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
 )
 

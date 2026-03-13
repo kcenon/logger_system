@@ -61,6 +61,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/logger/logger_export.h>
 
 #include <algorithm>
 #include <optional>
@@ -275,7 +276,7 @@ private:
  *
  * @since 3.2.0
  */
-class log_context_scope {
+class LOGGER_SYSTEM_API log_context_scope {
 public:
     /**
      * @brief Construct scope with initial fields

@@ -61,6 +61,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "sampling_config.h"
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/logger/logger_export.h>
 #include <kcenon/common/interfaces/logger_interface.h>
 
 #include <atomic>
@@ -95,7 +96,7 @@ using log_level = common::interfaces::log_level;
  *
  * @since 3.3.0
  */
-class log_sampler {
+class LOGGER_SYSTEM_API log_sampler {
 public:
     /**
      * @brief Construct a sampler with the given configuration
@@ -318,7 +319,7 @@ private:
  *
  * @since 3.3.0
  */
-class sampler_factory {
+class LOGGER_SYSTEM_API sampler_factory {
 public:
     /**
      * @brief Create a disabled sampler (pass-through)

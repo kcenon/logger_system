@@ -10,6 +10,8 @@ All rights reserved.
 #include <vector>
 #include <shared_mutex>
 
+#include <kcenon/logger/logger_export.h>
+
 // Forward declaration to avoid circular dependencies
 namespace kcenon::logger::security {
     class critical_logger_interface;
@@ -37,7 +39,7 @@ namespace kcenon::logger::core {
  * Thread Safety: All methods are thread-safe. Uses shared_mutex for reader-writer lock
  * optimization (multiple readers, single writer).
  */
-class logger_registry {
+class LOGGER_SYSTEM_API logger_registry {
 public:
     /**
      * @brief Default constructor

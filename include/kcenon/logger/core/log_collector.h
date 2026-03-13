@@ -44,6 +44,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/logger/interfaces/log_writer_interface.h>
+#include <kcenon/logger/logger_export.h>
 
 #include <atomic>
 #include <chrono>
@@ -58,7 +59,7 @@ namespace kcenon::logger {
  * Collects log entries in a queue (mutex/condition-variable backed)
  * and processes them in a background thread to minimize logging overhead.
  */
-class log_collector {
+class LOGGER_SYSTEM_API log_collector {
 public:
     /**
      * @brief Constructor
