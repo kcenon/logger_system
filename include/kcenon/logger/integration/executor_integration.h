@@ -59,6 +59,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <kcenon/logger/core/thread_integration_detector.h>
 #include <kcenon/logger/integration/standalone_executor.h>
+#include <kcenon/logger/logger_export.h>
 
 #if LOGGER_HAS_IEXECUTOR
 
@@ -139,7 +140,7 @@ enum class executor_type {
  *
  * @since 1.5.0
  */
-class executor_integration {
+class LOGGER_SYSTEM_API executor_integration {
 public:
     /**
      * @brief Enable async processing with optional executor

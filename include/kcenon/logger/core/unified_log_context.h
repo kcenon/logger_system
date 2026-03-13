@@ -62,6 +62,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include <kcenon/logger/interfaces/log_entry.h>
+#include <kcenon/logger/logger_export.h>
 #include <kcenon/logger/otlp/otel_context.h>
 
 #include <optional>
@@ -141,7 +142,7 @@ enum class context_category : uint8_t {
  *
  * @since 3.3.0
  */
-class unified_log_context {
+class LOGGER_SYSTEM_API unified_log_context {
 public:
     /**
      * @brief Default constructor

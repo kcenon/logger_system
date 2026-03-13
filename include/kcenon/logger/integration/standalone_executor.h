@@ -59,6 +59,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
 #include <kcenon/logger/core/thread_integration_detector.h>
+#include <kcenon/logger/logger_export.h>
 
 #if LOGGER_HAS_IEXECUTOR
 
@@ -142,7 +143,7 @@ private:
  *
  * @since 1.5.0
  */
-class standalone_executor : public common::interfaces::IExecutor {
+class LOGGER_SYSTEM_API standalone_executor : public common::interfaces::IExecutor {
 public:
     /**
      * @brief Constructor with configurable queue size
@@ -272,7 +273,7 @@ private:
 /**
  * @brief Factory for creating standalone executor instances
  */
-class standalone_executor_factory {
+class LOGGER_SYSTEM_API standalone_executor_factory {
 public:
     /**
      * @brief Create a new standalone executor
