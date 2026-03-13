@@ -33,6 +33,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 #include "queued_writer_base.h"
+
+#include <kcenon/logger/logger_export.h>
+
 #include <vector>
 #include <chrono>
 
@@ -58,7 +61,7 @@ namespace kcenon::logger {
  * @since 1.4.0 Added async_writer_tag and decorator_writer_tag for classification
  * @since 4.0.0 Refactored to use queued_writer_base
  */
-class batch_writer : public queued_writer_base<std::vector<log_entry>> {
+class LOGGER_SYSTEM_API batch_writer : public queued_writer_base<std::vector<log_entry>> {
     using base_type = queued_writer_base<std::vector<log_entry>>;
 
 public:

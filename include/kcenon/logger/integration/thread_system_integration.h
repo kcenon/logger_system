@@ -62,6 +62,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #pragma once
 
+#include <kcenon/logger/logger_export.h>
+
 #include <atomic>
 #include <functional>
 #include <memory>
@@ -148,7 +150,7 @@ enum class async_backend_type {
  * @note Only available when LOGGER_HAS_THREAD_SYSTEM is defined
  * @since 1.4.0
  */
-class thread_system_integration {
+class LOGGER_SYSTEM_API thread_system_integration {
 public:
     /**
      * @brief Enable thread_pool backend with optional custom pool

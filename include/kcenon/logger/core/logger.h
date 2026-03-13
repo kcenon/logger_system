@@ -49,9 +49,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/interfaces/logger_types.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/interfaces/log_writer_interface.h>
-#include <kcenon/logger/security/signal_manager.h>
+#include <kcenon/logger/logger_export.h>
 #include <kcenon/logger/otlp/otel_context.h>
 #include <kcenon/logger/sampling/sampling_config.h>
+#include <kcenon/logger/security/signal_manager.h>
 #include "structured_log_builder.h"
 #include "unified_log_context.h"
 
@@ -180,8 +181,8 @@ using routing::router_builder;
  *
  * @note For integration with common_system monitoring interfaces, use logger_monitoring_adapter
  */
-class logger : public security::critical_logger_interface,
-               public common::interfaces::ILogger {
+class LOGGER_SYSTEM_API logger : public security::critical_logger_interface,
+                                public common::interfaces::ILogger {
 public:
     /**
      * @brief Constructor with optional configuration

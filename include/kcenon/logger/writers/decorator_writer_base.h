@@ -65,6 +65,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../interfaces/log_writer_interface.h"
 #include "../interfaces/writer_category.h"
 
+#include <kcenon/logger/logger_export.h>
+
 #include <memory>
 #include <string>
 #include <string_view>
@@ -94,7 +96,7 @@ namespace kcenon::logger {
  *
  * @since 4.0.0
  */
-class decorator_writer_base : public log_writer_interface, public decorator_writer_tag {
+class LOGGER_SYSTEM_API decorator_writer_base : public log_writer_interface, public decorator_writer_tag {
 public:
     /**
      * @brief Construct a decorator writer base

@@ -71,6 +71,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../security/secure_key_storage.h"
 #include "../core/error_codes.h"
 
+#include <kcenon/logger/logger_export.h>
+
 #include <array>
 #include <memory>
 #include <mutex>
@@ -211,7 +213,7 @@ struct encrypted_log_header {
  * @since 1.4.0 Added decorator_writer_tag for category classification
  * @since 4.0.0 Refactored to use decorator_writer_base
  */
-class encrypted_writer : public decorator_writer_base {
+class LOGGER_SYSTEM_API encrypted_writer : public decorator_writer_base {
 public:
     /**
      * @brief Construct encrypted writer with wrapped writer

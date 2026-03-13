@@ -40,6 +40,8 @@
 #include <map>
 #include <string>
 
+#include <kcenon/logger/logger_export.h>
+
 namespace kcenon::logger::metrics {
 
 /**
@@ -174,7 +176,7 @@ struct logger_performance_stats {
 /**
  * @brief Global logger metrics instance
  */
-extern logger_performance_stats g_logger_stats;
+extern LOGGER_SYSTEM_API logger_performance_stats g_logger_stats;
 
 /**
  * @brief Record a logged message

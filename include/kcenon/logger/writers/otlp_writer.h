@@ -62,6 +62,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../interfaces/writer_category.h"
 #include "../otlp/otel_context.h"
 
+#include <kcenon/logger/logger_export.h>
+
 #include <atomic>
 #include <chrono>
 #include <condition_variable>
@@ -97,7 +99,7 @@ namespace kcenon::logger {
  * @since 3.0.0
  * @since 1.4.0 Added async_writer_tag for category classification
  */
-class otlp_writer : public base_writer, public async_writer_tag {
+class LOGGER_SYSTEM_API otlp_writer : public base_writer, public async_writer_tag {
 public:
     /**
      * @enum protocol_type

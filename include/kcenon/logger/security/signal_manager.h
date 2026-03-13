@@ -8,6 +8,7 @@ All rights reserved.
 *****************************************************************************/
 
 #include "signal_manager_interface.h"
+#include <kcenon/logger/logger_export.h>
 #include <csignal>
 #include <set>
 #include <mutex>
@@ -76,7 +77,7 @@ inline int safe_fsync(int fd) {
  *
  * @since 2.0.0 - Converted from singleton to DI pattern
  */
-class signal_manager : public signal_manager_interface {
+class LOGGER_SYSTEM_API signal_manager : public signal_manager_interface {
 public:
     /**
      * @brief Default constructor

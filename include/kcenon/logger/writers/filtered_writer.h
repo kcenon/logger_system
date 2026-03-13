@@ -66,6 +66,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "decorator_writer_base.h"
 #include "../interfaces/log_filter_interface.h"
 
+#include <kcenon/logger/logger_export.h>
+
 #include <memory>
 
 namespace kcenon::logger {
@@ -93,7 +95,7 @@ namespace kcenon::logger {
  * @since 4.0.0
  * @since 4.1.0 Migrated to use decorator_writer_base for code reuse
  */
-class filtered_writer : public decorator_writer_base {
+class LOGGER_SYSTEM_API filtered_writer : public decorator_writer_base {
 public:
     /**
      * @brief Construct a filtered writer

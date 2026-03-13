@@ -35,6 +35,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../interfaces/log_writer_interface.h"
 #include "../interfaces/log_formatter_interface.h"
 #include "../interfaces/writer_category.h"
+
+#include <kcenon/logger/logger_export.h>
+
 #include <atomic>
 #include <mutex>
 #include <memory>
@@ -61,7 +64,7 @@ namespace kcenon::logger {
  * @since 4.0.0 Refactored for Decorator pattern with simplified inheritance
  * @since 4.1.0 Directly implements log_writer_interface as core writer
  */
-class console_writer : public log_writer_interface, public sync_writer_tag {
+class LOGGER_SYSTEM_API console_writer : public log_writer_interface, public sync_writer_tag {
 public:
     /**
      * @brief Constructor

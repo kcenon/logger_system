@@ -59,6 +59,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "unified_log_context.h"
 
+#include <kcenon/logger/logger_export.h>
+
 #include <optional>
 #include <string>
 #include <string_view>
@@ -124,7 +126,7 @@ class logger;
  *
  * @since 3.3.0
  */
-class scoped_context_guard {
+class LOGGER_SYSTEM_API scoped_context_guard {
 public:
     /**
      * @brief Construct guard and save current context
