@@ -35,7 +35,7 @@ include(FetchContent)
 FetchContent_Declare(
     LoggerSystem
     GIT_REPOSITORY https://github.com/kcenon/logger_system.git
-    GIT_TAG main
+    GIT_TAG v0.1.0  # Pin to a specific release tag; do NOT use main
 )
 FetchContent_MakeAvailable(LoggerSystem)
 
