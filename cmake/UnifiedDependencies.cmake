@@ -553,7 +553,7 @@ macro(_unified_resolve_find_package DEP_NAME VERSION IS_REQUIRED)
     elseif(UNIFIED_ALLOW_FETCHCONTENT_FALLBACK)
         # Fallback to FetchContent
         message(STATUS "[UnifiedDependencies] ${DEP_NAME}: Not found, trying FetchContent fallback...")
-        _unified_resolve_fetchcontent(${DEP_NAME} "main")
+        _unified_resolve_fetchcontent(${DEP_NAME} ${_UFD_GIT_TAG})
     else()
         set(${DEP_NAME}_FOUND FALSE)
     endif()
