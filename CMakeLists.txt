@@ -13,7 +13,7 @@ endif()
 ##################################################
 project(
     LoggerSystem
-    VERSION 0.1.2
+    VERSION 0.1.3
     DESCRIPTION "High-performance C++20 logging system with asynchronous batching"
     HOMEPAGE_URL "https://github.com/kcenon/logger_system"
     LANGUAGES CXX
