@@ -56,6 +56,7 @@ set(_UNIFIED_TARGET_MAP_thread_system
     "typed_thread_pool"
     "ThreadSystem::Core"
     "thread_system"
+    "thread_system::ThreadSystem"
 )
 
 set(_UNIFIED_TARGET_MAP_logger_system
