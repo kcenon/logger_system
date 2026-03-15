@@ -245,7 +245,7 @@ jobs:
 
     - name: Commit performance updates
       if: matrix.os == 'ubuntu-22.04' && github.event_name == 'push' && github.ref == 'refs/heads/main'
-      uses: stefanzweifel/git-auto-commit-action@v5
+      uses: stefanzweifel/git-auto-commit-action@v7
       with:
         repository: logger_system
         commit_message: "chore: update performance metrics [skip ci]"
