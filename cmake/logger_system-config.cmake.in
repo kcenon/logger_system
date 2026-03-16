@@ -31,8 +31,8 @@ if(LoggerSystem_USE_THREAD_SYSTEM)
 endif()
 
 # Include the exported targets (may not exist when local thread_system skipped export)
-if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/LoggerSystemTargets.cmake")
-    include("${CMAKE_CURRENT_LIST_DIR}/LoggerSystemTargets.cmake")
+if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/logger_system-targets.cmake")
+    include("${CMAKE_CURRENT_LIST_DIR}/logger_system-targets.cmake")
 endif()
 
 # Provide the features that were enabled during build

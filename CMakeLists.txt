@@ -627,7 +627,7 @@ if(INSTALL_TARGETS)
         )
     else()
         install(TARGETS ${INSTALL_TARGETS}
-            EXPORT LoggerSystemTargets
+            EXPORT logger_system-targets
             LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
             ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
             RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -649,22 +649,22 @@ if(INSTALL_TARGETS)
         # already have both logger_system and thread_system available.
         message(STATUS "Logger System: Skipping install(EXPORT) — local thread_system linked (not IMPORTED)")
     else()
-        install(EXPORT LoggerSystemTargets
-            FILE LoggerSystemTargets.cmake
+        install(EXPORT logger_system-targets
+            FILE logger_system-targets.cmake
             NAMESPACE LoggerSystem::
-            DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/LoggerSystem
+            DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/logger_system
         )
     endif()
 endif()
 
 configure_package_config_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/LoggerSystemConfig.cmake.in
-    ${CMAKE_CURRENT_BINARY_DIR}/LoggerSystemConfig.cmake
-    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/LoggerSystem
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/logger_system-config.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/logger_system-config.cmake
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/logger_system
 )
 
 write_basic_package_version_file(
-    ${CMAKE_CURRENT_BINARY_DIR}/LoggerSystemConfigVersion.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/logger_system-config-version.cmake
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY SameMajorVersion
 )
@@ -679,7 +679,7 @@ if(BUILD_WITH_COMMON_SYSTEM)
 endif()
 
 install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/LoggerSystemConfig.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/LoggerSystemConfigVersion.cmake
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/LoggerSystem
+    ${CMAKE_CURRENT_BINARY_DIR}/logger_system-config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/logger_system-config-version.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/logger_system
 )
