@@ -5,8 +5,16 @@ with the project's BSD-3-Clause license.
 
 ## Default Build
 
-The default build has no required third-party production dependencies.
-Optional functionality is enabled through explicit vcpkg features.
+## kcenon-common-system (required)
+
+| Item               | Value                                          |
+|--------------------|--------------------------------------------- --|
+| Component          | kcenon-common-system                           |
+| License            | BSD-3-Clause                                   |
+| Pinned Version     | 0.2.0                                          |
+| Usage              | Core foundation library (Result<T>, ILogger)   |
+| Linking            | Static or dynamic                              |
+| BSD-3 Compatible   | Yes                                            |
 
 ## Optional Feature Dependencies
 
@@ -90,6 +98,7 @@ Optional functionality is enabled through explicit vcpkg features.
 
 | Dependency          | License        | Type     | BSD-3 Compatible |
 |---------------------|----------------|----------|------------------|
+| kcenon-common-system | BSD-3-Clause  | Required | Yes              |
 | OpenSSL             | Apache-2.0     | Optional | Yes              |
 | opentelemetry-cpp   | Apache-2.0     | Optional | Yes              |
 | protobuf            | BSD-3-Clause   | Optional | Yes              |

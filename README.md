@@ -221,10 +221,10 @@ target_link_libraries(your_app PRIVATE LoggerSystem::logger)
 | CMake | 3.20+ | Yes | Build system |
 | [common_system](https://github.com/kcenon/common_system) | latest | Yes | Common interfaces (ILogger, Result<T>) |
 | [thread_system](https://github.com/kcenon/thread_system) | latest | Optional | Async logging with thread pool support |
-| Third-party production packages | None in the default vcpkg manifest | No | Optional features add OpenSSL, OTLP, or benchmark-comparison dependencies only when enabled |
+| [kcenon-common-system](https://github.com/kcenon/common_system) | 0.2.0 | Yes | Installed automatically via vcpkg (`kcenon-common-system`) |
 | vcpkg | latest | Optional | Package management |
 
-> **Note**: The default vcpkg package has no required third-party production dependencies. Optional features add OpenSSL (`encryption`), OpenTelemetry/gRPC/Protocol Buffers (`otlp`), or spdlog (`benchmarks`) only when explicitly enabled. See [docs/SOUP.md](docs/SOUP.md) and [LICENSE-THIRD-PARTY](LICENSE-THIRD-PARTY) for the authoritative dependency inventory.
+> **Note**: `kcenon-common-system` is the only required production dependency and is installed automatically when using vcpkg. Optional features add OpenSSL (`encryption`), OpenTelemetry/gRPC/Protocol Buffers (`otlp`), or spdlog (`benchmarks`) only when explicitly enabled. See [docs/SOUP.md](docs/SOUP.md) and [LICENSE-THIRD-PARTY](LICENSE-THIRD-PARTY) for the authoritative dependency inventory.
 
 #### Optional Feature Dependencies
 

@@ -8,18 +8,16 @@
 | Document | Version |
 |----------|---------|
 | IEC 62304 Reference | &sect;8.1.2 Software items from SOUP |
-| Last Reviewed | 2026-03-07 |
-| logger_system Version | 0.1.0 |
+| Last Reviewed | 2026-03-16 |
+| logger_system Version | 0.1.2 |
 
 ---
 
 ## Production SOUP
 
-logger_system has no required production SOUP in its default configuration. All production dependencies are behind optional features.
-
 | ID | Name | Manufacturer | Version | License | Usage | Safety Class | Linking | Known Anomalies |
 |----|------|-------------|---------|---------|-------|-------------|---------|-----------------|
-| &mdash; | *(none in default build)* | | | | | | | |
+| SOUP-P01 | [kcenon-common-system](https://github.com/kcenon/common_system) | kcenon | 0.2.0 | BSD-3-Clause | Core foundation library providing Result&lt;T&gt; pattern, ILogger interface, and common utilities | A | Static or dynamic | None known at pinned version |
 
 ---
 
