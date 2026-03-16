@@ -7,7 +7,9 @@
   "homepage": "https://github.com/kcenon/logger_system",
   "license": "BSD-3-Clause",
   "supports": "!(uwp | xbox)",
-  "dependencies": [],
+  "dependencies": [
+    "kcenon-common-system"
+  ],
   "overrides": [
     { "name": "openssl", "version": "3.3.0" },
     { "name": "spdlog", "version": "1.13.0" },
