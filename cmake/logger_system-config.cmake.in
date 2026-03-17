@@ -31,6 +31,26 @@ if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/logger_system-targets.cmake")
     include("${CMAKE_CURRENT_LIST_DIR}/logger_system-targets.cmake")
 endif()
 
+# Backward compatibility aliases for LoggerSystem:: namespace consumers
+# The canonical namespace is now logger_system::, but existing consumers
+# may still use LoggerSystem::LoggerSystem or LoggerSystem::logger.
+if(TARGET logger_system::LoggerSystem AND NOT TARGET LoggerSystem::LoggerSystem)
+    add_library(LoggerSystem::LoggerSystem INTERFACE IMPORTED)
+    set_target_properties(LoggerSystem::LoggerSystem PROPERTIES
+        INTERFACE_LINK_LIBRARIES logger_system::LoggerSystem
+    )
+endif()
+
+# Set variables for compatibility
+set(logger_system_FOUND TRUE)
+set(logger_system_LIBRARIES logger_system::LoggerSystem)
+
+# Legacy variables for backward compatibility
+set(LoggerSystem_FOUND TRUE)
+set(LOGGERSYSTEM_FOUND TRUE)
+set(LoggerSystem_LIBRARIES ${logger_system_LIBRARIES})
+set(LOGGERSYSTEM_LIBRARIES ${logger_system_LIBRARIES})
+
 # Provide the features that were enabled during build
 set(LoggerSystem_USE_DI @LOGGER_USE_DI@)
 set(LoggerSystem_USE_MONITORING @LOGGER_USE_MONITORING@)
