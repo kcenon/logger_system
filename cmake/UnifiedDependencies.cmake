@@ -106,6 +106,16 @@ set(_UNIFIED_REPO_container_system "container_system")
 set(_UNIFIED_REPO_database_system "database_system")
 set(_UNIFIED_REPO_network_system "network_system")
 
+# Default GIT_TAG per dependency (used when no explicit GIT_TAG is passed)
+# Keep in sync with ecosystem release versions
+set(_UNIFIED_DEFAULT_TAG_common_system "v0.2.0")
+set(_UNIFIED_DEFAULT_TAG_thread_system "v0.3.1")
+set(_UNIFIED_DEFAULT_TAG_logger_system "v0.1.3")
+set(_UNIFIED_DEFAULT_TAG_monitoring_system "v0.1.0")
+set(_UNIFIED_DEFAULT_TAG_container_system "v0.1.0")
+set(_UNIFIED_DEFAULT_TAG_database_system "v0.1.0")
+set(_UNIFIED_DEFAULT_TAG_network_system "v0.1.1")
+
 # FetchContent names (CamelCase for FetchContent compatibility)
 set(_UNIFIED_FETCH_NAME_common_system "CommonSystem")
 set(_UNIFIED_FETCH_NAME_thread_system "ThreadSystem")
@@ -224,12 +234,20 @@ endmacro()
 macro(unified_find_dependency DEP_NAME)
     cmake_parse_arguments(_UFD "REQUIRED;OPTIONAL" "VERSION;GIT_TAG" "" ${ARGN})
 
-    # Default to the latest release tag if no tag specified.
+    # Default to the per-dependency release tag if no tag specified.
     # Using "main" is a moving target and breaks build reproducibility
     # and SOUP version traceability (IEC 62304 §8.1.2).
     # See: https://github.com/kcenon/common_system/issues/402
     if(NOT _UFD_GIT_TAG)
-        set(_UFD_GIT_TAG "v0.1.0")
+        if(DEFINED _UNIFIED_DEFAULT_TAG_${DEP_NAME})
+            set(_UFD_GIT_TAG "${_UNIFIED_DEFAULT_TAG_${DEP_NAME}}")
+        else()
+            set(_UFD_GIT_TAG "v0.1.0")
+            message(WARNING
+                "[UnifiedDependencies] No default GIT_TAG defined for '${DEP_NAME}'.\n"
+                "Falling back to v0.1.0. Add _UNIFIED_DEFAULT_TAG_${DEP_NAME} to keep versions in sync."
+            )
+        endif()
     endif()
 
     if("${_UFD_GIT_TAG}" STREQUAL "main")
@@ -237,7 +255,7 @@ macro(unified_find_dependency DEP_NAME)
             "[UnifiedDependencies] GIT_TAG 'main' used for ${DEP_NAME}.\n"
             "This breaks build reproducibility and SOUP version traceability (IEC 62304 §8.1.2).\n"
             "Pass a specific release tag to unified_find_dependency(), e.g.:\n"
-            "  unified_find_dependency(${DEP_NAME} GIT_TAG v0.1.0)"
+            "  unified_find_dependency(${DEP_NAME} GIT_TAG ${_UNIFIED_DEFAULT_TAG_${DEP_NAME}})"
         )
     endif()
 
