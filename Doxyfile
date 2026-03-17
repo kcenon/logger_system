@@ -1,7 +1,7 @@
 # Doxyfile for logger_system
 
 PROJECT_NAME           = "Logger System"
-PROJECT_NUMBER         = "1.0.0"
+PROJECT_NUMBER         = "0.1.3"
 PROJECT_BRIEF          = "High-performance C++20 thread-safe logging system with asynchronous capabilities"
 OUTPUT_DIRECTORY       = documents
 GENERATE_HTML          = YES
@@ -27,7 +27,7 @@ CREATE_SUBDIRS         = YES
 SOURCE_BROWSER         = YES
 GENERATE_TREEVIEW      = YES
 HAVE_DOT               = YES
-DOT_IMAGE_FORMAT       = svg
+DOT_IMAGE_FORMAT       = png
 CLASS_DIAGRAMS         = YES
 COLLABORATION_GRAPH    = YES
 UML_LOOK               = YES
