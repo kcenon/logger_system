@@ -61,6 +61,8 @@ set(_UNIFIED_TARGET_MAP_thread_system
 
 set(_UNIFIED_TARGET_MAP_logger_system
     "logger"
+    "logger_system::LoggerSystem"
+    "LoggerSystem::LoggerSystem"
     "LoggerSystem::logger"
     "LoggerSystem"
     "logger_system"
@@ -128,7 +130,7 @@ set(_UNIFIED_FETCH_NAME_network_system "NetworkSystem")
 # find_package names
 set(_UNIFIED_PACKAGE_NAME_common_system "common_system")
 set(_UNIFIED_PACKAGE_NAME_thread_system "thread_system")
-set(_UNIFIED_PACKAGE_NAME_logger_system "LoggerSystem")
+set(_UNIFIED_PACKAGE_NAME_logger_system "logger_system")
 set(_UNIFIED_PACKAGE_NAME_monitoring_system "MonitoringSystem")
 set(_UNIFIED_PACKAGE_NAME_container_system "ContainerSystem")
 set(_UNIFIED_PACKAGE_NAME_database_system "DatabaseSystem")

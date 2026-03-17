@@ -651,7 +651,7 @@ if(INSTALL_TARGETS)
     else()
         install(EXPORT logger_system-targets
             FILE logger_system-targets.cmake
-            NAMESPACE LoggerSystem::
+            NAMESPACE logger_system::
             DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/logger_system
         )
     endif()
