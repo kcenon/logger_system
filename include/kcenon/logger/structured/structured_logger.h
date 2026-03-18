@@ -57,6 +57,9 @@ using log_value = std::variant<std::string, int, double, bool>;
 
 /**
  * @brief Structured log entry
+ *
+ * @see structured_logger_interface
+ * @see log_builder
  */
 struct structured_log_entry {
     log_level level;
@@ -69,6 +72,10 @@ struct structured_log_entry {
 
 /**
  * @brief Structured logger interface
+ *
+ * @see log_builder
+ * @see structured_log_entry
+ * @see basic_structured_logger
  */
 class structured_logger_interface {
 public:
@@ -87,6 +94,9 @@ public:
 
 /**
  * @brief Builder for structured log entries
+ *
+ * @see structured_log_entry
+ * @see structured_logger_interface
  */
 class log_builder {
 private:
@@ -166,6 +176,9 @@ using structured_output_callback = std::function<void(log_level, const std::stri
  *     .field("ip_address", "192.168.1.1")
  *     .log();
  * @endcode
+ *
+ * @see json_formatter
+ * @see structured_logger_interface
  */
 class basic_structured_logger : public structured_logger_interface {
 private:
@@ -315,6 +328,9 @@ private:
  * @brief JSON formatter for structured logs
  *
  * @details Produces valid JSON output with proper escaping and ISO 8601 timestamps.
+ *
+ * @see basic_structured_logger
+ * @see structured_log_entry
  */
 class json_formatter {
 public:

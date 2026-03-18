@@ -30,6 +30,9 @@ namespace kcenon::logger {
  *
  * @thread_safety All methods are thread-safe.
  *
+ * @see output_sink_interface Base interface for all output sinks
+ * @see logger Main logger that uses sinks to write messages
+ *
  * @since 1.3.0
  */
 class file_sink : public output_sink_interface {
