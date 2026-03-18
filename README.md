@@ -452,6 +452,48 @@ int main() {
 
 ---
 
+## C++20 Module Support
+
+Logger System provides C++20 module support as an alternative to the header-based interface.
+
+### Requirements for Modules
+
+- **CMake 3.28+**
+- **Clang 16+, GCC 14+, or MSVC 2022 17.4+**
+- **common_system** with module support
+
+### Building with Modules
+
+```bash
+cmake -B build -DLOGGER_USE_MODULES=ON
+cmake --build build
+```
+
+### Using Modules
+
+```cpp
+import kcenon.logger;
+
+int main() {
+    // Use logger components directly
+    auto logger = kcenon::logger::create_logger("app");
+    logger->info("Hello from C++20 modules!");
+}
+```
+
+### Module Structure
+
+| Module | Contents |
+|--------|----------|
+| `kcenon.logger` | Primary module (imports all partitions) |
+| `kcenon.logger:core` | Core logging infrastructure |
+| `kcenon.logger:backends` | Output backends (console, file, network) |
+| `kcenon.logger:analysis` | Log analysis and filtering |
+
+> **Note**: C++20 modules are experimental. The header-based interface remains the primary API.
+
+---
+
 ## Documentation
 
 ### Getting Started
