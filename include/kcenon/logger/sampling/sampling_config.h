@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file sampling_config.h
  * @brief Configuration structures and enums for log sampling
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 3.3.0
  *
  * @details This file defines the configuration structures and sampling strategies

@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file composite_writer.h
  * @brief Composite writer combining formatter and sink (Pipeline Pattern)
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.3.0
  * @version Sprint 5-6 - Writer Refactoring
  *

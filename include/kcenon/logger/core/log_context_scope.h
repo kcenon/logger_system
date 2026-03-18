@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file log_context_scope.h
  * @brief RAII-based context scope management for structured logging
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 3.2.0
  *
  * @details This file provides thread-local context storage and RAII scope

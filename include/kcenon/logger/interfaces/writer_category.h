@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file writer_category.h
  * @brief Writer category interfaces and type traits
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.4.0
  * @version Phase 2.0 - Writer Hierarchy Clarification
  *

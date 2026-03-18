@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file structured_log_builder.h
  * @brief Fluent builder for structured log entries
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 3.1.0
  *
  * @details Provides a fluent interface for building structured log entries

@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file log_sampler.h
  * @brief Log sampling implementation for high-volume scenarios
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 3.3.0
  *
  * @details Provides log sampling functionality to reduce log volume while
