@@ -3,6 +3,7 @@
 [![Benchmarks](https://github.com/kcenon/logger_system/actions/workflows/benchmarks.yml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/benchmarks.yml)
 [![Code Coverage](https://github.com/kcenon/logger_system/actions/workflows/coverage.yml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/coverage.yml)
 [![Static Analysis](https://github.com/kcenon/logger_system/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/static-analysis.yml)
+[![codecov](https://codecov.io/gh/kcenon/logger_system/branch/main/graph/badge.svg)](https://codecov.io/gh/kcenon/logger_system)
 [![Documentation](https://github.com/kcenon/logger_system/actions/workflows/build-Doxygen.yaml/badge.svg)](https://github.com/kcenon/logger_system/actions/workflows/build-Doxygen.yaml)
 [![License](https://img.shields.io/github/license/kcenon/logger_system)](https://github.com/kcenon/logger_system/blob/main/LICENSE)
 
