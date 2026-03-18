@@ -45,7 +45,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file timestamp_formatter.h
  * @brief Default human-readable formatter with timestamps
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.2.0
  * @version Phase 3 - Code Quality Improvement
  *

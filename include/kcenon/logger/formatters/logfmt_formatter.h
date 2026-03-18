@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file logfmt_formatter.h
  * @brief Logfmt formatter for structured logging
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 3.1.0
  *
  * @details Formats log messages in logfmt format (key=value pairs) for

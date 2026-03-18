@@ -10,7 +10,7 @@ All rights reserved.
 /**
  * @file log_entry.h
  * @brief Data structures for representing log entries and source locations
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.0.0
  * 
  * @details This file defines the core data structures used to represent log messages

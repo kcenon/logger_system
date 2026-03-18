@@ -32,6 +32,58 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
+/**
+ * @file logger.h
+ * @brief High-performance, thread-safe logging system with asynchronous capabilities
+ * @author kcenon
+ * @since 1.0.0
+ *
+ * @details This file defines the main logger class that provides a comprehensive
+ * logging solution with support for multiple output destinations, asynchronous
+ * processing, metrics collection, and dependency injection. The logger is designed
+ * to be thread-safe and supports both synchronous and asynchronous operation modes.
+ *
+ * @note The logger integrates with the thread_system when USE_THREAD_SYSTEM is defined,
+ * providing seamless compatibility with the broader thread management infrastructure.
+ *
+ * @example Basic usage:
+ * @code
+ * // Create a logger with default settings
+ * kcenon::logger::logger logger;
+ *
+ * // Add a console writer
+ * logger.add_writer(std::make_unique<console_writer>());
+ *
+ * // Start the logger in async mode
+ * logger.start();
+ *
+ * // Log messages
+ * logger.log(log_level::info, "Application started");
+ * logger.log(log_level::error, "An error occurred", __FILE__, __LINE__, __FUNCTION__);
+ *
+ * // Flush and stop
+ * logger.flush();
+ * logger.stop();
+ * @endcode
+ *
+ * @example Advanced configuration with builder:
+ * @code
+ * auto result = logger_builder()
+ *     .with_async(true)
+ *     .with_buffer_size(16384)
+ *     .with_min_level(log_level::debug)
+ *     .with_metrics(true)
+ *     .add_writer("console", std::make_unique<console_writer>())
+ *     .add_writer("file", std::make_unique<file_writer>("logs/app.log"))
+ *     .build();
+ *
+ * if (result) {
+ *     auto logger = std::move(result.value());
+ *     // Use logger...
+ * }
+ * @endcode
+ */
+
 #include <memory>
 #include <vector>
 #include <atomic>
@@ -55,58 +107,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kcenon/logger/security/signal_manager.h>
 #include "structured_log_builder.h"
 #include "unified_log_context.h"
-
-/**
- * @file logger.h
- * @brief High-performance, thread-safe logging system with asynchronous capabilities
- * @author 🍀☀🌕🌥 🌊
- * @since 1.0.0
- * 
- * @details This file defines the main logger class that provides a comprehensive
- * logging solution with support for multiple output destinations, asynchronous
- * processing, metrics collection, and dependency injection. The logger is designed
- * to be thread-safe and supports both synchronous and asynchronous operation modes.
- * 
- * @note The logger integrates with the thread_system when USE_THREAD_SYSTEM is defined,
- * providing seamless compatibility with the broader thread management infrastructure.
- * 
- * @example Basic usage:
- * @code
- * // Create a logger with default settings
- * kcenon::logger::logger logger;
- * 
- * // Add a console writer
- * logger.add_writer(std::make_unique<console_writer>());
- * 
- * // Start the logger in async mode
- * logger.start();
- * 
- * // Log messages
- * logger.log(log_level::info, "Application started");
- * logger.log(log_level::error, "An error occurred", __FILE__, __LINE__, __FUNCTION__);
- * 
- * // Flush and stop
- * logger.flush();
- * logger.stop();
- * @endcode
- * 
- * @example Advanced configuration with builder:
- * @code
- * auto result = logger_builder()
- *     .with_async(true)
- *     .with_buffer_size(16384)
- *     .with_min_level(log_level::debug)
- *     .with_metrics(true)
- *     .add_writer("console", std::make_unique<console_writer>())
- *     .add_writer("file", std::make_unique<file_writer>("logs/app.log"))
- *     .build();
- * 
- * if (result) {
- *     auto logger = std::move(result.value());
- *     // Use logger...
- * }
- * @endcode
- */
 
 namespace kcenon::logger {
 

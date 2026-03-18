@@ -10,7 +10,7 @@ All rights reserved.
 /**
  * @file logger_builder.h
  * @brief Builder pattern implementation for flexible logger configuration
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.0.0
  * 
  * @details This file provides a fluent interface for constructing logger instances
