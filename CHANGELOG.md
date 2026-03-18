@@ -1,0 +1,50 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [0.1.3] - 2026-03-14
+
+### Fixed
+- CMake: add thread_system::ThreadSystem to unified target map
+
+## [0.1.2] - 2026-03-14
+
+### Fixed
+- CMake: use configured GIT_TAG instead of hardcoded 'main' in find_package fallback (#492)
+- Build: add DLL export macros, fix CMake install/export and include paths (#487)
+- CMake: use lowercase thread_system as find_package name (#486)
+
+### Documentation
+- Replace GIT_TAG main with tagged versions in FetchContent examples (#491)
+- Fix Doxyfile portability and improve comment coverage (#484)
+
+## [0.1.1] - 2026-03-11
+
+### Fixed
+- CMake: use lowercase common_system as find_package name in UnifiedDependencies (#481)
+
+## [0.1.0] - 2026-03-10
+
+### Added
+- High-performance async logging with 4.34M messages/second throughput
+- Decorator pattern composition (console, file, rotating, encrypted writers)
+- OpenTelemetry (OTLP) integration for observability
+- AES-256-GCM encrypted log writer
+- Structured logging with key-value pairs
+- Sampling strategies (rate-based, priority-based)
+- Security features (log signing, tamper detection)
+- C++20 module support
+- Dependabot and OSV-Scanner vulnerability monitoring (#472)
+- SBOM generation and CVE scanning workflows (#466)
+- IEC 62304 SOUP register (#467)
+
+### Infrastructure
+- GitHub Actions CI/CD with sanitizer testing
+- Doxygen documentation workflow
+- vcpkg manifest with optional features (encryption, otlp, benchmarks)
+- Cross-platform support (Linux, macOS, Windows)
