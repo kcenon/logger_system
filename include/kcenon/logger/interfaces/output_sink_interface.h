@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file output_sink_interface.h
  * @brief Interface for log output destinations (Single Responsibility Principle)
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.3.0
  * @version Sprint 5-6 - Writer Refactoring
  *

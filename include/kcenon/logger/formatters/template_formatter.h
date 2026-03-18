@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file template_formatter.h
  * @brief Template-based customizable formatter for structured logging
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 3.1.0
  *
  * @details Formats log messages using user-defined templates with placeholders.

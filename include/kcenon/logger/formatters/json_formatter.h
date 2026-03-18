@@ -47,7 +47,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file json_formatter.h
  * @brief JSON formatter for structured logging
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.2.0
  * @version Phase 3 - Code Quality Improvement
  *

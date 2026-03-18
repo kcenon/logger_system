@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file log_collector.h
  * @brief Asynchronous log collector using C++20 std::jthread
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.3.0 - Standalone implementation without thread_system dependency
  *
  * @details This collector uses C++20 std::jthread with std::stop_token for

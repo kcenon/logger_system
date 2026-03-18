@@ -10,7 +10,7 @@ All rights reserved.
 /**
  * @file async_worker.h
  * @brief Standalone async worker implementation with jthread compatibility
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.3.0
  *
  * @details This file provides a standalone async worker that uses std::jthread

@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file log_formatter_interface.h
  * @brief Interface for log message formatters (Strategy Pattern)
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.2.0
  * @version Phase 3 - Code Quality Improvement
  *

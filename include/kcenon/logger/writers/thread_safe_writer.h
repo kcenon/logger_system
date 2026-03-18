@@ -41,7 +41,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file thread_safe_writer.h
  * @brief Thread-safe base class for writer implementations
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.3.0
  *
  * @details This file defines the thread_safe_writer base class that provides

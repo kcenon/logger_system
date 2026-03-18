@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file otel_context.h
  * @brief OpenTelemetry context structure for trace correlation
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 3.0.0
  *
  * @details This file defines the OpenTelemetry context structure used for

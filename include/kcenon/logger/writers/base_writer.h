@@ -47,7 +47,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file base_writer.h
  * @brief Abstract base class for all log output writers
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.0.0
  *
  * @details This file defines the abstract base class for all log writers in the system.

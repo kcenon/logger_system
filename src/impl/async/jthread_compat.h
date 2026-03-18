@@ -10,7 +10,7 @@ All rights reserved.
 /**
  * @file jthread_compat.h
  * @brief Compatibility header for std::jthread and std::stop_token
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.3.0
  *
  * @details This header provides compatibility macros and fallback implementations

@@ -20,7 +20,7 @@ All rights reserved.
 /**
  * @file monitoring_backend.h
  * @brief Monitoring system integration backend implementation
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.2.0
  *
  * @details This backend is used when the logger integrates with monitoring_system.

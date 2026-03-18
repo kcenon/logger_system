@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file otlp_writer.h
  * @brief OpenTelemetry Protocol (OTLP) log writer for observability
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 3.0.0
  *
  * @details This file defines the OTLP writer for exporting logs to

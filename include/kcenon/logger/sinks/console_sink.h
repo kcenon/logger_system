@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file console_sink.h
  * @brief Console output sink implementation (stdout/stderr)
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.3.0
  * @version Sprint 5-6 - Writer Refactoring
  *

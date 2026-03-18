@@ -12,7 +12,7 @@ All rights reserved.
 /**
  * @file standalone_backend.h
  * @brief Standalone integration backend implementation
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.2.0
  *
  * @details This backend is used when the logger operates independently

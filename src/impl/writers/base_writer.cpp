@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file base_writer.cpp
  * @brief Implementation of base_writer class
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.0.0
  * @since 1.3.0 Separated from console_writer.cpp for proper code organization
  */

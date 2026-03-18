@@ -38,7 +38,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * @file integration_backend.h
  * @brief Runtime polymorphism interface for integration backends
- * @author 🍀☀🌕🌥 🌊
+ *  kcenon
  * @since 1.2.0
  *
  * @details This file defines the integration backend interface that replaces
