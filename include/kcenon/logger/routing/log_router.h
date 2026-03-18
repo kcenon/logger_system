@@ -50,6 +50,9 @@ using log_level = common::interfaces::log_level;
 
 /**
  * @brief Route configuration for log messages
+ *
+ * @see log_router
+ * @see log_filter_interface
  */
 struct route_config {
     std::vector<std::string> writer_names;
@@ -63,6 +66,10 @@ struct route_config {
 
 /**
  * @brief Log router for directing messages to specific writers
+ *
+ * @see router_builder
+ * @see route_config
+ * @see log_filter_interface
  */
 class log_router {
 private:
@@ -119,6 +126,9 @@ public:
 
 /**
  * @brief Builder for creating routing rules
+ *
+ * @see log_router
+ * @see route_config
  */
 class router_builder {
 private:
