@@ -51,6 +51,9 @@ namespace kcenon::logger::safety {
  * - Signal handlers cannot allocate memory
  * - Emergency flush is best-effort only
  * - May not work with all crash scenarios (e.g., stack corruption)
+ *
+ * @see logger Underlying logger being wrapped for crash safety
+ * @see output_sink_interface Sinks that receive emergency flushed logs
  */
 class crash_safe_logger {
 public:

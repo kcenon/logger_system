@@ -68,6 +68,9 @@ using log_level = common::interfaces::log_level;
  * conditional compilation. Implementations provide level conversion and optional
  * metrics reporting capabilities.
  *
+ * @see logger Uses backends for log level normalization
+ * @see common::interfaces::log_level Level type being normalized
+ *
  * @since 1.2.0
  */
 class integration_backend {
