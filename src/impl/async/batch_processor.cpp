@@ -37,8 +37,12 @@ class batch_processing_jthread_worker {
 public:
     using process_callback = std::function<void()>;
 
-    explicit batch_processing_jthread_worker(process_callback callback)
+    explicit batch_processing_jthread_worker(process_callback callback,
+                                             std::mutex& notify_mutex,
+                                             std::condition_variable& notify_cv)
         : callback_(std::move(callback))
+        , notify_mutex_(notify_mutex)
+        , notify_cv_(notify_cv)
 #if !LOGGER_HAS_JTHREAD
         , stop_source_(std::make_shared<simple_stop_source>())
 #endif
@@ -55,13 +59,17 @@ public:
 
 #if LOGGER_HAS_JTHREAD
         auto callback = callback_;
-        thread_ = compat_jthread([callback](std::stop_token stop_token) {
+        auto& cv = notify_cv_;
+        auto& mtx = notify_mutex_;
+        thread_ = compat_jthread([callback, &cv, &mtx](std::stop_token stop_token) {
             while (!stop_token.stop_requested()) {
                 if (callback) {
                     callback();
                 }
-                // Brief sleep to control loop frequency
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                // Wait for notification or timeout instead of polling
+                std::unique_lock<std::mutex> lock(mtx);
+                cv.wait_for(lock, std::chrono::milliseconds(10),
+                            [&stop_token]{ return stop_token.stop_requested(); });
             }
         });
 #else
@@ -70,13 +78,17 @@ public:
 
         auto callback = callback_;
         auto stop = stop_source_;
-        thread_ = compat_jthread([callback, stop](simple_stop_source& /*unused*/) {
+        auto& cv = notify_cv_;
+        auto& mtx = notify_mutex_;
+        thread_ = compat_jthread([callback, stop, &cv, &mtx](simple_stop_source& /*unused*/) {
             while (!stop->stop_requested()) {
                 if (callback) {
                     callback();
                 }
-                // Brief sleep to control loop frequency
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                // Wait for notification or timeout instead of polling
+                std::unique_lock<std::mutex> lock(mtx);
+                cv.wait_for(lock, std::chrono::milliseconds(10),
+                            [&stop]{ return stop->stop_requested(); });
             }
         });
 #endif
@@ -98,6 +110,8 @@ public:
 
 private:
     process_callback callback_;
+    std::mutex& notify_mutex_;
+    std::condition_variable& notify_cv_;
     compat_jthread thread_;
     std::atomic<bool> running_{false};
 #if !LOGGER_HAS_JTHREAD
@@ -139,7 +153,7 @@ bool batch_processor::start() {
 
     should_stop_ = false;
     processing_worker_ = std::make_unique<batch_processing_jthread_worker>(
-        [this] { process_loop_iteration(); });
+        [this] { process_loop_iteration(); }, notify_mutex_, notify_cv_);
     processing_worker_->start();
     return true;
 }
@@ -150,6 +164,9 @@ void batch_processor::stop(bool flush_remaining) {
     }
 
     should_stop_ = true;
+
+    // Wake the worker so it can observe should_stop_ and exit
+    notify_cv_.notify_one();
 
     if (processing_worker_) {
         processing_worker_->stop();
@@ -185,6 +202,9 @@ bool batch_processor::add_entry(batch_entry&& entry) {
         stats_.dropped_entries.fetch_add(1, std::memory_order_relaxed);
         return false;
     }
+
+    // Wake the worker thread immediately
+    notify_cv_.notify_one();
 
     return true;
 }
@@ -270,8 +290,14 @@ size_t batch_processor::collect_entries(std::vector<batch_entry>& batch,
             batch.push_back(std::move(entry));
             ++collected;
         } else {
-            // Queue is empty, short wait
-            std::this_thread::sleep_for(std::chrono::microseconds(10));
+            // Queue is empty, wait for notification or remaining deadline
+            auto remaining = deadline - std::chrono::steady_clock::now();
+            if (remaining <= std::chrono::steady_clock::duration::zero()) {
+                break;
+            }
+            std::unique_lock<std::mutex> lock(notify_mutex_);
+            notify_cv_.wait_for(lock, remaining,
+                                [this]{ return queue_->size() > 0 || should_stop_.load(std::memory_order_relaxed); });
         }
     }
 
