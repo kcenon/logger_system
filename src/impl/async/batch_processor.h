@@ -261,6 +261,10 @@ private:
     std::atomic<bool> running_{false};
     std::atomic<bool> should_stop_{false};
 
+    // Condition variable for waking the worker thread when new entries arrive
+    std::mutex notify_mutex_;
+    std::condition_variable notify_cv_;
+
     // Dynamic sizing
     std::atomic<size_t> current_batch_size_;
     std::atomic<std::chrono::milliseconds> current_wait_time_;
