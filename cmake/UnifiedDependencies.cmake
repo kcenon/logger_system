@@ -110,7 +110,7 @@ set(_UNIFIED_REPO_network_system "network_system")
 
 # Default GIT_TAG per dependency (used when no explicit GIT_TAG is passed)
 # Keep in sync with ecosystem release versions
-set(_UNIFIED_DEFAULT_TAG_common_system "e5adfa990418c917a846986bbd19d7b4d12ee515")
+set(_UNIFIED_DEFAULT_TAG_common_system "93b1d0f")
 set(_UNIFIED_DEFAULT_TAG_thread_system "v0.3.1")
 set(_UNIFIED_DEFAULT_TAG_logger_system "v0.1.3")
 set(_UNIFIED_DEFAULT_TAG_monitoring_system "v0.1.0")
