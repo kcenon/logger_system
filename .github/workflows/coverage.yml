@@ -34,6 +34,7 @@ jobs:
       uses: actions/checkout@v6
       with:
         repository: kcenon/common_system
+        ref: main
         path: common_system
 
     - name: Configure CMake with coverage
