@@ -100,13 +100,12 @@ TEST_F(ILoggerInterfaceTest, LogWithSourceLocation) {
 }
 
 /**
- * @brief Test log method with explicit source_location parameters
+ * @brief Test log method with source_location (captured at call site)
  */
 TEST_F(ILoggerInterfaceTest, LogWithExplicitSourceLocation) {
-    ::kcenon::common::source_location loc("test_file.cpp", "test_function", 42);
     auto result = logger_->log(ci::log_level::debug,
                                std::string_view("Debug message"),
-                               loc);
+                               common::source_location::current());
     EXPECT_TRUE(result.is_ok());
 }
 

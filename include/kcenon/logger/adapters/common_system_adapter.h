@@ -112,8 +112,20 @@ public:
      */
     ::common::VoidResult log(
         const ::common::interfaces::log_entry& entry) override {
-        ::kcenon::common::source_location loc(entry.file.c_str(), entry.function.c_str(), entry.line);
-        return log(entry.level, std::string_view(entry.message), loc);
+        if (!impl_) {
+            return ::common::VoidResult(
+                ::common::error_info(1, "Logger not initialized", "kcenon::logger"));
+        }
+
+        try {
+            // Delegate directly to logger's log_entry overload, which extracts
+            // file/line/function from the entry without constructing a
+            // std::source_location (not possible in C++20).
+            return impl_->log(entry);
+        } catch (const std::exception& e) {
+            return ::common::VoidResult(
+                ::common::error_info(2, e.what(), "kcenon::logger"));
+        }
     }
 
     /**

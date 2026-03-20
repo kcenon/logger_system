@@ -515,8 +515,65 @@ common::VoidResult logger::log(common::interfaces::log_level level,
 }
 
 common::VoidResult logger::log(const common::interfaces::log_entry& entry) {
-    common::source_location loc(entry.file.c_str(), entry.function.c_str(), entry.line);
-    return log(entry.level, std::string_view(entry.message), loc);
+    if (!pimpl_ || !meets_threshold(entry.level, pimpl_->min_level_.load())) {
+        return common::ok();
+    }
+
+    std::string msg_str(entry.message);
+    std::string file_str(entry.file);
+    int line = entry.line;
+    std::string func_str(entry.function);
+
+    // Create log entry for filtering and routing
+    log_entry internal_entry(entry.level, msg_str, file_str, line, func_str);
+
+    // Apply filter if set
+    {
+        std::shared_lock<std::shared_mutex> filter_lock(pimpl_->filter_mutex_);
+        if (pimpl_->filter_) {
+            if (!pimpl_->filter_->should_log(internal_entry)) {
+                return common::ok();
+            }
+        }
+    }
+
+    // Apply sampling if set
+    {
+        std::shared_lock<std::shared_mutex> sampler_lock(pimpl_->sampler_mutex_);
+        if (pimpl_->sampler_ && pimpl_->sampler_->is_enabled()) {
+            if (!pimpl_->sampler_->should_sample(internal_entry)) {
+                return common::ok();
+            }
+        }
+    }
+
+    // Record metrics if enabled
+    auto start_time = std::chrono::high_resolution_clock::now();
+
+    // Use async path if in async mode
+    if (pimpl_->async_mode_ && pimpl_->collector_) {
+        auto now = std::chrono::system_clock::now();
+        pimpl_->collector_->enqueue(entry.level, msg_str, file_str, line, func_str, now);
+
+        if (pimpl_->metrics_enabled_) {
+            auto end_time = std::chrono::high_resolution_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
+            metrics::record_message_logged(duration.count());
+        }
+        return common::ok();
+    }
+
+    // Synchronous path: dispatch with routing support
+    pimpl_->dispatch_to_writers(entry.level, msg_str, file_str, line, func_str, internal_entry);
+
+    // Update metrics after logging
+    if (pimpl_->metrics_enabled_) {
+        auto end_time = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time);
+        metrics::record_message_logged(duration.count());
+    }
+
+    return common::ok();
 }
 
 bool logger::is_enabled(common::interfaces::log_level level) const {
