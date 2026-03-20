@@ -903,95 +903,10 @@ public:
         return *this;
     }
 
-    /**
-     * @brief Enable random sampling with specified rate
-     * @param rate Sampling rate (0.0 to 1.0)
-     * @param always_log_levels Levels that bypass sampling
-     * @return Reference to builder for chaining
-     *
-     * @deprecated Use with_sampling(sampling_config::random_sampling(rate).with_always_log(levels)) instead
-     *
-     * @example
-     * @code
-     * auto logger = logger_builder()
-     *     .with_sampling(sampling::sampling_config::random_sampling(0.1))
-     *     .build();
-     * @endcode
-     *
-     * @since 3.3.0
-     */
-    [[deprecated("Use with_sampling(sampling_config::random_sampling(rate).with_always_log(levels)) instead")]]
-    logger_builder& with_random_sampling(
-        double rate,
-        std::vector<log_level> always_log_levels = {
-            log_level::error,
-            log_level::critical
-        }) {
-        return with_sampling(
-            sampling::sampling_config::random_sampling(rate)
-                .with_always_log(std::move(always_log_levels)));
-    }
-
-    /**
-     * @brief Enable rate limiting sampling
-     * @param max_per_second Maximum logs per second
-     * @param always_log_levels Levels that bypass sampling
-     * @return Reference to builder for chaining
-     *
-     * @deprecated Use with_sampling(sampling_config::rate_limited(max_per_second).with_always_log(levels)) instead
-     *
-     * @example
-     * @code
-     * auto logger = logger_builder()
-     *     .with_sampling(sampling::sampling_config::rate_limited(1000))
-     *     .build();
-     * @endcode
-     *
-     * @since 3.3.0
-     */
-    [[deprecated("Use with_sampling(sampling_config::rate_limited(max_per_second).with_always_log(levels)) instead")]]
-    logger_builder& with_rate_limiting(
-        std::size_t max_per_second,
-        std::vector<log_level> always_log_levels = {
-            log_level::error,
-            log_level::critical
-        }) {
-        return with_sampling(
-            sampling::sampling_config::rate_limited(max_per_second)
-                .with_always_log(std::move(always_log_levels)));
-    }
-
-    /**
-     * @brief Enable adaptive sampling
-     * @param threshold Messages/second threshold to trigger adaptation
-     * @param min_rate Minimum sampling rate under load
-     * @param always_log_levels Levels that bypass sampling
-     * @return Reference to builder for chaining
-     *
-     * @deprecated Use with_sampling(sampling_config::adaptive(threshold, min_rate).with_always_log(levels)) instead
-     *
-     * @example
-     * @code
-     * auto logger = logger_builder()
-     *     .with_sampling(sampling::sampling_config::adaptive(50000, 0.01))
-     *     .build();
-     * @endcode
-     *
-     * @since 3.3.0
-     */
-    [[deprecated("Use with_sampling(sampling_config::adaptive(threshold, min_rate).with_always_log(levels)) instead")]]
-    logger_builder& with_adaptive_sampling(
-        std::size_t threshold = 10000,
-        double min_rate = 0.01,
-        std::vector<log_level> always_log_levels = {
-            log_level::warning,
-            log_level::error,
-            log_level::critical
-        }) {
-        return with_sampling(
-            sampling::sampling_config::adaptive(threshold, min_rate)
-                .with_always_log(std::move(always_log_levels)));
-    }
+    // Legacy sampling methods (with_random_sampling, with_rate_limiting, with_adaptive_sampling)
+    // removed. Use with_sampling(sampling_config::random_sampling(rate)),
+    // with_sampling(sampling_config::rate_limited(max_per_second)),
+    // with_sampling(sampling_config::adaptive(threshold, min_rate)) instead.
 
     /**
      * @brief Build the logger with validation

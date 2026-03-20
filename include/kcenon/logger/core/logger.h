@@ -59,7 +59,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * // Log messages
  * logger.log(log_level::info, "Application started");
- * logger.log(log_level::error, "An error occurred", __FILE__, __LINE__, __FUNCTION__);
+ * logger.log(log_level::error, "An error occurred");
  *
  * // Flush and stop
  * logger.flush();
@@ -248,25 +248,8 @@ public:
                            std::string_view message,
                            const common::source_location& loc = common::source_location::current()) override;
 
-    /**
-     * @brief Log a message with source location information (legacy convenience method)
-     * @param level Log level
-     * @param message Log message
-     * @param file Source file name
-     * @param line Source line number
-     * @param function Function name
-     * @return VoidResult indicating success or error
-     *
-     * @deprecated Use log(log_level, std::string_view, const source_location&) instead
-     * @note This method was removed from common::interfaces::ILogger in v3.0.0 (Issue #217).
-     *       It is preserved here for backward compatibility but no longer overrides ILogger.
-     * @since 2.0.0
-     */
-    common::VoidResult log(common::interfaces::log_level level,
-                           const std::string& message,
-                           const std::string& file,
-                           int line,
-                           const std::string& function);
+    // Legacy log(level, message, file, line, function) removed.
+    // Use log(level, message, source_location::current()) instead.
 
     /**
      * @brief Log a structured entry (ILogger interface)
@@ -617,65 +600,8 @@ public:
     [[nodiscard]] bool has_realtime_analysis() const;
 #endif  // LOGGER_WITH_ANALYSIS
 
-    // =========================================================================
-    // OpenTelemetry context management
-    // =========================================================================
-
-    /**
-     * @brief Set OpenTelemetry context for the current thread
-     * @param ctx Context to set (trace_id, span_id, etc.)
-     *
-     * @details Sets the OTEL context for trace correlation. All subsequent
-     * log messages on this thread will include the trace_id and span_id.
-     *
-     * @example
-     * @code
-     * logger->set_otel_context(otlp::otel_context{
-     *     .trace_id = extract_trace_id(request.headers),
-     *     .span_id = extract_span_id(request.headers)
-     * });
-     * @endcode
-     *
-     * @since 3.0.0
-     * @deprecated Use context().set_otel(ctx) instead
-     */
-    [[deprecated("Use context().set_otel(ctx) instead")]]
-    void set_otel_context(const otlp::otel_context& ctx);
-
-    /**
-     * @brief Get the current OpenTelemetry context for this thread
-     * @return Optional context, empty if not set
-     *
-     * @details Returns the OTEL context set for the current thread.
-     * Useful for propagating context to downstream services.
-     *
-     * @since 3.0.0
-     * @deprecated Query individual fields via context().get_string("trace_id") etc.
-     */
-    [[deprecated("Query individual fields via context().get_string(\"trace_id\") etc.")]]
-    [[nodiscard]] std::optional<otlp::otel_context> get_otel_context() const;
-
-    /**
-     * @brief Clear the OpenTelemetry context for this thread
-     *
-     * @details Clears the OTEL context. Call this at the end of request
-     * processing to prevent context leakage.
-     *
-     * @since 3.0.0
-     * @deprecated Use context().clear(context_category::otel) instead
-     */
-    [[deprecated("Use context().clear(context_category::otel) instead")]]
-    void clear_otel_context();
-
-    /**
-     * @brief Check if OTEL context is set for this thread
-     * @return true if context is set
-     *
-     * @since 3.0.0
-     * @deprecated Use context().has("trace_id") instead
-     */
-    [[deprecated("Use context().has(\"trace_id\") instead")]]
-    [[nodiscard]] bool has_otel_context() const;
+    // OpenTelemetry context: Use context().set_otel(), context().get_string("trace_id"),
+    // context().clear(context_category::otel), context().has("trace_id") instead.
 
     // =========================================================================
     // Structured logging API
@@ -688,7 +614,7 @@ public:
      *
      * @details This is the canonical API for structured logging. Returns a builder
      * that allows adding arbitrary fields to the log entry. The entry is logged
-     * when emit() is called on the builder. Context fields (set via set_context())
+     * when emit() is called on the builder. Context fields (set via context().set())
      * are automatically included.
      *
      * Level-specific convenience methods (trace_structured(), debug_structured(), etc.)
@@ -755,74 +681,7 @@ public:
      */
     [[nodiscard]] const unified_log_context& context() const;
 
-    // =========================================================================
-    // Context fields management (legacy API - use context() instead)
-    // =========================================================================
-
-    /**
-     * @brief Set a context field that persists across log calls
-     * @param key Field name
-     * @param value Field value
-     *
-     * @details Context fields are automatically included in all structured
-     * log entries created via log_structured() method. Useful for request IDs,
-     * trace IDs, or other per-request/per-session metadata.
-     *
-     * @example
-     * @code
-     * logger->set_context("request_id", "req-123");
-     * logger->set_context("trace_id", "trace-456");
-     *
-     * // All subsequent structured logs include request_id and trace_id
-     * logger->log_structured(log_level::info)
-     *     .message("Processing request")
-     *     .emit();
-     * @endcode
-     *
-     * @since 3.1.0
-     * @deprecated Use context().set(key, value) instead
-     */
-    [[deprecated("Use context().set(key, value) instead")]]
-    void set_context(const std::string& key, const std::string& value);
-
-    /**
-     * @brief Set a context field with integer value
-     * @param key Field name
-     * @param value Field value
-     * @since 3.1.0
-     * @deprecated Use context().set(key, value) instead
-     */
-    [[deprecated("Use context().set(key, value) instead")]]
-    void set_context(const std::string& key, int64_t value);
-
-    /**
-     * @brief Set a context field with double value
-     * @param key Field name
-     * @param value Field value
-     * @since 3.1.0
-     * @deprecated Use context().set(key, value) instead
-     */
-    [[deprecated("Use context().set(key, value) instead")]]
-    void set_context(const std::string& key, double value);
-
-    /**
-     * @brief Set a context field with boolean value
-     * @param key Field name
-     * @param value Field value
-     * @since 3.1.0
-     * @deprecated Use context().set(key, value) instead
-     */
-    [[deprecated("Use context().set(key, value) instead")]]
-    void set_context(const std::string& key, bool value);
-
-    /**
-     * @brief Remove a context field
-     * @param key Field name to remove
-     * @since 3.1.0
-     * @deprecated Use context().remove(key) instead
-     */
-    [[deprecated("Use context().remove(key) instead")]]
-    void remove_context(const std::string& key);
+    // Legacy context fields: Use context().set(key, value) and context().remove(key) instead.
 
     // =========================================================================
     // Log sampling API

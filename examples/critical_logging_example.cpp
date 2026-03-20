@@ -45,13 +45,9 @@
 #include <kcenon/logger/writers/async_writer.h>
 #include <kcenon/common/interfaces/logger_interface.h>
 #include <iostream>
-#include <thread>
-#include <chrono>
 
 using namespace kcenon::logger;
 namespace ci = kcenon::common::interfaces;
-using namespace std::chrono_literals;
-
 /**
  * Example 1: Basic critical writer usage
  * Wraps a file writer to ensure critical logs are immediately flushed
@@ -69,7 +65,6 @@ void example_basic_critical_writer() {
         critical_writer_config{
             .force_flush_on_critical = true,
             .force_flush_on_error = false,
-            .enable_signal_handlers = true,
             .write_ahead_log = false,
             .sync_on_critical = true
         }
@@ -107,7 +102,6 @@ void example_write_ahead_logging() {
         std::move(file),
         critical_writer_config{
             .force_flush_on_critical = true,
-            .enable_signal_handlers = true,
             .write_ahead_log = true,  // Enable WAL
             .wal_path = "logs/.critical.wal",
             .sync_on_critical = true
@@ -138,8 +132,7 @@ void example_hybrid_writer() {
         std::make_unique<file_writer>("logs/hybrid.log"),
         critical_writer_config{
             .force_flush_on_critical = true,
-            .force_flush_on_error = true, // Also flush errors immediately
-            .enable_signal_handlers = true
+            .force_flush_on_error = true // Also flush errors immediately
         },
         10000 // Async queue size
     );
@@ -158,50 +151,11 @@ void example_hybrid_writer() {
 }
 
 /**
- * Example 4: Signal handler demonstration
- * Shows how critical_writer handles abnormal termination
- */
-void example_signal_handler() {
-    std::cout << "\n=== Example 4: Signal Handler ===\n";
-
-    logger log(false);
-
-    auto critical = std::make_unique<critical_writer>(
-        std::make_unique<file_writer>("logs/signal_test.log"),
-        critical_writer_config{
-            .force_flush_on_critical = true,
-            .enable_signal_handlers = true,
-            .write_ahead_log = true,
-            .wal_path = "logs/.signal.wal"
-        }
-    );
-
-    // Get stats reference before moving
-    auto& stats = critical->get_stats();
-    log.add_writer(std::move(critical));
-
-    log.log(ci::log_level::info, std::string("Before critical log"));
-    log.log(ci::log_level::critical, std::string("Critical log before potential crash"));
-
-    std::cout << "Try sending SIGTERM (Ctrl+C) to this process\n";
-    std::cout << "The signal handler will ensure logs are flushed\n";
-
-    // Simulate some work
-    std::this_thread::sleep_for(5s);
-
-    std::cout << "Statistics:\n";
-    std::cout << "  Critical writes: " << stats.total_critical_writes.load() << "\n";
-    std::cout << "  Flushes: " << stats.total_flushes.load() << "\n";
-    std::cout << "  WAL writes: " << stats.wal_writes.load() << "\n";
-    std::cout << "  Signal invocations: " << stats.signal_handler_invocations.load() << "\n";
-}
-
-/**
- * Example 5: Production configuration
+ * Example 4: Production configuration
  * Recommended setup for production systems
  */
 void example_production_setup() {
-    std::cout << "\n=== Example 5: Production Configuration ===\n";
+    std::cout << "\n=== Example 4: Production Configuration ===\n";
 
     // Use logger_builder for comprehensive configuration
     auto result = logger_builder()
@@ -218,7 +172,6 @@ void example_production_setup() {
                 critical_writer_config{
                     .force_flush_on_critical = true,
                     .force_flush_on_error = true,
-                    .enable_signal_handlers = true,
                     .write_ahead_log = true,
                     .wal_path = "logs/.production.wal",
                     .sync_on_critical = true,
@@ -251,15 +204,14 @@ void example_production_setup() {
     std::cout << "  - Async logging for normal messages (performance)\n";
     std::cout << "  - Immediate flush for errors and critical (safety)\n";
     std::cout << "  - Write-ahead logging for crash recovery\n";
-    std::cout << "  - Signal handlers for graceful shutdown\n";
     std::cout << "  - File rotation to manage disk space\n";
 }
 
 /**
- * Example 6: Error handling and statistics
+ * Example 5: Error handling and statistics
  */
 void example_error_handling() {
-    std::cout << "\n=== Example 6: Error Handling & Statistics ===\n";
+    std::cout << "\n=== Example 5: Error Handling & Statistics ===\n";
 
     logger log(false);
 
@@ -267,7 +219,6 @@ void example_error_handling() {
         std::make_unique<file_writer>("logs/stats.log"),
         critical_writer_config{
             .force_flush_on_critical = true,
-            .enable_signal_handlers = false, // Disable for this example
             .write_ahead_log = true,
             .wal_path = "logs/.stats.wal"
         }
@@ -314,7 +265,6 @@ int main() {
         example_basic_critical_writer();
         example_write_ahead_logging();
         example_hybrid_writer();
-        example_signal_handler();
         example_production_setup();
         example_error_handling();
 

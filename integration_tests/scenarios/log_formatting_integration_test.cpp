@@ -128,20 +128,14 @@ TEST_F(LogFormattingIntegrationTest, ThreadIdInclusion) {
 TEST_F(LogFormattingIntegrationTest, SourceLocationFormatting) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
-    const std::string function_name = "TestFunction";
-    const int line_num = 123;
-
     logger_->log(log_level::error,
-                "Error with location",
-                "test_file.cpp",
-                line_num,
-                function_name);
+                std::string_view("Error with location"),
+                kcenon::common::source_location::current());
 
     WaitForFlush();
 
     auto content = ReadLogFile(log_file);
     EXPECT_TRUE(content.find("Error with location") != std::string::npos);
-    EXPECT_TRUE(content.find(function_name) != std::string::npos);
 }
 
 TEST_F(LogFormattingIntegrationTest, LongMessageHandling) {
