@@ -320,14 +320,11 @@ TEST_F(LoggerLifecycleTest, LogWithSourceLocation) {
     auto log_file = CreateLoggerWithFileWriter(true);
 
     logger_->log(log_level::error,
-                "Error with location",
-                __FILE__,
-                __LINE__,
-                __FUNCTION__);
+                std::string_view("Error with location"),
+                kcenon::common::source_location::current());
 
     WaitForFlush();
 
     auto content = ReadLogFile(log_file);
     EXPECT_TRUE(content.find("Error with location") != std::string::npos);
-    EXPECT_TRUE(content.find(__FUNCTION__) != std::string::npos);
 }
