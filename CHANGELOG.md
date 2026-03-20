@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **BREAKING**: Remove 8 deprecated context methods from `logger` public API; use `context()` unified API instead ([#534](https://github.com/kcenon/logger_system/issues/534))
+
 ### Performance
 
 - Remove unused `sequence_` array from `lockfree_spsc_queue` ([#533](https://github.com/kcenon/logger_system/issues/533))

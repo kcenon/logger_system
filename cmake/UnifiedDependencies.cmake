@@ -110,7 +110,7 @@ set(_UNIFIED_REPO_network_system "network_system")
 
 # Default GIT_TAG per dependency (used when no explicit GIT_TAG is passed)
 # Keep in sync with ecosystem release versions
-set(_UNIFIED_DEFAULT_TAG_common_system "93b1d0f")
+set(_UNIFIED_DEFAULT_TAG_common_system "93b1d0f64c6fb69529f0ff84bed2601de07ebba5")
 set(_UNIFIED_DEFAULT_TAG_thread_system "v0.3.1")
 set(_UNIFIED_DEFAULT_TAG_logger_system "v0.1.3")
 set(_UNIFIED_DEFAULT_TAG_monitoring_system "v0.1.0")
@@ -430,11 +430,18 @@ macro(_unified_resolve_fetchcontent DEP_NAME GIT_TAG)
             set(DATABASE_BUILD_TESTS OFF CACHE BOOL "" FORCE)
         endif()
 
+        # Shallow clone only works with tags/branches, not commit hashes.
+        # Detect if GIT_TAG is a commit hash (hex string without 'v' prefix).
+        set(_git_shallow TRUE)
+        if("${GIT_TAG}" MATCHES "^[0-9a-f]+$")
+            set(_git_shallow FALSE)
+        endif()
+
         FetchContent_Declare(
             ${_fetch_name}
             GIT_REPOSITORY https://github.com/${UNIFIED_GITHUB_ORG}/${_repo_name}.git
             GIT_TAG ${GIT_TAG}
-            GIT_SHALLOW TRUE
+            GIT_SHALLOW ${_git_shallow}
         )
 
         # Use FetchContent_Populate + add_subdirectory with EXCLUDE_FROM_ALL
