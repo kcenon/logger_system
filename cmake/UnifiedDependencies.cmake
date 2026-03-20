@@ -433,7 +433,7 @@ macro(_unified_resolve_fetchcontent DEP_NAME GIT_TAG)
         # Shallow clone only works with tags/branches, not commit hashes.
         # Detect if GIT_TAG is a commit hash (hex string without 'v' prefix).
         set(_git_shallow TRUE)
-        if(GIT_TAG MATCHES "^[0-9a-f]+$")
+        if("${GIT_TAG}" MATCHES "^[0-9a-f]+$")
             set(_git_shallow FALSE)
         endif()
 
