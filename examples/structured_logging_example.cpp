@@ -345,16 +345,16 @@ void logger_context_example() {
         .emit();
 
     // Check if context exists
-    if (logger_instance->has_context()) {
-        auto ctx = logger_instance->get_context();
+    if (!logger_instance->context().empty()) {
+        auto ctx = logger_instance->context().to_fields();
         std::cout << "Current context has " << ctx.size() << " fields" << std::endl;
     }
 
     // Remove specific context
-    logger_instance->remove_context("environment");
+    logger_instance->context().remove("environment");
 
     // Clear all context
-    logger_instance->clear_context();
+    logger_instance->context().clear();
 
     logger_instance->stop();
 }

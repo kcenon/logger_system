@@ -216,7 +216,7 @@ TEST_F(StructuredLoggingTest, LoggerContextManagement) {
     test_logger->start();
 
     // Initially no context
-    EXPECT_FALSE(test_logger->has_context());
+    EXPECT_TRUE(test_logger->context().empty());
 
     // Set context fields one by one and verify each
     test_logger->context().set("request_id", std::string("req-123"));
@@ -418,7 +418,7 @@ TEST_F(StructuredLoggingTest, ContextThreadSafety) {
             for (int i = 0; i < operations_per_thread; ++i) {
                 std::string key = "key_" + std::to_string(t) + "_" + std::to_string(i);
                 test_logger->set_context(key, "value");
-                test_logger->has_context();
+                (void)test_logger->context().empty();
                 test_logger->remove_context(key);
             }
         });
