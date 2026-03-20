@@ -33,7 +33,6 @@ All rights reserved.
  *     std::move(file_writer),
  *     critical_writer_config{
  *         .force_flush_on_critical = true,
- *         .enable_signal_handlers = true,
  *         .write_ahead_log = true
  *     }
  * );
@@ -54,7 +53,6 @@ All rights reserved.
 #include <memory>
 #include <mutex>
 #include <fstream>
-#include <csignal>
 #include <functional>
 
 namespace kcenon::logger {
@@ -70,11 +68,8 @@ struct critical_writer_config {
     /// Force immediate flush for error messages (default: false)
     bool force_flush_on_error = false;
 
-    /// Enable signal handlers for graceful shutdown (default: false)
-    /// @deprecated Signal handling should be managed by logger and signal_manager (DI pattern)
-    /// @since 2.0.0 Changed default from true to false
-    /// @note This field is deprecated. Use logger_context for signal handling instead.
-    bool enable_signal_handlers = false;
+    // Signal handling is managed by logger and signal_manager (DI pattern).
+    // Use logger_context for signal handling instead.
 
     /// Enable write-ahead logging for maximum durability (default: false)
     bool write_ahead_log = false;
@@ -96,9 +91,10 @@ struct critical_writer_config {
  * @details This writer prevents message loss by:
  * 1. Bypassing async queue for critical/fatal messages
  * 2. Forcing immediate flush after critical writes
- * 3. Installing signal handlers to flush on abnormal termination
- * 4. Optional write-ahead logging for crash recovery
- * 5. File descriptor synchronization (fsync) for durability
+ * 3. Optional write-ahead logging for crash recovery
+ * 4. File descriptor synchronization (fsync) for durability
+ *
+ * For signal handling, use signal_manager or crash_safe_logger instead.
  *
  * Thread Safety: All methods are thread-safe. Critical writes are serialized
  * to ensure ordering and prevent interleaving.
@@ -187,7 +183,6 @@ public:
         std::atomic<uint64_t> total_flushes{0};
         std::atomic<uint64_t> wal_writes{0};
         std::atomic<uint64_t> sync_calls{0};
-        std::atomic<uint64_t> signal_handler_invocations{0};
     };
 
     const critical_stats& get_stats() const { return stats_; }
@@ -211,21 +206,6 @@ private:
      */
     void sync_file_descriptor();
 
-    /**
-     * @brief Install signal handlers for graceful shutdown
-     */
-    void install_signal_handlers();
-
-    /**
-     * @brief Restore original signal handlers
-     */
-    void restore_signal_handlers();
-
-    /**
-     * @brief Signal handler callback
-     * @param signal Signal number
-     */
-    static void signal_handler(int signal);
 
     /// Configuration
     critical_writer_config config_;
@@ -244,22 +224,6 @@ private:
 
     /// Flag for shutdown
     std::atomic<bool> shutting_down_{false};
-
-    /// Global instance for signal handler (unfortunately needed for C signal API)
-    static std::atomic<critical_writer*> instance_;
-
-#ifdef _WIN32
-    /// Original signal handlers (Windows)
-    void (*original_sigterm_)(int) = nullptr;
-    void (*original_sigint_)(int) = nullptr;
-    void (*original_sigabrt_)(int) = nullptr;
-#elif defined(__unix__) || defined(__APPLE__)
-    /// Original signal handlers (POSIX)
-    struct sigaction original_sigterm_;
-    struct sigaction original_sigint_;
-    struct sigaction original_sigsegv_;
-    struct sigaction original_sigabrt_;
-#endif
 };
 
 /**

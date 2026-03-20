@@ -24,9 +24,6 @@ All rights reserved.
 
 namespace kcenon::logger {
 
-// Static instance for signal handler
-std::atomic<critical_writer*> critical_writer::instance_{nullptr};
-
 critical_writer::critical_writer(
     log_writer_ptr wrapped_writer,
     critical_writer_config config
@@ -67,21 +64,10 @@ critical_writer::critical_writer(
         }
     }
 
-    // Install signal handlers if enabled (deprecated - for backward compatibility)
-    if (config_.enable_signal_handlers) {
-        install_signal_handlers();
-    }
 }
 
 critical_writer::~critical_writer() {
     shutting_down_.store(true);
-
-    // Restore signal handlers (deprecated - for backward compatibility)
-    if (config_.enable_signal_handlers) {
-        utils::safe_destructor_operation("restore_signal_handlers", [this]() {
-            restore_signal_handlers();
-        });
-    }
 
     // Final flush - use safe operation to log any errors
     utils::safe_destructor_result_operation("final_flush", [this]() {
@@ -95,9 +81,6 @@ critical_writer::~critical_writer() {
             wal_stream_->close();
         });
     }
-
-    // Clear global instance
-    instance_.store(nullptr);
 }
 
 common::VoidResult critical_writer::write(const log_entry& entry) {
@@ -267,139 +250,6 @@ void critical_writer::sync_file_descriptor() {
     if (wal_stream_) {
         wal_stream_->flush();
         // Note: std::ofstream doesn't expose fd, would need native file handling
-    }
-#endif
-}
-
-void critical_writer::install_signal_handlers() {
-    // DEPRECATED: Signal handling should be managed by logger and signal_manager
-    // through dependency injection pattern. This method is kept for backwards
-    // compatibility but will be removed in a future version.
-    // Use logger_context::register_logger() instead.
-
-    // Set global instance
-    instance_.store(this);
-
-#ifdef _WIN32
-    // Windows: Use signal() API (less robust than POSIX sigaction)
-    original_sigterm_ = ::signal(SIGTERM, &critical_writer::signal_handler);
-    original_sigint_ = ::signal(SIGINT, &critical_writer::signal_handler);
-    original_sigabrt_ = ::signal(SIGABRT, &critical_writer::signal_handler);
-    // Note: SIGSEGV is not recommended to handle on Windows
-#elif defined(__unix__) || defined(__APPLE__)
-    // POSIX: Use sigaction for more reliable signal handling
-    struct sigaction sa;
-    sa.sa_handler = &critical_writer::signal_handler;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = SA_RESTART;
-
-    // Install handlers and save originals
-    sigaction(SIGTERM, &sa, &original_sigterm_);
-    sigaction(SIGINT, &sa, &original_sigint_);
-    sigaction(SIGSEGV, &sa, &original_sigsegv_);
-    sigaction(SIGABRT, &sa, &original_sigabrt_);
-#endif
-}
-
-void critical_writer::restore_signal_handlers() {
-    // DEPRECATED: Part of deprecated signal handler mechanism
-    // Use logger_context::unregister_logger() instead
-#ifdef _WIN32
-    // Windows: Restore original handlers
-    if (original_sigterm_) ::signal(SIGTERM, original_sigterm_);
-    if (original_sigint_) ::signal(SIGINT, original_sigint_);
-    if (original_sigabrt_) ::signal(SIGABRT, original_sigabrt_);
-#elif defined(__unix__) || defined(__APPLE__)
-    // POSIX: Restore original handlers
-    sigaction(SIGTERM, &original_sigterm_, nullptr);
-    sigaction(SIGINT, &original_sigint_, nullptr);
-    sigaction(SIGSEGV, &original_sigsegv_, nullptr);
-    sigaction(SIGABRT, &original_sigabrt_, nullptr);
-#endif
-
-    instance_.store(nullptr);
-}
-
-void critical_writer::signal_handler(int signal) {
-    // DEPRECATED: This signal handler is deprecated in favor of signal_manager
-    // integrated through logger_context. Kept for backwards compatibility only.
-    //
-    // IMPORTANT: This is a signal handler - only async-signal-safe operations allowed!
-    // See POSIX.1-2008 or https://man7.org/linux/man-pages/man7/signal-safety.7.html
-
-    // Get global instance (atomic operation - safe)
-    critical_writer* writer = instance_.load(std::memory_order_acquire);
-    if (!writer) {
-        return;
-    }
-
-    // Update statistics (atomic operation - safe)
-    writer->stats_.signal_handler_invocations.fetch_add(1, std::memory_order_relaxed);
-
-    // Set shutdown flag (atomic operation - safe)
-    // This allows other threads to detect signal and perform graceful shutdown
-    writer->shutting_down_.store(true, std::memory_order_release);
-
-    // Write emergency message using async-signal-safe write() syscall
-    const char* msg = nullptr;
-    size_t msg_len = 0;
-
-    switch (signal) {
-        case SIGTERM:
-            msg = "\n[critical_writer] SIGTERM received, shutting down...\n";
-            msg_len = 55;
-            break;
-        case SIGINT:
-            msg = "\n[critical_writer] SIGINT received, shutting down...\n";
-            msg_len = 54;
-            break;
-#if defined(__unix__) || defined(__APPLE__)
-        case SIGSEGV:
-            msg = "\n[critical_writer] SIGSEGV received, emergency shutdown...\n";
-            msg_len = 61;
-            break;
-#endif
-        case SIGABRT:
-            msg = "\n[critical_writer] SIGABRT received, emergency shutdown...\n";
-            msg_len = 61;
-            break;
-        default:
-            msg = "\n[critical_writer] Signal received, shutting down...\n";
-            msg_len = 55;
-            break;
-    }
-
-    // Use async-signal-safe write() directly to stderr (POSIX-safe)
-#if defined(__unix__) || defined(__APPLE__)
-    if (msg && msg_len > 0) {
-        ::write(STDERR_FILENO, msg, msg_len);
-    }
-#elif defined(_WIN32)
-    // Windows doesn't have strict async-signal-safe requirements
-    // But we still avoid complex operations
-    if (msg && msg_len > 0) {
-        ::write(_fileno(stderr), msg, static_cast<unsigned int>(msg_len));
-    }
-#endif
-
-    // NOTE: We do NOT call flush() here as it acquires mutex (signal-unsafe!)
-    // The shutting_down_ flag will be checked by other threads to perform
-    // graceful shutdown and flush operations in a safe context.
-
-#if defined(__unix__) || defined(__APPLE__)
-    // For fatal signals (SIGSEGV, SIGABRT), restore original handler and re-raise
-    // This allows the default action (core dump) to proceed
-    if (signal == SIGSEGV || signal == SIGABRT) {
-        // Restore original handlers (sigaction is async-signal-safe on most systems)
-        writer->restore_signal_handlers();
-        // Re-raise the signal to trigger default action
-        std::raise(signal);
-    }
-#else
-    // Windows: For SIGABRT, restore and re-raise
-    if (signal == SIGABRT) {
-        writer->restore_signal_handlers();
-        std::raise(signal);
     }
 #endif
 }

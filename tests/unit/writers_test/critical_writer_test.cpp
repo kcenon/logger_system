@@ -101,7 +101,6 @@ TEST(CriticalWriterConfigTest, DefaultValues) {
 
     EXPECT_TRUE(config.force_flush_on_critical);
     EXPECT_FALSE(config.force_flush_on_error);
-    EXPECT_FALSE(config.enable_signal_handlers);
     EXPECT_FALSE(config.write_ahead_log);
     EXPECT_EQ(config.wal_path, "logs/.wal");
     EXPECT_TRUE(config.sync_on_critical);
