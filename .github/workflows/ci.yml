@@ -182,8 +182,17 @@ jobs:
         # Ubuntu 24.04: GCC 14 and Clang 18 both have full C++20 support including std::jthread
         # No special flags needed - system compilers work out of the box
 
-        C_COMPILER="${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }}"
-        CXX_COMPILER="${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}"
+        # macOS: use explicit Apple Clang path to avoid Homebrew LLVM clang
+        if [[ "$RUNNER_OS" == "macOS" ]]; then
+          C_COMPILER="/usr/bin/clang"
+          CXX_COMPILER="/usr/bin/clang++"
+        elif [[ "${{ matrix.compiler }}" == "gcc" ]]; then
+          C_COMPILER="gcc"
+          CXX_COMPILER="g++"
+        else
+          C_COMPILER="clang"
+          CXX_COMPILER="clang++"
+        fi
 
         cmake .. \
           -G Ninja \
@@ -235,8 +244,17 @@ jobs:
         cd build
 
         # Ubuntu 24.04: GCC 14 and Clang 18 both have full C++20 support
-        C_COMPILER="${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }}"
-        CXX_COMPILER="${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}"
+        # macOS: use explicit Apple Clang path to avoid Homebrew LLVM clang
+        if [[ "$RUNNER_OS" == "macOS" ]]; then
+          C_COMPILER="/usr/bin/clang"
+          CXX_COMPILER="/usr/bin/clang++"
+        elif [[ "${{ matrix.compiler }}" == "gcc" ]]; then
+          C_COMPILER="gcc"
+          CXX_COMPILER="g++"
+        else
+          C_COMPILER="clang"
+          CXX_COMPILER="clang++"
+        fi
 
         cmake .. \
           -G Ninja \
@@ -450,8 +468,17 @@ jobs:
         mkdir -p build-core-only
         cd build-core-only
 
-        C_COMPILER="${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }}"
-        CXX_COMPILER="${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}"
+        # macOS: use explicit Apple Clang path to avoid Homebrew LLVM clang
+        if [[ "$RUNNER_OS" == "macOS" ]]; then
+          C_COMPILER="/usr/bin/clang"
+          CXX_COMPILER="/usr/bin/clang++"
+        elif [[ "${{ matrix.compiler }}" == "gcc" ]]; then
+          C_COMPILER="gcc"
+          CXX_COMPILER="g++"
+        else
+          C_COMPILER="clang"
+          CXX_COMPILER="clang++"
+        fi
 
         cmake .. \
           -G Ninja \
