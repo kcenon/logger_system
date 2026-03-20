@@ -75,15 +75,17 @@ common::VoidResult high_performance_async_writer::write(const log_entry& entry) 
 
     // Use batch processor if available
     if (batch_processor_) {
-        // Extract source location info
-        std::string file = entry.location ? entry.location->file.to_string() : "";
-        int line = entry.location ? entry.location->line : 0;
-        std::string function = entry.location ? entry.location->function.to_string() : "";
-
         // Convert log_level from logger_system to common::interfaces
         auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
 
-        batch_processor::batch_entry batch_entry(level, entry.message.to_string(), file, line, function, entry.timestamp);
+        // Construct batch_entry directly with to_string() rvalues to avoid copies
+        batch_processor::batch_entry batch_entry(
+            level,
+            entry.message.to_string(),
+            entry.location ? entry.location->file.to_string() : std::string{},
+            entry.location ? entry.location->line : 0,
+            entry.location ? entry.location->function.to_string() : std::string{},
+            entry.timestamp);
 
         if (batch_processor_->add_entry(std::move(batch_entry))) {
             const auto end_time = std::chrono::steady_clock::now();
