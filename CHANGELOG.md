@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Performance
+
+- Remove unused `sequence_` array from `lockfree_spsc_queue` ([#533](https://github.com/kcenon/logger_system/issues/533))
+- Eliminate string copies in `high_performance_async_writer` hot path ([#532](https://github.com/kcenon/logger_system/issues/532))
+
 ## [0.1.3] - 2026-03-14
 
 ### Fixed
