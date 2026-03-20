@@ -46,9 +46,9 @@ public:
     lockfree_spsc_queue()
         : head_{0}
         , tail_{0} {
-        // Initialize array elements
+        // Initialize cell sequence numbers for ABA prevention
         for (size_t i = 0; i < Size; ++i) {
-            sequence_[i].store(i, std::memory_order_relaxed);
+            cells_[i].sequence.store(i, std::memory_order_relaxed);
         }
     }
 
@@ -188,7 +188,6 @@ private:
     alignas(cache_line_size) std::atomic<size_t> head_;
     alignas(cache_line_size) std::atomic<size_t> tail_;
     alignas(cache_line_size) std::array<cell, Size> cells_;
-    alignas(cache_line_size) std::array<std::atomic<size_t>, Size> sequence_;
 };
 
 /**
