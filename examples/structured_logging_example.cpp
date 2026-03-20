@@ -106,10 +106,11 @@ void context_propagation_example() {
     logger_instance->add_writer(std::make_unique<console_writer>());
     logger_instance->start();
 
-    // Set distributed tracing context using generic API
-    logger_instance->set_context_id("trace_id", "0af7651916cd43dd8448eb211c80319c");
-    logger_instance->set_context_id("span_id", "b7ad6b7169203331");
-    logger_instance->set_context_id("correlation_id", "req-abc-123");
+    // Set distributed tracing context using unified context API
+    logger_instance->context()
+        .set("trace_id", std::string("0af7651916cd43dd8448eb211c80319c"), context_category::trace)
+        .set("span_id", std::string("b7ad6b7169203331"), context_category::trace)
+        .set("correlation_id", std::string("req-abc-123"), context_category::trace);
 
     // All subsequent logs will include trace context
     logger_instance->log_structured(log_level::info)
@@ -124,8 +125,8 @@ void context_propagation_example() {
         .field("rows_returned", 42)
         .emit();
 
-    // Clear all context IDs when request is complete
-    logger_instance->clear_all_context_ids();
+    // Clear all trace context IDs when request is complete
+    logger_instance->context().clear(context_category::trace);
 
     logger_instance->stop();
 }
@@ -328,9 +329,10 @@ void logger_context_example() {
     logger_instance->start();
 
     // Set logger-level context (applies to all logs)
-    logger_instance->set_context("service", std::string("order-service"));
-    logger_instance->set_context("version", std::string("1.2.3"));
-    logger_instance->set_context("environment", std::string("production"));
+    logger_instance->context()
+        .set("service", std::string("order-service"))
+        .set("version", std::string("1.2.3"))
+        .set("environment", std::string("production"));
 
     // All logs will include service, version, and environment
     logger_instance->log_structured(log_level::info)
@@ -343,16 +345,16 @@ void logger_context_example() {
         .emit();
 
     // Check if context exists
-    if (logger_instance->has_context()) {
-        auto ctx = logger_instance->get_context();
+    if (!logger_instance->context().empty()) {
+        auto ctx = logger_instance->context().to_fields();
         std::cout << "Current context has " << ctx.size() << " fields" << std::endl;
     }
 
     // Remove specific context
-    logger_instance->remove_context("environment");
+    logger_instance->context().remove("environment");
 
     // Clear all context
-    logger_instance->clear_context();
+    logger_instance->context().clear();
 
     logger_instance->stop();
 }
