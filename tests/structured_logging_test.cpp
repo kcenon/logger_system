@@ -219,47 +219,47 @@ TEST_F(StructuredLoggingTest, LoggerContextManagement) {
     EXPECT_FALSE(test_logger->has_context());
 
     // Set context fields one by one and verify each
-    test_logger->set_context("request_id", std::string("req-123"));
-    EXPECT_TRUE(test_logger->has_context());
+    test_logger->context().set("request_id", std::string("req-123"));
+    EXPECT_FALSE(test_logger->context().empty());
     {
-        auto ctx = test_logger->get_context();
+        auto ctx = test_logger->context().to_fields();
         ASSERT_EQ(ctx.size(), 1);
         ASSERT_TRUE(std::holds_alternative<std::string>(ctx.at("request_id")));
         EXPECT_EQ(std::get<std::string>(ctx.at("request_id")), "req-123");
     }
 
-    test_logger->set_context("user_id", static_cast<int64_t>(456));
+    test_logger->context().set("user_id", static_cast<int64_t>(456));
     {
-        auto ctx = test_logger->get_context();
+        auto ctx = test_logger->context().to_fields();
         ASSERT_EQ(ctx.size(), 2);
         ASSERT_TRUE(std::holds_alternative<int64_t>(ctx.at("user_id")));
         EXPECT_EQ(std::get<int64_t>(ctx.at("user_id")), 456);
     }
 
-    test_logger->set_context("is_admin", true);
+    test_logger->context().set("is_admin", true);
     {
-        auto ctx = test_logger->get_context();
+        auto ctx = test_logger->context().to_fields();
         ASSERT_EQ(ctx.size(), 3);
         ASSERT_TRUE(std::holds_alternative<bool>(ctx.at("is_admin")));
         EXPECT_TRUE(std::get<bool>(ctx.at("is_admin")));
     }
 
-    test_logger->set_context("response_time", 1.5);
+    test_logger->context().set("response_time", 1.5);
     {
-        auto ctx = test_logger->get_context();
+        auto ctx = test_logger->context().to_fields();
         ASSERT_EQ(ctx.size(), 4);
         ASSERT_TRUE(std::holds_alternative<double>(ctx.at("response_time")));
         EXPECT_NEAR(std::get<double>(ctx.at("response_time")), 1.5, 0.001);
     }
 
     // Remove a context field
-    test_logger->remove_context("is_admin");
-    EXPECT_EQ(test_logger->get_context().size(), 3);
+    test_logger->context().remove("is_admin");
+    EXPECT_EQ(test_logger->context().to_fields().size(), 3);
 
     // Clear all context
-    test_logger->clear_context();
-    EXPECT_FALSE(test_logger->has_context());
-    EXPECT_EQ(test_logger->get_context().size(), 0);
+    test_logger->context().clear();
+    EXPECT_TRUE(test_logger->context().empty());
+    EXPECT_EQ(test_logger->context().to_fields().size(), 0);
 
     test_logger->stop();
 }
@@ -434,125 +434,121 @@ TEST_F(StructuredLoggingTest, ContextThreadSafety) {
     test_logger->stop();
 }
 
-// Test 11: Generic context ID API
-TEST_F(StructuredLoggingTest, GenericContextIdAPI) {
+// Test 11: Unified context API for trace IDs
+TEST_F(StructuredLoggingTest, UnifiedContextTraceAPI) {
     auto test_logger = std::make_shared<logger>(false);
     test_logger->start();
 
     // Initially no context IDs
-    EXPECT_FALSE(test_logger->has_context_id("correlation_id"));
-    EXPECT_FALSE(test_logger->has_context_id("trace_id"));
-    EXPECT_EQ(test_logger->get_context_id("correlation_id"), "");
+    EXPECT_FALSE(test_logger->context().has("correlation_id"));
+    EXPECT_FALSE(test_logger->context().has("trace_id"));
+    EXPECT_EQ(test_logger->context().get_string("correlation_id"), "");
 
-    // Set context IDs using generic API
-    test_logger->set_context_id("correlation_id", "abc-123");
-    test_logger->set_context_id("trace_id", "0af7651916cd43dd8448eb211c80319c");
-    test_logger->set_context_id("span_id", "b7ad6b7169203331");
+    // Set context IDs using unified context API
+    test_logger->context().set("correlation_id", std::string("abc-123"), context_category::trace);
+    test_logger->context().set("trace_id", std::string("0af7651916cd43dd8448eb211c80319c"), context_category::trace);
+    test_logger->context().set("span_id", std::string("b7ad6b7169203331"), context_category::trace);
 
-    EXPECT_TRUE(test_logger->has_context_id("correlation_id"));
-    EXPECT_TRUE(test_logger->has_context_id("trace_id"));
-    EXPECT_TRUE(test_logger->has_context_id("span_id"));
+    EXPECT_TRUE(test_logger->context().has("correlation_id"));
+    EXPECT_TRUE(test_logger->context().has("trace_id"));
+    EXPECT_TRUE(test_logger->context().has("span_id"));
 
-    EXPECT_EQ(test_logger->get_context_id("correlation_id"), "abc-123");
-    EXPECT_EQ(test_logger->get_context_id("trace_id"), "0af7651916cd43dd8448eb211c80319c");
-    EXPECT_EQ(test_logger->get_context_id("span_id"), "b7ad6b7169203331");
+    EXPECT_EQ(test_logger->context().get_string("correlation_id"), "abc-123");
+    EXPECT_EQ(test_logger->context().get_string("trace_id"), "0af7651916cd43dd8448eb211c80319c");
+    EXPECT_EQ(test_logger->context().get_string("span_id"), "b7ad6b7169203331");
 
     // Clear single context ID
-    test_logger->clear_context_id("span_id");
-    EXPECT_FALSE(test_logger->has_context_id("span_id"));
-    EXPECT_TRUE(test_logger->has_context_id("correlation_id"));
+    test_logger->context().remove("span_id");
+    EXPECT_FALSE(test_logger->context().has("span_id"));
+    EXPECT_TRUE(test_logger->context().has("correlation_id"));
 
-    // Clear all context IDs
-    test_logger->clear_all_context_ids();
-    EXPECT_FALSE(test_logger->has_context_id("correlation_id"));
-    EXPECT_FALSE(test_logger->has_context_id("trace_id"));
+    // Clear trace category
+    test_logger->context().clear(context_category::trace);
+    EXPECT_FALSE(test_logger->context().has("correlation_id"));
+    EXPECT_FALSE(test_logger->context().has("trace_id"));
 
     test_logger->stop();
 }
 
-// Test 11b: Custom context ID keys
-TEST_F(StructuredLoggingTest, CustomContextIdKeys) {
+// Test 11b: Custom context keys via unified API
+TEST_F(StructuredLoggingTest, CustomContextKeys) {
     auto test_logger = std::make_shared<logger>(false);
     test_logger->start();
 
-    // Set custom context ID key
-    test_logger->set_context_id("custom_key", "custom_value");
-    EXPECT_TRUE(test_logger->has_context_id("custom_key"));
-    EXPECT_EQ(test_logger->get_context_id("custom_key"), "custom_value");
-
-    // clear_all_context_ids only clears known keys, not custom ones
-    test_logger->clear_all_context_ids();
-    EXPECT_TRUE(test_logger->has_context_id("custom_key"));
+    // Set custom context key
+    test_logger->context().set("custom_key", std::string("custom_value"), context_category::trace);
+    EXPECT_TRUE(test_logger->context().has("custom_key"));
+    EXPECT_EQ(test_logger->context().get_string("custom_key"), "custom_value");
 
     // Clear custom key manually
-    test_logger->clear_context_id("custom_key");
-    EXPECT_FALSE(test_logger->has_context_id("custom_key"));
+    test_logger->context().remove("custom_key");
+    EXPECT_FALSE(test_logger->context().has("custom_key"));
 
     test_logger->stop();
 }
 
-// Test 11c: Trace ID using generic context API
-TEST_F(StructuredLoggingTest, TraceIdGenericAPI) {
+// Test 11c: Trace ID using unified context API
+TEST_F(StructuredLoggingTest, TraceIdUnifiedAPI) {
     auto test_logger = std::make_shared<logger>(false);
     test_logger->start();
 
     // Initially no trace ID
-    EXPECT_FALSE(test_logger->has_context_id("trace_id"));
-    EXPECT_EQ(test_logger->get_context_id("trace_id"), "");
+    EXPECT_FALSE(test_logger->context().has("trace_id"));
+    EXPECT_EQ(test_logger->context().get_string("trace_id"), "");
 
-    // Set trace ID using generic API
-    test_logger->set_context_id("trace_id", "0af7651916cd43dd8448eb211c80319c");
-    EXPECT_TRUE(test_logger->has_context_id("trace_id"));
-    EXPECT_EQ(test_logger->get_context_id("trace_id"), "0af7651916cd43dd8448eb211c80319c");
+    // Set trace ID using unified context API
+    test_logger->context().set("trace_id", std::string("0af7651916cd43dd8448eb211c80319c"), context_category::trace);
+    EXPECT_TRUE(test_logger->context().has("trace_id"));
+    EXPECT_EQ(test_logger->context().get_string("trace_id"), "0af7651916cd43dd8448eb211c80319c");
 
     // Clear trace ID
-    test_logger->clear_context_id("trace_id");
-    EXPECT_FALSE(test_logger->has_context_id("trace_id"));
-    EXPECT_EQ(test_logger->get_context_id("trace_id"), "");
+    test_logger->context().remove("trace_id");
+    EXPECT_FALSE(test_logger->context().has("trace_id"));
+    EXPECT_EQ(test_logger->context().get_string("trace_id"), "");
 
     test_logger->stop();
 }
 
-// Test 12: Span ID using generic context API
-TEST_F(StructuredLoggingTest, SpanIdGenericAPI) {
+// Test 12: Span ID using unified context API
+TEST_F(StructuredLoggingTest, SpanIdUnifiedAPI) {
     auto test_logger = std::make_shared<logger>(false);
     test_logger->start();
 
     // Initially no span ID
-    EXPECT_FALSE(test_logger->has_context_id("span_id"));
-    EXPECT_EQ(test_logger->get_context_id("span_id"), "");
+    EXPECT_FALSE(test_logger->context().has("span_id"));
+    EXPECT_EQ(test_logger->context().get_string("span_id"), "");
 
-    // Set span ID using generic API
-    test_logger->set_context_id("span_id", "b7ad6b7169203331");
-    EXPECT_TRUE(test_logger->has_context_id("span_id"));
-    EXPECT_EQ(test_logger->get_context_id("span_id"), "b7ad6b7169203331");
+    // Set span ID using unified context API
+    test_logger->context().set("span_id", std::string("b7ad6b7169203331"), context_category::trace);
+    EXPECT_TRUE(test_logger->context().has("span_id"));
+    EXPECT_EQ(test_logger->context().get_string("span_id"), "b7ad6b7169203331");
 
     // Clear span ID
-    test_logger->clear_context_id("span_id");
-    EXPECT_FALSE(test_logger->has_context_id("span_id"));
-    EXPECT_EQ(test_logger->get_context_id("span_id"), "");
+    test_logger->context().remove("span_id");
+    EXPECT_FALSE(test_logger->context().has("span_id"));
+    EXPECT_EQ(test_logger->context().get_string("span_id"), "");
 
     test_logger->stop();
 }
 
-// Test 13: Parent Span ID using generic context API
-TEST_F(StructuredLoggingTest, ParentSpanIdGenericAPI) {
+// Test 13: Parent Span ID using unified context API
+TEST_F(StructuredLoggingTest, ParentSpanIdUnifiedAPI) {
     auto test_logger = std::make_shared<logger>(false);
     test_logger->start();
 
     // Initially no parent span ID
-    EXPECT_FALSE(test_logger->has_context_id("parent_span_id"));
-    EXPECT_EQ(test_logger->get_context_id("parent_span_id"), "");
+    EXPECT_FALSE(test_logger->context().has("parent_span_id"));
+    EXPECT_EQ(test_logger->context().get_string("parent_span_id"), "");
 
-    // Set parent span ID using generic API
-    test_logger->set_context_id("parent_span_id", "a1b2c3d4e5f67890");
-    EXPECT_TRUE(test_logger->has_context_id("parent_span_id"));
-    EXPECT_EQ(test_logger->get_context_id("parent_span_id"), "a1b2c3d4e5f67890");
+    // Set parent span ID using unified context API
+    test_logger->context().set("parent_span_id", std::string("a1b2c3d4e5f67890"), context_category::trace);
+    EXPECT_TRUE(test_logger->context().has("parent_span_id"));
+    EXPECT_EQ(test_logger->context().get_string("parent_span_id"), "a1b2c3d4e5f67890");
 
     // Clear parent span ID
-    test_logger->clear_context_id("parent_span_id");
-    EXPECT_FALSE(test_logger->has_context_id("parent_span_id"));
-    EXPECT_EQ(test_logger->get_context_id("parent_span_id"), "");
+    test_logger->context().remove("parent_span_id");
+    EXPECT_FALSE(test_logger->context().has("parent_span_id"));
+    EXPECT_EQ(test_logger->context().get_string("parent_span_id"), "");
 
     test_logger->stop();
 }

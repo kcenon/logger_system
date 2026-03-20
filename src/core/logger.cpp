@@ -803,73 +803,10 @@ void logger::remove_context(const std::string& key) {
     }
 }
 
-void logger::clear_context() {
-    if (pimpl_) {
-        pimpl_->context_.clear(context_category::custom);
-    }
-}
-
-bool logger::has_context() const {
-    if (pimpl_) {
-        return !pimpl_->context_.keys(context_category::custom).empty();
-    }
-    return false;
-}
-
-log_fields logger::get_context() const {
-    if (pimpl_) {
-        return pimpl_->context_.to_fields();
-    }
-    return {};
-}
-
-// =========================================================================
-// Generic context ID API implementation (legacy API - delegates to unified context)
-// =========================================================================
-
-void logger::set_context_id(std::string_view key, std::string_view value) {
-    if (pimpl_) {
-        // Use trace category for context IDs (trace_id, span_id, correlation_id, etc.)
-        pimpl_->context_.set(std::string(key), std::string(value), context_category::trace);
-    }
-}
-
-std::string logger::get_context_id(std::string_view key) const {
-    if (pimpl_) {
-        return pimpl_->context_.get_string(key);
-    }
-    return {};
-}
-
-void logger::clear_context_id(std::string_view key) {
-    if (pimpl_) {
-        pimpl_->context_.remove(key);
-    }
-}
-
-bool logger::has_context_id(std::string_view key) const {
-    if (pimpl_) {
-        return pimpl_->context_.has(key);
-    }
-    return false;
-}
-
-void logger::clear_all_context_ids() {
-    if (pimpl_) {
-        // Clear only the known context ID keys for backward compatibility
-        // Custom keys set via set_context_id() are NOT cleared by this method
-        static const std::vector<std::string_view> KNOWN_CONTEXT_ID_KEYS = {
-            "correlation_id",
-            "request_id",
-            "trace_id",
-            "span_id",
-            "parent_span_id"
-        };
-        for (const auto& key : KNOWN_CONTEXT_ID_KEYS) {
-            pimpl_->context_.remove(key);
-        }
-    }
-}
+// clear_context(), has_context(), get_context() removed (Issue #534)
+// set_context_id(), get_context_id(), clear_context_id(),
+// has_context_id(), clear_all_context_ids() removed (Issue #534)
+// Use context() API instead.
 
 // =========================================================================
 // Real-time analysis implementation (optional, requires LOGGER_WITH_ANALYSIS)

@@ -48,23 +48,14 @@ log_context_scope::log_context_scope(logger& log, const log_fields& fields)
 
         // Also set on logger for non-thread-local context
         std::visit([&log, &key](const auto& v) {
-            using T = std::decay_t<decltype(v)>;
-            if constexpr (std::is_same_v<T, std::string>) {
-                log.set_context(key, v);
-            } else if constexpr (std::is_same_v<T, int64_t>) {
-                log.set_context(key, v);
-            } else if constexpr (std::is_same_v<T, double>) {
-                log.set_context(key, v);
-            } else if constexpr (std::is_same_v<T, bool>) {
-                log.set_context(key, v);
-            }
+            log.context().set(key, v);
         }, value);
     }
 }
 
 void log_context_scope::remove_logger_context(const std::string& key) {
     if (logger_ != nullptr) {
-        logger_->remove_context(key);
+        logger_->context().remove(key);
     }
 }
 
