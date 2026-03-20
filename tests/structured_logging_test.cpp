@@ -417,9 +417,9 @@ TEST_F(StructuredLoggingTest, ContextThreadSafety) {
         threads.emplace_back([&test_logger, t, operations_per_thread]() {
             for (int i = 0; i < operations_per_thread; ++i) {
                 std::string key = "key_" + std::to_string(t) + "_" + std::to_string(i);
-                test_logger->set_context(key, "value");
+                test_logger->context().set(key, std::string("value"), context_category::custom);
                 (void)test_logger->context().empty();
-                test_logger->remove_context(key);
+                test_logger->context().remove(key);
             }
         });
     }

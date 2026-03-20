@@ -451,21 +451,17 @@ common::VoidResult logger::log(common::interfaces::log_level level,
 common::VoidResult logger::log(common::interfaces::log_level level,
                                std::string_view message,
                                const common::source_location& loc) {
-    return log(level, std::string(message),
-               std::string(loc.file_name()), loc.line(), std::string(loc.function_name()));
-}
-
-common::VoidResult logger::log(common::interfaces::log_level level,
-                               const std::string& message,
-                               const std::string& file,
-                               int line,
-                               const std::string& function) {
     if (!pimpl_ || !meets_threshold(level, pimpl_->min_level_.load())) {
         return common::ok();
     }
 
+    std::string msg_str(message);
+    std::string file_str(loc.file_name());
+    int line = loc.line();
+    std::string func_str(loc.function_name());
+
     // Create log entry for filtering and routing
-    log_entry entry(level, message, file, line, function);
+    log_entry entry(level, msg_str, file_str, line, func_str);
 
     // Apply filter if set
     {
@@ -494,7 +490,7 @@ common::VoidResult logger::log(common::interfaces::log_level level,
     if (pimpl_->async_mode_ && pimpl_->collector_) {
         // Enqueue to collector for background processing
         auto now = std::chrono::system_clock::now();
-        pimpl_->collector_->enqueue(level, message, file, line, function, now);
+        pimpl_->collector_->enqueue(level, msg_str, file_str, line, func_str, now);
 
         // Update metrics if enabled (async path is much faster)
         if (pimpl_->metrics_enabled_) {
@@ -506,7 +502,7 @@ common::VoidResult logger::log(common::interfaces::log_level level,
     }
 
     // Synchronous path: dispatch with routing support
-    pimpl_->dispatch_to_writers(level, message, file, line, function, entry);
+    pimpl_->dispatch_to_writers(level, msg_str, file_str, line, func_str, entry);
 
     // Update metrics after logging
     if (pimpl_->metrics_enabled_) {
@@ -519,7 +515,8 @@ common::VoidResult logger::log(common::interfaces::log_level level,
 }
 
 common::VoidResult logger::log(const common::interfaces::log_entry& entry) {
-    return log(entry.level, entry.message, entry.file, entry.line, entry.function);
+    common::source_location loc(entry.file.c_str(), entry.function.c_str(), entry.line);
+    return log(entry.level, std::string_view(entry.message), loc);
 }
 
 bool logger::is_enabled(common::interfaces::log_level level) const {
@@ -685,26 +682,6 @@ bool logger::has_routing() const {
 }
 
 // =========================================================================
-// OpenTelemetry context management implementation
-// =========================================================================
-
-void logger::set_otel_context(const otlp::otel_context& ctx) {
-    otlp::otel_context_storage::set(ctx);
-}
-
-std::optional<otlp::otel_context> logger::get_otel_context() const {
-    return otlp::otel_context_storage::get();
-}
-
-void logger::clear_otel_context() {
-    otlp::otel_context_storage::clear();
-}
-
-bool logger::has_otel_context() const {
-    return otlp::otel_context_storage::has_context();
-}
-
-// =========================================================================
 // Structured logging API implementation
 // =========================================================================
 
@@ -769,44 +746,8 @@ const unified_log_context& logger::context() const {
     return pimpl_->context_;
 }
 
-// =========================================================================
-// Context fields management implementation (legacy API - delegates to unified context)
-// =========================================================================
-
-void logger::set_context(const std::string& key, const std::string& value) {
-    if (pimpl_) {
-        pimpl_->context_.set(key, value, context_category::custom);
-    }
-}
-
-void logger::set_context(const std::string& key, int64_t value) {
-    if (pimpl_) {
-        pimpl_->context_.set(key, value, context_category::custom);
-    }
-}
-
-void logger::set_context(const std::string& key, double value) {
-    if (pimpl_) {
-        pimpl_->context_.set(key, value, context_category::custom);
-    }
-}
-
-void logger::set_context(const std::string& key, bool value) {
-    if (pimpl_) {
-        pimpl_->context_.set(key, value, context_category::custom);
-    }
-}
-
-void logger::remove_context(const std::string& key) {
-    if (pimpl_) {
-        pimpl_->context_.remove(key);
-    }
-}
-
-// clear_context(), has_context(), get_context() removed (Issue #534)
-// set_context_id(), get_context_id(), clear_context_id(),
-// has_context_id(), clear_all_context_ids() removed (Issue #534)
-// Use context() API instead.
+// Legacy context API (set_context, remove_context) removed.
+// Use context().set(key, value) and context().remove(key) instead.
 
 // =========================================================================
 // Real-time analysis implementation (optional, requires LOGGER_WITH_ANALYSIS)

@@ -21,6 +21,7 @@ All rights reserved.
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/common/interfaces/logger_interface.h>
 #include <kcenon/common/patterns/result.h>
+#include <kcenon/common/utils/source_location.h>
 
 #include <memory>
 #include <sstream>
@@ -99,39 +100,14 @@ TEST_F(ILoggerInterfaceTest, LogWithSourceLocation) {
 }
 
 /**
- * @brief Test log method with explicit file/line/function (legacy API)
- * @note This tests the backward compatibility method that was removed from
- *       common::interfaces::ILogger in v3.0.0 (Issue #217) but is still
- *       available directly on the logger class.
+ * @brief Test log method with explicit source_location parameters
  */
-TEST_F(ILoggerInterfaceTest, LogWithExplicitLocation) {
-    // Note: This method is no longer part of ILogger interface (removed in v3.0.0)
-    // but is still available directly on logger class for backward compatibility
-
-    // Suppress deprecation warning for this test - we're testing backward compatibility
-#if defined(__clang__) || defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4996)
-#endif
-
-    // Call directly on logger (not through ILogger* since it's no longer in interface)
+TEST_F(ILoggerInterfaceTest, LogWithExplicitSourceLocation) {
+    ::kcenon::common::source_location loc("test_file.cpp", "test_function", 42);
     auto result = logger_->log(ci::log_level::debug,
-                               std::string("Debug message"),
-                               std::string("test_file.cpp"),
-                               42,
-                               std::string("test_function"));
+                               std::string_view("Debug message"),
+                               loc);
     EXPECT_TRUE(result.is_ok());
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
-#if defined(__clang__) || defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
 }
 
 /**

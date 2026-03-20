@@ -607,7 +607,7 @@ TEST(LoggerBuilderSamplingTest, WithSamplingConfig) {
 
 TEST(LoggerBuilderSamplingTest, WithRandomSampling) {
     auto result = logger_builder()
-        .with_random_sampling(0.1)
+        .with_sampling(sampling::sampling_config::random_sampling(0.1))
         .with_async(false)
         .build();
 
@@ -618,7 +618,7 @@ TEST(LoggerBuilderSamplingTest, WithRandomSampling) {
 
 TEST(LoggerBuilderSamplingTest, WithRateLimiting) {
     auto result = logger_builder()
-        .with_rate_limiting(1000)
+        .with_sampling(sampling::sampling_config::rate_limited(1000))
         .with_async(false)
         .build();
 
@@ -629,7 +629,7 @@ TEST(LoggerBuilderSamplingTest, WithRateLimiting) {
 
 TEST(LoggerBuilderSamplingTest, WithAdaptiveSampling) {
     auto result = logger_builder()
-        .with_adaptive_sampling(50000, 0.01)
+        .with_sampling(sampling::sampling_config::adaptive(50000, 0.01))
         .with_async(false)
         .build();
 
