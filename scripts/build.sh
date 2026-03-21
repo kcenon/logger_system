@@ -385,11 +385,13 @@ check_dependencies() {
         return 1
     fi
     
-    # Check for vcpkg
-    if [ ! -d "../vcpkg" ]; then
+    # Check for vcpkg (skip if --no-vcpkg is set)
+    if [ "${NO_VCPKG:-0}" -eq 1 ]; then
+        print_info "Skipping vcpkg check (--no-vcpkg)"
+    elif [ ! -d "../vcpkg" ]; then
         print_warning "vcpkg not found in parent directory."
         print_warning "Running dependency script to set up vcpkg..."
-        
+
         if [ -f "./dependency.sh" ]; then
             bash ./dependency.sh
             if [ $? -ne 0 ]; then
@@ -398,6 +400,7 @@ check_dependencies() {
             fi
         else
             print_error "dependency.sh script not found"
+            print_warning "Use --no-vcpkg to build with system libraries only"
             return 1
         fi
     fi
@@ -578,8 +581,15 @@ elif [ $AUTO_SELECT -eq 1 ]; then
     if [ ${#DETECTED_COMPILERS[@]} -gt 0 ]; then
         SELECTED_COMPILER="${DETECTED_COMPILERS[0]}"
         SELECTED_COMPILER_NAME="${DETECTED_COMPILER_NAMES[0]}"
-        CC_COMPILER="$SELECTED_COMPILER"
-        CXX_COMPILER="$SELECTED_COMPILER"
+        SELECTED_COMPILER_TYPE="${DETECTED_COMPILER_TYPES[0]}"
+        # Map C/C++ compiler pair based on type
+        case "$SELECTED_COMPILER_TYPE" in
+            gcc)  CC_COMPILER="$SELECTED_COMPILER"; CXX_COMPILER="${SELECTED_COMPILER/gcc/g++}" ;;
+            g++)  CXX_COMPILER="$SELECTED_COMPILER"; CC_COMPILER="${SELECTED_COMPILER/g++/gcc}" ;;
+            clang)  CC_COMPILER="$SELECTED_COMPILER"; CXX_COMPILER="${SELECTED_COMPILER/clang/clang++}" ;;
+            clang++) CXX_COMPILER="$SELECTED_COMPILER"; CC_COMPILER="${SELECTED_COMPILER/clang++/clang}" ;;
+            *)    CC_COMPILER="$SELECTED_COMPILER"; CXX_COMPILER="$SELECTED_COMPILER" ;;
+        esac
         print_success "Auto-selected compiler: $SELECTED_COMPILER_NAME"
     else
         print_error "No compilers found for auto-selection!"
