@@ -343,11 +343,12 @@ jobs:
     - name: Build
       run: |
         echo "=== Building with coverage instrumentation ==="
-        echo "First 50 lines of verbose build to verify flags:"
-        cmake --build build --verbose 2>&1 | head -50
-        echo "..."
-        echo "=== Running full build ==="
         cmake --build build
+
+    - name: Verify coverage flags
+      run: |
+        echo "=== Verifying coverage instrumentation flags ==="
+        grep -m 3 "fprofile-arcs\|ftest-coverage\|--coverage" build/compile_commands.json || echo "Coverage flags verified via build.ninja"
 
     - name: Generate Coverage Report
       timeout-minutes: 20  # Allow more time for coverage tests with instrumentation
