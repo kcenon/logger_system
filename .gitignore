@@ -32,6 +32,7 @@ CTestTestfile.cmake
 _deps/
 *.cmake
 !cmake/*.cmake
+!vcpkg-ports/**/*.cmake
 
 # Testing
 Testing/
