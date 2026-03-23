@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 
 # C++20 Modules require CMake 3.28+
 # Check if we can enable module support
