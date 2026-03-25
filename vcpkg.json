@@ -60,6 +60,12 @@
           "version>=": "1.51.1"
         }
       ]
+    },
+    "thread-system": {
+      "description": "Enable thread_system integration for async executor",
+      "dependencies": [
+        "kcenon-thread-system"
+      ]
     }
   }
 }
