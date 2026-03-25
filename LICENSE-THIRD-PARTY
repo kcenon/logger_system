@@ -72,6 +72,17 @@ with the project's BSD-3-Clause license.
 | Usage              | Benchmark comparison logging library           |
 | BSD-3 Compatible   | Yes                                            |
 
+## kcenon-thread-system (`thread-system` feature)
+
+| Item               | Value                                          |
+|--------------------|--------------------------------------------- --|
+| Component          | kcenon-thread-system                           |
+| License            | BSD-3-Clause                                   |
+| Pinned Version     | 0.1.0                                          |
+| Usage              | Thread pool and async executor integration     |
+| Linking            | Static or dynamic                              |
+| BSD-3 Compatible   | Yes                                            |
+
 ## Development and Test Dependencies
 
 ## Google Test (`testing` feature)
@@ -104,5 +115,6 @@ with the project's BSD-3-Clause license.
 | protobuf            | BSD-3-Clause   | Optional | Yes              |
 | gRPC                | Apache-2.0     | Optional | Yes              |
 | spdlog              | MIT            | Optional | Yes              |
+| kcenon-thread-system | BSD-3-Clause  | Optional | Yes              |
 | GTest               | BSD-3-Clause   | Testing  | Yes              |
 | Google Benchmark    | Apache-2.0     | Testing  | Yes              |
