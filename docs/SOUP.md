@@ -30,6 +30,7 @@
 | SOUP-003 | [gRPC](https://grpc.io/) | Google / CNCF | 1.51.1 | Apache-2.0 | High-performance RPC for OTLP telemetry export (`otlp` feature) | B | Dynamic | None |
 | SOUP-004 | [Protocol Buffers](https://protobuf.dev/) | Google | 3.21.12 | BSD-3-Clause | Serialization format for gRPC and telemetry (`otlp` feature) | B | Dynamic | None |
 | SOUP-005 | [spdlog](https://github.com/gabime/spdlog) | Gabi Melman | 1.13.0 | MIT | Fast C++ logging library for benchmark comparison (`benchmarks` feature) | A | Header-only or shared | None |
+| SOUP-006 | [kcenon-thread-system](https://github.com/kcenon/thread_system) | kcenon | 0.1.0 | BSD-3-Clause | Thread pool and async executor integration (`thread-system` feature) | A | Static or dynamic | None known at pinned version |
 
 ---
 
