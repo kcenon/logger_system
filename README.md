@@ -253,6 +253,7 @@ target_link_libraries(your_app PRIVATE LoggerSystem::logger)
 | `encryption` | OpenSSL | AES-256-GCM encrypted log writer |
 | `otlp` | OpenTelemetry C++ SDK, gRPC, Protocol Buffers | OTLP telemetry export |
 | `benchmarks` | spdlog | Benchmark comparison against another logging library |
+| `thread-system` | kcenon-thread-system | Thread pool and async executor integration |
 
 #### Development and Benchmark Dependencies
 
