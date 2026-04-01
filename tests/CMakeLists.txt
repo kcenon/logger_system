@@ -936,6 +936,230 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/di_test/di_container_test.cpp")
     message(STATUS "DI container integration tests: Added")
 endif()
 
+# Path validator tests (Issue #566 - security path validation coverage)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/security_test/path_validator_test.cpp")
+    add_executable(logger_path_validator_test
+        unit/security_test/path_validator_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_path_validator_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_path_validator_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_path_validator_test
+        COMMAND logger_path_validator_test
+    )
+    set_target_properties(logger_path_validator_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Path validator tests: Added")
+endif()
+
+# Error codes tests (Issue #566 - error code helpers coverage)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/core_test/error_codes_test.cpp")
+    add_executable(logger_error_codes_test
+        unit/core_test/error_codes_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_error_codes_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_error_codes_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_error_codes_test
+        COMMAND logger_error_codes_test
+    )
+    set_target_properties(logger_error_codes_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Error codes tests: Added")
+endif()
+
+# Writer category tests (Issue #566 - writer category type traits coverage)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/writer_category_test.cpp")
+    add_executable(logger_writer_category_test
+        unit/writers_test/writer_category_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_writer_category_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_writer_category_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_writer_category_test
+        COMMAND logger_writer_category_test
+    )
+    set_target_properties(logger_writer_category_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Writer category tests: Added")
+endif()
+
+# String utils tests (Issue #566 - utility function coverage)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/utils_test/string_utils_test.cpp")
+    add_executable(logger_string_utils_test
+        unit/utils_test/string_utils_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_string_utils_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_string_utils_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_string_utils_test
+        COMMAND logger_string_utils_test
+    )
+    set_target_properties(logger_string_utils_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "String utils tests: Added")
+endif()
+
+# Time utils tests (Issue #566 - utility function coverage)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/utils_test/time_utils_test.cpp")
+    add_executable(logger_time_utils_test
+        unit/utils_test/time_utils_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_time_utils_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_time_utils_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_time_utils_test
+        COMMAND logger_time_utils_test
+    )
+    set_target_properties(logger_time_utils_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Time utils tests: Added")
+endif()
+
+# File utils tests (Issue #566 - utility function coverage)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/utils_test/file_utils_test.cpp")
+    add_executable(logger_file_utils_test
+        unit/utils_test/file_utils_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_file_utils_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_file_utils_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_file_utils_test
+        COMMAND logger_file_utils_test
+    )
+    set_target_properties(logger_file_utils_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "File utils tests: Added")
+endif()
+
+# Formatter tests (Issue #566 - formatter coverage)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/formatters_test/formatters_test.cpp")
+    add_executable(logger_formatters_test
+        unit/formatters_test/formatters_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_formatters_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_formatters_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_formatters_test
+        COMMAND logger_formatters_test
+    )
+    set_target_properties(logger_formatters_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Formatter tests: Added")
+endif()
+
+# Filter tests (Issue #566 - filter chain coverage)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/filters_test/filters_test.cpp")
+    add_executable(logger_filters_test
+        unit/filters_test/filters_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_filters_test
+            PRIVATE LoggerSystem GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_filters_test
+            PRIVATE LoggerSystem gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_filters_test
+        COMMAND logger_filters_test
+    )
+    set_target_properties(logger_filters_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Filter tests: Added")
+endif()
+
+# Coverage registration for Issue #566 test targets
+foreach(_test_target IN ITEMS
+    logger_path_validator_test
+    logger_error_codes_test
+    logger_writer_category_test
+    logger_string_utils_test
+    logger_time_utils_test
+    logger_file_utils_test
+    logger_formatters_test
+    logger_filters_test
+)
+    if(TARGET ${_test_target} AND COMMAND logger_register_coverage_target)
+        logger_register_coverage_target(${_test_target})
+    endif()
+endforeach()
+
 # Cleanup
 unset(_LOGGER_TEST_TARGETS)
 unset(_test_target)

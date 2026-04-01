@@ -11,18 +11,18 @@ coverage:
   status:
     project:
       default:
-        target: 55%  # Phase 1: Establish baseline
+        target: 65%  # Phase 2: Improved baseline with expanded test suite
         threshold: 2%
         if_ci_failed: error
     patch:
       default:
-        target: 60%
+        target: 70%
         threshold: 5%
         if_ci_failed: error
 
 # Gradual improvement plan:
-# - Phase 1 (Current): 55% project, 60% patch
-# - Phase 2: 65% project, 70% patch
+# - Phase 1: 55% project, 60% patch
+# - Phase 2 (Current): 65% project, 70% patch
 # - Phase 3: 75% project, 80% patch
 
 parsers:
