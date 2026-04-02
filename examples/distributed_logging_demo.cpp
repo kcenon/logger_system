@@ -1,9 +1,6 @@
-/*****************************************************************************
-BSD 3-Clause License
-
-Copyright (c) 2025, 🍀☀🌕🌥 🌊
-All rights reserved.
-*****************************************************************************/
+// BSD 3-Clause License
+// Copyright (c) 2025, 🍀☀🌕🌥 🌊
+// See the LICENSE file in the project root for full license information.
 
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/writers/console_writer.h>
