@@ -1,11 +1,8 @@
+// BSD 3-Clause License
+// Copyright (c) 2025, 🍀☀🌕🌥 🌊
+// See the LICENSE file in the project root for full license information.
+
 #pragma once
-
-/*****************************************************************************
-BSD 3-Clause License
-
-Copyright (c) 2025, 🍀☀🌕🌥 🌊
-All rights reserved.
-*****************************************************************************/
 
 #include "base_writer.h"
 #include "../interfaces/log_entry.h"

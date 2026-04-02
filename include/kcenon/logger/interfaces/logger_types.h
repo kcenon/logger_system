@@ -1,12 +1,11 @@
+// BSD 3-Clause License
+// Copyright (c) 2025, 🍀☀🌕🌥 🌊
+// See the LICENSE file in the project root for full license information.
+
 /**
  * @file logger_types.h
  * @brief Common types and enumerations for logger system
  * @date 2025-09-09
- *
- * BSD 3-Clause License
- * Copyright (c) 2025, kcenon
- * All rights reserved.
- *
  * @note For log_level, use common::interfaces::log_level from
  *       kcenon/common/interfaces/logger_interface.h
  */

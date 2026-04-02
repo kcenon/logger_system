@@ -1,9 +1,6 @@
-/*****************************************************************************
-BSD 3-Clause License
-
-Copyright (c) 2025, 🍀☀🌕🌥 🌊
-All rights reserved.
-*****************************************************************************/
+// BSD 3-Clause License
+// Copyright (c) 2025, 🍀☀🌕🌥 🌊
+// See the LICENSE file in the project root for full license information.
 
 // TODO: overflow_policy.h not yet migrated to new structure
 // #include <kcenon/logger/flow/overflow_policy.h>
