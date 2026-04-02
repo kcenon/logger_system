@@ -1,11 +1,11 @@
+// BSD 3-Clause License
+// Copyright (c) 2025, 🍀☀🌕🌥 🌊
+// See the LICENSE file in the project root for full license information.
+
 /**
  * @file stress_test.cpp
  * @brief Stress tests for logger system
  * @date 2025-09-09
- *
- * BSD 3-Clause License
- * Copyright (c) 2025, kcenon
- * All rights reserved.
  */
 
 #include <gtest/gtest.h>
