@@ -125,7 +125,7 @@ function(logger_configure_target target)
     )
     
     # Add sanitizers if enabled
-    # Note: Don't add sanitizers here - they're handled by LoggerSanitizers.cmake
+    # Note: Don't add sanitizers here - they're handled by logger_sanitizers.cmake
     # This prevents conflicts between address and thread sanitizers
     
     # Add coverage flags if enabled

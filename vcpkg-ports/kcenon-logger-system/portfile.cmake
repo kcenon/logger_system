@@ -32,8 +32,8 @@ vcpkg_cmake_configure(
 vcpkg_cmake_install()
 
 vcpkg_cmake_config_fixup(
-    PACKAGE_NAME LoggerSystem
-    CONFIG_PATH lib/cmake/LoggerSystem
+    PACKAGE_NAME logger_system
+    CONFIG_PATH lib/cmake/logger_system
 )
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")

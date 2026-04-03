@@ -151,7 +151,7 @@ add_dependencies(logger_integration_tests ${_LOGGER_GTEST_TARGET} ${_LOGGER_GTES
 # Note: GTest targets may already include gtest, so we link gtest_main which depends on gtest
 target_link_libraries(logger_integration_tests PRIVATE
     ${_LOGGER_GTEST_MAIN_TARGET}
-    LoggerSystem  # Correct target name
+    logger_system  # Correct target name
 )
 
 # Only link gtest separately if gtest_main doesn't already provide it

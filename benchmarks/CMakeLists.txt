@@ -35,7 +35,7 @@ if(benchmark_FOUND OR BENCHMARK_FOUND)
 
     target_link_libraries(logger_benchmarks
         PRIVATE
-            LoggerSystem
+            logger_system
             benchmark::benchmark
             benchmark::benchmark_main
     )
@@ -50,7 +50,7 @@ if(benchmark_FOUND OR BENCHMARK_FOUND)
     # Decorator benchmark configuration
     target_link_libraries(decorator_benchmark
         PRIVATE
-            LoggerSystem
+            logger_system
             benchmark::benchmark
             benchmark::benchmark_main
     )

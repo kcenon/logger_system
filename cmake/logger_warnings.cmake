@@ -1,4 +1,4 @@
-# LoggerWarnings.cmake
+# logger_warnings.cmake
 # Compiler warning configuration for Logger System
 
 # Warning options
