@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file audit_logger.h
+ * @brief Secure audit logging with tamper detection.
+ *
+ */
+
 #pragma once
 
 #include <kcenon/logger/security/secure_key_storage.h>

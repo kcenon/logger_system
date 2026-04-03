@@ -2,6 +2,13 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file signal_manager.h
+ * @brief Signal-safe write wrapper for cross-platform signal handling.
+ *
+ * @see signal_manager_interface.h
+ */
+
 #pragma once
 
 #include "signal_manager_interface.h"

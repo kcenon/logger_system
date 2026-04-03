@@ -2,6 +2,13 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file batch_writer.h
+ * @brief Batch writer that accumulates log entries and writes them in batches.
+ *
+ * @see log_writer_interface.h
+ */
+
 #pragma once
 
 #include "queued_writer_base.h"

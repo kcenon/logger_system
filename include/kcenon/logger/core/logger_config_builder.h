@@ -2,6 +2,13 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file logger_config_builder.h
+ * @brief Fluent builder for logger_config.
+ *
+ * @see logger_config.h
+ */
+
 #pragma once
 
 #include <kcenon/logger/core/logger_config.h>

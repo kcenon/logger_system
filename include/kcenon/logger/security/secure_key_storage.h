@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file secure_key_storage.h
+ * @brief RAII wrapper for encryption keys with secure memory management.
+ *
+ */
+
 #pragma once
 
 #include <kcenon/logger/core/error_codes.h>

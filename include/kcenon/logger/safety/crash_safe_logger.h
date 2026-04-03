@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file crash_safe_logger.h
+ * @brief Logger with crash recovery and emergency flush capabilities.
+ *
+ */
+
 #pragma once
 
 #include <kcenon/logger/core/logger.h>

@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file time_utils.h
+ * @brief Time utility functions for timestamp formatting.
+ *
+ */
+
 #pragma once
 
 #include <chrono>

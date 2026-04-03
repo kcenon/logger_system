@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file log_sink_interface.h
+ * @brief Interface for log sinks that receive formatted output.
+ *
+ */
+
 #pragma once
 
 #include <kcenon/common/patterns/result.h>

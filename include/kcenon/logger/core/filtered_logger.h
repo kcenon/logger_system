@@ -1,5 +1,12 @@
 // BSD 3-Clause License
 
+/**
+ * @file filtered_logger.h
+ * @brief Logger wrapper that applies compile-time and runtime log filtering.
+ *
+ * @see log_filter_interface.h
+ */
+
 #pragma once
 
 #include <memory>
