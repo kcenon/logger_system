@@ -12,6 +12,8 @@ category: "GUID"
 
 # Writer Hierarchy and Categories
 
+> **SSOT**: This document is the single source of truth for **Writer Hierarchy and Categories**.
+
 This document describes the logger system's writer hierarchy and category classification system introduced in v1.4.0.
 
 ## Overview

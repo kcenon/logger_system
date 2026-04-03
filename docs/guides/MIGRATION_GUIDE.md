@@ -12,6 +12,8 @@ category: "MIGR"
 
 # Logger System Migration Guide
 
+> **SSOT**: This document is the single source of truth for **Logger System Migration Guide**.
+
 **Version**: 0.4.0.0
 **Last Updated**: 2026-01-23
 

@@ -10,6 +10,8 @@ category: "PROJ"
 
 # 변경 이력 - Logger System
 
+> **SSOT**: This document is the single source of truth for **변경 이력 - Logger System**.
+
 > **언어:** [English](CHANGELOG.md) | **한국어**
 
 Logger System 프로젝트의 모든 주요 변경 사항이 이 파일에 문서화됩니다.

@@ -12,6 +12,8 @@ category: "GUID"
 
 # Getting Started with Logger System
 
+> **SSOT**: This document is the single source of truth for **Getting Started with Logger System**.
+
 This guide will help you get started with the Logger System quickly.
 
 ## Table of Contents

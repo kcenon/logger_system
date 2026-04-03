@@ -12,6 +12,8 @@ category: "SECU"
 
 # 보안 가이드
 
+> **SSOT**: This document is the single source of truth for **보안 가이드**.
+
 이 문서는 logger_system의 현재 보안 상태를 설명하고 안전한 배포를 위한 지침을 제공합니다.
 
 ## 위협 모델 (범위)

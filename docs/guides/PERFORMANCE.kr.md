@@ -12,6 +12,8 @@ category: "PERF"
 
 # Logger System 성능 가이드
 
+> **SSOT**: This document is the single source of truth for **Logger System 성능 가이드**.
+
 > 이 문서는 [PERFORMANCE.md](PERFORMANCE.md)의 한국어 번역 버전입니다.
 
 *이 문서의 번역은 진행 중입니다. 자세한 내용은 영문 버전을 참조하세요.*

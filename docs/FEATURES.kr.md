@@ -10,6 +10,8 @@ category: "FEAT"
 
 # Logger System - 상세 기능
 
+> **SSOT**: This document is the single source of truth for **Logger System - 상세 기능**.
+
 **언어:** [English](README.md) | **한국어**
 
 **최종 업데이트**: 2026-02-08

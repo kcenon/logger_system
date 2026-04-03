@@ -10,6 +10,8 @@ category: "MIGR"
 
 # Decorator Pattern Writer Migration Guide
 
+> **SSOT**: This document is the single source of truth for **Decorator Pattern Writer Migration Guide**.
+
 **Version**: 0.4.0.0
 **Last Updated**: 2026-01-22
 

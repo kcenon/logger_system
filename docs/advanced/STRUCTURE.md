@@ -10,6 +10,8 @@ category: "ARCH"
 
 # Logger System - Project Structure
 
+> **SSOT**: This document is the single source of truth for **Logger System - Project Structure**.
+
 **English | [한국어](STRUCTURE.kr.md)**
 
 ---

@@ -10,6 +10,8 @@ category: "PROJ"
 
 # Korean Translation Summary
 
+> **SSOT**: This document is the single source of truth for **Korean Translation Summary**.
+
 **Date**: 2025-10-20 (Asia/Seoul)
 **Task**: Create Korean versions for all markdown files in logger_system/docs/
 

@@ -10,6 +10,8 @@ category: "INTR"
 
 # Logger System Integration Guide
 
+> **SSOT**: This document is the single source of truth for **Logger System Integration Guide**.
+
 **English | [한국어](INTEGRATION.kr.md)**
 
 ---

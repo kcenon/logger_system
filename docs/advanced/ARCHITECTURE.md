@@ -10,6 +10,8 @@ category: "ARCH"
 
 # Architecture - Logger System
 
+> **SSOT**: This document is the single source of truth for **Architecture - Logger System**.
+
 > **Language:** **English** | [한국어](ARCHITECTURE.kr.md)
 
 ## Overview

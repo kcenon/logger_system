@@ -10,6 +10,8 @@ category: "PERF"
 
 # Logger System - 성능 기준 메트릭
 
+> **SSOT**: This document is the single source of truth for **Logger System - 성능 기준 메트릭**.
+
 **[English](BASELINE.md) | 한국어**
 
 ---

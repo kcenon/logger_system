@@ -12,6 +12,8 @@ category: "ARCH"
 
 # Logger System 아키텍처
 
+> **SSOT**: This document is the single source of truth for **Logger System 아키텍처**.
+
 **버전**: 0.4.0
 **최종 업데이트**: 2026-02-08
 
