@@ -13,7 +13,7 @@ category: "GUID"
 > **SSOT**: This file is the single source of truth for the documentation index
 > of **logger_system**.
 
-Total documents: **68**
+Total documents: **71**
 
 ## Document Index
 
@@ -73,20 +73,23 @@ Total documents: **68**
 | 52 | LOG-INTR-002 | OpenTelemetry Integration Guide | [OPENTELEMETRY.md](./guides/OPENTELEMETRY.md) | Released |
 | 53 | LOG-QUAL-001 | Logger System 프로덕션 품질 | [PRODUCTION_QUALITY.kr.md](./PRODUCTION_QUALITY.kr.md) | Released |
 | 54 | LOG-QUAL-002 | Logger System Production Quality | [PRODUCTION_QUALITY.md](./PRODUCTION_QUALITY.md) | Released |
-| 55 | LOG-QUAL-003 | Testing Guide | [TESTING_GUIDE.md](./contributing/TESTING_GUIDE.md) | Released |
-| 56 | LOG-SECU-001 | Security Module Guide | [SECURITY_GUIDE.md](./SECURITY_GUIDE.md) | Released |
-| 57 | LOG-SECU-002 | 보안 가이드 | [SECURITY.kr.md](./guides/SECURITY.kr.md) | Released |
-| 58 | LOG-SECU-003 | Security Guide | [SECURITY.md](./guides/SECURITY.md) | Released |
-| 59 | LOG-PROJ-001 | 변경 이력 - Logger System | [CHANGELOG.kr.md](./CHANGELOG.kr.md) | Released |
-| 60 | LOG-PROJ-002 | Changelog - Logger System | [CHANGELOG.md](./CHANGELOG.md) | Released |
-| 61 | LOG-PROJ-003 | Logger System 프로젝트 구조 | [PROJECT_STRUCTURE.kr.md](./PROJECT_STRUCTURE.kr.md) | Released |
-| 62 | LOG-PROJ-004 | Logger System Project Structure | [PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md) | Released |
-| 63 | LOG-PROJ-005 | SOUP List &mdash; logger_system | [SOUP.md](./SOUP.md) | Released |
-| 64 | LOG-PROJ-006 | Logger System CI/CD 대시보드 | [CI_CD_DASHBOARD.kr.md](./advanced/CI_CD_DASHBOARD.kr.md) | Released |
-| 65 | LOG-PROJ-007 | Logger System CI/CD Dashboard | [CI_CD_DASHBOARD.md](./advanced/CI_CD_DASHBOARD.md) | Released |
-| 66 | LOG-PROJ-008 | Logger System 기여하기 | [CONTRIBUTING.kr.md](./contributing/CONTRIBUTING.kr.md) | Released |
-| 67 | LOG-PROJ-009 | Contributing to Logger System | [CONTRIBUTING.md](./contributing/CONTRIBUTING.md) | Released |
-| 68 | LOG-PROJ-010 | Korean Translation Summary | [TRANSLATION_SUMMARY.md](./contributing/TRANSLATION_SUMMARY.md) | Released |
+| 55 | LOG-QUAL-002 | Feature-Test-Module Traceability Matrix | [TRACEABILITY.md](./TRACEABILITY.md) | Released |
+| 56 | LOG-QUAL-003 | Testing Guide | [TESTING_GUIDE.md](./contributing/TESTING_GUIDE.md) | Released |
+| 57 | LOG-SECU-001 | Security Module Guide | [SECURITY_GUIDE.md](./SECURITY_GUIDE.md) | Released |
+| 58 | LOG-SECU-002 | 보안 가이드 | [SECURITY.kr.md](./guides/SECURITY.kr.md) | Released |
+| 59 | LOG-SECU-003 | Security Guide | [SECURITY.md](./guides/SECURITY.md) | Released |
+| 60 | LOG-ADR-001 | ADR-001: Decorator Pattern for Writer Composition | [ADR-001-decorator-pattern-adoption.md](./adr/ADR-001-decorator-pattern-adoption.md) | Accepted |
+| 61 | LOG-ADR-002 | ADR-002: Async Writer Architecture | [ADR-002-async-writer-architecture.md](./adr/ADR-002-async-writer-architecture.md) | Accepted |
+| 62 | LOG-PROJ-001 | 변경 이력 - Logger System | [CHANGELOG.kr.md](./CHANGELOG.kr.md) | Released |
+| 63 | LOG-PROJ-002 | Changelog - Logger System | [CHANGELOG.md](./CHANGELOG.md) | Released |
+| 64 | LOG-PROJ-003 | Logger System 프로젝트 구조 | [PROJECT_STRUCTURE.kr.md](./PROJECT_STRUCTURE.kr.md) | Released |
+| 65 | LOG-PROJ-004 | Logger System Project Structure | [PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md) | Released |
+| 66 | LOG-PROJ-005 | SOUP List &mdash; logger_system | [SOUP.md](./SOUP.md) | Released |
+| 67 | LOG-PROJ-006 | Logger System CI/CD 대시보드 | [CI_CD_DASHBOARD.kr.md](./advanced/CI_CD_DASHBOARD.kr.md) | Released |
+| 68 | LOG-PROJ-007 | Logger System CI/CD Dashboard | [CI_CD_DASHBOARD.md](./advanced/CI_CD_DASHBOARD.md) | Released |
+| 69 | LOG-PROJ-008 | Logger System 기여하기 | [CONTRIBUTING.kr.md](./contributing/CONTRIBUTING.kr.md) | Released |
+| 70 | LOG-PROJ-009 | Contributing to Logger System | [CONTRIBUTING.md](./contributing/CONTRIBUTING.md) | Released |
+| 71 | LOG-PROJ-010 | Korean Translation Summary | [TRANSLATION_SUMMARY.md](./contributing/TRANSLATION_SUMMARY.md) | Released |
 
 ## Documents by Category
 
@@ -177,12 +180,13 @@ Total documents: **68**
 | LOG-INTR-001 | Logger System Integration Guide | [INTEGRATION.md](./guides/INTEGRATION.md) | Released |
 | LOG-INTR-002 | OpenTelemetry Integration Guide | [OPENTELEMETRY.md](./guides/OPENTELEMETRY.md) | Released |
 
-### Quality (3)
+### Quality (4)
 
 | doc_id | Topic | Document | Status |
 |--------|-------|----------|--------|
 | LOG-QUAL-001 | Logger System 프로덕션 품질 | [PRODUCTION_QUALITY.kr.md](./PRODUCTION_QUALITY.kr.md) | Released |
 | LOG-QUAL-002 | Logger System Production Quality | [PRODUCTION_QUALITY.md](./PRODUCTION_QUALITY.md) | Released |
+| LOG-QUAL-002 | Feature-Test-Module Traceability Matrix | [TRACEABILITY.md](./TRACEABILITY.md) | Released |
 | LOG-QUAL-003 | Testing Guide | [TESTING_GUIDE.md](./contributing/TESTING_GUIDE.md) | Released |
 
 ### Security (3)
@@ -192,6 +196,13 @@ Total documents: **68**
 | LOG-SECU-001 | Security Module Guide | [SECURITY_GUIDE.md](./SECURITY_GUIDE.md) | Released |
 | LOG-SECU-002 | 보안 가이드 | [SECURITY.kr.md](./guides/SECURITY.kr.md) | Released |
 | LOG-SECU-003 | Security Guide | [SECURITY.md](./guides/SECURITY.md) | Released |
+
+### Architecture Decision Records (2)
+
+| doc_id | Topic | Document | Status |
+|--------|-------|----------|--------|
+| LOG-ADR-001 | ADR-001: Decorator Pattern for Writer Composition | [ADR-001-decorator-pattern-adoption.md](./adr/ADR-001-decorator-pattern-adoption.md) | Accepted |
+| LOG-ADR-002 | ADR-002: Async Writer Architecture | [ADR-002-async-writer-architecture.md](./adr/ADR-002-async-writer-architecture.md) | Accepted |
 
 ### Project (10)
 
