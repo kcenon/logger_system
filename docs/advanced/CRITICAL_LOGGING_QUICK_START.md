@@ -35,6 +35,8 @@ category: "GUID"
 
 # Critical Logging Quick Start
 
+> **SSOT**: This document is the single source of truth for **Critical Logging Quick Start**.
+
 **⚠️ Apply Critical Log Loss Prevention in 5 Minutes**
 
 ---

@@ -10,6 +10,8 @@ category: "GUID"
 
 # Async Integration Guide
 
+> **SSOT**: This document is the single source of truth for **Async Integration Guide**.
+
 > **Language:** **English** | [한국어](THREAD_SYSTEM.kr.md)
 
 ## Overview

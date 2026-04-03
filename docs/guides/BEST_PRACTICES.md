@@ -12,6 +12,8 @@ category: "GUID"
 
 # Logger System Best Practices Guide
 
+> **SSOT**: This document is the single source of truth for **Logger System Best Practices Guide**.
+
 ## Table of Contents
 1. [Design Principles](#design-principles)
 2. [Configuration Best Practices](#configuration-best-practices)

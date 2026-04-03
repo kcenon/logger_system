@@ -12,6 +12,8 @@ category: "API"
 
 # API 레퍼런스
 
+> **SSOT**: This document is the single source of truth for **API 레퍼런스**.
+
 **버전**: 3.0.0
 **최종 업데이트**: 2025-12-10
 

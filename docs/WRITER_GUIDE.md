@@ -10,6 +10,8 @@ category: "GUID"
 
 # Writer Composition and Decorator Guide
 
+> **SSOT**: This document is the single source of truth for **Writer Composition and Decorator Guide**.
+
 **logger_system Writer Framework** (`include/kcenon/logger/writers/`)
 
 The writer framework in logger_system uses the **Decorator Pattern** to enable flexible, composable log processing pipelines. With 18 writer types (5 base writers + 13 processing decorators), you can build high-performance logging configurations achieving **4.34M msg/sec throughput** and **148ns latency**.

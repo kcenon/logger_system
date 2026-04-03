@@ -10,6 +10,8 @@ category: "GUID"
 
 # Configuration Strategies Guide
 
+> **SSOT**: This document is the single source of truth for **Configuration Strategies Guide**.
+
 **logger_system Configuration Strategies** (`include/kcenon/logger/core/strategies/`)
 
 The configuration strategies framework provides a flexible, composable approach to logger configuration using the Strategy Pattern. Strategies allow dynamic adaptation of logger behavior based on environment, performance requirements, or deployment context.

@@ -12,6 +12,8 @@ category: "GUID"
 
 # Logger System 문서
 
+> **SSOT**: This document is the single source of truth for **Logger System 문서**.
+
 고성능, 스레드 안전한 C++20 로깅 프레임워크인 Logger System의 종합 문서에 오신 것을 환영합니다.
 
 ## 📚 문서 구조

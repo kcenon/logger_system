@@ -10,6 +10,8 @@ category: "INTR"
 
 # OpenTelemetry Integration Guide
 
+> **SSOT**: This document is the single source of truth for **OpenTelemetry Integration Guide**.
+
 > **Version**: 0.3.0.0+
 > **Status**: Stable
 

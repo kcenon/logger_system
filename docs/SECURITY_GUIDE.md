@@ -10,6 +10,8 @@ category: "SECU"
 
 # Security Module Guide
 
+> **SSOT**: This document is the single source of truth for **Security Module Guide**.
+
 **logger_system Security Module** (`include/kcenon/logger/security/`)
 
 The security module provides defense-in-depth capabilities for logging infrastructure, protecting against common security threats while maintaining compliance requirements.

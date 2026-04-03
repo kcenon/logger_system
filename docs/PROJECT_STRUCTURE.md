@@ -10,6 +10,8 @@ category: "PROJ"
 
 # Logger System Project Structure
 
+> **SSOT**: This document is the single source of truth for **Logger System Project Structure**.
+
 **Last Updated**: 2026-02-08
 **Version**: 0.4.0.0
 

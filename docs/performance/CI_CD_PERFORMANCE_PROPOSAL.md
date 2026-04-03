@@ -10,6 +10,8 @@ category: "PERF"
 
 # CI/CD 성능 지표 자동화 제안서
 
+> **SSOT**: This document is the single source of truth for **CI/CD 성능 지표 자동화 제안서**.
+
 **문서 버전:** 1.0
 **작성일:** 2025-11-04
 **프로젝트:** logger_system

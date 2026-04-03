@@ -10,6 +10,8 @@ category: "FEAT"
 
 # Logger System Features
 
+> **SSOT**: This document is the single source of truth for **Logger System Features**.
+
 **Last Updated**: 2026-02-08
 **Version**: 0.4.0.0
 

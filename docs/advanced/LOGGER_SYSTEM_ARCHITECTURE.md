@@ -12,6 +12,8 @@ category: "ARCH"
 
 # Logger System Architecture
 
+> **SSOT**: This document is the single source of truth for **Logger System Architecture**.
+
 **Version**: 0.3.0.0
 **Last Updated**: 2025-12-10
 
