@@ -61,11 +61,12 @@ set(_UNIFIED_TARGET_MAP_thread_system
 
 set(_UNIFIED_TARGET_MAP_logger_system
     "logger"
+    "logger_system::logger"
+    "logger_system"
     "logger_system::LoggerSystem"
     "LoggerSystem::LoggerSystem"
     "LoggerSystem::logger"
     "LoggerSystem"
-    "logger_system"
 )
 
 set(_UNIFIED_TARGET_MAP_monitoring_system
@@ -121,7 +122,7 @@ set(_UNIFIED_DEFAULT_TAG_network_system "v0.1.1")
 # FetchContent names (CamelCase for FetchContent compatibility)
 set(_UNIFIED_FETCH_NAME_common_system "CommonSystem")
 set(_UNIFIED_FETCH_NAME_thread_system "ThreadSystem")
-set(_UNIFIED_FETCH_NAME_logger_system "LoggerSystem")
+set(_UNIFIED_FETCH_NAME_logger_system "logger_system")
 set(_UNIFIED_FETCH_NAME_monitoring_system "MonitoringSystem")
 set(_UNIFIED_FETCH_NAME_container_system "ContainerSystem")
 set(_UNIFIED_FETCH_NAME_database_system "DatabaseSystem")
@@ -215,7 +216,7 @@ macro(unified_setup_dependency_mode)
         if(UNIFIED_USE_FETCHCONTENT)
             set(CMAKE_DISABLE_FIND_PACKAGE_CommonSystem TRUE)
             set(CMAKE_DISABLE_FIND_PACKAGE_ThreadSystem TRUE)
-            set(CMAKE_DISABLE_FIND_PACKAGE_LoggerSystem TRUE)
+            set(CMAKE_DISABLE_FIND_PACKAGE_logger_system TRUE)
             set(CMAKE_DISABLE_FIND_PACKAGE_MonitoringSystem TRUE)
             set(CMAKE_DISABLE_FIND_PACKAGE_ContainerSystem TRUE)
             set(CMAKE_DISABLE_FIND_PACKAGE_DatabaseSystem TRUE)

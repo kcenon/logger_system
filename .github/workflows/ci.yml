@@ -453,10 +453,10 @@ jobs:
 
     - name: Verify library was built
       run: |
-        if [ -f "build-core-only/lib/libLoggerSystem.a" ]; then
+        if [ -f "build-core-only/lib/liblogger_system.a" ]; then
           echo "Core-only build successful!"
           ls -la build-core-only/lib/
         else
-          echo "ERROR: libLoggerSystem.a not found"
+          echo "ERROR: liblogger_system.a not found"
           exit 1
         fi

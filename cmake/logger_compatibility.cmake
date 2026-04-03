@@ -1,4 +1,4 @@
-# LoggerCompatibility.cmake
+# logger_compatibility.cmake
 # C++20 feature detection and compatibility layer (std::format required)
 
 ##################################################

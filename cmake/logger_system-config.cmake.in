@@ -1,5 +1,5 @@
 ##################################################
-# LoggerSystem Package Configuration
+# logger_system Package Configuration
 #
 # This file is used by CMake's find_package() command
 ##################################################
@@ -12,16 +12,16 @@ include(CMakeFindDependencyMacro)
 find_dependency(Threads REQUIRED)
 
 # common_system is required for Result<T>, ILogger, and shared interfaces
-set(LoggerSystem_BUILD_WITH_COMMON_SYSTEM @BUILD_WITH_COMMON_SYSTEM@)
-if(LoggerSystem_BUILD_WITH_COMMON_SYSTEM)
+set(logger_system_BUILD_WITH_COMMON_SYSTEM @BUILD_WITH_COMMON_SYSTEM@)
+if(logger_system_BUILD_WITH_COMMON_SYSTEM)
     find_dependency(common_system REQUIRED)
 endif()
 
 # thread_system is optional (Issue #222: standalone std::jthread implementation)
 # When built with thread_system support, consumers MUST have it available
 # so that INTERFACE_LINK_LIBRARIES references resolve correctly.
-set(LoggerSystem_USE_THREAD_SYSTEM @LOGGER_USE_THREAD_SYSTEM@)
-if(LoggerSystem_USE_THREAD_SYSTEM)
+set(logger_system_USE_THREAD_SYSTEM @LOGGER_USE_THREAD_SYSTEM@)
+if(logger_system_USE_THREAD_SYSTEM)
     find_dependency(thread_system CONFIG REQUIRED)
 endif()
 
@@ -31,65 +31,49 @@ if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/logger_system-targets.cmake")
     include("${CMAKE_CURRENT_LIST_DIR}/logger_system-targets.cmake")
 endif()
 
-# Backward compatibility aliases for LoggerSystem:: namespace consumers
-# The canonical namespace is now logger_system::, but existing consumers
-# may still use LoggerSystem::LoggerSystem or LoggerSystem::logger.
-if(TARGET logger_system::LoggerSystem AND NOT TARGET LoggerSystem::LoggerSystem)
-    add_library(LoggerSystem::LoggerSystem INTERFACE IMPORTED)
-    set_target_properties(LoggerSystem::LoggerSystem PROPERTIES
-        INTERFACE_LINK_LIBRARIES logger_system::LoggerSystem
-    )
-endif()
-
 # Set variables for compatibility
 set(logger_system_FOUND TRUE)
-set(logger_system_LIBRARIES logger_system::LoggerSystem)
-
-# Legacy variables for backward compatibility
-set(LoggerSystem_FOUND TRUE)
-set(LOGGERSYSTEM_FOUND TRUE)
-set(LoggerSystem_LIBRARIES ${logger_system_LIBRARIES})
-set(LOGGERSYSTEM_LIBRARIES ${logger_system_LIBRARIES})
+set(logger_system_LIBRARIES logger_system::logger)
 
 # Provide the features that were enabled during build
-set(LoggerSystem_USE_DI @LOGGER_USE_DI@)
-set(LoggerSystem_USE_MONITORING @LOGGER_USE_MONITORING@)
-set(LoggerSystem_USE_EXTERNAL_DI @LOGGER_USE_EXTERNAL_DI@)
-set(LoggerSystem_FORCE_LIGHTWEIGHT @LOGGER_FORCE_LIGHTWEIGHT@)
-set(LoggerSystem_ENABLE_CRASH_HANDLER @LOGGER_ENABLE_CRASH_HANDLER@)
-set(LoggerSystem_ENABLE_STRUCTURED_LOGGING @LOGGER_ENABLE_STRUCTURED_LOGGING@)
-set(LoggerSystem_USE_LOCK_FREE_QUEUE @LOGGER_USE_LOCK_FREE_QUEUE@)
-set(LoggerSystem_ENABLE_NETWORK_WRITER @LOGGER_ENABLE_NETWORK_WRITER@)
-set(LoggerSystem_ENABLE_FILE_ROTATION @LOGGER_ENABLE_FILE_ROTATION@)
-set(LoggerSystem_ENABLE_ASYNC @LOGGER_ENABLE_ASYNC@)
-set(LoggerSystem_USE_COMPRESSION @LOGGER_USE_COMPRESSION@)
-set(LoggerSystem_USE_ENCRYPTION @LOGGER_USE_ENCRYPTION@)
+set(logger_system_USE_DI @LOGGER_USE_DI@)
+set(logger_system_USE_MONITORING @LOGGER_USE_MONITORING@)
+set(logger_system_USE_EXTERNAL_DI @LOGGER_USE_EXTERNAL_DI@)
+set(logger_system_FORCE_LIGHTWEIGHT @LOGGER_FORCE_LIGHTWEIGHT@)
+set(logger_system_ENABLE_CRASH_HANDLER @LOGGER_ENABLE_CRASH_HANDLER@)
+set(logger_system_ENABLE_STRUCTURED_LOGGING @LOGGER_ENABLE_STRUCTURED_LOGGING@)
+set(logger_system_USE_LOCK_FREE_QUEUE @LOGGER_USE_LOCK_FREE_QUEUE@)
+set(logger_system_ENABLE_NETWORK_WRITER @LOGGER_ENABLE_NETWORK_WRITER@)
+set(logger_system_ENABLE_FILE_ROTATION @LOGGER_ENABLE_FILE_ROTATION@)
+set(logger_system_ENABLE_ASYNC @LOGGER_ENABLE_ASYNC@)
+set(logger_system_USE_COMPRESSION @LOGGER_USE_COMPRESSION@)
+set(logger_system_USE_ENCRYPTION @LOGGER_USE_ENCRYPTION@)
 
 # Performance settings
-set(LoggerSystem_DEFAULT_BUFFER_SIZE @LOGGER_DEFAULT_BUFFER_SIZE@)
-set(LoggerSystem_DEFAULT_BATCH_SIZE @LOGGER_DEFAULT_BATCH_SIZE@)
-set(LoggerSystem_DEFAULT_QUEUE_SIZE @LOGGER_DEFAULT_QUEUE_SIZE@)
-set(LoggerSystem_MAX_WRITERS @LOGGER_MAX_WRITERS@)
+set(logger_system_DEFAULT_BUFFER_SIZE @LOGGER_DEFAULT_BUFFER_SIZE@)
+set(logger_system_DEFAULT_BATCH_SIZE @LOGGER_DEFAULT_BATCH_SIZE@)
+set(logger_system_DEFAULT_QUEUE_SIZE @LOGGER_DEFAULT_QUEUE_SIZE@)
+set(logger_system_MAX_WRITERS @LOGGER_MAX_WRITERS@)
 
 # Version information
-set(LoggerSystem_VERSION @PROJECT_VERSION@)
-set(LoggerSystem_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
-set(LoggerSystem_VERSION_MINOR @PROJECT_VERSION_MINOR@)
-set(LoggerSystem_VERSION_PATCH @PROJECT_VERSION_PATCH@)
+set(logger_system_VERSION @PROJECT_VERSION@)
+set(logger_system_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(logger_system_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(logger_system_VERSION_PATCH @PROJECT_VERSION_PATCH@)
 
 # Check if all required components are available
-check_required_components(LoggerSystem)
+check_required_components(logger_system)
 
 # Print configuration summary if requested
-function(LoggerSystem_print_configuration)
-    message(STATUS "LoggerSystem ${LoggerSystem_VERSION} Configuration:")
+function(logger_system_print_configuration)
+    message(STATUS "logger_system ${logger_system_VERSION} Configuration:")
     message(STATUS "  Features:")
-    message(STATUS "    DI Support: ${LoggerSystem_USE_DI}")
-    message(STATUS "    Monitoring: ${LoggerSystem_USE_MONITORING}")
-    message(STATUS "    Async: ${LoggerSystem_ENABLE_ASYNC}")
-    message(STATUS "    Lock-free Queue: ${LoggerSystem_USE_LOCK_FREE_QUEUE}")
-    message(STATUS "    Thread System: ${LoggerSystem_USE_THREAD_SYSTEM}")
+    message(STATUS "    DI Support: ${logger_system_USE_DI}")
+    message(STATUS "    Monitoring: ${logger_system_USE_MONITORING}")
+    message(STATUS "    Async: ${logger_system_ENABLE_ASYNC}")
+    message(STATUS "    Lock-free Queue: ${logger_system_USE_LOCK_FREE_QUEUE}")
+    message(STATUS "    Thread System: ${logger_system_USE_THREAD_SYSTEM}")
     message(STATUS "  Performance:")
-    message(STATUS "    Buffer Size: ${LoggerSystem_DEFAULT_BUFFER_SIZE}")
-    message(STATUS "    Batch Size: ${LoggerSystem_DEFAULT_BATCH_SIZE}")
+    message(STATUS "    Buffer Size: ${logger_system_DEFAULT_BUFFER_SIZE}")
+    message(STATUS "    Batch Size: ${logger_system_DEFAULT_BATCH_SIZE}")
 endfunction()
