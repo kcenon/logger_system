@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file file_utils.h
+ * @brief File utility functions for path validation and sanitization.
+ *
+ */
+
 #pragma once
 
 #include <kcenon/logger/core/error_codes.h>

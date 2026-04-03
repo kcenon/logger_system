@@ -2,6 +2,13 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file common_system_adapter.h
+ * @brief Adapter exposing kcenon::logger as common::interfaces::ILogger.
+ *
+ * @see logger_adapter.h For standalone usage
+ */
+
 #pragma once
 
 #include <memory>

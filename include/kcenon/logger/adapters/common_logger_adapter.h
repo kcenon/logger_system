@@ -2,6 +2,13 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file common_logger_adapter.h
+ * @brief Log level conversion between logger_system and common_system.
+ *
+ * @see common_system_adapter.h
+ */
+
 #pragma once
 
 #include <memory>

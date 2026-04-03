@@ -1,5 +1,11 @@
 // BSD 3-Clause License
 
+/**
+ * @file log_context.h
+ * @brief Structured log context with key-value metadata for correlation.
+ *
+ */
+
 #pragma once
 
 #include <chrono>

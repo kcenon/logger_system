@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file base_formatter.h
+ * @brief Base implementation for log formatters with pattern support.
+ *
+ */
+
 #pragma once
 
 #include "../interfaces/log_formatter_interface.h"

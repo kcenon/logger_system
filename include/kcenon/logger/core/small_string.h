@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file small_string.h
+ * @brief Small String Optimization (SSO) for short log messages.
+ *
+ */
+
 #pragma once
 
 #include <cstring>

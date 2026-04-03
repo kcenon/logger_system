@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file error_handling_utils.h
+ * @brief Structured error context for debugging log system failures.
+ *
+ */
+
 #pragma once
 
 #include <kcenon/logger/core/error_codes.h>

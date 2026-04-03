@@ -2,6 +2,13 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file log_writer_interface.h
+ * @brief Base interface for all log writers and decorators.
+ *
+ * @see writers/ For concrete implementations
+ */
+
 #pragma once
 
 #include <string>

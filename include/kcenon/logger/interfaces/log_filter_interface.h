@@ -2,6 +2,13 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file log_filter_interface.h
+ * @brief Interface for log filters used by filtered_logger.
+ *
+ * @see filtered_logger.h
+ */
+
 #pragma once
 
 #include <string>
