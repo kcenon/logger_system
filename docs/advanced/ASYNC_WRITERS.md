@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-007"
+doc_title: "Asynchronous Writer Implementations Guide"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 # Asynchronous Writer Implementations Guide
 
 > **Language:** **English** | [한국어](ASYNC_WRITERS.kr.md)

@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-SECU-001"
+doc_title: "Security Module Guide"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "SECU"
+---
+
 # Security Module Guide
 
 **logger_system Security Module** (`include/kcenon/logger/security/`)

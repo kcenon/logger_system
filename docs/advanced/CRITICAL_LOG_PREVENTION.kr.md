@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-010"
+doc_title: "크리티컬 로그 손실 방지 가이드"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 > **Language:** [English](CRITICAL_LOG_PREVENTION.md) | **한국어**
 
 # 크리티컬 로그 손실 방지 가이드

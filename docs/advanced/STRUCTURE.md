@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-ARCH-009"
+doc_title: "Logger System - Project Structure"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "ARCH"
+---
+
 # Logger System - Project Structure
 
 **English | [한국어](STRUCTURE.kr.md)**

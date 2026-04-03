@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-QUAL-003"
+doc_title: "Testing Guide"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "QUAL"
+---
+
 ## Test Coverage
 
 To enable code coverage measurement:

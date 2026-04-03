@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-PROJ-009"
+doc_title: "Contributing to Logger System"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "PROJ"
+---
+
 > **Language:** **English** | [한국어](CONTRIBUTING.kr.md)
 
 # Contributing to Logger System

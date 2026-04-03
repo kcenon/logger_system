@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-008"
+doc_title: "크리티컬 로깅 빠른 시작"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 > **Language:** [English](CRITICAL_LOGGING_QUICK_START.md) | **한국어**
 
 # 크리티컬 로깅 빠른 시작

@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-PERF-002"
+doc_title: "Logger System Performance Benchmarks"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "PERF"
+---
+
 # Logger System Performance Benchmarks
 
 **Last Updated**: 2025-11-15

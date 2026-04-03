@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-FEAT-002"
+doc_title: "Logger System Features"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "FEAT"
+---
+
 # Logger System Features
 
 **Last Updated**: 2026-02-08

@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-PROJ-007"
+doc_title: "Logger System CI/CD Dashboard"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "PROJ"
+---
+
 > **Language:** **English** | [한국어](CI_CD_DASHBOARD.kr.md)
 
 # Logger System CI/CD Dashboard

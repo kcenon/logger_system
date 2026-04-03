@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-003"
+doc_title: "Logger System 문서"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 > **Language:** [English](README.md) | **한국어**
 
 # Logger System 문서

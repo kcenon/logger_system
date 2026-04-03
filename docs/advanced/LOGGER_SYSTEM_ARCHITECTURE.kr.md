@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-ARCH-006"
+doc_title: "로거 시스템 아키텍처"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "ARCH"
+---
+
 > **Language:** [English](LOGGER_SYSTEM_ARCHITECTURE.md) | **한국어**
 
 # 로거 시스템 아키텍처

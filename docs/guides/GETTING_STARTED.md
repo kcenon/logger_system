@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-021"
+doc_title: "Getting Started with Logger System"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 > **Language:** **English** | [한국어](GETTING_STARTED.kr.md)
 
 # Getting Started with Logger System

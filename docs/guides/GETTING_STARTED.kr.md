@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-020"
+doc_title: "Logger System 시작하기"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 > **Language:** [English](GETTING_STARTED.md) | **한국어**
 
 # Logger System 시작하기

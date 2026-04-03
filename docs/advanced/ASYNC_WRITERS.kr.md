@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-006"
+doc_title: "비동기 Writer 구현체 가이드"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 # 비동기 Writer 구현체 가이드
 
 > **Language:** [English](ASYNC_WRITERS.md) | **한국어**

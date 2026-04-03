@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-016"
+doc_title: "Writer Selection Guide"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 > **Language:** **English** | [한국어](WRITER_SELECTION_GUIDE.kr.md)
 
 # Writer Selection Guide
