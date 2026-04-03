@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-PROJ-004"
+doc_title: "Logger System Project Structure"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "PROJ"
+---
+
 # Logger System Project Structure
 
 **Last Updated**: 2026-02-08

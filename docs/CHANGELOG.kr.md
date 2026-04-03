@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-PROJ-001"
+doc_title: "변경 이력 - Logger System"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "PROJ"
+---
+
 # 변경 이력 - Logger System
 
 > **언어:** [English](CHANGELOG.md) | **한국어**

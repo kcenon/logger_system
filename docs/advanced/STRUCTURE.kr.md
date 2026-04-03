@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-ARCH-008"
+doc_title: "Logger System - 프로젝트 구조"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "ARCH"
+---
+
 # Logger System - 프로젝트 구조
 
 **[English](STRUCTURE.md) | 한국어**

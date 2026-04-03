@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-PROJ-010"
+doc_title: "Korean Translation Summary"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "PROJ"
+---
+
 # Korean Translation Summary
 
 **Date**: 2025-10-20 (Asia/Seoul)

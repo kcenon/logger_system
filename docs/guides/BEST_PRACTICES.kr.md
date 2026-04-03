@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-017"
+doc_title: "Logger System 모범 사례 가이드"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 > **Language:** [English](BEST_PRACTICES.md) | **한국어**
 
 # Logger System 모범 사례 가이드

@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-INTR-001"
+doc_title: "Logger System Integration Guide"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "INTR"
+---
+
 # Logger System Integration Guide
 
 **English | [한국어](INTEGRATION.kr.md)**

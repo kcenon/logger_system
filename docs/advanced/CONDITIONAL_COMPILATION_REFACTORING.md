@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-ARCH-005"
+doc_title: "Conditional Compilation Refactoring Strategy"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "ARCH"
+---
+
 # Conditional Compilation Refactoring Strategy
 
 **Version**: 0.1.0.0

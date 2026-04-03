@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-API-001"
+doc_title: "API 레퍼런스"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "API"
+---
+
 > **Language:** [English](API_REFERENCE.md) | **한국어**
 
 # API 레퍼런스

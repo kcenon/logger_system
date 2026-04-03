@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-013"
+doc_title: "Creating Custom Writers"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 > **Language:** **English** | [한국어](CUSTOM_WRITERS.kr.md)
 
 # Creating Custom Writers

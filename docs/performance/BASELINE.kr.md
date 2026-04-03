@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-PERF-005"
+doc_title: "Logger System - 성능 기준 메트릭"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "PERF"
+---
+
 # Logger System - 성능 기준 메트릭
 
 **[English](BASELINE.md) | 한국어**

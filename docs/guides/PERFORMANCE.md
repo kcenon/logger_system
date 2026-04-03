@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-PERF-004"
+doc_title: "Logger System Performance Guide"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "PERF"
+---
+
 > **Language:** **English** | [한국어](PERFORMANCE.kr.md)
 
 # Logger System Performance Guide

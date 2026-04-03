@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-SECU-002"
+doc_title: "보안 가이드"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "SECU"
+---
+
 > **Language:** [English](SECURITY.md) | **한국어**
 
 # 보안 가이드

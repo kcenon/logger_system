@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-025"
+doc_title: "thread_system 통합 가이드"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 # thread_system 통합 가이드
 
 > **Language:** [English](THREAD_SYSTEM.md) | **한국어**
