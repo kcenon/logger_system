@@ -2,6 +2,12 @@
 // Copyright (c) 2021-2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file logger_adapter.h
+ * @brief Standalone logger adapter for use without common_system DI.
+ *
+ */
+
 #pragma once
 
 #include <kcenon/logger/core/logger.h>

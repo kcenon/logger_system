@@ -2,6 +2,13 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file logger_config.h
+ * @brief Configuration structure for logger with validation.
+ *
+ * @see logger_config_builder.h For fluent construction
+ */
+
 #pragma once
 
 #include <chrono>

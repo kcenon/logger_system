@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file signal_manager_interface.h
+ * @brief Interface for signal handler management.
+ *
+ */
+
 #pragma once
 
 #include <cstddef>

@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file string_utils.h
+ * @brief String utility functions for log formatting and conversion.
+ *
+ */
+
 #pragma once
 
 #include <string>

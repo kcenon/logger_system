@@ -2,6 +2,13 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file console_writer.h
+ * @brief Console writer for logging to stdout/stderr.
+ *
+ * @see log_writer_interface.h
+ */
+
 #pragma once
 
 #include "../interfaces/log_writer_interface.h"

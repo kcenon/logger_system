@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file error_codes.h
+ * @brief Error codes specific to the logger system.
+ *
+ */
+
 #pragma once
 
 #include <string>

@@ -2,6 +2,13 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file network_writer.h
+ * @brief Network writer for sending logs over TCP/UDP.
+ *
+ * @see log_writer_interface.h
+ */
+
 #pragma once
 
 #include "base_writer.h"

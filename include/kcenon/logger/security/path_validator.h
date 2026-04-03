@@ -2,6 +2,12 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file path_validator.h
+ * @brief File path validation to prevent path traversal vulnerabilities.
+ *
+ */
+
 #pragma once
 
 #include <kcenon/logger/core/error_codes.h>

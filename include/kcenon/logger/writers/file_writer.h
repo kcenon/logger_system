@@ -2,6 +2,13 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file file_writer.h
+ * @brief File writer for logging to files with optional buffering.
+ *
+ * @see rotating_file_writer.h For size/time-based rotation
+ */
+
 #pragma once
 
 #include "../interfaces/log_writer_interface.h"

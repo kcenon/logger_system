@@ -2,6 +2,13 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file rotating_file_writer.h
+ * @brief Rotating file writer with size and time-based rotation.
+ *
+ * @see file_writer.h For the base file writer
+ */
+
 #pragma once
 
 #include "file_writer.h"
