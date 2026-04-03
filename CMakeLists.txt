@@ -12,7 +12,7 @@ endif()
 # Project configuration
 ##################################################
 project(
-    LoggerSystem
+    logger_system
     VERSION 0.1.3
     DESCRIPTION "High-performance C++20 logging system with asynchronous batching"
     HOMEPAGE_URL "https://github.com/kcenon/logger_system"
@@ -145,19 +145,19 @@ endif()
 ##################################################
 
 # Include feature configuration module
-include(LoggerFeatures)
+include(logger_features)
 
 # Include dependency detection module
-include(LoggerDependencies)
+include(logger_dependencies)
 
 # Include sanitizer configuration module
-include(LoggerSanitizers)
+include(logger_sanitizers)
 
 # Include warning configuration module
-include(LoggerWarnings)
+include(logger_warnings)
 
 # Include coverage configuration module
-include(LoggerCoverage)
+include(logger_coverage)
 
 # Include compiler checks module (following thread_system pattern)
 include(CompilerChecks)
@@ -342,9 +342,9 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
     list(LENGTH LOGGER_SOURCES SOURCE_COUNT)
     if(SOURCE_COUNT GREATER 5)
         # Create library with new structure
-        add_library(LoggerSystem ${LOGGER_SOURCES} ${LOGGER_HEADERS})
-        set_target_properties(LoggerSystem PROPERTIES EXPORT_NAME logger)
-        target_include_directories(LoggerSystem
+        add_library(logger_system ${LOGGER_SOURCES} ${LOGGER_HEADERS})
+        set_target_properties(logger_system PROPERTIES EXPORT_NAME logger)
+        target_include_directories(logger_system
             PUBLIC
                 $<BUILD_INTERFACE:${LOGGER_INCLUDE_DIR}>
                 $<INSTALL_INTERFACE:include>
@@ -352,23 +352,23 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
 
         # DLL export support
         if(BUILD_SHARED_LIBS)
-            target_compile_definitions(LoggerSystem PRIVATE LOGGER_SYSTEM_BUILDING)
+            target_compile_definitions(logger_system PRIVATE LOGGER_SYSTEM_BUILDING)
         else()
-            target_compile_definitions(LoggerSystem PUBLIC LOGGER_SYSTEM_STATIC)
+            target_compile_definitions(logger_system PUBLIC LOGGER_SYSTEM_STATIC)
         endif()
 
         # Optional module compile definitions (Issue #357: SRP)
         if(LOGGER_WITH_SERVER)
-            target_compile_definitions(LoggerSystem PUBLIC LOGGER_WITH_SERVER=1)
+            target_compile_definitions(logger_system PUBLIC LOGGER_WITH_SERVER=1)
         endif()
 
         if(LOGGER_WITH_ANALYSIS)
-            target_compile_definitions(LoggerSystem PUBLIC LOGGER_WITH_ANALYSIS=1)
+            target_compile_definitions(logger_system PUBLIC LOGGER_WITH_ANALYSIS=1)
         endif()
 
         # Suppress warnings inherited from parent project
         if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-            target_compile_options(LoggerSystem PRIVATE
+            target_compile_options(logger_system PRIVATE
                 -Wno-sign-conversion
                 -Wno-conversion
                 -Wno-float-equal
@@ -377,7 +377,7 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 -Wno-unused-private-field
             )
         elseif(MSVC)
-            target_compile_options(LoggerSystem PRIVATE
+            target_compile_options(logger_system PRIVATE
                 /wd4244  # conversion from 'type1' to 'type2', possible loss of data
                 /wd4267  # conversion from 'size_t' to 'type', possible loss of data
                 /wd4305  # truncation from 'type1' to 'type2'
@@ -393,10 +393,10 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
 
             # Add common_system include path
             if(TARGET kcenon::common_system)
-                target_link_libraries(LoggerSystem PUBLIC kcenon::common_system)
+                target_link_libraries(logger_system PUBLIC kcenon::common_system)
             else()
                 # Use the found include directory
-                target_include_directories(LoggerSystem
+                target_include_directories(logger_system
                     PUBLIC
                         $<BUILD_INTERFACE:${COMMON_SYSTEM_INCLUDE_DIR}>
                 )
@@ -414,35 +414,35 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
                 get_target_property(_ts_imported ${thread_system_TARGET} IMPORTED)
                 if(_ts_imported)
                     # IMPORTED target (vcpkg / find_package): safe to export
-                    target_link_libraries(LoggerSystem PUBLIC ${thread_system_TARGET})
-                    target_compile_definitions(LoggerSystem PUBLIC LOGGER_HAS_THREAD_SYSTEM)
+                    target_link_libraries(logger_system PUBLIC ${thread_system_TARGET})
+                    target_compile_definitions(logger_system PUBLIC LOGGER_HAS_THREAD_SYSTEM)
                 else()
                     # Local (submodule) target: cannot be in our export set
-                    target_link_libraries(LoggerSystem PRIVATE ${thread_system_TARGET})
-                    target_compile_definitions(LoggerSystem PRIVATE LOGGER_HAS_THREAD_SYSTEM)
+                    target_link_libraries(logger_system PRIVATE ${thread_system_TARGET})
+                    target_compile_definitions(logger_system PRIVATE LOGGER_HAS_THREAD_SYSTEM)
                     set(_LOGGER_HAS_LOCAL_THREAD_SYSTEM TRUE)
                 endif()
             elseif(TARGET ThreadSystem)
                 get_target_property(_ts_imported ThreadSystem IMPORTED)
-                target_link_libraries(LoggerSystem PUBLIC ThreadSystem)
-                target_compile_definitions(LoggerSystem PUBLIC LOGGER_HAS_THREAD_SYSTEM)
+                target_link_libraries(logger_system PUBLIC ThreadSystem)
+                target_compile_definitions(logger_system PUBLIC LOGGER_HAS_THREAD_SYSTEM)
                 if(NOT _ts_imported)
                     set(_LOGGER_HAS_LOCAL_THREAD_SYSTEM TRUE)
                 endif()
             elseif(TARGET thread_system)
                 get_target_property(_ts_imported thread_system IMPORTED)
-                target_link_libraries(LoggerSystem PUBLIC thread_system)
-                target_compile_definitions(LoggerSystem PUBLIC LOGGER_HAS_THREAD_SYSTEM)
+                target_link_libraries(logger_system PUBLIC thread_system)
+                target_compile_definitions(logger_system PUBLIC LOGGER_HAS_THREAD_SYSTEM)
                 if(NOT _ts_imported)
                     set(_LOGGER_HAS_LOCAL_THREAD_SYSTEM TRUE)
                 endif()
             else()
                 # Fallback: header-only access when aggregate targets are unavailable.
-                target_include_directories(LoggerSystem
+                target_include_directories(logger_system
                     PUBLIC
                         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../thread_system/include>
                 )
-                target_compile_definitions(LoggerSystem PRIVATE LOGGER_HAS_THREAD_SYSTEM)
+                target_compile_definitions(logger_system PRIVATE LOGGER_HAS_THREAD_SYSTEM)
                 set(_LOGGER_HAS_LOCAL_THREAD_SYSTEM TRUE)
             endif()
         else()
@@ -453,21 +453,21 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
         if(LOGGER_USE_ENCRYPTION)
             find_package(OpenSSL QUIET)
             if(OpenSSL_FOUND)
-                target_link_libraries(LoggerSystem PUBLIC OpenSSL::SSL OpenSSL::Crypto)
-                target_compile_definitions(LoggerSystem PUBLIC LOGGER_HAS_OPENSSL=1)
+                target_link_libraries(logger_system PUBLIC OpenSSL::SSL OpenSSL::Crypto)
+                target_compile_definitions(logger_system PUBLIC LOGGER_HAS_OPENSSL=1)
                 message(STATUS "Logger System: OpenSSL linked for encryption support (${OPENSSL_VERSION})")
             else()
                 message(WARNING "Logger System: LOGGER_USE_ENCRYPTION=ON but OpenSSL not found, encryption features disabled")
                 # Remove encrypted_writer from build since OpenSSL is not available
-                get_target_property(CURRENT_SOURCES LoggerSystem SOURCES)
+                get_target_property(CURRENT_SOURCES logger_system SOURCES)
                 list(FILTER CURRENT_SOURCES EXCLUDE REGEX ".*encrypted_writer.*")
-                set_target_properties(LoggerSystem PROPERTIES SOURCES "${CURRENT_SOURCES}")
+                set_target_properties(logger_system PROPERTIES SOURCES "${CURRENT_SOURCES}")
             endif()
         else()
             # If encryption is disabled, remove encrypted_writer from build
-            get_target_property(CURRENT_SOURCES LoggerSystem SOURCES)
+            get_target_property(CURRENT_SOURCES logger_system SOURCES)
             list(FILTER CURRENT_SOURCES EXCLUDE REGEX ".*encrypted_writer.*")
-            set_target_properties(LoggerSystem PROPERTIES SOURCES "${CURRENT_SOURCES}")
+            set_target_properties(logger_system PROPERTIES SOURCES "${CURRENT_SOURCES}")
             message(STATUS "Logger System: Encryption support disabled (LOGGER_USE_ENCRYPTION=OFF)")
         endif()
 
@@ -477,12 +477,12 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
             find_package(protobuf CONFIG QUIET)
             find_package(gRPC CONFIG QUIET)
             if(opentelemetry-cpp_FOUND)
-                target_link_libraries(LoggerSystem PUBLIC
+                target_link_libraries(logger_system PUBLIC
                     opentelemetry-cpp::logs
                     opentelemetry-cpp::otlp_http_log_record_exporter
                     opentelemetry-cpp::otlp_grpc_log_record_exporter
                 )
-                target_compile_definitions(LoggerSystem PUBLIC LOGGER_HAS_OTLP=1)
+                target_compile_definitions(logger_system PUBLIC LOGGER_HAS_OTLP=1)
                 message(STATUS "Logger System: OpenTelemetry linked for OTLP support")
             else()
                 message(WARNING "Logger System: LOGGER_ENABLE_OTLP=ON but opentelemetry-cpp not found")
@@ -523,14 +523,14 @@ if(EXISTS ${LOGGER_INCLUDE_DIR}/kcenon/logger AND EXISTS ${LOGGER_SOURCE_DIR})
 
             if(MODULES_AVAILABLE)
                 # Add module sources to the library using FILE_SET
-                target_sources(LoggerSystem
+                target_sources(logger_system
                     PUBLIC
                         FILE_SET CXX_MODULES
                         FILES ${LOGGER_MODULE_FILES}
                 )
 
                 # Define macro to indicate modules are available
-                target_compile_definitions(LoggerSystem PUBLIC LOGGER_HAS_MODULES=1)
+                target_compile_definitions(logger_system PUBLIC LOGGER_HAS_MODULES=1)
 
                 message(STATUS "Logger System: C++20 modules configured successfully")
                 message(STATUS "  Module files:")
@@ -611,10 +611,10 @@ include(CMakePackageConfigHelpers)
 
 # Installation targets list
 set(INSTALL_TARGETS)
-if(TARGET LoggerSystem)
-    list(APPEND INSTALL_TARGETS LoggerSystem)
+if(TARGET logger_system)
+    list(APPEND INSTALL_TARGETS logger_system)
 endif()
-# Note: thread_system is an external dependency and should not be installed as part of LoggerSystem
+# Note: thread_system is an external dependency and should not be installed as part of logger_system
 
 if(INSTALL_TARGETS)
     if(_LOGGER_HAS_LOCAL_THREAD_SYSTEM)

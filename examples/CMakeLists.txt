@@ -1,7 +1,7 @@
 # Basic usage sample - available when samples are enabled
 if(BUILD_SAMPLES)
     add_executable(logger_basic_usage basic_usage.cpp)
-    target_link_libraries(logger_basic_usage PRIVATE LoggerSystem)
+    target_link_libraries(logger_basic_usage PRIVATE logger_system)
     set_target_properties(logger_basic_usage PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
@@ -10,7 +10,7 @@ endif()
 # Critical logging example - demonstrates critical log loss prevention mechanisms
 if(BUILD_SAMPLES)
     add_executable(critical_logging_example critical_logging_example.cpp)
-    target_link_libraries(critical_logging_example PRIVATE LoggerSystem)
+    target_link_libraries(critical_logging_example PRIVATE logger_system)
     set_target_properties(critical_logging_example PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
@@ -19,7 +19,7 @@ endif()
 # Custom writer example - demonstrates thread_safe_writer usage (Phase 1.4)
 if(BUILD_SAMPLES)
     add_executable(custom_writer_example custom_writer_example.cpp)
-    target_link_libraries(custom_writer_example PRIVATE LoggerSystem)
+    target_link_libraries(custom_writer_example PRIVATE logger_system)
     set_target_properties(custom_writer_example PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
@@ -28,7 +28,7 @@ endif()
 # Structured logging example - demonstrates Phase 3.0 features
 if(BUILD_SAMPLES)
     add_executable(structured_logging_example structured_logging_example.cpp)
-    target_link_libraries(structured_logging_example PRIVATE LoggerSystem)
+    target_link_libraries(structured_logging_example PRIVATE logger_system)
     set_target_properties(structured_logging_example PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
@@ -37,7 +37,7 @@ endif()
 # Writer builder example - demonstrates Decorator pattern with writer_builder
 if(BUILD_SAMPLES)
     add_executable(writer_builder_example writer_builder_example.cpp)
-    target_link_libraries(writer_builder_example PRIVATE LoggerSystem)
+    target_link_libraries(writer_builder_example PRIVATE logger_system)
     set_target_properties(writer_builder_example PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
@@ -46,7 +46,7 @@ endif()
 # Decorator usage example - comprehensive decorator pattern guide
 if(BUILD_SAMPLES)
     add_executable(decorator_usage decorator_usage.cpp)
-    target_link_libraries(decorator_usage PRIVATE LoggerSystem)
+    target_link_libraries(decorator_usage PRIVATE logger_system)
     set_target_properties(decorator_usage PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
@@ -56,14 +56,14 @@ endif()
 if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM)
     # DI Pattern example
     add_executable(di_pattern_example di_pattern_example.cpp)
-    target_link_libraries(di_pattern_example PRIVATE LoggerSystem)
+    target_link_libraries(di_pattern_example PRIVATE logger_system)
     set_target_properties(di_pattern_example PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
 
     # Monitoring Integration example
     add_executable(monitoring_integration_example monitoring_integration_example.cpp)
-    target_link_libraries(monitoring_integration_example PRIVATE LoggerSystem)
+    target_link_libraries(monitoring_integration_example PRIVATE logger_system)
     set_target_properties(monitoring_integration_example PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
@@ -75,14 +75,14 @@ endif()
 if(BUILD_SAMPLES AND NOT BUILD_WITH_COMMON_SYSTEM)
     # Metrics demo sample
     add_executable(metrics_demo metrics_demo.cpp)
-    target_link_libraries(metrics_demo PRIVATE LoggerSystem)
+    target_link_libraries(metrics_demo PRIVATE logger_system)
     set_target_properties(metrics_demo PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
 
     # Advanced features demo sample
     add_executable(advanced_features_demo advanced_features_demo.cpp)
-    target_link_libraries(advanced_features_demo PRIVATE LoggerSystem)
+    target_link_libraries(advanced_features_demo PRIVATE logger_system)
     set_target_properties(advanced_features_demo PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
@@ -98,7 +98,7 @@ if(BUILD_SAMPLES AND NOT BUILD_WITH_COMMON_SYSTEM)
     # TODO: distributed_logging_demo requires unimplemented features (log_server, log_aggregator)
     # Re-enable when Issue #XXX is resolved
     # add_executable(distributed_logging_demo distributed_logging_demo.cpp)
-    # target_link_libraries(distributed_logging_demo PRIVATE LoggerSystem)
+    # target_link_libraries(distributed_logging_demo PRIVATE logger_system)
     # set_target_properties(distributed_logging_demo PROPERTIES
     #     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     # )
@@ -106,7 +106,7 @@ if(BUILD_SAMPLES AND NOT BUILD_WITH_COMMON_SYSTEM)
     # TODO: security_demo requires unimplemented features (log_sanitizer, structured_logger, get_router)
     # Re-enable when Issue #XXX is resolved
     # add_executable(security_demo security_demo.cpp)
-    # target_link_libraries(security_demo PRIVATE LoggerSystem)
+    # target_link_libraries(security_demo PRIVATE logger_system)
     # set_target_properties(security_demo PROPERTIES
     #     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     # )

@@ -3,9 +3,9 @@ add_executable(basic_integration_test integration_test.cpp)
 
 # Link with GTest
 if(TARGET GTest::gtest_main)
-    target_link_libraries(basic_integration_test PRIVATE LoggerSystem GTest::gtest_main)
+    target_link_libraries(basic_integration_test PRIVATE logger_system GTest::gtest_main)
 else()
-    target_link_libraries(basic_integration_test PRIVATE LoggerSystem gtest_main)
+    target_link_libraries(basic_integration_test PRIVATE logger_system gtest_main)
 endif()
 
 add_test(NAME basic_integration_test COMMAND basic_integration_test)
@@ -18,9 +18,9 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/integration/thread_system_integration_tes
     add_executable(thread_system_integration_test integration/thread_system_integration_test.cpp)
 
     if(TARGET GTest::gtest_main)
-        target_link_libraries(thread_system_integration_test PRIVATE LoggerSystem GTest::gtest_main)
+        target_link_libraries(thread_system_integration_test PRIVATE logger_system GTest::gtest_main)
     else()
-        target_link_libraries(thread_system_integration_test PRIVATE LoggerSystem gtest_main)
+        target_link_libraries(thread_system_integration_test PRIVATE logger_system gtest_main)
     endif()
 
     target_compile_definitions(thread_system_integration_test PRIVATE USE_THREAD_SYSTEM)
@@ -36,9 +36,9 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/integration/monitoring_integration_test.c
     add_executable(monitoring_integration_test integration/monitoring_integration_test.cpp)
 
     if(TARGET GTest::gtest_main)
-        target_link_libraries(monitoring_integration_test PRIVATE LoggerSystem GTest::gtest_main)
+        target_link_libraries(monitoring_integration_test PRIVATE logger_system GTest::gtest_main)
     else()
-        target_link_libraries(monitoring_integration_test PRIVATE LoggerSystem gtest_main)
+        target_link_libraries(monitoring_integration_test PRIVATE logger_system gtest_main)
     endif()
 
     add_test(NAME monitoring_integration_test COMMAND monitoring_integration_test)
@@ -52,9 +52,9 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/compatibility/version_compatibility_test.
     add_executable(version_compatibility_test compatibility/version_compatibility_test.cpp)
 
     if(TARGET GTest::gtest_main)
-        target_link_libraries(version_compatibility_test PRIVATE LoggerSystem GTest::gtest_main)
+        target_link_libraries(version_compatibility_test PRIVATE logger_system GTest::gtest_main)
     else()
-        target_link_libraries(version_compatibility_test PRIVATE LoggerSystem gtest_main)
+        target_link_libraries(version_compatibility_test PRIVATE logger_system gtest_main)
     endif()
 
     add_test(NAME version_compatibility_test COMMAND version_compatibility_test)
@@ -67,9 +67,9 @@ endif()
 add_executable(logger_min_level_threshold_test min_level_filter_test.cpp)
 
 if(TARGET GTest::gtest_main)
-    target_link_libraries(logger_min_level_threshold_test PRIVATE LoggerSystem GTest::gtest_main)
+    target_link_libraries(logger_min_level_threshold_test PRIVATE logger_system GTest::gtest_main)
 else()
-    target_link_libraries(logger_min_level_threshold_test PRIVATE LoggerSystem gtest_main)
+    target_link_libraries(logger_min_level_threshold_test PRIVATE logger_system gtest_main)
 endif()
 
 add_test(NAME logger_min_level_threshold_test COMMAND logger_min_level_threshold_test)
@@ -81,9 +81,9 @@ set_target_properties(logger_min_level_threshold_test PROPERTIES
 add_executable(logger_thread_safety_test thread_safety_tests.cpp)
 
 if(TARGET GTest::gtest_main)
-    target_link_libraries(logger_thread_safety_test PRIVATE LoggerSystem GTest::gtest_main)
+    target_link_libraries(logger_thread_safety_test PRIVATE logger_system GTest::gtest_main)
 else()
-    target_link_libraries(logger_thread_safety_test PRIVATE LoggerSystem gtest_main)
+    target_link_libraries(logger_thread_safety_test PRIVATE logger_system gtest_main)
 endif()
 
 add_test(NAME logger_thread_safety_test COMMAND logger_thread_safety_test)
@@ -95,9 +95,9 @@ set_target_properties(logger_thread_safety_test PROPERTIES
 add_executable(logger_sampling_test log_sampling_test.cpp)
 
 if(TARGET GTest::gtest_main)
-    target_link_libraries(logger_sampling_test PRIVATE LoggerSystem GTest::gtest_main)
+    target_link_libraries(logger_sampling_test PRIVATE logger_system GTest::gtest_main)
 else()
-    target_link_libraries(logger_sampling_test PRIVATE LoggerSystem gtest_main)
+    target_link_libraries(logger_sampling_test PRIVATE logger_system gtest_main)
 endif()
 
 add_test(NAME logger_sampling_test COMMAND logger_sampling_test)
@@ -109,9 +109,9 @@ set_target_properties(logger_sampling_test PROPERTIES
 add_executable(logger_routing_integration_test routing_integration_test.cpp)
 
 if(TARGET GTest::gtest_main)
-    target_link_libraries(logger_routing_integration_test PRIVATE LoggerSystem GTest::gtest_main)
+    target_link_libraries(logger_routing_integration_test PRIVATE logger_system GTest::gtest_main)
 else()
-    target_link_libraries(logger_routing_integration_test PRIVATE LoggerSystem gtest_main)
+    target_link_libraries(logger_routing_integration_test PRIVATE logger_system gtest_main)
 endif()
 
 add_test(NAME logger_routing_integration_test COMMAND logger_routing_integration_test)
@@ -124,9 +124,9 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/ilogger_interface_test.cpp")
     add_executable(logger_ilogger_interface_test unit/ilogger_interface_test.cpp)
 
     if(TARGET GTest::gtest_main)
-        target_link_libraries(logger_ilogger_interface_test PRIVATE LoggerSystem GTest::gtest_main)
+        target_link_libraries(logger_ilogger_interface_test PRIVATE logger_system GTest::gtest_main)
     else()
-        target_link_libraries(logger_ilogger_interface_test PRIVATE LoggerSystem gtest_main)
+        target_link_libraries(logger_ilogger_interface_test PRIVATE logger_system gtest_main)
     endif()
 
     add_test(NAME logger_ilogger_interface_test COMMAND logger_ilogger_interface_test)
@@ -143,9 +143,9 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/security_test/security_test.cpp")
     )
 
     if(TARGET GTest::gtest_main)
-        target_link_libraries(logger_security_test PRIVATE LoggerSystem GTest::gtest_main GTest::gtest)
+        target_link_libraries(logger_security_test PRIVATE logger_system GTest::gtest_main GTest::gtest)
     else()
-        target_link_libraries(logger_security_test PRIVATE LoggerSystem gtest_main gtest)
+        target_link_libraries(logger_security_test PRIVATE logger_system gtest_main gtest)
     endif()
 
     # Link OpenSSL if available (prefer 3.x for security)
@@ -187,11 +187,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/thread_system_integration_module_tes
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_thread_system_integration_module_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_thread_system_integration_module_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -222,9 +222,9 @@ endif()
 add_executable(logger_otlp_test otlp_test.cpp)
 
 if(TARGET GTest::gtest_main)
-    target_link_libraries(logger_otlp_test PRIVATE LoggerSystem GTest::gtest_main GTest::gtest)
+    target_link_libraries(logger_otlp_test PRIVATE logger_system GTest::gtest_main GTest::gtest)
 else()
-    target_link_libraries(logger_otlp_test PRIVATE LoggerSystem gtest_main gtest)
+    target_link_libraries(logger_otlp_test PRIVATE logger_system gtest_main gtest)
 endif()
 
 # Link OpenTelemetry if available
@@ -248,9 +248,9 @@ set_target_properties(logger_otlp_test PROPERTIES
 add_executable(logger_encrypted_writer_test encrypted_writer_test.cpp)
 
 if(TARGET GTest::gtest_main)
-    target_link_libraries(logger_encrypted_writer_test PRIVATE LoggerSystem GTest::gtest_main GTest::gtest)
+    target_link_libraries(logger_encrypted_writer_test PRIVATE logger_system GTest::gtest_main GTest::gtest)
 else()
-    target_link_libraries(logger_encrypted_writer_test PRIVATE LoggerSystem gtest_main gtest)
+    target_link_libraries(logger_encrypted_writer_test PRIVATE logger_system gtest_main gtest)
 endif()
 
 # Link OpenSSL if available
@@ -287,11 +287,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/executor_integration_test.cpp")
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_executor_integration_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_executor_integration_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -309,9 +309,9 @@ endif()
 add_executable(logger_structured_logging_test structured_logging_test.cpp)
 
 if(TARGET GTest::gtest_main)
-    target_link_libraries(logger_structured_logging_test PRIVATE LoggerSystem GTest::gtest_main GTest::gtest)
+    target_link_libraries(logger_structured_logging_test PRIVATE logger_system GTest::gtest_main GTest::gtest)
 else()
-    target_link_libraries(logger_structured_logging_test PRIVATE LoggerSystem gtest_main gtest)
+    target_link_libraries(logger_structured_logging_test PRIVATE logger_system gtest_main gtest)
 endif()
 
 add_test(NAME logger_structured_logging_test COMMAND logger_structured_logging_test)
@@ -325,9 +325,9 @@ message(STATUS "Structured logging tests: Added")
 add_executable(logger_realtime_analyzer_test realtime_analyzer_test.cpp)
 
 if(TARGET GTest::gtest_main)
-    target_link_libraries(logger_realtime_analyzer_test PRIVATE LoggerSystem GTest::gtest_main GTest::gtest)
+    target_link_libraries(logger_realtime_analyzer_test PRIVATE logger_system GTest::gtest_main GTest::gtest)
 else()
-    target_link_libraries(logger_realtime_analyzer_test PRIVATE LoggerSystem gtest_main gtest)
+    target_link_libraries(logger_realtime_analyzer_test PRIVATE logger_system gtest_main gtest)
 endif()
 
 add_test(NAME logger_realtime_analyzer_test COMMAND logger_realtime_analyzer_test)
@@ -345,15 +345,15 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/filtered_writer_test.cp
 
     if(TARGET GTest::gtest_main AND TARGET GTest::gmock)
         target_link_libraries(logger_filtered_writer_test
-            PRIVATE LoggerSystem GTest::gtest_main GTest::gmock
+            PRIVATE logger_system GTest::gtest_main GTest::gmock
         )
     elseif(TARGET GTest::gtest_main)
         target_link_libraries(logger_filtered_writer_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_filtered_writer_test
-            PRIVATE LoggerSystem gtest_main gmock
+            PRIVATE logger_system gtest_main gmock
         )
     endif()
 
@@ -375,11 +375,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/decorator_writer_base_t
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_decorator_writer_base_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_decorator_writer_base_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -401,11 +401,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/buffered_writer_test.cp
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_buffered_writer_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_buffered_writer_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -427,15 +427,15 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/formatted_writer_test.c
 
     if(TARGET GTest::gtest_main AND TARGET GTest::gmock)
         target_link_libraries(logger_formatted_writer_test
-            PRIVATE LoggerSystem GTest::gtest_main GTest::gmock
+            PRIVATE logger_system GTest::gtest_main GTest::gmock
         )
     elseif(TARGET GTest::gtest_main)
         target_link_libraries(logger_formatted_writer_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_formatted_writer_test
-            PRIVATE LoggerSystem gtest_main gmock
+            PRIVATE logger_system gtest_main gmock
         )
     endif()
 
@@ -530,11 +530,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/core_test/unified_log_context_test.c
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_unified_log_context_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_unified_log_context_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -556,11 +556,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/core_test/scoped_context_guard_test.
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_scoped_context_guard_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_scoped_context_guard_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -582,11 +582,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/interfaces_test/log_entry_test.cpp")
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_log_entry_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_log_entry_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -608,11 +608,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/writer_builder_test.cpp
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_writer_builder_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_writer_builder_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -634,11 +634,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/batch_writer_test.cpp")
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_batch_writer_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_batch_writer_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -660,11 +660,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/thread_safe_writer_test
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_thread_safe_writer_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_thread_safe_writer_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -686,11 +686,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/server_test/log_server_test.cpp")
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_log_server_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_log_server_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -712,11 +712,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/analysis_test/log_analyzer_test.cpp"
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_log_analyzer_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_log_analyzer_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -738,11 +738,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/rotating_file_writer_te
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_rotating_file_writer_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_rotating_file_writer_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -784,11 +784,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/security_test/signal_manager_test.cp
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_signal_manager_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_signal_manager_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -810,11 +810,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/queued_writer_base_test
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_queued_writer_base_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_queued_writer_base_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -836,11 +836,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/encrypted_writer_extend
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_encrypted_writer_extended_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_encrypted_writer_extended_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -877,11 +877,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/network_writer_test.cpp
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_network_writer_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_network_writer_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -910,11 +910,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/di_test/di_container_test.cpp")
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(di_container_test
-            PRIVATE LoggerSystem GTest::gtest_main Threads::Threads
+            PRIVATE logger_system GTest::gtest_main Threads::Threads
         )
     else()
         target_link_libraries(di_container_test
-            PRIVATE LoggerSystem gtest_main Threads::Threads
+            PRIVATE logger_system gtest_main Threads::Threads
         )
     endif()
 
@@ -944,11 +944,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/security_test/path_validator_test.cp
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_path_validator_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_path_validator_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -970,11 +970,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/core_test/error_codes_test.cpp")
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_error_codes_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_error_codes_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -996,11 +996,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/writer_category_test.cp
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_writer_category_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_writer_category_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -1022,11 +1022,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/utils_test/string_utils_test.cpp")
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_string_utils_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_string_utils_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -1048,11 +1048,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/utils_test/time_utils_test.cpp")
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_time_utils_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_time_utils_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -1074,11 +1074,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/utils_test/file_utils_test.cpp")
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_file_utils_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_file_utils_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -1100,11 +1100,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/formatters_test/formatters_test.cpp"
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_formatters_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_formatters_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 
@@ -1126,11 +1126,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/filters_test/filters_test.cpp")
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_filters_test
-            PRIVATE LoggerSystem GTest::gtest_main
+            PRIVATE logger_system GTest::gtest_main
         )
     else()
         target_link_libraries(logger_filters_test
-            PRIVATE LoggerSystem gtest_main
+            PRIVATE logger_system gtest_main
         )
     endif()
 

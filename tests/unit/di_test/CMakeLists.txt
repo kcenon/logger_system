@@ -11,9 +11,9 @@ add_executable(di_container_test
 )
 
 # Link with required libraries
-# LoggerSystem provides common_system transitively (PUBLIC link)
+# logger_system provides common_system transitively (PUBLIC link)
 target_link_libraries(di_container_test PRIVATE
-    LoggerSystem
+    logger_system
     GTest::gtest
     GTest::gtest_main
     Threads::Threads

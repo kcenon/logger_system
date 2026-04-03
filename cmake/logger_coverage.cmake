@@ -1,4 +1,4 @@
-# LoggerCoverage.cmake
+# logger_coverage.cmake
 # Code coverage configuration for Logger System
 #
 # This module provides automatic coverage instrumentation for test targets.
@@ -170,8 +170,8 @@ endfunction()
 macro(logger_enable_coverage_for_all)
     if(LOGGER_ENABLE_COVERAGE)
         # Add coverage to main library
-        if(TARGET LoggerSystem)
-            logger_add_coverage(LoggerSystem)
+        if(TARGET logger_system)
+            logger_add_coverage(logger_system)
         endif()
 
         # Add coverage to dynamically registered test targets

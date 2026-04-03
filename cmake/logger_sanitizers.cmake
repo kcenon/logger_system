@@ -1,4 +1,4 @@
-# LoggerSanitizers.cmake
+# logger_sanitizers.cmake
 # Sanitizer configuration for Logger System
 
 # Sanitizer options
