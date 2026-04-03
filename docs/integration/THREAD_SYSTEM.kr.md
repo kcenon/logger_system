@@ -10,6 +10,8 @@ category: "GUID"
 
 # thread_system 통합 가이드
 
+> **SSOT**: This document is the single source of truth for **thread_system 통합 가이드**.
+
 > **Language:** [English](THREAD_SYSTEM.md) | **한국어**
 
 ## 개요

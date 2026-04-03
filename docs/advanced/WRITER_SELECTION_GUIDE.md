@@ -12,6 +12,8 @@ category: "GUID"
 
 # Writer Selection Guide
 
+> **SSOT**: This document is the single source of truth for **Writer Selection Guide**.
+
 This guide helps you choose the right writer for your logging needs.
 
 ## Quick Selection Flowchart

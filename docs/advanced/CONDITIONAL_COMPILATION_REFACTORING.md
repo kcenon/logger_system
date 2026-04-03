@@ -10,6 +10,8 @@ category: "ARCH"
 
 # Conditional Compilation Refactoring Strategy
 
+> **SSOT**: This document is the single source of truth for **Conditional Compilation Refactoring Strategy**.
+
 **Version**: 0.1.0.0
 **Last Updated**: 2025-11-08
 **Status**: Planning Document

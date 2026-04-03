@@ -12,6 +12,8 @@ category: "API"
 
 # API Reference
 
+> **SSOT**: This document is the single source of truth for **API Reference**.
+
 **Version**: 0.5.0.0
 **Last Updated**: 2026-02-08
 

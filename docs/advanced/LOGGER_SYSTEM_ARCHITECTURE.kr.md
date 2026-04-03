@@ -12,6 +12,8 @@ category: "ARCH"
 
 # 로거 시스템 아키텍처
 
+> **SSOT**: This document is the single source of truth for **로거 시스템 아키텍처**.
+
 **버전**: 3.0.0
 **최종 업데이트**: 2025-12-10
 

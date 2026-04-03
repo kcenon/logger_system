@@ -12,6 +12,8 @@ category: "MIGR"
 
 # 로거 시스템 마이그레이션 가이드
 
+> **SSOT**: This document is the single source of truth for **로거 시스템 마이그레이션 가이드**.
+
 **버전**: 3.0.0
 **최종 업데이트**: 2025-12-14
 

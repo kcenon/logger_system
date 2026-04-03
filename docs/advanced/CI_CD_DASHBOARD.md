@@ -12,6 +12,8 @@ category: "PROJ"
 
 # Logger System CI/CD Dashboard
 
+> **SSOT**: This document is the single source of truth for **Logger System CI/CD Dashboard**.
+
 ## 🚀 Build Status
 
 ### Main Branch

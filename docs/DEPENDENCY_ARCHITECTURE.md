@@ -10,6 +10,8 @@ category: "ARCH"
 
 # Dependency Architecture
 
+> **SSOT**: This document is the single source of truth for **Dependency Architecture**.
+
 ## Overview
 
 logger_system follows a strict unidirectional dependency model using a tiered architecture. The bidirectional dependency risk identified in Issue #252 has been resolved.

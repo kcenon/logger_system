@@ -12,6 +12,8 @@ category: "PROJ"
 
 # Contributing to Logger System
 
+> **SSOT**: This document is the single source of truth for **Contributing to Logger System**.
+
 Thank you for your interest in contributing to the Logger System! This document provides guidelines and information for contributors.
 
 ## Table of Contents

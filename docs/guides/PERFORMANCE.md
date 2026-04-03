@@ -12,6 +12,8 @@ category: "PERF"
 
 # Logger System Performance Guide
 
+> **SSOT**: This document is the single source of truth for **Logger System Performance Guide**.
+
 ## Overview
 
 The Logger System is designed for high-performance logging in multi-threaded applications. This guide covers performance characteristics, benchmarks, and optimization strategies.

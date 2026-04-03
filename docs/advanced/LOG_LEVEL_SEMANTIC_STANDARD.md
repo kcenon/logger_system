@@ -10,6 +10,8 @@ category: "GUID"
 
 # Log Level Semantic Standard
 
+> **SSOT**: This document is the single source of truth for **Log Level Semantic Standard**.
+
 **Date**: 2025-11-08
 **Status**: Approved for Implementation
 **Affects**: logger_system, thread_system

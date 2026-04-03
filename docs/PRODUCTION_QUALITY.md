@@ -10,6 +10,8 @@ category: "QUAL"
 
 # Logger System Production Quality
 
+> **SSOT**: This document is the single source of truth for **Logger System Production Quality**.
+
 **Last Updated**: 2025-11-15
 **Version**: 0.3.0.0
 

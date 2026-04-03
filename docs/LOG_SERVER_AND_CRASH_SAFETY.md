@@ -10,6 +10,8 @@ category: "GUID"
 
 # Log Server and Crash-Safe Logger
 
+> **SSOT**: This document is the single source of truth for **Log Server and Crash-Safe Logger**.
+
 > **Version**: 1.0.0
 > **Last Updated**: 2025-02-09
 > **Status**: Production Ready

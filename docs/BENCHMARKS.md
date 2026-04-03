@@ -10,6 +10,8 @@ category: "PERF"
 
 # Logger System Performance Benchmarks
 
+> **SSOT**: This document is the single source of truth for **Logger System Performance Benchmarks**.
+
 **Last Updated**: 2025-11-15
 **Version**: 0.3.0.0
 

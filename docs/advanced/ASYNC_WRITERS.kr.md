@@ -10,6 +10,8 @@ category: "GUID"
 
 # 비동기 Writer 구현체 가이드
 
+> **SSOT**: This document is the single source of truth for **비동기 Writer 구현체 가이드**.
+
 > **Language:** [English](ASYNC_WRITERS.md) | **한국어**
 
 ## 개요

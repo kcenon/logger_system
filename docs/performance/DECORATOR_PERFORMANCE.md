@@ -10,6 +10,8 @@ category: "PERF"
 
 # Decorator Pattern Performance Characteristics
 
+> **SSOT**: This document is the single source of truth for **Decorator Pattern Performance Characteristics**.
+
 ## Overview
 
 This document describes the performance characteristics of the decorator pattern implementation in the logger system, specifically the `writer_builder` API compared to manual decorator nesting.

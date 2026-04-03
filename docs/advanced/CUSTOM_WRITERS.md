@@ -12,6 +12,8 @@ category: "GUID"
 
 # Creating Custom Writers
 
+> **SSOT**: This document is the single source of truth for **Creating Custom Writers**.
+
 This guide explains how to create custom writers for the Logger System to send logs to various destinations.
 
 ## Overview

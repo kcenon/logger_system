@@ -10,6 +10,8 @@ category: "GUID"
 
 # Asynchronous Writer Implementations Guide
 
+> **SSOT**: This document is the single source of truth for **Asynchronous Writer Implementations Guide**.
+
 > **Language:** **English** | [한국어](ASYNC_WRITERS.kr.md)
 
 ## Overview

@@ -12,6 +12,8 @@ category: "SECU"
 
 # Security Guide
 
+> **SSOT**: This document is the single source of truth for **Security Guide**.
+
 This document outlines the current security posture of the logger_system and provides guidance for secure deployments.
 
 ## Threat Model (Scope)

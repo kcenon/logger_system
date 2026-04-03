@@ -10,6 +10,8 @@ category: "PROJ"
 
 # Changelog - Logger System
 
+> **SSOT**: This document is the single source of truth for **Changelog - Logger System**.
+
 > **Language:** **English** | [한국어](CHANGELOG.kr.md)
 
 All notable changes to the Logger System project will be documented in this file.

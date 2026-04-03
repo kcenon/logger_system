@@ -70,6 +70,8 @@ category: "GUID"
 
 # Critical Log Loss Prevention Guide
 
+> **SSOT**: This document is the single source of truth for **Critical Log Loss Prevention Guide**.
+
 **Version:** 0.1.1.0
 **Author:** kcenon
 **Date:** 2025-01-17

@@ -10,6 +10,8 @@ category: "GUID"
 
 # Logger System Integration Guide
 
+> **SSOT**: This document is the single source of truth for **Logger System Integration Guide**.
+
 ## Overview
 
 This directory contains integration guides for using logger_system with other KCENON systems.
