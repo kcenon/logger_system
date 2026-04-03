@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-MIGR-003"
+doc_title: "로거 시스템 마이그레이션 가이드"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "MIGR"
+---
+
 > **Language:** [English](MIGRATION_GUIDE.md) | **한국어**
 
 # 로거 시스템 마이그레이션 가이드

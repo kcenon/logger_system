@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-019"
+doc_title: "Logger System - Frequently Asked Questions"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 # Logger System - Frequently Asked Questions
 
 > **Version:** 0.1.0

@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-009"
+doc_title: "Critical Logging Quick Start"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 > **Language:** **English** | [한국어](CRITICAL_LOGGING_QUICK_START.kr.md)
 
 ## Table of Contents

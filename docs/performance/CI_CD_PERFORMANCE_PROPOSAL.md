@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-PERF-007"
+doc_title: "CI/CD 성능 지표 자동화 제안서"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "PERF"
+---
+
 # CI/CD 성능 지표 자동화 제안서
 
 **문서 버전:** 1.0

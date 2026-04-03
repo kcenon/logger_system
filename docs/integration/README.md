@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-024"
+doc_title: "Logger System Integration Guide"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 # Logger System Integration Guide
 
 ## Overview

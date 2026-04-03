@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-INTR-002"
+doc_title: "OpenTelemetry Integration Guide"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "INTR"
+---
+
 # OpenTelemetry Integration Guide
 
 > **Version**: 0.3.0.0+

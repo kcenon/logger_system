@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-MIGR-004"
+doc_title: "Logger System Migration Guide"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "MIGR"
+---
+
 > **Language:** **English** | [한국어](MIGRATION_GUIDE.kr.md)
 
 # Logger System Migration Guide

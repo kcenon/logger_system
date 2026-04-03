@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-005"
+doc_title: "Writer Composition and Decorator Guide"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 # Writer Composition and Decorator Guide
 
 **logger_system Writer Framework** (`include/kcenon/logger/writers/`)

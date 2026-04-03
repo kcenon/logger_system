@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-002"
+doc_title: "Log Server and Crash-Safe Logger"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 # Log Server and Crash-Safe Logger
 
 > **Version**: 1.0.0

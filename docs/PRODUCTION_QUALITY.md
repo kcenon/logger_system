@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-QUAL-002"
+doc_title: "Logger System Production Quality"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "QUAL"
+---
+
 # Logger System Production Quality
 
 **Last Updated**: 2025-11-15

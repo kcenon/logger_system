@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-ARCH-007"
+doc_title: "Logger System Architecture"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "ARCH"
+---
+
 > **Language:** **English** | [한국어](LOGGER_SYSTEM_ARCHITECTURE.kr.md)
 
 # Logger System Architecture

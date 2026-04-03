@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-PERF-008"
+doc_title: "Decorator Pattern Performance Characteristics"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "PERF"
+---
+
 # Decorator Pattern Performance Characteristics
 
 ## Overview

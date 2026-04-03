@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-026"
+doc_title: "Async Integration Guide"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 # Async Integration Guide
 
 > **Language:** **English** | [한국어](THREAD_SYSTEM.kr.md)

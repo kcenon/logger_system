@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-MIGR-002"
+doc_title: "Decorator Pattern Writer Migration Guide"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "MIGR"
+---
+
 # Decorator Pattern Writer Migration Guide
 
 **Version**: 0.4.0.0

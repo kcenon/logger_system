@@ -1,3 +1,13 @@
+---
+doc_id: "LOG-GUID-015"
+doc_title: "Writer Hierarchy and Categories"
+doc_version: "1.0.0"
+doc_date: "2026-04-04"
+doc_status: "Released"
+project: "logger_system"
+category: "GUID"
+---
+
 > **Language:** **English** | [한국어](WRITER_HIERARCHY.kr.md)
 
 # Writer Hierarchy and Categories
