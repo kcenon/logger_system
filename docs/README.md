@@ -73,7 +73,7 @@ Total documents: **71**
 | 52 | LOG-INTR-002 | OpenTelemetry Integration Guide | [OPENTELEMETRY.md](./guides/OPENTELEMETRY.md) | Released |
 | 53 | LOG-QUAL-001 | Logger System 프로덕션 품질 | [PRODUCTION_QUALITY.kr.md](./PRODUCTION_QUALITY.kr.md) | Released |
 | 54 | LOG-QUAL-002 | Logger System Production Quality | [PRODUCTION_QUALITY.md](./PRODUCTION_QUALITY.md) | Released |
-| 55 | LOG-QUAL-002 | Feature-Test-Module Traceability Matrix | [TRACEABILITY.md](./TRACEABILITY.md) | Released |
+| 55 | LOG-QUAL-004 | Feature-Test-Module Traceability Matrix | [TRACEABILITY.md](./TRACEABILITY.md) | Released |
 | 56 | LOG-QUAL-003 | Testing Guide | [TESTING_GUIDE.md](./contributing/TESTING_GUIDE.md) | Released |
 | 57 | LOG-SECU-001 | Security Module Guide | [SECURITY_GUIDE.md](./SECURITY_GUIDE.md) | Released |
 | 58 | LOG-SECU-002 | 보안 가이드 | [SECURITY.kr.md](./guides/SECURITY.kr.md) | Released |
@@ -186,7 +186,7 @@ Total documents: **71**
 |--------|-------|----------|--------|
 | LOG-QUAL-001 | Logger System 프로덕션 품질 | [PRODUCTION_QUALITY.kr.md](./PRODUCTION_QUALITY.kr.md) | Released |
 | LOG-QUAL-002 | Logger System Production Quality | [PRODUCTION_QUALITY.md](./PRODUCTION_QUALITY.md) | Released |
-| LOG-QUAL-002 | Feature-Test-Module Traceability Matrix | [TRACEABILITY.md](./TRACEABILITY.md) | Released |
+| LOG-QUAL-004 | Feature-Test-Module Traceability Matrix | [TRACEABILITY.md](./TRACEABILITY.md) | Released |
 | LOG-QUAL-003 | Testing Guide | [TESTING_GUIDE.md](./contributing/TESTING_GUIDE.md) | Released |
 
 ### Security (3)
