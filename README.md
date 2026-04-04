@@ -426,6 +426,27 @@ logger->info_structured()
 
 ## Ecosystem Integration
 
+### Ecosystem Dependency Map
+
+```mermaid
+graph TD
+    A[common_system] --> B[thread_system]
+    A --> C[container_system]
+    B --> D[logger_system]
+    B --> E[monitoring_system]
+    D --> F[database_system]
+    E --> F
+    F --> G[network_system]
+    G --> H[pacs_system]
+
+    style D fill:#f9f,stroke:#333,stroke-width:3px
+```
+
+> **Ecosystem reference**:
+> [common_system](https://github.com/kcenon/common_system) — Tier 0: ILogger interface and Result&lt;T&gt; pattern
+> [thread_system](https://github.com/kcenon/thread_system) — Tier 1: Thread pool for async log processing (optional)
+> [monitoring_system](https://github.com/kcenon/monitoring_system) — Tier 3: Metrics and health monitoring (optional)
+
 Part of a modular C++ ecosystem with clean interface boundaries:
 
 ### Dependencies

@@ -35,7 +35,21 @@ Logger system internal architecture and ecosystem integration overview.
 - [Documentation Structure](#-documentation-structure)
 - [Future Roadmap](#-future-roadmap)
 
-## 🔧 Logger Pipeline Architecture
+## Overview
+
+> **Cross-reference**:
+> [API Reference](./API_REFERENCE.md) — Logger, writer, and builder APIs
+> [Benchmarks](./BENCHMARKS.md) — Throughput and latency measurements
+> [Configuration Strategies](./CONFIGURATION_STRATEGIES.md) — Logger setup patterns
+> [Dependency Architecture](./DEPENDENCY_ARCHITECTURE.md) — Build-time dependency details
+
+> **Ecosystem reference**:
+> [common_system API](https://github.com/kcenon/common_system/blob/main/docs/API_REFERENCE.md) — ILogger interface and Result&lt;T&gt; error handling
+> [thread_system Architecture](https://github.com/kcenon/thread_system/blob/main/docs/ARCHITECTURE.md) — Thread pool used for async logging
+
+---
+
+## Logger Pipeline Architecture
 
 The logger system implements a multi-stage asynchronous pipeline for processing log entries from application code to output destinations.
 
@@ -700,7 +714,32 @@ target_link_libraries(your_app PRIVATE
 - **Metrics Guide**: Available metrics
 - **Custom Collectors**: Extension patterns
 
-## 🔮 Future Roadmap
+## Ecosystem Dependencies
+
+logger_system sits at **Tier 2** in the kcenon ecosystem, providing logging infrastructure.
+
+```mermaid
+graph TD
+    A[common_system] --> B[thread_system]
+    A --> C[container_system]
+    B --> D[logger_system]
+    B --> E[monitoring_system]
+    D --> F[database_system]
+    E --> F
+    F --> G[network_system]
+    G --> H[pacs_system]
+
+    style D fill:#f9f,stroke:#333,stroke-width:3px
+```
+
+> **Ecosystem reference**:
+> [common_system](https://github.com/kcenon/common_system) — Tier 0: ILogger interface, Result&lt;T&gt;
+> [thread_system](https://github.com/kcenon/thread_system) — Tier 1: Thread pool for async I/O (optional)
+> [monitoring_system](https://github.com/kcenon/monitoring_system) — Tier 3: Metrics integration (optional)
+
+---
+
+## Future Roadmap
 
 ### Phase 3.1: Enhancement
 - ✅ common_system with C++20 Concepts
