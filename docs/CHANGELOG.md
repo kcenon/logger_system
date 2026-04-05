@@ -23,6 +23,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [4.1.0] - Unreleased
 
+### Changed - Doxygen Modernization (Issue #581)
+
+- Vendor doxygen-awesome-css theme with dark mode toggle, code copy buttons, and responsive sidebar
+- Add custom HTML header and branding CSS for consistent kcenon ecosystem styling
+- Update Doxyfile: `HTML_COLORSTYLE=LIGHT`, theme stylesheets, JS extensions, `HTML_COPY_CLIPBOARD=NO`
+- Create standardized `mainpage.dox` with 8-section template (overview, features, architecture diagram, quick start, installation, modules, examples, related systems)
+- Add `./examples` to Doxyfile INPUT for `@ref` resolution of example source files
+
 ### Added - Writer Builder for Fluent Decorator Composition (Issue #413, #415, #416)
 
 This release introduces `writer_builder` - a fluent API for composing log writers with decorators, significantly improving usability over manual decorator nesting.
