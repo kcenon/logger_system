@@ -8,6 +8,7 @@
  * @author kcenon
  * @date 2025-01-17
  *
+ * @example critical_logging_example.cpp
  * This example shows how to configure the logger system to prevent
  * loss of critical log messages during crashes or abnormal termination.
  */

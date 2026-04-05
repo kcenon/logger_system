@@ -2,6 +2,18 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file distributed_logging_demo.cpp
+ * @brief Distributed logging with network writers, log server, and real-time analysis
+ *
+ * @example distributed_logging_demo.cpp
+ * This example demonstrates distributed logging capabilities:
+ * - Network writer sending logs over TCP to a central log server
+ * - Multiple client applications logging concurrently
+ * - Real-time log analysis with pattern matching and alert rules
+ * - Log aggregation and per-source statistics
+ */
+
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/logger/writers/network_writer.h>

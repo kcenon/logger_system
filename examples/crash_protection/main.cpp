@@ -5,7 +5,8 @@
 /**
  * @file main.cpp
  * @brief Logger crash protection demonstration
- * 
+ *
+ * @example crash_protection/main.cpp
  * This example demonstrates comprehensive crash protection mechanisms
  * for logging systems including emergency logging, log file recovery,
  * automatic backups, and signal-safe logging operations.

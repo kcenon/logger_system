@@ -2,6 +2,20 @@
 // Copyright (c) 2024, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file security_demo.cpp
+ * @brief Security-focused logging with sanitization, encryption, and audit trails
+ *
+ * @example security_demo.cpp
+ * This example demonstrates logger security features:
+ * - Log sanitization of credit cards, SSNs, emails, IPs, and API keys
+ * - Security filter that blocks messages containing passwords
+ * - Encrypted log file output
+ * - Audit trail logging for compliance (GDPR, PCI, HIPAA)
+ * - Intrusion detection pattern logging
+ * - Security metrics monitoring
+ */
+
 #include <kcenon/logger/core/logger.h>
 // #include <kcenon/logger/security/log_sanitizer.h>  // TODO: Not implemented yet
 // #include <kcenon/logger/structured/structured_logger.h>  // TODO: Not implemented yet

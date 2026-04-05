@@ -6,6 +6,7 @@
  * @file monitoring_integration_example.cpp
  * @brief Advanced monitoring integration example for Phase 4
  *
+ * @example monitoring_integration_example.cpp
  * Demonstrates integration between logger_system and monitoring_system
  * using only common_system interfaces (no circular dependencies).
  */

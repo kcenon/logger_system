@@ -6,6 +6,7 @@
  * @file advanced_features_demo.cpp
  * @brief Demonstrates advanced logging features including filtering and writers
  *
+ * @example advanced_features_demo.cpp
  * This example showcases:
  * - Level-based filtering
  * - Regex-based filtering
