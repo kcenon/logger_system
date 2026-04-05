@@ -7,6 +7,7 @@
  * @brief Example demonstrating the new composite writer architecture
  * @since 1.3.0 (Sprint 5-6)
  *
+ * @example composite_writer_example.cpp
  * This example shows how to use the new SRP-compliant architecture:
  * - Formatters handle formatting only
  * - Sinks handle I/O only

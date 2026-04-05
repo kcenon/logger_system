@@ -6,6 +6,7 @@
  * @file custom_writer_example.cpp
  * @brief Example demonstrating how to create custom writers using thread_safe_writer
  *
+ * @example custom_writer_example.cpp
  * This example shows:
  * 1. How to inherit from thread_safe_writer for automatic thread-safety
  * 2. Implementing write_impl() and flush_impl() methods

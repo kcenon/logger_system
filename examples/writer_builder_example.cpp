@@ -8,6 +8,7 @@
  * @author kcenon
  * @since 4.1.0
  *
+ * @example writer_builder_example.cpp
  * This example shows how to use the writer_builder class to compose
  * log writers using the Decorator pattern. The builder provides a fluent
  * API that makes it easy to chain multiple decorators together.

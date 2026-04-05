@@ -6,6 +6,7 @@
  * @file adapter_pattern_poc.cpp
  * @brief Proof-of-concept for adapter pattern refactoring
  *
+ * @example adapter_pattern_poc.cpp
  * This file demonstrates how the adapter pattern would replace
  * conditional compilation in logger_system. This is NOT production code,
  * but a conceptual example to validate the approach.

@@ -2,6 +2,18 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file metrics_demo.cpp
+ * @brief Logger performance metrics collection and multi-threaded throughput test
+ *
+ * @example metrics_demo.cpp
+ * This example demonstrates logger metrics and diagnostics:
+ * - Enabling runtime metrics collection (messages logged, dropped, latency)
+ * - Multi-threaded log generation for throughput measurement
+ * - Retrieving and displaying performance statistics
+ * - Queue utilization and writer error tracking
+ */
+
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/logger/interfaces/logger_types.h>
