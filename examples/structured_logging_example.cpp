@@ -6,6 +6,7 @@
  * @file structured_logging_example.cpp
  * @brief Demonstrates structured logging features introduced in Phase 3.0
  *
+ * @example structured_logging_example.cpp
  * This example covers:
  * - Basic structured logging with key-value fields
  * - Context propagation (trace ID, correlation ID)

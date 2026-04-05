@@ -2,6 +2,19 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file basic_usage.cpp
+ * @brief Basic logger usage examples covering core logging functionality
+ *
+ * @example basic_usage.cpp
+ * This example demonstrates fundamental logger_system features:
+ * - Creating a logger and attaching a console writer
+ * - Logging at every severity level (trace through critical)
+ * - Multi-threaded logging with a shared async logger
+ * - Log-level filtering to control output verbosity
+ * - Synchronous vs asynchronous performance comparison
+ */
+
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/writers/console_writer.h>
 #include <kcenon/common/interfaces/logger_interface.h>

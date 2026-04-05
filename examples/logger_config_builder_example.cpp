@@ -2,6 +2,18 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file logger_config_builder_example.cpp
+ * @brief Logger configuration builder usage with preset profiles and validation
+ *
+ * @example logger_config_builder_example.cpp
+ * This example demonstrates the logger_config_builder fluent API:
+ * - Production, debug, and high-performance preset profiles
+ * - Custom configuration from scratch with fine-grained options
+ * - Remote/network logging configuration
+ * - Built-in validation that rejects invalid settings
+ */
+
 #include <kcenon/logger/core/logger_config_builder.h>
 #include <iostream>
 

@@ -6,6 +6,7 @@
  * @file di_pattern_example.cpp
  * @brief Dependency Injection pattern example for logger_system Phase 4
  *
+ * @example di_pattern_example.cpp
  * This example demonstrates the Dependency Injection (DI) pattern with
  * common_system interfaces for loose coupling between logger and monitor systems.
  */

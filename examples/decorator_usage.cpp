@@ -8,6 +8,7 @@
  * @author kcenon
  * @since 4.1.0
  *
+ * @example decorator_usage.cpp
  * This example demonstrates the complete decorator pattern functionality
  * in logger_system, including:
  * - All available decorators (async, buffered, encrypted, thread_safe, filtered)
