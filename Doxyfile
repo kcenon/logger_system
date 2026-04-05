@@ -23,7 +23,7 @@ OPTIMIZE_OUTPUT_JAVA   = NO
 OPTIMIZE_FOR_FORTRAN   = NO
 OPTIMIZE_OUTPUT_VHDL   = NO
 MARKDOWN_SUPPORT       = YES
-USE_MDFILE_AS_MAINPAGE = README.md
+USE_MDFILE_AS_MAINPAGE =
 INLINE_SOURCES         = YES
 CREATE_SUBDIRS         = NO
 SOURCE_BROWSER         = YES
@@ -86,7 +86,8 @@ COLS_IN_ALPHA_INDEX    = 5
 INPUT                  = README.md ARCHITECTURE.md SECURITY.md \
                          include/kcenon/logger \
                          src \
-                         docs
+                         docs \
+                         ./examples
 FILE_PATTERNS          = *.c \
                          *.cc \
                          *.cxx \
@@ -96,7 +97,8 @@ FILE_PATTERNS          = *.c \
                          *.hh \
                          *.hpp \
                          *.tpp \
-                         *.md
+                         *.md \
+                         *.dox
 EXCLUDE                = ./build \
                          ./build_test \
                          ./vcpkg \
@@ -109,7 +111,16 @@ EXCLUDE_PATTERNS       = */CMakeFiles/* \
                          */_deps/* \
                          */node_modules/*
 HTML_OUTPUT            = html
-HTML_COLORSTYLE        = AUTO_LIGHT
+HTML_HEADER            = docs/header.html
+HTML_EXTRA_STYLESHEET  = docs/doxygen-awesome-css/doxygen-awesome.css \
+                         docs/doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
+                         docs/custom.css
+HTML_EXTRA_FILES       = docs/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
+                         docs/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+                         docs/doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
+                         docs/doxygen-awesome-css/doxygen-awesome-interactive-toc.js
+HTML_COPY_CLIPBOARD    = NO
+HTML_COLORSTYLE        = LIGHT
 HTML_COLORSTYLE_HUE    = 220
 HTML_COLORSTYLE_SAT    = 100
 HTML_COLORSTYLE_GAMMA  = 80
