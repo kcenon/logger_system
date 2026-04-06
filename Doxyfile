@@ -62,14 +62,14 @@ ALIASES                = "thread_safety=@par Thread Safety:^^" \
 WARNINGS               = YES
 WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
-WARN_NO_PARAMDOC       = NO
+WARN_NO_PARAMDOC       = YES
 WARN_IF_INCOMPLETE_DOC = YES
 WARN_AS_ERROR          = NO
 WARN_FORMAT            = "$file:$line: $text"
 
 # Example settings
 EXAMPLE_PATH           = examples
-EXAMPLE_PATTERNS       = *.cpp *.h
+EXAMPLE_PATTERNS       = *.cpp, *.h
 EXAMPLE_RECURSIVE      = YES
 
 # Source browsing
