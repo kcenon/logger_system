@@ -1,0 +1,209 @@
+/**
+@page faq Frequently Asked Questions
+
+@tableofcontents
+
+This page collects the most common questions external developers ask when
+adopting logger_system. For step-by-step walkthroughs see the
+@ref tutorial_basic_logging, @ref tutorial_decorators, and
+@ref tutorial_production tutorials.
+
+@section faq_rotation 1. How do I configure log rotation?
+
+Use `rotating_file_writer` (or `writer_builder::rotating_file`) and supply the
+maximum segment size and the number of segments to retain. logger_system
+performs size-based rotation only; calendar rotation is best handled by an
+external tool such as `logrotate` running on the host.
+
+@code{.cpp}
+auto rotating = kcenon::logger::writer_builder()
+    .rotating_file("logs/app.log",
+                   100 * 1024 * 1024, // 100 MB per segment
+                   10)                // keep 10 historical files
+    .buffered(4096)
+    .async()
+    .build();
+@endcode
+
+Place log files on a dedicated volume to avoid filling the root partition,
+and compress old segments out-of-band to keep the hot path predictable.
+
+@section faq_async_vs_sync 2. What are the tradeoffs between async and sync logging?
+
+| Aspect | Synchronous | Asynchronous |
+|--------|-------------|--------------|
+| Latency on caller | Bound to writer cost | Sub-microsecond enqueue |
+| Throughput | Limited by writer | 4M+ msg/s with batching |
+| Determinism | Strict ordering on the calling thread | Reordered relative to enqueue |
+| Failure surface | Caller sees the error | Worker may drop or block |
+| Best for | Tests, CLIs, audit pipelines | Services, batch jobs |
+
+Choose @em sync when each `log()` call must be durable on return (auditing,
+crash diagnostics). Choose @em async (the default) for everything else.
+You can combine both: build an async chain for general logging and a sync
+critical chain for audit-grade events.
+
+@section faq_custom_writer 3. How do I add a custom writer?
+
+Implement `kcenon::logger::log_writer_interface`. The required surface is
+small: a `write(const log_entry&)` returning `common::VoidResult`, plus
+`flush()` and `get_name()`. Once implemented, your writer plugs into any
+decorator chain or directly into `logger::add_writer()`.
+
+@code{.cpp}
+class my_writer : public kcenon::logger::log_writer_interface {
+public:
+    kcenon::common::VoidResult write(const kcenon::logger::log_entry& e) override;
+    kcenon::common::VoidResult flush() override;
+    std::string get_name() const override { return "my_writer"; }
+};
+@endcode
+
+See @ref custom_writer_example.cpp for a complete reference implementation.
+
+@section faq_monitoring 4. How does logger_system integrate with monitoring_system?
+
+logger_system is Tier 2 in the kcenon ecosystem; `monitoring_system`
+(Tier 3) consumes it via the `monitoring_backend`. Two integration paths
+are supported:
+
+1. @b Backend @b mode. Build with `LOGGER_USE_MONITORING=ON` and the
+   `monitoring_backend` will publish queue depth, drop counts, and writer
+   latency to monitoring_system's metric registry.
+2. @b Adapter @b mode. Implement `kcenon::common::interfaces::IObserver`
+   and forward `logger::metrics()` snapshots into your existing dashboard
+   pipeline (Prometheus, OTLP, etc.).
+
+The two paths are not mutually exclusive: keep the in-process metrics for
+local debugging and ship aggregated counters via OTLP for fleet-wide
+dashboards.
+
+@section faq_thread_safety 5. Is logger_system thread-safe?
+
+Yes. The `logger` class is fully thread-safe, and all built-in writers are
+either inherently thread-safe (`console_writer`, `file_writer`,
+`rotating_file_writer`, `network_writer`, `otlp_writer`) or wrapped in a
+mutex via `thread_safe_writer` when needed. The async pipeline uses a
+lock-free MPSC queue so contention does not scale with thread count.
+
+If you implement a custom writer, you can either:
+
+- Make it thread-safe internally, or
+- Wrap it with `writer_builder::thread_safe()` to inherit a mutex-guarded
+  facade.
+
+@section faq_perf 6. How do I tune logger_system for maximum performance?
+
+In rough order of impact:
+
+1. Use the @em async writer with a large enough queue to absorb your peak
+   burst (typically 32k-256k entries).
+2. Combine `buffered` (4k-16k entries) and `batch` (1k-4k entries) to
+   amortize syscalls.
+3. Filter early. Drop noisy levels at the logger (`set_level`) instead of
+   relying on a downstream filter.
+4. Prefer `log_structured()` over `format()`-style messages on the hot path;
+   it avoids constructing and copying intermediate strings.
+5. Build with `LOGGER_USE_THREAD_SYSTEM=ON` if you already have a tuned
+   thread pool to share.
+6. Pin the worker thread to a non-critical core if your platform allows it.
+
+@section faq_otlp 7. How do I set up OpenTelemetry (OTLP) export?
+
+Build with `LOGGER_ENABLE_OTLP=ON` and link `opentelemetry-cpp` (>= 1.14).
+Construct an `otlp_endpoint`, point it at your collector, and add the
+`otlp_writer` to your logger:
+
+@code{.cpp}
+otlp::otlp_endpoint endpoint;
+endpoint.url      = "http://otel-collector:4318/v1/logs";
+endpoint.protocol = otlp::otlp_protocol::http_protobuf;
+endpoint.headers["x-tenant"] = "checkout";
+
+auto otlp = writer_builder()
+    .otlp(endpoint)
+    .buffered(1024)
+    .async(16384)
+    .build();
+@endcode
+
+For high availability, run a sidecar collector (Vector, OTel Collector,
+Fluent Bit) on each host so transient network issues do not back up the
+in-process queue.
+
+@section faq_decorator_order 8. Is decorator order important, and what is the recommended order?
+
+Yes, ordering changes both correctness and performance. From outermost (the
+caller-facing wrapper) to innermost (the core writer), the recommended order
+is:
+
+1. `async_writer`
+2. `thread_safe_writer` (only when wrapping a non-thread-safe core)
+3. `buffered_writer` / `batch_writer`
+4. `encrypted_writer`
+5. `filtered_writer`
+6. `formatted_writer`
+7. core writer (`file_writer`, `console_writer`, etc.)
+
+Putting `async_writer` inside `buffered_writer` defeats async (the buffer
+flushes on the calling thread). Putting `encrypted_writer` outside the
+buffer wastes CPU because each entry is encrypted individually. See
+@ref tutorial_decorators for a worked example.
+
+@section faq_field_conventions 9. What naming conventions should I use for structured fields?
+
+Adopt a stable, lowercase, snake_case schema and reuse the same key names
+across services. The kcenon convention follows ECS-inspired families:
+
+| Family | Examples |
+|--------|----------|
+| Identity | `user_id`, `tenant_id`, `session_id` |
+| Network  | `source_ip`, `dest_ip`, `port`, `protocol` |
+| Tracing  | `trace_id`, `span_id`, `parent_span_id` |
+| Performance | `duration_ms`, `latency_us`, `bytes_in`, `bytes_out` |
+| Result   | `status_code`, `outcome`, `error_code`, `error_message` |
+| Resource | `service_name`, `service_version`, `host`, `region` |
+
+Stick to scalars (`int`, `double`, `bool`, `string`) on the hot path; nested
+objects force the formatter to do extra work. If you need hierarchical data,
+flatten it into dotted keys (`request.size_bytes`).
+
+@section faq_security 10. How do I encrypt log files or protect sensitive data?
+
+Build with `LOGGER_USE_ENCRYPTION=ON` (the default) to enable the
+`encrypted_writer` and `secure_key_storage`. Generate a 32-byte AES key and
+chain `encrypted` after `buffered` so each cipher block carries enough data
+to be efficient:
+
+@code{.cpp}
+#include <kcenon/logger/security/secure_key_storage.h>
+
+auto key = security::secure_key_storage::generate_key(32).value();
+
+auto secure = writer_builder()
+    .file("audit.log.enc")
+    .encrypted(std::move(key))
+    .buffered(2048)
+    .async()
+    .build();
+@endcode
+
+Additional hardening:
+
+- Store the AES key in a hardware-backed keystore or KMS, not in source.
+- Rotate keys periodically; logger_system supports key rotation via the
+  secure key storage API.
+- Combine encryption with @em redaction in your formatter to scrub PII before
+  it ever reaches the bytes-on-disk layer.
+- Restrict log file permissions to the service user only (`chmod 600`).
+
+@section faq_more More Questions?
+
+- Read the relevant tutorial first: @ref tutorial_basic_logging,
+  @ref tutorial_decorators, or @ref tutorial_production.
+- Browse the @ref examples in `examples/` for runnable, idiomatic snippets.
+- Open a discussion or issue at
+  https://github.com/kcenon/logger_system/issues if your scenario is not
+  covered here.
+
+*/

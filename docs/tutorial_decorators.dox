@@ -1,0 +1,211 @@
+/**
+@page tutorial_decorators Tutorial: Decorator Composition
+
+@tableofcontents
+
+logger_system uses the @em Decorator pattern to layer cross-cutting concerns
+(filtering, buffering, encryption, asynchrony) on top of a small set of core
+writers. This tutorial explains how the decorators interact, what order to
+apply them in, and how to plug in your own.
+
+@section deco_concept Conceptual Model
+
+A "writer chain" is a single `log_writer_interface*` whose `write()` call
+invokes an inner writer, optionally transforming the entry along the way.
+
+@dot
+digraph chain {
+    rankdir=LR;
+    node [shape=box, style="filled,rounded", fontname="Helvetica", fontsize=11];
+    Logger [label="logger", fillcolor="#e8f0fe"];
+    Async  [label="async_writer", fillcolor="#fef7e0"];
+    Buf    [label="buffered_writer", fillcolor="#fef7e0"];
+    Enc    [label="encrypted_writer", fillcolor="#fef7e0"];
+    Filt   [label="filtered_writer", fillcolor="#fef7e0"];
+    File   [label="file_writer (core)", fillcolor="#e6f4ea"];
+    Logger -> Async -> Buf -> Enc -> Filt -> File;
+}
+@enddot
+
+Each layer is a `decorator_writer_base` subclass that owns a
+`std::unique_ptr<log_writer_interface>` and forwards `write()` after applying
+its concern. The chain is built from the @em outside @em in: when you write
+`writer_builder().file("a.log").filtered(f).encrypted(k).buffered(500).async()`
+the file writer ends up at the @em bottom of the chain and `async_writer`
+becomes the outermost wrapper.
+
+@section deco_ordering Ordering Rules
+
+The order in which decorators run matters. Following the recommended order
+yields predictable performance and security guarantees:
+
+| Position (outermost first) | Decorator | Why |
+|----------------------------|-----------|-----|
+| 1 | `async_writer` | Off-loads I/O to a worker thread; should be the first thing the calling thread sees so it returns immediately. |
+| 2 | `thread_safe_writer` | If you need an explicit mutex around a non-thread-safe inner writer, place it just inside the async layer. (Most core writers are already thread-safe.) |
+| 3 | `buffered_writer` / `batch_writer` | Aggregates entries to amortize syscalls. Must be inside the async layer or the worker thread will fight the buffer. |
+| 4 | `encrypted_writer` | Operates on the bytes that will be persisted, so it should run after buffering (more data = better cipher block utilization) but before any post-processing. |
+| 5 | `filtered_writer` | Drops entries based on level/content. Cheap, can sit anywhere, but placing it close to the core writer avoids paying for filtering on suppressed entries when an outer transformation is expensive. |
+| 6 | `formatted_writer` | Converts the structured entry to its on-wire representation. Must be the layer immediately above the core writer if you want bytes-on-disk control. |
+| 7 (core) | `console_writer`, `file_writer`, `rotating_file_writer`, `network_writer`, `otlp_writer`, `composite_writer` | The leaf that performs the real I/O. |
+
+@warning Putting `async_writer` @em inside `buffered_writer` is almost always
+wrong: the buffer will be flushed by the calling thread instead of the
+background worker, defeating the purpose of asynchrony.
+
+@section deco_builder Using writer_builder
+
+The fluent builder applies decorators in the order you call them, with the
+@em first call producing the innermost (core) writer. This means the order in
+your code reads naturally from "what data lives where" outward to "how should
+it be delivered":
+
+@code{.cpp}
+#include <kcenon/logger/builders/writer_builder.h>
+
+using namespace kcenon::logger;
+
+auto chain = writer_builder()
+    .file("audit.log")          // 1. core writer (innermost)
+    .filtered(make_level_filter(log_level::info))
+    .buffered(1024)             // batch up to 1 KiB worth of entries
+    .async(16384)               // background worker, 16k queue
+    .build();
+@endcode
+
+After `build()`, the resulting `std::unique_ptr<log_writer_interface>` is
+ready to be handed to `logger::add_writer()` or `logger_builder::add_writer()`.
+
+@section deco_examples Three Composition Examples
+
+@subsection deco_example_audit Example 1: Encrypted Audit Trail
+
+Sensitive audit logs that must be encrypted at rest, buffered for throughput,
+and written asynchronously so request handlers are not blocked.
+
+@code{.cpp}
+#include <kcenon/logger/builders/writer_builder.h>
+#include <kcenon/logger/security/secure_key_storage.h>
+
+using namespace kcenon::logger;
+
+auto key = security::secure_key_storage::generate_key(32).value();
+
+auto audit = writer_builder()
+    .file("audit.log.enc")
+    .encrypted(std::move(key))
+    .buffered(2048)
+    .async(32768)
+    .build();
+@endcode
+
+@subsection deco_example_console Example 2: Filtered Console + Persistent File
+
+Send everything to a rotating file, but only show warnings and errors on the
+console so the operator's terminal stays readable.
+
+@code{.cpp}
+#include <kcenon/logger/builders/writer_builder.h>
+#include <kcenon/logger/core/logger_builder.h>
+#include <kcenon/logger/interfaces/log_filter_interface.h>
+
+using namespace kcenon::logger;
+namespace ci = kcenon::common::interfaces;
+
+class min_level_filter : public log_filter_interface {
+public:
+    explicit min_level_filter(ci::log_level lvl) : lvl_(lvl) {}
+    bool should_log(const log_entry& e) const override { return e.level >= lvl_; }
+    std::string get_name() const override { return "min_level_filter"; }
+private:
+    ci::log_level lvl_;
+};
+
+auto console = writer_builder()
+    .console()
+    .filtered(std::make_unique<min_level_filter>(ci::log_level::warning))
+    .build();
+
+auto rotating = writer_builder()
+    .rotating_file("logs/app.log", 50 * 1024 * 1024, 10)
+    .buffered(4096)
+    .async(65536)
+    .build();
+
+auto log = logger_builder()
+    .add_writer(std::move(console))
+    .add_writer(std::move(rotating))
+    .build();
+@endcode
+
+@subsection deco_example_custom Example 3: Custom Decorator
+
+Implementing your own decorator is a matter of inheriting from
+`decorator_writer_base`, forwarding `write()`, and overriding `get_name()`.
+The example below tags every entry with a static service name.
+
+@code{.cpp}
+#include <kcenon/logger/writers/decorator_writer_base.h>
+#include <kcenon/logger/types/log_entry.h>
+
+namespace myapp {
+
+class service_tag_writer : public kcenon::logger::decorator_writer_base {
+public:
+    service_tag_writer(std::unique_ptr<kcenon::logger::log_writer_interface> inner,
+                       std::string service)
+        : decorator_writer_base(std::move(inner))
+        , service_(std::move(service)) {}
+
+    kcenon::common::VoidResult write(const kcenon::logger::log_entry& entry) override {
+        auto tagged = entry;
+        // Prepend the service name to the message body.
+        std::string buf = "[" + service_ + "] ";
+        buf.append(entry.message.data(), entry.message.size());
+        tagged.message = std::string_view(buf);
+        return inner().write(tagged);
+    }
+
+    std::string get_name() const override { return "service_tag_writer"; }
+
+private:
+    std::string service_;
+};
+
+} // namespace myapp
+
+// Usage:
+auto chain = std::make_unique<myapp::service_tag_writer>(
+    kcenon::logger::writer_builder().file("svc.log").buffered(512).async().build(),
+    "checkout-svc");
+@endcode
+
+If your decorator needs configuration plumbing or builder support you can also
+expose it through `writer_builder::with_decorator(std::function<...>)` so the
+fluent chain stays uniform with the built-in layers. See
+@ref decorator_usage.cpp for a complete walkthrough including filtering and
+encryption variants.
+
+@section deco_pitfalls Common Pitfalls
+
+- @b Forgetting @b to @b start: `async_writer` requires `start()` before any
+  `write()` call. `logger::start()` propagates to writers added through
+  `add_writer()`. If you build a chain manually, call
+  `dynamic_cast<async_writer*>(chain.get())->start()`.
+- @b Holding @b references @b past @b stop(): once `stop()` returns the worker
+  thread is gone. Subsequent `write()` calls return an error result.
+- @b Mixing @b sync @b and @b async @b in @b one @b chain: only one
+  `async_writer` per chain is supported. Wrap the async layer with another
+  decorator if you need post-processing on the worker thread.
+- @b Filter @b cost: filters are evaluated for every entry. Keep them branch-free
+  and avoid heap allocations on the hot path.
+
+@section deco_next Next Steps
+
+- @ref tutorial_basic_logging - revisit the fundamentals if anything in this
+  page felt advanced.
+- @ref tutorial_production - production hardening and observability.
+- @ref faq - clarifications on async tradeoffs and ordering.
+- @ref troubleshooting - what to do when a decorator chain misbehaves.
+
+*/

@@ -1,0 +1,189 @@
+/**
+@page troubleshooting Troubleshooting Guide
+
+@tableofcontents
+
+This guide enumerates the most common runtime problems people hit when
+adopting logger_system, the symptoms to look for, and the recommended fixes.
+For configuration questions consult @ref faq; for end-to-end walkthroughs
+see the tutorials linked from the project main page.
+
+@section ts_lost_messages 1. Lost log messages
+
+@subsection ts_lost_symptoms Symptoms
+
+- Entries that you expect to appear in the file or console output are
+  missing.
+- Drop counters reported by `logger::metrics()` are non-zero.
+- Async queue depth is at or near capacity in monitoring dashboards.
+
+@subsection ts_lost_causes Causes
+
+- The async queue overflowed and entries were dropped under back-pressure.
+- The process exited without calling `logger::stop()` (or the destructor
+  was skipped because of `std::abort` / `_exit`).
+- A filter is silently rejecting the entry (custom filters that mutate
+  state can be subtle).
+- The wrong logger instance was used (multiple loggers, mismatched writer).
+
+@subsection ts_lost_fix Fix
+
+1. Always call `logger::stop()` during shutdown. It flushes the queue and
+   joins the worker thread. Wrap your service entry point in an RAII guard
+   if your shutdown path is non-trivial.
+2. Increase the async queue size if drops occur during normal load:
+   @code{.cpp}
+   logger_builder().with_queue_size(131072).build();
+   @endcode
+3. Use `critical_writer` for events that must never be lost. It blocks the
+   producer when the queue is full instead of dropping silently.
+4. Inspect filter implementations and add unit tests covering boundary
+   levels.
+5. Enable metrics export and alert on `dropped_total > 0`.
+
+@section ts_file_perm 2. File permission errors
+
+@subsection ts_perm_symptoms Symptoms
+
+- `logger->add_writer()` succeeds but no file appears on disk.
+- `metrics().last_error` reports `permission_denied` or `path_not_found`.
+- The process logs `failed to open file: /var/log/app.log` to stderr.
+
+@subsection ts_perm_causes Causes
+
+- The service user lacks write permission on the target directory.
+- The configured path uses tilde expansion (`~/logs/app.log`) which the
+  file writer does @em not perform.
+- SELinux / AppArmor policies block writes to the chosen directory.
+- The directory does not exist and `create_parents` was not enabled.
+
+@subsection ts_perm_fix Fix
+
+1. Pre-create the log directory at deployment time and `chown` it to the
+   service user. The CMake install rules can do this for you.
+2. Use absolute paths (e.g. `/var/log/myapp/app.log`) instead of relying on
+   the working directory or shell expansion.
+3. Verify the security context with `ls -lZ` (SELinux) or
+   `aa-status` (AppArmor) and add a policy exception for the log
+   directory.
+4. When using `rotating_file_writer`, ensure the rotation root has enough
+   inodes and free space; rotation will fail silently if `rename(2)` cannot
+   complete.
+
+@section ts_queue_overflow 3. Async queue overflow
+
+@subsection ts_overflow_symptoms Symptoms
+
+- `metrics().queue_depth` is consistently near capacity.
+- Latency spikes on the producing thread when the queue is full.
+- `dropped_total` (or the analogous counter for your queue policy) is
+  growing.
+- In sanitizer builds, you see warnings about `try_enqueue` returning false.
+
+@subsection ts_overflow_causes Causes
+
+- Sustained logging rate exceeds writer drain rate (slow disk, slow OTLP
+  collector, network back-pressure).
+- The worker thread is starved by another high-priority thread.
+- A downstream decorator (e.g. `encrypted_writer` with a large key buffer)
+  is the bottleneck.
+
+@subsection ts_overflow_fix Fix
+
+1. Profile the writer chain. Compare per-decorator latency reported by
+   `metrics().writer_latency_ns` to identify the slow stage.
+2. Increase queue capacity to absorb bursts:
+   @code{.cpp}
+   writer_builder().file("app.log").buffered(8192).async(262144).build();
+   @endcode
+3. Add a `batch_writer` between `buffered` and the core writer to amortize
+   syscalls.
+4. Move expensive decorators (encryption, OTLP serialization) onto a
+   dedicated thread by isolating them in their own async sub-chain.
+5. Lower the logging volume by raising `set_level` for noisy modules or
+   adopting per-component loggers.
+6. As a last resort, switch to `critical_writer` for must-have entries and
+   accept blocking back-pressure on the producer.
+
+@section ts_perf 4. Performance degradation under load
+
+@subsection ts_perf_symptoms Symptoms
+
+- Throughput is well below the documented 4M+ msg/s ceiling.
+- CPU utilization is high but `metrics().writes_per_second` is low.
+- Profiler shows `std::format`, `to_string`, or `mutex::lock` near the top.
+
+@subsection ts_perf_causes Causes
+
+- Logging through `format()` allocates strings on the hot path.
+- The chain contains a `thread_safe_writer` wrapping an already-thread-safe
+  core writer, doubling the lock cost.
+- A buffer or batch size that is too small produces excessive syscalls.
+- The async queue is too small, causing repeated back-off and retries.
+- Building in Debug mode (`-O0`) hides decorator inlining.
+
+@subsection ts_perf_fix Fix
+
+1. Use `log_structured()` for hot paths; it avoids constructing intermediate
+   strings.
+2. Remove redundant `thread_safe_writer` layers. All built-in core writers
+   are already thread-safe.
+3. Increase buffer/batch sizes to 4k-16k entries.
+4. Build in Release mode (`-O2 -DNDEBUG`) for benchmarking.
+5. If you use `LOGGER_USE_THREAD_SYSTEM`, confirm the thread pool has
+   enough workers and is not contending with the rest of the application.
+6. Run the bundled benchmarks (`cmake --preset release -DBUILD_BENCHMARKS=ON`
+   then `./build/benchmarks/logger_bench`) on the target hardware to obtain
+   a realistic baseline.
+
+@section ts_decorator_compose 5. Decorator composition issues
+
+@subsection ts_decocomp_symptoms Symptoms
+
+- Compile errors when chaining decorators (`no matching function for call`).
+- Runtime exceptions with messages like "writer chain not started" or
+  "inner writer is null".
+- Encrypted output that decrypts to garbage.
+- Async writers that appear to do nothing.
+
+@subsection ts_decocomp_causes Causes
+
+- Calling `build()` multiple times on the same `writer_builder` instance.
+- Forgetting to call `start()` on a chain that contains an `async_writer`.
+- Wrapping `async_writer` with `buffered_writer` (the buffer flushes on the
+  caller thread, defeating async).
+- Mixing decorators that expect ownership (`std::unique_ptr`) with shared
+  ownership (`std::shared_ptr`).
+- Using a stale key with `encrypted_writer` after key rotation.
+
+@subsection ts_decocomp_fix Fix
+
+1. Construct a fresh `writer_builder` per chain. Builders are single-use.
+2. Call `logger::start()` after `add_writer()` so the propagation reaches
+   every async layer. If you build a chain manually, downcast and call
+   `async_writer::start()` directly.
+3. Stick to the recommended decorator order documented in
+   @ref tutorial_decorators - in particular, async must always be the
+   outermost layer.
+4. Inspect `get_name()` of the root writer to verify the chain matches what
+   you intended:
+   @code{.cpp}
+   std::cout << chain->get_name() << '\n';
+   // expected: async(buffered(encrypted(file(\"audit.log\"))))
+   @endcode
+5. Manage encryption keys through `secure_key_storage` so rotation events
+   propagate atomically; never copy raw key bytes between writer instances.
+
+@section ts_more More Help
+
+If none of the above fits your symptoms:
+
+- Enable verbose internal logging with `logger::enable_self_diagnostics(true)`.
+  This routes logger_system's own warnings to stderr.
+- Reduce your scenario to a minimal repro using one of the
+  @ref examples examples files.
+- File an issue at
+  https://github.com/kcenon/logger_system/issues with the build options,
+  platform, and the minimal repro attached.
+
+*/

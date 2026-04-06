@@ -1,0 +1,225 @@
+/**
+@page tutorial_basic_logging Tutorial: Basic Logging
+
+@tableofcontents
+
+This tutorial walks through the fundamental usage of logger_system, covering
+logger construction, writer attachment, log levels, and structured logging. By
+the end you will be comfortable wiring up a logger that writes to console and
+file destinations.
+
+@section basic_prereq Prerequisites
+
+- C++20 capable compiler (GCC 11+, Clang 14+, MSVC 2022+, Apple Clang 14+)
+- logger_system installed via CMake `FetchContent`, vcpkg, or as a sibling
+  source tree
+- A linked target depending on `kcenon::logger`
+
+The complete runnable source for the patterns shown here lives in
+@ref basic_usage.cpp.
+
+@section basic_step1 Step 1: Create a Logger
+
+The simplest way to obtain a logger is to construct one directly. Pass `true`
+to enable asynchronous mode (the default) or `false` for fully synchronous
+behaviour.
+
+@code{.cpp}
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/common/interfaces/logger_interface.h>
+
+namespace ci = kcenon::common::interfaces;
+using kcenon::logger::logger;
+using kcenon::logger::console_writer;
+using log_level = ci::log_level;
+
+int main() {
+    // Create an asynchronous logger with the default queue size (8192)
+    auto log = std::make_shared<logger>(true);
+
+    // Attach a console writer (writes to stdout/stderr based on level)
+    log->add_writer(std::make_unique<console_writer>());
+
+    // Async loggers must be started before use
+    log->start();
+
+    log->log(log_level::info, std::string("Application started"));
+
+    log->stop(); // flushes and shuts down background workers
+    return 0;
+}
+@endcode
+
+Asynchronous mode is recommended for almost all production scenarios because
+the calling thread enqueues messages and returns quickly. Synchronous mode is
+useful for unit tests or short-lived utilities where determinism is more
+important than throughput.
+
+@section basic_step2 Step 2: Combine Console and File Writers
+
+A typical service writes human-readable output to the console and persists the
+same stream to a file. The recommended way to compose writers is the
+`writer_builder` fluent API:
+
+@code{.cpp}
+#include <kcenon/logger/builders/writer_builder.h>
+#include <kcenon/logger/core/logger_builder.h>
+
+using namespace kcenon::logger;
+
+auto console = writer_builder()
+    .console()
+    .build();
+
+auto file = writer_builder()
+    .file("app.log")
+    .buffered(500)   // batch up to 500 entries before flushing
+    .async(20000)    // 20k-entry queue, background thread
+    .build();
+
+auto log = logger_builder()
+    .add_writer(std::move(console))
+    .add_writer(std::move(file))
+    .build();
+@endcode
+
+The builder takes care of decorator ordering for you and produces a single
+`std::unique_ptr<log_writer_interface>` per writer chain. The resulting
+chains can be passed to either `logger::add_writer()` or
+`logger_builder::add_writer()`.
+
+@section basic_step3 Step 3: Choose a Log Level
+
+logger_system uses the canonical six severity levels defined by
+`kcenon::common::interfaces::log_level`:
+
+| Level | Intended Usage |
+|-------|----------------|
+| `trace` | Per-message tracing for debugging hot paths |
+| `debug` | Diagnostic information useful during development |
+| `info`  | High-level lifecycle and progress events |
+| `warning` | Recoverable problems that deserve attention |
+| `error` | Failed operations that the caller can react to |
+| `critical` | Severe failures requiring immediate intervention |
+
+Set the minimum level on the logger to filter out noisy messages globally:
+
+@code{.cpp}
+log->set_level(log_level::info); // drop trace and debug
+log->log(log_level::trace, std::string("not emitted"));
+log->log(log_level::warning, std::string("emitted"));
+@endcode
+
+@section basic_step4 Step 4: Emit Structured Logs
+
+Free-form text is fine for humans, but structured logs are far easier for
+log processing pipelines (Elasticsearch, Loki, Datadog, etc.) to index. Use
+the structured builder returned by `logger::log_structured()`:
+
+@code{.cpp}
+log->log_structured(log_level::info)
+    .message("User login")
+    .field("user_id", 12345)
+    .field("ip", "203.0.113.42")
+    .field("mfa", true)
+    .field("latency_ms", 42.5)
+    .emit();
+@endcode
+
+Each call returns a builder that supports `field(key, value)` for any of the
+common scalar types (`int`, `double`, `bool`, `std::string`, `std::string_view`).
+Call `emit()` exactly once per record. The example
+@ref structured_logging_example.cpp covers JSON and Logfmt formatters as well
+as thread-local context propagation.
+
+@section basic_examples Three Complete Examples
+
+@subsection basic_example_minimal Example 1: Hello, Logger
+
+@code{.cpp}
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/common/interfaces/logger_interface.h>
+
+int main() {
+    using namespace kcenon::logger;
+    namespace ci = kcenon::common::interfaces;
+
+    auto log = std::make_shared<logger>(false); // sync, no start() needed
+    log->add_writer(std::make_unique<console_writer>());
+    log->log(ci::log_level::info, std::string("Hello, logger_system!"));
+    return 0;
+}
+@endcode
+
+@subsection basic_example_file Example 2: Console + Rotating File
+
+@code{.cpp}
+#include <kcenon/logger/builders/writer_builder.h>
+#include <kcenon/logger/core/logger_builder.h>
+
+using namespace kcenon::logger;
+namespace ci = kcenon::common::interfaces;
+
+auto console = writer_builder().console().build();
+auto rotating = writer_builder()
+    .rotating_file("logs/app.log", 10 * 1024 * 1024, 5) // 10 MB x 5 files
+    .buffered(1024)
+    .async(16384)
+    .build();
+
+auto log = logger_builder()
+    .with_async(true)
+    .add_writer(std::move(console))
+    .add_writer(std::move(rotating))
+    .build();
+
+log->log(ci::log_level::info, std::string("Service ready on port 8080"));
+log->log(ci::log_level::warning, std::string("Cache miss for key user:12345"));
+log->flush();
+@endcode
+
+@subsection basic_example_struct Example 3: Structured Login Audit
+
+@code{.cpp}
+#include <kcenon/logger/core/logger.h>
+#include <kcenon/logger/writers/console_writer.h>
+#include <kcenon/common/interfaces/logger_interface.h>
+
+using namespace kcenon::logger;
+namespace ci = kcenon::common::interfaces;
+
+auto audit = std::make_shared<logger>(true);
+audit->add_writer(std::make_unique<console_writer>());
+audit->start();
+
+audit->log_structured(ci::log_level::info)
+    .message("login_attempt")
+    .field("user_id", 42)
+    .field("result", "success")
+    .field("source_ip", "10.0.0.7")
+    .field("duration_ms", 18.3)
+    .emit();
+
+audit->log_structured(ci::log_level::warning)
+    .message("login_attempt")
+    .field("user_id", 99)
+    .field("result", "invalid_password")
+    .field("source_ip", "10.0.0.9")
+    .emit();
+
+audit->stop();
+@endcode
+
+@section basic_next Next Steps
+
+- @ref tutorial_decorators - learn how decorators compose, in what order, and
+  how to add your own.
+- @ref tutorial_production - production-ready configuration for high
+  throughput, rotation, and OpenTelemetry export.
+- @ref faq - quick answers to common configuration questions.
+- @ref troubleshooting - resolve lost messages, queue overflow, and similar
+  issues.
+
+*/
