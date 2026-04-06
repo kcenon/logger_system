@@ -136,6 +136,22 @@ digraph architecture {
 }
 @enddot
 
+@section learning Learning Resources
+
+New to logger_system? Start with these guided pages, written for external
+developers integrating the framework for the first time:
+
+| Resource | Audience | Description |
+|----------|----------|-------------|
+| @ref tutorial_basic_logging | Newcomers | Console + file writers, log levels, structured logging. Three runnable snippets. |
+| @ref tutorial_decorators | Intermediate | Decorator pattern, ordering rules, custom decorators. Three composition recipes. |
+| @ref tutorial_production | Advanced | High-throughput, async, rotation, OpenTelemetry export. Three production scenarios. |
+| @ref faq | Reference | Ten of the most common configuration questions, with concise answers. |
+| @ref troubleshooting | Operations | Lost messages, file permissions, queue overflow, performance degradation, decorator pitfalls. |
+
+The @ref examples examples directory contains 16 runnable programs that
+correspond one-to-one with the tutorials.
+
 @section quickstart Quick Start
 
 A minimal example using the logger builder with console and file writers:

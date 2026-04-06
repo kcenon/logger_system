@@ -1,0 +1,254 @@
+/**
+@page tutorial_production Tutorial: Production Configuration
+
+@tableofcontents
+
+This tutorial covers the configuration choices that matter when running
+logger_system in production: high-throughput async pipelines, log rotation
+and retention, OpenTelemetry export, and the operational hygiene that keeps
+your logging stack reliable under load.
+
+@section prod_goals Production Goals
+
+A well-tuned logger should:
+
+- @b Never @b block the request path. Logging must be effectively zero-cost
+  to the calling thread.
+- @b Survive @b spikes. Bursts of 10x normal load should not lose messages.
+- @b Bound @b disk @b usage. Files must rotate and old segments must expire.
+- @b Be @b observable. Operators need to query, correlate, and alert on logs.
+- @b Fail @b loudly @b but @b safely. Backpressure and disk-full conditions
+  should surface metrics, not crash the process.
+
+@section prod_throughput High-Throughput Configuration
+
+logger_system targets 4M+ messages/sec with sub-microsecond enqueue latency.
+Reaching that ceiling requires the right combination of async, buffered, and
+batched writers.
+
+@code{.cpp}
+#include <kcenon/logger/builders/writer_builder.h>
+#include <kcenon/logger/core/logger_builder.h>
+
+using namespace kcenon::logger;
+
+auto bulk = writer_builder()
+    .rotating_file("logs/app.log",
+                   100 * 1024 * 1024, // 100 MB per segment
+                   20)                // keep 20 segments (~2 GB)
+    .buffered(8192)                   // 8k entries before flushing
+    .batch(2048)                      // group syscalls into 2k-entry batches
+    .async(131072)                    // 128k async queue
+    .build();
+
+auto log = logger_builder()
+    .with_async(true)
+    .with_queue_size(131072)
+    .add_writer(std::move(bulk))
+    .build();
+@endcode
+
+Tuning checklist:
+
+- @b Queue @b size. Default is 8k entries; raise it for bursty workloads.
+  Each slot is roughly 256 B, so a 128k queue costs ~32 MB of RSS.
+- @b Buffer @b size. Larger buffers mean fewer syscalls and better throughput,
+  at the cost of higher per-entry latency. 4k-16k is a sensible range for
+  file-backed writers.
+- @b Batch @b size. The batch decorator groups physical writes; pair it with
+  a buffered layer for optimal cache and syscall behaviour.
+- @b Backend. Build with `LOGGER_USE_THREAD_SYSTEM=ON` to share a thread
+  pool across multiple subsystems. The default standalone backend uses
+  `std::jthread` and works without external dependencies.
+
+@section prod_async Async Logging
+
+Asynchronous mode is the default and almost always the right choice. The
+calling thread enqueues an entry into a lock-free MPSC queue; a dedicated
+worker thread drains the queue and forwards entries to the inner chain.
+
+@code{.cpp}
+auto async_chain = writer_builder()
+    .file("audit.log")
+    .buffered(2048)
+    .async(32768)
+    .build();
+@endcode
+
+Operational notes:
+
+- Always call `logger::start()` before logging and `logger::stop()` during
+  shutdown. `stop()` flushes the queue, so do not skip it on the happy path.
+- The worker thread is interruptible (`std::jthread`); calling `stop()` from
+  a signal handler is safe as long as you do not also `delete` the logger
+  from the same handler.
+- If `enqueue` returns an error result the queue is full. Decide between
+  @em drop (best-effort logs) and @em block (critical audit) based on the
+  log type. Use `critical_writer` for the latter.
+
+@section prod_rotation Log Rotation
+
+`rotating_file_writer` rotates by file size and keeps a configurable number
+of historical segments. Pair it with a retention policy that matches your
+storage budget.
+
+@code{.cpp}
+auto rotating = writer_builder()
+    .rotating_file(
+        "logs/app.log",        // base path; segments are app.1.log, app.2.log, ...
+        50 * 1024 * 1024,      // 50 MB per segment
+        14)                    // keep 14 segments (~700 MB)
+    .buffered(4096)
+    .async()
+    .build();
+@endcode
+
+Tips:
+
+- Place log files on a dedicated volume so a rogue logger cannot exhaust
+  the system root partition.
+- Compress rotated segments out-of-band (`logrotate`, `cronolog`, or a
+  systemd timer running `gzip`). logger_system intentionally avoids in-process
+  compression to keep the hot path predictable.
+- Combine size-based rotation with daily timestamped paths
+  (`logs/app-%Y-%m-%d.log`) using a wrapper script if you need calendar-aligned
+  shipping.
+
+@section prod_otlp OpenTelemetry Export
+
+When `LOGGER_ENABLE_OTLP=ON`, the `otlp_writer` exports log records to any
+OTLP-compatible collector via HTTP/Protobuf or gRPC. It batches records,
+retries with exponential backoff, and propagates trace/span IDs that the
+structured logger has placed in the entry's context.
+
+@code{.cpp}
+#include <kcenon/logger/builders/writer_builder.h>
+#include <kcenon/logger/otlp/otlp_context.h>
+
+using namespace kcenon::logger;
+
+otlp::otlp_endpoint endpoint;
+endpoint.url = "https://otel-collector.internal:4318/v1/logs";
+endpoint.protocol = otlp::otlp_protocol::http_protobuf;
+endpoint.headers["x-tenant"] = "checkout";
+
+auto otlp = writer_builder()
+    .otlp(endpoint)
+    .buffered(1024)
+    .async(16384)
+    .build();
+@endcode
+
+Operational guidance:
+
+- Run a local collector (Otel Collector, Vector, Fluent Bit) on the same host
+  to absorb network hiccups and batch upstream traffic.
+- Set `service.name` and `service.version` resource attributes via the
+  `otlp_context` so logs join distributed traces correctly.
+- Combine OTLP with a local file writer in a `composite_writer` so you keep a
+  durable copy when the collector is unreachable.
+
+@section prod_examples Three Production Examples
+
+@subsection prod_example_web Example 1: Stateless Web Service
+
+Console for human operators, rotating file for forensic analysis, OTLP for
+SRE dashboards.
+
+@code{.cpp}
+auto console = writer_builder().console().build();
+
+auto rotating = writer_builder()
+    .rotating_file("logs/web.log", 100 * 1024 * 1024, 10)
+    .buffered(4096)
+    .async(32768)
+    .build();
+
+auto otlp = writer_builder()
+    .otlp({.url = "http://localhost:4318/v1/logs",
+           .protocol = otlp::otlp_protocol::http_protobuf})
+    .buffered(1024)
+    .async(16384)
+    .build();
+
+auto log = logger_builder()
+    .add_writer(std::move(console))
+    .add_writer(std::move(rotating))
+    .add_writer(std::move(otlp))
+    .build();
+@endcode
+
+@subsection prod_example_audit Example 2: Compliance / Audit Pipeline
+
+Encrypted at rest, durable on flush, never lossy.
+
+@code{.cpp}
+#include <kcenon/logger/security/secure_key_storage.h>
+
+auto key = security::secure_key_storage::generate_key(32).value();
+
+auto audit = writer_builder()
+    .file("logs/audit.log.enc")
+    .encrypted(std::move(key))
+    .buffered(1024)
+    .critical()             // wait-free, blocking enqueue when full
+    .build();
+
+auto log = logger_builder()
+    .with_async(false)      // sync to guarantee durability per call
+    .add_writer(std::move(audit))
+    .build();
+@endcode
+
+@subsection prod_example_batch Example 3: Batch Job with Bulk Throughput
+
+A nightly ETL job that processes millions of records and needs maximum
+throughput. Keep the console for the operator, dump everything to a high-
+throughput file pipeline.
+
+@code{.cpp}
+auto console = writer_builder().console().build();
+
+auto bulk = writer_builder()
+    .rotating_file("logs/etl.log", 256 * 1024 * 1024, 5)
+    .buffered(16384)
+    .batch(4096)
+    .async(262144)        // 256k async queue
+    .build();
+
+auto log = logger_builder()
+    .with_async(true)
+    .with_queue_size(262144)
+    .add_writer(std::move(console))
+    .add_writer(std::move(bulk))
+    .build();
+
+log->start();
+run_etl(*log);
+log->stop();              // flushes ~256k entries on shutdown
+@endcode
+
+@section prod_metrics Metrics and Self-Observability
+
+Build with the monitoring backend (`LOGGER_USE_MONITORING=ON`) or attach the
+metrics collector exposed by `logger::metrics()` to gain visibility into:
+
+- Queue depth and high-water mark
+- Drop counts (per queue and per filter)
+- Bytes written, syscalls issued, retries triggered
+- Per-writer latency histograms
+
+Export those counters to your monitoring system (Prometheus, OpenTelemetry,
+or `monitoring_system`) and alert on `dropped_total > 0` and
+`queue_high_water > 0.8 * capacity`.
+
+@section prod_next Next Steps
+
+- @ref tutorial_basic_logging - re-read if any of the prerequisites feel
+  unfamiliar.
+- @ref tutorial_decorators - deep dive on the decorator chain semantics.
+- @ref faq - quick references for tuning and integration questions.
+- @ref troubleshooting - field manual for the most common production
+  incidents.
+
+*/
