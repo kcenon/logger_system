@@ -657,6 +657,10 @@ if(INSTALL_TARGETS)
     endif()
 endif()
 
+# common_system is a mandatory dependency; ensure the config template
+# substitutes @BUILD_WITH_COMMON_SYSTEM@ correctly.
+set(BUILD_WITH_COMMON_SYSTEM ON CACHE BOOL "Build with common_system integration")
+
 configure_package_config_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/logger_system-config.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/logger_system-config.cmake
@@ -669,14 +673,12 @@ write_basic_package_version_file(
     COMPATIBILITY SameMajorVersion
 )
 
-# Install adapter headers if BUILD_WITH_COMMON_SYSTEM is enabled
-if(BUILD_WITH_COMMON_SYSTEM)
-    install(FILES
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/kcenon/logger/adapters/common_logger_adapter.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/kcenon/logger/adapters
-        COMPONENT Development
-    )
-endif()
+# Install adapter headers (common_system is always required)
+install(FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/kcenon/logger/adapters/common_logger_adapter.h
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/kcenon/logger/adapters
+    COMPONENT Development
+)
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/logger_system-config.cmake
