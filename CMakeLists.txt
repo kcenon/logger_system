@@ -661,6 +661,32 @@ endif()
 # substitutes @BUILD_WITH_COMMON_SYSTEM@ correctly.
 set(BUILD_WITH_COMMON_SYSTEM ON CACHE BOOL "Build with common_system integration")
 
+# Ensure all @VAR@ references in the config template resolve to explicit
+# values.  The variables originate from option()/set(CACHE) calls in
+# logger_features.cmake and this file.  Forwarding them as normal (non-cache)
+# variables here guarantees configure_package_config_file() never substitutes
+# an empty string, regardless of cache evaluation order.
+#
+# Feature flags
+set(LOGGER_USE_DI                  "${LOGGER_USE_DI}")
+set(LOGGER_USE_MONITORING          "${LOGGER_USE_MONITORING}")
+set(LOGGER_USE_EXTERNAL_DI         "${LOGGER_USE_EXTERNAL_DI}")
+set(LOGGER_FORCE_LIGHTWEIGHT       "${LOGGER_FORCE_LIGHTWEIGHT}")
+set(LOGGER_ENABLE_CRASH_HANDLER    "${LOGGER_ENABLE_CRASH_HANDLER}")
+set(LOGGER_ENABLE_STRUCTURED_LOGGING "${LOGGER_ENABLE_STRUCTURED_LOGGING}")
+set(LOGGER_USE_LOCK_FREE_QUEUE     "${LOGGER_USE_LOCK_FREE_QUEUE}")
+set(LOGGER_ENABLE_NETWORK_WRITER   "${LOGGER_ENABLE_NETWORK_WRITER}")
+set(LOGGER_ENABLE_FILE_ROTATION    "${LOGGER_ENABLE_FILE_ROTATION}")
+set(LOGGER_ENABLE_ASYNC            "${LOGGER_ENABLE_ASYNC}")
+set(LOGGER_USE_COMPRESSION         "${LOGGER_USE_COMPRESSION}")
+set(LOGGER_USE_ENCRYPTION          "${LOGGER_USE_ENCRYPTION}")
+set(LOGGER_USE_THREAD_SYSTEM       "${LOGGER_USE_THREAD_SYSTEM}")
+# Performance settings
+set(LOGGER_DEFAULT_BUFFER_SIZE     "${LOGGER_DEFAULT_BUFFER_SIZE}")
+set(LOGGER_DEFAULT_BATCH_SIZE      "${LOGGER_DEFAULT_BATCH_SIZE}")
+set(LOGGER_DEFAULT_QUEUE_SIZE      "${LOGGER_DEFAULT_QUEUE_SIZE}")
+set(LOGGER_MAX_WRITERS             "${LOGGER_MAX_WRITERS}")
+
 configure_package_config_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/logger_system-config.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/logger_system-config.cmake
