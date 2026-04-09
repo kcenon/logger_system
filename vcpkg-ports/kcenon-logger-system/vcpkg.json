@@ -1,7 +1,7 @@
 {
   "name": "kcenon-logger-system",
   "version-semver": "0.1.3",
-  "port-version": 4,
+  "port-version": 7,
   "description": "High-performance C++20 async logging framework with 4.34M msg/sec throughput, 148ns latency, and modular architecture",
   "homepage": "https://github.com/kcenon/logger_system",
   "license": "BSD-3-Clause",
