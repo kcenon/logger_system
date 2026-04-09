@@ -633,6 +633,11 @@ if(INSTALL_TARGETS)
             RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
             INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         )
+
+        export(EXPORT logger_system-targets
+            FILE "${CMAKE_CURRENT_BINARY_DIR}/logger_system-targets.cmake"
+            NAMESPACE logger_system::
+        )
     endif()
 endif()
 
@@ -647,7 +652,20 @@ if(INSTALL_TARGETS)
         # its internal sub-targets (thread_base, etc.) are not in any export set.
         # Skip install(EXPORT) to avoid CMake errors. Consumers building from source
         # already have both logger_system and thread_system available.
-        message(STATUS "Logger System: Skipping install(EXPORT) — local thread_system linked (not IMPORTED)")
+        set(_LOGGER_NON_IMPORTED_DEPS "")
+        foreach(_ts_candidate ${thread_system_TARGET} ThreadSystem thread_system)
+            if(TARGET ${_ts_candidate})
+                get_target_property(_imp ${_ts_candidate} IMPORTED)
+                if(NOT _imp)
+                    list(APPEND _LOGGER_NON_IMPORTED_DEPS "${_ts_candidate}")
+                endif()
+            endif()
+        endforeach()
+        message(STATUS
+            "logger_system: install(EXPORT) skipped — non-IMPORTED deps: "
+            "${_LOGGER_NON_IMPORTED_DEPS}. "
+            "Headers and library are installed. "
+            "Subdirectory consumers: link to 'logger_system' target directly.")
     else()
         install(EXPORT logger_system-targets
             FILE logger_system-targets.cmake
