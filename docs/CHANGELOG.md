@@ -126,7 +126,7 @@ The following legacy writer patterns are **deprecated** and will be removed in v
 
 #### Migration Support
 
-- See [Deprecation Timeline and Legacy Patterns](guides/DECORATOR_MIGRATION.md#deprecation-timeline-and-legacy-patterns) for detailed migration scenarios
+- See [Deprecation Timeline and Legacy Patterns](guides/DECORATOR_MIGRATION.md) for detailed migration scenarios
 - 6+ common migration patterns documented with before/after code
 - Full backward compatibility maintained in v4.x series
 

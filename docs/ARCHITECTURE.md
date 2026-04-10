@@ -21,19 +21,19 @@ Logger system internal architecture and ecosystem integration overview.
 
 ## Table of Contents
 
-- [Logger Pipeline Architecture](#-logger-pipeline-architecture)
-- [Writer Architecture](#-writer-architecture)
-- [OTLP & Observability Pipeline](#-otlp--observability-pipeline)
-- [Sampling & Analysis Pipeline](#-sampling--analysis-pipeline)
-- [Ecosystem Overview](#-ecosystem-overview)
-- [Project Roles & Responsibilities](#-project-roles--responsibilities)
-- [Dependency Flow & Interface Contracts](#-dependency-flow--interface-contracts)
-- [Integration Patterns](#-integration-patterns)
-- [Performance Characteristics](#-performance-characteristics)
-- [Evolution: Monolithic → Modular](#-evolution-monolithic--modular)
-- [Getting Started](#-getting-started)
-- [Documentation Structure](#-documentation-structure)
-- [Future Roadmap](#-future-roadmap)
+- [Logger Pipeline Architecture](#logger-pipeline-architecture)
+- [Writer Architecture](#writer-architecture)
+- [OTLP & Observability Pipeline](#otlp--observability-pipeline)
+- [Sampling & Analysis Pipeline](#sampling--analysis-pipeline)
+- [Ecosystem Overview](#ecosystem-overview)
+- [Project Roles & Responsibilities](#project-roles--responsibilities)
+- [Dependency Flow & Interface Contracts](#dependency-flow--interface-contracts)
+- [Integration Patterns](#integration-patterns)
+- [Performance Characteristics](#performance-characteristics)
+- [Evolution: Monolithic → Modular → Standalone](#evolution-monolithic--modular--standalone)
+- [Getting Started](#getting-started)
+- [Documentation Structure](#documentation-structure)
+- [Future Roadmap](#future-roadmap)
 
 ## Overview
 
