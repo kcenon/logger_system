@@ -36,7 +36,6 @@
 #include <cstring>
 #include <functional>
 #include <iomanip>
-#include <iostream>
 #include <sstream>
 #include <thread>
 
@@ -335,61 +334,48 @@ bool network_writer::connect() {
         return true;
     }
 
-    // Create socket
+    // Resolve hostname using getaddrinfo (thread-safe, IPv4/IPv6)
     int sock_type = (protocol_ == protocol_type::tcp) ? SOCK_STREAM : SOCK_DGRAM;
-    socket_fd_ = socket(AF_INET, sock_type, 0);
-    if (socket_fd_ < 0) {
-        std::cerr << "Failed to create socket: " << strerror(errno) << std::endl;
+
+    struct addrinfo hints{}, *result = nullptr;
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_socktype = sock_type;
+
+    auto port_str = std::to_string(port_);
+    int rv = getaddrinfo(host_.c_str(), port_str.c_str(), &hints, &result);
+    if (rv != 0) {
+        std::lock_guard<std::mutex> lock(stats_mutex_);
+        stats_.connection_failures++;
+        stats_.last_error = std::chrono::system_clock::now();
         return false;
     }
 
-    // Resolve hostname
-    struct hostent* server = gethostbyname(host_.c_str());
-    if (!server) {
-        std::cerr << "Failed to resolve host: " << host_ << std::endl;
-        ::close(socket_fd_);
-        socket_fd_ = -1;
-        return false;
-    }
+    // Try each resolved address until one succeeds
+    for (auto* rp = result; rp != nullptr; rp = rp->ai_next) {
+        socket_fd_ = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
+        if (socket_fd_ < 0) {
+            continue;
+        }
 
-    // Setup server address
-    struct sockaddr_in server_addr{};
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(port_);
-    std::memcpy(&server_addr.sin_addr.s_addr, server->h_addr, server->h_length);
-
-    // Connect (TCP only)
-    if (protocol_ == protocol_type::tcp) {
-        if (::connect(socket_fd_, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
-            std::cerr << "Failed to connect to " << host_ << ":" << port_
-                     << " - " << strerror(errno) << std::endl;
-            ::close(socket_fd_);
-            socket_fd_ = -1;
+        if (::connect(socket_fd_, rp->ai_addr, static_cast<socklen_t>(rp->ai_addrlen)) == 0) {
+            freeaddrinfo(result);
+            connected_ = true;
 
             std::lock_guard<std::mutex> lock(stats_mutex_);
-            stats_.connection_failures++;
-            stats_.last_error = std::chrono::system_clock::now();
-            return false;
+            stats_.last_connected = std::chrono::system_clock::now();
+            return true;
         }
-    } else {
-        // For UDP, just save the server address
-        if (::connect(socket_fd_, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
-            std::cerr << "Failed to set UDP destination: " << strerror(errno) << std::endl;
-            ::close(socket_fd_);
-            socket_fd_ = -1;
-            return false;
-        }
+
+        ::close(socket_fd_);
+        socket_fd_ = -1;
     }
 
-    connected_ = true;
+    freeaddrinfo(result);
 
     std::lock_guard<std::mutex> lock(stats_mutex_);
-    stats_.last_connected = std::chrono::system_clock::now();
-
-    std::cout << "Connected to " << host_ << ":" << port_
-              << " via " << (protocol_ == protocol_type::tcp ? "TCP" : "UDP") << std::endl;
-
-    return true;
+    stats_.connection_failures++;
+    stats_.last_error = std::chrono::system_clock::now();
+    return false;
 }
 
 void network_writer::disconnect() {
@@ -413,7 +399,6 @@ bool network_writer::send_data(const std::string& data) {
     if (sent < 0) {
         if (protocol_ == protocol_type::tcp) {
             // TCP connection lost
-            std::cerr << "Send failed: " << strerror(errno) << std::endl;
             disconnect();
 
             std::lock_guard<std::mutex> lock(stats_mutex_);
@@ -449,7 +434,6 @@ void network_writer::process_buffer() {
 
 void network_writer::attempt_reconnect() {
     if (!connected_ && running_) {
-        std::cout << "Attempting to reconnect to " << host_ << ":" << port_ << std::endl;
         connect();
     }
 }
