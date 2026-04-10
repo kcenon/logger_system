@@ -1,0 +1,7 @@
+<map id="kcenon::logger::unified_log_context::get" name="kcenon::logger::unified_log_context::get">
+<area shape="rect" id="Node000001" title="Get a context value by key." alt="" coords="240,41,411,81"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1unified__log__context.html#ac3f317cb344b700cd4a4504d56d12616" title="Get a context value as string." alt="" coords="9,5,188,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,48,188,42,189,37,227,43"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#a60efb6d9bfe8667bd4bfe47391d8b9f0" title="Destructor &#45; restores previous context." alt="" coords="5,70,192,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="227,80,192,85,192,80,226,74"/>
+</map>

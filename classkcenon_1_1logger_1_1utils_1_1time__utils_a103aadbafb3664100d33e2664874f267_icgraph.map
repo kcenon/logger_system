@@ -1,0 +1,18 @@
+<map id="kcenon::logger::utils::time_utils::format_iso8601" name="kcenon::logger::utils::time_utils::format_iso8601">
+<area shape="rect" id="Node000001" title="Format timestamp to ISO 8601 / RFC 3339 format with UTC timezone." alt="" coords="867,62,1021,117"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1json__formatter.html#a90ed86614970dfc4c754a9a79992600f" title="Format a log entry to JSON string." alt="" coords="627,5,780,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="852,68,778,48,780,43,854,63"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1logfmt__formatter.html#a0bdcc137401f427f6dcb57adcfbd7550" title="Format a log entry to logfmt string." alt="" coords="619,69,788,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="852,92,788,92,788,87,852,87"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1template__formatter.html#a6484153f3815a4ce22e4754ab25a5e23" title="Resolve a placeholder to its actual value." alt="" coords="588,133,819,173"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="854,116,780,136,778,131,852,111"/>
+<area shape="rect" id="Node000004" href="$structured__logging__example_8cpp.html#ae96b3123ffe562a68fd21ffd71b723fd" title="Demonstrates Logfmt formatter for key=value output." alt="" coords="108,81,307,106"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="605,93,307,95,307,90,605,87"/>
+<area shape="rect" id="Node000005" href="$structured__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,110,60,135"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="119,111,61,121,60,116,118,106"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1template__formatter.html#a0b738b7e7413cfad5778dea556748157" title="Format a log entry using the template." alt="" coords="355,131,540,171"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="574,155,540,154,540,149,574,149"/>
+<area shape="rect" id="Node000008" href="$structured__logging__example_8cpp.html#adec95563fbcce6741a032ea597b63e87" title="Demonstrates template&#45;based custom formatter." alt="" coords="132,131,283,171"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="341,153,283,153,283,148,341,148"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="118,139,60,130,61,124,119,134"/>
+</map>

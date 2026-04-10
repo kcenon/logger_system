@@ -1,0 +1,17 @@
+<map id="kcenon::logger::security::path_validator::safe_join" name="kcenon::logger::security::path_validator::safe_join">
+<area shape="rect" id="Node000001" title="Create a safe path by joining base and relative path." alt="" coords="5,69,196,109"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a85f8e6324909f09be2f1810d710a6225" title=" " alt="" coords="263,5,410,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="174,67,249,46,251,51,176,72"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a490ccdd2eae7f688681a18ba3528db6d" title="Get error message from a VoidResult." alt="" coords="249,69,424,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="196,87,236,87,236,92,196,92"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1security_1_1path__validator.html#a97978ff6f41db48eea65ddea212982cb" title="Validate a file path." alt="" coords="244,133,429,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="176,107,250,127,249,132,174,112"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1security_1_1path__validator.html#a688521feb217e1c135e745ce91b45449" title="Check if a filename is safe (contains only allowed characters)" alt="" coords="477,54,656,109"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="401,131,465,110,467,115,402,136"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="485,133,648,173"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="430,151,472,151,472,156,430,156"/>
+<area shape="rect" id="Node000008" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="487,198,646,223"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="418,171,502,192,501,197,417,176"/>
+<area shape="rect" id="Node000007" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="704,133,871,173"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="649,151,690,151,690,156,649,156"/>
+</map>

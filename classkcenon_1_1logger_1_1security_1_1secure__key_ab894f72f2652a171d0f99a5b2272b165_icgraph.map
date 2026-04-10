@@ -1,0 +1,15 @@
+<map id="kcenon::logger::security::secure_key::data" name="kcenon::logger::security::secure_key::data">
+<area shape="rect" id="Node000001" title="Get const reference to key data." alt="" coords="749,76,928,116"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#a50cef7d2e2926ddf2b09a731a6cb6eb9" title="Calculate HMAC signature." alt="" coords="477,8,698,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="750,75,661,51,663,45,752,70"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1encrypted__writer.html#abefa3dd7fad66099c55c89c807a6e49d" title="Decrypt a single encrypted log entry." alt="" coords="492,76,683,116"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="736,99,683,99,683,93,736,93"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#a8faaa55edf1e628e81868226d3fa76f4" title="Save key to file with secure permissions." alt="" coords="473,140,701,180"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="747,122,667,143,666,137,746,117"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#af6d42db093bd32dbd0ffb06ffca23f7d" title="Verify integrity of an audit log entry." alt="" coords="228,5,425,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="463,29,426,29,426,24,463,24"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1log__decryptor.html#a1db5d66240dcdf7c7fc8cd6d1bd34704" title="Decrypt file with callback for each entry." alt="" coords="253,70,401,125"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="478,99,401,100,401,94,478,94"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1log__decryptor.html#a4e9a67e0515e15f8215cee9d169ec06e" title="Decrypt entire file to output file." alt="" coords="5,77,180,117"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="238,100,180,100,180,95,238,95"/>
+</map>

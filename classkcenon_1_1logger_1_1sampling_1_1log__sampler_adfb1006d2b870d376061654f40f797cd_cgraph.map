@@ -1,0 +1,30 @@
+<map id="kcenon::logger::sampling::log_sampler::should_sample" name="kcenon::logger::sampling::log_sampler::should_sample">
+<area shape="rect" id="Node000001" title="Check if a log entry should be sampled (logged)" alt="" coords="5,259,221,299"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#a2cc8f633d762b3360bfb882f86c68df4" title="Perform adaptive sampling decision." alt="" coords="281,67,511,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,257,182,188,223,149,268,117,281,110,283,115,271,121,226,153,186,192,130,261"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#a0cbfe3209bd8e9bfbf69a7dcc64eb15d" title="Perform random sampling decision." alt="" coords="589,10,812,50"/>
+<area shape="poly" id="edge9_Node000001_Node000003" title=" " alt="" coords="119,258,138,213,168,156,212,98,238,73,268,53,304,35,343,22,423,7,502,3,575,7,575,12,502,8,424,12,344,27,306,40,271,57,242,77,216,102,173,159,143,215,124,260"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#ac89ae24291a3a9c32c0ce0f3a816a199" title="Get the sampling rate for a category." alt="" coords="278,131,514,171"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="140,257,197,218,268,181,289,173,291,178,270,185,200,223,143,261"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#a9074069609e0307a44d7f39f7238fd8d" title="Get the sampling rate based on structured fields." alt="" coords="293,195,499,235"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="202,256,293,235,295,241,203,262"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#aec8d5732db0065da568c3c659acd5e59" title="Perform hash&#45;based sampling decision." alt="" coords="294,259,498,299"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="222,276,280,276,280,282,222,282"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#a5517f454222c71b4ccc0348fcd6d7e98" title="Perform rate limiting sampling decision." alt="" coords="278,323,514,363"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="203,296,295,317,293,323,202,302"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#aa6c6652afaa72a72eb2b0c6032de7aca" title="Check if any field should bypass sampling." alt="" coords="271,387,521,427"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="143,297,200,335,270,373,291,380,289,385,268,377,197,340,140,301"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#aa6bd33ac921c4d73b3bd51562c665f50" title="Check if a level should bypass sampling." alt="" coords="269,451,523,491"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="130,297,186,366,226,405,271,437,283,443,281,448,268,441,223,409,182,370,126,301"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="315,515,477,555"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="125,298,145,341,176,396,218,453,243,479,271,501,302,517,300,522,268,505,240,483,214,456,172,399,140,343,120,300"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="502,64,580,50,581,55,503,70"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#a244524f32755d6b0311b0d9c24301571" title="Update adaptive sampling rate based on current throughput." alt="" coords="571,74,831,114"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="512,87,557,88,557,93,511,92"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#abe9609cf8aa0e25f3a1d593ed4d4aef4" title="Fast xorshift64 PRNG for random sampling." alt="" coords="879,10,1065,50"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="812,27,865,27,865,32,812,32"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#af9da4ea7b3c4ab6f9f5ae0821e067c7b" title="FNV&#45;1a hash for message hashing." alt="" coords="604,259,797,299"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="498,276,590,276,590,282,498,282"/>
+<area shape="rect" id="Node000014" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="619,515,782,555"/>
+<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="477,532,605,532,605,538,477,538"/>
+</map>

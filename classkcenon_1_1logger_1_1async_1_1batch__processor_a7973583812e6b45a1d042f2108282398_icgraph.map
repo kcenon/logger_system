@@ -1,0 +1,11 @@
+<map id="kcenon::logger::async::batch_processor::process_batch" name="kcenon::logger::async::batch_processor::process_batch">
+<area shape="rect" id="Node000001" title="Process current batch." alt="" coords="487,49,724,89"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#ab545e34bc82963e5e7476bbc9403726e" title="Single iteration of processing loop." alt="" coords="244,5,439,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="473,53,439,49,439,43,473,48"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#a00c059999e75e41e615cc7871ef12473" title="Stop the batch processor." alt="" coords="255,85,427,125"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="473,89,428,96,427,90,472,84"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#a3a0f49b88ab539a586b9a45622270547" title="Start the batch processor." alt="" coords="13,13,188,53"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="230,35,188,35,188,30,230,30"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#a21902c9986d22caf8cc1324722c2c0c7" title="Destructor." alt="" coords="5,77,196,132"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="241,107,196,107,196,102,241,102"/>
+</map>

@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['신규_0',['신규',['../md_docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md2057',1,'5. 백엔드 선택 (v3.0 신규)'],['../md_docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md2058',1,'6. C++20 source_location (v3.0 신규)']]],
+  ['신규_20사용자_1',['신규 사용자',['../md_docs_2README_8kr.html#autotoc_md2930',1,'']]]
+];

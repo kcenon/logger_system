@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['마이그레이션_0',['마이그레이션',['../md_docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md232',1,'큐 가득 참 마이그레이션'],['../md_docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md2053',1,'1. 네임스페이스 마이그레이션'],['../md_docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md2054',1,'2. 인터페이스 마이그레이션'],['../md_docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md2055',1,'3. Result 타입 마이그레이션'],['../md_docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md2051',1,'v2.x에서 v3.0으로 마이그레이션'],['../md_docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md2060',1,'v2.x → v3.0 마이그레이션']]],
+  ['마이그레이션_20가이드_1',['마이그레이션 가이드',['../md_docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md2042',1,'로거 시스템 마이그레이션 가이드'],['../md_docs_2advanced_2ASYNC__WRITERS_8kr.html#autotoc_md230',1,'마이그레이션 가이드'],['../md_docs_2CHANGELOG_8kr.html#autotoc_md1191',1,'마이그레이션 가이드'],['../md_docs_2CHANGELOG_8kr.html#autotoc_md1228',1,'마이그레이션 가이드'],['../md_docs_2CHANGELOG_8kr.html#autotoc_md1232',1,'마이그레이션 가이드'],['../md_docs_2CHANGELOG_8kr.html#autotoc_md1237',1,'마이그레이션 가이드'],['../md_docs_2CHANGELOG_8kr.html#autotoc_md1250',1,'마이그레이션 가이드'],['../md_docs_2CHANGELOG_8kr.html#autotoc_md1257',1,'마이그레이션 가이드'],['../md_docs_2CHANGELOG_8kr.html#autotoc_md1278',1,'마이그레이션 가이드'],['../md_docs_2advanced_2STRUCTURE_8kr.html#autotoc_md681',1,'🔄 마이그레이션 가이드']]],
+  ['마이그레이션_20스크립트_20실행_2',['Step 4: 마이그레이션 스크립트 실행',['../md_docs_2advanced_2STRUCTURE_8kr.html#autotoc_md685',1,'']]],
+  ['마이그레이션_20체크리스트_3',['마이그레이션 체크리스트',['../md_docs_2guides_2MIGRATION__GUIDE_8kr.html#autotoc_md2059',1,'']]],
+  ['마이그레이션_20issue_20248_202025_2012_2022_4',['Deprecated common_system API 마이그레이션 (Issue #248) - 2025-12-22',['../md_docs_2CHANGELOG_8kr.html#autotoc_md1230',1,'']]]
+];

@@ -1,0 +1,5 @@
+<map id="kcenon::logger::unified_log_context::keys" name="kcenon::logger::unified_log_context::keys">
+<area shape="rect" id="Node000001" title="Get all keys in the context." alt="" coords="240,13,411,53"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#a60efb6d9bfe8667bd4bfe47391d8b9f0" title="Destructor &#45; restores previous context." alt="" coords="5,5,192,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="227,35,192,35,192,30,227,30"/>
+</map>

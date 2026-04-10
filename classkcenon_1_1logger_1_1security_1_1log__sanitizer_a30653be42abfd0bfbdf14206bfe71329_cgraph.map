@@ -1,0 +1,17 @@
+<map id="kcenon::logger::security::log_sanitizer::add_pattern" name="kcenon::logger::security::log_sanitizer::add_pattern">
+<area shape="rect" id="Node000001" title="Add a built&#45;in pattern for sensitive data detection." alt="" coords="5,249,204,289"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1log__sanitizer.html#a10760bf17e50b9d110750f21214f1459" title=" " alt="" coords="270,5,449,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,247,134,209,165,162,204,112,250,69,256,65,259,69,254,73,208,116,169,165,139,212,118,250"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1log__sanitizer.html#a843ecaf53b3db1b856268e4a3912cb0f" title=" " alt="" coords="265,84,454,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="124,247,179,198,214,171,251,148,261,142,264,147,253,152,217,176,182,202,128,251"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1security_1_1log__sanitizer.html#a8b3f0c5799c37bdb088c87de61259616" title=" " alt="" coords="265,163,454,217"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="169,246,256,219,258,224,171,251"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1security_1_1log__sanitizer.html#a864bf87cd8bb3e48f164790beafda388" title=" " alt="" coords="270,241,449,296"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="204,266,256,266,256,271,204,271"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1security_1_1log__sanitizer.html#aece6f7a7bd964200ea9c38d35b511cda" title=" " alt="" coords="252,320,467,375"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="171,286,258,313,256,318,169,291"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1security_1_1log__sanitizer.html#a8679db0f60148e91eff76663a57f5710" title=" " alt="" coords="263,399,455,453"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="128,287,183,334,253,384,266,390,263,395,251,388,179,339,125,291"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1security_1_1log__sanitizer.html#ac013fdeaf523f1c95e3ec9f1e75e475d" title=" " alt="" coords="270,477,449,532"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="118,288,139,325,169,371,208,420,254,463,261,468,258,472,250,467,204,424,165,374,134,327,114,290"/>
+</map>

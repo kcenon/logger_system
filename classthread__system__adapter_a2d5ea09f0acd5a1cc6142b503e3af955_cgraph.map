@@ -1,0 +1,7 @@
+<map id="thread_system_adapter::external_log" name="thread_system_adapter::external_log">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,181,45"/>
+<area shape="rect" id="Node000002" href="$classlogger__adapter.html#a7fb77b5f89aabea39baa4768fa4750ba" title=" " alt="" coords="229,13,377,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,23,215,23,215,28,181,28"/>
+<area shape="rect" id="Node000003" href="$classlogger__core.html#a54b58981b7394870d1a65442d3f68442" title=" " alt="" coords="425,13,608,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="378,23,412,23,412,28,378,28"/>
+</map>

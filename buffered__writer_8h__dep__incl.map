@@ -1,0 +1,5 @@
+<map id="include/kcenon/logger/writers/buffered_writer.h" name="include/kcenon/logger/writers/buffered_writer.h">
+<area shape="rect" id="Node000001" title="Decorator that provides buffering for wrapped log writers." alt="" coords="5,5,191,45"/>
+<area shape="rect" id="Node000002" href="$buffered__writer_8cpp.html" title="Implementation of buffered_writer decorator." alt="" coords="7,93,189,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,59,101,93,95,93,95,59"/>
+</map>

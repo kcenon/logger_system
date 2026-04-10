@@ -1,0 +1,13 @@
+<map id="kcenon::logger::logger_builder::use_template" name="kcenon::logger::logger_builder::use_template">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,133,176,173"/>
+<area shape="rect" id="Node000002" href="$structkcenon_1_1logger_1_1logger__config.html#afb660326faec59dd44687001bcc0f858" title="Create a debug configuration." alt="" coords="238,5,405,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,131,162,93,223,55,238,48,240,53,225,60,165,97,117,135"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1logger__config.html#a4f15641c4601049328f23af9dfabfa5a" title="Create a default configuration." alt="" coords="237,69,405,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="163,131,235,110,236,116,164,136"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1logger__config.html#a61eefc777c14a9cc76d2cc9df0fdd587" title="Create a high&#45;performance configuration." alt="" coords="224,133,419,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="176,151,210,151,210,156,176,156"/>
+<area shape="rect" id="Node000005" href="$structkcenon_1_1logger_1_1logger__config.html#a277abafef12e2a8ce50f7f06dc58e33a" title="Create a low&#45;latency configuration." alt="" coords="238,197,405,237"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="164,171,236,191,235,196,163,176"/>
+<area shape="rect" id="Node000006" href="$structkcenon_1_1logger_1_1logger__config.html#a30e3d5ac61b3f61fa6673fffebe3cc75" title="Create a production configuration." alt="" coords="238,261,405,301"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="117,171,165,209,225,247,240,254,238,259,223,252,162,214,113,175"/>
+</map>

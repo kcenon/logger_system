@@ -1,0 +1,25 @@
+<map id="kcenon::logger::decorator_writer_base" name="kcenon::logger::decorator_writer_base">
+<area shape="rect" id="Node000001" title="Abstract base class for decorator pattern log writers." alt="" coords="640,253,835,613"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1queued__writer__base.html" title=" " alt="" coords="5,734,187,1109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="627,457,526,484,413,526,355,553,300,585,247,621,201,663,173,697,151,735,146,732,169,694,197,659,244,617,297,580,353,548,411,521,525,479,626,452"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1queued__writer__base.html" title=" " alt="" coords="211,734,392,1109"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="629,489,573,523,513,563,456,610,406,663,382,697,362,735,357,732,378,695,402,660,452,606,510,559,570,518,627,485"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1buffered__writer.html" title="Decorator that buffers log entries before writing to wrapped writer." alt="" coords="416,661,621,1181"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="652,627,636,662,624,689,619,687,631,660,647,624"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1encrypted__writer.html" title="Decorator that encrypts log data before writing." alt="" coords="645,694,829,1149"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="740,627,740,694,735,694,735,627"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1filtered__writer.html" title="Decorator that applies a filter to a wrapped writer." alt="" coords="854,801,1018,1041"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="829,625,844,660,897,800,892,802,839,662,824,627"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1formatted__writer.html" title="Decorator that applies a formatter to a wrapped writer." alt="" coords="1042,801,1225,1041"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="848,496,895,529,944,568,991,612,1033,660,1055,693,1074,728,1104,800,1099,802,1069,730,1050,695,1029,663,988,615,941,572,892,533,845,500"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1queued__writer__base.html" title="Abstract base class for queue&#45;based log writers." alt="" coords="1249,741,1439,1101"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="849,457,942,486,1046,528,1098,554,1149,585,1196,620,1239,660,1269,697,1294,740,1289,742,1265,700,1235,663,1193,624,1146,590,1095,559,1043,533,940,491,847,462"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="546,5,726,205"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="673,218,684,252,679,254,668,219"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1decorator__writer__tag.html" title="Tag interface for decorator writers." alt="" coords="750,65,930,145"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="826,160,796,254,791,252,821,158"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1async__writer.html" title="Asynchronous wrapper for log writers." alt="" coords="13,1229,179,1609"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="99,1122,99,1229,93,1229,93,1122"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1batch__writer.html" title="Batch writer that accumulates log entries and writes them in batches." alt="" coords="207,1249,396,1589"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="304,1122,304,1249,299,1249,299,1122"/>
+</map>

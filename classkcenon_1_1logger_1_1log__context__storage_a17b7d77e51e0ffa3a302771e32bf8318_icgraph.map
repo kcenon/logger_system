@@ -1,0 +1,15 @@
+<map id="kcenon::logger::log_context_storage::set" name="kcenon::logger::log_context_storage::set">
+<area shape="rect" id="Node000001" title="Set a string context field for the current thread." alt="" coords="252,181,415,221"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__context__scope.html#a098055bdae9e989236eef505c75f78a6" title="Construct scope with a logger reference (for logger&#45;level context)" alt="" coords="29,5,180,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="306,172,260,123,202,75,179,62,182,57,206,70,264,119,309,168"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1scoped__context.html#a8e41728528b53ca633ef9c1e76430df6" title="Construct with boolean value." alt="" coords="11,85,199,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="282,176,203,139,171,127,173,122,205,134,284,171"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1scoped__context.html#a41b5f338d2fe2d61feca30ee30aff515" title="Construct with string value." alt="" coords="11,149,199,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="238,190,198,184,199,179,239,185"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1scoped__context.html#ae3fa84e36394f6e61a931c9428b8b1e3" title="Construct with double value." alt="" coords="11,213,199,253"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="239,217,199,222,198,217,238,211"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1scoped__context.html#a012ff671e5d34caf1e375dd7c579fbdf" title="Construct with integer value." alt="" coords="11,277,199,317"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="284,230,205,267,173,279,171,274,203,262,282,225"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1scoped__context.html#a308f484fc8a8f2b485a1a249ca9b19cb" title="Destructor &#45; restores or removes the context field." alt="" coords="5,341,204,381"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="310,233,265,283,236,309,205,331,182,343,179,338,203,326,233,305,261,279,306,230"/>
+</map>

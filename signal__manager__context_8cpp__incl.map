@@ -1,0 +1,15 @@
+<map id="src/core/signal_manager_context.cpp" name="src/core/signal_manager_context.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="116,5,297,45"/>
+<area shape="rect" id="Node000002" href="$signal__manager__context_8h.html" title="Manages signal manager lifecycle and access." alt="" coords="107,93,306,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,46,209,79,204,79,204,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,189,83,214"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="172,136,79,185,76,180,170,131"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="107,189,171,214"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="194,135,158,179,154,176,189,132"/>
+<area shape="rect" id="Node000005" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="195,181,354,221"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="224,132,253,169,249,172,220,135"/>
+<area shape="rect" id="Node000006" href="$signal__manager__interface_8h.html" title="Interface for signal handler management." alt="" coords="378,181,585,221"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="268,131,409,175,407,180,266,136"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="446,269,517,295"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="484,222,484,255,479,255,479,222"/>
+</map>

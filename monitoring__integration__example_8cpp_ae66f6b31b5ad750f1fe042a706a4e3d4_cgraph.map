@@ -1,0 +1,57 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,156,60,181"/>
+<area shape="rect" id="Node000002" href="$monitoring__integration__example_8cpp.html#a69f4c66591da0bf58d437167b4129a90" title="Example 1: Basic monitor integration with logger." alt="" coords="108,127,321,152"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,162,122,152,123,157,61,167"/>
+<area shape="rect" id="Node000016" href="$monitoring__integration__example_8cpp.html#a5367178a2d033e44314686687f84616c" title="Example 2: Multiple loggers with single monitor." alt="" coords="137,62,292,102"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="47,154,74,133,107,113,126,104,128,109,109,118,77,137,51,158"/>
+<area shape="rect" id="Node000017" href="$monitoring__integration__example_8cpp.html#a3795dc3758233d537d4f2094a55beaf0" title="Example 3: Demonstrating IMonitorable interface." alt="" coords="123,177,307,217"/>
+<area shape="poly" id="edge22_Node000001_Node000017" title=" " alt="" coords="60,170,110,178,109,183,60,175"/>
+<area shape="rect" id="Node000018" href="$monitoring__integration__example_8cpp.html#af6e1f246e5f5056cd6eecbb7737c4ecd" title="Example 4: Simulating monitoring_system integration." alt="" coords="129,241,301,281"/>
+<area shape="poly" id="edge30_Node000001_Node000018" title=" " alt="" coords="48,179,75,203,109,226,124,233,121,238,107,231,72,207,45,183"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1logger__builder.html#ac055417d32675b0fee649681e1ded0fa" title=" " alt="" coords="380,234,547,274"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="295,150,323,162,339,177,348,191,356,206,371,220,380,226,377,230,368,224,352,209,343,194,335,180,320,167,293,155"/>
+<area shape="rect" id="Node000008" href="$namespacekcenon_1_1common.html#acb69c22fef863568abb380de9887eca3" title=" " alt="" coords="382,298,545,338"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="303,150,323,163,336,178,344,193,349,224,353,255,359,269,371,284,376,288,372,292,367,288,355,272,348,256,343,225,339,195,332,181,320,167,300,154"/>
+<area shape="rect" id="Node000010" href="$namespacekcenon_1_1common.html#a06859d7ab4ee038bc1929ec7ea9f96b8" title=" " alt="" coords="375,184,551,209"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="271,149,395,178,394,183,270,155"/>
+<area shape="rect" id="Node000012" href="$monitoring__integration__example_8cpp.html#a6f4530120dec07801b687ea4759e9684" title="Print health check result." alt="" coords="391,363,535,388"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="306,150,323,163,341,186,349,210,350,234,348,257,347,280,348,303,355,326,371,348,381,356,378,360,367,352,350,328,343,304,341,280,343,257,345,234,343,211,336,189,319,167,302,154"/>
+<area shape="rect" id="Node000013" href="$monitoring__integration__example_8cpp.html#ae4ba0c461799ca96ebc7669b337031ab" title="Print metrics snapshot in formatted way." alt="" coords="376,5,551,31"/>
+<area shape="poly" id="edge12_Node000002_Node000013" title=" " alt="" coords="296,124,320,112,335,95,343,78,351,59,368,41,379,34,382,39,371,45,355,62,348,80,340,98,323,116,298,129"/>
+<area shape="rect" id="Node000014" href="$classkcenon_1_1logger_1_1logger__builder.html#a75f79c43d9d64fa35e60cc6d7fd6eb38" title=" " alt="" coords="380,55,547,95"/>
+<area shape="poly" id="edge13_Node000002_Node000014" title=" " alt="" coords="270,124,321,111,377,96,378,102,322,117,271,129"/>
+<area shape="rect" id="Node000015" href="$classkcenon_1_1logger_1_1logger__builder.html#a063db59d2c0e3471278f3d6051b77fa9" title="Set monitoring interface (Phase 2.2.4)" alt="" coords="369,119,557,159"/>
+<area shape="poly" id="edge14_Node000002_Node000015" title=" " alt="" coords="321,137,356,137,356,142,321,142"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1logger__config.html#a28b4aedeb6bfa7edfd72d3e0201ded7b" title="Validate the configuration." alt="" coords="613,234,780,274"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="547,251,600,251,600,257,547,257"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="836,206,999,246"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="780,241,822,235,823,241,781,246"/>
+<area shape="rect" id="Node000007" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="838,271,997,296"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="781,262,825,268,824,274,780,268"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="1047,206,1213,246"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="999,223,1033,223,1033,229,999,229"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1common_1_1Result.html#afc2d951c3583a8c410cee2f1ed643051" title=" " alt="" coords="605,298,788,338"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="545,315,591,315,591,321,545,321"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1common_1_1Result.html#ab0f3b10e9fe07b79961b7198223367af" title=" " alt="" coords="605,170,788,210"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="552,191,592,190,592,196,552,197"/>
+<area shape="poly" id="edge16_Node000016_Node000003" title=" " alt="" coords="293,95,323,113,335,127,342,141,348,168,354,195,360,207,371,220,376,224,373,229,367,224,356,210,349,196,343,169,337,143,331,130,320,117,291,100"/>
+<area shape="poly" id="edge17_Node000016_Node000008" title=" " alt="" coords="294,94,323,113,339,135,347,157,348,200,349,243,356,263,371,284,375,288,371,292,367,288,352,266,344,244,343,200,342,158,335,138,319,117,291,98"/>
+<area shape="poly" id="edge18_Node000016_Node000010" title=" " alt="" coords="293,98,323,113,339,128,347,142,356,156,371,169,385,177,382,181,368,174,352,159,343,145,334,131,320,118,291,103"/>
+<area shape="poly" id="edge19_Node000016_Node000013" title=" " alt="" coords="291,60,399,32,401,37,293,65"/>
+<area shape="poly" id="edge20_Node000016_Node000014" title=" " alt="" coords="292,77,366,75,366,81,292,83"/>
+<area shape="poly" id="edge21_Node000016_Node000015" title=" " alt="" coords="293,97,363,113,362,119,292,102"/>
+<area shape="poly" id="edge23_Node000017_Node000003" title=" " alt="" coords="303,214,367,229,366,234,301,219"/>
+<area shape="poly" id="edge24_Node000017_Node000008" title=" " alt="" coords="300,214,323,226,339,241,348,256,356,270,371,284,380,290,377,294,368,288,352,273,343,259,335,244,320,231,298,219"/>
+<area shape="poly" id="edge25_Node000017_Node000010" title=" " alt="" coords="307,194,361,194,361,199,307,199"/>
+<area shape="poly" id="edge26_Node000017_Node000012" title=" " alt="" coords="307,215,323,227,336,242,343,258,348,289,352,319,359,334,371,348,381,355,377,359,368,352,354,337,347,321,342,290,338,260,332,245,320,231,303,219"/>
+<area shape="poly" id="edge27_Node000017_Node000013" title=" " alt="" coords="303,174,320,163,332,148,338,134,342,103,347,72,354,57,367,41,375,35,378,40,371,45,359,59,352,74,348,104,343,135,336,151,323,167,307,179"/>
+<area shape="poly" id="edge28_Node000017_Node000014" title=" " alt="" coords="298,174,320,162,335,149,343,135,352,120,368,105,377,99,380,104,371,109,356,123,348,138,339,152,323,167,300,179"/>
+<area shape="poly" id="edge29_Node000017_Node000015" title=" " alt="" coords="301,174,362,160,364,165,303,179"/>
+<area shape="poly" id="edge31_Node000018_Node000003" title=" " alt="" coords="301,256,366,254,366,259,301,261"/>
+<area shape="poly" id="edge32_Node000018_Node000008" title=" " alt="" coords="302,278,369,294,368,299,300,283"/>
+<area shape="poly" id="edge33_Node000018_Node000010" title=" " alt="" coords="292,238,399,210,401,215,294,243"/>
+<area shape="poly" id="edge34_Node000018_Node000012" title=" " alt="" coords="247,279,303,313,370,348,394,356,393,361,368,352,300,318,244,283"/>
+<area shape="poly" id="edge35_Node000018_Node000013" title=" " alt="" coords="300,242,319,227,335,204,343,182,344,159,342,136,341,112,342,89,350,65,367,42,374,36,377,40,371,45,355,67,348,90,346,112,348,136,349,159,348,183,340,207,323,231,303,246"/>
+<area shape="poly" id="edge36_Node000018_Node000014" title=" " alt="" coords="299,240,320,227,332,212,338,198,343,168,348,137,355,121,367,105,372,101,376,105,371,109,359,124,353,138,348,169,343,200,336,215,323,231,302,245"/>
+<area shape="poly" id="edge37_Node000018_Node000015" title=" " alt="" coords="297,238,320,226,335,213,343,200,352,185,368,171,379,163,382,168,371,175,356,188,348,202,339,217,323,231,300,243"/>
+</map>

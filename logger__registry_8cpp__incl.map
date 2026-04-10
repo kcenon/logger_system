@@ -1,0 +1,16 @@
+<map id="src/core/logger_registry.cpp" name="src/core/logger_registry.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="259,5,459,31"/>
+<area shape="rect" id="Node000002" href="$logger__registry_8h.html" title="Manages logger registration and tracking." alt="" coords="123,79,270,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="337,33,249,75,247,70,335,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="275,174,390,199"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="359,32,347,79,337,160,332,159,342,78,353,30"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="357,86,442,111"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="368,30,390,73,385,75,363,32"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="466,86,530,111"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="381,29,467,77,464,82,378,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,174,68,199"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="163,121,71,170,69,165,160,116"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="228,116,304,164,302,169,225,121"/>
+<area shape="rect" id="Node000005" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="92,167,251,207"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="194,120,183,154,178,153,188,118"/>
+</map>

@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['방지_20가이드_0',['크리티컬 로그 손실 방지 가이드',['../md_docs_2advanced_2CRITICAL__LOG__PREVENTION_8kr.html#autotoc_md365',1,'']]]
+];

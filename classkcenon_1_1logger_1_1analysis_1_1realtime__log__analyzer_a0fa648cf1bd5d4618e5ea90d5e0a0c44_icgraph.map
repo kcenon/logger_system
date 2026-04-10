@@ -1,0 +1,5 @@
+<map id="kcenon::logger::analysis::realtime_log_analyzer::get_log_rate" name="kcenon::logger::analysis::realtime_log_analyzer::get_log_rate">
+<area shape="rect" id="Node000001" title="Get current log rate (logs per minute)" alt="" coords="233,5,413,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a433b10213b6b7125acfb4d128e46ccc1" title=" " alt="" coords="5,5,185,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="219,35,185,35,185,30,219,30"/>
+</map>

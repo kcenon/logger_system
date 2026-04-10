@@ -1,0 +1,55 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,699,60,725"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger__config__builder.html#ab46cc6e3630f775b805c23ce068dc1d8" title="Build the logger_config." alt="" coords="138,33,305,73"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="31,699,30,583,37,398,45,300,59,210,79,135,91,106,106,84,124,69,127,73,110,87,96,109,84,137,64,211,50,301,42,398,36,583,36,699"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1logger__config__builder.html#aff26da24ee27854e6fe16841a108f313" title="Enable/disable color output." alt="" coords="135,98,307,153"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="31,699,33,596,42,436,51,351,64,273,82,208,93,182,106,162,122,148,125,152,110,166,98,185,87,209,69,274,56,352,47,436,38,597,37,699"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a6030a33ccacc8b07ce53757d713c3fd4" title="Enable/disable metrics collection." alt="" coords="135,177,307,231"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="32,699,35,609,47,472,56,400,69,334,85,279,106,241,122,227,125,231,110,244,90,281,74,335,61,401,52,473,41,609,37,699"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a8c17932b88c399351033702784fe9d3d" title="Enable/disable source location in log messages." alt="" coords="135,255,307,310"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="32,699,38,623,51,509,73,396,88,351,106,320,122,306,125,310,110,323,93,353,78,397,56,510,43,623,37,699"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a2ea528a0a2ca373c8517b6149ec0086a" title="Enable/disable timestamp in log messages." alt="" coords="135,334,307,389"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="33,699,41,636,56,547,78,459,91,424,106,400,122,386,125,390,110,403,96,426,83,461,61,548,46,637,38,699"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1logger__config__builder.html#ab32813d268ed9b4d985d6dbbaaf18f4a" title="Set asynchronous logging mode." alt="" coords="125,413,318,453"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="31,699,33,655,43,592,52,557,65,523,83,491,106,463,111,459,115,463,110,467,88,494,70,526,57,559,48,593,39,655,36,699"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1logger__config__builder.html#af0822ec3a5bdcf9d7f16d29c93a92560" title="Set batch size for batch writing." alt="" coords="109,477,333,517"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="33,699,39,665,51,619,73,570,88,547,106,527,112,523,115,527,110,531,92,550,77,572,56,620,44,666,38,700"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a3a3d41ab156fbe4018d58623bc719b9d" title="Set buffer size." alt="" coords="108,541,335,581"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="36,698,60,646,81,617,106,591,114,586,117,590,110,595,85,620,65,649,41,700"/>
+<area shape="rect" id="Node000014" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a6342c480c48231e30ed48e8416f4839e" title="Set flush interval." alt="" coords="128,606,315,661"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="54,697,107,670,122,663,124,668,109,674,57,702"/>
+<area shape="rect" id="Node000015" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a99a0f7adc47432ba71559d88e9bf3131" title="Set log directory." alt="" coords="134,685,309,739"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="60,709,120,709,120,715,60,715"/>
+<area shape="rect" id="Node000016" href="$classkcenon_1_1logger_1_1logger__config__builder.html#ac834a812dc6553069e25d0ca86e66759" title="Set log file prefix." alt="" coords="134,763,309,818"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="57,722,109,748,127,756,125,761,107,753,55,727"/>
+<area shape="rect" id="Node000017" href="$classkcenon_1_1logger_1_1logger__config__builder.html#aab8423cced2fc8b31e3a53671e23c34f" title="Set maximum queue size." alt="" coords="129,842,313,897"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="41,724,66,774,85,802,110,827,119,834,116,838,106,831,81,806,61,777,36,726"/>
+<area shape="rect" id="Node000018" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a523fa794f08d4c31f9962baf45b20963" title="Set network retry count." alt="" coords="117,921,325,975"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="38,725,43,760,55,809,77,861,92,885,110,906,114,910,111,914,106,910,87,888,72,863,50,811,38,761,33,725"/>
+<area shape="rect" id="Node000019" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a6c8dd9ac099021923a17cf7945c340e0" title="Set network timeout." alt="" coords="117,999,325,1054"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="36,725,37,773,46,842,55,880,68,918,86,953,110,985,114,989,110,992,106,988,82,956,63,920,50,882,41,843,32,773,31,725"/>
+<area shape="rect" id="Node000020" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a847e7bbe537973b8bb8c23583b99e7a6" title="Set queue overflow policy." alt="" coords="116,1078,327,1133"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="38,724,45,794,59,896,80,997,94,1037,110,1064,114,1067,110,1071,106,1067,89,1039,75,999,53,897,39,795,32,725"/>
+<area shape="rect" id="Node000021" href="$classkcenon_1_1logger_1_1logger__config__builder.html#aca2af3ad0be676a0c8f8a97adbe26569" title="Set remote logging host." alt="" coords="120,1157,323,1211"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="37,725,42,808,54,933,64,999,76,1059,91,1109,110,1142,113,1146,109,1149,106,1146,87,1111,71,1060,58,1000,49,934,37,808,32,725"/>
+<area shape="rect" id="Node000022" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a65f1bbfcf5012b67d13977dce0880534" title="Use debug configuration as base." alt="" coords="122,1235,321,1290"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="37,725,40,821,50,970,59,1049,72,1121,89,1180,110,1221,114,1225,110,1228,106,1224,84,1182,67,1122,54,1049,44,971,34,821,31,725"/>
+<area shape="rect" id="Node000024" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a9ea942a35479bc12cbec2da3284becf9" title="Use high&#45;performance configuration as base." alt="" coords="128,1314,315,1369"/>
+<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="37,725,37,835,45,1008,54,1098,67,1183,86,1252,97,1279,110,1300,119,1308,115,1312,106,1303,93,1282,81,1254,62,1184,49,1099,40,1008,32,835,31,725"/>
+<area shape="rect" id="Node000026" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a7ad51f7671da83dddb44538c8581e620" title="Use production configuration as base." alt="" coords="108,1393,335,1447"/>
+<area shape="poly" id="edge25_Node000001_Node000026" title=" " alt="" coords="37,725,45,857,60,1066,82,1268,95,1341,110,1380,112,1382,108,1385,106,1383,90,1342,76,1269,54,1066,39,857,32,725"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1logger__config.html#a28b4aedeb6bfa7edfd72d3e0201ded7b" title="Validate the configuration." alt="" coords="397,33,563,73"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="305,51,383,51,383,56,305,56"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="625,5,788,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="563,40,611,34,612,40,564,46"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="627,70,786,95"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="564,61,614,68,614,73,563,67"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="836,5,1003,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="789,23,822,23,822,28,789,28"/>
+<area shape="rect" id="Node000023" href="$structkcenon_1_1logger_1_1logger__config.html#afb660326faec59dd44687001bcc0f858" title="Create a debug configuration." alt="" coords="397,1243,563,1283"/>
+<area shape="poly" id="edge22_Node000022_Node000023" title=" " alt="" coords="321,1260,383,1260,383,1265,321,1265"/>
+<area shape="rect" id="Node000025" href="$structkcenon_1_1logger_1_1logger__config.html#a61eefc777c14a9cc76d2cc9df0fdd587" title="Create a high&#45;performance configuration." alt="" coords="383,1321,577,1361"/>
+<area shape="poly" id="edge24_Node000024_Node000025" title=" " alt="" coords="315,1339,369,1339,369,1344,315,1344"/>
+<area shape="rect" id="Node000027" href="$structkcenon_1_1logger_1_1logger__config.html#a30e3d5ac61b3f61fa6673fffebe3cc75" title="Create a production configuration." alt="" coords="397,1400,563,1440"/>
+<area shape="poly" id="edge26_Node000026_Node000027" title=" " alt="" coords="335,1417,383,1417,383,1423,335,1423"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="kcenon::logger::logfmt_formatter::format" name="kcenon::logger::logfmt_formatter::format">
+<area shape="rect" id="Node000001" title="Format a log entry to logfmt string." alt="" coords="355,5,524,45"/>
+<area shape="rect" id="Node000002" href="$structured__logging__example_8cpp.html#ae96b3123ffe562a68fd21ffd71b723fd" title="Demonstrates Logfmt formatter for key=value output." alt="" coords="108,13,307,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="341,28,307,28,307,23,341,23"/>
+<area shape="rect" id="Node000003" href="$structured__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,13,60,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,28,60,28,60,23,94,23"/>
+</map>

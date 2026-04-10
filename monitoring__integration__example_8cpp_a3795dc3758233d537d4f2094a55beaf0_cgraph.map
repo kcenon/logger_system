@@ -1,0 +1,29 @@
+<map id="example_3_imonitorable_interface" name="example_3_imonitorable_interface">
+<area shape="rect" id="Node000001" title="Example 3: Demonstrating IMonitorable interface." alt="" coords="5,205,189,245"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger__builder.html#ac055417d32675b0fee649681e1ded0fa" title=" " alt="" coords="248,35,415,75"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,203,163,145,198,113,236,84,247,78,250,83,239,89,201,117,167,149,116,207"/>
+<area shape="rect" id="Node000007" href="$namespacekcenon_1_1common.html#acb69c22fef863568abb380de9887eca3" title=" " alt="" coords="250,99,413,139"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="132,203,236,150,257,141,259,146,238,154,135,208"/>
+<area shape="rect" id="Node000009" href="$namespacekcenon_1_1common.html#a06859d7ab4ee038bc1929ec7ea9f96b8" title=" " alt="" coords="243,163,419,189"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="189,203,257,189,258,194,190,209"/>
+<area shape="rect" id="Node000011" href="$monitoring__integration__example_8cpp.html#a6f4530120dec07801b687ea4759e9684" title="Print health check result." alt="" coords="259,213,403,238"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="189,223,245,223,245,228,189,228"/>
+<area shape="rect" id="Node000012" href="$monitoring__integration__example_8cpp.html#ae4ba0c461799ca96ebc7669b337031ab" title="Print metrics snapshot in formatted way." alt="" coords="244,262,419,287"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="190,242,258,257,257,262,189,247"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1logger__builder.html#a75f79c43d9d64fa35e60cc6d7fd6eb38" title=" " alt="" coords="248,312,415,352"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="134,243,238,298,255,305,253,309,236,302,131,248"/>
+<area shape="rect" id="Node000014" href="$classkcenon_1_1logger_1_1logger__builder.html#a063db59d2c0e3471278f3d6051b77fa9" title="Set monitoring interface (Phase 2.2.4)" alt="" coords="237,376,425,416"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="116,244,167,302,201,334,239,362,250,368,247,373,236,366,198,338,163,306,112,247"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1logger__config.html#a28b4aedeb6bfa7edfd72d3e0201ded7b" title="Validate the configuration." alt="" coords="481,35,648,75"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="415,52,468,52,468,57,415,57"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="704,5,867,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="648,41,690,35,691,41,649,46"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="706,70,865,95"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="649,63,693,68,692,74,648,68"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="915,5,1081,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="867,23,901,23,901,28,867,28"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1common_1_1Result.html#afc2d951c3583a8c410cee2f1ed643051" title=" " alt="" coords="473,99,656,139"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="413,116,459,116,459,121,413,121"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1common_1_1Result.html#ab0f3b10e9fe07b79961b7198223367af" title=" " alt="" coords="473,163,656,203"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="420,176,460,177,460,182,420,181"/>
+</map>

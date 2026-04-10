@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['풀_0',['패턴 1: 애플리케이션 전체 공유 풀',['../md_docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md2367',1,'']]],
+  ['풀_20설정_1',['패턴 2: 사용자 정의 풀 설정',['../md_docs_2integration_2THREAD__SYSTEM_8kr.html#autotoc_md2368',1,'']]]
+];

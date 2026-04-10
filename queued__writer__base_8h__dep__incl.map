@@ -1,0 +1,26 @@
+<map id="include/kcenon/logger/writers/queued_writer_base.h" name="include/kcenon/logger/writers/queued_writer_base.h">
+<area shape="rect" id="Node000001" title="Base template for queue&#45;based log writers." alt="" coords="275,5,443,60"/>
+<area shape="rect" id="Node000002" href="$async__writer_8h.html" title="Asynchronous wrapper for log writers." alt="" coords="175,108,345,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="323,71,282,110,278,106,319,68"/>
+<area shape="rect" id="Node000006" href="$batch__writer_8h.html" title="Batch writer that accumulates log entries and writes them in batches." alt="" coords="569,108,735,148"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="455,62,594,105,592,111,454,67"/>
+<area shape="rect" id="Node000003" href="$critical__logging__example_8cpp.html" title="Example demonstrating critical log loss prevention mechanisms." alt="" coords="5,284,195,324"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="163,144,115,164,95,179,78,197,71,218,72,241,80,263,90,283,85,285,75,265,67,242,65,217,74,195,91,175,113,160,161,139"/>
+<area shape="rect" id="Node000004" href="$decorator__usage_8cpp.html" title="Comprehensive decorator pattern usage examples." alt="" coords="88,196,240,236"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="230,159,187,198,183,194,227,155"/>
+<area shape="rect" id="Node000005" href="$writer__builder__example_8cpp.html" title="Demonstrates writer_builder usage patterns." alt="" coords="265,196,445,236"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="293,155,336,194,332,198,289,159"/>
+<area shape="rect" id="Node000007" href="$logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration kcenon." alt="" coords="469,196,635,236"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="621,159,576,198,572,194,618,155"/>
+<area shape="rect" id="Node000011" href="$writer__factory_8h.html" title="Factory for creating log writer instances." alt="" coords="659,196,847,236"/>
+<area shape="poly" id="edge11_Node000006_Node000011" title=" " alt="" coords="687,155,733,194,729,198,683,159"/>
+<area shape="rect" id="Node000012" href="$batch__writer_8cpp.html" title=" " alt="" coords="872,196,1035,236"/>
+<area shape="poly" id="edge12_Node000006_Node000012" title=" " alt="" coords="732,149,888,193,887,199,731,154"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="457,239,456,239,195,288,194,282,456,233,456,233"/>
+<area shape="rect" id="Node000008" href="$custom__writer__example_8cpp.html" title="Example demonstrating how to create custom writers using thread_safe_writer." alt="" coords="267,284,450,324"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="498,244,402,286,400,282,496,239"/>
+<area shape="rect" id="Node000009" href="$di__pattern__example_8cpp.html" title="Dependency Injection pattern example for logger_system Phase 4." alt="" coords="474,284,630,324"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="555,250,555,284,549,284,549,250"/>
+<area shape="rect" id="Node000010" href="$monitoring__integration__example_8cpp.html" title="Advanced monitoring integration example for Phase 4." alt="" coords="654,284,845,324"/>
+<area shape="poly" id="edge10_Node000007_Node000010" title=" " alt="" coords="609,239,707,282,705,286,607,244"/>
+</map>

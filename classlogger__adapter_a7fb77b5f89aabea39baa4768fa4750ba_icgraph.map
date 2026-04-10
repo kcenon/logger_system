@@ -1,0 +1,13 @@
+<map id="logger_adapter::log" name="logger_adapter::log">
+<area shape="rect" id="Node000001" title=" " alt="" coords="244,141,392,166"/>
+<area shape="rect" id="Node000002" href="$classfull__integration__adapter.html#a15caebcd14a19e6826117c970b1a71e1" title=" " alt="" coords="11,5,190,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="292,133,248,96,195,60,169,48,172,43,197,55,252,92,295,129"/>
+<area shape="rect" id="Node000003" href="$classthread__system__adapter.html#a2d5ea09f0acd5a1cc6142b503e3af955" title=" " alt="" coords="13,69,189,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="260,139,169,112,170,107,262,134"/>
+<area shape="rect" id="Node000004" href="$classstandalone__adapter.html#a0b9c5c030e7f03264758d5671f4b068b" title=" " alt="" coords="25,133,176,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="230,156,176,156,176,151,230,151"/>
+<area shape="rect" id="Node000005" href="$classcommon__system__adapter.html#a3d20446d7a64ae550fa63b6b3fa7fcfe" title=" " alt="" coords="5,197,196,237"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="262,173,170,200,169,195,260,167"/>
+<area shape="rect" id="Node000006" href="$classfull__integration__adapter.html#aa854552ffdbe305a6fc1b25e6f3fb272" title=" " alt="" coords="11,261,190,301"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="295,178,252,215,197,252,172,264,169,259,195,247,248,211,292,174"/>
+</map>

@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['handle_5fback_5fpressure_0',['handle_back_pressure',['../classkcenon_1_1logger_1_1async_1_1batch__processor.html#adcfcc34bb49424114cb483755c25ef3e',1,'kcenon::logger::async::batch_processor']]],
+  ['handle_5foverflow_1',['handle_overflow',['../classkcenon_1_1logger_1_1async__writer.html#ae41a12b8e2a110a38f61c2d5cc0f7c27',1,'kcenon::logger::async_writer::handle_overflow()'],['../classkcenon_1_1logger_1_1queued__writer__base.html#a6a6a66b9351c2d3177750bce1ebb0b17',1,'kcenon::logger::queued_writer_base::handle_overflow()']]],
+  ['has_2',['has',['../classkcenon_1_1logger_1_1unified__log__context.html#a5f4cc68fbed3ceba1da5fc5a97fa2cbf',1,'kcenon::logger::unified_log_context']]],
+  ['has_5fany_5fexecutor_5fsupport_3',['has_any_executor_support',['../namespacekcenon_1_1logger_1_1detail.html#a032fcd3469986abe03dadea67a903f03',1,'kcenon::logger::detail']]],
+  ['has_5fcontext_4',['has_context',['../classkcenon_1_1logger_1_1log__context__storage.html#ac03919f6c462887a5d5d5e8ead0595ec',1,'kcenon::logger::log_context_storage::has_context()'],['../classkcenon_1_1logger_1_1otlp_1_1otel__context__storage.html#ac7648c69eb35e4b415869e599828e41f',1,'kcenon::logger::otlp::otel_context_storage::has_context()']]],
+  ['has_5ferror_5',['has_error',['../classkcenon_1_1common_1_1Result.html#a6e368ac346569ef6b6ad6cebf17b216c',1,'kcenon::common::Result::has_error()'],['../classkcenon_1_1common_1_1VoidResult.html#a1c620020286727ac3b25878e63240de4',1,'kcenon::common::VoidResult::has_error()']]],
+  ['has_5fexecutor_5fsupport_6',['has_executor_support',['../namespacekcenon_1_1logger_1_1integration.html#ae4f0fb827fa9e8aeb3d3a4f894db6011',1,'kcenon::logger::integration']]],
+  ['has_5ffilter_7',['has_filter',['../classkcenon_1_1logger_1_1logger.html#a8de6a91d4c55141c4bff1aebd8492dc8',1,'kcenon::logger::logger']]],
+  ['has_5fiexecutor_5finterface_8',['has_iexecutor_interface',['../namespacekcenon_1_1logger_1_1detail.html#a6f722ea777fa7c053c819de73bbeea60',1,'kcenon::logger::detail']]],
+  ['has_5flogger_5ferror_9',['has_logger_error',['../namespacekcenon_1_1logger.html#aabd70e081606d4970bc03dcf216f60bd',1,'kcenon::logger']]],
+  ['has_5frouting_10',['has_routing',['../classkcenon_1_1logger_1_1logger.html#a61fd885fdf1b4fa8207771e2f01abcef',1,'kcenon::logger::logger']]],
+  ['has_5fsampling_11',['has_sampling',['../classkcenon_1_1logger_1_1logger.html#a63008fd30a49e679e82deea0ad565c13',1,'kcenon::logger::logger']]],
+  ['has_5fthread_5fsystem_5fsupport_12',['has_thread_system_support',['../namespacekcenon_1_1logger_1_1integration.html#a1b73dfdf1e3571807217782c25dc42f1',1,'kcenon::logger::integration']]],
+  ['has_5ftype_13',['has_type',['../classkcenon_1_1logger_1_1filter__factory.html#aeb66006ffc9181482a1da0dee384bef2',1,'kcenon::logger::filter_factory::has_type()'],['../classkcenon_1_1logger_1_1formatter__factory.html#ac983abef5644b44f4ea6c1f2d044675b',1,'kcenon::logger::formatter_factory::has_type()'],['../classkcenon_1_1logger_1_1writer__factory.html#ad7cfe972bc2ef9bd373cc620540b1286',1,'kcenon::logger::writer_factory::has_type()']]],
+  ['has_5fvalue_14',['has_value',['../classkcenon_1_1common_1_1Result.html#ab0f3b10e9fe07b79961b7198223367af',1,'kcenon::common::Result::has_value()'],['../classkcenon_1_1common_1_1VoidResult.html#a81bd853765c58f5bd9efdc6c3636bd35',1,'kcenon::common::VoidResult::has_value()'],['../classkcenon_1_1logger_1_1result.html#a78ea160f118f14c44fe7517a255a3b44',1,'kcenon::logger::result::has_value()']]],
+  ['hash_5fbased_15',['hash_based',['../structkcenon_1_1logger_1_1sampling_1_1sampling__config.html#a8658cbbd1c19584a8b7e4cd022b3f39d',1,'kcenon::logger::sampling::sampling_config']]],
+  ['hash_5fsample_16',['hash_sample',['../classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#aec8d5732db0065da568c3c659acd5e59',1,'kcenon::logger::sampling::log_sampler']]],
+  ['health_5fcheck_5fresult_17',['health_check_result',['../classkcenon_1_1logger_1_1health__check__result.html#ad3b46693d00afdf18dcbadb3d772c3b2',1,'kcenon::logger::health_check_result']]],
+  ['health_5fstatus_5fto_5fstring_18',['health_status_to_string',['../namespacekcenon_1_1logger.html#a5179eb048725085f66d1d27cb385f8d9',1,'kcenon::logger']]],
+  ['heavy_5flogging_5ftask_19',['heavy_logging_task',['../main_8cpp.html#a775892bc97b78484c588300394820d11',1,'main.cpp']]],
+  ['high_5fperformance_20',['high_performance',['../structkcenon_1_1logger_1_1logger__config.html#a61eefc777c14a9cc76d2cc9df0fdd587',1,'kcenon::logger::logger_config']]],
+  ['high_5fperformance_5fasync_5fwriter_21',['high_performance_async_writer',['../classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a26fbcba58f47086da356481ec4dff0ef',1,'kcenon::logger::async::high_performance_async_writer']]],
+  ['hybrid_5fwriter_22',['hybrid_writer',['../classkcenon_1_1logger_1_1hybrid__writer.html#abe6f91b8af7a0e0ba7d1bfe05a4e506b',1,'kcenon::logger::hybrid_writer']]]
+];

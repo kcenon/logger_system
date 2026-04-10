@@ -1,0 +1,5 @@
+<map id="kcenon::logger::security::critical_logger_interface" name="kcenon::logger::security::critical_logger_interface">
+<area shape="rect" id="Node000001" title="Interface for loggers that support emergency flushing." alt="" coords="5,5,212,160"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html" title="Main logger implementation providing high&#45;performance logging facilities." alt="" coords="29,208,188,473"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,174,111,208,106,208,106,174"/>
+</map>

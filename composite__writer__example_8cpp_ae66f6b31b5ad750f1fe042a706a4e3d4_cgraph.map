@@ -1,0 +1,26 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,77,60,102"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a14de1c488333c63954596bbedbbd6bc1" title=" " alt="" coords="115,37,277,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,82,101,73,102,79,61,87"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1console__writer.html#ac00806b7b0ba8195369fb38ace2d805c" title="Write a log entry to console." alt="" coords="108,101,284,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="61,92,95,99,94,104,60,97"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger_1_1utils.html#a59dc71d8dd9d4474f7c65d68dbdd0258" title="Stream state verification helper." alt="" coords="339,69,501,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="284,106,325,100,326,105,285,111"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1console__writer.html#ae82706c7a901a6488d242e4788c3470f" title="Format a log entry using the current formatter." alt="" coords="332,133,508,173"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="285,131,319,136,318,141,284,137"/>
+<area shape="rect" id="Node000011" href="$namespacekcenon_1_1logger_1_1utils.html#aafab2237b40cefbc519b3dcdf64fb23d" title="Error handling helper for write operations." alt="" coords="341,5,499,45"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="256,99,283,87,307,71,331,55,345,48,347,53,333,60,309,76,285,92,258,104"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1console__writer.html#a1edbb0406a72ac40abf6fdfc81185cff" title="Get current color output setting." alt="" coords="332,197,508,237"/>
+<area shape="poly" id="edge12_Node000003_Node000012" title=" " alt="" coords="239,139,333,183,350,190,348,195,331,188,236,144"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="556,9,719,49"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="493,67,550,50,552,56,494,72"/>
+<area shape="rect" id="Node000007" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="558,77,717,102"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="501,87,544,87,544,92,501,92"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="767,9,933,49"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="719,27,753,27,753,32,719,32"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="556,133,719,173"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="508,151,543,151,543,156,508,156"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="769,133,931,173"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="719,151,755,151,755,156,719,156"/>
+<area shape="poly" id="edge11_Node000011_Node000005" title=" " alt="" coords="499,24,542,25,542,30,499,29"/>
+</map>
