@@ -439,13 +439,18 @@ bool otlp_writer::export_with_http(const std::vector<log_entry>& batch) {
 
     json << "]}]}]}";
 
-    // For now, just log that we would send this
-    // In production, use libcurl or similar to actually POST
-    // This is a stub implementation when OTLP SDK is not available
-
-    // Return true to indicate "successful" export in stub mode
-    // The JSON is built but not actually sent without an HTTP client
-    return true;
+    // OTLP HTTP transport is not available (LOGGER_HAS_OTLP not defined).
+    // The JSON payload was built but cannot be sent without an HTTP client.
+    // Return false so callers know export did not succeed.
+    static bool warned = false;
+    if (!warned)
+    {
+        std::cerr << "[logger_system] WARNING: OTLP export configured but no HTTP transport "
+                  << "available. Build with LOGGER_ENABLE_OTLP=ON and OpenTelemetry SDK, "
+                  << "or provide an HTTP client library. Log data is NOT being exported.\n";
+        warned = true;
+    }
+    return false;
 }
 
 std::string otlp_writer::escape_json(const std::string& str) {
