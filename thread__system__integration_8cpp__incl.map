@@ -1,0 +1,19 @@
+<map id="src/integration/thread_system_integration.cpp" name="src/integration/thread_system_integration.cpp">
+<area shape="rect" id="Node000001" title="Implementation of optional thread_system integration." alt="" coords="367,5,549,45"/>
+<area shape="rect" id="Node000002" href="$thread__system__integration_8h.html" title="Optional thread_system integration for advanced async processing." alt="" coords="270,93,483,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="442,47,406,85,402,81,438,44"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="507,101,571,126"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="478,44,521,89,517,92,474,47"/>
+<area shape="rect" id="Node000003" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="5,181,164,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="313,136,162,180,161,175,312,131"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="189,189,255,214"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="344,136,256,184,253,180,341,131"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="280,189,367,214"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="367,135,340,178,336,175,363,132"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="391,189,469,214"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="391,132,418,175,413,178,386,135"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="493,189,557,214"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="410,131,495,180,492,184,408,136"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="581,189,639,214"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="436,131,570,179,574,181,572,186,568,184,434,136"/>
+</map>

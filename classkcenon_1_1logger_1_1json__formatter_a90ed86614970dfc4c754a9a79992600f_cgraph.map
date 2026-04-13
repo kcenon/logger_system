@@ -1,0 +1,16 @@
+<map id="kcenon::logger::json_formatter::format" name="kcenon::logger::json_formatter::format">
+<area shape="rect" id="Node000001" title="Format a log entry to JSON string." alt="" coords="5,114,159,154"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1utils_1_1string__utils.html#a5ecacbdb84c45866106a2776da479bc0" title="Escape special characters for JSON." alt="" coords="441,46,632,86"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,112,140,63,171,38,206,20,241,9,277,4,350,7,419,20,477,39,475,44,418,26,349,12,277,10,242,15,208,25,174,43,144,67,100,116"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1utils_1_1time__utils.html#a103aadbafb3664100d33e2664874f267" title="Format timestamp to ISO 8601 / RFC 3339 format with UTC timezone." alt="" coords="223,35,377,89"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="142,112,209,89,210,94,144,117"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1json__formatter.html#a8352e8feb90e455c56c2a7a6ac63a2a2" title="Format a log_value to JSON." alt="" coords="207,114,393,154"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="159,131,193,131,193,137,159,137"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1utils_1_1string__utils.html#a386bd338874eb5237f945415b8e29395" title="Convert log level to human&#45;readable string." alt="" coords="223,179,377,233"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="144,152,210,174,209,179,142,157"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="219,258,381,298"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="103,152,148,198,177,222,208,244,220,250,217,255,205,248,174,227,144,202,99,156"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="370,112,453,87,454,93,371,117"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="455,258,618,298"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="382,275,442,275,442,281,382,281"/>
+</map>

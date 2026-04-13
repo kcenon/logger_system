@@ -1,0 +1,5 @@
+<map id="kcenon::logger::writer_factory::create_rotating_file" name="kcenon::logger::writer_factory::create_rotating_file">
+<area shape="rect" id="Node000001" title="Create a rotating file writer (size&#45;based)" alt="" coords="252,5,460,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1writer__factory.html#a420bcb02c0f3818e22b283682ee75bfb" title="Create a production preset writer." alt="" coords="5,5,204,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,28,204,28,204,23,238,23"/>
+</map>

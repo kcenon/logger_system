@@ -1,0 +1,9 @@
+<map id="full_integration_adapter" name="full_integration_adapter">
+<area shape="rect" id="Node000001" title=" " alt="" coords="205,179,375,324"/>
+<area shape="rect" id="Node000002" href="$classlogger__adapter.html" title=" " alt="" coords="5,5,153,131"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,138,209,177,205,181,160,142"/>
+<area shape="rect" id="Node000003" href="$classexternal__system__interface.html" title=" " alt="" coords="178,15,402,121"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="293,134,293,178,287,178,287,134"/>
+<area shape="rect" id="Node000004" href="$classcommon__system__interface.html" title=" " alt="" coords="426,15,653,121"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="459,131,377,190,374,186,456,127"/>
+</map>

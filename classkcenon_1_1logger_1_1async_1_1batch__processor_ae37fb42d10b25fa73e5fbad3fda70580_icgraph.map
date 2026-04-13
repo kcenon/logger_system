@@ -1,0 +1,15 @@
+<map id="kcenon::logger::async::batch_processor::get_queue_size" name="kcenon::logger::async::batch_processor::get_queue_size">
+<area shape="rect" id="Node000001" title="Get current queue size." alt="" coords="747,84,912,139"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#a808fd88dbf765cde93ce688d97e9aa24" title="Adjust batch size based on performance metrics." alt="" coords="493,5,677,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="733,83,669,63,671,57,734,78"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#adcfcc34bb49424114cb483755c25ef3e" title="Handle back&#45;pressure conditions." alt="" coords="491,84,679,139"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="733,114,679,114,679,109,733,109"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#a36d55cdedeafd7b61c92d3748ea30d59" title="Update processing statistics." alt="" coords="471,163,699,203"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="734,142,699,153,655,166,653,161,698,147,733,137"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#ab545e34bc82963e5e7476bbc9403726e" title="Single iteration of processing loop." alt="" coords="228,84,423,139"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="482,67,417,86,415,81,480,62"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#a3a0f49b88ab539a586b9a45622270547" title="Start the batch processor." alt="" coords="5,91,180,131"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="214,114,180,114,180,109,214,109"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="477,114,423,114,423,109,477,109"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="498,162,422,141,423,136,500,157"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="kcenon::logger::thread_safe_writer" name="kcenon::logger::thread_safe_writer">
+<area shape="rect" id="Node000001" title="Base class providing automatic thread&#45;safety for writer implementations." alt="" coords="101,1056,273,1336"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1base__writer.html" title="Abstract base class for all log output writers." alt="" coords="41,733,192,993"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,1007,160,1055,155,1056,145,1008"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,471,185,671"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,684,110,733,105,733,101,684"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="210,523,383,618"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="270,620,203,728,198,725,265,617"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1log__formatter__interface.html" title="Abstract interface for log message formatters." alt="" coords="195,248,399,408"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="299,409,299,507,294,507,294,409"/>
+<area shape="rect" id="Node000006" href="$structkcenon_1_1logger_1_1format__options.html" title="Configuration options for log formatting." alt="" coords="204,5,389,185"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="299,186,299,231,294,231,294,186"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="216,831,300,896"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="254,897,223,1040,218,1039,249,896"/>
+</map>

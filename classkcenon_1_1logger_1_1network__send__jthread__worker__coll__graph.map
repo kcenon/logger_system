@@ -1,0 +1,14 @@
+<map id="kcenon::logger::network_send_jthread_worker" name="kcenon::logger::network_send_jthread_worker">
+<area shape="rect" id="Node000001" title="Worker thread for sending buffered logs with jthread compatibility." alt="" coords="22,836,206,1025"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html" title="Wrapper for std::jthread or std::thread with manual stop mechanism." alt="" coords="168,493,324,773"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,774,165,822,160,820,181,772"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="159,336,333,431"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="249,431,249,477,243,477,243,431"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1simple__stop__source.html" title="Simple stop source for environments without std::stop_token." alt="" coords="127,133,295,273"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="227,273,237,320,231,321,222,274"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,5,151,71"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="74,71,64,132,59,202,59,635,67,729,85,819,80,820,62,730,54,635,54,202,59,131,69,71"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="106,69,146,119,142,122,102,72"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="357,351,441,416"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="382,418,335,494,330,491,377,415"/>
+</map>

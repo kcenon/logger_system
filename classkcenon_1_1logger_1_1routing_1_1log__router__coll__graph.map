@@ -1,0 +1,17 @@
+<map id="kcenon::logger::routing::log_router" name="kcenon::logger::routing::log_router">
+<area shape="rect" id="Node000001" title="Log router for directing messages to specific writers." alt="" coords="115,800,291,960"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="123,643,282,737"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="205,738,205,783,200,783,200,738"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1routing_1_1route__config.html" title="Route configuration for log messages." alt="" coords="121,460,285,580"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="205,580,205,626,200,626,200,580"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,325,184,390"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="118,389,156,445,152,448,114,392"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="55,162,134,227"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="97,228,97,308,92,308,92,228"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="29,5,160,85"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="97,100,97,162,92,162,92,100"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="208,317,416,397"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="288,399,254,448,250,445,283,396"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1log__filter__interface.html" title="Interface for log filters." alt="" coords="226,135,398,255"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="315,255,315,301,309,301,309,255"/>
+</map>

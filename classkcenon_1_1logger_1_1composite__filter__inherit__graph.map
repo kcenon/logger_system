@@ -1,0 +1,7 @@
+<map id="kcenon::logger::composite_filter" name="kcenon::logger::composite_filter">
+<area shape="rect" id="Node000001" title="Combine multiple filters with AND/OR logic." alt="" coords="5,361,192,521"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__filter.html" title="Base class for log filtering." alt="" coords="29,173,168,313"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,327,101,361,96,361,96,327"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__filter__interface.html" title="Interface for log filters." alt="" coords="13,5,185,125"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="101,139,101,173,96,173,96,139"/>
+</map>

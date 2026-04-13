@@ -1,0 +1,9 @@
+<map id="include/kcenon/logger/writers/network_writer.h" name="include/kcenon/logger/writers/network_writer.h">
+<area shape="rect" id="Node000001" title="Network writer for sending logs over TCP/UDP." alt="" coords="192,5,376,45"/>
+<area shape="rect" id="Node000002" href="$distributed__logging__demo_8cpp.html" title="Distributed logging with network writers, log server, and real&#45;time analysis." alt="" coords="5,93,165,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="229,53,130,96,128,91,227,48"/>
+<area shape="rect" id="Node000003" href="$writer__factory_8h.html" title="Factory for creating log writer instances." alt="" coords="190,93,378,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="287,59,287,93,281,93,281,59"/>
+<area shape="rect" id="Node000004" href="$network__writer_8cpp.html" title="Network writer implementation with jthread compatibility." alt="" coords="402,93,582,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="343,48,447,91,445,96,341,53"/>
+</map>

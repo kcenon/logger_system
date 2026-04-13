@@ -1,0 +1,115 @@
+<map id="kcenon::logger::make_logger_void_result" name="kcenon::logger::make_logger_void_result">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1297,863,1460,903"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1encrypted__writer.html#a46337152ae2b21f348facd2b2f184771" title="Perform automatic key rotation if configured." alt="" coords="1044,5,1235,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1374,850,1365,689,1344,460,1328,342,1306,233,1280,143,1264,108,1247,81,1227,62,1230,58,1251,78,1269,106,1285,141,1312,232,1333,341,1349,459,1370,689,1379,849"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger_1_1utils.html#ab9c3c2b456e297b001c5b0a321cf76be" title="Condition verification helper." alt="" coords="521,993,675,1033"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1373,918,1360,967,1336,1025,1300,1081,1277,1106,1251,1126,1210,1146,1168,1160,1124,1169,1080,1173,989,1167,900,1149,816,1122,741,1091,631,1035,634,1030,743,1087,818,1117,902,1144,990,1162,1080,1167,1124,1164,1167,1155,1208,1141,1248,1121,1274,1102,1296,1078,1331,1022,1355,965,1368,916"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger_1_1utils.html#a8f9d87d158586c65673384d2f3bc99de" title="File existence verification helper." alt="" coords="1062,135,1217,175"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1373,850,1362,709,1339,513,1323,414,1302,322,1277,247,1263,218,1247,196,1233,183,1216,173,1219,169,1236,179,1251,192,1267,215,1282,245,1307,321,1328,413,1345,513,1367,709,1378,849"/>
+<area shape="rect" id="Node000007" href="$namespacekcenon_1_1logger_1_1utils.html#a59dc71d8dd9d4474f7c65d68dbdd0258" title="Stream state verification helper." alt="" coords="1059,250,1220,290"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1372,850,1358,728,1334,565,1317,482,1297,407,1274,345,1247,304,1234,293,1219,285,1221,280,1237,288,1251,300,1278,343,1302,405,1322,481,1339,564,1364,728,1377,849"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1file__writer.html#a3d2fd71af8ebe7299849f8cdba763815" title="Write a log entry to file." alt="" coords="794,186,941,226"/>
+<area shape="poly" id="edge59_Node000001_Node000011" title=" " alt="" coords="1373,850,1364,715,1342,530,1326,436,1305,352,1279,284,1264,259,1248,240,1226,227,1196,218,1115,207,1024,203,941,205,941,199,1024,198,1115,201,1197,213,1229,223,1251,236,1268,256,1283,282,1310,351,1331,435,1348,529,1369,714,1378,849"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1logger.html#ae29b186e1e4aed5128f0d7a64d3aa4b9" title="Enable or disable metrics collection." alt="" coords="1039,314,1239,354"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1371,849,1355,740,1329,596,1312,523,1293,458,1271,404,1247,368,1233,356,1236,352,1251,364,1276,402,1298,456,1318,522,1335,595,1361,739,1376,849"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1encrypted__writer.html#a7f6ef34fc1e1460beab4af5cb50e18b2" title="Encrypt plaintext using configured algorithm." alt="" coords="1044,378,1235,418"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1375,850,1370,768,1352,658,1336,599,1314,541,1285,487,1247,439,1223,420,1226,416,1251,435,1289,484,1319,539,1341,597,1358,657,1375,767,1380,849"/>
+<area shape="rect" id="Node000014" href="$namespacekcenon_1_1logger_1_1utils.html#ac1c682bf72bb430ec40c4db756d79b17" title="Directory creation helper." alt="" coords="505,793,691,833"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="1367,851,1352,805,1329,752,1294,701,1273,679,1248,662,1190,633,1163,626,1138,623,1112,625,1087,631,1060,644,1031,661,1017,675,1010,690,1008,723,1005,758,998,774,983,789,950,810,914,825,876,835,837,840,760,842,691,835,691,830,760,837,836,835,875,829,912,820,947,805,980,785,993,771,1000,756,1002,723,1005,688,1013,672,1028,657,1057,639,1085,626,1112,619,1138,617,1164,620,1192,628,1251,657,1276,675,1298,698,1333,749,1357,803,1372,849"/>
+<area shape="rect" id="Node000017" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a8363ee61d1496ee59e3117c22417fdf9" title="Write operation with automatic rotation check." alt="" coords="5,270,183,310"/>
+<area shape="poly" id="edge60_Node000001_Node000017" title=" " alt="" coords="1374,850,1369,694,1362,587,1351,474,1335,362,1313,260,1284,179,1267,148,1248,125,1217,108,1175,98,1123,93,1067,92,869,101,597,101,525,106,454,120,384,142,319,168,205,225,126,272,124,268,202,220,316,163,383,137,452,115,524,101,597,95,869,95,1067,87,1124,88,1176,93,1219,103,1251,121,1271,145,1289,176,1318,259,1340,361,1356,473,1367,587,1374,693,1380,850"/>
+<area shape="rect" id="Node000018" href="$classkcenon_1_1logger_1_1async__writer.html#aa0ca4cbb67c3ef7b23bdfb7c2839815c" title="Flush all pending messages." alt="" coords="1057,557,1221,597"/>
+<area shape="poly" id="edge18_Node000001_Node000018" title=" " alt="" coords="1368,850,1353,799,1329,737,1294,673,1273,643,1248,617,1219,599,1222,595,1251,613,1277,640,1299,670,1334,735,1358,798,1373,849"/>
+<area shape="rect" id="Node000019" href="$classkcenon_1_1logger_1_1console__writer.html#afd887fc39a4fc75e06b020a5d82907d7" title="Flush console streams." alt="" coords="779,378,955,418"/>
+<area shape="poly" id="edge19_Node000001_Node000019" title=" " alt="" coords="1375,850,1369,773,1351,674,1335,621,1313,570,1284,523,1248,483,1141,457,955,418,956,413,1142,452,1251,478,1288,520,1317,568,1340,620,1356,672,1374,773,1380,849"/>
+<area shape="rect" id="Node000021" href="$classkcenon_1_1logger_1_1file__sink.html#a9c8ed99ce09f6fa3a5afebbd93306c9c" title="Flush any buffered data." alt="" coords="1066,671,1213,711"/>
+<area shape="poly" id="edge21_Node000001_Node000021" title=" " alt="" coords="1357,852,1313,788,1283,754,1248,726,1212,708,1214,703,1251,721,1286,750,1317,784,1362,849"/>
+<area shape="rect" id="Node000022" href="$classkcenon_1_1logger_1_1network__writer.html#a29650b30422d4645e7371cd3c6695fde" title="Flush pending logs." alt="" coords="1050,735,1229,775"/>
+<area shape="poly" id="edge22_Node000001_Node000022" title=" " alt="" coords="1344,856,1300,822,1248,790,1220,778,1222,773,1251,785,1303,817,1347,852"/>
+<area shape="rect" id="Node000023" href="$classkcenon_1_1logger_1_1encrypted__writer.html#a20292460bbfd0d67d48c450501900e65" title="Generate secure random IV." alt="" coords="1044,799,1235,839"/>
+<area shape="poly" id="edge23_Node000001_Node000023" title=" " alt="" coords="1289,862,1214,842,1215,837,1291,857"/>
+<area shape="rect" id="Node000024" href="$classkcenon_1_1logger_1_1async__writer.html#ae41a12b8e2a110a38f61c2d5cc0f7c27" title="Handle queue overflow." alt="" coords="1048,863,1231,903"/>
+<area shape="poly" id="edge24_Node000001_Node000024" title=" " alt="" coords="1283,886,1231,886,1231,881,1283,881"/>
+<area shape="rect" id="Node000025" href="$classkcenon_1_1logger_1_1queued__writer__base.html#a6a6a66b9351c2d3177750bce1ebb0b17" title="Handle queue overflow condition." alt="" coords="1029,927,1249,967"/>
+<area shape="poly" id="edge25_Node000001_Node000025" title=" " alt="" coords="1291,910,1215,930,1214,925,1289,904"/>
+<area shape="rect" id="Node000027" href="$classkcenon_1_1logger_1_1thread__system__monitor__adapter.html#a7a724b8eb0d31c3d154e48eb0dcc9414" title="Reset all metrics." alt="" coords="1043,992,1235,1047"/>
+<area shape="poly" id="edge27_Node000001_Node000027" title=" " alt="" coords="1346,914,1302,949,1251,982,1224,994,1222,990,1248,977,1299,944,1343,910"/>
+<area shape="rect" id="Node000028" href="$classkcenon_1_1logger_1_1encrypted__writer.html#a572956dddf7abb359777ec041fe20ff6" title="Rotate encryption key." alt="" coords="1044,1071,1235,1111"/>
+<area shape="poly" id="edge28_Node000001_Node000028" title=" " alt="" coords="1364,917,1320,989,1288,1027,1251,1060,1227,1074,1224,1069,1248,1056,1284,1024,1316,986,1360,914"/>
+<area shape="rect" id="Node000029" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#a8faaa55edf1e628e81868226d3fa76f4" title="Save key to file with secure permissions." alt="" coords="753,1259,981,1299"/>
+<area shape="poly" id="edge29_Node000001_Node000029" title=" " alt="" coords="1380,917,1374,990,1355,1083,1339,1131,1317,1177,1288,1219,1251,1255,1231,1266,1205,1274,1137,1284,1059,1288,982,1287,982,1282,1059,1282,1136,1279,1203,1269,1229,1261,1248,1251,1284,1216,1312,1175,1334,1129,1350,1081,1369,989,1374,917"/>
+<area shape="rect" id="Node000030" href="$classkcenon_1_1logger_1_1utils_1_1file__utils.html#a8a26aaa584983b61711ffbcdc07cdba9" title="Set file permissions (Unix/POSIX systems)" alt="" coords="1062,1187,1217,1241"/>
+<area shape="poly" id="edge30_Node000001_Node000030" title=" " alt="" coords="1373,917,1359,971,1335,1038,1300,1107,1277,1140,1251,1169,1219,1192,1216,1188,1248,1165,1273,1137,1295,1105,1330,1036,1354,969,1368,916"/>
+<area shape="rect" id="Node000031" href="$namespacekcenon_1_1logger_1_1utils.html#aafab2237b40cefbc519b3dcdf64fb23d" title="Error handling helper for write operations." alt="" coords="1061,493,1218,533"/>
+<area shape="poly" id="edge31_Node000001_Node000031" title=" " alt="" coords="1372,850,1362,786,1340,704,1324,661,1303,619,1278,581,1248,547,1217,528,1220,524,1251,543,1282,577,1308,617,1329,659,1345,702,1367,785,1377,849"/>
+<area shape="rect" id="Node000037" href="$structkcenon_1_1logger_1_1logger__config.html#a28b4aedeb6bfa7edfd72d3e0201ded7b" title="Validate the configuration." alt="" coords="1056,1397,1223,1437"/>
+<area shape="poly" id="edge47_Node000001_Node000037" title=" " alt="" coords="1376,917,1360,1023,1333,1163,1316,1233,1297,1297,1275,1349,1251,1385,1225,1404,1222,1399,1247,1381,1271,1346,1292,1295,1311,1232,1328,1162,1355,1022,1370,917"/>
+<area shape="rect" id="Node000054" href="$classkcenon_1_1logger_1_1security_1_1path__validator.html#a97978ff6f41db48eea65ddea212982cb" title="Validate a file path." alt="" coords="1047,1461,1232,1501"/>
+<area shape="poly" id="edge51_Node000001_Node000054" title=" " alt="" coords="1377,917,1363,1036,1338,1195,1321,1275,1301,1349,1278,1409,1251,1450,1234,1464,1231,1460,1247,1447,1273,1407,1296,1347,1316,1274,1333,1194,1358,1035,1371,917"/>
+<area shape="rect" id="Node000056" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#abc4e1cfc617163980b5c4bbe359e7d43" title="Validate key file path (prevent path traversal)" alt="" coords="1029,1317,1249,1372"/>
+<area shape="poly" id="edge53_Node000001_Node000056" title=" " alt="" coords="1379,917,1371,993,1352,1095,1335,1149,1314,1203,1286,1254,1251,1300,1227,1319,1224,1315,1247,1296,1281,1251,1309,1201,1330,1147,1346,1093,1366,993,1374,917"/>
+<area shape="rect" id="Node000058" href="$classkcenon_1_1logger_1_1utils_1_1file__utils.html#a62037d5c862b28f542266382b37ad469" title="Validate log file path against path traversal attacks." alt="" coords="1062,1525,1217,1580"/>
+<area shape="poly" id="edge56_Node000001_Node000058" title=" " alt="" coords="1377,918,1365,1048,1340,1225,1324,1316,1303,1398,1279,1467,1266,1494,1251,1514,1236,1528,1218,1538,1216,1534,1233,1524,1247,1511,1261,1491,1274,1465,1298,1397,1318,1315,1335,1224,1359,1047,1372,917"/>
+<area shape="rect" id="Node000059" href="$classkcenon_1_1logger_1_1batch__writer.html#ae293329a317a211cfd636da07e0c3f96" title="Write a log entry to the batch." alt="" coords="1058,1605,1221,1645"/>
+<area shape="poly" id="edge57_Node000001_Node000059" title=" " alt="" coords="1378,917,1369,1061,1347,1264,1330,1367,1309,1461,1283,1539,1268,1570,1251,1593,1238,1605,1222,1614,1220,1609,1235,1601,1247,1590,1263,1567,1278,1537,1304,1460,1325,1366,1342,1263,1363,1061,1373,917"/>
+<area shape="rect" id="Node000060" href="$classkcenon_1_1logger_1_1encrypted__writer.html#a63639723e977b497acaac252d6cebbd5" title="Write encrypted log entry." alt="" coords="1044,1669,1235,1709"/>
+<area shape="poly" id="edge58_Node000001_Node000060" title=" " alt="" coords="1379,917,1371,1073,1351,1295,1335,1409,1313,1513,1286,1599,1269,1633,1251,1658,1237,1671,1233,1667,1247,1655,1265,1630,1281,1597,1308,1512,1329,1408,1346,1294,1366,1073,1374,917"/>
+<area shape="rect" id="Node000061" href="$classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#ad9c86b7a99d3cdc0ec3694a950bcc310" title="Write directly to the underlying writer (fallback mode)" alt="" coords="1043,1733,1236,1788"/>
+<area shape="poly" id="edge61_Node000001_Node000061" title=" " alt="" coords="1379,917,1372,1084,1353,1324,1337,1448,1315,1562,1287,1656,1270,1694,1251,1722,1238,1735,1234,1731,1247,1719,1265,1691,1282,1655,1310,1561,1331,1447,1348,1323,1367,1083,1374,917"/>
+<area shape="rect" id="Node000063" href="$classkcenon_1_1logger_1_1file__sink.html#ac67c1432815c3ab0535d26c0eca90a64" title="Write a pre&#45;formatted message to the output destination." alt="" coords="1066,1813,1213,1853"/>
+<area shape="poly" id="edge63_Node000001_Node000063" title=" " alt="" coords="1380,917,1376,1099,1370,1227,1360,1364,1344,1501,1321,1627,1307,1682,1291,1731,1272,1771,1251,1802,1234,1817,1214,1826,1212,1821,1231,1812,1247,1799,1268,1769,1286,1729,1302,1681,1316,1626,1339,1500,1354,1364,1365,1226,1371,1099,1375,917"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1file__writer.html#a0fe178557962a60f247e977c9b923b20" title="Open the file (internal, caller must hold mutex)" alt="" coords="255,793,419,833"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="558,986,362,835,366,831,561,982"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1file__writer.html#a44624a5f43c93517f144cdd982457c90" title="Constructor." alt="" coords="21,793,167,833"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="241,815,167,815,167,810,241,810"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1file__writer.html#aeb27df7f21b55913463eef21618a4b29" title="Flush file stream." alt="" coords="794,250,941,290"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="1045,273,941,273,941,267,1045,267"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1console__writer.html#ac00806b7b0ba8195369fb38ace2d805c" title="Write a log entry to console." alt="" coords="779,314,955,354"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="1046,295,954,317,952,311,1045,289"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="1045,251,940,226,942,221,1046,245"/>
+<area shape="rect" id="Node000010" href="$composite__writer__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="571,321,625,347"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="766,337,625,337,625,331,766,331"/>
+<area shape="poly" id="edge14_Node000014_Node000004" title=" " alt="" coords="492,815,419,815,419,810,492,810"/>
+<area shape="rect" id="Node000015" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a72c420b95fea71c28460766985ed3d8a" title="Perform the actual rotation operation." alt="" coords="231,526,443,566"/>
+<area shape="poly" id="edge15_Node000014_Node000015" title=" " alt="" coords="566,785,356,568,360,564,570,781"/>
+<area shape="rect" id="Node000016" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a1b8286e8c0a86e7bcc1e1f855eb517ce" title="Manually trigger log rotation (thread&#45;safe)" alt="" coords="5,526,183,566"/>
+<area shape="poly" id="edge16_Node000015_Node000016" title=" " alt="" coords="217,549,183,549,183,543,217,543"/>
+<area shape="poly" id="edge17_Node000015_Node000017" title=" " alt="" coords="305,518,112,312,116,309,309,514"/>
+<area shape="rect" id="Node000020" href="$classkcenon_1_1logger_1_1console__writer.html#a9c45046b0fcf50b81fcdaaafdd31cb60" title="Destructor." alt="" coords="507,378,689,418"/>
+<area shape="poly" id="edge20_Node000019_Node000020" title=" " alt="" coords="766,401,689,401,689,395,766,395"/>
+<area shape="rect" id="Node000026" href="$classkcenon_1_1logger_1_1queued__writer__base.html#a900ad2227f4f37d158bbb6f71a356104" title="Try to enqueue an entry with overflow protection." alt="" coords="770,927,965,967"/>
+<area shape="poly" id="edge26_Node000025_Node000026" title=" " alt="" coords="1016,950,965,950,965,945,1016,945"/>
+<area shape="poly" id="edge35_Node000031_Node000008" title=" " alt="" coords="1089,487,1056,462,1027,432,1016,413,1010,396,1006,364,1000,333,993,319,980,304,961,291,940,282,942,277,964,287,983,300,997,316,1005,332,1011,363,1015,395,1021,411,1031,428,1060,459,1092,483"/>
+<area shape="poly" id="edge45_Node000031_Node000009" title=" " alt="" coords="1094,487,1061,461,1027,432,1013,414,1005,397,996,383,980,368,954,355,957,350,983,364,1000,379,1009,395,1018,411,1031,428,1064,457,1098,483"/>
+<area shape="poly" id="edge46_Node000031_Node000011" title=" " alt="" coords="1087,487,1055,463,1027,431,1013,404,1007,378,1007,330,1008,307,1005,285,997,263,979,240,961,226,940,217,942,212,964,222,983,236,1001,260,1010,284,1013,307,1013,330,1013,378,1018,402,1032,429,1058,459,1090,483"/>
+<area shape="poly" id="edge38_Node000031_Node000015" title=" " alt="" coords="1047,509,934,504,796,502,643,505,491,517,420,529,420,523,490,511,643,499,796,496,935,499,1047,504"/>
+<area shape="poly" id="edge34_Node000031_Node000019" title=" " alt="" coords="1057,490,1028,476,1004,457,980,439,938,420,940,416,983,434,1007,453,1031,472,1060,485"/>
+<area shape="rect" id="Node000032" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a7ac2824b5e2f1fa6d499e5ce7494e245" title="Remove old backup files beyond max_files limit." alt="" coords="491,526,705,566"/>
+<area shape="poly" id="edge32_Node000031_Node000032" title=" " alt="" coords="1047,519,754,534,706,538,706,533,753,529,1047,513"/>
+<area shape="rect" id="Node000033" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a6b538f34b9519638cb327011a6007f09" title="Get list of existing backup files." alt="" coords="762,671,973,711"/>
+<area shape="poly" id="edge36_Node000031_Node000033" title=" " alt="" coords="1049,534,1031,547,1019,560,1013,574,1008,603,1003,632,996,647,983,661,966,673,963,669,980,657,991,644,998,630,1003,602,1008,572,1015,557,1028,543,1046,530"/>
+<area shape="rect" id="Node000034" href="$namespacekcenon_1_1logger_1_1utils.html#a925d3fe5ed1bcd5fe124d7aeca460e7c" title="Error handling helper for encryption operations." alt="" coords="771,543,964,583"/>
+<area shape="poly" id="edge39_Node000031_Node000034" title=" " alt="" coords="1048,532,965,548,964,543,1047,527"/>
+<area shape="rect" id="Node000035" href="$namespacekcenon_1_1logger_1_1utils.html#a49599f70927784bf34d2937836a7201e" title="Error handling helper for network operations." alt="" coords="779,607,956,647"/>
+<area shape="poly" id="edge40_Node000031_Node000035" title=" " alt="" coords="1049,537,1031,547,1016,559,1008,572,998,585,983,598,957,610,955,605,980,593,994,581,1003,569,1012,555,1028,542,1047,533"/>
+<area shape="rect" id="Node000036" href="$namespacekcenon_1_1logger_1_1utils.html#a89af593234842ba16d569fdafa25e3f4" title="Error handling helper for file open operations." alt="" coords="789,735,945,775"/>
+<area shape="poly" id="edge41_Node000031_Node000036" title=" " alt="" coords="1050,533,1031,547,1016,568,1008,590,1008,634,1008,679,1000,702,983,725,966,738,947,747,944,743,963,734,979,721,995,700,1002,679,1003,634,1003,589,1011,566,1027,543,1047,528"/>
+<area shape="poly" id="edge33_Node000032_Node000015" title=" " alt="" coords="477,549,443,549,443,543,477,543"/>
+<area shape="poly" id="edge37_Node000033_Node000032" title=" " alt="" coords="769,669,752,662,714,640,677,615,619,568,623,564,680,611,716,635,755,657,771,664"/>
+<area shape="poly" id="edge43_Node000036_Node000004" title=" " alt="" coords="776,761,641,768,491,783,419,796,418,791,490,778,641,763,776,755"/>
+<area shape="poly" id="edge42_Node000036_Node000014" title=" " alt="" coords="777,777,692,796,691,790,775,772"/>
+<area shape="poly" id="edge44_Node000036_Node000015" title=" " alt="" coords="777,734,752,726,646,685,541,642,379,569,381,564,544,637,648,680,754,721,778,729"/>
+<area shape="rect" id="Node000038" href="$classkcenon_1_1logger_1_1logger__builder.html#ac055417d32675b0fee649681e1ded0fa" title=" " alt="" coords="784,1387,951,1427"/>
+<area shape="poly" id="edge48_Node000037_Node000038" title=" " alt="" coords="1042,1416,951,1413,951,1408,1042,1411"/>
+<area shape="rect" id="Node000051" href="$classkcenon_1_1logger_1_1logger__config__builder.html#ab46cc6e3630f775b805c23ce068dc1d8" title="Build the logger_config." alt="" coords="784,1451,951,1491"/>
+<area shape="poly" id="edge49_Node000037_Node000051" title=" " alt="" coords="1043,1439,951,1457,950,1452,1042,1433"/>
+<area shape="rect" id="Node000053" href="$classkcenon_1_1logger_1_1logger__builder.html#a32b27f0f8fb0109fd8fcfefe0884975f" title="Validate current configuration without building." alt="" coords="784,1515,951,1555"/>
+<area shape="poly" id="edge50_Node000037_Node000053" title=" " alt="" coords="1045,1443,1031,1451,1016,1464,1008,1477,999,1492,983,1506,952,1520,950,1516,980,1501,995,1488,1003,1475,1012,1460,1028,1446,1042,1439"/>
+<area shape="rect" id="Node000055" href="$classkcenon_1_1logger_1_1security_1_1path__validator.html#ad0d9bbc216514b59bc158592f9a6671f" title="Create a safe path by joining base and relative path." alt="" coords="772,1579,963,1619"/>
+<area shape="poly" id="edge52_Node000054_Node000055" title=" " alt="" coords="1041,1509,1031,1515,1016,1528,1008,1541,999,1556,983,1570,959,1582,957,1577,980,1565,995,1552,1003,1539,1012,1524,1028,1511,1039,1504"/>
+<area shape="poly" id="edge55_Node000056_Node000029" title=" " alt="" coords="1015,1318,951,1302,952,1297,1016,1312"/>
+<area shape="rect" id="Node000057" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#a500a1523f64c69722faf15351a122e90" title="Load key from file with permission verification." alt="" coords="755,1323,980,1363"/>
+<area shape="poly" id="edge54_Node000056_Node000057" title=" " alt="" coords="1016,1347,980,1347,980,1341,1016,1341"/>
+<area shape="rect" id="Node000062" href="$classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a5e3277edb6cf43396aa35edd16a8d4b9" title="Write a log entry asynchronously." alt="" coords="771,1733,964,1788"/>
+<area shape="poly" id="edge62_Node000061_Node000062" title=" " alt="" coords="1029,1763,964,1763,964,1758,1029,1758"/>
+</map>

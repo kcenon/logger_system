@@ -1,0 +1,7 @@
+<map id="kcenon::logger::monitoring_data::add_metric" name="kcenon::logger::monitoring_data::add_metric">
+<area shape="rect" id="Node000001" title="Add a metric to the collection." alt="" coords="245,41,443,81"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1basic__monitor.html#a88c0dc362903ad3cef907bb2ae753a92" title="Collect current metrics." alt="" coords="8,5,195,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="231,47,194,42,195,37,232,42"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1thread__system__monitor__adapter.html#a2b8c73ae4749a505cc41c493d5868eb3" title="Collect current metrics." alt="" coords="5,70,197,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="232,81,198,86,197,80,231,75"/>
+</map>

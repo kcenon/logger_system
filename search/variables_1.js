@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['back_5fpressure_5fdelay_0',['back_pressure_delay',['../structkcenon_1_1logger_1_1async_1_1batch__processor_1_1config.html#a2b5d3580cea0d36f982276cd59ad94e4',1,'kcenon::logger::async::batch_processor::config']]],
+  ['back_5fpressure_5fevents_1',['back_pressure_events',['../structkcenon_1_1logger_1_1async_1_1batch__processor_1_1processing__stats.html#ad1dc90ec9beeb20fa6a9521ebad37628',1,'kcenon::logger::async::batch_processor::processing_stats']]],
+  ['back_5fpressure_5fthreshold_2',['back_pressure_threshold',['../structkcenon_1_1logger_1_1async_1_1batch__processor_1_1config.html#ae6f5cf34ba1169c177628d2506520ce8',1,'kcenon::logger::async::batch_processor::config']]],
+  ['backend_5f_3',['backend_',['../classkcenon_1_1logger_1_1logger__builder.html#ad594dc0fb85bb6443657ae5aa3988c30',1,'kcenon::logger::logger_builder::backend_'],['../classkcenon_1_1logger_1_1logger_1_1impl.html#a31201d5fc1fa15bbdd65e2c9cf908c6c',1,'kcenon::logger::logger::impl::backend_']]],
+  ['base_5ffilename_5f_4',['base_filename_',['../classkcenon_1_1logger_1_1rotating__file__writer.html#a9eccdd332ede3e4fcaa7209e7e46fc68',1,'kcenon::logger::rotating_file_writer']]],
+  ['baseline_5fduration_5',['baseline_duration',['../structkcenon_1_1logger_1_1analysis_1_1realtime__analysis__config.html#a9411009966b4f9936e6d47c96af15c0f',1,'kcenon::logger::analysis::realtime_analysis_config']]],
+  ['baseline_5frates_5f_6',['baseline_rates_',['../classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#aa190d9f6595edecda4ed607f3ee0b1c7',1,'kcenon::logger::analysis::realtime_log_analyzer']]],
+  ['batch_5fconfig_7',['batch_config',['../structkcenon_1_1logger_1_1async_1_1high__performance__async__writer_1_1config.html#a502a7681144584195df2bf6c303c46c4',1,'kcenon::logger::async::high_performance_async_writer::config']]],
+  ['batch_5fprocessor_5f_8',['batch_processor_',['../classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a15c53c05a3a8099f2958f8ee4f87a060',1,'kcenon::logger::async::high_performance_async_writer']]],
+  ['batch_5fsize_9',['batch_size',['../structkcenon_1_1logger_1_1logger__config.html#a16f2e95ce5ed7af9c7ee90833b273a4f',1,'kcenon::logger::logger_config::batch_size'],['../structkcenon_1_1logger_1_1log__collector__shared__state.html#a7cdbb6454240d9df3547e93b4dfb8e96',1,'kcenon::logger::log_collector_shared_state::batch_size']]],
+  ['buffer_5f_10',['buffer_',['../classkcenon_1_1logger_1_1buffered__writer.html#a07efe22a287bcb1427b97628c3937cdb',1,'kcenon::logger::buffered_writer::buffer_'],['../classkcenon_1_1logger_1_1network__writer.html#a8ae9bf135c6466611ee63ef7e265cc45',1,'kcenon::logger::network_writer::buffer_']]],
+  ['buffer_5fcv_5f_11',['buffer_cv_',['../classkcenon_1_1logger_1_1network__writer.html#a4408e0b110297b7c1498007299ffad47',1,'kcenon::logger::network_writer']]],
+  ['buffer_5fmutex_5f_12',['buffer_mutex_',['../classkcenon_1_1logger_1_1network__writer.html#a06b38ece3a8ada1398522b9358e113ac',1,'kcenon::logger::network_writer']]],
+  ['buffer_5fsize_13',['buffer_size',['../structkcenon_1_1logger_1_1logger__config.html#a999bec05d56329ea097afe8d7c99293d',1,'kcenon::logger::logger_config::buffer_size'],['../structkcenon_1_1logger_1_1server_1_1server__config.html#a5eee6f00b7ee1aee3eb3c87d5b36e6e5',1,'kcenon::logger::server::server_config::buffer_size'],['../structkcenon_1_1logger_1_1log__collector__shared__state.html#a334e1790180fbda2feaa5ed9ffbd58b8',1,'kcenon::logger::log_collector_shared_state::buffer_size']]],
+  ['buffer_5fsize_5f_14',['buffer_size_',['../classkcenon_1_1logger_1_1network__writer.html#a21c53adeb479a7db7f6d7ce18a2379fd',1,'kcenon::logger::network_writer::buffer_size_'],['../classkcenon_1_1logger_1_1logger_1_1impl.html#af47a60e746a9b45a2f9a885bb9278a01',1,'kcenon::logger::logger::impl::buffer_size_']]],
+  ['buffer_5fusage_5fbytes_5f_15',['buffer_usage_bytes_',['../classkcenon_1_1logger_1_1basic__monitor.html#a9735278797bf209ff99fb64b2660a900',1,'kcenon::logger::basic_monitor']]],
+  ['built_5fconfig_5f_16',['built_config_',['../classkcenon_1_1logger_1_1logger__builder.html#a7b21c7d7ad52ebba5e942e29973664ec',1,'kcenon::logger::logger_builder']]],
+  ['bypassed_5fcount_17',['bypassed_count',['../structkcenon_1_1logger_1_1sampling_1_1sampling__stats.html#a649c3265723865615f581969c74ac0cc',1,'kcenon::logger::sampling::sampling_stats']]],
+  ['bypassed_5fcount_5f_18',['bypassed_count_',['../classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#a6b2ae740ad5a1ee2556a14d3096343e3',1,'kcenon::logger::sampling::log_sampler']]],
+  ['bytes_5fsent_19',['bytes_sent',['../structkcenon_1_1logger_1_1network__writer_1_1connection__stats.html#abb4a702bca664b5a2a8fedb13e5d13f7',1,'kcenon::logger::network_writer::connection_stats']]],
+  ['bytes_5fwritten_20',['bytes_written',['../structkcenon_1_1logger_1_1metrics_1_1logger__performance__stats_1_1writer__stats__compat.html#a84cd1f27d2be37c0eb8649ef245872e1',1,'kcenon::logger::metrics::logger_performance_stats::writer_stats_compat']]],
+  ['bytes_5fwritten_5f_21',['bytes_written_',['../classkcenon_1_1logger_1_1file__writer.html#a4ace824fbe3f3cfd5cc6285d8a8ab088',1,'kcenon::logger::file_writer']]]
+];

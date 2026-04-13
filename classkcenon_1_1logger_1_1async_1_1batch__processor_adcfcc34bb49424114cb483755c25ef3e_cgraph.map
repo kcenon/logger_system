@@ -1,0 +1,5 @@
+<map id="kcenon::logger::async::batch_processor::handle_back_pressure" name="kcenon::logger::async::batch_processor::handle_back_pressure">
+<area shape="rect" id="Node000001" title="Handle back&#45;pressure conditions." alt="" coords="5,5,193,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#ae37fb42d10b25fa73e5fbad3fda70580" title="Get current queue size." alt="" coords="241,5,407,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,30,228,30,228,35,194,35"/>
+</map>

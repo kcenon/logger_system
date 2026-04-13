@@ -1,0 +1,17 @@
+<map id="include/kcenon/logger/writers/batch_writer.h" name="include/kcenon/logger/writers/batch_writer.h">
+<area shape="rect" id="Node000001" title="Batch writer that accumulates log entries and writes them in batches." alt="" coords="525,5,691,45"/>
+<area shape="rect" id="Node000002" href="$logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration kcenon." alt="" coords="324,93,489,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="552,53,452,96,450,91,550,48"/>
+<area shape="rect" id="Node000007" href="$writer__factory_8h.html" title="Factory for creating log writer instances." alt="" coords="514,93,702,133"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="611,59,611,93,605,93,605,59"/>
+<area shape="rect" id="Node000008" href="$batch__writer_8cpp.html" title=" " alt="" coords="727,93,889,133"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="666,48,765,91,763,96,663,53"/>
+<area shape="rect" id="Node000003" href="$critical__logging__example_8cpp.html" title="Example demonstrating critical log loss prevention mechanisms." alt="" coords="5,181,195,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="327,140,168,184,166,179,326,134"/>
+<area shape="rect" id="Node000004" href="$custom__writer__example_8cpp.html" title="Example demonstrating how to create custom writers using thread_safe_writer." alt="" coords="219,181,402,221"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="377,145,334,183,330,179,373,141"/>
+<area shape="rect" id="Node000005" href="$di__pattern__example_8cpp.html" title="Dependency Injection pattern example for logger_system Phase 4." alt="" coords="426,181,582,221"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="440,140,484,179,481,183,437,144"/>
+<area shape="rect" id="Node000006" href="$monitoring__integration__example_8cpp.html" title="Advanced monitoring integration example for Phase 4." alt="" coords="606,181,797,221"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="485,135,638,179,636,184,484,140"/>
+</map>

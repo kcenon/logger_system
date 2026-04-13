@@ -1,0 +1,29 @@
+<map id="kcenon::logger::batch_writer::write" name="kcenon::logger::batch_writer::write">
+<area shape="rect" id="Node000001" title="Write a log entry to the batch." alt="" coords="5,255,168,295"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a5e3582690bc5bebcfdf5e35edfd490db" title="Creates a copy of a log_entry for queue storage." alt="" coords="219,84,376,124"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,252,259,131,262,135,114,256"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1batch__writer.html#abc5837f4f78cfa19a0f4f40c62633313" title="Flush the batch to the underlying writer." alt="" coords="216,197,379,237"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="160,252,210,238,211,244,161,257"/>
+<area shape="rect" id="Node000008" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="656,262,815,287"/>
+<area shape="poly" id="edge13_Node000001_Node000008" title=" " alt="" coords="169,272,642,272,642,277,169,277"/>
+<area shape="rect" id="Node000011" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="216,312,379,352"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="161,292,211,306,210,311,160,297"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1batch__writer.html#aca4903ce63d946deb56cb044fb265a69" title="Check if batch should be flushed based on size." alt="" coords="216,377,379,431"/>
+<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="116,293,217,362,228,368,225,373,215,366,113,297"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="429,36,591,76"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="376,84,415,75,416,80,377,89"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="654,5,817,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="591,42,640,36,641,41,592,48"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1batch__writer.html#a3010aefb03e3afed8147254d5d2ecd88" title="Flush batch without locking (caller must hold lock)" alt="" coords="429,131,591,186"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="370,195,415,182,416,187,371,200"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="379,225,594,253,643,260,642,265,593,259,378,230"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a8b38854d249b4da0d7a5bf6d45dccf47" title="Flush any buffered data." alt="" coords="650,197,821,237"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="592,177,645,191,644,196,591,182"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="565,184,595,203,619,227,628,237,643,247,660,255,658,260,640,252,625,241,615,230,592,207,562,188"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="641,69,829,109"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="591,131,656,111,657,116,593,136"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1log__writer__interface.html#ad48f2ab0fd92db49d024bdc02f243a72" title="Write a log entry." alt="" coords="649,133,822,173"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="592,154,635,153,635,158,592,159"/>
+<area shape="rect" id="Node000012" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="427,312,593,352"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="379,329,413,329,413,335,379,335"/>
+</map>

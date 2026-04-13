@@ -1,0 +1,23 @@
+<map id="kcenon::logger::queued_writer_base::try_enqueue" name="kcenon::logger::queued_writer_base::try_enqueue">
+<area shape="rect" id="Node000001" title="Try to enqueue an entry with overflow protection." alt="" coords="5,133,200,173"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1queued__writer__base.html#ad12b277523c77608c476a1bab01d35c8" title="Enqueue entry (specialization for std::queue)" alt="" coords="260,5,471,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,131,181,93,247,55,265,47,267,52,249,60,184,97,131,135"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1queued__writer__base.html#ac746a4c3410f2180dfb227e600008897" title="Get container size (specialization for std::queue)" alt="" coords="248,69,483,109"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="185,131,269,110,270,115,186,136"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1queued__writer__base.html#a6a6a66b9351c2d3177750bce1ebb0b17" title="Handle queue overflow condition." alt="" coords="255,133,475,173"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="200,151,242,151,242,156,200,156"/>
+<area shape="rect" id="Node000010" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="286,198,445,223"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="194,171,249,183,293,192,292,198,247,188,193,176"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1queued__writer__base.html#a777512019264ffd15fed147d5d50cfdf" title="Called after an entry is successfully enqueued." alt="" coords="278,247,453,302"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="136,171,188,202,249,234,266,241,264,246,247,238,186,207,134,176"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a5e3582690bc5bebcfdf5e35edfd490db" title="Creates a copy of a log_entry for queue storage." alt="" coords="533,5,691,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="471,23,519,23,519,28,471,28"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="743,5,906,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="691,23,730,23,730,28,691,28"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="956,5,1119,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="907,23,943,23,943,28,907,28"/>
+<area shape="rect" id="Node000008" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="531,133,693,173"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="475,151,517,151,517,156,475,156"/>
+<area shape="rect" id="Node000009" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="741,133,908,173"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="694,151,728,151,728,156,694,156"/>
+</map>

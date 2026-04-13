@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['pattern_0',['pattern',['../structkcenon_1_1logger_1_1analysis_1_1anomaly__event.html#ad23b9271b01f1f8c961f066c06ed9221',1,'kcenon::logger::analysis::anomaly_event::pattern'],['../structkcenon_1_1logger_1_1analysis_1_1pattern__alert.html#a4683c0d43841ba8d1adc9f98872a0912',1,'kcenon::logger::analysis::pattern_alert::pattern'],['../structkcenon_1_1logger_1_1security_1_1sanitization__rule.html#a6db0a1b25bcd5995ab11d137d5dc67aa',1,'kcenon::logger::security::sanitization_rule::pattern']]],
+  ['pattern_5f_1',['pattern_',['../classkcenon_1_1logger_1_1filters_1_1regex__filter.html#a260f71573b5a6d707ce411918ad927a9',1,'kcenon::logger::filters::regex_filter::pattern_'],['../classkcenon_1_1logger_1_1filters_1_1field__regex__filter.html#a9e2f771949fb1531df498fe2f6892230',1,'kcenon::logger::filters::field_regex_filter::pattern_'],['../classkcenon_1_1logger_1_1routing_1_1router__builder_1_1regex__condition.html#a1b1a2eeb03087b9bfef25affd993c8a9',1,'kcenon::logger::routing::router_builder::regex_condition::pattern_'],['../classkcenon_1_1logger_1_1regex__filter.html#ab56968421e07e5fb58e57eb997beab38',1,'kcenon::logger::regex_filter::pattern_']]],
+  ['pattern_5fmatches_2',['pattern_matches',['../structkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer_1_1statistics.html#ad30b6514d050c68f39d3cca86e346807',1,'kcenon::logger::analysis::realtime_log_analyzer::statistics']]],
+  ['pattern_5fmatches_5f_3',['pattern_matches_',['../classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a89c9da67cabe5f1d179b400a140b77a9',1,'kcenon::logger::analysis::realtime_log_analyzer']]],
+  ['patterns_5f_4',['patterns_',['../classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#af321578fc4c05e06c9745f6a785a6d15',1,'kcenon::logger::analysis::realtime_log_analyzer']]],
+  ['patterns_5fmutex_5f_5',['patterns_mutex_',['../classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#aaa449ac5c6ae0ba5a3136a9546eb3a25',1,'kcenon::logger::analysis::realtime_log_analyzer']]],
+  ['pimpl_5f_6',['pimpl_',['../classkcenon_1_1logger_1_1log__collector.html#a5d45dbff3ed9a408c1fc326512662476',1,'kcenon::logger::log_collector::pimpl_'],['../classkcenon_1_1logger_1_1logger.html#a6121953277fea77c73e74fb06f44f7d5',1,'kcenon::logger::logger::pimpl_']]],
+  ['pool_5fconfig_7',['pool_config',['../structkcenon_1_1logger_1_1async_1_1high__performance__async__writer_1_1config.html#a57d50608bf23e71ec63416383299e779',1,'kcenon::logger::async::high_performance_async_writer::config']]],
+  ['pool_5fsize_5f_8',['pool_size_',['../classkcenon_1_1logger_1_1memory_1_1object__pool.html#a8f216b09be483d261d5839d9a4cbee92',1,'kcenon::logger::memory::object_pool']]],
+  ['port_9',['port',['../structkcenon_1_1logger_1_1server_1_1server__config.html#a21924d626cc40a71125b62a58ae4f9cc',1,'kcenon::logger::server::server_config']]],
+  ['port_5f_10',['port_',['../classkcenon_1_1logger_1_1network__writer.html#a667ef7bbe52e231e4beb0512bda7bf61',1,'kcenon::logger::network_writer']]],
+  ['predicate_5f_11',['predicate_',['../classkcenon_1_1logger_1_1filters_1_1function__filter.html#a6f50f8c3456d278fffda18e9964f7fbb',1,'kcenon::logger::filters::function_filter']]],
+  ['preserve_5forder_12',['preserve_order',['../structkcenon_1_1logger_1_1batch__writer_1_1config.html#af38f5ec23db8edcc5d9e4a383a6cb94b',1,'kcenon::logger::batch_writer::config']]],
+  ['preserve_5fpartial_13',['preserve_partial',['../structkcenon_1_1logger_1_1security_1_1sanitization__rule.html#ac3b8cbea1b7e68b0fc8b4112a4139658',1,'kcenon::logger::security::sanitization_rule']]],
+  ['pretty_5fprint_14',['pretty_print',['../structkcenon_1_1logger_1_1format__options.html#a07135783bbc4752d3154f72ae6b6bc32',1,'kcenon::logger::format_options']]],
+  ['previous_5fcontext_5f_15',['previous_context_',['../classkcenon_1_1logger_1_1log__context__scope.html#afc17b97247e14f1ba72522b7b4cc2ede',1,'kcenon::logger::log_context_scope::previous_context_'],['../classkcenon_1_1logger_1_1otlp_1_1otel__context__scope.html#aea4b265fe063a60ea31fccbaa3ca935f',1,'kcenon::logger::otlp::otel_context_scope::previous_context_']]],
+  ['previous_5fvalue_5f_16',['previous_value_',['../classkcenon_1_1logger_1_1scoped__context.html#acd92a9e02e262e2df1a120dc6fe8cb56',1,'kcenon::logger::scoped_context']]],
+  ['processing_5fworker_5f_17',['processing_worker_',['../classkcenon_1_1logger_1_1async_1_1batch__processor.html#a2d75795bb5aff93c8d1bce89757b5bac',1,'kcenon::logger::async::batch_processor']]],
+  ['protocol_18',['protocol',['../structkcenon_1_1logger_1_1otlp__writer_1_1config.html#aa85f26dd1f124d5bb91f9d8c6d5fa0f2',1,'kcenon::logger::otlp_writer::config']]],
+  ['protocol_5f_19',['protocol_',['../classkcenon_1_1logger_1_1network__writer.html#a42a6d7f55775a2fbf708f3a17da42c26',1,'kcenon::logger::network_writer']]],
+  ['ptr_20',['ptr',['../unionkcenon_1_1logger_1_1small__string_1_1data__union.html#a2a35444834e5d64579a65743aabb59d5',1,'kcenon::logger::small_string::data_union']]]
+];

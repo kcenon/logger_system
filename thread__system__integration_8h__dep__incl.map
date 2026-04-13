@@ -1,0 +1,5 @@
+<map id="include/kcenon/logger/integration/thread_system_integration.h" name="include/kcenon/logger/integration/thread_system_integration.h">
+<area shape="rect" id="Node000001" title="Optional thread_system integration for advanced async processing." alt="" coords="5,5,204,60"/>
+<area shape="rect" id="Node000002" href="$thread__system__integration_8cpp.html" title="Implementation of optional thread_system integration." alt="" coords="13,108,196,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,74,107,108,102,108,102,74"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="kcenon::logger::file_writer::open_internal" name="kcenon::logger::file_writer::open_internal">
+<area shape="rect" id="Node000001" title="Open the file (internal, caller must hold mutex)" alt="" coords="200,5,364,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1file__writer.html#a44624a5f43c93517f144cdd982457c90" title="Constructor." alt="" coords="5,5,152,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,28,152,28,152,23,186,23"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="kcenon::logger::thread_system_monitor_adapter" name="kcenon::logger::thread_system_monitor_adapter">
+<area shape="rect" id="Node000001" title="Adapter to use thread_system&#39;s monitoring capabilities." alt="" coords="5,313,200,757"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1monitoring__interface.html" title="Abstract monitoring interface." alt="" coords="8,5,197,265"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,279,105,313,100,313,100,279"/>
+</map>

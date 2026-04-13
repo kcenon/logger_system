@@ -1,0 +1,13 @@
+<map id="print_health_result" name="print_health_result">
+<area shape="rect" id="Node000001" title="Print health check result." alt="" coords="369,63,513,88"/>
+<area shape="rect" id="Node000002" href="$monitoring__integration__example_8cpp.html#a69f4c66591da0bf58d437167b4129a90" title="Example 1: Basic monitor integration with logger." alt="" coords="108,5,321,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="380,62,321,46,270,33,271,28,322,41,381,56"/>
+<area shape="rect" id="Node000004" href="$monitoring__integration__example_8cpp.html#a3795dc3758233d537d4f2094a55beaf0" title="Example 3: Demonstrating IMonitorable interface." alt="" coords="123,55,307,95"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="355,78,307,78,307,73,355,73"/>
+<area shape="rect" id="Node000005" href="$monitoring__integration__example_8cpp.html#af6e1f246e5f5056cd6eecbb7737c4ecd" title="Example 4: Simulating monitoring_system integration." alt="" coords="129,119,301,159"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="383,94,287,122,286,117,382,89"/>
+<area shape="rect" id="Node000003" href="$monitoring__integration__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,63,60,88"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="140,37,109,46,61,65,59,60,107,41,139,31"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="109,78,60,78,60,73,109,73"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="130,118,107,110,59,90,61,85,109,105,131,113"/>
+</map>

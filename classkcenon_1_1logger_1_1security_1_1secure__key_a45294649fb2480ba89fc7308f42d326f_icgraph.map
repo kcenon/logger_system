@@ -1,0 +1,13 @@
+<map id="kcenon::logger::security::secure_key::size" name="kcenon::logger::security::secure_key::size">
+<area shape="rect" id="Node000001" title="Get key size in bytes." alt="" coords="527,101,705,141"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#a50cef7d2e2926ddf2b09a731a6cb6eb9" title="Calculate HMAC signature." alt="" coords="254,5,475,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="563,97,478,60,442,48,444,43,480,55,565,93"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1encrypted__writer.html#a886f7b7540f46d1a59556479975878a2" title="Construct encrypted writer with wrapped writer." alt="" coords="269,69,460,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="513,111,460,104,461,99,514,106"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1encrypted__writer.html#a572956dddf7abb359777ec041fe20ff6" title="Rotate encryption key." alt="" coords="269,133,460,173"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="514,137,461,144,460,139,513,132"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#a8faaa55edf1e628e81868226d3fa76f4" title="Save key to file with secure permissions." alt="" coords="251,197,479,237"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="565,150,480,188,444,200,442,195,478,183,563,145"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#af6d42db093bd32dbd0ffb06ffca23f7d" title="Verify integrity of an audit log entry." alt="" coords="5,5,203,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="240,28,203,28,203,23,240,23"/>
+</map>

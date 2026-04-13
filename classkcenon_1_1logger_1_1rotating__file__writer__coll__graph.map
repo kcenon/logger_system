@@ -1,0 +1,36 @@
+<map id="kcenon::logger::rotating_file_writer" name="kcenon::logger::rotating_file_writer">
+<area shape="rect" id="Node000001" title="File writer with automatic log rotation support." alt="" coords="5,1412,220,1852"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1file__writer.html" title="Core file writer for logging to files." alt="" coords="462,963,601,1363"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="455,1253,222,1513,218,1509,451,1250"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="1113,700,1293,900"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1104,902,1104,902,1040,945,972,985,834,1054,705,1106,602,1142,600,1137,703,1101,832,1049,970,981,1037,941,1100,898,1101,898"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1sync__writer__tag.html" title="Tag interface for synchronous writers." alt="" coords="160,760,308,840"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="277,849,464,1075,460,1079,273,852"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="57,767,136,833"/>
+<area shape="poly" id="edge17_Node000001_Node000005" title=" " alt="" coords="100,833,111,1396,105,1396,95,833"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="111,832,127,866,149,898,201,944,279,1000,449,1109,446,1113,276,1005,198,948,145,902,122,868,106,834"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="31,517,162,597"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="99,611,99,767,94,767,94,611"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="333,767,434,833"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="396,832,432,938,458,999,453,1001,428,940,391,834"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="312,517,455,597"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="386,611,386,767,381,767,381,611"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="315,285,452,365"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="386,379,386,517,381,517,381,379"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="302,120,465,185"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="386,199,386,284,381,284,381,199"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="334,5,433,71"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="386,85,386,120,381,120,381,85"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="459,767,604,833"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="534,833,534,946,529,946,529,833"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="629,767,783,833"/>
+<area shape="poly" id="edge12_Node000002_Node000013" title=" " alt="" coords="693,834,610,1005,605,1003,688,832"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="807,753,981,847"/>
+<area shape="poly" id="edge13_Node000002_Node000014" title=" " alt="" coords="852,849,763,941,615,1085,611,1082,759,937,848,846"/>
+<area shape="rect" id="Node000015" href="$classkcenon_1_1logger_1_1log__formatter__interface.html" title="Abstract interface for log message formatters." alt="" coords="792,477,996,637"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="897,638,897,736,891,736,891,638"/>
+<area shape="rect" id="Node000016" href="$structkcenon_1_1logger_1_1format__options.html" title="Configuration options for log formatting." alt="" coords="801,235,987,415"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="897,415,897,461,891,461,891,415"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="1005,767,1089,833"/>
+<area shape="poly" id="edge16_Node000002_Node000017" title=" " alt="" coords="1037,834,1020,869,995,902,951,942,903,979,802,1044,703,1095,617,1132,615,1127,701,1090,800,1039,900,975,947,938,991,898,1015,866,1033,832"/>
+</map>

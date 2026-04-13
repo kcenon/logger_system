@@ -1,0 +1,13 @@
+<map id="include/kcenon/logger/core/strategies/environment_strategy.h" name="include/kcenon/logger/core/strategies/environment_strategy.h">
+<area shape="rect" id="Node000001" title="Environment variable&#45;based configuration strategy." alt="" coords="301,5,512,60"/>
+<area shape="rect" id="Node000002" href="$logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration kcenon." alt="" coords="324,108,489,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="409,74,409,108,404,108,404,74"/>
+<area shape="rect" id="Node000003" href="$critical__logging__example_8cpp.html" title="Example demonstrating critical log loss prevention mechanisms." alt="" coords="5,196,195,236"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="327,154,168,199,166,193,326,149"/>
+<area shape="rect" id="Node000004" href="$custom__writer__example_8cpp.html" title="Example demonstrating how to create custom writers using thread_safe_writer." alt="" coords="219,196,402,236"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="377,159,334,198,330,194,373,155"/>
+<area shape="rect" id="Node000005" href="$di__pattern__example_8cpp.html" title="Dependency Injection pattern example for logger_system Phase 4." alt="" coords="426,196,582,236"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="440,155,484,194,481,198,437,159"/>
+<area shape="rect" id="Node000006" href="$monitoring__integration__example_8cpp.html" title="Advanced monitoring integration example for Phase 4." alt="" coords="606,196,797,236"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="485,149,638,193,636,199,484,154"/>
+</map>

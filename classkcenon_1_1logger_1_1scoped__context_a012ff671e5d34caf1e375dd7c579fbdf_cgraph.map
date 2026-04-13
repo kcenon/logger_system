@@ -1,0 +1,13 @@
+<map id="kcenon::logger::scoped_context::scoped_context" name="kcenon::logger::scoped_context::scoped_context">
+<area shape="rect" id="Node000001" title="Construct with integer value." alt="" coords="5,53,193,93"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__context__storage.html#a900993bd17a765c41cb2733572e8b820" title="Get a specific field value if it exists." alt="" coords="241,21,440,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,58,227,53,228,58,194,63"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1log__context__storage.html#a17b7d77e51e0ffa3a302771e32bf8318" title="Set a string context field for the current thread." alt="" coords="259,85,422,125"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="194,82,246,89,245,95,193,88"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__context__storage.html#a160e7a0d53035331e93b8713e26c2f0e" title=" " alt="" coords="488,5,651,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="440,35,474,33,474,39,441,40"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__context__storage.html#aa72d924985d4e4cfb0659227cfd196ed" title=" " alt="" coords="488,84,651,139"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="407,58,476,80,474,85,405,63"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="404,82,474,60,476,65,406,87"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="422,104,474,106,474,111,422,110"/>
+</map>

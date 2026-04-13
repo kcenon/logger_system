@@ -1,0 +1,81 @@
+<map id="kcenon::logger::small_string::to_string" name="kcenon::logger::small_string::to_string">
+<area shape="rect" id="Node000001" title="Convert to std::string." alt="" coords="897,645,1060,685"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1buffered__writer.html#af69c3bfd3bfa8bd7169cfce8f2ec7f13" title="Copy a log entry for buffer storage." alt="" coords="644,5,824,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="971,632,955,513,928,353,911,271,892,197,870,135,847,91,822,66,791,48,793,43,825,62,851,88,875,132,897,195,917,270,934,352,960,513,976,631"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger.html#a5e3582690bc5bebcfdf5e35edfd490db" title="Creates a copy of a log_entry for queue storage." alt="" coords="655,101,813,141"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="971,632,955,524,929,380,912,309,893,244,871,191,847,155,831,143,812,134,814,129,834,138,851,152,876,188,898,242,917,307,934,379,961,523,976,631"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1compact__formatter.html#a8d5371b5ce8819169598958113f2599b" title="Format a log entry into a string." alt="" coords="643,165,825,205"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="975,632,972,548,966,495,955,438,939,378,916,321,886,267,848,219,824,203,827,199,851,215,891,264,921,318,944,377,960,436,971,494,977,548,981,631"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1json__formatter.html#a90ed86614970dfc4c754a9a79992600f" title="Format a log entry to JSON string." alt="" coords="657,229,811,269"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="974,632,966,560,947,466,930,416,909,368,882,323,848,283,830,271,810,262,812,257,833,266,851,279,886,320,914,365,935,414,952,464,971,559,979,632"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1logfmt__formatter.html#a0bdcc137401f427f6dcb57adcfbd7550" title="Format a log entry to logfmt string." alt="" coords="649,293,819,333"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="971,632,960,571,938,494,922,454,902,415,877,379,848,347,818,329,820,325,851,343,881,376,906,412,927,452,943,492,965,570,976,631"/>
+<area shape="rect" id="Node000014" href="$classkcenon_1_1logger_1_1timestamp__formatter.html#a12bf17e593c29666d537e68b023aff36" title="Format a log entry to human&#45;readable string." alt="" coords="635,357,833,397"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="967,633,953,584,929,524,894,463,873,435,848,411,830,400,833,395,851,407,876,432,899,460,934,521,958,582,973,631"/>
+<area shape="rect" id="Node000015" href="$classkcenon_1_1logger_1_1console__writer.html#ae82706c7a901a6488d242e4788c3470f" title="Format a log entry using the current formatter." alt="" coords="646,421,822,461"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="962,633,944,596,919,554,887,511,848,476,821,461,824,456,851,471,890,508,923,551,948,594,966,631"/>
+<area shape="rect" id="Node000018" href="$classkcenon_1_1logger_1_1file__writer.html#a561e0eae3b068d0ce032f3ded6a702dd" title="Format a log entry using the current formatter." alt="" coords="654,485,814,525"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="952,636,907,586,879,561,848,540,813,524,815,519,851,535,882,557,911,582,956,633"/>
+<area shape="rect" id="Node000021" href="$classkcenon_1_1logger_1_1network__writer.html#a7a2d7c4186ea898e86d8a2be49ddc8a8" title=" " alt="" coords="632,549,836,589"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="929,641,848,604,814,592,815,587,850,599,931,637"/>
+<area shape="rect" id="Node000024" href="$classkcenon_1_1logger_1_1base__writer.html#aac474fa9e38dec7f608879afecb50b80" title="Format a log entry using the current formatter." alt="" coords="641,613,827,653"/>
+<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="883,656,827,648,828,643,884,650"/>
+<area shape="rect" id="Node000027" href="$classkcenon_1_1logger_1_1template__formatter.html#a6484153f3815a4ce22e4754ab25a5e23" title="Resolve a placeholder to its actual value." alt="" coords="619,677,849,717"/>
+<area shape="poly" id="edge26_Node000001_Node000027" title=" " alt="" coords="884,680,850,685,849,680,883,675"/>
+<area shape="rect" id="Node000030" href="$classkcenon_1_1logger_1_1filters_1_1regex__filter.html#abb8fe31cb082a9ca853ae007ff094392" title="Check if a log entry should be processed." alt="" coords="643,741,825,781"/>
+<area shape="poly" id="edge30_Node000001_Node000030" title=" " alt="" coords="931,694,850,732,815,744,814,739,848,727,929,689"/>
+<area shape="rect" id="Node000031" href="$classkcenon_1_1logger_1_1log__filter.html#ad6f77eba5e9704847c7c4ccadf7ff02e" title="Check if a log entry should be processed (new interface)" alt="" coords="661,829,807,869"/>
+<area shape="poly" id="edge31_Node000001_Node000031" title=" " alt="" coords="954,698,908,746,851,795,819,815,786,832,784,827,816,811,848,791,905,743,950,694"/>
+<area shape="rect" id="Node000032" href="$classsecurity__filter.html#ab25cfe603ab2c42729f5602291f9eb55" title="Check if a log entry should be processed." alt="" coords="639,894,829,919"/>
+<area shape="poly" id="edge33_Node000001_Node000032" title=" " alt="" coords="970,700,953,742,928,792,894,842,874,864,851,884,827,896,825,892,848,879,870,860,890,838,924,790,948,740,965,698"/>
+<area shape="rect" id="Node000033" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#adfb1006d2b870d376061654f40f797cd" title="Check if a log entry should be sampled (logged)" alt="" coords="626,944,842,984"/>
+<area shape="poly" id="edge34_Node000001_Node000033" title=" " alt="" coords="973,699,959,751,935,814,900,879,877,908,851,934,833,946,830,942,848,930,873,905,895,876,930,812,954,749,968,698"/>
+<area shape="rect" id="Node000035" href="$classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a5e3277edb6cf43396aa35edd16a8d4b9" title="Write a log entry asynchronously." alt="" coords="637,1009,831,1063"/>
+<area shape="poly" id="edge36_Node000001_Node000035" title=" " alt="" coords="976,700,965,762,943,842,926,884,906,925,881,964,851,998,833,1012,830,1008,848,994,877,960,901,923,922,882,938,840,960,761,971,699"/>
+<area shape="rect" id="Node000036" href="$classkcenon_1_1logger_1_1encrypted__writer.html#a63639723e977b497acaac252d6cebbd5" title="Write encrypted log entry." alt="" coords="639,1088,829,1128"/>
+<area shape="poly" id="edge37_Node000001_Node000036" title=" " alt="" coords="980,699,974,776,955,878,939,932,917,985,888,1034,851,1078,831,1092,828,1088,848,1074,884,1031,912,983,934,930,950,877,969,776,974,699"/>
+<area shape="rect" id="Node000037" href="$classkcenon_1_1logger_1_1network__writer.html#a24559984597b2ea005551bd279120cef" title="Write log entry." alt="" coords="645,1152,823,1192"/>
+<area shape="poly" id="edge38_Node000001_Node000037" title=" " alt="" coords="975,700,959,801,932,933,915,999,896,1059,874,1108,851,1142,825,1160,822,1155,847,1138,870,1105,891,1057,910,998,927,932,954,800,970,699"/>
+<area shape="rect" id="Node000038" href="$classkcenon_1_1logger_1_1otlp__writer.html#aeecdba82f0f69df14a41c4b4969c6c6b" title="Write a log entry with OTEL context." alt="" coords="659,1216,809,1256"/>
+<area shape="poly" id="edge39_Node000001_Node000038" title=" " alt="" coords="976,699,962,813,936,964,919,1040,900,1110,877,1167,851,1206,832,1220,811,1230,809,1225,830,1216,847,1202,872,1164,895,1108,914,1039,931,963,957,812,971,699"/>
+<area shape="rect" id="Node000039" href="$classkcenon_1_1logger_1_1critical__writer.html#a1edbf0f0fecf4eb70b0c574a11a67799" title="Write to write&#45;ahead log." alt="" coords="649,1280,819,1320"/>
+<area shape="poly" id="edge40_Node000001_Node000039" title=" " alt="" coords="977,700,965,825,941,996,924,1082,903,1161,879,1225,866,1250,851,1270,837,1282,821,1290,819,1285,834,1277,847,1266,861,1248,875,1223,898,1159,918,1081,935,995,959,825,972,699"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1buffered__writer.html#a99f8b814a289c60d0ec167f3715f48b1" title="Write a log entry to the buffer." alt="" coords="373,5,553,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="630,28,553,28,553,23,630,23"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1queued__writer__base.html#ad12b277523c77608c476a1bab01d35c8" title="Enqueue entry (specialization for std::queue)" alt="" coords="357,69,568,109"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="641,113,568,104,569,99,642,108"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1queued__writer__base.html#aad61874981892f3c2f06df8383cbdde0" title="Enqueue entry (specialization for std::vector)" alt="" coords="357,133,568,173"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="642,135,569,144,568,138,641,130"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1batch__writer.html#ae293329a317a211cfd636da07e0c3f96" title="Write a log entry to the batch." alt="" coords="381,197,544,237"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="643,146,620,156,596,171,572,188,542,200,540,195,569,183,593,167,617,151,641,141"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1queued__writer__base.html#a900ad2227f4f37d158bbb6f71a356104" title="Try to enqueue an entry with overflow protection." alt="" coords="110,69,305,109"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="344,92,305,92,305,87,344,87"/>
+<area shape="rect" id="Node000012" href="$structured__logging__example_8cpp.html#ae96b3123ffe562a68fd21ffd71b723fd" title="Demonstrates Logfmt formatter for key=value output." alt="" coords="108,309,307,334"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="636,317,307,323,307,317,636,312"/>
+<area shape="rect" id="Node000013" href="$structured__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,526,60,551"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="127,342,110,354,92,374,77,396,56,445,44,492,38,526,33,525,38,491,51,444,73,394,88,370,106,350,124,338"/>
+<area shape="rect" id="Node000016" href="$classkcenon_1_1logger_1_1console__writer.html#ac00806b7b0ba8195369fb38ace2d805c" title="Write a log entry to console." alt="" coords="375,357,551,397"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="634,421,547,400,549,395,636,415"/>
+<area shape="rect" id="Node000017" href="$composite__writer__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="180,365,235,390"/>
+<area shape="poly" id="edge16_Node000016_Node000017" title=" " alt="" coords="361,380,235,380,235,375,361,375"/>
+<area shape="rect" id="Node000019" href="$classkcenon_1_1logger_1_1file__writer.html#a3d2fd71af8ebe7299849f8cdba763815" title="Write a log entry to file." alt="" coords="389,421,536,461"/>
+<area shape="poly" id="edge18_Node000018_Node000019" title=" " alt="" coords="640,486,536,461,537,456,641,481"/>
+<area shape="rect" id="Node000020" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a8363ee61d1496ee59e3117c22417fdf9" title="Write operation with automatic rotation check." alt="" coords="374,485,551,525"/>
+<area shape="poly" id="edge19_Node000018_Node000020" title=" " alt="" coords="640,508,552,508,552,503,640,503"/>
+<area shape="rect" id="Node000022" href="$classkcenon_1_1logger_1_1network__writer.html#addb327c9107daa00a12fd143a242fe12" title=" " alt="" coords="373,549,552,589"/>
+<area shape="poly" id="edge21_Node000021_Node000022" title=" " alt="" coords="618,572,552,572,552,567,618,567"/>
+<area shape="rect" id="Node000023" href="$classkcenon_1_1logger_1_1network__writer.html#a5032ad5c8fa86ee299d282ea49547974" title="Constructor." alt="" coords="118,549,297,589"/>
+<area shape="poly" id="edge22_Node000022_Node000023" title=" " alt="" coords="360,572,297,572,297,567,360,567"/>
+<area shape="rect" id="Node000025" href="$classcounted__console__writer.html#a3a2b90dd22598f4325afa313a55aefb9" title="Implementation of structured write operation (override in derived classes)" alt="" coords="375,613,551,653"/>
+<area shape="poly" id="edge24_Node000024_Node000025" title=" " alt="" coords="627,636,551,636,551,631,627,631"/>
+<area shape="rect" id="Node000026" href="$classmemory__writer.html#ab41a7a40680877cf869e0750f558cebd" title="Implementation of write operation." alt="" coords="381,677,544,717"/>
+<area shape="poly" id="edge25_Node000024_Node000026" title=" " alt="" coords="636,659,545,681,544,676,635,654"/>
+<area shape="rect" id="Node000028" href="$classkcenon_1_1logger_1_1template__formatter.html#a0b738b7e7413cfad5778dea556748157" title="Format a log entry using the template." alt="" coords="370,741,555,781"/>
+<area shape="poly" id="edge27_Node000027_Node000028" title=" " alt="" coords="636,723,549,744,547,739,634,718"/>
+<area shape="rect" id="Node000029" href="$structured__logging__example_8cpp.html#adec95563fbcce6741a032ea597b63e87" title="Demonstrates template&#45;based custom formatter." alt="" coords="132,677,283,717"/>
+<area shape="poly" id="edge28_Node000028_Node000029" title=" " alt="" coords="368,740,282,719,284,714,370,735"/>
+<area shape="poly" id="edge29_Node000029_Node000013" title=" " alt="" coords="172,670,46,554,50,550,176,666"/>
+<area shape="poly" id="edge32_Node000031_Node000031" title=" " alt="" coords="775,818,761,811,734,808,711,810,696,815,691,821,694,828,689,830,686,820,693,810,709,805,734,803,762,806,778,813"/>
+<area shape="rect" id="Node000034" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#ae99926e0ac51e451573590e637c8909e" title="Check if a log entry should be sampled (without category)" alt="" coords="355,944,571,984"/>
+<area shape="poly" id="edge35_Node000033_Node000034" title=" " alt="" coords="612,967,571,967,571,961,612,961"/>
+</map>

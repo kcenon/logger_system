@@ -1,0 +1,7 @@
+<map id="kcenon::logger::security::path_validator::is_safe_filename" name="kcenon::logger::security::path_validator::is_safe_filename">
+<area shape="rect" id="Node000001" title="Check if a filename is safe (contains only allowed characters)" alt="" coords="477,5,656,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1path__validator.html#a97978ff6f41db48eea65ddea212982cb" title="Validate a file path." alt="" coords="244,13,429,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="463,35,430,35,430,30,463,30"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1path__validator.html#ad0d9bbc216514b59bc158592f9a6671f" title="Create a safe path by joining base and relative path." alt="" coords="5,13,196,53"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="230,35,196,35,196,30,230,30"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="kcenon::logger::log_context_scope::remove_logger_context" name="kcenon::logger::log_context_scope::remove_logger_context">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,30,187,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#ae830b3970289b394d60144e2b7eda193" title=" " alt="" coords="237,5,403,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,42,223,37,223,42,187,47"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1unified__log__context.html#ae23905a5eac8262209ae6eb4c6f325ae" title="Remove a specific key from the context." alt="" coords="235,69,405,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="187,68,221,73,221,78,186,73"/>
+</map>

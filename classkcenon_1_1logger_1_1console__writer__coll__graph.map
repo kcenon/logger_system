@@ -1,0 +1,15 @@
+<map id="kcenon::logger::console_writer" name="kcenon::logger::console_writer">
+<area shape="rect" id="Node000001" title="Core console writer for logging to stdout/stderr." alt="" coords="257,733,425,1133"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,471,185,671"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,680,259,807,254,810,168,683"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1sync__writer__tag.html" title="Tag interface for synchronous writers." alt="" coords="209,531,357,611"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="294,624,312,733,306,734,289,625"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="382,523,555,618"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="455,619,419,718,414,717,450,617"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1log__formatter__interface.html" title="Abstract interface for log message formatters." alt="" coords="367,248,571,408"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="471,409,471,507,466,507,466,409"/>
+<area shape="rect" id="Node000006" href="$structkcenon_1_1logger_1_1format__options.html" title="Configuration options for log formatting." alt="" coords="376,5,561,185"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="471,186,471,231,466,231,466,186"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="580,538,664,603"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="609,605,570,672,505,757,438,834,434,830,501,753,565,669,604,602"/>
+</map>

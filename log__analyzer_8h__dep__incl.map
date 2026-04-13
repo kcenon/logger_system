@@ -1,0 +1,17 @@
+<map id="include/kcenon/logger/analysis/log_analyzer.h" name="include/kcenon/logger/analysis/log_analyzer.h">
+<area shape="rect" id="Node000001" title="Log analysis and metrics functionality." alt="" coords="223,5,401,45"/>
+<area shape="rect" id="Node000002" href="$distributed__logging__demo_8cpp.html" title="Distributed logging with network writers, log server, and real&#45;time analysis." alt="" coords="139,101,299,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="285,57,239,103,236,99,281,53"/>
+<area shape="rect" id="Node000003" href="$realtime__log__analyzer_8h.html" title="Real&#45;time log analysis with anomaly detection." alt="" coords="323,93,490,148"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="343,53,382,91,378,95,339,57"/>
+<area shape="rect" id="Node000004" href="$logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration kcenon." alt="" coords="324,196,489,236"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="409,162,409,196,404,196,404,162"/>
+<area shape="rect" id="Node000005" href="$critical__logging__example_8cpp.html" title="Example demonstrating critical log loss prevention mechanisms." alt="" coords="5,284,195,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="327,242,168,287,166,281,326,237"/>
+<area shape="rect" id="Node000006" href="$custom__writer__example_8cpp.html" title="Example demonstrating how to create custom writers using thread_safe_writer." alt="" coords="219,284,402,324"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="377,247,334,286,330,282,373,243"/>
+<area shape="rect" id="Node000007" href="$di__pattern__example_8cpp.html" title="Dependency Injection pattern example for logger_system Phase 4." alt="" coords="426,284,582,324"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="440,243,484,282,481,286,437,247"/>
+<area shape="rect" id="Node000008" href="$monitoring__integration__example_8cpp.html" title="Advanced monitoring integration example for Phase 4." alt="" coords="606,284,797,324"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="485,237,638,281,636,287,484,242"/>
+</map>

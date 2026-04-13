@@ -1,0 +1,22 @@
+<map id="kcenon::logger::file_writer::open_internal" name="kcenon::logger::file_writer::open_internal">
+<area shape="rect" id="Node000001" title="Open the file (internal, caller must hold mutex)" alt="" coords="5,92,169,132"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger_1_1utils.html#ab9c3c2b456e297b001c5b0a321cf76be" title="Condition verification helper." alt="" coords="233,5,387,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,89,244,48,246,53,141,94"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="451,70,609,95"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="169,104,437,86,437,91,170,109"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger_1_1utils.html#ac1c682bf72bb430ec40c4db756d79b17" title="Directory creation helper." alt="" coords="217,120,403,160"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="170,120,204,124,203,129,169,125"/>
+<area shape="rect" id="Node000007" href="$namespacekcenon_1_1logger_1_1utils.html#a89af593234842ba16d569fdafa25e3f4" title="Error handling helper for file open operations." alt="" coords="452,173,608,213"/>
+<area shape="poly" id="edge12_Node000001_Node000007" title=" " alt="" coords="124,130,168,152,218,169,274,181,332,188,439,193,438,198,331,193,273,186,217,175,166,156,122,135"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="863,116,1025,156"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="388,28,493,39,610,55,740,81,857,110,855,115,739,86,609,60,493,44,387,34"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="388,43,468,64,467,69,387,48"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="1073,116,1240,156"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1026,133,1060,133,1060,139,1026,139"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="403,137,849,134,849,139,403,142"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="387,117,467,96,468,101,388,123"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="394,157,439,169,438,174,392,163"/>
+<area shape="rect" id="Node000008" href="$namespacekcenon_1_1logger_1_1utils.html#aafab2237b40cefbc519b3dcdf64fb23d" title="Error handling helper for write operations." alt="" coords="657,173,815,213"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="608,191,643,191,643,196,608,196"/>
+<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="808,171,857,157,859,162,810,176"/>
+</map>

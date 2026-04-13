@@ -1,0 +1,5 @@
+<map id="kcenon::logger::async::high_performance_async_writer::set_use_color" name="kcenon::logger::async::high_performance_async_writer::set_use_color">
+<area shape="rect" id="Node000001" title="Set whether to use color output." alt="" coords="5,5,199,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1base__writer.html#ab92d0f39e839960274faa320024c91f9" title="Get current color output setting." alt="" coords="247,13,404,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,30,233,30,233,35,199,35"/>
+</map>

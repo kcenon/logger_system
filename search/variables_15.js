@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['wal_5fpath_0',['wal_path',['../structkcenon_1_1logger_1_1critical__writer__config.html#a75aad0d0f8b7a81d3d185c28448465ff',1,'kcenon::logger::critical_writer_config']]],
+  ['wal_5fstream_5f_1',['wal_stream_',['../classkcenon_1_1logger_1_1critical__writer.html#abf43ec9086f253f1a933750048797d5e',1,'kcenon::logger::critical_writer']]],
+  ['wal_5fwrites_2',['wal_writes',['../structkcenon_1_1logger_1_1critical__writer_1_1critical__stats.html#ad1f067d11786e9bd78043d4c761f2c71',1,'kcenon::logger::critical_writer::critical_stats']]],
+  ['width_3',['width',['../structkcenon_1_1logger_1_1template__formatter_1_1template__segment.html#aa81034961b5b7d3a1d9210fbe746a665',1,'kcenon::logger::template_formatter::template_segment']]],
+  ['window_5fduration_4',['window_duration',['../structkcenon_1_1logger_1_1analysis_1_1realtime__analysis__config.html#afd372aea3b85fe7c22ef5dff5dc217ed',1,'kcenon::logger::analysis::realtime_analysis_config']]],
+  ['window_5fmutex_5f_5',['window_mutex_',['../classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a45a5a74ab7d19ed02eb359ed618fed76',1,'kcenon::logger::analysis::realtime_log_analyzer']]],
+  ['worker_5f_6',['worker_',['../classkcenon_1_1logger_1_1log__collector_1_1impl.html#aafa3bbe1afbb2bd535a855a655ae2e92',1,'kcenon::logger::log_collector::impl']]],
+  ['worker_5fthread_5f_7',['worker_thread_',['../classkcenon_1_1logger_1_1async__writer.html#a8869944b124769510471c35694e341b2',1,'kcenon::logger::async_writer::worker_thread_'],['../classkcenon_1_1logger_1_1async_1_1async__worker.html#a33663cfbed8cac89586bbf571f0b24b7',1,'kcenon::logger::async::async_worker::worker_thread_']]],
+  ['worker_5fthreads_5f_8',['worker_threads_',['../classkcenon_1_1logger_1_1server_1_1log__server.html#a050bbfe88d25e6cdeea525c246b8f4f7',1,'kcenon::logger::server::log_server']]],
+  ['wrapped_5f_9',['wrapped_',['../classkcenon_1_1logger_1_1decorator__writer__base.html#a6c962b17a33c9975fca48f58d83cc06f',1,'kcenon::logger::decorator_writer_base']]],
+  ['wrapped_5fwriter_5f_10',['wrapped_writer_',['../classkcenon_1_1logger_1_1critical__writer.html#ac3020487c1f4251569257789a1393072',1,'kcenon::logger::critical_writer::wrapped_writer_'],['../classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#ac20befca165f68ef19b0bf24aa2e5b8a',1,'kcenon::logger::async::high_performance_async_writer::wrapped_writer_']]],
+  ['write_5fahead_5flog_11',['write_ahead_log',['../structkcenon_1_1logger_1_1critical__writer__config.html#abe60fb75a98f7228589725bc4bbffdb1',1,'kcenon::logger::critical_writer_config']]],
+  ['write_5ffailures_12',['write_failures',['../structkcenon_1_1logger_1_1metrics_1_1logger__performance__stats_1_1writer__stats__compat.html#a02dbc34bbbccff1d4a415f4ef19d8aab',1,'kcenon::logger::metrics::logger_performance_stats::writer_stats_compat']]],
+  ['write_5fmutex_5f_13',['write_mutex_',['../classkcenon_1_1logger_1_1encrypted__writer.html#a065f0f8036282f5ccbeb6739c34a3699',1,'kcenon::logger::encrypted_writer::write_mutex_'],['../classkcenon_1_1logger_1_1thread__safe__writer.html#a7b2ff8c5f8f0fe9124b761f746aa427e',1,'kcenon::logger::thread_safe_writer::write_mutex_']]],
+  ['writer_5f_14',['writer_',['../classkcenon_1_1logger_1_1async_1_1batch__processor.html#a9d3bc176ba9a28105982bce5f388cfc7',1,'kcenon::logger::async::batch_processor']]],
+  ['writer_5ferrors_15',['writer_errors',['../structkcenon_1_1logger_1_1metrics_1_1logger__performance__stats.html#a91fc6538009ddb7e4cef15dc7ee41c62',1,'kcenon::logger::metrics::logger_performance_stats']]],
+  ['writer_5fnames_16',['writer_names',['../structkcenon_1_1logger_1_1routing_1_1route__config.html#a1d4b25622e257937397572dd49826601',1,'kcenon::logger::routing::route_config']]],
+  ['writer_5fstats_17',['writer_stats',['../structkcenon_1_1logger_1_1metrics_1_1logger__performance__stats.html#a3aa9f290effb83eb02c20efd821f7133',1,'kcenon::logger::metrics::logger_performance_stats']]],
+  ['writer_5fthread_5fcount_18',['writer_thread_count',['../structkcenon_1_1logger_1_1logger__config.html#a2cc5835c36bf8f06e16d76e20d2a3f0f',1,'kcenon::logger::logger_config']]],
+  ['writers_19',['writers',['../structkcenon_1_1logger_1_1log__collector__shared__state.html#ad9abecd63487b64a13a2e1567f7a861c',1,'kcenon::logger::log_collector_shared_state']]],
+  ['writers_5f_20',['writers_',['../classkcenon_1_1logger_1_1logger__builder.html#aa77fdf203624974e19f2ef15ae281914',1,'kcenon::logger::logger_builder::writers_'],['../classkcenon_1_1logger_1_1logger_1_1impl.html#ac432610b2f592f201033664dd945d0f6',1,'kcenon::logger::logger::impl::writers_']]],
+  ['writers_5ffailed_5f_21',['writers_failed_',['../classkcenon_1_1logger_1_1basic__monitor.html#aad968fe3311b2475ddecdec4f1c4bac8',1,'kcenon::logger::basic_monitor']]],
+  ['writers_5fmutex_22',['writers_mutex',['../structkcenon_1_1logger_1_1log__collector__shared__state.html#a67592db23a81214964796c5c9d569ed8',1,'kcenon::logger::log_collector_shared_state']]],
+  ['writers_5fmutex_5f_23',['writers_mutex_',['../classkcenon_1_1logger_1_1logger_1_1impl.html#a8e34de4bbaba266e5584cea8959f0b30',1,'kcenon::logger::logger::impl']]],
+  ['writes_5fsince_5fcheck_5f_24',['writes_since_check_',['../classkcenon_1_1logger_1_1rotating__file__writer.html#a53787e93028f7d3f5b32c42a264b903b',1,'kcenon::logger::rotating_file_writer']]]
+];

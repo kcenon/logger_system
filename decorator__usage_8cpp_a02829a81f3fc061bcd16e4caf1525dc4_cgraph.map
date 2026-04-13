@@ -1,0 +1,14 @@
+<map id="example_single_decorators" name="example_single_decorators">
+<area shape="rect" id="Node000001" title="Example 2: Single Decorator Usage." alt="" coords="5,75,207,101"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a5906c5c775436861017bab4775a7552d" title="Get the name of this writer." alt="" coords="483,5,671,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,73,254,53,365,39,469,30,470,35,366,44,255,59,159,78"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1filtered__writer.html#afa52fac9e6683fb5685f2f4296eb7e17" title="Get the name of this writer." alt="" coords="255,68,427,108"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="207,85,241,85,241,91,207,91"/>
+<area shape="rect" id="Node000006" href="$decorator__usage_8cpp.html#a1156846072709ab6e482082b43aae398" title=" " alt="" coords="287,133,394,158"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="159,98,276,127,274,132,158,103"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="416,65,488,46,489,51,417,71"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a36e4ca76478f6b08b045f3386c02d61d" title=" " alt="" coords="475,69,680,109"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="427,86,461,86,461,91,427,91"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="483,133,671,173"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="415,106,492,127,490,132,413,111"/>
+</map>

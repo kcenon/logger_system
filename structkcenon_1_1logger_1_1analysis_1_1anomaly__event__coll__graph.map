@@ -1,0 +1,12 @@
+<map id="kcenon::logger::analysis::anomaly_event" name="kcenon::logger::analysis::anomaly_event">
+<area shape="rect" id="Node000001" title="Represents an anomaly event detected during real&#45;time analysis." alt="" coords="5,667,177,807"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="52,135,131,200"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,200,94,650,89,650,89,200"/>
+<area shape="rect" id="Node000005" href="$structkcenon_1_1logger_1_1analysis_1_1analyzed__log__entry.html" title="Log entry for analysis." alt="" coords="108,292,280,432"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="111,199,152,276,147,279,106,202"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="26,5,157,85"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,99,94,134,89,134,89,99"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="109,509,265,604"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="165,605,139,653,134,651,160,603"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="194,432,192,493,187,493,189,432"/>
+</map>

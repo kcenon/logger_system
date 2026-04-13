@@ -1,0 +1,8 @@
+<map id="kcenon::logger::log_filter::should_log" name="kcenon::logger::log_filter::should_log">
+<area shape="rect" id="Node000001" title="Check if a log entry should be processed (new interface)" alt="" coords="5,29,152,69"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="40,30,38,20,44,11,58,5,79,3,102,6,115,13,113,18,101,11,79,8,59,10,48,15,43,21,46,28"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="200,29,363,69"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="152,47,186,47,186,52,152,52"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="411,29,573,69"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="363,47,397,47,397,52,363,52"/>
+</map>

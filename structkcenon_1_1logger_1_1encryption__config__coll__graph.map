@@ -1,0 +1,7 @@
+<map id="kcenon::logger::encryption_config" name="kcenon::logger::encryption_config">
+<area shape="rect" id="Node000001" title="Configuration for encrypted_writer." alt="" coords="5,476,192,736"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html" title="RAII wrapper for encryption keys with secure memory management." alt="" coords="13,133,184,413"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,414,101,459,96,459,96,414"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="19,5,178,71"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="101,71,101,117,96,117,96,71"/>
+</map>

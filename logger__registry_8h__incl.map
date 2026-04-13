@@ -1,0 +1,9 @@
+<map id="include/kcenon/logger/core/logger_registry.h" name="include/kcenon/logger/core/logger_registry.h">
+<area shape="rect" id="Node000001" title="Manages logger registration and tracking." alt="" coords="67,5,233,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,101,68,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,48,65,94,61,90,123,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="93,101,207,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="153,46,153,87,147,87,147,46"/>
+<area shape="rect" id="Node000004" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="232,93,391,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="187,43,265,85,263,89,184,48"/>
+</map>

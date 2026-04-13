@@ -1,0 +1,5 @@
+<map id="kcenon::logger::metrics::logger_performance_stats::reset" name="kcenon::logger::metrics::logger_performance_stats::reset">
+<area shape="rect" id="Node000001" title="Reset all statistics." alt="" coords="253,5,453,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#ae29b186e1e4aed5128f0d7a64d3aa4b9" title="Enable or disable metrics collection." alt="" coords="5,13,205,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="240,35,206,35,206,30,240,30"/>
+</map>

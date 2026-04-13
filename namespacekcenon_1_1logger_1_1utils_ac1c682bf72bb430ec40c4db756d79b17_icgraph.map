@@ -1,0 +1,13 @@
+<map id="kcenon::logger::utils::ensure_directory_exists" name="kcenon::logger::utils::ensure_directory_exists">
+<area shape="rect" id="Node000001" title="Directory creation helper." alt="" coords="491,37,676,77"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1file__writer.html#a0fe178557962a60f247e977c9b923b20" title="Open the file (internal, caller must hold mutex)" alt="" coords="255,5,419,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="477,46,418,39,419,33,477,41"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a72c420b95fea71c28460766985ed3d8a" title="Perform the actual rotation operation." alt="" coords="231,69,443,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="478,74,443,78,442,73,477,68"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1file__writer.html#a44624a5f43c93517f144cdd982457c90" title="Constructor." alt="" coords="21,5,167,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="241,28,167,28,167,23,241,23"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a1b8286e8c0a86e7bcc1e1f855eb517ce" title="Manually trigger log rotation (thread&#45;safe)" alt="" coords="5,69,183,109"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="217,92,183,92,183,87,217,87"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a8363ee61d1496ee59e3117c22417fdf9" title="Write operation with automatic rotation check." alt="" coords="5,133,183,173"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="248,115,171,136,170,131,246,110"/>
+</map>

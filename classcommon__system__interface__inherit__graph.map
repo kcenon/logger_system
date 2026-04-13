@@ -1,0 +1,7 @@
+<map id="common_system_interface" name="common_system_interface">
+<area shape="rect" id="Node000001" title=" " alt="" coords="83,5,310,111"/>
+<area shape="rect" id="Node000002" href="$classcommon__system__adapter.html" title=" " alt="" coords="5,179,188,284"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,124,129,180,125,177,157,121"/>
+<area shape="rect" id="Node000003" href="$classfull__integration__adapter.html" title=" " alt="" coords="213,159,383,304"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="237,121,258,157,253,160,232,124"/>
+</map>

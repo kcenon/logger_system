@@ -1,0 +1,36 @@
+<map id="kcenon::logger::logger_builder::with_async" name="kcenon::logger::logger_builder::with_async">
+<area shape="rect" id="Node000001" title=" " alt="" coords="377,277,544,317"/>
+<area shape="rect" id="Node000002" href="$di__pattern__example_8cpp.html#a4eaf8643101790b89bdb53d866a8fd73" title="Example demonstrating DI pattern with logger and monitor." alt="" coords="141,5,296,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="448,265,432,218,407,163,372,107,351,82,328,59,295,41,297,37,331,55,355,78,377,104,412,160,437,216,453,263"/>
+<area shape="rect" id="Node000004" href="$monitoring__integration__example_8cpp.html#a69f4c66591da0bf58d437167b4129a90" title="Example 1: Basic monitor integration with logger." alt="" coords="112,313,325,338"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="364,311,326,316,325,310,364,306"/>
+<area shape="rect" id="Node000006" href="$monitoring__integration__example_8cpp.html#a5367178a2d033e44314686687f84616c" title="Example 2: Multiple loggers with single monitor." alt="" coords="141,363,296,403"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="400,325,330,352,290,365,288,360,328,347,398,320"/>
+<area shape="rect" id="Node000007" href="$di__pattern__example_8cpp.html#a01edde6daa7655b6d8d345aa730fa55c" title="Example demonstrating monitor&#45;less operation." alt="" coords="141,69,296,109"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="441,266,397,194,365,156,328,124,295,107,298,102,331,119,369,152,401,191,446,263"/>
+<area shape="rect" id="Node000008" href="$monitoring__integration__example_8cpp.html#a3795dc3758233d537d4f2094a55beaf0" title="Example 3: Demonstrating IMonitorable interface." alt="" coords="127,427,311,467"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="435,329,389,375,361,397,331,417,305,429,302,424,328,412,358,393,386,371,431,326"/>
+<area shape="rect" id="Node000009" href="$di__pattern__example_8cpp.html#a988a3f28c0cc9203f9a43eb217427175" title="Example demonstrating runtime monitor injection." alt="" coords="113,133,324,173"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="430,269,384,227,328,188,302,176,304,171,331,183,388,223,434,265"/>
+<area shape="rect" id="Node000010" href="$di__pattern__example_8cpp.html#a0d431828f6fced341fed5c7177400f1f" title="Example demonstrating monitor swapping." alt="" coords="108,198,329,223"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="409,274,328,239,285,226,286,221,330,233,411,269"/>
+<area shape="rect" id="Node000011" href="$monitoring__integration__example_8cpp.html#af6e1f246e5f5056cd6eecbb7737c4ecd" title="Example 4: Simulating monitoring_system integration." alt="" coords="133,491,305,531"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="447,331,428,366,402,407,370,447,331,481,306,494,304,490,328,476,366,443,398,403,423,363,442,328"/>
+<area shape="rect" id="Node000012" href="$di__pattern__example_8cpp.html#a2e334e3a2683d09487af8cff4b158dec" title=" " alt="" coords="139,248,298,288"/>
+<area shape="poly" id="edge17_Node000001_Node000012" title=" " alt="" coords="364,288,298,280,299,275,364,283"/>
+<area shape="rect" id="Node000013" href="$critical__logging__example_8cpp.html#af3661cb486a5baec84764a058cb2f01e" title=" " alt="" coords="141,555,296,595"/>
+<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="453,331,438,379,413,436,377,495,356,521,331,545,298,563,295,559,328,541,352,518,373,492,408,434,433,377,448,330"/>
+<area shape="rect" id="Node000003" href="$di__pattern__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,141,60,166"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="130,48,110,60,87,78,69,101,43,141,38,139,64,97,84,75,106,55,127,44"/>
+<area shape="rect" id="Node000005" href="$monitoring__integration__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,402,60,427"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="128,345,109,353,74,378,47,404,43,400,70,374,107,348,126,340"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="128,401,60,413,60,407,127,396"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="132,116,109,124,61,144,59,139,107,119,130,111"/>
+<area shape="poly" id="edge10_Node000008_Node000005" title=" " alt="" coords="112,431,60,422,61,417,113,426"/>
+<area shape="poly" id="edge12_Node000009_Node000003" title=" " alt="" coords="99,156,60,156,60,151,99,151"/>
+<area shape="poly" id="edge14_Node000010_Node000003" title=" " alt="" coords="140,197,107,188,59,169,61,164,109,183,141,192"/>
+<area shape="poly" id="edge16_Node000011_Node000005" title=" " alt="" coords="121,488,107,481,71,456,44,430,48,426,74,452,109,476,123,483"/>
+<area shape="poly" id="edge18_Node000012_Node000003" title=" " alt="" coords="125,247,106,237,67,202,40,168,45,165,71,199,110,232,128,242"/>
+<area shape="rect" id="Node000014" href="$critical__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,562,60,587"/>
+<area shape="poly" id="edge20_Node000013_Node000014" title=" " alt="" coords="128,577,60,577,60,572,128,572"/>
+</map>
