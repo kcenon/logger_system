@@ -223,22 +223,23 @@ jobs:
         ref: main
         path: thread_system
 
-    - name: Setup vcpkg
-      uses: lukka/run-vcpkg@v11
+    - name: Cache FetchContent dependencies
+      uses: actions/cache@v5
       with:
-        vcpkgGitCommitId: '50c0cb48a0cf2f6fc5c7b2c0d2bafbe26d0a7ca2'
+        path: |
+          build/_deps
+        key: ${{ runner.os }}-${{ matrix.build-type }}-fetchcontent-gtest-v1.14.0-v2
+        restore-keys: |
+          ${{ runner.os }}-${{ matrix.build-type }}-fetchcontent-gtest-v1.14.0-
+          ${{ runner.os }}-fetchcontent-gtest-v1.14.0-
 
     - name: Configure CMake
-      env:
-        VCPKG_FEATURE_FLAGS: manifests
       run: |
         cmake -B build `
           -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} `
           -DLOGGER_BUILD_TESTS=ON `
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON `
-          -DBUILD_WITH_COMMON_SYSTEM=ON `
-          -DVCPKG_MANIFEST_FEATURES="testing" `
-          -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake"
+          -DBUILD_WITH_COMMON_SYSTEM=ON
 
     - name: Build
       run: cmake --build build --config ${{ matrix.build-type }}
