@@ -1,0 +1,64 @@
+# Logger System Change Impact Graph — when X changes, review Y.
+_meta: {schema: "1.0.0", generated: "2026-04-12"}
+
+cascade:
+  LOG-ARCH-001:
+    targets:
+      - {doc: LOG-ARCH-DEP, why: "Dependency architecture is subset of main architecture"}
+      - {doc: LOG-API-CORE, why: "Core API depends on architecture"}
+      - {doc: LOG-PROJ-001, why: "Directory mirrors architecture"}
+      - {doc: LOG-G-CRASH,  why: "Crash safety ties to async pipeline"}
+
+  LOG-API-CORE:
+    targets:
+      - {doc: LOG-API-QR,   why: "Quick reference"}
+      - {doc: LOG-FEAT-001, why: "Features implemented via API"}
+      - {doc: LOG-GS-001,   why: "Getting Started uses API"}
+
+  LOG-API-WR:
+    targets:
+      - {doc: LOG-G-WR,     why: "Writer guide references writer API"}
+      - {doc: LOG-API-QR,   why: "Quick reference lists writers"}
+      - {doc: LOG-FEAT-001, why: "Writer features"}
+
+  LOG-API-SEC:
+    targets:
+      - {doc: LOG-G-SEC,    why: "Security guide references security API"}
+      - {doc: LOG-FEAT-001, why: "Security features"}
+
+  LOG-G-CRASH:
+    targets:
+      - {doc: LOG-G-SRV,    why: "Log server depends on crash-safety guarantees"}
+      - {doc: LOG-ARCH-001, why: "Architecture enforces crash safety"}
+      - {doc: LOG-QUAL-001, why: "Quality report validates crash safety"}
+
+  LOG-G-WR:
+    targets:
+      - {doc: LOG-API-WR,   why: "Writer guide and writer API must match"}
+
+  LOG-G-SEC:
+    targets:
+      - {doc: LOG-API-SEC,  why: "Security guide and security API must match"}
+
+  LOG-CFG-BAS:
+    targets:
+      - {doc: LOG-CFG-ADV,  why: "Advanced strategies extend basic"}
+
+  LOG-QUAL-001:
+    targets:
+      - {doc: LOG-QUAL-KR,  why: "Korean mirror"}
+      - {doc: LOG-BENCH,    why: "Benchmarks referenced by quality report"}
+
+korean_pairs:
+  - {en: LOG-DOC-IDX,  kr: LOG-DOC-KR}
+  - {en: LOG-ARCH-001, kr: LOG-ARCH-KR}
+  - {en: LOG-API-IDX,  kr: LOG-API-KR}
+  - {en: LOG-FEAT-001, kr: LOG-FEAT-KR}
+  - {en: LOG-PROJ-001, kr: LOG-PROJ-KR}
+  - {en: LOG-CHG-001,  kr: LOG-CHG-KR}
+  - {en: LOG-QUAL-001, kr: LOG-QUAL-KR}
+  - {en: LOG-BENCH,    kr: LOG-BENCH-KR}
+
+external_deps:
+  - {source: common_system, target: LOG-ARCH-001, why: "logger_system depends on common_system"}
+  - {source: thread_system, target: LOG-ARCH-001, why: "async logger uses thread pool"}

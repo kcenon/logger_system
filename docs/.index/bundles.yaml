@@ -1,0 +1,54 @@
+# Logger System Document Bundles — load a bundle to get all context for a feature.
+_meta: {schema: "1.0.0", generated: "2026-04-12"}
+
+quickstart:
+  name: "Quickstart"
+  files: [README.md, GETTING_STARTED.md, API_QUICK_REFERENCE.md]
+
+api-core:
+  name: "Core API Reference"
+  desc: "Logger core + writers + security"
+  files: [API_REFERENCE_CORE.md, API_REFERENCE_WRITERS.md, API_REFERENCE_SECURITY.md, API_QUICK_REFERENCE.md]
+
+logger-core:
+  name: "Logger Core (level / format / filter)"
+  files: [API_REFERENCE_CORE.md, FEATURES.md]
+
+architecture:
+  name: "Architecture"
+  files: [ARCHITECTURE.md, DEPENDENCY_ARCHITECTURE.md, PROJECT_STRUCTURE.md]
+
+writer:
+  name: "Writers & Sinks"
+  desc: "File, console, rotating, custom writers"
+  files: [WRITER_GUIDE.md, API_REFERENCE_WRITERS.md, FEATURES.md]
+
+security:
+  name: "Security (PII / redaction / encryption)"
+  files: [SECURITY_GUIDE.md, API_REFERENCE_SECURITY.md, FEATURES.md]
+
+crash-safety:
+  name: "Crash Safety"
+  desc: "Durability guarantees, flush policies, signal handling"
+  files: [CRASH_SAFETY_GUIDE.md, ARCHITECTURE.md, API_REFERENCE_CORE.md]
+
+log-server:
+  name: "Log Server"
+  desc: "Remote centralized logging and crash-safety interaction"
+  files: [LOG_SERVER_GUIDE.md, CRASH_SAFETY_GUIDE.md, API_REFERENCE_CORE.md]
+
+configuration:
+  name: "Configuration Strategies"
+  files: [CONFIG_STRATEGIES_BASIC.md, CONFIG_STRATEGIES_ADVANCED.md]
+
+performance:
+  name: "Performance & Benchmarks"
+  files: [BENCHMARKS.md]
+
+quality-assurance:
+  name: "Quality Assurance"
+  files: [PRODUCTION_QUALITY.md, BENCHMARKS.md]
+
+compliance:
+  name: "Compliance (SOUP / Traceability)"
+  files: [SOUP.md, TRACEABILITY.md]

@@ -1,0 +1,28 @@
+# Logger System Query Router — match query to minimum document set.
+_meta: {schema: "1.0.0", generated: "2026-04-12"}
+
+intent_routes:
+  - {keywords: [getting started, tutorial, install, 시작], bundle: quickstart}
+  - {keywords: [api, reference, method, 레퍼런스], bundle: api-core}
+  - {keywords: [architecture, design, async, 아키텍처], bundle: architecture}
+  - {keywords: [writer, sink, file, console, rotating, 싱크, 라이터], bundle: writer}
+  - {keywords: [security, pii, redaction, mask, encryption, audit, 보안, 마스킹], bundle: security}
+  - {keywords: [crash, safety, durability, flush, sigsegv, 크래시, 안전], bundle: crash-safety}
+  - {keywords: [log server, remote, centralized, network, 로그 서버], bundle: log-server}
+  - {keywords: [config, configuration, strategy, 설정], bundle: configuration}
+  - {keywords: [level, filter, format, formatter, 레벨], bundle: logger-core}
+  - {keywords: [benchmark, performance, 성능], bundle: performance}
+  - {keywords: [quality, sanitizer, tsan, asan, 품질], bundle: quality-assurance}
+
+fallback:
+  primary: LOG-DOC-IDX
+  secondary: [LOG-API-QR, LOG-FEAT-001]
+
+skip:
+  - ECOSYSTEM.md
+  - SOUP.md
+  - TRACEABILITY.md
+  - API_REFERENCE.md          # 78 lines, index-only
+  - API_REFERENCE.kr.md       # 78 lines, index-only
+  - CONFIGURATION_STRATEGIES.md  # 56 lines, index-only
+  - LOG_SERVER_AND_CRASH_SAFETY.md  # 71 lines, index-only

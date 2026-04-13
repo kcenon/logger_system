@@ -1,0 +1,56 @@
+# Logger System Document Manifest — read this FIRST, then load only needed sections.
+_meta: {schema: "1.0.0", generated: "2026-04-12", docs: 33, project: "logger_system", tier: 2}
+
+core:
+  - {id: LOG-DOC-IDX,  file: README.md,                title: "Project README",        keywords: [index, overview], lines: 224}
+  - {id: LOG-DOC-KR,   file: README.kr.md,             title: "README (한국어)",         keywords: [index, korean], lines: 98, mirrors: LOG-DOC-IDX}
+  - {id: LOG-ARCH-001, file: ARCHITECTURE.md,          title: "Architecture",          keywords: [architecture, async, writers, sinks, pipeline], lines: 771}
+  - {id: LOG-ARCH-KR,  file: ARCHITECTURE.kr.md,       title: "아키텍처 (한국어)",        keywords: [architecture, korean], lines: 117, mirrors: LOG-ARCH-001}
+  - {id: LOG-ARCH-DEP, file: DEPENDENCY_ARCHITECTURE.md, title: "Dependency Architecture", keywords: [architecture, dependencies, tier], lines: 109}
+  - {id: LOG-API-IDX,  file: API_REFERENCE.md,         title: "API Reference (index)", keywords: [api, index, redirect], lines: 78}
+  - {id: LOG-API-KR,   file: API_REFERENCE.kr.md,      title: "API 참조 (한국어, index)", keywords: [api, korean, index], lines: 78, mirrors: LOG-API-IDX}
+  - {id: LOG-API-CORE, file: API_REFERENCE_CORE.md,    title: "API Reference — Core",  keywords: [api, logger, level, format, config], lines: 1035}
+  - {id: LOG-API-WR,   file: API_REFERENCE_WRITERS.md, title: "API Reference — Writers", keywords: [api, writers, sinks, file, console, rotating], lines: 705}
+  - {id: LOG-API-SEC,  file: API_REFERENCE_SECURITY.md, title: "API Reference — Security", keywords: [api, security, redaction, pii, masking], lines: 352}
+  - {id: LOG-API-QR,   file: API_QUICK_REFERENCE.md,   title: "API Quick Reference",   keywords: [api, cheatsheet], lines: 355}
+  - {id: LOG-FEAT-001, file: FEATURES.md,              title: "Features",              keywords: [features, async, levels, sinks, security], lines: 1123}
+  - {id: LOG-FEAT-KR,  file: FEATURES.kr.md,           title: "기능 (한국어)",            keywords: [features, korean], lines: 637, mirrors: LOG-FEAT-001}
+  - {id: LOG-PROJ-001, file: PROJECT_STRUCTURE.md,     title: "Project Structure",     keywords: [structure, directory], lines: 676}
+  - {id: LOG-PROJ-KR,  file: PROJECT_STRUCTURE.kr.md,  title: "프로젝트 구조 (한국어)",    keywords: [structure, korean], lines: 642, mirrors: LOG-PROJ-001}
+  - {id: LOG-CHG-001,  file: CHANGELOG.md,             title: "Changelog",             keywords: [changelog, versions], lines: 1013}
+  - {id: LOG-CHG-KR,   file: CHANGELOG.kr.md,          title: "변경 이력 (한국어)",        keywords: [changelog, korean], lines: 706, mirrors: LOG-CHG-001}
+  - {id: LOG-GS-001,   file: GETTING_STARTED.md,       title: "Getting Started",       keywords: [getting-started, tutorial], lines: 351}
+
+config:
+  - {id: LOG-CFG-IDX,  file: CONFIGURATION_STRATEGIES.md,    title: "Config Strategies (index)", keywords: [config, index], lines: 56}
+  - {id: LOG-CFG-BAS,  file: CONFIG_STRATEGIES_BASIC.md,     title: "Config Strategies — Basic", keywords: [config, basic, quick], lines: 740}
+  - {id: LOG-CFG-ADV,  file: CONFIG_STRATEGIES_ADVANCED.md,  title: "Config Strategies — Advanced", keywords: [config, advanced, tuning], lines: 597}
+
+guides:
+  - {id: LOG-G-WR,     file: WRITER_GUIDE.md,          title: "Writer Guide",          keywords: [writer, sinks, file, console, rotating, custom], lines: 1340}
+  - {id: LOG-G-SEC,    file: SECURITY_GUIDE.md,        title: "Security Guide",        keywords: [security, pii, redaction, encryption, audit], lines: 1285}
+  - {id: LOG-G-CRASH,  file: CRASH_SAFETY_GUIDE.md,    title: "Crash Safety Guide",    keywords: [crash, safety, durability, flush], lines: 967}
+  - {id: LOG-G-SRV,    file: LOG_SERVER_GUIDE.md,      title: "Log Server Guide",      keywords: [server, remote, centralized, network], lines: 785}
+  - {id: LOG-G-SRV-CS, file: LOG_SERVER_AND_CRASH_SAFETY.md, title: "Log Server & Crash Safety (index)", keywords: [server, crash, index], lines: 71}
+
+quality:
+  - {id: LOG-QUAL-001, file: PRODUCTION_QUALITY.md,    title: "Production Quality",    keywords: [quality, ci, sanitizers], lines: 810}
+  - {id: LOG-QUAL-KR,  file: PRODUCTION_QUALITY.kr.md, title: "프로덕션 품질 (한국어)",    keywords: [quality, korean], lines: 375, mirrors: LOG-QUAL-001}
+  - {id: LOG-BENCH,    file: BENCHMARKS.md,            title: "Benchmarks",            keywords: [benchmarks, performance, throughput], lines: 473}
+  - {id: LOG-BENCH-KR, file: BENCHMARKS.kr.md,         title: "벤치마크 (한국어)",        keywords: [benchmarks, korean], lines: 222, mirrors: LOG-BENCH}
+
+reference:
+  - {id: LOG-ECO,      file: ECOSYSTEM.md,             title: "Ecosystem",             keywords: [ecosystem], lines: 26}
+  - {id: LOG-SOUP,     file: SOUP.md,                  title: "SOUP",                  keywords: [soup], lines: 110}
+  - {id: LOG-TRACE,    file: TRACEABILITY.md,          title: "Traceability",          keywords: [traceability], lines: 140}
+
+load_patterns:
+  quick_start:         [LOG-DOC-IDX, LOG-GS-001, LOG-API-QR]
+  api_deep:            [LOG-API-CORE, LOG-API-WR, LOG-API-SEC]
+  architecture_review: [LOG-ARCH-001, LOG-ARCH-DEP, LOG-PROJ-001]
+  writer_work:         [LOG-G-WR, LOG-API-WR]
+  security_work:       [LOG-G-SEC, LOG-API-SEC]
+  crash_safety_work:   [LOG-G-CRASH, LOG-G-SRV, LOG-ARCH-001]
+  server_work:         [LOG-G-SRV, LOG-G-CRASH, LOG-API-CORE]
+  config_work:         [LOG-CFG-BAS, LOG-CFG-ADV]
+  quality_audit:       [LOG-QUAL-001, LOG-BENCH]
