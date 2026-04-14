@@ -746,12 +746,12 @@ monitor->register_health_check("logger", [&logger]() {
 
 ### Minimum Requirements
 
-**C++ Standard**: C++17 (C++20 features are optional and auto-detected)
+**C++ Standard**: C++20 (required since v3.x)
 
 **Compilers**:
-- GCC 7.0+
-- Clang 5.0+
-- MSVC 19.14+ (Visual Studio 2017)
+- GCC 11.0+
+- Clang 14.0+
+- MSVC 19.30+ (Visual Studio 2022)
 - Apple Clang 10.0+
 
 **CMake**: 3.20+
@@ -805,6 +805,6 @@ monitor->register_health_check("logger", [&logger]() {
 ## See Also
 
 - [Performance Benchmarks](BENCHMARKS.md) - Detailed performance analysis
-- [Architecture Overview](01-architecture.md) - System design and internals
-- [Security Guide](../SECURITY.md) - Security best practices
+- [Architecture Overview](ARCHITECTURE.md) - System design and internals
+- [Security Guide](guides/SECURITY.md) - Security best practices
 - [CI/CD Workflows](https://github.com/kcenon/logger_system/tree/main/.github/workflows) - Automation pipelines

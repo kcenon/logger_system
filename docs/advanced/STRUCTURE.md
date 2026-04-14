@@ -525,8 +525,8 @@ Configure via CMake options:
 
 ## References
 
-- [README.md](README.md) - Project overview and features
-- [INTEGRATION.md](INTEGRATION.md) - Integration guide with other systems
+- [README.md](../../README.md) - Project overview and features
+- [INTEGRATION.md](../guides/INTEGRATION.md) - Integration guide with other systems
 - [BASELINE.md](../performance/BASELINE.md) - Performance baselines and benchmarks
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) - Detailed architecture documentation
-- [docs/API_REFERENCE.md](docs/API_REFERENCE.md) - Complete API reference
+- [docs/ARCHITECTURE.md](../ARCHITECTURE.md) - Detailed architecture documentation
+- [docs/API_REFERENCE.md](../API_REFERENCE.md) - Complete API reference

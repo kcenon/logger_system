@@ -1270,14 +1270,15 @@ The **logger_system security module** provides enterprise-grade protection for l
 - ✅ **Compliance ready** — SOX, HIPAA, GDPR, PCI-DSS support
 
 **Next steps:**
-- Review [ENCRYPTION.md](ENCRYPTION.md) for encrypted log storage
+- Review [API_REFERENCE_SECURITY.md](API_REFERENCE_SECURITY.md) for encrypted log storage APIs<!-- TODO: ENCRYPTION.md does not exist; replaced with API_REFERENCE_SECURITY.md -->
 - Review [ARCHITECTURE.md](ARCHITECTURE.md) for module integration
 - Configure security features in `logger_builder`
 
 **Related documentation:**
-- [ENCRYPTION.md](ENCRYPTION.md) — Encrypted log file storage
-- [API.md](API.md) — Full API reference
-- [EXAMPLES.md](EXAMPLES.md) — Usage examples
+- [API_REFERENCE_SECURITY.md](API_REFERENCE_SECURITY.md) — Encrypted log file storage API<!-- TODO: ENCRYPTION.md does not exist -->
+- [API_REFERENCE.md](API_REFERENCE.md) — Full API reference
+- [examples/](../examples/) — Usage examples
+<!-- TODO: API.md and EXAMPLES.md do not exist; replaced with closest canonical references -->
 
 ---
 

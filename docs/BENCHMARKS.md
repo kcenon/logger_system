@@ -467,7 +467,7 @@ For continuous performance monitoring, see:
 
 ## See Also
 
-- [Architecture Overview](01-architecture.md) - System design and internals
+- [Architecture Overview](ARCHITECTURE.md) - System design and internals
 - [Performance Guide](guides/PERFORMANCE.md) - Optimization tips and tuning
 - [Production Quality](PRODUCTION_QUALITY.md) - CI/CD and quality metrics
 - [Getting Started](guides/GETTING_STARTED.md) - Quick start guide

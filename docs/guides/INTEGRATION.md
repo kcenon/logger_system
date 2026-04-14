@@ -12,7 +12,8 @@ category: "INTR"
 
 > **SSOT**: This document is the single source of truth for **Logger System Integration Guide**.
 
-**English | [한국어](INTEGRATION.kr.md)**
+**English | 한국어 (번역 예정)**
+<!-- TODO: INTEGRATION.kr.md translation not yet available -->
 
 ---
 
@@ -747,7 +748,7 @@ if (metrics.get_queue_utilization_percent() > 80) {
 
 ## References
 
-- [logger_system README.md](README.md) - Project overview
-- [STRUCTURE.md](STRUCTURE.md) - Directory structure and organization
-- [common_system ARCHITECTURE.md](../common_system/ARCHITECTURE.md) - Common system architecture
-- [common_system INTEGRATION.md](../common_system/INTEGRATION.md) - Integration patterns
+- [logger_system README.md](../../README.md) - Project overview
+- [STRUCTURE.md](../advanced/STRUCTURE.md) - Directory structure and organization
+- [common_system](https://github.com/kcenon/common_system) - Common system architecture and integration patterns
+<!-- TODO: common_system sibling paths are not available from this repo tree -->

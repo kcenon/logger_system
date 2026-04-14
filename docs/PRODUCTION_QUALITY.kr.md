@@ -349,12 +349,12 @@ All heap blocks were freed -- no leaks are possible
 
 ### 최소 요구사항
 
-**C++ 표준**: C++17 (C++20 기능은 선택적이며 자동 감지)
+**C++ 표준**: C++20 (v3.x부터 필수)
 
 **컴파일러**:
-- GCC 7.0+
-- Clang 5.0+
-- MSVC 19.14+ (Visual Studio 2017)
+- GCC 11.0+
+- Clang 14.0+
+- MSVC 19.30+ (Visual Studio 2022)
 - Apple Clang 10.0+
 
 **CMake**: 3.20+
@@ -363,7 +363,7 @@ All heap blocks were freed -- no leaks are possible
 
 **참고 문서**:
 - [BENCHMARKS.md](BENCHMARKS.md) / [BENCHMARKS.kr.md](BENCHMARKS.kr.md) - 상세 성능 분석
-- [ARCHITECTURE.md](01-architecture.md) / [ARCHITECTURE.kr.md](ARCHITECTURE.kr.md) - 시스템 설계 및 내부
+- [ARCHITECTURE.md](ARCHITECTURE.md) / [ARCHITECTURE.kr.md](ARCHITECTURE.kr.md) - 시스템 설계 및 내부
 
 ---
 

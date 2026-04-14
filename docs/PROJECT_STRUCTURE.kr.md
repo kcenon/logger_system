@@ -596,7 +596,7 @@ option(LOGGER_ENABLE_COVERAGE "코드 커버리지 활성화" OFF)
 
 **필수**:
 - **fmt**: 문자열 포매팅 라이브러리 (헤더 전용 모드 가능)
-- **C++17 컴파일러**: GCC 7+, Clang 5+, MSVC 2017+
+- **C++20 컴파일러**: GCC 11+, Clang 14+, MSVC 2022+
 
 **선택적**:
 - **thread_system**: 스레딩 프리미티브 및 로거 인터페이스
@@ -627,9 +627,9 @@ option(LOGGER_ENABLE_COVERAGE "코드 커버리지 활성화" OFF)
 
 ## 참고 문서
 
-- [아키텍처 개요](01-architecture.md) / [아키텍처 (한국어)](ARCHITECTURE.kr.md) - 시스템 설계 및 아키텍처
-- [API 레퍼런스](02-API_REFERENCE.md) - 완전한 API 문서
-- [빌드 가이드](guides/BUILD_GUIDE.md) - 상세 빌드 지침
+- [아키텍처 개요](ARCHITECTURE.md) / [아키텍처 (한국어)](ARCHITECTURE.kr.md) - 시스템 설계 및 아키텍처
+- [API 레퍼런스](API_REFERENCE.md) - 완전한 API 문서
+- [빠른 시작 가이드](guides/QUICK_START.md) - 빌드 및 시작 지침<!-- TODO: guides/BUILD_GUIDE.md does not exist -->
 - [기여 가이드](contributing/CONTRIBUTING.md) - 기여 가이드라인
 
 ---

@@ -47,10 +47,11 @@ This document has been split into focused sub-documents for easier navigation.
 ## Related Documentation
 
 - [ARCHITECTURE.md](ARCHITECTURE.md) -- Logger architecture overview
-- [API.md](API.md) -- Full API reference
-- [EXAMPLES.md](EXAMPLES.md) -- Usage examples
+- [API_REFERENCE.md](API_REFERENCE.md) -- Full API reference
+- [examples/](../examples/) -- Usage examples
+<!-- TODO: API.md and EXAMPLES.md do not exist; replaced with closest canonical references -->
 
 ---
 
 *Last updated: 2025-02-09*
-*logger_system version: 2.x*
+*logger_system version: 3.x*

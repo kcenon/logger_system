@@ -420,7 +420,7 @@ logger->info_structured()
 - **Formatters**: Configurable output formats (plain, JSON, logfmt, custom)
 - **Security**: Path validation, secure storage, audit logging
 
-[🏛️ Detailed Architecture Guide →](docs/01-architecture.md)
+[🏛️ Detailed Architecture Guide →](docs/ARCHITECTURE.md)
 
 ---
 
@@ -540,27 +540,27 @@ int main() {
 
 ### Getting Started
 - 📖 [Getting Started Guide](docs/guides/GETTING_STARTED.md) - Step-by-step setup and basic usage
-- 🚀 [Quick Start Examples](examples/basic_logging/) - Hands-on examples
-- 🔧 [Build Guide](docs/guides/BUILD_GUIDE.md) - Detailed build instructions
+- 🚀 [Quick Start Examples](examples/) - Hands-on examples
+- 🔧 [Quick Start Guide](docs/guides/QUICK_START.md) - Detailed build and startup instructions<!-- TODO: docs/guides/BUILD_GUIDE.md does not exist -->
 
 ### Core Documentation
 - 📘 [Features](docs/FEATURES.md) - Comprehensive feature documentation
 - 📊 [Benchmarks](docs/BENCHMARKS.md) - Performance analysis and comparisons
-- 🏗️ [Architecture](docs/01-architecture.md) - System design and internals
+- 🏗️ [Architecture](docs/ARCHITECTURE.md) - System design and internals
 - 📋 [Project Structure](docs/PROJECT_STRUCTURE.md) - Directory organization and files
-- 🔧 [API Reference](docs/02-API_REFERENCE.md) - Complete API documentation
+- 🔧 [API Reference](docs/API_REFERENCE.md) - Complete API documentation
 
 ### Advanced Topics
 - ⚡ [Performance Guide](docs/guides/PERFORMANCE.md) - Optimization tips and tuning
-- 🔒 [Security Guide](docs/SECURITY.md) - Security considerations and best practices
+- 🔒 [Security Guide](docs/guides/SECURITY.md) - Security considerations and best practices
 - ✅ [Production Quality](docs/PRODUCTION_QUALITY.md) - CI/CD, testing, quality metrics
 - 🎨 [Custom Writers](docs/advanced/CUSTOM_WRITERS.md) - Creating custom log writers
 - 🔄 [Integration Guide](docs/guides/INTEGRATION.md) - Ecosystem integration patterns
 
 ### Development
-- 🤝 [Contributing Guide](docs/CONTRIBUTING.md) - How to contribute
+- 🤝 [Contributing Guide](docs/contributing/CONTRIBUTING.md) - How to contribute
 - 📋 [FAQ](docs/guides/FAQ.md) - Frequently asked questions
-- 🔍 [Troubleshooting](docs/guides/TROUBLESHOOTING.md) - Common issues and solutions
+- 🔍 [Troubleshooting](docs/guides/FAQ.md#troubleshooting) - Common issues and solutions<!-- TODO: docs/guides/TROUBLESHOOTING.md does not exist -->
 - 📝 [Changelog](docs/CHANGELOG.md) - Release history and changes
 
 ---
@@ -618,7 +618,7 @@ auto logger = kcenon::logger::logger_builder()
     .value();
 ```
 
-[📚 Complete Configuration Guide →](docs/guides/CONFIGURATION.md)
+[📚 Complete Configuration Guide →](docs/CONFIGURATION_STRATEGIES.md)<!-- TODO: docs/guides/CONFIGURATION.md does not exist; using CONFIGURATION_STRATEGIES instead -->
 
 ---
 
@@ -649,7 +649,7 @@ cmake -DLOGGER_ENABLE_COVERAGE=ON     # Code coverage
 cmake -DLOGGER_WARNINGS_AS_ERRORS=ON  # Treat warnings as errors
 ```
 
-[🔧 Complete Build Options →](docs/guides/BUILD_GUIDE.md)
+[🔧 Complete Build Options →](docs/guides/QUICK_START.md)<!-- TODO: docs/guides/BUILD_GUIDE.md does not exist -->
 
 ---
 

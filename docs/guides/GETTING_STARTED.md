@@ -296,10 +296,10 @@ auto context = thread_module::thread_context(logger_interface);
 
 ## Next Steps
 
-- Read the [Architecture Overview](ARCHITECTURE.md) to understand the system design
-- Check the [API Reference](API-REFERENCE.md) for detailed documentation
+- Read the [Architecture Overview](../ARCHITECTURE.md) to understand the system design
+- Check the [API Reference](../API_REFERENCE.md) for detailed documentation
 - See [Performance Guide](PERFORMANCE.md) for optimization tips
-- Learn about [Custom Writers](CUSTOM-WRITERS.md) for specialized output
+- Learn about [Custom Writers](../advanced/CUSTOM_WRITERS.md) for specialized output
 
 ---
 

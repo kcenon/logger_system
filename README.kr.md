@@ -270,7 +270,7 @@ OTLP 프로토콜을 통한 텔레메트리 내보내기를 지원합니다. 배
 
 | 예제 | 난이도 | 설명 |
 |------|--------|------|
-| [basic_example](examples/basic_example.cpp) | 초급 | 기본 콘솔 및 파일 로깅 |
+| [basic_usage](examples/basic_usage.cpp) | 초급 | 기본 콘솔 및 파일 로깅 |
 | [decorator_usage](examples/decorator_usage.cpp) | 중급 | 데코레이터 패턴 가이드 |
 | [writer_builder_example](examples/writer_builder_example.cpp) | 중급 | 빌더 패턴 예제 |
 
