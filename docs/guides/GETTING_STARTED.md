@@ -45,14 +45,14 @@ Add the following to your `CMakeLists.txt`:
 include(FetchContent)
 
 FetchContent_Declare(
-    LoggerSystem
+    logger_system
     GIT_REPOSITORY https://github.com/kcenon/logger_system.git
     GIT_TAG v0.1.0  # Pin to a specific release tag; do NOT use main
 )
-FetchContent_MakeAvailable(LoggerSystem)
+FetchContent_MakeAvailable(logger_system)
 
 # Link to your target
-target_link_libraries(your_target PRIVATE LoggerSystem::logger)
+target_link_libraries(your_target PRIVATE logger_system::logger_system)
 ```
 
 ### Building from Source
@@ -80,8 +80,8 @@ sudo cmake --install .
 If you've installed the logger system:
 
 ```cmake
-find_package(LoggerSystem REQUIRED)
-target_link_libraries(your_target PRIVATE LoggerSystem::logger)
+find_package(logger_system REQUIRED)
+target_link_libraries(your_target PRIVATE logger_system::logger_system)
 ```
 
 ## Basic Usage

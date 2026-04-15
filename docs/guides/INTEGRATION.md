@@ -62,7 +62,7 @@ common_system (interfaces) ← logger_system implements ILogger
 **CMake Configuration**:
 ```cmake
 find_package(common_system CONFIG REQUIRED)
-target_link_libraries(LoggerSystem PUBLIC kcenon::common_system)
+target_link_libraries(logger_system PUBLIC kcenon::common_system)
 ```
 
 ### Optional Dependencies
@@ -332,10 +332,10 @@ cmake_minimum_required(VERSION 3.16)
 project(MyApp)
 
 # Find logger_system
-find_package(LoggerSystem CONFIG REQUIRED)
+find_package(logger_system CONFIG REQUIRED)
 
 add_executable(myapp main.cpp)
-target_link_libraries(myapp PRIVATE LoggerSystem::logger)
+target_link_libraries(myapp PRIVATE logger_system::logger_system)
 ```
 
 #### Full Ecosystem Integration
@@ -346,7 +346,7 @@ project(MyApp)
 # Find all systems
 find_package(common_system CONFIG REQUIRED)
 find_package(thread_system CONFIG REQUIRED)
-find_package(LoggerSystem CONFIG REQUIRED)
+find_package(logger_system CONFIG REQUIRED)
 find_package(monitoring_system CONFIG QUIET)
 
 add_executable(myapp main.cpp)
@@ -355,7 +355,7 @@ add_executable(myapp main.cpp)
 target_link_libraries(myapp PRIVATE
     kcenon::common_system      # Foundation
     kcenon::thread_system      # Core systems
-    LoggerSystem::logger       # Service systems
+    logger_system::logger_system  # Service systems
 )
 
 # Optional monitoring integration
@@ -633,7 +633,7 @@ sudo cmake --install build
 target_link_libraries(MyApp PRIVATE
     kcenon::common_system      # Foundation (first)
     kcenon::thread_system      # Core systems
-    LoggerSystem::logger       # Service systems
+    logger_system::logger_system  # Service systems
     kcenon::monitoring_system  # Optional systems (last)
 )
 ```

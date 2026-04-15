@@ -229,8 +229,8 @@ cmake --build . --target install
 
 **Using in Your Project**:
 ```cmake
-find_package(LoggerSystem REQUIRED)
-target_link_libraries(your_app PRIVATE LoggerSystem::logger)
+find_package(logger_system REQUIRED)
+target_link_libraries(your_app PRIVATE logger_system::logger_system)
 ```
 
 ### Requirements

@@ -151,8 +151,8 @@ cmake --build . --target install
 
 프로젝트에서 사용:
 ```cmake
-find_package(LoggerSystem REQUIRED)
-target_link_libraries(your_app PRIVATE LoggerSystem::logger)
+find_package(logger_system REQUIRED)
+target_link_libraries(your_app PRIVATE logger_system::logger_system)
 ```
 
 ### 의존성과 함께 빌드
