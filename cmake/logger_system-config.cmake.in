@@ -33,7 +33,7 @@ endif()
 
 # Set variables for compatibility
 set(logger_system_FOUND TRUE)
-set(logger_system_LIBRARIES logger_system::logger)
+set(logger_system_LIBRARIES logger_system::logger_system)
 
 # Provide the features that were enabled during build
 set(logger_system_USE_DI @LOGGER_USE_DI@)

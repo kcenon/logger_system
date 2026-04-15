@@ -60,6 +60,7 @@ set(_UNIFIED_TARGET_MAP_thread_system
 )
 
 set(_UNIFIED_TARGET_MAP_logger_system
+    "logger_system::logger_system"
     "logger"
     "logger_system::logger"
     "logger_system"
