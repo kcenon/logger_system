@@ -560,7 +560,7 @@ int main() {
 ### Development
 - 🤝 [Contributing Guide](docs/contributing/CONTRIBUTING.md) - How to contribute
 - 📋 [FAQ](docs/guides/FAQ.md) - Frequently asked questions
-- 🔍 [Troubleshooting](docs/guides/FAQ.md#troubleshooting) - Common issues and solutions<!-- TODO: docs/guides/TROUBLESHOOTING.md does not exist -->
+- 🔍 [Troubleshooting](docs/guides/FAQ.md) - Common issues and solutions<!-- TODO: docs/guides/TROUBLESHOOTING.md does not exist; FAQ lacks a dedicated troubleshooting section -->
 - 📝 [Changelog](docs/CHANGELOG.md) - Release history and changes
 
 ---
