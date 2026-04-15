@@ -114,7 +114,7 @@ set(_UNIFIED_REPO_network_system "network_system")
 # Keep in sync with ecosystem release versions
 set(_UNIFIED_DEFAULT_TAG_common_system "78080b2d85bf73472abf971946bf1537d3f128f2")
 set(_UNIFIED_DEFAULT_TAG_thread_system "v0.3.1")
-set(_UNIFIED_DEFAULT_TAG_logger_system "v0.1.3")
+set(_UNIFIED_DEFAULT_TAG_logger_system "v1.0.0")
 set(_UNIFIED_DEFAULT_TAG_monitoring_system "v0.1.0")
 set(_UNIFIED_DEFAULT_TAG_container_system "v0.1.0")
 set(_UNIFIED_DEFAULT_TAG_database_system "v0.1.0")
