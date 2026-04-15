@@ -90,6 +90,8 @@ Total documents: **71**
 | 69 | LOG-PROJ-008 | Logger System 기여하기 | [CONTRIBUTING.kr.md](./contributing/CONTRIBUTING.kr.md) | Released |
 | 70 | LOG-PROJ-009 | Contributing to Logger System | [CONTRIBUTING.md](./contributing/CONTRIBUTING.md) | Released |
 | 71 | LOG-PROJ-010 | Korean Translation Summary | [TRANSLATION_SUMMARY.md](./contributing/TRANSLATION_SUMMARY.md) | Released |
+| 72 | LOG-GUID-027 | Getting Started Tutorial (long-form) | [GETTING_STARTED.md](./GETTING_STARTED.md) | Released |
+| 73 | LOG-PROJ-011 | Ecosystem Integration Map | [ECOSYSTEM.md](./ECOSYSTEM.md) | Released |
 
 ## Documents by Category
 

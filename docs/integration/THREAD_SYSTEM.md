@@ -528,7 +528,7 @@ executor_integration::submit_task(task);
 
 ## Related Documentation
 
-- [async_worker](../internals/ASYNC_WORKER.md) - Standalone async implementation
+- [async_writer](../advanced/ASYNC_WRITERS.md) - Standalone async implementation<!-- TODO: ../internals/ASYNC_WORKER.md does not exist; redirected to advanced/ASYNC_WRITERS.md -->
 - [thread_system](https://github.com/kcenon/thread_system) - Thread pool library
 - [common_system IExecutor](https://github.com/kcenon/common_system) - Executor interface
 - [Issue #224](https://github.com/kcenon/logger_system/issues/224) - Optional integration feature request

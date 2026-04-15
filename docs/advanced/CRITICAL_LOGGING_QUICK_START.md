@@ -210,8 +210,8 @@ $ cat app.log
 ## 📚 Learn More
 
 - **Detailed Guide**: [CRITICAL_LOG_PREVENTION.md](CRITICAL_LOG_PREVENTION.md)
-- **Example Code**: [critical_logging_example.cpp](../examples/critical_logging_example.cpp)
-- **API Documentation**: [critical_writer.h](../include/kcenon/logger/writers/critical_writer.h)
+- **Example Code**: [critical_logging_example.cpp](../../examples/critical_logging_example.cpp)
+- **API Documentation**: [critical_writer.h](../../include/kcenon/logger/writers/critical_writer.h)
 
 ---
 

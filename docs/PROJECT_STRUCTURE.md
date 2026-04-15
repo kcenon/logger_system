@@ -635,7 +635,7 @@ option(LOGGER_ENABLE_COVERAGE "Enable code coverage" OFF)
 
 **Required**:
 - **fmt**: String formatting library (header-only mode available)
-- **C++17 compiler**: GCC 7+, Clang 5+, MSVC 2017+
+- **C++20 compiler**: GCC 11+, Clang 14+, MSVC 2022+
 
 **Optional**:
 - **thread_system**: Threading primitives and logger interface
@@ -670,7 +670,7 @@ option(LOGGER_ENABLE_COVERAGE "Enable code coverage" OFF)
 
 ## See Also
 
-- [Architecture Overview](01-architecture.md) - System design and architecture
-- [API Reference](02-API_REFERENCE.md) - Complete API documentation
-- [Build Guide](guides/BUILD_GUIDE.md) - Detailed build instructions
+- [Architecture Overview](ARCHITECTURE.md) - System design and architecture
+- [API Reference](API_REFERENCE.md) - Complete API documentation
+- [Quick Start Guide](guides/QUICK_START.md) - Build and startup instructions<!-- TODO: guides/BUILD_GUIDE.md does not exist -->
 - [Contributing Guide](contributing/CONTRIBUTING.md) - Contribution guidelines

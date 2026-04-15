@@ -588,10 +588,11 @@ The **logger_system configuration strategies framework** provides:
 
 **Next steps:**
 - Review [ARCHITECTURE.md](ARCHITECTURE.md) for logger architecture overview
-- Review [API.md](API.md) for full API reference
-- Review [EXAMPLES.md](EXAMPLES.md) for usage examples
+- Review [API_REFERENCE.md](API_REFERENCE.md) for full API reference
+- Review [examples/](../examples/) for usage examples
+<!-- TODO: API.md and EXAMPLES.md do not exist; replaced with closest canonical references -->
 
 ---
 
 *Last updated: 2025-02-09*
-*logger_system version: 2.x*
+*logger_system version: 3.x*

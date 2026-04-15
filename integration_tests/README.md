@@ -299,6 +299,6 @@ ASAN_OPTIONS=detect_leaks=1 ./integration_tests
 ## Related Documentation
 
 - [Logger System README](../README.md)
-- [Architecture Documentation](../docs/architecture.md)
-- [API Reference](../docs/api.md)
-- [Performance Tuning Guide](../docs/performance.md)
+- [Architecture Documentation](../docs/ARCHITECTURE.md)
+- [API Reference](../docs/API_REFERENCE.md)
+- [Performance Tuning Guide](../docs/guides/PERFORMANCE.md)

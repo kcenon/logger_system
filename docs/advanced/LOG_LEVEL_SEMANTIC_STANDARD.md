@@ -307,8 +307,7 @@ logger->set_level("ERROR");   // Not: logger->set_level(log_level::error);
 
 - [RFC 5424: The Syslog Protocol](https://tools.ietf.org/html/rfc5424) - Section 6.2.1 Severity
 - [spdlog Logging Levels](https://github.com/gabime/spdlog) - Industry standard C++ logger
-- [logger_system IMPROVEMENT_PLAN.md](../IMPROVEMENT_PLAN.md#1-dual-log-level-semantics)
-- [thread_system IMPROVEMENT_PLAN.md](../../thread_system/IMPROVEMENT_PLAN.md#5-log-level-enumeration-mismatch)
+<!-- TODO: IMPROVEMENT_PLAN.md files not present in this tree; external plan documents -->
 
 ---
 
