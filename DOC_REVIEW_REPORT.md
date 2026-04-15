@@ -207,3 +207,56 @@ The Korean index references files with the wrong relative path (paths resolve fr
 **6. Relative-path depth errors in `docs/advanced/`.** Multiple files use `../` where `../../` is needed, particularly for links reaching into `examples/` and `include/`. A linter rule for "every `../` path must resolve" would catch these pre-merge.
 
 **7. Orphans worth triaging.** `docs/GETTING_STARTED.md` (a full setup guide from 2026-04-05) and `docs/ECOSYSTEM.md` have no incoming references — either surface them in `docs/README.md` or delete them to prevent confusion with their sibling `docs/guides/GETTING_STARTED.md`.
+
+---
+
+## Post-Fix Re-Validation (2026-04-15)
+
+**Fix commit**: `95878f8a` — `docs: fix 48 broken cross-references, 5 version mismatches, and xref gaps`
+**Scope**: Phase 1 only (anchors + inter-file links)
+**Files scanned**: 96 markdown files (excluding `build/`, `.git/`, `doxygen-awesome-css/`, `.claude/`)
+**Method**: Automated anchor-registry build (GitHub slug rules, fenced code blocks skipped, links inside `<!-- ... -->` TODO markers excluded), cross-file target resolution with URL decoding.
+
+### Before / After Summary
+
+| Category                        | Before (prior report) | After (this run) | Delta |
+|---------------------------------|-----------------------|------------------|-------|
+| Must-Fix (Phase 1)              | 48                    | 0 prior + 1 new  | -47   |
+| Should-Fix (Phase 1, named)     | 16                    | 0                | -16   |
+| Inter-file missing-file links   | ~45                   | 1 (pre-existing) | -44   |
+| Inter-file missing-anchor links | 1                     | 1 (new)          |  0    |
+| Intra-file broken anchors       | 0                     | 12 (pre-existing)|  +12  |
+
+Note on intra-file deltas: the 12 intra-file broken anchors found in this run are in `docs/ARCHITECTURE.md` (11) and `docs/advanced/CRITICAL_LOG_PREVENTION.md` (1). Neither file was modified by commit `95878f8a`, so these are pre-existing defects that the prior scan under-reported (likely due to a slugifier difference around emoji-prefixed headings and `&`/`+`/`→` separators). They are not regressions.
+
+### Per-Item Verification — Prior Must-Fix (48)
+
+| Status | Count | Notes |
+|--------|-------|-------|
+| Fixed (file reference removed / corrected) | 47 | Items 1–47 all verified resolved either by re-pointing or by wrapping in `<!-- TODO -->` with a canonical replacement link. |
+| Fixed (wrapped in TODO comment) | subset of 47 | e.g., README.md:544, 621, 652; SECURITY_GUIDE.md:1273, 1278, 1281; CONFIG_STRATEGIES_*:52/593; integration/README.md:22; advanced/ARCHITECTURE.md:16. |
+| Residual | 0 | Original broken file references have all been eliminated. |
+
+### Residual Must-Fix List (remaining defects from prior report)
+
+None — all 48 prior Must-Fix items are eliminated from source. The only post-fix Phase 1 defects are listed under Regressions below.
+
+### Regression List (CRITICAL)
+
+1. **`README.md:563`** — New broken anchor reference: `[🔍 Troubleshooting](docs/guides/FAQ.md#troubleshooting)`. The file `docs/guides/FAQ.md` exists but has no section slugified as `#troubleshooting` (its closest heading is `### 32. How do I troubleshoot common issues?`, which slugs to `#32-how-do-i-troubleshoot-common-issues`). The fix commit replaced the previously-broken `docs/guides/TROUBLESHOOTING.md` file reference with this redirect; while the file now resolves, the anchor does not. **Severity: Must-Fix (new)**. Recommended remediation: either add a `## Troubleshooting` section to `FAQ.md`, or drop `#troubleshooting` from the link.
+
+### Other Findings (pre-existing, not regressions)
+
+1. **`docs/integration/README.md:156`** — `../../../ECOSYSTEM.md` resolves one directory above the repo root; correct target is `../ECOSYSTEM.md`. Pre-existed before commit `95878f8a`; not in prior Must-Fix list.
+2. **`docs/ARCHITECTURE.md:25–35` (11 intra-file anchor refs)** — The `## Table of Contents` block points to `#writer-architecture`, `#otlp--observability-pipeline`, etc., but the actual headings are `## ✍️ Writer Architecture`, `## 🔭 OTLP & Observability Pipeline`, and similar emoji-prefixed forms. Under GitHub-Pages slugification, these render as `#-writer-architecture`, `#-otlp--observability-pipeline`, etc. (a leading hyphen from the stripped emoji + surrounding space). The TOC was authored against a slugifier that stripped the leading emoji+space entirely. Pre-existing; file not touched by the fix commit.
+3. **`docs/advanced/CRITICAL_LOG_PREVENTION.md:53`** — TOC entry `#testing-verification` targets heading `## Testing & Verification`, which under GitHub slugification produces `#testing--verification` (double hyphen from the `&` + surrounding spaces). Pre-existing; file not touched.
+
+### Verdict: **PARTIAL-PASS**
+
+- All 48 originally-reported Phase 1 Must-Fix items have been eliminated from source (PASS).
+- One new Must-Fix-grade defect was introduced by the fix commit (the `FAQ.md#troubleshooting` anchor), so the commit is not a clean pass.
+- Twelve intra-file anchor defects and one inter-file path-depth defect that pre-existed were not addressed by this commit — they were also not covered by the prior Must-Fix list, so they do not block acceptance of this commit, but are worth tracking in a follow-up issue.
+
+Recommended next actions:
+1. Replace `[🔍 Troubleshooting](docs/guides/FAQ.md#troubleshooting)` with either an anchor that exists (`#32-how-do-i-troubleshoot-common-issues`) or drop the `#troubleshooting` fragment until a dedicated section is written.
+2. Open a follow-up issue for the 12 pre-existing intra-file anchor defects and 1 pre-existing inter-file path-depth defect (`../../../ECOSYSTEM.md`).
