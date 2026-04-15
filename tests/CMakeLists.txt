@@ -1160,6 +1160,95 @@ foreach(_test_target IN ITEMS
     endif()
 endforeach()
 
+# Logger registry tests (Issue #607 - v1.0 coverage improvement)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/core_test/logger_registry_test.cpp")
+    add_executable(logger_registry_test
+        unit/core_test/logger_registry_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_registry_test
+            PRIVATE logger_system GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_registry_test
+            PRIVATE logger_system gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_registry_test
+        COMMAND logger_registry_test
+    )
+    set_target_properties(logger_registry_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Logger registry tests: Added")
+endif()
+
+# Console writer tests (Issue #607 - v1.0 coverage improvement)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/writers_test/console_writer_test.cpp")
+    add_executable(logger_console_writer_test
+        unit/writers_test/console_writer_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_console_writer_test
+            PRIVATE logger_system GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_console_writer_test
+            PRIVATE logger_system gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_console_writer_test
+        COMMAND logger_console_writer_test
+    )
+    set_target_properties(logger_console_writer_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Console writer tests: Added")
+endif()
+
+# Standalone executor tests (Issue #607 - v1.0 coverage improvement)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/integration_test/standalone_executor_test.cpp")
+    add_executable(logger_standalone_executor_test
+        unit/integration_test/standalone_executor_test.cpp
+    )
+
+    if(TARGET GTest::gtest_main)
+        target_link_libraries(logger_standalone_executor_test
+            PRIVATE logger_system GTest::gtest_main
+        )
+    else()
+        target_link_libraries(logger_standalone_executor_test
+            PRIVATE logger_system gtest_main
+        )
+    endif()
+
+    add_test(NAME logger_standalone_executor_test
+        COMMAND logger_standalone_executor_test
+    )
+    set_target_properties(logger_standalone_executor_test PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+
+    message(STATUS "Standalone executor tests: Added")
+endif()
+
+# Coverage registration for Issue #607 test targets
+foreach(_test_target IN ITEMS
+    logger_registry_test
+    logger_console_writer_test
+    logger_standalone_executor_test
+)
+    if(TARGET ${_test_target} AND COMMAND logger_register_coverage_target)
+        logger_register_coverage_target(${_test_target})
+    endif()
+endforeach()
+
 # Cleanup
 unset(_LOGGER_TEST_TARGETS)
 unset(_test_target)
