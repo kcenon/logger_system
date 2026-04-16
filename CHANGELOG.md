@@ -7,9 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-04-15
+
 ### Changed
 
 - **BREAKING**: Remove 8 deprecated context methods from `logger` public API; use `context()` unified API instead ([#534](https://github.com/kcenon/logger_system/issues/534))
+- Fix CMake exported target name from `logger_system::logger` to `logger_system::logger_system` in config template ([#606](https://github.com/kcenon/logger_system/issues/606))
+- Align `find_package()` and `target_link_libraries()` documentation with actual CMake target names ([#606](https://github.com/kcenon/logger_system/issues/606))
+
+### Added
+
+- Unit tests for `logger_registry`, `console_writer`, and `standalone_executor` (46 new test cases) ([#607](https://github.com/kcenon/logger_system/issues/607))
 
 ### Performance
 
