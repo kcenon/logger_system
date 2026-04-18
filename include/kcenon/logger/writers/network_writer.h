@@ -26,6 +26,8 @@
 
 namespace kcenon::logger {
 
+namespace security { class integrity_policy; }
+
 // Forward declarations for worker threads (std::jthread-based)
 class network_send_jthread_worker;
 class network_reconnect_jthread_worker;
@@ -100,7 +102,19 @@ public:
     };
     
     connection_stats get_stats() const;
-    
+
+    /**
+     * @brief Enable tamper-evident integrity signing for outbound frames.
+     * @param policy Signing policy (shared ownership); pass nullptr to disable.
+     *
+     * When installed, each JSON frame emitted on the socket carries an
+     * extra \"signature\" field (hex-encoded) computed over the frame
+     * without that field (Issue #612, ISO/IEC 27001 A.14.1.3 for the
+     * transmission protection aspect). This lets the receiving log
+     * aggregator reject tampered frames.
+     */
+    void set_integrity_policy(std::shared_ptr<security::integrity_policy> policy);
+
 private:
     
     // Network operations
@@ -137,6 +151,9 @@ private:
     // Statistics
     mutable std::mutex stats_mutex_;
     connection_stats stats_{};
+
+    // Integrity policy (Issue #612) - optional, set before start.
+    std::shared_ptr<security::integrity_policy> integrity_policy_;
     
     // Helper functions
     std::string escape_json(const std::string& str) const;

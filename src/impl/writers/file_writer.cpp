@@ -5,6 +5,7 @@
 #include <kcenon/logger/writers/file_writer.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/formatters/timestamp_formatter.h>
+#include <kcenon/logger/security/integrity_policy.h>
 #include <kcenon/logger/utils/error_handling_utils.h>
 #include <filesystem>
 #include <iostream>
@@ -37,6 +38,15 @@ common::VoidResult file_writer::write(const log_entry& entry) {
 
         // Format and write
         std::string formatted = format_entry(entry);
+
+        // Append tamper-evident signature (Issue #612) when a policy is set.
+        // The signature covers the formatted record so verifiers can
+        // reconstruct and check it without re-formatting.
+        if (integrity_policy_) {
+            formatted.append(
+                security::format_signature_suffix(*integrity_policy_, formatted));
+        }
+
         file_stream_ << formatted << '\n';
         bytes_written_.fetch_add(formatted.size() + 1);  // +1 for newline
 
@@ -65,6 +75,12 @@ common::VoidResult file_writer::close() {
 
 bool file_writer::is_healthy() const {
     return is_open_ && file_stream_.good();
+}
+
+void file_writer::set_integrity_policy(
+    std::shared_ptr<security::integrity_policy> policy) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    integrity_policy_ = std::move(policy);
 }
 
 std::string file_writer::format_entry(const log_entry& entry) const {

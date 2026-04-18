@@ -24,6 +24,8 @@
 
 namespace kcenon::logger {
 
+namespace security { class integrity_policy; }
+
 /**
  * @class file_writer
  * @brief Core file writer for logging to files
@@ -103,6 +105,21 @@ public:
      */
     size_t get_file_size() const { return bytes_written_.load(); }
 
+    /**
+     * @brief Enable tamper-evident integrity signing for every record.
+     * @param policy Signing policy (shared ownership); pass nullptr to disable.
+     *
+     * When a policy is installed, each written record is followed by a
+     * SIGNATURE[<policy>]:<hex> suffix on the same line (Issue #612,
+     * ISO/IEC 27001 A.12.4.2 / A.12.4.3). Existing log consumers that
+     * already parse a single line per record continue to work; the
+     * signature is simply appended at end-of-line before the newline.
+     *
+     * Must be called before the writer is handed off to a logger — it is
+     * not safe to swap policies while concurrent writes are in flight.
+     */
+    void set_integrity_policy(std::shared_ptr<security::integrity_policy> policy);
+
 protected:
     /**
      * @brief Format a log entry using the current formatter
@@ -134,6 +151,8 @@ protected:
     std::atomic<size_t> bytes_written_{0};
 
     std::unique_ptr<log_formatter_interface> formatter_;
+    /// Integrity policy shared with derived writers (e.g. rotating_file_writer).
+    std::shared_ptr<security::integrity_policy> integrity_policy_;
     mutable std::mutex mutex_;
 };
 
