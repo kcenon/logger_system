@@ -541,7 +541,8 @@ int main() {
 ### Getting Started
 - 📖 [Getting Started Guide](docs/guides/GETTING_STARTED.md) - Step-by-step setup and basic usage
 - 🚀 [Quick Start Examples](examples/) - Hands-on examples
-- 🔧 [Quick Start Guide](docs/guides/QUICK_START.md) - Detailed build and startup instructions<!-- TODO: docs/guides/BUILD_GUIDE.md does not exist -->
+- 🔧 [Quick Start Guide](docs/guides/QUICK_START.md) - Detailed build and startup instructions
+- 🛠️ [Build Guide](docs/guides/BUILD.md) - Complete CMake options, presets, and optional features
 
 ### Core Documentation
 - 📘 [Features](docs/FEATURES.md) - Comprehensive feature documentation
@@ -560,7 +561,7 @@ int main() {
 ### Development
 - 🤝 [Contributing Guide](docs/contributing/CONTRIBUTING.md) - How to contribute
 - 📋 [FAQ](docs/guides/FAQ.md) - Frequently asked questions
-- 🔍 [Troubleshooting](docs/guides/FAQ.md) - Common issues and solutions<!-- TODO: docs/guides/TROUBLESHOOTING.md does not exist; FAQ lacks a dedicated troubleshooting section -->
+- 🔍 [Troubleshooting](docs/guides/TROUBLESHOOTING.md) - Common build, runtime, and integration issues
 - 📝 [Changelog](docs/CHANGELOG.md) - Release history and changes
 
 ---
@@ -649,7 +650,7 @@ cmake -DLOGGER_ENABLE_COVERAGE=ON     # Code coverage
 cmake -DLOGGER_WARNINGS_AS_ERRORS=ON  # Treat warnings as errors
 ```
 
-[🔧 Complete Build Options →](docs/guides/QUICK_START.md)<!-- TODO: docs/guides/BUILD_GUIDE.md does not exist -->
+[🔧 Complete Build Options →](docs/guides/BUILD.md)
 
 ---
 

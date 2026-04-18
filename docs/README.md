@@ -13,7 +13,7 @@ category: "GUID"
 > **SSOT**: This file is the single source of truth for the documentation index
 > of **logger_system**.
 
-Total documents: **71**
+Total documents: **73**
 
 ## Document Index
 
@@ -92,6 +92,8 @@ Total documents: **71**
 | 71 | LOG-PROJ-010 | Korean Translation Summary | [TRANSLATION_SUMMARY.md](./contributing/TRANSLATION_SUMMARY.md) | Released |
 | 72 | LOG-GUID-027 | Getting Started Tutorial (long-form) | [GETTING_STARTED.md](./GETTING_STARTED.md) | Released |
 | 73 | LOG-PROJ-011 | Ecosystem Integration Map | [ECOSYSTEM.md](./ECOSYSTEM.md) | Released |
+| 74 | LOG-GUID-028 | Logger System Build Guide | [BUILD.md](./guides/BUILD.md) | Released |
+| 75 | LOG-GUID-029 | Logger System Troubleshooting Guide | [TROUBLESHOOTING.md](./guides/TROUBLESHOOTING.md) | Released |
 
 ## Documents by Category
 
@@ -123,7 +125,7 @@ Total documents: **71**
 | LOG-FEAT-001 | Logger System - 상세 기능 | [FEATURES.kr.md](./FEATURES.kr.md) | Released |
 | LOG-FEAT-002 | Logger System Features | [FEATURES.md](./FEATURES.md) | Released |
 
-### Guides (25)
+### Guides (27)
 
 | doc_id | Topic | Document | Status |
 |--------|-------|----------|--------|
@@ -152,6 +154,8 @@ Total documents: **71**
 | LOG-GUID-024 | Logger System Integration Guide | [README.md](./integration/README.md) | Released |
 | LOG-GUID-025 | thread_system 통합 가이드 | [THREAD_SYSTEM.kr.md](./integration/THREAD_SYSTEM.kr.md) | Released |
 | LOG-GUID-026 | Async Integration Guide | [THREAD_SYSTEM.md](./integration/THREAD_SYSTEM.md) | Released |
+| LOG-GUID-028 | Logger System Build Guide | [BUILD.md](./guides/BUILD.md) | Released |
+| LOG-GUID-029 | Logger System Troubleshooting Guide | [TROUBLESHOOTING.md](./guides/TROUBLESHOOTING.md) | Released |
 
 ### Performance (8)
 
