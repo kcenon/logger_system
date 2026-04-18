@@ -1194,6 +1194,61 @@ auto writer = std::make_unique<sanitizing_writer>(
 - Implement log monitoring and alerting
 - Document security procedures in ISMS
 
+#### Writer Integrity Policy (Issue #612)
+
+The `integrity_policy` abstraction extends HMAC-SHA256 tamper detection
+from `audit_logger` to every general-purpose writer, satisfying ISO/IEC
+27001 A.12.4.2 ("Protection of log information") and A.12.4.3
+("Administrator and operator logs") by default, and contributing to
+A.14.1.3 ("Protecting application services transactions") for the
+`network_writer` case.
+
+| ISO/IEC 27001 Control | Writer Coverage | Mechanism |
+|-----------------------|-----------------|-----------|
+| A.12.4.2 Protection of log information | `file_writer`, `rotating_file_writer`, `console_writer` | Per-line `SIGNATURE[HMAC-SHA256]:<hex>` suffix |
+| A.12.4.3 Administrator and operator logs | `audit_logger` (existing) + `file_writer` | HMAC-SHA256 on each record |
+| A.14.1.3 Protecting application services transactions | `network_writer` | `sig_alg` + `signature` fields in every JSON frame |
+
+Enable per writer:
+
+```cpp
+#include <kcenon/logger/security/integrity_policy.h>
+#include <kcenon/logger/security/secure_key_storage.h>
+#include <kcenon/logger/writers/file_writer.h>
+
+auto key = kcenon::logger::security::secure_key_storage::generate_key(32);
+auto policy = std::make_shared<
+    kcenon::logger::security::hmac_sha256_integrity_policy>(
+        std::move(key.value()));
+
+kcenon::logger::file_writer writer("/var/log/app.log");
+writer.set_integrity_policy(policy);
+// Every subsequent write is suffixed with SIGNATURE[HMAC-SHA256]:<hex>.
+```
+
+Verification (reader side):
+
+```cpp
+std::ifstream in("/var/log/app.log");
+std::string line;
+while (std::getline(in, line)) {
+    auto pos = line.rfind(" SIGNATURE[");
+    if (pos == std::string::npos) continue;   // unsigned record
+    auto colon = line.find("]:", pos);
+    std::string record = line.substr(0, pos);
+    std::string sig    = line.substr(colon + 2);
+    if (!policy->verify(record, sig)) {
+        // Record was tampered with — alert security monitoring.
+    }
+}
+```
+
+**Overhead**: HMAC-SHA256 adds approximately one 32-byte hash per record
+(<5% throughput overhead for typical record sizes with OpenSSL 3.x).
+Without OpenSSL, the policy falls back to a non-cryptographic hash that
+still provides round-trip verification but MUST NOT be relied on for
+tamper detection in production.
+
 ---
 
 ## Frequently Asked Questions

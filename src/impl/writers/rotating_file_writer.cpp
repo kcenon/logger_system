@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for full license information.
 
 #include <kcenon/logger/writers/rotating_file_writer.h>
+#include <kcenon/logger/security/integrity_policy.h>
 #include <kcenon/logger/utils/error_handling_utils.h>
 #include <filesystem>
 #include <algorithm>
@@ -90,6 +91,16 @@ common::VoidResult rotating_file_writer::write(const log_entry& entry) {
 
     // Format and write - preserves all structured fields
     std::string formatted = format_entry(entry);
+
+    // Apply integrity signature (Issue #612) if the parent file_writer
+    // was configured with a policy. We reach into the parent's protected
+    // integrity_policy_ to keep the behavior consistent across size-based
+    // and time-based rotation paths.
+    if (integrity_policy_) {
+        formatted.append(
+            security::format_signature_suffix(*integrity_policy_, formatted));
+    }
+
     file_stream_ << formatted << '\n';
     bytes_written_.fetch_add(formatted.size() + 1);
 
