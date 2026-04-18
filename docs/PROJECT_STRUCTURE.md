@@ -672,5 +672,7 @@ option(LOGGER_ENABLE_COVERAGE "Enable code coverage" OFF)
 
 - [Architecture Overview](ARCHITECTURE.md) - System design and architecture
 - [API Reference](API_REFERENCE.md) - Complete API documentation
-- [Quick Start Guide](guides/QUICK_START.md) - Build and startup instructions<!-- TODO: guides/BUILD_GUIDE.md does not exist -->
+- [Quick Start Guide](guides/QUICK_START.md) - Build and startup instructions
+- [Build Guide](guides/BUILD.md) - Complete CMake options, presets, and optional features
+- [Troubleshooting Guide](guides/TROUBLESHOOTING.md) - Common build and runtime issues
 - [Contributing Guide](contributing/CONTRIBUTING.md) - Contribution guidelines

@@ -629,7 +629,9 @@ option(LOGGER_ENABLE_COVERAGE "코드 커버리지 활성화" OFF)
 
 - [아키텍처 개요](ARCHITECTURE.md) / [아키텍처 (한국어)](ARCHITECTURE.kr.md) - 시스템 설계 및 아키텍처
 - [API 레퍼런스](API_REFERENCE.md) - 완전한 API 문서
-- [빠른 시작 가이드](guides/QUICK_START.md) - 빌드 및 시작 지침<!-- TODO: guides/BUILD_GUIDE.md does not exist -->
+- [빠른 시작 가이드](guides/QUICK_START.md) - 빌드 및 시작 지침
+- [Build Guide](guides/BUILD.md) - 전체 CMake 옵션, 프리셋, 선택적 기능
+- [Troubleshooting Guide](guides/TROUBLESHOOTING.md) - 빌드 및 런타임 공통 이슈
 - [기여 가이드](contributing/CONTRIBUTING.md) - 기여 가이드라인
 
 ---
