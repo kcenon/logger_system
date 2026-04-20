@@ -73,17 +73,24 @@ jobs:
     - name: Generate coverage report
       run: |
         cd build
+        # The build uses gcc-13 (see Install dependencies step), which emits
+        # .gcno files whose format is not understood by the system default
+        # gcov-11 bundled with Ubuntu 22.04's lcov. Point lcov at gcov-13 so
+        # it can actually read the coverage data.
+        GCOV_TOOL=$(command -v gcov-13 || command -v gcov)
+        echo "Using gcov tool: $GCOV_TOOL"
+
         # Capture coverage data
-        lcov --directory . --capture --output-file coverage.info || true
+        lcov --gcov-tool "$GCOV_TOOL" --directory . --capture --output-file coverage.info || true
 
         # Filter out system headers and test files
-        lcov --remove coverage.info '/usr/*' '*/test/*' '*/tests/*' '*/examples/*' --output-file coverage_filtered.info || true
+        lcov --gcov-tool "$GCOV_TOOL" --remove coverage.info '/usr/*' '*/test/*' '*/tests/*' '*/examples/*' --output-file coverage_filtered.info || true
 
         # Generate HTML report
         genhtml coverage_filtered.info --output-directory coverage_html || true
 
         # Print summary
-        lcov --list coverage_filtered.info || true
+        lcov --gcov-tool "$GCOV_TOOL" --list coverage_filtered.info || true
 
     - name: Enforce coverage threshold
       run: |
