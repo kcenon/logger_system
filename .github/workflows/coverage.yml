@@ -100,10 +100,13 @@ jobs:
           exit 1
         fi
         # lcov --summary prints lines like "  lines......: 78.5% (1234 of 1573 lines)"
+        # Extract the percentage only if the second field actually looks
+        # like one (lcov prints "branches...: no data found" when branch
+        # instrumentation is off, which otherwise gets mis-parsed as "no").
         COVERAGE=$(lcov --summary coverage_filtered.info 2>&1 \
-          | awk '/lines\.\.\.\./ { gsub("%", "", $2); print $2; exit }')
+          | awk '/lines\.\.\.\./ && $2 ~ /%$/ { gsub("%", "", $2); print $2; exit }')
         BRANCH_COVERAGE=$(lcov --summary coverage_filtered.info 2>&1 \
-          | awk '/branches\.\.\./ { gsub("%", "", $2); print $2; exit }')
+          | awk '/branches\.\.\./ && $2 ~ /%$/ { gsub("%", "", $2); print $2; exit }')
         # Initial floor: current measured line coverage is 78.3%. Set the
         # threshold at 78% so the gate prevents regressions below today's
         # baseline. A follow-up issue tracks raising this to 80% once the
