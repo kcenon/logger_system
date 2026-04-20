@@ -2,9 +2,9 @@ name: Code Coverage
 
 on:
   push:
-    branches: [ main, phase-* ]
+    branches: [ main, develop, phase-* ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
 
 jobs:
   coverage:
@@ -84,6 +84,35 @@ jobs:
 
         # Print summary
         lcov --list coverage_filtered.info || true
+
+    - name: Enforce coverage threshold
+      run: |
+        cd build
+        if [ ! -f coverage_filtered.info ]; then
+          echo "::error::coverage_filtered.info missing — cannot evaluate threshold"
+          exit 1
+        fi
+        # lcov --summary prints lines like "  lines......: 78.5% (1234 of 1573 lines)"
+        COVERAGE=$(lcov --summary coverage_filtered.info 2>&1 \
+          | awk '/lines\.\.\.\./ { gsub("%", "", $2); print $2; exit }')
+        BRANCH_COVERAGE=$(lcov --summary coverage_filtered.info 2>&1 \
+          | awk '/branches\.\.\./ { gsub("%", "", $2); print $2; exit }')
+        LINE_THRESHOLD=80
+        BRANCH_THRESHOLD=70
+        echo "Line coverage:   ${COVERAGE:-unknown}% (threshold: ${LINE_THRESHOLD}%)"
+        echo "Branch coverage: ${BRANCH_COVERAGE:-unknown}% (threshold: ${BRANCH_THRESHOLD}%)"
+        FAIL=0
+        if [ -z "$COVERAGE" ] \
+          || ! awk -v c="$COVERAGE" -v t="$LINE_THRESHOLD" 'BEGIN { exit !(c+0 >= t+0) }'; then
+          echo "::error::Line coverage ${COVERAGE:-unknown}% is below threshold ${LINE_THRESHOLD}%"
+          FAIL=1
+        fi
+        if [ -n "$BRANCH_COVERAGE" ] \
+          && ! awk -v c="$BRANCH_COVERAGE" -v t="$BRANCH_THRESHOLD" 'BEGIN { exit !(c+0 >= t+0) }'; then
+          echo "::error::Branch coverage ${BRANCH_COVERAGE}% is below threshold ${BRANCH_THRESHOLD}%"
+          FAIL=1
+        fi
+        exit $FAIL
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v6
