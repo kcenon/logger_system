@@ -148,7 +148,7 @@ TEST_F(StandaloneExecutorTest, ExecuteJobSuccessfully) {
     auto job = std::make_unique<counting_job>(counter);
 
     auto result = executor_->execute(std::move(job));
-    ASSERT_TRUE(result.has_value());
+    ASSERT_TRUE(result.is_ok());
 
     result.value().wait();
     EXPECT_EQ(counter.load(), 1);
@@ -164,7 +164,7 @@ TEST_F(StandaloneExecutorTest, ExecuteMultipleJobs) {
     for (int i = 0; i < num_jobs; ++i) {
         auto job = std::make_unique<counting_job>(counter);
         auto result = executor_->execute(std::move(job));
-        ASSERT_TRUE(result.has_value());
+        ASSERT_TRUE(result.is_ok());
         futures.push_back(std::move(result.value()));
     }
 
@@ -199,7 +199,7 @@ TEST_F(StandaloneExecutorTest, FunctionJobExecutes) {
     EXPECT_EQ(job->get_name(), "test_func_job");
 
     auto result = executor_->execute(std::move(job));
-    ASSERT_TRUE(result.has_value());
+    ASSERT_TRUE(result.is_ok());
     result.value().wait();
 
     EXPECT_TRUE(executed.load());
@@ -232,7 +232,7 @@ TEST_F(StandaloneExecutorTest, JobExceptionPropagatesViaFuture) {
 
     auto job = std::make_unique<throwing_job>();
     auto result = executor_->execute(std::move(job));
-    ASSERT_TRUE(result.has_value());
+    ASSERT_TRUE(result.is_ok());
 
     EXPECT_THROW(result.value().get(), std::runtime_error);
 }
@@ -250,7 +250,7 @@ TEST_F(StandaloneExecutorTest, DelayedExecution) {
     auto before = std::chrono::steady_clock::now();
     auto result = executor_->execute_delayed(
         std::move(job), std::chrono::milliseconds(50));
-    ASSERT_TRUE(result.has_value());
+    ASSERT_TRUE(result.is_ok());
 
     result.value().wait();
     auto after = std::chrono::steady_clock::now();
@@ -296,7 +296,7 @@ TEST_F(StandaloneExecutorTest, QueueOverflowIncreasesDroppedCount) {
     for (int i = 0; i < 20; ++i) {
         auto job = std::make_unique<counting_job>(counter);
         auto result = small_executor->execute(std::move(job));
-        if (result.has_value()) {
+        if (result.is_ok()) {
             submitted++;
         } else {
             errors++;

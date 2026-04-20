@@ -38,11 +38,7 @@ using log_level = common::interfaces::log_level;
 // =============================================================================
 
 static log_entry make_test_entry(log_level level, const std::string& message) {
-    log_entry entry;
-    entry.level = level;
-    entry.message = message;
-    entry.timestamp = std::chrono::system_clock::now();
-    return entry;
+    return log_entry(level, message, std::chrono::system_clock::now());
 }
 
 // =============================================================================

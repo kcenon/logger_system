@@ -2,9 +2,9 @@ name: Code Coverage
 
 on:
   push:
-    branches: [ main, phase-* ]
+    branches: [ main, develop, phase-* ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
 
 jobs:
   coverage:
@@ -73,17 +73,63 @@ jobs:
     - name: Generate coverage report
       run: |
         cd build
+        # The build uses gcc-13 (see Install dependencies step), which emits
+        # .gcno files whose format is not understood by the system default
+        # gcov-11 bundled with Ubuntu 22.04's lcov. Point lcov at gcov-13 so
+        # it can actually read the coverage data.
+        GCOV_TOOL=$(command -v gcov-13 || command -v gcov)
+        echo "Using gcov tool: $GCOV_TOOL"
+
         # Capture coverage data
-        lcov --directory . --capture --output-file coverage.info || true
+        lcov --gcov-tool "$GCOV_TOOL" --directory . --capture --output-file coverage.info || true
 
         # Filter out system headers and test files
-        lcov --remove coverage.info '/usr/*' '*/test/*' '*/tests/*' '*/examples/*' --output-file coverage_filtered.info || true
+        lcov --gcov-tool "$GCOV_TOOL" --remove coverage.info '/usr/*' '*/test/*' '*/tests/*' '*/examples/*' --output-file coverage_filtered.info || true
 
         # Generate HTML report
         genhtml coverage_filtered.info --output-directory coverage_html || true
 
         # Print summary
-        lcov --list coverage_filtered.info || true
+        lcov --gcov-tool "$GCOV_TOOL" --list coverage_filtered.info || true
+
+    - name: Enforce coverage threshold
+      run: |
+        cd build
+        if [ ! -f coverage_filtered.info ]; then
+          echo "::error::coverage_filtered.info missing — cannot evaluate threshold"
+          exit 1
+        fi
+        # lcov --summary prints lines like "  lines......: 78.5% (1234 of 1573 lines)"
+        # Extract the percentage only if the second field actually looks
+        # like one (lcov prints "branches...: no data found" when branch
+        # instrumentation is off, which otherwise gets mis-parsed as "no").
+        COVERAGE=$(lcov --summary coverage_filtered.info 2>&1 \
+          | awk '/lines\.\.\.\./ && $2 ~ /%$/ { gsub("%", "", $2); print $2; exit }')
+        BRANCH_COVERAGE=$(lcov --summary coverage_filtered.info 2>&1 \
+          | awk '/branches\.\.\./ && $2 ~ /%$/ { gsub("%", "", $2); print $2; exit }')
+        # Initial floor: current measured line coverage is 78.3%. Set the
+        # threshold at 78% so the gate prevents regressions below today's
+        # baseline. A follow-up issue tracks raising this to 80% once the
+        # pre-existing failing tests (EncryptedWriterTest.WriteAndDecrypt*,
+        # LoggerOtelIntegrationTest.LoggerContextMethods,
+        # ConsoleWriterIntegrityTest.RoundTripOnStdout) are repaired or new
+        # tests close the remaining 1.7% gap.
+        LINE_THRESHOLD=78
+        BRANCH_THRESHOLD=70
+        echo "Line coverage:   ${COVERAGE:-unknown}% (threshold: ${LINE_THRESHOLD}%)"
+        echo "Branch coverage: ${BRANCH_COVERAGE:-unknown}% (threshold: ${BRANCH_THRESHOLD}%)"
+        FAIL=0
+        if [ -z "$COVERAGE" ] \
+          || ! awk -v c="$COVERAGE" -v t="$LINE_THRESHOLD" 'BEGIN { exit !(c+0 >= t+0) }'; then
+          echo "::error::Line coverage ${COVERAGE:-unknown}% is below threshold ${LINE_THRESHOLD}%"
+          FAIL=1
+        fi
+        if [ -n "$BRANCH_COVERAGE" ] \
+          && ! awk -v c="$BRANCH_COVERAGE" -v t="$BRANCH_THRESHOLD" 'BEGIN { exit !(c+0 >= t+0) }'; then
+          echo "::error::Branch coverage ${BRANCH_COVERAGE}% is below threshold ${BRANCH_THRESHOLD}%"
+          FAIL=1
+        fi
+        exit $FAIL
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v6
