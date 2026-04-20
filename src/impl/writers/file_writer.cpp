@@ -14,9 +14,11 @@ namespace kcenon::logger {
 
 file_writer::file_writer(const std::string& filename,
                         bool append,
-                        std::unique_ptr<log_formatter_interface> formatter)
+                        std::unique_ptr<log_formatter_interface> formatter,
+                        bool binary)
     : filename_(filename)
     , append_mode_(append)
+    , binary_mode_(binary)
     , formatter_(formatter ? std::move(formatter) : std::make_unique<timestamp_formatter>()) {
     std::lock_guard<std::mutex> lock(mutex_);
     open_internal();
@@ -47,8 +49,17 @@ common::VoidResult file_writer::write(const log_entry& entry) {
                 security::format_signature_suffix(*integrity_policy_, formatted));
         }
 
-        file_stream_ << formatted << '\n';
-        bytes_written_.fetch_add(formatted.size() + 1);  // +1 for newline
+        if (binary_mode_) {
+            // Binary mode writes the payload verbatim. Callers (for example,
+            // encrypted_writer) produce fully-framed byte streams that must
+            // not be corrupted by a trailing newline or CRLF translation.
+            file_stream_.write(formatted.data(),
+                               static_cast<std::streamsize>(formatted.size()));
+            bytes_written_.fetch_add(formatted.size());
+        } else {
+            file_stream_ << formatted << '\n';
+            bytes_written_.fetch_add(formatted.size() + 1);  // +1 for newline
+        }
 
         // Verify stream state
         return utils::check_stream_state(file_stream_, "write");
@@ -104,7 +115,11 @@ common::VoidResult file_writer::open_internal() {
 
         // Open file
         auto mode = append_mode_ ? std::ios::app : std::ios::trunc;
-        file_stream_.open(filename_, std::ios::out | mode);
+        auto flags = std::ios::out | mode;
+        if (binary_mode_) {
+            flags |= std::ios::binary;
+        }
+        file_stream_.open(filename_, flags);
 
         // Check if file opened successfully
         auto check = utils::check_condition(
