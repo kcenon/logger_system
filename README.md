@@ -22,6 +22,7 @@
 - [Ecosystem Integration](#ecosystem-integration)
 - [C++20 Module Support](#c20-module-support)
 - [Documentation](#documentation)
+- [Compliance](#compliance)
 - [Configuration Templates](#configuration-templates)
 - [Build Configuration](#build-configuration)
 - [Platform Support](#platform-support)
@@ -563,6 +564,16 @@ int main() {
 - 📋 [FAQ](docs/guides/FAQ.md) - Frequently asked questions
 - 🔍 [Troubleshooting](docs/guides/TROUBLESHOOTING.md) - Common build, runtime, and integration issues
 - 📝 [Changelog](docs/CHANGELOG.md) - Release history and changes
+
+---
+
+## Compliance
+
+`logger_system` provides technical primitives that organizations may use as part of an Information Security Management System (ISMS). The library is not itself certified; adopters integrate it into their ISMS and supply the organizational controls (policy, training, risk management).
+
+- 🛡️ [ISO/IEC 27001 Control Mapping](docs/compliance/iso-27001.md) — how audit logger, encrypted writer, path validation, log sanitizer, and retention policies map to Annex A controls
+
+Related standards covered by the same features: ISO/IEC 27701 (privacy), GDPR Art. 32, PCI DSS v4.0 § 10, SOC 2 CC7.2, HIPAA § 164.312(b).
 
 ---
 
