@@ -50,10 +50,15 @@ public:
      * @param filename Path to the log file
      * @param append Whether to append to existing file (default: true)
      * @param formatter Custom log formatter (default: timestamp formatter)
+     * @param binary Whether to open the file in binary mode and skip the
+     *        trailing newline that is otherwise appended after each record
+     *        (default: false). Required when the caller writes pre-framed
+     *        binary payloads such as those produced by encrypted_writer.
      */
     explicit file_writer(const std::string& filename,
                         bool append = true,
-                        std::unique_ptr<log_formatter_interface> formatter = nullptr);
+                        std::unique_ptr<log_formatter_interface> formatter = nullptr,
+                        bool binary = false);
 
     /**
      * @brief Destructor
@@ -145,6 +150,7 @@ protected:
 protected:
     std::string filename_;
     bool append_mode_;
+    bool binary_mode_ = false;
 
     std::ofstream file_stream_;
     std::atomic<bool> is_open_{false};

@@ -48,7 +48,10 @@ common::VoidResult console_writer::write(const log_entry& entry) {
         // Convert logger_system::log_level to common::interfaces::log_level for comparison
         auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
 
-        auto& stream = (use_stderr_ || level <= common::interfaces::log_level::error)
+        // Route error/fatal to stderr; everything less severe to stdout.
+        // log_level values are ordered by severity (trace=0 ... fatal=5),
+        // so >= error selects the high-severity bucket.
+        auto& stream = (use_stderr_ || level >= common::interfaces::log_level::error)
                        ? std::cerr : std::cout;
 
         if (use_color()) {
