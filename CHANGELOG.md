@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Documentation
+
+- Add "Project Layout" section to `README.md` and `README.kr.md` linking to the kcenon ecosystem layout standard ([#629](https://github.com/kcenon/logger_system/issues/629))
+
 ## [1.0.0] - 2026-04-15
 
 ### Changed
