@@ -76,11 +76,16 @@ jobs:
         GCOV_TOOL=$(command -v gcov-13 || command -v gcov)
         echo "Using gcov tool: $GCOV_TOOL"
 
-        # Capture coverage data
-        lcov --gcov-tool "$GCOV_TOOL" --directory . --capture --output-file coverage.info || true
+        # Capture coverage data.
+        # lcov 2.0 (ubuntu-24.04) escalates `mismatched end line` to a fatal
+        # error where lcov 1.15 only warned. The mismatches come from gcov-13
+        # debug info on inlined/templated test bodies and do not affect the
+        # numeric coverage; bypass per lcov's own remediation hint.
+        LCOV_IGNORE="--ignore-errors mismatch,unused,empty,inconsistent"
+        lcov $LCOV_IGNORE --gcov-tool "$GCOV_TOOL" --directory . --capture --output-file coverage.info || true
 
         # Filter out system headers and test files
-        lcov --gcov-tool "$GCOV_TOOL" --remove coverage.info '/usr/*' '*/test/*' '*/tests/*' '*/examples/*' --output-file coverage_filtered.info || true
+        lcov $LCOV_IGNORE --gcov-tool "$GCOV_TOOL" --remove coverage.info '/usr/*' '*/test/*' '*/tests/*' '*/examples/*' --output-file coverage_filtered.info || true
 
         # Generate HTML report
         genhtml coverage_filtered.info --output-directory coverage_html || true
