@@ -487,7 +487,7 @@ The `src/impl/` directory contains internal headers and implementations not part
 | Subdirectory | Contents |
 |-------------|----------|
 | `memory/` | `object_pool.h`, `log_entry_pool.h` - Memory pool implementations |
-| `monitoring/` | `basic_monitor.h`, `monitoring_interface.h`, `thread_system_monitor_adapter.h` |
+| `monitoring/` | `basic_monitor.h`, `monitoring_interface.h` |
 
 ---
 
