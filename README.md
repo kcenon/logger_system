@@ -14,6 +14,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
+- [Project Layout](#project-layout)
 - [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Core Features](#core-features)
@@ -41,6 +42,12 @@ A high-performance C++20 asynchronous logging framework designed for multithread
 - 🛡️ **Production-grade**: Comprehensive CI/CD, sanitizers, benchmarks
 - 🔐 **Security-first**: Path validation, secure storage, audit logging
 - 🌐 **Cross-platform**: Windows, Linux, macOS with GCC, Clang, MSVC
+
+---
+
+## Project Layout
+
+`logger_system` follows the [kcenon ecosystem layout standard](https://github.com/kcenon/common_system/blob/develop/docs/kcenon-system-layout.md) (v1.1) and serves as a reference example of the convention. Refer to that document for the canonical directory structure, CMake target naming, and cross-system integration rules shared by all kcenon systems.
 
 ---
 
