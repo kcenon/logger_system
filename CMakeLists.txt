@@ -48,71 +48,16 @@ message(STATUS "  Architecture: ${CMAKE_SYSTEM_PROCESSOR}")
 message(STATUS "========================================")
 
 ##################################################
-# Global options
+# Build options, feature flags, performance tuning
 ##################################################
-option(BUILD_TESTS "Build unit tests" ON)
-option(BUILD_BENCHMARKS "Build benchmarks" OFF)
-option(BUILD_SAMPLES "Build sample programs" ON)
-option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
-option(LOGGER_BUILD_INTEGRATION_TESTS "Build integration tests" ON)
-option(LOGGER_ENABLE_COVERAGE "Enable code coverage reporting" OFF)
-option(LOGGER_ENABLE_OTLP "Enable OpenTelemetry (OTLP) integration for observability" OFF)
-option(LOGGER_USE_ENCRYPTION "Enable encryption support via OpenSSL" ON)
-
-# Optional module options (Issue #357: SRP - separate server/analysis from core)
-option(LOGGER_WITH_SERVER "Include log server functionality" ON)
-option(LOGGER_WITH_ANALYSIS "Include log analysis functionality" ON)
-
-# C++20 Modules option (requires CMake 3.28+)
-if(LOGGER_CAN_USE_MODULES)
-    option(LOGGER_USE_MODULES "Build with C++20 modules support" OFF)
-else()
-    set(LOGGER_USE_MODULES OFF CACHE BOOL "Build with C++20 modules (requires CMake 3.28+)" FORCE)
-endif()
-
-if(LOGGER_USE_MODULES)
-    message(STATUS "Logger System: C++20 modules support enabled")
-    set(CMAKE_CXX_SCAN_FOR_MODULES ON)
-endif()
-
-# Map LOGGER_BUILD_* to BUILD_* for compatibility with CI/CD
-if(DEFINED LOGGER_BUILD_SAMPLES)
-    set(BUILD_SAMPLES ${LOGGER_BUILD_SAMPLES} CACHE BOOL "Build sample programs" FORCE)
-endif()
-if(DEFINED LOGGER_BUILD_TESTS)
-    set(BUILD_TESTS ${LOGGER_BUILD_TESTS} CACHE BOOL "Build unit tests" FORCE)
-endif()
-
-# Respect global BUILD_INTEGRATION_TESTS flag if set
-if(DEFINED BUILD_INTEGRATION_TESTS)
-    if(BUILD_INTEGRATION_TESTS)
-        set(_LOGGER_BUILD_IT_VALUE ON)
-    else()
-        set(_LOGGER_BUILD_IT_VALUE OFF)
-    endif()
-    set(LOGGER_BUILD_INTEGRATION_TESTS ${_LOGGER_BUILD_IT_VALUE} CACHE BOOL "Build integration tests" FORCE)
-endif()
-option(NO_VCPKG "Skip vcpkg and use system libraries only" OFF)
-
-# Disable tests and benchmarks for MinGW builds due to compatibility issues
-if(MINGW)
-    if(BUILD_TESTS)
-        message(STATUS "Disabling tests for MinGW build due to compatibility issues")
-        set(BUILD_TESTS OFF CACHE BOOL "Tests disabled for MinGW" FORCE)
-    endif()
-    if(BUILD_BENCHMARKS)
-        message(STATUS "Disabling benchmarks for MinGW build due to compatibility issues")
-        set(BUILD_BENCHMARKS OFF CACHE BOOL "Benchmarks disabled for MinGW" FORCE)
-    endif()
-endif()
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(options)
 
 ##################################################
 # Dependency Management (Unified CMake Module)
 ##################################################
 
-# Add cmake modules path (required before including UnifiedDependencies)
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-
+# CMAKE_MODULE_PATH already set above before include(options)
 # Include unified dependency management module
 include(UnifiedDependencies)
 
@@ -144,9 +89,7 @@ endif()
 # Include Custom CMake Modules
 ##################################################
 
-# Include feature configuration module
-include(logger_features)
-
+# Feature flags now live in options.cmake (included earlier)
 # Include dependency detection module
 include(logger_dependencies)
 
@@ -200,10 +143,9 @@ if(NO_VCPKG)
     set(SKIP_VCPKG ON)
 endif()
 
-# thread_system is now OPTIONAL (Issue #222, #224)
-# logger_system uses standalone std::jthread implementation by default
-# When enabled, provides optional integration with thread_system's thread_pool
-option(LOGGER_USE_THREAD_SYSTEM "Enable optional thread_system integration" OFF)
+# LOGGER_USE_THREAD_SYSTEM is declared in options.cmake (Issue #222, #224).
+# logger_system uses standalone std::jthread implementation by default.
+# When enabled, provides optional integration with thread_system's thread_pool.
 
 ##################################################
 # Bidirectional Dependency Guard (Issue #252 — Resolved)
