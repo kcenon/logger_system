@@ -81,7 +81,9 @@ jobs:
         # error where lcov 1.15 only warned. The mismatches come from gcov-13
         # debug info on inlined/templated test bodies and do not affect the
         # numeric coverage; bypass per lcov's own remediation hint.
-        LCOV_IGNORE="--ignore-errors mismatch,unused,empty,inconsistent"
+        # `negative` covers GCC 13 atomic counter races on inlined std-lib
+        # headers — lcov 2.0 otherwise drops the entire tracefile.
+        LCOV_IGNORE="--ignore-errors mismatch,unused,empty,inconsistent,negative"
         lcov $LCOV_IGNORE --gcov-tool "$GCOV_TOOL" --directory . --capture --output-file coverage.info || true
 
         # Filter out system headers and test files
