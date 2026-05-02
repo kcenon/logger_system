@@ -154,7 +154,7 @@ include(logger_dependencies)
 include(logger_sanitizers)
 
 # Include warning configuration module
-include(logger_warnings)
+include(warnings)
 
 # Include coverage configuration module
 include(logger_coverage)
