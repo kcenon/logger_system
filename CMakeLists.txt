@@ -1,16 +1,12 @@
 cmake_minimum_required(VERSION 3.20)
 
-# C++20 Modules require CMake 3.28+
-# Check if we can enable module support
+# C++20 Modules require CMake 3.28+ (gates LOGGER_USE_MODULES in options.cmake)
 if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.28")
     set(LOGGER_CAN_USE_MODULES ON)
 else()
     set(LOGGER_CAN_USE_MODULES OFF)
 endif()
 
-##################################################
-# Project configuration
-##################################################
 project(
     logger_system
     VERSION 1.0.0
@@ -19,92 +15,26 @@ project(
     LANGUAGES CXX
 )
 
-##################################################
-# Build options, feature flags, performance tuning
-##################################################
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-include(options)
-
-##################################################
-# C++ standard, compiler checks, sanitizers
-##################################################
-include(compiler)
-
-##################################################
-# Dependencies (find_package + FetchContent)
-##################################################
-include(dependencies)
-
-##################################################
-# Warnings (coverage is handled by testing.cmake)
-##################################################
-include(warnings)
-
-# Perform compiler version check
-check_compiler_version()
-
-# Configure platform-specific settings
-configure_platform_settings()
-
-# Configure build types
-configure_build_types()
-
-# Check required headers
-check_required_headers()
-
-# Check C++ features
-check_cpp_features()
-
-##################################################
-# Output directories
-##################################################
+# Output directories shared across targets
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 ##################################################
-# Dependency detection + bidirectional guard (Issue #252)
+# Canonical cmake module orchestration (kcenon-system-layout v1.1)
 ##################################################
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-# Use our dependency detection module
-logger_find_all_dependencies()
+include(options)        # 1. option() / feature flags / performance tuning
+include(compiler)       # 2. C++ standard, platform, sanitizers, feature checks
+include(dependencies)   # 3. find_package + FetchContent + thread/common_system
+include(warnings)       # 4. logger_add_warnings(), logger_enable_warnings_for_all()
+include(targets)        # 5. logger_system library target with explicit sources
+include(install)        # 6. install rules + config-package generation
+include(testing)        # 7. enable_testing(), tests/, integration_tests/, coverage
+include(examples)       # 8. examples/samples subdirectory wiring
 
-# Print feature configuration summary
-logger_print_features()
-
-# Skip vcpkg if NO_VCPKG option is set
-if(NO_VCPKG)
-    message(STATUS "Skipping vcpkg - using system libraries only")
-    set(SKIP_VCPKG ON)
-endif()
-
-# Perform dependency guard check (declared in dependencies.cmake)
-check_bidirectional_dependency_guard()
-
-# Optional thread_system + spdlog (resolution helpers in dependencies.cmake)
-logger_resolve_thread_system()
-logger_resolve_spdlog()
-
-# Test/benchmark dependencies are resolved in dependencies.cmake.
-# enable_testing() and add_subdirectory(tests) move to testing.cmake.
-
-##################################################
-# Library target (explicit source list, no file(GLOB))
-##################################################
-include(targets)
-
-##################################################
-# Examples and tests
-##################################################
-include(examples)
-include(testing)
-
-# Benchmarks (kept in root: depends on FetchBenchmark.cmake helper)
+# Benchmarks remain inline (relies on cmake/FetchBenchmark.cmake helper)
 if(BUILD_BENCHMARKS)
     add_subdirectory(benchmarks)
 endif()
-
-##################################################
-# Installation rules + config-package generation
-##################################################
-include(install)

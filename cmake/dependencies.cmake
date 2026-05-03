@@ -276,3 +276,18 @@ function(check_bidirectional_dependency_guard)
         endif()
     endif()
 endfunction()
+
+##################################################
+# Self-invoked dependency detection + guard + optional integrations
+##################################################
+logger_find_all_dependencies()
+logger_print_features()
+
+if(NO_VCPKG)
+    message(STATUS "Skipping vcpkg - using system libraries only")
+    set(SKIP_VCPKG ON)
+endif()
+
+check_bidirectional_dependency_guard()
+logger_resolve_thread_system()
+logger_resolve_spdlog()

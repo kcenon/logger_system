@@ -522,3 +522,12 @@ if(LOGGER_ENABLE_SANITIZERS)
     message(STATUS "  Compiler: ${CMAKE_CXX_COMPILER_ID}")
     message(STATUS "========================================")
 endif()
+
+##################################################
+# Self-invoked compiler / platform / build-type / feature checks
+##################################################
+check_compiler_version()
+configure_platform_settings()
+configure_build_types()
+check_required_headers()
+check_cpp_features()
