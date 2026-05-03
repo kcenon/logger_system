@@ -31,54 +31,15 @@ include(options)
 include(compiler)
 
 ##################################################
-# Dependency Management (Unified CMake Module)
+# Dependencies (find_package + FetchContent)
 ##################################################
-
-# CMAKE_MODULE_PATH already set above before include(options)
-# Include unified dependency management module
-include(UnifiedDependencies)
-
-# Setup dependency resolution mode
-# Supports: UNIFIED_USE_LOCAL, UNIFIED_USE_FETCHCONTENT, find_package with fallback
-unified_setup_dependency_mode()
-
-message(STATUS "=== Dependency Management (UnifiedDependencies) ===")
-
-# Find common_system (required dependency)
-unified_find_dependency(common_system REQUIRED)
-
-# Set COMMON_SYSTEM_INCLUDE_DIR for backward compatibility
-if(common_system_FOUND AND common_system_SOURCE_DIR)
-    set(COMMON_SYSTEM_INCLUDE_DIR "${common_system_SOURCE_DIR}/include")
-elseif(COMMON_SYSTEM_INCLUDE_DIR)
-    # Already set by UnifiedDependencies
-else()
-    # Try to get from target
-    if(TARGET ${common_system_TARGET})
-        get_target_property(_cs_inc ${common_system_TARGET} INTERFACE_INCLUDE_DIRECTORIES)
-        if(_cs_inc)
-            list(GET _cs_inc 0 COMMON_SYSTEM_INCLUDE_DIR)
-        endif()
-    endif()
-endif()
+include(dependencies)
 
 ##################################################
-# Include Custom CMake Modules
+# Warnings + coverage
 ##################################################
-
-# Feature flags now live in options.cmake (included earlier)
-# Include dependency detection module
-include(logger_dependencies)
-
-# Sanitizer logic now lives in compiler.cmake (already included above)
-
-# Include warning configuration module
 include(warnings)
-
-# Include coverage configuration module
 include(logger_coverage)
-
-# CompilerChecks logic now lives in compiler.cmake (already included above)
 
 # Perform compiler version check
 check_compiler_version()
@@ -103,7 +64,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 ##################################################
-# Dependencies (modular approach)
+# Dependency detection + bidirectional guard (Issue #252)
 ##################################################
 
 # Use our dependency detection module
@@ -118,64 +79,7 @@ if(NO_VCPKG)
     set(SKIP_VCPKG ON)
 endif()
 
-# LOGGER_USE_THREAD_SYSTEM is declared in options.cmake (Issue #222, #224).
-# logger_system uses standalone std::jthread implementation by default.
-# When enabled, provides optional integration with thread_system's thread_pool.
-
-##################################################
-# Bidirectional Dependency Guard (Issue #252 — Resolved)
-##################################################
-# The bidirectional dependency risk between logger_system and thread_system has been
-# resolved. thread_system's BUILD_WITH_LOGGER_SYSTEM is deprecated (thread_system#336)
-# and scheduled for removal in v0.5.0.0.
-#
-# This guard remains as a safety check during the transition period.
-# Direction: logger_system → thread_system (optional, unidirectional)
-# Removed:  thread_system → logger_system (deprecated, uses ILogger DI instead)
-#
-# See: docs/DEPENDENCY_ARCHITECTURE.md for the resolved dependency graph
-# See: docs/integration/THREAD_SYSTEM.md for integration options
-
-function(check_bidirectional_dependency_guard)
-    # Check if we're enabling logger → thread direction
-    if(LOGGER_USE_THREAD_SYSTEM)
-        # Check if thread_system still has deprecated reverse dependency (thread → logger)
-        if(DEFINED BUILD_WITH_LOGGER_SYSTEM AND BUILD_WITH_LOGGER_SYSTEM)
-            message(WARNING
-                "=================================================================\n"
-                "DEPRECATED CONFIGURATION DETECTED (Issue #252)\n"
-                "=================================================================\n"
-                "  logger_system → thread_system (LOGGER_USE_THREAD_SYSTEM=ON)\n"
-                "  thread_system → logger_system (BUILD_WITH_LOGGER_SYSTEM=ON)\n"
-                "\n"
-                "BUILD_WITH_LOGGER_SYSTEM is deprecated in thread_system (see\n"
-                "thread_system#336) and scheduled for removal in v0.5.0.0.\n"
-                "thread_system now uses ILogger dependency injection instead.\n"
-                "\n"
-                "ACTION:\n"
-                "  Set BUILD_WITH_LOGGER_SYSTEM=OFF and use ILogger DI approach.\n"
-                "  See: docs/DEPENDENCY_ARCHITECTURE.md\n"
-                "=================================================================")
-        endif()
-
-        # Additional check: Inspect thread_system target for deprecated reverse dependency
-        if(TARGET thread_system::thread_system)
-            get_target_property(THREAD_DEFS thread_system::thread_system
-                               INTERFACE_COMPILE_DEFINITIONS)
-            if(THREAD_DEFS)
-                string(FIND "${THREAD_DEFS}" "BUILD_WITH_LOGGER_SYSTEM" _bidep_pos)
-                if(NOT _bidep_pos EQUAL -1)
-                    message(WARNING
-                        "Deprecated configuration detected: thread_system target has "
-                        "BUILD_WITH_LOGGER_SYSTEM in compile definitions. "
-                        "This is deprecated (thread_system#336) and will be removed in v0.5.0.0.")
-                endif()
-            endif()
-        endif()
-    endif()
-endfunction()
-
-# Perform dependency guard check
+# Perform dependency guard check (declared in dependencies.cmake)
 check_bidirectional_dependency_guard()
 
 if(LOGGER_USE_THREAD_SYSTEM)

@@ -1,19 +1,21 @@
-# UnifiedDependencies.cmake
-# Unified dependency management for kcenon system libraries
+# UnifiedDependencies.cmake -- shared dependency resolution helpers
 #
-# This module provides a unified interface for finding dependencies across
-# three modes: LOCAL (sibling directories), FETCHCONTENT, and find_package.
+# Inputs:
+#   - UNIFIED_USE_LOCAL: option (default OFF), use sibling directories
+#   - UNIFIED_USE_FETCHCONTENT: option (default OFF), force FetchContent
+#   - UNIFIED_ALLOW_FETCHCONTENT_FALLBACK: option (default ON),
+#     allow FetchContent when find_package fails
+#   - UNIFIED_GITHUB_ORG: cache string (default "kcenon")
+# Outputs:
+#   - unified_setup_dependency_mode(): function, configures resolution mode
+#   - unified_find_dependency(<name> [REQUIRED|OPTIONAL]): function, resolves a dependency
+#   - <dep>_FOUND / <dep>_TARGET / <dep>_SOURCE_DIR: per-dependency variables
 #
 # Usage:
 #   include(UnifiedDependencies)
 #   unified_setup_dependency_mode()  # Call once to configure mode
 #   unified_find_dependency(common_system REQUIRED)
 #   unified_find_dependency(monitoring_system OPTIONAL)
-#
-# Options (set before including):
-#   UNIFIED_USE_LOCAL       - Use sibling directories (default: OFF)
-#   UNIFIED_USE_FETCHCONTENT - Use FetchContent (default: OFF)
-#   UNIFIED_ALLOW_FETCHCONTENT_FALLBACK - Allow FetchContent as fallback (default: ON)
 
 cmake_minimum_required(VERSION 3.16)
 
