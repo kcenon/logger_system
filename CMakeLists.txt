@@ -7,9 +7,14 @@ else()
     set(LOGGER_CAN_USE_MODULES OFF)
 endif()
 
+# Read version from the VERSION file (single source of truth, R-29).
+# The file contains a single SemVer line, e.g. "1.0.0".
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/VERSION" LOGGER_VERSION_RAW)
+string(STRIP "${LOGGER_VERSION_RAW}" LOGGER_VERSION)
+
 project(
     logger_system
-    VERSION 1.0.0
+    VERSION ${LOGGER_VERSION}
     DESCRIPTION "High-performance C++20 logging system with asynchronous batching"
     HOMEPAGE_URL "https://github.com/kcenon/logger_system"
     LANGUAGES CXX

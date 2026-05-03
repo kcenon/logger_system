@@ -84,8 +84,10 @@ namespace kcenon::logger {
 
 // Type aliases - use common::interfaces types for standardization
 using log_level = common::interfaces::log_level;
-using health_status = logger_system::health_status;
-using overflow_policy = logger_system::overflow_policy;
+// health_status and overflow_policy are declared directly in this namespace
+// via <kcenon/logger/interfaces/logger_types.h> (included above). No further
+// aliasing needed — they are already visible as kcenon::logger::health_status
+// and kcenon::logger::overflow_policy.
 
 // Type aliases for convenience and compatibility
 using logger_metrics = metrics::logger_performance_stats;
