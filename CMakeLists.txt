@@ -20,38 +20,15 @@ project(
 )
 
 ##################################################
-# C++ standard requirements
-##################################################
-
-# C++20 is REQUIRED (no fallback to earlier standards)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# Verify that C++20 is actually being used
-if(CMAKE_CXX_STANDARD LESS 20)
-    message(FATAL_ERROR "Logger System requires C++20 or later. Current standard: C++${CMAKE_CXX_STANDARD}")
-endif()
-
-message(STATUS "Logger System: Using C++20 standard")
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # Generate compile_commands.json for tooling
-
-# Output compiler information for debugging purposes
-message(STATUS "========================================")
-message(STATUS "Logger System - Compiler Configuration:")
-message(STATUS "  ID: ${CMAKE_CXX_COMPILER_ID}")
-message(STATUS "  Version: ${CMAKE_CXX_COMPILER_VERSION}")
-message(STATUS "  Path: ${CMAKE_CXX_COMPILER}")
-message(STATUS "  C++ Standard: ${CMAKE_CXX_STANDARD}")
-message(STATUS "  Platform: ${CMAKE_SYSTEM_NAME}")
-message(STATUS "  Architecture: ${CMAKE_SYSTEM_PROCESSOR}")
-message(STATUS "========================================")
-
-##################################################
 # Build options, feature flags, performance tuning
 ##################################################
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(options)
+
+##################################################
+# C++ standard, compiler checks, sanitizers
+##################################################
+include(compiler)
 
 ##################################################
 # Dependency Management (Unified CMake Module)
@@ -93,8 +70,7 @@ endif()
 # Include dependency detection module
 include(logger_dependencies)
 
-# Include sanitizer configuration module
-include(logger_sanitizers)
+# Sanitizer logic now lives in compiler.cmake (already included above)
 
 # Include warning configuration module
 include(warnings)
@@ -102,8 +78,7 @@ include(warnings)
 # Include coverage configuration module
 include(logger_coverage)
 
-# Include compiler checks module (following thread_system pattern)
-include(CompilerChecks)
+# CompilerChecks logic now lives in compiler.cmake (already included above)
 
 # Perform compiler version check
 check_compiler_version()
