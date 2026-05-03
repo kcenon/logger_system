@@ -176,6 +176,36 @@ function(logger_find_benchmark_dependencies)
 endfunction()
 
 ##################################################
+# Optional thread_system integration (Issue #222, #224)
+##################################################
+function(logger_resolve_thread_system)
+    if(LOGGER_USE_THREAD_SYSTEM)
+        unified_find_dependency(thread_system QUIET)
+        if(thread_system_FOUND)
+            set(THREAD_SYSTEM_FOUND TRUE PARENT_SCOPE)
+            message(STATUS "Logger System: thread_system integration enabled")
+            message(STATUS "  Direction: logger_system -> thread_system (using thread_pool for async I/O)")
+        else()
+            message(STATUS "Logger System: thread_system not found, using standalone mode")
+            set(THREAD_SYSTEM_FOUND FALSE PARENT_SCOPE)
+        endif()
+    else()
+        message(STATUS "Logger System: Using standalone mode (thread_system integration disabled)")
+        set(THREAD_SYSTEM_FOUND FALSE PARENT_SCOPE)
+    endif()
+endfunction()
+
+##################################################
+# Optional spdlog (informational, not linked by targets.cmake)
+##################################################
+function(logger_resolve_spdlog)
+    find_package(spdlog CONFIG)
+    if(spdlog_FOUND)
+        message(STATUS "Found spdlog library")
+    endif()
+endfunction()
+
+##################################################
 # Aggregate dependency detection entry point
 ##################################################
 function(logger_find_all_dependencies)
