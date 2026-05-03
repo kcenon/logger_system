@@ -36,10 +36,9 @@ include(compiler)
 include(dependencies)
 
 ##################################################
-# Warnings + coverage
+# Warnings (coverage is handled by testing.cmake)
 ##################################################
 include(warnings)
-include(logger_coverage)
 
 # Perform compiler version check
 check_compiler_version()
@@ -104,15 +103,8 @@ if(spdlog_FOUND)
     message(STATUS "Found spdlog library")
 endif()
 
-# Google Test (for unit tests)
-if (BUILD_TESTS)
-    # Test dependencies are handled by LoggerDependencies module
-    enable_testing()
-endif()
-
-# Google Benchmark (for benchmarks)
-# Benchmark dependencies are handled by LoggerDependencies module
-# Note: MinGW benchmark disable is handled in the options section (line 58-61)
+# Test/benchmark dependencies are resolved in dependencies.cmake.
+# enable_testing() and add_subdirectory(tests) move to testing.cmake.
 
 ##################################################
 # Source files
@@ -371,57 +363,15 @@ else()
     message(FATAL_ERROR "Logger System: Required directories missing: include/kcenon/logger and src/")
 endif()
 
-if (BUILD_SAMPLES)
-    # Skip examples in CI environment to avoid compilation errors with incomplete features
-    if(NOT DEFINED ENV{CI})
-        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/examples)
-            add_subdirectory(examples)
-        elseif(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/samples)
-            add_subdirectory(samples)
-        endif()
-    else()
-        message(STATUS "Skipping examples/samples in CI environment")
-    endif()
-endif()
+##################################################
+# Examples and tests
+##################################################
+include(examples)
+include(testing)
 
-if (BUILD_TESTS)
-    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt)
-        add_subdirectory(tests)
-    else()
-        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/unittest)
-            add_subdirectory(unittest)
-        endif()
-        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests)
-            add_subdirectory(tests)
-        endif()
-    endif()
-
-    # Enable sanitizers for test targets if requested
-    logger_enable_sanitizers_for_tests()
-
-    # Enable warnings for all targets
-    logger_enable_warnings_for_all()
-endif()
-
-if (BUILD_BENCHMARKS)
+# Benchmarks (kept in root: depends on FetchBenchmark.cmake helper)
+if(BUILD_BENCHMARKS)
     add_subdirectory(benchmarks)
-endif()
-
-# Integration tests
-if (LOGGER_BUILD_INTEGRATION_TESTS AND BUILD_TESTS AND BUILD_WITH_COMMON_SYSTEM)
-    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/integration_tests AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/integration_tests/CMakeLists.txt)
-        message(STATUS "Adding integration_tests subdirectory")
-        add_subdirectory(integration_tests)
-    endif()
-elseif (LOGGER_BUILD_INTEGRATION_TESTS AND BUILD_TESTS AND NOT BUILD_WITH_COMMON_SYSTEM)
-    message(STATUS "Skipping integration_tests because BUILD_WITH_COMMON_SYSTEM=OFF")
-endif()
-
-# Enable coverage for all registered test targets
-# IMPORTANT: This must be called AFTER all test subdirectories (tests/, integration_tests/)
-# have been processed, so that all test targets are registered for coverage.
-if (BUILD_TESTS)
-    logger_enable_coverage_for_all()
 endif()
 
 ##################################################
