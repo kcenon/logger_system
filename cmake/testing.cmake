@@ -1,12 +1,24 @@
-# logger_coverage.cmake
-# Code coverage configuration for Logger System
+# testing.cmake -- Test target registration, sanitizer/warning wiring, coverage
 #
-# This module provides automatic coverage instrumentation for test targets.
-# Instead of maintaining a static list, test targets are automatically registered
-# using the logger_register_coverage_target() function.
+# Inputs:
+#   - BUILD_TESTS: option (declared in options.cmake), gates everything
+#   - LOGGER_BUILD_INTEGRATION_TESTS: option (options.cmake)
+#   - BUILD_WITH_COMMON_SYSTEM: cache bool (set in install.cmake / root)
+#   - LOGGER_ENABLE_COVERAGE: option (options.cmake)
+#   - LOGGER_ENABLE_SANITIZERS / LOGGER_SANITIZER_TYPE: from compiler.cmake
+# Outputs:
+#   - enable_testing() invoked when BUILD_TESTS is ON
+#   - tests/, integration_tests/ subdirectories added
+#   - logger_register_coverage_target(target): function, registers a target
+#     for coverage instrumentation
+#   - logger_add_coverage(target): function, applies coverage flags
+#   - logger_setup_coverage_target(): function, creates coverage report target
+#   - logger_enable_coverage_for_all(): macro, applies coverage to all
+#     registered + legacy test targets (call AFTER all test subdirectories)
 
-# Coverage options
-option(LOGGER_ENABLE_COVERAGE "Enable code coverage reporting" OFF)
+##################################################
+# Coverage configuration (formerly logger_coverage.cmake)
+##################################################
 
 # Initialize global property for tracking coverage targets
 # This replaces the static LOGGER_COVERAGE_TARGETS list with dynamic registration
@@ -53,12 +65,12 @@ function(logger_add_coverage target)
     if(NOT LOGGER_ENABLE_COVERAGE)
         return()
     endif()
-    
+
     if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
         message(WARNING "Code coverage is only supported in Debug builds")
         return()
     endif()
-    
+
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
         # Coverage flags for GCC/Clang
         target_compile_options(${target} PRIVATE
@@ -84,7 +96,7 @@ function(logger_add_coverage target)
         endif()
 
         message(STATUS "Enabled code coverage for ${target}")
-        
+
     elseif(MSVC)
         message(WARNING "Code coverage is not yet supported for MSVC")
     else()
@@ -97,13 +109,13 @@ function(logger_setup_coverage_target)
     if(NOT LOGGER_ENABLE_COVERAGE)
         return()
     endif()
-    
+
     # Find required tools
     find_program(GCOV_EXECUTABLE gcov)
     find_program(LCOV_EXECUTABLE lcov)
     find_program(GENHTML_EXECUTABLE genhtml)
     find_program(GCOVR_EXECUTABLE gcovr)
-    
+
     if(GCOVR_EXECUTABLE)
         # Use gcovr for coverage report generation
         add_custom_target(coverage
@@ -121,42 +133,42 @@ function(logger_setup_coverage_target)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMENT "Generating code coverage report with gcovr"
         )
-        
+
         message(STATUS "Coverage target 'coverage' created (using gcovr)")
-        
+
     elseif(LCOV_EXECUTABLE AND GENHTML_EXECUTABLE)
         # Use lcov for coverage report generation
         add_custom_target(coverage
             # Cleanup
             COMMAND ${LCOV_EXECUTABLE} --directory . --zerocounters
-            
+
             # Run tests
             COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-            
+
             # Capture coverage data
             COMMAND ${LCOV_EXECUTABLE} --directory . --capture --output-file coverage.info
-            
+
             # Remove unwanted files from coverage
-            COMMAND ${LCOV_EXECUTABLE} --remove coverage.info 
-                '/usr/*' '*/unittest/*' '*/tests/*' '*/build/*' 
+            COMMAND ${LCOV_EXECUTABLE} --remove coverage.info
+                '/usr/*' '*/unittest/*' '*/tests/*' '*/build/*'
                 --output-file coverage.cleaned
-            
+
             # Generate HTML report
-            COMMAND ${GENHTML_EXECUTABLE} coverage.cleaned 
+            COMMAND ${GENHTML_EXECUTABLE} coverage.cleaned
                 --output-directory ${CMAKE_BINARY_DIR}/coverage
                 --title "Logger System Coverage Report"
                 --show-details --legend
-            
+
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMENT "Generating code coverage report with lcov"
         )
-        
+
         message(STATUS "Coverage target 'coverage' created (using lcov)")
-        
+
     else()
         message(WARNING "Coverage tools not found. Install gcovr or lcov+genhtml for coverage reports")
     endif()
-    
+
     # Add coverage reset target
     add_custom_target(coverage-reset
         COMMAND find ${CMAKE_BINARY_DIR} -name '*.gcda' -delete
@@ -215,4 +227,42 @@ if(LOGGER_ENABLE_COVERAGE)
     message(STATUS "  Build Type: ${CMAKE_BUILD_TYPE}")
     message(STATUS "  Compiler: ${CMAKE_CXX_COMPILER_ID}")
     message(STATUS "========================================")
+endif()
+
+##################################################
+# Test target registration (subdirectories + sanitizer/warning hooks)
+##################################################
+if(BUILD_TESTS)
+    enable_testing()
+
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt)
+        add_subdirectory(tests)
+    else()
+        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/unittest)
+            add_subdirectory(unittest)
+        endif()
+        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+            add_subdirectory(tests)
+        endif()
+    endif()
+
+    # Enable sanitizers for test targets if requested (function from compiler.cmake)
+    logger_enable_sanitizers_for_tests()
+
+    # Enable warnings for all targets (macro from warnings.cmake)
+    logger_enable_warnings_for_all()
+
+    # Integration tests (require common_system)
+    if(LOGGER_BUILD_INTEGRATION_TESTS AND BUILD_WITH_COMMON_SYSTEM)
+        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/integration_tests AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/integration_tests/CMakeLists.txt)
+            message(STATUS "Adding integration_tests subdirectory")
+            add_subdirectory(integration_tests)
+        endif()
+    elseif(LOGGER_BUILD_INTEGRATION_TESTS AND NOT BUILD_WITH_COMMON_SYSTEM)
+        message(STATUS "Skipping integration_tests because BUILD_WITH_COMMON_SYSTEM=OFF")
+    endif()
+
+    # Apply coverage flags to all registered test targets
+    # IMPORTANT: This must run AFTER all test subdirectories have been processed
+    logger_enable_coverage_for_all()
 endif()

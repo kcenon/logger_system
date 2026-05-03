@@ -1,8 +1,11 @@
-##################################################
-# FetchBenchmark.cmake
-# 
-# Configuration for fetching Google Benchmark if not found
-##################################################
+# FetchBenchmark.cmake -- helper to fetch Google Benchmark when find_package fails
+#
+# Inputs: none (reads BUILD_BENCHMARKS via the calling context)
+# Outputs:
+#   - benchmark::benchmark target (alias) when fetch succeeds
+#   - googlebenchmark FetchContent population
+#
+# Used from: tests/benchmarks/CMakeLists.txt (not from the canonical modules)
 
 include(FetchContent)
 

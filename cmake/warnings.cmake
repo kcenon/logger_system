@@ -1,5 +1,12 @@
-# logger_warnings.cmake
-# Compiler warning configuration for Logger System
+# warnings.cmake -- Compiler warning configuration for Logger System
+#
+# Inputs:
+#   - LOGGER_ENABLE_WARNINGS: option (default ON), gates application of warning flags
+#   - LOGGER_WARNINGS_AS_ERRORS: option (default OFF), promotes warnings to errors
+# Outputs:
+#   - logger_add_warnings(target): function, applies warning flags to target
+#   - logger_suppress_warnings(target): function, disables warnings for target
+#   - logger_enable_warnings_for_all(): macro, applies to logger_system + tests
 
 # Warning options
 option(LOGGER_ENABLE_WARNINGS "Enable comprehensive compiler warnings" ON)
