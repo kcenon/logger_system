@@ -21,6 +21,13 @@
 ##################################################
 include(UnifiedDependencies)
 
+# Default common_system integration to ON; UnifiedDependencies overrides on success.
+# This ensures testing.cmake's BUILD_WITH_COMMON_SYSTEM gate is well-defined even
+# before unified_find_dependency(common_system REQUIRED) runs.
+if(NOT DEFINED BUILD_WITH_COMMON_SYSTEM)
+    set(BUILD_WITH_COMMON_SYSTEM ON CACHE BOOL "Build with common_system integration")
+endif()
+
 # Setup dependency resolution mode
 # Supports: UNIFIED_USE_LOCAL, UNIFIED_USE_FETCHCONTENT, find_package with fallback
 unified_setup_dependency_mode()
