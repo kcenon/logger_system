@@ -23,6 +23,8 @@
 
 namespace kcenon::logger {
 
+namespace security { class integrity_policy; }
+
 /**
  * @class console_writer
  * @brief Core console writer for logging to stdout/stderr
@@ -107,6 +109,16 @@ public:
      */
     bool use_color() const;
 
+    /**
+     * @brief Enable tamper-evident integrity signing for every console record.
+     * @param policy Signing policy (shared ownership); pass nullptr to disable.
+     *
+     * When a policy is installed, each emitted line is suffixed with a
+     * SIGNATURE[<policy>]:<hex> token (Issue #612). Consumers piping the
+     * console output to a log collector can re-verify each record.
+     */
+    void set_integrity_policy(std::shared_ptr<security::integrity_policy> policy);
+
 protected:
     /**
      * @brief Format a log entry using the current formatter
@@ -130,6 +142,7 @@ private:
     bool use_stderr_;
     bool use_color_{true};
     std::unique_ptr<log_formatter_interface> formatter_;
+    std::shared_ptr<security::integrity_policy> integrity_policy_;
     mutable std::mutex mutex_;
 };
 

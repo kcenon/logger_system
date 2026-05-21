@@ -294,7 +294,7 @@ These scenarios are **not** benchmarked (yet):
 ## Related Documentation
 
 - [Migration Guide](../guides/DECORATOR_MIGRATION.md) - How to migrate from old patterns
-- [Writer Builder Documentation](../examples/writer_builder_examples.md) - API usage examples
+- [Writer Builder Example](../../examples/writer_builder_example.cpp) - API usage examples<!-- TODO: ../examples/writer_builder_examples.md does not exist; redirected to source example -->
 - [Benchmark Baseline](BASELINE.md) - Overall system performance baselines
 
 ## Version History

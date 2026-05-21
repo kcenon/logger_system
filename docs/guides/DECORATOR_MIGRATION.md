@@ -1010,7 +1010,7 @@ If you encounter issues not covered in this guide:
 ## Related Documentation
 
 - [writer_builder Example](../../examples/writer_builder_example.cpp) - Complete usage examples
-- [API Reference - Writers](../API_REFERENCE.md#writers)
+- [API Reference - Writers](../API_REFERENCE.md#writers-and-filters)
 - [Architecture Overview](../ARCHITECTURE.md)
 - [Changelog](../CHANGELOG.md) - Version history and breaking changes
 - [Best Practices](BEST_PRACTICES.md)

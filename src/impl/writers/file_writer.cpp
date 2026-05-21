@@ -5,6 +5,7 @@
 #include <kcenon/logger/writers/file_writer.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/formatters/timestamp_formatter.h>
+#include <kcenon/logger/security/integrity_policy.h>
 #include <kcenon/logger/utils/error_handling_utils.h>
 #include <filesystem>
 #include <iostream>
@@ -13,9 +14,11 @@ namespace kcenon::logger {
 
 file_writer::file_writer(const std::string& filename,
                         bool append,
-                        std::unique_ptr<log_formatter_interface> formatter)
+                        std::unique_ptr<log_formatter_interface> formatter,
+                        bool binary)
     : filename_(filename)
     , append_mode_(append)
+    , binary_mode_(binary)
     , formatter_(formatter ? std::move(formatter) : std::make_unique<timestamp_formatter>()) {
     std::lock_guard<std::mutex> lock(mutex_);
     open_internal();
@@ -37,8 +40,26 @@ common::VoidResult file_writer::write(const log_entry& entry) {
 
         // Format and write
         std::string formatted = format_entry(entry);
-        file_stream_ << formatted << '\n';
-        bytes_written_.fetch_add(formatted.size() + 1);  // +1 for newline
+
+        // Append tamper-evident signature (Issue #612) when a policy is set.
+        // The signature covers the formatted record so verifiers can
+        // reconstruct and check it without re-formatting.
+        if (integrity_policy_) {
+            formatted.append(
+                security::format_signature_suffix(*integrity_policy_, formatted));
+        }
+
+        if (binary_mode_) {
+            // Binary mode writes the payload verbatim. Callers (for example,
+            // encrypted_writer) produce fully-framed byte streams that must
+            // not be corrupted by a trailing newline or CRLF translation.
+            file_stream_.write(formatted.data(),
+                               static_cast<std::streamsize>(formatted.size()));
+            bytes_written_.fetch_add(formatted.size());
+        } else {
+            file_stream_ << formatted << '\n';
+            bytes_written_.fetch_add(formatted.size() + 1);  // +1 for newline
+        }
 
         // Verify stream state
         return utils::check_stream_state(file_stream_, "write");
@@ -67,6 +88,12 @@ bool file_writer::is_healthy() const {
     return is_open_ && file_stream_.good();
 }
 
+void file_writer::set_integrity_policy(
+    std::shared_ptr<security::integrity_policy> policy) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    integrity_policy_ = std::move(policy);
+}
+
 std::string file_writer::format_entry(const log_entry& entry) const {
     if (!formatter_) {
         // Fallback if formatter is somehow null
@@ -88,7 +115,11 @@ common::VoidResult file_writer::open_internal() {
 
         // Open file
         auto mode = append_mode_ ? std::ios::app : std::ios::trunc;
-        file_stream_.open(filename_, std::ios::out | mode);
+        auto flags = std::ios::out | mode;
+        if (binary_mode_) {
+            flags |= std::ios::binary;
+        }
+        file_stream_.open(filename_, flags);
 
         // Check if file opened successfully
         auto check = utils::check_condition(

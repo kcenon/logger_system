@@ -6,6 +6,7 @@
 #include <kcenon/logger/interfaces/log_entry.h>
 #include <kcenon/logger/formatters/timestamp_formatter.h>
 #include <kcenon/logger/core/small_string.h>
+#include <kcenon/logger/security/integrity_policy.h>
 #include <kcenon/logger/utils/error_handling_utils.h>
 #include <iostream>
 #include <iomanip>
@@ -47,7 +48,10 @@ common::VoidResult console_writer::write(const log_entry& entry) {
         // Convert logger_system::log_level to common::interfaces::log_level for comparison
         auto level = static_cast<common::interfaces::log_level>(static_cast<int>(entry.level));
 
-        auto& stream = (use_stderr_ || level <= common::interfaces::log_level::error)
+        // Route error/fatal to stderr; everything less severe to stdout.
+        // log_level values are ordered by severity (trace=0 ... fatal=5),
+        // so >= error selects the high-severity bucket.
+        auto& stream = (use_stderr_ || level >= common::interfaces::log_level::error)
                        ? std::cerr : std::cout;
 
         if (use_color()) {
@@ -74,10 +78,20 @@ common::VoidResult console_writer::write(const log_entry& entry) {
             }
         }
 
-        stream << format_entry(entry);
+        std::string formatted = format_entry(entry);
+
+        // Append tamper-evident signature (Issue #612) when configured.
+        // Color reset is emitted first so the signature is never colorized
+        // and stays machine-readable by downstream collectors.
+        stream << formatted;
 
         if (use_color()) {
             stream << "\033[0m"; // Reset color
+        }
+
+        if (integrity_policy_) {
+            stream << security::format_signature_suffix(
+                *integrity_policy_, formatted);
         }
 
         stream << '\n';
@@ -121,6 +135,12 @@ void console_writer::set_use_color(bool use_color) {
 
 bool console_writer::use_color() const {
     return use_color_;
+}
+
+void console_writer::set_integrity_policy(
+    std::shared_ptr<security::integrity_policy> policy) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    integrity_policy_ = std::move(policy);
 }
 
 std::string console_writer::format_entry(const log_entry& entry) const {

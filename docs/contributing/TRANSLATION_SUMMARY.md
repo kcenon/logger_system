@@ -62,14 +62,14 @@ category: "PROJ"
 ## Language Switcher Format
 
 ### English Files
-\`\`\`markdown
+```markdown
 > **Language:** **English** | [한국어](FILENAME.kr.md)
-\`\`\`
+```
 
 ### Korean Files
-\`\`\`markdown
+```markdown
 > **Language:** [English](FILENAME.md) | **한국어**
-\`\`\`
+```
 
 ## Translation Approach
 

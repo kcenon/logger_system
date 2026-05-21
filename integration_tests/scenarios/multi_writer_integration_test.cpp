@@ -2,6 +2,16 @@
 // Copyright (c) 2025, 🍀☀🌕🌥 🌊
 // See the LICENSE file in the project root for full license information.
 
+/**
+ * @file multi_writer_integration_test.cpp
+ * @brief Cross-system integration scenarios: multi-writer, rotation,
+ *        metrics, concurrency, and start/stop lifecycle.
+ *
+ * @note Relocated from tests/integration_test.cpp under audit DEV-08
+ *       (test placement convention). gtest_main provides main() so the
+ *       int main() in the previous location was removed.
+ */
+
 #include <gtest/gtest.h>
 #include <kcenon/logger/core/logger.h>
 #include <kcenon/logger/writers/console_writer.h>
@@ -18,7 +28,7 @@ using namespace kcenon::logger;
 using namespace std::chrono_literals;
 namespace ci = kcenon::common::interfaces;
 
-class IntegrationTest : public ::testing::Test {
+class MultiWriterIntegrationTest : public ::testing::Test {
 protected:
     void SetUp() override {
         cleanup_test_files();
@@ -50,7 +60,7 @@ protected:
 };
 
 // Test 1: Multi-writer integration
-TEST_F(IntegrationTest, MultiWriterLogging) {
+TEST_F(MultiWriterIntegrationTest,MultiWriterLogging) {
     auto test_logger = std::make_shared<logger>();
     test_logger->start();
 
@@ -92,7 +102,7 @@ TEST_F(IntegrationTest, MultiWriterLogging) {
 }
 
 // Test 2: Metrics collection
-TEST_F(IntegrationTest, MetricsCollection) {
+TEST_F(MultiWriterIntegrationTest,MetricsCollection) {
     auto test_logger = std::make_shared<logger>();
     test_logger->start();
     test_logger->add_writer(std::make_unique<file_writer>("test_integration.log"));
@@ -118,7 +128,7 @@ TEST_F(IntegrationTest, MetricsCollection) {
 }
 
 // Test 3: Rotating file writer (encrypted_writer removed due to security concerns)
-TEST_F(IntegrationTest, FileRotation) {
+TEST_F(MultiWriterIntegrationTest,FileRotation) {
     auto test_logger = std::make_shared<logger>();
     test_logger->start();
 
@@ -151,7 +161,7 @@ TEST_F(IntegrationTest, FileRotation) {
 }
 
 // Test 5: Concurrent multi-threaded logging
-TEST_F(IntegrationTest, ConcurrentLogging) {
+TEST_F(MultiWriterIntegrationTest,ConcurrentLogging) {
     auto test_logger = std::make_shared<logger>();
     test_logger->start();
     test_logger->add_writer(std::make_unique<file_writer>("test_integration.log"));
@@ -206,7 +216,7 @@ TEST_F(IntegrationTest, ConcurrentLogging) {
 }
 
 // Test 6: Start/stop lifecycle
-TEST_F(IntegrationTest, StartStopLifecycle) {
+TEST_F(MultiWriterIntegrationTest,StartStopLifecycle) {
     auto test_logger = std::make_shared<logger>();
     test_logger->add_writer(std::make_unique<file_writer>("test_integration.log"));
 
@@ -233,7 +243,3 @@ TEST_F(IntegrationTest, StartStopLifecycle) {
     }
 }
 
-int main(int argc, char** argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}

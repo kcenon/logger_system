@@ -16,6 +16,7 @@
 ## 목차
 
 - [개요](#개요)
+- [프로젝트 레이아웃](#프로젝트-레이아웃)
 - [주요 기능](#주요-기능)
 - [요구사항](#요구사항)
 - [빠른 시작](#빠른-시작)
@@ -42,6 +43,12 @@ Logger System은 모듈식 인터페이스 기반 아키텍처와 원활한 생�
 - **프로덕션 등급**: 포괄적 CI/CD, sanitizer, 벤치마크
 - **보안 우선**: 경로 검증, 보안 저장소, 감사 로깅
 - **크로스 플랫폼**: Windows, Linux, macOS (GCC, Clang, MSVC)
+
+---
+
+## 프로젝트 레이아웃
+
+`logger_system`은 [kcenon 생태계 레이아웃 표준](https://github.com/kcenon/common_system/blob/develop/docs/kcenon-system-layout.md) (v1.1)을 따르며, 해당 표준의 참조 예시 역할을 합니다. 모든 kcenon 시스템이 공유하는 정규 디렉터리 구조, CMake 타겟 네이밍, 시스템 간 통합 규칙은 표준 문서를 참조하세요.
 
 ---
 
@@ -151,8 +158,8 @@ cmake --build . --target install
 
 프로젝트에서 사용:
 ```cmake
-find_package(LoggerSystem REQUIRED)
-target_link_libraries(your_app PRIVATE LoggerSystem::logger)
+find_package(logger_system REQUIRED)
+target_link_libraries(your_app PRIVATE logger_system::logger_system)
 ```
 
 ### 의존성과 함께 빌드
@@ -270,7 +277,7 @@ OTLP 프로토콜을 통한 텔레메트리 내보내기를 지원합니다. 배
 
 | 예제 | 난이도 | 설명 |
 |------|--------|------|
-| [basic_example](examples/basic_example.cpp) | 초급 | 기본 콘솔 및 파일 로깅 |
+| [basic_usage](examples/basic_usage.cpp) | 초급 | 기본 콘솔 및 파일 로깅 |
 | [decorator_usage](examples/decorator_usage.cpp) | 중급 | 데코레이터 패턴 가이드 |
 | [writer_builder_example](examples/writer_builder_example.cpp) | 중급 | 빌더 패턴 예제 |
 

@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 #include <kcenon/logger/writers/encrypted_writer.h>
 #include <kcenon/logger/writers/file_writer.h>
+#include <kcenon/logger/formatters/raw_formatter.h>
 #include <kcenon/logger/security/secure_key_storage.h>
 #include <kcenon/logger/interfaces/log_entry.h>
 
@@ -102,8 +103,14 @@ TEST_F(EncryptedWriterTest, WriteAndDecryptSingleEntry) {
     );
 
     {
+        // Wrap file_writer in binary mode with a raw pass-through formatter so
+        // the encrypted payload is written verbatim (no timestamp prefix, no
+        // trailing newline).
         encrypted_writer writer(
-            std::make_unique<file_writer>(log_path.string()),
+            std::make_unique<file_writer>(log_path.string(),
+                                          /*append=*/false,
+                                          std::make_unique<raw_formatter>(),
+                                          /*binary=*/true),
             std::move(config)
         );
 
@@ -160,8 +167,13 @@ TEST_F(EncryptedWriterTest, WriteMultipleEntries) {
     );
 
     {
+        // Binary mode + raw formatter keeps encrypted frames contiguous so
+        // log_decryptor::decrypt_file can parse header/body pairs back-to-back.
         encrypted_writer writer(
-            std::make_unique<file_writer>(log_path.string()),
+            std::make_unique<file_writer>(log_path.string(),
+                                          /*append=*/false,
+                                          std::make_unique<raw_formatter>(),
+                                          /*binary=*/true),
             std::move(config)
         );
 
@@ -280,8 +292,13 @@ TEST_F(EncryptedWriterTest, DecryptWithWrongKey) {
     );
 
     {
+        // Binary mode + raw formatter so the raw encrypted bytes land in the
+        // file untouched and decrypt_entry sees a valid header.
         encrypted_writer writer(
-            std::make_unique<file_writer>(log_path.string()),
+            std::make_unique<file_writer>(log_path.string(),
+                                          /*append=*/false,
+                                          std::make_unique<raw_formatter>(),
+                                          /*binary=*/true),
             std::move(config)
         );
 

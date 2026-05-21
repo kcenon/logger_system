@@ -37,11 +37,11 @@ category: "PROJ"
 
 | ID | Name | Manufacturer | Version | License | Usage | Safety Class | Linking | Known Anomalies |
 |----|------|-------------|---------|---------|-------|-------------|---------|-----------------|
-| SOUP-001 | [OpenSSL](https://www.openssl.org/) | OpenSSL Software Foundation | 3.3.0 | Apache-2.0 | AES-256-GCM encrypted log writer (`encryption` feature) | C | Dynamic | None known at pinned version |
-| SOUP-002 | [OpenTelemetry C++ SDK](https://github.com/open-telemetry/opentelemetry-cpp) | CNCF / OpenTelemetry | 1.14.2 | Apache-2.0 | Distributed tracing and metrics export via OTLP (`otlp` feature) | B | Dynamic | None |
-| SOUP-003 | [gRPC](https://grpc.io/) | Google / CNCF | 1.51.1 | Apache-2.0 | High-performance RPC for OTLP telemetry export (`otlp` feature) | B | Dynamic | None |
-| SOUP-004 | [Protocol Buffers](https://protobuf.dev/) | Google | 3.21.12 | BSD-3-Clause | Serialization format for gRPC and telemetry (`otlp` feature) | B | Dynamic | None |
-| SOUP-005 | [spdlog](https://github.com/gabime/spdlog) | Gabi Melman | 1.13.0 | MIT | Fast C++ logging library for benchmark comparison (`benchmarks` feature) | A | Header-only or shared | None |
+| SOUP-001 | [OpenSSL](https://www.openssl.org/) | OpenSSL Software Foundation | 3.4.1 | Apache-2.0 | AES-256-GCM encrypted log writer (`encryption` feature) | C | Dynamic | None known at pinned version |
+| SOUP-002 | [OpenTelemetry C++ SDK](https://github.com/open-telemetry/opentelemetry-cpp) | CNCF / OpenTelemetry | 1.18.0 | Apache-2.0 | Distributed tracing and metrics export via OTLP (`otlp` feature) | B | Dynamic | None |
+| SOUP-003 | [gRPC](https://grpc.io/) | Google / CNCF | 1.60.0 | Apache-2.0 | High-performance RPC for OTLP telemetry export (`otlp` feature) | B | Dynamic | None |
+| SOUP-004 | [Protocol Buffers](https://protobuf.dev/) | Google | 4.25.1 | BSD-3-Clause | Serialization format for gRPC and telemetry (`otlp` feature) | B | Dynamic | None |
+| SOUP-005 | [spdlog](https://github.com/gabime/spdlog) | Gabi Melman | 1.15.3 | MIT | Fast C++ logging library for benchmark comparison (`benchmarks` feature) | A | Header-only or shared | None |
 | SOUP-006 | [kcenon-thread-system](https://github.com/kcenon/thread_system) | kcenon | 0.1.0 | BSD-3-Clause | Thread pool and async executor integration (`thread-system` feature) | A | Static or dynamic | None known at pinned version |
 
 ---
@@ -50,8 +50,8 @@ category: "PROJ"
 
 | ID | Name | Manufacturer | Version | License | Usage | Qualification |
 |----|------|-------------|---------|---------|-------|--------------|
-| SOUP-T01 | [Google Test](https://github.com/google/googletest) | Google | 1.14.0 | BSD-3-Clause | Unit testing framework (includes GMock) | Required |
-| SOUP-T02 | [Google Benchmark](https://github.com/google/benchmark) | Google | 1.8.3 | Apache-2.0 | Performance benchmarking framework | Not required |
+| SOUP-T01 | [Google Test](https://github.com/google/googletest) | Google | 1.17.0 | BSD-3-Clause | Unit testing framework (includes GMock) | Required |
+| SOUP-T02 | [Google Benchmark](https://github.com/google/benchmark) | Google | 1.9.5 | Apache-2.0 | Performance benchmarking framework | Not required |
 
 ---
 
@@ -72,13 +72,13 @@ All SOUP versions are pinned in `vcpkg.json` via the `overrides` field:
 ```json
 {
   "overrides": [
-    { "name": "openssl", "version": "3.3.0" },
-    { "name": "spdlog", "version": "1.13.0" },
-    { "name": "opentelemetry-cpp", "version": "1.14.2" },
-    { "name": "protobuf", "version": "3.21.12" },
-    { "name": "grpc", "version": "1.51.1" },
-    { "name": "gtest", "version": "1.14.0" },
-    { "name": "benchmark", "version": "1.8.3" }
+    { "name": "openssl", "version": "3.4.1" },
+    { "name": "spdlog", "version": "1.15.3" },
+    { "name": "opentelemetry-cpp", "version": "1.18.0" },
+    { "name": "protobuf", "version": "4.25.1" },
+    { "name": "grpc", "version": "1.60.0" },
+    { "name": "gtest", "version": "1.17.0" },
+    { "name": "benchmark", "version": "1.9.5" }
   ]
 }
 ```

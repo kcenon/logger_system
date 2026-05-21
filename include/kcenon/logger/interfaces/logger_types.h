@@ -8,6 +8,11 @@
  * @date 2025-09-09
  * @note For log_level, use common::interfaces::log_level from
  *       kcenon/common/interfaces/logger_interface.h
+ *
+ * @note Canonical namespace is kcenon::logger. The legacy
+ *       logger_system:: aliases are retained as [[deprecated]]
+ *       forwarding aliases for one minor release; consumer code
+ *       should migrate to the kcenon::logger:: spellings.
  */
 
 #pragma once
@@ -15,7 +20,7 @@
 #include <chrono>
 #include <string>
 
-namespace logger_system {
+namespace kcenon::logger {
 
 /**
  * @brief Overflow policy for when buffers are full
@@ -23,8 +28,8 @@ namespace logger_system {
 enum class overflow_policy {
     block,          // Block until space is available
     drop_oldest,    // Drop oldest messages
-    drop_newest,    // Drop newest messages  
-    grow           // Dynamically grow buffer
+    drop_newest,    // Drop newest messages
+    grow            // Dynamically grow buffer
 };
 
 /**
@@ -37,29 +42,22 @@ enum class health_status {
     critical        // System is in critical state
 };
 
+} // namespace kcenon::logger
+
+namespace logger_system {
+
 /**
- * @brief Logger error codes
+ * @brief Deprecated forwarding alias for kcenon::logger::overflow_policy.
+ * @deprecated Use kcenon::logger::overflow_policy. This alias will be removed in the next minor release.
  */
-enum class logger_error_code {
-    success = 0,
-    invalid_configuration,
-    writer_not_found,
-    writer_already_exists,
-    write_failed,
-    flush_failed,
-    buffer_full,
-    invalid_level,
-    invalid_pattern,
-    file_open_failed,
-    network_error,
-    encryption_error,
-    compression_error,
-    monitoring_failed,
-    component_not_found,
-    di_resolution_failed,
-    health_check_failed,
-    writer_closed,
-    unknown_error
-};
+using overflow_policy [[deprecated("Use kcenon::logger::overflow_policy; alias removed in next minor release")]]
+    = kcenon::logger::overflow_policy;
+
+/**
+ * @brief Deprecated forwarding alias for kcenon::logger::health_status.
+ * @deprecated Use kcenon::logger::health_status. This alias will be removed in the next minor release.
+ */
+using health_status [[deprecated("Use kcenon::logger::health_status; alias removed in next minor release")]]
+    = kcenon::logger::health_status;
 
 } // namespace logger_system

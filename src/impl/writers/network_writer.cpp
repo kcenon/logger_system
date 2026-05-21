@@ -13,6 +13,7 @@
  */
 
 #include <kcenon/logger/writers/network_writer.h>
+#include <kcenon/logger/security/integrity_policy.h>
 #include <kcenon/logger/utils/error_handling_utils.h>
 #include <kcenon/logger/utils/string_utils.h>
 #include "../async/jthread_compat.h"
@@ -476,8 +477,27 @@ std::string network_writer::format_for_network(const log_entry& entry) {
         oss << ",\"host\":\"" << hostname << "\"";
     }
 
+    // Tamper-evident signature (Issue #612). The signature covers the
+    // unsigned JSON body (closed with '}'); verifiers recompute by
+    // stripping the trailing ,"sig_alg":"..","signature":".." suffix,
+    // which is a stable canonical form on the wire.
+    if (integrity_policy_) {
+        std::string unsigned_body = oss.str() + "}";
+        std::string sig = integrity_policy_->sign(unsigned_body);
+        if (!sig.empty()) {
+            oss << ",\"sig_alg\":\"" << integrity_policy_->name() << "\"";
+            oss << ",\"signature\":\"" << sig << "\"";
+        }
+    }
+
     oss << "}\n";
     return oss.str();
+}
+
+void network_writer::set_integrity_policy(
+    std::shared_ptr<security::integrity_policy> policy) {
+    std::lock_guard<std::mutex> lock(buffer_mutex_);
+    integrity_policy_ = std::move(policy);
 }
 
 std::string network_writer::escape_json(const std::string& str) const {

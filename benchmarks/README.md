@@ -277,7 +277,7 @@ When adding new benchmarks:
 
 - [Google Benchmark Documentation](https://github.com/google/benchmark)
 - [Benchmark Best Practices](https://github.com/google/benchmark/blob/main/docs/user_guide.md)
-- [logger_system Architecture](../docs/LOGGER_SYSTEM_ARCHITECTURE.md)
+- [logger_system Architecture](../docs/advanced/LOGGER_SYSTEM_ARCHITECTURE.md)
 
 ---
 

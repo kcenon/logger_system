@@ -10,6 +10,8 @@ category: "GUID"
 
 # Getting Started with logger_system
 
+> **See also**: The short-form canonical guide is [docs/guides/GETTING_STARTED.md](guides/GETTING_STARTED.md). This document is the long-form tutorial.
+
 A step-by-step guide from zero to production-ready logging in C++20.
 
 ## Prerequisites
