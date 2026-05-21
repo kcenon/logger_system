@@ -1,5 +1,5 @@
 ---
-doc_id: "LOG-GUID-018"
+doc_id: "LOG-GUID-027"
 doc_title: "Getting Started with logger_system"
 doc_version: "1.0.0"
 doc_date: "2026-04-05"
