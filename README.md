@@ -545,6 +545,7 @@ int main() {
 
 ### Core Documentation
 - 📘 [Features](docs/FEATURES.md) - Comprehensive feature documentation
+- 🧩 [Feature Matrix](docs/FEATURE_MATRIX.md) - Production feature matrix: CMake options, defaults, dependencies, verification
 - 📊 [Benchmarks](docs/BENCHMARKS.md) - Performance analysis and comparisons
 - 🏗️ [Architecture](docs/01-architecture.md) - System design and internals
 - 📋 [Project Structure](docs/PROJECT_STRUCTURE.md) - Directory organization and files
