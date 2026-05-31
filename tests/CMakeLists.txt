@@ -1,41 +1,12 @@
-# NOTE: integration_test.cpp was moved to integration_tests/scenarios/
-# (renamed to multi_writer_integration_test.cpp) under audit DEV-08 to
-# satisfy the directory-split rule (cross-system scenario tests live
-# under integration_tests/, not tests/).
-
-# Thread system integration test
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/integration/thread_system_integration_test.cpp")
-    add_executable(thread_system_integration_test integration/thread_system_integration_test.cpp)
-
-    if(TARGET GTest::gtest_main)
-        target_link_libraries(thread_system_integration_test PRIVATE logger_system GTest::gtest_main)
-    else()
-        target_link_libraries(thread_system_integration_test PRIVATE logger_system gtest_main)
-    endif()
-
-    target_compile_definitions(thread_system_integration_test PRIVATE USE_THREAD_SYSTEM)
-
-    add_test(NAME thread_system_integration_test COMMAND thread_system_integration_test)
-    set_target_properties(thread_system_integration_test PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-
-# Monitoring system integration test
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/integration/monitoring_integration_test.cpp")
-    add_executable(monitoring_integration_test integration/monitoring_integration_test.cpp)
-
-    if(TARGET GTest::gtest_main)
-        target_link_libraries(monitoring_integration_test PRIVATE logger_system GTest::gtest_main)
-    else()
-        target_link_libraries(monitoring_integration_test PRIVATE logger_system gtest_main)
-    endif()
-
-    add_test(NAME monitoring_integration_test COMMAND monitoring_integration_test)
-    set_target_properties(monitoring_integration_test PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
+# NOTE: Cross-system integration/scenario tests live under integration_tests/,
+# not tests/ (directory-split rule). The following relocations were performed:
+#   - integration_test.cpp -> integration_tests/scenarios/multi_writer_integration_test.cpp
+#     (audit DEV-08)
+#   - tests/integration/monitoring_integration_test.cpp ->
+#     integration_tests/scenarios/monitoring_integration_test.cpp (Issue #642)
+#   - tests/integration/thread_system_integration_test.cpp removed (Issue #642);
+#     superseded by integration_tests/scenarios/thread_system_integration_test.cpp,
+#     which exercises the real thread_system_integration API instead of simulating it.
 
 # Version compatibility test
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/compatibility/version_compatibility_test.cpp")
@@ -466,14 +437,6 @@ set(_LOGGER_TEST_TARGETS
 )
 
 # Conditionally added targets
-if(TARGET thread_system_integration_test)
-    list(APPEND _LOGGER_TEST_TARGETS thread_system_integration_test)
-endif()
-
-if(TARGET monitoring_integration_test)
-    list(APPEND _LOGGER_TEST_TARGETS monitoring_integration_test)
-endif()
-
 if(TARGET version_compatibility_test)
     list(APPEND _LOGGER_TEST_TARGETS version_compatibility_test)
 endif()

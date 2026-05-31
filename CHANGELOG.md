@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Unify cross-system integration test location under `integration_tests/`: relocate `monitoring_integration_test.cpp` to `integration_tests/scenarios/`, remove the superseded simulated `tests/integration/thread_system_integration_test.cpp`, and drop the now-empty `tests/integration/` directory ([#642](https://github.com/kcenon/logger_system/issues/642))
+- Relocate the stray root `test_backend.cpp` smoke demo into `examples/backend_integration_example.cpp` and wire it into the samples build ([#642](https://github.com/kcenon/logger_system/issues/642))
+
 ### Documentation
 
 - Add "Project Layout" section to `README.md` and `README.kr.md` linking to the kcenon ecosystem layout standard ([#629](https://github.com/kcenon/logger_system/issues/629))
+- Update `TEST_INVENTORY.md`, `TRACEABILITY.md`, `PROJECT_STRUCTURE.md`/`.kr.md`, and `PRODUCTION_QUALITY.md` to reference the unified integration-test location ([#642](https://github.com/kcenon/logger_system/issues/642))
 
 ## [1.0.0] - 2026-04-15
 

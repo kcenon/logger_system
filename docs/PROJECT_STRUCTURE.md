@@ -523,7 +523,7 @@ tests/unit/
 ---
 
 ### Integration Tests
-**Location**: `tests/integration/`
+**Location**: `integration_tests/`
 
 **Focus Areas**:
 - Ecosystem integration (thread_system, monitoring_system)

@@ -264,7 +264,7 @@ IWYU: 3 suggestions (advisory)
 
 #### Integration Tests
 **Framework**: Google Test (GTest)
-**Location**: `tests/integration/`
+**Location**: `integration_tests/`
 **Count**: 30+ test scenarios
 
 **Test Scenarios**:

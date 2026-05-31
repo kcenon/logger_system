@@ -507,7 +507,7 @@ tests/unit/
 ---
 
 ### 통합 테스트
-**위치**: `tests/integration/`
+**위치**: `integration_tests/`
 
 **중점 영역**:
 - 에코시스템 통합 (thread_system, monitoring_system)

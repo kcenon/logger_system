@@ -90,7 +90,7 @@ category: "QUAL"
 
 | Feature ID | Feature | Test File(s) | Module/Directory | Status |
 |-----------|---------|-------------|-----------------|--------|
-| LOG-FEAT-038 | Monitoring Integration | tests/unit/monitoring_test/monitoring_test.cpp, tests/integration/monitoring_integration_test.cpp | include/kcenon/logger/core/ | Covered |
+| LOG-FEAT-038 | Monitoring Integration | tests/unit/monitoring_test/monitoring_test.cpp, integration_tests/scenarios/monitoring_integration_test.cpp | include/kcenon/logger/core/ | Covered |
 | LOG-FEAT-039 | Health Checks | tests/unit/health_test/health_check_test.cpp | include/kcenon/logger/core/ | Covered |
 
 ### Integration & DI
@@ -99,7 +99,7 @@ category: "QUAL"
 |-----------|---------|-------------|-----------------|--------|
 | LOG-FEAT-040 | DI Container | tests/unit/di_test/di_container_test.cpp | include/kcenon/logger/di/ | Covered |
 | LOG-FEAT-041 | Executor Integration | tests/unit/executor_integration_test.cpp | include/kcenon/logger/adapters/ | Covered |
-| LOG-FEAT-042 | Thread System Integration | tests/integration/thread_system_integration_test.cpp, tests/unit/thread_system_integration_module_test.cpp | include/kcenon/logger/integration/ | Covered |
+| LOG-FEAT-042 | Thread System Integration | integration_tests/scenarios/thread_system_integration_test.cpp, tests/unit/thread_system_integration_module_test.cpp | include/kcenon/logger/integration/ | Covered |
 | LOG-FEAT-043 | Version Compatibility | tests/compatibility/version_compatibility_test.cpp | (cross-cutting) | Covered |
 
 ### Utilities
