@@ -52,6 +52,15 @@ if(BUILD_SAMPLES)
     )
 endif()
 
+# Backend integration example - relocated from root test_backend.cpp (Issue #642)
+if(BUILD_SAMPLES)
+    add_executable(backend_integration_example backend_integration_example.cpp)
+    target_link_libraries(backend_integration_example PRIVATE logger_system)
+    set_target_properties(backend_integration_example PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
+
 # Phase 4 DI Pattern examples - available when common_system integration is enabled
 if(BUILD_SAMPLES AND BUILD_WITH_COMMON_SYSTEM)
     # DI Pattern example

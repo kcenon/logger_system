@@ -1,6 +1,10 @@
 // BSD 3-Clause License
-// Copyright (c) 2021-2025, 🍀☀🌕🌥 🌊
+// Copyright (c) 2021-2025, kcenon
 // See the LICENSE file in the project root for full license information.
+
+// @note Relocated from the repository root (test_backend.cpp) into examples/
+//       under Issue #642. This manual main()-based backend smoke demo belongs
+//       in the example tree, not the project root.
 
 #include <iostream>
 #include <kcenon/logger/core/logger.h>
@@ -30,10 +34,10 @@ int main() {
 
         if (logger_result) {
             auto logger_inst = std::move(logger_result.value());
-            logger_inst->log(log_level::info, "Test message from standalone backend");
-            std::cout << "✅ Standalone backend test passed" << std::endl;
+            logger_inst->log(log_level::info, std::string("Test message from standalone backend"));
+            std::cout << "[PASS] Standalone backend test passed" << std::endl;
         } else {
-            std::cerr << "❌ Failed to build logger: " << logger_result.error_message() << std::endl;
+            std::cerr << "[FAIL] Failed to build logger: " << logger_result.error_message() << std::endl;
             return 1;
         }
     }
@@ -51,10 +55,10 @@ int main() {
 
         if (logger_result) {
             auto logger_inst = std::move(logger_result.value());
-            logger_inst->log(log_level::info, "Test message with auto-detected backend");
-            std::cout << "✅ Auto-detection test passed (standalone backend)" << std::endl;
+            logger_inst->log(log_level::info, std::string("Test message with auto-detected backend"));
+            std::cout << "[PASS] Auto-detection test passed (standalone backend)" << std::endl;
         } else {
-            std::cerr << "❌ Failed to build logger: " << logger_result.error_message() << std::endl;
+            std::cerr << "[FAIL] Failed to build logger: " << logger_result.error_message() << std::endl;
             return 1;
         }
     }

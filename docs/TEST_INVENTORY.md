@@ -19,9 +19,9 @@ module calls `enable_testing()` and adds the `tests/` subdirectory, and
 
 ## Test sources (tracked counts)
 
-- Tracked `.cpp` under `tests/`: 65 files (includes correctness tests and
+- Tracked `.cpp` under `tests/`: 63 files (includes correctness tests and
   `tests/benchmarks/` Google Benchmark sources).
-- Tracked `.cpp` under `integration_tests/`: 6 files.
+- Tracked `.cpp` under `integration_tests/`: 7 files.
 
 ### `tests/` layout
 
@@ -30,9 +30,8 @@ module calls `enable_testing()` and adds the `tests/` subdirectory, and
   `routing_integration_test.cpp`, `otlp_test.cpp`,
   `encrypted_writer_test.cpp`, `structured_logging_test.cpp`,
   `realtime_analyzer_test.cpp`.
-- `tests/integration/`: `thread_system_integration_test.cpp`,
-  `monitoring_integration_test.cpp` (wired by `if(EXISTS ...)` guards in
-  `tests/CMakeLists.txt`).
+- Cross-system scenario tests live under `integration_tests/scenarios/`
+  (not `tests/integration/`); see the `integration_tests/` layout below.
 - `tests/compatibility/`: `version_compatibility_test.cpp`.
 - `tests/unit/` and its subdirectories (`logger_test/`, `writers_test/`,
   `collectors_test/`, `config_test/`, `di_test/`, `monitoring_test/`,
@@ -57,7 +56,8 @@ executable by GLOB-ing `scenarios/*.cpp`, `failures/*.cpp`, and
 - `scenarios/logger_lifecycle_test.cpp`,
   `scenarios/multi_writer_integration_test.cpp`,
   `scenarios/log_formatting_integration_test.cpp`,
-  `scenarios/thread_system_integration_test.cpp`
+  `scenarios/thread_system_integration_test.cpp`,
+  `scenarios/monitoring_integration_test.cpp`
 - `failures/error_handling_test.cpp`
 - `performance/logger_performance_test.cpp`
 
