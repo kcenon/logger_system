@@ -8,6 +8,12 @@
  * @file lockfree_queue.h
  * @brief High-performance lock-free queue implementation
  *
+ * @internal This header is INTERNAL to the logger_system implementation
+ *           and is not part of the public API. It is included only from
+ *           other src/impl/ headers (batch_processor.h,
+ *           high_performance_async_writer.h) and is not installed.
+ *           Public consumers must NOT include this header directly.
+ *
  * This file provides a lock-free queue optimized for single-producer,
  * single-consumer scenarios commonly found in logging systems.
  *

@@ -13,7 +13,7 @@ category: "GUID"
 > **SSOT**: This file is the single source of truth for the documentation index
 > of **logger_system**.
 
-Total documents: **71**
+Total documents: **75**
 
 ## Document Index
 
@@ -32,6 +32,7 @@ Total documents: **71**
 | 11 | LOG-API-002 | API Reference | [API_REFERENCE.md](./API_REFERENCE.md) | Released |
 | 12 | LOG-FEAT-001 | Logger System - 상세 기능 | [FEATURES.kr.md](./FEATURES.kr.md) | Released |
 | 13 | LOG-FEAT-002 | Logger System Features | [FEATURES.md](./FEATURES.md) | Released |
+| 13a | LOG-FEAT-003 | Logger System Production Feature Matrix | [FEATURE_MATRIX.md](./FEATURE_MATRIX.md) | Released |
 | 14 | LOG-GUID-001 | Configuration Strategies Guide | [CONFIGURATION_STRATEGIES.md](./CONFIGURATION_STRATEGIES.md) | Released |
 | 15 | LOG-GUID-002 | Log Server and Crash-Safe Logger | [LOG_SERVER_AND_CRASH_SAFETY.md](./LOG_SERVER_AND_CRASH_SAFETY.md) | Released |
 | 16 | LOG-GUID-003 | Logger System 문서 | [README.kr.md](./README.kr.md) | Released |
@@ -57,6 +58,7 @@ Total documents: **71**
 | 36 | LOG-GUID-024 | Logger System Integration Guide | [README.md](./integration/README.md) | Released |
 | 37 | LOG-GUID-025 | thread_system 통합 가이드 | [THREAD_SYSTEM.kr.md](./integration/THREAD_SYSTEM.kr.md) | Released |
 | 38 | LOG-GUID-026 | Async Integration Guide | [THREAD_SYSTEM.md](./integration/THREAD_SYSTEM.md) | Released |
+| 38a | LOG-GUID-027 | Getting Started with logger_system | [GETTING_STARTED.md](./GETTING_STARTED.md) | Released |
 | 39 | LOG-PERF-001 | Logger System 성능 벤치마크 | [BENCHMARKS.kr.md](./BENCHMARKS.kr.md) | Released |
 | 40 | LOG-PERF-002 | Logger System Performance Benchmarks | [BENCHMARKS.md](./BENCHMARKS.md) | Released |
 | 41 | LOG-PERF-003 | Logger System 성능 가이드 | [PERFORMANCE.kr.md](./guides/PERFORMANCE.kr.md) | Released |
@@ -90,6 +92,10 @@ Total documents: **71**
 | 69 | LOG-PROJ-008 | Logger System 기여하기 | [CONTRIBUTING.kr.md](./contributing/CONTRIBUTING.kr.md) | Released |
 | 70 | LOG-PROJ-009 | Contributing to Logger System | [CONTRIBUTING.md](./contributing/CONTRIBUTING.md) | Released |
 | 71 | LOG-PROJ-010 | Korean Translation Summary | [TRANSLATION_SUMMARY.md](./contributing/TRANSLATION_SUMMARY.md) | Released |
+| 72 | LOG-GUID-027 | Getting Started Tutorial (long-form) | [GETTING_STARTED.md](./GETTING_STARTED.md) | Released |
+| 73 | LOG-PROJ-011 | Ecosystem Integration Map | [ECOSYSTEM.md](./ECOSYSTEM.md) | Released |
+| 74 | LOG-GUID-028 | Logger System Build Guide | [BUILD.md](./guides/BUILD.md) | Released |
+| 75 | LOG-GUID-029 | Logger System Troubleshooting Guide | [TROUBLESHOOTING.md](./guides/TROUBLESHOOTING.md) | Released |
 
 ## Documents by Category
 
@@ -121,7 +127,7 @@ Total documents: **71**
 | LOG-FEAT-001 | Logger System - 상세 기능 | [FEATURES.kr.md](./FEATURES.kr.md) | Released |
 | LOG-FEAT-002 | Logger System Features | [FEATURES.md](./FEATURES.md) | Released |
 
-### Guides (25)
+### Guides (28)
 
 | doc_id | Topic | Document | Status |
 |--------|-------|----------|--------|
@@ -150,6 +156,9 @@ Total documents: **71**
 | LOG-GUID-024 | Logger System Integration Guide | [README.md](./integration/README.md) | Released |
 | LOG-GUID-025 | thread_system 통합 가이드 | [THREAD_SYSTEM.kr.md](./integration/THREAD_SYSTEM.kr.md) | Released |
 | LOG-GUID-026 | Async Integration Guide | [THREAD_SYSTEM.md](./integration/THREAD_SYSTEM.md) | Released |
+| LOG-GUID-027 | Getting Started with logger_system | [GETTING_STARTED.md](./GETTING_STARTED.md) | Released |
+| LOG-GUID-028 | Logger System Build Guide | [BUILD.md](./guides/BUILD.md) | Released |
+| LOG-GUID-029 | Logger System Troubleshooting Guide | [TROUBLESHOOTING.md](./guides/TROUBLESHOOTING.md) | Released |
 
 ### Performance (8)
 

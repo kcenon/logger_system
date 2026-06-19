@@ -2,14 +2,14 @@ name: Code Coverage
 
 on:
   push:
-    branches: [ main, phase-* ]
+    branches: [ main, develop, phase-* ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
 
 jobs:
   coverage:
     name: Coverage Analysis
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Checkout code
@@ -20,12 +20,8 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake ninja-build lcov software-properties-common libssl-dev
-        # Install GCC 13 for std::format support
-        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-        sudo apt-get update
-        sudo apt-get install -y gcc-13 g++-13
-        # Set GCC 13 as default
+        sudo apt-get install -y cmake ninja-build lcov gcc-13 g++-13 libssl-dev
+        # Ubuntu 24.04 ships gcc-13 in base; PPA (ubuntu-toolchain-r/test) no longer needed.
         sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
         sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
         # GTest is now fetched via CMake FetchContent
@@ -73,17 +69,69 @@ jobs:
     - name: Generate coverage report
       run: |
         cd build
-        # Capture coverage data
-        lcov --directory . --capture --output-file coverage.info || true
+        # The build uses gcc-13 (see Install dependencies step), which emits
+        # .gcno files whose format is not understood by the system default
+        # gcov-11 bundled with Ubuntu 22.04's lcov. Point lcov at gcov-13 so
+        # it can actually read the coverage data.
+        GCOV_TOOL=$(command -v gcov-13 || command -v gcov)
+        echo "Using gcov tool: $GCOV_TOOL"
+
+        # Capture coverage data.
+        # lcov 2.0 (ubuntu-24.04) escalates `mismatched end line` to a fatal
+        # error where lcov 1.15 only warned. The mismatches come from gcov-13
+        # debug info on inlined/templated test bodies and do not affect the
+        # numeric coverage; bypass per lcov's own remediation hint.
+        # `negative` covers GCC 13 atomic counter races on inlined std-lib
+        # headers — lcov 2.0 otherwise drops the entire tracefile.
+        LCOV_IGNORE="--ignore-errors mismatch,unused,empty,inconsistent,negative"
+        lcov $LCOV_IGNORE --gcov-tool "$GCOV_TOOL" --directory . --capture --output-file coverage.info || true
 
         # Filter out system headers and test files
-        lcov --remove coverage.info '/usr/*' '*/test/*' '*/tests/*' '*/examples/*' --output-file coverage_filtered.info || true
+        lcov $LCOV_IGNORE --gcov-tool "$GCOV_TOOL" --remove coverage.info '/usr/*' '*/test/*' '*/tests/*' '*/examples/*' --output-file coverage_filtered.info || true
 
         # Generate HTML report
         genhtml coverage_filtered.info --output-directory coverage_html || true
 
         # Print summary
-        lcov --list coverage_filtered.info || true
+        lcov --gcov-tool "$GCOV_TOOL" --list coverage_filtered.info || true
+
+    - name: Enforce coverage threshold
+      run: |
+        cd build
+        if [ ! -f coverage_filtered.info ]; then
+          echo "::error::coverage_filtered.info missing — cannot evaluate threshold"
+          exit 1
+        fi
+        # lcov --summary prints lines like "  lines......: 78.5% (1234 of 1573 lines)"
+        # Extract the percentage only if the second field actually looks
+        # like one (lcov prints "branches...: no data found" when branch
+        # instrumentation is off, which otherwise gets mis-parsed as "no").
+        COVERAGE=$(lcov --summary coverage_filtered.info 2>&1 \
+          | awk '/lines\.\.\.\./ && $2 ~ /%$/ { gsub("%", "", $2); print $2; exit }')
+        BRANCH_COVERAGE=$(lcov --summary coverage_filtered.info 2>&1 \
+          | awk '/branches\.\.\./ && $2 ~ /%$/ { gsub("%", "", $2); print $2; exit }')
+        # Target gate: 80% line / 70% branch (acceptance criterion from #613).
+        # The pre-existing failing tests that previously suppressed coverage
+        # (EncryptedWriterTest.WriteAndDecrypt*, LoggerOtelIntegrationTest
+        # .LoggerContextMethods, ConsoleWriterIntegrityTest.RoundTripOnStdout)
+        # were repaired in #620 so their instrumented paths now count toward
+        # coverage, clearing the 80% bar without requiring new tests.
+        LINE_THRESHOLD=80
+        BRANCH_THRESHOLD=70
+        echo "Line coverage:   ${COVERAGE:-unknown}% (threshold: ${LINE_THRESHOLD}%)"
+        echo "Branch coverage: ${BRANCH_COVERAGE:-unknown}% (threshold: ${BRANCH_THRESHOLD}%)"
+        FAIL=0
+        if [ -z "$COVERAGE" ] \
+          || ! awk -v c="$COVERAGE" -v t="$LINE_THRESHOLD" 'BEGIN { exit !(c+0 >= t+0) }'; then
+          echo "::error::Line coverage ${COVERAGE:-unknown}% is below threshold ${LINE_THRESHOLD}%"
+          FAIL=1
+        fi
+        if [ -n "$BRANCH_COVERAGE" ] \
+          && ! awk -v c="$BRANCH_COVERAGE" -v t="$BRANCH_THRESHOLD" 'BEGIN { exit !(c+0 >= t+0) }'; then
+          echo "::error::Branch coverage ${BRANCH_COVERAGE}% is below threshold ${BRANCH_THRESHOLD}%"
+          FAIL=1
+        fi
+        exit $FAIL
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v6

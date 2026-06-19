@@ -8,7 +8,8 @@ project: "logger_system"
 category: "GUID"
 ---
 
-> **Language:** **English** | [한국어](WRITER_HIERARCHY.kr.md)
+> **Language:** **English** | 한국어 (번역 예정)
+<!-- TODO: WRITER_HIERARCHY.kr.md translation not yet available -->
 
 # Writer Hierarchy and Categories
 

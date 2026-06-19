@@ -492,12 +492,10 @@ monitoring_system (OPTIONAL)
 
 ```cmake
 # Main library
-LoggerSystem::logger          # Header-only or compiled library
+logger_system::logger_system  # Compiled library (via find_package(logger_system))
 
-# Component targets (internal)
-LoggerSystem::core            # Core logger components
-LoggerSystem::writers         # Writer implementations
-LoggerSystem::formatters      # Formatter implementations
+# Note: Component-level targets are not currently exported.
+# All components are linked into the single logger_system target.
 ```
 
 ### Feature Flags
@@ -525,8 +523,8 @@ Configure via CMake options:
 
 ## References
 
-- [README.md](README.md) - Project overview and features
-- [INTEGRATION.md](INTEGRATION.md) - Integration guide with other systems
+- [README.md](../../README.md) - Project overview and features
+- [INTEGRATION.md](../guides/INTEGRATION.md) - Integration guide with other systems
 - [BASELINE.md](../performance/BASELINE.md) - Performance baselines and benchmarks
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) - Detailed architecture documentation
-- [docs/API_REFERENCE.md](docs/API_REFERENCE.md) - Complete API reference
+- [docs/ARCHITECTURE.md](../ARCHITECTURE.md) - Detailed architecture documentation
+- [docs/API_REFERENCE.md](../API_REFERENCE.md) - Complete API reference

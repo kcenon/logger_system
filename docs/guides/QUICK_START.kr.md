@@ -138,10 +138,10 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # logger_system 찾기
-find_package(LoggerSystem REQUIRED)
+find_package(logger_system REQUIRED)
 
 add_executable(my_app main.cpp)
-target_link_libraries(my_app PRIVATE LoggerSystem::logger)
+target_link_libraries(my_app PRIVATE logger_system::logger_system)
 ```
 
 또는 FetchContent 사용:

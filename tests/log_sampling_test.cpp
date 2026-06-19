@@ -14,6 +14,7 @@
 #include <chrono>
 #include <memory>
 #include <string>
+#include <thread>
 #include <vector>
 
 // Use ILogger interface log_level for log() calls
@@ -611,4 +612,295 @@ TEST(LoggerBuilderSamplingTest, WithAdaptiveSampling) {
     ASSERT_TRUE(result.has_value());
     auto& log = result.value();
     EXPECT_TRUE(log->has_sampling());
+}
+
+// =============================================================================
+// log_sampler tests - Move semantics
+// =============================================================================
+
+TEST(LogSamplerTest, MoveConstructorPreservesStatsAndConfig) {
+    auto config = sampling_config::random_sampling(0.5);
+    config.always_log_levels.clear();
+    log_sampler source(config);
+
+    for (int i = 0; i < 100; ++i) {
+        (void)source.should_sample(kcenon::logger::log_level::info, "payload");
+    }
+    const auto before = source.get_stats();
+    ASSERT_EQ(before.total_count, 100U);
+
+    log_sampler moved(std::move(source));
+    const auto after = moved.get_stats();
+
+    EXPECT_EQ(after.total_count, before.total_count);
+    EXPECT_EQ(after.sampled_count, before.sampled_count);
+    EXPECT_EQ(after.dropped_count, before.dropped_count);
+    EXPECT_TRUE(moved.is_enabled());
+    EXPECT_DOUBLE_EQ(moved.get_config().rate, 0.5);
+}
+
+TEST(LogSamplerTest, MoveAssignmentReplacesState) {
+    auto src_cfg = sampling_config::random_sampling(0.25);
+    src_cfg.always_log_levels.clear();
+    log_sampler source(src_cfg);
+
+    for (int i = 0; i < 40; ++i) {
+        (void)source.should_sample(kcenon::logger::log_level::info, "m");
+    }
+
+    log_sampler target(sampling_config::disabled());
+    target = std::move(source);
+
+    const auto stats = target.get_stats();
+    EXPECT_EQ(stats.total_count, 40U);
+    EXPECT_TRUE(target.is_enabled());
+    EXPECT_DOUBLE_EQ(target.get_config().rate, 0.25);
+}
+
+// =============================================================================
+// log_sampler tests - Entry overload with structured fields
+// =============================================================================
+
+TEST(LogSamplerTest, EntryOverloadBypassFieldIsCounted) {
+    sampling_config config;
+    config.enabled = true;
+    config.rate = 0.0;  // Would drop everything...
+    config.always_log_levels.clear();
+    config.always_log_fields = {"transaction_id"};  // ...unless this field is present.
+
+    log_sampler sampler(config);
+
+    log_entry entry_with_field(kcenon::logger::log_level::info, "tagged");
+    log_fields fields;
+    fields.emplace("transaction_id", std::string{"tx-42"});
+    entry_with_field.fields = std::move(fields);
+
+    log_entry entry_without_field(kcenon::logger::log_level::info, "plain");
+
+    EXPECT_TRUE(sampler.should_sample(entry_with_field));
+    EXPECT_FALSE(sampler.should_sample(entry_without_field));
+
+    const auto stats = sampler.get_stats();
+    EXPECT_EQ(stats.bypassed_count, 1U);
+    EXPECT_EQ(stats.dropped_count, 1U);
+    EXPECT_EQ(stats.total_count, 2U);
+}
+
+TEST(LogSamplerTest, EntryOverloadStringFieldRateOverride) {
+    sampling_config config;
+    config.enabled = true;
+    config.rate = 0.0;  // Drop by default.
+    config.always_log_levels.clear();
+    config.field_rates["severity"]["high"] = 1.0;  // But always keep "high".
+
+    log_sampler sampler(config);
+
+    log_entry high(kcenon::logger::log_level::info, "hi");
+    log_fields high_fields;
+    high_fields.emplace("severity", std::string{"high"});
+    high.fields = std::move(high_fields);
+
+    log_entry low(kcenon::logger::log_level::info, "lo");
+    log_fields low_fields;
+    low_fields.emplace("severity", std::string{"low"});
+    low.fields = std::move(low_fields);
+
+    EXPECT_TRUE(sampler.should_sample(high));
+    EXPECT_FALSE(sampler.should_sample(low));
+}
+
+TEST(LogSamplerTest, EntryOverloadIntFieldRateOverride) {
+    sampling_config config;
+    config.enabled = true;
+    config.rate = 0.0;
+    config.always_log_levels.clear();
+    config.field_rates["tenant_id"]["7"] = 1.0;
+
+    log_sampler sampler(config);
+
+    log_entry entry(kcenon::logger::log_level::info, "int-keyed");
+    log_fields f;
+    f.emplace("tenant_id", static_cast<int64_t>(7));
+    entry.fields = std::move(f);
+
+    EXPECT_TRUE(sampler.should_sample(entry));
+}
+
+TEST(LogSamplerTest, EntryOverloadDoubleFieldRateOverride) {
+    sampling_config config;
+    config.enabled = true;
+    config.rate = 0.0;
+    config.always_log_levels.clear();
+    // log_sampler::get_field_rate stringifies doubles via std::to_string.
+    // Build the same string locally so the key matches regardless of the C
+    // locale active on the test host.
+    config.field_rates["score"][std::to_string(3.14)] = 1.0;
+
+    log_sampler sampler(config);
+
+    log_entry entry(kcenon::logger::log_level::info, "dbl-keyed");
+    log_fields f;
+    f.emplace("score", 3.14);
+    entry.fields = std::move(f);
+
+    EXPECT_TRUE(sampler.should_sample(entry));
+}
+
+TEST(LogSamplerTest, EntryOverloadBoolFieldRateOverride) {
+    sampling_config config;
+    config.enabled = true;
+    config.rate = 0.0;
+    config.always_log_levels.clear();
+    config.field_rates["vip"]["true"] = 1.0;
+    config.field_rates["vip"]["false"] = 0.0;
+
+    log_sampler sampler(config);
+
+    log_entry vip(kcenon::logger::log_level::info, "vip");
+    log_fields vip_fields;
+    vip_fields.emplace("vip", true);
+    vip.fields = std::move(vip_fields);
+
+    log_entry non_vip(kcenon::logger::log_level::info, "non-vip");
+    log_fields non_vip_fields;
+    non_vip_fields.emplace("vip", false);
+    non_vip.fields = std::move(non_vip_fields);
+
+    EXPECT_TRUE(sampler.should_sample(vip));
+    EXPECT_FALSE(sampler.should_sample(non_vip));
+}
+
+TEST(LogSamplerTest, EntryOverloadFallsBackToCategoryRate) {
+    sampling_config config;
+    config.enabled = true;
+    config.rate = 0.0;
+    config.always_log_levels.clear();
+    config.category_rates["audit"] = 1.0;
+
+    log_sampler sampler(config);
+
+    log_entry entry(kcenon::logger::log_level::info, "audited");
+    entry.category = std::string{"audit"};
+
+    EXPECT_TRUE(sampler.should_sample(entry));
+}
+
+TEST(LogSamplerTest, EntryOverloadBypassedLevelTakesPrecedence) {
+    sampling_config config;
+    config.enabled = true;
+    config.rate = 0.0;  // Drop all non-bypassed
+    config.always_log_levels = {kcenon::logger::log_level::error};
+
+    log_sampler sampler(config);
+
+    log_entry entry(kcenon::logger::log_level::error, "boom");
+    EXPECT_TRUE(sampler.should_sample(entry));
+
+    const auto stats = sampler.get_stats();
+    EXPECT_EQ(stats.bypassed_count, 1U);
+}
+
+// =============================================================================
+// log_sampler tests - Adaptive throttling
+// =============================================================================
+
+TEST(LogSamplerTest, AdaptiveReducesEffectiveRateAboveThreshold) {
+    sampling_config config;
+    config.enabled = true;
+    config.rate = 1.0;
+    config.strategy = sampling_strategy::adaptive;
+    config.adaptive_enabled = true;
+    config.adaptive_threshold = 10;  // Low threshold to force throttling.
+    config.adaptive_min_rate = 0.05;
+    config.always_log_levels.clear();
+
+    log_sampler sampler(config);
+
+    // Burst above the threshold and wait for the 1-second window to roll over.
+    for (int i = 0; i < 200; ++i) {
+        (void)sampler.should_sample(kcenon::logger::log_level::info, "burst");
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(1100));
+    (void)sampler.should_sample(kcenon::logger::log_level::info, "trigger-recalc");
+
+    EXPECT_LT(sampler.get_effective_rate(), 1.0);
+    const auto stats = sampler.get_stats();
+    EXPECT_TRUE(stats.is_throttling);
+}
+
+TEST(LogSamplerTest, AdaptiveResetsRateWhenBelowThreshold) {
+    sampling_config config;
+    config.enabled = true;
+    config.rate = 0.75;
+    config.strategy = sampling_strategy::adaptive;
+    config.adaptive_enabled = true;
+    config.adaptive_threshold = 100000;  // Very high — we stay under.
+    config.adaptive_min_rate = 0.01;
+    config.always_log_levels.clear();
+
+    log_sampler sampler(config);
+
+    // Two window rollovers with light traffic keep the rate at base_rate.
+    for (int window = 0; window < 2; ++window) {
+        for (int i = 0; i < 3; ++i) {
+            (void)sampler.should_sample(kcenon::logger::log_level::info, "trickle");
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(1100));
+        (void)sampler.should_sample(kcenon::logger::log_level::info, "rollover");
+    }
+
+    EXPECT_DOUBLE_EQ(sampler.get_effective_rate(), 0.75);
+    EXPECT_FALSE(sampler.get_stats().is_throttling);
+}
+
+// =============================================================================
+// log_sampler tests - Rate limiting window reset
+// =============================================================================
+
+TEST(LogSamplerTest, RateLimitWindowResetsAfterElapsed) {
+    sampling_config config;
+    config.enabled = true;
+    config.strategy = sampling_strategy::rate_limiting;
+    config.rate_limit_per_second = 3;
+    config.rate_limit_window_ms = 200;  // Short window so the test stays fast.
+    config.always_log_levels.clear();
+
+    log_sampler sampler(config);
+
+    int accepted_first = 0;
+    for (int i = 0; i < 20; ++i) {
+        if (sampler.should_sample(kcenon::logger::log_level::info, "first-window")) {
+            ++accepted_first;
+        }
+    }
+    EXPECT_LE(accepted_first, 5);  // Small tolerance for scheduling jitter.
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(250));
+
+    int accepted_second = 0;
+    for (int i = 0; i < 20; ++i) {
+        if (sampler.should_sample(kcenon::logger::log_level::info, "second-window")) {
+            ++accepted_second;
+        }
+    }
+    EXPECT_GT(accepted_second, 0);
+}
+
+// =============================================================================
+// log_sampler tests - Miscellaneous public API
+// =============================================================================
+
+TEST(LogSamplerTest, GetEffectiveRateMatchesConfigAtConstruction) {
+    auto config = sampling_config::random_sampling(0.42);
+    log_sampler sampler(config);
+    EXPECT_DOUBLE_EQ(sampler.get_effective_rate(), 0.42);
+}
+
+TEST(LogSamplerTest, SetConfigUpdatesEffectiveRate) {
+    log_sampler sampler(sampling_config::random_sampling(0.9));
+    EXPECT_DOUBLE_EQ(sampler.get_effective_rate(), 0.9);
+
+    sampler.set_config(sampling_config::random_sampling(0.1));
+    EXPECT_DOUBLE_EQ(sampler.get_effective_rate(), 0.1);
+    EXPECT_DOUBLE_EQ(sampler.get_config().rate, 0.1);
 }

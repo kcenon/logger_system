@@ -361,7 +361,7 @@ if (pool) {
 
 ## 관련 문서
 
-- [async_worker](../internals/ASYNC_WORKER.md) - Standalone 비동기 구현
+- [async_writer](../advanced/ASYNC_WRITERS.kr.md) - Standalone 비동기 구현<!-- TODO: ../internals/ASYNC_WORKER.md does not exist -->
 - [thread_system](https://github.com/kcenon/thread_system) - 스레드 풀 라이브러리
 - [Issue #224](https://github.com/kcenon/logger_system/issues/224) - 선택적 통합 기능 요청
 - [Issue #252](https://github.com/kcenon/logger_system/issues/252) - 양방향 의존성 해결

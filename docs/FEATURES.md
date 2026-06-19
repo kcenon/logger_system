@@ -1117,7 +1117,7 @@ logger->reset_sampling_stats();
 ## See Also
 
 - [Performance Benchmarks](BENCHMARKS.md) - Detailed performance analysis
-- [Architecture Overview](01-architecture.md) - System architecture and design
-- [API Reference](02-API_REFERENCE.md) - Complete API documentation
-- [Security Guide](../SECURITY.md) - Security best practices
+- [Architecture Overview](ARCHITECTURE.md) - System architecture and design
+- [API Reference](API_REFERENCE.md) - Complete API documentation
+- [Security Guide](guides/SECURITY.md) - Security best practices
 - [Getting Started](guides/GETTING_STARTED.md) - Quick start guide

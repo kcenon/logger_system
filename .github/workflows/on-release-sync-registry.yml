@@ -12,3 +12,54 @@ jobs:
       version: ${{ github.event.release.tag_name }}
     secrets:
       REGISTRY_PAT: ${{ secrets.VCPKG_REGISTRY_PAT }}
+
+  verify-sha512:
+    # Independent SHA512 verification against the actual GitHub release archive.
+    # Provides repo-local defense-in-depth on top of the verify step inside
+    # kcenon/common_system/.github/workflows/sync-vcpkg-registry.yml (added in
+    # kcenon/common_system#676). Runs after sync so that if the reusable
+    # workflow ever regresses, this job still fails the release run before
+    # consumers cold-cache install the broken portfile.
+    # See kcenon/logger_system#634 (parent EPIC kcenon/common_system#674) and
+    # microsoft/vcpkg#51511.
+    name: Verify SHA512 against actual GitHub archive
+    needs: sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Re-fetch release archive and compute SHA512
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          # Use --fail so curl returns non-zero on HTTP errors; download to a
+          # file (rather than piping into sha512sum) so a fetch failure cannot
+          # silently produce the empty-input hash cf83e1357eefb8bdf...
+          set -euo pipefail
+          ARCHIVE_URL="https://github.com/${GITHUB_REPOSITORY}/archive/refs/tags/${TAG}.tar.gz"
+          VERIFY_FILE="$(mktemp)"
+
+          echo "Re-fetching ${ARCHIVE_URL} for independent verification..."
+          if ! curl -fsSL --retry 3 --retry-delay 2 -o "${VERIFY_FILE}" "${ARCHIVE_URL}"; then
+            echo "::error::Failed to download release archive for verification: ${ARCHIVE_URL}"
+            rm -f "${VERIFY_FILE}"
+            exit 1
+          fi
+
+          ARCHIVE_BYTES=$(stat -c%s "${VERIFY_FILE}")
+          if [[ "${ARCHIVE_BYTES}" -lt 1024 ]]; then
+            echo "::error::Release archive is suspiciously small (${ARCHIVE_BYTES} bytes): ${ARCHIVE_URL}"
+            rm -f "${VERIFY_FILE}"
+            exit 1
+          fi
+
+          ACTUAL_SHA=$(sha512sum "${VERIFY_FILE}" | awk '{print $1}')
+          rm -f "${VERIFY_FILE}"
+
+          echo "SHA512 for ${TAG}:"
+          echo "  ${ACTUAL_SHA}"
+          echo ""
+          echo "This value MUST match the SHA512 line in"
+          echo "  kcenon/vcpkg-registry/ports/kcenon-logger-system/portfile.cmake"
+          echo "after the sync job's PR is merged. Reviewers should cross-check."

@@ -12,7 +12,8 @@ category: "MIGR"
 
 > **SSOT**: This document is the single source of truth for **Migration Guide - Logger System**.
 
-> **Language:** **English** | [한국어](MIGRATION.kr.md)
+> **Language:** **English** | 한국어 (번역 예정)
+<!-- TODO: MIGRATION.kr.md translation not yet available -->
 
 ## Overview
 
@@ -610,9 +611,9 @@ Need help with migration?
 ## Next Steps After Migration
 
 1. **Read Documentation**:
-   - [README.md](README.md) - Feature overview
+   - [README.md](../../README.md) - Feature overview
    - [ARCHITECTURE.md](ARCHITECTURE.md) - System design
-   - [examples/](examples/) - Code examples
+   - [examples/](../../examples/) - Code examples
 
 2. **Optimize Configuration**:
    - Review log levels

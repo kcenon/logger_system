@@ -1024,3 +1024,140 @@ TEST_F(StructuredLoggingTest, UnifiedContextWithAllValueTypes) {
 
     test_logger->stop();
 }
+
+// =============================================================================
+// log_context_scope(logger&, fields) constructor coverage (issue #613)
+// =============================================================================
+
+// Test 36: log_context_scope with logger reference sets both thread-local and
+//          logger context, then restores logger context on destruction.
+TEST_F(StructuredLoggingTest, LogContextScopeWithLoggerSetsBothContexts) {
+    log_context_storage::clear();
+
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+    ASSERT_TRUE(test_logger->context().empty());
+
+    {
+        log_context_scope scope(*test_logger, {
+            {"request_id", std::string("req-789")},
+            {"user_id", static_cast<int64_t>(42)}
+        });
+
+        // Thread-local storage is populated.
+        EXPECT_TRUE(log_context_storage::has_context());
+        auto fields = log_context_storage::get();
+        EXPECT_EQ(fields.size(), 2u);
+        EXPECT_EQ(std::get<std::string>(fields["request_id"]), "req-789");
+        EXPECT_EQ(std::get<int64_t>(fields["user_id"]), 42);
+
+        // Logger-level context is also populated for the same keys.
+        EXPECT_TRUE(test_logger->context().has("request_id"));
+        EXPECT_TRUE(test_logger->context().has("user_id"));
+        EXPECT_EQ(test_logger->context().get_string("request_id"), "req-789");
+    }
+
+    // After the scope exits, both thread-local and logger context for the
+    // keys added by the scope must be removed.
+    EXPECT_FALSE(log_context_storage::has_context());
+    EXPECT_FALSE(test_logger->context().has("request_id"));
+    EXPECT_FALSE(test_logger->context().has("user_id"));
+
+    test_logger->stop();
+}
+
+// Test 37: Nested scopes with logger reference properly remove inner keys
+//          without touching outer-scope keys.
+TEST_F(StructuredLoggingTest, LogContextScopeWithLoggerNestedRestoresOuter) {
+    log_context_storage::clear();
+
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    {
+        log_context_scope outer(*test_logger, {
+            {"outer", std::string("out")}
+        });
+
+        ASSERT_TRUE(test_logger->context().has("outer"));
+
+        {
+            log_context_scope inner(*test_logger, {
+                {"inner", std::string("in")}
+            });
+
+            EXPECT_TRUE(test_logger->context().has("outer"));
+            EXPECT_TRUE(test_logger->context().has("inner"));
+
+            auto fields = log_context_storage::get();
+            EXPECT_EQ(fields.size(), 2u);
+        }
+
+        // After inner scope, only outer key remains on both layers.
+        EXPECT_TRUE(test_logger->context().has("outer"));
+        EXPECT_FALSE(test_logger->context().has("inner"));
+
+        auto fields = log_context_storage::get();
+        EXPECT_EQ(fields.size(), 1u);
+        EXPECT_EQ(std::get<std::string>(fields["outer"]), "out");
+    }
+
+    EXPECT_FALSE(log_context_storage::has_context());
+    EXPECT_FALSE(test_logger->context().has("outer"));
+
+    test_logger->stop();
+}
+
+// Test 38: Pre-existing thread-local context is restored after the logger
+//          overload scope exits, even when a key is overridden.
+TEST_F(StructuredLoggingTest, LogContextScopeWithLoggerRestoresOverriddenKey) {
+    log_context_storage::clear();
+
+    // Seed thread-local context BEFORE entering the scope.
+    log_context_storage::set("request_id", std::string("original"));
+    log_context_storage::set("session_id", std::string("sess-1"));
+
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    {
+        log_context_scope scope(*test_logger, {
+            {"request_id", std::string("override")},
+            {"trace_id", std::string("trace-xyz")}
+        });
+
+        // Inside the scope: new values take effect.
+        auto inside = log_context_storage::get();
+        EXPECT_EQ(std::get<std::string>(inside["request_id"]), "override");
+        EXPECT_EQ(std::get<std::string>(inside["session_id"]), "sess-1");
+        EXPECT_EQ(std::get<std::string>(inside["trace_id"]), "trace-xyz");
+    }
+
+    // After the scope exits, the overridden key must be restored to the
+    // pre-existing value, and the newly-added key must be removed.
+    auto after = log_context_storage::get();
+    EXPECT_EQ(std::get<std::string>(after["request_id"]), "original");
+    EXPECT_EQ(std::get<std::string>(after["session_id"]), "sess-1");
+    EXPECT_EQ(after.find("trace_id"), after.end());
+
+    log_context_storage::clear();
+    test_logger->stop();
+}
+
+// Test 39: Empty fields list with logger overload leaves all contexts empty.
+TEST_F(StructuredLoggingTest, LogContextScopeWithLoggerEmptyFields) {
+    log_context_storage::clear();
+    auto test_logger = std::make_shared<logger>(false);
+    test_logger->start();
+
+    {
+        log_context_scope scope(*test_logger, {});
+        EXPECT_FALSE(log_context_storage::has_context());
+        EXPECT_TRUE(test_logger->context().empty());
+    }
+
+    EXPECT_FALSE(log_context_storage::has_context());
+    EXPECT_TRUE(test_logger->context().empty());
+
+    test_logger->stop();
+}

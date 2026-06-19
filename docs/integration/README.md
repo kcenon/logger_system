@@ -18,11 +18,8 @@ This directory contains integration guides for using logger_system with other KC
 
 ## Integration Guides
 
-- [With Common System](with-common-system.md) - ILogger interface implementation
-- [With Thread System](with-thread-system.md) - Async logging and thread-safe operations
-- [With Monitoring System](with-monitoring.md) - Log metrics and observability
-- [With Network System](with-network-system.md) - Network event logging
-- [With Database System](with-database-system.md) - Database query logging
+- [With Thread System](THREAD_SYSTEM.md) - Async logging and thread-safe operations
+<!-- TODO: with-common-system.md, with-monitoring.md, with-network-system.md, with-database-system.md do not exist -->
 
 ## Quick Start
 

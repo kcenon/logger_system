@@ -1,0 +1,66 @@
+name: Fuzzing
+
+on:
+  schedule:
+    # Weekly, Mondays at 06:17 UTC.
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      max_total_time:
+        description: 'Max fuzzing time per target, in seconds'
+        required: false
+        default: '300'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  libfuzzer:
+    name: libFuzzer (ASan)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build clang
+
+      - name: Configure with fuzzers
+        run: |
+          cmake -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DBUILD_TESTS=OFF \
+            -DBUILD_FUZZERS=ON \
+            -DCMAKE_C_COMPILER=clang \
+            -DCMAKE_CXX_COMPILER=clang++
+
+      - name: Build fuzz targets
+        run: cmake --build build --target log_entry_fuzzer
+
+      - name: Run log_entry_fuzzer
+        env:
+          MAX_TOTAL_TIME: ${{ github.event.inputs.max_total_time || '300' }}
+        run: |
+          ./build/fuzz/log_entry_fuzzer \
+            -max_total_time="${MAX_TOTAL_TIME}" \
+            -print_final_stats=1 \
+            fuzz/corpus
+
+      - name: Upload crashes
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fuzz-crashes
+          path: |
+            crash-*
+            leak-*
+            timeout-*
+          if-no-files-found: ignore

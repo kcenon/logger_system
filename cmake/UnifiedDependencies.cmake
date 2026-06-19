@@ -1,19 +1,21 @@
-# UnifiedDependencies.cmake
-# Unified dependency management for kcenon system libraries
+# UnifiedDependencies.cmake -- shared dependency resolution helpers
 #
-# This module provides a unified interface for finding dependencies across
-# three modes: LOCAL (sibling directories), FETCHCONTENT, and find_package.
+# Inputs:
+#   - UNIFIED_USE_LOCAL: option (default OFF), use sibling directories
+#   - UNIFIED_USE_FETCHCONTENT: option (default OFF), force FetchContent
+#   - UNIFIED_ALLOW_FETCHCONTENT_FALLBACK: option (default ON),
+#     allow FetchContent when find_package fails
+#   - UNIFIED_GITHUB_ORG: cache string (default "kcenon")
+# Outputs:
+#   - unified_setup_dependency_mode(): function, configures resolution mode
+#   - unified_find_dependency(<name> [REQUIRED|OPTIONAL]): function, resolves a dependency
+#   - <dep>_FOUND / <dep>_TARGET / <dep>_SOURCE_DIR: per-dependency variables
 #
 # Usage:
 #   include(UnifiedDependencies)
 #   unified_setup_dependency_mode()  # Call once to configure mode
 #   unified_find_dependency(common_system REQUIRED)
 #   unified_find_dependency(monitoring_system OPTIONAL)
-#
-# Options (set before including):
-#   UNIFIED_USE_LOCAL       - Use sibling directories (default: OFF)
-#   UNIFIED_USE_FETCHCONTENT - Use FetchContent (default: OFF)
-#   UNIFIED_ALLOW_FETCHCONTENT_FALLBACK - Allow FetchContent as fallback (default: ON)
 
 cmake_minimum_required(VERSION 3.16)
 
@@ -60,6 +62,7 @@ set(_UNIFIED_TARGET_MAP_thread_system
 )
 
 set(_UNIFIED_TARGET_MAP_logger_system
+    "logger_system::logger_system"
     "logger"
     "logger_system::logger"
     "logger_system"
@@ -113,7 +116,7 @@ set(_UNIFIED_REPO_network_system "network_system")
 # Keep in sync with ecosystem release versions
 set(_UNIFIED_DEFAULT_TAG_common_system "78080b2d85bf73472abf971946bf1537d3f128f2")
 set(_UNIFIED_DEFAULT_TAG_thread_system "v0.3.1")
-set(_UNIFIED_DEFAULT_TAG_logger_system "v0.1.3")
+set(_UNIFIED_DEFAULT_TAG_logger_system "v1.0.0")
 set(_UNIFIED_DEFAULT_TAG_monitoring_system "v0.1.0")
 set(_UNIFIED_DEFAULT_TAG_container_system "v0.1.0")
 set(_UNIFIED_DEFAULT_TAG_database_system "v0.1.0")

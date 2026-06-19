@@ -22,10 +22,10 @@ category: "GUID"
 - **[README.md](../README.md)** - 프로젝트 개요, 기능 및 빠른 시작
 - **[API_REFERENCE.md](API_REFERENCE.md)** ([한국어](API_REFERENCE.kr.md)) - 예제가 포함된 완전한 API 문서
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** ([한국어](ARCHITECTURE.kr.md)) - 스레딩 생태계 아키텍처
-- **[LOGGER_SYSTEM_ARCHITECTURE.md](LOGGER_SYSTEM_ARCHITECTURE.md)** ([한국어](LOGGER_SYSTEM_ARCHITECTURE.kr.md)) - 상세한 시스템 아키텍처
+- **[LOGGER_SYSTEM_ARCHITECTURE.md](advanced/LOGGER_SYSTEM_ARCHITECTURE.md)** ([한국어](advanced/LOGGER_SYSTEM_ARCHITECTURE.kr.md)) - 상세한 시스템 아키텍처
 - **[CHANGELOG.md](CHANGELOG.md)** ([한국어](CHANGELOG.kr.md)) - 버전 히스토리 및 릴리스 노트
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** ([한국어](CONTRIBUTING.kr.md)) - 기여 가이드라인
-- **[SECURITY.md](SECURITY.md)** ([한국어](SECURITY.kr.md)) - 보안 고려사항 및 보고
+- **[CONTRIBUTING.md](contributing/CONTRIBUTING.md)** ([한국어](contributing/CONTRIBUTING.kr.md)) - 기여 가이드라인
+- **[SECURITY.md](guides/SECURITY.md)** ([한국어](guides/SECURITY.kr.md)) - 보안 고려사항 및 보고
 
 ### 가이드 (`docs/guides/`)
 시작하기 및 모범 사례를 위한 필수 가이드:
@@ -54,13 +54,13 @@ category: "GUID"
 3. 최적 사용법은 **[BEST_PRACTICES.md](guides/BEST_PRACTICES.md)** ([한국어](guides/BEST_PRACTICES.kr.md))를 참조하세요
 
 ### 기여자
-1. 가이드라인을 위해 **[CONTRIBUTING.md](CONTRIBUTING.md)** ([한국어](CONTRIBUTING.kr.md))를 읽으세요
-2. 구현 세부사항은 **[LOGGER_SYSTEM_ARCHITECTURE.md](LOGGER_SYSTEM_ARCHITECTURE.md)** ([한국어](LOGGER_SYSTEM_ARCHITECTURE.kr.md))를 학습하세요
+1. 가이드라인을 위해 **[CONTRIBUTING.md](contributing/CONTRIBUTING.md)** ([한국어](contributing/CONTRIBUTING.kr.md))를 읽으세요
+2. 구현 세부사항은 **[LOGGER_SYSTEM_ARCHITECTURE.md](advanced/LOGGER_SYSTEM_ARCHITECTURE.md)** ([한국어](advanced/LOGGER_SYSTEM_ARCHITECTURE.kr.md))를 학습하세요
 3. 확장 패턴은 **[CUSTOM_WRITERS.md](advanced/CUSTOM_WRITERS.md)** ([한국어](advanced/CUSTOM_WRITERS.kr.md))를 탐색하세요
 
 ### 성능 엔지니어
 1. 벤치마크는 **[PERFORMANCE.md](guides/PERFORMANCE.md)** ([한국어](guides/PERFORMANCE.kr.md))를 검토하세요
-2. 설계 결정은 **[LOGGER_SYSTEM_ARCHITECTURE.md](LOGGER_SYSTEM_ARCHITECTURE.md)** ([한국어](LOGGER_SYSTEM_ARCHITECTURE.kr.md))를 확인하세요
+2. 설계 결정은 **[LOGGER_SYSTEM_ARCHITECTURE.md](advanced/LOGGER_SYSTEM_ARCHITECTURE.md)** ([한국어](advanced/LOGGER_SYSTEM_ARCHITECTURE.kr.md))를 확인하세요
 3. 최적화 팁은 **[BEST_PRACTICES.md](guides/BEST_PRACTICES.md)** ([한국어](guides/BEST_PRACTICES.kr.md))를 참조하세요
 
 ## 🔧 문서 유지관리
@@ -87,7 +87,7 @@ category: "GUID"
 
 - **이슈**: [GitHub Issues](https://github.com/kcenon/logger_system/issues)에서 버그 보고 및 기능 요청
 - **토론**: [GitHub Discussions](https://github.com/kcenon/logger_system/discussions)에서 유지보수 지원 및 질문
-- **보안**: **[SECURITY.md](SECURITY.md)** ([한국어](SECURITY.kr.md)) 가이드라인에 따라 보안 이슈 보고
+- **보안**: **[SECURITY.md](guides/SECURITY.md)** ([한국어](guides/SECURITY.kr.md)) 가이드라인에 따라 보안 이슈 보고
 
 ---
 

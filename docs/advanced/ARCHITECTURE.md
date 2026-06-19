@@ -12,7 +12,8 @@ category: "ARCH"
 
 > **SSOT**: This document is the single source of truth for **Architecture - Logger System**.
 
-> **Language:** **English** | [한국어](ARCHITECTURE.kr.md)
+> **Language:** **English** | 한국어 (번역 예정)
+<!-- TODO: ARCHITECTURE.kr.md translation not yet available -->
 
 ## Overview
 
@@ -639,8 +640,8 @@ See `core/error_codes.h` for complete error code listing.
 
 ## References
 
-- [README.md](README.md) - Project overview and quick start
-- [CHANGELOG.md](CHANGELOG.md) - Version history
+- [README.md](../../README.md) - Project overview and quick start
+- [CHANGELOG.md](../CHANGELOG.md) - Version history
 - [MIGRATION.md](MIGRATION.md) - Migration from integrated thread_system
 - [BASELINE.md](../performance/BASELINE.md) - Performance baselines
 - [common_system Integration](https://github.com/kcenon/common_system)

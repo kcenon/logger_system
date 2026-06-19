@@ -1,5 +1,5 @@
 // BSD 3-Clause License
-// Copyright (c) 2025, 🍀☀🌕🌥 🌊
+// Copyright (c) 2025, kcenon
 // See the LICENSE file in the project root for full license information.
 
 /**
@@ -8,6 +8,11 @@
  *
  * This file tests the integration of logger_system with monitoring_system,
  * verifying metrics collection and alert system integration.
+ *
+ * @note Relocated from tests/integration/monitoring_integration_test.cpp under
+ *       Issue #642 (test placement convention: cross-system scenario tests live
+ *       under integration_tests/, not tests/). gtest_main provides main(), so the
+ *       int main() in the previous location was removed.
  */
 
 #include <gtest/gtest.h>
@@ -289,9 +294,4 @@ TEST_F(MonitoringIntegrationTest, CustomMetricsIntegration) {
         return m.name.find("custom") != std::string::npos;
     });
     EXPECT_EQ(custom_metric_count, 3);
-}
-
-int main(int argc, char** argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
 }

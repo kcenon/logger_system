@@ -1,5 +1,5 @@
 ---
-doc_id: "LOG-GUID-018"
+doc_id: "LOG-GUID-027"
 doc_title: "Getting Started with logger_system"
 doc_version: "1.0.0"
 doc_date: "2026-04-05"
@@ -9,6 +9,8 @@ category: "GUID"
 ---
 
 # Getting Started with logger_system
+
+> **See also**: The short-form canonical guide is [docs/guides/GETTING_STARTED.md](guides/GETTING_STARTED.md). This document is the long-form tutorial.
 
 A step-by-step guide from zero to production-ready logging in C++20.
 

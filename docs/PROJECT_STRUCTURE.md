@@ -487,7 +487,7 @@ The `src/impl/` directory contains internal headers and implementations not part
 | Subdirectory | Contents |
 |-------------|----------|
 | `memory/` | `object_pool.h`, `log_entry_pool.h` - Memory pool implementations |
-| `monitoring/` | `basic_monitor.h`, `monitoring_interface.h`, `thread_system_monitor_adapter.h` |
+| `monitoring/` | `basic_monitor.h`, `monitoring_interface.h` |
 
 ---
 
@@ -523,7 +523,7 @@ tests/unit/
 ---
 
 ### Integration Tests
-**Location**: `tests/integration/`
+**Location**: `integration_tests/`
 
 **Focus Areas**:
 - Ecosystem integration (thread_system, monitoring_system)
@@ -635,7 +635,7 @@ option(LOGGER_ENABLE_COVERAGE "Enable code coverage" OFF)
 
 **Required**:
 - **fmt**: String formatting library (header-only mode available)
-- **C++17 compiler**: GCC 7+, Clang 5+, MSVC 2017+
+- **C++20 compiler**: GCC 11+, Clang 14+, MSVC 2022+
 
 **Optional**:
 - **thread_system**: Threading primitives and logger interface
@@ -670,7 +670,9 @@ option(LOGGER_ENABLE_COVERAGE "Enable code coverage" OFF)
 
 ## See Also
 
-- [Architecture Overview](01-architecture.md) - System design and architecture
-- [API Reference](02-API_REFERENCE.md) - Complete API documentation
-- [Build Guide](guides/BUILD_GUIDE.md) - Detailed build instructions
+- [Architecture Overview](ARCHITECTURE.md) - System design and architecture
+- [API Reference](API_REFERENCE.md) - Complete API documentation
+- [Quick Start Guide](guides/QUICK_START.md) - Build and startup instructions
+- [Build Guide](guides/BUILD.md) - Complete CMake options, presets, and optional features
+- [Troubleshooting Guide](guides/TROUBLESHOOTING.md) - Common build and runtime issues
 - [Contributing Guide](contributing/CONTRIBUTING.md) - Contribution guidelines

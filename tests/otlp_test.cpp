@@ -394,8 +394,9 @@ protected:
 TEST_F(LoggerOtelIntegrationTest, LoggerContextMethods) {
     logger log(false, 8192);  // Synchronous mode
 
-    // Initially no context
-    EXPECT_FALSE(log.context().has("trace_id"));
+    // Initially no context. set_otel stores under the "otel_*" key prefix,
+    // matching unified_log_context_test and scoped_context_guard_test.
+    EXPECT_FALSE(log.context().has("otel_trace_id"));
 
     // Set context using unified context API
     otlp::otel_context ctx{
@@ -404,14 +405,14 @@ TEST_F(LoggerOtelIntegrationTest, LoggerContextMethods) {
     };
     log.context().set_otel(ctx);
 
-    EXPECT_TRUE(log.context().has("trace_id"));
+    EXPECT_TRUE(log.context().has("otel_trace_id"));
 
-    auto trace_id = log.context().get_string("trace_id");
+    auto trace_id = log.context().get_string("otel_trace_id");
     EXPECT_EQ(trace_id, "22222222222222222222222222222222");
 
     // Clear context
     log.context().clear(context_category::otel);
-    EXPECT_FALSE(log.context().has("trace_id"));
+    EXPECT_FALSE(log.context().has("otel_trace_id"));
 }
 
 TEST_F(LoggerOtelIntegrationTest, LogEntryHasOtelContext) {
