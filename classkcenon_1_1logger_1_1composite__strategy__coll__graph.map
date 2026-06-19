@@ -1,0 +1,10 @@
+<map id="kcenon::logger::composite_strategy" name="kcenon::logger::composite_strategy">
+<area shape="rect" id="Node000001" title="Combines multiple configuration strategies." alt="" coords="19,543,206,763"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1config__strategy__interface.html" title="Abstract interface for logger configuration strategies." alt="" coords="5,5,220,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,179,115,542,110,542,110,179"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="134,228,307,323"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="160,164,188,212,184,215,156,167"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="129,385,326,480"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="205,481,180,529,175,527,201,479"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="225,323,227,369,222,369,220,323"/>
+</map>

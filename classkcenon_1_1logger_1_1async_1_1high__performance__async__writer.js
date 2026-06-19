@@ -1,0 +1,28 @@
+var classkcenon_1_1logger_1_1async_1_1high__performance__async__writer =
+[
+    [ "config", "structkcenon_1_1logger_1_1async_1_1high__performance__async__writer_1_1config.html", "structkcenon_1_1logger_1_1async_1_1high__performance__async__writer_1_1config" ],
+    [ "performance_stats", "structkcenon_1_1logger_1_1async_1_1high__performance__async__writer_1_1performance__stats.html", "structkcenon_1_1logger_1_1async_1_1high__performance__async__writer_1_1performance__stats" ],
+    [ "queued_log_entry", "structkcenon_1_1logger_1_1async_1_1high__performance__async__writer_1_1queued__log__entry.html", "structkcenon_1_1logger_1_1async_1_1high__performance__async__writer_1_1queued__log__entry" ],
+    [ "high_performance_async_writer", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a26fbcba58f47086da356481ec4dff0ef", null ],
+    [ "~high_performance_async_writer", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a62ee5d8b878388be13d8bc3c55abfa3a", null ],
+    [ "flush", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a3d18cbfa6e54c5c25d268cb63487b1c0", null ],
+    [ "get_batch_stats", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a48c9a6d68fb18dcba6b8a8d65c4bbda3", null ],
+    [ "get_name", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a1d866b1ebda499bd5464dfe1bf2efab8", null ],
+    [ "get_queue_utilization", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a1ca95147c3aa63d91e085133795fc8c2", null ],
+    [ "get_stats", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a4578794dec30ec2dc600f786cb367ae6", null ],
+    [ "is_healthy", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a2a05bf54878968d860fd012fa4390a2b", null ],
+    [ "reset_stats", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#ab5f824e26e1c1619b4580c35dd77a4d6", null ],
+    [ "set_use_color", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a1373869a349a458049c04845bcee01e0", null ],
+    [ "start", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#acb911a4dd0403557da95d70ce832fbe4", null ],
+    [ "stop", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a9efd01445306239bfb65a363242b4989", null ],
+    [ "to_batch_entry", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#ad50ac133c03a9f1cb3167a4acff3dd09", null ],
+    [ "update_stats", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a2f5aa19fa412f61aedca8f6b6a231a71", null ],
+    [ "write", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a5e3277edb6cf43396aa35edd16a8d4b9", null ],
+    [ "write_direct", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#ad9c86b7a99d3cdc0ec3694a950bcc310", null ],
+    [ "batch_processor_", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a15c53c05a3a8099f2958f8ee4f87a060", null ],
+    [ "config_", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a04d7a3fe5f94e426dc26e46e1229d9ff", null ],
+    [ "memory_pool_", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a11022fc08d423ac30fa4682d76943bde", null ],
+    [ "running_", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a6dcfc358eeb9cc8cb09f3761eba2dbba", null ],
+    [ "stats_", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#ad070cc82d2eb2f2d574efcef34a9d816", null ],
+    [ "wrapped_writer_", "classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#ac20befca165f68ef19b0bf24aa2e5b8a", null ]
+];

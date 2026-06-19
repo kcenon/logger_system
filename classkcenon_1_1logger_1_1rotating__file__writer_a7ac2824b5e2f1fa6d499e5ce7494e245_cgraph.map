@@ -1,0 +1,15 @@
+<map id="kcenon::logger::rotating_file_writer::cleanup_old_files" name="kcenon::logger::rotating_file_writer::cleanup_old_files">
+<area shape="rect" id="Node000001" title="Remove old backup files beyond max_files limit." alt="" coords="5,41,220,81"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a6b538f34b9519638cb327011a6007f09" title="Get list of existing backup files." alt="" coords="268,41,479,81"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,58,254,58,254,63,220,63"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="527,5,685,31"/>
+<area shape="poly" id="edge6_Node000001_Node000003" title=" " alt="" coords="197,38,268,26,396,16,513,14,513,19,396,22,268,31,198,43"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger_1_1utils.html#aafab2237b40cefbc519b3dcdf64fb23d" title="Error handling helper for write operations." alt="" coords="527,70,685,110"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="195,78,268,90,327,94,373,94,479,90,513,89,513,95,479,95,373,99,327,100,268,95,195,83"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="478,39,522,31,523,36,479,44"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="479,71,514,76,514,81,479,77"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="733,70,896,110"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="685,87,720,87,720,93,685,93"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="944,70,1111,110"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="897,87,930,87,930,93,897,93"/>
+</map>

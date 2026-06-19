@@ -1,0 +1,6 @@
+<map id="kcenon::logger::backends::standalone_backend" name="kcenon::logger::backends::standalone_backend">
+<area shape="rect" id="Node000001" title="Integration backend for standalone logger operation." alt="" coords="5,353,188,613"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1backends_1_1integration__backend.html" title="Abstract interface for integration backends." alt="" coords="6,5,187,305"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,319,91,353,85,353,85,319"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="108,319,108,353,103,353,103,319"/>
+</map>

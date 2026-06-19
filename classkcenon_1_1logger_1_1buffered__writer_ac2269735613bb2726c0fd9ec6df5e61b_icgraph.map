@@ -1,0 +1,5 @@
+<map id="kcenon::logger::buffered_writer::should_flush_by_time" name="kcenon::logger::buffered_writer::should_flush_by_time">
+<area shape="rect" id="Node000001" title="Check if time&#45;based flush is needed." alt="" coords="233,5,449,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1buffered__writer.html#a99f8b814a289c60d0ec167f3715f48b1" title="Write a log entry to the buffer." alt="" coords="5,5,185,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,28,185,28,185,23,220,23"/>
+</map>

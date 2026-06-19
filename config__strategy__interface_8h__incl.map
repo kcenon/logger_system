@@ -1,0 +1,9 @@
+<map id="include/kcenon/logger/core/strategies/config_strategy_interface.h" name="include/kcenon/logger/core/strategies/config_strategy_interface.h">
+<area shape="rect" id="Node000001" title="Interface for logger configuration strategies (Strategy Pattern)" alt="" coords="53,5,219,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,83,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,62,68,100,65,96,106,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="107,108,165,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="139,60,139,94,133,94,133,60"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="190,108,277,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="167,58,212,97,208,101,164,62"/>
+</map>

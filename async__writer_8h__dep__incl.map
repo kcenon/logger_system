@@ -1,0 +1,9 @@
+<map id="include/kcenon/logger/writers/async_writer.h" name="include/kcenon/logger/writers/async_writer.h">
+<area shape="rect" id="Node000001" title="Asynchronous wrapper for log writers." alt="" coords="210,5,379,45"/>
+<area shape="rect" id="Node000002" href="$critical__logging__example_8cpp.html" title="Example demonstrating critical log loss prevention mechanisms." alt="" coords="5,93,195,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="241,53,144,96,142,91,239,48"/>
+<area shape="rect" id="Node000003" href="$decorator__usage_8cpp.html" title="Comprehensive decorator pattern usage examples." alt="" coords="219,93,371,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="297,59,297,93,292,93,292,59"/>
+<area shape="rect" id="Node000004" href="$writer__builder__example_8cpp.html" title="Demonstrates writer_builder usage patterns." alt="" coords="395,93,575,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="350,49,445,91,442,96,348,53"/>
+</map>

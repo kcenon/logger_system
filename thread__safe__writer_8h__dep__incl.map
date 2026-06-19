@@ -1,0 +1,7 @@
+<map id="include/kcenon/logger/writers/thread_safe_writer.h" name="include/kcenon/logger/writers/thread_safe_writer.h">
+<area shape="rect" id="Node000001" title="Thread&#45;safe base class for writer implementations kcenon." alt="" coords="114,5,279,60"/>
+<area shape="rect" id="Node000002" href="$custom__writer__example_8cpp.html" title="Example demonstrating how to create custom writers using thread_safe_writer." alt="" coords="5,108,188,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,72,119,110,115,106,156,68"/>
+<area shape="rect" id="Node000003" href="$thread__safe__writer_8cpp.html" title=" " alt="" coords="212,108,381,148"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="237,68,278,106,275,110,233,72"/>
+</map>

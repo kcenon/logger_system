@@ -1,0 +1,20 @@
+<map id="include/kcenon/logger/security/secure_key_storage.h" name="include/kcenon/logger/security/secure_key_storage.h">
+<area shape="rect" id="Node000001" title="RAII wrapper for encryption keys with secure memory management." alt="" coords="219,5,385,60"/>
+<area shape="rect" id="Node000002" href="$audit__logger_8h.html" title="Secure audit logging with tamper detection." alt="" coords="5,108,180,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,68,136,110,134,105,230,63"/>
+<area shape="rect" id="Node000004" href="$integrity__policy_8h.html" title="Tamper&#45;evident log signing policies for writers." alt="" coords="424,108,617,148"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="377,63,478,106,476,110,375,68"/>
+<area shape="rect" id="Node000009" href="$encrypted__writer_8h.html" title="Encryption wrapper for log writers providing AES&#45;256&#45;GCM encryption." alt="" coords="204,108,400,148"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="305,74,305,108,299,108,299,74"/>
+<area shape="rect" id="Node000003" href="$encrypted__writer_8cpp.html" title=" " alt="" coords="13,196,205,236"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="101,161,108,195,103,196,96,162"/>
+<area shape="rect" id="Node000005" href="$console__writer_8cpp.html" title=" " alt="" coords="237,196,415,236"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="467,156,370,198,368,194,465,151"/>
+<area shape="rect" id="Node000006" href="$file__writer_8cpp.html" title=" " alt="" coords="439,196,586,236"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="520,162,517,196,512,196,515,161"/>
+<area shape="rect" id="Node000007" href="$network__writer_8cpp.html" title="Network writer implementation with jthread compatibility." alt="" coords="611,196,791,236"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="573,151,662,194,660,198,571,156"/>
+<area shape="rect" id="Node000008" href="$rotating__file__writer_8cpp.html" title=" " alt="" coords="815,196,994,236"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="619,148,821,193,820,199,617,154"/>
+<area shape="poly" id="edge9_Node000009_Node000003" title=" " alt="" coords="248,156,152,198,150,194,246,151"/>
+</map>

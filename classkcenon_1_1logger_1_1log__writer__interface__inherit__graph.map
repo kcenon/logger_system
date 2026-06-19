@@ -1,0 +1,49 @@
+<map id="kcenon::logger::log_writer_interface" name="kcenon::logger::log_writer_interface">
+<area shape="rect" id="Node000001" title="Base interface for all log writers and decorators." alt="" coords="1626,5,1806,205"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1base__writer.html" title="Abstract base class for all log output writers." alt="" coords="618,403,769,683"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1614,153,770,512,768,507,1612,148"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1composite__writer.html" title="Coordinates formatting and output through a pipeline." alt="" coords="1421,423,1608,663"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1642,218,1622,255,1585,340,1554,424,1549,422,1580,338,1618,252,1638,216"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1console__writer.html" title="Core console writer for logging to stdout/stderr." alt="" coords="1632,303,1800,783"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1719,219,1719,303,1713,303,1713,219"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1decorator__writer__base.html" title="Abstract base class for decorator pattern log writers." alt="" coords="1824,363,2019,723"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1794,216,1814,252,1863,362,1858,364,1810,255,1789,218"/>
+<area shape="rect" id="Node000023" href="$classkcenon_1_1logger_1_1file__writer.html" title="Core file writer for logging to files." alt="" coords="2357,253,2523,833"/>
+<area shape="poly" id="edge22_Node000001_Node000023" title=" " alt="" coords="1820,147,1924,194,2032,251,2121,306,2209,365,2358,474,2355,478,2206,369,2119,311,2029,256,1921,199,1817,151"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html" title="High&#45;performance asynchronous writer." alt="" coords="5,899,208,1423"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="606,590,517,640,415,707,312,788,265,834,222,883,209,901,205,898,218,880,261,831,309,784,412,702,514,635,604,585"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1critical__writer.html" title="Synchronous wrapper ensuring critical logs are never lost." alt="" coords="232,944,400,1379"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="610,630,509,745,459,812,414,883,384,945,379,943,410,880,454,809,505,742,606,627"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1hybrid__writer.html" title="Combines async writer for normal logs with critical_writer for safety." alt="" coords="425,1051,583,1271"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="649,697,540,1052,535,1050,644,696"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1network__writer.html" title="Sends logs over network (TCP/UDP)" alt="" coords="608,881,779,1441"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="696,697,696,881,691,881,691,697"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1otlp__writer.html" title="OTLP log exporter for OpenTelemetry integration." alt="" coords="803,891,968,1431"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="743,696,805,894,800,896,738,697"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1thread__safe__writer.html" title="Base class providing automatic thread&#45;safety for writer implementations." alt="" coords="993,1021,1165,1301"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="781,625,884,741,936,809,982,880,1016,949,1043,1020,1038,1022,1011,951,978,883,932,812,880,744,777,629"/>
+<area shape="rect" id="Node000009" href="$classcounted__console__writer.html" title="A console writer that counts messages per log level." alt="" coords="795,1587,989,1772"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="1028,1315,983,1442,929,1587,924,1586,977,1440,1023,1313"/>
+<area shape="rect" id="Node000010" href="$classmemory__writer.html" title="A custom writer that stores log entries in memory." alt="" coords="1013,1587,1163,1772"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="1084,1315,1089,1586,1084,1587,1079,1315"/>
+<area shape="rect" id="Node000014" href="$classkcenon_1_1logger_1_1queued__writer__base.html" title=" " alt="" coords="1189,974,1371,1349"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="1885,737,1855,791,1836,815,1814,835,1785,854,1757,867,1729,874,1702,877,1649,872,1597,860,1545,848,1492,843,1466,846,1439,853,1412,865,1384,883,1364,903,1346,925,1319,975,1314,972,1342,922,1360,899,1381,879,1409,860,1437,848,1465,840,1492,838,1545,843,1598,854,1650,866,1702,871,1729,869,1755,862,1783,850,1810,831,1832,811,1851,788,1880,735"/>
+<area shape="rect" id="Node000016" href="$classkcenon_1_1logger_1_1queued__writer__base.html" title=" " alt="" coords="1395,974,1576,1349"/>
+<area shape="poly" id="edge15_Node000013_Node000016" title=" " alt="" coords="1882,737,1853,790,1835,814,1814,835,1784,854,1756,862,1727,863,1700,860,1672,857,1645,858,1618,865,1590,883,1553,925,1527,975,1522,973,1549,922,1586,879,1615,860,1644,852,1672,852,1700,855,1728,857,1755,857,1782,849,1810,831,1831,811,1849,787,1877,735"/>
+<area shape="rect" id="Node000018" href="$classkcenon_1_1logger_1_1buffered__writer.html" title="Decorator that buffers log entries before writing to wrapped writer." alt="" coords="1600,901,1805,1421"/>
+<area shape="poly" id="edge17_Node000013_Node000018" title=" " alt="" coords="1856,738,1797,902,1792,900,1851,736"/>
+<area shape="rect" id="Node000019" href="$classkcenon_1_1logger_1_1encrypted__writer.html" title="Decorator that encrypts log data before writing." alt="" coords="1829,934,2013,1389"/>
+<area shape="poly" id="edge18_Node000013_Node000019" title=" " alt="" coords="1924,737,1924,934,1919,934,1919,737"/>
+<area shape="rect" id="Node000020" href="$classkcenon_1_1logger_1_1filtered__writer.html" title="Decorator that applies a filter to a wrapped writer." alt="" coords="2038,1041,2202,1281"/>
+<area shape="poly" id="edge19_Node000013_Node000020" title=" " alt="" coords="1986,736,2084,1040,2079,1042,1981,738"/>
+<area shape="rect" id="Node000021" href="$classkcenon_1_1logger_1_1formatted__writer.html" title="Decorator that applies a formatter to a wrapped writer." alt="" coords="2226,1041,2409,1281"/>
+<area shape="poly" id="edge20_Node000013_Node000021" title=" " alt="" coords="2031,646,2127,755,2174,816,2216,880,2255,960,2286,1040,2281,1042,2251,962,2211,883,2169,819,2123,758,2027,650"/>
+<area shape="rect" id="Node000022" href="$classkcenon_1_1logger_1_1queued__writer__base.html" title="Abstract base class for queue&#45;based log writers." alt="" coords="2433,981,2623,1341"/>
+<area shape="poly" id="edge21_Node000013_Node000022" title=" " alt="" coords="2032,618,2345,831,2386,852,2404,862,2422,880,2455,928,2481,980,2476,982,2450,930,2418,883,2400,866,2384,856,2343,836,2029,623"/>
+<area shape="rect" id="Node000015" href="$classkcenon_1_1logger_1_1async__writer.html" title="Asynchronous wrapper for log writers." alt="" coords="1197,1489,1363,1869"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="1283,1362,1283,1489,1277,1489,1277,1362"/>
+<area shape="rect" id="Node000017" href="$classkcenon_1_1logger_1_1batch__writer.html" title="Batch writer that accumulates log entries and writes them in batches." alt="" coords="1391,1509,1580,1849"/>
+<area shape="poly" id="edge16_Node000016_Node000017" title=" " alt="" coords="1488,1362,1488,1509,1483,1509,1483,1362"/>
+<area shape="rect" id="Node000024" href="$classkcenon_1_1logger_1_1rotating__file__writer.html" title="File writer with automatic log rotation support." alt="" coords="2647,921,2862,1401"/>
+<area shape="poly" id="edge23_Node000023_Node000024" title=" " alt="" coords="2533,691,2586,784,2637,880,2656,920,2652,922,2632,883,2581,786,2528,693"/>
+</map>

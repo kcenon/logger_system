@@ -1,0 +1,16 @@
+<map id="kcenon::logger::analysis::realtime_log_analyzer::notify_anomaly" name="kcenon::logger::analysis::realtime_log_analyzer::notify_anomaly">
+<area shape="rect" id="Node000001" title=" " alt="" coords="461,124,641,179"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#ab012a01c8390c594be3e036dab9a7447" title=" " alt="" coords="233,5,413,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="493,119,412,74,389,62,391,58,415,69,496,114"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#aad02b71df74511a07fdcd851003eb5cc" title=" " alt="" coords="233,84,413,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="447,136,413,130,414,124,448,131"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a92f392da95407740fbb120f192e25f68" title=" " alt="" coords="233,163,413,217"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="448,172,414,177,413,172,447,166"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a249daef69adfa9cf431130fe7b7bedd2" title=" " alt="" coords="233,241,413,296"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="493,188,415,231,389,244,386,239,412,226,490,184"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#ab8cadc55fbfabbcb32a0543a663dd06f" title="Analyze a log entry in real&#45;time." alt="" coords="5,124,185,179"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="246,68,235,74,142,126,140,121,232,69,243,63"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="220,132,186,138,185,133,219,127"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="219,175,185,169,186,164,220,170"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="246,238,232,231,142,181,144,177,235,226,248,233"/>
+</map>

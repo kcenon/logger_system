@@ -1,0 +1,14 @@
+<map id="kcenon::logger::structured::log_builder" name="kcenon::logger::structured::log_builder">
+<area shape="rect" id="Node000001" title="Builder for structured log entries." alt="" coords="113,603,297,823"/>
+<area shape="rect" id="Node000002" href="$structkcenon_1_1logger_1_1structured_1_1structured__log__entry.html" title="Structured log entry." alt="" coords="5,423,189,523"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,522,151,586,147,589,117,524"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="58,135,137,200"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="96,201,91,263,90,337,94,406,89,406,85,337,85,263,91,200"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="175,263,355,343"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="138,198,205,250,202,254,135,202"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="32,5,163,85"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="100,99,100,134,95,134,95,99"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="228,345,160,413,156,409,224,341"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1structured_1_1structured__logger__interface.html" title="Structured logger interface." alt="" coords="214,405,415,540"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="287,541,265,589,260,586,282,539"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="src/integration/standalone_executor.cpp" name="src/integration/standalone_executor.cpp">
+<area shape="rect" id="Node000001" title="Implementation of standalone IExecutor." alt="" coords="71,5,263,45"/>
+<area shape="rect" id="Node000002" href="$standalone__executor_8h.html" title="Standalone IExecutor implementation using std::jthread." alt="" coords="72,93,261,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,46,169,79,164,79,164,46"/>
+<area shape="rect" id="Node000003" href="$thread__integration__detector_8h.html" title="Conditionally enables thread_system integration when available." alt="" coords="5,181,152,236"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="151,135,115,173,111,169,147,132"/>
+<area shape="rect" id="Node000004" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="177,189,335,229"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="187,132,231,177,227,181,183,135"/>
+</map>

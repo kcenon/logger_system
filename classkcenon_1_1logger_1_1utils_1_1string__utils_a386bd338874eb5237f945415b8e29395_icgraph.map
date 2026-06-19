@@ -1,0 +1,21 @@
+<map id="kcenon::logger::utils::string_utils::level_to_string" name="kcenon::logger::utils::string_utils::level_to_string">
+<area shape="rect" id="Node000001" title="Convert log level to human&#45;readable string." alt="" coords="847,94,1001,149"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1json__formatter.html#a90ed86614970dfc4c754a9a79992600f" title="Format a log entry to JSON string." alt="" coords="607,5,760,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="862,90,798,60,759,47,761,42,800,55,864,85"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1timestamp__formatter.html#a12bf17e593c29666d537e68b023aff36" title="Format a log entry to human&#45;readable string." alt="" coords="585,69,782,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="832,112,782,105,782,100,833,107"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1network__writer.html#a7a2d7c4186ea898e86d8a2be49ddc8a8" title=" " alt="" coords="581,133,785,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="833,136,786,142,785,137,832,131"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1template__formatter.html#a6484153f3815a4ce22e4754ab25a5e23" title="Resolve a placeholder to its actual value." alt="" coords="568,197,799,237"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="864,158,800,188,765,200,764,195,798,183,862,153"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1network__writer.html#addb327c9107daa00a12fd143a242fe12" title=" " alt="" coords="338,133,517,173"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="568,156,517,156,517,151,568,151"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1network__writer.html#a5032ad5c8fa86ee299d282ea49547974" title="Constructor." alt="" coords="108,133,287,173"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="324,156,287,156,287,151,324,151"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1template__formatter.html#a0b738b7e7413cfad5778dea556748157" title="Format a log entry using the template." alt="" coords="335,197,520,237"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="554,220,520,220,520,215,554,215"/>
+<area shape="rect" id="Node000009" href="$structured__logging__example_8cpp.html#adec95563fbcce6741a032ea597b63e87" title="Demonstrates template&#45;based custom formatter." alt="" coords="122,197,273,237"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="321,220,273,220,273,215,321,215"/>
+<area shape="rect" id="Node000010" href="$structured__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,205,60,230"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="108,220,60,220,60,215,108,215"/>
+</map>

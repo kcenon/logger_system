@@ -1,0 +1,16 @@
+<map id="kcenon::logger::analysis::analysis_stats" name="kcenon::logger::analysis::analysis_stats">
+<area shape="rect" id="Node000001" title="Analysis result statistics." alt="" coords="246,440,418,560"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,270,155,370"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,368,174,414,233,451,230,455,170,418,120,372"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="179,263,338,377"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="271,377,282,415,287,424,282,426,278,417,265,378"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="363,287,541,353"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="433,355,383,428,379,425,428,352"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="507,135,586,200"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="529,202,483,275,478,272,525,199"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="565,280,720,360"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="576,198,594,223,619,264,614,267,590,225,572,202"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="481,5,612,85"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="549,99,549,134,544,134,544,99"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="629,361,611,391,586,418,551,441,512,460,435,485,433,480,510,455,548,437,582,414,606,388,624,359"/>
+</map>

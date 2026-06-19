@@ -1,0 +1,21 @@
+<map id="kcenon::logger::async::batch_processor::start" name="kcenon::logger::async::batch_processor::start">
+<area shape="rect" id="Node000001" title="Start the batch processor." alt="" coords="5,206,180,246"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#ab545e34bc82963e5e7476bbc9403726e" title="Single iteration of processing loop." alt="" coords="228,199,423,253"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,223,215,223,215,229,180,229"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#a808fd88dbf765cde93ce688d97e9aa24" title="Adjust batch size based on performance metrics." alt="" coords="497,5,681,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="343,197,395,133,430,99,469,69,483,61,486,66,472,74,434,103,399,137,347,200"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#a529658d4ee56708bba334d188b216f02" title="Collect entries for batch processing." alt="" coords="496,84,683,139"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="372,196,470,148,486,141,488,146,472,152,375,201"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#adcfcc34bb49424114cb483755c25ef3e" title="Handle back&#45;pressure conditions." alt="" coords="495,163,683,217"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="423,210,481,202,482,207,423,215"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#a7973583812e6b45a1d042f2108282398" title="Process current batch." alt="" coords="471,242,708,282"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="423,237,457,241,456,247,423,242"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#ac06380ec35d153ce8ab9ae736dea78ab" title="Check if batch should be flushed based on time." alt="" coords="496,307,683,361"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="382,251,472,292,492,299,490,304,470,296,380,256"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#a36d55cdedeafd7b61c92d3748ea30d59" title="Update processing statistics." alt="" coords="475,386,703,426"/>
+<area shape="poly" id="edge9_Node000002_Node000009" title=" " alt="" coords="348,252,400,312,434,343,472,370,487,378,485,383,469,375,431,348,396,316,344,255"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#ae37fb42d10b25fa73e5fbad3fda70580" title="Get current queue size." alt="" coords="756,163,921,217"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="683,56,709,69,763,108,806,151,803,154,759,112,707,74,680,61"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="684,187,742,187,742,193,684,193"/>
+<area shape="poly" id="edge10_Node000009_Node000004" title=" " alt="" coords="683,384,706,370,742,339,773,301,798,263,817,228,822,231,803,266,778,305,746,342,710,375,686,388"/>
+</map>

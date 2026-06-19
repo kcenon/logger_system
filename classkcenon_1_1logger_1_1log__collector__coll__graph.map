@@ -1,0 +1,45 @@
+<map id="kcenon::logger::log_collector" name="kcenon::logger::log_collector">
+<area shape="rect" id="Node000001" title="Asynchronous log collector for high&#45;performance logging." alt="" coords="374,2735,537,2975"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="369,2577,542,2672"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="458,2672,458,2718,453,2718,453,2672"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__collector_1_1impl.html" title=" " alt="" coords="374,2215,537,2515"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="458,2515,458,2561,453,2561,453,2515"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="373,1495,546,1590"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="462,1590,459,2198,453,2198,456,1590"/>
+<area shape="rect" id="Node000015" href="$classkcenon_1_1logger_1_1log__collector__jthread__worker.html" title="Worker thread for log processing with jthread compatibility." alt="" coords="210,1745,391,1995"/>
+<area shape="poly" id="edge15_Node000015_Node000004" title=" " alt="" coords="439,1591,371,1732,366,1729,434,1589"/>
+<area shape="rect" id="Node000005" href="$structkcenon_1_1logger_1_1log__collector__shared__state.html" title="Shared state for log processing &#45; survives impl destruction." alt="" coords="442,1205,610,1340"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="512,1341,477,1480,472,1479,507,1339"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="313,1018,459,1098"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="413,1097,467,1180,474,1190,469,1193,462,1183,409,1100"/>
+<area shape="rect" id="Node000007" href="$structkcenon_1_1logger_1_1log__entry.html" title="Represents a single log entry with all associated metadata." alt="" coords="317,625,455,925"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="389,926,389,1002,383,1002,383,926"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1small__string.html" title=" " alt="" coords="306,223,466,563"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="389,563,389,608,383,608,383,563"/>
+<area shape="rect" id="Node000009" href="$unionkcenon_1_1logger_1_1small__string_1_1data__union.html" title=" " alt="" coords="307,5,465,160"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="389,160,389,206,383,206,383,160"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="484,1025,568,1091"/>
+<area shape="poly" id="edge9_Node000005_Node000010" title=" " alt="" coords="529,1091,529,1189,523,1189,523,1091"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="592,1011,767,1105"/>
+<area shape="poly" id="edge10_Node000005_Node000011" title=" " alt="" coords="672,1106,659,1145,639,1183,624,1201,620,1198,634,1180,654,1143,667,1105"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="597,728,761,823"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="682,823,682,994,677,994,677,823"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="589,293,769,493"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="682,493,682,712,677,712,677,493"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="230,2057,403,2152"/>
+<area shape="poly" id="edge13_Node000003_Node000014" title=" " alt="" coords="344,2151,370,2199,365,2202,339,2153"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="312,1995,315,2041,310,2041,307,1995"/>
+<area shape="rect" id="Node000016" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html" title="Wrapper for std::jthread or std::thread with manual stop mechanism." alt="" coords="192,1403,348,1683"/>
+<area shape="poly" id="edge16_Node000015_Node000016" title=" " alt="" coords="286,1683,290,1729,285,1729,280,1683"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="135,1225,309,1320"/>
+<area shape="poly" id="edge17_Node000016_Node000017" title=" " alt="" coords="233,1320,245,1386,240,1387,228,1321"/>
+<area shape="rect" id="Node000018" href="$classkcenon_1_1logger_1_1async_1_1simple__stop__source.html" title="Simple stop source for environments without std::stop_token." alt="" coords="102,988,270,1128"/>
+<area shape="poly" id="edge18_Node000017_Node000018" title=" " alt="" coords="200,1128,214,1208,209,1209,195,1129"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="5,743,151,808"/>
+<area shape="poly" id="edge21_Node000015_Node000019" title=" " alt="" coords="75,808,58,918,51,987,49,1057,49,1544,52,1582,62,1618,78,1652,97,1685,146,1744,199,1794,195,1798,142,1748,93,1688,73,1655,57,1620,47,1583,43,1544,43,1057,46,987,53,917,69,808"/>
+<area shape="poly" id="edge19_Node000018_Node000019" title=" " alt="" coords="93,807,156,972,151,974,88,809"/>
+<area shape="rect" id="Node000020" title=" " alt="" coords="333,1240,417,1305"/>
+<area shape="poly" id="edge20_Node000016_Node000020" title=" " alt="" coords="368,1306,343,1380,340,1388,335,1387,338,1378,363,1305"/>
+<area shape="rect" id="Node000021" title=" " alt="" coords="492,2072,691,2137"/>
+<area shape="poly" id="edge22_Node000003_Node000021" title=" " alt="" coords="577,2139,544,2202,539,2199,572,2136"/>
+</map>

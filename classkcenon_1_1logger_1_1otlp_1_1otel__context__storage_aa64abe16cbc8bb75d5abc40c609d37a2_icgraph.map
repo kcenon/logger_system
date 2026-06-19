@@ -1,0 +1,16 @@
+<map id="kcenon::logger::otlp::otel_context_storage::get_storage" name="kcenon::logger::otlp::otel_context_storage::get_storage">
+<area shape="rect" id="Node000001" title=" " alt="" coords="464,70,631,125"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1otlp_1_1otel__context__storage.html#ae782fc4a335cb8ab9debfb9a8d9b00ad" title="Clear the OpenTelemetry context for the current thread." alt="" coords="235,70,401,125"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="450,100,401,100,401,95,450,95"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1otlp_1_1otel__context__storage.html#adfab4779d9770ebc571147cdd2f89552" title="Get the OpenTelemetry context for the current thread." alt="" coords="220,5,416,45"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="449,69,382,48,383,43,451,64"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1otlp_1_1otel__context__storage.html#ae65854ce17c0c54e3d5809b9be59df25" title="Set the OpenTelemetry context for the current thread." alt="" coords="221,149,415,189"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="451,130,383,152,382,147,449,125"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1otlp_1_1otel__context__scope.html#a3eb5ee1e4aefd69f5108a2e7d093fbee" title="Destructor &#45; restores previous context." alt="" coords="5,70,172,125"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="221,100,172,100,172,95,221,95"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1otlp__writer.html#aeecdba82f0f69df14a41c4b4969c6c6b" title="Write a log entry with OTEL context." alt="" coords="13,5,164,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="206,28,164,28,164,23,206,23"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="239,148,172,126,173,121,241,143"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1otlp_1_1otel__context__scope.html#a23491d8c4fe09eee8f49697937b4816c" title="Construct and set context." alt="" coords="11,149,167,203"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="207,175,167,176,167,171,207,170"/>
+</map>

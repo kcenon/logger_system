@@ -1,0 +1,9 @@
+<map id="print_metrics" name="print_metrics">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,99,113,124"/>
+<area shape="rect" id="Node000002" href="$structkcenon_1_1logger_1_1metrics_1_1logger__performance__stats.html#a3e41f3d28ca628a577f003b92f78b748" title="Get average enqueue time in nanoseconds." alt="" coords="173,5,377,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,96,160,69,179,62,181,67,162,74,93,101"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1metrics_1_1logger__performance__stats.html#aa4908f133f82707ee4a4de0c3aa1e7f1" title="Get messages per second." alt="" coords="172,84,377,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="114,109,158,109,158,114,114,114"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1metrics_1_1logger__performance__stats.html#a2f54cf74e03145b2bb1177a29cc367a5" title="Get queue utilization percentage." alt="" coords="161,163,388,217"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="94,122,162,148,183,155,182,160,160,152,92,127"/>
+</map>

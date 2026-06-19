@@ -1,0 +1,5 @@
+<map id="kcenon::logger::utils::safe_destructor_operation" name="kcenon::logger::utils::safe_destructor_operation">
+<area shape="rect" id="Node000001" title="Safe operation execution for destructors." alt="" coords="237,5,437,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1network__writer.html#a104ca93683e934fcca4dccd96205de9f" title="Destructor." alt="" coords="5,5,189,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,28,189,28,189,23,224,23"/>
+</map>

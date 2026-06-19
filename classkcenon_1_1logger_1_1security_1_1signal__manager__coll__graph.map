@@ -1,0 +1,16 @@
+<map id="kcenon::logger::security::signal_manager" name="kcenon::logger::security::signal_manager">
+<area shape="rect" id="Node000001" title="Manager for safe signal handler installation." alt="" coords="258,445,443,845"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="276,908,425,1003"/>
+<area shape="poly" id="edge3_Node000003_Node000001" title=" " alt="" coords="312,846,317,883,320,892,315,893,312,885,306,846"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1signal__manager__interface.html" title="Interface for signal handler management." alt="" coords="5,223,224,383"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,393,260,509,256,512,175,396"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="350,908,351,884,351,862,356,862,356,884,355,908"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="249,270,333,335"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="299,335,315,429,310,430,294,336"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="357,255,531,350"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="434,351,412,430,407,429,429,350"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1security_1_1critical__logger__interface.html" title="Interface for loggers that support emergency flushing." alt="" coords="341,5,547,160"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="447,160,447,239,441,239,441,160"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="555,270,701,335"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="604,337,456,519,452,516,600,334"/>
+</map>

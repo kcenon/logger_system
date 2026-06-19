@@ -1,0 +1,9 @@
+<map id="example_core_writers" name="example_core_writers">
+<area shape="rect" id="Node000001" title="Example 1: Core Writers (No Decorators)" alt="" coords="5,77,172,102"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1console__writer.html#af7a36e737bc35cc5a8ab133dfcbce7ea" title="Get writer name." alt="" coords="220,5,396,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,74,225,47,226,52,134,79"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1file__writer.html#a0a8cb64d8f9ebadd74d0620b2475e43a" title="Get writer name." alt="" coords="235,69,381,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="173,87,221,87,221,92,173,92"/>
+<area shape="rect" id="Node000004" href="$decorator__usage_8cpp.html#a1156846072709ab6e482082b43aae398" title=" " alt="" coords="255,134,361,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="139,99,246,128,245,133,137,105"/>
+</map>

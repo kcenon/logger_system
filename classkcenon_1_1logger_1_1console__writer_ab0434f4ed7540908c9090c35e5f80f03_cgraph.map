@@ -1,0 +1,5 @@
+<map id="kcenon::logger::console_writer::set_use_color" name="kcenon::logger::console_writer::set_use_color">
+<area shape="rect" id="Node000001" title="Set whether to use color output (if supported)" alt="" coords="5,5,181,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1console__writer.html#a1edbb0406a72ac40abf6fdfc81185cff" title="Get current color output setting." alt="" coords="229,5,405,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,23,215,23,215,28,182,28"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="include/kcenon/logger/writers/otlp_writer.h" name="include/kcenon/logger/writers/otlp_writer.h">
+<area shape="rect" id="Node000001" title="OpenTelemetry Protocol (OTLP) log writer for observability kcenon." alt="" coords="5,5,171,45"/>
+<area shape="rect" id="Node000002" href="$otlp__writer_8cpp.html" title=" " alt="" coords="12,93,164,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,59,91,93,85,93,85,59"/>
+</map>

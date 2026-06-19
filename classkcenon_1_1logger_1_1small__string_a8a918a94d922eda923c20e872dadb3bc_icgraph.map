@@ -1,0 +1,7 @@
+<map id="kcenon::logger::small_string::size" name="kcenon::logger::small_string::size">
+<area shape="rect" id="Node000001" title="Get size." alt="" coords="240,35,403,75"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1small__string.html#a3be3f4a5a48346094e706afadfac609e" title="Copy assignment." alt="" coords="17,5,180,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,45,180,39,181,33,227,40"/>
+<area shape="rect" id="Node000003" href="$classcontent__filter.html#aa85690eb16ab88d4b0c2a559578867aa" title="Check if a log entry should be processed." alt="" coords="5,70,192,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="227,69,193,74,192,68,226,64"/>
+</map>

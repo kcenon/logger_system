@@ -1,0 +1,7 @@
+<map id="kcenon::logger::security::hmac_sha256_integrity_policy::compute_hmac" name="kcenon::logger::security::hmac_sha256_integrity_policy::compute_hmac">
+<area shape="rect" id="Node000001" title=" " alt="" coords="236,45,419,100"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1hmac__sha256__integrity__policy.html#a5c30ce2e5928a5dcca66f8c4bb996864" title="Produce a signature for record." alt="" coords="5,5,188,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="222,57,188,51,189,46,223,52"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1hmac__sha256__integrity__policy.html#a3092af9971bee3c6d10203d1e44178b4" title="Verify that signature matches record." alt="" coords="5,84,188,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="223,93,189,99,188,93,222,88"/>
+</map>

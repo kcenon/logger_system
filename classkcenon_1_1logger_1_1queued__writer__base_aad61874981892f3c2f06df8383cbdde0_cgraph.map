@@ -1,0 +1,9 @@
+<map id="kcenon::logger::queued_writer_base::enqueue_entry" name="kcenon::logger::queued_writer_base::enqueue_entry">
+<area shape="rect" id="Node000001" title="Enqueue entry (specialization for std::vector)" alt="" coords="5,5,216,45"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a5e3582690bc5bebcfdf5e35edfd490db" title="Creates a copy of a log_entry for queue storage." alt="" coords="264,5,421,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="216,23,250,23,250,28,216,28"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="469,5,632,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="422,23,456,23,456,28,422,28"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="680,5,843,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="632,23,666,23,666,28,632,28"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="kcenon::logger::rotating_file_writer::should_rotate" name="kcenon::logger::rotating_file_writer::should_rotate">
+<area shape="rect" id="Node000001" title="Check if rotation should occur." alt="" coords="5,41,196,81"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#aa52c3cff4d55ec8682697a62b6250c68" title="Get current file size from filesystem." alt="" coords="248,5,431,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,44,234,39,235,44,197,50"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a1d852b9ba7a90b5c1f29c825631adf9a" title="Check if time&#45;based rotation should occur." alt="" coords="244,70,435,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="197,73,231,78,230,84,196,78"/>
+</map>

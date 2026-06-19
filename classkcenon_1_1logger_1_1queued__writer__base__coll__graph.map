@@ -1,0 +1,22 @@
+<map id="kcenon::logger::queued_writer_base&lt; Container &gt;" name="kcenon::logger::queued_writer_base&lt; Container &gt;">
+<area shape="rect" id="Node000001" title="Abstract base class for queue&#45;based log writers." alt="" coords="535,813,725,1133"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1decorator__writer__base.html" title="Abstract base class for decorator pattern log writers." alt="" coords="262,411,457,751"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="466,743,471,749,537,842,532,845,466,752,462,746"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,5,185,205"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="63,220,60,252,60,285,65,317,75,347,91,376,111,404,159,453,211,495,263,528,260,533,208,499,155,457,107,407,87,379,70,349,59,318,54,285,54,252,58,219"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="85,268,301,348"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="146,204,169,252,164,254,141,207"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1decorator__writer__tag.html" title="Tag interface for decorator writers." alt="" coords="325,268,505,348"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="407,362,397,411,392,410,402,361"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="219,347,256,406,251,409,214,349"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="529,275,608,341"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="536,343,471,412,469,415,465,411,467,409,532,339"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="503,65,634,145"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="571,159,571,275,566,275,566,159"/>
+<area shape="rect" id="Node000008" href="$structkcenon_1_1logger_1_1async__writer__tag.html" title="Tag interface for asynchronous writers." alt="" coords="481,541,637,621"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="571,634,604,813,599,814,566,635"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="661,548,745,613"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="700,614,665,798,660,797,695,613"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="771,548,916,613"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="841,614,822,696,806,744,786,791,764,827,738,862,734,859,759,824,781,788,801,742,817,695,836,613"/>
+</map>

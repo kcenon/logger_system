@@ -1,0 +1,9 @@
+<map id="kcenon::logger::scoped_context_guard::set_request" name="kcenon::logger::scoped_context_guard::set_request">
+<area shape="rect" id="Node000001" title="Set request context." alt="" coords="5,69,212,109"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#ae830b3970289b394d60144e2b7eda193" title=" " alt="" coords="273,5,440,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,67,265,46,266,51,188,72"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1unified__log__context.html#a4e8a40accfd926bff23f22625dadc4f9" title="Set request context." alt="" coords="262,69,451,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,87,248,87,248,92,212,92"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#aef59eabdc7cadf6eb99f3fe5b60a6293" title="Track a key as added or overridden." alt="" coords="260,133,453,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="188,107,266,127,265,132,186,112"/>
+</map>

@@ -1,0 +1,24 @@
+<map id="include/kcenon/logger/interfaces/output_sink_interface.h" name="include/kcenon/logger/interfaces/output_sink_interface.h">
+<area shape="rect" id="Node000001" title="Interface for log output destinations (Single Responsibility Principle) kcenon." alt="" coords="156,5,326,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="192,196,250,221"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,41,118,49,79,62,45,82,17,109,8,129,13,146,29,160,53,173,116,191,178,200,178,206,115,196,51,178,26,165,9,149,3,129,12,107,41,77,77,57,116,43,155,36"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="27,115,124,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="196,62,109,111,107,106,193,58"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="149,115,226,141"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="228,62,204,104,199,102,224,59"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="251,115,338,141"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="259,59,283,102,279,104,254,62"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="362,108,550,148"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="303,58,401,100,399,105,300,63"/>
+<area shape="rect" id="Node000007" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="574,108,721,148"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="327,51,562,104,561,110,326,56"/>
+<area shape="poly" id="edge7_Node000007_Node000002" title=" " alt="" coords="575,148,563,151,265,203,264,198,562,145,574,143"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="460,196,547,221"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="615,150,538,192,536,187,612,146"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="571,196,631,221"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="639,150,617,185,613,183,634,147"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="656,196,730,221"/>
+<area shape="poly" id="edge10_Node000007_Node000010" title=" " alt="" coords="661,147,682,183,677,185,656,150"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="754,196,834,221"/>
+<area shape="poly" id="edge11_Node000007_Node000011" title=" " alt="" coords="684,146,762,187,759,192,682,150"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="kcenon::logger::source_location" name="kcenon::logger::source_location">
+<area shape="rect" id="Node000001" title="Source code location information for debugging." alt="" coords="97,625,258,725"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1small__string.html" title=" " alt="" coords="5,223,165,563"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,562,159,609,154,610,138,564"/>
+<area shape="rect" id="Node000003" href="$unionkcenon_1_1logger_1_1small__string_1_1data__union.html" title=" " alt="" coords="97,5,255,160"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="156,161,142,207,137,206,151,160"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html" title=" " alt="" coords="189,223,349,563"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="202,160,216,206,211,207,197,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="216,564,201,610,196,609,211,562"/>
+</map>

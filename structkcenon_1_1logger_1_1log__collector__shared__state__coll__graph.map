@@ -1,0 +1,19 @@
+<map id="kcenon::logger::log_collector_shared_state" name="kcenon::logger::log_collector_shared_state">
+<area shape="rect" id="Node000001" title="Shared state for log processing &#45; survives impl destruction." alt="" coords="141,1160,309,1295"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="12,995,159,1075"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,1074,169,1145,164,1148,112,1077"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1log__entry.html" title="Represents a single log entry with all associated metadata." alt="" coords="16,625,155,925"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="88,926,88,979,83,979,83,926"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html" title=" " alt="" coords="5,223,165,563"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="88,563,88,608,83,608,83,563"/>
+<area shape="rect" id="Node000005" href="$unionkcenon_1_1logger_1_1small__string_1_1data__union.html" title=" " alt="" coords="6,5,165,160"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="88,160,88,206,83,206,83,160"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="183,1003,267,1068"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="228,1068,228,1143,223,1143,223,1068"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="291,988,466,1083"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="366,1084,354,1112,338,1138,323,1155,319,1152,334,1134,350,1109,362,1082"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="297,728,461,823"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="381,823,381,972,376,972,376,823"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="289,293,469,493"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="381,493,381,712,376,712,376,493"/>
+</map>

@@ -1,0 +1,25 @@
+<map id="src/impl/memory/object_pool.h" name="src/impl/memory/object_pool.h">
+<area shape="rect" id="Node000001" title="Object pool implementation for high&#45;performance memory management." alt="" coords="415,5,593,45"/>
+<area shape="rect" id="Node000002" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="156,93,303,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="445,48,304,92,302,87,443,43"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="327,101,404,126"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="475,48,397,96,394,91,472,43"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="429,101,491,126"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="497,47,475,89,470,87,492,44"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="516,101,580,126"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="516,44,538,87,533,89,511,47"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="604,101,671,126"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="535,43,609,91,607,95,532,48"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="695,101,758,126"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="557,43,684,91,689,93,687,98,682,96,555,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,181,64,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="184,136,77,179,75,174,182,131"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="89,181,175,207"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="207,136,159,175,155,170,204,131"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="199,181,259,207"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="232,134,232,167,227,167,227,134"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="284,181,359,207"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="253,132,299,170,295,174,250,136"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="383,181,463,207"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="277,131,383,174,381,179,275,136"/>
+</map>

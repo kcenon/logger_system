@@ -1,0 +1,7 @@
+<map id="kcenon::logger::log_context_storage::set" name="kcenon::logger::log_context_storage::set">
+<area shape="rect" id="Node000001" title="Set an integer context field for the current thread." alt="" coords="5,53,168,93"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__context__storage.html#a160e7a0d53035331e93b8713e26c2f0e" title=" " alt="" coords="216,5,379,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,55,202,48,203,53,169,60"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__context__storage.html#aa72d924985d4e4cfb0659227cfd196ed" title=" " alt="" coords="216,84,379,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,85,203,91,202,97,168,90"/>
+</map>

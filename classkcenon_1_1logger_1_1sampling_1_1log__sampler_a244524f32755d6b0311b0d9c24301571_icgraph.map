@@ -1,0 +1,11 @@
+<map id="kcenon::logger::sampling::log_sampler::update_adaptive_rate" name="kcenon::logger::sampling::log_sampler::update_adaptive_rate">
+<area shape="rect" id="Node000001" title="Update adaptive sampling rate based on current throughput." alt="" coords="812,37,1072,77"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#a2cc8f633d762b3360bfb882f86c68df4" title="Perform adaptive sampling decision." alt="" coords="533,37,764,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="798,60,764,60,764,55,798,55"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#adfb1006d2b870d376061654f40f797cd" title="Check if a log entry should be sampled (logged)" alt="" coords="269,5,485,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="519,45,485,41,486,35,520,39"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#ab2df92d525aa3647400d9b7cf42f8398" title="Check if a log entry should be sampled with category." alt="" coords="269,69,485,109"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="520,75,486,79,485,74,519,70"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#ae99926e0ac51e451573590e637c8909e" title="Check if a log entry should be sampled (without category)" alt="" coords="5,5,221,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="256,28,221,28,221,23,256,23"/>
+</map>

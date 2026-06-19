@@ -1,0 +1,5 @@
+<map id="kcenon::logger::async::async_worker::flush" name="kcenon::logger::async::async_worker::flush">
+<area shape="rect" id="Node000001" title="Flush all pending tasks." alt="" coords="5,5,169,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1async__worker.html#a3f7969c002f47d96e4a4fd9abaeb95d6" title="Process all remaining tasks in the queue." alt="" coords="217,5,424,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,23,204,23,204,28,169,28"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="kcenon::logger::otlp::otel_context_storage::clear" name="kcenon::logger::otlp::otel_context_storage::clear">
+<area shape="rect" id="Node000001" title="Clear the OpenTelemetry context for the current thread." alt="" coords="220,5,387,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1otlp_1_1otel__context__scope.html#a3eb5ee1e4aefd69f5108a2e7d093fbee" title="Destructor &#45; restores previous context." alt="" coords="5,5,172,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,35,172,35,172,30,206,30"/>
+</map>

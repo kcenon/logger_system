@@ -1,0 +1,5 @@
+<map id="kcenon::logger::filter_factory::builder::exclude_pattern" name="kcenon::logger::filter_factory::builder::exclude_pattern">
+<area shape="rect" id="Node000001" title="Exclude messages matching pattern." alt="" coords="5,5,192,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1filter__factory.html#af4bec7eb99ee1c059f513dc41cdf5c0f" title="Create a regex filter." alt="" coords="240,13,407,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,30,226,30,226,35,192,35"/>
+</map>

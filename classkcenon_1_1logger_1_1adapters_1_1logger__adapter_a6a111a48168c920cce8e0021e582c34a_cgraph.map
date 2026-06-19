@@ -1,0 +1,9 @@
+<map id="kcenon::logger::adapters::logger_adapter::set_level" name="kcenon::logger::adapters::logger_adapter::set_level">
+<area shape="rect" id="Node000001" title="Set the minimum log level." alt="" coords="5,37,200,77"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger_1_1adapters.html#ae443f525293397314fa2947b282acc74" title=" " alt="" coords="248,5,431,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,42,234,37,235,42,201,47"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1logger.html#a1c613f8eaa6acdd696f28d6b71d6d1ef" title="Set the minimum log level (ILogger interface)" alt="" coords="256,69,423,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="201,68,243,74,242,79,200,73"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="479,77,637,102"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="423,87,465,87,465,92,423,92"/>
+</map>

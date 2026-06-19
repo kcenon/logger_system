@@ -1,0 +1,5 @@
+<map id="kcenon::logger::otlp::otel_context_storage::get" name="kcenon::logger::otlp::otel_context_storage::get">
+<area shape="rect" id="Node000001" title="Get the OpenTelemetry context for the current thread." alt="" coords="204,5,400,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1otlp__writer.html#aeecdba82f0f69df14a41c4b4969c6c6b" title="Write a log entry with OTEL context." alt="" coords="5,5,156,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,28,157,28,157,23,190,23"/>
+</map>

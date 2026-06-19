@@ -1,0 +1,11 @@
+<map id="kcenon::logger::thread_safe_writer" name="kcenon::logger::thread_safe_writer">
+<area shape="rect" id="Node000001" title="Base class providing automatic thread&#45;safety for writer implementations." alt="" coords="113,581,285,861"/>
+<area shape="rect" id="Node000004" href="$classcounted__console__writer.html" title="A console writer that counts messages per log level." alt="" coords="5,909,199,1095"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="149,875,137,910,131,908,144,874"/>
+<area shape="rect" id="Node000005" href="$classmemory__writer.html" title="A custom writer that stores log entries in memory." alt="" coords="223,909,373,1095"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="256,874,268,908,263,910,251,875"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1base__writer.html" title="Abstract base class for all log output writers." alt="" coords="124,253,275,533"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,547,202,581,197,581,197,547"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="109,5,289,205"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="202,219,202,253,197,253,197,219"/>
+</map>

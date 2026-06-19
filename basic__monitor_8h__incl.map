@@ -1,0 +1,38 @@
+<map id="src/impl/monitoring/basic_monitor.h" name="src/impl/monitoring/basic_monitor.h">
+<area shape="rect" id="Node000001" title="Basic monitoring implementation with no external dependencies." alt="" coords="449,5,598,45"/>
+<area shape="rect" id="Node000002" href="$monitoring__interface_8h.html" title="Abstract interface for monitoring and metrics collection." alt="" coords="265,93,435,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="483,48,389,90,387,85,481,43"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,174,129,199"/>
+<area shape="poly" id="edge17_Node000001_Node000004" title=" " alt="" coords="449,39,340,60,280,76,222,96,152,131,95,168,92,164,149,127,220,91,278,71,339,55,448,34"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="153,174,216,199"/>
+<area shape="poly" id="edge16_Node000001_Node000005" title=" " alt="" coords="449,34,402,41,352,53,301,71,254,96,237,110,221,127,199,163,194,160,217,124,233,106,251,91,299,66,350,48,401,36,448,29"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="462,174,529,199"/>
+<area shape="poly" id="edge18_Node000001_Node000006" title=" " alt="" coords="520,46,507,94,499,161,494,160,502,93,514,45"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="553,174,619,199"/>
+<area shape="poly" id="edge15_Node000001_Node000007" title=" " alt="" coords="530,45,538,79,551,118,574,161,569,164,546,120,533,81,525,46"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="561,93,625,119"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="542,44,575,81,571,84,538,47"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="649,93,726,119"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="564,43,652,85,650,90,561,48"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="750,93,835,119"/>
+<area shape="poly" id="edge19_Node000001_Node000015" title=" " alt="" coords="589,43,741,87,740,92,587,48"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="859,93,926,119"/>
+<area shape="poly" id="edge20_Node000001_Node000016" title=" " alt="" coords="599,39,847,91,845,96,598,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="179,255,238,280"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="335,121,309,142,281,168,250,207,225,244,221,241,246,204,277,165,306,138,332,117"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="310,121,122,173,121,168,308,116"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="327,121,222,171,220,166,325,116"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="373,116,463,165,461,170,370,121"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="391,116,542,164,547,166,546,171,540,169,389,121"/>
+<area shape="rect" id="Node000008" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="291,167,438,207"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="355,118,361,153,356,154,350,119"/>
+<area shape="poly" id="edge8_Node000008_Node000003" title=" " alt="" coords="328,209,245,251,243,246,326,204"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="367,255,453,280"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="378,206,399,241,394,244,373,208"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="477,255,537,280"/>
+<area shape="poly" id="edge10_Node000008_Node000010" title=" " alt="" coords="400,204,476,246,473,250,398,209"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="562,255,637,280"/>
+<area shape="poly" id="edge11_Node000008_Node000011" title=" " alt="" coords="422,204,553,248,551,253,420,209"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="262,255,342,280"/>
+<area shape="poly" id="edge12_Node000008_Node000012" title=" " alt="" coords="352,209,322,245,318,242,347,205"/>
+</map>

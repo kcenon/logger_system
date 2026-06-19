@@ -1,0 +1,9 @@
+<map id="kcenon::logger::base_writer::use_color" name="kcenon::logger::base_writer::use_color">
+<area shape="rect" id="Node000001" title="Get current color output setting." alt="" coords="247,85,404,125"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a1373869a349a458049c04845bcee01e0" title="Set whether to use color output." alt="" coords="5,5,199,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="249,83,186,63,188,57,250,78"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1hybrid__writer.html#ae9c96b92fcdc976cff891455b9175b07" title="Set whether to use color output (if supported)" alt="" coords="19,85,185,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="233,107,186,107,186,102,233,102"/>
+<area shape="rect" id="Node000004" href="$classcounted__console__writer.html#a3a2b90dd22598f4325afa313a55aefb9" title="Implementation of structured write operation (override in derived classes)" alt="" coords="14,149,190,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="242,131,173,151,172,146,241,126"/>
+</map>

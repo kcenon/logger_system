@@ -1,0 +1,11 @@
+<map id="kcenon::logger::base_formatter" name="kcenon::logger::base_formatter">
+<area shape="rect" id="Node000001" title="Base implementation for log formatters." alt="" coords="197,213,359,373"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1compact__formatter.html" title="Compact formatter for minimal output." alt="" coords="5,471,180,571"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="207,386,135,473,131,469,203,382"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1json__formatter.html" title="JSON formatter for structured logging." alt="" coords="205,421,351,621"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="281,387,281,421,275,421,275,387"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1plain__formatter.html" title="Simple plain text formatter." alt="" coords="376,471,527,571"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="349,383,416,469,412,473,345,386"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__formatter__interface.html" title="Abstract interface for log message formatters." alt="" coords="176,5,380,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="281,179,281,213,275,213,275,179"/>
+</map>

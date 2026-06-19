@@ -1,0 +1,5 @@
+<map id="kcenon::logger::safety::crash_safe_logger::start_auto_flush_thread" name="kcenon::logger::safety::crash_safe_logger::start_auto_flush_thread">
+<area shape="rect" id="Node000001" title="Start auto&#45;flush background thread." alt="" coords="5,5,192,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1safety_1_1crash__safe__logger.html#a0b0b2e16368852fc502ba12eab37bf91" title="Flush with timeout to prevent deadlocks." alt="" coords="240,5,427,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,30,226,30,226,35,192,35"/>
+</map>

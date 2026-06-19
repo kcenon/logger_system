@@ -1,0 +1,37 @@
+<map id="include/kcenon/logger/security/integrity_policy.h" name="include/kcenon/logger/security/integrity_policy.h">
+<area shape="rect" id="Node000001" title="Tamper&#45;evident log signing policies for writers." alt="" coords="398,5,591,45"/>
+<area shape="rect" id="Node000002" href="$secure__key__storage_8h.html" title="RAII wrapper for encryption keys with secure memory management." alt="" coords="336,93,507,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="480,47,448,85,444,81,476,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,269,64,295"/>
+<area shape="poly" id="edge17_Node000001_Node000004" title=" " alt="" coords="398,40,258,62,196,77,153,96,114,132,83,176,60,220,45,257,40,255,55,218,78,173,110,128,151,91,194,72,257,56,397,34"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="89,269,149,295"/>
+<area shape="poly" id="edge18_Node000001_Node000006" title=" " alt="" coords="399,38,324,54,245,81,207,100,171,123,139,150,113,183,106,200,104,219,111,256,106,257,99,219,101,199,108,180,136,147,168,118,204,95,243,76,323,48,397,33"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="531,101,605,126"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="513,44,551,88,547,91,509,47"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="629,101,707,126"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="534,43,634,92,632,97,532,48"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="731,101,805,126"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="563,43,719,91,727,93,725,98,718,96,561,48"/>
+<area shape="rect" id="Node000003" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="219,181,365,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="394,136,334,176,331,171,391,131"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="390,189,453,214"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="424,134,424,175,419,175,419,134"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="477,189,544,214"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="443,132,490,177,487,181,439,136"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="568,189,659,214"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="465,131,576,181,574,186,462,136"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="683,189,757,214"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="500,131,671,179,679,181,678,186,670,184,499,136"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="781,189,848,214"/>
+<area shape="poly" id="edge12_Node000002_Node000013" title=" " alt="" coords="507,128,519,131,645,151,701,161,770,179,778,181,776,186,769,184,699,166,645,156,518,136,506,134"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="123,189,195,214"/>
+<area shape="poly" id="edge13_Node000002_Node000014" title=" " alt="" coords="358,136,208,184,201,186,199,181,206,179,356,131"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="231,224,78,270,77,265,230,219"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="173,269,259,295"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="276,223,239,261,235,257,272,220"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="252,224,158,266,156,261,249,219"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="284,269,359,295"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="302,221,315,255,310,257,297,222"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="383,269,463,295"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="325,219,393,260,390,264,322,224"/>
+</map>

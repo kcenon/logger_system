@@ -1,0 +1,14 @@
+<map id="kcenon::logger::log_collector_jthread_worker::start" name="kcenon::logger::log_collector_jthread_worker::start">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,195,118"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__collector__jthread__worker.html#a2a79eec5120723c8a82acf7517bcaa2d" title=" " alt="" coords="480,37,705,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,82,466,63,467,68,195,87"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1log__collector__jthread__worker.html#a16084e389b08a00008d30d74a39f73f5" title=" " alt="" coords="243,95,432,150"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="195,101,229,105,229,111,194,106"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a90bd0e17804555e24d4f86fe20c8497a" title="Wait for thread to complete." alt="" coords="783,5,947,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="705,41,769,34,770,39,706,47"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a815d60b193847e48d48b5e2724957668" title="Request the thread to stop." alt="" coords="753,69,977,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="706,68,740,72,740,77,705,73"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="431,96,500,78,501,83,433,101"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1log__collector__jthread__worker.html#acda68391f774d8a076b947d5e64b8302" title=" " alt="" coords="498,102,687,157"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="432,122,484,124,484,129,432,128"/>
+</map>

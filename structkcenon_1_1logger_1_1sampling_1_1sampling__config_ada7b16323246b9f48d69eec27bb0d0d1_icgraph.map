@@ -1,0 +1,5 @@
+<map id="kcenon::logger::sampling::sampling_config::disabled" name="kcenon::logger::sampling::sampling_config::disabled">
+<area shape="rect" id="Node000001" title="Create a default sampling configuration (disabled)" alt="" coords="240,13,439,53"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1sampling_1_1sampler__factory.html#a5a0b8b3b53fde8e936b77fe3a34d9278" title="Create a disabled sampler (pass&#45;through)" alt="" coords="5,5,192,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,35,192,35,192,30,226,30"/>
+</map>

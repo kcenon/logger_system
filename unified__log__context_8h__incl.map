@@ -1,0 +1,49 @@
+<map id="include/kcenon/logger/core/unified_log_context.h" name="include/kcenon/logger/core/unified_log_context.h">
+<area shape="rect" id="Node000001" title="Unified interface for managing all types of logging context." alt="" coords="700,5,897,45"/>
+<area shape="rect" id="Node000002" href="$log__entry_8h.html" title="Data structures for representing log entries and source locations kcenon." alt="" coords="391,93,574,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="730,48,566,92,564,87,729,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="436,269,495,295"/>
+<area shape="poly" id="edge24_Node000001_Node000003" title=" " alt="" coords="802,45,802,83,796,131,780,180,767,203,750,223,732,235,707,245,642,261,509,280,508,274,641,256,705,240,730,230,746,219,762,200,775,178,790,130,797,82,797,45"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,269,80,295"/>
+<area shape="poly" id="edge22_Node000001_Node000005" title=" " alt="" coords="700,30,559,35,396,46,246,65,186,79,141,96,114,113,96,131,66,182,53,220,47,256,42,255,48,219,62,180,91,127,110,109,139,91,184,74,245,60,395,41,558,30,700,25"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="105,269,229,295"/>
+<area shape="poly" id="edge26_Node000001_Node000006" title=" " alt="" coords="700,34,536,48,441,59,346,75,256,94,178,118,116,148,94,165,78,183,72,201,78,220,98,244,124,261,121,266,95,248,74,223,66,201,74,180,90,161,113,143,176,114,255,89,345,69,440,54,535,42,700,29"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="994,189,1062,214"/>
+<area shape="poly" id="edge27_Node000001_Node000007" title=" " alt="" coords="825,43,1003,178,1000,182,822,48"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1055,269,1153,295"/>
+<area shape="poly" id="edge25_Node000001_Node000011" title=" " alt="" coords="863,43,915,64,973,93,1029,131,1055,154,1077,180,1096,217,1104,255,1099,256,1091,219,1072,183,1051,158,1026,136,970,98,913,69,861,48"/>
+<area shape="rect" id="Node000016" href="$otel__context_8h.html" title="OpenTelemetry context structure for trace correlation kcenon." alt="" coords="89,181,231,221"/>
+<area shape="poly" id="edge21_Node000001_Node000016" title=" " alt="" coords="700,37,547,57,462,74,379,96,331,114,284,135,204,177,202,172,282,130,329,109,378,91,461,68,546,52,699,31"/>
+<area shape="rect" id="Node000017" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="1075,93,1234,133"/>
+<area shape="poly" id="edge20_Node000001_Node000017" title=" " alt="" coords="877,43,1064,88,1063,93,876,48"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="1259,101,1373,126"/>
+<area shape="poly" id="edge23_Node000001_Node000018" title=" " alt="" coords="898,35,1062,58,1247,91,1264,95,1263,100,1246,96,1061,63,897,41"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="1398,101,1461,126"/>
+<area shape="poly" id="edge28_Node000001_Node000019" title=" " alt="" coords="898,27,1000,33,1123,44,1256,63,1386,91,1394,93,1392,98,1385,96,1255,68,1123,49,1000,38,898,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="409,136,375,155,360,168,348,183,341,201,348,220,362,237,381,251,424,269,421,274,379,256,359,241,343,223,336,201,343,180,356,164,371,150,407,131"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="669,189,736,214"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="534,131,658,179,664,181,662,186,656,184,532,136"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="391,122,304,129,212,140,131,158,100,170,78,183,64,199,55,218,47,256,41,255,50,216,60,196,74,179,97,165,129,153,211,135,304,123,391,116"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="438,136,335,184,260,226,197,264,194,260,257,221,332,179,436,131"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="575,117,765,137,875,154,983,179,991,181,990,186,982,184,874,160,764,142,574,122"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="357,189,424,214"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="464,136,415,181,412,177,460,132"/>
+<area shape="rect" id="Node000009" href="$small__string_8h.html" title="Small String Optimization (SSO) for short log messages." alt="" coords="811,189,970,214"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="573,131,824,183,823,188,572,136"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="447,181,646,221"/>
+<area shape="poly" id="edge15_Node000002_Node000015" title=" " alt="" coords="499,132,526,168,522,172,495,135"/>
+<area shape="poly" id="edge16_Node000002_Node000016" title=" " alt="" coords="413,136,244,180,243,175,411,131"/>
+<area shape="poly" id="edge10_Node000009_Node000003" title=" " alt="" coords="831,217,792,224,509,276,508,270,792,219,830,211"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="753,269,820,295"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="877,216,814,263,811,259,874,212"/>
+<area shape="poly" id="edge11_Node000009_Node000011" title=" " alt="" coords="923,212,1061,262,1059,267,921,217"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="844,269,929,295"/>
+<area shape="poly" id="edge12_Node000009_Node000012" title=" " alt="" coords="893,214,891,256,885,255,887,214"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="953,269,1031,295"/>
+<area shape="poly" id="edge13_Node000009_Node000013" title=" " alt="" coords="907,212,968,259,964,263,904,216"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="669,269,729,295"/>
+<area shape="poly" id="edge14_Node000009_Node000014" title=" " alt="" coords="864,216,740,267,738,262,862,212"/>
+<area shape="poly" id="edge17_Node000016_Node000003" title=" " alt="" coords="232,218,423,267,422,272,231,224"/>
+<area shape="poly" id="edge18_Node000016_Node000005" title=" " alt="" coords="133,224,73,264,70,260,130,219"/>
+<area shape="poly" id="edge19_Node000016_Node000006" title=" " alt="" coords="164,221,167,255,162,256,159,222"/>
+</map>
