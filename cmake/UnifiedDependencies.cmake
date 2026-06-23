@@ -365,8 +365,21 @@ macro(_unified_resolve_local DEP_NAME IS_REQUIRED)
             set(USE_UNIT_TEST OFF CACHE BOOL "" FORCE)
         endif()
 
+        # Isolate CMAKE_MODULE_PATH for the dependency's own configure. A
+        # source-built dependency (e.g. common_system) uses bare
+        # include(<module>) for its template modules (options, dependencies,
+        # targets, ...). Without isolation those resolve to THIS project's
+        # same-named modules inherited via CMAKE_MODULE_PATH, cross-wiring the
+        # dependency's build to the consumer's CMake logic (e.g. consuming the
+        # consumer's targets.cmake, which checks for the consumer's include
+        # tree). The dependency re-populates the path from its own CMakeLists,
+        # so empty-and-restore lets each side resolve its own modules. CMake
+        # builtin modules live in CMAKE_ROOT and are unaffected.
+        set(_unified_saved_module_path "${CMAKE_MODULE_PATH}")
+        set(CMAKE_MODULE_PATH "")
         # Use EXCLUDE_FROM_ALL to prevent installation of local dependencies
         add_subdirectory("${_local_path}" "${CMAKE_BINARY_DIR}/_local/${DEP_NAME}" EXCLUDE_FROM_ALL)
+        set(CMAKE_MODULE_PATH "${_unified_saved_module_path}")
 
         # Post-load handling
         if(${DEP_NAME} STREQUAL "logger_system")
