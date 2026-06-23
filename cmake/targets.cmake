@@ -304,6 +304,19 @@ else()
 endif()
 
 ##################################################
+# OpenSSL for HMAC integrity policy (rotating_file_writer)
+##################################################
+# rotating_file_writer's hmac_sha256_integrity_policy uses OpenSSL EVP_MAC
+# unconditionally (independent of LOGGER_USE_ENCRYPTION). Link libcrypto
+# whenever OpenSSL is available so those symbols resolve, and link it PUBLIC so
+# downstream consumers (e.g. network_system tests) pick up libcrypto with the
+# correct link order (after liblogger).
+find_package(OpenSSL QUIET)
+if(OpenSSL_FOUND)
+    target_link_libraries(logger_system PUBLIC OpenSSL::Crypto)
+endif()
+
+##################################################
 # OpenSSL (encryption)
 ##################################################
 if(LOGGER_USE_ENCRYPTION)
