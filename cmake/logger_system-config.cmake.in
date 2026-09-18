@@ -10,6 +10,11 @@ include(CMakeFindDependencyMacro)
 
 # Find required dependencies
 find_dependency(Threads REQUIRED)
+# rotating_file_writer uses libcrypto even when encryption writers are disabled.
+find_dependency(OpenSSL REQUIRED COMPONENTS Crypto)
+if(@LOGGER_USE_COMPRESSION@)
+    find_dependency(ZLIB REQUIRED)
+endif()
 
 # common_system is required for Result<T>, ILogger, and shared interfaces
 set(logger_system_BUILD_WITH_COMMON_SYSTEM @BUILD_WITH_COMMON_SYSTEM@)
@@ -33,7 +38,10 @@ endif()
 
 # Set variables for compatibility
 set(logger_system_FOUND TRUE)
-set(logger_system_LIBRARIES logger_system::logger_system)
+if(TARGET logger_system::logger AND NOT TARGET logger_system::logger_system)
+    add_library(logger_system::logger_system ALIAS logger_system::logger)
+endif()
+set(logger_system_LIBRARIES logger_system::logger)
 
 # Provide the features that were enabled during build
 set(logger_system_USE_DI @LOGGER_USE_DI@)

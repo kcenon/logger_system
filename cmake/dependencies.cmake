@@ -117,7 +117,7 @@ function(logger_find_test_dependencies)
         FetchContent_Declare(
             googletest
             GIT_REPOSITORY https://github.com/google/googletest.git
-            GIT_TAG v1.14.0
+            GIT_TAG v1.17.0
         )
 
         FetchContent_MakeAvailable(googletest)
@@ -161,7 +161,7 @@ function(logger_find_benchmark_dependencies)
         FetchContent_Declare(
             googlebenchmark
             GIT_REPOSITORY https://github.com/google/benchmark.git
-            GIT_TAG v1.8.3
+            GIT_TAG v1.9.5
         )
 
         # Use the same pattern as GoogleTest for consistency
@@ -183,6 +183,7 @@ function(logger_resolve_thread_system)
         unified_find_dependency(thread_system QUIET)
         if(thread_system_FOUND)
             set(THREAD_SYSTEM_FOUND TRUE PARENT_SCOPE)
+            set(thread_system_TARGET "${thread_system_TARGET}" PARENT_SCOPE)
             message(STATUS "Logger System: thread_system integration enabled")
             message(STATUS "  Direction: logger_system -> thread_system (using thread_pool for async I/O)")
         else()
