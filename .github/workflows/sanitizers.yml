@@ -80,7 +80,7 @@ jobs:
           -DCMAKE_SHARED_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }}" \
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_SAMPLES=OFF \
-          -DBUILD_WITH_COMMON_SYSTEM=ON \
+          -DKCENON_WITH_COMMON_SYSTEM=ON \
           -DUNIFIED_USE_LOCAL=ON \
           -DUSE_THREAD_SYSTEM=ON || {
             echo "::error::CMake configuration failed"

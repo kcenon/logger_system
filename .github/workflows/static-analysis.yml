@@ -45,7 +45,7 @@ jobs:
           -DCMAKE_CXX_COMPILER=clang++ \
           -DCMAKE_C_COMPILER=clang \
           -DCMAKE_CXX_FLAGS="-stdlib=libc++" \
-          -DBUILD_WITH_COMMON_SYSTEM=ON \
+          -DKCENON_WITH_COMMON_SYSTEM=ON \
           -DLOGGER_BUILD_TESTS=OFF \
           -DLOGGER_BUILD_BENCHMARKS=OFF \
           -DLOGGER_BUILD_SAMPLES=OFF

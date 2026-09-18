@@ -1,3 +1,11 @@
+include("${CMAKE_CURRENT_LIST_DIR}/KcenonDependencyOptions.cmake")
+
+kcenon_dependency_option(KCENON_WITH_COMMON_SYSTEM BUILD_WITH_COMMON_SYSTEM
+    "Required common_system integration" ON)
+if(NOT KCENON_WITH_COMMON_SYSTEM)
+    message(FATAL_ERROR "common_system is required")
+endif()
+
 # options.cmake -- Build options, feature flags, and version variables for Logger System
 #
 # Inputs:
@@ -97,7 +105,8 @@ option(LOGGER_ENABLE_FILE_ROTATION "Enable file rotation support" ON)
 option(LOGGER_ENABLE_ASYNC "Enable asynchronous logging" ON)
 
 # thread_system is now OPTIONAL (Issue #222, #224)
-option(LOGGER_USE_THREAD_SYSTEM "Enable optional thread_system integration" OFF)
+kcenon_dependency_option(KCENON_WITH_THREAD_SYSTEM LOGGER_USE_THREAD_SYSTEM
+    "Enable optional thread_system integration" OFF)
 
 # Performance tuning options
 set(LOGGER_DEFAULT_BUFFER_SIZE "8192" CACHE STRING "Default buffer size in bytes")
