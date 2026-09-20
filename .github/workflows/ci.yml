@@ -286,14 +286,20 @@ jobs:
       matrix:
         sanitizer:
           - name: ThreadSanitizer
+            cc: gcc
+            cxx: g++
             flags: "-fsanitize=thread -g -O1"
             env: "TSAN_OPTIONS=second_deadlock_stack=1"
           - name: AddressSanitizer
+            cc: gcc
+            cxx: g++
             flags: "-fsanitize=address -fno-omit-frame-pointer -g -O1"
             env: "ASAN_OPTIONS=detect_leaks=1:strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1"
           - name: UndefinedBehaviorSanitizer
-            # Avoid the long GCC -O1 compilation of the thread metrics exporter.
-            flags: "-fsanitize=undefined -fno-omit-frame-pointer -g -O0"
+            # GCC UBSan stalls while compiling thread_system's metrics exporter.
+            cc: clang
+            cxx: clang++
+            flags: "-fsanitize=undefined -fno-omit-frame-pointer -g -O1"
             env: "UBSAN_OPTIONS=print_stacktrace=1:halt_on_error=1"
 
     steps:
@@ -325,18 +331,15 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        # Ubuntu 24.04 has GCC 14 by default - full C++20 support
-        sudo apt install -y cmake build-essential ninja-build
+        sudo apt install -y cmake build-essential ninja-build clang
 
         # Verify compiler
-        echo "=== GCC Version ==="
-        gcc --version | head -1
+        ${{ matrix.sanitizer.cc }} --version | head -1
 
     - name: Configure CMake with ${{ matrix.sanitizer.name }}
       run: |
         mkdir -p build
         cd build
-        # Ubuntu 24.04 GCC 14 has full C++20 support including std::jthread
         SANITIZER_FLAGS="${{ matrix.sanitizer.flags }}"
         cmake .. \
           -G Ninja \
@@ -345,8 +348,8 @@ jobs:
           -DLOGGER_STANDALONE_MODE=ON \
           -DLOGGER_USE_THREAD_SYSTEM=ON \
           -DUNIFIED_USE_LOCAL=ON \
-          -DCMAKE_C_COMPILER=gcc \
-          -DCMAKE_CXX_COMPILER=g++ \
+          -DCMAKE_C_COMPILER=${{ matrix.sanitizer.cc }} \
+          -DCMAKE_CXX_COMPILER=${{ matrix.sanitizer.cxx }} \
           -DCMAKE_C_FLAGS="${SANITIZER_FLAGS}" \
           -DCMAKE_CXX_FLAGS="${SANITIZER_FLAGS}" \
           -DCMAKE_EXE_LINKER_FLAGS="${SANITIZER_FLAGS}" \
