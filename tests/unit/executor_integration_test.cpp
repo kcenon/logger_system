@@ -190,6 +190,7 @@ TEST_F(ExecutorIntegrationTest, SubmitTaskWithEnabledExecutor) {
         std::this_thread::yield();
     }
 
+    executor_integration::get_executor()->shutdown(true);
     EXPECT_TRUE(executed) << "Task should be executed by executor";
 }
 
@@ -210,11 +211,9 @@ TEST_F(ExecutorIntegrationTest, SubmitMultipleTasks) {
         EXPECT_TRUE(submitted);
     }
 
-    // Wait for all tasks to complete
-    auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(10);
-    while (counter.load() < num_tasks && std::chrono::steady_clock::now() < deadline) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    }
+    // Join before captured stack variables die; observing a relaxed counter
+    // alone does not synchronize its lifetime with the worker.
+    executor_integration::get_executor()->shutdown(true);
 
     EXPECT_EQ(counter.load(), num_tasks) << "All tasks should be executed";
 }
@@ -244,6 +243,7 @@ TEST_F(ExecutorIntegrationTest, SubmitDelayedTask) {
 
     auto elapsed = std::chrono::steady_clock::now() - start;
 
+    executor_integration::get_executor()->shutdown(true);
     EXPECT_TRUE(executed) << "Delayed task should be executed";
     EXPECT_GE(elapsed, std::chrono::milliseconds(90))
         << "Task should be delayed by approximately the specified duration";
@@ -396,12 +396,9 @@ TEST_F(ExecutorIntegrationTest, ConcurrentTaskSubmission) {
         thread.join();
     }
 
-    // Wait for all tasks to complete
-    auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(10);
+    // Join the executor as well as the producers before destroying counter.
+    executor_integration::get_executor()->shutdown(true);
     const int total_tasks = num_threads * tasks_per_thread;
-    while (counter.load() < total_tasks && std::chrono::steady_clock::now() < deadline) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    }
 
     EXPECT_EQ(counter.load(), total_tasks) << "All concurrently submitted tasks should complete";
 }

@@ -200,6 +200,7 @@ TEST_F(ThreadSystemIntegrationModuleTest, SubmitTaskWithEnabledBackend) {
         std::this_thread::yield();
     }
 
+    thread_system_integration::get_thread_pool()->stop();
     EXPECT_TRUE(executed) << "Task should be executed by thread_pool";
 }
 
@@ -225,6 +226,8 @@ TEST_F(ThreadSystemIntegrationModuleTest, SubmitMultipleTasks) {
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
 
+    // Join before captured locals die, including relaxed atomic counters.
+    thread_system_integration::get_thread_pool()->stop();
     EXPECT_EQ(counter.load(), num_tasks) << "All tasks should be executed";
 }
 
@@ -309,6 +312,8 @@ TEST_F(ThreadSystemIntegrationModuleTest, BackendSwitchingDoesNotLoseTasks) {
            std::chrono::steady_clock::now() < deadline) {
         std::this_thread::yield();
     }
+
+    thread_system_integration::get_thread_pool()->stop();
 
     // Note: Some tasks from before the switch may be lost if pool was stopped
     // This is expected behavior - we verify at least the post-switch tasks complete
