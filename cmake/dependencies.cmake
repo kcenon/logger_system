@@ -19,7 +19,7 @@
 ##################################################
 # Unified dependency management
 ##################################################
-include(UnifiedDependencies)
+include("${CMAKE_CURRENT_LIST_DIR}/UnifiedDependencies.cmake")
 
 # Default common_system integration to ON; UnifiedDependencies overrides on success.
 # This ensures testing.cmake's BUILD_WITH_COMMON_SYSTEM gate is well-defined even

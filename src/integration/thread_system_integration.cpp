@@ -36,7 +36,9 @@ void thread_system_integration::enable(std::shared_ptr<kcenon::thread::thread_po
         thread_pool_ = create_default_pool();
     }
 
-    current_backend_.store(async_backend_type::thread_pool, std::memory_order_release);
+    current_backend_.store(thread_pool_ ? async_backend_type::thread_pool
+                                       : async_backend_type::standalone,
+                           std::memory_order_release);
 }
 
 void thread_system_integration::disable() {
@@ -110,6 +112,12 @@ std::shared_ptr<kcenon::thread::thread_pool> thread_system_integration::create_d
     auto pool = std::make_shared<kcenon::thread::thread_pool>(
         "logger_async_pool"
     );
+
+    // thread_pool starts empty; it needs a worker before start() can succeed.
+    auto added = pool->enqueue(std::make_unique<kcenon::thread::thread_worker>());
+    if (!added.is_ok()) {
+        return nullptr;
+    }
 
     // Start the pool
     auto result = pool->start();

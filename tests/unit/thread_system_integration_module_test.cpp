@@ -118,7 +118,7 @@ TEST_F(ThreadSystemIntegrationModuleTest, EnableWithDefaultPool) {
         << "Backend name should be 'thread_pool' after enable()";
 
     auto pool = thread_system_integration::get_thread_pool();
-    EXPECT_NE(pool, nullptr) << "Default thread pool should be created";
+    ASSERT_NE(pool, nullptr) << "Default thread pool should be created";
     EXPECT_TRUE(pool->is_running()) << "Default thread pool should be running";
 }
 
@@ -144,6 +144,7 @@ TEST_F(ThreadSystemIntegrationModuleTest, DisableAfterEnable) {
  */
 TEST_F(ThreadSystemIntegrationModuleTest, EnableWithCustomPool) {
     auto custom_pool = std::make_shared<kcenon::thread::thread_pool>("custom_test_pool");
+    ASSERT_TRUE(custom_pool->enqueue(std::make_unique<kcenon::thread::thread_worker>()).is_ok());
     auto start_result = custom_pool->start();
     ASSERT_TRUE(start_result.is_ok()) << "Custom pool should start successfully";
 
@@ -161,6 +162,7 @@ TEST_F(ThreadSystemIntegrationModuleTest, EnableWithCustomPool) {
  */
 TEST_F(ThreadSystemIntegrationModuleTest, SetThreadPool) {
     auto pool = std::make_shared<kcenon::thread::thread_pool>("set_pool_test");
+    ASSERT_TRUE(pool->enqueue(std::make_unique<kcenon::thread::thread_worker>()).is_ok());
     auto start_result = pool->start();
     ASSERT_TRUE(start_result.is_ok());
 
@@ -245,14 +247,11 @@ TEST_F(ThreadSystemIntegrationModuleTest, ThreadSafetyOfEnableDisable) {
                         std::this_thread::yield();
                         thread_system_integration::disable();
                     } else {
-                        // Check state consistency
-                        bool enabled = thread_system_integration::is_enabled();
+                        // Concurrent enable/disable can occur between separate
+                        // reads. Validate one snapshot instead of comparing two.
                         auto backend = thread_system_integration::get_backend();
-
-                        if (enabled && backend != async_backend_type::thread_pool) {
-                            errors.fetch_add(1);
-                        }
-                        if (!enabled && backend != async_backend_type::standalone) {
+                        if (backend != async_backend_type::thread_pool &&
+                            backend != async_backend_type::standalone) {
                             errors.fetch_add(1);
                         }
                     }
@@ -268,6 +267,10 @@ TEST_F(ThreadSystemIntegrationModuleTest, ThreadSafetyOfEnableDisable) {
     }
 
     EXPECT_EQ(errors.load(), 0) << "No errors should occur during concurrent enable/disable";
+    thread_system_integration::disable();
+    EXPECT_FALSE(thread_system_integration::is_enabled());
+    EXPECT_EQ(thread_system_integration::get_backend(), async_backend_type::standalone);
+    EXPECT_EQ(thread_system_integration::get_thread_pool(), nullptr);
 }
 
 /**

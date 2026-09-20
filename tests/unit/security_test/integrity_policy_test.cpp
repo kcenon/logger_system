@@ -211,6 +211,7 @@ TEST(ConsoleWriterIntegrityTest, RoundTripOnStdout) {
 
     console_writer writer(/*use_stderr=*/false,
                           /*auto_detect_color=*/false);
+    writer.set_use_color(false);
     writer.set_integrity_policy(policy);
 
     testing::internal::CaptureStdout();
