@@ -220,6 +220,7 @@ jobs:
           -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
           -DLOGGER_STANDALONE_MODE=ON \
           -DLOGGER_USE_THREAD_SYSTEM=ON \
+          -DLOGGER_BUILD_INTEGRATION_TESTS=OFF \
           -DUNIFIED_USE_LOCAL=ON \
           -DCMAKE_C_COMPILER=$C_COMPILER \
           -DCMAKE_CXX_COMPILER=$CXX_COMPILER
@@ -253,24 +254,18 @@ jobs:
 
         cmake --build . --config $env:BUILD_TYPE --parallel
 
-    - name: Run minimal test (fallback - Unix)
+    - name: Run tests (fallback - Unix)
       if: runner.os != 'Windows' && steps.build_vcpkg_unix.outcome != 'success'
       run: |
         cd build
-        if [ -f "bin/logger_unit" ]; then
-          ./bin/logger_unit --gtest_filter="*BasicTest*" || true
-        fi
-        echo "Build completed with system libraries"
+        ctest --output-on-failure --no-tests=error -E "(integration_test|compatibility_test)"
 
-    - name: Run minimal test (fallback - Windows)
+    - name: Run tests (fallback - Windows)
       if: runner.os == 'Windows' && steps.build_vcpkg_windows.outcome != 'success'
       shell: pwsh
       run: |
         cd build
-        if (Test-Path "bin\$env:BUILD_TYPE\logger_unit.exe") {
-          .\bin\$env:BUILD_TYPE\logger_unit.exe --gtest_filter="*BasicTest*"
-        }
-        Write-Host "Build completed with system libraries"
+        ctest -C $env:BUILD_TYPE --output-on-failure --no-tests=error -E "(integration_test|compatibility_test)"
 
     - name: Upload test results
       if: always()
@@ -282,7 +277,7 @@ jobs:
 
   # Phase 1: Sanitizer failures block merges
   sanitizers:
-    name: Sanitizers (${{ matrix.sanitizer }})
+    name: Sanitizers (${{ matrix.sanitizer.name }})
     runs-on: ubuntu-24.04
     timeout-minutes: 60
 
