@@ -292,8 +292,9 @@ jobs:
             flags: "-fsanitize=address -fno-omit-frame-pointer -g -O1"
             env: "ASAN_OPTIONS=detect_leaks=1:strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1"
           - name: UndefinedBehaviorSanitizer
-            flags: "-fsanitize=undefined -fno-omit-frame-pointer -g -O1"
-            env: "UBSAN_OPTIONS=print_stacktrace=1:halt_on_error=0"
+            # Avoid the long GCC -O1 compilation of the thread metrics exporter.
+            flags: "-fsanitize=undefined -fno-omit-frame-pointer -g -O0"
+            env: "UBSAN_OPTIONS=print_stacktrace=1:halt_on_error=1"
 
     steps:
     - name: Checkout code
@@ -360,9 +361,7 @@ jobs:
       run: |
         cd build
         export ${{ matrix.sanitizer.env }}
-        if [ -f "bin/logger_unit" ]; then
-          ./bin/logger_unit
-        fi
+        ctest --output-on-failure --no-tests=error -E "(integration_test|compatibility_test)"
 
     - name: Upload sanitizer logs
       if: always()
