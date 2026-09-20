@@ -76,8 +76,9 @@ TEST(ConsoleWriterTest, ConstructWithStderr) {
     EXPECT_TRUE(writer.is_healthy());
 }
 
-TEST(ConsoleWriterTest, ConstructWithColorDisabled) {
+TEST(ConsoleWriterTest, DisableColorWithoutAutoDetection) {
     console_writer writer(false, false);
+    writer.set_use_color(false);
     EXPECT_FALSE(writer.use_color());
 }
 

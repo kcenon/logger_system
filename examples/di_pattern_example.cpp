@@ -204,9 +204,9 @@ void example_1_basic_di_pattern() {
     auto logger_instance = std::shared_ptr<logger>(std::move(logger_result.value()));
 
     // Step 3: Use logger - metrics are automatically recorded to monitor
-    logger_instance->log(ci::log_level::info, "Application started");
-    logger_instance->log(ci::log_level::debug, "Debug message");
-    logger_instance->log(ci::log_level::warning, "Warning message");
+    logger_instance->log(ci::log_level::info, std::string{"Application started"});
+    logger_instance->log(ci::log_level::debug, std::string{"Debug message"});
+    logger_instance->log(ci::log_level::warning, std::string{"Warning message"});
 
     // Step 4: Verify metrics were recorded
     std::cout << "\nMonitor collected " << monitor->get_metric_count()
@@ -215,9 +215,9 @@ void example_1_basic_di_pattern() {
     // Step 5: Get health status from logger (IMonitorable interface)
     // TODO: Implement health_check() in logger class (Phase 2.2)
     // auto health = logger_instance->health_check();
-    // if (kcenon::common::is_ok(health)) {
+    // if (health.is_ok()) {
     //     std::cout << "Logger health: "
-    //               << ci::to_string(kcenon::common::get_value(health).status) << std::endl;
+    //               << ci::to_string(health.value().status) << std::endl;
     // }
     std::cout << "Logger health: [health_check() not yet implemented]" << std::endl;
 }
@@ -242,8 +242,8 @@ void example_2_optional_monitor() {
     auto logger_instance = std::shared_ptr<logger>(std::move(logger_result.value()));
 
     // Logger works fine without monitor
-    logger_instance->log(ci::log_level::info, "Operating without monitor");
-    logger_instance->log(ci::log_level::warning, "Warning without monitoring");
+    logger_instance->log(ci::log_level::info, std::string{"Operating without monitor"});
+    logger_instance->log(ci::log_level::warning, std::string{"Warning without monitoring"});
 
     std::cout << "Logger operates successfully without monitor (DI optional)" << std::endl;
 }
@@ -267,7 +267,7 @@ void example_3_runtime_monitor_injection() {
     auto logger_instance = std::shared_ptr<logger>(std::move(logger_result.value()));
 
     std::cout << "Phase 1: Operating without monitor" << std::endl;
-    logger_instance->log(ci::log_level::info, "Message 1 - no monitoring");
+    logger_instance->log(ci::log_level::info, std::string{"Message 1 - no monitoring"});
 
     // Inject monitor at runtime
     // TODO: Implement set_monitor() in logger class (Phase 2.2)
@@ -276,8 +276,8 @@ void example_3_runtime_monitor_injection() {
     // logger_instance->set_monitor(std::move(monitor));
 
     std::cout << "\nPhase 2: Monitor injected at runtime [set_monitor() not yet implemented]" << std::endl;
-    logger_instance->log(ci::log_level::info, "Message 2 - with monitoring");
-    logger_instance->log(ci::log_level::info, "Message 3 - with monitoring");
+    logger_instance->log(ci::log_level::info, std::string{"Message 2 - with monitoring"});
+    logger_instance->log(ci::log_level::info, std::string{"Message 3 - with monitoring"});
 
     std::cout << "\nMonitor recorded " << monitor_ref->get_metric_count()
               << " metrics (only from Phase 2)" << std::endl;
@@ -302,8 +302,8 @@ void example_4_monitor_swapping() {
     // logger_instance->set_monitor(std::move(monitor1));
 
     std::cout << "Using Monitor 1 [set_monitor() not yet implemented]" << std::endl;
-    logger_instance->log(ci::log_level::info, "Message to Monitor 1");
-    logger_instance->log(ci::log_level::info, "Another message to Monitor 1");
+    logger_instance->log(ci::log_level::info, std::string{"Message to Monitor 1"});
+    logger_instance->log(ci::log_level::info, std::string{"Another message to Monitor 1"});
 
     size_t monitor1_metrics = monitor1_ref->get_metric_count();
 
@@ -313,7 +313,7 @@ void example_4_monitor_swapping() {
     // logger_instance->set_monitor(std::move(monitor2));
 
     std::cout << "\nSwapped to Monitor 2 [set_monitor() not yet implemented]" << std::endl;
-    logger_instance->log(ci::log_level::info, "Message to Monitor 2");
+    logger_instance->log(ci::log_level::info, std::string{"Message to Monitor 2"});
 
     size_t monitor2_metrics = monitor2_ref->get_metric_count();
 
@@ -334,9 +334,9 @@ void use_logger_via_interface(std::shared_ptr<ci::ILogger> logger) {
     // Check if logger supports monitoring (IMonitorable)
     if (auto monitorable = std::dynamic_pointer_cast<ci::IMonitorable>(logger)) {
         auto data = monitorable->get_monitoring_data();
-        if (kcenon::common::is_ok(data)) {
+        if (data.is_ok()) {
             std::cout << "Logger provides monitoring data from "
-                      << kcenon::common::get_value(data).source_id << std::endl;
+                      << data.value().source_id << std::endl;
         }
     }
 }

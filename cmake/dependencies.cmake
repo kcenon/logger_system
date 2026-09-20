@@ -19,7 +19,7 @@
 ##################################################
 # Unified dependency management
 ##################################################
-include(UnifiedDependencies)
+include("${CMAKE_CURRENT_LIST_DIR}/UnifiedDependencies.cmake")
 
 # Default common_system integration to ON; UnifiedDependencies overrides on success.
 # This ensures testing.cmake's BUILD_WITH_COMMON_SYSTEM gate is well-defined even
@@ -178,10 +178,17 @@ endfunction()
 ##################################################
 # Optional thread_system integration (Issue #222, #224)
 ##################################################
+include("${CMAKE_CURRENT_LIST_DIR}/thread_system_compat.cmake")
+
 function(logger_resolve_thread_system)
     if(LOGGER_USE_THREAD_SYSTEM)
         unified_find_dependency(thread_system QUIET)
         if(thread_system_FOUND)
+            if(TARGET thread_core)
+                logger_propagate_thread_system_abi(thread_core)
+            elseif(TARGET thread_base)
+                logger_propagate_thread_system_abi(thread_base)
+            endif()
             set(THREAD_SYSTEM_FOUND TRUE PARENT_SCOPE)
             message(STATUS "Logger System: thread_system integration enabled")
             message(STATUS "  Direction: logger_system -> thread_system (using thread_pool for async I/O)")

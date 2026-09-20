@@ -9,6 +9,18 @@
 #include <filesystem>
 #include <fstream>
 
+#ifdef _WIN32
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+#include <aclapi.h>
+#include <sddl.h>
+#endif
+
 using namespace kcenon::logger;
 using namespace kcenon::logger::security;
 
@@ -89,12 +101,29 @@ TEST_F(SecurityTest, SaveAndLoadKey) {
     // Verify file exists
     EXPECT_TRUE(std::filesystem::exists(key_path));
 
-    // Verify file permissions (0600)
+    // Verify native file permissions: a protected private DACL or POSIX 0600.
+#ifdef _WIN32
+    PACL acl = nullptr;
+    PSECURITY_DESCRIPTOR descriptor = nullptr;
+    auto native_path = key_path.wstring();
+    ASSERT_EQ(GetNamedSecurityInfoW(native_path.data(), SE_FILE_OBJECT, DACL_SECURITY_INFORMATION,
+                                   nullptr, nullptr, &acl, nullptr, &descriptor), ERROR_SUCCESS);
+    EXPECT_NE(acl, nullptr);
+    if (acl) {
+        EXPECT_EQ(acl->AceCount, 1u);
+    }
+    SECURITY_DESCRIPTOR_CONTROL control = 0;
+    DWORD revision = 0;
+    EXPECT_TRUE(GetSecurityDescriptorControl(descriptor, &control, &revision));
+    EXPECT_NE(control & SE_DACL_PROTECTED, 0);
+    LocalFree(descriptor);
+#else
     auto status = std::filesystem::status(key_path);
     auto perms = status.permissions();
 
     EXPECT_EQ(perms & std::filesystem::perms::group_read, std::filesystem::perms::none);
     EXPECT_EQ(perms & std::filesystem::perms::others_read, std::filesystem::perms::none);
+#endif
 
     // Load key and verify
     auto load_result = secure_key_storage::load_key(key_path, 32, test_dir_);
@@ -116,7 +145,26 @@ TEST_F(SecurityTest, LoadKeyWithInsecurePermissions) {
     file.write(reinterpret_cast<const char*>(dummy_key.data()), 32);
     file.close();
 
-    // Set insecure permissions
+    // Set permissions that explicitly allow other users to read the key.
+#ifdef _WIN32
+    PSID everyone = nullptr;
+    ASSERT_TRUE(ConvertStringSidToSidW(L"S-1-1-0", &everyone));
+    EXPLICIT_ACCESSW access{};
+    access.grfAccessPermissions = FILE_GENERIC_READ;
+    access.grfAccessMode = SET_ACCESS;
+    access.Trustee.TrusteeForm = TRUSTEE_IS_SID;
+    access.Trustee.ptstrName = reinterpret_cast<LPWSTR>(everyone);
+    PACL acl = nullptr;
+    const auto acl_status = SetEntriesInAclW(1, &access, nullptr, &acl);
+    LocalFree(everyone);
+    ASSERT_EQ(acl_status, ERROR_SUCCESS);
+    auto native_path = key_path.wstring();
+    const auto status = SetNamedSecurityInfoW(native_path.data(), SE_FILE_OBJECT,
+        DACL_SECURITY_INFORMATION | PROTECTED_DACL_SECURITY_INFORMATION,
+        nullptr, nullptr, acl, nullptr);
+    LocalFree(acl);
+    ASSERT_EQ(status, ERROR_SUCCESS);
+#else
     std::filesystem::permissions(
         key_path,
         std::filesystem::perms::owner_read |
@@ -125,6 +173,7 @@ TEST_F(SecurityTest, LoadKeyWithInsecurePermissions) {
         std::filesystem::perms::others_read,  // Insecure!
         std::filesystem::perm_options::replace
     );
+#endif
 
     // Attempt to load should fail
     auto result = secure_key_storage::load_key(key_path, 32, test_dir_);
@@ -132,28 +181,49 @@ TEST_F(SecurityTest, LoadKeyWithInsecurePermissions) {
     EXPECT_EQ(result.error_code(), logger_error_code::insecure_permissions);
 }
 
+TEST_F(SecurityTest, SaveKeyReplacesExistingFile) {
+    auto key_path = test_dir_ / "existing_key.bin";
+    {
+        std::ofstream file(key_path, std::ios::binary);
+        file << std::string(128, 'x');
+    }
+    secure_key key(std::vector<uint8_t>(32, 0xAB));
+    ASSERT_TRUE(secure_key_storage::save_key(key, key_path, test_dir_).is_ok());
+
+    EXPECT_EQ(std::filesystem::file_size(key_path), 32u);
+    auto loaded = secure_key_storage::load_key(key_path, 32, test_dir_);
+    ASSERT_TRUE(loaded.has_value());
+    EXPECT_EQ(loaded.value().data(), key.data());
+}
+
 TEST_F(SecurityTest, LoadKeyWithInvalidSize) {
     auto key_path = test_dir_ / "wrong_size_key.bin";
 
-    // Create key file with wrong size (16 bytes instead of 32)
-    std::ofstream file(key_path, std::ios::binary);
-    std::vector<uint8_t> dummy_key(16, 0xAA);
-    file.write(reinterpret_cast<const char*>(dummy_key.data()), 16);
-    file.close();
-
-    // Set secure permissions
-    std::filesystem::permissions(
-        key_path,
-        std::filesystem::perms::owner_read |
-        std::filesystem::perms::owner_write,
-        std::filesystem::perm_options::replace
-    );
+    // Use the native secure save path, with a wrong size (16 instead of 32).
+    secure_key wrong_size_key(std::vector<uint8_t>(16, 0xAA));
+    ASSERT_TRUE(secure_key_storage::save_key(wrong_size_key, key_path, test_dir_).is_ok());
 
     // Attempt to load with expected size 32 should fail
     auto result = secure_key_storage::load_key(key_path, 32, test_dir_);
     ASSERT_FALSE(result.has_value());
     EXPECT_EQ(result.error_code(), logger_error_code::invalid_key_size);
 }
+
+#ifdef _WIN32
+TEST_F(SecurityTest, LoadKeyWithNullDacl) {
+    auto key_path = test_dir_ / "null_dacl_key.bin";
+    secure_key key(32);
+    ASSERT_TRUE(secure_key_storage::save_key(key, key_path, test_dir_).is_ok());
+    auto native_path = key_path.wstring();
+    ASSERT_EQ(SetNamedSecurityInfoW(native_path.data(), SE_FILE_OBJECT,
+        DACL_SECURITY_INFORMATION | PROTECTED_DACL_SECURITY_INFORMATION,
+        nullptr, nullptr, nullptr, nullptr), ERROR_SUCCESS);
+
+    auto result = secure_key_storage::load_key(key_path, 32, test_dir_);
+    ASSERT_FALSE(result.has_value());
+    EXPECT_EQ(result.error_code(), logger_error_code::insecure_permissions);
+}
+#endif
 
 // ============================================================================
 // path_validator Tests
@@ -418,4 +488,3 @@ TEST_F(SecurityTest, IntegrationSecureKeyWorkflow) {
     EXPECT_NE(content.find("encryption_key_generated"), std::string::npos);
     EXPECT_NE(content.find("encryption_key_loaded"), std::string::npos);
 }
-

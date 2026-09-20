@@ -81,8 +81,8 @@ public:
         // Collect metrics from all registered components
         for (const auto& component : monitored_components_) {
             auto comp_data = component->get_monitoring_data();
-            if (kcenon::common::is_ok(comp_data)) {
-                const auto& component_metrics = kcenon::common::get_value(comp_data);
+            if (comp_data.is_ok()) {
+                const auto& component_metrics = comp_data.value();
                 for (const auto& metric : component_metrics.metrics) {
                     snapshot.metrics.push_back(metric);
                 }
@@ -107,8 +107,8 @@ public:
             auto comp_health = component->health_check();
             const auto component_name = component->get_component_name();
 
-            if (kcenon::common::is_ok(comp_health)) {
-                const auto& component_result = kcenon::common::get_value(comp_health);
+            if (comp_health.is_ok()) {
+                const auto& component_result = comp_health.value();
                 result.metadata["component_status:" + component_name] = ci::to_string(component_result.status);
 
                 if (component_result.status == ci::health_status::unhealthy) {
@@ -120,7 +120,7 @@ public:
                     result.message = "One or more components degraded";
                 }
             } else {
-                const auto& error = kcenon::common::get_error(comp_health);
+                const auto& error = comp_health.error();
                 result.metadata["component_status:" + component_name] = "error:" + error.message;
                 if (result.status == ci::health_status::healthy) {
                     result.status = ci::health_status::degraded;
@@ -227,14 +227,14 @@ void example_1_basic_integration() {
 
     // Get aggregated metrics
     auto metrics = monitor->get_metrics();
-    if (kcenon::common::is_ok(metrics)) {
-        print_metrics_snapshot(kcenon::common::get_value(metrics));
+    if (metrics.is_ok()) {
+        print_metrics_snapshot(metrics.value());
     }
 
     // Check aggregated health
     auto health = monitor->check_health();
-    if (kcenon::common::is_ok(health)) {
-        print_health_result(kcenon::common::get_value(health));
+    if (health.is_ok()) {
+        print_health_result(health.value());
     }
 }
 
@@ -281,9 +281,9 @@ void example_2_multiple_loggers() {
 
     // Get combined metrics
     auto metrics = monitor->get_metrics();
-    if (kcenon::common::is_ok(metrics)) {
+    if (metrics.is_ok()) {
         std::cout << "Combined metrics from all loggers:" << std::endl;
-        print_metrics_snapshot(kcenon::common::get_value(metrics));
+        print_metrics_snapshot(metrics.value());
     }
 }
 
@@ -315,16 +315,16 @@ void example_3_imonitorable_interface() {
 
         // Get monitoring data directly from logger
         auto data = monitorable->get_monitoring_data();
-        if (kcenon::common::is_ok(data)) {
+        if (data.is_ok()) {
             std::cout << "\nDirect monitoring data from logger:" << std::endl;
-            print_metrics_snapshot(kcenon::common::get_value(data));
+            print_metrics_snapshot(data.value());
         }
 
         // Health check directly from logger
         auto health = monitorable->health_check();
-        if (kcenon::common::is_ok(health)) {
+        if (health.is_ok()) {
             std::cout << "\nDirect health check from logger:" << std::endl;
-            print_health_result(kcenon::common::get_value(health));
+            print_health_result(health.value());
         }
     }
 }
@@ -366,17 +366,17 @@ void example_4_monitoring_system_simulation() {
 
     // Monitoring system can query the monitor
     auto metrics = monitor->get_metrics();
-    if (kcenon::common::is_ok(metrics)) {
+    if (metrics.is_ok()) {
         std::cout << "Monitoring system received metrics:" << std::endl;
-        print_metrics_snapshot(kcenon::common::get_value(metrics));
+        print_metrics_snapshot(metrics.value());
     }
 
     // Monitoring system can check logger health through IMonitorable
     if (auto monitorable = std::dynamic_pointer_cast<ci::IMonitorable>(logger_instance)) {
         auto health = monitorable->health_check();
-        if (kcenon::common::is_ok(health)) {
+        if (health.is_ok()) {
             std::cout << "\nLogger health status:" << std::endl;
-            print_health_result(kcenon::common::get_value(health));
+            print_health_result(health.value());
         }
     }
 

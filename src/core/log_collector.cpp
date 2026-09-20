@@ -45,6 +45,8 @@ using log_level = common::interfaces::log_level;
 struct log_collector_shared_state {
     std::queue<log_entry> queue;
     mutable std::mutex queue_mutex;
+    std::condition_variable drained_cv;
+    bool processing_batch = false;  // Protected by queue_mutex, like queue.
 #if LOGGER_HAS_JTHREAD
     std::condition_variable_any queue_cv;  // Works with stop_token
 #else
@@ -161,12 +163,11 @@ private:
                     batch.push_back(std::move(state->queue.front()));
                     state->queue.pop();
                 }
+                state->processing_batch = true;
             }
 
             // Process batch outside the lock
-            for (const auto& entry : batch) {
-                write_to_all(state, entry);
-            }
+            process_batch(state, batch);
         }
     }
 #else
@@ -203,15 +204,26 @@ private:
                     batch.push_back(std::move(state->queue.front()));
                     state->queue.pop();
                 }
+                state->processing_batch = true;
             }
 
             // Process batch outside the lock
-            for (const auto& entry : batch) {
-                write_to_all(state, entry);
-            }
+            process_batch(state, batch);
         }
     }
 #endif
+
+    static void process_batch(const std::shared_ptr<log_collector_shared_state>& state,
+                              const std::vector<log_entry>& batch) {
+        for (const auto& entry : batch) {
+            write_to_all(state, entry);
+        }
+        {
+            std::lock_guard<std::mutex> lock(state->queue_mutex);
+            state->processing_batch = false;
+        }
+        state->drained_cv.notify_all();
+    }
 
     static void write_to_all(const std::shared_ptr<log_collector_shared_state>& state,
                             const log_entry& entry) {
@@ -329,16 +341,13 @@ public:
     }
 
     void flush() {
-        // Wait for queue to be empty
-        while (true) {
-            {
-                std::lock_guard<std::mutex> lock(state_->queue_mutex);
-                if (state_->queue.empty()) {
-                    break;
-                }
-            }
-            // Brief yield to allow worker to process
-            std::this_thread::sleep_for(std::chrono::microseconds(100));
+        // A dequeued batch is still in flight until every writer has received it.
+        // Flushing writers earlier can leave those writes buffered after return.
+        {
+            std::unique_lock<std::mutex> lock(state_->queue_mutex);
+            state_->drained_cv.wait(lock, [this] {
+                return state_->queue.empty() && !state_->processing_batch;
+            });
         }
 
         // Flush all writers
@@ -356,6 +365,7 @@ private:
         {
             std::lock_guard<std::mutex> lock(state_->queue_mutex);
             std::swap(remaining, state_->queue);
+            state_->processing_batch = !remaining.empty();
         }
 
         // Process remaining entries
@@ -364,6 +374,11 @@ private:
             remaining.pop();
             write_to_all(entry);
         }
+        {
+            std::lock_guard<std::mutex> lock(state_->queue_mutex);
+            state_->processing_batch = false;
+        }
+        state_->drained_cv.notify_all();
     }
 
     void flush_writers() {

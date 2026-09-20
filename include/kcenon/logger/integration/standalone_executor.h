@@ -165,7 +165,7 @@ public:
 
     /**
      * @brief Get the number of worker threads
-     * @return Always returns 1 for standalone executor
+     * @return 1 while running, otherwise 0
      */
     size_t worker_count() const override;
 

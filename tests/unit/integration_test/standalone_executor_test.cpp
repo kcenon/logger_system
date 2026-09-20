@@ -110,7 +110,7 @@ public:
 TEST_F(StandaloneExecutorTest, InitialStateIsNotRunning) {
     EXPECT_FALSE(executor_->is_running());
     EXPECT_EQ(executor_->pending_tasks(), 0u);
-    EXPECT_EQ(executor_->worker_count(), 1u);
+    EXPECT_EQ(executor_->worker_count(), 0u);
 }
 
 TEST_F(StandaloneExecutorTest, StartSetsRunning) {
@@ -122,6 +122,16 @@ TEST_F(StandaloneExecutorTest, DoubleStartIsIdempotent) {
     executor_->start();
     executor_->start();
     EXPECT_TRUE(executor_->is_running());
+}
+
+TEST_F(StandaloneExecutorTest, RepeatedIdleShutdownDoesNotLoseWakeup) {
+    for (int i = 0; i < 100; ++i) {
+        executor_->start();
+        std::this_thread::yield();
+        executor_->shutdown(true);
+        EXPECT_FALSE(executor_->is_running());
+        EXPECT_EQ(executor_->worker_count(), 0u);
+    }
 }
 
 TEST_F(StandaloneExecutorTest, ShutdownStopsExecutor) {
@@ -318,10 +328,12 @@ TEST_F(StandaloneExecutorTest, GetName) {
     EXPECT_EQ(executor_->get_name(), "test_executor");
 }
 
-TEST_F(StandaloneExecutorTest, WorkerCountIsAlwaysOne) {
-    EXPECT_EQ(executor_->worker_count(), 1u);
+TEST_F(StandaloneExecutorTest, WorkerCountTracksLifecycle) {
+    EXPECT_EQ(executor_->worker_count(), 0u);
     executor_->start();
     EXPECT_EQ(executor_->worker_count(), 1u);
+    executor_->shutdown(true);
+    EXPECT_EQ(executor_->worker_count(), 0u);
 }
 
 TEST_F(StandaloneExecutorTest, InitialDroppedCountIsZero) {
