@@ -343,9 +343,11 @@ TEST_F(ExecutorIntegrationTest, ThreadSafetyOfStateChecking) {
 
                     // Submit tasks concurrently
                     if (enabled) {
-                        executor_integration::submit_task([&task_count]() {
+                        if (!executor_integration::submit_task([&task_count]() {
                             task_count.fetch_add(1, std::memory_order_relaxed);
-                        });
+                        })) {
+                            errors.fetch_add(1);
+                        }
                     }
 
                     std::this_thread::yield();
@@ -360,8 +362,12 @@ TEST_F(ExecutorIntegrationTest, ThreadSafetyOfStateChecking) {
         thread.join();
     }
 
+    // Joining producers does not wait for their queued callbacks. Drain them
+    // while task_count is alive; fixture TearDown runs after these locals die.
+    executor_integration::get_executor()->shutdown(true);
+
     EXPECT_EQ(errors.load(), 0) << "No errors should occur during concurrent operations";
-    EXPECT_GT(task_count.load(), 0) << "Some tasks should have been executed";
+    EXPECT_EQ(task_count.load(), num_threads * iterations);
 }
 
 /**
