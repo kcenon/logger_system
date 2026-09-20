@@ -97,8 +97,9 @@ TEST(FileUtilsTest, SanitizeFilenameTruncatesLongNames) {
 // is_absolute
 // =============================================================================
 
-TEST(FileUtilsTest, IsAbsoluteUnixPath) {
-    EXPECT_TRUE(file_utils::is_absolute("/var/log/app.log"));
+TEST(FileUtilsTest, IsAbsoluteNativePath) {
+    const auto path = std::filesystem::temp_directory_path() / "app.log";
+    EXPECT_TRUE(file_utils::is_absolute(path.string()));
 }
 
 TEST(FileUtilsTest, IsAbsoluteRelativePath) {

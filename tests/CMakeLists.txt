@@ -121,6 +121,10 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/security_test/security_test.cpp")
     add_executable(logger_security_test ${_LOGGER_SECURITY_TEST_SOURCES})
     unset(_LOGGER_SECURITY_TEST_SOURCES)
 
+    if(WIN32)
+        target_link_libraries(logger_security_test PRIVATE advapi32)
+    endif()
+
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_security_test PRIVATE logger_system GTest::gtest_main GTest::gtest)
     else()

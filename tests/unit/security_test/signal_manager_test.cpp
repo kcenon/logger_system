@@ -222,10 +222,12 @@ TEST_F(SignalManagerTest, SafeWriteToInvalidFdReturnsError) {
     // Writing to an invalid fd should return -1
     ssize_t result = detail::safe_write(-1, "test", 4);
     EXPECT_EQ(result, -1);
+    EXPECT_EQ(errno, EBADF);
 }
 
 TEST_F(SignalManagerTest, SafeFsyncToInvalidFdReturnsError) {
     // fsync on invalid fd should return -1
     int result = detail::safe_fsync(-1);
     EXPECT_EQ(result, -1);
+    EXPECT_EQ(errno, EBADF);
 }

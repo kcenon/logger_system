@@ -11,6 +11,7 @@
 #pragma once
 
 #include <kcenon/logger/core/error_codes.h>
+#include <kcenon/logger/logger_export.h>
 #include <vector>
 #include <cstdint>
 #include <filesystem>
@@ -133,7 +134,7 @@ private:
  * @brief Secure storage and retrieval of encryption keys
  *
  * Security features:
- * - File permission verification (0600)
+ * - File permission verification (0600 on POSIX, private user DACL on Windows)
  * - Path traversal prevention
  * - Secure random generation
  * - Memory cleanup after use
@@ -197,6 +198,9 @@ public:
             );
         }
 
+#ifdef _WIN32
+        return save_key_windows(key, path);
+#else
         // 3. Write key to file
         std::ofstream file(path, std::ios::binary | std::ios::trunc);
         if (!file) {
@@ -238,6 +242,7 @@ public:
         }
 
         return common::ok();
+#endif
     }
 
     /**
@@ -267,6 +272,9 @@ public:
                 "Key file does not exist"};
         }
 
+#ifdef _WIN32
+        return load_key_windows(path, expected_size);
+#else
         // 3. Verify file permissions (must not be readable by group/others)
         try {
             auto status = std::filesystem::status(path);
@@ -322,9 +330,17 @@ public:
         }
 
         return result<secure_key>(std::move(key));
+#endif
     }
 
 private:
+#ifdef _WIN32
+    static LOGGER_SYSTEM_API common::VoidResult save_key_windows(
+        const secure_key& key, const std::filesystem::path& path);
+    static LOGGER_SYSTEM_API result<secure_key> load_key_windows(
+        const std::filesystem::path& path, size_t expected_size);
+#endif
+
     /**
      * @brief Validate key file path (prevent path traversal)
      * @param path Path to validate
