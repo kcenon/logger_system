@@ -334,12 +334,9 @@ TEST_F(WriterBuilderTest, AsyncDecorator) {
     log_entry entry(log_level::info, "async test");
     writer->write(entry);
 
-    // Give async writer time to process
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
-    EXPECT_EQ(mock_ptr->write_count(), 1);
-
+    // Join the writer before reading its unsynchronized test-only counters.
     async_ptr->stop();
+    EXPECT_EQ(mock_ptr->write_count(), 1);
 }
 
 //============================================================================

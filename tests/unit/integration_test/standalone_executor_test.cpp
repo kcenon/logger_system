@@ -124,6 +124,16 @@ TEST_F(StandaloneExecutorTest, DoubleStartIsIdempotent) {
     EXPECT_TRUE(executor_->is_running());
 }
 
+TEST_F(StandaloneExecutorTest, RepeatedIdleShutdownDoesNotLoseWakeup) {
+    for (int i = 0; i < 100; ++i) {
+        executor_->start();
+        std::this_thread::yield();
+        executor_->shutdown(true);
+        EXPECT_FALSE(executor_->is_running());
+        EXPECT_EQ(executor_->worker_count(), 0u);
+    }
+}
+
 TEST_F(StandaloneExecutorTest, ShutdownStopsExecutor) {
     executor_->start();
     executor_->shutdown(true);

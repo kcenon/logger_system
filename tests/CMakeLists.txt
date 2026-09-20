@@ -277,6 +277,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/executor_integration_test.cpp")
     add_test(NAME logger_executor_integration_test
         COMMAND logger_executor_integration_test
     )
+    set_tests_properties(logger_executor_integration_test PROPERTIES TIMEOUT 60)
     set_target_properties(logger_executor_integration_test PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
@@ -1201,6 +1202,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/integration_test/standalone_executor
     add_test(NAME logger_standalone_executor_test
         COMMAND logger_standalone_executor_test
     )
+    set_tests_properties(logger_standalone_executor_test PROPERTIES TIMEOUT 60)
     set_target_properties(logger_standalone_executor_test PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
