@@ -51,6 +51,8 @@ set(_UNIFIED_TARGET_MAP_common_system
 )
 
 set(_UNIFIED_TARGET_MAP_thread_system
+    "thread_system::thread_system"
+    "thread_system::thread_base"
     "thread_pool"
     "thread_base"
     "interfaces"
@@ -267,7 +269,8 @@ macro(unified_find_dependency DEP_NAME)
 
     # Check if already loaded
     list(FIND _UNIFIED_LOADED_DEPS "${DEP_NAME}" _dep_index)
-    if(NOT _dep_index EQUAL -1)
+    _unified_find_existing_target(${DEP_NAME} _already_loaded_target)
+    if(NOT _dep_index EQUAL -1 AND _already_loaded_target)
         message(STATUS "[UnifiedDependencies] ${DEP_NAME}: Already loaded (skipping)")
         # Find and set the target variable anyway
         _unified_find_existing_target(${DEP_NAME} _found_target)
