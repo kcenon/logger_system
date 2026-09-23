@@ -11,6 +11,13 @@ include(CMakeFindDependencyMacro)
 # Find required dependencies
 find_dependency(Threads REQUIRED)
 
+# The exported logger target links OpenSSL publicly when encryption support is
+# enabled. Recreate that imported dependency before loading the targets file.
+set(logger_system_USE_ENCRYPTION @LOGGER_USE_ENCRYPTION@)
+if(logger_system_USE_ENCRYPTION)
+    find_dependency(OpenSSL 3.0 REQUIRED)
+endif()
+
 # common_system is required for Result<T>, ILogger, and shared interfaces
 set(logger_system_BUILD_WITH_COMMON_SYSTEM @BUILD_WITH_COMMON_SYSTEM@)
 if(logger_system_BUILD_WITH_COMMON_SYSTEM)
@@ -47,7 +54,6 @@ set(logger_system_ENABLE_NETWORK_WRITER @LOGGER_ENABLE_NETWORK_WRITER@)
 set(logger_system_ENABLE_FILE_ROTATION @LOGGER_ENABLE_FILE_ROTATION@)
 set(logger_system_ENABLE_ASYNC @LOGGER_ENABLE_ASYNC@)
 set(logger_system_USE_COMPRESSION @LOGGER_USE_COMPRESSION@)
-set(logger_system_USE_ENCRYPTION @LOGGER_USE_ENCRYPTION@)
 
 # Performance settings
 set(logger_system_DEFAULT_BUFFER_SIZE @LOGGER_DEFAULT_BUFFER_SIZE@)
