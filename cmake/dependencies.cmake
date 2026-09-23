@@ -117,7 +117,7 @@ function(logger_find_test_dependencies)
         FetchContent_Declare(
             googletest
             GIT_REPOSITORY https://github.com/google/googletest.git
-            GIT_TAG v1.14.0
+            GIT_TAG v1.17.0
         )
 
         FetchContent_MakeAvailable(googletest)
@@ -161,7 +161,7 @@ function(logger_find_benchmark_dependencies)
         FetchContent_Declare(
             googlebenchmark
             GIT_REPOSITORY https://github.com/google/benchmark.git
-            GIT_TAG v1.8.3
+            GIT_TAG v1.9.5
         )
 
         # Use the same pattern as GoogleTest for consistency
