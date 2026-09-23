@@ -1,0 +1,17 @@
+<map id="example_2_optional_monitor" name="example_2_optional_monitor">
+<area shape="rect" id="Node000001" title="Example demonstrating monitor&#45;less operation." alt="" coords="5,99,160,139"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger__builder.html#ac055417d32675b0fee649681e1ded0fa" title=" " alt="" coords="215,35,382,75"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,96,217,76,218,81,152,101"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1logger__builder.html#a75f79c43d9d64fa35e60cc6d7fd6eb38" title=" " alt="" coords="215,99,382,139"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="160,116,202,116,202,121,160,121"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1logger__builder.html#a1228e7a24955286da72a7d08d2375f7d" title=" " alt="" coords="208,163,389,203"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="152,136,218,156,217,161,150,141"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1logger__config.html#a28b4aedeb6bfa7edfd72d3e0201ded7b" title="Validate the configuration." alt="" coords="437,35,604,75"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="382,52,424,52,424,57,382,57"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="652,5,815,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="604,41,638,36,639,41,605,46"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="654,70,813,95"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="605,63,641,68,640,73,604,68"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="863,5,1029,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="815,23,849,23,849,28,815,28"/>
+</map>

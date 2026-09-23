@@ -1,0 +1,13 @@
+<map id="src/modules/backends.cppm" name="src/modules/backends.cppm">
+<area shape="rect" id="Node000001" title="Backends partition for kcenon.logger module." alt="" coords="147,5,354,31"/>
+<area shape="rect" id="Node000002" href="$logger_8cppm.html" title="Primary module interface for kcenon.logger." alt="" coords="5,79,152,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,33,120,76,118,71,222,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="80,152,211,177"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="244,33,164,142,160,139,240,30"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="251,79,328,104"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="259,30,279,65,274,68,255,32"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="352,79,411,104"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="273,28,349,70,347,74,270,33"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="124,76,161,77,173,82,179,91,175,99,166,104,138,107,137,102,164,99,171,96,173,91,170,86,160,82,124,81"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="92,103,127,140,123,144,88,106"/>
+</map>

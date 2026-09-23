@@ -1,0 +1,9 @@
+<map id="kcenon::logger::utils::try_network_operation" name="kcenon::logger::utils::try_network_operation">
+<area shape="rect" id="Node000001" title="Error handling helper for network operations." alt="" coords="5,5,183,45"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger_1_1utils.html#aafab2237b40cefbc519b3dcdf64fb23d" title="Error handling helper for write operations." alt="" coords="231,5,388,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,23,217,23,217,28,183,28"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="436,5,599,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="388,23,423,23,423,28,388,28"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="647,5,813,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="599,23,633,23,633,28,599,28"/>
+</map>

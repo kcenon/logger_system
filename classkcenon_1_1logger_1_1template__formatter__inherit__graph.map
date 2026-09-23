@@ -1,0 +1,5 @@
+<map id="kcenon::logger::template_formatter" name="kcenon::logger::template_formatter">
+<area shape="rect" id="Node000001" title="Customizable formatter using template strings with placeholders." alt="" coords="10,213,205,493"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__formatter__interface.html" title="Abstract interface for log message formatters." alt="" coords="5,5,209,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,179,110,213,105,213,105,179"/>
+</map>

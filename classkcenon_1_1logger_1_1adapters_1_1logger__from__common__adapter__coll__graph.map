@@ -1,0 +1,5 @@
+<map id="kcenon::logger::adapters::logger_from_common_adapter" name="kcenon::logger::adapters::logger_from_common_adapter">
+<area shape="rect" id="Node000001" title="Adapter to use common::interfaces::ILogger in logger_system." alt="" coords="5,148,228,343"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="23,5,210,85"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,86,119,131,114,131,114,86"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="kcenon::logger::async::compat_cv_wait::wait" name="kcenon::logger::async::compat_cv_wait::wait">
+<area shape="rect" id="Node000001" title="Wait on condition variable with stop support." alt="" coords="5,13,177,53"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1simple__stop__source.html#a0f65078555189251d6c26383bd1cf6dd" title="Check if stop was requested." alt="" coords="225,5,389,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,30,212,30,212,35,178,35"/>
+</map>

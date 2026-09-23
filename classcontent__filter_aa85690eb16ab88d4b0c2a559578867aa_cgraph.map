@@ -1,0 +1,7 @@
+<map id="content_filter::should_log" name="content_filter::should_log">
+<area shape="rect" id="Node000001" title="Check if a log entry should be processed." alt="" coords="5,45,192,70"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="240,5,403,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,42,226,36,227,42,188,47"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#a8a918a94d922eda923c20e872dadb3bc" title="Get size." alt="" coords="240,69,403,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="188,67,227,73,226,78,187,73"/>
+</map>

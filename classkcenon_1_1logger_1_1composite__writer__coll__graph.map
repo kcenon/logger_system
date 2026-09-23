@@ -1,0 +1,17 @@
+<map id="kcenon::logger::composite_writer" name="kcenon::logger::composite_writer">
+<area shape="rect" id="Node000001" title="Coordinates formatting and output through a pipeline." alt="" coords="271,753,458,973"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,491,185,691"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,690,273,766,269,770,193,694"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1composite__writer__tag.html" title="Tag interface for composite writers." alt="" coords="210,551,397,631"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="318,643,342,752,337,753,312,644"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="421,543,594,638"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="485,640,432,740,428,737,480,637"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1log__formatter__interface.html" title="Abstract interface for log message formatters." alt="" coords="391,258,595,418"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="500,418,506,526,501,527,495,418"/>
+<area shape="rect" id="Node000006" href="$structkcenon_1_1logger_1_1format__options.html" title="Configuration options for log formatting." alt="" coords="400,5,585,185"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="495,185,495,242,490,242,490,185"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="622,543,795,638"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="665,640,608,693,541,745,473,793,470,789,537,741,604,689,662,636"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1output__sink__interface.html" title="Abstract interface for log output destinations (I/O only)" alt="" coords="619,248,809,428"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="715,428,713,527,707,527,709,428"/>
+</map>

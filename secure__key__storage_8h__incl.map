@@ -1,0 +1,29 @@
+<map id="include/kcenon/logger/security/secure_key_storage.h" name="include/kcenon/logger/security/secure_key_storage.h">
+<area shape="rect" id="Node000001" title="RAII wrapper for encryption keys with secure memory management." alt="" coords="599,5,764,60"/>
+<area shape="rect" id="Node000002" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="156,108,303,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="599,53,317,111,316,105,598,48"/>
+<area shape="rect" id="Node000008" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="327,108,486,148"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="605,63,476,106,474,101,603,58"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="510,115,573,141"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="643,62,571,110,568,106,640,58"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="597,115,664,141"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="669,62,646,104,641,102,665,59"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="688,115,779,141"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="698,59,722,102,718,104,694,62"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="803,115,877,141"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="727,58,810,106,807,111,725,62"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="901,115,968,141"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="758,58,890,106,896,108,894,113,888,110,756,63"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="992,115,1064,141"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="765,49,869,74,981,105,988,108,987,113,979,111,867,79,764,54"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,196,64,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="184,150,77,193,75,188,182,146"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="89,196,175,221"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="207,150,159,189,155,185,204,146"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="199,196,259,221"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="232,148,232,182,227,182,227,148"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="284,196,359,221"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="253,146,299,185,295,189,250,150"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="383,196,463,221"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="277,146,383,188,381,193,275,150"/>
+</map>

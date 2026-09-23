@@ -1,0 +1,9 @@
+<map id="kcenon::logger::security::log_sanitizer::add_email_pattern" name="kcenon::logger::security::log_sanitizer::add_email_pattern">
+<area shape="rect" id="Node000001" title=" " alt="" coords="740,5,929,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1log__sanitizer.html#a30653be42abfd0bfbdf14206bfe71329" title="Add a built&#45;in pattern for sensitive data detection." alt="" coords="493,13,692,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="726,35,692,35,692,30,726,30"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1log__sanitizer.html#a0f202aa567b8271bfd94fba7626040ce" title="Add all common patterns at once." alt="" coords="236,5,445,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="480,35,445,35,445,30,480,30"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger_1_1security.html#aee294dd2896de20d2c8dd0f9fcd7e28b" title="Create a sanitizer with common patterns pre&#45;configured." alt="" coords="5,13,188,53"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="222,35,188,35,188,30,222,30"/>
+</map>

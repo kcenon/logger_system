@@ -1,0 +1,43 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,106,60,131"/>
+<area shape="rect" id="Node000002" href="$monitoring__integration__example_8cpp.html#a69f4c66591da0bf58d437167b4129a90" title="Example 1: Basic monitor integration with logger." alt="" coords="108,77,321,102"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,112,122,102,123,107,61,117"/>
+<area shape="rect" id="Node000012" href="$monitoring__integration__example_8cpp.html#a5367178a2d033e44314686687f84616c" title="Example 2: Multiple loggers with single monitor." alt="" coords="137,12,292,52"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="47,104,74,82,107,62,124,54,126,59,109,66,77,87,50,108"/>
+<area shape="rect" id="Node000013" href="$monitoring__integration__example_8cpp.html#a3795dc3758233d537d4f2094a55beaf0" title="Example 3: Demonstrating IMonitorable interface." alt="" coords="123,127,307,167"/>
+<area shape="poly" id="edge16_Node000001_Node000013" title=" " alt="" coords="60,120,110,128,109,133,60,125"/>
+<area shape="rect" id="Node000014" href="$monitoring__integration__example_8cpp.html#af6e1f246e5f5056cd6eecbb7737c4ecd" title="Example 4: Simulating monitoring_system integration." alt="" coords="129,191,301,231"/>
+<area shape="poly" id="edge22_Node000001_Node000014" title=" " alt="" coords="48,129,75,153,109,176,124,183,121,188,107,181,72,157,45,133"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1logger__builder.html#ac055417d32675b0fee649681e1ded0fa" title=" " alt="" coords="380,69,547,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="321,87,366,87,366,92,321,92"/>
+<area shape="rect" id="Node000008" href="$monitoring__integration__example_8cpp.html#a6f4530120dec07801b687ea4759e9684" title="Print health check result." alt="" coords="391,249,535,274"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="303,100,323,113,336,128,344,143,348,175,352,205,359,220,371,234,381,241,377,245,368,238,354,223,347,207,343,175,339,145,332,131,320,117,300,104"/>
+<area shape="rect" id="Node000009" href="$monitoring__integration__example_8cpp.html#ae4ba0c461799ca96ebc7669b337031ab" title="Print metrics snapshot in formatted way." alt="" coords="376,134,551,159"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="271,99,395,128,394,133,270,105"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1logger__builder.html#a75f79c43d9d64fa35e60cc6d7fd6eb38" title=" " alt="" coords="380,184,547,224"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="295,100,323,112,339,127,348,141,356,156,371,170,380,176,377,180,368,174,352,159,343,144,335,130,320,117,293,105"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1logger__builder.html#a063db59d2c0e3471278f3d6051b77fa9" title="Set monitoring interface (Phase 2.2.4)" alt="" coords="369,5,557,45"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="270,74,321,61,377,46,378,52,322,67,271,79"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1logger__config.html#a28b4aedeb6bfa7edfd72d3e0201ded7b" title="Validate the configuration." alt="" coords="605,69,772,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="547,87,592,87,592,92,547,92"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="820,40,983,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="772,75,806,70,807,76,773,80"/>
+<area shape="rect" id="Node000007" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="822,105,981,130"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="773,98,809,102,808,108,772,103"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="1031,40,1197,80"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="983,57,1017,57,1017,63,983,63"/>
+<area shape="poly" id="edge12_Node000012_Node000003" title=" " alt="" coords="293,47,367,65,366,70,292,52"/>
+<area shape="poly" id="edge13_Node000012_Node000009" title=" " alt="" coords="293,47,323,62,339,76,348,91,356,106,371,119,384,126,382,131,368,124,352,109,343,94,335,80,320,66,291,52"/>
+<area shape="poly" id="edge14_Node000012_Node000010" title=" " alt="" coords="293,44,323,62,335,76,343,90,348,117,354,144,360,157,371,170,376,174,373,179,367,174,356,160,349,146,343,118,337,91,331,79,320,66,291,49"/>
+<area shape="poly" id="edge15_Node000012_Node000011" title=" " alt="" coords="292,27,355,26,356,31,292,33"/>
+<area shape="poly" id="edge17_Node000013_Node000003" title=" " alt="" coords="301,124,366,109,367,114,303,129"/>
+<area shape="poly" id="edge18_Node000013_Node000008" title=" " alt="" coords="300,164,323,176,339,191,348,206,356,220,371,234,384,241,382,246,368,238,352,224,343,209,335,195,320,181,298,169"/>
+<area shape="poly" id="edge19_Node000013_Node000009" title=" " alt="" coords="307,144,362,144,362,149,307,149"/>
+<area shape="poly" id="edge20_Node000013_Node000010" title=" " alt="" coords="303,164,367,179,366,184,301,169"/>
+<area shape="poly" id="edge21_Node000013_Node000011" title=" " alt="" coords="295,124,320,111,335,98,343,84,352,70,368,55,377,49,380,54,371,59,356,73,348,87,339,101,323,116,298,129"/>
+<area shape="poly" id="edge23_Node000014_Node000003" title=" " alt="" coords="298,188,320,176,335,163,343,149,352,134,368,119,377,113,380,118,371,123,356,137,348,152,339,166,323,181,300,193"/>
+<area shape="poly" id="edge24_Node000014_Node000008" title=" " alt="" coords="302,226,387,243,386,248,300,231"/>
+<area shape="poly" id="edge25_Node000014_Node000009" title=" " alt="" coords="292,188,399,160,401,165,294,193"/>
+<area shape="poly" id="edge26_Node000014_Node000010" title=" " alt="" coords="301,206,366,204,366,209,301,211"/>
+<area shape="poly" id="edge27_Node000014_Node000011" title=" " alt="" coords="299,190,320,177,332,162,338,148,343,118,348,87,355,71,367,55,372,51,376,55,371,59,359,74,353,88,348,119,343,150,336,165,323,181,302,195"/>
+</map>

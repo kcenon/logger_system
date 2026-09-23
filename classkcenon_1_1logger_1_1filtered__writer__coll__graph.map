@@ -1,0 +1,20 @@
+<map id="kcenon::logger::filtered_writer" name="kcenon::logger::filtered_writer">
+<area shape="rect" id="Node000001" title="Decorator that applies a filter to a wrapped writer." alt="" coords="445,853,609,1093"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1decorator__writer__base.html" title="Abstract base class for decorator pattern log writers." alt="" coords="318,451,513,791"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="476,803,492,852,487,854,471,804"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,5,185,205"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="62,219,55,261,54,304,60,347,75,387,97,421,123,453,153,481,185,507,253,550,319,581,317,586,251,554,182,511,149,485,119,456,92,424,70,389,55,348,49,305,50,261,56,219"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="85,288,301,368"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="142,205,171,272,166,274,137,207"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1decorator__writer__tag.html" title="Tag interface for decorator writers." alt="" coords="325,288,505,368"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="418,382,418,450,413,450,413,382"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="225,367,310,478,306,481,221,370"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="529,295,608,361"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="554,362,515,437,510,435,550,360"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="503,65,634,145"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="571,159,571,295,566,295,566,159"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="575,581,783,661"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="665,662,588,840,583,838,660,660"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1log__filter__interface.html" title="Interface for log filters." alt="" coords="632,268,804,388"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="713,388,689,565,684,564,708,388"/>
+</map>

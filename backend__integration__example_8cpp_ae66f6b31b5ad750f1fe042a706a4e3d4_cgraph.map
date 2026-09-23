@@ -1,0 +1,19 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,109,60,134"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger__builder.html#ac92e85f0d7373398ae45d04c78b2ba72" title="Add a writer to the logger." alt="" coords="119,5,286,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="44,106,71,81,107,55,119,48,122,53,109,60,75,85,48,110"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1logger__builder.html#ac055417d32675b0fee649681e1ded0fa" title=" " alt="" coords="119,69,286,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="60,114,105,105,106,110,61,119"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1logger__builder.html#a75f79c43d9d64fa35e60cc6d7fd6eb38" title=" " alt="" coords="119,133,286,173"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="61,124,106,132,105,138,60,129"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1logger__builder.html#a6396c90753fdd1255c424fe3411f9cac" title="Use standalone backend explicitly." alt="" coords="108,198,297,253"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="48,133,75,158,109,183,120,189,117,194,107,188,72,162,45,136"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1logger__config.html#a28b4aedeb6bfa7edfd72d3e0201ded7b" title="Validate the configuration." alt="" coords="345,69,512,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="287,87,332,87,332,92,287,92"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="560,40,723,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="512,75,546,70,547,76,513,80"/>
+<area shape="rect" id="Node000007" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="562,105,721,130"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="513,98,549,102,548,108,512,103"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="771,40,937,80"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="723,57,757,57,757,63,723,63"/>
+</map>

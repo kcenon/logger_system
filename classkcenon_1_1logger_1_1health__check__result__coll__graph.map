@@ -1,0 +1,10 @@
+<map id="kcenon::logger::health_check_result" name="kcenon::logger::health_check_result">
+<area shape="rect" id="Node000001" title="Health check result." alt="" coords="5,391,175,651"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="51,135,129,200"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,201,83,263,83,374,78,374,78,263,83,200"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="169,263,347,328"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="131,196,205,251,201,255,128,200"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="25,5,155,85"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,99,93,134,87,134,87,99"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="236,330,187,396,182,393,232,326"/>
+</map>

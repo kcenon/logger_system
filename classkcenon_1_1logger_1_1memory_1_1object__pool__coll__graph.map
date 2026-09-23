@@ -1,0 +1,13 @@
+<map id="kcenon::logger::memory::object_pool&lt; T &gt;" name="kcenon::logger::memory::object_pool&lt; T &gt;">
+<area shape="rect" id="Node000001" title="Thread&#45;safe object pool for high&#45;performance memory management." alt="" coords="227,316,401,516"/>
+<area shape="rect" id="Node000002" href="$structkcenon_1_1logger_1_1memory_1_1object__pool_1_1config.html" title="Configuration for object pool." alt="" coords="5,133,188,253"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,252,217,313,214,317,153,255"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="212,161,296,226"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="265,225,285,300,280,301,260,227"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="320,153,489,233"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="391,235,363,302,359,300,386,232"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="393,5,416,71"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="407,71,407,137,402,137,402,71"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="514,161,669,226"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="570,228,541,261,508,294,463,329,416,360,413,356,460,325,504,290,537,257,566,224"/>
+</map>

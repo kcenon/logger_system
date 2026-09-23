@@ -1,0 +1,16 @@
+<map id="kcenon::logger::template_formatter" name="kcenon::logger::template_formatter">
+<area shape="rect" id="Node000001" title="Customizable formatter using template strings with placeholders." alt="" coords="150,728,345,968"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__formatter__interface.html" title="Abstract interface for log message formatters." alt="" coords="5,505,209,665"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,676,186,727,181,729,154,678"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1format__options.html" title="Configuration options for log formatting." alt="" coords="15,263,200,443"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="110,443,110,489,105,489,105,443"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="229,135,308,200"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="270,200,254,712,249,712,265,200"/>
+<area shape="rect" id="Node000007" href="$structkcenon_1_1logger_1_1template__formatter_1_1template__segment.html" title="Segment of parsed template." alt="" coords="285,303,500,403"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="292,199,353,288,348,291,288,202"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="203,5,334,85"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="271,99,271,134,266,134,266,99"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="288,538,487,633"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="365,634,321,715,317,712,360,632"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="394,403,391,521,386,521,389,403"/>
+</map>

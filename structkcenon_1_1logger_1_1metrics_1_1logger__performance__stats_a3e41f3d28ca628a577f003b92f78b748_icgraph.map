@@ -1,0 +1,7 @@
+<map id="kcenon::logger::metrics::logger_performance_stats::get_avg_enqueue_time_ns" name="kcenon::logger::metrics::logger_performance_stats::get_avg_enqueue_time_ns">
+<area shape="rect" id="Node000001" title="Get average enqueue time in nanoseconds." alt="" coords="264,5,468,60"/>
+<area shape="rect" id="Node000002" href="$metrics__demo_8cpp.html#a3a0eef174cfc8a02c8ed68e55676df88" title=" " alt="" coords="108,20,216,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="250,35,216,35,216,30,250,30"/>
+<area shape="rect" id="Node000003" href="$metrics__demo_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,20,60,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,35,60,35,60,30,94,30"/>
+</map>

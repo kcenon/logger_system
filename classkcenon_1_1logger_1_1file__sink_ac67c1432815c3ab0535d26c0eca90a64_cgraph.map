@@ -1,0 +1,9 @@
+<map id="kcenon::logger::file_sink::write_raw" name="kcenon::logger::file_sink::write_raw">
+<area shape="rect" id="Node000001" title="Write a pre&#45;formatted message to the output destination." alt="" coords="5,35,152,75"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="200,5,363,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,41,186,36,187,42,153,47"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="202,70,361,95"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="153,62,189,67,188,72,152,67"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="411,5,577,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="363,23,397,23,397,28,363,28"/>
+</map>

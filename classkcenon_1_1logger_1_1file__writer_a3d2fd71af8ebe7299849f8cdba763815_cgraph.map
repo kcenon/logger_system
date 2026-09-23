@@ -1,0 +1,27 @@
+<map id="kcenon::logger::file_writer::write" name="kcenon::logger::file_writer::write">
+<area shape="rect" id="Node000001" title="Write a log entry to file." alt="" coords="5,97,152,137"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger_1_1utils.html#a59dc71d8dd9d4474f7c65d68dbdd0258" title="Stream state verification helper." alt="" coords="212,97,373,137"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,114,198,114,198,120,152,120"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="441,33,604,73"/>
+<area shape="poly" id="edge11_Node000001_Node000003" title=" " alt="" coords="95,95,139,54,168,34,199,19,231,10,265,5,332,5,396,13,452,27,450,32,395,19,331,10,265,10,232,15,201,24,170,38,142,58,99,99"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1file__writer.html#a561e0eae3b068d0ce032f3ded6a702dd" title="Format a log entry using the current formatter." alt="" coords="213,161,373,201"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="147,135,213,154,211,160,146,140"/>
+<area shape="rect" id="Node000009" href="$namespacekcenon_1_1logger_1_1security.html#ac9578ff96b93ef4157f1ccaf649d73c0" title="Format a signature line suitable for appending to a text log record." alt="" coords="200,225,385,265"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="102,135,146,173,201,211,214,217,212,222,199,215,143,177,99,139"/>
+<area shape="rect" id="Node000012" href="$namespacekcenon_1_1logger_1_1utils.html#aafab2237b40cefbc519b3dcdf64fb23d" title="Error handling helper for write operations." alt="" coords="214,33,371,73"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="146,94,211,74,213,80,147,99"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="365,94,437,74,438,79,366,100"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="443,104,602,130"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="374,114,430,114,430,120,374,120"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="660,33,827,73"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="605,50,646,50,646,56,605,56"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="441,161,604,201"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="373,178,427,178,427,184,373,184"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="662,161,825,201"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="605,178,648,178,648,184,605,184"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1security_1_1integrity__policy.html#af54c2f30aa781fc19e11ef0b16aef868" title="Short identifier used as a prefix in serialized signatures (e.g. &quot;HMAC&#45;SHA256&quot;). Implementations must..." alt="" coords="433,225,612,265"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="386,242,420,242,420,248,386,248"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1security_1_1integrity__policy.html#ad7df3cf10a0ba9e06bba3afa218a7ea4" title="Produce a signature for record." alt="" coords="433,289,612,329"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="366,263,438,283,437,288,365,268"/>
+<area shape="poly" id="edge13_Node000012_Node000003" title=" " alt="" coords="372,50,428,50,428,56,372,56"/>
+</map>

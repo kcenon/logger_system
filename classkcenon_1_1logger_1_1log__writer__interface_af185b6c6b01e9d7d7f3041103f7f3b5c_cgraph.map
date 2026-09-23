@@ -1,0 +1,5 @@
+<map id="kcenon::logger::log_writer_interface::close" name="kcenon::logger::log_writer_interface::close">
+<area shape="rect" id="Node000001" title="Close the writer and release resources." alt="" coords="5,5,180,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a8b38854d249b4da0d7a5bf6d45dccf47" title="Flush any buffered data." alt="" coords="228,5,399,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,23,215,23,215,28,180,28"/>
+</map>

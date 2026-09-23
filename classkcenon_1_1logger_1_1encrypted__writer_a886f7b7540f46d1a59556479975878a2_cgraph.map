@@ -1,0 +1,7 @@
+<map id="kcenon::logger::encrypted_writer::encrypted_writer" name="kcenon::logger::encrypted_writer::encrypted_writer">
+<area shape="rect" id="Node000001" title="Construct encrypted writer with wrapped writer." alt="" coords="5,37,196,77"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#ac4a1cbaf2f87843752132839348f2cd3" title="Log an audit event." alt="" coords="244,5,467,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,43,230,38,231,44,197,48"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html#a45294649fb2480ba89fc7308f42d326f" title="Get key size in bytes." alt="" coords="266,69,445,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="197,67,253,74,252,79,196,72"/>
+</map>

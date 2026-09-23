@@ -1,0 +1,7 @@
+<map id="kcenon::logger::composite_writer" name="kcenon::logger::composite_writer">
+<area shape="rect" id="Node000001" title="Coordinates formatting and output through a pipeline." alt="" coords="106,253,293,493"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,5,185,205"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,217,155,252,150,254,136,219"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1composite__writer__tag.html" title="Tag interface for composite writers." alt="" coords="210,65,397,145"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="286,159,249,254,244,252,281,157"/>
+</map>

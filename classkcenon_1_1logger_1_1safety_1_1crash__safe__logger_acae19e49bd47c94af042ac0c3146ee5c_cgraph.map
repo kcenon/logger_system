@@ -1,0 +1,7 @@
+<map id="kcenon::logger::safety::crash_safe_logger::~crash_safe_logger" name="kcenon::logger::safety::crash_safe_logger::~crash_safe_logger">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,45,172,100"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1safety_1_1crash__safe__logger.html#a7d4e61347feed24cc7c8c469174b4fa8" title="Stop auto&#45;flush background thread." alt="" coords="234,5,418,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,56,220,48,221,53,173,61"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1safety_1_1crash__safe__logger.html#a9223d6c5b3977a19bda0c47202a70196" title="Remove signal handlers." alt="" coords="220,84,432,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="173,84,207,89,206,95,172,89"/>
+</map>

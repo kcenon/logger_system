@@ -1,0 +1,7 @@
+<map id="kcenon::logger::batch_writer::get_name" name="kcenon::logger::batch_writer::get_name">
+<area shape="rect" id="Node000001" title="Get writer name." alt="" coords="5,37,168,77"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a36e4ca76478f6b08b045f3386c02d61d" title=" " alt="" coords="216,5,421,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,44,202,39,203,44,169,49"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="225,69,413,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,66,212,72,211,77,168,71"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="kcenon::logger::async::high_performance_async_writer::write_direct" name="kcenon::logger::async::high_performance_async_writer::write_direct">
+<area shape="rect" id="Node000001" title="Write directly to the underlying writer (fallback mode)" alt="" coords="5,34,199,89"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="262,5,425,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,44,248,37,249,42,199,50"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a2f5aa19fa412f61aedca8f6b6a231a71" title="Update performance statistics." alt="" coords="247,70,440,125"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="199,73,233,78,233,84,198,78"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="488,5,655,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="425,23,474,23,474,28,425,28"/>
+</map>

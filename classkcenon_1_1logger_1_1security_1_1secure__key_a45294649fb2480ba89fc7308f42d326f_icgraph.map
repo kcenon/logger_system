@@ -1,0 +1,19 @@
+<map id="kcenon::logger::security::secure_key::size" name="kcenon::logger::security::secure_key::size">
+<area shape="rect" id="Node000001" title="Get key size in bytes." alt="" coords="527,149,705,189"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#a50cef7d2e2926ddf2b09a731a6cb6eb9" title="Calculate HMAC signature." alt="" coords="254,5,475,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="584,142,536,99,477,60,450,48,452,43,480,55,540,95,588,138"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1security_1_1hmac__sha256__integrity__policy.html#a3a06dc6685878f7e72cfaf47f79145be" title=" " alt="" coords="273,70,456,125"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="532,148,456,126,457,121,533,143"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1encrypted__writer.html#a886f7b7540f46d1a59556479975878a2" title="Construct encrypted writer with wrapped writer." alt="" coords="269,149,460,189"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="513,172,460,172,460,167,513,167"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1encrypted__writer.html#a572956dddf7abb359777ec041fe20ff6" title="Rotate encryption key." alt="" coords="269,213,460,253"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="524,195,444,216,443,211,523,190"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#a8faaa55edf1e628e81868226d3fa76f4" title="Save key to file with secure permissions." alt="" coords="251,277,479,317"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="582,200,535,235,480,268,450,280,448,275,477,263,532,231,579,196"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#af6d42db093bd32dbd0ffb06ffca23f7d" title="Verify integrity of an audit log entry." alt="" coords="5,5,203,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="240,28,203,28,203,23,240,23"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1security_1_1hmac__sha256__integrity__policy.html#a5c30ce2e5928a5dcca66f8c4bb996864" title="Produce a signature for record." alt="" coords="13,70,195,125"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="259,100,196,100,196,95,259,95"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1security_1_1hmac__sha256__integrity__policy.html#a3092af9971bee3c6d10203d1e44178b4" title="Verify that signature matches record." alt="" coords="13,149,195,203"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="261,131,196,151,195,146,259,126"/>
+</map>

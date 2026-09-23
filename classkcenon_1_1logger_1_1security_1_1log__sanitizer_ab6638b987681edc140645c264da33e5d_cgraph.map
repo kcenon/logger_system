@@ -1,0 +1,5 @@
+<map id="kcenon::logger::security::log_sanitizer::sanitize" name="kcenon::logger::security::log_sanitizer::sanitize">
+<area shape="rect" id="Node000001" title="Sanitize a string by masking all detected sensitive data." alt="" coords="5,5,184,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1log__sanitizer.html#a4802dd13d994db563c4d9a15b7d2f6b8" title=" " alt="" coords="232,5,421,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,23,218,23,218,28,184,28"/>
+</map>

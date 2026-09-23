@@ -1,0 +1,23 @@
+<map id="kcenon::logger::analysis::log_analyzer" name="kcenon::logger::analysis::log_analyzer">
+<area shape="rect" id="Node000001" title="Log analyzer for processing and analyzing log data." alt="" coords="415,677,627,1037"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="632,507,788,602"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="683,604,638,676,633,673,679,601"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1analysis_1_1analyzed__log__entry.html" title="Log entry for analysis." alt="" coords="744,292,916,432"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="789,434,750,495,746,492,784,431"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="603,135,681,200"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="675,199,753,278,749,282,671,202"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="362,329,541,395"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="604,194,561,226,519,271,483,318,479,314,515,268,558,222,601,190"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="565,322,719,402"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="645,200,645,306,639,306,639,200"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="577,5,707,85"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="645,99,645,134,639,134,639,99"/>
+<area shape="rect" id="Node000006" href="$structkcenon_1_1logger_1_1analysis_1_1analysis__stats.html" title="Analysis result statistics." alt="" coords="341,495,513,615"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="448,614,463,661,458,662,443,616"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="189,312,338,412"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="288,411,305,441,325,469,337,481,333,485,321,472,300,444,283,414"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="5,305,164,419"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="144,418,177,444,213,468,269,497,327,520,325,525,267,502,210,473,174,449,141,422"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="444,395,431,456,429,478,424,478,426,456,439,394"/>
+<area shape="poly" id="edge10_Node000006_Node000010" title=" " alt="" coords="642,403,633,439,615,472,575,506,530,529,527,524,572,501,611,469,628,437,637,402"/>
+</map>

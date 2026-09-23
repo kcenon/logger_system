@@ -1,0 +1,5 @@
+<map id="kcenon::logger::sampling::sampling_config::rate_limited" name="kcenon::logger::sampling::sampling_config::rate_limited">
+<area shape="rect" id="Node000001" title="Create a rate limiting configuration." alt="" coords="240,5,427,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1sampling_1_1sampler__factory.html#ab13efbeedf2faeeb5bfce52b1459b1e9" title="Create a rate limiting sampler." alt="" coords="5,5,192,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="227,35,192,35,192,30,227,30"/>
+</map>

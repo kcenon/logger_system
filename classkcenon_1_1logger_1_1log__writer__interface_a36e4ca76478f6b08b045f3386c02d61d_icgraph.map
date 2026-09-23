@@ -1,0 +1,15 @@
+<map id="kcenon::logger::log_writer_interface::get_name" name="kcenon::logger::log_writer_interface::get_name">
+<area shape="rect" id="Node000001" title=" " alt="" coords="596,101,801,141"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async__writer.html#a26745f3bf255c5d8a242265c581550d7" title="Get the name of this writer." alt="" coords="371,5,535,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="639,98,547,60,515,48,516,43,549,55,641,93"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1batch__writer.html#ac52268a5eb41b4dae6eee0e9085c2e71" title="Get writer name." alt="" coords="371,69,534,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="582,109,534,103,534,97,583,104"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1filtered__writer.html#afa52fac9e6683fb5685f2f4296eb7e17" title="Get the name of this writer." alt="" coords="367,133,539,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="583,139,539,145,538,140,582,134"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1formatted__writer.html#a6101d77c99710924bbc986ad3a402a92" title="Get the name of this writer." alt="" coords="357,197,548,237"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="641,149,549,188,516,200,515,195,547,183,639,145"/>
+<area shape="rect" id="Node000005" href="$decorator__usage_8cpp.html#a02829a81f3fc061bcd16e4caf1525dc4" title="Example 2: Single Decorator Usage." alt="" coords="108,141,309,166"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="353,156,309,156,309,151,353,151"/>
+<area shape="rect" id="Node000006" href="$decorator__usage_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,141,60,166"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="94,156,60,156,60,151,94,151"/>
+</map>

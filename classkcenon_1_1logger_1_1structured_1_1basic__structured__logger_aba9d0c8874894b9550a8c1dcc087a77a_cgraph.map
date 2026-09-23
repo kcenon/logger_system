@@ -1,0 +1,21 @@
+<map id="kcenon::logger::structured::basic_structured_logger::log_structured" name="kcenon::logger::structured::basic_structured_logger::log_structured">
+<area shape="rect" id="Node000001" title="Log a structured message." alt="" coords="5,280,197,335"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1structured_1_1json__formatter.html#a5c4ca764065af58a40208c1fc74a567b" title=" " alt="" coords="245,170,437,210"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,277,286,214,288,219,159,282"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1structured_1_1basic__structured__logger.html#ae91ee925b83cbef0df43034e07d971c1" title="Format entry in logfmt style (key=value pairs)" alt="" coords="245,359,437,413"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="187,332,246,352,244,357,185,337"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1structured_1_1json__formatter.html#a1e5425b1b0a24409a5ad9ce76ff5fffb" title=" " alt="" coords="491,5,683,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="361,168,414,119,484,69,494,64,496,68,487,74,418,123,365,172"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1structured_1_1json__formatter.html#a3a5e484f969db3d5ad6a7ec70323ddd5" title=" " alt="" coords="491,84,683,139"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="404,167,487,140,489,145,405,172"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1structured_1_1json__formatter.html#ab9ef35cf55a6e70b0973adeea774c87e" title=" " alt="" coords="491,163,683,217"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="438,187,477,187,477,193,438,193"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1structured_1_1json__formatter.html#a8124e91908e0d1033ad773d35a5992ce" title=" " alt="" coords="491,241,683,296"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="405,208,489,235,487,240,404,213"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1structured_1_1basic__structured__logger.html#a40617f187beba07728b5ccd0bae253b7" title=" " alt="" coords="491,320,683,375"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="437,368,477,362,478,367,438,374"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1structured_1_1basic__structured__logger.html#abad096944f743416c5bb4e7117a7e2e0" title=" " alt="" coords="485,399,688,453"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="438,399,472,405,471,410,437,404"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1structured_1_1basic__structured__logger.html#a36dae8ffb4c16d86a4906c8b1236512e" title=" " alt="" coords="491,477,683,532"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="389,411,487,464,500,470,497,474,484,468,387,416"/>
+</map>

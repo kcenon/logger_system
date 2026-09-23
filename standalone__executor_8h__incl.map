@@ -1,0 +1,7 @@
+<map id="include/kcenon/logger/integration/standalone_executor.h" name="include/kcenon/logger/integration/standalone_executor.h">
+<area shape="rect" id="Node000001" title="Standalone IExecutor implementation using std::jthread." alt="" coords="80,5,253,60"/>
+<area shape="rect" id="Node000002" href="$thread__integration__detector_8h.html" title="Conditionally enables thread_system integration when available." alt="" coords="5,108,152,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,62,112,100,108,96,142,59"/>
+<area shape="rect" id="Node000003" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="177,115,335,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="192,58,232,103,228,106,188,62"/>
+</map>

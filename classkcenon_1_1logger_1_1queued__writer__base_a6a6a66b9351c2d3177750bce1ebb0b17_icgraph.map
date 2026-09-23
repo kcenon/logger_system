@@ -1,0 +1,5 @@
+<map id="kcenon::logger::queued_writer_base::handle_overflow" name="kcenon::logger::queued_writer_base::handle_overflow">
+<area shape="rect" id="Node000001" title="Handle queue overflow condition." alt="" coords="248,5,468,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1queued__writer__base.html#a900ad2227f4f37d158bbb6f71a356104" title="Try to enqueue an entry with overflow protection." alt="" coords="5,5,200,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="234,28,200,28,200,23,234,23"/>
+</map>

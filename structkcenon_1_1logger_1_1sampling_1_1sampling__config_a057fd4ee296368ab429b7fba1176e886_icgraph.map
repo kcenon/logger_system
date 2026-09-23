@@ -1,0 +1,5 @@
+<map id="kcenon::logger::sampling::sampling_config::random_sampling" name="kcenon::logger::sampling::sampling_config::random_sampling">
+<area shape="rect" id="Node000001" title="Create a random sampling configuration." alt="" coords="295,5,489,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1sampling_1_1sampler__factory.html#a1499272dd0c76c6a8c4f0b8edf7c6780" title="Create a random sampling sampler." alt="" coords="5,13,247,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="281,35,247,35,247,30,281,30"/>
+</map>

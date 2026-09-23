@@ -1,0 +1,10 @@
+<map id="kcenon::logger::metric_value" name="kcenon::logger::metric_value">
+<area shape="rect" id="Node000001" title="Single metric value with metadata." alt="" coords="5,435,165,575"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="46,135,125,200"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,200,79,277,79,372,81,418,76,418,73,372,73,277,79,200"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="141,277,285,372"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="114,199,167,263,163,266,109,202"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="20,5,151,85"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="88,99,88,134,83,134,83,99"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="182,374,147,423,143,419,178,371"/>
+</map>

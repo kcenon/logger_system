@@ -1,0 +1,9 @@
+<map id="include/kcenon/logger/interfaces/log_formatter_interface.h" name="include/kcenon/logger/interfaces/log_formatter_interface.h">
+<area shape="rect" id="Node000001" title="Interface for log message formatters (Strategy Pattern) kcenon." alt="" coords="35,5,219,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,64,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,62,59,100,55,96,97,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="88,108,165,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="129,60,129,94,124,94,124,60"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="190,108,277,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="161,58,210,97,206,101,158,62"/>
+</map>

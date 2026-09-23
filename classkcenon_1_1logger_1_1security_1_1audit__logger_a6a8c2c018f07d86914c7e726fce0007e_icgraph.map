@@ -1,0 +1,7 @@
+<map id="kcenon::logger::security::audit_logger::get_audit_file" name="kcenon::logger::security::audit_logger::get_audit_file">
+<area shape="rect" id="Node000001" title=" " alt="" coords="232,41,439,81"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#aa55e1e7b25091be82709220a17b8b07f" title="Initialize audit logger." alt="" coords="5,5,184,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="218,46,184,41,184,36,219,41"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#ad82da3dd1e0ddf62e33ac22064b2fb00" title="Write entry to audit log file." alt="" coords="5,70,184,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,81,184,87,184,81,218,76"/>
+</map>

@@ -1,0 +1,50 @@
+<map id="kcenon::logger::async::batch_processor" name="kcenon::logger::async::batch_processor">
+<area shape="rect" id="Node000001" title="Advanced batch processor with dynamic sizing and back&#45;pressure handling." alt="" coords="654,1712,843,2192"/>
+<area shape="rect" id="Node000002" href="$structkcenon_1_1logger_1_1async_1_1batch__processor_1_1config.html" title="Configuration for batch processor." alt="" coords="5,1369,196,1649"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,1635,210,1647,261,1691,315,1732,429,1804,541,1862,640,1906,637,1911,539,1867,426,1809,312,1736,257,1695,207,1651,194,1639"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="221,1469,367,1549"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="296,1549,305,1617,316,1653,334,1687,364,1725,399,1761,438,1793,479,1822,562,1871,640,1908,637,1913,559,1876,476,1827,435,1797,396,1765,360,1729,329,1689,311,1655,300,1618,291,1550"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="187,942,367,1142"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="283,1142,295,1453,289,1453,278,1143"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="467,1447,686,1571"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="603,1570,652,1696,647,1698,598,1572"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1async_1_1lockfree__spsc__queue.html" title=" " alt="" coords="484,880,669,1204"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="579,1205,579,1431,574,1431,574,1205"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="454,171,609,236"/>
+<area shape="poly" id="edge22_Node000001_Node000007" title=" " alt="" coords="492,238,463,266,436,300,415,339,409,360,407,382,407,1511,413,1567,430,1622,455,1673,487,1722,524,1767,563,1808,643,1876,639,1880,560,1811,520,1770,483,1725,451,1676,425,1624,408,1568,402,1511,402,382,404,359,410,337,431,297,459,262,488,234"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="569,234,595,263,616,296,623,315,625,336,641,462,648,562,647,661,635,788,624,864,618,864,630,788,641,661,643,562,635,463,619,336,617,317,612,298,590,266,565,238"/>
+<area shape="rect" id="Node000009" href="$structkcenon_1_1logger_1_1async_1_1lockfree__spsc__queue_1_1cell.html" title="Cell structure with sequence number for ABA prevention." alt="" coords="452,336,611,431"/>
+<area shape="poly" id="edge9_Node000009_Node000007" title=" " alt="" coords="534,236,534,320,529,320,529,236"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="442,601,621,695"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="539,695,559,863,554,864,534,696"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="534,431,534,584,529,584,529,431"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="811,1462,1022,1557"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="901,1558,848,1697,843,1695,897,1556"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1async_1_1batch__processing__jthread__worker.html" title="Worker thread for batch processing with jthread compatibility." alt="" coords="849,930,1054,1154"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="946,1154,924,1446,919,1445,940,1154"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="839,615,923,681"/>
+<area shape="poly" id="edge21_Node000001_Node000012" title=" " alt="" coords="871,682,850,742,831,813,812,927,795,1044,772,1279,758,1502,752,1696,747,1696,753,1502,766,1279,790,1044,806,926,826,811,845,740,865,680"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="868,682,854,718,842,761,836,809,842,855,866,914,861,916,837,857,831,809,837,760,849,716,863,680"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html" title="Wrapper for std::jthread or std::thread with manual stop mechanism." alt="" coords="1141,508,1297,788"/>
+<area shape="poly" id="edge13_Node000011_Node000013" title=" " alt="" coords="1143,765,1039,918,1034,915,1139,762"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="1050,336,1223,431"/>
+<area shape="poly" id="edge19_Node000011_Node000014" title=" " alt="" coords="1090,433,1061,468,1037,509,973,914,968,913,1031,507,1056,465,1086,429"/>
+<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="1153,430,1169,483,1171,492,1166,493,1163,485,1147,432"/>
+<area shape="rect" id="Node000015" href="$classkcenon_1_1logger_1_1async_1_1simple__stop__source.html" title="Simple stop source for environments without std::stop_token." alt="" coords="1025,133,1193,273"/>
+<area shape="poly" id="edge15_Node000014_Node000015" title=" " alt="" coords="1122,273,1129,319,1124,320,1117,274"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="888,5,1033,71"/>
+<area shape="poly" id="edge20_Node000001_Node000016" title=" " alt="" coords="942,72,896,147,838,252,781,377,757,443,738,509,721,598,719,669,723,741,726,833,726,1511,732,1695,726,1696,721,1511,721,833,718,741,714,669,716,597,733,507,752,441,776,375,834,250,892,144,937,70"/>
+<area shape="poly" id="edge18_Node000011_Node000016" title=" " alt="" coords="963,71,963,202,963,649,959,913,953,913,958,649,958,202,958,71"/>
+<area shape="poly" id="edge16_Node000015_Node000016" title=" " alt="" coords="991,69,1037,119,1033,123,987,72"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="1248,351,1332,416"/>
+<area shape="poly" id="edge17_Node000013_Node000017" title=" " alt="" coords="1284,417,1264,493,1258,491,1279,416"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="1047,1469,1221,1549"/>
+<area shape="poly" id="edge23_Node000001_Node000018" title=" " alt="" coords="1110,1551,1036,1651,946,1753,857,1847,853,1843,942,1750,1032,1648,1106,1548"/>
+<area shape="rect" id="Node000019" href="$structkcenon_1_1logger_1_1async_1_1batch__processor_1_1processing__stats.html" title="Processing statistics." alt="" coords="1246,1469,1491,1549"/>
+<area shape="poly" id="edge24_Node000001_Node000019" title=" " alt="" coords="1337,1551,1290,1601,1234,1651,1139,1722,1040,1788,860,1895,857,1890,1037,1784,1136,1718,1231,1647,1286,1597,1333,1548"/>
+<area shape="rect" id="Node000020" title=" " alt="" coords="1078,1009,1249,1075"/>
+<area shape="poly" id="edge25_Node000019_Node000020" title=" " alt="" coords="1157,1076,1145,1131,1140,1201,1141,1239,1147,1276,1158,1311,1176,1344,1188,1354,1201,1357,1217,1360,1234,1367,1286,1409,1329,1455,1326,1459,1282,1413,1231,1372,1215,1365,1200,1363,1185,1359,1172,1347,1154,1313,1142,1277,1136,1239,1134,1201,1140,1130,1152,1074"/>
+<area shape="rect" id="Node000021" title=" " alt="" coords="1385,1009,1547,1075"/>
+<area shape="poly" id="edge27_Node000001_Node000021" title=" " alt="" coords="1483,1074,1524,1180,1544,1251,1561,1331,1569,1414,1565,1498,1557,1539,1545,1578,1528,1616,1505,1651,1475,1688,1440,1723,1363,1782,1278,1830,1188,1868,1098,1898,1010,1919,930,1935,860,1944,859,1939,929,1929,1009,1914,1096,1893,1186,1863,1275,1825,1360,1778,1437,1719,1471,1685,1501,1648,1523,1613,1540,1576,1552,1537,1559,1497,1563,1414,1555,1332,1539,1253,1519,1181,1478,1076"/>
+<area shape="poly" id="edge26_Node000019_Node000021" title=" " alt="" coords="1450,1076,1417,1145,1400,1186,1387,1229,1376,1288,1371,1348,1369,1453,1363,1453,1365,1348,1371,1287,1382,1227,1395,1184,1412,1143,1446,1074"/>
+</map>

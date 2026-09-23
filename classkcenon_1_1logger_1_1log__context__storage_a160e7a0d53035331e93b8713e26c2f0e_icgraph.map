@@ -1,0 +1,44 @@
+<map id="kcenon::logger::log_context_storage::get_has_context" name="kcenon::logger::log_context_storage::get_has_context">
+<area shape="rect" id="Node000001" title=" " alt="" coords="499,362,661,417"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__context__storage.html#aef5569952063e545b002ef507922dc18" title="Clear all context fields for the current thread." alt="" coords="264,5,439,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="572,349,560,285,538,208,522,167,502,128,478,92,449,59,433,48,436,43,452,55,482,88,506,125,527,165,543,206,565,284,577,348"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__context__storage.html#a56728008e7c8ea20aea0be5ca5994d99" title="Get all context fields for the current thread." alt="" coords="270,69,433,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="567,349,552,298,529,237,494,176,473,148,449,123,431,111,434,107,452,119,477,145,499,173,533,235,558,296,573,348"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__context__storage.html#a900993bd17a765c41cb2733572e8b820" title="Get a specific field value if it exists." alt="" coords="252,133,451,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="561,350,543,312,518,268,487,225,449,187,430,176,433,171,452,183,491,221,523,265,548,309,566,348"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1log__context__storage.html#ac03919f6c462887a5d5d5e8ead0595ec" title="Check if any context fields are set for the current thread." alt="" coords="269,326,434,381"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="485,377,434,369,435,364,485,372"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1log__context__storage.html#a4a959d60e00a97238c2c10f4c7538f7b" title="Remove a context field for the current thread." alt="" coords="255,261,447,301"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="523,357,450,317,417,304,419,299,452,312,526,352"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1log__context__storage.html#a0311b1bbabef94561f0a8662b52092f5" title="Set a boolean context field for the current thread." alt="" coords="270,405,433,445"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="486,407,433,415,432,410,485,402"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1log__context__storage.html#ac0b440a713c02bbf64a5d27643c11217" title="Set a C&#45;string context field for the current thread." alt="" coords="270,469,433,509"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="521,426,452,460,421,472,419,467,450,455,518,421"/>
+<area shape="rect" id="Node000014" href="$classkcenon_1_1logger_1_1log__context__storage.html#af92645205d1fe73a5c37ebbe9c75ac70" title="Set a log_value context field for the current thread." alt="" coords="270,533,433,573"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="552,429,508,478,481,502,452,524,428,536,426,531,449,519,478,498,504,474,548,426"/>
+<area shape="rect" id="Node000015" href="$classkcenon_1_1logger_1_1log__context__storage.html#a17b7d77e51e0ffa3a302771e32bf8318" title="Set a string context field for the current thread." alt="" coords="270,197,433,237"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="550,352,506,300,479,274,449,252,427,240,429,235,452,247,482,270,510,296,554,349"/>
+<area shape="rect" id="Node000017" href="$classkcenon_1_1logger_1_1log__context__storage.html#a4628a7c4ace7dbca596e70e852ebeff2" title="Set a double context field for the current thread." alt="" coords="270,597,433,637"/>
+<area shape="poly" id="edge21_Node000001_Node000017" title=" " alt="" coords="565,430,547,468,522,510,490,551,452,587,432,599,430,595,449,583,486,548,517,507,542,465,560,428"/>
+<area shape="rect" id="Node000018" href="$classkcenon_1_1logger_1_1log__context__storage.html#af2bcc2487d463289d849d3e3a114f4f7" title="Set an integer context field for the current thread." alt="" coords="270,661,433,701"/>
+<area shape="poly" id="edge22_Node000001_Node000018" title=" " alt="" coords="572,431,556,481,532,540,498,600,477,627,452,651,434,664,431,659,449,647,473,624,494,597,527,538,551,479,567,429"/>
+<area shape="rect" id="Node000019" href="$classkcenon_1_1logger_1_1log__context__storage.html#a089a7801cf95984c6fac4309ab64c281" title="Set multiple context fields at once." alt="" coords="259,725,444,765"/>
+<area shape="poly" id="edge23_Node000001_Node000019" title=" " alt="" coords="576,431,564,493,542,569,526,609,506,647,481,683,452,715,436,727,433,723,449,711,477,680,501,645,521,607,537,567,559,492,571,430"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1scoped__context.html#a8e41728528b53ca633ef9c1e76430df6" title="Construct with boolean value." alt="" coords="11,5,199,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="259,129,250,123,234,107,226,91,217,75,202,59,182,48,184,43,206,55,222,72,230,88,239,104,254,119,262,125"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1scoped__context.html#a41b5f338d2fe2d61feca30ee30aff515" title="Construct with string value." alt="" coords="11,69,199,109"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="260,132,182,112,183,107,261,127"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1scoped__context.html#ae3fa84e36394f6e61a931c9428b8b1e3" title="Construct with double value." alt="" coords="11,133,199,173"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="238,156,199,156,199,151,238,151"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1scoped__context.html#a012ff671e5d34caf1e375dd7c579fbdf" title="Construct with integer value." alt="" coords="11,197,199,237"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="261,179,183,200,182,195,260,174"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1scoped__context.html#a308f484fc8a8f2b485a1a249ca9b19cb" title="Destructor &#45; restores or removes the context field." alt="" coords="5,341,204,381"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="277,308,205,332,169,344,167,339,203,327,275,303"/>
+<area shape="poly" id="edge16_Node000015_Node000005" title=" " alt="" coords="257,193,250,187,237,171,230,154,225,122,221,90,215,75,202,59,186,48,190,43,206,55,219,72,226,88,231,121,235,153,241,168,254,183,260,189"/>
+<area shape="poly" id="edge17_Node000015_Node000006" title=" " alt="" coords="259,193,250,187,234,171,226,155,217,139,202,123,182,112,184,107,206,119,222,136,230,152,239,168,254,183,262,189"/>
+<area shape="poly" id="edge18_Node000015_Node000007" title=" " alt="" coords="260,196,182,176,183,171,261,191"/>
+<area shape="poly" id="edge19_Node000015_Node000008" title=" " alt="" coords="256,220,199,220,199,215,256,215"/>
+<area shape="poly" id="edge20_Node000015_Node000011" title=" " alt="" coords="260,247,254,251,238,270,231,290,223,311,206,331,187,343,184,339,202,327,218,308,225,288,233,268,250,247,257,242"/>
+<area shape="rect" id="Node000016" href="$classkcenon_1_1logger_1_1log__context__scope.html#a098055bdae9e989236eef505c75f78a6" title="Construct scope with a logger reference (for logger&#45;level context)" alt="" coords="29,262,180,317"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="270,244,181,270,179,265,268,239"/>
+</map>

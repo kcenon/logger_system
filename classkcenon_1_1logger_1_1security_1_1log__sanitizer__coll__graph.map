@@ -1,0 +1,11 @@
+<map id="kcenon::logger::security::log_sanitizer" name="kcenon::logger::security::log_sanitizer">
+<area shape="rect" id="Node000001" title="Log sanitizer for masking sensitive data." alt="" coords="5,597,227,992"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="43,440,189,535"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,535,119,581,113,581,113,535"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1security_1_1sanitization__rule.html" title="Configuration for a sanitization rule." alt="" coords="31,277,201,377"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="119,378,119,424,113,424,113,378"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="77,135,155,200"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="119,200,119,261,113,261,113,200"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="51,5,181,85"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="119,99,119,134,113,134,113,99"/>
+</map>

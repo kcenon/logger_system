@@ -1,0 +1,7 @@
+<map id="kcenon::logger::buffered_writer::copy_entry" name="kcenon::logger::buffered_writer::copy_entry">
+<area shape="rect" id="Node000001" title="Copy a log entry for buffer storage." alt="" coords="5,5,185,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="233,5,396,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,23,219,23,219,28,185,28"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="444,5,607,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="396,23,430,23,430,28,396,28"/>
+</map>

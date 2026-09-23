@@ -1,0 +1,13 @@
+<map id="kcenon::logger::result::value" name="kcenon::logger::result::value">
+<area shape="rect" id="Node000001" title=" " alt="" coords="431,63,593,103"/>
+<area shape="rect" id="Node000002" href="$critical__logging__example_8cpp.html#af3661cb486a5baec84764a058cb2f01e" title=" " alt="" coords="224,5,379,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="424,62,375,48,376,43,426,56"/>
+<area shape="rect" id="Node000004" href="$custom__writer__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="274,70,329,95"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="417,85,329,85,329,80,417,80"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1result.html#abbac0f197de84cb191c2d530d18a80d1" title=" " alt="" coords="220,120,383,160"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="426,109,376,123,375,117,424,104"/>
+<area shape="rect" id="Node000003" href="$critical__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="61,13,116,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="210,28,116,28,116,23,210,23"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1logger.html#a641365c08cd20984b21b7cb1bd8c4bae" title="Get current performance metrics." alt="" coords="5,120,172,160"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="206,143,172,143,172,137,206,137"/>
+</map>

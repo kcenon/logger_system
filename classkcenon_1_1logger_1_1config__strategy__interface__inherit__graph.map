@@ -1,0 +1,11 @@
+<map id="kcenon::logger::config_strategy_interface" name="kcenon::logger::config_strategy_interface">
+<area shape="rect" id="Node000001" title="Abstract interface for logger configuration strategies." alt="" coords="318,5,533,165"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1composite__strategy.html" title="Combines multiple configuration strategies." alt="" coords="5,223,192,443"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="307,148,255,180,206,215,194,225,191,221,202,211,252,175,304,143"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1deployment__strategy.html" title="Configuration strategy based on deployment environment." alt="" coords="217,213,413,453"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="387,179,371,214,366,212,382,177"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1environment__strategy.html" title="Configuration strategy based on environment variables." alt="" coords="437,233,638,433"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="469,177,495,232,490,234,465,179"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1performance__strategy.html" title="Configuration strategy for performance tuning." alt="" coords="662,213,866,453"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="546,143,600,175,652,211,663,220,660,224,649,215,598,180,544,148"/>
+</map>

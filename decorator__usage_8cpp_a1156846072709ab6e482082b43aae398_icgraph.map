@@ -1,0 +1,26 @@
+<map id="print_section" name="print_section">
+<area shape="rect" id="Node000001" title=" " alt="" coords="372,181,479,207"/>
+<area shape="rect" id="Node000002" href="$decorator__usage_8cpp.html#a9aa00470ae59104f2d2bf1ef03226dff" title="Example 1: Core Writers (No Decorators)" alt="" coords="133,5,299,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="411,170,377,110,352,79,323,52,284,33,286,28,325,48,356,75,381,107,415,167"/>
+<area shape="rect" id="Node000003" href="$decorator__usage_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,181,60,207"/>
+<area shape="poly" id="edge15_Node000001_Node000003" title=" " alt="" coords="406,172,372,130,349,111,323,96,264,75,215,67,166,73,109,96,85,114,65,138,41,182,37,180,61,135,81,110,107,92,165,68,215,61,266,70,325,92,352,107,375,127,411,168"/>
+<area shape="rect" id="Node000004" href="$decorator__usage_8cpp.html#ac3ed5ca81fef4b6c16c74a5d319f30b4" title="Example 6: Custom Filtering Patterns." alt="" coords="121,107,311,132"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="390,177,323,146,285,135,287,130,325,141,392,172"/>
+<area shape="rect" id="Node000005" href="$decorator__usage_8cpp.html#aec6539611e7b55e909233e1856f54240" title="Example 7: Migration from Manual Nesting." alt="" coords="111,156,321,181"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="358,189,321,184,321,179,359,183"/>
+<area shape="rect" id="Node000006" href="$decorator__usage_8cpp.html#afb18538f1ea51daea5d73176e5aaeee5" title="Example 3: Multiple Decorator Composition." alt="" coords="108,205,324,231"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="359,204,325,208,324,203,358,199"/>
+<area shape="rect" id="Node000007" href="$decorator__usage_8cpp.html#a9e1da3086b56f36bc574d0831566a946" title="Example 4: Performance Comparison." alt="" coords="131,255,301,295"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="389,215,325,244,288,258,286,253,323,240,387,211"/>
+<area shape="rect" id="Node000008" href="$decorator__usage_8cpp.html#afe94899b5674125d5b41f079cbbf3a52" title="Example 5: Real&#45;World Production Scenarios." alt="" coords="139,319,293,359"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="411,220,375,266,352,289,325,310,295,325,292,320,323,305,348,285,371,262,407,217"/>
+<area shape="rect" id="Node000009" href="$decorator__usage_8cpp.html#a02829a81f3fc061bcd16e4caf1525dc4" title="Example 2: Single Decorator Usage." alt="" coords="115,384,317,409"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="419,221,407,256,387,297,360,339,326,373,303,386,300,382,322,369,356,335,383,295,402,254,414,219"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="132,38,110,52,82,83,61,120,39,182,34,180,57,117,78,80,106,48,129,34"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="129,139,109,146,77,164,50,183,47,179,74,159,107,141,127,134"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="111,186,60,193,60,188,110,181"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="105,206,60,200,61,195,106,201"/>
+<area shape="poly" id="edge10_Node000007_Node000003" title=" " alt="" coords="127,253,107,244,49,209,52,205,109,240,129,248"/>
+<area shape="poly" id="edge12_Node000008_Node000003" title=" " alt="" coords="125,321,106,309,81,285,61,257,37,208,41,206,66,255,85,282,110,305,127,316"/>
+<area shape="poly" id="edge14_Node000009_Node000003" title=" " alt="" coords="114,379,106,373,88,355,73,333,51,286,39,241,33,207,38,207,44,240,56,284,78,330,92,351,110,369,117,375"/>
+</map>

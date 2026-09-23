@@ -1,0 +1,34 @@
+<map id="kcenon::logger::log_collector_jthread_worker" name="kcenon::logger::log_collector_jthread_worker">
+<area shape="rect" id="Node000001" title="Worker thread for log processing with jthread compatibility." alt="" coords="413,1785,595,2055"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="255,1535,428,1630"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="366,1629,434,1769,430,1772,361,1631"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1log__collector__shared__state.html" title="Shared state for log processing &#45; survives impl destruction." alt="" coords="215,1205,383,1380"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="314,1380,335,1519,329,1520,309,1381"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="12,1018,159,1098"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="112,1097,141,1138,175,1180,204,1209,201,1213,171,1183,137,1141,108,1100"/>
+<area shape="rect" id="Node000005" href="$structkcenon_1_1logger_1_1log__entry.html" title="Represents a single log entry with all associated metadata." alt="" coords="16,625,155,925"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="88,926,88,1002,83,1002,83,926"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1small__string.html" title=" " alt="" coords="5,223,165,563"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="88,563,88,608,83,608,83,563"/>
+<area shape="rect" id="Node000007" href="$unionkcenon_1_1logger_1_1small__string_1_1data__union.html" title=" " alt="" coords="6,5,165,160"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="88,160,88,206,83,206,83,160"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="183,1025,267,1091"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="229,1091,234,1134,244,1181,247,1189,242,1191,239,1182,228,1135,224,1091"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="291,1011,466,1105"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="371,1106,349,1182,346,1191,341,1189,344,1181,366,1105"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="297,728,461,823"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="381,823,381,994,376,994,376,823"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="289,293,469,493"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="381,493,381,712,376,712,376,493"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html" title="Wrapper for std::jthread or std::thread with manual stop mechanism." alt="" coords="602,1443,758,1723"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="609,1724,584,1772,580,1769,605,1722"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="593,1245,767,1340"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="683,1340,683,1426,677,1426,677,1340"/>
+<area shape="rect" id="Node000014" href="$classkcenon_1_1logger_1_1async_1_1simple__stop__source.html" title="Simple stop source for environments without std::stop_token." alt="" coords="556,988,724,1128"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="655,1128,672,1229,667,1229,649,1129"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="546,743,691,808"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="599,810,570,856,540,916,516,985,509,1021,507,1057,507,1584,507,1769,501,1769,501,1584,501,1057,504,1020,511,984,535,914,565,853,594,807"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="624,808,636,971,631,972,618,808"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="791,1260,875,1325"/>
+<area shape="poly" id="edge15_Node000012_Node000016" title=" " alt="" coords="824,1327,782,1420,769,1445,764,1443,778,1417,819,1325"/>
+</map>

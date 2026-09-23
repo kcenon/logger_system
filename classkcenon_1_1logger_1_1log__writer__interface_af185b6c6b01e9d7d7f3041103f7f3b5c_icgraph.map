@@ -1,0 +1,20 @@
+<map id="kcenon::logger::log_writer_interface::close" name="kcenon::logger::log_writer_interface::close">
+<area shape="rect" id="Node000001" title="Close the writer and release resources." alt="" coords="937,92,1112,132"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1network__writer.html#a3ee99a35f6220a4c9e6084543e2cc450" title=" " alt="" coords="481,56,660,96"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="923,107,660,86,660,80,924,101"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1network__writer.html#a4aabfa181358abb6312ed877d9a0214f" title=" " alt="" coords="711,120,889,160"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="924,127,890,132,889,126,923,122"/>
+<area shape="poly" id="edge4_Node000002_Node000002" title=" " alt="" coords="610,44,596,37,571,35,549,37,535,41,530,47,533,55,528,56,525,46,532,37,547,31,571,29,597,32,612,39"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1network__writer.html#a150175f12a048e056ada950eb9188ef6" title=" " alt="" coords="232,5,431,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="468,57,426,48,427,43,469,52"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1network__writer.html#a5032ad5c8fa86ee299d282ea49547974" title="Constructor." alt="" coords="5,63,184,103"/>
+<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="467,80,184,84,184,79,467,75"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="236,51,178,65,177,60,235,46"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1network__writer.html#a931eeb5b8303fd9b553b59df5941dae4" title=" " alt="" coords="481,120,660,160"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="697,143,660,143,660,137,697,137"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1network__writer.html#a104ca93683e934fcca4dccd96205de9f" title="Destructor." alt="" coords="479,184,663,224"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="715,166,644,187,642,181,714,161"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1network__writer.html#addb327c9107daa00a12fd143a242fe12" title=" " alt="" coords="242,120,421,160"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="468,143,421,143,421,137,468,137"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="235,119,177,105,178,100,236,114"/>
+</map>

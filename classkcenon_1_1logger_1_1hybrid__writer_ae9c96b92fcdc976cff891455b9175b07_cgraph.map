@@ -1,0 +1,5 @@
+<map id="kcenon::logger::hybrid_writer::set_use_color" name="kcenon::logger::hybrid_writer::set_use_color">
+<area shape="rect" id="Node000001" title="Set whether to use color output (if supported)" alt="" coords="5,5,172,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1base__writer.html#ab92d0f39e839960274faa320024c91f9" title="Get current color output setting." alt="" coords="220,5,377,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,23,206,23,206,28,173,28"/>
+</map>

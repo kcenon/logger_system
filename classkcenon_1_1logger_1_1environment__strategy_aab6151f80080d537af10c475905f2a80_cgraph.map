@@ -1,0 +1,9 @@
+<map id="kcenon::logger::environment_strategy::apply" name="kcenon::logger::environment_strategy::apply">
+<area shape="rect" id="Node000001" title="Apply this strategy to a logger configuration." alt="" coords="5,69,215,109"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1environment__strategy.html#a5a2aa4a9bbcad56ed2079f488f264346" title=" " alt="" coords="263,5,472,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,67,273,46,274,51,192,72"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1environment__strategy.html#a14840ca8a50cb1333634b8465f7bc3d0" title=" " alt="" coords="263,69,472,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="215,87,249,87,249,92,215,92"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1environment__strategy.html#aa3d578788d50035550c6b7c3473e5655" title=" " alt="" coords="263,133,472,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="192,107,274,127,273,133,191,112"/>
+</map>

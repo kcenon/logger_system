@@ -1,0 +1,5 @@
+<map id="kcenon::logger::sampling::sampling_config::adaptive" name="kcenon::logger::sampling::sampling_config::adaptive">
+<area shape="rect" id="Node000001" title="Create an adaptive sampling configuration." alt="" coords="240,13,441,53"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1sampling_1_1sampler__factory.html#a4521d45e7fa3db11aedf757cfc8e1a75" title="Create an adaptive sampler." alt="" coords="5,5,192,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,35,192,35,192,30,226,30"/>
+</map>

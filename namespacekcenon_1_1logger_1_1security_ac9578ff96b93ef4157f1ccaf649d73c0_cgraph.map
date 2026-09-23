@@ -1,0 +1,7 @@
+<map id="kcenon::logger::security::format_signature_suffix" name="kcenon::logger::security::format_signature_suffix">
+<area shape="rect" id="Node000001" title="Format a signature line suitable for appending to a text log record." alt="" coords="5,37,191,77"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1integrity__policy.html#af54c2f30aa781fc19e11ef0b16aef868" title="Short identifier used as a prefix in serialized signatures (e.g. &quot;HMAC&#45;SHA256&quot;). Implementations must..." alt="" coords="239,5,417,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,42,225,37,226,42,192,47"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1integrity__policy.html#ad7df3cf10a0ba9e06bba3afa218a7ea4" title="Produce a signature for record." alt="" coords="239,69,417,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="192,68,226,72,225,78,191,73"/>
+</map>

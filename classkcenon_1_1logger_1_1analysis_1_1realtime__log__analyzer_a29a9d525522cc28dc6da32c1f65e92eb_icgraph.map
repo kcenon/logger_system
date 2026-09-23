@@ -1,0 +1,17 @@
+<map id="kcenon::logger::analysis::realtime_log_analyzer::calculate_rate" name="kcenon::logger::analysis::realtime_log_analyzer::calculate_rate">
+<area shape="rect" id="Node000001" title=" " alt="" coords="461,124,641,179"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#ab012a01c8390c594be3e036dab9a7447" title=" " alt="" coords="233,5,413,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="493,119,412,74,389,62,391,58,415,69,496,114"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a249daef69adfa9cf431130fe7b7bedd2" title=" " alt="" coords="233,84,413,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="447,136,413,130,414,124,448,131"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a34c3797444058b46cb2a5e6d3c1f7e40" title="Get current error rate (errors per minute)" alt="" coords="233,163,413,217"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="448,172,414,177,413,172,447,166"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a0fa648cf1bd5d4618e5ea90d5e0a0c44" title="Get current log rate (logs per minute)" alt="" coords="233,241,413,296"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="493,188,415,231,389,244,386,239,412,226,490,184"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#ab8cadc55fbfabbcb32a0543a663dd06f" title="Analyze a log entry in real&#45;time." alt="" coords="5,65,185,120"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="221,62,186,72,185,66,219,57"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="219,106,185,103,186,97,220,100"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a433b10213b6b7125acfb4d128e46ccc1" title=" " alt="" coords="5,183,185,237"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="220,202,186,205,185,199,219,196"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="219,245,185,236,186,231,221,240"/>
+</map>

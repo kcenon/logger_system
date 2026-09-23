@@ -1,0 +1,11 @@
+<map id="kcenon::logger::async_writer::stop" name="kcenon::logger::async_writer::stop">
+<area shape="rect" id="Node000001" title="Stop the async writer thread." alt="" coords="5,69,169,109"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async__writer.html#afbb2632dc4baf0f00a48e210162132bf" title="Flush any remaining messages after stopping." alt="" coords="217,69,396,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,87,204,87,204,92,169,92"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a8b38854d249b4da0d7a5bf6d45dccf47" title="Flush any buffered data." alt="" coords="453,5,623,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="379,67,451,46,453,52,380,72"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="444,69,632,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="396,87,431,87,431,92,396,92"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1log__writer__interface.html#ad48f2ab0fd92db49d024bdc02f243a72" title="Write a log entry." alt="" coords="451,133,625,173"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="380,107,453,127,451,132,379,112"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="kcenon::logger::sampling::log_sampler::hash_sample" name="kcenon::logger::sampling::log_sampler::hash_sample">
+<area shape="rect" id="Node000001" title="Perform hash&#45;based sampling decision." alt="" coords="5,5,209,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#af9da4ea7b3c4ab6f9f5ae0821e067c7b" title="FNV&#45;1a hash for message hashing." alt="" coords="257,5,451,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,23,244,23,244,28,210,28"/>
+</map>

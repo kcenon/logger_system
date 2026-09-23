@@ -1,0 +1,25 @@
+var classkcenon_1_1logger_1_1security_1_1signal__manager =
+[
+    [ "signal_manager", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#ad3396f25e8d885ffd533e76991ef40c6", null ],
+    [ "~signal_manager", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#aaefd5dfa49972a2a242f7cad8a9ff531", null ],
+    [ "signal_manager", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a363f4eb32835faa61b7f042723c22a01", null ],
+    [ "signal_manager", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a0f1067683df9c7ba5cbd98b8e9993fd5", null ],
+    [ "are_handlers_installed", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a9d8e2f279bc68d62839215e79c97a910", null ],
+    [ "emergency_flush", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a73d1518f75c3a354ce28032a6629abc7", null ],
+    [ "install_handlers", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a34347f41f705504e1838af60a7564c73", null ],
+    [ "logger_count", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#aaa4b3d11f4affe92830269b7345be5f9", null ],
+    [ "operator=", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#af6b69399a7eaf20b6f99660a6633111b", null ],
+    [ "operator=", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#ad287ad67ec8883d64c5e3a498b15ac5b", null ],
+    [ "register_logger", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a009cf243108ed947af9fb2c09b1cbd58", null ],
+    [ "signal_handler", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a6e1ca4545070d89fa75e620754dc5621", null ],
+    [ "uninstall_handlers", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a3e16cde27da900b71dfcb12f52bc7f44", null ],
+    [ "unregister_logger", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a74a616c71304cfff2fcd6544d5fba481", null ],
+    [ "current_instance_", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a3e68bc5a62bd9c66d5e54aba0b10159e", null ],
+    [ "handlers_installed_", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a78d5a30ee2ff2fbefae31ffdf074f197", null ],
+    [ "loggers_", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a03ab4f75028348d1ccb7f0933b5d5c46", null ],
+    [ "mutex_", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#ae53d28698045d0d89abdc38ceeaef97d", null ],
+    [ "original_sigabrt_", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a57dff0515b2735de062fd82119e3e8c2", null ],
+    [ "original_sigint_", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a208a2fce9e2c4ec8e39764a93b2e96fb", null ],
+    [ "original_sigsegv_", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a0b59737c2b09b7e49b9089cc357eb722", null ],
+    [ "original_sigterm_", "classkcenon_1_1logger_1_1security_1_1signal__manager.html#a1ef50d625c3131c9b8770d1944dfa7a2", null ]
+];

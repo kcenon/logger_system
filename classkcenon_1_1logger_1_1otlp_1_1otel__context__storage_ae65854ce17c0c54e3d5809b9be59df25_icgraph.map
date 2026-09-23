@@ -1,0 +1,7 @@
+<map id="kcenon::logger::otlp::otel_context_storage::set" name="kcenon::logger::otlp::otel_context_storage::set">
+<area shape="rect" id="Node000001" title="Set the OpenTelemetry context for the current thread." alt="" coords="220,53,415,93"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1otlp_1_1otel__context__scope.html#a23491d8c4fe09eee8f49697937b4816c" title="Construct and set context." alt="" coords="11,5,167,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,56,166,49,167,44,207,51"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1otlp_1_1otel__context__scope.html#a3eb5ee1e4aefd69f5108a2e7d093fbee" title="Destructor &#45; restores previous context." alt="" coords="5,84,172,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="207,94,173,100,172,95,206,89"/>
+</map>

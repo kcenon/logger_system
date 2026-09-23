@@ -1,0 +1,5 @@
+<map id="kcenon::logger::queued_writer_base::on_entry_enqueued" name="kcenon::logger::queued_writer_base::on_entry_enqueued">
+<area shape="rect" id="Node000001" title="Called after an entry is successfully enqueued." alt="" coords="248,5,423,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1queued__writer__base.html#a900ad2227f4f37d158bbb6f71a356104" title="Try to enqueue an entry with overflow protection." alt="" coords="5,13,200,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="234,35,200,35,200,30,234,30"/>
+</map>
