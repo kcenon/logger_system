@@ -87,8 +87,10 @@ NEED_TO_IMPROVEMENT.md
 documents/
 thread_system/
 
+# Coherence gate reports and Python tests
 coherence-results/
-
+__pycache__/
 *.pyc
 
+# Reviewed coherence inputs and provenance.
 !ci/*.json

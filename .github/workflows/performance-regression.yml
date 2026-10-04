@@ -62,7 +62,9 @@ jobs:
 
     # --- PR branch ---
     - name: Checkout PR branch
-      run: git checkout ${{ github.head_ref }}
+      env:
+        PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      run: git checkout --detach "$PR_HEAD_SHA"
 
     - name: Build PR branch
       continue-on-error: true

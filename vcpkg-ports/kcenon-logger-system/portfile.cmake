@@ -15,6 +15,7 @@ vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
         encryption    LOGGER_USE_ENCRYPTION
         otlp          LOGGER_ENABLE_OTLP
         thread-system LOGGER_USE_THREAD_SYSTEM
+        thread-system KCENON_WITH_THREAD_SYSTEM
 )
 
 vcpkg_cmake_configure(
@@ -26,6 +27,7 @@ vcpkg_cmake_configure(
         -DLOGGER_BUILD_INTEGRATION_TESTS=OFF
         -DLOGGER_ENABLE_COVERAGE=OFF
         -DBUILD_WITH_COMMON_SYSTEM=ON
+        -DKCENON_WITH_COMMON_SYSTEM=ON
         -DFETCHCONTENT_FULLY_DISCONNECTED=ON
         ${FEATURE_OPTIONS}
 )

@@ -45,7 +45,7 @@ jobs:
         cmake -B build -G Ninja \
           -DCMAKE_BUILD_TYPE=Debug \
           -DLOGGER_ENABLE_COVERAGE=ON \
-          -DBUILD_WITH_COMMON_SYSTEM=ON \
+          -DKCENON_WITH_COMMON_SYSTEM=ON \
           -DLOGGER_BUILD_TESTS=ON \
           -DLOGGER_BUILD_INTEGRATION_TESTS=ON \
           -DCMAKE_PREFIX_PATH="/usr" \
