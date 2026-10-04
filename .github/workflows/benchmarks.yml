@@ -279,12 +279,11 @@ jobs:
     - name: Store benchmark results for tracking
       if: matrix.os == 'ubuntu-22.04' && github.event_name == 'push' && github.ref == 'refs/heads/main'
       continue-on-error: true  # Don't fail workflow if benchmark tracking fails
-      working-directory: logger_system
       uses: benchmark-action/github-action-benchmark@v1
       with:
         name: Logger System Performance
         tool: 'googlecpp'
-        output-file-path: benchmarks/results/latest_${{ matrix.os }}.json
+        output-file-path: logger_system/benchmarks/results/latest_${{ matrix.os }}.json
         # Store data in gh-pages branch
         gh-pages-branch: gh-pages
         benchmark-data-dir-path: dev/bench

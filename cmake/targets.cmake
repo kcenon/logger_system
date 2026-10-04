@@ -67,6 +67,7 @@ set(LOGGER_SOURCES
     ${LOGGER_SOURCE_DIR}/integration/standalone_executor.cpp
     ${LOGGER_SOURCE_DIR}/integration/thread_system_integration.cpp
     ${LOGGER_SOURCE_DIR}/sampling/log_sampler.cpp
+    ${LOGGER_SOURCE_DIR}/security/secure_key_storage.cpp
     ${LOGGER_SOURCE_DIR}/security/signal_manager.cpp
 )
 
@@ -191,6 +192,9 @@ endif()
 # Library target
 ##################################################
 add_library(logger_system ${LOGGER_SOURCES} ${LOGGER_HEADERS})
+if(WIN32)
+    target_link_libraries(logger_system PRIVATE advapi32)
+endif()
 set_target_properties(logger_system PROPERTIES EXPORT_NAME logger)
 target_include_directories(logger_system
     PUBLIC

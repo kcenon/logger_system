@@ -91,3 +91,6 @@ thread_system/
 coherence-results/
 __pycache__/
 *.pyc
+
+# Reviewed coherence inputs and provenance.
+!ci/*.json

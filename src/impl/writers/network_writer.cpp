@@ -218,6 +218,9 @@ network_writer::network_writer(const std::string& host,
 
     running_ = true;
 
+    // Finish socket initialization before the reconnect worker can call connect().
+    connect();
+
     // Create and start send worker
     send_worker_ = std::make_unique<network_send_jthread_worker>(
         [this] { process_buffer(); });
@@ -229,9 +232,6 @@ network_writer::network_writer(const std::string& host,
             [this] { attempt_reconnect(); }, reconnect_interval_);
         reconnect_worker_->start();
     }
-
-    // Initial connection attempt
-    connect();
 }
 
 network_writer::~network_writer() {
