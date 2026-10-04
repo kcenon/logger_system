@@ -1,0 +1,30 @@
+<map id="kcenon::logger::network_writer::network_writer" name="kcenon::logger::network_writer::network_writer">
+<area shape="rect" id="Node000001" title="Constructor." alt="" coords="5,69,184,109"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1network__writer.html#a150175f12a048e056ada950eb9188ef6" title=" " alt="" coords="232,12,431,52"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,67,235,53,236,58,178,72"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1network__writer.html#a3ee99a35f6220a4c9e6084543e2cc450" title=" " alt="" coords="491,29,670,69"/>
+<area shape="poly" id="edge6_Node000001_Node000003" title=" " alt="" coords="184,81,430,61,477,57,478,62,431,67,184,86"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1network__writer.html#addb327c9107daa00a12fd143a242fe12" title=" " alt="" coords="242,127,421,167"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="178,107,236,121,235,126,177,112"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="431,36,478,40,477,45,431,42"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="536,30,534,20,541,10,557,5,581,3,608,6,623,13,621,18,607,11,581,8,558,10,544,15,539,21,542,28"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__writer__interface.html#af185b6c6b01e9d7d7f3041103f7f3b5c" title="Close the writer and release resources." alt="" coords="957,59,1132,99"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="671,52,944,70,943,75,670,58"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a8b38854d249b4da0d7a5bf6d45dccf47" title="Flush any buffered data." alt="" coords="1180,59,1351,99"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="1132,76,1167,76,1167,81,1132,81"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1network__writer.html#a7a2d7c4186ea898e86d8a2be49ddc8a8" title=" " alt="" coords="479,200,683,240"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="401,164,500,194,498,199,399,169"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1network__writer.html#a931eeb5b8303fd9b553b59df5941dae4" title=" " alt="" coords="491,108,670,148"/>
+<area shape="poly" id="edge13_Node000006_Node000012" title=" " alt="" coords="420,137,477,133,478,138,421,143"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1network__writer.html#add782c82f05268659ec361cbef347616" title=" " alt="" coords="731,215,909,255"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="683,224,717,226,717,231,683,229"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1utils_1_1string__utils.html#a386bd338874eb5237f945415b8e29395" title="Convert log level to human&#45;readable string." alt="" coords="743,279,897,334"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="638,238,732,272,730,277,636,243"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="739,151,901,191"/>
+<area shape="poly" id="edge11_Node000007_Node000010" title=" " alt="" coords="678,197,724,188,726,193,679,203"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="963,151,1126,191"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="901,168,950,168,950,173,901,173"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1network__writer.html#a4aabfa181358abb6312ed877d9a0214f" title=" " alt="" coords="731,87,909,127"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="670,117,717,113,717,118,670,123"/>
+<area shape="poly" id="edge15_Node000013_Node000004" title=" " alt="" coords="909,93,943,89,944,94,910,98"/>
+</map>

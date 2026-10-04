@@ -1,0 +1,7 @@
+<map id="kcenon::logger::adapters::logger_adapter::shutdown" name="kcenon::logger::adapters::logger_adapter::shutdown">
+<area shape="rect" id="Node000001" title="Shutdown the adapter." alt="" coords="5,5,204,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#af7af3a3731ba4fe410a8adfe9228dd5c" title="Flush any buffered log messages (ILogger interface)" alt="" coords="252,5,419,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,23,238,23,238,28,204,28"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="467,13,625,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="419,23,453,23,453,28,419,28"/>
+</map>

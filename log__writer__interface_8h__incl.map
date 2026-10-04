@@ -1,0 +1,22 @@
+<map id="include/kcenon/logger/interfaces/log_writer_interface.h" name="include/kcenon/logger/interfaces/log_writer_interface.h">
+<area shape="rect" id="Node000001" title="Base interface for all log writers and decorators." alt="" coords="71,5,236,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="118,196,176,221"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,61,40,81,15,109,8,128,15,147,33,166,55,181,105,198,103,204,53,186,29,170,10,149,3,128,10,107,36,77,70,57"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="24,115,91,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="128,62,82,107,78,104,125,58"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="115,115,192,141"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="156,60,156,101,151,101,151,60"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="217,108,405,148"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="199,58,269,99,266,103,197,62"/>
+<area shape="rect" id="Node000006" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="430,108,576,148"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="237,53,420,102,419,107,236,59"/>
+<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="430,148,190,201,189,195,429,143"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="316,196,402,221"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="470,150,394,192,391,187,467,146"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="426,196,486,221"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="494,150,473,185,468,183,490,147"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="511,196,586,221"/>
+<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="516,147,537,183,533,185,512,150"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="610,196,690,221"/>
+<area shape="poly" id="edge10_Node000006_Node000010" title=" " alt="" coords="540,146,617,187,615,192,537,150"/>
+</map>

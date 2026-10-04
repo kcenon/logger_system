@@ -1,0 +1,13 @@
+<map id="kcenon::logger::utils::string_utils::extract_filename" name="kcenon::logger::utils::string_utils::extract_filename">
+<area shape="rect" id="Node000001" title="Extract filename from full file path." alt="" coords="819,30,975,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1timestamp__formatter.html#a12bf17e593c29666d537e68b023aff36" title="Format a log entry to human&#45;readable string." alt="" coords="557,5,754,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="804,48,754,41,755,36,805,43"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1template__formatter.html#a6484153f3815a4ce22e4754ab25a5e23" title="Resolve a placeholder to its actual value." alt="" coords="540,69,771,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="805,72,771,77,770,71,805,67"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1template__formatter.html#a0b738b7e7413cfad5778dea556748157" title="Format a log entry using the template." alt="" coords="307,69,492,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="526,92,492,92,492,87,526,87"/>
+<area shape="rect" id="Node000005" href="$structured__logging__example_8cpp.html#adec95563fbcce6741a032ea597b63e87" title="Demonstrates template&#45;based custom formatter." alt="" coords="108,69,259,109"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="293,92,259,92,259,87,293,87"/>
+<area shape="rect" id="Node000006" href="$structured__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,77,60,102"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="94,92,60,92,60,87,94,87"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="kcenon::logger::small_string::small_string" name="kcenon::logger::small_string::small_string">
+<area shape="rect" id="Node000001" title="Construct from std::string." alt="" coords="5,5,168,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1small__string.html#a440831edf18853423019551699eb26b1" title="Assign from string data." alt="" coords="216,5,379,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,23,202,23,202,28,168,28"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#a8254fba32d32186937c401e6ff512b50" title="Calculate capacity for heap allocation." alt="" coords="427,5,621,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="379,23,413,23,413,28,379,28"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html#aac5202a8a61b91594483d204e4220ebc" title="Get capacity." alt="" coords="669,5,832,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="622,23,656,23,656,28,622,28"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="kcenon::logger::rotating_file_writer::get_backup_files" name="kcenon::logger::rotating_file_writer::get_backup_files">
+<area shape="rect" id="Node000001" title="Get list of existing backup files." alt="" coords="5,27,216,67"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="264,5,423,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="216,31,250,27,251,32,217,37"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger_1_1utils.html#aafab2237b40cefbc519b3dcdf64fb23d" title="Error handling helper for write operations." alt="" coords="265,55,422,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="217,57,252,62,251,67,216,63"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="471,55,633,95"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="423,73,457,73,457,78,423,78"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="681,55,848,95"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="634,73,668,73,668,78,634,78"/>
+</map>

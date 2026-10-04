@@ -1,0 +1,25 @@
+<map id="kcenon::logger::template_formatter::resolve_placeholder" name="kcenon::logger::template_formatter::resolve_placeholder">
+<area shape="rect" id="Node000001" title="Resolve a placeholder to its actual value." alt="" coords="5,325,236,365"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1template__formatter.html#a8234b23abc6161f1a0b3fd30a1d407da" title="Calculate display width excluding ANSI escape codes." alt="" coords="284,5,539,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,324,142,270,174,197,195,158,220,121,249,86,282,55,290,50,293,54,286,59,253,89,224,124,199,161,178,200,147,272,130,326"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1utils_1_1string__utils.html#a57221bc86e085aebe6ed42804e53966e" title="ANSI color reset sequence." alt="" coords="320,69,503,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="128,324,150,281,183,225,227,168,254,142,283,119,306,107,308,111,285,124,257,146,231,171,187,228,154,284,133,326"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1utils_1_1string__utils.html#af734b7540f4cfa5e229e95d12bc84538" title="Extract filename from full file path." alt="" coords="333,134,489,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="138,323,198,262,238,229,283,199,319,182,322,187,285,204,242,233,201,266,141,327"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1template__formatter.html#a09bd72c3bd87ffacca640be62c548364" title="Format a structured field value to string." alt="" coords="301,213,522,253"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="156,323,214,293,283,263,307,255,309,260,285,268,217,297,158,328"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1utils_1_1time__utils.html#a103aadbafb3664100d33e2664874f267" title="Format timestamp to ISO 8601 / RFC 3339 format with UTC timezone." alt="" coords="334,278,489,333"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="236,327,320,315,321,320,237,332"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1utils_1_1time__utils.html#a0f69693908176cf9cf2e523745088b02" title="Format timestamp to human&#45;readable format (YYYY&#45;MM&#45;DD HH:MM:SS.mmm)" alt="" coords="334,357,489,411"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="237,358,321,369,320,375,236,363"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1utils_1_1string__utils.html#a05b3c6b3d884e8aae0ad647425ad5e68" title="Convert log level to ANSI color code." alt="" coords="334,435,489,490"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="162,363,285,420,322,434,320,439,283,425,159,368"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1utils_1_1string__utils.html#a386bd338874eb5237f945415b8e29395" title="Convert log level to human&#45;readable string." alt="" coords="334,514,489,569"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="140,364,199,430,240,467,285,499,322,516,320,521,283,504,237,471,196,434,136,367"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1utils_1_1string__utils.html#ae5f7dd336dd6310aea3bc06590cde9f2" title="Convert string to lowercase." alt="" coords="328,593,495,633"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="133,364,153,409,186,467,230,527,257,554,285,578,316,594,313,598,283,582,253,558,226,531,182,470,149,412,128,367"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="330,657,493,697"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="129,365,146,421,177,496,198,537,223,576,252,612,286,643,318,661,315,665,282,647,248,616,218,579,193,539,172,499,141,422,124,366"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="587,657,749,697"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="493,675,573,675,573,680,493,680"/>
+</map>

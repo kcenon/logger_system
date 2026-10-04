@@ -1,0 +1,5 @@
+<map id="kcenon::logger::async::lockfree_spsc_queue::dequeue" name="kcenon::logger::async::lockfree_spsc_queue::dequeue">
+<area shape="rect" id="Node000001" title="Dequeue an item (consumer side)" alt="" coords="231,5,397,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1lockfree__spsc__queue.html#af7883baa695282e39041102eef60f506" title="Destructor." alt="" coords="5,5,183,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="217,35,183,35,183,30,217,30"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="kcenon::logger::otlp::otel_context_storage::has_context" name="kcenon::logger::otlp::otel_context_storage::has_context">
+<area shape="rect" id="Node000001" title="Check if a context is set for the current thread." alt="" coords="5,5,172,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1otlp_1_1otel__context__storage.html#a8c95449921e1da0e2dc3f1aa4d51c63b" title=" " alt="" coords="220,5,387,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,30,206,30,206,35,173,35"/>
+</map>

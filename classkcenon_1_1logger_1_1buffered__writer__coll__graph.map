@@ -1,0 +1,30 @@
+<map id="kcenon::logger::buffered_writer" name="kcenon::logger::buffered_writer">
+<area shape="rect" id="Node000001" title="Decorator that buffers log entries before writing to wrapped writer." alt="" coords="535,1449,741,1909"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1decorator__writer__base.html" title="Abstract base class for decorator pattern log writers." alt="" coords="318,1047,513,1387"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="505,1398,538,1465,533,1467,500,1400"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,293,185,493"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="65,506,46,600,37,707,37,763,44,819,56,873,75,924,96,963,123,1000,185,1065,253,1120,319,1163,316,1167,250,1124,181,1069,118,1003,92,966,70,926,51,874,38,819,32,763,31,707,41,599,59,505"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="85,735,301,815"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="123,492,181,719,176,720,118,494"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1decorator__writer__tag.html" title="Tag interface for decorator writers." alt="" coords="325,735,505,815"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="418,829,418,1047,413,1047,413,829"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="215,814,325,1031,320,1033,210,817"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="529,743,608,808"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="560,809,482,1032,477,1030,555,807"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="495,353,626,433"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="564,446,571,742,565,743,559,447"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="539,1184,623,1249"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="587,1249,610,1433,605,1433,582,1250"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="647,1177,794,1257"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="716,1257,685,1433,679,1432,711,1256"/>
+<area shape="rect" id="Node000010" href="$structkcenon_1_1logger_1_1log__entry.html" title="Represents a single log entry with all associated metadata." alt="" coords="654,625,793,925"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="725,926,724,1160,718,1160,720,926"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1small__string.html" title=" " alt="" coords="650,223,810,563"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="730,563,729,609,724,608,724,563"/>
+<area shape="rect" id="Node000012" href="$unionkcenon_1_1logger_1_1small__string_1_1data__union.html" title=" " alt="" coords="651,5,809,160"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="733,160,733,206,727,206,727,160"/>
+<area shape="rect" id="Node000013" href="$structkcenon_1_1logger_1_1buffered__writer_1_1stats.html" title="Statistics for the buffered writer." alt="" coords="819,1177,991,1257"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="884,1258,752,1488,747,1485,880,1255"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="819,743,990,808"/>
+<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="907,808,907,1160,902,1160,902,808"/>
+</map>

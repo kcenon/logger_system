@@ -1,0 +1,11 @@
+<map id="kcenon::logger::get_logger_error_code" name="kcenon::logger::get_logger_error_code">
+<area shape="rect" id="Node000001" title=" " alt="" coords="493,77,640,117"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#a500a1523f64c69722faf15351a122e90" title="Load key from file with permission verification." alt="" coords="220,5,445,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="493,75,445,60,405,48,406,43,446,55,495,70"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger_1_1utils.html#adfd15d92c5326f2a26c4dabb21d7cbd4" title="Safe operation with result for destructors." alt="" coords="245,70,420,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="479,100,420,100,420,95,479,95"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1security_1_1path__validator.html#ad0d9bbc216514b59bc158592f9a6671f" title="Create a safe path by joining base and relative path." alt="" coords="237,149,428,189"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="492,124,446,139,403,152,401,147,445,133,490,119"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1batch__writer.html#a275aff4337e1c95ff4eca96276d13eb8" title="Destructor &#45; ensures all pending entries are flushed." alt="" coords="5,77,172,117"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="232,100,172,100,172,95,232,95"/>
+</map>

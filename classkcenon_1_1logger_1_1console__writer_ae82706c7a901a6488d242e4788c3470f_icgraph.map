@@ -1,0 +1,7 @@
+<map id="kcenon::logger::console_writer::format_entry" name="kcenon::logger::console_writer::format_entry">
+<area shape="rect" id="Node000001" title="Format a log entry using the current formatter." alt="" coords="332,5,508,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1console__writer.html#ac00806b7b0ba8195369fb38ace2d805c" title="Write a log entry to console." alt="" coords="108,5,284,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="318,28,284,28,284,23,318,23"/>
+<area shape="rect" id="Node000003" href="$composite__writer__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,13,60,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,28,60,28,60,23,94,23"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="kcenon::logger::batch_writer::flush_batch_unsafe" name="kcenon::logger::batch_writer::flush_batch_unsafe">
+<area shape="rect" id="Node000001" title="Flush batch without locking (caller must hold lock)" alt="" coords="5,85,168,139"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a8b38854d249b4da0d7a5bf6d45dccf47" title="Flush any buffered data." alt="" coords="225,5,395,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,82,215,55,235,47,237,52,217,60,151,87"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="231,70,389,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="168,99,217,92,218,97,169,104"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="216,120,404,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="169,120,203,124,202,129,168,125"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1log__writer__interface.html#ad48f2ab0fd92db49d024bdc02f243a72" title="Write a log entry." alt="" coords="223,184,397,224"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="145,137,217,170,236,177,234,182,215,174,142,142"/>
+</map>

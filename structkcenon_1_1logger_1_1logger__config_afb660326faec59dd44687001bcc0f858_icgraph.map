@@ -1,0 +1,11 @@
+<map id="kcenon::logger::logger_config::debug_config" name="kcenon::logger::logger_config::debug_config">
+<area shape="rect" id="Node000001" title="Create a debug configuration." alt="" coords="513,49,680,89"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a65f1bbfcf5012b67d13977dce0880534" title="Use debug configuration as base." alt="" coords="267,5,465,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="499,56,465,51,466,46,500,51"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1logger__builder.html#a280c589564b5b5ede0d1789b538ad0f1" title=" " alt="" coords="281,85,451,125"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="500,86,452,94,451,89,499,81"/>
+<area shape="rect" id="Node000003" href="$logger__config__builder__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="85,20,139,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="253,35,140,35,140,30,253,30"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1logger__builder.html#a54cd6a57d715ede3b24b1e3d7b30d88f" title="Detect environment from environment variables." alt="" coords="5,85,219,125"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="267,107,219,107,219,102,267,102"/>
+</map>

@@ -1,0 +1,23 @@
+<map id="src/security/signal_manager.cpp" name="src/security/signal_manager.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="498,5,638,45"/>
+<area shape="rect" id="Node000002" href="$signal__manager_8h.html" title="Signal&#45;safe write wrapper for cross&#45;platform signal handling." alt="" coords="483,93,653,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="571,46,571,79,565,79,565,46"/>
+<area shape="rect" id="Node000003" href="$signal__manager__interface_8h.html" title="Interface for signal handler management." alt="" coords="5,189,208,214"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="483,133,182,189,181,184,482,128"/>
+<area shape="rect" id="Node000005" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="233,181,391,221"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="513,136,382,180,380,174,511,131"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="415,189,483,214"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="543,136,478,183,475,178,540,131"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="508,189,551,214"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="562,135,543,177,538,175,557,133"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="575,189,639,214"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="579,133,598,175,593,177,574,135"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="663,189,729,214"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="598,131,669,179,666,183,595,136"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="754,189,817,214"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="619,131,742,179,747,181,745,186,740,184,617,136"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="841,189,916,214"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="652,131,830,179,838,181,836,186,829,184,650,136"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="71,269,142,295"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="109,214,109,255,104,255,104,214"/>
+</map>

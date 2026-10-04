@@ -1,0 +1,21 @@
+<map id="kcenon::logger::buffered_writer::write" name="kcenon::logger::buffered_writer::write">
+<area shape="rect" id="Node000001" title="Write a log entry to the buffer." alt="" coords="5,147,185,187"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1buffered__writer.html#af69c3bfd3bfa8bd7169cfce8f2ec7f13" title="Copy a log entry for buffer storage." alt="" coords="251,21,431,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,144,287,65,290,70,137,149"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1buffered__writer.html#a5a41181fabab786da202da75af832ea5" title="Flush buffer without acquiring mutex (caller must hold lock)" alt="" coords="240,117,443,157"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="185,153,226,148,227,154,186,159"/>
+<area shape="rect" id="Node000009" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="262,182,421,207"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="186,174,249,181,248,187,185,180"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1buffered__writer.html#ac2269735613bb2726c0fd9ec6df5e61b" title="Check if time&#45;based flush is needed." alt="" coords="233,232,449,272"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="147,184,234,217,258,225,257,230,232,223,145,189"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="510,5,673,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="431,33,496,29,496,34,432,38"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="733,5,896,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="673,23,720,23,720,28,673,28"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a8b38854d249b4da0d7a5bf6d45dccf47" title="Flush any buffered data." alt="" coords="506,69,677,109"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="442,115,492,106,493,111,443,120"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="497,133,685,173"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="443,141,484,144,484,149,443,146"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1log__writer__interface.html#ad48f2ab0fd92db49d024bdc02f243a72" title="Write a log entry." alt="" coords="505,197,678,237"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="408,155,450,168,518,190,516,195,449,173,407,160"/>
+</map>

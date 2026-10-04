@@ -1,0 +1,5 @@
+<map id="counted_console_writer::print_stats" name="counted_console_writer::print_stats">
+<area shape="rect" id="Node000001" title="Print statistics summary." alt="" coords="5,5,181,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1thread__safe__writer.html#a9dbbc756f564f5514819eee79d403438" title="Access the writer mutex for extended operations." alt="" coords="229,5,409,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,23,215,23,215,28,182,28"/>
+</map>

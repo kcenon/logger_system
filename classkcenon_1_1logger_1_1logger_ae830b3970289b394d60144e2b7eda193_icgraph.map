@@ -1,0 +1,19 @@
+<map id="kcenon::logger::logger::context" name="kcenon::logger::logger::context">
+<area shape="rect" id="Node000001" title=" " alt="" coords="484,227,651,267"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__context__scope.html#a098055bdae9e989236eef505c75f78a6" title="Construct scope with a logger reference (for logger&#45;level context)" alt="" coords="257,5,408,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="547,216,502,145,471,107,434,73,407,57,409,53,438,69,474,103,506,142,552,213"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__context__scope.html#a0ae16f9253d420092a28b8966a8ece5a" title=" " alt="" coords="242,84,423,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="531,221,486,187,435,154,410,141,412,137,437,149,489,182,534,217"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#a56ab269be7d1f26cbef44c73dc248053" title="Set a context value." alt="" coords="247,163,419,203"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="480,226,406,206,407,201,481,221"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#ab22e4c2733d88cdff2a73e036628c2a5" title="Set OpenTelemetry context." alt="" coords="241,227,424,267"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="470,250,424,250,424,245,470,245"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#a8273861b49816776a7b01fcffeb3bad3" title="Set request context." alt="" coords="229,291,436,331"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="481,274,407,294,406,289,480,268"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#a84fc0a0e951013c7a9a8278518b530bc" title="Set trace context." alt="" coords="237,355,428,395"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="535,278,490,313,437,346,409,358,407,353,435,341,487,309,532,274"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#a60efb6d9bfe8667bd4bfe47391d8b9f0" title="Destructor &#45; restores previous context." alt="" coords="239,420,426,475"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="549,281,503,345,472,379,438,409,417,422,414,418,434,405,469,376,499,342,545,278"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#ad2db396f43a238f62c5e604ebc1d4056" title="Construct guard and set a single context field." alt="" coords="5,156,181,211"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="233,186,182,186,182,181,233,181"/>
+</map>

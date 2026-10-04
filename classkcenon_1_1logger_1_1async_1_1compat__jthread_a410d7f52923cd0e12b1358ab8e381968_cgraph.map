@@ -1,0 +1,9 @@
+<map id="kcenon::logger::async::compat_jthread::~compat_jthread" name="kcenon::logger::async::compat_jthread::~compat_jthread">
+<area shape="rect" id="Node000001" title="Destructor &#45; requests stop and joins." alt="" coords="5,62,205,117"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a90bd0e17804555e24d4f86fe20c8497a" title="Wait for thread to complete." alt="" coords="283,5,447,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="205,62,270,46,271,51,206,67"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a6890087cefad1f5d529d9af418b433f5" title="Check if thread is joinable." alt="" coords="269,69,461,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="205,87,255,87,255,92,205,92"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a815d60b193847e48d48b5e2724957668" title="Request the thread to stop." alt="" coords="253,133,477,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="206,111,271,127,270,133,205,116"/>
+</map>

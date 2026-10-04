@@ -1,0 +1,9 @@
+<map id="counted_console_writer" name="counted_console_writer">
+<area shape="rect" id="Node000001" title="A console writer that counts messages per log level." alt="" coords="5,909,199,1095"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1thread__safe__writer.html" title="Base class providing automatic thread&#45;safety for writer implementations." alt="" coords="16,581,188,861"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,875,105,909,99,909,99,875"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1base__writer.html" title="Abstract base class for all log output writers." alt="" coords="27,253,177,533"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="105,547,105,581,99,581,99,547"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="12,5,192,205"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="105,219,105,253,99,253,99,219"/>
+</map>

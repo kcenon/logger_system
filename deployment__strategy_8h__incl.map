@@ -1,0 +1,33 @@
+<map id="include/kcenon/logger/core/strategies/deployment_strategy.h" name="include/kcenon/logger/core/strategies/deployment_strategy.h">
+<area shape="rect" id="Node000001" title="Deployment environment configuration strategies." alt="" coords="177,5,383,60"/>
+<area shape="rect" id="Node000002" href="$config__strategy__interface_8h.html" title="Interface for logger configuration strategies (Strategy Pattern)" alt="" coords="62,108,261,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,62,190,102,187,98,242,58"/>
+<area shape="rect" id="Node000006" href="$logger__config_8h.html" title="Configuration structure for logger with validation." alt="" coords="373,108,507,133"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="330,58,407,99,405,104,328,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,196,83,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="147,136,73,190,69,186,144,131"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="253,284,312,309"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="157,135,148,155,141,182,139,209,148,235,166,255,189,270,240,287,239,292,187,274,163,259,143,237,134,210,135,181,143,154,152,133"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="158,196,245,221"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="169,132,192,182,188,184,164,135"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="389,136,346,154,327,167,310,183,298,204,290,227,285,271,279,270,285,225,293,201,306,180,323,163,344,149,387,131"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="320,196,387,221"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="430,135,377,188,373,184,426,132"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="411,196,469,221"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="443,134,443,182,437,182,437,134"/>
+<area shape="rect" id="Node000009" href="$thread__integration__detector_8h.html" title="Conditionally enables thread_system integration when available." alt="" coords="493,181,640,236"/>
+<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="459,131,518,171,515,176,456,136"/>
+<area shape="rect" id="Node000010" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="664,189,811,229"/>
+<area shape="poly" id="edge10_Node000006_Node000010" title=" " alt="" coords="483,131,653,179,664,182,663,187,651,184,481,136"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="835,189,1034,229"/>
+<area shape="poly" id="edge16_Node000006_Node000015" title=" " alt="" coords="507,128,653,149,823,179,844,183,843,188,822,184,652,155,507,133"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="680,231,653,239,471,273,326,293,325,288,470,268,651,233,679,226"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="550,284,637,309"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="707,231,625,279,623,275,704,226"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="661,284,721,309"/>
+<area shape="poly" id="edge13_Node000010_Node000012" title=" " alt="" coords="729,230,706,273,701,271,725,228"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="745,284,820,309"/>
+<area shape="poly" id="edge14_Node000010_Node000013" title=" " alt="" coords="750,228,772,270,768,273,745,230"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="844,284,924,309"/>
+<area shape="poly" id="edge15_Node000010_Node000014" title=" " alt="" coords="771,226,854,275,851,279,768,231"/>
+</map>

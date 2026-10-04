@@ -1,0 +1,7 @@
+<map id="full_integration_adapter::get_metric_count" name="full_integration_adapter::get_metric_count">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,184,45"/>
+<area shape="rect" id="Node000002" href="$classlogger__adapter.html#ad4c17c8626b9b157cfe0b7c26d995579" title=" " alt="" coords="232,5,419,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,23,219,23,219,28,184,28"/>
+<area shape="rect" id="Node000003" href="$classlogger__core.html#ac4f6ad85c26b1c00a58de4f08ab6475f" title=" " alt="" coords="467,5,632,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="419,23,453,23,453,28,419,28"/>
+</map>

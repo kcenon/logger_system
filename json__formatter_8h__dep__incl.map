@@ -1,0 +1,9 @@
+<map id="include/kcenon/logger/formatters/json_formatter.h" name="include/kcenon/logger/formatters/json_formatter.h">
+<area shape="rect" id="Node000001" title="JSON formatter for structured logging kcenon." alt="" coords="193,5,400,45"/>
+<area shape="rect" id="Node000002" href="$custom__writer__example_8cpp.html" title="Example demonstrating how to create custom writers using thread_safe_writer." alt="" coords="5,101,188,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,54,138,103,136,98,243,49"/>
+<area shape="rect" id="Node000003" href="$structured__logging__example_8cpp.html" title="Demonstrates structured logging features introduced in Phase 3.0." alt="" coords="213,101,381,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="299,59,299,101,294,101,294,59"/>
+<area shape="rect" id="Node000004" href="$formatter__factory_8h.html" title="Factory for creating log formatter instances." alt="" coords="405,93,570,148"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="349,49,435,91,432,96,346,54"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="kcenon::logger::logger_config::low_latency" name="kcenon::logger::logger_config::low_latency">
+<area shape="rect" id="Node000001" title="Create a low&#45;latency configuration." alt="" coords="496,49,663,89"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a8a3764cd3be4f8a4733691f686ad8126" title="Use low&#45;latency configuration as base." alt="" coords="267,5,448,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="482,56,448,50,448,45,483,50"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1logger__builder.html#a280c589564b5b5ede0d1789b538ad0f1" title=" " alt="" coords="272,85,443,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="483,87,443,93,442,88,482,82"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1logger__builder.html#a54cd6a57d715ede3b24b1e3d7b30d88f" title="Detect environment from environment variables." alt="" coords="5,85,219,125"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="258,107,219,107,219,102,258,102"/>
+</map>

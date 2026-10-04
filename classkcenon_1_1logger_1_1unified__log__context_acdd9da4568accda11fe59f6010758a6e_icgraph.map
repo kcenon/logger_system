@@ -1,0 +1,9 @@
+<map id="kcenon::logger::unified_log_context::set" name="kcenon::logger::unified_log_context::set">
+<area shape="rect" id="Node000001" title="Set a context value." alt="" coords="449,49,620,89"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__context__scope.html#a098055bdae9e989236eef505c75f78a6" title="Construct scope with a logger reference (for logger&#45;level context)" alt="" coords="240,5,391,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="435,55,391,48,391,42,436,50"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#a56ab269be7d1f26cbef44c73dc248053" title="Set a context value." alt="" coords="229,85,401,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="436,88,402,93,401,88,435,82"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#ad2db396f43a238f62c5e604ebc1d4056" title="Construct guard and set a single context field." alt="" coords="5,77,181,132"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="216,107,181,107,181,102,216,102"/>
+</map>

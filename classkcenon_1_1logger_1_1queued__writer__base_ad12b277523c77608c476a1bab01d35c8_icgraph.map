@@ -1,0 +1,5 @@
+<map id="kcenon::logger::queued_writer_base::enqueue_entry" name="kcenon::logger::queued_writer_base::enqueue_entry">
+<area shape="rect" id="Node000001" title="Enqueue entry (specialization for std::queue)" alt="" coords="248,5,459,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1queued__writer__base.html#a900ad2227f4f37d158bbb6f71a356104" title="Try to enqueue an entry with overflow protection." alt="" coords="5,5,200,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="235,28,200,28,200,23,235,23"/>
+</map>

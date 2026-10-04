@@ -1,0 +1,11 @@
+<map id="kcenon::logger::filters::category_filter" name="kcenon::logger::filters::category_filter">
+<area shape="rect" id="Node000001" title="Filter based on category field." alt="" coords="35,445,190,565"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__filter__interface.html" title="Interface for log filters." alt="" coords="5,263,177,383"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,396,108,445,103,445,97,397"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="202,290,381,355"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="262,357,184,435,181,432,258,353"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="252,135,331,200"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="294,200,294,274,289,274,289,200"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="226,5,357,85"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="294,99,294,134,289,134,289,99"/>
+</map>

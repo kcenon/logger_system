@@ -1,0 +1,9 @@
+<map id="kcenon::logger::scoped_context_guard::set_otel" name="kcenon::logger::scoped_context_guard::set_otel">
+<area shape="rect" id="Node000001" title="Set OpenTelemetry context." alt="" coords="5,69,188,109"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#ae830b3970289b394d60144e2b7eda193" title=" " alt="" coords="249,5,416,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,67,245,46,246,51,172,72"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1unified__log__context.html#a46a6621742034491dabb0bffaca3cff7" title="Set OpenTelemetry context." alt="" coords="247,69,418,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="188,87,233,87,233,92,188,92"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#aef59eabdc7cadf6eb99f3fe5b60a6293" title="Track a key as added or overridden." alt="" coords="236,133,429,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="172,107,246,127,245,132,170,112"/>
+</map>

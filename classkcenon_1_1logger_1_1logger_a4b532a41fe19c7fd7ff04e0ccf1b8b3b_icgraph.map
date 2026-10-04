@@ -1,0 +1,24 @@
+<map id="kcenon::logger::logger::add_writer" name="kcenon::logger::logger::add_writer">
+<area shape="rect" id="Node000001" title=" " alt="" coords="336,141,503,181"/>
+<area shape="rect" id="Node000002" href="$critical__logging__example_8cpp.html#a4a3911b646a2f740eda1219fabe8e9cd" title=" " alt="" coords="113,5,283,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="386,134,341,96,287,60,262,48,264,43,289,55,344,92,389,130"/>
+<area shape="rect" id="Node000004" href="$critical__logging__example_8cpp.html#aeef0b8ef6455a15653c9c8d7b4769e8b" title=" " alt="" coords="108,70,288,95"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="360,138,287,109,250,98,252,93,289,104,362,133"/>
+<area shape="rect" id="Node000005" href="$critical__logging__example_8cpp.html#ab9867bd82859f8e050dfeef33a609bec" title=" " alt="" coords="112,119,284,145"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="322,151,284,146,284,141,323,146"/>
+<area shape="rect" id="Node000006" href="$decorator__usage_8cpp.html#afe94899b5674125d5b41f079cbbf3a52" title="Example 5: Real&#45;World Production Scenarios." alt="" coords="121,233,275,273"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="365,190,289,224,258,236,256,231,287,219,363,185"/>
+<area shape="rect" id="Node000008" href="$writer__builder__example_8cpp.html#af3661cb486a5baec84764a058cb2f01e" title="Example 5: Production Setup with Multiple Writers." alt="" coords="121,297,275,337"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="395,194,348,241,289,288,266,300,264,295,287,283,345,237,391,190"/>
+<area shape="rect" id="Node000010" href="$critical__logging__example_8cpp.html#a3a6ffeda085cf67083e3674b885009ac" title=" " alt="" coords="115,169,281,209"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="323,176,282,181,281,176,322,171"/>
+<area shape="rect" id="Node000003" href="$critical__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,95,60,121"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="124,53,109,60,52,97,49,93,107,55,121,48"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="102,100,61,107,60,101,101,95"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="98,120,60,115,61,109,99,115"/>
+<area shape="rect" id="Node000007" href="$decorator__usage_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,241,60,266"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="107,256,60,256,60,251,107,251"/>
+<area shape="rect" id="Node000009" href="$writer__builder__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,305,60,330"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="107,320,60,320,60,315,107,315"/>
+<area shape="poly" id="edge12_Node000010_Node000003" title=" " alt="" coords="124,166,107,158,50,123,53,119,109,154,126,161"/>
+</map>

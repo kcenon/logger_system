@@ -1,0 +1,24 @@
+<map id="include/kcenon/logger/writers/file_writer.h" name="include/kcenon/logger/writers/file_writer.h">
+<area shape="rect" id="Node000001" title="File writer for logging to files with optional buffering." alt="" coords="565,5,730,45"/>
+<area shape="rect" id="Node000002" href="$advanced__features__demo_8cpp.html" title="Demonstrates advanced logging features including filtering and writers." alt="" coords="5,196,220,236"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="551,42,446,63,335,96,280,120,226,147,142,198,139,194,224,143,277,115,333,91,445,58,550,37"/>
+<area shape="rect" id="Node000003" href="$main_8cpp.html" title="Logger crash protection demonstration." alt="" coords="616,101,815,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="671,55,704,99,699,102,667,58"/>
+<area shape="rect" id="Node000004" href="$critical__logging__example_8cpp.html" title="Example demonstrating critical log loss prevention mechanisms." alt="" coords="245,196,434,236"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="552,41,441,62,396,77,367,95,351,118,343,145,340,196,335,196,338,144,346,116,363,91,394,73,440,57,550,36"/>
+<area shape="rect" id="Node000005" href="$decorator__usage_8cpp.html" title="Comprehensive decorator pattern usage examples." alt="" coords="839,101,991,141"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="715,47,862,98,860,103,714,52"/>
+<area shape="rect" id="Node000006" href="$security__demo_8cpp.html" title="Security&#45;focused logging with sanitization, encryption, and audit trails." alt="" coords="1015,108,1229,133"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="744,41,1004,91,1072,105,1071,111,1003,96,743,47"/>
+<area shape="rect" id="Node000007" href="$writer__factory_8h.html" title="Factory for creating log writer instances." alt="" coords="661,196,849,236"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="625,58,612,79,603,102,600,125,607,147,619,162,635,175,671,194,668,198,632,179,616,166,602,149,594,126,597,101,607,76,620,55"/>
+<area shape="rect" id="Node000008" href="$rotating__file__writer_8h.html" title="Rotating file writer with size and time&#45;based rotation." alt="" coords="377,93,542,148"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="598,54,513,96,511,91,596,49"/>
+<area shape="rect" id="Node000010" href="$file__writer_8cpp.html" title=" " alt="" coords="1253,101,1399,141"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="744,29,972,50,1107,67,1241,91,1271,98,1269,103,1240,96,1106,72,971,55,744,35"/>
+<area shape="poly" id="edge8_Node000008_Node000002" title=" " alt="" coords="364,150,183,199,182,193,363,145"/>
+<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="416,159,365,198,362,194,413,155"/>
+<area shape="poly" id="edge10_Node000008_Node000007" title=" " alt="" coords="556,149,696,193,695,198,554,154"/>
+<area shape="rect" id="Node000009" href="$rotating__file__writer_8cpp.html" title=" " alt="" coords="458,196,637,236"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="496,156,531,194,528,198,492,160"/>
+</map>

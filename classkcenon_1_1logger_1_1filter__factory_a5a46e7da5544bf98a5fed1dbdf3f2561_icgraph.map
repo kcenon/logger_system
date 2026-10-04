@@ -1,0 +1,7 @@
+<map id="kcenon::logger::filter_factory::create_composite_and" name="kcenon::logger::filter_factory::create_composite_and">
+<area shape="rect" id="Node000001" title="Create a composite filter with AND logic." alt="" coords="252,37,481,77"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1filter__factory_1_1builder.html#aaed72029ea9a4d0eb38b116784121939" title="Build the composite filter." alt="" coords="21,5,188,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,44,188,38,189,33,239,39"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1filter__factory.html#a56283e43602eb4eb579d4db8d856b569" title="Create a production filter." alt="" coords="5,69,204,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="239,76,204,80,204,75,238,70"/>
+</map>

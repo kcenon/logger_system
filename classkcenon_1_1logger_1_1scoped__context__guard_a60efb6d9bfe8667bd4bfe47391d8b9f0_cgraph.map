@@ -1,0 +1,11 @@
+<map id="kcenon::logger::scoped_context_guard::~scoped_context_guard" name="kcenon::logger::scoped_context_guard::~scoped_context_guard">
+<area shape="rect" id="Node000001" title="Destructor &#45; restores previous context." alt="" coords="5,94,192,149"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#ae830b3970289b394d60144e2b7eda193" title=" " alt="" coords="256,5,423,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,91,239,55,259,47,261,52,241,60,157,96"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1unified__log__context.html#a6a67e61fb152ee263ffec8058d88fd95" title="Get a context value by key." alt="" coords="254,69,425,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="192,106,240,100,241,105,192,112"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1unified__log__context.html#a74eb2ffd7f6d4a62009cf9fe49c04c64" title="Get the category of a context entry." alt="" coords="240,133,439,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="192,131,227,136,226,141,192,136"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1unified__log__context.html#a453a692e635e379903cc0c2540804a69" title="Get all keys in the context." alt="" coords="254,197,425,237"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="157,146,241,183,261,190,259,195,239,188,155,151"/>
+</map>

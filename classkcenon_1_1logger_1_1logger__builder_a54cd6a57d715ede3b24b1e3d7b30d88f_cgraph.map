@@ -1,0 +1,15 @@
+<map id="kcenon::logger::logger_builder::detect_environment" name="kcenon::logger::logger_builder::detect_environment">
+<area shape="rect" id="Node000001" title="Detect environment from environment variables." alt="" coords="5,133,219,173"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger__builder.html#a280c589564b5b5ede0d1789b538ad0f1" title=" " alt="" coords="267,133,437,173"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="219,151,253,151,253,156,219,156"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1logger__config.html#afb660326faec59dd44687001bcc0f858" title="Create a debug configuration." alt="" coords="499,5,666,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="375,131,423,93,484,55,499,48,501,53,487,60,426,97,378,135"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1logger__config.html#a4f15641c4601049328f23af9dfabfa5a" title="Create a default configuration." alt="" coords="499,69,667,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="424,131,496,110,498,116,426,136"/>
+<area shape="rect" id="Node000005" href="$structkcenon_1_1logger_1_1logger__config.html#a61eefc777c14a9cc76d2cc9df0fdd587" title="Create a high&#45;performance configuration." alt="" coords="485,133,680,173"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="438,151,472,151,472,156,438,156"/>
+<area shape="rect" id="Node000006" href="$structkcenon_1_1logger_1_1logger__config.html#a277abafef12e2a8ce50f7f06dc58e33a" title="Create a low&#45;latency configuration." alt="" coords="499,197,666,237"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="426,171,498,191,496,196,424,176"/>
+<area shape="rect" id="Node000007" href="$structkcenon_1_1logger_1_1logger__config.html#a30e3d5ac61b3f61fa6673fffebe3cc75" title="Create a production configuration." alt="" coords="499,261,666,301"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="378,171,426,209,487,247,501,254,499,259,484,252,423,214,375,175"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="kcenon::logger::adapters::to_common_level" name="kcenon::logger::adapters::to_common_level">
+<area shape="rect" id="Node000001" title="Convert log levels between logger_system and common_system." alt="" coords="312,105,495,145"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1adapters_1_1logger__adapter.html#a124735ce8bd40f780b6ce7f7fa16dd07" title="Get the current log level." alt="" coords="37,5,233,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="354,101,263,60,226,48,227,43,265,55,356,97"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1adapters_1_1logger__from__common__adapter.html#a525b44a51d635597053dde54aaf981f2" title="Log a message." alt="" coords="5,69,264,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="298,114,264,109,265,104,299,109"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1adapters_1_1logger__from__common__adapter.html#a1763455ae8de151bc9e5429f2e4ef19b" title="Log with source location." alt="" coords="19,134,250,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="299,142,250,149,250,143,298,137"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1adapters_1_1logger__from__common__adapter.html#a13712207500271ac7b8bca63c1a7f644" title="Set log level." alt="" coords="19,213,250,267"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="359,155,265,202,232,215,230,210,263,198,356,150"/>
+</map>

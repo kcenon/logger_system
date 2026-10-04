@@ -1,0 +1,7 @@
+<map id="kcenon::logger::async::compat_jthread::joinable" name="kcenon::logger::async::compat_jthread::joinable">
+<area shape="rect" id="Node000001" title="Check if thread is joinable." alt="" coords="260,41,452,81"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a2905335e5a409c9e50e00cbafd2346cf" title=" " alt="" coords="5,5,212,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="246,48,212,43,213,38,247,43"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a410d7f52923cd0e12b1358ab8e381968" title="Destructor &#45; requests stop and joins." alt="" coords="9,70,209,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="247,80,209,85,209,80,246,75"/>
+</map>

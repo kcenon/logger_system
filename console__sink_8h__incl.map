@@ -1,0 +1,30 @@
+<map id="include/kcenon/logger/sinks/console_sink.h" name="include/kcenon/logger/sinks/console_sink.h">
+<area shape="rect" id="Node000001" title="Console output sink implementation (stdout/stderr) kcenon." alt="" coords="59,5,224,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,101,85,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,48,71,93,67,89,118,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="109,101,173,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="144,46,144,87,139,87,139,46"/>
+<area shape="rect" id="Node000004" href="$output__sink__interface_8h.html" title="Interface for log output destinations (Single Responsibility Principle) kcenon." alt="" coords="198,93,343,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="172,43,232,83,229,88,169,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="221,269,280,295"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="198,134,102,160,64,173,46,183,38,203,42,219,58,233,82,246,146,264,208,274,207,279,144,269,81,251,55,238,38,222,32,202,42,180,62,168,100,155,197,129"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="57,189,154,214"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="236,136,140,185,138,180,233,131"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="179,189,256,214"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="261,135,234,178,230,175,257,132"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="281,189,367,214"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="285,132,312,175,307,178,280,135"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="391,181,579,221"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="319,131,427,174,425,179,317,136"/>
+<area shape="rect" id="Node000010" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="604,181,751,221"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="344,127,591,178,590,184,343,132"/>
+<area shape="poly" id="edge10_Node000010_Node000005" title=" " alt="" coords="604,222,592,224,294,276,293,271,592,219,603,216"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="490,269,577,295"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="644,224,568,265,565,260,642,219"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="601,269,661,295"/>
+<area shape="poly" id="edge12_Node000010_Node000012" title=" " alt="" coords="668,223,647,259,642,256,664,220"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="685,269,760,295"/>
+<area shape="poly" id="edge13_Node000010_Node000013" title=" " alt="" coords="691,220,711,256,707,259,686,223"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="784,269,864,295"/>
+<area shape="poly" id="edge14_Node000010_Node000014" title=" " alt="" coords="714,219,792,260,789,265,711,224"/>
+</map>

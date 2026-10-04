@@ -1,0 +1,7 @@
+<map id="security_filter::should_log" name="security_filter::should_log">
+<area shape="rect" id="Node000001" title="Check if a log entry should be processed." alt="" coords="5,13,195,38"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="243,5,405,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,23,229,23,229,28,195,28"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="453,5,616,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="406,23,440,23,440,28,406,28"/>
+</map>

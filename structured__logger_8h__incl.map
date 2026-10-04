@@ -1,0 +1,23 @@
+<map id="include/kcenon/logger/structured/structured_logger.h" name="include/kcenon/logger/structured/structured_logger.h">
+<area shape="rect" id="Node000001" title="Structured logging functionality." alt="" coords="561,5,726,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,204,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="561,51,218,110,217,105,560,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="227,115,286,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="561,49,436,74,299,111,293,113,291,108,297,105,435,68,560,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="311,115,435,141"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="568,63,420,113,418,108,566,58"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="459,115,527,141"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="602,62,524,111,521,106,600,58"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="551,115,629,141"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="631,62,606,104,601,102,626,59"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="653,115,740,141"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="661,59,685,102,681,104,656,62"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="765,115,845,141"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="690,58,775,106,772,111,687,62"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="869,115,943,141"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="721,58,858,105,864,108,862,113,856,111,719,63"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="967,115,1042,141"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="727,48,836,73,956,105,964,108,962,113,955,111,835,78,726,53"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1066,115,1125,141"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="727,40,880,64,968,82,1055,105,1061,107,1059,113,1053,111,967,87,880,69,726,45"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="kcenon::logger::otlp_writer::escape_json" name="kcenon::logger::otlp_writer::escape_json">
+<area shape="rect" id="Node000001" title=" " alt="" coords="895,69,1049,109"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1otlp__writer.html#a65be58debc539bf3a823a1dd7c5f796a" title=" " alt="" coords="661,69,847,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="881,92,847,92,847,87,881,87"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1otlp__writer.html#ae5b84ed7af236f7a11a5c709d867ecf8" title=" " alt="" coords="453,69,613,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="648,92,614,92,614,87,648,87"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1otlp__writer.html#a4b080fbac9822827bbb51a7b1cc13345" title=" " alt="" coords="204,5,405,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="448,68,376,48,377,43,449,63"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1otlp__writer.html#a90683c5a64b853d84cef2cbe4d72f918" title="Force immediate export of current batch." alt="" coords="226,69,383,109"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="440,92,383,92,383,87,440,87"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1otlp__writer.html#a60ced9bb5a91b7fe17ee28e765357f8e" title="Destructor &#45; flushes remaining logs." alt="" coords="227,133,383,173"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="449,116,377,136,376,131,448,110"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1otlp__writer.html#aff3f73ec0d51810b78302ed3057f45cb" title="Constructor with configuration." alt="" coords="5,5,156,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="190,28,157,28,157,23,190,23"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1otlp__writer.html#ad7b0c5dca619d19093b0ba50b8ceadb5" title="Flush pending logs." alt="" coords="5,69,156,109"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="212,92,156,92,156,87,212,87"/>
+</map>

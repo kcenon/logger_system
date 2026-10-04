@@ -1,0 +1,5 @@
+<map id="kcenon::logger::security::secure_key::~secure_key" name="kcenon::logger::security::secure_key::~secure_key">
+<area shape="rect" id="Node000001" title="Destructor &#45; securely clears key from memory." alt="" coords="5,5,200,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html#a67314c67b3c5240521e39cb3515bee27" title="Securely clear key data from memory." alt="" coords="248,5,440,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,23,235,23,235,28,200,28"/>
+</map>

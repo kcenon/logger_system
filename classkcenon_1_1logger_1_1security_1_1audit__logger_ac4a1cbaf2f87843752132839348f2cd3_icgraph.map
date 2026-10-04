@@ -1,0 +1,5 @@
+<map id="kcenon::logger::security::audit_logger::log_audit_event" name="kcenon::logger::security::audit_logger::log_audit_event">
+<area shape="rect" id="Node000001" title="Log an audit event." alt="" coords="244,5,467,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1encrypted__writer.html#a886f7b7540f46d1a59556479975878a2" title="Construct encrypted writer with wrapped writer." alt="" coords="5,5,196,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,28,196,28,196,23,230,23"/>
+</map>

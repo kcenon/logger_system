@@ -1,0 +1,5 @@
+<map id="kcenon::logger::writer_factory::create_high_performance" name="kcenon::logger::writer_factory::create_high_performance">
+<area shape="rect" id="Node000001" title="Create a high&#45;performance preset writer." alt="" coords="5,5,169,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1writer__factory.html#adfb8b1e93919419dd00e86ec908b43a3" title="Wrap a writer with batch processing." alt="" coords="217,13,384,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,30,204,30,204,35,170,35"/>
+</map>

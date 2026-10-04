@@ -1,0 +1,13 @@
+<map id="kcenon::logger::security::signal_manager::emergency_flush" name="kcenon::logger::security::signal_manager::emergency_flush">
+<area shape="rect" id="Node000001" title="Emergency flush for a logger (signal&#45;safe)" alt="" coords="5,170,259,210"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1critical__logger__interface.html#a6e81fbf1091a1f1ba94e63c47ff20e34" title="Get emergency buffer pointer." alt="" coords="318,5,505,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,168,222,120,305,69,317,63,320,68,308,74,225,124,160,172"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1critical__logger__interface.html#ac7d8a8b10bea90b5a381ce9cba822855" title="Get emergency buffer size." alt="" coords="307,84,516,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="203,167,300,140,301,145,205,173"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1security_1_1critical__logger__interface.html#a4fa1ad3bbf6d2e925f9dc2f3525fde35" title="Get file descriptor for emergency writing." alt="" coords="318,163,505,217"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="259,187,304,187,304,193,259,193"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger_1_1security_1_1detail.html#ae1fa485bfdaef0c0e36db8333d82a71a" title="Signal&#45;safe fsync wrapper (cross&#45;platform)" alt="" coords="322,242,501,282"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="211,207,320,236,319,241,210,213"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger_1_1security_1_1detail.html#a7ed0996e25fa091eaa31028b3711a661" title="Signal&#45;safe write wrapper (cross&#45;platform)" alt="" coords="322,306,501,346"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="164,208,228,249,308,292,326,299,324,304,306,296,226,254,161,213"/>
+</map>

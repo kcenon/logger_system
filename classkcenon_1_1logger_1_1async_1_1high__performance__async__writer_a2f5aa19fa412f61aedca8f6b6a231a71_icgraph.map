@@ -1,0 +1,8 @@
+<map id="kcenon::logger::async::high_performance_async_writer::update_stats" name="kcenon::logger::async::high_performance_async_writer::update_stats">
+<area shape="rect" id="Node000001" title="Update performance statistics." alt="" coords="488,5,681,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#a5e3277edb6cf43396aa35edd16a8d4b9" title="Write a log entry asynchronously." alt="" coords="5,5,199,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="474,29,440,27,247,27,199,29,199,24,247,22,440,22,474,23"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1high__performance__async__writer.html#ad9c86b7a99d3cdc0ec3694a950bcc310" title="Write directly to the underlying writer (fallback mode)" alt="" coords="247,37,440,92"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="475,50,441,54,440,49,474,45"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="233,53,199,48,199,43,234,47"/>
+</map>

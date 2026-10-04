@@ -1,0 +1,7 @@
+<map id="kcenon::logger::async::batch_processor::handle_back_pressure" name="kcenon::logger::async::batch_processor::handle_back_pressure">
+<area shape="rect" id="Node000001" title="Handle back&#45;pressure conditions." alt="" coords="471,5,659,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#ab545e34bc82963e5e7476bbc9403726e" title="Single iteration of processing loop." alt="" coords="228,5,423,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="457,35,423,35,423,30,457,30"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#a3a0f49b88ab539a586b9a45622270547" title="Start the batch processor." alt="" coords="5,13,180,53"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="214,35,180,35,180,30,214,30"/>
+</map>

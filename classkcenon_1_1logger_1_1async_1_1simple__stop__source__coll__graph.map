@@ -1,0 +1,5 @@
+<map id="kcenon::logger::async::simple_stop_source" name="kcenon::logger::async::simple_stop_source">
+<area shape="rect" id="Node000001" title="Simple stop source for environments without std::stop_token." alt="" coords="5,133,173,273"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="17,5,162,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,71,92,117,87,117,87,71"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="kcenon::logger::security::secure_key_storage::validate_key_path" name="kcenon::logger::security::secure_key_storage::validate_key_path">
+<area shape="rect" id="Node000001" title="Validate key file path (prevent path traversal)" alt="" coords="281,30,501,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#a500a1523f64c69722faf15351a122e90" title="Load key from file with permission verification." alt="" coords="7,5,232,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="268,45,232,41,232,36,268,40"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#a8faaa55edf1e628e81868226d3fa76f4" title="Save key to file with secure permissions." alt="" coords="5,69,233,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="268,74,234,79,233,73,268,69"/>
+</map>
