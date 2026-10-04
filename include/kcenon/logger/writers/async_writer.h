@@ -111,6 +111,12 @@ public:
             worker_thread_.join();
         }
 
+        // The worker may observe running_ == false before entering its loop.
+        // Honor force_flush even when it never had a chance to drain the queue.
+        if (force_flush) {
+            flush_remaining();
+        }
+
         // Verify all messages were processed
         if (!queue_.empty()) {
             std::cerr << "[async_writer] Warning: " << queue_.size()

@@ -38,6 +38,17 @@ set_target_properties(logger_min_level_threshold_test PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+# Regression: flush must wait for dequeued writes before flushing writers.
+add_executable(logger_log_collector_flush_test unit/log_collector_flush_test.cpp)
+if(TARGET GTest::gtest_main)
+    target_link_libraries(logger_log_collector_flush_test PRIVATE logger_system GTest::gtest_main)
+else()
+    target_link_libraries(logger_log_collector_flush_test PRIVATE logger_system gtest_main)
+endif()
+add_test(NAME logger_log_collector_flush_test COMMAND logger_log_collector_flush_test)
+set_tests_properties(logger_log_collector_flush_test PROPERTIES TIMEOUT 15)
+logger_register_coverage_target(logger_log_collector_flush_test)
+
 # Thread safety tests (Phase 1 - Task 1.1)
 add_executable(logger_thread_safety_test thread_safety_test.cpp)
 
@@ -109,6 +120,10 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/security_test/security_test.cpp")
     endif()
     add_executable(logger_security_test ${_LOGGER_SECURITY_TEST_SOURCES})
     unset(_LOGGER_SECURITY_TEST_SOURCES)
+
+    if(WIN32)
+        target_link_libraries(logger_security_test PRIVATE advapi32)
+    endif()
 
     if(TARGET GTest::gtest_main)
         target_link_libraries(logger_security_test PRIVATE logger_system GTest::gtest_main GTest::gtest)
@@ -266,6 +281,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/executor_integration_test.cpp")
     add_test(NAME logger_executor_integration_test
         COMMAND logger_executor_integration_test
     )
+    set_tests_properties(logger_executor_integration_test PROPERTIES TIMEOUT 60)
     set_target_properties(logger_executor_integration_test PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
@@ -1190,6 +1206,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/integration_test/standalone_executor
     add_test(NAME logger_standalone_executor_test
         COMMAND logger_standalone_executor_test
     )
+    set_tests_properties(logger_standalone_executor_test PROPERTIES TIMEOUT 60)
     set_target_properties(logger_standalone_executor_test PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )

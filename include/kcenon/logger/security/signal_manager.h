@@ -17,6 +17,7 @@
 #include <set>
 #include <mutex>
 #include <atomic>
+#include <cerrno>
 
 // Platform-specific headers and definitions
 #ifdef _WIN32
@@ -44,6 +45,11 @@ namespace detail {
  * This avoids macro pollution that would affect other headers.
  */
 inline ssize_t safe_write(int fd, const void* buf, size_t count) {
+    // MSVC terminates on a negative descriptor instead of returning EBADF.
+    if (fd < 0) {
+        errno = EBADF;
+        return -1;
+    }
 #ifdef _WIN32
     return _write(fd, buf, static_cast<unsigned int>(count));
 #else
@@ -59,6 +65,10 @@ inline ssize_t safe_write(int fd, const void* buf, size_t count) {
  * Note: Uses _commit on Windows (POSIX fsync is not available)
  */
 inline int safe_fsync(int fd) {
+    if (fd < 0) {
+        errno = EBADF;
+        return -1;
+    }
 #ifdef _WIN32
     return _commit(fd);
 #else

@@ -28,16 +28,16 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 ##################################################
 # Canonical cmake module orchestration (kcenon-system-layout v1.1)
 ##################################################
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-
-include(options)        # 1. option() / feature flags / performance tuning
-include(compiler)       # 2. C++ standard, platform, sanitizers, feature checks
-include(dependencies)   # 3. find_package + FetchContent + thread/common_system
-include(warnings)       # 4. logger_add_warnings(), logger_enable_warnings_for_all()
-include(targets)        # 5. logger_system library target with explicit sources
-include(install)        # 6. install rules + config-package generation
-include(testing)        # 7. enable_testing(), tests/, integration_tests/, coverage
-include(examples)       # 8. examples/samples subdirectory wiring
+# Resolve project modules explicitly: dependencies also use names such as
+# options.cmake and dependencies.cmake in their own CMAKE_MODULE_PATH.
+include(cmake/options.cmake)        # 1. option() / feature flags / performance tuning
+include(cmake/compiler.cmake)       # 2. C++ standard, platform, sanitizers, feature checks
+include(cmake/dependencies.cmake)   # 3. find_package + FetchContent + thread/common_system
+include(cmake/warnings.cmake)       # 4. logger_add_warnings(), logger_enable_warnings_for_all()
+include(cmake/targets.cmake)        # 5. logger_system library target with explicit sources
+include(cmake/install.cmake)        # 6. install rules + config-package generation
+include(cmake/testing.cmake)        # 7. enable_testing(), tests/, integration_tests/, coverage
+include(cmake/examples.cmake)       # 8. examples/samples subdirectory wiring
 
 # Benchmarks remain inline (relies on cmake/FetchBenchmark.cmake helper)
 if(BUILD_BENCHMARKS)

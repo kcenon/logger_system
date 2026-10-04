@@ -105,7 +105,13 @@ void standalone_executor::shutdown(bool wait_for_completion) {
         return; // Already stopped
     }
 
-    stop_requested_.store(true);
+    // Synchronize the wait predicate with the worker's condition-variable lock.
+    // Otherwise shutdown can notify between its predicate check and wait,
+    // leaving an idle worker asleep while join() waits forever.
+    {
+        std::lock_guard<std::mutex> lock(queue_mutex_);
+        stop_requested_.store(true);
+    }
     queue_cv_.notify_all();
 
     if (worker_thread_.joinable()) {
