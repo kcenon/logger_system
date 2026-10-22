@@ -1,0 +1,9 @@
+<map id="kcenon::logger::compact_formatter::format" name="kcenon::logger::compact_formatter::format">
+<area shape="rect" id="Node000001" title="Format a log entry into a string." alt="" coords="5,49,188,89"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1base__formatter.html#a8056f137776b78e9540c044217bedd96" title="Convert log level to string." alt="" coords="239,5,396,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,51,225,45,226,50,189,56"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="236,85,399,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="189,81,223,87,222,92,188,86"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="447,85,609,125"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="399,102,433,102,433,107,399,107"/>
+</map>

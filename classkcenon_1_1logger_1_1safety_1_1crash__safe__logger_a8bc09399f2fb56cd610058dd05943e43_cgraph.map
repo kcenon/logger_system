@@ -1,0 +1,5 @@
+<map id="kcenon::logger::safety::crash_safe_logger::stop" name="kcenon::logger::safety::crash_safe_logger::stop">
+<area shape="rect" id="Node000001" title="Stop the underlying logger." alt="" coords="5,13,189,53"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1safety_1_1crash__safe__logger.html#a7d4e61347feed24cc7c8c469174b4fa8" title="Stop auto&#45;flush background thread." alt="" coords="237,5,421,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,30,223,30,223,35,190,35"/>
+</map>

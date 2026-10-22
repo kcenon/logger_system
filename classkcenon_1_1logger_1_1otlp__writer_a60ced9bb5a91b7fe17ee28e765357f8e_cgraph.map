@@ -1,0 +1,11 @@
+<map id="kcenon::logger::otlp_writer::~otlp_writer" name="kcenon::logger::otlp_writer::~otlp_writer">
+<area shape="rect" id="Node000001" title="Destructor &#45; flushes remaining logs." alt="" coords="5,37,161,77"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1otlp__writer.html#ae5b84ed7af236f7a11a5c709d867ecf8" title=" " alt="" coords="209,37,369,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,55,196,55,196,60,162,60"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1otlp__writer.html#a65be58debc539bf3a823a1dd7c5f796a" title=" " alt="" coords="417,37,603,77"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="369,55,404,55,404,60,369,60"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1otlp__writer.html#a9869623b4ac19b7823fed711994fc0e2" title=" " alt="" coords="663,5,818,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="602,42,649,35,650,41,603,47"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1otlp__writer.html#a679a8d8cbeb8c027aafdfdd0b9553b87" title=" " alt="" coords="651,69,831,109"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="603,68,638,72,637,78,602,73"/>
+</map>

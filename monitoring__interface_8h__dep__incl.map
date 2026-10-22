@@ -1,0 +1,5 @@
+<map id="src/impl/monitoring/monitoring_interface.h" name="src/impl/monitoring/monitoring_interface.h">
+<area shape="rect" id="Node000001" title="Abstract interface for monitoring and metrics collection." alt="" coords="5,5,180,45"/>
+<area shape="rect" id="Node000002" href="$basic__monitor_8h.html" title="Basic monitoring implementation with no external dependencies." alt="" coords="18,93,167,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,59,95,93,90,93,90,59"/>
+</map>

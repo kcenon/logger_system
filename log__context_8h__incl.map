@@ -1,0 +1,9 @@
+<map id="include/kcenon/logger/core/log_context.h" name="include/kcenon/logger/core/log_context.h">
+<area shape="rect" id="Node000001" title="Structured log context with key&#45;value metadata for correlation." alt="" coords="63,5,228,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,72,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,48,67,87,64,83,118,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="97,93,194,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,46,148,79,143,79,143,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="219,93,283,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="172,43,226,83,222,87,169,48"/>
+</map>

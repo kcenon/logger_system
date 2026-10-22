@@ -1,0 +1,17 @@
+<map id="kcenon::logger::network_writer::~network_writer" name="kcenon::logger::network_writer::~network_writer">
+<area shape="rect" id="Node000001" title="Destructor." alt="" coords="5,37,189,77"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1network__writer.html#a4aabfa181358abb6312ed877d9a0214f" title=" " alt="" coords="248,5,427,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="189,42,234,36,234,42,190,48"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger_1_1utils.html#a3a01c81a1aa50d2a6d931997df5609f3" title="Safe operation execution for destructors." alt="" coords="237,69,437,109"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="190,67,224,72,223,77,189,72"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html#af185b6c6b01e9d7d7f3041103f7f3b5c" title="Close the writer and release resources." alt="" coords="485,5,660,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="427,23,472,23,472,28,427,28"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a8b38854d249b4da0d7a5bf6d45dccf47" title="Flush any buffered data." alt="" coords="714,5,885,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="661,23,700,23,700,28,661,28"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger_1_1utils.html#a7de50bb37b0ef460621bf5a4965f66f8" title="Log error to stderr with context." alt="" coords="495,69,650,109"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="437,87,481,87,481,92,437,92"/>
+<area shape="rect" id="Node000007" href="$structkcenon_1_1logger_1_1utils_1_1error__context.html#adf0e9566f6bf9ce92f6e686b24aa02cc" title="Convert error context to a formatted string." alt="" coords="708,69,891,109"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="650,87,694,87,694,92,650,92"/>
+<area shape="rect" id="Node000008" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="939,69,1105,109"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="891,87,925,87,925,92,891,92"/>
+</map>

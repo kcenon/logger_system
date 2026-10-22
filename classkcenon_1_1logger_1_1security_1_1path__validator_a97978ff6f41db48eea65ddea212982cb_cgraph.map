@@ -1,0 +1,11 @@
+<map id="kcenon::logger::security::path_validator::validate" name="kcenon::logger::security::path_validator::validate">
+<area shape="rect" id="Node000001" title="Validate a file path." alt="" coords="5,85,191,125"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1path__validator.html#a688521feb217e1c135e745ce91b45449" title="Check if a filename is safe (contains only allowed characters)" alt="" coords="239,5,417,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,82,227,62,228,67,163,87"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="247,85,409,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="191,102,233,102,233,107,191,107"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="249,149,407,175"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="179,122,264,143,262,149,178,127"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="465,85,632,125"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="410,102,452,102,452,107,410,107"/>
+</map>

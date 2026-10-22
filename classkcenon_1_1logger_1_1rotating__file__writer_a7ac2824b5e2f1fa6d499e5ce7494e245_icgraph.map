@@ -1,0 +1,9 @@
+<map id="kcenon::logger::rotating_file_writer::cleanup_old_files" name="kcenon::logger::rotating_file_writer::cleanup_old_files">
+<area shape="rect" id="Node000001" title="Remove old backup files beyond max_files limit." alt="" coords="491,37,705,77"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a72c420b95fea71c28460766985ed3d8a" title="Perform the actual rotation operation." alt="" coords="231,37,443,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="477,60,443,60,443,55,477,55"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a1b8286e8c0a86e7bcc1e1f855eb517ce" title="Manually trigger log rotation (thread&#45;safe)" alt="" coords="5,5,183,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="217,44,182,40,183,34,217,39"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a8363ee61d1496ee59e3117c22417fdf9" title="Write operation with automatic rotation check." alt="" coords="5,69,183,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="217,76,183,80,182,75,217,70"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="kcenon::logger::get_logger_error_message" name="kcenon::logger::get_logger_error_message">
+<area shape="rect" id="Node000001" title="Get error message from a VoidResult." alt="" coords="279,69,453,109"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#a500a1523f64c69722faf15351a122e90" title="Load key from file with permission verification." alt="" coords="5,5,231,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="274,68,195,48,197,43,275,63"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1path__validator.html#ad0d9bbc216514b59bc158592f9a6671f" title="Create a safe path by joining base and relative path." alt="" coords="23,69,213,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="265,92,214,92,214,87,265,87"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1encrypted__writer.html#a63639723e977b497acaac252d6cebbd5" title="Write encrypted log entry." alt="" coords="23,133,213,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="275,115,197,136,195,131,274,110"/>
+</map>

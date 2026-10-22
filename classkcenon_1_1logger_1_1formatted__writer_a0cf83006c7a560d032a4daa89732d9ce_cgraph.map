@@ -1,0 +1,7 @@
+<map id="kcenon::logger::formatted_writer::write" name="kcenon::logger::formatted_writer::write">
+<area shape="rect" id="Node000001" title="Write a log entry after applying the formatter." alt="" coords="5,37,196,77"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="244,5,432,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,42,230,37,231,42,196,47"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html#ad48f2ab0fd92db49d024bdc02f243a72" title="Write a log entry." alt="" coords="251,69,425,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="196,68,238,73,237,78,196,73"/>
+</map>

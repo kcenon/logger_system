@@ -1,0 +1,5 @@
+<map id="kcenon::logger::security::log_sanitizer::add_common_patterns" name="kcenon::logger::security::log_sanitizer::add_common_patterns">
+<area shape="rect" id="Node000001" title="Add all common patterns at once." alt="" coords="236,5,445,60"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger_1_1security.html#aee294dd2896de20d2c8dd0f9fcd7e28b" title="Create a sanitizer with common patterns pre&#45;configured." alt="" coords="5,13,188,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="222,35,188,35,188,30,222,30"/>
+</map>

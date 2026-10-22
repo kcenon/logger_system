@@ -1,0 +1,19 @@
+<map id="kcenon::logger::core::logger_context" name="kcenon::logger::core::logger_context">
+<area shape="rect" id="Node000001" title="Facade coordinating logger system components." alt="" coords="296,628,443,908"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1core_1_1signal__manager__context.html" title="Manages signal manager instance with thread&#45;safe access." alt="" coords="162,395,361,555"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="293,555,314,612,309,613,288,556"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="28,228,201,323"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="125,322,141,360,156,381,152,384,136,363,120,324"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1security_1_1signal__manager__interface.html" title="Interface for signal handler management." alt="" coords="5,5,224,165"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="117,166,117,212,112,212,112,166"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="226,243,310,308"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="270,308,267,379,262,379,264,308"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1core_1_1logger__registry.html" title="Manages registration and unregistration of loggers." alt="" coords="385,385,573,565"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="448,567,430,613,425,611,443,565"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="360,228,557,323"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="466,323,471,369,465,369,461,323"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1security_1_1critical__logger__interface.html" title="Interface for loggers that support emergency flushing." alt="" coords="355,8,562,163"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="461,163,461,212,456,212,456,163"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="582,243,717,308"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="624,310,568,375,564,371,620,307"/>
+</map>

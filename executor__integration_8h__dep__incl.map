@@ -1,0 +1,5 @@
+<map id="include/kcenon/logger/integration/executor_integration.h" name="include/kcenon/logger/integration/executor_integration.h">
+<area shape="rect" id="Node000001" title="IExecutor&#45;based async integration for logger_system." alt="" coords="11,5,176,60"/>
+<area shape="rect" id="Node000002" href="$executor__integration_8cpp.html" title="Implementation of IExecutor&#45;based integration." alt="" coords="5,108,181,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,74,96,108,91,108,91,74"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="kcenon::logger::logfmt_formatter::escape_logfmt_value" name="kcenon::logger::logfmt_formatter::escape_logfmt_value">
+<area shape="rect" id="Node000001" title="Escape a logfmt value." alt="" coords="807,5,1045,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logfmt__formatter.html#a0bdcc137401f427f6dcb57adcfbd7550" title="Format a log entry to logfmt string." alt="" coords="355,5,524,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="793,25,759,24,572,24,524,25,524,20,572,19,759,19,793,19"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1logfmt__formatter.html#a3cfb53af89a1a13c90997a0131b4474d" title="Format a log_value to logfmt." alt="" coords="572,33,759,73"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="793,42,759,46,758,41,793,37"/>
+<area shape="rect" id="Node000003" href="$structured__logging__example_8cpp.html#ae96b3123ffe562a68fd21ffd71b723fd" title="Demonstrates Logfmt formatter for key=value output." alt="" coords="108,13,307,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="341,28,307,28,307,23,341,23"/>
+<area shape="rect" id="Node000004" href="$structured__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,13,60,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="94,28,60,28,60,23,94,23"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="558,43,524,38,525,33,559,37"/>
+</map>

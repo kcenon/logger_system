@@ -1,0 +1,17 @@
+<map id="kcenon::logger::security::secure_key_storage::save_key" name="kcenon::logger::security::secure_key_storage::save_key">
+<area shape="rect" id="Node000001" title="Save key to file with secure permissions." alt="" coords="5,128,233,168"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html#ab894f72f2652a171d0f99a5b2272b165" title="Get const reference to key data." alt="" coords="302,5,481,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,126,213,94,280,62,315,48,317,53,282,66,215,99,157,130"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="549,96,712,136"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="185,125,232,114,281,105,343,100,391,100,501,105,536,107,536,112,501,111,391,105,343,105,282,111,233,119,186,131"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="551,197,710,222"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="144,166,204,211,242,233,282,249,342,263,390,266,439,260,501,249,546,239,587,225,588,230,547,244,502,255,440,265,390,271,341,269,281,255,239,238,201,216,141,170"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html#a45294649fb2480ba89fc7308f42d326f" title="Get key size in bytes." alt="" coords="302,200,481,240"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="196,165,303,194,301,199,195,171"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#abc4e1cfc617163980b5c4bbe359e7d43" title="Validate key file path (prevent path traversal)" alt="" coords="281,121,501,175"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="234,145,267,145,267,151,234,151"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="760,96,927,136"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="713,113,746,113,746,119,713,119"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="501,131,535,126,536,131,502,136"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="499,173,568,191,566,196,498,178"/>
+</map>

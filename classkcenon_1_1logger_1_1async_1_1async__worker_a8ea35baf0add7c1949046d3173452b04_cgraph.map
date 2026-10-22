@@ -1,0 +1,9 @@
+<map id="kcenon::logger::async::async_worker::stop" name="kcenon::logger::async::async_worker::stop">
+<area shape="rect" id="Node000001" title="Stop the worker thread gracefully." alt="" coords="5,69,169,109"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1async__worker.html#a3f7969c002f47d96e4a4fd9abaeb95d6" title="Process all remaining tasks in the queue." alt="" coords="226,5,433,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,67,240,46,241,51,164,72"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a90bd0e17804555e24d4f86fe20c8497a" title="Wait for thread to complete." alt="" coords="247,69,411,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="170,87,233,87,233,92,170,92"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a815d60b193847e48d48b5e2724957668" title="Request the thread to stop." alt="" coords="217,133,441,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="164,107,241,127,240,132,163,112"/>
+</map>

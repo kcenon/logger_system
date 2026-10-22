@@ -1,0 +1,5 @@
+<map id="kcenon::logger::utils::safe_destructor_result_operation" name="kcenon::logger::utils::safe_destructor_result_operation">
+<area shape="rect" id="Node000001" title="Safe operation with result for destructors." alt="" coords="220,5,395,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1batch__writer.html#a275aff4337e1c95ff4eca96276d13eb8" title="Destructor &#45; ensures all pending entries are flushed." alt="" coords="5,13,172,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,35,172,35,172,30,206,30"/>
+</map>

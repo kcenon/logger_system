@@ -1,0 +1,7 @@
+<map id="kcenon::logger::base_writer::format_log_entry" name="kcenon::logger::base_writer::format_log_entry">
+<area shape="rect" id="Node000001" title="Format a log entry using the current formatter." alt="" coords="229,37,416,77"/>
+<area shape="rect" id="Node000002" href="$classcounted__console__writer.html#a3a2b90dd22598f4325afa313a55aefb9" title="Implementation of structured write operation (override in derived classes)" alt="" coords="5,5,181,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,45,181,40,182,35,216,40"/>
+<area shape="rect" id="Node000003" href="$classmemory__writer.html#ab41a7a40680877cf869e0750f558cebd" title="Implementation of write operation." alt="" coords="12,69,175,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="216,75,175,81,174,75,215,70"/>
+</map>

@@ -1,0 +1,16 @@
+<map id="kcenon::logger::logger_builder::with_min_level" name="kcenon::logger::logger_builder::with_min_level">
+<area shape="rect" id="Node000001" title=" " alt="" coords="311,101,492,141"/>
+<area shape="rect" id="Node000002" href="$di__pattern__example_8cpp.html#a4eaf8643101790b89bdb53d866a8fd73" title="Example demonstrating DI pattern with logger and monitor." alt="" coords="108,5,263,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="345,98,262,60,234,48,236,43,264,55,347,93"/>
+<area shape="rect" id="Node000004" href="$di__pattern__example_8cpp.html#a01edde6daa7655b6d8d345aa730fa55c" title="Example demonstrating monitor&#45;less operation." alt="" coords="108,69,263,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="296,108,263,103,263,98,297,103"/>
+<area shape="rect" id="Node000005" href="$critical__logging__example_8cpp.html#af3661cb486a5baec84764a058cb2f01e" title=" " alt="" coords="108,133,263,173"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="297,139,263,145,263,139,296,134"/>
+<area shape="rect" id="Node000007" href="$custom__writer__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="158,198,213,223"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="348,150,264,188,214,205,212,200,262,183,346,145"/>
+<area shape="rect" id="Node000003" href="$di__pattern__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,45,60,70"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,47,61,54,60,49,94,42"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="94,73,60,66,61,60,95,68"/>
+<area shape="rect" id="Node000006" href="$critical__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,141,60,166"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="94,156,60,156,60,151,94,151"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="kcenon::logger::async::batch_processor::adjust_batch_size" name="kcenon::logger::async::batch_processor::adjust_batch_size">
+<area shape="rect" id="Node000001" title="Adjust batch size based on performance metrics." alt="" coords="5,5,189,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1batch__processor.html#ae37fb42d10b25fa73e5fbad3fda70580" title="Get current queue size." alt="" coords="237,5,403,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="189,30,224,30,224,35,189,35"/>
+</map>

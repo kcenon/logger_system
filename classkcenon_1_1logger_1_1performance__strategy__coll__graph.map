@@ -1,0 +1,5 @@
+<map id="kcenon::logger::performance_strategy" name="kcenon::logger::performance_strategy">
+<area shape="rect" id="Node000001" title="Configuration strategy for performance tuning." alt="" coords="11,213,215,453"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1config__strategy__interface.html" title="Abstract interface for logger configuration strategies." alt="" coords="5,5,220,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,179,115,213,110,213,110,179"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="kcenon::logger::security::critical_logger_interface::get_emergency_buffer" name="kcenon::logger::security::critical_logger_interface::get_emergency_buffer">
+<area shape="rect" id="Node000001" title="Get emergency buffer pointer." alt="" coords="307,5,493,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1signal__manager.html#a73d1518f75c3a354ce28032a6629abc7" title="Emergency flush for a logger (signal&#45;safe)" alt="" coords="5,13,259,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="293,35,259,35,259,30,293,30"/>
+</map>

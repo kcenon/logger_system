@@ -1,0 +1,7 @@
+<map id="kcenon::logger::security::audit_logger::get_hmac_key" name="kcenon::logger::security::audit_logger::get_hmac_key">
+<area shape="rect" id="Node000001" title=" " alt="" coords="251,37,464,77"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#aa55e1e7b25091be82709220a17b8b07f" title="Initialize audit logger." alt="" coords="15,5,193,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,45,193,39,194,34,237,39"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#af6d42db093bd32dbd0ffb06ffca23f7d" title="Verify integrity of an audit log entry." alt="" coords="5,69,203,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="237,75,203,80,202,74,237,70"/>
+</map>

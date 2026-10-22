@@ -1,0 +1,7 @@
+<map id="include/kcenon/logger/formatters/template_formatter.h" name="include/kcenon/logger/formatters/template_formatter.h">
+<area shape="rect" id="Node000001" title="Template&#45;based customizable formatter for structured logging kcenon." alt="" coords="101,5,267,60"/>
+<area shape="rect" id="Node000002" href="$structured__logging__example_8cpp.html" title="Demonstrates structured logging features introduced in Phase 3.0." alt="" coords="5,115,173,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,72,109,117,106,113,148,69"/>
+<area shape="rect" id="Node000003" href="$formatter__factory_8h.html" title="Factory for creating log formatter instances." alt="" coords="197,108,363,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="220,68,257,106,253,110,217,72"/>
+</map>

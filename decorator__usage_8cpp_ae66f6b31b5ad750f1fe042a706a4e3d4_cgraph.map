@@ -1,0 +1,51 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,222,60,247"/>
+<area shape="rect" id="Node000002" href="$decorator__usage_8cpp.html#a9aa00470ae59104f2d2bf1ef03226dff" title="Example 1: Core Writers (No Decorators)" alt="" coords="133,45,299,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="34,221,41,192,55,153,76,113,106,79,119,71,122,76,110,83,80,116,59,155,46,193,39,222"/>
+<area shape="rect" id="Node000005" href="$decorator__usage_8cpp.html#a1156846072709ab6e482082b43aae398" title=" " alt="" coords="416,193,523,218"/>
+<area shape="poly" id="edge29_Node000001_Node000005" title=" " alt="" coords="47,246,73,271,109,292,168,312,218,320,266,315,323,292,339,279,346,263,354,245,370,228,402,214,404,218,374,233,359,248,351,265,343,282,325,297,267,320,218,325,167,317,107,297,70,275,43,250"/>
+<area shape="rect" id="Node000006" href="$decorator__usage_8cpp.html#ac3ed5ca81fef4b6c16c74a5d319f30b4" title="Example 6: Custom Filtering Patterns." alt="" coords="121,94,311,119"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="37,221,62,175,82,150,106,129,116,123,119,127,110,133,86,153,67,178,42,223"/>
+<area shape="rect" id="Node000007" href="$decorator__usage_8cpp.html#aec6539611e7b55e909233e1856f54240" title="Example 7: Migration from Manual Nesting." alt="" coords="111,143,321,169"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="46,220,73,198,107,178,125,170,127,175,109,182,76,202,49,224"/>
+<area shape="rect" id="Node000008" href="$decorator__usage_8cpp.html#afb18538f1ea51daea5d73176e5aaeee5" title="Example 3: Multiple Decorator Composition." alt="" coords="108,193,324,218"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="60,228,122,218,123,223,61,233"/>
+<area shape="rect" id="Node000009" href="$decorator__usage_8cpp.html#a9e1da3086b56f36bc574d0831566a946" title="Example 4: Performance Comparison." alt="" coords="131,243,301,283"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="61,236,118,245,117,250,60,241"/>
+<area shape="rect" id="Node000010" href="$decorator__usage_8cpp.html#afe94899b5674125d5b41f079cbbf3a52" title="Example 5: Real&#45;World Production Scenarios." alt="" coords="139,357,293,397"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="42,246,68,290,87,315,110,337,130,349,127,354,106,341,83,319,63,293,38,249"/>
+<area shape="rect" id="Node000016" href="$decorator__usage_8cpp.html#a02829a81f3fc061bcd16e4caf1525dc4" title="Example 2: Single Decorator Usage." alt="" coords="115,422,317,447"/>
+<area shape="poly" id="edge22_Node000001_Node000016" title=" " alt="" coords="38,247,44,280,57,323,78,369,92,389,110,407,118,413,115,418,106,411,88,393,73,372,52,325,39,281,33,248"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1console__writer.html#af7a36e737bc35cc5a8ab133dfcbce7ea" title="Get writer name." alt="" coords="381,5,557,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="299,44,367,36,367,41,300,50"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1file__writer.html#a0a8cb64d8f9ebadd74d0620b2475e43a" title="Get writer name." alt="" coords="396,69,543,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="300,65,383,76,382,81,299,70"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="296,68,325,79,444,181,441,185,323,84,294,73"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="287,117,325,128,385,155,437,183,434,188,383,160,323,133,286,122"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="282,166,403,190,402,195,281,171"/>
+<area shape="poly" id="edge10_Node000008_Node000005" title=" " alt="" coords="324,203,402,203,402,208,324,208"/>
+<area shape="poly" id="edge12_Node000009_Node000005" title=" " alt="" coords="300,241,402,218,403,223,301,246"/>
+<area shape="poly" id="edge21_Node000010_Node000005" title=" " alt="" coords="292,356,322,337,333,324,340,311,345,283,351,256,358,242,370,229,401,212,404,217,374,233,362,245,356,258,350,285,345,312,338,327,326,341,295,361"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1logger.html#a4b532a41fe19c7fd7ff04e0ccf1b8b3b" title=" " alt="" coords="386,293,553,333"/>
+<area shape="poly" id="edge14_Node000010_Node000011" title=" " alt="" coords="293,355,376,334,377,339,294,360"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1logger.html#af7af3a3731ba4fe410a8adfe9228dd5c" title="Flush any buffered log messages (ILogger interface)" alt="" coords="386,357,553,397"/>
+<area shape="poly" id="edge16_Node000010_Node000013" title=" " alt="" coords="294,375,372,375,372,380,294,380"/>
+<area shape="rect" id="Node000014" href="$classkcenon_1_1logger_1_1logger.html#ad0e6c77ee47115131a3b8f2686163df2" title="Log a message with specified level (ILogger interface)" alt="" coords="372,243,567,269"/>
+<area shape="poly" id="edge18_Node000010_Node000014" title=" " alt="" coords="288,355,322,337,337,323,345,308,354,293,370,279,385,271,387,276,374,284,359,297,350,311,341,326,326,341,291,359"/>
+<area shape="rect" id="Node000012" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="638,301,797,326"/>
+<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="553,311,624,311,624,316,553,316"/>
+<area shape="poly" id="edge17_Node000013_Node000012" title=" " alt="" coords="547,355,654,327,655,332,548,360"/>
+<area shape="poly" id="edge19_Node000014_Node000012" title=" " alt="" coords="526,266,649,295,648,300,525,271"/>
+<area shape="rect" id="Node000015" href="$namespacekcenon_1_1logger_1_1metrics.html#acc52491d3b202388435672ac51ffc00c" title="Record a logged message." alt="" coords="623,236,811,276"/>
+<area shape="poly" id="edge20_Node000014_Node000015" title=" " alt="" coords="567,253,610,253,610,259,567,259"/>
+<area shape="poly" id="edge28_Node000016_Node000005" title=" " alt="" coords="305,420,322,407,338,386,346,365,347,343,346,320,346,275,353,251,370,229,385,218,402,210,404,215,388,222,374,233,358,254,351,275,351,320,352,343,351,366,343,389,326,411,308,424"/>
+<area shape="rect" id="Node000017" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a5906c5c775436861017bab4775a7552d" title="Get the name of this writer." alt="" coords="623,412,811,452"/>
+<area shape="poly" id="edge23_Node000016_Node000017" title=" " alt="" coords="317,431,610,430,610,435,317,437"/>
+<area shape="rect" id="Node000018" href="$classkcenon_1_1logger_1_1filtered__writer.html#afa52fac9e6683fb5685f2f4296eb7e17" title="Get the name of this writer." alt="" coords="383,473,555,513"/>
+<area shape="poly" id="edge24_Node000016_Node000018" title=" " alt="" coords="272,445,371,468,369,473,271,450"/>
+<area shape="poly" id="edge25_Node000018_Node000017" title=" " alt="" coords="550,471,622,453,624,458,552,476"/>
+<area shape="rect" id="Node000019" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a36e4ca76478f6b08b045f3386c02d61d" title=" " alt="" coords="615,540,820,580"/>
+<area shape="poly" id="edge26_Node000018_Node000019" title=" " alt="" coords="545,511,630,534,628,539,544,516"/>
+<area shape="rect" id="Node000020" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="623,476,811,516"/>
+<area shape="poly" id="edge27_Node000018_Node000020" title=" " alt="" coords="555,492,610,492,610,498,555,497"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="kcenon::logger::security::secure_key_storage::load_key" name="kcenon::logger::security::secure_key_storage::load_key">
+<area shape="rect" id="Node000001" title="Load key from file with permission verification." alt="" coords="5,101,231,141"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a85f8e6324909f09be2f1810d710a6225" title=" " alt="" coords="315,5,462,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,99,278,55,302,47,304,52,280,60,167,104"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a490ccdd2eae7f688681a18ba3528db6d" title="Get error message from a VoidResult." alt="" coords="301,69,476,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="231,105,288,99,288,104,231,111"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html#adce2e70d0af1736418b09e63b75a6654" title="Get mutable reference to key data (use with caution)" alt="" coords="289,133,489,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="231,132,276,137,275,143,231,137"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#abc4e1cfc617163980b5c4bbe359e7d43" title="Validate key file path (prevent path traversal)" alt="" coords="279,198,499,253"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="169,139,280,183,300,191,298,196,278,188,167,144"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="547,176,709,216"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="499,209,533,205,533,210,499,214"/>
+<area shape="rect" id="Node000008" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="549,241,707,266"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="499,236,536,240,535,245,499,241"/>
+<area shape="rect" id="Node000007" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="757,176,924,216"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="710,193,744,193,744,199,710,199"/>
+</map>

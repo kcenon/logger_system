@@ -1,0 +1,9 @@
+<map id="kcenon::logger::small_string::append" name="kcenon::logger::small_string::append">
+<area shape="rect" id="Node000001" title="Append a string." alt="" coords="216,69,379,109"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1small__string.html#aa6550b755cd631826427632718f51280" title="Append a string." alt="" coords="5,5,168,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="217,68,152,48,154,43,218,63"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#a2e74db84d95c03de7358e64d250dc640" title="Append operator." alt="" coords="5,69,168,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="202,92,168,92,168,87,202,87"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html#ab1f6cd88639f331932331d28a09d6323" title="Append operator." alt="" coords="5,133,168,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="218,116,154,136,152,131,217,111"/>
+</map>

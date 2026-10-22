@@ -1,0 +1,11 @@
+<map id="kcenon::logger::buffered_writer::~buffered_writer" name="kcenon::logger::buffered_writer::~buffered_writer">
+<area shape="rect" id="Node000001" title="Destructor &#45; flushes any remaining buffered entries." alt="" coords="5,69,191,109"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1buffered__writer.html#a5a41181fabab786da202da75af832ea5" title="Flush buffer without acquiring mutex (caller must hold lock)" alt="" coords="239,69,441,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,87,225,87,225,92,191,92"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a8b38854d249b4da0d7a5bf6d45dccf47" title="Flush any buffered data." alt="" coords="498,5,669,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="416,67,493,46,494,51,418,72"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="489,69,677,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="442,87,476,87,476,92,442,92"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1log__writer__interface.html#ad48f2ab0fd92db49d024bdc02f243a72" title="Write a log entry." alt="" coords="497,133,670,173"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="418,107,494,127,493,132,416,112"/>
+</map>

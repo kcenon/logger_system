@@ -1,0 +1,7 @@
+<map id="kcenon::logger::log_context_storage::clear" name="kcenon::logger::log_context_storage::clear">
+<area shape="rect" id="Node000001" title="Clear all context fields for the current thread." alt="" coords="5,53,180,93"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__context__storage.html#a160e7a0d53035331e93b8713e26c2f0e" title=" " alt="" coords="228,5,391,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,54,214,48,215,53,181,59"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__context__storage.html#aa72d924985d4e4cfb0659227cfd196ed" title=" " alt="" coords="228,84,391,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,86,215,92,214,97,180,91"/>
+</map>

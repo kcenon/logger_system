@@ -1,0 +1,5 @@
+<map id="kcenon::logger::adapters::common_system_logger_adapter::log" name="kcenon::logger::adapters::common_system_logger_adapter::log">
+<area shape="rect" id="Node000001" title="Log a message with source location information (C++20 style)" alt="" coords="5,13,196,67"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1adapters_1_1common__system__logger__adapter.html#a9f496aad0b292b0f77cb33d169f0ae5f" title="Convert common log level to kcenon::logger log level." alt="" coords="244,5,435,75"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,37,230,37,230,43,196,43"/>
+</map>

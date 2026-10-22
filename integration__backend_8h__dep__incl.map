@@ -1,0 +1,57 @@
+<map id="include/kcenon/logger/backends/integration_backend.h" name="include/kcenon/logger/backends/integration_backend.h">
+<area shape="rect" id="Node000001" title="Runtime polymorphism interface for integration backends kcenon." alt="" coords="419,5,585,60"/>
+<area shape="rect" id="Node000002" href="$monitoring__backend_8h.html" title="Monitoring system integration backend implementation kcenon." alt="" coords="239,108,405,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="444,69,371,110,368,105,442,64"/>
+<area shape="rect" id="Node000003" href="$standalone__backend_8h.html" title="Standalone integration backend implementation kcenon." alt="" coords="479,108,645,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="527,70,549,107,544,109,522,73"/>
+<area shape="rect" id="Node000005" href="$logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration kcenon." alt="" coords="359,218,525,258"/>
+<area shape="poly" id="edge30_Node000001_Node000005" title=" " alt="" coords="484,73,470,109,455,168,447,218,442,218,450,167,465,107,479,71"/>
+<area shape="rect" id="Node000011" href="$logger_8h.html" title="High&#45;performance, thread&#45;safe logging system with asynchronous capabilities." alt="" coords="1865,115,2030,155"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="599,38,1865,126,1864,131,598,43"/>
+<area shape="rect" id="Node000004" href="$backend__integration__example_8cpp.html" title=" " alt="" coords="607,313,829,353"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="564,176,570,221,578,244,589,264,620,292,656,311,654,316,617,296,585,267,573,246,565,222,558,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="522,174,466,220,463,216,518,170"/>
+<area shape="rect" id="Node000010" href="$logger_8cpp.html" title=" " alt="" coords="599,225,743,251"/>
+<area shape="poly" id="edge10_Node000003_Node000010" title=" " alt="" coords="603,170,660,223,657,227,599,174"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="511,260,663,311,661,316,510,265"/>
+<area shape="rect" id="Node000006" href="$critical__logging__example_8cpp.html" title="Example demonstrating critical log loss prevention mechanisms." alt="" coords="1701,313,1890,353"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="539,256,588,263,907,293,1222,312,1499,323,1701,328,1701,333,1499,328,1222,317,907,298,587,268,538,261"/>
+<area shape="rect" id="Node000007" href="$custom__writer__example_8cpp.html" title="Example demonstrating how to create custom writers using thread_safe_writer." alt="" coords="220,313,403,353"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="406,268,339,315,336,311,403,264"/>
+<area shape="rect" id="Node000008" href="$di__pattern__example_8cpp.html" title="Dependency Injection pattern example for logger_system Phase 4." alt="" coords="427,313,583,353"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="465,268,494,312,490,315,460,271"/>
+<area shape="rect" id="Node000009" href="$monitoring__integration__example_8cpp.html" title="Advanced monitoring integration example for Phase 4." alt="" coords="5,313,196,353"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="360,264,170,316,169,311,359,259"/>
+<area shape="poly" id="edge13_Node000011_Node000004" title=" " alt="" coords="1851,141,1592,147,1266,160,1108,170,971,182,867,196,831,204,807,213,790,229,769,256,731,314,727,311,764,253,786,225,805,208,829,199,866,191,971,176,1108,164,1265,155,1591,142,1851,136"/>
+<area shape="poly" id="edge25_Node000011_Node000005" title=" " alt="" coords="1851,141,1626,146,1313,158,953,179,768,195,588,213,525,223,524,217,587,208,768,189,952,174,1312,152,1626,140,1851,135"/>
+<area shape="poly" id="edge15_Node000011_Node000006" title=" " alt="" coords="2044,137,2217,144,2417,157,2510,167,2590,178,2649,192,2669,200,2681,209,2691,223,2694,238,2691,253,2681,267,2665,278,2640,287,2565,302,2464,314,2346,322,2098,332,1890,335,1890,329,2098,326,2346,317,2463,309,2564,297,2638,282,2663,273,2677,263,2686,251,2689,238,2686,225,2677,213,2666,205,2647,197,2589,184,2509,172,2417,163,2217,149,2044,142"/>
+<area shape="poly" id="edge28_Node000011_Node000010" title=" " alt="" coords="1851,138,1651,140,1380,150,1073,172,916,190,763,213,705,228,704,223,761,208,915,185,1072,167,1380,144,1651,135,1851,133"/>
+<area shape="rect" id="Node000012" href="$advanced__features__demo_8cpp.html" title="Demonstrates advanced logging features including filtering and writers." alt="" coords="2452,218,2667,258"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="2044,147,2228,173,2440,208,2477,215,2476,221,2439,213,2227,178,2044,152"/>
+<area shape="rect" id="Node000013" href="$basic__usage_8cpp.html" title="Basic logger usage examples covering core logging functionality." alt="" coords="2742,225,2939,251"/>
+<area shape="poly" id="edge14_Node000011_Node000013" title=" " alt="" coords="2044,139,2348,163,2536,182,2724,208,2796,223,2795,228,2723,213,2535,188,2347,168,2044,145"/>
+<area shape="rect" id="Node000014" href="$decorator__usage_8cpp.html" title="Comprehensive decorator pattern usage examples." alt="" coords="2963,218,3115,258"/>
+<area shape="poly" id="edge16_Node000011_Node000014" title=" " alt="" coords="2044,134,2215,138,2442,149,2696,171,2826,188,2952,208,2983,215,2982,221,2951,213,2825,193,2696,177,2441,155,2215,144,2044,140"/>
+<area shape="rect" id="Node000015" href="$distributed__logging__demo_8cpp.html" title="Distributed logging with network writers, log server, and real&#45;time analysis." alt="" coords="3139,218,3299,258"/>
+<area shape="poly" id="edge17_Node000011_Node000015" title=" " alt="" coords="2044,133,2243,135,2512,145,2819,168,2975,185,3128,208,3160,215,3159,220,3127,213,2974,191,2818,173,2512,150,2242,140,2044,138"/>
+<area shape="rect" id="Node000016" href="$metrics__demo_8cpp.html" title="Logger performance metrics collection and multi&#45;threaded throughput test." alt="" coords="3323,225,3534,251"/>
+<area shape="poly" id="edge18_Node000011_Node000016" title=" " alt="" coords="2044,134,2270,137,2584,147,2946,169,3131,186,3312,208,3386,223,3385,228,3311,213,3130,192,2945,175,2584,152,2270,142,2044,139"/>
+<area shape="rect" id="Node000017" href="$security__demo_8cpp.html" title="Security&#45;focused logging with sanitization, encryption, and audit trails." alt="" coords="3558,225,3771,251"/>
+<area shape="poly" id="edge19_Node000011_Node000017" title=" " alt="" coords="2044,136,2797,161,3230,182,3410,194,3546,208,3622,223,3621,228,3546,213,3409,199,3230,187,2797,166,2044,142"/>
+<area shape="rect" id="Node000018" href="$structured__logging__example_8cpp.html" title="Demonstrates structured logging features introduced in Phase 3.0." alt="" coords="818,218,986,258"/>
+<area shape="poly" id="edge20_Node000011_Node000018" title=" " alt="" coords="1851,141,1688,147,1476,159,1238,180,1000,213,966,221,965,215,999,208,1238,175,1476,154,1688,141,1851,136"/>
+<area shape="rect" id="Node000019" href="$writer__builder__example_8cpp.html" title="Demonstrates writer_builder usage patterns." alt="" coords="1011,218,1191,258"/>
+<area shape="poly" id="edge21_Node000011_Node000019" title=" " alt="" coords="1851,144,1560,167,1382,187,1204,213,1169,221,1168,215,1203,208,1381,181,1560,162,1851,139"/>
+<area shape="rect" id="Node000020" href="$common__system__adapter_8h.html" title="Adapter exposing kcenon::logger as common::interfaces::ILogger." alt="" coords="1215,211,1413,265"/>
+<area shape="poly" id="edge22_Node000011_Node000020" title=" " alt="" coords="1851,150,1655,176,1426,213,1414,216,1413,210,1426,208,1654,171,1850,145"/>
+<area shape="rect" id="Node000021" href="$logger__adapter_8h.html" title="Standalone logger adapter for use without common_system DI." alt="" coords="1437,218,1633,258"/>
+<area shape="poly" id="edge23_Node000011_Node000021" title=" " alt="" coords="1858,161,1613,221,1612,215,1856,156"/>
+<area shape="rect" id="Node000022" href="$filtered__logger_8h.html" title="Logger wrapper that applies compile&#45;time and runtime log filtering." alt="" coords="1658,218,1823,258"/>
+<area shape="poly" id="edge24_Node000011_Node000022" title=" " alt="" coords="1897,164,1781,220,1778,216,1895,159"/>
+<area shape="rect" id="Node000023" href="$crash__safe__logger_8h.html" title="Logger with crash recovery and emergency flush capabilities." alt="" coords="1847,218,2047,258"/>
+<area shape="poly" id="edge26_Node000011_Node000023" title=" " alt="" coords="1950,169,1950,218,1945,218,1945,169"/>
+<area shape="rect" id="Node000024" href="$log__context__scope_8cpp.html" title=" " alt="" coords="2071,218,2224,258"/>
+<area shape="poly" id="edge27_Node000011_Node000024" title=" " alt="" coords="1998,159,2111,216,2109,220,1996,164"/>
+<area shape="rect" id="Node000025" href="$scoped__context__guard_8cpp.html" title=" " alt="" coords="2249,218,2427,258"/>
+<area shape="poly" id="edge29_Node000011_Node000025" title=" " alt="" coords="2034,156,2237,208,2266,215,2264,220,2236,213,2033,161"/>
+</map>

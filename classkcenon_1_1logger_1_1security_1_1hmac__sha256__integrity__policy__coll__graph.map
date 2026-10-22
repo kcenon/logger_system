@@ -1,0 +1,11 @@
+<map id="kcenon::logger::security::hmac_sha256_integrity_policy" name="kcenon::logger::security::hmac_sha256_integrity_policy">
+<area shape="rect" id="Node000001" title="HMAC&#45;SHA256 integrity policy (ISO/IEC 27001 A.12.4.2 default)." alt="" coords="46,679,266,853"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1integrity__policy.html" title="Abstract interface for log integrity signing." alt="" coords="5,476,176,616"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,629,133,678,128,679,113,630"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="200,506,419,586"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="284,588,228,667,224,664,280,585"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html" title="RAII wrapper for encryption keys with secure memory management." alt="" coords="224,133,395,413"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="312,414,312,490,307,490,307,414"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="230,5,389,71"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="312,71,312,117,307,117,307,71"/>
+</map>

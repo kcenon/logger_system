@@ -1,0 +1,5 @@
+<map id="kcenon::logger::memory::thread_local_object_pool::release" name="kcenon::logger::memory::thread_local_object_pool::release">
+<area shape="rect" id="Node000001" title="Return an object to the pool." alt="" coords="5,5,187,60"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1memory_1_1thread__local__object__pool.html#a1ae0a8a9b9784353047cf7526db9cac5" title="Get thread&#45;local cache." alt="" coords="235,5,416,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,30,221,30,221,35,187,35"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="kcenon::logger::analysis::realtime_log_analyzer::get_statistics" name="kcenon::logger::analysis::realtime_log_analyzer::get_statistics">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,45,185,100"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a34c3797444058b46cb2a5e6d3c1f7e40" title="Get current error rate (errors per minute)" alt="" coords="233,5,413,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,54,219,48,220,53,186,59"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a0fa648cf1bd5d4618e5ea90d5e0a0c44" title="Get current log rate (logs per minute)" alt="" coords="233,84,413,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="186,85,220,91,219,96,185,91"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a29a9d525522cc28dc6da32c1f65e92eb" title=" " alt="" coords="461,45,641,100"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="414,46,448,52,447,57,413,51"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="413,93,447,88,448,93,414,99"/>
+</map>

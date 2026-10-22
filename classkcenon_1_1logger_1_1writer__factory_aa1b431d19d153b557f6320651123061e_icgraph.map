@@ -1,0 +1,9 @@
+<map id="kcenon::logger::writer_factory::registry" name="kcenon::logger::writer_factory::registry">
+<area shape="rect" id="Node000001" title=" " alt="" coords="221,69,385,109"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1writer__factory.html#aecfa6527a8d55d433f1bd91cd17e2e4d" title="Create a writer by registered name." alt="" coords="7,5,171,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="222,68,156,48,157,43,223,63"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1writer__factory.html#ad7cfe972bc2ef9bd373cc620540b1286" title="Check if a writer type is registered." alt="" coords="7,69,171,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="207,92,172,92,172,87,207,87"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1writer__factory.html#a01ca268f5d16c5e71c0881d4b7ed92f2" title="Register a custom writer type." alt="" coords="5,133,173,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="223,116,157,136,156,131,222,111"/>
+</map>

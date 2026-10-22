@@ -1,0 +1,5 @@
+<map id="kcenon::logger::security::secure_key_storage::generate_key" name="kcenon::logger::security::secure_key_storage::generate_key">
+<area shape="rect" id="Node000001" title="Generate a secure random key." alt="" coords="5,5,260,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html#adce2e70d0af1736418b09e63b75a6654" title="Get mutable reference to key data (use with caution)" alt="" coords="308,5,508,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="260,23,294,23,294,28,260,28"/>
+</map>

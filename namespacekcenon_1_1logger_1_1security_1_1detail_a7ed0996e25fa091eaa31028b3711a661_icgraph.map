@@ -1,0 +1,5 @@
+<map id="kcenon::logger::security::detail::safe_write" name="kcenon::logger::security::detail::safe_write">
+<area shape="rect" id="Node000001" title="Signal&#45;safe write wrapper (cross&#45;platform)" alt="" coords="307,5,485,45"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1signal__manager.html#a73d1518f75c3a354ce28032a6629abc7" title="Emergency flush for a logger (signal&#45;safe)" alt="" coords="5,5,259,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="293,28,259,28,259,23,293,23"/>
+</map>

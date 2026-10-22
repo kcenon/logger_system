@@ -1,0 +1,9 @@
+<map id="include/kcenon/logger/backends/standalone_backend.h" name="include/kcenon/logger/backends/standalone_backend.h">
+<area shape="rect" id="Node000001" title="Standalone integration backend implementation kcenon." alt="" coords="28,5,193,60"/>
+<area shape="rect" id="Node000002" href="$integration__backend_8h.html" title="Runtime polymorphism interface for integration backends kcenon." alt="" coords="27,108,194,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,60,113,94,108,94,108,60"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,189,64,214"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="101,135,57,181,53,177,98,132"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="87,181,286,221"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="124,132,161,170,157,173,120,135"/>
+</map>

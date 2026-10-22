@@ -1,0 +1,14 @@
+<map id="kcenon::logger::async::async_worker::drain_queue" name="kcenon::logger::async::async_worker::drain_queue">
+<area shape="rect" id="Node000001" title="Process all remaining tasks in the queue." alt="" coords="684,37,891,77"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1async__worker.html#a73376c5a4936a3bb05dd8da3cf3c80ec" title="Flush all pending tasks." alt="" coords="472,5,636,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="670,44,636,39,637,34,671,39"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1async__worker.html#a8ea35baf0add7c1949046d3173452b04" title="Stop the worker thread gracefully." alt="" coords="472,69,636,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="671,76,637,81,636,75,670,71"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1async__worker.html#a445719018926598a4cbde02865fa024d" title="Start the worker thread." alt="" coords="5,41,169,81"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="472,69,424,60,357,54,290,53,170,57,170,52,290,48,358,49,424,55,473,63"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1async_1_1async__worker.html#a38fe968fe718ae235d3690a3e3c5ae99" title="Worker thread main loop (fallback version)" alt="" coords="217,69,424,109"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="458,92,424,92,424,87,458,87"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1async_1_1async__worker.html#a4513018d29e3e494ff657ed027e50800" title="Destructor &#45; ensures graceful shutdown." alt="" coords="233,134,409,189"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="476,116,410,137,408,132,475,111"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="203,78,169,74,170,69,204,73"/>
+</map>

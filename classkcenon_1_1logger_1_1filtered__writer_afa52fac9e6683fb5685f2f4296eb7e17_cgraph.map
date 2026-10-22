@@ -1,0 +1,9 @@
+<map id="kcenon::logger::filtered_writer::get_name" name="kcenon::logger::filtered_writer::get_name">
+<area shape="rect" id="Node000001" title="Get the name of this writer." alt="" coords="5,69,177,109"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a5906c5c775436861017bab4775a7552d" title="Get the name of this writer." alt="" coords="234,5,422,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,67,240,46,241,51,167,72"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a36e4ca76478f6b08b045f3386c02d61d" title=" " alt="" coords="225,69,431,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,87,212,87,212,92,178,92"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="234,133,422,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="167,107,241,127,240,132,165,112"/>
+</map>

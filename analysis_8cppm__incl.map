@@ -1,0 +1,18 @@
+<map id="src/modules/analysis.cppm" name="src/modules/analysis.cppm">
+<area shape="rect" id="Node000001" title="Analysis partition for kcenon.logger module." alt="" coords="275,5,474,31"/>
+<area shape="rect" id="Node000002" href="$logger_8cppm.html" title="Primary module interface for kcenon.logger." alt="" coords="5,79,152,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="328,33,140,78,139,73,326,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="200,79,267,104"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="353,33,270,75,267,70,351,28"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="291,79,368,104"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="369,32,346,69,342,66,365,30"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="392,79,451,104"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="385,30,408,66,404,69,380,32"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="475,79,599,104"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="402,28,499,71,497,75,400,33"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="623,79,686,104"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="422,28,611,76,609,81,420,33"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="124,76,161,77,173,82,179,91,175,99,166,104,138,107,137,102,164,99,171,96,173,91,170,86,160,82,124,81"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="13,152,144,177"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="81,104,81,138,76,138,76,104"/>
+</map>
