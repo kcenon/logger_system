@@ -26,7 +26,7 @@ jobs:
           - os: ubuntu-24.04
             compiler: clang
             triplet: x64-linux
-          - os: macos-14
+          - os: macos-15
             compiler: clang
             triplet: arm64-osx
           - os: windows-2022
@@ -388,7 +388,7 @@ jobs:
         include:
           - os: ubuntu-24.04
             compiler: gcc
-          - os: macos-14
+          - os: macos-15
             compiler: clang
 
     steps:

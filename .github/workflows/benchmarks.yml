@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, macos-14]
+        os: [ubuntu-22.04, macos-15]
         # Ubuntu uses GCC 13 for std::format+std::jthread, macOS uses Clang
         compiler: [gcc]
         build_type: [Release]
