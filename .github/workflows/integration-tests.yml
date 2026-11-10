@@ -260,7 +260,6 @@ jobs:
   coverage:
     name: Integration Test Coverage
     runs-on: ubuntu-latest
-    continue-on-error: true  # Coverage is optional - don't fail workflow if it fails
 
     steps:
     - name: Checkout code
@@ -364,7 +363,7 @@ jobs:
 
         # Run tests with extended timeout
         echo "=== Running tests for coverage (integration) ==="
-        ctest --output-on-failure --timeout 300 -L "integration" || {
+        ctest --no-tests=error --output-on-failure --timeout 300 -L "integration" || {
           echo "::warning::Tests failed or timed out during coverage run"
           exit 1
         }
@@ -375,17 +374,11 @@ jobs:
         # - negative: Should not occur with -fprofile-update=atomic, but handle anyway
         # - mismatch: gcov/gcc version compatibility
         echo "=== Capturing coverage data ==="
+        # Match gcov to the GCC 13 compiler selected above.
         lcov --directory . \
-          --capture \
+          --capture --gcov-tool gcov-13 \
           --ignore-errors inconsistent,negative,mismatch \
-          --output-file coverage/all.info || {
-          echo "::error::Failed to capture coverage data"
-          echo "Attempting capture with all errors ignored..."
-          lcov --directory . \
-            --capture \
-            --ignore-errors all \
-            --output-file coverage/all.info || exit 1
-        }
+          --output-file coverage/all.info
 
         # Filter coverage data
         echo "=== Filtering coverage data ==="

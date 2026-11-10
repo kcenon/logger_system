@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, macos-14]
+        os: [ubuntu-22.04, macos-15]
         # Ubuntu uses GCC 13 for std::format+std::jthread, macOS uses Clang
         compiler: [gcc]
         build_type: [Release]
@@ -243,19 +243,6 @@ jobs:
               console.log('This is non-fatal - benchmark results are in step summary');
             }
           }
-
-    - name: Commit performance updates
-      if: matrix.os == 'ubuntu-22.04' && github.event_name == 'push' && github.ref == 'refs/heads/main'
-      uses: stefanzweifel/git-auto-commit-action@v7
-      with:
-        repository: logger_system
-        commit_message: "chore: update performance metrics [skip ci]"
-        file_pattern: |
-          README.md
-          docs/performance/**
-          benchmarks/results/**
-        commit_user_name: github-actions[bot]
-        commit_user_email: github-actions[bot]@users.noreply.github.com
 
     - name: Save baseline (if requested)
       if: github.event.inputs.save_baseline == 'true' && github.ref == 'refs/heads/main'
