@@ -1,0 +1,10 @@
+<map id="kcenon::logger::network_writer::attempt_reconnect" name="kcenon::logger::network_writer::attempt_reconnect">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,203,74"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1network__writer.html#a3ee99a35f6220a4c9e6084543e2cc450" title=" " alt="" coords="251,29,429,74"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,49,238,51,232,52,203,54"/>
+<area shape="poly" id="edge4_Node000002_Node000002" title=" " alt="" coords="297,27,296,19,303,10,318,5,340,3,364,5,380,14,375,14,363,10,340,8,319,10,306,15,301,21,302,30"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html#af185b6c6b01e9d7d7f3041103f7f3b5c" title="Close the writer and release resources." alt="" coords="477,29,650,74"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="429,49,464,52,459,52,429,54"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a8b38854d249b4da0d7a5bf6d45dccf47" title="Flush any buffered data." alt="" coords="698,29,869,74"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="651,49,685,52,680,52,651,54"/>
+</map>

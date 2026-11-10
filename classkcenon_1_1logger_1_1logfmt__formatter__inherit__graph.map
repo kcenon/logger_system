@@ -1,0 +1,5 @@
+<map id="kcenon::logger::logfmt_formatter" name="kcenon::logger::logfmt_formatter">
+<area shape="rect" id="Node000001" title="Formatter that outputs logfmt&#45;structured log messages." alt="" coords="18,232,194,455"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__formatter__interface.html" title="Abstract interface for log message formatters." alt="" coords="5,5,207,184"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,197,109,233,104,232,106,202"/>
+</map>

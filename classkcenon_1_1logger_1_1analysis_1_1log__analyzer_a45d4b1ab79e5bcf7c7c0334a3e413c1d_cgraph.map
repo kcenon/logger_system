@@ -1,0 +1,9 @@
+<map id="kcenon::logger::analysis::log_analyzer::generate_summary_report" name="kcenon::logger::analysis::log_analyzer::generate_summary_report">
+<area shape="rect" id="Node000001" title="Generate summary report." alt="" coords="5,32,185,93"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1analysis_1_1log__analyzer.html#a2a19728657b65dedc682fa381e9ff008" title="Get analysis statistics." alt="" coords="251,5,431,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,47,238,42,232,43,186,52"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1analysis_1_1log__analyzer.html#aab232d210d33cc1a1287f3b62a3b9b25" title=" " alt="" coords="233,75,449,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="185,72,220,79,215,80,185,78"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1analysis_1_1log__analyzer.html#a5930348b1a78ed5a9b61da2445570254" title=" " alt="" coords="497,5,701,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="431,25,484,27,479,28,432,30"/>
+</map>

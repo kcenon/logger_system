@@ -1,0 +1,9 @@
+<map id="kcenon::logger::safety::crash_safe_logger::set_auto_flush_interval" name="kcenon::logger::safety::crash_safe_logger::set_auto_flush_interval">
+<area shape="rect" id="Node000001" title="Enable auto&#45;flush at regular intervals." alt="" coords="5,48,181,110"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1safety_1_1crash__safe__logger.html#a990e584a3da1e6a3ef793b873852aeb1" title="Start auto&#45;flush background thread." alt="" coords="229,5,414,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,60,215,55,210,57,182,65"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1safety_1_1crash__safe__logger.html#a7d4e61347feed24cc7c8c469174b4fa8" title="Stop auto&#45;flush background thread." alt="" coords="230,91,413,152"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="181,93,217,101,211,102,181,98"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1safety_1_1crash__safe__logger.html#a0b0b2e16368852fc502ba12eab37bf91" title="Flush with timeout to prevent deadlocks." alt="" coords="462,5,648,67"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="414,34,449,36,444,37,414,39"/>
+</map>

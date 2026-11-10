@@ -1,0 +1,21 @@
+<map id="kcenon::logger::security::secure_key::data" name="kcenon::logger::security::secure_key::data">
+<area shape="rect" id="Node000001" title="Get const reference to key data." alt="" coords="747,185,925,230"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#a50cef7d2e2926ddf2b09a731a6cb6eb9" title="Calculate HMAC signature." alt="" coords="476,27,696,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="784,177,622,75,623,69,789,177"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1security_1_1hmac__sha256__integrity__policy.html#a3a06dc6685878f7e72cfaf47f79145be" title=" " alt="" coords="495,138,676,200"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="730,192,677,186,677,180,735,192"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1encrypted__writer.html#abefa3dd7fad66099c55c89c807a6e49d" title="Decrypt a single encrypted log entry." alt="" coords="490,224,681,269"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="730,224,682,234,681,229,735,223"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#a8faaa55edf1e628e81868226d3fa76f4" title="Save key to file with secure permissions." alt="" coords="472,293,699,338"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="787,238,700,283,669,295,667,290,698,279,781,239"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#af6d42db093bd32dbd0ffb06ffca23f7d" title="Verify integrity of an audit log entry." alt="" coords="228,5,424,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="457,39,425,38,424,33,462,38"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1security_1_1hmac__sha256__integrity__policy.html#a5c30ce2e5928a5dcca66f8c4bb996864" title="Produce a signature for record." alt="" coords="235,74,416,136"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="477,143,417,130,417,125,483,143"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1security_1_1hmac__sha256__integrity__policy.html#a3092af9971bee3c6d10203d1e44178b4" title="Verify that signature matches record." alt="" coords="235,160,416,221"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="477,178,418,185,417,180,482,177"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1log__decryptor.html#a1db5d66240dcdf7c7fc8cd6d1bd34704" title="Decrypt file with callback for each entry." alt="" coords="252,245,400,306"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="472,259,400,270,400,265,478,258"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1log__decryptor.html#a4e9a67e0515e15f8215cee9d169ec06e" title="Decrypt entire file to output file." alt="" coords="5,253,180,298"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="234,276,180,278,180,273,239,275"/>
+</map>

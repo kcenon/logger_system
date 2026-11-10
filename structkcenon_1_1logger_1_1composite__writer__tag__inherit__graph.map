@@ -1,0 +1,7 @@
+<map id="kcenon::logger::composite_writer_tag" name="kcenon::logger::composite_writer_tag">
+<area shape="rect" id="Node000001" title="Tag interface for composite writers." alt="" coords="101,5,284,95"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1composite__writer.html" title="Coordinates formatting and output through a pipeline." alt="" coords="5,143,188,411"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,106,156,144,151,142,167,111"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1hybrid__writer.html" title="Combines async writer for normal logs with critical_writer for safety." alt="" coords="212,154,368,400"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="218,106,240,154,235,154,217,111"/>
+</map>

@@ -1,0 +1,22 @@
+<map id="kcenon::logger::formatted_writer" name="kcenon::logger::formatted_writer">
+<area shape="rect" id="Node000001" title="Decorator that applies a formatter to a wrapped writer." alt="" coords="420,982,600,1250"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1decorator__writer__base.html" title="Abstract base class for decorator pattern log writers." alt="" coords="312,537,506,917"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="463,929,478,983,473,982,461,934"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,5,183,229"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="56,246,50,299,48,358,55,416,74,471,95,507,121,540,182,598,249,645,315,683,310,685,246,650,179,602,117,544,91,510,69,473,50,417,43,358,45,299,57,241"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="84,338,297,428"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="134,226,172,322,166,323,135,231"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1decorator__writer__tag.html" title="Tag interface for decorator writers." alt="" coords="321,338,497,428"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="410,440,412,538,406,537,408,445"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="218,425,306,560,301,561,218,430"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="522,347,598,419"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="546,417,501,523,497,521,543,421"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="490,72,618,162"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="556,174,562,348,556,347,555,179"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="555,674,724,780"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="624,778,562,967,558,964,620,782"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1log__formatter__interface.html" title="Abstract interface for log message formatters." alt="" coords="629,294,831,472"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="709,470,660,659,655,657,705,474"/>
+<area shape="rect" id="Node000010" href="$structkcenon_1_1logger_1_1format__options.html" title="Configuration options for log formatting." alt="" coords="643,16,826,218"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="734,215,734,278,729,276,732,220"/>
+</map>

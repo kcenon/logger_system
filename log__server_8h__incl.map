@@ -1,0 +1,18 @@
+<map id="include/kcenon/logger/server/log_server.h" name="include/kcenon/logger/server/log_server.h">
+<area shape="rect" id="Node000001" title="Log server for distributed logging." alt="" coords="265,5,429,50"/>
+<area shape="rect" id="Node000002" href="$logger__types_8h.html" title="Common types and enumerations for logger system." alt="" coords="5,98,188,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="285,52,172,95,170,90,289,49"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="174,191,232,218"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="310,49,279,74,252,100,228,138,213,178,209,174,224,136,248,96,276,69,305,52"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="262,106,339,134"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="338,49,316,94,312,91,334,52"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="363,106,425,134"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="359,48,383,93,378,92,357,53"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="449,106,515,134"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="380,48,453,98,447,98,379,53"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="540,106,603,134"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="407,48,528,96,534,100,528,99,526,100,406,53"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="64,191,129,218"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="98,141,99,176,94,174,95,145"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="125,141,177,180,171,181,124,146"/>
+</map>

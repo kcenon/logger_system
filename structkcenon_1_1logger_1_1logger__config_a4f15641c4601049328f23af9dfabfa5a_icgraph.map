@@ -1,0 +1,9 @@
+<map id="kcenon::logger::logger_config::default_config" name="kcenon::logger::logger_config::default_config">
+<area shape="rect" id="Node000001" title="Create a default configuration." alt="" coords="517,52,684,97"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger__config__builder.html#ac0e002b26eaf39249d1f896cbff478f6" title="Use default configuration as base." alt="" coords="266,5,469,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="499,59,470,56,470,50,504,58"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1logger__builder.html#a280c589564b5b5ede0d1789b538ad0f1" title=" " alt="" coords="282,91,452,136"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="505,91,453,102,453,97,499,91"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1logger__builder.html#a54cd6a57d715ede3b24b1e3d7b30d88f" title="Detect environment from environment variables." alt="" coords="5,91,218,136"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="264,114,218,116,218,111,269,113"/>
+</map>

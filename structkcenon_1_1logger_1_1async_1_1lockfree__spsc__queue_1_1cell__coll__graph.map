@@ -1,0 +1,5 @@
+<map id="kcenon::logger::async::lockfree_spsc_queue&lt; T, Size &gt;::cell" name="kcenon::logger::async::lockfree_spsc_queue&lt; T, Size &gt;::cell">
+<area shape="rect" id="Node000001" title="Cell structure with sequence number for ABA prevention." alt="" coords="5,143,160,249"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="7,5,158,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,75,85,126,80,126,82,80"/>
+</map>

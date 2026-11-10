@@ -1,0 +1,9 @@
+<map id="kcenon::logger::formatter_factory::registry" name="kcenon::logger::formatter_factory::registry">
+<area shape="rect" id="Node000001" title=" " alt="" coords="241,75,428,119"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1formatter__factory.html#a83073e1b9ab035ae79c9c7b6e37c2cd4" title="Create a formatter by registered name." alt="" coords="5,5,193,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="239,71,178,53,177,48,244,69"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1formatter__factory.html#ac983abef5644b44f4ea6c1f2d044675b" title="Check if a formatter type is registered." alt="" coords="5,75,193,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="222,98,194,100,193,94,227,96"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1formatter__factory.html#adfd113e2086f7dfdf38dc2aa31b18675" title="Register a custom formatter type." alt="" coords="5,144,193,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="244,124,178,146,177,141,239,125"/>
+</map>

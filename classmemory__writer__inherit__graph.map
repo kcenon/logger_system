@@ -1,0 +1,9 @@
+<map id="memory_writer" name="memory_writer">
+<area shape="rect" id="Node000001" title="A custom writer that stores log entries in memory." alt="" coords="21,998,168,1204"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1thread__safe__writer.html" title="Base class providing automatic thread&#45;safety for writer implementations." alt="" coords="9,637,179,950"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,962,97,999,92,998,94,967"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1base__writer.html" title="Abstract base class for all log output writers." alt="" coords="20,277,169,589"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,602,97,638,92,638,94,607"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,5,183,229"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="94,241,97,277,92,277,94,246"/>
+</map>

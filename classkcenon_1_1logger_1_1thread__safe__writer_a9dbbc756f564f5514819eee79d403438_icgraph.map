@@ -1,0 +1,15 @@
+<map id="kcenon::logger::thread_safe_writer::get_mutex" name="kcenon::logger::thread_safe_writer::get_mutex">
+<area shape="rect" id="Node000001" title="Access the writer mutex for extended operations." alt="" coords="229,161,408,206"/>
+<area shape="rect" id="Node000002" href="$classmemory__writer.html#afb6fd442dfef99db730d357f8fa53caf" title="Clear all stored entries." alt="" coords="12,5,174,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="289,149,242,97,212,70,179,47,158,36,157,31,182,42,215,66,245,93,294,148"/>
+<area shape="rect" id="Node000003" href="$classcounted__console__writer.html#ab2ec1105b6379cb2a454c7145a157998" title="Get count for a specific log level." alt="" coords="5,57,181,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="259,154,180,116,154,105,153,100,182,111,264,152"/>
+<area shape="rect" id="Node000004" href="$classmemory__writer.html#ac7420f8af1e73f0db3191e51156acd69" title="Get all stored log entries." alt="" coords="18,126,168,171"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="211,168,169,163,168,157,216,166"/>
+<area shape="rect" id="Node000005" href="$classcounted__console__writer.html#a74e10139e996d386e81c34a79b07e3b1" title="Print statistics summary." alt="" coords="5,196,181,240"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="211,201,182,207,180,202,216,198"/>
+<area shape="rect" id="Node000006" href="$classmemory__writer.html#a72a65955b011b8f3689978fc5d91b7d5" title="Get count of stored entries." alt="" coords="15,264,171,292"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="261,215,182,255,150,266,148,261,180,250,266,212"/>
+<area shape="rect" id="Node000007" href="$classcounted__console__writer.html#a4e035996c066c05b961bef327f37f0da" title="Get total message count." alt="" coords="5,316,181,360"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="287,216,239,263,182,305,160,317,158,312,179,301,236,259,283,218"/>
+</map>

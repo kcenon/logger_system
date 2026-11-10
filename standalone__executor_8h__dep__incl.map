@@ -1,0 +1,9 @@
+<map id="include/kcenon/logger/integration/standalone_executor.h" name="include/kcenon/logger/integration/standalone_executor.h">
+<area shape="rect" id="Node000001" title="Standalone IExecutor implementation using std::jthread." alt="" coords="107,5,279,67"/>
+<area shape="rect" id="Node000002" href="$executor__integration_8h.html" title="IExecutor&#45;based async integration for logger_system." alt="" coords="11,115,175,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,81,123,116,119,113,156,76"/>
+<area shape="rect" id="Node000004" href="$standalone__executor_8cpp.html" title="Implementation of standalone IExecutor." alt="" coords="199,124,390,168"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="232,76,277,123,271,123,231,81"/>
+<area shape="rect" id="Node000003" href="$executor__integration_8cpp.html" title="Implementation of IExecutor&#45;based integration." alt="" coords="5,225,181,269"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,190,96,225,90,223,91,194"/>
+</map>

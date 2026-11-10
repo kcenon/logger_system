@@ -1,0 +1,9 @@
+<map id="kcenon::logger::json_formatter::escape_json" name="kcenon::logger::json_formatter::escape_json">
+<area shape="rect" id="Node000001" title=" " alt="" coords="537,5,716,50"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1json__formatter.html#a90ed86614970dfc4c754a9a79992600f" title="Format a log entry into a string." alt="" coords="337,5,489,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="519,28,490,30,490,25,524,28"/>
+<area shape="rect" id="Node000003" href="$structured__logging__example_8cpp.html#afb50a28e9c0023460056e61bf3b153f7" title="Demonstrates JSON formatter for structured output." alt="" coords="108,14,289,42"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="319,28,289,30,289,25,324,28"/>
+<area shape="rect" id="Node000004" href="$structured__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,14,60,42"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="90,29,61,30,60,25,95,27"/>
+</map>

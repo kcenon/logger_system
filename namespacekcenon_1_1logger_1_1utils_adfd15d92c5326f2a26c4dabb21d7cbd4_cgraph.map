@@ -1,0 +1,11 @@
+<map id="kcenon::logger::utils::safe_destructor_result_operation" name="kcenon::logger::utils::safe_destructor_result_operation">
+<area shape="rect" id="Node000001" title="Safe operation with result for destructors." alt="" coords="5,32,180,93"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a85f8e6324909f09be2f1810d710a6225" title=" " alt="" coords="231,5,378,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,45,219,41,214,43,181,51"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger_1_1utils.html#a7de50bb37b0ef460621bf5a4965f66f8" title="Log error to stderr with context." alt="" coords="228,75,381,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="180,74,215,82,210,82,180,79"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1utils_1_1error__context.html#adf0e9566f6bf9ce92f6e686b24aa02cc" title="Convert error context to a formatted string." alt="" coords="429,75,610,119"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="381,94,416,97,411,97,381,100"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="658,75,825,119"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="611,94,645,97,640,97,611,100"/>
+</map>

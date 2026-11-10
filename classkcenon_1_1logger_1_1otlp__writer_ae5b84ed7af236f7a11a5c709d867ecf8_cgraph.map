@@ -1,0 +1,9 @@
+<map id="kcenon::logger::otlp_writer::export_batch" name="kcenon::logger::otlp_writer::export_batch">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,40,165,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1otlp__writer.html#a65be58debc539bf3a823a1dd7c5f796a" title=" " alt="" coords="213,40,397,85"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="164,60,200,62,194,63,165,65"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1otlp__writer.html#a9869623b4ac19b7823fed711994fc0e2" title=" " alt="" coords="458,5,612,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="397,46,445,41,439,42,398,51"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1otlp__writer.html#a679a8d8cbeb8c027aafdfdd0b9553b87" title=" " alt="" coords="445,75,624,119"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="397,74,432,81,427,81,397,79"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="kcenon::logger::adapters::logger_adapter::flush" name="kcenon::logger::adapters::logger_adapter::flush">
+<area shape="rect" id="Node000001" title="Flush all pending log messages." alt="" coords="5,5,188,50"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#af7af3a3731ba4fe410a8adfe9228dd5c" title="Flush any buffered log messages (ILogger interface)" alt="" coords="236,5,402,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,25,223,27,217,28,188,30"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="450,14,607,42"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="403,25,437,28,432,28,403,30"/>
+</map>

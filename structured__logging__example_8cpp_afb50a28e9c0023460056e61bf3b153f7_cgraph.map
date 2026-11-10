@@ -1,0 +1,13 @@
+<map id="json_formatter_example" name="json_formatter_example">
+<area shape="rect" id="Node000001" title="Demonstrates JSON formatter for structured output." alt="" coords="5,118,187,146"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1json__formatter.html#a90ed86614970dfc4c754a9a79992600f" title="Format a log entry into a string." alt="" coords="235,109,387,154"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,129,221,131,216,133,188,134"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1json__formatter.html#a51953d7a244b48b4a1ef0213f6577cc3" title=" " alt="" coords="456,5,634,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="347,106,434,60,454,55,449,57,436,65,349,111"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1base__formatter.html#af340497d76be2215b57bf419a44fbb96" title="Format timestamp to ISO8601 string." alt="" coords="435,75,655,119"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="387,118,422,115,417,116,388,123"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1base__formatter.html#afbd4ad16a3c8ff7c04e6aed24db27ed1" title="Get current thread ID as string." alt="" coords="452,144,639,189"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="387,140,439,150,433,151,388,146"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1base__formatter.html#a8056f137776b78e9540c044217bedd96" title="Convert log level to string." alt="" coords="467,213,623,274"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="350,152,436,199,455,209,450,209,434,203,349,157"/>
+</map>

@@ -1,0 +1,31 @@
+<map id="examples/logger_config_builder_example.cpp" name="examples/logger_config_builder_example.cpp">
+<area shape="rect" id="Node000001" title="Logger configuration builder usage with preset profiles and validation." alt="" coords="343,5,520,50"/>
+<area shape="rect" id="Node000002" href="$logger__config__builder_8h.html" title="Fluent builder for logger_config." alt="" coords="268,98,443,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="415,48,385,88,381,85,411,52"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="468,106,547,134"/>
+<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="450,48,489,94,484,94,449,53"/>
+<area shape="rect" id="Node000003" href="$logger__config_8h.html" title="Configuration structure for logger with validation." alt="" coords="228,191,373,235"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="344,141,323,179,319,176,341,145"/>
+<area shape="rect" id="Node000008" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="620,292,765,336"/>
+<area shape="poly" id="edge14_Node000002_Node000008" title=" " alt="" coords="394,141,644,283,639,285,393,146"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,300,71,328"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="226,236,161,259,91,286,74,294,70,290,89,281,159,254,230,233"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="276,393,334,421"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="226,227,177,248,154,264,136,285,128,300,125,314,128,328,136,343,162,368,194,385,228,395,263,403,257,403,227,401,192,390,158,373,132,347,123,330,120,314,123,299,132,282,151,260,174,244,230,224"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="146,300,204,328"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="276,234,205,293,202,288,271,237"/>
+<area shape="rect" id="Node000007" href="$thread__integration__detector_8h.html" title="Conditionally enables thread_system integration when available." alt="" coords="228,283,373,345"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="302,233,303,269,298,266,299,238"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="374,226,485,250,608,281,621,287,616,287,607,286,484,255,374,231"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="398,292,596,336"/>
+<area shape="poly" id="edge13_Node000003_Node000013" title=" " alt="" coords="344,233,443,284,438,285,343,239"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="636,336,608,348,467,380,350,401,349,396,466,375,607,342,631,338"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="509,393,594,421"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="661,336,586,387,584,382,656,338"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="618,393,677,421"/>
+<area shape="poly" id="edge10_Node000008_Node000010" title=" " alt="" coords="684,335,662,381,659,377,680,338"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="701,393,775,421"/>
+<area shape="poly" id="edge11_Node000008_Node000011" title=" " alt="" coords="705,335,727,380,722,378,702,339"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="800,393,879,421"/>
+<area shape="poly" id="edge12_Node000008_Node000012" title=" " alt="" coords="729,334,808,385,803,384,727,340"/>
+</map>

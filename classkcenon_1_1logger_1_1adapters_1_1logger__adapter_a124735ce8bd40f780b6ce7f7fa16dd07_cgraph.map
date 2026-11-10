@@ -1,0 +1,7 @@
+<map id="kcenon::logger::adapters::logger_adapter::get_level" name="kcenon::logger::adapters::logger_adapter::get_level">
+<area shape="rect" id="Node000001" title="Get the current log level." alt="" coords="5,40,201,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#a232cc1dc22ebd679ef41518d0c984819" title="Get the current minimum log level (ILogger interface)" alt="" coords="257,5,423,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,45,244,41,239,43,202,51"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger_1_1adapters.html#aa313de2fc92b00820f3077c863b8727a" title="Convert log levels between logger_system and common_system." alt="" coords="249,75,431,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="201,74,236,81,230,82,201,79"/>
+</map>

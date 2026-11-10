@@ -1,0 +1,15 @@
+<map id="include/kcenon/logger/security/log_sanitizer.h" name="include/kcenon/logger/security/log_sanitizer.h">
+<area shape="rect" id="Node000001" title="Log sanitization for sensitive data protection." alt="" coords="194,5,369,50"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,98,64,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="216,53,79,99,77,94,215,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="88,98,184,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="245,50,173,92,171,88,240,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="209,98,271,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="273,49,255,86,252,82,268,52"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="295,98,353,126"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="294,48,312,85,307,83,291,53"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="378,98,454,126"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="318,48,384,90,379,90,316,53"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="478,98,564,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="345,48,471,92,466,93,344,53"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="example_basic_critical_writer" name="example_basic_critical_writer">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,36,176,81"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#a4b532a41fe19c7fd7ff04e0ccf1b8b3b" title=" " alt="" coords="238,5,404,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="175,44,225,40,220,42,177,50"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1logger.html#ad0e6c77ee47115131a3b8f2686163df2" title="Log a message with specified level (ILogger interface)" alt="" coords="224,74,418,102"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="176,67,211,73,205,74,176,72"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="481,14,638,42"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="404,25,468,27,463,28,404,30"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="378,71,484,46,490,45,379,76"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger_1_1metrics.html#acc52491d3b202388435672ac51ffc00c" title="Record a logged message." alt="" coords="466,65,653,110"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="419,85,453,88,448,88,419,90"/>
+</map>

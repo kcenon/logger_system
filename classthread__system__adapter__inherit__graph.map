@@ -1,0 +1,7 @@
+<map id="thread_system_adapter" name="thread_system_adapter">
+<area shape="rect" id="Node000001" title=" " alt="" coords="99,193,266,310"/>
+<area shape="rect" id="Node000002" href="$classlogger__adapter.html" title=" " alt="" coords="5,5,151,145"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,155,151,193,146,193,126,160"/>
+<area shape="rect" id="Node000003" href="$classexternal__system__interface.html" title=" " alt="" coords="175,16,397,134"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="247,144,218,195,214,191,243,148"/>
+</map>

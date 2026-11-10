@@ -1,0 +1,28 @@
+<map id="kcenon::logger::small_string::capacity" name="kcenon::logger::small_string::capacity">
+<area shape="rect" id="Node000001" title="Get capacity." alt="" coords="667,349,829,394"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1small__string.html#a8254fba32d32186937c401e6ff512b50" title="Calculate capacity for heap allocation." alt="" coords="424,285,619,330"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="650,345,603,333,604,328,656,345"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1small__string.html#a2f8a82f8406fb7858d3c5b39cd145cc9" title="Reserve capacity." alt="" coords="215,352,376,397"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="649,373,377,377,376,371,654,371"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1small__string.html#a8d24c89f43c8197aa4e9d6ec5a69ff99" title=" " alt="" coords="424,409,619,454"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="655,396,609,411,608,406,650,397"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#ae0e06b326a659bbd244688824a4083df" title="Append a string." alt="" coords="215,109,376,154"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="477,276,325,157,326,152,482,275"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1small__string.html#a440831edf18853423019551699eb26b1" title="Assign from string data." alt="" coords="215,283,376,327"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="406,307,377,309,376,303,411,306"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="426,336,375,354,373,349,431,334"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html#aa6550b755cd631826427632718f51280" title="Append a string." alt="" coords="5,5,167,50"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="239,103,165,65,142,53,140,48,168,60,244,101"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1small__string.html#a2e74db84d95c03de7358e64d250dc640" title="Append operator." alt="" coords="5,75,167,119"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="197,117,168,113,166,108,201,114"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1small__string.html#ab1f6cd88639f331932331d28a09d6323" title="Append operator." alt="" coords="5,144,167,189"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="197,149,168,155,166,151,201,146"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1small__string.html#a3be3f4a5a48346094e706afadfac609e" title="Copy assignment." alt="" coords="5,213,167,258"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="209,278,156,261,156,256,214,276"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1small__string.html#a087363e0bdfdc61c8638d5b171ba7b6d" title="Construct from C&#45;string." alt="" coords="5,283,167,327"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="197,306,168,308,166,302,201,304"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1small__string.html#abba64b6026387a260587d02de1b5599c" title="Construct from std::string." alt="" coords="5,352,167,397"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="209,334,157,354,155,349,214,331"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1small__string.html#ad001ee686bc9af1321fe892f5de6aae8" title="Construct from string_view." alt="" coords="5,421,167,466"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="222,335,216,342,201,359,193,376,185,393,168,411,150,423,148,418,165,407,180,390,188,373,197,356,213,338,217,338"/>
+</map>

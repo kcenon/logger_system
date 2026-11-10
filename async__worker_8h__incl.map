@@ -1,0 +1,28 @@
+<map id="src/impl/async/async_worker.h" name="src/impl/async/async_worker.h">
+<area shape="rect" id="Node000001" title="Standalone async worker implementation with jthread compatibility kcenon." alt="" coords="473,5,630,50"/>
+<area shape="rect" id="Node000002" href="$jthread__compat_8h.html" title="Compatibility header for std::jthread and std::stop_token kcenon." alt="" coords="328,98,464,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="513,50,435,93,433,88,508,52"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,182,72,210"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="470,45,373,70,263,101,173,135,85,176,81,178,79,173,83,171,171,130,262,95,371,64,475,43"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="96,182,237,210"/>
+<area shape="poly" id="edge10_Node000001_Node000005" title=" " alt="" coords="470,47,396,70,317,100,251,137,196,175,194,170,248,133,315,96,395,65,475,45"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="458,182,544,210"/>
+<area shape="poly" id="edge11_Node000001_Node000006" title=" " alt="" coords="547,49,512,169,508,165,543,52"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="568,182,632,210"/>
+<area shape="poly" id="edge13_Node000001_Node000007" title=" " alt="" coords="560,49,594,168,589,166,556,53"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="656,182,720,210"/>
+<area shape="poly" id="edge15_Node000001_Node000008" title=" " alt="" coords="570,48,631,124,669,171,664,169,627,127,568,53"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="640,98,706,126"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="584,48,644,89,638,89,583,53"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="730,98,806,126"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="609,48,722,92,716,92,609,53"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="830,98,892,126"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="631,46,818,97,813,97,631,51"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="262,174,434,218"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="390,125,370,162,367,158,386,128"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="325,122,213,144,148,158,85,176,79,178,76,173,83,171,147,153,212,138,330,121"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="362,126,218,179,217,174,356,127"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="414,124,475,173,470,172,412,129"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="434,124,557,171,562,176,557,175,555,176,433,129"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="464,123,551,143,645,171,651,176,646,175,643,176,550,148,464,128"/>
+</map>

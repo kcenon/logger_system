@@ -1,0 +1,10 @@
+<map id="kcenon::logger::logger::~logger" name="kcenon::logger::logger::~logger">
+<area shape="rect" id="Node000001" title="Destructor &#45; ensures all logs are flushed." alt="" coords="5,36,172,81"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#acf0ce0b84cf4398141260dad882a4c54" title="Stop the logger." alt="" coords="220,36,386,81"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,56,207,58,202,59,172,61"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1logger.html#af7af3a3731ba4fe410a8adfe9228dd5c" title="Flush any buffered log messages (ILogger interface)" alt="" coords="434,5,600,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="386,44,416,42,421,41,387,49"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="648,44,806,72"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="387,59,434,60,600,60,635,62,630,62,600,65,434,65,387,64"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="601,37,636,45,630,45,601,43"/>
+</map>

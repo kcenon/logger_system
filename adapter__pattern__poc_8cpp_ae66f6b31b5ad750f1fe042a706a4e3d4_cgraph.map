@@ -1,0 +1,9 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,32,60,60"/>
+<area shape="rect" id="Node000002" href="$adapter__pattern__poc_8cpp.html#a949dcbe608248b7f9fe7bf1e70a2f4bd" title=" " alt="" coords="111,5,273,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="59,39,97,34,93,37,61,44"/>
+<area shape="rect" id="Node000003" href="$adapter__pattern__poc_8cpp.html#af0283ede5e2de8fab3605f4c3390a218" title=" " alt="" coords="108,57,276,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="60,47,94,54,90,56,60,53"/>
+<area shape="rect" id="Node000004" href="$classlogger__factory.html#ab5dd2870662216b50bef634fce239136" title=" " alt="" coords="324,57,487,85"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="277,69,311,71,306,71,277,74"/>
+</map>

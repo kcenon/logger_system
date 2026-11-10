@@ -1,0 +1,35 @@
+<map id="kcenon::logger::log_writer_interface::write" name="kcenon::logger::log_writer_interface::write">
+<area shape="rect" id="Node000001" title="Write a log entry." alt="" coords="703,369,876,414"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1batch__writer.html#a3010aefb03e3afed8147254d5d2ecd88" title="Flush batch without locking (caller must hold lock)" alt="" coords="474,62,635,124"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="766,355,719,276,687,230,653,185,595,127,595,122,657,182,692,226,723,273,772,356"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1buffered__writer.html#a5a41181fabab786da202da75af832ea5" title="Flush buffer without acquiring mutex (caller must hold lock)" alt="" coords="454,196,655,241"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="746,359,654,290,590,244,590,239,657,286,751,360"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1async__writer.html#afbb2632dc4baf0f00a48e210162132bf" title="Flush any remaining messages after stopping." alt="" coords="466,300,644,345"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="694,365,633,348,633,343,700,364"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1async__writer.html#a9a5d57c1ec1feb1012842fddc4de2d69" title="Process messages from the queue." alt="" coords="456,369,653,414"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="685,392,654,394,653,389,690,391"/>
+<area shape="rect" id="Node000015" href="$classkcenon_1_1logger_1_1async__writer.html#ae07d4e024e6e813eb0077eff6fd7f6cf" title="Write a log entry asynchronously." alt="" coords="473,439,636,483"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="700,418,634,441,632,435,694,420"/>
+<area shape="rect" id="Node000016" href="$classkcenon_1_1logger_1_1filtered__writer.html#ae9f82579e16294f337a8954c7eacb27e" title="Write a log entry if it passes the filter." alt="" coords="469,508,640,553"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="755,424,709,463,657,498,631,510,630,505,654,493,706,459,750,426"/>
+<area shape="rect" id="Node000017" href="$classkcenon_1_1logger_1_1formatted__writer.html#a0cf83006c7a560d032a4daa89732d9ce" title="Write a log entry after applying the formatter." alt="" coords="460,577,650,622"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="772,426,725,499,693,535,657,567,637,579,635,574,654,563,690,532,721,495,767,429"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1batch__writer.html#abc5837f4f78cfa19a0f4f40c62633313" title="Flush the batch to the underlying writer." alt="" coords="233,40,394,85"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="456,82,396,75,394,70,461,80"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1batch__writer.html#ae293329a317a211cfd636da07e0c3f96" title="Write a log entry to the batch." alt="" coords="9,5,170,50"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="216,49,172,43,170,38,220,46"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1batch__writer.html#a275aff4337e1c95ff4eca96276d13eb8" title="Destructor &#45; ensures all pending entries are flushed." alt="" coords="6,75,173,119"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="216,79,175,86,171,82,220,75"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1buffered__writer.html#a6a6decd842259a45fc53f9dafa7e012b" title="Flush all buffered entries to the wrapped writer." alt="" coords="224,109,404,154"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="473,191,379,157,378,152,478,189"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1buffered__writer.html#a99f8b814a289c60d0ec167f3715f48b1" title="Write a log entry to the buffer." alt="" coords="224,179,404,223"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="436,211,405,210,403,205,441,209"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1buffered__writer.html#a6832950942dbdf1c54554938b2bd8339" title="Destructor &#45; flushes any remaining buffered entries." alt="" coords="222,248,406,293"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="436,245,408,253,405,248,441,242"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1async__writer.html#a5deb2448b184722ed453db189470b3bd" title="Stop the async writer thread." alt="" coords="232,317,396,362"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="447,331,397,336,395,331,452,329"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1async__writer.html#a14424f999ea52ece32a4109eda3edf7d" title="Destructor." alt="" coords="5,317,174,362"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="214,341,175,342,173,337,219,338"/>
+<area shape="rect" id="Node000014" href="$classkcenon_1_1logger_1_1async__writer.html#a97fcea6d3a24a2dcd2ffb7b34cc3cd14" title="Start the async writer thread." alt="" coords="232,387,396,431"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="438,401,397,406,395,401,443,399"/>
+</map>

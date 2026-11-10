@@ -1,0 +1,7 @@
+<map id="kcenon::logger::batch_writer::is_healthy" name="kcenon::logger::batch_writer::is_healthy">
+<area shape="rect" id="Node000001" title="Check if writer is healthy." alt="" coords="5,52,167,97"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a5c23fbefbad836b3101cae506d3ab135" title="Check if the writer is healthy." alt="" coords="233,5,384,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,58,220,51,215,53,168,63"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="215,91,402,136"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="167,86,202,94,196,95,167,92"/>
+</map>

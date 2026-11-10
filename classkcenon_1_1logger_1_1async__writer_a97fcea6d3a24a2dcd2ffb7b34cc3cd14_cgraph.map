@@ -1,0 +1,9 @@
+<map id="kcenon::logger::async_writer::start" name="kcenon::logger::async_writer::start">
+<area shape="rect" id="Node000001" title="Start the async writer thread." alt="" coords="5,40,169,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async__writer.html#a9a5d57c1ec1feb1012842fddc4de2d69" title="Process messages from the queue." alt="" coords="217,40,414,85"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,60,204,62,199,63,169,65"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="462,5,649,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="414,45,449,43,444,44,415,51"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__writer__interface.html#ad48f2ab0fd92db49d024bdc02f243a72" title="Write a log entry." alt="" coords="470,75,642,119"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="414,74,457,82,452,82,414,79"/>
+</map>

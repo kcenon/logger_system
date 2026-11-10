@@ -1,0 +1,21 @@
+<map id="src/modules/core.cppm" name="src/modules/core.cppm">
+<area shape="rect" id="Node000001" title="Core partition for kcenon.logger module." alt="" coords="382,5,555,33"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,81,135,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="397,36,151,81,150,76,396,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="158,81,224,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="419,34,240,83,239,77,414,34"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="248,81,313,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="438,33,329,78,327,73,432,34"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="337,81,414,109"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="455,33,405,74,403,69,449,34"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="437,81,500,109"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="471,32,471,67,467,64,467,35"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="525,81,583,109"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="485,31,530,71,525,70,483,36"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="607,81,704,109"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="503,31,611,75,606,75,502,36"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="728,81,791,109"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="525,31,715,80,710,81,524,36"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="815,81,877,109"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="555,31,668,50,803,81,797,80,667,56,555,36"/>
+</map>

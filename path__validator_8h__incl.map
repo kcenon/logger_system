@@ -1,0 +1,21 @@
+<map id="include/kcenon/logger/security/path_validator.h" name="include/kcenon/logger/security/path_validator.h">
+<area shape="rect" id="Node000001" title="File path validation to prevent path traversal vulnerabilities." alt="" coords="329,5,516,50"/>
+<area shape="rect" id="Node000002" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="154,98,299,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="378,49,288,93,286,89,373,52"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="323,106,412,134"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="412,49,385,95,382,91,407,52"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="436,106,521,134"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="437,48,465,94,460,92,435,53"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="545,106,609,134"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="460,48,544,98,539,98,459,53"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,191,64,218"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="176,146,79,187,77,182,175,141"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="88,191,173,218"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="204,142,159,182,156,178,199,144"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="197,191,256,218"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="228,141,229,176,224,174,225,145"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="280,191,354,218"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="251,141,294,180,289,180,249,146"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="379,191,458,218"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="278,141,377,184,371,185,277,146"/>
+</map>

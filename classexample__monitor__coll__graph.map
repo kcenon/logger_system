@@ -1,0 +1,13 @@
+<map id="example_monitor" name="example_monitor">
+<area shape="rect" id="Node000001" title="Example monitor implementation demonstrating IMonitor interface." alt="" coords="230,436,380,620"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,281,201,371"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,378,232,452,227,453,157,384"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="226,281,383,371"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="306,368,307,420,302,418,303,373"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="267,144,342,216"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="306,214,307,265,302,264,303,219"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="241,5,368,95"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="305,107,307,145,302,143,304,112"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="407,290,488,362"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="424,360,381,424,377,421,420,364"/>
+</map>

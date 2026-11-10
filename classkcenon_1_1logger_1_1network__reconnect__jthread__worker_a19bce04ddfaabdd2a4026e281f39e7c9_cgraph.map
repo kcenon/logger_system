@@ -1,0 +1,9 @@
+<map id="kcenon::logger::network_reconnect_jthread_worker::start" name="kcenon::logger::network_reconnect_jthread_worker::start">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,32,202,93"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1network__reconnect__jthread__worker.html#a0464dd7cbda46564f4efe864111c6c42" title=" " alt="" coords="250,40,482,85"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,60,237,62,231,63,203,65"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a90bd0e17804555e24d4f86fe20c8497a" title="Wait for thread to complete." alt="" coords="560,5,723,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="482,45,547,39,542,40,483,50"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a815d60b193847e48d48b5e2724957668" title="Request the thread to stop." alt="" coords="530,75,753,119"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="483,74,517,81,512,81,483,80"/>
+</map>

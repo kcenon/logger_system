@@ -1,0 +1,13 @@
+<map id="kcenon::logger::base_formatter::level_to_string" name="kcenon::logger::base_formatter::level_to_string">
+<area shape="rect" id="Node000001" title="Convert log level to string." alt="" coords="566,66,723,128"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1compact__formatter.html#a8d5371b5ce8819169598958113f2599b" title="Format a log entry into a string." alt="" coords="337,5,518,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="549,67,500,53,500,48,554,67"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1json__formatter.html#a90ed86614970dfc4c754a9a79992600f" title="Format a log entry into a string." alt="" coords="352,75,504,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="548,97,505,100,504,94,553,97"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1plain__formatter.html#a5da6d1a3978edc73f1da1ed24f53ea9a" title="Format a log entry into a string." alt="" coords="349,144,506,189"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="554,126,500,146,499,141,549,127"/>
+<area shape="rect" id="Node000004" href="$structured__logging__example_8cpp.html#afb50a28e9c0023460056e61bf3b153f7" title="Demonstrates JSON formatter for structured output." alt="" coords="108,83,289,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="333,97,290,100,289,94,338,97"/>
+<area shape="rect" id="Node000005" href="$structured__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,83,60,111"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="90,99,61,100,59,94,94,95"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="include/kcenon/logger/interfaces/output_sink_interface.h" name="include/kcenon/logger/interfaces/output_sink_interface.h">
+<area shape="rect" id="Node000001" title="Interface for log output destinations (Single Responsibility Principle) kcenon." alt="" coords="190,5,361,67"/>
+<area shape="rect" id="Node000002" href="$console__sink_8h.html" title="Console output sink implementation (stdout/stderr) kcenon." alt="" coords="5,115,170,160"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,77,130,117,127,112,206,73"/>
+<area shape="rect" id="Node000004" href="$file__sink_8h.html" title="File output sink implementation." alt="" coords="193,115,358,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="277,81,278,116,273,113,274,85"/>
+<area shape="rect" id="Node000005" href="$composite__writer_8h.html" title="Composite writer combining formatter and sink (Pipeline Pattern) kcenon." alt="" coords="382,115,580,160"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="352,71,439,114,433,115,352,77"/>
+<area shape="rect" id="Node000003" href="$composite__writer__example_8cpp.html" title="Example demonstrating the new composite writer architecture." alt="" coords="197,208,354,252"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="147,164,233,206,228,208,146,169"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="277,173,278,209,273,206,274,177"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="420,166,325,210,324,205,415,167"/>
+</map>

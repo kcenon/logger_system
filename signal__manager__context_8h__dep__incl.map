@@ -1,0 +1,9 @@
+<map id="include/kcenon/logger/core/signal_manager_context.h" name="include/kcenon/logger/core/signal_manager_context.h">
+<area shape="rect" id="Node000001" title="Manages signal manager lifecycle and access." alt="" coords="122,5,286,67"/>
+<area shape="rect" id="Node000002" href="$logger__context_8h.html" title="Facade for logger system components following SRP." alt="" coords="22,115,189,160"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,76,129,116,125,113,161,80"/>
+<area shape="rect" id="Node000004" href="$signal__manager__context_8cpp.html" title=" " alt="" coords="213,115,393,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="246,76,284,115,279,114,244,81"/>
+<area shape="rect" id="Node000003" href="$logger__context_8cpp.html" title=" " alt="" coords="5,208,206,235"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="107,174,108,208,103,206,104,177"/>
+</map>

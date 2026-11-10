@@ -1,0 +1,15 @@
+<map id="example_production_setup" name="example_production_setup">
+<area shape="rect" id="Node000001" title="Example 5: Production Setup with Multiple Writers." alt="" coords="5,75,160,119"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#a4b532a41fe19c7fd7ff04e0ccf1b8b3b" title=" " alt="" coords="222,5,388,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,72,219,54,214,57,157,77"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1logger.html#af7af3a3731ba4fe410a8adfe9228dd5c" title="Flush any buffered log messages (ILogger interface)" alt="" coords="222,75,388,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="160,94,208,96,203,98,160,100"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1logger.html#ad0e6c77ee47115131a3b8f2686163df2" title="Log a message with specified level (ILogger interface)" alt="" coords="208,143,402,171"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="160,116,208,129,236,139,231,139,207,134,160,121"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="465,83,622,111"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="384,48,481,78,476,79,384,53"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="388,94,452,97,447,97,388,100"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="362,140,468,116,474,115,363,145"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger_1_1metrics.html#acc52491d3b202388435672ac51ffc00c" title="Record a logged message." alt="" coords="450,135,637,179"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="403,154,437,157,432,157,403,160"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="kcenon::logger::small_string::append" name="kcenon::logger::small_string::append">
+<area shape="rect" id="Node000001" title="Append a string." alt="" coords="5,40,167,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1small__string.html#ae0e06b326a659bbd244688824a4083df" title="Append a string." alt="" coords="215,40,376,85"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,60,202,62,197,63,168,65"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#a8254fba32d32186937c401e6ff512b50" title="Calculate capacity for heap allocation." alt="" coords="424,5,618,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="376,47,412,44,406,45,377,53"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="440,75,602,119"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="377,72,428,82,423,82,376,77"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html#aac5202a8a61b91594483d204e4220ebc" title="Get capacity." alt="" coords="666,5,828,50"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="618,25,654,27,648,28,619,30"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="kcenon::logger::copy_log_entry" name="kcenon::logger::copy_log_entry">
+<area shape="rect" id="Node000001" title="Creates a copy of a log_entry for queue storage." alt="" coords="5,5,162,50"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="210,5,371,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,25,197,27,192,28,162,30"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="419,5,580,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="372,25,406,28,401,28,372,30"/>
+</map>

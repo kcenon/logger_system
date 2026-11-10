@@ -1,0 +1,7 @@
+<map id="kcenon::logger::queued_writer_base::get_container_size" name="kcenon::logger::queued_writer_base::get_container_size">
+<area shape="rect" id="Node000001" title="Get container size (specialization for std::queue)" alt="" coords="267,40,501,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1queued__writer__base.html#a84735de511ca3a03e85366d09d4a8ec0" title="Get the current queue size." alt="" coords="5,5,219,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="248,46,219,44,219,39,254,45"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1queued__writer__base.html#a900ad2227f4f37d158bbb6f71a356104" title="Try to enqueue an entry with overflow protection." alt="" coords="15,75,209,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="249,80,209,87,209,82,254,79"/>
+</map>

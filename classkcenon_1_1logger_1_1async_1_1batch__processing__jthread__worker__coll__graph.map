@@ -1,0 +1,17 @@
+<map id="kcenon::logger::async::batch_processing_jthread_worker" name="kcenon::logger::async::batch_processing_jthread_worker">
+<area shape="rect" id="Node000001" title="Worker thread for batch processing with jthread compatibility." alt="" coords="97,913,301,1165"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,656,86,728"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="38,730,36,763,35,804,38,847,50,888,66,918,88,947,83,948,62,921,45,890,33,848,29,804,31,762,39,725"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html" title="Wrapper for std::jthread or std::thread with manual stop mechanism." alt="" coords="348,535,501,848"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="350,817,332,849,298,901,294,897,327,847,346,821"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="257,364,426,470"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="285,472,264,502,245,536,216,626,199,720,192,813,191,897,186,896,187,812,194,720,211,625,240,534,259,499,287,468"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="358,468,375,519,370,519,357,473"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1async_1_1simple__stop__source.html" title="Simple stop source for environments without std::stop_token." alt="" coords="232,143,398,299"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="326,296,335,347,330,347,325,301"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="119,5,260,78"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="183,75,176,143,171,220,171,693,175,796,183,896,178,896,169,796,166,693,166,219,171,143,183,80"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="214,75,253,128,248,129,215,80"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="451,381,531,453"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="484,451,469,520,464,518,481,455"/>
+</map>

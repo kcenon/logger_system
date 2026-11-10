@@ -1,0 +1,9 @@
+<map id="kcenon::logger::buffered_writer::flush_buffer_unsafe" name="kcenon::logger::buffered_writer::flush_buffer_unsafe">
+<area shape="rect" id="Node000001" title="Flush buffer without acquiring mutex (caller must hold lock)" alt="" coords="238,75,439,119"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1buffered__writer.html#a6a6decd842259a45fc53f9dafa7e012b" title="Flush all buffered entries to the wrapped writer." alt="" coords="8,5,187,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,71,178,53,178,48,247,69"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1buffered__writer.html#a99f8b814a289c60d0ec167f3715f48b1" title="Write a log entry to the buffer." alt="" coords="8,75,187,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,98,188,100,187,94,224,96"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1buffered__writer.html#a6832950942dbdf1c54554938b2bd8339" title="Destructor &#45; flushes any remaining buffered entries." alt="" coords="5,144,190,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="247,123,179,146,177,141,242,125"/>
+</map>

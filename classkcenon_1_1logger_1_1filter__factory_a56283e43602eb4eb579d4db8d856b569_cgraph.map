@@ -1,0 +1,9 @@
+<map id="kcenon::logger::filter_factory::create_production" name="kcenon::logger::filter_factory::create_production">
+<area shape="rect" id="Node000001" title="Create a production filter." alt="" coords="5,75,204,119"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1filter__factory.html#a5a46e7da5544bf98a5fed1dbdf3f2561" title="Create a composite filter with AND logic." alt="" coords="252,5,480,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,72,267,53,262,56,193,77"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1filter__factory.html#aa02430dd734dcab41499e56e8f86201e" title="Create a level filter." alt="" coords="285,75,446,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="204,94,272,96,267,98,204,100"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1filter__factory.html#af4bec7eb99ee1c059f513dc41cdf5c0f" title="Create a regex filter." alt="" coords="283,144,449,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="192,117,270,140,265,141,191,123"/>
+</map>

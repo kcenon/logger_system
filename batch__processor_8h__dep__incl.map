@@ -1,0 +1,9 @@
+<map id="src/impl/async/batch_processor.h" name="src/impl/async/batch_processor.h">
+<area shape="rect" id="Node000001" title="Optimized batch processing engine for log entries." alt="" coords="109,5,265,50"/>
+<area shape="rect" id="Node000002" href="$batch__processor_8cpp.html" title="Batch processor implementation with jthread compatibility." alt="" coords="5,98,161,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,62,110,99,106,96,153,58"/>
+<area shape="rect" id="Node000003" href="$high__performance__async__writer_8h.html" title="High&#45;performance asynchronous writer using lock&#45;free queue and memory pooling." alt="" coords="185,98,397,143"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="224,58,269,97,264,98,223,63"/>
+<area shape="rect" id="Node000004" href="$high__performance__async__writer_8cpp.html" title=" " alt="" coords="177,191,405,235"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="293,156,293,192,289,189,289,160"/>
+</map>

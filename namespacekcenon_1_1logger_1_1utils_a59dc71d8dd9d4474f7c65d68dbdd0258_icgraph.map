@@ -1,0 +1,11 @@
+<map id="kcenon::logger::utils::check_stream_state" name="kcenon::logger::utils::check_stream_state">
+<area shape="rect" id="Node000001" title="Stream state verification helper." alt="" coords="331,75,491,119"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1file__writer.html#aeb27df7f21b55913463eef21618a4b29" title="Flush file stream." alt="" coords="123,5,268,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="322,70,267,53,267,48,328,69"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1console__writer.html#ac00806b7b0ba8195369fb38ace2d805c" title="Write a log entry to console." alt="" coords="108,75,283,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="313,97,284,100,283,94,318,97"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1file__writer.html#a3d2fd71af8ebe7299849f8cdba763815" title="Write a log entry to file." alt="" coords="123,144,268,189"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="328,124,268,146,267,141,322,125"/>
+<area shape="rect" id="Node000004" href="$composite__writer__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,83,60,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="90,99,61,100,59,94,94,95"/>
+</map>

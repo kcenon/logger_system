@@ -1,0 +1,7 @@
+<map id="kcenon::logger::file_writer::close" name="kcenon::logger::file_writer::close">
+<area shape="rect" id="Node000001" title="Close the file." alt="" coords="5,36,151,81"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1file__writer.html#a18e1e6314bcc8c7f185f86f52498ec29" title="Close the file (internal, caller must hold mutex)" alt="" coords="199,5,364,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,45,186,42,180,43,152,50"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="203,74,360,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="151,66,190,74,184,74,151,72"/>
+</map>

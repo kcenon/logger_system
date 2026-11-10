@@ -1,0 +1,5 @@
+<map id="kcenon::logger::filters::field_exists_filter" name="kcenon::logger::filters::field_exists_filter">
+<area shape="rect" id="Node000001" title="Filter based on structured field presence." alt="" coords="14,187,166,344"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__filter__interface.html" title="Interface for log filters." alt="" coords="5,5,175,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,152,93,188,88,187,90,157"/>
+</map>

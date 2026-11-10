@@ -1,0 +1,9 @@
+<map id="kcenon::logger::utils::check_stream_state" name="kcenon::logger::utils::check_stream_state">
+<area shape="rect" id="Node000001" title="Stream state verification helper." alt="" coords="5,36,166,81"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="214,5,375,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,44,201,41,195,42,167,49"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="216,74,373,102"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="166,67,203,74,198,75,166,72"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="423,5,589,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="375,25,410,27,405,28,376,30"/>
+</map>

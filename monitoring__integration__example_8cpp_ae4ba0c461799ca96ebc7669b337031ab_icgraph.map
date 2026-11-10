@@ -1,0 +1,16 @@
+<map id="print_metrics_snapshot" name="print_metrics_snapshot">
+<area shape="rect" id="Node000001" title="Print metrics snapshot in formatted way." alt="" coords="368,100,541,128"/>
+<area shape="rect" id="Node000002" href="$monitoring__integration__example_8cpp.html#a69f4c66591da0bf58d437167b4129a90" title="Example 1: Basic monitor integration with logger." alt="" coords="108,5,320,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="414,92,370,70,319,47,285,36,285,31,321,42,373,65,420,92"/>
+<area shape="rect" id="Node000004" href="$monitoring__integration__example_8cpp.html#a5367178a2d033e44314686687f84616c" title="Example 2: Multiple loggers with single monitor." alt="" coords="137,57,291,102"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="350,100,292,93,291,88,355,99"/>
+<area shape="rect" id="Node000005" href="$monitoring__integration__example_8cpp.html#a3795dc3758233d537d4f2094a55beaf0" title="Example 3: Demonstrating IMonitorable interface." alt="" coords="122,126,306,171"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="350,129,306,138,305,133,355,128"/>
+<area shape="rect" id="Node000006" href="$monitoring__integration__example_8cpp.html#af6e1f246e5f5056cd6eecbb7737c4ecd" title="Example 4: Simulating monitoring_system integration." alt="" coords="128,196,300,240"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="418,135,321,186,290,197,289,192,319,181,413,136"/>
+<area shape="rect" id="Node000003" href="$monitoring__integration__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,100,60,128"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="118,41,109,47,73,73,47,101,43,98,70,70,106,42,121,37"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="120,99,61,111,59,106,123,95"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="105,130,61,122,59,116,109,126"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="115,189,106,185,70,158,45,131,46,125,74,154,109,181,120,189"/>
+</map>

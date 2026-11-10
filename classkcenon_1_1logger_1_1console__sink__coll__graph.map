@@ -1,0 +1,7 @@
+<map id="kcenon::logger::console_sink" name="kcenon::logger::console_sink">
+<area shape="rect" id="Node000001" title="Outputs log messages to console (stdout or stderr)" alt="" coords="79,271,278,545"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1output__sink__interface.html" title="Abstract interface for log output destinations (I/O only)" alt="" coords="5,5,194,206"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,218,146,272,140,271,129,223"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="218,70,299,142"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="251,139,221,256,217,254,248,144"/>
+</map>

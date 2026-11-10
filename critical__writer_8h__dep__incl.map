@@ -1,0 +1,7 @@
+<map id="include/kcenon/logger/writers/critical_writer.h" name="include/kcenon/logger/writers/critical_writer.h">
+<area shape="rect" id="Node000001" title="Synchronous wrapper for critical log messages to prevent loss." alt="" coords="114,5,288,50"/>
+<area shape="rect" id="Node000002" href="$critical__logging__example_8cpp.html" title="Example demonstrating critical log loss prevention mechanisms." alt="" coords="5,98,194,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,59,125,100,122,95,163,61"/>
+<area shape="rect" id="Node000003" href="$critical__writer_8cpp.html" title=" " alt="" coords="218,98,389,143"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="237,58,282,98,276,97,236,63"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="kcenon::logger::filter_factory::registry" name="kcenon::logger::filter_factory::registry">
+<area shape="rect" id="Node000001" title=" " alt="" coords="221,75,376,119"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1filter__factory.html#a8bb49d8e34f93803890d89af844365c8" title="Create a filter by registered name." alt="" coords="11,5,167,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,70,159,53,159,48,217,68"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1filter__factory.html#aeb66006ffc9181482a1da0dee384bef2" title="Check if a filter type is registered." alt="" coords="11,75,167,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="202,98,167,100,167,94,207,96"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1filter__factory.html#a50b63f77d0d63ce3a905f3758cfff330" title="Register a custom filter type." alt="" coords="5,144,173,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="217,124,160,146,158,141,212,126"/>
+</map>

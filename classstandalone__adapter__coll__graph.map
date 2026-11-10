@@ -1,0 +1,15 @@
+<map id="standalone_adapter" name="standalone_adapter">
+<area shape="rect" id="Node000001" title=" " alt="" coords="23,921,162,1016"/>
+<area shape="rect" id="Node000002" href="$classlogger__adapter.html" title=" " alt="" coords="20,733,166,872"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,884,95,922,90,921,91,889"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="11,578,174,668"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,665,95,716,90,715,92,670"/>
+<area shape="rect" id="Node000004" href="$classlogger__core.html" title=" " alt="" coords="23,419,162,513"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="93,511,95,561,90,561,92,516"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,281,180,354"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="93,351,95,402,90,402,92,356"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="55,144,130,216"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="93,214,95,265,90,265,93,219"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="29,5,156,95"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="93,107,95,144,90,144,93,112"/>
+</map>

@@ -1,0 +1,39 @@
+<map id="include/kcenon/logger/security/integrity_policy.h" name="include/kcenon/logger/security/integrity_policy.h">
+<area shape="rect" id="Node000001" title="Tamper&#45;evident log signing policies for writers." alt="" coords="428,5,620,50"/>
+<area shape="rect" id="Node000002" href="$secure__key__storage_8h.html" title="RAII wrapper for encryption keys with secure memory management." alt="" coords="367,98,536,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="509,49,480,88,477,84,505,52"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,283,64,311"/>
+<area shape="poly" id="edge18_Node000001_Node000004" title=" " alt="" coords="425,38,347,49,263,62,189,79,160,89,139,100,118,117,101,137,73,183,54,230,43,269,38,267,49,228,68,181,97,134,115,113,136,96,158,84,187,74,262,56,346,43,430,36"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="118,283,178,311"/>
+<area shape="poly" id="edge19_Node000001_Node000006" title=" " alt="" coords="425,36,344,52,252,80,208,100,166,125,129,156,98,192,92,212,97,232,109,253,125,273,120,272,105,256,92,234,87,211,93,189,125,152,163,121,205,95,250,75,342,47,430,34"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="560,106,634,134"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="542,48,580,95,574,94,540,53"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="659,106,735,134"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="566,48,661,99,656,99,565,53"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="760,106,834,134"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="601,48,749,95,757,100,751,100,747,101,601,53"/>
+<area shape="rect" id="Node000003" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="291,191,436,235"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="433,142,397,182,393,178,429,144"/>
+<area shape="rect" id="Node000009" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="461,191,619,235"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="474,140,511,180,506,179,472,146"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="643,199,706,227"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="511,141,632,188,637,193,632,192,629,193,511,146"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="730,199,795,227"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="537,139,639,165,718,188,725,193,720,192,716,193,638,170,536,145"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="819,199,908,227"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="537,138,548,140,679,161,736,171,809,188,820,194,815,193,807,193,735,176,678,166,547,145,537,143"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="933,199,1005,227"/>
+<area shape="poly" id="edge12_Node000002_Node000013" title=" " alt="" coords="537,138,548,140,653,153,736,158,818,166,922,188,931,193,926,193,920,193,818,171,736,163,653,159,547,145,537,143"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="107,199,172,227"/>
+<area shape="poly" id="edge13_Node000002_Node000014" title=" " alt="" coords="364,140,278,164,185,193,180,195,178,190,183,188,277,159,369,138"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="196,199,268,227"/>
+<area shape="poly" id="edge14_Node000002_Node000015" title=" " alt="" coords="394,144,281,193,276,195,274,190,279,188,399,142"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="288,233,280,238,79,288,78,282,279,233,293,232"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="217,283,302,311"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="339,235,289,276,287,271,334,237"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="309,236,193,282,192,277,304,236"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="327,283,401,311"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="366,234,366,269,362,266,362,238"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="426,283,505,311"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="391,233,440,274,434,273,390,238"/>
+</map>

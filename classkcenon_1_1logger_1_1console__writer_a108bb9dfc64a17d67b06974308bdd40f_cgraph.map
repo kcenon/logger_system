@@ -1,0 +1,9 @@
+<map id="kcenon::logger::console_writer::console_writer" name="kcenon::logger::console_writer::console_writer">
+<area shape="rect" id="Node000001" title="Constructor." alt="" coords="5,40,181,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1console__writer.html#a28e1ea156644bb256715a751dc0db764" title="Check if terminal supports color." alt="" coords="229,5,425,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,47,216,44,210,45,182,52"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1console__writer.html#ab0434f4ed7540908c9090c35e5f80f03" title="Set whether to use color output (if supported)" alt="" coords="239,75,414,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,73,227,81,221,82,181,78"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1console__writer.html#a1edbb0406a72ac40abf6fdfc81185cff" title="Get current color output setting." alt="" coords="473,75,648,119"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="415,94,460,97,455,97,415,100"/>
+</map>

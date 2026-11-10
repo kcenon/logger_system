@@ -1,0 +1,7 @@
+<map id="kcenon::logger::async::lockfree_spsc_queue::enqueue_impl" name="kcenon::logger::async::lockfree_spsc_queue::enqueue_impl">
+<area shape="rect" id="Node000001" title="Implementation for enqueue operations." alt="" coords="219,48,384,110"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1lockfree__spsc__queue.html#a89fea1e9f46468180d747305a4399aff" title="Enqueue an item (producer side)" alt="" coords="5,5,171,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,60,171,55,171,50,206,59"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1lockfree__spsc__queue.html#a6b7574e66c09e595b4800ee971095414" title="Enqueue an item using move semantics (producer side)" alt="" coords="5,91,171,152"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="201,99,172,108,171,102,206,98"/>
+</map>

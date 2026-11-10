@@ -1,0 +1,17 @@
+<map id="src/core/logger_metrics.cpp" name="src/core/logger_metrics.cpp">
+<area shape="rect" id="Node000001" title="Logger metrics implementation." alt="" coords="157,5,357,33"/>
+<area shape="rect" id="Node000002" href="$logger__metrics_8h.html" title="Logger performance metrics and monitoring." alt="" coords="164,81,351,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="259,31,260,66,255,64,256,36"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,182,72,210"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="200,129,84,176,80,178,77,173,81,171,199,124"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="95,182,160,210"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="229,125,160,175,158,171,224,127"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="184,182,250,210"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="250,124,231,170,227,166,245,127"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="273,182,324,210"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="268,124,289,169,284,167,266,128"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="348,182,406,210"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="286,123,350,173,345,172,285,129"/>
+<area shape="rect" id="Node000008" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="430,174,588,218"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="318,124,437,168,432,168,317,129"/>
+</map>

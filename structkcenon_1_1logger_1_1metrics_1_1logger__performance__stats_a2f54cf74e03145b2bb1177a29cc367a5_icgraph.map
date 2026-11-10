@@ -1,0 +1,7 @@
+<map id="kcenon::logger::metrics::logger_performance_stats::get_queue_utilization_percent" name="kcenon::logger::metrics::logger_performance_stats::get_queue_utilization_percent">
+<area shape="rect" id="Node000001" title="Get queue utilization percentage." alt="" coords="263,5,488,67"/>
+<area shape="rect" id="Node000002" href="$metrics__demo_8cpp.html#a3a0eef174cfc8a02c8ed68e55676df88" title=" " alt="" coords="108,22,215,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,36,216,39,215,34,251,36"/>
+<area shape="rect" id="Node000003" href="$metrics__demo_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,22,60,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="90,37,61,39,60,34,94,35"/>
+</map>

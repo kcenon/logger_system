@@ -1,0 +1,5 @@
+<map id="kcenon::logger::security::secure_key" name="kcenon::logger::security::secure_key">
+<area shape="rect" id="Node000001" title="RAII wrapper for encryption keys with secure memory management." alt="" coords="5,143,172,455"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="11,5,166,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,75,91,126,86,125,88,80"/>
+</map>

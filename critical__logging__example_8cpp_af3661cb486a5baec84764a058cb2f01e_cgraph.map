@@ -1,0 +1,15 @@
+<map id="example_production_setup" name="example_production_setup">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,179,160,223"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger__builder.html#ac92e85f0d7373398ae45d04c78b2ba72" title="Add a writer to the logger." alt="" coords="218,5,384,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,177,142,119,172,88,206,60,217,56,213,60,209,64,176,92,146,123,101,180"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1result.html#aa0165978d6656f5a8b3dbc8bf7d2e835" title=" " alt="" coords="220,75,382,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="119,176,206,129,223,124,219,127,209,134,123,180"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1result.html#a85b53bd2cd9a3fe53a0a1c94ca1dbf54" title=" " alt="" coords="220,144,382,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="159,186,207,180,203,183,161,191"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1logger__builder.html#a75f79c43d9d64fa35e60cc6d7fd6eb38" title=" " alt="" coords="218,213,384,258"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="159,211,205,219,201,221,161,216"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1logger__builder.html#ae1db1e406420961320bea91df5730dfa" title="Set buffer size." alt="" coords="208,283,395,327"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="121,221,209,268,224,276,219,277,206,273,121,226"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1logger__builder.html#a1228e7a24955286da72a7d08d2375f7d" title=" " alt="" coords="211,352,392,397"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="100,221,146,279,176,310,209,338,218,345,212,344,206,342,172,314,142,283,98,226"/>
+</map>

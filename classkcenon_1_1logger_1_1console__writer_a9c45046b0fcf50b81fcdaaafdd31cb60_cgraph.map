@@ -1,0 +1,14 @@
+<map id="kcenon::logger::console_writer::~console_writer" name="kcenon::logger::console_writer::~console_writer">
+<area shape="rect" id="Node000001" title="Destructor." alt="" coords="5,14,186,59"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1console__writer.html#afd887fc39a4fc75e06b020a5d82907d7" title="Flush console streams." alt="" coords="234,14,409,59"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,34,220,36,215,37,187,39"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="662,19,824,64"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="409,15,457,8,536,3,615,8,650,16,644,16,614,14,536,8,457,14,410,20"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="457,23,614,50"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="409,34,444,36,439,37,410,39"/>
+<area shape="rect" id="Node000006" href="$namespacekcenon_1_1logger_1_1utils.html#aafab2237b40cefbc519b3dcdf64fb23d" title="Error handling helper for write operations." alt="" coords="458,74,614,119"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="404,57,445,70,440,70,403,62"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="872,19,1038,64"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="824,39,859,42,853,42,824,44"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="614,73,644,67,650,67,615,78"/>
+</map>

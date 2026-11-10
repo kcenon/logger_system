@@ -1,0 +1,13 @@
+<map id="kcenon::logger::log_context_scope::log_context_scope" name="kcenon::logger::log_context_scope::log_context_scope">
+<area shape="rect" id="Node000001" title="Construct scope with a logger reference (for logger&#45;level context)" alt="" coords="5,66,156,128"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#ae830b3970289b394d60144e2b7eda193" title=" " alt="" coords="205,5,372,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,70,207,54,203,57,157,74"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__context__storage.html#a17b7d77e51e0ffa3a302771e32bf8318" title="Set a string context field for the current thread." alt="" coords="208,75,369,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="155,94,194,96,189,98,156,100"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1unified__log__context.html#acdd9da4568accda11fe59f6010758a6e" title="Set a context value." alt="" coords="204,144,373,189"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="156,119,208,138,203,139,156,125"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__context__storage.html#a160e7a0d53035331e93b8713e26c2f0e" title=" " alt="" coords="421,24,583,85"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="369,78,408,73,403,74,370,83"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1log__context__storage.html#aa72d924985d4e4cfb0659227cfd196ed" title=" " alt="" coords="421,109,583,170"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="370,110,409,120,403,121,369,116"/>
+</map>

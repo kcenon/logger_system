@@ -1,0 +1,11 @@
+<map id="kcenon::logger::logger_config::high_performance" name="kcenon::logger::logger_config::high_performance">
+<area shape="rect" id="Node000001" title="Create a high&#45;performance configuration." alt="" coords="499,52,692,97"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger__config__builder.html#a9ea942a35479bc12cbec2da3284becf9" title="Use high&#45;performance configuration as base." alt="" coords="266,5,451,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="481,57,451,54,451,49,486,56"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1logger__builder.html#a280c589564b5b5ede0d1789b538ad0f1" title=" " alt="" coords="273,91,444,136"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="486,93,444,102,444,97,481,93"/>
+<area shape="rect" id="Node000003" href="$logger__config__builder__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="84,22,139,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="248,38,139,39,138,34,252,34"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1logger__builder.html#a54cd6a57d715ede3b24b1e3d7b30d88f" title="Detect environment from environment variables." alt="" coords="5,91,218,136"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="255,114,218,116,218,111,260,113"/>
+</map>

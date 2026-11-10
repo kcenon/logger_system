@@ -1,0 +1,7 @@
+<map id="kcenon::logger::security::audit_logger::calculate_hmac" name="kcenon::logger::security::audit_logger::calculate_hmac">
+<area shape="rect" id="Node000001" title="Calculate HMAC signature." alt="" coords="5,40,226,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html#ab894f72f2652a171d0f99a5b2272b165" title="Get const reference to key data." alt="" coords="274,5,451,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,44,261,42,256,43,227,49"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html#a45294649fb2480ba89fc7308f42d326f" title="Get key size in bytes." alt="" coords="274,75,451,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="226,75,261,82,256,83,226,81"/>
+</map>

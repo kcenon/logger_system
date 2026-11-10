@@ -1,0 +1,20 @@
+<map id="kcenon::logger::routing::router_builder" name="kcenon::logger::routing::router_builder">
+<area shape="rect" id="Node000001" title="Builder for creating routing rules." alt="" coords="118,1111,278,1290"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1routing_1_1log__router.html" title="Log router for directing messages to specific writers." alt="" coords="214,868,388,1046"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="265,1044,244,1097,240,1094,262,1048"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="216,696,372,803"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="296,800,300,851,295,850,295,805"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1routing_1_1route__config.html" title="Route configuration for log messages." alt="" coords="118,497,278,631"/>
+<area shape="poly" id="edge9_Node000001_Node000004" title=" " alt="" coords="201,630,201,1095,195,1094,195,632"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="232,628,261,681,256,681,232,634"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,352,180,424"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="113,421,152,483,147,484,114,426"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="55,175,130,247"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="93,244,95,335,90,334,93,250"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="29,5,156,95"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="93,107,95,175,90,175,93,112"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="204,343,408,432"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="278,434,250,484,245,482,280,430"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1log__filter__interface.html" title="Interface for log filters." alt="" coords="221,144,391,278"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="306,275,309,327,303,326,306,280"/>
+</map>

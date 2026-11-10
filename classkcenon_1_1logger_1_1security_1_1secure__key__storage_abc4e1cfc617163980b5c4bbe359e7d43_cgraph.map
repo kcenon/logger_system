@@ -1,0 +1,9 @@
+<map id="kcenon::logger::security::secure_key_storage::validate_key_path" name="kcenon::logger::security::secure_key_storage::validate_key_path">
+<area shape="rect" id="Node000001" title="Validate key file path (prevent path traversal)" alt="" coords="5,28,225,89"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="273,5,434,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="225,42,260,39,254,41,226,47"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="275,74,432,102"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="225,69,262,76,257,76,225,75"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="482,5,648,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="434,25,469,27,464,28,435,30"/>
+</map>

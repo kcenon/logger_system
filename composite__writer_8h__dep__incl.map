@@ -1,0 +1,5 @@
+<map id="include/kcenon/logger/writers/composite_writer.h" name="include/kcenon/logger/writers/composite_writer.h">
+<area shape="rect" id="Node000001" title="Composite writer combining formatter and sink (Pipeline Pattern) kcenon." alt="" coords="5,5,204,50"/>
+<area shape="rect" id="Node000002" href="$composite__writer__example_8cpp.html" title="Example demonstrating the new composite writer architecture." alt="" coords="26,98,183,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,64,107,99,102,97,103,68"/>
+</map>

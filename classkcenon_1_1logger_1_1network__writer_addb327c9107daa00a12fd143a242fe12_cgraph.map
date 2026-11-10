@@ -1,0 +1,21 @@
+<map id="kcenon::logger::network_writer::process_buffer" name="kcenon::logger::network_writer::process_buffer">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,156,184,201"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1network__writer.html#a7a2d7c4186ea898e86d8a2be49ddc8a8" title=" " alt="" coords="232,121,435,166"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,163,218,160,214,162,185,168"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1network__writer.html#a931eeb5b8303fd9b553b59df5941dae4" title=" " alt="" coords="244,191,422,235"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="184,189,232,197,226,198,184,194"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1network__writer.html#add782c82f05268659ec361cbef347616" title=" " alt="" coords="483,5,661,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="372,119,482,60,493,58,498,55,484,65,374,123"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1utils_1_1string__utils.html#a386bd338874eb5237f945415b8e29395" title="Convert log level to human&#45;readable string." alt="" coords="496,74,649,136"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="435,125,483,119,477,121,436,130"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="492,160,653,205"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="435,158,479,167,473,167,436,163"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="715,160,877,205"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="653,180,702,182,697,183,654,185"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1network__writer.html#a4aabfa181358abb6312ed877d9a0214f" title=" " alt="" coords="483,229,661,274"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="423,225,471,235,465,235,423,230"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1log__writer__interface.html#af185b6c6b01e9d7d7f3041103f7f3b5c" title="Close the writer and release resources." alt="" coords="709,229,883,274"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="662,249,696,252,691,252,662,254"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1log__writer__interface.html#a8b38854d249b4da0d7a5bf6d45dccf47" title="Flush any buffered data." alt="" coords="931,229,1101,274"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="883,249,917,252,912,252,883,254"/>
+</map>

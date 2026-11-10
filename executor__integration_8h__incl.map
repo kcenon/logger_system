@@ -1,0 +1,11 @@
+<map id="include/kcenon/logger/integration/executor_integration.h" name="include/kcenon/logger/integration/executor_integration.h">
+<area shape="rect" id="Node000001" title="IExecutor&#45;based async integration for logger_system." alt="" coords="84,5,248,67"/>
+<area shape="rect" id="Node000002" href="$thread__integration__detector_8h.html" title="Conditionally enables thread_system integration when available." alt="" coords="5,208,151,269"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,70,81,90,62,116,56,134,54,154,62,193,56,193,49,154,50,133,57,114,77,87,106,65"/>
+<area shape="rect" id="Node000003" href="$standalone__executor_8h.html" title="Standalone IExecutor implementation using std::jthread." alt="" coords="72,115,260,160"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="167,65,169,100,163,99,165,70"/>
+<area shape="rect" id="Node000004" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="196,216,354,261"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="227,65,255,87,275,114,283,135,287,158,285,202,280,200,281,158,278,137,270,116,251,90,227,70"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="149,158,117,198,113,194,145,162"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="191,158,243,206,238,206,189,163"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="include/kcenon/logger/otlp/otel_context.h" name="include/kcenon/logger/otlp/otel_context.h">
+<area shape="rect" id="Node000001" title="OpenTelemetry context structure for trace correlation kcenon." alt="" coords="43,5,207,50"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,98,64,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,49,62,89,59,85,99,52"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="88,98,162,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="127,48,128,83,123,81,123,52"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="186,98,310,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="158,48,218,89,213,89,157,53"/>
+</map>

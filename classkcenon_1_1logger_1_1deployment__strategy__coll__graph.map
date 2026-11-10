@@ -1,0 +1,5 @@
+<map id="kcenon::logger::deployment_strategy" name="kcenon::logger::deployment_strategy">
+<area shape="rect" id="Node000001" title="Configuration strategy based on deployment environment." alt="" coords="16,232,208,500"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1config__strategy__interface.html" title="Abstract interface for logger configuration strategies." alt="" coords="5,5,218,184"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,196,114,233,109,232,111,202"/>
+</map>

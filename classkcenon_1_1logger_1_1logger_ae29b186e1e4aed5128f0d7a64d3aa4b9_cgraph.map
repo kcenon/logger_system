@@ -1,0 +1,11 @@
+<map id="kcenon::logger::logger::enable_metrics_collection" name="kcenon::logger::logger::enable_metrics_collection">
+<area shape="rect" id="Node000001" title="Enable or disable metrics collection." alt="" coords="5,65,205,110"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="272,5,433,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,62,259,50,254,52,201,67"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="274,74,431,102"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="205,85,261,87,256,88,206,90"/>
+<area shape="rect" id="Node000005" href="$structkcenon_1_1logger_1_1metrics_1_1logger__performance__stats.html#adbd6aa2e0bd01c63e85e67924afef88a" title="Reset all statistics." alt="" coords="253,126,452,188"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="188,108,240,124,235,125,187,113"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="500,5,666,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="433,25,487,27,481,28,434,30"/>
+</map>

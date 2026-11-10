@@ -1,0 +1,9 @@
+<map id="kcenon::logger::security::hmac_sha256_integrity_policy::verify" name="kcenon::logger::security::hmac_sha256_integrity_policy::verify">
+<area shape="rect" id="Node000001" title="Verify that signature matches record." alt="" coords="5,32,187,93"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1hmac__sha256__integrity__policy.html#a3a06dc6685878f7e72cfaf47f79145be" title=" " alt="" coords="235,32,416,93"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,60,222,62,217,63,187,65"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html#ab894f72f2652a171d0f99a5b2272b165" title="Get const reference to key data." alt="" coords="464,5,641,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="416,46,451,43,446,44,417,51"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html#a45294649fb2480ba89fc7308f42d326f" title="Get key size in bytes." alt="" coords="464,75,641,119"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="416,73,451,81,446,81,416,79"/>
+</map>

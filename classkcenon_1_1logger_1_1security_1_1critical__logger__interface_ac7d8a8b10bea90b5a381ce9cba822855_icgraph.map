@@ -1,0 +1,5 @@
+<map id="kcenon::logger::security::critical_logger_interface::get_emergency_buffer_size" name="kcenon::logger::security::critical_logger_interface::get_emergency_buffer_size">
+<area shape="rect" id="Node000001" title="Get emergency buffer size." alt="" coords="306,5,514,67"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1signal__manager.html#a73d1518f75c3a354ce28032a6629abc7" title="Emergency flush for a logger (signal&#45;safe)" alt="" coords="5,14,258,58"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="287,36,258,39,258,34,293,36"/>
+</map>

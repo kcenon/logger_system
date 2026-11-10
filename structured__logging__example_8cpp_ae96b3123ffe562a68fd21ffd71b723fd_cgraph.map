@@ -1,0 +1,20 @@
+<map id="logfmt_formatter_example" name="logfmt_formatter_example">
+<area shape="rect" id="Node000001" title="Demonstrates Logfmt formatter for key=value output." alt="" coords="5,180,203,208"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logfmt__formatter.html#a0bdcc137401f427f6dcb57adcfbd7550" title="Format a log entry to logfmt string." alt="" coords="251,172,419,217"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,192,237,193,233,195,204,197"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1logfmt__formatter.html#a80c8a9974421374516f2f05b01a71d41" title="Escape a logfmt key (remove spaces and special characters)" alt="" coords="467,5,691,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="353,170,401,119,432,91,466,67,492,55,488,58,468,71,435,95,405,123,357,174"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1logfmt__formatter.html#a3f5e7fef3e242c20d1af495a0202bb7c" title="Escape a logfmt value." alt="" coords="739,139,977,183"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="361,169,408,137,436,122,466,110,507,102,549,97,633,100,712,113,782,133,776,134,711,119,632,106,549,103,508,107,468,116,438,127,411,141,364,174"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1utils_1_1time__utils.html#a103aadbafb3664100d33e2664874f267" title="Format timestamp to ISO 8601 / RFC 3339 format with UTC timezone." alt="" coords="502,125,656,186"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="419,178,490,169,485,171,420,184"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1logfmt__formatter.html#a3cfb53af89a1a13c90997a0131b4474d" title="Format a log_value to logfmt." alt="" coords="486,211,672,255"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="419,205,474,215,468,216,420,210"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1logfmt__formatter.html#aedec564daf6f4f18b89c83f4fda83d1d" title="Convert log level to lowercase string." alt="" coords="468,280,691,325"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="373,215,418,241,468,265,486,274,481,274,466,270,416,245,372,220"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="498,349,660,394"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="352,215,400,275,432,307,468,335,487,347,481,346,466,339,429,311,396,279,350,220"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="668,207,757,187,752,188,669,213"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="777,349,939,394"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="660,369,765,372,759,372,660,374"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="kcenon::logger::otlp::otel_context_scope::otel_context_scope" name="kcenon::logger::otlp::otel_context_scope::otel_context_scope">
+<area shape="rect" id="Node000001" title="Construct and set context." alt="" coords="5,48,161,110"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1otlp_1_1otel__context__storage.html#ae65854ce17c0c54e3d5809b9be59df25" title="Set the OpenTelemetry context for the current thread." alt="" coords="209,56,403,101"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,76,195,78,190,80,161,81"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1otlp_1_1otel__context__storage.html#a8c95449921e1da0e2dc3f1aa4d51c63b" title=" " alt="" coords="451,5,617,67"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="403,58,438,54,433,55,404,63"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1otlp_1_1otel__context__storage.html#aa64abe16cbc8bb75d5abc40c609d37a2" title=" " alt="" coords="451,91,617,152"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="404,94,438,103,433,103,403,100"/>
+</map>

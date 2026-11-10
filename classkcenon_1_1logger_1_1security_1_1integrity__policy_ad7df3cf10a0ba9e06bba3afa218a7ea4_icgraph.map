@@ -1,0 +1,13 @@
+<map id="kcenon::logger::security::integrity_policy::sign" name="kcenon::logger::security::integrity_policy::sign">
+<area shape="rect" id="Node000001" title="Produce a signature for record." alt="" coords="564,75,742,119"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger_1_1security.html#ac9578ff96b93ef4157f1ccaf649d73c0" title="Format a signature line suitable for appending to a text log record." alt="" coords="332,75,516,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="546,97,517,100,517,94,552,97"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1console__writer.html#ac00806b7b0ba8195369fb38ace2d805c" title="Write a log entry to console." alt="" coords="108,5,284,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="331,70,272,53,272,48,336,69"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1file__writer.html#a3d2fd71af8ebe7299849f8cdba763815" title="Write a log entry to file." alt="" coords="123,75,268,119"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="314,98,269,100,269,94,319,96"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a8363ee61d1496ee59e3117c22417fdf9" title="Write operation with automatic rotation check." alt="" coords="108,144,284,189"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="336,124,273,146,271,141,331,125"/>
+<area shape="rect" id="Node000004" href="$composite__writer__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,14,60,42"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="90,29,61,30,59,25,94,26"/>
+</map>

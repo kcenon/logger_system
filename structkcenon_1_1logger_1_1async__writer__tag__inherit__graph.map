@@ -1,0 +1,17 @@
+<map id="kcenon::logger::async_writer_tag" name="kcenon::logger::async_writer_tag">
+<area shape="rect" id="Node000001" title="Tag interface for asynchronous writers." alt="" coords="418,5,571,95"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1queued__writer__base.html" title=" " alt="" coords="5,246,184,665"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="402,59,352,69,297,85,244,110,198,145,161,192,134,247,129,245,156,189,194,141,241,105,295,80,351,64,406,55"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1queued__writer__base.html" title=" " alt="" coords="208,246,387,665"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="428,108,401,144,374,194,352,247,347,245,369,192,397,141,430,103"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1network__writer.html" title="Sends logs over network (TCP/UDP)" alt="" coords="411,143,579,768"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="495,107,497,143,492,142,494,112"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1otlp__writer.html" title="OTLP log exporter for OpenTelemetry integration." alt="" coords="603,154,766,757"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="561,102,593,141,605,163,600,163,589,144,561,108"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1queued__writer__base.html" title="Abstract base class for queue&#45;based log writers." alt="" coords="790,254,976,656"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="585,57,635,67,687,84,736,108,779,141,801,166,820,193,849,255,843,254,815,196,797,169,776,145,733,112,685,89,634,72,587,62"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async__writer.html" title="Asynchronous wrapper for log writers." alt="" coords="12,816,177,1240"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,677,97,817,92,816,94,682"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1batch__writer.html" title="Batch writer that accumulates log entries and writes them in batches." alt="" coords="204,838,391,1218"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="299,677,300,839,295,838,296,682"/>
+</map>

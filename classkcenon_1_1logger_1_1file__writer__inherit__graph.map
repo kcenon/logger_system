@@ -1,0 +1,9 @@
+<map id="kcenon::logger::file_writer" name="kcenon::logger::file_writer">
+<area shape="rect" id="Node000001" title="Core file writer for logging to files." alt="" coords="104,277,269,924"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1rotating__file__writer.html" title="File writer with automatic log rotation support." alt="" coords="80,972,293,1508"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="187,937,189,973,184,972,186,942"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,5,183,229"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,241,127,277,122,277,118,246"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1sync__writer__tag.html" title="Tag interface for synchronous writers." alt="" coords="207,72,352,162"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="269,174,252,277,246,276,268,179"/>
+</map>

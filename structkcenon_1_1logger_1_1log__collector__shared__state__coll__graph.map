@@ -1,0 +1,19 @@
+<map id="kcenon::logger::log_collector_shared_state" name="kcenon::logger::log_collector_shared_state">
+<area shape="rect" id="Node000001" title="Shared state for log processing &#45; survives impl destruction." alt="" coords="138,1277,303,1472"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="12,1097,156,1186"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,1184,157,1262,152,1263,109,1189"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1log__entry.html" title="Represents a single log entry with all associated metadata." alt="" coords="17,688,152,1023"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="85,1020,87,1080,82,1080,84,1026"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html" title=" " alt="" coords="5,244,163,623"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="84,621,87,671,82,671,84,626"/>
+<area shape="rect" id="Node000005" href="$unionkcenon_1_1logger_1_1small__string_1_1data__union.html" title=" " alt="" coords="7,5,162,179"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="84,176,87,227,82,227,84,181"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="180,1105,261,1178"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="222,1175,223,1261,218,1259,219,1180"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="284,1088,455,1195"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="358,1192,348,1225,333,1254,315,1281,311,1277,329,1251,343,1223,355,1197"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="289,803,450,909"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="371,906,372,1072,367,1071,368,911"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="281,322,459,545"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="371,543,372,786,367,785,369,548"/>
+</map>

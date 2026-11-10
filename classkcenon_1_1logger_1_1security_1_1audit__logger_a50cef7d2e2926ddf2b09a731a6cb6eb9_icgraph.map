@@ -1,0 +1,5 @@
+<map id="kcenon::logger::security::audit_logger::calculate_hmac" name="kcenon::logger::security::audit_logger::calculate_hmac">
+<area shape="rect" id="Node000001" title="Calculate HMAC signature." alt="" coords="250,5,470,50"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#af6d42db093bd32dbd0ffb06ffca23f7d" title="Verify integrity of an audit log entry." alt="" coords="5,5,202,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="231,28,202,30,202,25,237,27"/>
+</map>

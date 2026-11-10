@@ -1,0 +1,27 @@
+<map id="include/kcenon/logger/utils/error_handling_utils.h" name="include/kcenon/logger/utils/error_handling_utils.h">
+<area shape="rect" id="Node000001" title="Structured error context for debugging log system failures." alt="" coords="604,5,769,67"/>
+<area shape="rect" id="Node000002" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="154,115,299,160"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="602,55,315,117,314,112,606,52"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="323,115,495,160"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="607,66,485,112,484,107,601,68"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="519,124,608,151"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="651,67,593,116,591,111,647,69"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="633,124,740,151"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="688,66,689,109,684,106,685,70"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="764,124,830,151"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="721,65,774,114,769,113,719,70"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="853,124,928,151"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="749,65,853,117,847,116,748,70"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="952,124,1032,151"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="770,58,941,112,950,118,944,117,939,118,769,63"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,208,64,235"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="176,163,79,204,77,199,175,158"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="88,208,173,235"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="204,159,159,199,156,195,199,161"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="197,208,256,235"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="228,158,229,193,224,191,225,162"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="280,208,354,235"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="251,158,294,197,289,197,249,163"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="379,208,458,235"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="278,158,377,201,371,202,277,163"/>
+</map>

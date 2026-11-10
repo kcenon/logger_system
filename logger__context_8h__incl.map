@@ -1,0 +1,25 @@
+<map id="include/kcenon/logger/core/logger_context.h" name="include/kcenon/logger/core/logger_context.h">
+<area shape="rect" id="Node000001" title="Facade for logger system components following SRP." alt="" coords="313,5,479,50"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="412,199,489,227"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="401,48,424,142,440,186,435,184,419,143,398,52"/>
+<area shape="rect" id="Node000003" href="$logger__registry_8h.html" title="Manages logger registration and tracking." alt="" coords="126,98,271,143"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="346,52,261,94,258,89,351,49"/>
+<area shape="rect" id="Node000006" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="230,191,388,235"/>
+<area shape="poly" id="edge12_Node000001_Node000006" title=" " alt="" coords="388,49,328,178,324,175,383,52"/>
+<area shape="rect" id="Node000007" href="$signal__manager__context_8h.html" title="Manages signal manager lifecycle and access." alt="" coords="433,98,630,143"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="429,48,489,89,484,89,428,53"/>
+<area shape="rect" id="Node000009" href="$signal__manager__interface_8h.html" title="Interface for signal handler management." alt="" coords="599,191,806,235"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="479,33,521,41,564,53,606,71,644,96,661,113,675,134,695,177,690,175,671,136,657,117,641,100,604,76,562,58,520,46,480,38"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="143,199,206,227"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="194,141,184,185,180,183,191,145"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,199,120,227"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="164,145,96,193,93,188,167,141"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="225,140,274,180,268,181,224,146"/>
+<area shape="poly" id="edge7_Node000007_Node000002" title=" " alt="" coords="515,142,474,190,471,185,510,144"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="481,142,377,187,376,182,476,144"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="512,199,576,227"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="536,141,542,185,538,182,533,145"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="573,141,651,183,646,183,572,146"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="668,283,737,311"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="704,234,705,269,700,266,701,238"/>
+</map>

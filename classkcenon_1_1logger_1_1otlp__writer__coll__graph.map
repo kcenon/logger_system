@@ -1,0 +1,44 @@
+<map id="kcenon::logger::otlp_writer" name="kcenon::logger::otlp_writer">
+<area shape="rect" id="Node000001" title="OTLP log exporter for OpenTelemetry integration." alt="" coords="834,1573,997,2020"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1base__writer.html" title="Abstract base class for all log output writers." alt="" coords="217,1201,366,1491"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="376,1464,403,1489,456,1533,512,1575,630,1650,742,1711,837,1759,832,1760,739,1716,627,1654,509,1579,453,1538,399,1493,376,1469"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,789,183,1012"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="150,1023,230,1201,225,1202,150,1029"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="207,847,376,954"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="292,951,294,1184,289,1184,291,956"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1log__formatter__interface.html" title="Abstract interface for log message formatters." alt="" coords="191,372,393,550"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="292,548,294,831,289,830,291,553"/>
+<area shape="rect" id="Node000006" href="$structkcenon_1_1logger_1_1format__options.html" title="Configuration options for log formatting." alt="" coords="200,5,383,206"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="292,203,294,355,289,355,291,209"/>
+<area shape="rect" id="Node000007" href="$structkcenon_1_1logger_1_1async__writer__tag.html" title="Tag interface for asynchronous writers." alt="" coords="413,1302,565,1391"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="519,1401,548,1446,580,1490,643,1558,710,1623,837,1733,832,1733,707,1627,639,1562,576,1493,544,1449,519,1406"/>
+<area shape="rect" id="Node000008" href="$structkcenon_1_1logger_1_1otlp__writer_1_1config.html" title="Configuration for OTLP writer." alt="" coords="590,1223,730,1469"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="730,1466,829,1638,823,1638,728,1471"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="482,425,558,497"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="502,500,464,599,442,667,423,743,411,824,407,907,416,989,425,1028,439,1067,453,1092,468,1111,501,1137,539,1161,559,1177,579,1199,586,1209,581,1210,575,1203,555,1181,536,1165,498,1141,464,1114,448,1095,435,1069,420,1030,410,990,402,907,405,823,418,742,437,665,459,597,504,494"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="589,847,730,954"/>
+<area shape="poly" id="edge11_Node000011_Node000009" title=" " alt="" coords="531,495,641,831,635,831,530,500"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="456,61,584,150"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="520,163,522,426,517,425,519,168"/>
+<area shape="poly" id="edge10_Node000008_Node000011" title=" " alt="" coords="661,951,662,1207,657,1206,659,956"/>
+<area shape="rect" id="Node000012" href="$structkcenon_1_1logger_1_1otlp__writer_1_1internal__stats.html" title="Internal atomic statistics (non&#45;copyable)" alt="" coords="754,1290,907,1402"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="842,1400,873,1558,868,1556,839,1404"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="754,864,920,937"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="838,934,834,1274,829,1273,835,939"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="930,1302,1074,1391"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="996,1388,964,1558,960,1555,992,1392"/>
+<area shape="rect" id="Node000015" href="$structkcenon_1_1logger_1_1log__entry.html" title="Represents a single log entry with all associated metadata." alt="" coords="944,733,1079,1068"/>
+<area shape="poly" id="edge15_Node000014_Node000015" title=" " alt="" coords="1010,1065,1006,1285,1001,1283,1007,1070"/>
+<area shape="rect" id="Node000016" href="$classkcenon_1_1logger_1_1small__string.html" title=" " alt="" coords="933,271,1091,651"/>
+<area shape="poly" id="edge16_Node000015_Node000016" title=" " alt="" coords="1013,648,1014,717,1009,715,1011,653"/>
+<area shape="rect" id="Node000017" href="$unionkcenon_1_1logger_1_1small__string_1_1data__union.html" title=" " alt="" coords="934,19,1089,192"/>
+<area shape="poly" id="edge17_Node000016_Node000017" title=" " alt="" coords="1012,190,1014,255,1009,254,1011,195"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="1098,1310,1179,1382"/>
+<area shape="poly" id="edge18_Node000001_Node000018" title=" " alt="" coords="1129,1380,1112,1435,1089,1492,1050,1571,1007,1649,1004,1645,1045,1569,1084,1490,1107,1433,1126,1384"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="1203,1302,1346,1391"/>
+<area shape="poly" id="edge19_Node000001_Node000019" title=" " alt="" coords="1263,1389,1233,1469,1212,1511,1187,1551,1147,1601,1102,1648,1012,1728,1009,1723,1099,1644,1143,1597,1183,1548,1208,1508,1229,1466,1259,1393"/>
+<area shape="rect" id="Node000020" title=" " alt="" coords="1234,864,1315,937"/>
+<area shape="poly" id="edge20_Node000019_Node000020" title=" " alt="" coords="1276,934,1277,1286,1272,1284,1273,939"/>
+<area shape="rect" id="Node000021" title=" " alt="" coords="1370,1310,1512,1382"/>
+<area shape="poly" id="edge21_Node000001_Node000021" title=" " alt="" coords="1429,1380,1386,1465,1355,1511,1319,1551,1244,1613,1164,1668,1085,1715,1013,1753,1011,1748,1082,1710,1161,1663,1241,1609,1315,1547,1351,1507,1382,1462,1425,1384"/>
+</map>

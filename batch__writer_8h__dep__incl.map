@@ -1,0 +1,19 @@
+<map id="include/kcenon/logger/writers/batch_writer.h" name="include/kcenon/logger/writers/batch_writer.h">
+<area shape="rect" id="Node000001" title="Batch writer that accumulates log entries and writes them in batches." alt="" coords="672,5,838,50"/>
+<area shape="rect" id="Node000002" href="$logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration kcenon." alt="" coords="472,98,637,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="695,56,603,100,602,95,690,58"/>
+<area shape="rect" id="Node000008" href="$writer__factory_8h.html" title="Factory for creating log writer instances." alt="" coords="661,98,848,143"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="756,64,757,99,753,96,753,68"/>
+<area shape="rect" id="Node000009" href="$batch__writer_8cpp.html" title=" " alt="" coords="872,98,1034,143"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="816,54,908,98,903,97,816,59"/>
+<area shape="rect" id="Node000003" href="$backend__integration__example_8cpp.html" title=" " alt="" coords="5,191,227,235"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="458,144,222,193,221,187,457,139"/>
+<area shape="rect" id="Node000004" href="$critical__logging__example_8cpp.html" title="Example demonstrating critical log loss prevention mechanisms." alt="" coords="251,191,440,235"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="493,149,396,193,395,188,488,150"/>
+<area shape="rect" id="Node000005" href="$custom__writer__example_8cpp.html" title="Example demonstrating how to create custom writers using thread_safe_writer." alt="" coords="464,191,646,235"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="557,156,557,192,553,189,553,160"/>
+<area shape="rect" id="Node000006" href="$di__pattern__example_8cpp.html" title="Dependency Injection pattern example for logger_system Phase 4." alt="" coords="670,191,826,235"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="615,147,704,190,699,190,614,152"/>
+<area shape="rect" id="Node000007" href="$monitoring__integration__example_8cpp.html" title="Advanced monitoring integration example for Phase 4." alt="" coords="850,191,1040,235"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="652,141,854,190,849,190,651,147"/>
+</map>

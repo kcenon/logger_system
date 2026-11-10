@@ -1,0 +1,9 @@
+<map id="kcenon::logger::core::signal_manager_context" name="kcenon::logger::core::signal_manager_context">
+<area shape="rect" id="Node000001" title="Manages signal manager instance with thread&#45;safe access." alt="" coords="90,420,287,599"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="29,249,199,355"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,352,118,396,121,405,115,405,113,397,109,357"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1signal__manager__interface.html" title="Interface for signal handler management." alt="" coords="5,5,222,184"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="114,181,116,232,111,232,113,186"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="224,266,305,338"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="256,336,238,397,234,406,230,403,233,395,253,340"/>
+</map>

@@ -1,0 +1,14 @@
+<map id="kcenon::logger::decorator_writer_base" name="kcenon::logger::decorator_writer_base">
+<area shape="rect" id="Node000001" title="Abstract base class for decorator pattern log writers." alt="" coords="258,448,451,828"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,5,183,229"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="59,246,58,278,58,314,63,349,74,382,110,442,156,495,208,541,261,580,256,582,205,545,152,499,105,445,69,384,58,350,53,314,53,278,59,241"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="84,294,297,383"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="143,226,167,278,162,279,143,231"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1decorator__writer__tag.html" title="Tag interface for decorator writers." alt="" coords="321,294,497,383"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="400,396,391,449,387,447,397,400"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="214,380,252,447,247,448,214,385"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="522,302,598,374"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="538,372,462,485,458,481,534,376"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="496,72,624,162"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="561,174,562,303,557,302,558,179"/>
+</map>

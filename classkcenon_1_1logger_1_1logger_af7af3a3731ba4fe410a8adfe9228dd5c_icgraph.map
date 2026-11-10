@@ -1,0 +1,19 @@
+<map id="kcenon::logger::logger::flush" name="kcenon::logger::logger::flush">
+<area shape="rect" id="Node000001" title="Flush any buffered log messages (ILogger interface)" alt="" coords="466,144,632,189"/>
+<area shape="rect" id="Node000002" href="$decorator__usage_8cpp.html#afe94899b5674125d5b41f079cbbf3a52" title="Example 5: Real&#45;World Production Scenarios." alt="" coords="242,5,396,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="511,133,468,99,417,65,394,53,393,48,419,60,471,95,516,133"/>
+<area shape="rect" id="Node000004" href="$writer__builder__example_8cpp.html#af3661cb486a5baec84764a058cb2f01e" title="Example 5: Production Setup with Multiple Writers." alt="" coords="242,75,396,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="456,140,396,123,396,117,461,139"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1adapters_1_1logger__adapter.html#af5f4a2bf37a30857d0e8de707a14c95a" title="Flush all pending log messages." alt="" coords="228,144,410,189"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="448,167,411,169,410,164,453,166"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1adapters_1_1logger__adapter.html#a29ec56c3e6fe45aa8ff85d2d7b28dc8f" title="Shutdown the adapter." alt="" coords="220,213,418,258"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="461,193,396,215,395,210,456,194"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1logger.html#acf0ce0b84cf4398141260dad882a4c54" title="Stop the logger." alt="" coords="236,283,402,327"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="516,198,471,238,419,273,394,285,393,280,417,268,468,234,511,200"/>
+<area shape="rect" id="Node000003" href="$decorator__usage_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="61,14,116,42"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="224,30,117,30,115,25,228,26"/>
+<area shape="rect" id="Node000005" href="$writer__builder__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="61,83,116,111"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="224,99,117,100,116,94,228,95"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1logger.html#ad2bdf6e4f3f4d6f95a22ac2158b01795" title="Destructor &#45; ensures all logs are flushed." alt="" coords="5,283,172,327"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="218,305,172,308,172,302,223,305"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="kcenon::logger::utils::log_error_context" name="kcenon::logger::utils::log_error_context">
+<area shape="rect" id="Node000001" title="Log error to stderr with context." alt="" coords="5,5,159,50"/>
+<area shape="rect" id="Node000002" href="$structkcenon_1_1logger_1_1utils_1_1error__context.html#adf0e9566f6bf9ce92f6e686b24aa02cc" title="Convert error context to a formatted string." alt="" coords="207,5,388,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,25,194,27,188,28,159,30"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="436,5,602,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="388,25,423,28,418,28,389,30"/>
+</map>

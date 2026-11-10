@@ -1,0 +1,11 @@
+<map id="kcenon::logger::template_formatter::calculate_display_width" name="kcenon::logger::template_formatter::calculate_display_width">
+<area shape="rect" id="Node000001" title="Calculate display width excluding ANSI escape codes." alt="" coords="815,5,1069,50"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1template__formatter.html#a6484153f3815a4ce22e4754ab25a5e23" title="Resolve a placeholder to its actual value." alt="" coords="537,5,767,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="796,28,767,30,767,25,802,28"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1template__formatter.html#a0b738b7e7413cfad5778dea556748157" title="Format a log entry using the template." alt="" coords="305,5,489,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="519,28,490,30,490,25,524,28"/>
+<area shape="rect" id="Node000004" href="$structured__logging__example_8cpp.html#adec95563fbcce6741a032ea597b63e87" title="Demonstrates template&#45;based custom formatter." alt="" coords="108,5,257,50"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="287,28,258,30,257,25,292,28"/>
+<area shape="rect" id="Node000005" href="$structured__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,14,60,42"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="90,29,60,30,60,25,95,27"/>
+</map>

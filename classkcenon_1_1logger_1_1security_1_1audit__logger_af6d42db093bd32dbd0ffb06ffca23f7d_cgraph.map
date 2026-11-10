@@ -1,0 +1,11 @@
+<map id="kcenon::logger::security::audit_logger::verify_entry" name="kcenon::logger::security::audit_logger::verify_entry">
+<area shape="rect" id="Node000001" title="Verify integrity of an audit log entry." alt="" coords="5,75,202,119"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#a50cef7d2e2926ddf2b09a731a6cb6eb9" title="Calculate HMAC signature." alt="" coords="250,40,470,85"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,81,237,79,231,80,203,86"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1security_1_1audit__logger.html#abea5e7caaad906da63f9182641007bba" title=" " alt="" coords="254,109,466,154"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="202,108,241,115,236,115,202,113"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html#ab894f72f2652a171d0f99a5b2272b165" title="Get const reference to key data." alt="" coords="518,5,695,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="470,44,505,42,500,43,471,49"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html#a45294649fb2480ba89fc7308f42d326f" title="Get key size in bytes." alt="" coords="518,75,695,119"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="470,75,505,82,500,82,470,81"/>
+</map>

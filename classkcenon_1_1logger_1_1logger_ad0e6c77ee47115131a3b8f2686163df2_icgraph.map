@@ -1,0 +1,40 @@
+<map id="kcenon::logger::logger::log" name="kcenon::logger::logger::log">
+<area shape="rect" id="Node000001" title="Log a message with specified level (ILogger interface)" alt="" coords="352,384,546,412"/>
+<area shape="rect" id="Node000002" href="$critical__logging__example_8cpp.html#a4a3911b646a2f740eda1219fabe8e9cd" title=" " alt="" coords="121,5,291,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="441,368,427,307,401,225,383,181,361,139,334,99,302,64,289,53,287,48,306,60,338,96,365,136,388,179,406,223,432,305,446,369"/>
+<area shape="rect" id="Node000004" href="$critical__logging__example_8cpp.html#aeef0b8ef6455a15653c9c8d7b4769e8b" title=" " alt="" coords="116,74,296,102"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="439,369,423,315,396,247,356,176,331,144,302,116,284,105,283,99,306,112,335,141,361,173,401,244,428,314,444,369"/>
+<area shape="rect" id="Node000005" href="$critical__logging__example_8cpp.html#ab9867bd82859f8e050dfeef33a609bec" title=" " alt="" coords="120,126,292,154"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="436,370,418,326,389,271,351,214,328,189,302,167,286,157,284,152,306,163,332,185,355,211,394,268,422,324,441,370"/>
+<area shape="rect" id="Node000006" href="$decorator__usage_8cpp.html#afe94899b5674125d5b41f079cbbf3a52" title="Example 5: Real&#45;World Production Scenarios." alt="" coords="129,247,283,291"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="414,375,364,341,303,306,278,294,277,289,305,301,367,337,420,374"/>
+<area shape="rect" id="Node000008" href="$writer__builder__example_8cpp.html#af3661cb486a5baec84764a058cb2f01e" title="Example 5: Production Setup with Multiple Writers." alt="" coords="129,316,283,361"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="373,382,284,360,283,355,378,379"/>
+<area shape="rect" id="Node000010" href="$critical__logging__example_8cpp.html#a3a6ffeda085cf67083e3674b885009ac" title=" " alt="" coords="123,177,288,222"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="428,371,377,305,342,268,303,237,284,225,282,220,305,232,345,264,381,301,433,371"/>
+<area shape="rect" id="Node000011" href="$metrics__demo_8cpp.html#a601ed57bdda4ff982e86702111c91887" title=" " alt="" coords="149,384,262,412"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="334,400,264,401,262,396,339,397"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1adapters_1_1logger__adapter.html#a392c1c68dd974b1f9e12d2ad08ae8786" title="Log a message with specified level." alt="" coords="115,436,297,481"/>
+<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="373,418,299,438,296,434,377,415"/>
+<area shape="rect" id="Node000014" href="$classkcenon_1_1logger_1_1adapters_1_1logger__adapter.html#a9e9b537588290bddfd05886cd6184a0e" title="Log a message with the specified level." alt="" coords="115,505,297,550"/>
+<area shape="poly" id="edge16_Node000001_Node000014" title=" " alt="" coords="415,424,367,460,305,495,279,507,276,503,303,491,364,455,419,420"/>
+<area shape="rect" id="Node000015" href="$classkcenon_1_1logger_1_1core_1_1filtered__logger.html#ac7765e11c45178049dac3dd96a3387ea" title=" " alt="" coords="129,575,282,619"/>
+<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="432,424,381,495,345,532,305,565,285,576,281,572,303,560,342,528,377,492,429,428"/>
+<area shape="rect" id="Node000016" href="$classkcenon_1_1logger_1_1core_1_1filtered__logger.html#a32881b36b69dcb61f555dc73abc2103c" title=" " alt="" coords="129,644,282,689"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="439,424,421,472,392,528,354,584,306,634,284,647,281,643,302,630,350,581,388,525,416,470,436,429"/>
+<area shape="rect" id="Node000017" href="$classkcenon_1_1logger_1_1adapters_1_1logger__adapter.html#a54bb2dbd9a5590e09785c2fb77b484db" title="Log a structured entry." alt="" coords="108,713,304,758"/>
+<area shape="poly" id="edge19_Node000001_Node000017" title=" " alt="" coords="443,425,429,485,402,559,362,636,336,671,306,703,289,715,286,710,302,699,332,668,357,633,397,557,424,484,440,430"/>
+<area shape="rect" id="Node000018" href="$classkcenon_1_1logger_1_1adapters_1_1logger__adapter.html#aa9c8e1cb0ae3d602332fa2137479738d" title="Log a message with source location information." alt="" coords="111,782,301,844"/>
+<area shape="poly" id="edge20_Node000001_Node000018" title=" " alt="" coords="446,425,434,496,409,588,391,637,368,685,340,731,306,772,292,784,290,779,302,768,335,728,363,683,386,635,404,586,429,495,443,430"/>
+<area shape="rect" id="Node000003" href="$critical__logging__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,100,60,128"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="118,59,109,65,53,102,49,99,106,60,122,54"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="99,106,62,112,58,108,102,102"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="103,127,62,120,59,116,107,123"/>
+<area shape="rect" id="Node000007" href="$decorator__usage_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,255,60,283"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="111,271,62,271,59,267,115,267"/>
+<area shape="rect" id="Node000009" href="$writer__builder__example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,324,60,352"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="111,340,62,340,59,336,115,336"/>
+<area shape="poly" id="edge12_Node000010_Node000003" title=" " alt="" coords="118,172,106,167,53,131,51,126,109,163,122,170"/>
+<area shape="rect" id="Node000012" href="$metrics__demo_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,384,60,412"/>
+<area shape="poly" id="edge14_Node000011_Node000012" title=" " alt="" coords="132,400,62,401,59,396,135,396"/>
+</map>

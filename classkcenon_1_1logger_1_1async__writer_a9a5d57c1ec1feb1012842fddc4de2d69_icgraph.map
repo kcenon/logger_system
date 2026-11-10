@@ -1,0 +1,5 @@
+<map id="kcenon::logger::async_writer::process_messages" name="kcenon::logger::async_writer::process_messages">
+<area shape="rect" id="Node000001" title="Process messages from the queue." alt="" coords="217,5,414,50"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async__writer.html#a97fcea6d3a24a2dcd2ffb7b34cc3cd14" title="Start the async writer thread." alt="" coords="5,5,169,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,28,169,30,169,25,204,27"/>
+</map>

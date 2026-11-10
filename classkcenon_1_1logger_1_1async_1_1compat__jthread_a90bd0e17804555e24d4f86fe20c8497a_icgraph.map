@@ -1,0 +1,43 @@
+<map id="kcenon::logger::async::compat_jthread::join" name="kcenon::logger::async::compat_jthread::join">
+<area shape="rect" id="Node000001" title="Wait for thread to complete." alt="" coords="838,458,1002,503"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a2905335e5a409c9e50e00cbafd2346cf" title=" " alt="" coords="572,64,777,108"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="914,442,904,375,883,289,867,243,846,199,820,159,789,123,775,112,775,106,792,119,824,155,851,197,872,241,888,287,909,374,919,444"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1async__worker.html#a8ea35baf0add7c1949046d3173452b04" title="Stop the worker thread gracefully." alt="" coords="592,133,756,178"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="894,445,847,376,788,294,695,181,696,175,792,291,851,373,899,446"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1async_1_1batch__processing__jthread__worker.html#a5875963765919b33621199f0f8402e37" title=" " alt="" coords="576,304,772,366"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="865,451,728,369,728,364,871,450"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1log__collector__jthread__worker.html#a2a79eec5120723c8a82acf7517bcaa2d" title=" " alt="" coords="562,458,786,503"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="820,481,787,483,786,478,825,480"/>
+<area shape="rect" id="Node000014" href="$classkcenon_1_1logger_1_1network__reconnect__jthread__worker.html#a0464dd7cbda46564f4efe864111c6c42" title=" " alt="" coords="558,629,790,674"/>
+<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="877,511,709,631,707,626,872,513"/>
+<area shape="rect" id="Node000017" href="$classkcenon_1_1logger_1_1network__send__jthread__worker.html#a78033b604dfdf43d00c15ed3e14dd04e" title=" " alt="" coords="574,745,774,790"/>
+<area shape="poly" id="edge18_Node000001_Node000017" title=" " alt="" coords="904,515,858,600,827,645,792,688,755,720,717,747,715,742,752,716,788,684,823,642,854,597,899,519"/>
+<area shape="rect" id="Node000020" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a410d7f52923cd0e12b1358ab8e381968" title="Destructor &#45; requests stop and joins." alt="" coords="574,814,774,875"/>
+<area shape="poly" id="edge21_Node000001_Node000020" title=" " alt="" coords="915,516,904,580,881,656,865,696,845,735,821,771,792,804,775,817,773,812,788,800,816,768,840,732,860,694,876,654,899,579,912,520"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1async__worker.html#a445719018926598a4cbde02865fa024d" title="Start the worker thread." alt="" coords="18,26,181,71"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="575,134,556,123,540,102,533,81,526,62,509,46,469,28,427,16,383,10,339,8,254,14,181,28,178,24,253,9,339,3,383,5,428,11,471,23,511,41,530,59,538,79,544,100,560,119,581,132"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1async_1_1async__worker.html#a38fe968fe718ae235d3690a3e3c5ae99" title="Worker thread main loop (fallback version)" alt="" coords="273,56,478,100"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="575,131,509,115,466,103,464,98,511,110,580,129"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1async_1_1async__worker.html#a4513018d29e3e494ff657ed027e50800" title="Destructor &#45; ensures graceful shutdown." alt="" coords="288,124,464,186"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="575,157,465,158,463,153,579,154"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="256,67,183,60,180,55,260,64"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1async_1_1batch__processing__jthread__worker.html#a4c620bed9a4cc4670f551fcfc41e2136" title=" " alt="" coords="278,210,474,271"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="559,301,474,274,473,269,564,299"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1async_1_1batch__processing__jthread__worker.html#a3fc7a9dda9689772a41617aa603e35e9" title=" " alt="" coords="274,296,478,375"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="558,337,479,338,477,333,563,334"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1log__collector__jthread__worker.html#a0a9a3e37a73621abc29ecdfa130cd706" title=" " alt="" coords="5,415,194,477"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="584,455,510,441,427,434,343,432,195,439,193,434,343,427,427,428,510,435,589,453"/>
+<area shape="rect" id="Node000012" href="$classkcenon_1_1logger_1_1log__collector__jthread__worker.html#a16084e389b08a00008d30d74a39f73f5" title=" " alt="" coords="282,450,470,511"/>
+<area shape="poly" id="edge12_Node000010_Node000012" title=" " alt="" coords="544,482,471,483,470,478,549,480"/>
+<area shape="rect" id="Node000013" href="$classkcenon_1_1logger_1_1log__collector__jthread__worker.html#ad13ea4c052c69d5ea0801ba7df1b2d7b" title=" " alt="" coords="262,535,490,597"/>
+<area shape="poly" id="edge14_Node000010_Node000013" title=" " alt="" coords="576,509,487,537,485,532,581,507"/>
+<area shape="poly" id="edge13_Node000012_Node000011" title=" " alt="" coords="264,468,195,460,193,455,268,465"/>
+<area shape="rect" id="Node000015" href="$classkcenon_1_1logger_1_1network__reconnect__jthread__worker.html#a19bce04ddfaabdd2a4026e281f39e7c9" title=" " alt="" coords="278,620,474,682"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="540,652,475,654,474,649,545,651"/>
+<area shape="rect" id="Node000016" href="$classkcenon_1_1logger_1_1network__reconnect__jthread__worker.html#a54d31b65a914e62c0aeb5c36bf2a44ac" title=" " alt="" coords="242,706,510,767"/>
+<area shape="poly" id="edge17_Node000014_Node000016" title=" " alt="" coords="576,679,487,708,485,703,581,678"/>
+<area shape="rect" id="Node000018" href="$classkcenon_1_1logger_1_1network__send__jthread__worker.html#aaec425d5048ece459621246ded63cb03" title=" " alt="" coords="275,792,476,836"/>
+<area shape="poly" id="edge19_Node000017_Node000018" title=" " alt="" coords="557,786,477,801,476,796,562,785"/>
+<area shape="rect" id="Node000019" href="$classkcenon_1_1logger_1_1network__send__jthread__worker.html#ad41d35f7d5bab0dd0b29d211bae65655" title=" " alt="" coords="262,860,490,922"/>
+<area shape="poly" id="edge20_Node000017_Node000019" title=" " alt="" coords="571,796,559,804,545,815,536,827,527,839,511,851,489,863,488,857,509,846,523,835,532,824,541,812,557,800,566,797"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="kcenon::logger::security::signal_manager" name="kcenon::logger::security::signal_manager">
+<area shape="rect" id="Node000001" title="Manager for safe signal handler installation." alt="" coords="22,232,206,768"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1signal__manager__interface.html" title="Interface for signal handler management." alt="" coords="5,5,222,184"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,196,116,232,111,232,114,202"/>
+</map>

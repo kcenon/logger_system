@@ -1,0 +1,13 @@
+<map id="include/kcenon/logger/core/signal_manager_context.h" name="include/kcenon/logger/core/signal_manager_context.h">
+<area shape="rect" id="Node000001" title="Manages signal manager lifecycle and access." alt="" coords="121,5,286,67"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,124,82,151"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,70,79,117,76,113,156,65"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="105,124,168,151"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="185,66,156,112,152,109,181,69"/>
+<area shape="rect" id="Node000004" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="192,115,351,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="225,65,251,102,245,102,223,70"/>
+<area shape="rect" id="Node000005" href="$signal__manager__interface_8h.html" title="Interface for signal handler management." alt="" coords="375,115,581,160"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="287,65,406,109,401,110,286,70"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="444,208,513,235"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="480,158,480,194,476,190,476,162"/>
+</map>

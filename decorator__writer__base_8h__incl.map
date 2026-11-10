@@ -1,0 +1,36 @@
+<map id="include/kcenon/logger/writers/decorator_writer_base.h" name="include/kcenon/logger/writers/decorator_writer_base.h">
+<area shape="rect" id="Node000001" title="Base class for decorator pattern writers." alt="" coords="550,5,732,67"/>
+<area shape="rect" id="Node000002" href="$log__writer__interface_8h.html" title="Base interface for all log writers and decorators." alt="" coords="313,115,481,160"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="564,69,466,111,463,106,569,66"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="232,300,290,328"/>
+<area shape="poly" id="edge17_Node000001_Node000003" title=" " alt="" coords="548,49,409,73,248,106,172,127,104,152,51,179,32,194,18,209,11,222,8,233,10,243,15,252,35,268,65,281,142,299,219,310,213,311,141,304,63,286,32,273,11,255,5,244,3,233,6,220,13,206,28,190,49,175,102,147,170,122,247,101,408,67,553,47"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="549,216,626,244"/>
+<area shape="poly" id="edge16_Node000001_Node000005" title=" " alt="" coords="631,66,615,116,595,202,591,199,610,114,627,69"/>
+<area shape="rect" id="Node000012" href="$writer__category_8h.html" title="Writer category interfaces and type traits kcenon." alt="" coords="625,115,766,160"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="659,65,679,102,674,101,657,70"/>
+<area shape="rect" id="Node000015" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="790,115,948,160"/>
+<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="711,65,808,108,802,108,710,70"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="973,124,1069,151"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="732,55,842,81,960,112,973,118,968,118,959,118,841,86,732,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="385,159,319,254,286,291,283,287,315,251,381,161"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="28,216,94,244"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="311,155,214,179,107,210,102,212,99,207,105,205,212,174,315,153"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="443,158,549,209,544,209,442,163"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="118,208,305,252"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="355,159,270,203,268,198,350,161"/>
+<area shape="rect" id="Node000007" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="380,208,526,252"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="411,158,434,195,429,194,409,162"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="405,252,305,297,303,292,399,253"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="314,300,400,328"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="430,252,385,292,383,287,425,254"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="423,300,483,328"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="455,251,455,286,451,283,451,255"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="506,300,581,328"/>
+<area shape="poly" id="edge10_Node000007_Node000010" title=" " alt="" coords="478,250,520,290,515,289,476,255"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="605,300,685,328"/>
+<area shape="poly" id="edge11_Node000007_Node000011" title=" " alt="" coords="504,250,603,294,598,294,503,256"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="650,216,741,244"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="697,158,698,202,693,199,694,162"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="766,216,831,244"/>
+<area shape="poly" id="edge14_Node000012_Node000014" title=" " alt="" coords="721,157,775,206,769,205,719,163"/>
+</map>

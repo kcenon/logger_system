@@ -1,0 +1,9 @@
+<map id="generate_logs" name="generate_logs">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,36,119,64"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger.html#ad0e6c77ee47115131a3b8f2686163df2" title="Log a message with specified level (ILogger interface)" alt="" coords="167,36,361,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,47,153,49,148,51,119,52"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="424,5,581,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="361,35,411,31,406,32,362,40"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1logger_1_1metrics.html#acc52491d3b202388435672ac51ffc00c" title="Record a logged message." alt="" coords="409,57,596,102"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="362,59,396,66,391,66,362,64"/>
+</map>

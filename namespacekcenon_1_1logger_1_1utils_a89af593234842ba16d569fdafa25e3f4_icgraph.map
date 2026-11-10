@@ -1,0 +1,17 @@
+<map id="kcenon::logger::utils::try_open_operation" name="kcenon::logger::utils::try_open_operation">
+<area shape="rect" id="Node000001" title="Error handling helper for file open operations." alt="" coords="721,59,877,103"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger_1_1utils.html#ac1c682bf72bb430ec40c4db756d79b17" title="Directory creation helper." alt="" coords="489,59,673,103"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="703,81,674,84,674,78,709,81"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1file__writer.html#a0fe178557962a60f247e977c9b923b20" title="Open the file (internal, caller must hold mutex)" alt="" coords="254,5,417,50"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="709,54,673,49,538,34,418,30,417,25,539,29,674,44,714,54"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a72c420b95fea71c28460766985ed3d8a" title="Perform the actual rotation operation." alt="" coords="230,93,441,138"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="717,107,674,118,554,127,442,126,441,120,553,122,673,113,712,108"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="471,58,418,48,418,43,476,57"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="471,97,442,103,441,98,476,96"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1file__writer.html#aa090978cdc03c16a44dcfe72e7ae457e" title="Constructor." alt="" coords="21,5,166,50"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="236,29,167,30,166,25,240,26"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a1b8286e8c0a86e7bcc1e1f855eb517ce" title="Manually trigger log rotation (thread&#45;safe)" alt="" coords="5,81,182,126"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="211,110,182,111,182,105,217,109"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a8363ee61d1496ee59e3117c22417fdf9" title="Write operation with automatic rotation check." alt="" coords="5,151,182,195"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="221,143,183,155,182,149,226,142"/>
+</map>

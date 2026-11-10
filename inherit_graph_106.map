@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classkcenon_1_1logger_1_1security_1_1critical__logger__interface.html" title="Interface for loggers that support emergency flushing." alt="" coords="5,5,192,50"/>
+<area shape="rect" id="Node000001" href="$classkcenon_1_1logger_1_1logger.html" title="Main logger implementation providing high&#45;performance logging facilities." alt="" coords="251,14,418,42"/>
+<area shape="poly" id="edge76_Node000000_Node000001" title=" " alt="" coords="207,25,253,27,248,29,208,30"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="23,75,174,119"/>
+<area shape="poly" id="edge79_Node000002_Node000001" title=" " alt="" coords="188,67,239,52,285,41,280,43,240,57,190,72"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1adapters_1_1common__system__logger__adapter.html" title="Adapter to expose kcenon::logger as common::interfaces::ILogger." alt="" coords="240,66,429,128"/>
+<area shape="poly" id="edge77_Node000002_Node000003" title=" " alt="" coords="189,94,242,96,237,98,190,100"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1adapters_1_1logger__adapter.html" title="Adapter to expose logger as common::interfaces::ILogger." alt="" coords="243,152,426,197"/>
+<area shape="poly" id="edge78_Node000002_Node000004" title=" " alt="" coords="184,122,267,151,261,152,183,127"/>
+</map>

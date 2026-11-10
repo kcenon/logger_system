@@ -1,0 +1,20 @@
+<map id="kcenon::logger::async::async_worker" name="kcenon::logger::async::async_worker">
+<area shape="rect" id="Node000001" title="Standalone async worker with jthread compatibility." alt="" coords="291,913,444,1360"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,656,178,728"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,725,138,802,182,888,231,962,283,1032,278,1033,226,965,177,890,133,804,105,730"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="202,656,283,728"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="239,725,237,802,240,846,247,888,264,942,287,996,281,996,259,944,241,890,234,846,232,802,237,730"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html" title="Wrapper for std::jthread or std::thread with manual stop mechanism." alt="" coords="421,535,573,848"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="453,845,440,898,435,895,450,850"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="456,364,626,470"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="534,468,527,520,522,518,532,473"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1async_1_1simple__stop__source.html" title="Simple stop source for environments without std::stop_token." alt="" coords="431,143,597,299"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="525,296,534,348,529,347,524,301"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="318,5,460,78"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="383,75,375,143,370,220,370,693,370,897,365,896,365,693,365,219,370,143,382,80"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="413,75,453,128,447,129,414,80"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="650,381,731,453"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="674,451,655,485,629,513,610,525,588,538,584,534,607,521,626,509,650,481,671,455"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="597,656,792,728"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="673,726,560,891,456,1028,452,1024,556,887,669,730"/>
+</map>

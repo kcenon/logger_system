@@ -1,0 +1,9 @@
+<map id="kcenon::logger::core::logger_registry" name="kcenon::logger::core::logger_registry">
+<area shape="rect" id="Node000001" title="Manages registration and unregistration of loggers." alt="" coords="154,415,340,616"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="11,244,205,350"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,347,176,400,171,401,141,353"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1critical__logger__interface.html" title="Interface for loggers that support emergency flushing." alt="" coords="5,5,210,179"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="108,176,110,227,105,227,107,181"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="229,261,360,333"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="288,331,275,399,270,397,285,335"/>
+</map>

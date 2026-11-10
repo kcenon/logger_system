@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,118,124,146"/>
+<area shape="rect" id="Node000001" href="$structkcenon_1_1logger_1_1is__async__writer.html" title="Type trait to check if a writer is asynchronous." alt="" coords="187,5,336,50"/>
+<area shape="poly" id="edge87_Node000000_Node000001" title=" " alt="" coords="96,106,170,60,199,49,195,52,173,65,99,111"/>
+<area shape="rect" id="Node000002" href="$structkcenon_1_1logger_1_1is__composite__writer.html" title="Type trait to check if a writer is composite." alt="" coords="172,75,351,119"/>
+<area shape="poly" id="edge88_Node000000_Node000002" title=" " alt="" coords="138,116,174,111,169,114,140,121"/>
+<area shape="rect" id="Node000003" href="$structkcenon_1_1logger_1_1is__decorator__writer.html" title="Type trait to check if a writer is a decorator." alt="" coords="175,144,348,189"/>
+<area shape="poly" id="edge89_Node000000_Node000003" title=" " alt="" coords="139,142,177,150,172,152,139,147"/>
+<area shape="rect" id="Node000004" href="$structkcenon_1_1logger_1_1is__sync__writer.html" title="Type trait to check if a writer is synchronous." alt="" coords="191,213,332,258"/>
+<area shape="poly" id="edge90_Node000000_Node000004" title=" " alt="" coords="98,152,173,199,200,213,194,213,170,203,97,157"/>
+</map>

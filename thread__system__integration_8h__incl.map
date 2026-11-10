@@ -1,0 +1,15 @@
+<map id="include/kcenon/logger/integration/thread_system_integration.h" name="include/kcenon/logger/integration/thread_system_integration.h">
+<area shape="rect" id="Node000001" title="Optional thread_system integration for advanced async processing." alt="" coords="274,5,471,67"/>
+<area shape="rect" id="Node000002" href="$logger__export_8h.html" title="DLL export/import macros for logger_system shared library support." alt="" coords="5,115,164,160"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="287,67,163,112,161,107,282,68"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="187,124,254,151"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="329,67,255,117,252,112,324,68"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="277,124,364,151"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="359,66,336,112,333,108,354,69"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="388,124,464,151"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="390,65,414,111,409,109,387,70"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="488,124,551,151"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="418,65,490,115,485,114,417,70"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="575,124,634,151"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="451,65,564,113,569,117,564,116,562,117,450,70"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="kcenon::logger::formatter_factory::create_plain" name="kcenon::logger::formatter_factory::create_plain">
+<area shape="rect" id="Node000001" title="Create a plain/timestamp formatter." alt="" coords="269,40,456,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1formatter__factory.html#a59417795e6118a287fc63b3f54f17951" title="Create a development formatter." alt="" coords="5,5,221,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="251,48,221,45,221,40,256,47"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1formatter__factory.html#ab4a653e169f443728d1cebdd6d532166" title="Create a minimal formatter." alt="" coords="19,75,207,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="250,78,208,87,207,81,256,77"/>
+</map>

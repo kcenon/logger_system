@@ -1,0 +1,5 @@
+<map id="kcenon::logger::unified_log_context::set_otel" name="kcenon::logger::unified_log_context::set_otel">
+<area shape="rect" id="Node000001" title="Set OpenTelemetry context." alt="" coords="235,5,404,50"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1scoped__context__guard.html#ab22e4c2733d88cdff2a73e036628c2a5" title="Set OpenTelemetry context." alt="" coords="5,5,187,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="217,28,187,30,187,25,222,27"/>
+</map>

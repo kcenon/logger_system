@@ -1,0 +1,21 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,164,60,192"/>
+<area shape="rect" id="Node000002" href="$metrics__demo_8cpp.html#a601ed57bdda4ff982e86702111c91887" title=" " alt="" coords="138,61,252,89"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,161,159,95,158,100,58,165"/>
+<area shape="rect" id="Node000006" href="$metrics__demo_8cpp.html#a3a0eef174cfc8a02c8ed68e55676df88" title=" " alt="" coords="141,164,248,192"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="59,175,127,176,124,180,61,180"/>
+<area shape="rect" id="Node000010" href="$metrics__demo_8cpp.html#a6546239568db590b52c2817062ecb654" title=" " alt="" coords="108,216,282,244"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="60,184,109,201,134,210,129,212,107,206,60,190"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1logger.html#ad0e6c77ee47115131a3b8f2686163df2" title="Log a message with specified level (ILogger interface)" alt="" coords="346,35,540,62"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="251,67,332,59,328,62,253,72"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="618,5,776,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="540,35,606,29,601,31,541,40"/>
+<area shape="rect" id="Node000005" href="$namespacekcenon_1_1logger_1_1metrics.html#acc52491d3b202388435672ac51ffc00c" title="Record a logged message." alt="" coords="603,57,791,102"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="540,58,590,66,585,67,541,63"/>
+<area shape="rect" id="Node000007" href="$structkcenon_1_1logger_1_1metrics_1_1logger__performance__stats.html#a3e41f3d28ca628a577f003b92f78b748" title="Get average enqueue time in nanoseconds." alt="" coords="341,87,544,149"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="248,162,328,145,323,147,250,167"/>
+<area shape="rect" id="Node000008" href="$structkcenon_1_1logger_1_1metrics_1_1logger__performance__stats.html#aa4908f133f82707ee4a4de0c3aa1e7f1" title="Get messages per second." alt="" coords="340,172,545,234"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="249,181,327,190,322,192,249,186"/>
+<area shape="rect" id="Node000009" href="$structkcenon_1_1logger_1_1metrics_1_1logger__performance__stats.html#a2f54cf74e03145b2bb1177a29cc367a5" title="Get queue utilization percentage." alt="" coords="330,258,555,319"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="249,188,283,202,298,213,308,223,332,244,340,251,335,250,328,248,304,227,295,217,281,207,249,193"/>
+</map>

@@ -1,0 +1,27 @@
+<map id="include/kcenon/logger/core/strategies/config_strategy_interface.h" name="include/kcenon/logger/core/strategies/config_strategy_interface.h">
+<area shape="rect" id="Node000001" title="Interface for logger configuration strategies (Strategy Pattern)" alt="" coords="472,5,637,67"/>
+<area shape="rect" id="Node000002" href="$logger__builder_8h.html" title="Builder pattern implementation for flexible logger configuration kcenon." alt="" coords="472,225,637,269"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="454,46,359,61,311,72,268,86,235,103,214,123,209,134,209,147,214,160,223,175,239,188,262,199,326,217,400,230,475,240,469,241,400,235,325,222,260,204,236,192,219,178,209,162,204,147,204,133,209,120,232,99,266,81,310,67,358,56,459,43"/>
+<area shape="rect" id="Node000008" href="$composite__strategy_8h.html" title="Composite configuration strategy for combining multiple strategies." alt="" coords="234,115,428,177"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="476,75,395,117,392,112,480,73"/>
+<area shape="rect" id="Node000009" href="$deployment__strategy_8h.html" title="Deployment environment configuration strategies." alt="" coords="452,115,657,177"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="556,80,557,116,552,113,553,85"/>
+<area shape="rect" id="Node000010" href="$environment__strategy_8h.html" title="Environment variable&#45;based configuration strategy." alt="" coords="681,115,890,177"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="633,71,723,114,718,115,633,77"/>
+<area shape="rect" id="Node000011" href="$performance__strategy_8h.html" title="Performance tuning configuration strategies." alt="" coords="914,115,1123,177"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="653,56,903,112,916,118,911,118,902,118,653,61"/>
+<area shape="rect" id="Node000003" href="$backend__integration__example_8cpp.html" title=" " alt="" coords="5,317,227,362"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="458,271,222,319,221,314,457,266"/>
+<area shape="rect" id="Node000004" href="$critical__logging__example_8cpp.html" title="Example demonstrating critical log loss prevention mechanisms." alt="" coords="251,317,440,362"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="493,275,396,319,395,314,488,276"/>
+<area shape="rect" id="Node000005" href="$custom__writer__example_8cpp.html" title="Example demonstrating how to create custom writers using thread_safe_writer." alt="" coords="464,317,646,362"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="557,283,557,319,553,315,553,287"/>
+<area shape="rect" id="Node000006" href="$di__pattern__example_8cpp.html" title="Dependency Injection pattern example for logger_system Phase 4." alt="" coords="670,317,826,362"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="615,274,704,317,699,317,614,279"/>
+<area shape="rect" id="Node000007" href="$monitoring__integration__example_8cpp.html" title="Advanced monitoring integration example for Phase 4." alt="" coords="850,317,1040,362"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="652,268,854,317,849,317,651,273"/>
+<area shape="poly" id="edge8_Node000008_Node000002" title=" " alt="" coords="413,181,508,224,503,224,413,186"/>
+<area shape="poly" id="edge10_Node000009_Node000002" title=" " alt="" coords="556,190,557,226,552,223,553,195"/>
+<area shape="poly" id="edge12_Node000010_Node000002" title=" " alt="" coords="703,182,606,227,604,222,698,184"/>
+<area shape="poly" id="edge14_Node000011_Node000002" title=" " alt="" coords="896,178,638,233,637,228,901,177"/>
+</map>

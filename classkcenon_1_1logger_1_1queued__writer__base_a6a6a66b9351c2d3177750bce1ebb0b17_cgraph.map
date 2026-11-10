@@ -1,0 +1,7 @@
+<map id="kcenon::logger::queued_writer_base::handle_overflow" name="kcenon::logger::queued_writer_base::handle_overflow">
+<area shape="rect" id="Node000001" title="Handle queue overflow condition." alt="" coords="5,5,225,50"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="273,5,434,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="225,25,260,28,254,28,225,30"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="482,5,648,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="434,25,469,28,464,28,434,30"/>
+</map>

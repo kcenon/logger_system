@@ -1,0 +1,7 @@
+<map id="kcenon::logger::console_sink::~console_sink" name="kcenon::logger::console_sink::~console_sink">
+<area shape="rect" id="Node000001" title="Destructor &#45; ensures all data is flushed." alt="" coords="5,5,181,50"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1console__sink.html#a5c43347f6e8412c9af7830090037ac8f" title="Flush buffered output to console." alt="" coords="229,5,404,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,25,216,27,211,28,181,30"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="452,14,609,42"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="404,25,439,28,434,28,404,30"/>
+</map>

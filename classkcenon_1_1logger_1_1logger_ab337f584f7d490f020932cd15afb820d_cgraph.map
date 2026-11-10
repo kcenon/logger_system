@@ -1,0 +1,7 @@
+<map id="kcenon::logger::logger::log" name="kcenon::logger::logger::log">
+<area shape="rect" id="Node000001" title="Log a structured entry (ILogger interface)" alt="" coords="5,36,200,64"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="263,5,420,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,35,250,31,245,32,201,40"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger_1_1metrics.html#acc52491d3b202388435672ac51ffc00c" title="Record a logged message." alt="" coords="248,57,435,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="200,59,235,66,230,66,200,64"/>
+</map>

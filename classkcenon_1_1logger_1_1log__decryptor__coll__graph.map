@@ -1,0 +1,7 @@
+<map id="kcenon::logger::log_decryptor" name="kcenon::logger::log_decryptor">
+<area shape="rect" id="Node000001" title="Utility class for decrypting encrypted log files." alt="" coords="5,520,191,766"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1secure__key.html" title="RAII wrapper for encryption keys with secure memory management." alt="" coords="15,143,182,455"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,452,101,504,96,503,98,458"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="21,5,176,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,75,101,126,96,126,98,80"/>
+</map>

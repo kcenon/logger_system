@@ -1,0 +1,7 @@
+<map id="kcenon::logger::rotating_file_writer::should_rotate_by_time" name="kcenon::logger::rotating_file_writer::should_rotate_by_time">
+<area shape="rect" id="Node000001" title="Check if time&#45;based rotation should occur." alt="" coords="468,5,658,67"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a49bf6da75fcd075b545a8003f26198d4" title="Check if rotation should occur." alt="" coords="230,14,420,58"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="450,36,420,39,420,34,455,36"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1rotating__file__writer.html#a8363ee61d1496ee59e3117c22417fdf9" title="Write operation with automatic rotation check." alt="" coords="5,14,182,58"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="211,36,182,39,182,34,217,36"/>
+</map>

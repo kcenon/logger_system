@@ -1,0 +1,7 @@
+<map id="full_integration_adapter::external_log" name="full_integration_adapter::external_log">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,183,50"/>
+<area shape="rect" id="Node000002" href="$classlogger__adapter.html#a7fb77b5f89aabea39baa4768fa4750ba" title=" " alt="" coords="231,14,378,42"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,25,217,27,212,28,183,30"/>
+<area shape="rect" id="Node000003" href="$classlogger__core.html#a54b58981b7394870d1a65442d3f68442" title=" " alt="" coords="426,14,608,42"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="379,25,413,28,408,28,379,30"/>
+</map>

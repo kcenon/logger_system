@@ -1,0 +1,12 @@
+<map id="kcenon::logger::decorator_writer_base::get_name" name="kcenon::logger::decorator_writer_base::get_name">
+<area shape="rect" id="Node000001" title="Get the name of this writer." alt="" coords="594,26,782,71"/>
+<area shape="rect" id="Node000002" href="$decorator__usage_8cpp.html#a02829a81f3fc061bcd16e4caf1525dc4" title="Example 2: Single Decorator Usage." alt="" coords="108,5,308,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="591,22,546,16,423,10,309,13,308,8,423,4,547,11,596,22"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1filtered__writer.html#afa52fac9e6683fb5685f2f4296eb7e17" title="Get the name of this writer." alt="" coords="366,26,537,71"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="576,49,537,51,537,46,581,48"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1formatted__writer.html#a6101d77c99710924bbc986ad3a402a92" title="Get the name of this writer." alt="" coords="356,96,546,140"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="597,75,531,97,530,92,592,76"/>
+<area shape="rect" id="Node000003" href="$decorator__usage_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="90,21,61,22,59,17,94,17"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="347,37,309,34,308,29,352,36"/>
+</map>

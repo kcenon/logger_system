@@ -1,0 +1,9 @@
+<map id="kcenon::logger::logger_builder::apply_strategy" name="kcenon::logger::logger_builder::apply_strategy">
+<area shape="rect" id="Node000001" title="Apply a configuration strategy." alt="" coords="253,75,431,119"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1logger__builder.html#a5095ea31d0ced80245c45cc33da5730b" title="Auto&#45;configure from environment variables." alt="" coords="16,5,194,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="246,71,184,53,184,48,251,69"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1logger__builder.html#a9745c1a4a0cfd23957d95b8769cda2d8" title="Configure for a specific deployment environment." alt="" coords="10,75,200,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="234,98,201,100,200,94,240,96"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1logger__builder.html#a931ae6597433cbb42cd5601d16da8a3a" title="Apply performance tuning." alt="" coords="5,144,205,205"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="259,124,203,145,201,140,254,125"/>
+</map>

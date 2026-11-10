@@ -1,0 +1,9 @@
+<map id="kcenon::logger::sampling::log_sampler::hash_sample" name="kcenon::logger::sampling::log_sampler::hash_sample">
+<area shape="rect" id="Node000001" title="Perform hash&#45;based sampling decision." alt="" coords="532,40,735,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#adfb1006d2b870d376061654f40f797cd" title="Check if a log entry should be sampled (logged)" alt="" coords="269,5,484,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="514,47,484,45,484,40,519,47"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#ab2df92d525aa3647400d9b7cf42f8398" title="Check if a log entry should be sampled with category." alt="" coords="269,75,484,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="519,78,485,85,484,80,514,78"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1sampling_1_1log__sampler.html#ae99926e0ac51e451573590e637c8909e" title="Check if a log entry should be sampled (without category)" alt="" coords="5,5,221,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="251,28,221,30,221,25,256,27"/>
+</map>

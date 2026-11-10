@@ -1,0 +1,11 @@
+<map id="kcenon::logger::filter_factory::create_level" name="kcenon::logger::filter_factory::create_level">
+<area shape="rect" id="Node000001" title="Create a level filter." alt="" coords="269,109,430,154"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1filter__factory.html#a78a404a7047cf165ff2e368601559e5d" title="Create a development filter." alt="" coords="5,5,221,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="295,102,220,65,191,53,190,48,222,60,300,101"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1filter__factory.html#a8db0eeeb311540ef83dbb0b370a065a3" title="Create an error&#45;only filter." alt="" coords="12,75,214,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="251,118,215,115,214,109,256,117"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1filter__factory.html#a56283e43602eb4eb579d4db8d856b569" title="Create a production filter." alt="" coords="14,144,212,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="251,147,214,154,212,149,256,145"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1filter__factory_1_1builder.html#ab50b58a3def307908ed0ee51152ee663" title="Set minimum log level." alt="" coords="32,213,194,274"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="299,161,222,203,195,215,193,210,220,199,294,163"/>
+</map>

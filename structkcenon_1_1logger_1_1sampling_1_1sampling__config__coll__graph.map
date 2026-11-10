@@ -1,0 +1,18 @@
+<map id="kcenon::logger::sampling::sampling_config" name="kcenon::logger::sampling::sampling_config">
+<area shape="rect" id="Node000001" title="Configuration for log sampling behavior." alt="" coords="226,679,401,1081"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,516,174,589"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,586,87,621,94,654,117,698,147,738,181,774,216,807,211,808,177,778,143,741,113,700,89,656,81,622,84,591"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="283,281,440,371"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="323,373,288,427,271,459,259,492,250,533,246,576,252,663,246,662,241,576,245,533,254,490,267,456,284,424,325,368"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="381,491,577,614"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="366,368,377,418,396,466,403,477,397,477,391,468,372,419,365,373"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="450,144,526,216"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="449,216,427,242,404,269,400,266,423,239,452,212"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="489,214,484,474,478,473,486,219"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="528,395,702,467"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="507,213,592,379,587,380,505,219"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="424,5,552,95"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="489,107,491,145,486,144,488,112"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="450,612,411,694,407,691,447,616"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="618,464,615,538,607,578,592,616,556,673,512,726,464,772,416,812,413,808,460,768,508,722,552,670,587,613,602,576,610,537,616,469"/>
+</map>

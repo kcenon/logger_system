@@ -1,0 +1,7 @@
+<map id="kcenon::logger::security::secure_key::mutable_data" name="kcenon::logger::security::secure_key::mutable_data">
+<area shape="rect" id="Node000001" title="Get mutable reference to key data (use with caution)" alt="" coords="308,40,507,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#aff2a8a3bf752548e6f32169851e1a210" title="Generate a secure random key." alt="" coords="5,5,260,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="290,48,260,46,260,41,295,48"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1security_1_1secure__key__storage.html#a500a1523f64c69722faf15351a122e90" title="Load key from file with permission verification." alt="" coords="20,75,245,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="290,77,245,85,245,80,295,76"/>
+</map>

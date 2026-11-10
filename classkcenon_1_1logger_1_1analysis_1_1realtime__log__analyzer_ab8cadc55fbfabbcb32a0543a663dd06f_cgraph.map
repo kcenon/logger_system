@@ -1,0 +1,27 @@
+<map id="kcenon::logger::analysis::realtime_log_analyzer::analyze" name="kcenon::logger::analysis::realtime_log_analyzer::analyze">
+<area shape="rect" id="Node000001" title="Analyze a log entry in real&#45;time." alt="" coords="5,176,185,238"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a77e6bacb9c7ca967bd5da22d2d085c2c" title=" " alt="" coords="233,5,412,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,174,171,125,231,77,240,73,236,77,234,81,175,129,126,177"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#ab012a01c8390c594be3e036dab9a7447" title=" " alt="" coords="233,91,412,152"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="177,173,226,157,222,160,180,178"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#aad02b71df74511a07fdcd851003eb5cc" title=" " alt="" coords="233,347,412,408"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="125,236,175,284,234,333,241,339,236,338,231,337,171,288,124,241"/>
+<area shape="rect" id="Node000010" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a92f392da95407740fbb120f192e25f68" title=" " alt="" coords="233,261,412,323"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="179,235,226,255,221,256,179,241"/>
+<area shape="rect" id="Node000011" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a249daef69adfa9cf431130fe7b7bedd2" title=" " alt="" coords="233,176,412,238"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="184,204,219,206,215,208,186,209"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#afa1dd9424a6a62ff207e42c7e2b6904b" title=" " alt="" coords="470,5,649,67"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="412,34,457,35,452,37,413,39"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a29a9d525522cc28dc6da32c1f65e92eb" title=" " alt="" coords="470,176,649,238"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="409,150,460,170,455,171,410,155"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a08c3c7a7e74a3dba3556f632706ea55c" title=" " alt="" coords="470,91,649,152"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="412,119,457,121,452,122,413,124"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#ab24a2003d245763167676630df8e4ab4" title=" " alt="" coords="470,261,649,323"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="398,150,414,162,431,185,438,206,446,227,462,248,465,252,460,251,458,251,441,229,433,208,426,187,410,166,398,156"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="409,344,455,329,460,328,410,349"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1analysis_1_1realtime__log__analyzer.html#a97e9d1b770feff55fc1b5df07402d506" title=" " alt="" coords="460,347,658,408"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="412,375,447,377,442,378,413,380"/>
+<area shape="poly" id="edge11_Node000010_Node000007" title=" " alt="" coords="412,290,457,292,451,293,413,295"/>
+<area shape="poly" id="edge13_Node000011_Node000005" title=" " alt="" coords="412,204,457,206,452,207,413,209"/>
+<area shape="poly" id="edge14_Node000011_Node000007" title=" " alt="" coords="410,235,460,255,455,256,409,241"/>
+</map>

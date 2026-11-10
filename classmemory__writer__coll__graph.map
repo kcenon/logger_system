@@ -1,0 +1,23 @@
+<map id="memory_writer" name="memory_writer">
+<area shape="rect" id="Node000001" title="A custom writer that stores log entries in memory." alt="" coords="317,1536,464,1743"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1thread__safe__writer.html" title="Base class providing automatic thread&#45;safety for writer implementations." alt="" coords="208,1159,378,1471"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="345,1483,362,1537,357,1536,343,1488"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1base__writer.html" title="Abstract base class for all log output writers." alt="" coords="113,803,262,1094"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="234,1106,251,1159,246,1159,233,1111"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,515,183,738"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="131,750,148,803,143,804,131,755"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="207,574,376,680"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="274,682,242,788,237,787,276,677"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1log__formatter__interface.html" title="Abstract interface for log message formatters." alt="" coords="191,271,393,450"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="292,447,294,557,289,556,291,452"/>
+<area shape="rect" id="Node000007" href="$structkcenon_1_1logger_1_1format__options.html" title="Configuration options for log formatting." alt="" coords="200,5,383,206"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="292,203,294,255,289,254,291,209"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="286,912,367,985"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="324,982,311,1142,306,1141,322,987"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="402,1279,576,1351"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="480,1349,429,1522,424,1519,476,1353"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="451,912,527,985"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="490,982,492,1263,486,1261,488,986"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="425,582,553,671"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="490,684,492,913,486,912,488,689"/>
+</map>

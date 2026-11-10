@@ -1,0 +1,7 @@
+<map id="include/kcenon/logger/formatters/logfmt_formatter.h" name="include/kcenon/logger/formatters/logfmt_formatter.h">
+<area shape="rect" id="Node000001" title="Logfmt formatter for structured logging kcenon." alt="" coords="73,5,294,50"/>
+<area shape="rect" id="Node000002" href="$structured__logging__example_8cpp.html" title="Demonstrates structured logging features introduced in Phase 3.0." alt="" coords="5,106,173,151"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,60,111,108,108,104,150,62"/>
+<area shape="rect" id="Node000003" href="$formatter__factory_8h.html" title="Factory for creating log formatter instances." alt="" coords="196,98,360,160"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="216,59,252,98,247,97,214,64"/>
+</map>

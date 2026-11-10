@@ -1,0 +1,9 @@
+<map id="kcenon::logger::logger_config::validate" name="kcenon::logger::logger_config::validate">
+<area shape="rect" id="Node000001" title="Validate the configuration." alt="" coords="5,36,172,81"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1logger.html#a3eb2a5b0165d7cee4a0384a326b572a1" title=" " alt="" coords="220,5,381,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,44,207,41,202,42,172,49"/>
+<area shape="rect" id="Node000004" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="222,74,379,102"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="172,67,209,74,204,75,172,73"/>
+<area shape="rect" id="Node000003" href="$namespacekcenon_1_1logger.html#a8e47762f83b31ee84ea1d02723b5cff2" title="Convert logger_error_code to string representation." alt="" coords="429,5,595,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="381,25,416,27,411,28,382,30"/>
+</map>

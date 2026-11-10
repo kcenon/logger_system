@@ -1,0 +1,7 @@
+<map id="kcenon::logger::async_writer::process_messages" name="kcenon::logger::async_writer::process_messages">
+<area shape="rect" id="Node000001" title="Process messages from the queue." alt="" coords="5,40,203,85"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="251,5,438,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,45,238,43,233,44,204,51"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1log__writer__interface.html#ad48f2ab0fd92db49d024bdc02f243a72" title="Write a log entry." alt="" coords="258,75,430,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="203,74,246,82,240,83,203,79"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="kcenon::logger::network_writer::format_for_network" name="kcenon::logger::network_writer::format_for_network">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,83,209,127"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1network__writer.html#add782c82f05268659ec361cbef347616" title=" " alt="" coords="257,5,435,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,80,262,54,258,57,180,84"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1utils_1_1string__utils.html#a386bd338874eb5237f945415b8e29395" title="Convert log level to human&#45;readable string." alt="" coords="269,74,422,136"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="209,102,256,104,251,106,210,108"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1small__string.html#adc58ba39eef805e557da9a71d410ee1e" title="Convert to std::string." alt="" coords="265,160,426,205"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="179,125,263,154,257,155,178,131"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1small__string.html#a7ce5bd6139de9f2d1b24b06a8044e570" title="Get data pointer." alt="" coords="483,160,644,205"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="427,180,470,182,465,182,427,185"/>
+</map>

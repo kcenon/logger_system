@@ -1,0 +1,19 @@
+<map id="counted_console_writer" name="counted_console_writer">
+<area shape="rect" id="Node000001" title="A console writer that counts messages per log level." alt="" coords="192,1536,383,1743"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1thread__safe__writer.html" title="Base class providing automatic thread&#45;safety for writer implementations." alt="" coords="100,1159,270,1471"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="240,1483,258,1537,253,1536,238,1488"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1base__writer.html" title="Abstract base class for all log output writers." alt="" coords="41,803,190,1094"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="146,1106,158,1159,153,1159,146,1111"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__writer__interface.html" title="Base interface for all log writers and decorators." alt="" coords="5,515,183,738"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="103,751,109,804,103,804,103,756"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="207,574,376,680"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="262,682,201,798,196,796,264,677"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1log__formatter__interface.html" title="Abstract interface for log message formatters." alt="" coords="191,271,393,450"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="292,447,294,557,289,556,291,452"/>
+<area shape="rect" id="Node000007" href="$structkcenon_1_1logger_1_1format__options.html" title="Configuration options for log formatting." alt="" coords="200,5,383,206"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="292,203,294,255,289,254,291,209"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="214,912,295,985"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="249,982,220,1143,215,1141,247,987"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="294,1251,489,1379"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="373,1377,328,1522,323,1520,369,1381"/>
+</map>

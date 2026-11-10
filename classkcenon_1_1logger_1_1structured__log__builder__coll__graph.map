@@ -1,0 +1,10 @@
+<map id="kcenon::logger::structured_log_builder" name="kcenon::logger::structured_log_builder">
+<area shape="rect" id="Node000001" title="Fluent builder for creating structured log entries." alt="" coords="5,436,187,771"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="58,144,134,216"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,213,90,281,89,419,84,419,85,281,92,219"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="172,281,349,371"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="134,212,201,270,196,272,134,217"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="32,5,160,95"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="97,107,99,144,94,144,96,112"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="233,373,198,436,194,434,236,368"/>
+</map>

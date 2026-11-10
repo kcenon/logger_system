@@ -1,0 +1,13 @@
+<map id="kcenon::logger::metrics::logger_performance_stats" name="kcenon::logger::metrics::logger_performance_stats">
+<area shape="rect" id="Node000001" title="Performance statistics for logger operations." alt="" coords="73,684,285,1043"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,386,172,458"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,455,90,550,94,605,103,660,104,668,99,668,97,661,89,606,84,550,87,460"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="196,360,384,483"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="284,481,272,568,253,661,250,669,246,667,247,660,267,567,282,486"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="154,183,229,256"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="209,253,255,345,250,345,209,258"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="128,5,255,95"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="192,107,194,184,189,184,191,112"/>
+<area shape="rect" id="Node000006" href="$structkcenon_1_1logger_1_1metrics_1_1logger__performance__stats_1_1writer__stats__compat.html" title=" " alt="" coords="253,144,442,295"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="327,292,314,345,309,343,325,297"/>
+</map>

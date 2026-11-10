@@ -1,0 +1,21 @@
+<map id="kcenon::logger::file_sink" name="kcenon::logger::file_sink">
+<area shape="rect" id="Node000001" title="Writes log messages to a file." alt="" coords="226,792,395,1021"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1output__sink__interface.html" title="Abstract interface for log output destinations (I/O only)" alt="" coords="5,526,194,727"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,736,229,794,224,795,184,741"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="218,590,294,663"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="255,660,258,712,264,768,265,776,260,775,259,768,252,713,253,665"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="180,387,308,477"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="248,489,256,591,251,590,247,494"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="318,590,415,663"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="361,660,339,777,334,775,358,664"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="332,387,470,477"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="392,489,375,592,370,590,389,494"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="334,249,468,338"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="402,350,404,388,399,387,400,355"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="322,127,480,199"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="402,211,404,249,399,248,401,217"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="353,5,449,78"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="402,90,404,128,399,127,401,95"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="440,590,520,663"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="465,660,430,728,398,780,394,776,426,726,461,664"/>
+</map>

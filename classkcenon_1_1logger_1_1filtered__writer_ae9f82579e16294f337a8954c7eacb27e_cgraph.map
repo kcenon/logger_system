@@ -1,0 +1,9 @@
+<map id="kcenon::logger::filtered_writer::write" name="kcenon::logger::filtered_writer::write">
+<area shape="rect" id="Node000001" title="Write a log entry if it passes the filter." alt="" coords="5,57,177,102"/>
+<area shape="rect" id="Node000002" href="$namespacekcenon_1_1common.html#a908ab82f8a0977c5dd212942bb175ad1" title=" " alt="" coords="240,5,397,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,54,251,36,246,39,178,59"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1decorator__writer__base.html#a9b88c3699fa7ba8bb345b346357e4d8e" title="Access the wrapped writer (non&#45;const)" alt="" coords="225,57,412,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="177,77,212,78,206,80,178,82"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__writer__interface.html#ad48f2ab0fd92db49d024bdc02f243a72" title="Write a log entry." alt="" coords="232,126,404,171"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="167,99,231,120,225,122,166,105"/>
+</map>

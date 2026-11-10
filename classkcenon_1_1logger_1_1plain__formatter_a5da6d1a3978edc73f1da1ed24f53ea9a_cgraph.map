@@ -1,0 +1,9 @@
+<map id="kcenon::logger::plain_formatter::format" name="kcenon::logger::plain_formatter::format">
+<area shape="rect" id="Node000001" title="Format a log entry into a string." alt="" coords="5,75,163,119"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1base__formatter.html#af340497d76be2215b57bf419a44fbb96" title="Format timestamp to ISO8601 string." alt="" coords="211,5,431,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,72,229,54,225,56,164,77"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1base__formatter.html#afbd4ad16a3c8ff7c04e6aed24db27ed1" title="Get current thread ID as string." alt="" coords="227,75,414,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="163,94,214,96,209,98,164,100"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1base__formatter.html#a8056f137776b78e9540c044217bedd96" title="Convert log level to string." alt="" coords="243,144,399,205"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="155,117,230,143,225,145,155,123"/>
+</map>

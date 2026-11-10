@@ -1,0 +1,11 @@
+<map id="kcenon::logger::deployment_strategy::apply" name="kcenon::logger::deployment_strategy::apply">
+<area shape="rect" id="Node000001" title="Apply this strategy to a logger configuration." alt="" coords="5,109,209,154"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1deployment__strategy.html#a81524f40a433fccf2277a23315d1015a" title=" " alt="" coords="257,5,475,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,107,256,60,277,54,272,57,258,65,154,111"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1deployment__strategy.html#af36190d8d4cfbec90e68c7f635365abe" title=" " alt="" coords="264,75,468,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="208,115,251,112,246,114,210,121"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1deployment__strategy.html#a4f38d7621c54b70927a74aad75e72bfd" title=" " alt="" coords="264,144,468,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="209,143,251,150,246,151,209,148"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1deployment__strategy.html#ac4310f8d7c484121cf581ed703bea71d" title=" " alt="" coords="264,213,468,258"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="154,152,258,199,277,208,272,208,256,203,153,157"/>
+</map>

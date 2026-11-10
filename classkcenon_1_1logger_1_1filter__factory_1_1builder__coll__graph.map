@@ -1,0 +1,9 @@
+<map id="kcenon::logger::filter_factory::builder" name="kcenon::logger::filter_factory::builder">
+<area shape="rect" id="Node000001" title="Filter builder for complex filter construction." alt="" coords="35,530,180,709"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="20,359,195,465"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,462,110,513,105,512,107,467"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,204,210,294"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="108,291,110,342,105,341,107,296"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1log__filter__interface.html" title="Interface for log filters." alt="" coords="23,5,193,139"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="108,136,110,188,105,187,107,142"/>
+</map>

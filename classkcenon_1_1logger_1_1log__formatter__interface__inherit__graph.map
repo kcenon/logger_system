@@ -1,0 +1,20 @@
+<map id="kcenon::logger::log_formatter_interface" name="kcenon::logger::log_formatter_interface">
+<area shape="rect" id="Node000001" title="Abstract interface for log message formatters." alt="" coords="544,5,746,184"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1base__formatter.html" title="Base implementation for log formatters." alt="" coords="219,299,378,478"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="529,151,471,189,412,234,382,266,355,301,350,298,378,262,409,230,468,185,533,148"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1json__formatter.html" title="JSON formatter for structured logging." alt="" coords="370,593,515,816"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="530,154,490,189,472,210,457,233,438,276,424,322,416,369,411,417,412,510,421,594,416,592,407,510,406,417,411,368,419,321,433,275,452,231,468,207,487,185,534,150"/>
+<area shape="rect" id="Node000006" href="$classkcenon_1_1logger_1_1logfmt__formatter.html" title="Formatter that outputs logfmt&#45;structured log messages." alt="" coords="467,277,643,500"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="615,196,591,278,587,275,612,200"/>
+<area shape="rect" id="Node000007" href="$classkcenon_1_1logger_1_1raw__formatter.html" title="Formatter that returns log_entry.message verbatim." alt="" coords="667,310,808,466"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="679,196,716,311,710,310,677,201"/>
+<area shape="rect" id="Node000008" href="$classkcenon_1_1logger_1_1template__formatter.html" title="Customizable formatter using template strings with placeholders." alt="" coords="832,232,1024,545"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="758,173,822,230,834,245,829,245,818,234,758,178"/>
+<area shape="rect" id="Node000009" href="$classkcenon_1_1logger_1_1timestamp__formatter.html" title="Default formatter with human&#45;readable timestamp format." alt="" coords="1048,321,1234,455"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="760,113,828,131,900,155,972,188,1038,230,1080,272,1112,322,1107,321,1076,276,1034,234,969,193,898,160,827,136,761,119"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1compact__formatter.html" title="Compact formatter for minimal output." alt="" coords="5,648,176,760"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="234,488,129,650,124,647,230,492"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="346,489,395,593,389,593,344,493"/>
+<area shape="rect" id="Node000005" href="$classkcenon_1_1logger_1_1plain__formatter.html" title="Simple plain text formatter." alt="" coords="200,648,347,760"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="292,491,280,650,275,648,288,494"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="include/kcenon/logger/interfaces/log_sink_interface.h" name="include/kcenon/logger/interfaces/log_sink_interface.h">
+<area shape="rect" id="Node000001" title="Interface for log sinks that receive formatted output." alt="" coords="112,5,276,67"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,115,193,160"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,70,132,105,128,102,167,66"/>
+<area shape="rect" id="Node000003" href="$error__codes_8h.html" title="Error codes specific to the logger system." alt="" coords="217,115,362,160"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="224,65,261,104,256,104,222,70"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="68,208,127,235"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="241,160,142,204,140,199,236,161"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="151,208,236,235"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="267,159,222,199,219,195,262,161"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="260,208,319,235"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="292,158,292,194,287,191,288,162"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="343,208,418,235"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="314,158,357,197,352,196,313,163"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="442,208,521,235"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="341,158,440,201,434,201,340,163"/>
+</map>

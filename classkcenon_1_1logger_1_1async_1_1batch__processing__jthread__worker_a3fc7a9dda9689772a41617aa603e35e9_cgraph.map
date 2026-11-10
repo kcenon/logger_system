@@ -1,0 +1,9 @@
+<map id="kcenon::logger::async::batch_processing_jthread_worker::~batch_processing_jthread_worker" name="kcenon::logger::async::batch_processing_jthread_worker::~batch_processing_jthread_worker">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,23,210,102"/>
+<area shape="rect" id="Node000002" href="$classkcenon_1_1logger_1_1async_1_1batch__processing__jthread__worker.html#a5875963765919b33621199f0f8402e37" title=" " alt="" coords="258,32,453,93"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,60,245,62,239,63,211,65"/>
+<area shape="rect" id="Node000003" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a90bd0e17804555e24d4f86fe20c8497a" title="Wait for thread to complete." alt="" coords="531,5,694,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="453,47,519,40,513,41,454,52"/>
+<area shape="rect" id="Node000004" href="$classkcenon_1_1logger_1_1async_1_1compat__jthread.html#a815d60b193847e48d48b5e2724957668" title="Request the thread to stop." alt="" coords="501,75,724,119"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="453,73,488,80,483,80,453,78"/>
+</map>
